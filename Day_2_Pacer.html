@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day 2 Pacer — Graphing from Factored Form</title>
+<style>
+  :root {
+    --hue: 210;
+    --bg: hsl(var(--hue), 62%, 92%);
+    --bg-deep: hsl(var(--hue), 70%, 82%);
+    --accent: hsl(var(--hue), 72%, 32%);
+    --text: #111;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: -apple-system, Segoe UI, system-ui, Roboto, sans-serif;
+    background: linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 100%);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 800ms linear;
+  }
+  header {
+    padding: 1rem 2rem 0.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .phase-meta {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+  .phase-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin: 0.2rem 0 0.4rem;
+    color: var(--accent);
+  }
+  .progress-wrap {
+    height: 10px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0 2rem;
+    width: calc(100% - 4rem);
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 300ms linear;
+  }
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(280px, 42%) 1fr;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    align-items: stretch;
+  }
+  @media (max-width: 800px) {
+    main { grid-template-columns: 1fr; }
+  }
+  .timer-card {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .timer {
+    font-size: clamp(5rem, 14vw, 11rem);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    line-height: 0.9;
+    margin: 0.4rem 0;
+    letter-spacing: -0.02em;
+  }
+  .timer-sub {
+    font-size: 0.95rem;
+    opacity: 0.75;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .content-card {
+    background: white;
+    border-radius: 18px;
+    padding: 1.5rem 1.8rem;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .instructions {
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    line-height: 1.55;
+    color: #222;
+  }
+  .instructions ul {
+    margin: 0.4rem 0 0 1.1rem;
+    padding: 0;
+  }
+  .instructions li { margin: 0.2rem 0; }
+  .transition {
+    margin-top: auto;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.04);
+    border-left: 5px solid rgba(0, 0, 0, 0.25);
+    opacity: 0.55;
+    font-size: 1rem;
+    transition: opacity 400ms, background 400ms, border-color 400ms;
+  }
+  .transition.active {
+    opacity: 1;
+    background: hsl(var(--hue), 80%, 95%);
+    border-left-color: var(--accent);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.01); }
+  }
+  .transition-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  footer {
+    padding: 1rem 2rem 1.3rem;
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.35);
+  }
+  button {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+    transition: transform 120ms, filter 120ms;
+    min-width: 90px;
+  }
+  button.secondary {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--text);
+  }
+  button:hover { filter: brightness(1.08); }
+  button:active { transform: translateY(1px); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .kbd {
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.55;
+    padding: 0 1rem 0.8rem;
+  }
+  .dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem 0 0.6rem;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.18);
+  }
+  .dot.done { background: var(--accent); opacity: 0.45; }
+  .dot.current { background: var(--accent); box-shadow: 0 0 0 4px rgba(0,0,0,0.05); }
+  .dok-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: white;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="phase-meta" id="phase-meta">Phase 1 of 6 · Algebra 2 · Lesson 3-5 · Day 2</div>
+    <h1 class="phase-title" id="phase-title">Blooket Recall</h1>
+  </div>
+  <div class="dots" id="dots"></div>
+</header>
+<div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+
+<main>
+  <section class="timer-card">
+    <div class="timer-sub" id="timer-sub">Remaining</div>
+    <div class="timer" id="timer">7:00</div>
+    <div class="timer-sub" id="status-line">Press Start or Space</div>
+  </section>
+  <section class="content-card">
+    <div class="instructions" id="instructions"></div>
+    <div class="transition" id="transition">
+      <span class="transition-label">Transition cue (activates in last 60s)</span>
+      <span id="transition-text"></span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <button id="btn-prev" class="secondary">◀ Prev</button>
+  <button id="btn-play">▶ Start</button>
+  <button id="btn-next" class="secondary">Next ▶</button>
+  <button id="btn-reset" class="secondary">↻ Reset phase</button>
+  <button id="btn-restart-all" class="secondary">↺ Restart all</button>
+</footer>
+<div class="kbd">Space: play/pause  ·  ← →: prev/next phase  ·  R: reset current phase  ·  Total: 60 min</div>
+
+<script>
+const PHASES = [
+  {
+    title: "Blooket Recall",
+    dok: "DOK 1",
+    duration: 7 * 60,
+    instructions: `
+      <p><strong>Re-activation after spring break.</strong> Display Blooket code.</p>
+      <ul>
+        <li>Zeros from factors · counting intervals</li>
+        <li>Difference of squares · GCF + quadratic factoring</li>
+        <li>New: 2–3 sign-flip primer questions</li>
+      </ul>
+      <p>Monitor the dashboard diagnostically. Which skills have decayed?</p>
+      <p>If &gt;40% miss a core skill, 60-second reset <em>before</em> Sign Flip. Do not exceed 60s — skills get reps during activities.</p>
+    `,
+    transition: `Close game. "Look at your packet — Sign Flip Warm-Up. Two functions side by side. Do NOT graph yet. Predict first."`
+  },
+  {
+    title: "Sign Flip Warm-Up",
+    dok: "DOK 2",
+    duration: 8 * 60,
+    instructions: `
+      <p><strong>Compare:</strong> f(x) = x(x−4)(x+3)   vs.   g(x) = −x(x−4)(x+3)</p>
+      <p>Think silently 2 min → Turn and Talk 2 min → Desmos verify + class synthesis 4 min.</p>
+      <p><strong>Pull from students, don't front-load:</strong></p>
+      <ul>
+        <li>Zeros identical (−3, 0, 4). Zero Product Property doesn't care about a leading negative.</li>
+        <li>Every row of the sign chart flips.</li>
+        <li>End behavior flips: up-left/down-right (negative odd cubic).</li>
+        <li>It's a reflection over the x-axis.</li>
+      </ul>
+      <p>Frame: <em>"The zeros stay the same because ___. The graph changes because ___."</em></p>
+    `,
+    transition: `"Pens down. Next: Practice #12 fluency pre-check. 5 minutes. Factor, find zeros, plot on a number line. No sketch today."`
+  },
+  {
+    title: "Practice #12 Fluency Pre-Check",
+    dok: "DOK 2",
+    duration: 5 * 60,
+    instructions: `
+      <p><strong>f(x) = 3x³ − 9x² − 12x</strong></p>
+      <p>This is deliberately a repeat of the Day 1 Try It 1a pattern. Diagnostic: did the GCF-cubic skill survive break?</p>
+      <ul>
+        <li>Target: GCF 3x → 3x(x−4)(x+1) → zeros 0, 4, −1</li>
+        <li>Plot on a number line. <strong>No sketch.</strong></li>
+      </ul>
+      <p><strong>Circulate watching only.</strong> Do not reteach class-wide.</p>
+      <p>Stuck at 3 min? Prompt: "Two numbers × to −4, + to −3." Give once. Pair slow finishers with finishers.</p>
+    `,
+    transition: `"Hard stop. Next function: Practice #13. Factor it on blank paper. Then graph in Desmos. Watch what happens at x = 4."`
+  },
+  {
+    title: "Practice #13 Discovery",
+    dok: "DOK 2–3",
+    duration: 17 * 60,
+    instructions: `
+      <p><strong>g(x) = x³ − 8x² + 16x</strong></p>
+      <p>Target factoring: x(x² − 8x + 16) = <strong>x(x − 4)²</strong>  ← repeated factor!</p>
+      <ul>
+        <li>Factor on blank paper</li>
+        <li>Identify zeros (only 2 distinct — why?)</li>
+        <li>Graph in Desmos</li>
+        <li><strong>Notice what the graph does at x = 4</strong></li>
+        <li>Sketch on blank paper</li>
+      </ul>
+      <p><strong>⚠️ DO NOT name "multiplicity" today.</strong> That's Day 3's discovery payoff.</p>
+      <p>When students say "it touches!" / "it bounces!" / "it doesn't cross!" — capture on the board, ask "which factor made that happen?", hear guesses, say <em>"we'll name it tomorrow."</em></p>
+      <p>All student language accepted: touches, bounces, turns, kisses the axis.</p>
+    `,
+    transition: `"Save the observation. We'll return to it. Now: the hardest thing today. Build the equation — we're going BACKWARD from zeros to f(x)."`
+  },
+  {
+    title: "Reverse Engineering",
+    dok: "DOK 3",
+    duration: 18 * 60,
+    instructions: `
+      <p><strong>Target:</strong> polynomial with zeros at x = −2, 1, 4 passing through (0, −8).</p>
+      <p>Three moves students must coordinate:</p>
+      <ol>
+        <li>Zeros → factors: f(x) = a(x+2)(x−1)(x−4)</li>
+        <li>Plug in (0, −8): −8 = a(2)(−1)(−4) = 8a</li>
+        <li>Solve: a = −1, so f(x) = −(x+2)(x−1)(x−4)</li>
+      </ol>
+      <p><strong>Common stalls:</strong></p>
+      <ul>
+        <li>Forgets the leading coefficient a. Prompt: "Plug in x=0. Do you get −8?"</li>
+        <li>Sign flip on factor: x = −2 → writes (x−2). Prompt: "Set your factor = 0. Does it give x = −2?"</li>
+      </ul>
+      <p><strong>Partners justify aloud.</strong> Push: "How did the point give you a?"</p>
+      <p><strong>Release valve:</strong> if time short, verbal partner justification only; written CER becomes homework. Preserve the DOK 3 conversation.</p>
+    `,
+    transition: `"Collect your papers — but save 5 minutes for the exit ticket. Pencils up. CER. One question."`
+  },
+  {
+    title: "Exit Ticket — CER",
+    dok: "DOK 2",
+    duration: 5 * 60,
+    instructions: `
+      <p><strong>Savvas Practice #6:</strong></p>
+      <p><em>"If you use zeros to sketch the graph of a polynomial function, how can you verify that your graph is correct?"</em></p>
+      <p>Students write <strong>Claim / Evidence / Reasoning</strong> on the packet.</p>
+      <p>DOK 2 — applying known verification strategies (substitute zeros, test points in each interval, Desmos cross-check). Not constructing a novel argument.</p>
+      <p><strong>Collect on the way out.</strong></p>
+    `,
+    transition: `"Packets to the front. Pack up. See you Wednesday."`
+  }
+];
+
+const TRANSITION_WINDOW = 60; // seconds
+
+const $ = id => document.getElementById(id);
+const state = {
+  idx: 0,
+  remaining: PHASES[0].duration,
+  running: false,
+  lastTick: null,
+  rafId: null,
+};
+
+function fmtTime(s) {
+  s = Math.max(0, Math.round(s));
+  const m = Math.floor(s / 60);
+  const ss = s % 60;
+  return `${m}:${ss.toString().padStart(2, '0')}`;
+}
+
+function hueForPhase(remaining, duration) {
+  const frac = Math.max(0, Math.min(1, remaining / duration));
+  return Math.round(210 * frac);
+}
+
+function renderDots() {
+  const dots = $("dots");
+  dots.innerHTML = "";
+  for (let i = 0; i < PHASES.length; i++) {
+    const d = document.createElement("div");
+    d.className = "dot" + (i < state.idx ? " done" : i === state.idx ? " current" : "");
+    dots.appendChild(d);
+  }
+}
+
+function renderPhase() {
+  const p = PHASES[state.idx];
+  $("phase-meta").textContent = `Phase ${state.idx + 1} of ${PHASES.length} · Algebra 2 · Lesson 3-5 · Day 2`;
+  $("phase-title").innerHTML = `${p.title}<span class="dok-badge">${p.dok}</span>`;
+  $("instructions").innerHTML = p.instructions;
+  $("transition-text").textContent = p.transition;
+  renderDots();
+  update();
+}
+
+function update() {
+  const p = PHASES[state.idx];
+  const hue = hueForPhase(state.remaining, p.duration);
+  document.documentElement.style.setProperty("--hue", hue);
+
+  const pct = 100 * (1 - state.remaining / p.duration);
+  $("progress-fill").style.width = pct.toFixed(1) + "%";
+  $("timer").textContent = fmtTime(state.remaining);
+
+  const transitionEl = $("transition");
+  if (state.remaining <= TRANSITION_WINDOW && state.remaining > 0) {
+    transitionEl.classList.add("active");
+  } else {
+    transitionEl.classList.remove("active");
+  }
+
+  $("btn-prev").disabled = state.idx === 0;
+  $("btn-play").textContent = state.running ? "⏸ Pause" : (state.remaining === PHASES[state.idx].duration ? "▶ Start" : "▶ Resume");
+  $("status-line").textContent = state.running ? "Running" : (state.remaining === 0 ? "Phase complete" : "Paused");
+}
+
+function tick(ts) {
+  if (!state.running) return;
+  if (state.lastTick === null) state.lastTick = ts;
+  const dt = (ts - state.lastTick) / 1000;
+  state.lastTick = ts;
+  state.remaining -= dt;
+  if (state.remaining <= 0) {
+    state.remaining = 0;
+    state.running = false;
+    update();
+    return;
+  }
+  update();
+  state.rafId = requestAnimationFrame(tick);
+}
+
+function play() {
+  if (state.remaining <= 0) return;
+  state.running = true;
+  state.lastTick = null;
+  cancelAnimationFrame(state.rafId);
+  state.rafId = requestAnimationFrame(tick);
+  update();
+}
+
+function pause() {
+  state.running = false;
+  cancelAnimationFrame(state.rafId);
+  update();
+}
+
+function toggle() {
+  if (state.running) pause();
+  else play();
+}
+
+function next() {
+  if (state.idx < PHASES.length - 1) {
+    state.idx++;
+    state.remaining = PHASES[state.idx].duration;
+    state.running = false;
+    cancelAnimationFrame(state.rafId);
+    renderPhase();
+  }
+}
+
+function prev() {
+  if (state.idx > 0) {
+    state.idx--;
+    state.remaining = PHASES[state.idx].duration;
+    state.running = false;
+    cancelAnimationFrame(state.rafId);
+    renderPhase();
+  }
+}
+
+function resetPhase() {
+  state.remaining = PHASES[state.idx].duration;
+  state.running = false;
+  cancelAnimationFrame(state.rafId);
+  update();
+}
+
+function restartAll() {
+  state.idx = 0;
+  state.remaining = PHASES[0].duration;
+  state.running = false;
+  cancelAnimationFrame(state.rafId);
+  renderPhase();
+}
+
+$("btn-play").addEventListener("click", toggle);
+$("btn-next").addEventListener("click", next);
+$("btn-prev").addEventListener("click", prev);
+$("btn-reset").addEventListener("click", resetPhase);
+$("btn-restart-all").addEventListener("click", restartAll);
+
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+  if (e.code === "Space") { e.preventDefault(); toggle(); }
+  else if (e.code === "ArrowRight") { e.preventDefault(); next(); }
+  else if (e.code === "ArrowLeft") { e.preventDefault(); prev(); }
+  else if (e.key === "r" || e.key === "R") { e.preventDefault(); resetPhase(); }
+});
+
+renderPhase();
+</script>
+</body>
+</html>
