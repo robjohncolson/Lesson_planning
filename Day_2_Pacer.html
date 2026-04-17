@@ -42,6 +42,7 @@
     font-weight: 700;
     margin: 0.2rem 0 0.4rem;
     color: var(--accent);
+    line-height: 1.15;
   }
   .progress-wrap {
     height: 10px;
@@ -108,7 +109,7 @@
     line-height: 1.55;
     color: #222;
   }
-  .instructions ul {
+  .instructions ul, .instructions ol {
     margin: 0.4rem 0 0 1.1rem;
     padding: 0;
   }
@@ -191,9 +192,15 @@
   }
   .dot.done { background: var(--accent); opacity: 0.45; }
   .dot.current { background: var(--accent); box-shadow: 0 0 0 4px rgba(0,0,0,0.05); }
-  .dok-badge {
+  .badge-row {
+    display: inline-flex;
+    gap: 0.35rem;
+    margin-left: 0.55rem;
+    vertical-align: middle;
+  }
+  .badge {
     display: inline-block;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -201,8 +208,10 @@
     border-radius: 999px;
     background: var(--accent);
     color: white;
-    vertical-align: middle;
-    margin-left: 0.5rem;
+    white-space: nowrap;
+  }
+  .badge.framework {
+    background: rgba(0, 0, 0, 0.72);
   }
 </style>
 </head>
@@ -210,7 +219,7 @@
 
 <header>
   <div>
-    <div class="phase-meta" id="phase-meta">Phase 1 of 6 · Algebra 2 · Lesson 3-5 · Day 2</div>
+    <div class="phase-meta" id="phase-meta">Phase 1 of 7 · Algebra 2 · Lesson 3-5 · Day 2</div>
     <h1 class="phase-title" id="phase-title">Blooket Recall</h1>
   </div>
   <div class="dots" id="dots"></div>
@@ -245,6 +254,7 @@
 const PHASES = [
   {
     title: "Blooket Recall",
+    framework: "Do Now",
     dok: "DOK 1",
     duration: 7 * 60,
     instructions: `
@@ -255,12 +265,13 @@ const PHASES = [
         <li>New: 2–3 sign-flip primer questions</li>
       </ul>
       <p>Monitor the dashboard diagnostically. Which skills have decayed?</p>
-      <p>If &gt;40% miss a core skill, 60-second reset <em>before</em> Sign Flip. Do not exceed 60s — skills get reps during activities.</p>
+      <p>If &gt;40% miss a core skill, 60-second reset <em>before</em> Launch. Do not exceed 60s.</p>
     `,
     transition: `Close game. "Look at your packet — Sign Flip Warm-Up. Two functions side by side. Do NOT graph yet. Predict first."`
   },
   {
     title: "Sign Flip Warm-Up",
+    framework: "Launch",
     dok: "DOK 2",
     duration: 8 * 60,
     instructions: `
@@ -268,9 +279,9 @@ const PHASES = [
       <p>Think silently 2 min → Turn and Talk 2 min → Desmos verify + class synthesis 4 min.</p>
       <p><strong>Pull from students, don't front-load:</strong></p>
       <ul>
-        <li>Zeros identical (−3, 0, 4). Zero Product Property doesn't care about a leading negative.</li>
+        <li>Zeros identical (−3, 0, 4). ZPP doesn't care about a leading negative.</li>
         <li>Every row of the sign chart flips.</li>
-        <li>End behavior flips: up-left/down-right (negative odd cubic).</li>
+        <li>End behavior flips: up-left/down-right.</li>
         <li>It's a reflection over the x-axis.</li>
       </ul>
       <p>Frame: <em>"The zeros stay the same because ___. The graph changes because ___."</em></p>
@@ -278,12 +289,13 @@ const PHASES = [
     transition: `"Pens down. Next: Practice #12 fluency pre-check. 5 minutes. Factor, find zeros, plot on a number line. No sketch today."`
   },
   {
-    title: "Practice #12 Fluency Pre-Check",
+    title: "Practice #12 — Fluency Pre-Check",
+    framework: "Explore",
     dok: "DOK 2",
     duration: 5 * 60,
     instructions: `
       <p><strong>f(x) = 3x³ − 9x² − 12x</strong></p>
-      <p>This is deliberately a repeat of the Day 1 Try It 1a pattern. Diagnostic: did the GCF-cubic skill survive break?</p>
+      <p>Deliberate repeat of the Day 1 Try It 1a pattern. Diagnostic: did the GCF-cubic skill survive break?</p>
       <ul>
         <li>Target: GCF 3x → 3x(x−4)(x+1) → zeros 0, 4, −1</li>
         <li>Plot on a number line. <strong>No sketch.</strong></li>
@@ -291,12 +303,13 @@ const PHASES = [
       <p><strong>Circulate watching only.</strong> Do not reteach class-wide.</p>
       <p>Stuck at 3 min? Prompt: "Two numbers × to −4, + to −3." Give once. Pair slow finishers with finishers.</p>
     `,
-    transition: `"Hard stop. Next function: Practice #13. Factor it on blank paper. Then graph in Desmos. Watch what happens at x = 4."`
+    transition: `"Hard stop. Next function: Practice #13. Factor on blank paper. Then graph in Desmos. Watch what happens at x = 4."`
   },
   {
-    title: "Practice #13 Discovery",
+    title: "Practice #13 — Discovery",
+    framework: "Explore",
     dok: "DOK 2–3",
-    duration: 17 * 60,
+    duration: 15 * 60,
     instructions: `
       <p><strong>g(x) = x³ − 8x² + 16x</strong></p>
       <p>Target factoring: x(x² − 8x + 16) = <strong>x(x − 4)²</strong>  ← repeated factor!</p>
@@ -307,16 +320,16 @@ const PHASES = [
         <li><strong>Notice what the graph does at x = 4</strong></li>
         <li>Sketch on blank paper</li>
       </ul>
-      <p><strong>⚠️ DO NOT name "multiplicity" today.</strong> That's Day 3's discovery payoff.</p>
-      <p>When students say "it touches!" / "it bounces!" / "it doesn't cross!" — capture on the board, ask "which factor made that happen?", hear guesses, say <em>"we'll name it tomorrow."</em></p>
-      <p>All student language accepted: touches, bounces, turns, kisses the axis.</p>
+      <p><strong>⚠️ DO NOT name "multiplicity" today.</strong> Day 3's discovery payoff.</p>
+      <p>When students say "it touches!" / "it bounces!" — capture on the board, ask "which factor made that happen?", hear guesses, say <em>"we'll name it tomorrow."</em></p>
     `,
-    transition: `"Save the observation. We'll return to it. Now: the hardest thing today. Build the equation — we're going BACKWARD from zeros to f(x)."`
+    transition: `"Save the observation. Now: the hardest thing today. Build the equation — we're going BACKWARD from zeros to f(x)."`
   },
   {
     title: "Reverse Engineering",
+    framework: "Explore",
     dok: "DOK 3",
-    duration: 18 * 60,
+    duration: 15 * 60,
     instructions: `
       <p><strong>Target:</strong> polynomial with zeros at x = −2, 1, 4 passing through (0, −8).</p>
       <p>Three moves students must coordinate:</p>
@@ -327,30 +340,48 @@ const PHASES = [
       </ol>
       <p><strong>Common stalls:</strong></p>
       <ul>
-        <li>Forgets the leading coefficient a. Prompt: "Plug in x=0. Do you get −8?"</li>
+        <li>Forgets a. Prompt: "Plug in x=0. Do you get −8?"</li>
         <li>Sign flip on factor: x = −2 → writes (x−2). Prompt: "Set your factor = 0. Does it give x = −2?"</li>
       </ul>
-      <p><strong>Partners justify aloud.</strong> Push: "How did the point give you a?"</p>
-      <p><strong>Release valve:</strong> if time short, verbal partner justification only; written CER becomes homework. Preserve the DOK 3 conversation.</p>
+      <p><strong>Partners justify aloud.</strong> Release valve: if short on time, written CER → homework; <em>preserve the partner conversation.</em></p>
     `,
-    transition: `"Collect your papers — but save 5 minutes for the exit ticket. Pencils up. CER. One question."`
+    transition: `"Pause work. Packets out. Let's synthesize."`
+  },
+  {
+    title: "Synthesis + Self-Reflection",
+    framework: "Share/Summary",
+    dok: "DOK 2",
+    duration: 5 * 60,
+    instructions: `
+      <p><strong>Teacher script (5 min flat):</strong></p>
+      <ol>
+        <li><strong>Essential Question callback</strong> (60s): "How do the zeros and a point on the graph determine the polynomial's equation?" One student; paraphrase with precision.</li>
+        <li><strong>Language Objective check</strong> (60s): "Who used <em>'the zeros stay the same because...'</em> today? What did you finish it with?" 2–3 voices.</li>
+        <li><strong>Self-ratings on packet</strong> (90s): students circle ✓ / partly / not yet for four Criteria for Success. Teacher scans.</li>
+        <li><strong>Preview Day 3</strong> (30s): "Tomorrow we name what happened at x = 4." Do NOT name it.</li>
+        <li><strong>Transition</strong> (30s): packets stay out for CER.</li>
+      </ol>
+      <p><em>Do NOT skip this phase even if Explore ran long — use the RE release valve instead.</em></p>
+    `,
+    transition: `"Pencils up. One question. CER format. You have 5 minutes."`
   },
   {
     title: "Exit Ticket — CER",
+    framework: "Exit Ticket",
     dok: "DOK 2",
     duration: 5 * 60,
     instructions: `
       <p><strong>Savvas Practice #6:</strong></p>
       <p><em>"If you use zeros to sketch the graph of a polynomial function, how can you verify that your graph is correct?"</em></p>
       <p>Students write <strong>Claim / Evidence / Reasoning</strong> on the packet.</p>
-      <p>DOK 2 — applying known verification strategies (substitute zeros, test points in each interval, Desmos cross-check). Not constructing a novel argument.</p>
+      <p>DOK 2 — applying known verification strategies (substitute zeros, test points, Desmos cross-check). Not constructing a novel argument.</p>
       <p><strong>Collect on the way out.</strong></p>
     `,
-    transition: `"Packets to the front. Pack up. See you Wednesday."`
+    transition: `"Packets to the front. Pack up. See you next class."`
   }
 ];
 
-const TRANSITION_WINDOW = 60; // seconds
+const TRANSITION_WINDOW = 60;
 
 const $ = id => document.getElementById(id);
 const state = {
@@ -386,7 +417,11 @@ function renderDots() {
 function renderPhase() {
   const p = PHASES[state.idx];
   $("phase-meta").textContent = `Phase ${state.idx + 1} of ${PHASES.length} · Algebra 2 · Lesson 3-5 · Day 2`;
-  $("phase-title").innerHTML = `${p.title}<span class="dok-badge">${p.dok}</span>`;
+  $("phase-title").innerHTML =
+    `${p.title}<span class="badge-row">` +
+    `<span class="badge framework">${p.framework}</span>` +
+    `<span class="badge">${p.dok}</span>` +
+    `</span>`;
   $("instructions").innerHTML = p.instructions;
   $("transition-text").textContent = p.transition;
   renderDots();
