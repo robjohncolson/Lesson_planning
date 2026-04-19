@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QuestionBank entry",
+  "type": "object",
+  "required": ["id", "lesson", "prompt", "dok"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable identifier, e.g. '3-5-ex04', '3-5-practice13'. Used across builders.",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "lesson": {
+      "type": "string",
+      "description": "Lesson code, e.g. '3-5'. Must have a matching calibration/<lesson>.json."
+    },
+    "source": {
+      "type": "string",
+      "description": "Human-readable source, e.g. 'Savvas Practice #13', 'Savvas Example 4', 'Lesson Quiz 3-5 #2'."
+    },
+    "page": {
+      "type": ["integer", "null"],
+      "description": "Source page in the textbook PDF, if known."
+    },
+    "image": {
+      "type": ["string", "null"],
+      "description": "Path to screenshot relative to repo root. Null for text-only questions."
+    },
+    "has_visual": {
+      "type": "boolean",
+      "description": "True if the question contains a graph/figure essential to solving it."
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Transcribed question text. Preserve math notation as plain text (use ^ for exponents, √ for roots, etc.)."
+    },
+    "answers": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Multiple-choice options in order. Empty array for open-response questions."
+    },
+    "correct": {
+      "type": ["integer", "string", "null"],
+      "description": "For MC: 1-based index into answers. For open-response: the expected answer string. Null if answer not transcribed."
+    },
+    "dok": {
+      "type": "integer",
+      "enum": [1, 2, 3, 4],
+      "description": "Depth of Knowledge level, calibrated to Savvas anchors for this lesson."
+    },
+    "dok_rationale": {
+      "type": "string",
+      "description": "One-sentence justification comparing to a calibration anchor."
+    },
+    "topics": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Topic tags for filtering, e.g. ['multiplicity', 'factoring', 'gcf', 'end-behavior']. Lowercase-hyphenated."
+    },
+    "tags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Free-form tags: 'savvas-declared-dok3', 'discovery', 'error-analysis', 'cer', 'sat-style', etc."
+    },
+    "used_in": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Lesson days this question has appeared in, e.g. ['Day_2', 'Day_7-review']."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Teacher notes, misconceptions, common stalls."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "ISO date of ingestion."
+    }
+  }
+}
