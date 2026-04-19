@@ -4,26 +4,30 @@
   "notes": "Populate `dok2_anchors` and `dok3_anchors` with Savvas-declared examples from the textbook. The ingest script loads this file and sends it to Claude as reference BEFORE asking for a classification on a new screenshot. Keep 2-5 anchors per level. Prefer anchors whose rationale is easy to articulate in one sentence.",
   "dok2_anchors": [
     {
-      "source": "Savvas Example 2 (placeholder — replace with actual Savvas-declared DOK2)",
-      "prompt": "Find the zeros of f(x) = x³ − 4x² − 5x and graph.",
-      "why_dok2": "Applies a multi-step procedure (factor, identify zeros, plot) with known methods. Single-path execution — no judgment call about which strategy to try."
+      "source": "Savvas Practice #7 (Error Analysis, lesson 3-5, anchors Example 2 — multiplicity)",
+      "prompt": "Tonya graphs f(x) = x³ + 3x² + 7x + 5 and concludes it has only one real root at x = −1. Describe and resolve two errors she made in finding all roots.",
+      "answer": "Tonya neglected to use synthetic division to factor the polynomial after finding the real root, so she missed the complex roots −1 + 2i and −1 − 2i.",
+      "why_dok2": "Apply a known multi-step procedure (find a real zero, divide, solve the quadratic) and notice what was skipped. Critique is shallow — the fix is procedural, not strategic. No novel reasoning required."
     },
     {
-      "source": "Savvas Practice #6 (used as Day 2 exit ticket)",
-      "prompt": "If you use zeros to sketch the graph of a polynomial function, how can you verify that your graph is correct?",
-      "why_dok2": "Applies known verification strategies (test points, Desmos check, end behavior). Conceptual recall-plus-application, not construction of a novel argument."
+      "source": "Savvas Practice #18 (lesson 3-5, anchors Example 4 — polynomial model)",
+      "prompt": "Waterworks models paddleboard profit (in hundreds of dollars) as P(x) = −3x³ + 48x² − 144x, where x is paddleboards sold (in thousands). What do the zeros tell you about how many paddleboards Waterworks should produce?",
+      "answer": "P(x) > 0 for 4 < x < 12, so produce between 4,000 and 12,000 paddleboards.",
+      "why_dok2": "Apply a familiar procedure (factor, find zeros, sign-chart) to a real-world model with a single correct interpretation. The contextual translation is one step on top of routine execution."
     }
   ],
   "dok3_anchors": [
     {
-      "source": "Savvas Error Analysis (placeholder — replace with actual Savvas-declared DOK3)",
-      "prompt": "Tonya sketches f(x) = (x+1)²(x−3) and draws the graph crossing the x-axis at x=−1. Describe her error and explain what the graph should do at the repeated zero.",
-      "why_dok3": "Critique someone else's reasoning AND defend the correct alternative with domain-specific vocabulary (multiplicity, sign change). Requires strategic thinking, not procedural execution."
+      "source": "Savvas Practice #27 (Model With Mathematics, lesson 3-5, anchors Example 4)",
+      "prompt": "A rectangular storage box has length less than both its length and width (length is greatest). f(x) = x³ + 2x² − 3x represents the volume, where x is the width in feet. (a) Find the factored form of f(x). (b) Find the zeros. (c) x is the width — what do the other two factors represent? (d) Find the dimensions when V = 10 ft³.",
+      "answer": "(a) x(x+3)(x−1); (b) x = 0, −3, 1; (c) (x−1) is height, (x+3) is length; (d) width = 2 ft, height = 1 ft, length = 5 ft.",
+      "why_dok3": "Coordinate four sub-problems where each part depends on a strategic interpretation of the previous one — factor, then map factors to physical dimensions using the constraint 'length is greatest', then solve a non-routine cubic equation in context. No single procedure produces all four parts."
     },
     {
-      "source": "Savvas Reverse Engineering (Day 2 DOK3)",
-      "prompt": "Write a polynomial with zeros at x = −2, 1, 4 that passes through (0, −8).",
-      "why_dok3": "Coordinate three moves (zeros → factors, factored form with unknown a, point constraint → solve for a). No memorized procedure reaches the answer in one step."
+      "source": "Savvas Practice #30 (Performance Task, lesson 3-5)",
+      "prompt": "Venetta opened deli sandwich franchises in 2000. The profit P (in hundreds of dollars) of the franchises in t years is P(t) = t³ + t² − 6t. (A) Sketch a graph of the function. (B) Based on the model, during what years did Venetta not make a profit? (C) If the model is appropriate, predict Venetta's profit in 2020.",
+      "answer": "(A) cubic with zeros at t = −3, 0, 2; (B) Venetta did not make a profit during the first two years (0 ≤ t < 2); (C) predicted 2020 profit ≈ $828,000 (P(20) = 8,280 hundreds of dollars).",
+      "why_dok3": "Open-ended modeling task: produce a graph, interpret zeros as a real-world interval, then extrapolate well beyond the modeled range and judge model appropriateness. Requires strategic reasoning across representations, not a single procedure."
     }
   ],
   "topic_vocabulary": [
