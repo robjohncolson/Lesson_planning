@@ -144,19 +144,22 @@ def build(path):
              Inches(0.6), Inches(2.0), Inches(12), Inches(1.4),
              size=44, bold=True, color=RGBColor(0xFF, 0xFF, 0xFF))
     add_text(s, [
-        "Math Objective: determine multiplicity of each zero; predict cross/touch from factored form.",
-        "Essential Question: what does a repeated factor do to the graph, and how can you predict behavior just from factored form?",
+        "Essential Question:",
+        "What does a repeated factor do to the graph of a polynomial,",
+        "and how can you predict the behavior at every zero just by looking",
+        "at the factored form?",
         "",
-        "Yesterday: g(x) = x(x \u2212 4)\u00b2 TOUCHED at x = 4. We said \u201cwe\u2019ll name it tomorrow.\u201d",
-        "Today is tomorrow. The word is MULTIPLICITY.",
+        "Day 2: zeros + a point \u2192 equation (you worked BACKWARD).",
+        "Today: when a factor appears more than once, the graph does",
+        "something different at that zero. We\u2019ll name it.",
     ],
-        Inches(0.6), Inches(3.6), Inches(12), Inches(3.2),
+        Inches(0.6), Inches(3.6), Inches(12), Inches(3.4),
         size=20, color=RGBColor(0xDD, 0xEE, 0xFF))
-    add_text(s, "55-min block  \u00b7  Tuesday F / Tuesday A / Monday A",
+    add_text(s, "55-min lesson  \u00b7  one DOK-3 driver",
              Inches(0.6), Inches(6.7), Inches(12), Inches(0.5),
              size=16, color=RGBColor(0x88, 0xAA, 0xCC))
 
-    total = 8
+    total = 7
 
     # 1. Do Now
     add_phase_slide(prs, 1, total,
@@ -167,13 +170,12 @@ def build(path):
             "",
             "1.  f(x) = (x + 2)(x \u2212 3)",
             "2.  h(x) = (x \u2212 1)\u00b2 (x + 5)",
-            "3.  k(x) = x\u00b3 (x \u2212 2)\u00b2",
             "",
-            "4.  Pattern guess: EVEN factor count \u2192 ?    ODD factor count \u2192 ?",
+            "3.  Pattern guess:  EVEN factor count \u2192 ?    ODD factor count \u2192 ?",
             "",
-            "Silent \u00b7 Pencil only \u00b7 No Desmos \u00b7 No packet",
+            "Silent  \u00b7  Pencil only  \u00b7  No Desmos  \u00b7  No packet",
         ],
-        footer="When everyone's in:  Blooket code coming up.")
+        footer="When everyone\u2019s in:  Blooket code coming up.")
 
     # 2. Blooket login
     s = prs.slides.add_slide(prs.slide_layouts[6])
@@ -206,100 +208,88 @@ def build(path):
 
     # 3. Blooket game
     add_phase_slide(prs, 3, total,
-        "Blooket  \u2014  Multiplicity Warm-Up",
+        "Blooket  \u2014  Rule Recall",
         "Do Now C", "DOK 1", 7, [
-            "Today\u2019s targeted Blooket (NEW):",
-            "  \u2022  Reading multiplicity from factored form",
-            "  \u2022  Even vs. odd behavior (cross vs. touch)",
-            "  \u2022  Matching graphs to equations",
-            "  \u2022  2 recall questions from Day 2",
+            "Pure rule recall today. The rules you\u2019ll need in 30 minutes:",
             "",
-            "Focus. Play fast. Teacher is watching the dashboard.",
+            "  \u2022  Multiplicity = exponent on the factor",
+            "  \u2022  EVEN multiplicity \u2192 graph TOUCHES and turns",
+            "  \u2022  ODD multiplicity \u2192 graph CROSSES",
+            "  \u2022  Day 2 recall: zero \u21d4 factor = 0  /  zero at c gives (x \u2212 c)",
+            "",
+            "Play fast.  Teacher is watching the dashboard.",
         ],
-        footer="Close game.  \u201cPackets out. Pull your Do Now sheet. Next we name the thing.\u201d")
+        footer="Close game at 0.  \u201cPull out your Do Now. Packet too.\u201d")
 
-    # 4. Launch - Name the thing
+    # 4. Launch \u2014 Name the Pattern via (x-1)\u207f
     add_phase_slide(prs, 4, total,
-        "Launch  \u2014  Name It:  MULTIPLICITY",
-        "Launch", "DOK 2", 8, [
-            "Yesterday:  g(x) = x (x \u2212 4)\u00b2   touched at x = 4.",
+        "Launch  \u2014  Name the Pattern",
+        "Launch", "DOK 2", 12, [
+            "1.  Pull out your Do Now.  Cold-call the pattern in #3.",
             "",
-            "MULTIPLICITY  =  how many times a factor appears in factored form.",
+            "2.  In Desmos \u2014 type each, watch what happens at x = 1:",
+            "      (a)  y = (x \u2212 1)\u00b9        (b)  y = (x \u2212 1)\u00b2",
+            "      (c)  y = (x \u2212 1)\u00b3        (d)  y = (x \u2212 1)\u2074",
             "",
-            "f(x) = (x \u2212 4)\u00b2 (x + 1)",
-            "   \u2022  x = 4:   factor (x \u2212 4) appears 2 times  \u2192  multiplicity 2",
-            "   \u2022  x = \u22121:  factor (x + 1) appears 1 time   \u2192  multiplicity 1",
+            "3.  THE WORD:  the number of times a factor appears in the factored",
+            "    form is its  MULTIPLICITY.   (x \u2212 1)\u00b2  has multiplicity 2 at x = 1.",
             "",
-            "Build the Frayer on your packet:  Definition  /  Characteristics  /  Example  /  Non-example",
+            "4.  Fill the T-chart on your packet:  ODD  vs.  EVEN.",
         ],
-        footer="Desmos next.  We\u2019ll test (x \u2212 1) with exponents 1, 2, 3, 4. Watch x = 1.")
+        footer="\u201cPackets to Practice. Three quick items.\u201d",
+        body_size=22)
 
-    # 5. Desmos explore
+    # 5. Practice \u2014 Try It A-C
     add_phase_slide(prs, 5, total,
-        "Explore  \u2014  Desmos: (x \u2212 1)\u207f",
-        "Explore", "DOK 2\u20133", 15, [
-            "Graph each. Record what happens AT x = 1:",
+        "Practice  \u2014  Try It A\u2013C",
+        "Practice", "DOK 2", 10, [
+            "For each polynomial:  list zeros, multiplicity, and behavior.",
             "",
-            "(a)  y = (x \u2212 1)\u00b9     \u2192  ?",
-            "(b)  y = (x \u2212 1)\u00b2     \u2192  ?",
-            "(c)  y = (x \u2212 1)\u00b3     \u2192  ?",
-            "(d)  y = (x \u2212 1)\u2074     \u2192  ?",
-            "",
-            "Then fill the EVEN vs. ODD T-chart.",
+            "  A.  f(x) = (x + 3)(x \u2212 2)\u00b2",
+            "  B.  g(x) = x\u00b2 (x \u2212 5)\u00b3",
+            "  C.  h(x) = (x + 1)\u2074 (x \u2212 4)",
             "",
             "Frame:  \u201cThe multiplicity is ____, so the graph ____ at x = ____.\u201d",
+            "",
+            "Fast finishers \u2014 challenge on the board.",
         ],
-        footer="Bonus: (x-1)\u00b3 crosses, but HOW is that cross different from (x-1)\u00b9? Discuss.")
+        footer="\u201cPacket flip. Tonya\u2019s graph next. Read the rules card on the page.\u201d")
 
-    # 6. Error analysis
+    # 6. Tonya \u2014 the DOK-3 driver
     add_phase_slide(prs, 6, total,
-        "Explore  \u2014  Tonya\u2019s Error",
-        "Explore", "DOK 3", 10, [
+        "Explore  \u2014  Tonya\u2019s Graph (Error Analysis)",
+        "Explore", "DOK 3", 15, [
             "Tonya sketches   f(x) = (x + 1)\u00b2 (x \u2212 3).",
-            "She draws the graph CROSSING at x = \u22121 and CROSSING at x = 3.",
+            "She draws the graph CROSSING at x = \u22121 AND CROSSING at x = 3.",
             "",
-            "(a)  What did Tonya get RIGHT?",
-            "(b)  What did she get WRONG?   Use the word MULTIPLICITY.",
-            "(c)  Defend the correct behavior at x = \u22121 in CER format.",
+            "EVERYTHING YOU NEED IS ON YOUR PAGE  \u2014  three rules + 5 steps.",
             "",
-            "Partners justify aloud using \u201cbecause\u201d / \u201csince.\u201d",
+            "  Step 1  What did Tonya get RIGHT?",
+            "  Step 2  What did she get WRONG?  Use \u201cmultiplicity\u201d.",
+            "  Step 3  Defend the correct behavior at x = \u22121 (sentence frame).",
+            "  Step 4  Verify in Desmos.    Step 5  Explain to your partner.",
         ],
-        footer="If time short: verbal CER now, written CER = homework.")
+        footer="Teacher circulates.  Prompts only \u2014 \u201cWhat\u2019s the exponent on (x + 1)?\u201d",
+        body_size=22)
 
-    # 7. Share/Summary
+    # 7. Summary Exit Ticket
     add_phase_slide(prs, 7, total,
-        "Share / Summary",
-        "Share/Summary", "DOK 2", 4, [
-            "Essential Question:",
-            "What does a repeated factor do to the graph,",
-            "and how do you predict each zero\u2019s behavior just from factored form?",
+        "Exit Ticket  \u2014  Summary",
+        "Exit Ticket", "DOK 1\u20132", 4, [
+            "1.  MULTIPLICITY = ______ on the factor.",
             "",
-            "Language Objective check:",
-            "Who used  \u201cThe multiplicity is ___, so the graph ___ at x = ___\u201d?",
+            "2.  EVEN \u2192 ______ .    ODD \u2192 ______ .",
             "",
-            "Self-rating on packet:   \u2713  /  partly  /  not yet",
+            "3.  In  p(x) = (x + 2)\u00b3 (x \u2212 4):",
+            "      x = \u22122 \u2192 mult ____, behavior ______________",
+            "      x =  4 \u2192 mult ____, behavior ______________",
             "",
-            "Preview Day 4:  what if the quadratic won\u2019t factor over the reals? Complex zeros.",
-        ],
-        footer="\u201cPencils up. Exit ticket. Use the frame.\u201d")
-
-    # 8. Exit ticket
-    add_phase_slide(prs, 8, total,
-        "Exit Ticket",
-        "Exit Ticket", "DOK 2", 4, [
-            "For  p(x) = (x + 2)\u00b3 (x \u2212 1)\u00b2 (x \u2212 4):",
-            "",
-            "(a)  List each zero and its MULTIPLICITY.",
-            "(b)  Predict the behavior (cross / touch / flatten-through) at each.",
-            "(c)  In ONE sentence, explain how multiplicity told you the behavior \u2014",
-            "       use the frame.",
-            "",
-            "Put your packet on the front desk as you leave.",
+            "4.  One sentence: most important thing I learned today.",
         ],
         footer="Packets to the front. Pack up. See you next class.",
-        body_size=26)
+        body_size=24)
 
-    # 9. Wrap-up
+    # 8. Wrap-up
     s = prs.slides.add_slide(prs.slide_layouts[6])
     add_background(s, NAVY)
     add_text(s, "Nice work.",

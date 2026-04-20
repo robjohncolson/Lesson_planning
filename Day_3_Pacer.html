@@ -220,7 +220,7 @@
 
 <header>
   <div>
-    <div class="phase-meta" id="phase-meta">Phase 1 of 8 · Algebra 2 · Lesson 3-5 · Day 3</div>
+    <div class="phase-meta" id="phase-meta">Phase 1 of 7 · Algebra 2 · Lesson 3-5 · Day 3</div>
     <h1 class="phase-title" id="phase-title">Solo Paper: Touch or Cross?</h1>
   </div>
   <div class="dots" id="dots"></div>
@@ -259,9 +259,9 @@ const PHASES = [
     dok: "DOK 2",
     duration: 5 * 60,
     instructions: `
-      <p><strong>Students get the DO NOW sheet as they walk in.</strong> Silent, pencil only, no Desmos, no packet.</p>
-      <p>They predict CROSS or TOUCH at each zero for three factored polynomials, then attempt a pattern rule in #4.</p>
-      <p><strong>Diagnostic scan:</strong> which students predicted "cross" for every zero (missed repeated factors)? Cold-call them in Launch. Which students wrote the even/odd rule in #4? Have them share first.</p>
+      <p><strong>Hand the DO NOW sheet to every student as they walk in.</strong> Silent, pencil only, no Desmos, no packet.</p>
+      <p>Three small predictions + one pattern guess. Breathable.</p>
+      <p><strong>Diagnostic scan:</strong> students who predicted "cross" for EVERY zero in #2 missed the repeated factor — cold-call them in Launch. Students who articulated the EVEN/ODD rule in #3 — have them share first (peer-voiced rule beats teacher-voiced rule).</p>
       <p><strong>Teacher action:</strong> no teaching. Circulate silently.</p>
     `,
     transition: `"Pencils down on Do Now. Chromebooks out. Blooket code on the screen."`
@@ -272,113 +272,108 @@ const PHASES = [
     dok: "—",
     duration: 2 * 60,
     instructions: `
-      <p><strong>Display the Blooket code.</strong> Day 3 Multiplicity CSV must be imported before class.</p>
+      <p><strong>Display the Blooket code.</strong> Day 3 Multiplicity CSV must be imported before class (regenerate via <code>regen_blooket_csvs.py</code>).</p>
       <p>Students open Chromebooks, type code, enter a nickname.</p>
       <p>2 minutes hard. Late joiners hop in mid-game.</p>
     `,
     transition: `"Everyone in? Go."`
   },
   {
-    title: "Blooket — Multiplicity Warm-Up",
+    title: "Blooket — Rule Recall",
     framework: "Do Now C",
     dok: "DOK 1",
     duration: 7 * 60,
     instructions: `
-      <p><strong>7-minute game.</strong> NEW targeted CSV: <code>Blooket_Day3_Multiplicity.csv</code>. Topics:</p>
+      <p><strong>7-minute game. Pure rule recall</strong> — habits of mind today's work depends on:</p>
       <ul>
-        <li>Reading multiplicity from factored form</li>
-        <li>Even vs. odd parity → cross vs. touch</li>
-        <li>Matching graphs to factored equations</li>
-        <li>2 recall questions from Day 2 (zeros, intervals)</li>
+        <li>Multiplicity = exponent on the factor</li>
+        <li>EVEN multiplicity → graph TOUCHES and turns</li>
+        <li>ODD multiplicity → graph CROSSES</li>
+        <li>Day 2 retention: zero ⇔ factor = 0; zero at c gives (x − c)</li>
       </ul>
-      <p>Monitor dashboard. Which questions had the lowest %? Address in Launch.</p>
+      <p><strong>NO procedural factoring items</strong> — DOK 2 problem solving doesn't belong on flashcards.</p>
+      <p>Monitor dashboard. Note the two lowest items; 60-second board reset if a rule is cold.</p>
     `,
-    transition: `Close game. "Packets out. Pull your Do Now. Next we NAME the thing."`
+    transition: `Close game. "Pull out your Do Now. Packet too. Launch next."`
   },
   {
-    title: "Launch — Name It: MULTIPLICITY",
+    title: "Launch — Name the Pattern via (x − 1)ⁿ",
     framework: "Launch",
     dok: "DOK 2",
-    duration: 8 * 60,
+    duration: 12 * 60,
     instructions: `
-      <p><strong>Bridge:</strong> Write g(x) = x(x − 4)² on the board. "Which zero was weird yesterday?" → x = 4. "How many times is (x − 4) in the factored form?" → twice. "That's MULTIPLICITY 2. The graph touched."</p>
-      <p>Now the word is attached to a shared memory, not a cold definition.</p>
-      <p><strong>Build the Frayer together</strong> on the packet: Definition / Characteristics / Example / Non-example.</p>
-      <ul>
-        <li>Definition: number of times a factor appears in factored form.</li>
-        <li>Example: (x − 5)³ → zero of multiplicity 3 at x = 5.</li>
-        <li>Non-example: the 3 in 3x is NOT multiplicity (that's a coefficient).</li>
-      </ul>
+      <p><strong>Script:</strong></p>
+      <ol>
+        <li>"Pull out your Do Now." (15s)</li>
+        <li>Cold-call the student who wrote a clean even/odd rule in #3. (60s)</li>
+        <li>Cold-call a student who wrote "cross" everywhere in #2 — surface the misconception. (60s)</li>
+        <li>Partners type (a)–(d) in Desmos, record behavior at x = 1. (5 min)
+          <ul>
+            <li>(a) y = (x − 1)¹  → clean cross</li>
+            <li>(b) y = (x − 1)²  → <strong>TOUCHES</strong> (name MULTIPLICITY here)</li>
+            <li>(c) y = (x − 1)³  → crosses but FLATTENS</li>
+            <li>(d) y = (x − 1)⁴  → touches, flatter</li>
+          </ul>
+        </li>
+        <li>Class share: "What happened at multiplicity 2 vs. 3 vs. 4?" (3 min)</li>
+        <li>Fill the T-chart together on the packet. (3 min)</li>
+      </ol>
+      <p><strong>Don't volunteer the FLATTEN insight</strong> — let students notice it themselves on (c) and (d).</p>
     `,
-    transition: `"Desmos next. We'll test (x − 1) with exponents 1, 2, 3, 4. Watch x = 1."`
+    transition: `"Packets to Practice. Three quick items."`
   },
   {
-    title: "Desmos — (x − 1)ⁿ Investigation",
-    framework: "Explore",
-    dok: "DOK 2–3",
-    duration: 15 * 60,
-    instructions: `
-      <p>Partners graph each in Desmos and record behavior AT x = 1:</p>
-      <ul>
-        <li>y = (x − 1)¹  → clean cross (linear)</li>
-        <li>y = (x − 1)²  → <strong>TOUCHES</strong> (parabolic kiss)</li>
-        <li>y = (x − 1)³  → crosses but <strong>FLATTENS</strong> (S-curve)</li>
-        <li>y = (x − 1)⁴  → touches, flatter than the square</li>
-      </ul>
-      <p>Then fill the EVEN vs. ODD T-chart on the packet.</p>
-      <p><strong>Bonus push:</strong> "Multiplicity 3 vs. multiplicity 1 — both cross. What's different about HOW they cross?" Productive struggle. Don't rescue.</p>
-      <p>Then Try It A–C (zeros, multiplicities, behaviors) + D challenge (build a polynomial with cross/touch/flatten-through at three specified zeros).</p>
-    `,
-    transition: `"Pause. Packets open to Error Analysis. Tonya sketched something wrong — find it."`
-  },
-  {
-    title: "Tonya Error Analysis",
-    framework: "Explore",
-    dok: "DOK 3",
+    title: "Practice — Try It A–C",
+    framework: "Practice",
+    dok: "DOK 2",
     duration: 10 * 60,
     instructions: `
-      <p><strong>Prompt:</strong> Tonya sketches f(x) = (x + 1)² (x − 3) with the graph CROSSING at both x = −1 and x = 3.</p>
-      <ol>
-        <li>What did Tonya get RIGHT? (x = 3 crosses — mult 1, odd ✓)</li>
-        <li>What did she get WRONG? (x = −1 has mult 2 → should TOUCH, not cross)</li>
-        <li>Defend the correct behavior at x = −1 in <strong>CER format</strong>.</li>
-      </ol>
-      <p><strong>Push "because" / "since."</strong> Partners justify aloud using multiplicity vocabulary.</p>
-      <p><strong>Release valve:</strong> written CER → homework if time tight; preserve the partner conversation.</p>
+      <p>For each polynomial: list zeros, multiplicity of each, and behavior.</p>
+      <ul>
+        <li>A. f(x) = (x + 3)(x − 2)²  → x = −3 mult 1 CROSS; x = 2 mult 2 TOUCH</li>
+        <li>B. g(x) = x² (x − 5)³  → x = 0 mult 2 TOUCH; x = 5 mult 3 CROSS (flatten)</li>
+        <li>C. h(x) = (x + 1)⁴ (x − 4)  → x = −1 mult 4 TOUCH (flat); x = 4 mult 1 CROSS</li>
+      </ul>
+      <p>Teacher circulates with sentence-frame prompts, not corrections.</p>
+      <p><strong>Fast-finisher extension</strong> (board): "Build a polynomial that CROSSES at x = 0, TOUCHES at x = 2, and FLATTEN-CROSSES at x = −1." Sample: f(x) = x(x − 2)²(x + 1)³.</p>
     `,
-    transition: `"Pencils up. Packets open to self-rating. Essential Question callback."`
+    transition: `"Packet flip. Tonya's graph next. Read the rule card on the page."`
   },
   {
-    title: "Synthesis + Self-Reflection",
-    framework: "Share/Summary",
-    dok: "DOK 2",
-    duration: 4 * 60,
+    title: "Tonya — the DOK-3 driver",
+    framework: "Explore",
+    dok: "DOK 3",
+    duration: 15 * 60,
     instructions: `
-      <p><strong>Teacher script (4 min flat):</strong></p>
+      <p><strong>Tonya sketches f(x) = (x + 1)² (x − 3)</strong> with the graph CROSSING at BOTH x = −1 and x = 3.</p>
+      <p><strong>All info is on the student page</strong> — three rules + 5-step scaffold + sentence frame.
+      Teacher circulates. Prompts only ("What's the exponent on (x + 1)?").</p>
       <ol>
-        <li>Essential Question callback (45s): "What does a repeated factor do?"</li>
-        <li>Language Objective check (45s): "Who used <em>the multiplicity is ___, so the graph ___ at x = ___</em>?"</li>
-        <li>Students circle self-ratings on packet (60s). Teacher scans.</li>
-        <li>Preview Day 4 (30s): "What if a quadratic won't factor over the reals? Complex zeros."</li>
-        <li>Transition (30s): exit ticket out.</li>
+        <li>What did Tonya get RIGHT? (x = 3 mult 1, odd → cross ✓)</li>
+        <li>What did she get WRONG? (x = −1 mult 2, even → should TOUCH)</li>
+        <li>Defend the correct behavior at x = −1 (sentence frame).</li>
+        <li>Verify in Desmos.</li>
+        <li>Explain to partner.</li>
       </ol>
-      <p><em>Do NOT skip. Use the Error Analysis release valve before cutting this.</em></p>
+      <p><strong>Stuck-pair hint card</strong> (after 10 min): "At x = −1, write the exponent on (x + 1). Now read Rule 2." Preserves DOK 3 — they still articulate WHY.</p>
     `,
-    transition: `"Pencils up. One question. Use the frame. 4 minutes."`
+    transition: `"Pencils up. Last 4 minutes. Summary exit ticket on the bottom of your packet."`
   },
   {
-    title: "Exit Ticket — Multiplicity Rule",
+    title: "Exit Ticket — Summary (NOT a CER)",
     framework: "Exit Ticket",
-    dok: "DOK 2",
+    dok: "DOK 1–2",
     duration: 4 * 60,
     instructions: `
-      <p><strong>p(x) = (x + 2)³ (x − 1)² (x − 4)</strong></p>
+      <p><strong>Summary recap</strong> — three fill-in-the-blank items + one open sentence.</p>
       <ol>
-        <li>List each zero and its multiplicity.</li>
-        <li>Predict behavior (cross / touch / flatten-through) at each.</li>
-        <li>ONE sentence using the frame: <em>"The multiplicity is ___, so the graph ___ at x = ___."</em></li>
+        <li>MULTIPLICITY = ______ on the factor.</li>
+        <li>EVEN → ______ . ODD → ______ .</li>
+        <li>In p(x) = (x + 2)³ (x − 4): mult and behavior at x = −2 and x = 4.</li>
+        <li>One sentence — most important thing learned today.</li>
       </ol>
-      <p>Full credit = all three behaviors correct AND the frame used in (c).</p>
+      <p><em>Intentionally NOT a CER.</em> The DOK-3 generative work happened in Tonya. Walk-out task should recap, not produce new argument.</p>
+      <p>If you want a CER for HW: "Explain why even multiplicity must touch, using sign-chart reasoning."</p>
       <p><strong>Collect on the way out.</strong></p>
     `,
     transition: `"Packets to the front. Pack up. See you next class."`

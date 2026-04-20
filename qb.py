@@ -159,6 +159,19 @@ def _default_time(dok: int) -> int:
 # Summary / inspection helpers
 # ----------------------------------------------------------------------
 
+def get_for_packet(ids: list[str]) -> list[dict]:
+    """Look up a fixed ordered list of registry entries for a packet builder.
+
+    Raises KeyError if any id is missing from the registry, so a packet
+    build fails loudly rather than silently rendering placeholder text.
+    """
+    found = {q["id"]: q for q in load() if q.get("id") in set(ids)}
+    missing = [qid for qid in ids if qid not in found]
+    if missing:
+        raise KeyError(f"Bank IDs not in registry: {missing}")
+    return [found[qid] for qid in ids]
+
+
 def stats() -> dict:
     items = load()
     by_lesson: dict[str, dict] = {}
