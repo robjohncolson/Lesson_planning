@@ -4,6 +4,31 @@ Paste into the next Claude Code / Codex session after `git pull`.
 
 ---
 
+## Machine context
+
+**This repo exists on two machines.** Home laptop (`C:/Users/rober/...`) is where code/tooling iteration happens with no student materials present. Work laptop (`C:/Users/ColsonR/...`) is where actual Savvas screenshots live and where packet building against real source material happens. **Lesson 3-5 was built on the home laptop; Lesson 4-1 onward will be built on the work laptop** because the user captures Savvas screenshots there. Always `git pull` on the machine you pick up on.
+
+## Next curriculum target: Unit 4 → selected Unit 5 → Trig → Unit 6
+
+**Not Lesson 3-6.** User's explicit roadmap (from `A2LessonSelection.txt`):
+
+1. **Unit 4 (all four)**: 4-1, 4-3, 4-4, 4-5 → culminates in **LEHS 8-question assessment**
+2. **Unit 5 (selected)**: 5-1 (quick), 5-4, 5-5 (quick)
+3. **Right-triangle trig**: SOH CAH TOA
+4. **Unit 6**: 6-3, 6-4, 6-5
+
+Skips 3-6, 4-2, 5-2, 5-3, 6-1, 6-2. Same Savvas-only + single-DOK-3 + pacer-v2 pattern applies to every lesson.
+
+### First task on next session (work laptop)
+
+User will drop Savvas screenshots into `questionbank/images/` for **Lesson 4-1** (naming convention `4-1_savvas_qNN_question.png` / `..._answer.png`, teacher addendum pages `4-1_te_addendum_pNN.png`). Ingest procedure:
+
+1. Read `questionbank/INGEST_PROMPT.md`.
+2. Create `calibration/4-1.json` (Savvas Item Analysis table — DOK mix, Example anchors, multiplicity of practice items).
+3. Ingest screenshots with vision, append to `questionbank/registry.jsonl` using `qb_append.py`. Tag scheme: `savvas-practice`, `try-it`, `lesson-quiz`, `do-now-bridge`, `today-preview`, `blooket-pool`, `rti-support`, `rti-extend`, `day{N}-...`, plus `lesson-4-1`.
+4. Identify the Savvas-declared DOK-3 item(s) for 4-1. That becomes the single DOK-3 driver for the corresponding day.
+5. Build packets + pacer v2 + slides using the same `build_day*.py` / `packet_styles.py` / `build_pacer_qr.py` toolchain.
+
 ## Where we are (as of 2026-04-20, end of session)
 
 ### Hard rules (locked in)
@@ -112,7 +137,7 @@ Teacher runs the full 55-min (or 45-min for short variants) lesson from the pace
 1. **Day 8 Support station has only 1 Savvas item** after the Savvas-only filter narrowed the pool. If you want 2 items per station, hand-pick a second `3-5-savvas-*` ID in `build_day8_packets.py:62` or widen the tag filter.
 2. **Day 6/7/8 Blooket CSVs.** Currently no dedicated CSVs for these days; the Day 2/Day 3 decks cover procedural items. If you want day-specific rule-recall decks, use `regen_blooket_csvs.py` with a new tag filter.
 3. **Classroom test:** run Day 6 (or a combined day) live and note timing drift. Day 7 Explore (Venetta) was widened to 26 min based on timing audit — verify it lands.
-4. **Lesson 3-6 ingest** (eventually). When 3-6 starts: create `calibration/3-6.json`, screenshot Savvas Item Analysis table, ingest practice + teacher addendums. Same tag scheme + Savvas-only rule applies.
+4. **Lesson 4-1 ingest** (next). User will take Savvas screenshots on the work laptop and drop them into `questionbank/images/`. See "Next curriculum target" section above for the full roadmap (4-1, 4-3, 4-4, 4-5 → LEHS assessment → 5-1/5-4/5-5 → SOH CAH TOA → 6-3/6-4/6-5). **Not 3-6.**
 
 ## Cross-agent review (2026-04-20)
 
@@ -165,6 +190,6 @@ python "C:/Users/rober/Downloads/Projects/Agent/runner/cross-agent.py" \
   --working-dir "C:/Users/rober/Downloads/Projects/Lesson_planning" \
   --timeout 600 --prompt "..."
 
-# Ingest a Savvas screenshot (e.g., for Lesson 3-6 eventually)
-# Tell Claude: "ingest questionbank/images/3-6_savvas_q<NN>_question.png"
+# Ingest a Savvas screenshot (Lesson 4-1 is the next target, not 3-6)
+# Tell Claude: "ingest questionbank/images/4-1_savvas_q<NN>_question.png"
 ```
