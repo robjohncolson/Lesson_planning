@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day 3 Pacer (45 min) — The Magic of Multiplicity</title>
+<style>
+  :root {
+    --hue: 210;
+    --bg: hsl(var(--hue), 62%, 92%);
+    --bg-deep: hsl(var(--hue), 70%, 82%);
+    --accent: hsl(var(--hue), 72%, 32%);
+    --text: #111;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: -apple-system, Segoe UI, system-ui, Roboto, sans-serif;
+    background: linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 100%);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 800ms linear;
+  }
+  header {
+    padding: 1rem 2rem 0.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .phase-meta {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+  .phase-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin: 0.2rem 0 0.4rem;
+    color: var(--accent);
+    line-height: 1.15;
+  }
+  .progress-wrap {
+    height: 10px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0 2rem;
+    width: calc(100% - 4rem);
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 300ms linear;
+  }
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(280px, 42%) 1fr;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    align-items: stretch;
+  }
+  @media (max-width: 800px) {
+    main { grid-template-columns: 1fr; }
+  }
+  .timer-card {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .timer {
+    font-size: clamp(5rem, 14vw, 11rem);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    line-height: 0.9;
+    margin: 0.4rem 0;
+    letter-spacing: -0.02em;
+  }
+  .timer-sub {
+    font-size: 0.95rem;
+    opacity: 0.75;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .content-card {
+    background: white;
+    border-radius: 18px;
+    padding: 1.5rem 1.8rem;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .instructions {
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    line-height: 1.55;
+    color: #222;
+  }
+  .instructions ul, .instructions ol {
+    margin: 0.4rem 0 0 1.1rem;
+    padding: 0;
+  }
+  .instructions li { margin: 0.2rem 0; }
+  .transition {
+    margin-top: auto;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.04);
+    border-left: 5px solid rgba(0, 0, 0, 0.25);
+    opacity: 0.55;
+    font-size: 1rem;
+    transition: opacity 400ms, background 400ms, border-color 400ms;
+  }
+  .transition.active {
+    opacity: 1;
+    background: hsl(var(--hue), 80%, 95%);
+    border-left-color: var(--accent);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.01); }
+  }
+  .transition-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  footer {
+    padding: 1rem 2rem 1.3rem;
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.35);
+  }
+  button {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+    transition: transform 120ms, filter 120ms;
+    min-width: 90px;
+  }
+  button.secondary {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--text);
+  }
+  button:hover { filter: brightness(1.08); }
+  button:active { transform: translateY(1px); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .kbd {
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.55;
+    padding: 0 1rem 0.8rem;
+  }
+  .dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem 0 0.6rem;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.18);
+  }
+  .dot.done { background: var(--accent); opacity: 0.45; }
+  .dot.current { background: var(--accent); box-shadow: 0 0 0 4px rgba(0,0,0,0.05); }
+  .badge-row {
+    display: inline-flex;
+    gap: 0.35rem;
+    margin-left: 0.55rem;
+    vertical-align: middle;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: white;
+    white-space: nowrap;
+  }
+  .badge.framework {
+    background: rgba(0, 0, 0, 0.72);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="phase-meta" id="phase-meta">Phase 1 of 6 · Algebra 2 · Lesson 3-5 · Day 3 · 45-min (F Wed)</div>
+    <h1 class="phase-title" id="phase-title">Solo Paper: Touch or Cross?</h1>
+  </div>
+  <div class="dots" id="dots"></div>
+</header>
+<div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+
+<main>
+  <section class="timer-card">
+    <div class="timer-sub" id="timer-sub">Remaining</div>
+    <div class="timer" id="timer">5:00</div>
+    <div class="timer-sub" id="status-line">Press Start or Space</div>
+  </section>
+  <section class="content-card">
+    <div class="instructions" id="instructions"></div>
+    <div class="transition" id="transition">
+      <span class="transition-label">Transition cue (activates in last 60s)</span>
+      <span id="transition-text"></span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <button id="btn-prev" class="secondary">◀ Prev</button>
+  <button id="btn-play">▶ Start</button>
+  <button id="btn-next" class="secondary">Next ▶</button>
+  <button id="btn-reset" class="secondary">↻ Reset phase</button>
+  <button id="btn-restart-all" class="secondary">↺ Restart all</button>
+</footer>
+<div class="kbd">Space: play/pause  ·  ← →: prev/next phase  ·  R: reset current phase  ·  Total: 45 min (Practice dropped; students apply the rule inside Tonya)</div>
+
+<script>
+const PHASES = [
+  {
+    title: "Solo Paper: Touch or Cross?",
+    framework: "Do Now A",
+    dok: "DOK 2",
+    duration: 5 * 60,
+    instructions: `
+      <p><strong>Hand the DO NOW sheet to every student as they walk in.</strong> Silent, pencil only, no Desmos, no packet.</p>
+      <p>Three small predictions + one pattern guess. Breathable.</p>
+      <p><strong>Diagnostic scan:</strong> students who predicted "cross" for EVERY zero in #2 missed the repeated factor — cold-call them in Launch. Students who articulated the EVEN/ODD rule in #3 — have them share first (peer-voiced rule beats teacher-voiced rule).</p>
+      <p><strong>Teacher action:</strong> no teaching. Circulate silently.</p>
+    `,
+    transition: `"Pencils down on Do Now. Chromebooks out. Blooket code on the screen."`
+  },
+  {
+    title: "Blooket Login",
+    framework: "Do Now B",
+    dok: "—",
+    duration: 2 * 60,
+    instructions: `
+      <p><strong>Display the Blooket code.</strong> Day 3 Multiplicity CSV must be imported before class (regenerate via <code>regen_blooket_csvs.py</code>).</p>
+      <p>Students open Chromebooks, type code, enter a nickname.</p>
+      <p>2 minutes hard. Late joiners hop in mid-game.</p>
+    `,
+    transition: `"Everyone in? Go."`
+  },
+  {
+    title: "Blooket — Rule Recall",
+    framework: "Do Now C",
+    dok: "DOK 1",
+    duration: 7 * 60,
+    instructions: `
+      <p><strong>7-minute game. Pure rule recall</strong> — habits of mind today's work depends on:</p>
+      <ul>
+        <li>Multiplicity = exponent on the factor</li>
+        <li>EVEN multiplicity → graph TOUCHES and turns</li>
+        <li>ODD multiplicity → graph CROSSES</li>
+        <li>Day 2 retention: zero ⇔ factor = 0; zero at c gives (x − c)</li>
+      </ul>
+      <p><strong>NO procedural factoring items</strong> — DOK 2 problem solving doesn't belong on flashcards.</p>
+      <p>Monitor dashboard. Note the two lowest items; 60-second board reset if a rule is cold.</p>
+    `,
+    transition: `Close game. "Pull out your Do Now. Packet too. Launch next."`
+  },
+  {
+    title: "Launch — Name the Pattern via (x − 1)ⁿ",
+    framework: "Launch",
+    dok: "DOK 2",
+    duration: 12 * 60,
+    instructions: `
+      <p><strong>Script:</strong></p>
+      <ol>
+        <li>"Pull out your Do Now." (15s)</li>
+        <li>Cold-call the student who wrote a clean even/odd rule in #3. (60s)</li>
+        <li>Cold-call a student who wrote "cross" everywhere in #2 — surface the misconception. (60s)</li>
+        <li>Partners type (a)–(d) in Desmos, record behavior at x = 1. (5 min)
+          <ul>
+            <li>(a) y = (x − 1)¹  → clean cross</li>
+            <li>(b) y = (x − 1)²  → <strong>TOUCHES</strong> (name MULTIPLICITY here)</li>
+            <li>(c) y = (x − 1)³  → crosses but FLATTENS</li>
+            <li>(d) y = (x − 1)⁴  → touches, flatter</li>
+          </ul>
+        </li>
+        <li>Class share: "What happened at multiplicity 2 vs. 3 vs. 4?" (3 min)</li>
+        <li>Fill the T-chart together on the packet. (3 min)</li>
+      </ol>
+      <p><strong>Don't volunteer the FLATTEN insight</strong> — let students notice it themselves on (c) and (d).</p>
+    `,
+    transition: `"Packets to Practice. Three quick items."`
+  },
+  {
+    title: "Tonya — the DOK-3 driver",
+    framework: "Explore",
+    dok: "DOK 3",
+    duration: 15 * 60,
+    instructions: `
+      <p><strong>Tonya sketches f(x) = (x + 1)² (x − 3)</strong> with the graph CROSSING at BOTH x = −1 and x = 3.</p>
+      <p><strong>All info is on the student page</strong> — three rules + 5-step scaffold + sentence frame.
+      Teacher circulates. Prompts only ("What's the exponent on (x + 1)?").</p>
+      <ol>
+        <li>What did Tonya get RIGHT? (x = 3 mult 1, odd → cross ✓)</li>
+        <li>What did she get WRONG? (x = −1 mult 2, even → should TOUCH)</li>
+        <li>Defend the correct behavior at x = −1 (sentence frame).</li>
+        <li>Verify in Desmos.</li>
+        <li>Explain to partner.</li>
+      </ol>
+      <p><strong>Stuck-pair hint card</strong> (after 10 min): "At x = −1, write the exponent on (x + 1). Now read Rule 2." Preserves DOK 3 — they still articulate WHY.</p>
+    `,
+    transition: `"Pencils up. Last 4 minutes. Summary exit ticket on the bottom of your packet."`
+  },
+  {
+    title: "Exit Ticket — Summary (NOT a CER)",
+    framework: "Exit Ticket",
+    dok: "DOK 1–2",
+    duration: 4 * 60,
+    instructions: `
+      <p><strong>Summary recap</strong> — three fill-in-the-blank items + one open sentence.</p>
+      <ol>
+        <li>MULTIPLICITY = ______ on the factor.</li>
+        <li>EVEN → ______ . ODD → ______ .</li>
+        <li>In p(x) = (x + 2)³ (x − 4): mult and behavior at x = −2 and x = 4.</li>
+        <li>One sentence — most important thing learned today.</li>
+      </ol>
+      <p><em>Intentionally NOT a CER.</em> The DOK-3 generative work happened in Tonya. Walk-out task should recap, not produce new argument.</p>
+      <p>If you want a CER for HW: "Explain why even multiplicity must touch, using sign-chart reasoning."</p>
+      <p><strong>Collect on the way out.</strong></p>
+    `,
+    transition: `"Packets to the front. Pack up. See you next class."`
+  }
+];
+
+const TRANSITION_WINDOW = 60;
+
+const $ = id => document.getElementById(id);
+const state = {
+  idx: 0,
+  remaining: PHASES[0].duration,
+  running: false,
+  lastTick: null,
+  rafId: null,
+};
+
+function fmtTime(s) {
+  s = Math.max(0, Math.round(s));
+  const m = Math.floor(s / 60);
+  const ss = s % 60;
+  return `${m}:${ss.toString().padStart(2, '0')}`;
+}
+
+function hueForPhase(remaining, duration) {
+  const frac = Math.max(0, Math.min(1, remaining / duration));
+  return Math.round(210 * frac);
+}
+
+function renderDots() {
+  const dots = $("dots");
+  dots.innerHTML = "";
+  for (let i = 0; i < PHASES.length; i++) {
+    const d = document.createElement("div");
+    d.className = "dot" + (i < state.idx ? " done" : i === state.idx ? " current" : "");
+    dots.appendChild(d);
+  }
+}
+
+function renderPhase() {
+  const p = PHASES[state.idx];
+  $("phase-meta").textContent = `Phase ${state.idx + 1} of ${PHASES.length} · Algebra 2 · Lesson 3-5 · Day 3`;
+  $("phase-title").innerHTML =
+    `${p.title}<span class="badge-row">` +
+    `<span class="badge framework">${p.framework}</span>` +
+    (p.dok === "—" ? `` : `<span class="badge">${p.dok}</span>`) +
+    `</span>`;
+  $("instructions").innerHTML = p.instructions;
+  $("transition-text").textContent = p.transition;
+  renderDots();
+  update();
+}
+
+function update() {
+  const p = PHASES[state.idx];
+  const hue = hueForPhase(state.remaining, p.duration);
+  document.documentElement.style.setProperty("--hue", hue);
+
+  const pct = 100 * (1 - state.remaining / p.duration);
+  $("progress-fill").style.width = pct.toFixed(1) + "%";
+  $("timer").textContent = fmtTime(state.remaining);
+
+  const transitionEl = $("transition");
+  if (state.remaining <= TRANSITION_WINDOW && state.remaining > 0) {
+    transitionEl.classList.add("active");
+  } else {
+    transitionEl.classList.remove("active");
+  }
+
+  $("btn-prev").disabled = state.idx === 0;
+  $("btn-play").textContent = state.running ? "⏸ Pause" : (state.remaining === PHASES[state.idx].duration ? "▶ Start" : "▶ Resume");
+  $("status-line").textContent = state.running ? "Running" : (state.remaining === 0 ? "Phase complete" : "Paused");
+}
+
+function tick(ts) {
+  if (!state.running) return;
+  if (state.lastTick === null) state.lastTick = ts;
+  const dt = (ts - state.lastTick) / 1000;
+  state.lastTick = ts;
+  state.remaining -= dt;
+  if (state.remaining <= 0) {
+    state.remaining = 0;
+    state.running = false;
+    update();
+    return;
+  }
+  update();
+  state.rafId = requestAnimationFrame(tick);
+}
+
+function play() {
+  if (state.remaining <= 0) return;
+  state.running = true;
+  state.lastTick = null;
+  cancelAnimationFrame(state.rafId);
+  state.rafId = requestAnimationFrame(tick);
+  update();
+}
+
+function pause() {
+  state.running = false;
+  cancelAnimationFrame(state.rafId);
+  update();
+}
+
+function toggle() {
+  if (state.running) pause();
+  else play();
+}
+
+function next() {
+  if (state.idx < PHASES.length - 1) {
+    state.idx++;
+    state.remaining = PHASES[state.idx].duration;
+    state.running = false;
+    cancelAnimationFrame(state.rafId);
+    renderPhase();
+  }
+}
+
+function prev() {
+  if (state.idx > 0) {
+    state.idx--;
+    state.remaining = PHASES[state.idx].duration;
+    state.running = false;
+    cancelAnimationFrame(state.rafId);
+    renderPhase();
+  }
+}
+
+function resetPhase() {
+  state.remaining = PHASES[state.idx].duration;
+  state.running = false;
+  cancelAnimationFrame(state.rafId);
+  update();
+}
+
+function restartAll() {
+  state.idx = 0;
+  state.remaining = PHASES[0].duration;
+  state.running = false;
+  cancelAnimationFrame(state.rafId);
+  renderPhase();
+}
+
+$("btn-play").addEventListener("click", toggle);
+$("btn-next").addEventListener("click", next);
+$("btn-prev").addEventListener("click", prev);
+$("btn-reset").addEventListener("click", resetPhase);
+$("btn-restart-all").addEventListener("click", restartAll);
+
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+  if (e.code === "Space") { e.preventDefault(); toggle(); }
+  else if (e.code === "ArrowRight") { e.preventDefault(); next(); }
+  else if (e.code === "ArrowLeft") { e.preventDefault(); prev(); }
+  else if (e.key === "r" || e.key === "R") { e.preventDefault(); resetPhase(); }
+});
+
+renderPhase();
+</script>
+</body>
+</html>
