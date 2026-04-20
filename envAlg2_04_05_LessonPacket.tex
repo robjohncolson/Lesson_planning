@@ -1,0 +1,471 @@
+\documentclass[11pt]{article}
+
+% ---------- PACKAGES ----------
+\usepackage[letterpaper,margin=0.85in,top=0.75in,bottom=0.75in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{multicol}
+
+% ---------- COLORS (matches Savvas enVision look) ----------
+\definecolor{envisionblue}{HTML}{1F6FB5}
+\definecolor{envisiondark}{HTML}{103E6B}
+\definecolor{tryitred}{HTML}{B22222}
+\definecolor{habitsred}{HTML}{C0392B}
+\definecolor{callout}{HTML}{FFF5E6}
+\definecolor{rulebar}{HTML}{8CB9E0}
+\definecolor{lightgray}{HTML}{D8D8D8}
+
+% ---------- HEADER / FOOTER ----------
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% ---------- CUSTOM STYLES ----------
+% "EXAMPLE N: Title" banner
+\newcommand{\examplebanner}[2]{%
+  \vspace{6pt}%
+  \noindent\begin{tcolorbox}[
+    colback=envisionblue,colframe=envisionblue,
+    coltext=white,sharp corners,boxrule=0pt,
+    left=10pt,right=10pt,top=3pt,bottom=3pt,
+    width=\linewidth
+  ]
+    {\bfseries\large EXAMPLE #1}\quad{\large #2}
+  \end{tcolorbox}\vspace{4pt}%
+}
+
+% "Try It! Title" heading
+\newcommand{\tryitbanner}[1]{%
+  \vspace{4pt}%
+  {\color{tryitred}\bfseries\Large Try It!}\quad{\bfseries\large #1}\par
+  \vspace{2pt}%
+}
+
+% HABITS OF MIND box
+\newtcolorbox{habitsbox}[1]{%
+  colback=white,colframe=habitsred,
+  boxrule=0.5pt,sharp corners,
+  left=8pt,right=8pt,top=4pt,bottom=4pt,
+  title={\color{habitsred}\bfseries HABITS OF MIND \textemdash\ #1},
+  fonttitle=\bfseries,coltitle=habitsred,
+  colbacktitle=white,titlerule=0pt
+}
+
+% Concept Summary banner
+\newcommand{\conceptbanner}[1]{%
+  \vspace{6pt}%
+  \noindent\begin{tcolorbox}[
+    colback=lightgray,colframe=lightgray,
+    coltext=envisiondark,sharp corners,boxrule=0pt,
+    left=10pt,right=10pt,top=3pt,bottom=3pt,
+    width=\linewidth
+  ]
+    {\bfseries\large CONCEPT SUMMARY}\quad{\large #1}
+  \end{tcolorbox}\vspace{4pt}%
+}
+
+% Side-label tag (WORDS / ALGEBRA / GRAPHS)
+\newcommand{\sidetag}[1]{%
+  \begin{tcolorbox}[
+    colback=envisionblue,colframe=envisionblue,
+    coltext=white,sharp corners,boxrule=0pt,
+    width=1.1in,halign=center,
+    left=4pt,right=4pt,top=2pt,bottom=2pt
+  ]\bfseries #1\end{tcolorbox}%
+}
+
+% DOK pill
+\newcommand{\dok}[1]{%
+  \hfill{\bfseries\color{habitsred}DOK#1}%
+}
+
+% Writing-line space (for student work)
+\newcommand{\writelines}[1]{%
+  \vspace{2pt}%
+  \foreach \i in {1,...,#1}{\noindent\rule{\linewidth}{0.3pt}\par\vspace{12pt}}%
+}
+% Simpler fallback that doesn't require tikz/pgffor:
+\makeatletter
+\def\writespaces#1{%
+  \@for\z:={1,...,#1}\do{}% no-op, use the loop below
+  \par\vspace{2pt}%
+  \count@=0
+  \loop\ifnum\count@<#1
+    \noindent\rule{\linewidth}{0.3pt}\par\vspace{14pt}%
+    \advance\count@ by 1
+  \repeat
+}
+\makeatother
+
+% Blank answer box of given height
+\newcommand{\answerbox}[1]{%
+  \par\noindent\fbox{\begin{minipage}[t][#1][t]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}\ \end{minipage}}\par
+}
+
+% Two-column side-by-side boxes (for parts a and b)
+\newcommand{\twopart}[2]{%
+  \par\noindent
+  \begin{minipage}[t]{0.48\linewidth}#1\end{minipage}\hfill
+  \begin{minipage}[t]{0.48\linewidth}#2\end{minipage}\par
+}
+
+% Side-margin reflection prompt
+\newcommand{\sideprompt}[1]{%
+  \par\hfill{\itshape\small #1}\par
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+% ==================================================================
+\begin{document}
+
+% ---------- STUDENT HEADER ----------
+\noindent
+Algebra 2 \textendash\ Block \underline{\hspace{0.6in}}\hfill
+Date \underline{\hspace{1.3in}}\hfill
+Name \underline{\hspace{2.4in}}
+
+\begin{center}
+  {\Huge\bfseries Lesson 4-5: Solve Rational Equations}
+\end{center}
+
+% ---------- OBJECTIVES TABLE ----------
+\renewcommand{\arraystretch}{1.35}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\bfseries\raggedright\arraybackslash}p{1.5in}|X|}
+\hline
+Math Objectives &
+\begin{itemize}[leftmargin=*,nosep,topsep=0pt,label=\textbullet]
+  \item Solve rational equations in one variable.
+  \item Identify extraneous solutions to rational equations and give examples of how they arise.
+\end{itemize} \\
+\hline
+Language Objective &
+\begin{itemize}[leftmargin=*,nosep,topsep=0pt,label=\textbullet]
+  \item Students will write how to solve a rational equation word problem using a graphic organizer.
+\end{itemize} \\
+\hline
+Essential Question &
+\begin{itemize}[leftmargin=*,nosep,topsep=0pt,label=\textbullet]
+  \item How can I solve rational equations and identify extraneous solutions?
+\end{itemize} \\
+\hline
+\end{tabularx}
+
+\vspace{10pt}
+
+% ---------- CRITIQUE & EXPLAIN ----------
+{\color{envisionblue}\bfseries\Large CRITIQUE \& EXPLAIN}\\
+Nicky and Tavon used different methods to solve the equation
+$\displaystyle \frac{1}{2}x + \frac{2}{5} = \frac{9}{10}$.
+
+\vspace{4pt}
+
+\renewcommand{\arraystretch}{1.25}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}p{2.7in}|X|}
+\hline
+\textbf{Nicky} & \textbf{Tavon} \\
+\hline
+$\displaystyle \frac{1}{2}x + \frac{2}{5} = \frac{9}{10}$ &
+$\displaystyle \frac{1}{2}x + \frac{2}{5} = \frac{9}{10}$ \\
+$\displaystyle \frac{1}{2}x = \frac{9}{10} - \frac{2}{5}$ &
+$\displaystyle 10\!\left(\frac{1}{2}x + \frac{2}{5} = \frac{9}{10}\right)$ \\
+$\displaystyle \frac{1}{2}x = \frac{5}{10}$ & $5x + 4 = 9$ \\
+$x = 1$ & $5x = 5$ \\
+The solution is $1$. & $x = 1$ \quad The solution is $1$. \\
+\hline
+\end{tabularx}
+
+\vspace{8pt}
+
+\renewcommand{\arraystretch}{1.1}
+\noindent
+\begin{tabularx}{\linewidth}{|X|X|}
+\hline
+Explain different strategies that Nicky and Tavon used and the advantages and disadvantages of each.
+& \multicolumn{1}{l|}{} \\[2.2in] \hline
+Did Nicky use a correct method to solve the equation? Did Tavon? &
+\textbf{Use Structure.} Why might Tavon have chosen to multiply both sides of the equation by 10? Could he have used another number? Explain. \\[1.6in] \hline
+\end{tabularx}
+
+\vspace{6pt}
+
+\begin{habitsbox}{Reason}
+If Tavon had multiplied each side of the equation by 100, would his answer have been 10 times as much? Explain.
+\vspace{1in}
+\end{habitsbox}
+
+\sideprompt{What do you notice about the equation? \quad What strategies do each of them use?}
+
+\newpage
+
+% ---------- EXAMPLE 1 ----------
+\examplebanner{1}{Solve a Rational Equation}
+
+\textbf{What is the solution to each rational equation?}
+
+\textbf{A.}\quad $\displaystyle \frac{1}{x+4} = 2$
+
+\begin{center}
+\begin{minipage}{0.55\linewidth}
+\begin{align*}
+(x+4)\!\left(\frac{1}{x+4}\right) &= 2(x+4) \\
+1 &= 2x + 8 \\
+x &= -\tfrac{7}{2}
+\end{align*}
+The solution is $x = -\dfrac{7}{2}$.
+\end{minipage}\hfill
+\begin{minipage}{0.40\linewidth}
+\begin{tcolorbox}[colback=callout,colframe=envisionblue,boxrule=0.4pt,sharp corners,fontupper=\small]
+Multiply both sides of the equation by the common denominator to eliminate the fractions. Then solve. Confirm that the solution is valid in the original equation.
+\end{tcolorbox}
+\end{minipage}
+\end{center}
+
+\sideprompt{Why do you have to confirm that the solution is valid in the original equation?}
+
+\vspace{4pt}
+\tryitbanner{Solve a Rational Equation}
+
+\textbf{1.} What is the solution to each equation?
+
+\twopart{%
+\textbf{a.}\quad $\displaystyle \frac{2}{x+5} = 4$
+\answerbox{1.6in}
+}{%
+\textbf{b.}\quad $\displaystyle \frac{1}{x-7} = 2$
+\answerbox{1.6in}
+}
+
+\vspace{6pt}
+\begin{habitsbox}{Critique Reasoning}
+For part (b), Kaitlyn wrote $1 = 2x - 7$, then $8 = 2x$, and $4 = x$. Is she correct? Explain.
+\vspace{0.9in}
+\end{habitsbox}
+
+\newpage
+
+% ---------- EXAMPLE 2 ----------
+\examplebanner{2}{Solve a Work-Rate Problem}
+
+\textbf{Arthur and Cheyenne} are making Chinese paper cutting designs to give as gifts to wish family and friends good luck in the coming year. Together they can complete the job in $24$ hours. How long would it take Cheyenne to complete the job if she was working alone? \textit{(Cheyenne works twice as fast as Arthur.)}
+
+\answerbox{3.0in}
+
+\sideprompt{Why is it important to define the variable(s) before writing an equation to represent the problem?}
+
+\vspace{6pt}
+\tryitbanner{Solve a Work-Rate Problem}
+
+\textbf{2.} It takes $12$ hours to fill a pool with two pipes, where the water in one pipe flows three times as fast as the other pipe. How long will it take the slower pipe to fill the pool by itself?
+
+\answerbox{2.2in}
+
+\vspace{4pt}
+\begin{habitsbox}{Reason}
+In a work-rate problem, explain why you can't average the individual rates to determine how long it will take to complete a job together.
+\vspace{0.9in}
+\end{habitsbox}
+
+\newpage
+
+% ---------- EXAMPLE 3 ----------
+\examplebanner{3}{Identify an Extraneous Solution}
+
+Solve the equation and identify any \textbf{extraneous solutions}:
+\[
+\frac{1}{x-3} \;+\; \frac{x}{x+3} \;=\; \frac{2}{x^2-9}
+\]
+
+\textbf{Note:} $x^2 - 9$ is a \textbf{difference of squares.}
+
+\renewcommand{\arraystretch}{1.35}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{2.2in}|X|}
+\hline
+\textbf{Step 1:} Identify any restrictions on the domain. & \\[0.9in] \hline
+\textbf{Step 2:} Multiply each side of the equation by the common denominator $x^2-9$. & \\[1.1in] \hline
+\textbf{Step 3:} Solve. & \\[1.3in] \hline
+\textbf{Step 4:} Check for extraneous solutions. & \\[0.9in] \hline
+\textbf{Step 5:} Verify by graphing / extraneous solution. & \\[0.9in] \hline
+\end{tabularx}
+
+\sideprompt{Do you have to multiply both sides of the equation by the LCD to eliminate the fractions?}
+\sideprompt{How can you determine values that cannot be solutions before solving?}
+
+\vspace{6pt}
+\tryitbanner{Identify an Extraneous Solution}
+
+\textbf{3.} What is the solution to the equation
+$\displaystyle \frac{1}{x+2} + \frac{1}{x-2} = \frac{4}{(x+2)(x-2)}$?
+
+\answerbox{2.0in}
+
+\newpage
+
+% ---------- EXAMPLE 4 ----------
+\examplebanner{4}{Check for Extraneous Solutions}
+
+\textbf{What are the solution(s) to the following equation?}
+\[
+\frac{3}{x-3} \;=\; \frac{x}{x-3} \;-\; \frac{x}{4}
+\]
+
+\begin{center}
+\begin{minipage}{0.60\linewidth}
+\begin{align*}
+(4)(x-3)\!\left(\frac{3}{x-3}\right) &= \left(\frac{x}{x-3} - \frac{x}{4}\right)(4)(x-3) \\
+4(3) &= 4(x) - x(x-3) \\
+12 &= 4x - x^2 + 3x \\
+x^2 - 7x + 12 &= 0 \\
+(x-3)(x-4) &= 0 \\
+x - 3 = 0 \ \text{or}\ \ x - 4 &= 0 \\
+x = 3 \ \text{or}\ \ x &= 4
+\end{align*}
+\end{minipage}\hfill
+\begin{minipage}{0.36\linewidth}
+\begin{tcolorbox}[colback=callout,colframe=envisionblue,boxrule=0.4pt,sharp corners,fontupper=\small]
+Multiply by the LCD.
+\end{tcolorbox}
+\vspace{10pt}
+\begin{tcolorbox}[colback=callout,colframe=envisionblue,boxrule=0.4pt,sharp corners,fontupper=\small]
+Write in standard form so the quadratic is equal to $0$. Then factor the polynomial and solve for $x$.
+\end{tcolorbox}
+\end{minipage}
+\end{center}
+
+Check the solutions in the original equation. The value $3$ is an \textbf{extraneous solution} because it would cause the denominator of the original equation to be equal to zero. The only solution to the equation is $x = 4$.
+
+\sideprompt{How could you use a graph to verify your solution?}
+
+\vspace{6pt}
+\tryitbanner{Check for Extraneous Solutions}
+
+\textbf{4.} What are the solutions to the following equations?
+
+\twopart{%
+\textbf{a.}\quad $\displaystyle x + \frac{6}{x-3} = \frac{2x}{x-3}$
+\answerbox{2.0in}
+}{%
+\textbf{b.}\quad $\displaystyle \frac{x^2}{x+5} = \frac{25}{x+5}$
+\answerbox{2.0in}
+}
+
+\newpage
+
+% ---------- EXAMPLE 5 ----------
+\examplebanner{5}{Solve a Rate Problem}
+
+Paddling with the current in a river, Jake traveled $16$ miles. Even though he paddled upstream for an hour longer than the amount of time he paddled downstream, Jake could only travel $6$ miles against the current. In still water, Jake paddles at a rate of $5$ mph. What is the speed of the current in the river?
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.35}
+\noindent
+\begin{tabularx}{\linewidth}{|>{\bfseries\raggedright\arraybackslash}p{1.0in}|X|}
+\hline
+Formulate & \\[1.2in] \hline
+Compute & \\[1.6in] \hline
+Interpret & \\[1.2in] \hline
+\end{tabularx}
+
+\vspace{6pt}
+\tryitbanner{Solve a Rate Problem}
+
+\textbf{5.} Three people are planting tomatoes in a community garden. Marta takes $50$ minutes to plant the garden alone, Benito takes $x$ minutes, and Tyler takes $x + 15$ minutes. If the three of them take $20$ minutes to finish the garden, how long would it have taken Tyler alone?
+
+\answerbox{2.6in}
+
+\vspace{4pt}
+\begin{habitsbox}{Make Sense and Persevere}
+What does the fraction $\dfrac{1}{50}$ mean with regards to Marta?
+\vspace{0.8in}
+\end{habitsbox}
+
+\newpage
+
+% ---------- CONCEPT SUMMARY ----------
+\conceptbanner{Solving Rational Equations}
+
+\vspace{4pt}
+\noindent\sidetag{WORDS}\\[-2pt]
+A rational equation is an equation that contains a rational expression. To solve, identify the domain for the variable. Then multiply both sides of the equation by a common denominator and solve. An \textbf{extraneous solution} is a solution that is not valid because that value is excluded from the domain of the original equation.
+
+\vspace{10pt}
+\noindent\sidetag{ALGEBRA}\\[-2pt]
+
+\noindent
+\begin{minipage}[t]{0.48\linewidth}
+Domain: $x \neq 0$
+\[
+\begin{aligned}
+\frac{1}{x} + \frac{2}{x} &= \frac{1}{6} \\[2pt]
+6x\!\left(\frac{1}{x} + \frac{2}{x}\right) &= 6x\!\left(\frac{1}{6}\right) \\
+6 + 12 &= x \\
+18 &= x
+\end{aligned}
+\]
+The domain includes $x = 18$, so the solution to the equation is $18$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}
+Domain: $x \neq 1$
+\[
+\begin{aligned}
+\frac{x^2 + 4}{x - 1} &= \frac{5}{x - 1} \\[2pt]
+(x-1)\!\left(\frac{x^2+4}{x-1}\right) &= (x-1)\!\left(\frac{5}{x-1}\right) \\
+x^2 + 4 &= 5 \\
+x^2 &= 1 \\
+x &= \pm 1
+\end{aligned}
+\]
+The domain does not include $x = 1$, so $1$ is an extraneous solution. It does include $x = -1$, so the solution to the equation is $-1$.
+\end{minipage}
+
+\newpage
+
+% ---------- SELECT EXERCISES ----------
+\begin{center}{\Large\bfseries Select Exercises}\end{center}
+
+% Each exercise is its own tabularx so LaTeX can break pages between them.
+% \exerciserow{prompt}{workspace-height}
+\newcommand{\exerciserow}[2]{%
+  \noindent\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{2.9in}|X|}
+  \hline
+  #1 & \\[#2] \hline
+  \end{tabularx}\par\vspace{2pt}%
+}
+
+\exerciserow{%
+\textbf{8. Reason.} If you solve a work-rate problem and your solution, which represents the amount of time it would take \textit{working together}, exceeds the individual \textit{working alone} times that are given, then how do you know your solution is unreasonable? Explain. \dok{3}%
+}{1.4in}
+
+\exerciserow{%
+\textbf{20.} Russel and Aaron can build a shed in the time shown when working together. Aaron works three times as fast as Russel. How long would it take Russel to build the shed if he were to work alone? \textit{(Russel and Aaron can build the shed in $8$ hours working together.)} \dok{2}%
+}{1.6in}
+
+\exerciserow{%
+\textbf{Solve the equation.} \textsc{(See Example 3)}\par
+\textbf{21.} $\displaystyle \frac{x}{x-3} - 4 = \frac{3}{x-3}$ \dok{2}%
+}{1.5in}
+
+\exerciserow{%
+\textbf{Solve the equation.} \textsc{(See Example 4)}\par
+\textbf{23.} $\displaystyle \frac{4}{3(x+1)} = \frac{12}{x^2-1}$ \dok{2}%
+}{1.5in}
+
+\exerciserow{%
+\textbf{30. Generalize.} So far this baseball season, Philip has gotten a hit $8$ times out of $40$ at-bats. He wants to increase his batting average to $0.333$. Calculate the number of consecutive hits, $h$, he would need in order to achieve this goal. Round your answer to the nearest whole number. \dok{3}%
+}{1.7in}
+
+\end{document}
