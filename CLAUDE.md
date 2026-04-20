@@ -1,46 +1,83 @@
 # Lesson_planning — Project Guidance
 
-High school Algebra 2 lesson materials, Topic 3-5 (Zeros of Polynomial Functions).
+High school Algebra 2 lesson materials — Topic 3 (Polynomials) closing, Topic 4 (Rational Functions + Inverse Variation) beginning, then selected 5-x / trig / 6-x through end of school year (2026-06-20).
 
 ## Hard rules
 
 - **Savvas-only for student-facing work.** Every problem, Try It, Do Now, Practice, or Exit item on a student packet MUST trace to a Savvas bank ID in `questionbank/registry.jsonl`. No fabricated items. If the right Savvas item isn't in the bank, ingest it first (screenshots live in `questionbank/images/`).
-- **Single-DOK3 spine.** One DOK-3 driver per period, self-contained with all rules printed on the page. See `obsidian-wiki/wiki/concepts/Single-DOK3 Lesson Spine.md` for the full pattern.
-- **Summary exit, not CER.** Walk-out tasks recap the day's learning. Full CER writing in 5 min is unrealistic.
-- **Blooket = pure DOK-1 rule recall.** Habits of mind only. No procedural factoring items (those are DOK-2 problem solving, not flashcard material).
-- **Savvas's editorial stance on DOK-3:** in Lesson 3-5, Savvas puts DOK-3 demand on modeling applications only. The three Savvas-declared DOK-3 items are Practice #25 (firework), #27 (storage box), #30 (Venetta) — all Example 4 anchors. Multiplicity + complex zeros are DOK 1–2 procedural skills in Savvas's framing.
+- **Single-DOK3 spine, per period.** One DOK-3 driver per period, self-contained with all rules printed on the page. A lesson's P3 may have no DOK-3 driver (pure DOK-2 mastery day) when P2 already carried the spine. See wiki `concepts/Single-DOK3 Lesson Spine.md`.
+- **Summary exit, not CER.** Walk-out tasks recap the day's learning with fill-in + one "biggest thing learned" sentence. Full CER writing in 5 min is unrealistic.
+- **Blooket is DEPRECATED** for all lessons from Unit 4 onward. Do Now now carries DOK-1 recall load. Existing Blooket CSVs moved to `legacy/`.
+- **Try-Its stay in-class as Think-Pair-Share.** Student homework completion is unreliable. The Lynn DOK framework wants 35–40 min of student heavy lifting in Explore — Try-Its fill that. Back-of-packet HW is OPTIONAL REINFORCEMENT only.
+- **Klimsara-adapted 3-period cadence** (default going forward). Each lesson = 3 teaching periods. Teacher models ONE Example in Launch; Explore is the 35-min TPS block; student-centered, not teacher-modeled-end-to-end.
+- **Framework phases** (non-negotiable, per `DOKframework.txt`): Do Now (≤10) · Launch (10–15) · Explore (35–40) · Share/Summary (5–15) · Exit Ticket. Teacher packet carries explicit `Questions to ask:` and `Adult role:` per phase for evaluators.
 
-## Current recommended structure (Savvas-only)
+## Current structure — Klimsara-adapted (Unit 4+)
 
-8-day plan collapses to 6–7 teachable days via combined packets:
+Three periods per lesson. One pacer with three sub-tabs (P1/P2/P3) replaces per-day pacers.
 
-| Combined Day | Source days folded | DOK-3 driver | Bank-anchored items |
+| Period | Role | DOK arc | Typical Explore load |
 |---|---|---|---|
-| Day 2-3 | factored-form graphing + multiplicity | none (DOK 1–2 practice) | LQ Q4 · Example 2 · Try It 2a, 2b · Practice #14, #15, #16 · LQ Q5 |
-| Day 4-5 | real+complex zeros + modeling | **Savvas Practice #27** (storage box) | Practice #28 · Example 3 · Try It 3a, 3b · Practice #27 · Practice #17 |
+| **P1** | Conceptual introduction | 1 → 2 | Do Now (bridge) + 2 Examples modeled + 5–7 Practice/Try-It items in TPS |
+| **P2** | Applications + DOK-3 spine | 2 → 3 | Bridge + 1 Example modeled + 4 Practice + **⭐ DOK-3 driver** |
+| **P3** | Mastery / assessment-critical | 2 | Bridge + 2 Examples paired in Launch + 5–6 Practice (assessment-aligned) |
 
-Legacy per-day packets (Day 2, Day 3, Day 3 short) remain in the repo for reference but contain fabricated items (Reverse Engineering on Day 2, Tonya on Day 3) — not Savvas-anchored.
+**Wednesday F 45-min variant**: Explore cut to 25 min (drop 2 practice items), Launch/Share/Exit unchanged. Framework phases never cut.
+
+### Lesson 3-5 (closed)
+
+Originally 8 days. Retired to `legacy/`. Replaced by Klimsara close-out:
+
+| Period | File prefix | DOK-3 driver | Content |
+|---|---|---|---|
+| P2 (Tue 4/28) | `L35_P2_*` | — | Multiplicity + factored-form graphing |
+| P3 (Wed 4/29) | `L35_P3_*` | **Practice #27 (Storage Box)** | Real+complex zeros + modeling |
+| P4 (Thu 4/30) | `L35_P4_*` | — | Topic 3 Assessment (11 Qs, external `a2topic3assess.docx`) |
+
+### Lesson 4-1 (ready, Fri F / Mon A start)
+
+| Period | File prefix | DOK-3 driver | Content |
+|---|---|---|---|
+| P1 | `L41_P1_*` | — | Inverse variation introduction (xy = k, y = k/x) |
+| P2 | `L41_P2_*` | **Practice #26 (Ramón road trip — direct-vs-inverse)** | Applications + DOK-3 performance task |
+| P3 | `L41_P3_*` | — | Reciprocal function + translations (**assessment-critical**: Topic 4 LEHS Q#3 + Q#5) |
+
+## Naming conventions
+
+- **Artifacts:** `L{NN}_P{N}_{Do_Now,Student_Packet,Teacher_Packet,Slides,Visuals_Checklist}.{docx,pptx,md}`. Replaces legacy `Day_N_*`.
+- **Bank IDs:** `{lesson}-savvas-q{N}` for practice items (e.g. `4-1-savvas-q26`); longer auto-slugs for Examples/Try-Its/TE addendums.
 
 ## Standard toolchain
 
-- `qb.py` — registry accessor. `qb.get_for_packet(ids)` wires Practice items into a packet builder.
-- `packet_styles.py` — shared docx formatting helpers (day banner, teal sections, summary-exit box, sentence-frame callout, running header). Adapted from `lesson35_8day.tex`.
-- `build_day{23,45}_packets.py` — recommended packet builders (Savvas-only).
-- `build_day{23,45}_slides.py` — projection decks for the combined days.
-- `build_pacer_qr.py` — segno-powered offline SVG QR generator for pacer overlays.
-- `regen_blooket_csvs.py` — regenerate Blooket CSVs from bank with bridge/preview ratio reporting.
-- `index.html` — GitHub Pages landing page listing all pacers by card; top section shows recommended Savvas-only combined days, bottom section shows legacy per-day pacers.
+- `qb.py` — registry accessor. `qb.get_for_packet(ids)` wires items into builders. `qb.visuals_for(ids)` + `qb.write_visuals_checklist(ids, path)` emit pre-print checklists.
+- `qb_append.py` — validates + appends registry entries. Required fields: `lesson`, `prompt`, `dok`. Optional schema includes `visual_type` (enum: `none`/`photo`/`graph`/`table`/`diagram`/`map`), `visual_needs_cleanup` (bool), `visual_clean_asset` (path).
+- `generate_practice_skeletons.py` — given a lesson's calibration file, emits pre-filled JSON stubs for every Savvas practice item. Cuts per-item ingest time from ~90s to ~20s. `python generate_practice_skeletons.py <lesson>` writes `skeletons/<lesson>_practice_skeletons.json`.
+- `packet_styles.py` — shared docx formatting helpers + `framework_phase_header` (with DOK/minutes/teacher_does/students_do/Qs/adult_role) + `emit_visuals_checklist()` hook for builders.
+- `build_L{35,41}_P{N}_packets.py` — lesson builders. Each emits Do Now + Student Packet + Teacher Packet + Visuals Checklist.
+- `build_L{35,41}_slides.py` — per-lesson slide decks (one builder, N deck functions).
+- `L{35,41}_Pacer.html` — single-file pacer per lesson, 3 sub-tabs (one per period), countdown timer, inline teacher scripts / answer keys / rules / bridges / warnings.
+- `backfill_visuals_4-1.py` — historical one-off that populated visual_type fields on already-ingested 4-1 items. Kept for reference; re-runnable.
+- `legacy/` — retired Day 2-8 artifacts + Blooket CSVs from pre-Klimsara Lesson 3-5.
 
-## Class context (as of 2026-04-19)
+## Class context (as of 2026-04-20)
 
-- Two sections: **Period A** and **Period F**. Day 1 ran 3 class periods (budgeted 1). Use ~1.4× stretch factor when sizing packets for this population.
-- Day 1 is closed as-taught; `Day_1_Period_A_Supplement_The_Leap.docx` is an optional Monday handout.
-- Wednesday F = 45 min (short period) — compressed variants drop Practice and fold Share/Summary into Exit.
-- School's lesson-plan framework sub-phases the Do Now into A/B/C (solo paper DOK 2 + login + Blooket DOK 1). Per-phase teacher packet must carry explicit `Questions to ask:` and `Adult role:` labels per `DOKframework.txt`.
+- Two sections: **Period A** and **Period F**.
+- **Week of 2026-04-27 schedule** (saved in project memory): Mon A 65 / Tue F 65 + A 55 / Wed A 65 + F **45** / Thu F 65 + A 55 / Fri F 65.
+- **Period A** is one period behind Period F at start of 3-5 close-out. Both finish Topic 3 Thu 4/30. Period F starts 4-1 on Fri 5/1; Period A starts 4-1 on Mon 5/4.
+- **Wednesday F = 45 min** — short variant with Explore cut.
+- **Solo teacher, class ≤10.** No aide-based release valves. Single-teacher circulation (4–6 laps during Explore).
+- **ELL-heavy** — sentence frames on student packet are non-negotiable.
 
-## Related wiki pages (obsidian-wiki)
+## Assessment coverage
 
-- `concepts/Single-DOK3 Lesson Spine.md` — the full design pattern
+- **Topic 3 assessment (Thu 4/30)** — `a2topic3assess.docx`. 11 Qs spanning 3-1 through 3-5. Of these, 4 are Lesson 3-5 content: Q#2 (conjugate pairs — preped via Tue→Wed bridge prompt), Q#5 (zeros + end behavior), Q#6 (Lucy's tray volume model — paralleled by Storage Box #27 on Wed), Q#10 (identify zeros).
+- **Topic 4 LEHS 8-Q assessment** — `a2topic4assess.docx`, 8 selected items: #2, #3, #4, #5, #6, #7, #15, #19. Of these, 2 are Lesson 4-1 content: Q#3 (H/V asymptotes, from Ex 4/5), Q#5 (translation description, from Ex 5). **Practice #19 is the rehearsal item** for these.
+
+## Related wiki pages (obsidian-wiki, home laptop)
+
+- `concepts/Klimsara-Adapted Lesson Pattern.md` — 3-period template, phase timings, TPS rule, Wed-F variant
+- `concepts/Single-DOK3 Lesson Spine.md` — updated: per-period, not per-lesson
+- `concepts/Self-Contained Pacer Pattern.md` — v3 tabbed pattern
 - `concepts/Do Now A-B-C Framework.md` — the school's Do Now sub-phasing convention
 
 ---
