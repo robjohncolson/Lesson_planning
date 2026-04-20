@@ -698,3 +698,6 @@ if __name__ == "__main__":
     build_student("Day_6_Student_Packet.docx")
     build_teacher("Day_6_Teacher_Packet.docx")
     print("Built Day_6_Do_Now.docx, Day_6_Student_Packet.docx, Day_6_Teacher_Packet.docx")
+    from packet_styles import emit_visuals_checklist
+    emit_visuals_checklist(_ALL_IDS, "Day_6_Visuals_Checklist.md",
+                           title="Day 6 - Visuals Checklist")

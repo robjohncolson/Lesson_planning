@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L35 Pacer · Periods 2, 3, 4</title>
+<style>
+  :root {
+    --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
+    --gold:#c88b14; --red:#b23a3a; --accent:#d94e2f;
+    --bg:#eaf2fb; --card:#ffffff; --ink:#112233; --muted:#556677;
+    --pale-teal:#d4edda; --pale-gold:#fff2cc; --pale-red:#f7d7d7;
+    --pale-navy:#cfe2f3; --pale-orange:#fce5cd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.4;
+  }
+  header {
+    background: var(--navy); color: #fff; padding: 12px 24px;
+    display:flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+  header .meta { font-size: 0.85rem; color: #bbd0e6; }
+  .tabs {
+    display:flex; gap: 4px; background:#fff; padding: 6px 24px;
+    border-bottom: 1px solid #ccc;
+  }
+  .tab {
+    padding: 10px 20px; border: none; background: #dfe9f3;
+    color: var(--navy); font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; border-radius: 6px 6px 0 0;
+    transition: background 0.15s;
+  }
+  .tab:hover { background: #c9dcf0; }
+  .tab.active { background: var(--navy); color: #fff; }
+  .panel { display: none; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .panel.active { display: block; }
+  .timer-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--navy); color: #fff; padding: 10px 16px;
+    border-radius: 8px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .timer-bar .countdown { font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
+  .timer-bar button {
+    background: var(--gold); color: #fff; border: none;
+    padding: 8px 16px; border-radius: 4px; font-weight: 600;
+    cursor: pointer; font-size: 0.9rem;
+  }
+  .timer-bar button.stop { background: var(--red); }
+  .timer-bar button:hover { filter: brightness(1.1); }
+  .timer-bar .phase-title { font-size: 1rem; color: #bbd0e6; }
+  .phase-list {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+  }
+  .phase-chip {
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
+    font-weight: 600; border: 2px solid transparent;
+  }
+  .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
+  .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
+  .phase-card {
+    background: var(--card); border-radius: 8px; padding: 18px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px;
+  }
+  .phase-card h2 {
+    margin: 0 0 6px 0; color: var(--navy); font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badges { display:flex; gap: 6px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.72rem; font-weight: 700; color: #fff;
+  }
+  .badge.dok { background: var(--gold); }
+  .badge.min { background: var(--green); }
+  .badge.fw { background: var(--blue); }
+  .phase-card .obj { color: var(--muted); font-size: 0.92rem; margin-bottom: 12px; }
+  .callout {
+    padding: 12px 14px; border-radius: 6px; margin: 12px 0;
+    border-left: 5px solid var(--teal);
+  }
+  .callout.teacher { background: var(--pale-navy); border-color: var(--navy); }
+  .callout.answer  { background: var(--pale-teal); border-color: var(--green); }
+  .callout.rule    { background: var(--pale-gold); border-color: var(--gold); }
+  .callout.warn    { background: var(--pale-red); border-color: var(--red); }
+  .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout .label {
+    font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    display: block; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout.answer .label { color: var(--green); }
+  .callout.rule .label { color: var(--gold); }
+  .callout.warn .label { color: var(--red); }
+  .callout.bridge .label { color: var(--accent); }
+  .callout ul { margin: 4px 0; padding-left: 22px; }
+  .item {
+    border-left: 3px solid var(--blue); padding: 10px 14px;
+    background: #f7faff; margin: 8px 0; border-radius: 4px;
+  }
+  .item .qid {
+    font-size: 0.75rem; color: var(--muted); font-family: monospace;
+  }
+  .item.dok3 { border-left-color: var(--accent); background: #fff5ef; }
+  .item .dok3-star { color: var(--accent); font-weight: 700; }
+  .short-note {
+    background: #ffd9e0; padding: 10px 14px; border-radius: 6px;
+    border-left: 4px solid #c42; font-size: 0.9rem; margin: 12px 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lesson 3-5 Pacer · Klimsara-Adapted</h1>
+    <div class="meta">Periods 2-4 · Tue–Thu · Single DOK-3 spine · No Blooket</div>
+  </div>
+  <div class="meta" id="dateLabel"></div>
+</header>
+
+<nav class="tabs" id="tabBar">
+  <button class="tab active" data-tab="p2">P2 · Tue · Multiplicity</button>
+  <button class="tab" data-tab="p3">P3 · Wed · Zeros + Modeling</button>
+  <button class="tab" data-tab="p4">P4 · Thu · Topic 3 Assessment</button>
+</nav>
+
+<main id="panels"></main>
+
+<script>
+// ── Pacer data ─────────────────────────────────────────────────────────────
+const PACER = {
+  p2: {
+    label: "Period 2 · Tuesday · 55 min (A) / 65 min (F)",
+    total_min: 55,
+    phases: [
+      { id: "donow",   title: "Do Now — Zeros from factored form",
+        fw: "bridge", dok: "1", min: 5,
+        items: [{qid:"3-5-savvas-q13", label:"Savvas #13", note:"Sketch graph by finding zeros of g(x) = (x+3)(x−1)(x−4)."}],
+        teacher: ["Hand out Do Now at door.", "Circulate 3 min.", "Cold-call 1 student for one zero at minute 4."],
+        answer: "Zeros: x = −3, 1, 4. Each factor (x + 3)(x − 1)(x − 4) = 0 gives one zero.",
+      },
+      { id: "launch", title: "Launch — Teacher models Example 2 (multiplicity)",
+        fw: "teacher models", dok: "2", min: 12,
+        items: [],
+        teacher: [
+          "Project Savvas Example 2. Think aloud: count each factor; odd → crosses, even → tangent.",
+          "Pause 2× for 30-sec partner-check: \"Tell your neighbor what multiplicity this zero has.\"",
+          "Do NOT solve Try-Its — release at minute 17."
+        ],
+        rules: [
+          "Odd multiplicity → graph CROSSES the x-axis",
+          "Even multiplicity → graph is TANGENT (touches and turns back)",
+          "Example: f(x) = (x−2)³(x+1)² → x=2 mult 3 (crosses); x=−1 mult 2 (tangent)"
+        ],
+      },
+      { id: "explore", title: "Explore — Think-Pair-Share",
+        fw: "student work", dok: "2", min: 33,
+        items: [
+          {qid:"3-5-tryit-2a",    label:"Try It 2a"},
+          {qid:"3-5-tryit-2b",    label:"Try It 2b"},
+          {qid:"3-5-savvas-q14",  label:"Practice #14"},
+          {qid:"3-5-savvas-q15",  label:"Practice #15"},
+          {qid:"3-5-savvas-q16",  label:"Practice #16"},
+        ],
+        teacher: [
+          "4 laps circulation (~8 min each).",
+          "Lap 1: notice stalls. Lap 2: ask purposeful Qs. Lap 3: check answers. Lap 4: invite 1 pair to share.",
+          "Do not give answers. Press pairs to justify with the rule card."
+        ],
+        warn: "Period F (65 min): add 10 min to this phase, not to Launch.",
+      },
+      { id: "share", title: "Share / Summary",
+        fw: "academic conversation", dok: "2", min: 5,
+        items: [],
+        teacher: ["Cold-call 2 pairs to read their sentence-frame sentence.",
+                  "Write the rule sentence on board (student-generated).",
+                  "POST the Wednesday bridge prompt visibly."],
+        bridge: "\"A cubic has zeros 2, 1+√3, and 1−√3. What is the nature of its coefficients — rational, irrational, or complex? Why?\" (Preps Topic 3 Q#2.)",
+      },
+      { id: "exit", title: "Exit Ticket — Summary Recap",
+        fw: "not graded", dok: "1-2", min: 2,
+        items: [],
+        teacher: ["Collect at door as students exit.",
+                  "Scan for confusion flags; plan Wednesday Do Now emphasis accordingly."],
+        rules: ["1. Today I learned that ___.",
+                "2. The rule I want to remember is ___.",
+                "3. One thing I'm still unsure about is ___."],
+      },
+    ]
+  },
+  p3: {
+    label: "Period 3 · Wednesday · 65 min (A) / 45 min (F — SHORT)",
+    total_min: 65,
+    short_note: "Period F on Wednesday is only 45 min. Apply the SHORT VARIANT cuts flagged in each phase.",
+    phases: [
+      { id: "donow",  title: "Do Now — Intersection + bridge prompt",
+        fw: "bridge from Tuesday", dok: "1-2", min: 5,
+        items: [{qid:"3-5-savvas-q11", label:"Savvas #11", note:"Find intersection points of f(x) = x³ − 2x² − 16x + 20 and g(x) = −12."}],
+        teacher: ["Hand out at door. POST Tuesday's bridge prompt visibly.",
+                  "Circulate 3 min. Cold-call 1 student for one intersection point.",
+                  "Then pivot: \"Who thought about last night's bridge prompt?\""],
+        answer: "Intersection: x-values where the cubic equals −12. Set x³ − 2x² − 16x + 20 = −12 → x³ − 2x² − 16x + 32 = 0 → factor to find x = 2 (among others). Students sketch or solve.",
+        bridge: "EXPECTED ANSWER to bridge: \"Rational coefficients. The zeros 1+√3 and 1−√3 are irrational conjugates — their product (x − (1+√3))(x − (1−√3)) = x² − 2x − 2 is rational. Times (x − 2) gives all rational coefficients.\" This IS Topic 3 Q#2 answer C.",
+      },
+      { id: "launch", title: "Launch — Complex Zeros + Modeling (Ex 3 + brief Ex 4)",
+        fw: "teacher models", dok: "2", min: 12,
+        items: [],
+        teacher: [
+          "Project Example 3 (real + complex zeros cubic). Think aloud: find one real zero (rational root test), divide, solve the leftover quadratic.",
+          "When discriminant is negative: \"Now we get complex zeros — in CONJUGATE PAIRS. 2+3i means 2−3i is also a zero. Not a coincidence — it's a rule.\"",
+          "90-sec flash on Example 4: project storage box picture. \"Notice V(x) = x(x+3)(x−1). Unpack in Explore.\"",
+        ],
+        rules: [
+          "COMPLEX ZEROS come in CONJUGATE PAIRS (polynomials with real coefficients)",
+          "If a+bi is a zero, then a−bi is also a zero",
+          "Degree-n polynomial has exactly n zeros (counting multiplicity)",
+          "MODELING: factored form V(x) = (expr₁)(expr₂)(expr₃) — each factor is a physical dimension"
+        ],
+        warn: "PERIOD F SHORT: skip Example 4 brief. Stay on Example 3 only. Still 10 min total."
+      },
+      { id: "explore", title: "Explore — TPS + DOK-3 Storage Box",
+        fw: "student work + DOK-3", dok: "2-3", min: 38,
+        items: [
+          {qid:"3-5-tryit-3a",    label:"Try It 3a"},
+          {qid:"3-5-tryit-3b",    label:"Try It 3b"},
+          {qid:"3-5-savvas-q17",  label:"Practice #17"},
+          {qid:"3-5-savvas-q27",  label:"Practice #27 ⭐ DOK-3 DRIVER", dok3: true, note:"Storage Box volume model. 4 parts: factor, zeros, dimension interpretation, find at V=10."},
+        ],
+        teacher: [
+          "5 laps across 38 min.",
+          "Laps 1-2: Try-Its 3a/3b + Practice #17 (~18 min).",
+          "Laps 3-5: Practice #27 (~20 min). Press pairs on part (c) — dimension interpretation is the DOK-3 pivot.",
+          "Do NOT give #27 answers. Pairs present parts (a-d) to each other."
+        ],
+        answer: "Practice #27 key: (a) x(x+3)(x−1); (b) x = 0, −3, 1; (c) (x−1) is height, (x+3) is length (greatest); (d) width = 2 ft, height = 1 ft, length = 5 ft.",
+        warn: "PERIOD F SHORT: Explore capped at 25 min. DROP Try-It 3b + Practice #17. Keep Try-It 3a + Practice #27 ONLY. #27 is non-negotiable.",
+      },
+      { id: "share", title: "Share / Summary — Assessment preview",
+        fw: "academic conversation", dok: "2", min: 7,
+        items: [],
+        teacher: ["Call 1 pair to the board to present #27 parts (a)-(d).",
+                  "30-sec connection: \"Tomorrow's Lucy's tray problem uses the same factored-volume idea.\"",
+                  "Post the exit ticket cue."],
+        bridge: "Tomorrow's Topic 3 Q#6 (Lucy's tray) = same strategy as Practice #27. Different physical setup, same factoring logic.",
+        warn: "PERIOD F SHORT: 5 min. One pair presents #27 parts (a)+(b) only.",
+      },
+      { id: "exit", title: "Exit Ticket — Summary Recap",
+        fw: "not graded", dok: "1-2", min: 3,
+        items: [],
+        teacher: ["Collect at door.",
+                  "Scan #3 (assessment prediction). Use tonight to adjust Thu Do Now."],
+        rules: ["1. Today I learned that ___.",
+                "2. For the Storage Box, the hardest step was ___.",
+                "3. Thursday's assessment will test ___."],
+      },
+    ]
+  },
+  p4: {
+    label: "Period 4 · Thursday · 55 min (A) / 65 min (F) · Topic 3 Assessment",
+    total_min: 55,
+    phases: [
+      { id: "donow", title: "Do Now — Gentle warm-up",
+        fw: "low-stakes prime", dok: "1", min: 3,
+        items: [
+          {qid:"3-5-savvas-q13", label:"Warm-Up #1"},
+          {qid:"3-5-savvas-q14", label:"Warm-Up #2"},
+        ],
+        teacher: ["Hand out warm-up at door. Calm, low-key energy.",
+                  "Do NOT stop to reteach.",
+                  "Collect or leave on desks at minute 3."],
+        rules: ["Students pick ONE problem, write confidently, and settle in."],
+      },
+      { id: "launch", title: "Launch — Test format reminder",
+        fw: "logistics", dok: "—", min: 2,
+        items: [],
+        teacher: [
+          "11 questions, calculator allowed, expect 35 min.",
+          "\"If stuck, flag it and move on. Come back at the end.\"",
+          "No phones. Pencil only. Clear desk.",
+          "Start timer visibly."
+        ],
+      },
+      { id: "assessment", title: "ASSESSMENT — Topic 3 (11 questions)",
+        fw: "proctoring · silent", dok: "1-3 mix", min: 35,
+        items: [],
+        teacher: [
+          "Silent circulation every 10 min.",
+          "At min 20: \"15 min remaining.\"",
+          "At min 30: \"5 min. Finalize.\"",
+          "No content help. No discussion."
+        ],
+        rules: [
+          "Q#1 Remainder Theorem (3-4)",
+          "Q#2 Cubic with conjugate irrational pair (3-5 Tue bridge prompt)",
+          "Q#3 Binomial Theorem (3-3)",
+          "Q#4 Simplify to standard form (3-2/3)",
+          "Q#5 Zeros + end behavior from graph (3-5 Tue)",
+          "Q#6 Lucy's tray volume model (3-5 Wed — parallel to #27)",
+          "Q#7 Polynomial identities factoring (3-3)",
+          "Q#8 Cube vs sphere growth (3-1/2)",
+          "Q#9 Synthetic division (3-4)",
+          "Q#10 Identify zeros (3-5 Tue)",
+          "Q#11 Graph transformations (3-1/2)"
+        ],
+        warn: "Silent proctoring only. No content support during the test.",
+      },
+      { id: "share", title: "Share / Reflect — Brief debrief",
+        fw: "debrief", dok: "—", min: 5,
+        items: [],
+        teacher: ["Collect tests.",
+                  "Hand out self-reflection sheet.",
+                  "\"One sentence: how did that feel?\" — volunteer only.",
+                  "Warm, non-judgmental. Do NOT give away answers."],
+      },
+      { id: "exit", title: "Exit — Self-reflection",
+        fw: "self-reflection", dok: "—", min: 5,
+        items: [],
+        teacher: ["Collect self-reflection at door.",
+                  "Tonight: scan confidence scores (1-5). Plan 4-1 P1 Do Now if class averages <3."],
+        rules: [
+          "1. Hardest Q: Q#___. Why?",
+          "2. Easiest Q: Q#___. What clicked?",
+          "3. One thing I want to strengthen before Topic 4:",
+          "4. Confidence 1-5: ___ / 5"
+        ],
+        bridge: "Period F (65 min) bonus: 5 min math-chat on ONE interesting Q + 5 min Topic 4 preview (\"as x doubles, y halves — what does that mean?\").",
+      },
+    ]
+  },
+};
+
+// ── Renderer ───────────────────────────────────────────────────────────────
+const panels = document.getElementById("panels");
+const tabBar = document.getElementById("tabBar");
+document.getElementById("dateLabel").textContent = new Date().toDateString();
+
+function renderPanel(tabId) {
+  const data = PACER[tabId];
+  const panel = document.createElement("div");
+  panel.className = "panel";
+  panel.id = "panel-" + tabId;
+  panel.innerHTML = `
+    <div class="timer-bar">
+      <div>
+        <div class="phase-title" id="phaseTitle-${tabId}">Select a phase to begin</div>
+      </div>
+      <div class="countdown" id="timer-${tabId}">--:--</div>
+      <div>
+        <button onclick="startPhase('${tabId}')" id="startBtn-${tabId}">Start</button>
+        <button class="stop" onclick="stopPhase('${tabId}')">Stop</button>
+      </div>
+    </div>
+    <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    ${data.short_note ? `<div class="short-note">⚠️ ${data.short_note}</div>` : ""}
+    <div class="phase-list" id="chips-${tabId}"></div>
+    <div id="phase-card-${tabId}"></div>
+  `;
+  panels.appendChild(panel);
+
+  const chipBar = panel.querySelector(`#chips-${tabId}`);
+  data.phases.forEach((ph, idx) => {
+    const chip = document.createElement("button");
+    chip.className = "phase-chip";
+    chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0]} · ${ph.min}m`;
+    chip.onclick = () => selectPhase(tabId, idx);
+    chipBar.appendChild(chip);
+  });
+  // Auto-select first phase
+  selectPhase(tabId, 0);
+}
+
+function selectPhase(tabId, idx) {
+  const data = PACER[tabId];
+  const ph = data.phases[idx];
+  const card = document.getElementById(`phase-card-${tabId}`);
+  let html = `<div class="phase-card">
+    <h2>
+      ${ph.title}
+      <span class="badges">
+        <span class="badge dok">DOK ${ph.dok}</span>
+        <span class="badge min">${ph.min} min</span>
+        <span class="badge fw">${ph.fw}</span>
+      </span>
+    </h2>`;
+  if (ph.items && ph.items.length) {
+    ph.items.forEach(it => {
+      const cls = it.dok3 ? "item dok3" : "item";
+      const star = it.dok3 ? '<span class="dok3-star">⭐ </span>' : '';
+      html += `<div class="${cls}">
+        ${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>
+        ${it.note ? `<div>${it.note}</div>` : ""}
+      </div>`;
+    });
+  }
+  if (ph.teacher && ph.teacher.length) {
+    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
+    ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.rules && ph.rules.length) {
+    html += `<div class="callout rule"><span class="label">📘 Rules / stems</span><ul>`;
+    ph.rules.forEach(r => html += `<li>${r}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.answer) {
+    html += `<div class="callout answer"><span class="label">✅ Answer key</span>${ph.answer}</div>`;
+  }
+  if (ph.bridge) {
+    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
+  }
+  if (ph.warn) {
+    html += `<div class="callout warn"><span class="label">⚠️ Warning / Variant</span>${ph.warn}</div>`;
+  }
+  html += `</div>`;
+  card.innerHTML = html;
+
+  const chips = document.querySelectorAll(`#chips-${tabId} .phase-chip`);
+  chips.forEach((c, i) => {
+    c.classList.toggle("active", i === idx);
+  });
+
+  document.getElementById(`phaseTitle-${tabId}`).textContent = ph.title;
+  currentPhase[tabId] = idx;
+  stopPhase(tabId);
+  document.getElementById(`timer-${tabId}`).textContent =
+    `${String(ph.min).padStart(2,'0')}:00`;
+}
+
+// ── Timer ──────────────────────────────────────────────────────────────────
+const timers = {};
+const currentPhase = {};
+
+function startPhase(tabId) {
+  const idx = currentPhase[tabId];
+  const ph = PACER[tabId].phases[idx];
+  let remaining = ph.min * 60;
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  clearInterval(timers[tabId]);
+  timers[tabId] = setInterval(() => {
+    remaining--;
+    if (remaining < 0) {
+      clearInterval(timers[tabId]);
+      timerEl.textContent = "TIME";
+      timerEl.style.color = "#ff6b6b";
+      const next = idx + 1;
+      if (next < PACER[tabId].phases.length) {
+        document.querySelectorAll(`#chips-${tabId} .phase-chip`)[idx].classList.add("done");
+      }
+      return;
+    }
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    timerEl.style.color = remaining < 60 ? "#ff6b6b" : "#ffffff";
+  }, 1000);
+}
+
+function stopPhase(tabId) {
+  clearInterval(timers[tabId]);
+  const idx = currentPhase[tabId];
+  if (idx === undefined) return;
+  const ph = PACER[tabId].phases[idx];
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  timerEl.textContent = `${String(ph.min).padStart(2,'0')}:00`;
+  timerEl.style.color = "#ffffff";
+}
+
+// ── Tab switcher ──────────────────────────────────────────────────────────
+Object.keys(PACER).forEach(renderPanel);
+document.querySelector('.panel').classList.add('active');
+
+tabBar.addEventListener("click", e => {
+  if (!e.target.matches(".tab")) return;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  e.target.classList.add("active");
+  document.getElementById("panel-" + e.target.dataset.tab).classList.add("active");
+});
+</script>
+
+</body>
+</html>
