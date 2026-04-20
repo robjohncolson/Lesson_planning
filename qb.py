@@ -159,6 +159,35 @@ def _default_time(dok: int) -> int:
 # Summary / inspection helpers
 # ----------------------------------------------------------------------
 
+TEACHER_PROMPTS_DIR = ROOT / "questionbank" / "teacher_prompts"
+
+
+def teacher_prompts(lesson: str, *, anchor_example: int | None = None,
+                    types: list[str] | None = None) -> list[dict]:
+    """Load Savvas teacher-edition prompts (ETP, Habits of Mind, ELL) for a lesson.
+
+    Filter by anchor_example number and/or prompt type. Returns a list of
+    dicts with keys: source, anchor_example, type, prompt, expected_response,
+    use, image.
+    """
+    f = TEACHER_PROMPTS_DIR / f"{lesson}.jsonl"
+    if not f.exists():
+        return []
+    out = []
+    for line in f.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        q = json.loads(line)
+        if q.get("lesson") != lesson:
+            continue
+        if anchor_example is not None and q.get("anchor_example") != anchor_example:
+            continue
+        if types is not None and q.get("type") not in types:
+            continue
+        out.append(q)
+    return out
+
+
 def get_for_packet(ids: list[str]) -> list[dict]:
     """Look up a fixed ordered list of registry entries for a packet builder.
 
