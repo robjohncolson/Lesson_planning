@@ -214,6 +214,28 @@
   .badge.framework {
     background: rgba(0, 0, 0, 0.72);
   }
+  /* QR overlay — scan from laptop to open pacer on phone */
+  .qr-overlay {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 6px 6px 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+    text-align: center;
+  }
+  .qr-overlay img { display: block; width: 88px; height: 88px; }
+  .qr-overlay .qr-label {
+    font-size: 0.62rem;
+    color: #334;
+    margin-top: 3px;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+  }
+  @media (max-width: 720px) { .qr-overlay { display: none; } }
 </style>
 </head>
 <body>
@@ -263,6 +285,8 @@ const PHASES = [
       <p>Early arrivers work at their desks while library-charger students return. This phase IS the library-trip window.</p>
       <p>Two prompts only: (1) what stays the same / what changes, (2) sentence frame. Breathable page.</p>
       <p>Scan predictions as they come in. Note students predicting "zeros change" — cold-call them during Launch.</p>
+      <p><strong>Questions to ask</strong> (circulating silently): none aloud. Scan for the "zeros change" misconception.</p>
+      <p><strong>Adult role:</strong> teacher hands sheets at door, circulates silently; aide (if present) supports processing-speed accommodations without prompting content.</p>
     `,
     transition: `When everyone's back: "Pencils down. Chromebooks out. Blooket code coming on the screen."`
   },
@@ -294,6 +318,8 @@ const PHASES = [
       </ul>
       <p><strong>NO procedural factoring items</strong> — those are DOK 2 problem solving and don't belong on flashcards.</p>
       <p>Monitor dashboard diagnostically. Note the two lowest items; 60-second board reset if a rule is cold.</p>
+      <p><strong>Questions to ask</strong> (after game): "Which rule had the lowest %? Say it now."</p>
+      <p><strong>Adult role:</strong> teacher watches dashboard + runs 60-sec reset; aide troubleshoots Chromebook issues during login.</p>
     `,
     transition: `Close game. "Pull out your Do Now. Packet too. Launch synthesis."`
   },
@@ -313,6 +339,8 @@ const PHASES = [
         <li>Transition framing: "You just went factors → graph. Next: BACKWARD. Zeros + a point → equation." (45s)</li>
       </ol>
       <p>Cold-call, not volunteers — post-break, low-hand students need re-engagement.</p>
+      <p><strong>Questions to ask:</strong> "What stays the same? What changes?" / "Plug in x = 0 to both. What do you get?" / "Why doesn't a −1 out front move the zeros?" (ZPP elicitation)</p>
+      <p><strong>Adult role:</strong> teacher runs script + cold-calls; aide assists any student who hasn't opened Desmos so they stay inside the 90-sec window.</p>
     `,
     transition: `"Pens down. Packet open to Reverse Engineering. Everything you need is on the page."`
   },
@@ -339,6 +367,8 @@ const PHASES = [
       </ul>
       <p><strong>Stuck-pair hint card (after 15 min):</strong> "a = −1. Now justify WHY." Preserves DOK-3 via justification.</p>
       <p>Fast finishers: "What if the point were (0, 8)?" (a = 1.) Or: "What if the point were (2, 0)?" (a is not determined — good conceptual catch.)</p>
+      <p><strong>Questions to ask</strong> (prompt-only): "Plug in x = 0. Do you get −8?" / "Set your factor = 0. Does it give x = −2?" / "Which Rule on the page are you using right now?"</p>
+      <p><strong>Adult role:</strong> teacher circulates with prompts only; aide stations near pairs with processing-speed accommodations and prompts partner swap when the equation-checker stalls on Step 2.</p>
     `,
     transition: `"Pause. Packets open. Synthesis + self-rating."`
   },
@@ -357,6 +387,8 @@ const PHASES = [
         <li>Transition (30s): "Pencils up. Summary exit ticket."</li>
       </ol>
       <p><em>Do NOT skip. Use Reverse Engineering hint card first if time is tight.</em></p>
+      <p><strong>Questions to ask:</strong> "Which Criterion for Success did you rate 'partly'? What's the blocker?" (feed into Day 3 warm-up) / "Who used 'the zeros stay the same because...'?"</p>
+      <p><strong>Adult role:</strong> teacher leads script; aide scans self-ratings as packets tilt up during transition.</p>
     `,
     transition: `"Pencils up. Summary exit ticket. 5 minutes."`
   },
@@ -375,6 +407,8 @@ const PHASES = [
       <p><em>Intentionally NOT a CER.</em> The DOK-3 generative work already happened in Reverse Engineering.
       A walk-out task under time pressure should recap, not produce new argument.</p>
       <p>If you want CER practice: assign Savvas Practice #6 as HW, or use it as the Day 3 Do Now.</p>
+      <p><strong>Questions to ask:</strong> none during write time. As papers come up: "Biggest thing you learned? Say it in one breath."</p>
+      <p><strong>Adult role:</strong> teacher collects at the door; aide totals #3 responses for next-day diagnostic while students pack up.</p>
       <p><strong>Collect on the way out.</strong></p>
     `,
     transition: `"Packets to the front. Pack up. See you next class."`
@@ -536,5 +570,9 @@ document.addEventListener("keydown", (e) => {
 
 renderPhase();
 </script>
+<div class="qr-overlay" title="Scan to open this pacer on your phone">
+  <img src="qr_day2_pacer.svg" alt="QR code for Day 2 Pacer">
+  <div class="qr-label">Scan on phone</div>
+</div>
 </body>
 </html>

@@ -13,8 +13,9 @@ Phases (55 min, fits 55-min Tue F on the nose; 65-min Mon A / Tue A get slack):
   5\u20137    Do Now B : Blooket login                             [\u2014]
   7\u201314   Do Now C : Blooket rule recall (mult + ZPP)          [DOK 1]
   14\u201326  Launch    : Name multiplicity via (x\u22121)\u207f pattern        [DOK 2]
-  26\u201336  Practice  : 3 Try It items \u2014 zeros, mults, behavior   [DOK 2]
-  36\u201351  Explore   : Tonya error analysis \u2014 the DOK-3 driver   [DOK 3]
+  26\u201333  Practice  : 2 Try It items \u2014 zeros, mults, behavior   [DOK 2]
+  33\u201348  Explore   : Tonya error analysis \u2014 the DOK-3 driver   [DOK 3]
+  48\u201351  Share/Sum : Synthesis + self-rating                   [DOK 2]
   51\u201355  Exit      : Summary recap (NOT a CER)                 [DOK 1\u20132]
 """
 from docx import Document
@@ -22,6 +23,7 @@ from docx.shared import Pt, Inches
 from docx.enum.table import WD_ALIGN_VERTICAL
 
 import qb
+import packet_styles as ps
 
 TABLE_STYLE = "Table Grid"
 
@@ -335,8 +337,11 @@ def build_student(path):
         sec.left_margin = Inches(0.7)
         sec.right_margin = Inches(0.7)
 
+    ps.running_header_name_block(doc)
     header_line(doc, "ALGEBRA 2  |  LESSON 3-5", size=14)
-    header_line(doc, "Day 3  |  The Magic of Multiplicity", size=13)
+    ps.day_banner(doc, 3, "The Magic of Multiplicity",
+                  "Use Desmos to compare graphs.  Use cross, touch, turn, "
+                  "even, odd, and multiplicity in every explanation.")
 
     add_two_col(doc, OBJECTIVES)
     add_two_col(doc, FRAMEWORK_HEADER)
@@ -365,7 +370,7 @@ def build_student(path):
     )])
 
     add_two_col(doc, [(
-        "\u270F\uFE0F  Practice  \u2014  Zeros + Multiplicities + Behavior   [Practice]  [DOK 2]   (10 min)",
+        "\u270F\uFE0F  Practice  \u2014  Zeros + Multiplicities + Behavior   [Practice]  [DOK 2]   (7 min)",
         _practice_student_lines(),
     )])
 
@@ -375,10 +380,10 @@ def build_student(path):
     )])
 
     add_callout(doc,
-        "\U0001F501  SHARE / SUMMARY   [Share/Summary]  [DOK 2]   (folded into Exit)",
+        "\U0001F501  SHARE / SUMMARY   [Share/Summary]  [DOK 2]   (3 min)",
         SHARE_SUMMARY_STUDENT)
 
-    add_callout(doc,
+    ps.summary_exit_box(doc,
         "\U0001F4E4  EXIT TICKET  \u2014  SUMMARY   [Exit Ticket]  [DOK 1\u20132]   (4 min)",
         EXIT_STUDENT)
 
@@ -431,6 +436,11 @@ BLOOKET_SCOPE = [
     "Dashboard diagnostic: note the two lowest items. If a rule is cold, "
     "60-second board reset before Launch.",
     "CSV: Blooket_Day3_Multiplicity.csv  (regenerate via regen_blooket_csvs.py).",
+    "Questions to ask (after game): \u201cWhich rule had the lowest %?  Say it now.\u201d "
+    "(Surface the weak rule aloud before Launch so it primes the \u2212f(x) synthesis.)",
+    "Adult role: teacher watches dashboard and runs the 60-second board reset if "
+    "needed; aide (if present) troubleshoots any Chromebook issues during the "
+    "2-min login window.",
 ]
 
 LAUNCH_KEY = [
@@ -522,7 +532,9 @@ def build_teacher(path):
 
     header_line(doc, "TEACHER EDITION", size=12)
     header_line(doc, "ALGEBRA 2  |  LESSON 3-5", size=14)
-    header_line(doc, "Day 3  |  The Magic of Multiplicity", size=13)
+    ps.day_banner(doc, 3, "The Magic of Multiplicity",
+                  "Teacher pacing + DOK framework crosswalk + answer keys + "
+                  "Questions to ask / Adult role per phase.")
 
     add_two_col(doc, OBJECTIVES + [("CCSS", "F-IF.C.7c, A-APR.B.3, MP.3, MP.7")])
     add_two_col(doc, FRAMEWORK_HEADER)
@@ -548,7 +560,7 @@ def build_teacher(path):
         "  Do Now B (Blooket login) ..... 2 min",
         "  Do Now C (Blooket game) ...... 7 min",
         "  Launch ((x\u22121)\u207f + naming) .... 12 min",
-        "  Practice (Try It A\u2013C) ........ 10 min",
+        "  Practice (Try It A\u2013B) ......... 7 min",
         "  Explore (Tonya) .............. 15 min",
         "  Summary Exit .................. 4 min",
         "RELEASE VALVES (in order of preference):",
@@ -562,10 +574,14 @@ def build_teacher(path):
     ])
 
     # ---- Do Now A ----
-    add_callout(doc, "[Do Now A]  [DOK 2] Touch-or-Cross Prediction", [
+    add_callout(doc, "[Do Now A]  [DOK 2] Touch-or-Cross Prediction  (5 min)", [
         "Students receive the Do Now sheet on entry. Silent, 5 min, pencil only.",
         "Three small prediction items + one pattern guess. Breathable.",
         "Bridges from Day 2 (still ZPP) and primes today\u2019s pattern reveal.",
+        "Questions to ask (circulating silently): none aloud. Scan for "
+        "\u201ccross-everywhere\u201d misconception and note those students for Launch cold-call.",
+        "Adult role: teacher hands sheets at door, circulates silently; aide (if present) "
+        "supports processing-speed accommodations without prompting content.",
     ])
     add_callout(doc, "\u2705  DO NOW / ANSWER KEY", DO_NOW_KEY)
 
@@ -585,13 +601,22 @@ def build_teacher(path):
         "4.  Partners type (a)\u2013(d) in Desmos, record behavior at x = 1. (5 min)",
         "5.  Class share: \u201cWhat happened at multiplicity 2 vs. 3 vs. 4?\u201d (3 min)",
         "6.  Name the word, build the T-chart together. (3 min)",
+        "Questions to ask: \u201cWhat changed between (x\u22121)\u00b9 and (x\u22121)\u00b2 at x = 1?\u201d / "
+        "\u201cHow many times does the factor (x\u22121) appear in each case?\u201d / "
+        "\u201cWho predicted touch on the Do Now?  What made you predict that?\u201d",
+        "Adult role: teacher runs script + cold-calls; aide (if present) walks to "
+        "partners stuck loading Desmos, keeps them in the 5-min window.",
     ])
     add_callout(doc, "\u2705  LAUNCH / ANSWER KEY", LAUNCH_KEY)
 
     # ---- Practice ----
-    add_callout(doc, "[Practice]  [DOK 2] Try It A\u2013C  (10 min)", [
-        "Three items.  Each: zeros + multiplicity + behavior.",
+    add_callout(doc, "[Practice]  [DOK 2] Try It A\u2013B  (7 min)", [
+        "Two items pulled from the Savvas bank.  Each: zeros + multiplicity + behavior.",
         "Teacher circulates with sentence-frame prompts, not corrections.",
+        "Questions to ask: \u201cWhich factor tells you the behavior at this zero?\u201d / "
+        "\u201cIs this multiplicity even or odd?\u201d",
+        "Adult role: teacher circulates with prompts; aide (if present) scans for "
+        "students stuck on Item B\u2019s irreducible quadratic and redirects to Rule 1.",
         "Fast finishers: write a polynomial with prescribed cross/touch/flatten "
         "behaviors at three zeros (extension on the board).",
     ])
@@ -602,22 +627,32 @@ def build_teacher(path):
         "ONE driver.  All three rules printed on the student page; 5-step scaffold; "
         "self-contained.  Students critique Tonya\u2019s sketch and defend the correct "
         "behavior using multiplicity language.",
-        "Teacher role: circulate, prompt-only.  Answer questions with questions "
-        "(\u201cWhat\u2019s the exponent on (x + 1)?\u201d).",
         "Partner roles: one writes Step 1\u20132, the other drafts Step 3 (the defense). "
         "Swap for fast-finisher CER expansion if time allows.",
+        "Questions to ask (prompt-only, answer questions with questions): "
+        "\u201cWhat\u2019s the exponent on (x + 1)?\u201d / \u201cRead Rule 2 aloud.  "
+        "Does that match what Tonya drew?\u201d / \u201cWhich factor appears twice?  "
+        "What does that mean?\u201d",
+        "Adult role: teacher circulates with prompts only (no answers); aide (if "
+        "present) stations near pairs with processing-speed accommodations, prompts "
+        "partner swap when Step 3 stalls.",
     ])
     add_callout(doc, "\U0001F50E  TONYA / ANSWER KEY + WHY DOK 3", TONYA_KEY)
 
-    # ---- Share / Summary (folded into exit) ----
-    add_callout(doc, "[Share/Summary]  [DOK 2] Folded into Exit Ticket  (\u22642 min)", [
-        "Day 3 folds the synthesis into the exit ticket itself \u2014 the recap items "
-        "ARE the synthesis, and the self-rating happens at packet collection.",
-        "Teacher script during the last 4 min:",
-        "1.  \u201cPencils up. Last 4 minutes. Exit ticket on the bottom of your packet.\u201d",
-        "2.  As students work: scan #3 (the application) for diagnostic.",
-        "3.  Preview Day 4 (when papers come up): \u201cTomorrow: what if the zeros "
-        "aren\u2019t all real numbers?\u201d",
+    # ---- Share / Summary (distinct phase, per DOKframework.txt) ----
+    add_callout(doc, "[Share/Summary]  [DOK 2] Synthesis + Self-Rating  (3 min)", [
+        "Teacher script (3 min flat):",
+        "1.  \u201cPencils up.\u201d Essential Question callback (45s): \u201cWhat does a "
+        "repeated factor do, and how do you predict the behavior at every zero?\u201d",
+        "2.  Language Objective check (30s): \u201cWho used \u2018the multiplicity is ___, "
+        "so the graph ___ at x = ___\u2019? Finish with what?\u201d",
+        "3.  Self-rating circle on packet (45s).  Teacher scans.",
+        "4.  Preview Day 4 (30s): \u201cTomorrow: what if the zeros aren\u2019t all real?\u201d",
+        "5.  Transition (30s): \u201cSummary exit ticket. 4 minutes.\u201d",
+        "Questions to ask: \u201cWhich Criterion for Success did you rate \u2018partly\u2019? "
+        "What\u2019s the blocker?\u201d (use answers to target Day 4 warm-up).",
+        "Adult role: teacher leads; aide (if present) scans self-ratings as packets "
+        "tilt up during transition.",
     ])
     add_callout(doc,
         "\U0001F501  SHARE / SUMMARY (student-facing self-rating)",
@@ -629,8 +664,12 @@ def build_teacher(path):
         "Three fill-in-the-blank items + one open sentence.",
         "Why not CER here: full CER writing in 4 min is unrealistic; the DOK-3 "
         "generative work already happened in Tonya.",
+        "Questions to ask: none during write time.  As papers come up: "
+        "\u201cBiggest thing you learned?  Say it in one breath.\u201d",
+        "Adult role: teacher collects at the door; aide (if present) totals #3 "
+        "responses for next-day diagnostic while students pack up.",
     ])
-    add_callout(doc,
+    ps.summary_exit_box(doc,
         "\U0001F4E4  EXIT TICKET  \u2014  SUMMARY (student-facing)",
         EXIT_STUDENT)
     add_callout(doc, "\u2705  EXIT TICKET / ANSWER KEY", EXIT_KEY)

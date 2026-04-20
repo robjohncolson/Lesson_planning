@@ -21,6 +21,8 @@ from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.table import WD_ALIGN_VERTICAL
 
+import packet_styles as ps
+
 TABLE_STYLE = "Table Grid"
 
 OBJECTIVES = [
@@ -225,8 +227,11 @@ def build_student(path):
         sec.left_margin = Inches(0.7)
         sec.right_margin = Inches(0.7)
 
+    ps.running_header_name_block(doc)
     header_line(doc, "ALGEBRA 2  |  LESSON 3-5", size=14)
-    header_line(doc, "Day 2  |  Graphing from Factored Form", size=13)
+    ps.day_banner(doc, 2, "Graphing from Factored Form",
+                  "Work BACKWARD today: given zeros and a point, build "
+                  "the polynomial. Explain every step.")
 
     add_two_col(doc, OBJECTIVES)
     add_two_col(doc, FRAMEWORK_HEADER)
@@ -266,7 +271,7 @@ def build_student(path):
         "\U0001F501  SHARE / SUMMARY   [Share/Summary]  [DOK 2]   (5 min)",
         SHARE_SUMMARY_STUDENT)
 
-    add_callout(doc,
+    ps.summary_exit_box(doc,
         "\U0001F4E4  EXIT TICKET  \u2014  SUMMARY   [Exit Ticket]  [DOK 1\u20132]   (5 min)",
         EXIT_STUDENT)
 
@@ -320,6 +325,10 @@ BLOOKET_SCOPE = [
     "that\u2019s DOK 2 problem solving and doesn\u2019t belong on flashcards.",
     "Dashboard diagnostic: note the two lowest-percent items. If a rule is cold, "
     "60-second board reset before Launch.",
+    "Questions to ask (after game): \u201cWhich rule had the lowest %?  Say it now.\u201d "
+    "Surface the weak rule aloud before the Sign Flip synthesis.",
+    "Adult role: teacher watches dashboard + runs 60-second board reset if needed; "
+    "aide (if present) troubleshoots any Chromebook issues during the 2-min login window.",
 ]
 
 REVERSE_KEY = [
@@ -408,7 +417,9 @@ def build_teacher(path):
 
     header_line(doc, "TEACHER EDITION", size=12)
     header_line(doc, "ALGEBRA 2  |  LESSON 3-5", size=14)
-    header_line(doc, "Day 2  |  Graphing from Factored Form", size=13)
+    ps.day_banner(doc, 2, "Graphing from Factored Form",
+                  "Teacher pacing + DOK framework crosswalk + answer keys "
+                  "+ Questions to ask / Adult role per phase.")
 
     add_two_col(doc, OBJECTIVES + [("CCSS", "F-IF.C.7c, A-APR.B.3, MP.3")])
     add_two_col(doc, FRAMEWORK_HEADER)
@@ -447,12 +458,16 @@ def build_teacher(path):
     ])
 
     # ---- Do Now A ----
-    add_callout(doc, "[Do Now A]  [DOK 2] Solo Paper \u2014 Sign Flip Prediction", [
+    add_callout(doc, "[Do Now A]  [DOK 2] Solo Paper \u2014 Sign Flip Prediction  (5 min)", [
         "Students receive the separate Do Now sheet on entry. Silent, 5 min, pencil only.",
         "TWO prompts only (breathable).  Primes Zero Product Property + end-behavior "
         "reasoning for the DOK-3 driver later.",
         "Purpose: productive use of the library-trip window + early written commitment "
         "before the synthesis.",
+        "Questions to ask (circulating silently): none aloud. Scan for \u201czeros "
+        "change\u201d misconception on the sheets and note those students for Launch cold-call.",
+        "Adult role: teacher hands sheets at door, circulates silently; aide (if "
+        "present) supports processing-speed accommodations without prompting content.",
     ])
     add_callout(doc, "\u2705  DO NOW / ANSWER KEY", DO_NOW_KEY)
 
@@ -470,15 +485,24 @@ def build_teacher(path):
         "6.  Transition to Reverse Engineering: \u201cYou just went from factors to graph. "
         "Next: you\u2019ll go from zeros to equation. Backward.\u201d (45s)",
         "Cold-call, don\u2019t take volunteers \u2014 post-break, low-hand students need re-engagement.",
+        "Questions to ask: \u201cWhat stays the same?  What changes?\u201d / \u201cPlug in "
+        "x = 0 to both.  What do you get?\u201d / \u201cWhy doesn\u2019t a \u22121 out front move "
+        "the zeros?\u201d (ZPP elicitation).",
+        "Adult role: teacher runs script + cold-calls; aide (if present) assists any "
+        "student who hasn\u2019t opened Desmos, keeps them inside the 90-sec window.",
     ])
 
     # ---- Explore ----
     add_callout(doc, "[Explore]  [DOK 3] Reverse Engineering  (25 min)", [
         "One driver.  All the information the student needs is printed on their packet page: "
         "both rules, the step-by-step scaffold, the verification prompt, the partner frame.",
-        "Teacher role: circulate.  No board teaching.  Prompt-only \u2014 answer questions "
-        "with questions (\u201cPlug in x = 0. Do you get \u22128?\u201d).",
         "Partner roles (IEP-friendly): \u201cfactor-finder\u201d (Steps 1, 3) + \u201cequation-checker\u201d (Steps 2, 4).",
+        "Questions to ask (prompt-only \u2014 answer questions with questions): \u201cPlug "
+        "in x = 0. Do you get \u22128?\u201d / \u201cSet your factor = 0. Does it give x = "
+        "\u22122?\u201d / \u201cWhich Rule on the page are you using right now?\u201d",
+        "Adult role: teacher circulates with prompts only; aide (if present) stations "
+        "near pairs with processing-speed accommodations and prompts partner swap when "
+        "the equation-checker stalls on Step 2.",
     ])
     add_two_col(doc, [("\U0001F527  Reverse Engineering / ANSWER KEY", REVERSE_KEY)])
     add_callout(doc, "\U0001F3AF  TEACHER MOVES \u2014 Reverse Engineering", [
@@ -493,6 +517,12 @@ def build_teacher(path):
     # ---- Share / Summary ----
     add_callout(doc, "[Share/Summary]  [DOK 2] Synthesis + Reflection  (5 min)", [
         "Framework: synthesis, return to objectives, self-rating.  NOT optional.",
+        "Questions to ask: \u201cWhich Criterion for Success did you rate \u2018partly\u2019? "
+        "What\u2019s the blocker?\u201d (feed answers into Day 3 warm-up) / \u201cWho used "
+        "\u2018the zeros stay the same because...\u2019 today?  Finish with what?\u201d (Language "
+        "Objective check).",
+        "Adult role: teacher leads script; aide (if present) scans self-ratings as "
+        "packets tilt up during transition.",
     ])
     add_callout(doc,
         "\U0001F501  SHARE / SUMMARY (student-facing)",
@@ -505,8 +535,12 @@ def build_teacher(path):
         "new cognitive task.  Two fill-in-the-blank recap items + one open sentence.",
         "Why not CER here: full CER writing in 5 min is unrealistic and a DOK-3 task at "
         "the walk-out window is bad design.  The DOK-3 work is Reverse Engineering.",
+        "Questions to ask: none during write time. As papers come up: \u201cBiggest thing "
+        "you learned? Say it in one breath.\u201d",
+        "Adult role: teacher collects at the door; aide (if present) totals #3 "
+        "responses for next-day diagnostic while students pack up.",
     ])
-    add_callout(doc,
+    ps.summary_exit_box(doc,
         "\U0001F4E4  EXIT TICKET  \u2014  SUMMARY (student-facing)",
         EXIT_STUDENT)
     add_callout(doc, "\u2705  EXIT TICKET / ANSWER KEY", EXIT_KEY)

@@ -214,13 +214,39 @@
   .badge.framework {
     background: rgba(0, 0, 0, 0.72);
   }
+  /* QR overlay — scan from laptop to open pacer on phone */
+  .qr-overlay {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 6px 6px 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+    text-align: center;
+    pointer-events: auto;
+  }
+  .qr-overlay img { display: block; width: 88px; height: 88px; }
+  .qr-overlay .qr-label {
+    font-size: 0.62rem;
+    color: #334;
+    margin-top: 3px;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+  }
+  /* If the pacer itself is open on a phone, hide the QR — you're already there */
+  @media (max-width: 720px) {
+    .qr-overlay { display: none; }
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div>
-    <div class="phase-meta" id="phase-meta">Phase 1 of 7 · Algebra 2 · Lesson 3-5 · Day 3</div>
+    <div class="phase-meta" id="phase-meta">Phase 1 of 8 · Algebra 2 · Lesson 3-5 · Day 3</div>
     <h1 class="phase-title" id="phase-title">Solo Paper: Touch or Cross?</h1>
   </div>
   <div class="dots" id="dots"></div>
@@ -262,7 +288,8 @@ const PHASES = [
       <p><strong>Hand the DO NOW sheet to every student as they walk in.</strong> Silent, pencil only, no Desmos, no packet.</p>
       <p>Three small predictions + one pattern guess. Breathable.</p>
       <p><strong>Diagnostic scan:</strong> students who predicted "cross" for EVERY zero in #2 missed the repeated factor — cold-call them in Launch. Students who articulated the EVEN/ODD rule in #3 — have them share first (peer-voiced rule beats teacher-voiced rule).</p>
-      <p><strong>Teacher action:</strong> no teaching. Circulate silently.</p>
+      <p><strong>Questions to ask</strong> (circulating silently): none aloud. Scan for the "cross-everywhere" misconception.</p>
+      <p><strong>Adult role:</strong> teacher hands sheets at door, circulates silently; aide (if present) supports processing-speed accommodations without prompting content.</p>
     `,
     transition: `"Pencils down on Do Now. Chromebooks out. Blooket code on the screen."`
   },
@@ -293,6 +320,8 @@ const PHASES = [
       </ul>
       <p><strong>NO procedural factoring items</strong> — DOK 2 problem solving doesn't belong on flashcards.</p>
       <p>Monitor dashboard. Note the two lowest items; 60-second board reset if a rule is cold.</p>
+      <p><strong>Questions to ask</strong> (after game): "Which rule had the lowest %? Say it now." Surface the weak rule aloud before Launch.</p>
+      <p><strong>Adult role:</strong> teacher watches dashboard + runs the 60-sec board reset; aide troubleshoots Chromebook issues during login.</p>
     `,
     transition: `Close game. "Pull out your Do Now. Packet too. Launch next."`
   },
@@ -319,22 +348,25 @@ const PHASES = [
         <li>Fill the T-chart together on the packet. (3 min)</li>
       </ol>
       <p><strong>Don't volunteer the FLATTEN insight</strong> — let students notice it themselves on (c) and (d).</p>
+      <p><strong>Questions to ask:</strong> "What changed between (x−1)¹ and (x−1)² at x = 1?" / "How many times does the factor (x−1) appear?" / "Who predicted touch on the Do Now? What made you predict that?"</p>
+      <p><strong>Adult role:</strong> teacher runs script + cold-calls; aide walks to partners stuck loading Desmos so they finish inside the 5-min window.</p>
     `,
-    transition: `"Packets to Practice. Three quick items."`
+    transition: `"Packets to Practice. Two quick items from the bank."`
   },
   {
-    title: "Practice — Try It A–C",
+    title: "Practice — Try It A–B",
     framework: "Practice",
     dok: "DOK 2",
-    duration: 10 * 60,
+    duration: 7 * 60,
     instructions: `
-      <p>For each polynomial: list zeros, multiplicity of each, and behavior.</p>
+      <p>Two Savvas-anchored items from the bank. For each: zeros + multiplicity + behavior.</p>
       <ul>
-        <li>A. f(x) = (x + 3)(x − 2)²  → x = −3 mult 1 CROSS; x = 2 mult 2 TOUCH</li>
-        <li>B. g(x) = x² (x − 5)³  → x = 0 mult 2 TOUCH; x = 5 mult 3 CROSS (flatten)</li>
-        <li>C. h(x) = (x + 1)⁴ (x − 4)  → x = −1 mult 4 TOUCH (flat); x = 4 mult 1 CROSS</li>
+        <li>A. f(x) = x(x + 4)(x − 1)⁴  → crosses at 0 and −4 (mult 1); turning at x = 1 (mult 4)</li>
+        <li>B. f(x) = (x² + 9)(x − 1)⁵(x + 2)²  → crosses at x = 1 (mult 5); touches at x = −2 (mult 2); x² + 9 contributes no real zero</li>
       </ul>
       <p>Teacher circulates with sentence-frame prompts, not corrections.</p>
+      <p><strong>Questions to ask:</strong> "Which factor tells you the behavior at this zero?" / "Is this multiplicity even or odd?"</p>
+      <p><strong>Adult role:</strong> teacher circulates with prompts; aide scans for students stuck on Item B's x² + 9 and redirects to Rule 1 (irreducible quadratic = no real zero).</p>
       <p><strong>Fast-finisher extension</strong> (board): "Build a polynomial that CROSSES at x = 0, TOUCHES at x = 2, and FLATTEN-CROSSES at x = −1." Sample: f(x) = x(x − 2)²(x + 1)³.</p>
     `,
     transition: `"Packet flip. Tonya's graph next. Read the rule card on the page."`
@@ -356,8 +388,29 @@ const PHASES = [
         <li>Explain to partner.</li>
       </ol>
       <p><strong>Stuck-pair hint card</strong> (after 10 min): "At x = −1, write the exponent on (x + 1). Now read Rule 2." Preserves DOK 3 — they still articulate WHY.</p>
+      <p><strong>Questions to ask</strong> (prompt-only, answer questions with questions): "What's the exponent on (x + 1)?" / "Read Rule 2 aloud. Does that match what Tonya drew?" / "Which factor appears twice? What does that mean?"</p>
+      <p><strong>Adult role:</strong> teacher circulates with prompts only (no answers); aide stations near pairs with processing-speed accommodations, prompts partner swap when Step 3 stalls.</p>
     `,
-    transition: `"Pencils up. Last 4 minutes. Summary exit ticket on the bottom of your packet."`
+    transition: `"Pencils up. Synthesis + self-rating next. 3 minutes."`
+  },
+  {
+    title: "Share / Summary — synthesis + self-rating",
+    framework: "Share/Summary",
+    dok: "DOK 2",
+    duration: 3 * 60,
+    instructions: `
+      <p><strong>Teacher script (3 min flat):</strong></p>
+      <ol>
+        <li>Essential Question callback (45s): "What does a repeated factor do, and how do you predict the behavior at every zero?"</li>
+        <li>Language Objective check (30s): "Who used <em>the multiplicity is ___, so the graph ___ at x = ___</em>?"</li>
+        <li>Students circle self-ratings on packet (45s). Teacher scans.</li>
+        <li>Preview Day 4 (30s): "Tomorrow: what if the zeros aren't all real?"</li>
+        <li>Transition (30s): "Summary exit ticket. 4 minutes."</li>
+      </ol>
+      <p><strong>Questions to ask:</strong> "Which Criterion for Success did you rate 'partly'? What's the blocker?" (Use answers to target Day 4 warm-up.)</p>
+      <p><strong>Adult role:</strong> teacher leads; aide scans self-ratings as packets tilt up during transition.</p>
+    `,
+    transition: `"Pencils up. Summary exit ticket. 4 minutes."`
   },
   {
     title: "Exit Ticket — Summary (NOT a CER)",
@@ -374,6 +427,8 @@ const PHASES = [
       </ol>
       <p><em>Intentionally NOT a CER.</em> The DOK-3 generative work happened in Tonya. Walk-out task should recap, not produce new argument.</p>
       <p>If you want a CER for HW: "Explain why even multiplicity must touch, using sign-chart reasoning."</p>
+      <p><strong>Questions to ask:</strong> none during write time. As papers come up: "Biggest thing you learned? Say it in one breath."</p>
+      <p><strong>Adult role:</strong> teacher collects at the door; aide totals #3 responses for next-day diagnostic while students pack up.</p>
       <p><strong>Collect on the way out.</strong></p>
     `,
     transition: `"Packets to the front. Pack up. See you next class."`
@@ -535,5 +590,9 @@ document.addEventListener("keydown", (e) => {
 
 renderPhase();
 </script>
+<div class="qr-overlay" title="Scan to open this pacer on your phone">
+  <img src="qr_day3_pacer.svg" alt="QR code for Day 3 Pacer">
+  <div class="qr-label">Scan on phone</div>
+</div>
 </body>
 </html>
