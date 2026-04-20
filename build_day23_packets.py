@@ -37,8 +37,8 @@ OBJECTIVES = [
     ("Math Objective",
      "Identify the zeros of a polynomial function from factored form, "
      "determine the multiplicity of each zero, and use multiplicity to "
-     "predict whether the graph crosses, touches, or flattens through "
-     "the x-axis."),
+     "predict whether the graph crosses the x-axis or is tangent to it "
+     "(turning point)."),
     ("Language Objective",
      "Students will use the frame \u201cThe multiplicity is ___, so the "
      "graph ___ at x = ___\u201d to justify graph behavior."),
@@ -290,9 +290,10 @@ def _practice_lines():
     items = qb.get_for_packet(PRACTICE_IDS)
     lines = [
         "For each polynomial: list the zeros, the multiplicity of each, and "
-        "describe the behavior of the graph at each zero (cross / touch / "
-        "flatten-through).  Use Desmos only to CHECK your prediction, not to "
-        "predict.",
+        "describe the behavior of the graph at each zero using Savvas\u2019s "
+        "language \u2014 CROSSES the x-axis (odd multiplicity) or is TANGENT to "
+        "the x-axis / has a TURNING POINT (even multiplicity).  Use Desmos "
+        "only to CHECK your prediction, not to make it.",
         "",
         "REQUIRED:  A and B.   PICK ONE of C, D, E.",
         "",
@@ -329,7 +330,7 @@ def _exit_lines():
         "",
         "Zeros:  _____________________________________________________",
         "",
-        "Behavior at each zero (cross, touch, or flatten-through):",
+        "Behavior at each zero (crosses the x-axis, OR tangent / turning point):",
         "____________________________________________________________",
         "____________________________________________________________",
         "____________________________________________________________",
@@ -433,8 +434,8 @@ def _launch_key_lines():
     prompts = qb.teacher_prompts("3-5", anchor_example=2)
     lines = [
         "SAVVAS EXAMPLE 2 TARGET OBSERVATIONS at x = \u22122:",
-        "    y = (x + 2)\u00b2 (x \u2212 1)  \u2192  graph TOUCHES and turns (multiplicity 2).",
-        "    y = (x + 2)\u00b3 (x \u2212 1)  \u2192  graph CROSSES, with a flatten at x = \u22122 (multiplicity 3).",
+        "    y = (x + 2)\u00b2 (x \u2212 1)  \u2192  graph is TANGENT to the x-axis at x = \u22122 (turning point; multiplicity 2).",
+        "    y = (x + 2)\u00b3 (x \u2212 1)  \u2192  graph CROSSES the x-axis at x = \u22122 (multiplicity 3).",
         "    Shared between the two: zeros at x = \u22122 and x = 1.  End behavior is",
         "    opposite (cubic vs. quartic-like behavior near the zero).",
         "",
@@ -443,10 +444,13 @@ def _launch_key_lines():
         "    their packet (or you draw on the board): ODD multiplicity on one side,",
         "    EVEN multiplicity on the other. Each column lists the behavior rule and",
         "    a small sketch. It is the physical artifact of the multiplicity rule.",
-        "    ODD column:  graph CROSSES the x-axis (multiplicity 1 = clean cross;",
-        "                 3, 5 = flatten-through).",
-        "    EVEN column: graph TOUCHES the x-axis and TURNS (sign of f doesn\u2019t change",
-        "                 at the zero).",
+        "    ODD column:  graph CROSSES the x-axis.  (Multiplicity 1 = a clean",
+        "                 linear crossing; higher odd multiplicities still cross,",
+        "                 just with visible curvature near the zero.)  Savvas does",
+        "                 not give the curvature a separate name \u2014 it is still",
+        "                 \u2018crosses.\u2019",
+        "    EVEN column: graph is TANGENT to the x-axis / has a TURNING POINT",
+        "                 (sign of f does not change at the zero).",
         "",
         "LAUNCH STEP-BY-STEP (12 minutes, solo teacher):",
         "    0:00 \u2013 0:15  \u201cPull out your Do Now.\u201d",
@@ -466,7 +470,7 @@ def _launch_key_lines():
         "    8:00 \u2013 10:00 CLASS SHARE: ask any student (or call on someone who got",
         "                it first) to describe what (x + 2)\u00b2 did at x = \u22122 and what",
         "                (x + 2)\u00b3 did. \u201cNAME MULTIPLICITY\u201d = at the moment the class",
-        "                agrees on \u201ctouches\u201d and \u201ccrosses with a flatten,\u201d the",
+        "                agrees on \u201ctangent / turning point\u201d vs \u201ccrosses,\u201d the",
         "                teacher SAYS the word out loud: \u201cThis thing we\u2019re calling",
         "                a repeated factor has a name: multiplicity.\u201d Advance to",
         "                PowerPoint slide 5 (definition + example). That slide IS",
@@ -531,7 +535,7 @@ def _exit_key_lines():
     return [
         f"[bank: {q['id']}, DOK {q.get('dok')}]",
         "DESMOS POLICY: students may use Desmos to VERIFY zeros. The behavior",
-        "description (cross/touch/flatten) must be written in their own words.",
+        "description (crosses / tangent / turning point) must be written in their own words.",
         "",
         _format_unicode(q["prompt"]),
         "",
@@ -540,7 +544,9 @@ def _exit_key_lines():
         "DOK rationale: " + _format_unicode(str(q.get("dok_rationale", ""))),
         "",
         "Full credit = zeros correct AND behavior using multiplicity language",
-        "(\u201ccrosses\u201d / \u201ctouches\u201d / \u201cturns\u201d / \u201cflattens\u201d all accepted).",
+        "(\u201ccrosses\u201d for odd multiplicity; \u201ctangent\u201d, \u201cturning point\u201d, or "
+        "\u201ctouches and turns back\u201d all accepted for even multiplicity \u2014 "
+        "matches Savvas language).",
     ]
 
 
@@ -659,7 +665,8 @@ def build_teacher(path):
     add_callout(doc, "[Practice]  [DOK 2] Savvas Try Its + Practice  (20 min)", [
         "Five Savvas items (bank IDs: " + ", ".join(PRACTICE_IDS) + ").",
         "Required: A + B. Choice: one of C/D/E. Fast finishers: all five, plus",
-        "the \u201cbuild a polynomial with cross/touch/flatten at prescribed zeros\u201d",
+        "the \u201cbuild a polynomial with a simple crossing, a tangent/turning "
+        "point, and a higher-odd-multiplicity crossing at prescribed zeros\u201d",
         "board extension.",
     ])
     add_callout(doc, "\u270F\uFE0F  PRACTICE / ANSWER KEY + CIRCULATION PATTERN",
