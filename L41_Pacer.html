@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L41 Pacer · Periods 1, 2, 3</title>
+<style>
+  :root {
+    --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
+    --gold:#c88b14; --red:#b23a3a; --accent:#d94e2f;
+    --bg:#eaf2fb; --card:#ffffff; --ink:#112233; --muted:#556677;
+    --pale-teal:#d4edda; --pale-gold:#fff2cc; --pale-red:#f7d7d7;
+    --pale-navy:#cfe2f3; --pale-orange:#fce5cd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.4;
+  }
+  header {
+    background: var(--navy); color: #fff; padding: 12px 24px;
+    display:flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+  header .meta { font-size: 0.85rem; color: #bbd0e6; }
+  .tabs {
+    display:flex; gap: 4px; background:#fff; padding: 6px 24px;
+    border-bottom: 1px solid #ccc;
+  }
+  .tab {
+    padding: 10px 20px; border: none; background: #dfe9f3;
+    color: var(--navy); font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; border-radius: 6px 6px 0 0;
+    transition: background 0.15s;
+  }
+  .tab:hover { background: #c9dcf0; }
+  .tab.active { background: var(--navy); color: #fff; }
+  .panel { display: none; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .panel.active { display: block; }
+  .timer-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--navy); color: #fff; padding: 10px 16px;
+    border-radius: 8px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .timer-bar .countdown { font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
+  .timer-bar button {
+    background: var(--gold); color: #fff; border: none;
+    padding: 8px 16px; border-radius: 4px; font-weight: 600;
+    cursor: pointer; font-size: 0.9rem;
+  }
+  .timer-bar button.stop { background: var(--red); }
+  .timer-bar button:hover { filter: brightness(1.1); }
+  .timer-bar .phase-title { font-size: 1rem; color: #bbd0e6; }
+  .phase-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .phase-chip {
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
+    font-weight: 600; border: 2px solid transparent;
+  }
+  .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
+  .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
+  .phase-card {
+    background: var(--card); border-radius: 8px; padding: 18px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px;
+  }
+  .phase-card h2 {
+    margin: 0 0 6px 0; color: var(--navy); font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badges { display:flex; gap: 6px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.72rem; font-weight: 700; color: #fff;
+  }
+  .badge.dok { background: var(--gold); }
+  .badge.min { background: var(--green); }
+  .badge.fw { background: var(--blue); }
+  .callout {
+    padding: 12px 14px; border-radius: 6px; margin: 12px 0;
+    border-left: 5px solid var(--teal);
+  }
+  .callout.teacher { background: var(--pale-navy); border-color: var(--navy); }
+  .callout.answer  { background: var(--pale-teal); border-color: var(--green); }
+  .callout.rule    { background: var(--pale-gold); border-color: var(--gold); }
+  .callout.warn    { background: var(--pale-red); border-color: var(--red); }
+  .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout .label {
+    font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    display: block; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout.answer .label { color: var(--green); }
+  .callout.rule .label { color: var(--gold); }
+  .callout.warn .label { color: var(--red); }
+  .callout.bridge .label { color: var(--accent); }
+  .callout ul { margin: 4px 0; padding-left: 22px; }
+  .item {
+    border-left: 3px solid var(--blue); padding: 10px 14px;
+    background: #f7faff; margin: 8px 0; border-radius: 4px;
+  }
+  .item .qid {
+    font-size: 0.75rem; color: var(--muted); font-family: monospace;
+  }
+  .item.dok3 { border-left-color: var(--accent); background: #fff5ef; }
+  .item.assess { border-left-color: var(--gold); background: #fffbea; }
+  .item .star { font-weight: 700; }
+  .item.dok3 .star { color: var(--accent); }
+  .item.assess .star { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lesson 4-1 Pacer · Klimsara-Adapted</h1>
+    <div class="meta">Periods 1-3 · Inverse Variation + Reciprocal Function · Single DOK-3 spine · No Blooket</div>
+  </div>
+  <div class="meta" id="dateLabel"></div>
+</header>
+
+<nav class="tabs" id="tabBar">
+  <button class="tab active" data-tab="p1">P1 · Inverse Variation (Introduction)</button>
+  <button class="tab" data-tab="p2">P2 · Applications + DOK-3</button>
+  <button class="tab" data-tab="p3">P3 · Reciprocal + Translations ⭐</button>
+</nav>
+
+<main id="panels"></main>
+
+<script>
+const PACER = {
+  p1: {
+    label: "Period 1 · Inverse Variation Introduction · 55 min base (65 min for both A & F)",
+    total_min: 55,
+    phases: [
+      { id:"donow", title:"Do Now — Notice & Wonder",
+        fw:"exploration", dok:"2", min:5,
+        items:[{qid:"4-1-savvas-model-discuss-lesson-4-1-launch", label:"Savvas Model & Discuss (Part A/B/C)"}],
+        teacher:[
+          "Project the two rectangles on screen or pass out the Do Now sheet.",
+          "Circulate SILENTLY — do not answer questions. This is struggle time.",
+          "Collect at 5 min sharp."
+        ],
+        rules:[
+          "Rectangle 1: length 72, width 2 (area 144)",
+          "Rectangle 2: length 24, width 6 (area 144)",
+          "A) Notice 1 thing · B) Wonder 1 thing · C) Sketch a third 144-area rectangle"
+        ],
+        answer:"Anticipated notices: 'same area', 'one is long and thin, other shorter and wider', 'when length is bigger, width is smaller'. Anticipated wonders: 'can ANY rectangle have area 144?', 'what's the rule?' KEY MOVE in Launch: surface that length × width = 144 → this is xy = k.",
+      },
+      { id:"launch", title:"Launch — Inverse Variation (Ex 1 + Ex 2)",
+        fw:"teacher models", dok:"2", min:12,
+        items:[],
+        teacher:[
+          "Bridge from Do Now: 'You noticed length × width = 144. That's INVERSE VARIATION.'",
+          "Project Example 1. Compute xy for each column — constant = inverse.",
+          "Project Example 2. Find k = xy, write y = k/x, substitute.",
+          "Pause 1× for 30-sec partner check: 'What's k for our area=144 rectangles?' (144)",
+          "Release promptly at minute 17."
+        ],
+        rules:[
+          "Inverse variation: xy = k  OR  y = k/x (k is the constant of variation)",
+          "As one increases, the other decreases proportionally",
+          "⚠️ COMMON ERROR: y/x = k is DIRECT variation, not inverse"
+        ],
+      },
+      { id:"explore", title:"Explore — Think-Pair-Share (7 items)",
+        fw:"student work", dok:"1-2", min:33,
+        items:[
+          {qid:"4-1-savvas-try-it-1-lesson-4-1-matches-examp", label:"Try It 1 — Identify inverse variation"},
+          {qid:"4-1-savvas-q9",  label:"Practice #9 — Generalize"},
+          {qid:"4-1-savvas-q14", label:"Practice #14 — Another table"},
+          {qid:"4-1-savvas-try-it-2-lesson-4-1-matches-examp", label:"Try It 2 — Write the equation"},
+          {qid:"4-1-savvas-q13", label:"Practice #13 — k in terms of x,y"},
+          {qid:"4-1-savvas-q16", label:"Practice #16 — Apply"},
+          {qid:"4-1-savvas-q10", label:"Practice #10 — Construct Arguments (stretch)"},
+        ],
+        teacher:[
+          "5 laps across 33 min (~6-7 min each).",
+          "Press pairs to compute xy for EVERY column, not just two.",
+          "Do NOT give answers. Sentence frame: 'Product is ___ → is/is not inverse variation.'",
+          "If pace slows, cut Practice #10 (DOK-2 stretch) first."
+        ],
+        answer:"Try It 1 key: (a) yes, all xy=25.5 → inverse. (b) no, products not constant. #9: y increases with x → direct variation, not inverse. #14: direct variation (k=18). #13: k=xy. #16: y=-2 (k=2, at x=-1). #10: division by zero is undefined.",
+        warn:"Period A Friday (65 min) & Period F Friday (65 min) → use extra 10 min on Explore, not Launch.",
+      },
+      { id:"share", title:"Share / Summary",
+        fw:"academic conversation", dok:"2", min:5,
+        items:[],
+        teacher:["Cold-call 2 pairs to read their sentence-frame sentence.",
+                 "Write one student-generated sentence on board.",
+                 "Preview P2: 'Next class — Bouzouki string + Ramón road trip = BOTH direct & inverse in one scenario.'"],
+        bridge:"P2 tomorrow: bouzouki application + DOK-3 Performance Task (Ramón road trip). Different physical setup → same inverse-variation structure.",
+      },
+      { id:"exit", title:"Exit Ticket — Summary Recap",
+        fw:"not graded", dok:"1-2", min:2,
+        items:[],
+        teacher:["Collect at door.","Scan #2 for direct-vs-inverse confusion → plan P2 Do Now emphasis accordingly."],
+        rules:[
+          "1. Today I learned that ___.",
+          "2. The difference between inverse and direct variation is ___.",
+          "3. One thing I'm still unsure about is ___."
+        ],
+      },
+    ]
+  },
+
+  p2: {
+    label: "Period 2 · Applications + DOK-3 · 55 min base",
+    total_min: 55,
+    phases: [
+      { id:"donow", title:"Do Now — Quick inverse variation check",
+        fw:"bridge from P1", dok:"1", min:5,
+        items:[{qid:"4-1-savvas-q15", label:"Practice #15"}],
+        teacher:["Hand out at door.","Circulate 3 min.","Cold-call: 'Is it inverse? What's k?'"],
+        answer:"Yes; all xy = 60 → k = 60. y = 60/x. As x increases, y decreases.",
+      },
+      { id:"launch", title:"Launch — Example 3 (Bouzouki application)",
+        fw:"teacher models", dok:"2", min:12,
+        items:[],
+        teacher:[
+          "Project Example 3 (bouzouki string-length ↔ frequency).",
+          "Think aloud: identify s and f, compute k = sf = 26 × 329.63 = 8570.38.",
+          "Plug in new length: s=13 → f = 8570.38/13 = 659.26.",
+          "Flag: 'Today's Performance Task has BOTH direct and inverse in ONE scenario.'",
+          "Release at minute 17."
+        ],
+        rules:[
+          "APPLICATION STEPS for Inverse Variation:",
+          "1. Identify two varying quantities + their constant PRODUCT k",
+          "2. Compute k from one given pair",
+          "3. Write y = k/x (rename to fit context)",
+          "4. Solve for the unknown",
+          "⚠️ DIRECT (y/x = k) vs INVERSE (xy = k) — watch both on #26"
+        ],
+      },
+      { id:"explore", title:"Explore — TPS + ⭐ DOK-3 Performance Task",
+        fw:"student work + DOK-3", dok:"2-3", min:33,
+        items:[
+          {qid:"4-1-savvas-try-it-3-lesson-4-1-matches-examp", label:"Try It 3 — Ice cube melting"},
+          {qid:"4-1-savvas-q12", label:"Practice #12 — HOT: inverse SQUARE"},
+          {qid:"4-1-savvas-q17", label:"Practice #17 — Radio wavelength (graph)"},
+          {qid:"4-1-savvas-q23", label:"Practice #23 — Boyle's Law"},
+          {qid:"4-1-savvas-q26", label:"Practice #26 ⭐ PERFORMANCE TASK · Ramón", dok3:true, note:"Part A = DIRECT variation; Part B = INVERSE. Plan ~15 min."},
+        ],
+        teacher:[
+          "5 laps across 33 min.",
+          "Laps 1-4: Try-It 3 + #12 + #17 + #23 (~21 min total).",
+          "Lap 5: ⭐ #26 Ramón (~12-15 min). Press HARD on 'Part A is direct, Part B is inverse.'",
+          "Do NOT give #26 answers — pairs present to each other.",
+          "If running tight: cut #12 (HOT, tangent). NEVER cut #26."
+        ],
+        answer:"Try It 3: ~13.3 min (k=400, t=400/30). #12: divide by 16. #17: 800 kHz (k=300,000). #23: 131.25 in³ (volleyball k=1350, at P=8 V=168.75). #26 Part A: d=66.5t; 465.5 mi (at t=7 total). Part B: g=18/t; ≈2.57 gal (at t=7). STRESS: A is direct (d/t constant), B is inverse (g·t constant).",
+      },
+      { id:"share", title:"Share / Summary + Wed bridge",
+        fw:"academic conversation", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Cold-call a pair that struggled earlier to present #26 Parts A and B using sentence frame.",
+          "Write the direct-vs-inverse test on board: y/x constant = direct; xy constant = inverse.",
+          "Wed bridge: 'Tomorrow we GRAPH y = k/x and its translations. Asymptote time.'"
+        ],
+        bridge:"P3 tomorrow: graph the reciprocal function + its translations. Ex 4 (parent) + Ex 5 (translations). ASSESSMENT-CRITICAL for Topic 4 8-Q.",
+      },
+      { id:"exit", title:"Exit Ticket — Summary Recap",
+        fw:"not graded", dok:"1-2", min:3,
+        items:[],
+        teacher:["Collect at door.","Scan #3 — did students articulate the test (y/x vs xy constant)?"],
+        rules:[
+          "1. Today I learned that ___.",
+          "2. The biggest trap in Ramón's task was ___.",
+          "3. I distinguish direct from inverse variation by ___."
+        ],
+      },
+    ]
+  },
+
+  p3: {
+    label: "Period 3 · Reciprocal Function + Translations · 55 min base · ASSESSMENT-CRITICAL",
+    total_min: 55,
+    short_note: "P3 prepares students for Topic 4 8-Q assessment items #3 (asymptotes) and #5 (translation description). Practice #19 is THE rehearsal item — asymptotes + domain/range + intercepts, matching Q#3 format exactly.",
+    phases: [
+      { id:"donow", title:"Do Now — Generalize + Predict",
+        fw:"bridge from P2", dok:"1", min:5,
+        items:[{qid:"4-1-savvas-q13", label:"Practice #13 — Generalize"}],
+        teacher:[
+          "Hand out at door.","Circulate 3 min.",
+          "Cold-call: 'Both forms of inverse variation?' (y = k/x AND xy = k.)",
+          "Then 30-sec prediction: 'What do you THINK y = 1/x graphs as?'"
+        ],
+        answer:"k = xy (also: y = k/x equivalently). Prediction: students often guess a line; reveal the hyperbola in Launch.",
+      },
+      { id:"launch", title:"Launch — Ex 4 + Ex 5 (reciprocal + translations)",
+        fw:"teacher models 2 examples", dok:"2", min:12,
+        items:[],
+        teacher:[
+          "FIRST 6 min (Example 4): graph f(x) = 1/x. Table of x→0 and x→±∞. Name asymptotes.",
+          "NEXT 5 min (Example 5): g(x) = 1/(x−3) + 2. (h, k) = (3, 2). Asymptotes shift.",
+          "30 sec: point at rule cards. 'These are your assessment reference — mark them.'",
+          "Release."
+        ],
+        rules:[
+          "PARENT f(x) = 1/x:  VA x=0, HA y=0, domain x≠0, range y≠0, hyperbola Quadrants I and III",
+          "TRANSLATED g(x) = 1/(x−h) + k:  VA x=h, HA y=k, center (h, k)",
+          "y-intercept: set x=0 → y = −1/h + k",
+          "x-intercept: set y=0 → x = h − 1/k"
+        ],
+      },
+      { id:"explore", title:"Explore — TPS · Assessment Rehearsal (6 items)",
+        fw:"student work · pure DOK-2", dok:"2", min:35,
+        items:[
+          {qid:"4-1-savvas-try-it-4-lesson-4-1-matches-examp", label:"Try It 4 — Graph g(x) = 10/x"},
+          {qid:"4-1-savvas-q11", label:"Practice #11 — Error Analysis (y = 5/x)"},
+          {qid:"4-1-savvas-q18", label:"Practice #18 — Graph y = −2/x"},
+          {qid:"4-1-savvas-try-it-5-lesson-4-1-matches-examp", label:"Try It 5 — Graph g(x) = 1/(x+2) − 4"},
+          {qid:"4-1-savvas-q19", label:"Practice #19 ⭐ ASSESSMENT-CRITICAL", assess:true, note:"g(x) = 1/(x−2) + 6 — asymptotes + domain/range + intercepts. Plan ~8 min."},
+          {qid:"4-1-savvas-q21", label:"Practice #21 — Video game storage"},
+        ],
+        teacher:[
+          "6 laps across 35 min.",
+          "Parent forms first (Try-It 4, #11, #18) then translations (Try-It 5, #19, #21).",
+          "Press BOTH asymptotes AND intercepts on #19 — this IS the assessment rehearsal.",
+          "If pace slows: cut #21 (modeling) first. Never cut #19."
+        ],
+        answer:"Try It 4: VA x=0, HA y=0, D/R: reals except 0; g is vertical stretch of f. #11: mislabeled — should be (2, 2.5), (−2, −2.5) since 5/2 = 2.5. #18: VA x=0, HA y=0, D/R reals except 0, hyperbola in Q II and IV. Try It 5: VA x=−2, HA y=−4, D/R reals except −2/−4. #19: VA x=2, HA y=6, D x≠2, R y≠6, y-intercept 11/2, x-intercept 11/6. #21: n=320/s; table 320, 128, 106.7, 80.",
+        warn:"⭐ Practice #19 IS the Topic 4 Q#3 rehearsal. Its structure (asymptotes + intercepts + translation) matches the assessment exactly.",
+      },
+      { id:"share", title:"Share / Summary + Concept Summary",
+        fw:"LEHS 8-Q preview", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Cold-call 1 pair to present #19 (asymptotes + intercepts).",
+          "Project the Concept Summary (in student packet).",
+          "Announce: 'Topic 4 8-Q assessment expects Q#3 on asymptotes and Q#5 on translation descriptions. You just rehearsed both.'"
+        ],
+        rules:[
+          "INVERSE VARIATION (y = k/x): as one ↑, other ↓ proportionally; k = xy constant",
+          "TRANSLATED RECIPROCAL (y = a/(x−h) + k): asymptotes shift to x=h, y=k; center (h, k)"
+        ],
+        bridge:"Topic 4 8-Q assessment = 4-1, 4-3, 4-4, 4-5 content. You own 2 of 8 from today (#3 asymptotes, #5 translations).",
+      },
+      { id:"exit", title:"Exit Ticket — Pre-Assessment Confidence",
+        fw:"confidence check", dok:"1-2", min:3,
+        items:[],
+        teacher:["Collect at door.","Tonight: scan confidence scores. If averages <3 on either skill, insert 5-min recap Do Now when 8-Q lands."],
+        rules:[
+          "• I can identify asymptotes of y = 1/(x−h) + k.   Confidence: 1 / 2 / 3 / 4 / 5",
+          "• I can describe a translation from f(x) = 1/x to g(x).   Confidence: 1 / 2 / 3 / 4 / 5",
+          "• One thing I want to review before Topic 4 assessment: ___"
+        ],
+      },
+    ]
+  },
+};
+
+const panels = document.getElementById("panels");
+const tabBar = document.getElementById("tabBar");
+document.getElementById("dateLabel").textContent = new Date().toDateString();
+
+function renderPanel(tabId) {
+  const data = PACER[tabId];
+  const panel = document.createElement("div");
+  panel.className = "panel";
+  panel.id = "panel-" + tabId;
+  panel.innerHTML = `
+    <div class="timer-bar">
+      <div>
+        <div class="phase-title" id="phaseTitle-${tabId}">Select a phase to begin</div>
+      </div>
+      <div class="countdown" id="timer-${tabId}">--:--</div>
+      <div>
+        <button onclick="startPhase('${tabId}')" id="startBtn-${tabId}">Start</button>
+        <button class="stop" onclick="stopPhase('${tabId}')">Stop</button>
+      </div>
+    </div>
+    <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    ${data.short_note ? `<div style="background:#fffbea; border-left:4px solid var(--gold); padding:10px 14px; border-radius:6px; font-size:0.9rem; margin:12px 0;">⭐ ${data.short_note}</div>` : ""}
+    <div class="phase-list" id="chips-${tabId}"></div>
+    <div id="phase-card-${tabId}"></div>
+  `;
+  panels.appendChild(panel);
+  const chipBar = panel.querySelector(`#chips-${tabId}`);
+  data.phases.forEach((ph, idx) => {
+    const chip = document.createElement("button");
+    chip.className = "phase-chip";
+    chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0]} · ${ph.min}m`;
+    chip.onclick = () => selectPhase(tabId, idx);
+    chipBar.appendChild(chip);
+  });
+  selectPhase(tabId, 0);
+}
+
+function selectPhase(tabId, idx) {
+  const data = PACER[tabId];
+  const ph = data.phases[idx];
+  const card = document.getElementById(`phase-card-${tabId}`);
+  let html = `<div class="phase-card">
+    <h2>${ph.title}
+      <span class="badges">
+        <span class="badge dok">DOK ${ph.dok}</span>
+        <span class="badge min">${ph.min} min</span>
+        <span class="badge fw">${ph.fw}</span>
+      </span>
+    </h2>`;
+  if (ph.items && ph.items.length) {
+    ph.items.forEach(it => {
+      let cls = "item";
+      if (it.dok3) cls = "item dok3";
+      else if (it.assess) cls = "item assess";
+      const star = it.dok3 ? '<span class="star">⭐ DOK-3 </span>' :
+                    it.assess ? '<span class="star">⭐ ASSESS </span>' : '';
+      html += `<div class="${cls}">${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>${it.note ? `<div>${it.note}</div>` : ""}</div>`;
+    });
+  }
+  if (ph.teacher && ph.teacher.length) {
+    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
+    ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.rules && ph.rules.length) {
+    html += `<div class="callout rule"><span class="label">📘 Rules / stems</span><ul>`;
+    ph.rules.forEach(r => html += `<li>${r}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.answer) {
+    html += `<div class="callout answer"><span class="label">✅ Answer key</span>${ph.answer}</div>`;
+  }
+  if (ph.bridge) {
+    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
+  }
+  if (ph.warn) {
+    html += `<div class="callout warn"><span class="label">⚠️ Warning / Note</span>${ph.warn}</div>`;
+  }
+  html += `</div>`;
+  card.innerHTML = html;
+  document.querySelectorAll(`#chips-${tabId} .phase-chip`).forEach((c, i) => {
+    c.classList.toggle("active", i === idx);
+  });
+  document.getElementById(`phaseTitle-${tabId}`).textContent = ph.title;
+  currentPhase[tabId] = idx;
+  stopPhase(tabId);
+  document.getElementById(`timer-${tabId}`).textContent =
+    `${String(ph.min).padStart(2,'0')}:00`;
+}
+
+const timers = {}, currentPhase = {};
+
+function startPhase(tabId) {
+  const idx = currentPhase[tabId];
+  const ph = PACER[tabId].phases[idx];
+  let remaining = ph.min * 60;
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  clearInterval(timers[tabId]);
+  timers[tabId] = setInterval(() => {
+    remaining--;
+    if (remaining < 0) {
+      clearInterval(timers[tabId]);
+      timerEl.textContent = "TIME";
+      timerEl.style.color = "#ff6b6b";
+      if (idx + 1 < PACER[tabId].phases.length) {
+        document.querySelectorAll(`#chips-${tabId} .phase-chip`)[idx].classList.add("done");
+      }
+      return;
+    }
+    const m = Math.floor(remaining / 60), s = remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    timerEl.style.color = remaining < 60 ? "#ff6b6b" : "#ffffff";
+  }, 1000);
+}
+
+function stopPhase(tabId) {
+  clearInterval(timers[tabId]);
+  const idx = currentPhase[tabId];
+  if (idx === undefined) return;
+  const ph = PACER[tabId].phases[idx];
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  timerEl.textContent = `${String(ph.min).padStart(2,'0')}:00`;
+  timerEl.style.color = "#ffffff";
+}
+
+Object.keys(PACER).forEach(renderPanel);
+document.querySelector('.panel').classList.add('active');
+
+tabBar.addEventListener("click", e => {
+  if (!e.target.matches(".tab")) return;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  e.target.classList.add("active");
+  document.getElementById("panel-" + e.target.dataset.tab).classList.add("active");
+});
+</script>
+
+</body>
+</html>
