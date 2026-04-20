@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Day 4-5 Pacer — Real + Complex Zeros + Modeling (Savvas)</title>
+<title>Day 7 Pacer — Synthesis + Venetta Performance Task (Savvas)</title>
 <style>
   :root {
     --hue: 210;
@@ -317,7 +317,7 @@
 <body>
 
 <header>
-  <div class="phase-meta" id="phase-meta">Phase 1 of 9 · Algebra 2 · Lesson 3-5 · Combined Day 4-5 (Savvas-only)</div>
+  <div class="phase-meta" id="phase-meta">Phase 1 of 9 · Algebra 2 · Lesson 3-5 · Combined Day 7 (Savvas-only)</div>
   <h1 class="phase-title" id="phase-title">— </h1>
   <div class="dots" id="dots"></div>
 </header>
@@ -342,77 +342,72 @@
 </main>
 
 <footer>
-  <button id="btn-prev" class="ctrl secondary">◀ Prev</button>
-  <button id="btn-play" class="ctrl">▶ Start</button>
-  <button id="btn-next" class="ctrl secondary">Next ▶</button>
-  <button id="btn-reset" class="ctrl secondary">↻ Reset phase</button>
-  <button id="btn-restart-all" class="ctrl secondary">↺ Restart all</button>
+  <button id="btn-prev" class="ctrl secondary">&#9664; Prev</button>
+  <button id="btn-play" class="ctrl">&#9654; Start</button>
+  <button id="btn-next" class="ctrl secondary">Next &#9654;</button>
+  <button id="btn-reset" class="ctrl secondary">&#8635; Reset phase</button>
+  <button id="btn-restart-all" class="ctrl secondary">&#8634; Restart all</button>
 </footer>
-<div class="kbd">Space: play/pause  ·  ← →: prev/next phase  ·  R: reset current phase  ·  Total: 57 min · <strong>Teacher packet optional — all info is on this pacer</strong></div>
+<div class="kbd">Space: play/pause &nbsp;&middot;&nbsp; &larr; &rarr;: prev/next phase &nbsp;&middot;&nbsp; R: reset current phase &nbsp;&middot;&nbsp; Total: 57 min &nbsp;&middot;&nbsp; Explore = 26 min (includes 4-min circulation buffer) &nbsp;&middot;&nbsp; <strong>Teacher packet optional &mdash; all info is on this pacer</strong></div>
 
 <div class="qr-overlay" title="Scan to open this pacer on your phone">
-  <img src="qr_day45_pacer.svg" alt="QR code for Day 4-5 Pacer">
+  <img src="qr_day7_pacer.svg" alt="QR code for Day 7 Pacer">
   <div class="qr-label">Scan</div>
 </div>
 
 <script>
 // ----------------------------------------------------------------------
-// Phase definitions — each phase is self-contained. Teacher does NOT
-// need the paper packet. Sub-steps give nested timing hints.
+// Phase definitions — Day 7 Synthesis + Venetta Performance Task.
+// Teacher does NOT need the paper packet.
+// DOK-3 driver = Savvas Practice #30 (Venetta). ONE DOK-3 only.
 // ----------------------------------------------------------------------
 const PHASES = [
   {
-    title: "Do Now — Savvas Practice #28 Vocab",
+    title: "Do Now \u2014 Savvas Practice #29 (SAT-style)",
     framework: "Do Now A",
-    dok: "DOK 1",
+    dok: "DOK 2",
     duration: 5 * 60,
     substeps: [
-      {label: "Hand sheets at door; students read silently", sec: 15},
-      {label: "Students complete fill-in vocab items", sec: 240},
-      {label: "Scan for sign-flip errors (x − 2 vs x + 2)", sec: 45},
+      {label: "Hand sheets; students start silently", sec: 60},
+      {label: "Students factor + identify zeros mentally", sec: 120},
+      {label: "Students pick graph + write 1-sentence reasoning", sec: 120},
     ],
     instructions: `
       <h3>Student task</h3>
-      <p><strong>Savvas Practice #28</strong> — complete each statement to mean <em>"4 is a zero of the function"</em>:</p>
-      <ol>
-        <li>The graph of the function crosses the <strong>__________</strong> at 4.</li>
-        <li><strong>__________</strong> is a factor of the polynomial.</li>
-      </ol>
-      <p>Then two bridge questions:</p>
-      <ul>
-        <li>If −2 is a zero of a polynomial, one factor is: <strong>__________</strong></li>
-        <li>If a polynomial has degree 3 and only one real zero, how many complex zeros must it have? <strong>__________</strong></li>
-      </ul>
+      <p><strong>Savvas Practice #29</strong> (SAT/ACT style). Without a graphing calculator,
+      identify which graph shows <strong>f(x) = x&#179; + x&#178; &minus; 4x</strong>.
+      Circle A/B/C/D, then write one sentence explaining how they know.</p>
 
       <div class="callout answer">
-        <strong>Answer key:</strong><br>
-        (1) <strong>x-axis</strong>  (2) <strong>(x − 4)</strong><br>
-        Bridge: factor for −2 → <strong>(x + 2)</strong> [sign flip!]  ·  complex zeros: <strong>2</strong> (conjugate pair)
+        <strong>Answer key:</strong> <strong>Graph C</strong><br>
+        Factor: f(x) = x(x&#178; + x &minus; 4). GCF = x &rarr; zero at x = 0.<br>
+        x&#178; + x &minus; 4 = 0: discriminant 1 + 16 = 17 &gt; 0, two irrational real zeros near &plusmn;1.6.<br>
+        Cubic, positive leading coefficient: down-left, up-right. Three real x-intercepts.
       </div>
 
-      <h3>Teacher moves (silent)</h3>
+      <h3>Teacher moves (silent lap)</h3>
       <ul>
-        <li>Hand sheets at the door.  Walk 1 lap as students work.</li>
-        <li>Scan for students who wrote (x − 2) for the −2 zero — they have the sign-flip backward.  Cold-call during Launch: <em>"If I plug −2 into (x − 2), do I get 0?"</em></li>
-        <li>Students who left the complex-zeros line blank are primed for the Launch Example 3 discovery.</li>
+        <li>Scan answers: A or B &rarr; missed the zero at x = 0 (forgot GCF). Cold-call during Launch.</li>
+        <li>D &rarr; end behavior reversed (odd degree, negative leading?). Address in Launch.</li>
+        <li>Students who circled C with a clean sentence &rarr; call on them first.</li>
       </ul>
 
-      <div class="callout warn"><strong>DOK 1 · 5 min · Silent · Pencil only · No Desmos</strong></div>
+      <div class="callout warn"><strong>DOK 2 &nbsp;&middot;&nbsp; 5 min &nbsp;&middot;&nbsp; Silent &nbsp;&middot;&nbsp; Pencil only &nbsp;&middot;&nbsp; No graphing calculator</strong></div>
     `,
-    transition: `"Pencils down. Chromebooks out. Blooket code on the screen."`
+    transition: `When timer hits 0: "Pencils down. Chromebooks out. Blooket code on the next slide."`
   },
 
   {
     title: "Blooket Login",
     framework: "Do Now B",
-    dok: "—",
+    dok: "\u2014",
     duration: 2 * 60,
     instructions: `
       <h3>Teacher action</h3>
       <ul>
-        <li>Display Blooket code on the projector.</li>
-        <li>Confirm the Day 4-5 Real-Complex CSV (Blooket_Day45_RealComplex.csv) is loaded — pure rule-recall items.</li>
-        <li>Decide mode: <strong>Fishing Frenzy</strong> (first time this week) or <strong>Racing</strong> (repeat day, more rigorous).</li>
+        <li>Display Blooket code on the projector (PowerPoint Slide 2).</li>
+        <li>Confirm the Day 7 synthesis CSV is loaded &mdash; whole-lesson rules pool.</li>
+        <li>Decide mode: <strong>Fishing Frenzy</strong> (first time this week) or <strong>Racing</strong> (repeat day).</li>
       </ul>
 
       <div class="callout"><strong>Mode for today:</strong>
@@ -423,44 +418,49 @@ const PHASES = [
         <span id="mode-note" style="font-size:0.85rem; opacity: 0.8; margin-left: 0.5rem;"></span>
       </div>
 
-      <p>Students open Chromebooks, type code, enter nickname.  Late joiners hop in mid-game.</p>
+      <p>Students open Chromebooks, type code, enter nickname. Late joiners hop in mid-game.</p>
+
+      <div class="callout">
+        <strong>Rules under test (synthesis round):</strong>
+        Zero &harr; factor &nbsp;&middot;&nbsp; odd mult &rarr; crosses &nbsp;&middot;&nbsp; even mult &rarr; tangent &nbsp;&middot;&nbsp;
+        conjugate pairs &nbsp;&middot;&nbsp; sign chart &nbsp;&middot;&nbsp; inequality intervals.
+      </div>
     `,
     transition: `"Everyone in? Go."`
   },
 
   {
-    title: "Blooket — Rule Recall",
+    title: "Blooket \u2014 Synthesis Rule Recall",
     framework: "Do Now C",
     dok: "DOK 1",
     duration: 6 * 60,
-    // One 6-minute round. No sub-rounds.
     instructions: `
-      <h3>Rules under test (also on Slide)</h3>
+      <h3>Rules under test (whole-lesson synthesis)</h3>
       <ul>
-        <li>Fundamental Theorem of Algebra: a degree-n polynomial has <strong>exactly n zeros</strong> (real + complex, counted with multiplicity)</li>
-        <li>Non-real complex zeros come in <strong>conjugate pairs</strong>: if a + bi is a zero, so is a − bi</li>
-        <li>Factor theorem: x = c is a zero ⟺ (x − c) is a factor</li>
-        <li>Synthetic division: bring down leading coefficient → multiply by c → add next coefficient</li>
-        <li>Quadratic formula applies to the reduced quadratic after synthetic division</li>
-        <li>Day 2-3 retention: EVEN multiplicity → <strong>tangent</strong> to x-axis; ODD multiplicity → <strong>crosses</strong></li>
+        <li>Zero &harr; factor theorem: zero at c &harr; (x &minus; c) is a factor</li>
+        <li>Odd multiplicity &rarr; graph <strong>crosses</strong> the x-axis</li>
+        <li>Even multiplicity &rarr; graph is <strong>tangent</strong> to x-axis (turning point)</li>
+        <li>Non-real complex zeros come in <strong>conjugate pairs</strong> (a + bi with a &minus; bi)</li>
+        <li>Sign chart: find zeros &rarr; test intervals &rarr; determine sign</li>
+        <li>Polynomial inequality: solution = union of intervals with correct sign</li>
       </ul>
 
       <div class="callout script">
-        <strong>Display during play:</strong> project the rule-recall slide, not the Blooket leaderboard.  Students see the rules they're being tested on.
+        <strong>Display during play:</strong> project the PowerPoint rule-recall slide, not the Blooket leaderboard. Students see the rules they're being tested on.
       </div>
 
       <h3>Dashboard diagnostic (during play)</h3>
-      <p>Note the TWO lowest-percent rules.  You'll use one in the Wrap phase.</p>
+      <p>Note the TWO lowest-percent rules. You'll use the lowest in the Blooket Wrap phase (next).</p>
 
       <div class="callout warn">
-        <strong>6 min hard stop.</strong> Don't let it run over — the Wrap phase is separate.
+        <strong>6 min hard stop.</strong> Don't let it run over &mdash; Blooket Wrap is separate.
       </div>
     `,
     transition: `Close the game. "Pencils up, we're doing the Wrap."`
   },
 
   {
-    title: "Blooket Wrap — Candy + Lowest Question",
+    title: "Blooket Wrap \u2014 Candy + Lowest Rule",
     framework: "Do Now D",
     dok: "DOK 1",
     duration: 1 * 60,
@@ -472,238 +472,189 @@ const PHASES = [
     instructions: `
       <h3>Teacher moves (tight, 60 sec total)</h3>
       <ol>
-        <li><strong>Candy pass</strong> (~20 sec): walk the candy jar around once.  Top finisher(s) get an extra piece.  Low-stakes; pure tradition.</li>
-        <li><strong>Lowest-scored rule aloud</strong> (~25 sec): from the dashboard, announce the lowest-percent rule.  Whole class repeats it in unison (1 beat), then an individual volunteer says it once more.  Example: <em>"A degree-3 polynomial has exactly 3 zeros — real and complex combined."</em></li>
-        <li><strong>Transition</strong> (~15 sec): <em>"Pull out your Do Now sheet.  We're going to use it right now."</em></li>
+        <li><strong>Candy pass</strong> (~20 sec): walk the candy jar around once. Top finisher(s) get an extra piece. Low-stakes tradition.</li>
+        <li><strong>Lowest-scored rule aloud</strong> (~25 sec): announce the lowest-percent rule from the dashboard. Whole class repeats it in unison (1 beat), then an individual volunteer says it once more.</li>
+        <li><strong>Transition</strong> (~15 sec): "Pull out your Do Now sheet. Launch coming up."</li>
       </ol>
 
       <div class="callout">
         <strong>Why this works:</strong> sugar bumps engagement; verbalizing the weakest rule seats it in memory right before Launch uses it.
       </div>
     `,
-    transition: `"Pull out your Do Now. 10 minutes on Launch."`
+    transition: `"Pull out your Do Now. 8 minutes on Launch."`
   },
 
   {
-    title: "Launch — Savvas Example 3",
+    title: "Launch \u2014 3-Concept Rapid Review",
     framework: "Launch",
     dok: "DOK 2",
-    duration: 10 * 60,
+    duration: 8 * 60,
     substeps: [
-      {label: ""Pull out your Do Now."", sec: 15},
-      {label: "Turn-and-Talk: vocab bridge (zero ⟺ factor)", sec: 90},
-      {label: "Cold-call one student (sign-flip check)", sec: 60},
-      {label: "Teacher models synthetic division at board", sec: 300},
-      {label: "Name conjugate pair rule + Fundamental Theorem", sec: 135},
+      {label: "Multiplicity check: (x\u22121)\u00b2(x+3)", sec: 150},
+      {label: "Complex-pair check: Savvas Practice #17", sec: 150},
+      {label: "Inequality check: Savvas Try It 6a", sec: 150},
+      {label: "Transition to Venetta", sec: 30},
     ],
     instructions: `
-      <h3>Savvas Example 3 — f(x) = x³ − 2x² − 2x − 3</h3>
-      <p>Students graph in Desmos, observe 1 real crossing, then use synthetic division + quadratic formula to find the complex pair.</p>
+      <h3>Three rapid-review checks &mdash; teacher projects, class calls out answers</h3>
 
-      <div class="callout script">
-        <strong>Script (10 min):</strong>
-        <ol>
-          <li>"Graph it in Desmos.  How many times does it cross the x-axis?" <em>(expect: once, at x = 3)</em></li>
-          <li>"Degree 3 → how many zeros total?  Why?" <em>(expect: 3 — Fundamental Theorem)</em></li>
-          <li>Model synthetic division once at board: divisor 3, coefficients 1 −2 −2 −3 → quotient x² + x + 1.</li>
-          <li>Students do synthetic division on their Launch page (2 min).</li>
-          <li>Model quadratic formula on quotient: discriminant = 1 − 4 = −3 → x = (−1 ± i√3)/2.</li>
-          <li>Name the CONJUGATE PAIR rule and Fundamental Theorem shortcut.</li>
-        </ol>
+      <div class="callout answer">
+        <strong>1. MULTIPLICITY (150s)</strong> &nbsp; f(x) = (x &minus; 1)&sup2;(x + 3)<br>
+        At x = 1: mult 2 (EVEN) &rarr; <strong>tangent to x-axis</strong> (turning point)<br>
+        At x = &minus;3: mult 1 (ODD) &rarr; <strong>crosses the x-axis</strong><br>
+        <em>Say: "Even &rarr; tangent; odd &rarr; crosses."</em>
       </div>
 
       <div class="callout answer">
-        <strong>Answer key — Example 3:</strong><br>
-        Synthetic division by (x − 3): &nbsp; 1 &nbsp;−2 &nbsp;−2 &nbsp;−3 &nbsp;| 3<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 &nbsp;&nbsp;&nbsp;3 &nbsp;&nbsp;&nbsp;3<br>
-        Quotient: <strong>Q(x) = x² + x + 1</strong><br>
-        Quadratic formula: x = (−1 ± √(1 − 4)) / 2 = (−1 ± i√3) / 2<br>
-        All three zeros: <strong>x = 3, x = (−1 + i√3)/2, x = (−1 − i√3)/2</strong>
+        <strong>2. COMPLEX ZEROS (150s)</strong> &nbsp; f(x) = x&#179; &minus; x&#178; &minus; 4x &minus; 6 &nbsp; [Savvas #17]<br>
+        Real zero at x = 3. Synthetic division &rarr; quotient x&#178; + 2x + 2.<br>
+        Quadratic formula: x = (&minus;2 &plusmn; &radic;(4&minus;8))/2 = &minus;1 &plusmn; i.<br>
+        All zeros: <strong>x = 3, x = &minus;1 + i, x = &minus;1 &minus; i</strong>.<br>
+        <em>Say: "Conjugate pairs &mdash; if a + bi is a zero, a &minus; bi must be too."</em>
       </div>
 
+      <div class="callout answer">
+        <strong>3. INEQUALITY (150s)</strong> &nbsp; 2x&#179; + 12x&#178; + 12x &lt; 0 &nbsp; [Try It 6a]<br>
+        Factor: 2x(x&#178; + 6x + 6) &lt; 0. Zeros: x = 0, x = &minus;3 &plusmn; &radic;3 (&asymp; &minus;4.73 and &minus;1.27).<br>
+        Sign chart: negative on (&minus;&infin;, &minus;3&minus;&radic;3) and (&minus;3+&radic;3, 0).<br>
+        Solution: <strong>x &lt; &minus;3 &minus; &radic;3 &nbsp;or&nbsp; &minus;3 + &radic;3 &lt; x &lt; 0</strong>.
+      </div>
+
+      <h3>Cold-call phrasing (low-stakes)</h3>
       <div class="callout script">
-        <strong>Cold-call phrasing (no grades, no candy-incentive):</strong>
-        "<em>[Name], what did you get for the factor when −2 is a zero?</em>" → sincere "thanks" → "<em>anyone want to build on that?</em>"
-        If sign-flip error surfaces: "If I plug −2 into (x − 2), do I get 0?"
+        "[Name], even or odd multiplicity?" &rarr; sincere "thanks" &rarr; "anyone want to build on that?"<br>
+        Normalize wrong answers as finding the edge of what we know.
       </div>
-
-      <h3>Questions to ask (never deliver the answer)</h3>
-      <ul>
-        <li>"How many zeros MUST this have?  Why?"</li>
-        <li>"If you found 1 real zero, how many are still missing?"</li>
-        <li>"What does it mean that the discriminant is negative?"</li>
-      </ul>
     `,
-    transition: `"Packets to Practice — Try It 3a and 3b. 10 minutes."`
+    transition: `"Packets to the Venetta page. Read the rules printed there. 22 minutes. Go."`
   },
 
   {
-    title: "Practice — Try It 3a + 3b",
-    framework: "Practice",
-    dok: "DOK 2",
-    duration: 10 * 60,
-    substeps: [
-      {label: "Lap 1 — every pair has Try It 3a started", sec: 300},
-      {label: "Lap 2 — check Try It 3b gotcha (degree 4)", sec: 300},
-    ],
-    instructions: `
-      <h3>Two items (both Savvas). Find ALL real + complex zeros.</h3>
-      <ul>
-        <li><strong>A.</strong> f(x) = 2x³ − 8x² + 9x  [Savvas Try It 3a]<br>
-          → factor out x: x(2x² − 8x + 9).  Real zero: <strong>x = 0</strong>.  Quadratic discriminant: 64 − 72 = −8 &lt; 0.<br>
-          Complex zeros: <strong>x = (8 ± 2i√2) / 4 = 2 ± (i√2)/2</strong></li>
-        <li><strong>B.</strong> f(x) = x⁴ − 3x² − 4  [Savvas Try It 3b]<br>
-          → treat as quadratic in u = x²: (u − 4)(u + 1) = (x² − 4)(x² + 1) = (x − 2)(x + 2)(x² + 1).<br>
-          Real zeros: <strong>x = 2, x = −2</strong> (both mult 1, cross).  x² + 1 → NO real zero.<br>
-          Complex zeros: <strong>x = i, x = −i</strong></li>
-      </ul>
-
-      <h3>Questions to ask (circulating)</h3>
-      <ul>
-        <li>"What's the real zero from the graph?"</li>
-        <li>"What's the quotient after dividing?"</li>
-        <li>"Is the discriminant negative?  What does that tell you?"</li>
-        <li>"Does the total zero count match the degree?"</li>
-      </ul>
-
-      <div class="callout warn">
-        <strong>Try It 3b gotcha:</strong> degree 4 → students may try synthetic division first.  Redirect: "Can you factor this as a quadratic in x²?"  (u-substitution, not synthetic division.)
-      </div>
-
-      <div class="callout">
-        <strong>Fast-finisher:</strong> verify the conjugate-pair rule held — if a + bi is a zero, is a − bi also on your list?
-      </div>
-    `,
-    transition: `"Packet flip. Storage box next. Read the rule card on the page."`
-  },
-
-  {
-    title: "Explore — Savvas Practice #27 Storage Box",
+    title: "Explore \u2014 Venetta Deli (Savvas Practice #30)",
     framework: "Explore",
     dok: "DOK 3",
-    duration: 15 * 60,
+    duration: 26 * 60,
     substeps: [
-      {label: "Independent think — read problem + rules (Steps 1-2)", sec: 180},
-      {label: "Partner build — Steps 3-4 (dimension map + cubic)", sec: 420},
-      {label: "Circulate + hint-card for stuck pairs", sec: 240},
-      {label: "Class share — one pair walks through Steps 1-4", sec: 60},
+      {label: "Read + Part A: factor and sketch graph", sec: 360},
+      {label: "Part B: find break-even year(s)", sec: 240},
+      {label: "Part C: interpret negative-profit interval", sec: 240},
+      {label: "Part D: find profitable year range", sec: 360},
+      {label: "Final justification write-up", sec: 120},
+      {label: "Circulation buffer — check stuck pairs, prompt only (4 min)", sec: 240},
     ],
     instructions: `
-      <h3>Savvas Practice #27 — Storage Box Volume (DOK 3)</h3>
-      <p>Rectangular storage box: height is less than BOTH length and width.</p>
-      <p>Volume: <strong>f(x) = x³ + 2x² − 3x</strong>, where x is the width (in feet).</p>
-      <p><strong>All three rules are printed on the student page:</strong></p>
-      <ul>
-        <li>Rule 1: V = length × width × height</li>
-        <li>Rule 2: each factor of f(x) represents one dimension</li>
-        <li>Rule 3: height must be the SMALLEST of the three factors</li>
-      </ul>
+      <h3>Savvas Practice #30 &mdash; Venetta Performance Task &nbsp; <em>[bank: 3-5-savvas-q30, DOK 3]</em></h3>
+      <p>P(t) = t&#179; + t&#178; &minus; 6t &nbsp;&nbsp; (profit in hundreds of $, t years since 2000)</p>
 
       <div class="callout answer">
-        <strong>Answer key — full working:</strong><br>
-        (a) Factored form: f(x) = x(x² + 2x − 3) = <strong>x(x + 3)(x − 1)</strong><br>
-        (b) Zeros: <strong>x = 0, x = −3, x = 1</strong><br>
-        (c) x = WIDTH (given). Compare (x + 3) vs (x − 1): at x = 2, (x − 1) = 1 &lt; (x + 3) = 5.
-        So <strong>(x − 1) = HEIGHT</strong> (smaller), <strong>(x + 3) = LENGTH</strong>.<br>
-        (d) Set f(x) = 10: x³ + 2x² − 3x − 10 = 0.  Test x = 2: 8 + 8 − 6 − 10 = 0. ✓<br>
-        Width = <strong>2 ft</strong>, Height = <strong>1 ft</strong>, Length = <strong>5 ft</strong>.  Verify: 2 × 1 × 5 = 10 ✓
+        <strong>Full answer key:</strong><br>
+        <strong>Factor:</strong> P(t) = t(t&#178; + t &minus; 6) = t(t + 3)(t &minus; 2).<br>
+        <strong>Zeros:</strong> t = 0, t = &minus;3, t = 2.<br>
+        <strong>Part A (graph):</strong> Cubic, positive leading coefficient (down-left, up-right).
+        Crosses at t = &minus;3, t = 0, t = 2. For t &ge; 0: starts at origin, dips below in (0,&thinsp;2), crosses at t = 2, climbs.<br>
+        <strong>Part B (break-even):</strong> t &ge; 0 zeros are t = 0 (year 2000) and t = 2 (year 2002).
+        t = &minus;3 is discarded (before franchise opened).<br>
+        <strong>Part C (negative P):</strong> P(t) &lt; 0 on (0,&thinsp;2). Franchises lost money during first two years (2000&ndash;2002).<br>
+        <strong>Part D (profitable):</strong> P(t) &gt; 0 for t &gt; 2. Profitable from year 2002 onward.
       </div>
 
+      <h3>Hint card (reveal only after 8+ min of genuine stuck)</h3>
       <div class="callout warn">
-        <strong>Watch for extraneous roots:</strong> x = 0 and x = −3 give zero or negative width — not physical.  Only x = 1 or larger positive values make sense for the width.  Do NOT let students claim x = −3 or x = 0 as the answer.
+        "Factor first. List all three zeros. Which zeros have t &ge; 0?
+        Now plug in t = 1 &mdash; is P positive or negative?"<br>
+        After hint: require written justification to preserve DOK 3.
       </div>
 
-      <div class="callout script">
-        <strong>Stuck-pair hint card (release after 10 min):</strong>
-        "Factor first. Then list zeros. Which of (x + 3) and (x − 1) gives the SMALLER dimension when x = 2?"
-        This preserves DOK 3 by requiring the justification, not just the arithmetic.
-      </div>
-
-      <h3>Questions to ask (prompt-only — never deliver)</h3>
+      <h3>Questions to ask &mdash; NEVER deliver the answer</h3>
       <ul>
-        <li>"What's the factored form?"</li>
-        <li>"What are the zeros of f?"</li>
-        <li>"Which factor is smaller — (x + 3) or (x − 1) — at the width you're testing?"</li>
-        <li>"Verify: does length × width × height equal 10?"</li>
+        <li>"What does P(t) = 0 mean in the context of the franchise?"</li>
+        <li>"Can the franchise lose money before it opens? Which zeros are meaningful?"</li>
+        <li>"What sign does P have between t = 0 and t = 2? How do you know?"</li>
+        <li>"What does 'profitable' mean in terms of the sign of P?"</li>
       </ul>
 
-      <h3>Why this is DOK 3</h3>
+      <div class="callout script">
+        <strong>Teacher circulation pattern (solo, ~10 students, 5 pairs):</strong><br>
+        Four laps of the room. 2&ndash;3 min per lap. Read their work, ask ONE question, move on.<br>
+        Resist the urge to re-explain. Let pairs build on each other.
+      </div>
+
       <div class="callout">
-        Students coordinate four sub-problems where each answer depends on the previous one.
-        Mapping algebraic factors to physical dimensions via the "height is smaller" constraint is not a memorized step.
-        The cubic equation (set f(x) = 10) requires strategic reasoning (test integer values), not a formula.
+        <strong>Release valve:</strong> If time is tight, skip Part D written justification.
+        Preserve Parts A&ndash;C in-class.
       </div>
     `,
-    transition: `"Pencils up. Synthesis + self-rating. 3 minutes."`
+    transition: `"Pencils up. Synthesis + self-rating. 4 minutes."`
   },
 
   {
-    title: "Share / Summary — synthesis + self-rating",
+    title: "Share / Summary",
     framework: "Share/Summary",
     dok: "DOK 2",
-    duration: 3 * 60,
+    duration: 4 * 60,
     substeps: [
-      {label: "Essential Question callback", sec: 30},
-      {label: "Language Objective check — call on 1-2", sec: 30},
+      {label: "Cold-call Pair 1: describe the sign chart", sec: 60},
+      {label: "Cold-call Pair 2: justify profitable interval", sec: 60},
       {label: "Self-rating circle (scan as they write)", sec: 60},
-      {label: "Preview Day 6 (polynomial inequalities)", sec: 30},
-      {label: "Transition to Exit", sec: 30},
+      {label: "Preview Day 8 + transition", sec: 60},
     ],
     instructions: `
-      <h3>Teacher script (3 min flat)</h3>
+      <h3>Teacher script (4 min flat)</h3>
       <ol>
-        <li><strong>Essential Question</strong> callback: "How do synthetic division and the quadratic formula let us find EVERY zero of a polynomial?"</li>
-        <li><strong>Language Objective check:</strong> "Who used <em>'the zero at x = ___ represents ___ in the context'</em>?"  Call on 1-2 students.</li>
-        <li>Self-rating circle on packet (60s).  Scan yourself as packets tilt up.</li>
-        <li>Preview Day 6 (30s): "Tomorrow — polynomial inequalities: where is the graph above or below the x-axis?"</li>
-        <li>Transition (30s): "Exit ticket.  Savvas Practice #17.  5 minutes."</li>
+        <li><strong>Cold-call Pair 1</strong> (60s): "Can you walk me through the sign chart for P(t)?"</li>
+        <li><strong>Cold-call Pair 2</strong> (60s): "Can you justify why P(t) is positive for t &gt; 2?"</li>
+        <li>Self-rating circle (60s): "Circle &check; / partly / not yet for each criterion. I'll scan."</li>
+        <li>Preview + transition (60s): "Tomorrow &mdash; quiz and stations. Review zeros, multiplicity, sign charts. Exit ticket &mdash; 5 minutes."</li>
       </ol>
 
-      <h3>Question to ask</h3>
-      <p>"Which Criterion did you rate <em>partly</em>?  What's the blocker?"  (2 students max; feeds into Day 6 warm-up)</p>
+      <div class="callout script">
+        Cold-call phrasing (low-stakes): "[Name], can you describe the sign chart?"<br>
+        &rarr; sincere "thanks" &rarr; "anyone want to add to that?"
+      </div>
 
-      <div class="callout">
-        <strong>Self-check criteria (student-facing):</strong>
-        <ol>
-          <li>I can find every zero of a polynomial (real AND complex).</li>
-          <li>I can use synthetic division to reduce a cubic to a quadratic.</li>
-          <li>I can interpret factors as physical dimensions in a model.</li>
-        </ol>
+      <div class="callout answer">
+        <strong>Expected sign-chart answer:</strong><br>
+        Zeros at t = 0 and t = 2 (for t &ge; 0). Test t = 1: P(1) = 1 + 1 &minus; 6 = &minus;4 &lt; 0.
+        Test t = 3: P(3) = 27 + 9 &minus; 18 = 18 &gt; 0. Negative on (0,&thinsp;2); positive for t &gt; 2.
       </div>
     `,
     transition: `"Pencils up. Exit ticket. 5 minutes."`
   },
 
   {
-    title: "Exit Ticket — Savvas Practice #17",
+    title: "Exit Ticket \u2014 Synthesis Recap",
     framework: "Exit Ticket",
-    dok: "DOK 2",
+    dok: "DOK 1\u20132",
     duration: 5 * 60,
     instructions: `
       <h3>Student task</h3>
-      <p><strong>Savvas Practice #17:</strong> Find all real and complex zeros of <strong>f(x) = x³ − x² − 4x − 6</strong>.  Then verify: does your total zero count match the degree?</p>
+      <p>Fill-in-the-blank recap + one "biggest thing I learned" sentence. No new problem-solving.</p>
 
       <div class="callout">
-        <strong>Desmos policy:</strong> students may use Desmos to locate the real zero.  All algebraic work (synthetic division, quadratic formula) must be shown on paper.
+        <strong>Fill-in answers (for scanning):</strong>
+        <ol>
+          <li>"crosses" (odd mult) / "tangent" (even mult)</li>
+          <li>"conjugate"</li>
+          <li>"positive" / "negative"</li>
+          <li>t &gt; 2 (year 2002 onward); sign chart confirms positive for t &gt; 2.</li>
+        </ol>
+        <em>Scan "biggest thing" sentences tonight. Students who wrote only "we did the deli problem" (no vocabulary) &rarr; target for Day 8 warm-up.</em>
       </div>
 
-      <div class="callout answer">
-        <strong>Answer key:</strong><br>
-        Graph shows one real crossing.  Test x = 3: 27 − 9 − 12 − 6 = 0. ✓  Real zero: <strong>x = 3</strong>.<br>
-        Synthetic division by (x − 3): quotient = <strong>x² + 2x + 2</strong><br>
-        Quadratic formula: x = (−2 ± √(4 − 8)) / 2 = (−2 ± √(−4)) / 2 = (−2 ± 2i) / 2<br>
-        Complex zeros: <strong>x = −1 + i</strong> and <strong>x = −1 − i</strong>  (conjugate pair ✓)<br>
-        Degree check: 3 zeros for degree 3. ✓
-      </div>
-
-      <h3>Teacher moves during write time</h3>
+      <h3>Teacher moves</h3>
       <ul>
-        <li>No questions asked.  Collect silently at the door.</li>
-        <li>As papers come up: "Did your total count match the degree?"</li>
-        <li>Skim degree-check answers that evening.  Students who didn't verify the conjugate-pair rule → target in Day 6 warm-up diagnostic.</li>
+        <li>Silent write time. No hints.</li>
+        <li>Collect at door.</li>
+        <li>At door: "Biggest thing &mdash; one word. Go."</li>
+        <li>Scan criterion-3 self-ratings for Day 8 station assignments.</li>
       </ul>
+
+      <div class="callout warn">
+        <strong>Summary recap only &mdash; NOT a CER.</strong>
+        Walk-out task documents what was learned. Generative work already happened during Venetta.
+      </div>
     `,
-    transition: `"Packets to the front. Pack up. See you next class."`
+    transition: `"Packets to the front. Pack up. See you at Day 8."`
   },
 ];
 
@@ -726,8 +677,8 @@ function setMode(m) {
     f.classList.toggle("on", m === "fishing");
     r.classList.toggle("on", m === "racing");
     note.textContent = m === "fishing"
-      ? "First time this week — Fishing Frenzy keeps energy playful."
-      : "Repeat day — Racing is more rigorous; use when students need the faster pace.";
+      ? "First time this week \u2014 Fishing Frenzy keeps energy playful."
+      : "Repeat day \u2014 Racing is more rigorous; use when students need the faster pace.";
   }
 }
 window.setMode = setMode;
@@ -797,11 +748,11 @@ function renderSubsteps() {
 
 function renderPhase() {
   const p = PHASES[state.idx];
-  $("phase-meta").textContent = `Phase ${state.idx + 1} of ${PHASES.length}  ·  Algebra 2  ·  Lesson 3-5  ·  Combined Day 4-5 (Savvas-only)`;
+  $("phase-meta").textContent = `Phase ${state.idx + 1} of ${PHASES.length}  \u00b7  Algebra 2  \u00b7  Lesson 3-5  \u00b7  Combined Day 7 (Savvas-only)`;
   $("phase-title").innerHTML =
     `${p.title}<span class="badge-row">` +
     `<span class="badge framework">${p.framework}</span>` +
-    (p.dok === "—" ? `` : `<span class="badge">${p.dok}</span>`) +
+    (p.dok === "\u2014" ? `` : `<span class="badge">${p.dok}</span>`) +
     `<span class="badge" style="background:#555">${Math.round(p.duration/60)} min</span>` +
     `</span>`;
   $("instructions").innerHTML = p.instructions;
@@ -830,7 +781,7 @@ function update() {
   renderSubsteps();
 
   $("btn-prev").disabled = state.idx === 0;
-  $("btn-play").textContent = state.running ? "⏸ Pause" : (state.remaining === PHASES[state.idx].duration ? "▶ Start" : "▶ Resume");
+  $("btn-play").textContent = state.running ? "\u23F8 Pause" : (state.remaining === PHASES[state.idx].duration ? "\u25B6 Start" : "\u25B6 Resume");
   $("status-line").textContent = state.running ? "Running" : (state.remaining === 0 ? "Phase complete" : "Paused");
 }
 

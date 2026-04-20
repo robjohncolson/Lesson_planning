@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day 8 Pacer — Lesson Quiz + Stations (Savvas)</title>
+<style>
+  :root {
+    --hue: 210;
+    --bg: hsl(var(--hue), 62%, 92%);
+    --bg-deep: hsl(var(--hue), 70%, 82%);
+    --accent: hsl(var(--hue), 72%, 32%);
+    --navy: #0B3C6C;
+    --teal: #0097A7;
+    --warmred: #C0392B;
+    --text: #112233;
+    --muted: #556677;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
+    background: linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 100%);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 800ms linear;
+  }
+  header { padding: 0.8rem 2rem 0.3rem; }
+  .phase-meta {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+  .phase-title {
+    font-size: clamp(1.4rem, 3vw, 2.0rem);
+    font-weight: 700;
+    margin: 0.1rem 0 0.4rem;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .badge-row {
+    display: inline-flex;
+    gap: 0.35rem;
+    margin-left: 0.55rem;
+    vertical-align: middle;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: white;
+    white-space: nowrap;
+  }
+  .badge.framework { background: rgba(0, 0, 0, 0.72); }
+
+  .progress-wrap {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 2rem;
+    width: calc(100% - 4rem);
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 300ms linear;
+  }
+
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(280px, 36%) 1fr;
+    gap: 1rem;
+    padding: 1rem 2rem;
+  }
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+  }
+
+  .timer-card {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .timer-block {
+    text-align: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .timer {
+    font-size: clamp(4rem, 11vw, 8rem);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .timer-sub {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  /* 5-minute warning banner — shown only during Quiz phase */
+  .quiz-warning {
+    display: none;
+    padding: 0.55rem 0.9rem;
+    border-radius: 8px;
+    background: rgba(192, 57, 43, 0.12);
+    border: 2px solid var(--warmred);
+    color: var(--warmred);
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-align: center;
+    margin-top: 0.4rem;
+  }
+  .quiz-warning.show { display: block; }
+
+  .substep-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.95rem;
+  }
+  .substep {
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.35);
+    border-left: 4px solid transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.6rem;
+    transition: background 250ms, border-color 250ms;
+  }
+  .substep.done {
+    opacity: 0.45;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+  .substep.current {
+    background: hsl(var(--hue), 80%, 92%);
+    border-left-color: var(--accent);
+    font-weight: 600;
+  }
+  .substep-text { flex: 1; }
+  .substep-time {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  .substep.current .substep-time { opacity: 1; color: var(--accent); font-weight: 700; }
+
+  .content-card {
+    background: white;
+    border-radius: 18px;
+    padding: 1.2rem 1.4rem;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-height: calc(100vh - 230px);
+    overflow-y: auto;
+  }
+  .content-card h3 {
+    margin: 0.6rem 0 0.2rem;
+    font-size: 0.95rem;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .content-card h3:first-child { margin-top: 0; }
+  .content-card p, .content-card li { line-height: 1.45; font-size: 0.95rem; }
+  .content-card p { margin: 0.3rem 0; }
+  .content-card ul, .content-card ol { margin: 0.2rem 0 0.4rem 1.2rem; padding: 0; }
+
+  .callout {
+    padding: 0.6rem 0.9rem;
+    border-radius: 8px;
+    background: rgba(0, 150, 167, 0.08);
+    border-left: 4px solid var(--teal);
+    font-size: 0.9rem;
+  }
+  .callout.warn {
+    background: rgba(192, 57, 43, 0.08);
+    border-left-color: var(--warmred);
+  }
+  .callout.script {
+    background: rgba(11, 60, 108, 0.06);
+    border-left-color: var(--navy);
+  }
+  .callout.answer {
+    background: rgba(34, 139, 34, 0.08);
+    border-left-color: #2E7D32;
+  }
+  .callout strong { color: var(--navy); }
+
+  .transition {
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.04);
+    border-left: 5px solid rgba(0, 0, 0, 0.25);
+    opacity: 0.55;
+    font-size: 0.95rem;
+    transition: opacity 400ms, background 400ms, border-color 400ms;
+    margin-top: 0.6rem;
+  }
+  .transition.active {
+    opacity: 1;
+    background: hsl(var(--hue), 80%, 95%);
+    border-left-color: var(--accent);
+  }
+  .transition-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  footer {
+    padding: 0.6rem 2rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.35);
+  }
+  button.ctrl {
+    padding: 0.55rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+    transition: transform 120ms, filter 120ms;
+  }
+  button.ctrl.secondary {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--text);
+  }
+  button.ctrl:hover { filter: brightness(1.08); }
+  button.ctrl:active { transform: translateY(1px); }
+  .kbd {
+    text-align: center;
+    font-size: 0.72rem;
+    opacity: 0.55;
+    padding: 0 1rem 0.6rem;
+  }
+  .dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.2rem 0;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.18);
+  }
+  .dot.done { background: var(--accent); opacity: 0.45; }
+  .dot.current { background: var(--accent); box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+
+  /* QR overlay */
+  .qr-overlay {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 5px 5px 3px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+    text-align: center;
+  }
+  .qr-overlay img { display: block; width: 72px; height: 72px; }
+  .qr-overlay .qr-label {
+    font-size: 0.58rem;
+    color: #334;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 900px) { .qr-overlay { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="phase-meta" id="phase-meta">Phase 1 of 5 · Algebra 2 · Lesson 3-5 · Day 8 (Savvas-only)</div>
+  <h1 class="phase-title" id="phase-title">— </h1>
+  <div class="dots" id="dots"></div>
+</header>
+<div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+
+<main>
+  <section class="timer-card">
+    <div class="timer-block">
+      <div class="timer-sub">Phase remaining</div>
+      <div class="timer" id="timer">0:00</div>
+      <div class="timer-sub" id="status-line">Press Start or Space</div>
+    </div>
+    <div id="quiz-warning" class="quiz-warning">⚠ 5 minutes remaining on quiz</div>
+    <div class="substep-list" id="substep-list"></div>
+  </section>
+  <section class="content-card" id="content-card">
+    <div id="instructions"></div>
+    <div class="transition" id="transition">
+      <span class="transition-label">Transition cue (activates in last 60s)</span>
+      <span id="transition-text"></span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <button id="btn-prev" class="ctrl secondary">◀ Prev</button>
+  <button id="btn-play" class="ctrl">▶ Start</button>
+  <button id="btn-next" class="ctrl secondary">Next ▶</button>
+  <button id="btn-reset" class="ctrl secondary">↻ Reset phase</button>
+  <button id="btn-restart-all" class="ctrl secondary">↺ Restart all</button>
+</footer>
+<div class="kbd">Space: play/pause  ·  ← →: prev/next phase  ·  R: reset current phase  ·  Total: 55 min · <strong>No Blooket today — quiet quiz environment</strong></div>
+
+<div class="qr-overlay" title="Scan to open this pacer on your phone">
+  <img src="qr_day8_pacer.svg" alt="QR code for Day 8 Pacer">
+  <div class="qr-label">Scan</div>
+</div>
+
+<script>
+// ----------------------------------------------------------------------
+// Phase definitions — Day 8 (Quiz + Stations). No Blooket.
+// Teacher runs the full 55-min lesson from this pacer alone.
+// Answer keys for quiz items are in .callout.answer blocks (teacher only).
+// ----------------------------------------------------------------------
+const PHASES = [
+  {
+    title: "Do Now — Vocabulary Warm-Up",
+    framework: "Do Now A",
+    dok: "DOK 1",
+    duration: 5 * 60,
+    substeps: [
+      {label: "Hand out sheets, students start silently", sec: 30},
+      {label: "Students complete vocabulary fill-in (q28)", sec: 210},
+      {label: "Students review notes quietly", sec: 60},
+    ],
+    instructions: `
+      <h3>Student task</h3>
+      <p><strong>Savvas Practice (bank: 3-5-savvas-q28)</strong> — vocabulary fill-in.<br>
+      "Complete each statement so it means the same as '4 is a zero of the function':<br>
+      (1) The graph of the function crosses the ___ at 4.<br>
+      (2) The expression (x − 4) is a ___ of the polynomial."</p>
+
+      <div class="callout answer">
+        <strong>Answer key:</strong><br>
+        (1) <strong>x-axis</strong> &nbsp;&nbsp; (2) <strong>factor</strong><br>
+        Bridge: '4 is a zero' ⟺ f(4) = 0 ⟺ graph at x = 4 ⟺ (x − 4) is a factor.
+      </div>
+
+      <h3>Teacher moves (silent)</h3>
+      <ul>
+        <li>Hand out Do Now sheets at the door.</li>
+        <li>Walk one lap. Scan for completion.</li>
+        <li>Collect sheets before distributing the quiz.</li>
+      </ul>
+
+      <div class="callout warn"><strong>DOK 1 · 5 min · Silent · Pencil only · No Desmos</strong></div>
+    `,
+    transition: `"Pencils down. Pass your Do Now to the front. I'm handing out the quiz now."`
+  },
+
+  {
+    title: "Quiz — Savvas Lesson Quiz (Q1a–Q5)",
+    framework: "Assessment",
+    dok: "DOK 1–2",
+    duration: 25 * 60,
+    isQuiz: true,  // triggers the 5-min warning banner
+    substeps: [
+      {label: "Distribute quiz, students start", sec: 60},
+      {label: "Lap 1 — silent circulation", sec: 360},
+      {label: "Lap 2 — silent circulation", sec: 360},
+      {label: "Lap 3 — silent circulation", sec: 360},
+      {label: "Lap 4 — final silent check", sec: 360},
+    ],
+    instructions: `
+      <h3>Quiz items (Savvas Lesson 3-5 Lesson Quiz)</h3>
+      <ol>
+        <li><strong>Q1a.</strong> What are all the zeros of f(x) = x³ + 2x² − 3x?<br>
+          <em>Prompts: "Factor completely. What makes each factor = 0?"</em></li>
+        <li><strong>Q1b.</strong> Use the zeros of f(x) = x³ + 2x² − 3x to sketch the graph of f.<br>
+          <em>Sketch space on quiz. Desmos NOT allowed.</em></li>
+        <li><strong>Q2.</strong> What x-values solve x³ + 5x² − x − 7 = x² + 6x + 3?<br>
+          <em>"Move everything to one side first."</em></li>
+        <li><strong>Q3.</strong> What values solve the inequality x³ − 4x > 0?<br>
+          <em>"Factor, find zeros, build a sign chart."</em></li>
+        <li><strong>Q4.</strong> (MC) Zeros + multiplicities for y = x³ + 3x² + x + 3 from graph.</li>
+        <li><strong>Q5.</strong> (MC) Zeros + behavior for f(x) = −x³ − 2x² + 7x − 4.</li>
+      </ol>
+
+      <div class="callout warn">
+        <strong>Proctor rules:</strong> No questions answered during quiz.
+        Circulate silently — write encouraging non-answer notes on the roster (e.g., "nice setup on Q2").
+        Hard stop at 25 min.
+      </div>
+
+      <div class="callout answer">
+        <strong>Answer key — Q1a:</strong> Factor: x(x + 3)(x − 1). Zeros: x = −3, 0, 1 (all multiplicity 1).
+      </div>
+      <div class="callout answer">
+        <strong>Answer key — Q1b:</strong> Cubic, positive leading. Zeros at −3, 0, 1. All cross (mult 1).
+        Left end → −∞, right end → +∞.
+      </div>
+      <div class="callout answer">
+        <strong>Answer key — Q2:</strong> Move all terms left: x³ + 4x² − 7x − 10 = 0.
+        Test x = −1: 0 ✓. Synthetic division → (x + 1)(x + 5)(x − 2). Zeros: x = −5, −1, 2.
+      </div>
+      <div class="callout answer">
+        <strong>Answer key — Q3:</strong> Factor: x(x − 2)(x + 2) > 0. Zeros: −2, 0, 2.
+        Sign chart: positive on (−2, 0) and (2, ∞). Solution: <strong>−2 &lt; x &lt; 0 OR x &gt; 2</strong>.
+      </div>
+      <div class="callout answer">
+        <strong>Answer key — Q4 (MC):</strong> <strong>B</strong> — "−3, multiplicity 1."
+        Factor by grouping: (x + 3)(x² + 1). Real zero at x = −3, mult 1 only.
+      </div>
+      <div class="callout answer">
+        <strong>Answer key — Q5 (MC):</strong> <strong>D</strong> — "−4, 1; tangent at 1."
+        f(x) = −(x + 4)(x − 1)². Zeros: x = −4 (mult 1, crosses), x = 1 (mult 2, tangent).
+      </div>
+    `,
+    transition: `"Pencils down. Hand your quiz to the front. Open your student packet to the stations page."`
+  },
+
+  {
+    title: "Transition — Hand In Quiz + Station Setup",
+    framework: "Transition",
+    dok: "—",
+    duration: 2 * 60,
+    substeps: [
+      {label: "Collect quizzes", sec: 30},
+      {label: "Explain stations + self-rating", sec: 60},
+      {label: "Students open packet, circle station", sec: 30},
+    ],
+    instructions: `
+      <h3>Teacher script (~2 min)</h3>
+      <ol>
+        <li>Collect quizzes (30 sec).</li>
+        <li>Explain: <em>"Rate yourself 1, 2, or 3 on how the quiz felt. 1 = needed more help, 3 = felt confident."</em></li>
+        <li><em>"Open the student packet to the stations page. Circle the 1 or 2 stations you'll do. You choose — I'm not assigning them."</em></li>
+        <li>Start the stations timer.</li>
+      </ol>
+
+      <div class="callout script">
+        <strong>Station overview (say this aloud):</strong><br>
+        <ul>
+          <li><strong>Support</strong> — factoring + multiplicity scaffold. Good if Q1–Q3 felt shaky.</li>
+          <li><strong>Core</strong> — sign chart + complex zeros. Good if you got through the quiz but want more practice.</li>
+          <li><strong>Extend</strong> — synthesis inequality (DOK 1, hardest). Only if you felt confident on everything.</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <strong>Student autonomy:</strong> This is student choice, not assignment. Evaluators prefer this.
+        If a student clearly needs Support but picks Extend, walk over quietly after 2 min.
+      </div>
+    `,
+    transition: `"Stations are open. 18 minutes. Go."`
+  },
+
+  {
+    title: "Stations — Differentiated Practice",
+    framework: "Stations",
+    dok: "DOK 2",
+    duration: 18 * 60,
+    substeps: [
+      {label: "Segment 1 — circulate to Support station", sec: 360},
+      {label: "Segment 2 — circulate to Core station", sec: 360},
+      {label: "Segment 3 — check Extend; photo evidence", sec: 360},
+    ],
+    instructions: `
+      <h3>Three stations — student choice</h3>
+
+      <h3>Support station (DOK 1) — Re-teach scaffold</h3>
+      <div class="callout">
+        <strong>Items: 3-5-savvas-q14 + 3-5-blooket-day3-multiplicity-q1</strong><br>
+        (A) f(x) = x³ − 8x² + 16x. Factor: x(x − 4)². Zeros 0 (crosses) and 4 (tangent).<br>
+        (B) Multiplicity of x = 4 in f(x) = (x − 4)²(x + 1)?
+      </div>
+      <div class="callout answer">
+        <strong>Answer key — Support (A):</strong> Zeros: x = 0 (mult 1, crosses), x = 4 (mult 2, tangent).<br>
+        <strong>Answer key — Support (B):</strong> Multiplicity = 2.
+      </div>
+
+      <h3>Core station (DOK 1) — Sign chart + complex zeros</h3>
+      <div class="callout">
+        <strong>Items: 3-5-savvas-q17 + 3-5-savvas-q22</strong><br>
+        (A) f(x) = x³ − x² − 4x − 6. Real and complex zeros.<br>
+        (B) Inequality: x³ − 9x > 0. Solution set.
+      </div>
+      <div class="callout answer">
+        <strong>Answer key — Core (A):</strong> x = 3 (real, from graph). Synthetic ÷ by (x − 3) → x² + 2x + 2.
+        Discriminant = 4 − 8 = −4 &lt; 0. Complex zeros: x = −1 ± i.<br>
+        <strong>Answer key — Core (B):</strong> Factor x(x − 3)(x + 3) > 0. Zeros: −3, 0, 3.
+        Solution: −3 &lt; x &lt; 0 OR x &gt; 3.
+      </div>
+
+      <h3>Extend station (DOK 1, synthesis) — Hardest inequality</h3>
+      <div class="callout">
+        <strong>Item: 3-5-savvas-q24</strong> (Savvas Practice #24 — synthesis DOK-1)<br>
+        What are the solutions of the inequality 64x² > −4x³ − x − 16?<br>
+        Key move: move all terms to one side, then factor by grouping and recognize 4x²+1 &gt; 0 always.
+      </div>
+      <div class="callout answer">
+        <strong>Answer key — Extend:</strong>
+        Rearrange: 4x³ + 64x² + x + 16 &gt; 0.<br>
+        Factor by grouping: (x + 16)(4x² + 1) &gt; 0.<br>
+        Since 4x² + 1 &gt; 0 for all real x, the inequality reduces to x + 16 &gt; 0.<br>
+        <strong>Solution: x &gt; −16.</strong>
+      </div>
+
+      <h3>Questions to ask (NEVER give answers)</h3>
+      <ul>
+        <li>Support: "Which factor tells you the behavior at this zero?"</li>
+        <li>Core: "Where are the zeros? What is the sign of f in each interval?"</li>
+        <li>Extend: "After you move everything to one side, what factor is always positive?"</li>
+      </ul>
+    `,
+    transition: `"Stations close. Exit ticket on the student packet. 5 minutes."`
+  },
+
+  {
+    title: "Exit — Summary Recap",
+    framework: "Exit Ticket",
+    dok: "DOK 1–2",
+    duration: 5 * 60,
+    instructions: `
+      <h3>Student task</h3>
+      <p>Fill in the summary blanks on the student packet. No notes, no Desmos.
+      Then write ONE sentence: "My biggest takeaway from Lesson 3-5 is…"</p>
+
+      <div class="callout warn">
+        <strong>NOT a CER.</strong> This is a summary recap — fill-in vocabulary + one free-form takeaway sentence.
+      </div>
+
+      <div class="callout answer">
+        <strong>Answer key — blanks:</strong><br>
+        1. f(x) = <strong>0</strong>.  Graph <strong>crosses</strong> or is <strong>tangent to</strong> the x-axis.<br>
+        2. EVEN multiplicity → graph is <strong>tangent</strong> to the x-axis (turning point).<br>
+        3. Find the <strong>zeros</strong>; build a <strong>sign</strong> chart.<br>
+        4. Open response — any accurate statement about zeros, multiplicity, or inequalities.
+      </div>
+
+      <h3>Teacher moves</h3>
+      <ul>
+        <li>Silent during write time.</li>
+        <li>Collect student packets as students leave.</li>
+        <li>Optional closing: "Biggest thing you learned? Say it in one breath." (after time is up.)</li>
+      </ul>
+    `,
+    transition: `"Packets to the front. Pack up. Lesson 3-5 done."`
+  },
+];
+
+const TRANSITION_WINDOW = 60;
+// Quiz 5-minute warning fires when a phase has isQuiz=true and remaining ≤ 300s
+const QUIZ_WARNING_SEC = 5 * 60;
+
+const $ = id => document.getElementById(id);
+const state = {
+  idx: 0,
+  remaining: PHASES[0].duration,
+  running: false,
+  lastTick: null,
+  rafId: null,
+};
+
+function fmt(s) {
+  s = Math.max(0, Math.round(s));
+  const m = Math.floor(s / 60);
+  const ss = s % 60;
+  return `${m}:${ss.toString().padStart(2, '0')}`;
+}
+
+function hueForRemaining(remaining, duration) {
+  const frac = Math.max(0, Math.min(1, remaining / duration));
+  return Math.round(210 * frac);
+}
+
+function renderDots() {
+  const dots = $("dots");
+  dots.innerHTML = "";
+  for (let i = 0; i < PHASES.length; i++) {
+    const d = document.createElement("div");
+    d.className = "dot" + (i < state.idx ? " done" : i === state.idx ? " current" : "");
+    dots.appendChild(d);
+  }
+}
+
+function currentSubstep(phase, remaining) {
+  if (!phase.substeps || !phase.substeps.length) return null;
+  const elapsed = phase.duration - remaining;
+  let acc = 0;
+  for (let i = 0; i < phase.substeps.length; i++) {
+    acc += phase.substeps[i].sec;
+    if (elapsed < acc) {
+      return {index: i, remainingInStep: acc - elapsed};
+    }
+  }
+  return {index: phase.substeps.length - 1, remainingInStep: 0};
+}
+
+function renderSubsteps() {
+  const p = PHASES[state.idx];
+  const list = $("substep-list");
+  list.innerHTML = "";
+  if (!p.substeps) return;
+  const cur = currentSubstep(p, state.remaining);
+  p.substeps.forEach((s, i) => {
+    const div = document.createElement("div");
+    let cls = "substep";
+    if (cur && i < cur.index) cls += " done";
+    else if (cur && i === cur.index) cls += " current";
+    div.className = cls;
+    const text = document.createElement("div");
+    text.className = "substep-text";
+    text.textContent = s.label;
+    const time = document.createElement("div");
+    time.className = "substep-time";
+    if (cur && i === cur.index) {
+      time.textContent = fmt(cur.remainingInStep);
+    } else {
+      time.textContent = fmt(s.sec);
+    }
+    div.appendChild(text);
+    div.appendChild(time);
+    list.appendChild(div);
+  });
+}
+
+function renderPhase() {
+  const p = PHASES[state.idx];
+  $("phase-meta").textContent = `Phase ${state.idx + 1} of ${PHASES.length}  ·  Algebra 2  ·  Lesson 3-5  ·  Day 8 (Savvas-only)`;
+  $("phase-title").innerHTML =
+    `${p.title}<span class="badge-row">` +
+    `<span class="badge framework">${p.framework}</span>` +
+    (p.dok === "—" ? `` : `<span class="badge">${p.dok}</span>`) +
+    `<span class="badge" style="background:#555">${Math.round(p.duration/60)} min</span>` +
+    `</span>`;
+  $("instructions").innerHTML = p.instructions;
+  $("transition-text").textContent = p.transition || "";
+  renderDots();
+  update();
+}
+
+function update() {
+  const p = PHASES[state.idx];
+  const hue = hueForRemaining(state.remaining, p.duration);
+  document.documentElement.style.setProperty("--hue", hue);
+
+  const pct = 100 * (1 - state.remaining / p.duration);
+  $("progress-fill").style.width = pct.toFixed(1) + "%";
+  $("timer").textContent = fmt(state.remaining);
+
+  const transitionEl = $("transition");
+  if (state.remaining <= TRANSITION_WINDOW && state.remaining > 0) {
+    transitionEl.classList.add("active");
+  } else {
+    transitionEl.classList.remove("active");
+  }
+
+  // Quiz 5-minute warning
+  const warningEl = $("quiz-warning");
+  if (p.isQuiz && state.remaining <= QUIZ_WARNING_SEC && state.remaining > 0) {
+    warningEl.classList.add("show");
+  } else {
+    warningEl.classList.remove("show");
+  }
+
+  renderSubsteps();
+
+  $("btn-prev").disabled = state.idx === 0;
+  $("btn-play").textContent = state.running ? "⏸ Pause" : (state.remaining === PHASES[state.idx].duration ? "▶ Start" : "▶ Resume");
+  $("status-line").textContent = state.running ? "Running" : (state.remaining === 0 ? "Phase complete" : "Paused");
+}
+
+function tick(ts) {
+  if (!state.running) return;
+  if (state.lastTick === null) state.lastTick = ts;
+  const dt = (ts - state.lastTick) / 1000;
+  state.lastTick = ts;
+  state.remaining -= dt;
+  if (state.remaining <= 0) {
+    state.remaining = 0;
+    state.running = false;
+    update();
+    return;
+  }
+  update();
+  state.rafId = requestAnimationFrame(tick);
+}
+
+function play() {
+  if (state.remaining <= 0) return;
+  state.running = true;
+  state.lastTick = null;
+  cancelAnimationFrame(state.rafId);
+  state.rafId = requestAnimationFrame(tick);
+  update();
+}
+function pause() {
+  state.running = false;
+  cancelAnimationFrame(state.rafId);
+  update();
+}
+function toggle() { state.running ? pause() : play(); }
+
+function next() {
+  if (state.idx < PHASES.length - 1) {
+    state.idx++;
+    state.remaining = PHASES[state.idx].duration;
+    state.running = false;
+    cancelAnimationFrame(state.rafId);
+    renderPhase();
+  }
+}
+function prev() {
+  if (state.idx > 0) {
+    state.idx--;
+    state.remaining = PHASES[state.idx].duration;
+    state.running = false;
+    cancelAnimationFrame(state.rafId);
+    renderPhase();
+  }
+}
+function resetPhase() {
+  state.remaining = PHASES[state.idx].duration;
+  state.running = false;
+  cancelAnimationFrame(state.rafId);
+  update();
+}
+function restartAll() {
+  state.idx = 0;
+  state.remaining = PHASES[0].duration;
+  state.running = false;
+  cancelAnimationFrame(state.rafId);
+  renderPhase();
+}
+
+$("btn-play").addEventListener("click", toggle);
+$("btn-next").addEventListener("click", next);
+$("btn-prev").addEventListener("click", prev);
+$("btn-reset").addEventListener("click", resetPhase);
+$("btn-restart-all").addEventListener("click", restartAll);
+
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+  if (e.code === "Space") { e.preventDefault(); toggle(); }
+  else if (e.code === "ArrowRight") { e.preventDefault(); next(); }
+  else if (e.code === "ArrowLeft") { e.preventDefault(); prev(); }
+  else if (e.key === "r" || e.key === "R") { e.preventDefault(); resetPhase(); }
+});
+
+renderPhase();
+</script>
+</body>
+</html>
