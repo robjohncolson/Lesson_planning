@@ -1,0 +1,764 @@
+\documentclass[10pt]{article}
+
+% -- Page geometry --
+\usepackage[letterpaper, margin=0.5in, top=0.55in, bottom=0.5in]{geometry}
+
+% -- Core packages --
+\usepackage{amsmath, amssymb}
+\usepackage{array, tabularx, multirow, makecell}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+% -- Colors --
+\definecolor{tealheader}{HTML}{0097A7}
+\definecolor{lightgray}{HTML}{F2F2F2}
+\definecolor{warmred}{HTML}{C0392B}
+\definecolor{dayblue}{HTML}{2B5C8A}
+
+% -- Header / Footer --
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{\textsf{FULL NAME: \rule{2.5in}{0.4pt}}}
+\fancyhead[R]{\textsf{BLOCK: \rule{1in}{0.4pt}}}
+\fancyfoot[C]{\small\textsf{\thepage}}
+
+% -- Fonts --
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% -- Custom commands --
+\newcommand{\writespace}[1]{\vspace{#1}}
+\newcommand{\writelines}[1]{%
+  \par\vspace{4pt}%
+  \foreach \n in {1,...,#1}{\noindent\rule{\linewidth}{0.3pt}\vspace{8pt}\par}%
+}
+\newcommand{\gridpaper}[2]{%
+  \begin{tikzpicture}
+    \draw[step=0.25cm, gray!35, very thin] (0,0) grid (#1,#2);
+    \draw[step=1cm, gray!55, thin] (0,0) grid (#1,#2);
+  \end{tikzpicture}%
+}
+\newcommand{\blankline}{\rule{1.5in}{0.4pt}}
+\newcommand{\dayheading}[3]{%
+  \begin{tcolorbox}[enhanced, colback=dayblue, colframe=dayblue,
+    arc=0pt, left=8pt, right=8pt, top=5pt, bottom=5pt,
+    fontupper=\Large\bfseries\sffamily\color{white}]
+    Day #1 \;\textbar\; #2
+  \end{tcolorbox}
+  \vspace{1pt}
+  {\small\itshape #3}%
+}
+
+% -- Column types --
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+
+% -- tcolorbox styles --
+\newtcolorbox{activitybox}[1][]{%
+  enhanced, colback=white, colframe=black!40,
+  boxrule=0.5pt, arc=0pt, left=5pt, right=5pt,
+  top=3pt, bottom=3pt, #1
+}
+
+\newtcolorbox{generalizebox}{%
+  enhanced, colback=lightgray, colframe=lightgray,
+  boxrule=0pt, arc=0pt, left=6pt, right=6pt,
+  top=4pt, bottom=4pt,
+  borderline west={3pt}{0pt}{tealheader}
+}
+
+\newtcolorbox{cerbox}{%
+  enhanced, colback=white, colframe=warmred!70,
+  boxrule=0.8pt, arc=0pt, left=6pt, right=6pt,
+  top=4pt, bottom=4pt,
+  title={\sffamily\bfseries\color{warmred} CER (Exit Ticket)},
+  coltitle=warmred, colbacktitle=warmred!8,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=0pt, boxrule=0pt}
+}
+
+\newtcolorbox{sectionlabel}[1][]{%
+  enhanced, colback=tealheader!10, colframe=tealheader,
+  boxrule=0pt, arc=0pt, left=6pt, right=6pt,
+  top=2pt, bottom=2pt,
+  borderline west={3pt}{0pt}{tealheader},
+  #1
+}
+
+% -- Suppress paragraph indent --
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+% ===================================================================
+%   COVER / OBJECTIVES PAGE
+% ===================================================================
+
+\begin{center}
+  {\LARGE Algebra 2 Lesson: 3-5 Zeros of Polynomial Functions}
+
+  \vspace{2pt}
+  {\normalsize\textit{8-Day Student Packet}}
+\end{center}
+
+\vspace{-2pt}
+
+% -- Objectives Table --
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|>{\centering\arraybackslash}m{1.15in}|m{5.6in}|}
+\hline
+\textbf{Math Objective} &
+Identify the zeros of a function using factoring or synthetic division. Use zeros to graph a polynomial function. \\
+\hline
+\textbf{Language Objective} &
+Students will write what they think about a problem using ``Notice and Wonder''. \\
+\hline
+\textbf{Essential Understanding} &
+The zeros of a polynomial function can be determined using factoring or synthetic division. The zeros can be used to sketch its graph. \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{10pt}
+
+% ===================================================================
+%   DAY 1
+% ===================================================================
+
+\dayheading{1}{What Is a Zero?}{Complete on your laptop, in a notes app, or on blank paper. Record your final thinking here.}
+
+\vspace{4pt}
+
+\renewcommand{\arraystretch}{1}
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Notice \& Wonder &
+\textbf{Model \& Discuss (pg.\ 150b)}
+
+\textbf{Prompt A:} Charlie and Aiko launched a model rocket. It launched from the ground at $t = 0$ seconds and landed at $t = 5$ seconds. Charlie claims the equation is exactly $h(t) = at^2 + bt + c$.
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=0pt]
+  \item What do you notice about the launch and landing times?
+\end{itemize}
+
+\writespace{30pt}
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=0pt]
+  \item What do you wonder about the missing letters $a$, $b$, $c$?
+\end{itemize}
+
+\writespace{30pt}
+
+\textbf{Prompt B:} Look at the function $f(x) = x(x - 4)(x + 3)$. Predict the $x$-intercepts using the Zero Product Property.
+
+\writespace{30pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Explore &
+\textbf{Savvas Example 1 (pg.\ 150)}
+
+\begin{enumerate}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item Use Desmos to graph $f(x) = x(x - 4)(x + 3)$.
+  \item Record the exact zeros of the function.
+  \item Explain what a zero represents in the rocket situation vs.\ the pure math equation.
+  \item Sketch $f(x)$ and pick one ``test point'' in each interval to prove if the graph is above/below the $x$-axis.
+\end{enumerate}
+
+\writespace{10pt}
+\\
+\hline
+Discuss &
+How is a zero represented in an equation, on a graph, and in a context? Use both functions in your explanation.
+
+\writespace{30pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{cerbox}
+In Charlie and Aiko's rocket model, the zeros are $t = 0$ and $t = 5$. Charlie claims he can write the exact equation of the parabola with only that information. Do you agree or disagree? Explain why additional information (like a third point or initial speed) is mathematically required.
+
+\vspace{6pt}
+\textbf{Claim:} \blankline
+
+\vspace{4pt}
+\textbf{Evidence:} \blankline
+
+\vspace{4pt}
+\textbf{Reasoning:} \blankline
+
+\writespace{14pt}
+\end{cerbox}
+
+% ===================================================================
+%   DAY 2
+% ===================================================================
+\newpage
+
+\dayheading{2}{Graphing from Factored Form}{Use blank paper for sketches and Desmos for quick checks. Explain every graph using zeros and intervals.}
+
+\vspace{4pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Compare &
+\textbf{Savvas Example 1 (pg.\ 150)}
+
+Compare $f(x) = x(x - 4)(x + 3)$ and $g(x) = -x(x - 4)(x + 3)$.
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item What will stay the exact same when graphed?
+\end{itemize}
+
+\writespace{24pt}
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item What will change? How do you know before graphing?
+\end{itemize}
+
+\writespace{24pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Build the Graph &
+\textbf{Savvas Practice \#12 \& \#13 (pg.\ 156)}
+
+\begin{enumerate}[label=\Alph*., leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item Use Desmos to check your warm-up prediction.
+  \item On blank paper, sketch $f(x) = 3x^3 - 9x^2 - 12x$. \quad\textit{(Hint: factor out the GCF first!)}
+  \item Sketch $g(x) = x^3 - 8x^2 + 16x$. \quad(Practice \#13)
+\end{enumerate}
+
+\textit{For each function, list the zeros, choose a test point in each interval, and justify the rough shape.}
+
+\writespace{10pt}
+\\
+\hline
+Explain &
+Which is more useful when sketching: the zeros or the test points? Defend your answer with at least one example from today.
+
+\writespace{40pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{cerbox}
+\textbf{Reason:} If you use zeros to sketch the graph of a polynomial function, how can you verify that your graph is correct? \textit{(Savvas Practice \#6)}
+
+\vspace{6pt}
+\textbf{Claim:} \blankline
+
+\vspace{4pt}
+\textbf{Evidence:} \blankline
+
+\vspace{4pt}
+\textbf{Reasoning:} \blankline
+
+\writespace{14pt}
+\end{cerbox}
+
+% ===================================================================
+%   DAY 3
+% ===================================================================
+\newpage
+
+\dayheading{3}{Multiplicity}{Use Desmos to compare graphs and use words like cross, touch, turn, even, odd, and multiplicity.}
+
+\vspace{4pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Graph \& Compare &
+\textbf{Savvas Example 2 (pg.\ 151)}
+
+Graph $y = (x + 2)^2(x - 1)$ and $y = (x + 2)^3(x - 1)$ on Desmos.
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item What happens at the zero $x = -2$ in the first graph?
+\end{itemize}
+
+\writespace{20pt}
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item What happens at $x = -2$ in the second graph?
+\end{itemize}
+
+\writespace{20pt}
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item What do you predict the exponent (multiplicity) has to do with the behavior?
+\end{itemize}
+
+\writespace{20pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Create a Rule &
+\textbf{Savvas Try It 2b \& Practice \#15}
+
+1.\ For each function below, identify the zero(s), multiplicity, and graph behavior (Crosses or Touches):
+
+\quad a.\ $f(x) = (x^2 + 9)(x - 1)^5(x + 2)^2$
+
+\writespace{20pt}
+
+\quad b.\ $g(x) = x^3 - x^2 - 25x + 25$ \quad\textit{(Hint: factor by grouping!)}
+
+\writespace{20pt}
+
+2.\ Write a rule in words: When multiplicity is odd\ldots\ When multiplicity is even\ldots
+
+\writespace{16pt}
+
+3.\ Test your rule by sketching one new function from your group.
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{generalizebox}
+\textbf{Sentence frames:}
+
+When the multiplicity is odd, the graph \blankline\ the $x$-axis.
+
+When the multiplicity is even, the graph \blankline\ at the $x$-axis.
+\end{generalizebox}
+
+\vspace{6pt}
+
+\begin{cerbox}
+\textbf{Savvas Practice \#7 --- Error Analysis (pg.\ 156)}
+
+\textit{(Hint: Check end behavior AND the number of turning points for a cubic.)}
+
+\vspace{6pt}
+\textbf{Claim:} \blankline
+
+\vspace{4pt}
+\textbf{Evidence:} \blankline
+
+\vspace{4pt}
+\textbf{Reasoning:} \blankline
+
+\writespace{14pt}
+\end{cerbox}
+
+% ===================================================================
+%   DAY 4
+% ===================================================================
+\newpage
+
+\dayheading{4}{Real and Complex Zeros}{Finding ALL zeros of a polynomial using graphing, synthetic division, and the quadratic formula.}
+
+\vspace{4pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Notice \& Predict &
+\textbf{Savvas Example 3 (pg.\ 152)}
+
+Graph $f(x) = x^3 - 2x^2 - 2x - 3$.
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item The graph shows only one $x$-intercept. What is it?
+\end{itemize}
+
+\writespace{16pt}
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item Because it's a cubic (degree 3), what do you predict about the other two roots?
+\end{itemize}
+
+\writespace{16pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{generalizebox}
+\textbf{Three-Step Process}
+
+\textbf{Step 1:} Graph the polynomial to find the real zero.
+
+\textbf{Step 2:} Use Synthetic Division by that real zero to create a smaller quotient.
+
+\textbf{Step 3:} Use the Quadratic Formula $x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ on the quotient to find the remaining complex zeros.
+\end{generalizebox}
+
+\vspace{6pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Guided Example &
+\textbf{Find all zeros of $f(x) = x^3 - 2x^2 - 2x - 3$.}
+
+\begin{enumerate}[leftmargin=14pt, topsep=2pt, itemsep=4pt]
+  \item Graph it: Real zero at $x =$ \blankline
+  \item Synthetic Division: Divide by the real zero. The reduced quotient is $x^2 +$ \blankline $x +$ \blankline.
+  \item Quadratic Formula: Solve $x^2 + x + 1 = 0$.
+\end{enumerate}
+
+\writespace{30pt}
+
+Final zeros: \rule{3in}{0.4pt}
+\\
+\hline
+Think-Pair-Share &
+\textbf{Savvas Try It 3a}
+
+Find all the zeros of $g(x) = x^3 - x^2 - 5x + 5$.
+
+\textit{(Hint: You can use the graph + synthetic division process, OR try factoring by grouping!)}
+
+Student A: find the real zero and set up synthetic division.
+
+Student B: finish the division and set up the Quadratic Formula.
+
+Together: solve for the final roots.
+
+\textit{Language check: Use these words in your explanation --- real, complex, conjugate, quotient.}
+
+\writespace{20pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{cerbox}
+\textit{[Refer to Savvas Exit Ticket image]}
+
+\vspace{6pt}
+\textbf{Claim:} \blankline
+
+\vspace{4pt}
+\textbf{Evidence:} \blankline
+
+\vspace{4pt}
+\textbf{Reasoning:} \blankline
+
+\writespace{14pt}
+\end{cerbox}
+
+% ===================================================================
+%   DAY 5
+% ===================================================================
+\newpage
+
+\dayheading{5}{Real-World Modeling}{Interpret zeros and sign intervals in context. Use the graph and the equation together.}
+
+\vspace{4pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Think About the Context &
+\textbf{Savvas Example 4 (pg.\ 153)}
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item Which zero does \textit{not} make sense in the context of this problem? Why?
+\end{itemize}
+
+\writespace{30pt}
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item Between what production amounts does Acme make a positive profit?
+\end{itemize}
+
+\writespace{30pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Waterworks Paddleboards &
+\textbf{Savvas Practice \#18 (pg.\ 156)}
+
+Waterworks profit $P(x)$ (in hundreds of dollars) based on $x$ paddleboards sold (in thousands) is modeled by: $P(x) = -3x^3 + 48x^2 - 144x$.
+
+\begin{enumerate}[label=\Alph*., leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item Factor to find the zeros.
+  \item What are the solutions to the equation $P(x) = 0$?
+  \item When $P(x)$ is positive, the company earns a profit. Over what interval(s) does the company make a profit?
+\end{enumerate}
+
+\writespace{30pt}
+\\
+\hline
+Discuss Domain &
+Why must we think about domain in a business problem, even when the algebra allows many more $x$-values?
+
+\writespace{30pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{cerbox}
+\textbf{Savvas Practice \#25 --- Make Sense and Persevere}
+
+\textit{[Refer to Savvas textbook image]}
+
+\vspace{4pt}
+\textbf{A.}\quad\textbf{Claim:} \blankline\quad\textbf{Evidence:} \blankline\quad\textbf{Reasoning:} \blankline
+
+\writespace{14pt}
+
+\textbf{B.}\quad\textbf{Claim:} \blankline\quad\textbf{Evidence:} \blankline\quad\textbf{Reasoning:} \blankline
+
+\writespace{14pt}
+
+\textbf{C.}\quad\textbf{Claim:} \blankline\quad\textbf{Evidence:} \blankline\quad\textbf{Reasoning:} \blankline
+
+\writespace{14pt}
+\end{cerbox}
+
+% ===================================================================
+%   DAY 6
+% ===================================================================
+\newpage
+
+\dayheading{6}{Solving Polynomial Inequalities}{Use zeros and graphs to find where a function is positive or negative.}
+
+\vspace{4pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Visualizing Inequalities &
+\textbf{Savvas Example 6 (pg.\ 154)}
+
+Look at the graph of $f(x) = x^3 - 16x$.
+
+\begin{itemize}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item If $f(x) < 0$, we are looking for where the graph is \textbf{BELOW} the $x$-axis.
+  \item Color-code or highlight the exact intervals on the graph where this happens.
+\end{itemize}
+
+\writespace{20pt}
+\\
+\hline
+Guided Example &
+\textbf{Solve the inequality $x^3 - 16x < 0$ algebraically.}
+
+\begin{enumerate}[leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item Find the zeros by factoring $x(x^2 - 16) < 0$. Zeros are $0, -4, 4$.
+  \item Plot the zeros on a number line and test the intervals: $(-\infty, -4)$, $(-4, 0)$, $(0, 4)$, $(4, \infty)$.
+  \item Write the final solution in interval notation.
+\end{enumerate}
+
+\writespace{30pt}
+\\
+\hline
+Partner Practice &
+\textbf{Savvas Try It 6a \& 6b}
+
+\begin{enumerate}[label=\Alph*., leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item Solve: $2x^3 + 12x^2 + 12x < 0$
+  \item Solve: $(x^2 - 1)(x^2 - x - 6) > 0$
+\end{enumerate}
+
+\textit{Use blank paper for your number line and sign testing. Check your answers by graphing on Desmos.}
+
+\writespace{20pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{generalizebox}
+\textbf{Explanation frame:}
+
+The solution includes the intervals \blankline\ and \blankline\ because the graph is \blankline\ the $x$-axis in those regions. We use brackets instead of parentheses because the inequality is \blankline.
+\end{generalizebox}
+
+\vspace{6pt}
+
+\begin{cerbox}
+A student solves $2x^3 + 12x^2 + 12x > 0$ and writes the answer as $[-6, -1] \cup [0, \infty)$. Evaluate their answer. Is their interval notation correct? Explain the difference between using parentheses $(\;)$ and brackets $[\;]$ in inequalities.
+
+\vspace{6pt}
+\textbf{Claim:} \blankline
+
+\vspace{4pt}
+\textbf{Evidence:} \blankline
+
+\vspace{4pt}
+\textbf{Reasoning:} \blankline
+
+\writespace{14pt}
+\end{cerbox}
+
+% ===================================================================
+%   DAY 7
+% ===================================================================
+\newpage
+
+\dayheading{7}{Synthesis and Critique}{Use this page to argue, critique, and connect the big ideas from the whole unit.}
+
+\vspace{4pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+SAT/ACT Practice &
+\textbf{Savvas Practice \#29 (pg.\ 157)}
+
+Without using a graphing calculator, determine which of the 4 graphs provided represents $f(x) = x^3 + x^2 - 4x$.
+
+\textit{Explain to your group how end-behavior and factoring helped you eliminate the wrong choices.}
+
+\writespace{40pt}
+\\
+\hline
+Performance Task &
+\textbf{Savvas Practice \#30: Venetta's Deli (pg.\ 157)}
+
+Venetta opened several deli sandwich franchises in the year 2000. Her profit $P(t)$, in hundreds of dollars, after $t$ years can be modeled by $P(t) = t^3 + t^2 - 6t$.
+
+\textbf{Part A:} Sketch a graph of the function.
+
+\hfill\gridpaper{5}{3.5}\hfill\mbox{}
+
+\textbf{Part B:} Based on the model, during what years did Venetta NOT make a profit?
+
+\writespace{26pt}
+
+\textbf{Part C:} If the model is appropriate, predict the amount of profit Venetta will receive from her franchises in the year 2020.
+
+\writespace{26pt}
+\\
+\hline
+Listen \& Respond &
+Listen to another group's explanation. Add one question, one counterexample, or one way to strengthen the evidence.
+
+\writespace{24pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{cerbox}
+\textbf{Critique the Model}
+
+Based on your answer to Part C of the Venetta problem, you predicted a specific profit for the year 2020. Critique the limits of this mathematical model. Is it realistic to assume a cubic function will perfectly model business profit forever? Why or why not?
+
+\vspace{6pt}
+\textbf{Claim:} \blankline
+
+\vspace{4pt}
+\textbf{Evidence:} \blankline
+
+\vspace{4pt}
+\textbf{Reasoning:} \blankline
+
+\writespace{14pt}
+\end{cerbox}
+
+% ===================================================================
+%   DAY 8
+% ===================================================================
+\newpage
+
+\dayheading{8}{Mastery Check and Reflection}{Use the assessment to show what you can do, then choose the station that best helps you keep growing.}
+
+\vspace{4pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Error Analysis &
+\textbf{Savvas Practice \#27 (pg.\ 157)}
+
+The height of a rectangular storage box is less than both its length and width. The function $f(x) = x^3 + 2x^2 - 3x$ represents the volume, where $x$ is the width in feet.
+
+\begin{enumerate}[label=(\alph*), leftmargin=14pt, topsep=2pt, itemsep=2pt]
+  \item Find the factored form.
+  \item Find the zeros.
+  \item What do the other two factors represent?
+  \item Find dimensions when volume is 10 ft$^3$.
+\end{enumerate}
+
+\writespace{30pt}
+\\
+\hline
+Mastery Check &
+\textbf{Savvas Lesson Quiz (pg.\ 157)}
+
+\textit{Do your best on these 3 problems without graphing technology.}
+
+\writespace{120pt}
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{tabular}{|>{\bfseries\sffamily\color{tealheader}}p{1.1in}|p{5.7in}|}
+\hline
+Choose a Station &
+\textbf{Savvas Differentiated Resources}
+
+\textbf{Station 1 (Reteach):} Work with the teacher on ``Reteach to Build Understanding'' (focus on factoring and sign charts).
+
+\vspace{4pt}
+\textbf{Station 2 (Mathematical Literacy):} Work on the Vocabulary worksheet matching graphs to roots, multiplicities, and terms.
+
+\vspace{4pt}
+\textbf{Station 3 (Enrichment):} Complete the advanced problem-solving task predicting higher-degree polynomial behaviors.
+\\
+\hline
+\end{tabular}
+
+\vspace{6pt}
+
+\begin{cerbox}
+Reflect on your learning. When trying to graph or solve a polynomial, which representation do you find most helpful and why: Factoring/Algebra, Desmos/Visual Graphing, or Synthetic Division?
+
+\vspace{6pt}
+\textbf{Claim:} \blankline
+
+\vspace{4pt}
+\textbf{Evidence:} \blankline
+
+\vspace{4pt}
+\textbf{Reasoning:} \blankline
+
+\writespace{20pt}
+\end{cerbox}
+
+\end{document}
