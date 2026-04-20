@@ -10,12 +10,16 @@
     --bg: hsl(var(--hue), 62%, 92%);
     --bg-deep: hsl(var(--hue), 70%, 82%);
     --accent: hsl(var(--hue), 72%, 32%);
-    --text: #111;
+    --navy: #0B3C6C;
+    --teal: #0097A7;
+    --warmred: #C0392B;
+    --text: #112233;
+    --muted: #556677;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; }
   body {
-    font-family: -apple-system, Segoe UI, system-ui, Roboto, sans-serif;
+    font-family: -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
     background: linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 100%);
     color: var(--text);
     min-height: 100vh;
@@ -23,175 +27,20 @@
     flex-direction: column;
     transition: background 800ms linear;
   }
-  header {
-    padding: 1rem 2rem 0.5rem;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+  header { padding: 0.8rem 2rem 0.3rem; }
   .phase-meta {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     opacity: 0.7;
   }
   .phase-title {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-size: clamp(1.4rem, 3vw, 2.0rem);
     font-weight: 700;
-    margin: 0.2rem 0 0.4rem;
+    margin: 0.1rem 0 0.4rem;
     color: var(--accent);
-    line-height: 1.15;
+    line-height: 1.1;
   }
-  .progress-wrap {
-    height: 10px;
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 6px;
-    overflow: hidden;
-    margin: 0 2rem;
-    width: calc(100% - 4rem);
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    width: 0%;
-    transition: width 300ms linear;
-  }
-  main {
-    flex: 1;
-    display: grid;
-    grid-template-columns: minmax(280px, 42%) 1fr;
-    gap: 1rem;
-    padding: 1.5rem 2rem;
-    align-items: stretch;
-  }
-  @media (max-width: 800px) {
-    main { grid-template-columns: 1fr; }
-  }
-  .timer-card {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 18px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .timer {
-    font-size: clamp(5rem, 14vw, 11rem);
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    color: var(--accent);
-    line-height: 0.9;
-    margin: 0.4rem 0;
-    letter-spacing: -0.02em;
-  }
-  .timer-sub {
-    font-size: 0.95rem;
-    opacity: 0.75;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-  }
-  .content-card {
-    background: white;
-    border-radius: 18px;
-    padding: 1.5rem 1.8rem;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .instructions {
-    font-size: clamp(1rem, 1.6vw, 1.25rem);
-    line-height: 1.55;
-    color: #222;
-  }
-  .instructions ul, .instructions ol {
-    margin: 0.4rem 0 0 1.1rem;
-    padding: 0;
-  }
-  .instructions li { margin: 0.2rem 0; }
-  .transition {
-    margin-top: auto;
-    padding: 0.9rem 1rem;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.04);
-    border-left: 5px solid rgba(0, 0, 0, 0.25);
-    opacity: 0.55;
-    font-size: 1rem;
-    transition: opacity 400ms, background 400ms, border-color 400ms;
-  }
-  .transition.active {
-    opacity: 1;
-    background: hsl(var(--hue), 80%, 95%);
-    border-left-color: var(--accent);
-    animation: pulse 1.6s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.01); }
-  }
-  .transition-label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: 700;
-    opacity: 0.8;
-    display: block;
-    margin-bottom: 0.35rem;
-  }
-  footer {
-    padding: 1rem 2rem 1.3rem;
-    display: flex;
-    gap: 0.6rem;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background: rgba(255, 255, 255, 0.35);
-  }
-  button {
-    padding: 0.7rem 1.2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: var(--accent);
-    color: white;
-    transition: transform 120ms, filter 120ms;
-    min-width: 90px;
-  }
-  button.secondary {
-    background: rgba(0, 0, 0, 0.08);
-    color: var(--text);
-  }
-  button:hover { filter: brightness(1.08); }
-  button:active { transform: translateY(1px); }
-  button:disabled { opacity: 0.4; cursor: not-allowed; }
-  .kbd {
-    text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.55;
-    padding: 0 1rem 0.8rem;
-  }
-  .dots {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    justify-content: center;
-    padding: 0.3rem 0 0.6rem;
-  }
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.18);
-  }
-  .dot.done { background: var(--accent); opacity: 0.45; }
-  .dot.current { background: var(--accent); box-shadow: 0 0 0 4px rgba(0,0,0,0.05); }
   .badge-row {
     display: inline-flex;
     gap: 0.35rem;
@@ -211,56 +60,280 @@
     color: white;
     white-space: nowrap;
   }
-  .badge.framework {
-    background: rgba(0, 0, 0, 0.72);
+  .badge.framework { background: rgba(0, 0, 0, 0.72); }
+
+  .progress-wrap {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 2rem;
+    width: calc(100% - 4rem);
   }
-  /* QR overlay — scan from laptop to open pacer on phone */
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 300ms linear;
+  }
+
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(280px, 36%) 1fr;
+    gap: 1rem;
+    padding: 1rem 2rem;
+  }
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+  }
+
+  .timer-card {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .timer-block {
+    text-align: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .timer {
+    font-size: clamp(4rem, 11vw, 8rem);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .timer-sub {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .substep-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.95rem;
+  }
+  .substep {
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.35);
+    border-left: 4px solid transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.6rem;
+    transition: background 250ms, border-color 250ms;
+  }
+  .substep.done {
+    opacity: 0.45;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+  .substep.current {
+    background: hsl(var(--hue), 80%, 92%);
+    border-left-color: var(--accent);
+    font-weight: 600;
+  }
+  .substep-text { flex: 1; }
+  .substep-time {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  .substep.current .substep-time { opacity: 1; color: var(--accent); font-weight: 700; }
+
+  .content-card {
+    background: white;
+    border-radius: 18px;
+    padding: 1.2rem 1.4rem;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-height: calc(100vh - 230px);
+    overflow-y: auto;
+  }
+  .content-card h3 {
+    margin: 0.6rem 0 0.2rem;
+    font-size: 0.95rem;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .content-card h3:first-child { margin-top: 0; }
+  .content-card p, .content-card li { line-height: 1.45; font-size: 0.95rem; }
+  .content-card p { margin: 0.3rem 0; }
+  .content-card ul, .content-card ol { margin: 0.2rem 0 0.4rem 1.2rem; padding: 0; }
+
+  .callout {
+    padding: 0.6rem 0.9rem;
+    border-radius: 8px;
+    background: rgba(0, 150, 167, 0.08);
+    border-left: 4px solid var(--teal);
+    font-size: 0.9rem;
+  }
+  .callout.warn {
+    background: rgba(192, 57, 43, 0.08);
+    border-left-color: var(--warmred);
+  }
+  .callout.script {
+    background: rgba(11, 60, 108, 0.06);
+    border-left-color: var(--navy);
+  }
+  .callout.answer {
+    background: rgba(34, 139, 34, 0.08);
+    border-left-color: #2E7D32;
+  }
+  .callout strong { color: var(--navy); }
+
+  .transition {
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.04);
+    border-left: 5px solid rgba(0, 0, 0, 0.25);
+    opacity: 0.55;
+    font-size: 0.95rem;
+    transition: opacity 400ms, background 400ms, border-color 400ms;
+    margin-top: 0.6rem;
+  }
+  .transition.active {
+    opacity: 1;
+    background: hsl(var(--hue), 80%, 95%);
+    border-left-color: var(--accent);
+  }
+  .transition-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .mode-toggle {
+    display: inline-flex;
+    gap: 0.3rem;
+    padding: 0.2rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 999px;
+    font-size: 0.8rem;
+  }
+  .mode-toggle button {
+    border: 0;
+    background: transparent;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .mode-toggle button.on {
+    background: var(--accent);
+    color: white;
+  }
+
+  footer {
+    padding: 0.6rem 2rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.35);
+  }
+  button.ctrl {
+    padding: 0.55rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+    transition: transform 120ms, filter 120ms;
+  }
+  button.ctrl.secondary {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--text);
+  }
+  button.ctrl:hover { filter: brightness(1.08); }
+  button.ctrl:active { transform: translateY(1px); }
+  .kbd {
+    text-align: center;
+    font-size: 0.72rem;
+    opacity: 0.55;
+    padding: 0 1rem 0.6rem;
+  }
+  .dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.2rem 0;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.18);
+  }
+  .dot.done { background: var(--accent); opacity: 0.45; }
+  .dot.current { background: var(--accent); box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+
+  /* QR overlay */
   .qr-overlay {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    padding: 6px 6px 4px;
+    padding: 5px 5px 3px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     z-index: 1000;
     text-align: center;
-    pointer-events: auto;
   }
-  .qr-overlay img { display: block; width: 88px; height: 88px; }
+  .qr-overlay img { display: block; width: 72px; height: 72px; }
   .qr-overlay .qr-label {
-    font-size: 0.62rem;
+    font-size: 0.58rem;
     color: #334;
-    margin-top: 3px;
+    margin-top: 2px;
     letter-spacing: 0.04em;
-    line-height: 1.15;
   }
-  /* If the pacer itself is open on a phone, hide the QR — you're already there */
-  @media (max-width: 720px) {
-    .qr-overlay { display: none; }
-  }
+  @media (max-width: 900px) { .qr-overlay { display: none; } }
 </style>
 </head>
 <body>
 
 <header>
-  <div>
-    <div class="phase-meta" id="phase-meta">Phase 1 of 7 · Algebra 2 · Lesson 3-5 · Combined Day 2-3 (Savvas-only)</div>
-    <h1 class="phase-title" id="phase-title">Solo Paper: Touch or Cross?</h1>
-  </div>
+  <div class="phase-meta" id="phase-meta">Phase 1 of 8 · Algebra 2 · Lesson 3-5 · Combined Day 2-3 (Savvas-only)</div>
+  <h1 class="phase-title" id="phase-title">— </h1>
   <div class="dots" id="dots"></div>
 </header>
 <div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
 
 <main>
   <section class="timer-card">
-    <div class="timer-sub" id="timer-sub">Remaining</div>
-    <div class="timer" id="timer">5:00</div>
-    <div class="timer-sub" id="status-line">Press Start or Space</div>
+    <div class="timer-block">
+      <div class="timer-sub">Phase remaining</div>
+      <div class="timer" id="timer">0:00</div>
+      <div class="timer-sub" id="status-line">Press Start or Space</div>
+    </div>
+    <div class="substep-list" id="substep-list"></div>
   </section>
-  <section class="content-card">
-    <div class="instructions" id="instructions"></div>
+  <section class="content-card" id="content-card">
+    <div id="instructions"></div>
     <div class="transition" id="transition">
       <span class="transition-label">Transition cue (activates in last 60s)</span>
       <span id="transition-text"></span>
@@ -269,132 +342,303 @@
 </main>
 
 <footer>
-  <button id="btn-prev" class="secondary">◀ Prev</button>
-  <button id="btn-play">▶ Start</button>
-  <button id="btn-next" class="secondary">Next ▶</button>
-  <button id="btn-reset" class="secondary">↻ Reset phase</button>
-  <button id="btn-restart-all" class="secondary">↺ Restart all</button>
+  <button id="btn-prev" class="ctrl secondary">◀ Prev</button>
+  <button id="btn-play" class="ctrl">▶ Start</button>
+  <button id="btn-next" class="ctrl secondary">Next ▶</button>
+  <button id="btn-reset" class="ctrl secondary">↻ Reset phase</button>
+  <button id="btn-restart-all" class="ctrl secondary">↺ Restart all</button>
 </footer>
-<div class="kbd">Space: play/pause  ·  ← →: prev/next phase  ·  R: reset current phase  ·  Total: 55 min · Savvas-only (no fabricated items)</div>
+<div class="kbd">Space: play/pause  ·  ← →: prev/next phase  ·  R: reset current phase  ·  Total: 55 min · <strong>Teacher packet optional — all info is on this pacer</strong></div>
+
+<div class="qr-overlay" title="Scan to open this pacer on your phone">
+  <img src="qr_day23_pacer.svg" alt="QR code for Day 2-3 Pacer">
+  <div class="qr-label">Scan</div>
+</div>
 
 <script>
+// ----------------------------------------------------------------------
+// Phase definitions — each phase is self-contained. Teacher does NOT
+// need the paper packet. Sub-steps give nested timing hints.
+// ----------------------------------------------------------------------
 const PHASES = [
   {
-    title: "Solo Paper: Zeros + Multiplicities",
+    title: "Do Now — Savvas Lesson Quiz Q4",
     framework: "Do Now A",
     dok: "DOK 1",
     duration: 5 * 60,
+    substeps: [
+      {label: "Hand out sheets, students start silently", sec: 60},
+      {label: "Students read graph + choose A/B/C/D", sec: 180},
+      {label: "Students write 1-sentence explanation", sec: 60},
+    ],
     instructions: `
-      <p><strong>Hand the DO NOW sheet to every student as they walk in.</strong> Silent, pencil only, no Desmos.</p>
-      <p><strong>Savvas Lesson Quiz Q4:</strong> "What are the zeros and their multiplicities for the function y = x³ + 3x² + x + 3, shown in the graph?" Plus two bridge questions about behavior at each zero.</p>
-      <p><strong>Questions to ask</strong> (circulating silently): none aloud.</p>
-      <p><strong>Adult role:</strong> teacher hands sheets at door, circulates silently (solo teacher; class ≤10).</p>
+      <h3>Student task</h3>
+      <p><strong>Savvas LQ Q4</strong> (multiple-choice).  y = x³ + 3x² + x + 3, shown in graph.
+      Circle A / B / C / D, then one sentence on how they know.</p>
+
+      <div class="callout answer">
+        <strong>Answer key:</strong> <strong>B</strong> — −3, multiplicity 1.<br>
+        Factor by grouping: x²(x + 3) + 1(x + 3) = (x + 3)(x² + 1).
+        Real zero at x = −3, multiplicity 1. The factor x² + 1 contributes no real zero.
+      </div>
+
+      <h3>Teacher moves (silent)</h3>
+      <ul>
+        <li>Hand sheets at the door.  Walk 1 lap as students work.</li>
+        <li>Scan what they circled: A or C → misread graph, cold-call in Launch. D → confused multiplicity with crossings count.</li>
+        <li>Students who circled B + wrote a clean sentence → have them share first during Launch class-share.</li>
+      </ul>
+
+      <div class="callout warn"><strong>DOK 1 · 5 min · Silent · Pencil only · No Desmos</strong></div>
     `,
-    transition: `"Pencils down. Chromebooks out. Blooket code on the screen."`
+    transition: `When timer hits 0: "Pencils down. Chromebooks out. Blooket code on the next slide."`
   },
+
   {
     title: "Blooket Login",
     framework: "Do Now B",
     dok: "—",
     duration: 2 * 60,
     instructions: `
-      <p><strong>Display the Blooket code.</strong> Day 3 Multiplicity CSV imported before class.</p>
-      <p>Students open Chromebooks, type code, enter a nickname. 2 minutes hard.</p>
+      <h3>Teacher action</h3>
+      <ul>
+        <li>Display Blooket code on the projector (PowerPoint Slide 3).</li>
+        <li>Confirm the Day 3 Multiplicity CSV (Blooket_Day3_Multiplicity.csv) is loaded — 27 items, 7 bridge / 20 preview.</li>
+        <li>Decide mode: <strong>Fishing Frenzy</strong> (first time this week) or <strong>Racing</strong> (repeat day, more rigorous).</li>
+      </ul>
+
+      <div class="callout"><strong>Mode for today:</strong>
+        <div class="mode-toggle">
+          <button id="mode-fishing" class="on" onclick="setMode('fishing')">Fishing Frenzy</button>
+          <button id="mode-racing" onclick="setMode('racing')">Racing</button>
+        </div>
+        <span id="mode-note" style="font-size:0.85rem; opacity: 0.8; margin-left: 0.5rem;"></span>
+      </div>
+
+      <p>Students open Chromebooks, type code, enter nickname.  Late joiners hop in mid-game.</p>
     `,
     transition: `"Everyone in? Go."`
   },
+
   {
     title: "Blooket — Rule Recall",
     framework: "Do Now C",
     dok: "DOK 1",
-    duration: 7 * 60,
+    duration: 6 * 60,
+    substeps: [
+      {label: "Round 1 — first pass on rules", sec: 180},
+      {label: "Round 2 — speed increases; watch dashboard", sec: 180},
+    ],
     instructions: `
-      <p><strong>7-minute game. Pure rule recall.</strong> Rules today's work depends on:</p>
+      <h3>Rules under test (also on Slide 4)</h3>
       <ul>
-        <li>Zero Product Property (zero ⇔ factor = 0)</li>
-        <li>Sign direction: zero at x = c gives factor (x − c)</li>
-        <li>Multiplicity = exponent on the factor</li>
-        <li>EVEN → graph TOUCHES and turns</li>
-        <li>ODD → graph CROSSES</li>
+        <li>Zero Product Property  (zero ⇔ factor = 0)</li>
+        <li>Sign direction: zero at x = c → factor is (x − c)</li>
+        <li>Multiplicity = <em>exponent on the factor</em></li>
+        <li>EVEN multiplicity → graph is <strong>tangent</strong> to x-axis (turning point)</li>
+        <li>ODD multiplicity → graph <strong>crosses</strong> the x-axis</li>
         <li>Highest power → end behavior</li>
       </ul>
-      <p><strong>NO procedural factoring items.</strong></p>
-      <p><strong>Questions to ask</strong> (after game): "Which rule had the lowest %? Say it now."</p>
-      <p><strong>Adult role:</strong> teacher watches dashboard + reads diagnostics; no. during login.</p>
+
+      <div class="callout script">
+        <strong>Display during play:</strong> project the PowerPoint rule-recall slide, not the Blooket leaderboard.  Students see the rules they're being tested on.
+      </div>
+
+      <h3>Dashboard diagnostic (during play)</h3>
+      <p>Note the TWO lowest-percent rules. You'll use them in the Wrap phase.</p>
+
+      <div class="callout warn">
+        <strong>6 min hard stop.</strong> Don't let it run over — the Wrap phase is separate.
+      </div>
     `,
-    transition: `Close game. "Pull out your Do Now. Packet too. Launch next."`
+    transition: `Close the game. "Pencils up, we're doing the Wrap."`
   },
+
+  {
+    title: "Blooket Wrap — Candy + Lowest Question",
+    framework: "Do Now D",
+    dok: "DOK 1",
+    duration: 1 * 60,
+    substeps: [
+      {label: "Candy: pass to class; winner(s) get extra", sec: 20},
+      {label: "Class repeats the lowest-scored question aloud", sec: 25},
+      {label: "Tight transition into Launch", sec: 15},
+    ],
+    instructions: `
+      <h3>Teacher moves (tight, 60 sec total)</h3>
+      <ol>
+        <li><strong>Candy pass</strong> (~20 sec): walk the candy jar around once. Top finisher(s) get an extra piece. Low-stakes; pure tradition.</li>
+        <li><strong>Lowest-scored question aloud</strong> (~25 sec): from the dashboard, announce the lowest-percent rule. Whole class repeats it in unison (1 beat), then an individual volunteer says it once more. Example: "Even multiplicity means the graph is tangent to the x-axis."</li>
+        <li><strong>Transition</strong> (~15 sec): "Pull out your Do Now sheet. We're going to use it right now."</li>
+      </ol>
+
+      <div class="callout">
+        <strong>Why this works:</strong> sugar bumps engagement; verbalizing the weakest rule seats it in memory right before Launch uses it.
+      </div>
+    `,
+    transition: `"Pull out your Do Now. 12 minutes on Launch."`
+  },
+
   {
     title: "Launch — Savvas Example 2",
     framework: "Launch",
     dok: "DOK 2",
     duration: 12 * 60,
+    substeps: [
+      {label: "“Pull out your Do Now.”", sec: 15},
+      {label: "Turn-and-Talk: what did you circle? why?", sec: 105},
+      {label: "Cold-call one student (low-stakes)", sec: 60},
+      {label: "Partners graph (x+2)² and (x+2)³ in Desmos", sec: 300},
+      {label: "Class share + NAME multiplicity (Slide 5)", sec: 120},
+      {label: "Fill T-chart together (Slide 6)", sec: 120},
+    ],
     instructions: `
-      <p><strong>Savvas Example 2</strong> (pg. 151): compare <code>y = (x + 2)² (x − 1)</code> vs <code>y = (x + 2)³ (x − 1)</code> in Desmos. Name MULTIPLICITY. Build T-chart.</p>
-      <ol>
-        <li>"Pull out your Do Now." Cold-call the repeated-factor observation. (60s)</li>
-        <li>Partners graph both in Desmos, record behavior at x = −2. (5 min)</li>
-        <li>Class share → name MULTIPLICITY. Write definition + example on board. (3 min)</li>
-        <li>Fill T-chart together (ODD vs EVEN). (3 min)</li>
-      </ol>
-      <p><strong>Questions to ask:</strong> "What's the exponent on (x + 2) in each graph?" / "What's the same? What's different?" / "Who predicted touch on the Do Now? What made you predict that?"</p>
-      <p><strong>Adult role:</strong> teacher runs script + cold-calls. For ~10 students, walk two laps of the room.</p>
+      <h3>Launch script — <strong>students graph in Desmos; teacher does NOT draw on the board</strong></h3>
+      <p>Walk laps reading student screens. For 10 students / 5 pairs, two laps covers everyone.</p>
+
+      <div class="callout script">
+        <strong>Cold-call phrasing (no grades, no candy-incentive):</strong>
+        "<em>[Name], can you read me your one-sentence explanation?</em>" → sincere "thanks" → "<em>anyone want to build on that?</em>"
+        Normalize wrong answers as the class finding the edge of what we know.
+      </div>
+
+      <h3>Savvas Example 2 — target observations</h3>
+      <div class="callout answer">
+        <p>Graph <strong>y = (x + 2)² (x − 1)</strong> and <strong>y = (x + 2)³ (x − 1)</strong>. At x = −2:</p>
+        <ul>
+          <li>(x + 2)² → graph is <strong>tangent</strong> to the x-axis (turning point; multiplicity 2)</li>
+          <li>(x + 2)³ → graph <strong>crosses</strong> the x-axis (multiplicity 3)</li>
+          <li>Shared: zero at x = 1 (both functions have it, mult 1, crosses)</li>
+        </ul>
+      </div>
+
+      <h3>"Name MULTIPLICITY" — what that means concretely</h3>
+      <p>At the moment the class agrees on "tangent / turning point" vs "crosses," SAY IT ALOUD:
+      <em>"This repeated factor has a name: <strong>multiplicity</strong>."</em>
+      Advance to PowerPoint Slide 5 (definition + example).  The slide <strong>IS</strong> the board write — you don't need to write the definition on the whiteboard yourself.</p>
+
+      <h3>T-Chart — what it is + how to build it</h3>
+      <div class="callout">
+        <p>A two-column reference on the student packet (and Slide 6):</p>
+        <table style="font-size: 0.9rem; margin: 0.4rem 0;">
+        <tr><th style="text-align:left; padding-right:1rem;">ODD multiplicity (1, 3, 5…)</th><th style="text-align:left;">EVEN multiplicity (2, 4, 6…)</th></tr>
+        <tr><td>Graph <strong>crosses</strong> the x-axis</td><td>Graph is <strong>tangent</strong> (turning point)</td></tr>
+        <tr><td>Small sketch: line through</td><td>Small sketch: U-shape kissing axis</td></tr>
+        </table>
+      </div>
+
+      <h3>Savvas TE Questions (use during partner work)</h3>
+      <ul>
+        <li><em>"What do you notice about each graph in relation to the polynomial function it represents?"</em> (expected: #unique factors = #times graph crosses or is tangent)</li>
+        <li><em>"How does the term <strong>multiplicity</strong> of a zero relate to multiplication?"</em> (expected: it counts how many times a factor is multiplied)</li>
+        <li><em>Habits of Mind:</em> "Do function values always change sign on either side of a zero?" (expected: No — a zero can be a turning point)</li>
+      </ul>
     `,
-    transition: `"Packets to Practice. Five Savvas items."`
+    transition: `"Packets to Practice — 20 minutes. A + B required. Pick one of C/D/E."`
   },
+
   {
     title: "Practice — Savvas Try Its + #14/15/16",
     framework: "Practice",
     dok: "DOK 2",
     duration: 20 * 60,
+    substeps: [
+      {label: "Lap 1 — every pair has A started", sec: 300},
+      {label: "Lap 2 — pairs on Item B (x² + 9 gotcha)", sec: 300},
+      {label: "Lap 3 — nudge finishers to C/D/E", sec: 300},
+      {label: "Lap 4 — check the chosen item; photo evidence", sec: 300},
+    ],
     instructions: `
-      <p>Five Savvas-anchored items. Required: <strong>A</strong> (Try It 2a) + <strong>B</strong> (Try It 2b). Choice: <strong>one of C, D, E</strong> (Savvas Practice #14, #15, #16).</p>
+      <h3>Five items (all Savvas). Required: A + B. Pick one of C/D/E.</h3>
       <ul>
-        <li>A. f(x) = x(x + 4)(x − 1)⁴  [Savvas Try It 2a]</li>
-        <li>B. f(x) = (x² + 9)(x − 1)⁵(x + 2)²  [Savvas Try It 2b]</li>
-        <li>C. f(x) = x³ − 8x² + 16x  [Savvas Practice #14]</li>
-        <li>D. g(x) = x³ − x² − 25x + 25  [Savvas Practice #15]</li>
-        <li>E. f(x) = 9x⁴ − 40x² + 16  [Savvas Practice #16]</li>
+        <li><strong>A.</strong> f(x) = x(x + 4)(x − 1)⁴  [Try It 2a]<br>
+          → zeros 0, −4, 1.  Crosses at 0 and −4 (mult 1).  <strong>Tangent</strong> at 1 (mult 4).</li>
+        <li><strong>B.</strong> f(x) = (x² + 9)(x − 1)⁵(x + 2)²  [Try It 2b]<br>
+          → real zeros: 1 (mult 5, crosses), −2 (mult 2, <strong>tangent</strong>).  x² + 9 contributes NO real zero.</li>
+        <li><strong>C.</strong> f(x) = x³ − 8x² + 16x  [Practice #14]<br>
+          → factor x(x − 4)².  Zeros 0 (crosses) and 4 (<strong>tangent</strong>).</li>
+        <li><strong>D.</strong> g(x) = x³ − x² − 25x + 25  [Practice #15]<br>
+          → factor by grouping: (x − 1)(x² − 25) = (x − 1)(x − 5)(x + 5).  All mult 1, all cross.</li>
+        <li><strong>E.</strong> f(x) = 9x⁴ − 40x² + 16  [Practice #16]<br>
+          → (9x² − 4)(x² − 4) = (3x − 2)(3x + 2)(x − 2)(x + 2).  Four mult-1 zeros; all cross.</li>
       </ul>
-      <p><strong>Sentence frame:</strong> "The multiplicity is ____, so the graph ____ at x = ____."</p>
-      <p><strong>Questions to ask:</strong> "Which factor tells you the behavior at this zero?" / "Is this multiplicity even or odd?"</p>
-      <p><strong>Adult role:</strong> teacher circulates with prompts. Watch for students stuck on Item B’s x² + 9 and redirect to the rule: x² + positive has no real zero.</p>
+
+      <h3>Questions to ask (NEVER deliver the answer)</h3>
+      <ul>
+        <li>"Which factor tells you the behavior at this zero?"</li>
+        <li>"Is this multiplicity even or odd?"</li>
+        <li>"Write the exponent on that factor. Now read Rule 2 on your packet."</li>
+      </ul>
+
+      <div class="callout warn">
+        <strong>Item B gotcha:</strong> students stall on x² + 9.  Reminder: x² + (any positive) has NO real zero.  Day 1 rule.
+      </div>
+
+      <div class="callout">
+        <strong>Fast-finisher extension</strong> (board): build a polynomial with a simple crossing at x = 0, a tangent at x = 2, and a higher-odd-multiplicity crossing at x = −1.  Sample: f(x) = x(x − 2)²(x + 1)³.
+      </div>
     `,
     transition: `"Pencils up. Synthesis + self-rating. 4 minutes."`
   },
+
   {
     title: "Share / Summary — synthesis + self-rating",
     framework: "Share/Summary",
     dok: "DOK 2",
     duration: 4 * 60,
+    substeps: [
+      {label: "Essential Question callback", sec: 45},
+      {label: "Language Objective check — call on 2", sec: 30},
+      {label: "Self-rating circle (scan as they write)", sec: 60},
+      {label: "Preview Day 4-5 (storage-box DOK-3)", sec: 30},
+      {label: "Transition to Exit", sec: 75},
+    ],
     instructions: `
-      <p><strong>Teacher script (4 min flat):</strong></p>
+      <h3>Teacher script (4 min flat)</h3>
       <ol>
-        <li>Essential Question callback (45s): "How does factored form tell you everything you need to sketch?"</li>
-        <li>Language Objective check (30s): "Who used <em>the multiplicity is ___, so the graph ___</em>?"</li>
-        <li>Self-rating circle (60s). Teacher scans.</li>
-        <li>Preview Day 4-5 (30s): "Tomorrow — real + complex zeros + Savvas storage-box volume problem (DOK 3)."</li>
-        <li>Transition (30s): "Exit ticket. Savvas LQ Q5. 5 minutes."</li>
+        <li><strong>Essential Question</strong> callback: "How does the factored form tell you everything you need to sketch?"</li>
+        <li><strong>Language Objective check:</strong> "Who used <em>the multiplicity is ___, so the graph ___</em>?" Call on two students.</li>
+        <li>Self-rating circle on packet (60s). Scan yourself as packets tilt up.</li>
+        <li>Preview Day 4-5 (30s): "Tomorrow — complex zeros + Savvas storage-box volume problem (DOK 3)."</li>
+        <li>Transition (75s): "Exit ticket. LQ Q5. 5 minutes. Desmos OK for zeros."</li>
       </ol>
-      <p><strong>Questions to ask:</strong> "Which Criterion for Success did you rate 'partly'? What's the blocker?"</p>
-      <p><strong>Adult role:</strong> teacher leads; scan self-ratings yourself as packets tilt up.</p>
+
+      <h3>Question to ask</h3>
+      <p>"Which Criterion did you rate <em>partly</em>? What's the blocker?" (2 students max; feeds into Day 4-5 warm-up)</p>
     `,
-    transition: `"Pencils up. Exit ticket. 5 minutes."`
+    transition: `"Pencils up. Exit ticket. 5 minutes. Desmos OK only to verify zeros."`
   },
+
   {
-    title: "Exit Ticket — Savvas LQ Q5",
+    title: "Exit Ticket — Savvas Lesson Quiz Q5",
     framework: "Exit Ticket",
     dok: "DOK 2",
     duration: 5 * 60,
     instructions: `
-      <p><strong>Savvas Lesson Quiz Q5:</strong> Find the zeros of f(x) = −x³ − 2x² + 7x − 4. Then describe the behavior of the graph at each zero.</p>
-      <p>Full credit = zeros correct AND behavior description using multiplicity language ("crosses" / "touches" / "turns").</p>
-      <p><strong>Questions to ask:</strong> none during write time.</p>
-      <p><strong>Adult role:</strong> teacher collects at door. Skim #3 responses that evening for Day 4-5 warm-up diagnostic.</p>
-      <p><strong>Collect on the way out.</strong></p>
+      <h3>Student task</h3>
+      <p><strong>Savvas LQ Q5:</strong> Find the zeros of f(x) = −x³ − 2x² + 7x − 4. Then describe the behavior of the graph at each zero.</p>
+
+      <div class="callout">
+        <strong>DESMOS POLICY:</strong> YES — students may use Desmos to VERIFY zeros.
+        Behavior description must still be written in their own words using
+        Savvas language (<em>crosses</em>, <em>tangent</em>, <em>turning point</em>).
+      </div>
+
+      <div class="callout answer">
+        <strong>Answer key:</strong><br>
+        Factor: f(x) = −(x + 4)(x − 1)². Zeros: <strong>x = −4</strong> (mult 1, <em>crosses</em>) and <strong>x = 1</strong> (mult 2, <em>tangent</em>).<br>
+        End behavior: leading −x³ → as x → −∞, f → +∞; as x → +∞, f → −∞.
+      </div>
+
+      <h3>Teacher moves during write time</h3>
+      <ul>
+        <li>No questions asked. Collect silently.</li>
+        <li>As papers come up: "Biggest thing you learned? Say it in one breath."</li>
+        <li>Skim responses that evening. Students whose #3 response was "partly" on factoring → target them in Day 4-5 Do Now.</li>
+      </ul>
     `,
     transition: `"Packets to the front. Pack up. See you next class."`
-  }
+  },
 ];
 
 const TRANSITION_WINDOW = 60;
@@ -406,16 +650,30 @@ const state = {
   running: false,
   lastTick: null,
   rafId: null,
+  mode: "fishing",
 };
 
-function fmtTime(s) {
+function setMode(m) {
+  state.mode = m;
+  const f = $("mode-fishing"), r = $("mode-racing"), note = $("mode-note");
+  if (f && r && note) {
+    f.classList.toggle("on", m === "fishing");
+    r.classList.toggle("on", m === "racing");
+    note.textContent = m === "fishing"
+      ? "First time this week — Fishing Frenzy keeps energy playful."
+      : "Repeat day — Racing is more rigorous; use when students need the faster pace.";
+  }
+}
+window.setMode = setMode;
+
+function fmt(s) {
   s = Math.max(0, Math.round(s));
   const m = Math.floor(s / 60);
   const ss = s % 60;
   return `${m}:${ss.toString().padStart(2, '0')}`;
 }
 
-function hueForPhase(remaining, duration) {
+function hueForRemaining(remaining, duration) {
   const frac = Math.max(0, Math.min(1, remaining / duration));
   return Math.round(210 * frac);
 }
@@ -430,28 +688,71 @@ function renderDots() {
   }
 }
 
+function currentSubstep(phase, remaining) {
+  if (!phase.substeps || !phase.substeps.length) return null;
+  const elapsed = phase.duration - remaining;
+  let acc = 0;
+  for (let i = 0; i < phase.substeps.length; i++) {
+    acc += phase.substeps[i].sec;
+    if (elapsed < acc) {
+      return {index: i, remainingInStep: acc - elapsed};
+    }
+  }
+  return {index: phase.substeps.length - 1, remainingInStep: 0};
+}
+
+function renderSubsteps() {
+  const p = PHASES[state.idx];
+  const list = $("substep-list");
+  list.innerHTML = "";
+  if (!p.substeps) return;
+  const cur = currentSubstep(p, state.remaining);
+  p.substeps.forEach((s, i) => {
+    const div = document.createElement("div");
+    let cls = "substep";
+    if (cur && i < cur.index) cls += " done";
+    else if (cur && i === cur.index) cls += " current";
+    div.className = cls;
+    const text = document.createElement("div");
+    text.className = "substep-text";
+    text.textContent = s.label;
+    const time = document.createElement("div");
+    time.className = "substep-time";
+    if (cur && i === cur.index) {
+      time.textContent = fmt(cur.remainingInStep);
+    } else {
+      time.textContent = fmt(s.sec);
+    }
+    div.appendChild(text);
+    div.appendChild(time);
+    list.appendChild(div);
+  });
+}
+
 function renderPhase() {
   const p = PHASES[state.idx];
-  $("phase-meta").textContent = `Phase ${state.idx + 1} of ${PHASES.length} · Algebra 2 · Lesson 3-5 · Day 3`;
+  $("phase-meta").textContent = `Phase ${state.idx + 1} of ${PHASES.length}  ·  Algebra 2  ·  Lesson 3-5  ·  Combined Day 2-3 (Savvas-only)`;
   $("phase-title").innerHTML =
     `${p.title}<span class="badge-row">` +
     `<span class="badge framework">${p.framework}</span>` +
     (p.dok === "—" ? `` : `<span class="badge">${p.dok}</span>`) +
+    `<span class="badge" style="background:#555">${Math.round(p.duration/60)} min</span>` +
     `</span>`;
   $("instructions").innerHTML = p.instructions;
-  $("transition-text").textContent = p.transition;
+  $("transition-text").textContent = p.transition || "";
   renderDots();
   update();
+  if (p.framework === "Do Now B") setMode(state.mode);
 }
 
 function update() {
   const p = PHASES[state.idx];
-  const hue = hueForPhase(state.remaining, p.duration);
+  const hue = hueForRemaining(state.remaining, p.duration);
   document.documentElement.style.setProperty("--hue", hue);
 
   const pct = 100 * (1 - state.remaining / p.duration);
   $("progress-fill").style.width = pct.toFixed(1) + "%";
-  $("timer").textContent = fmtTime(state.remaining);
+  $("timer").textContent = fmt(state.remaining);
 
   const transitionEl = $("transition");
   if (state.remaining <= TRANSITION_WINDOW && state.remaining > 0) {
@@ -459,6 +760,8 @@ function update() {
   } else {
     transitionEl.classList.remove("active");
   }
+
+  renderSubsteps();
 
   $("btn-prev").disabled = state.idx === 0;
   $("btn-play").textContent = state.running ? "⏸ Pause" : (state.remaining === PHASES[state.idx].duration ? "▶ Start" : "▶ Resume");
@@ -489,17 +792,12 @@ function play() {
   state.rafId = requestAnimationFrame(tick);
   update();
 }
-
 function pause() {
   state.running = false;
   cancelAnimationFrame(state.rafId);
   update();
 }
-
-function toggle() {
-  if (state.running) pause();
-  else play();
-}
+function toggle() { state.running ? pause() : play(); }
 
 function next() {
   if (state.idx < PHASES.length - 1) {
@@ -510,7 +808,6 @@ function next() {
     renderPhase();
   }
 }
-
 function prev() {
   if (state.idx > 0) {
     state.idx--;
@@ -520,14 +817,12 @@ function prev() {
     renderPhase();
   }
 }
-
 function resetPhase() {
   state.remaining = PHASES[state.idx].duration;
   state.running = false;
   cancelAnimationFrame(state.rafId);
   update();
 }
-
 function restartAll() {
   state.idx = 0;
   state.remaining = PHASES[0].duration;
@@ -552,9 +847,5 @@ document.addEventListener("keydown", (e) => {
 
 renderPhase();
 </script>
-<div class="qr-overlay" title="Scan to open this pacer on your phone">
-  <img src="qr_day23_pacer.svg" alt="QR code for Day 2-3 Pacer">
-  <div class="qr-label">Scan on phone</div>
-</div>
 </body>
 </html>
