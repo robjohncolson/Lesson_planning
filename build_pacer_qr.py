@@ -18,6 +18,8 @@ PACERS = [
     ("Day_2_Pacer.html",       "qr_day2_pacer.svg"),
     ("Day_3_Pacer.html",       "qr_day3_pacer.svg"),
     ("Day_3_Pacer_short.html", "qr_day3_pacer_short.svg"),
+    ("Day_23_Pacer.html",      "qr_day23_pacer.svg"),
+    ("Day_45_Pacer.html",      "qr_day45_pacer.svg"),
 ]
 
 
