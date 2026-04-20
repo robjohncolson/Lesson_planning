@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Algebra 2 · Lesson 3-5 · Pacer Index</title>
+<style>
+  :root {
+    --navy:    #0B3C6C;
+    --blue:    #1E6FC8;
+    --teal:    #0097A7;
+    --bg:      #EAF2FB;
+    --bg-deep: #C8DDF2;
+    --dark:    #112233;
+    --gray:    #556677;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
+    background: linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 100%);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+  header {
+    padding: 2rem 2rem 1rem;
+    text-align: center;
+  }
+  header .eyebrow {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--blue);
+    opacity: 0.8;
+  }
+  header h1 {
+    margin: 0.3rem 0 0.5rem;
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    color: var(--navy);
+    line-height: 1.15;
+  }
+  header p {
+    margin: 0 auto;
+    max-width: 40rem;
+    color: var(--gray);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.2rem;
+    padding: 1rem 2rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .pacer-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    transition: transform 180ms, box-shadow 180ms;
+  }
+  .pacer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  }
+  .pacer-card .badges {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.22rem 0.6rem;
+    border-radius: 999px;
+    color: white;
+  }
+  .badge.day    { background: var(--navy); }
+  .badge.length { background: var(--teal); }
+  .badge.short  { background: #D94E2F; }
+  .pacer-card h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--navy);
+    line-height: 1.25;
+  }
+  .pacer-card .subtitle {
+    color: var(--gray);
+    font-size: 0.92rem;
+    margin: 0;
+    line-height: 1.45;
+  }
+  .pacer-card .qr-and-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .pacer-card .qr-and-link img {
+    width: 110px;
+    height: 110px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    padding: 4px;
+    background: white;
+    flex-shrink: 0;
+  }
+  .pacer-card .link-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+  .pacer-card .link-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+  }
+  .pacer-card a.open {
+    display: inline-block;
+    background: var(--navy);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding: 0.55rem 0.9rem;
+    border-radius: 8px;
+    transition: filter 120ms;
+  }
+  .pacer-card a.open:hover { filter: brightness(1.15); }
+  .pacer-card a.url {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    color: var(--blue);
+    word-break: break-all;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+    opacity: 0.85;
+  }
+  .pacer-card a.url:hover { text-decoration: underline; }
+  .phase-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.85rem;
+    color: var(--dark);
+    line-height: 1.45;
+  }
+  .phase-list li { margin: 0.1rem 0; }
+  footer {
+    text-align: center;
+    padding: 1.5rem 2rem 2rem;
+    color: var(--gray);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Algebra 2 · Lesson 3-5 · Zeros of Polynomial Functions</div>
+  <h1>Teacher Pacer Index</h1>
+  <p>Scan a QR with your phone to carry the pacer around the room, or open directly on this device. Each pacer uses the school's Do&nbsp;Now → Launch → Explore → Share/Summary → Exit framework with explicit DOK tags and release valves.</p>
+</header>
+
+<main>
+
+  <section class="pacer-card">
+    <div class="badges">
+      <span class="badge day">Day 2</span>
+      <span class="badge length">57 min</span>
+    </div>
+    <h2>Graphing from Factored Form</h2>
+    <p class="subtitle">DOK-3 driver: Reverse Engineering (zeros + a point → equation). Self-contained on the page with both rules printed.</p>
+    <ol class="phase-list">
+      <li>Do&nbsp;Now A — Sign Flip Prediction (5, DOK 2)</li>
+      <li>Blooket login + rule recall (2 + 7, DOK 1)</li>
+      <li>Launch — Sign Flip Synthesis (8, DOK 2)</li>
+      <li>Explore — Reverse Engineering (25, <strong>DOK 3</strong>)</li>
+      <li>Share/Summary (5, DOK 2)</li>
+      <li>Exit — Summary recap (5, DOK 1–2)</li>
+    </ol>
+    <div class="qr-and-link">
+      <img src="qr_day2_pacer.svg" alt="QR code for Day 2 Pacer">
+      <div class="link-block">
+        <span class="link-label">Open the pacer</span>
+        <a class="open" href="Day_2_Pacer.html">▶ Day 2 Pacer</a>
+        <a class="url" href="https://robjohncolson.github.io/Lesson_planning/Day_2_Pacer.html">robjohncolson.github.io/Lesson_planning/Day_2_Pacer.html</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pacer-card">
+    <div class="badges">
+      <span class="badge day">Day 3</span>
+      <span class="badge length">55 min</span>
+    </div>
+    <h2>The Magic of Multiplicity</h2>
+    <p class="subtitle">DOK-3 driver: Tonya error analysis. Three rules + 5-step scaffold self-contained on the page. Launch names multiplicity via (x−1)ⁿ investigation.</p>
+    <ol class="phase-list">
+      <li>Do&nbsp;Now A — Touch or Cross? (5, DOK 2)</li>
+      <li>Blooket login + rule recall (2 + 7, DOK 1)</li>
+      <li>Launch — Name the Pattern (12, DOK 2)</li>
+      <li>Practice — Try It A–B from bank (7, DOK 2)</li>
+      <li>Explore — Tonya (15, <strong>DOK 3</strong>)</li>
+      <li>Share/Summary (3, DOK 2)</li>
+      <li>Exit — Summary recap (4, DOK 1–2)</li>
+    </ol>
+    <div class="qr-and-link">
+      <img src="qr_day3_pacer.svg" alt="QR code for Day 3 Pacer">
+      <div class="link-block">
+        <span class="link-label">Open the pacer</span>
+        <a class="open" href="Day_3_Pacer.html">▶ Day 3 Pacer</a>
+        <a class="url" href="https://robjohncolson.github.io/Lesson_planning/Day_3_Pacer.html">robjohncolson.github.io/Lesson_planning/Day_3_Pacer.html</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pacer-card">
+    <div class="badges">
+      <span class="badge day">Day 3</span>
+      <span class="badge length">45 min</span>
+      <span class="badge short">F Wed</span>
+    </div>
+    <h2>Multiplicity — Compressed</h2>
+    <p class="subtitle">45-min variant for Wednesday F period. Practice dropped; students apply the rule directly inside Tonya. Share/Summary folded into the Exit transition.</p>
+    <ol class="phase-list">
+      <li>Do&nbsp;Now A — Touch or Cross? (5, DOK 2)</li>
+      <li>Blooket login + rule recall (2 + 7, DOK 1)</li>
+      <li>Launch — Name the Pattern (12, DOK 2)</li>
+      <li>Explore — Tonya (15, <strong>DOK 3</strong>)</li>
+      <li>Exit — Summary + folded synthesis (4, DOK 1–2)</li>
+    </ol>
+    <div class="qr-and-link">
+      <img src="qr_day3_pacer_short.svg" alt="QR code for Day 3 Pacer (45-min variant)">
+      <div class="link-block">
+        <span class="link-label">Open the pacer</span>
+        <a class="open" href="Day_3_Pacer_short.html">▶ Day 3 Pacer (45 min)</a>
+        <a class="url" href="https://robjohncolson.github.io/Lesson_planning/Day_3_Pacer_short.html">robjohncolson.github.io/Lesson_planning/Day_3_Pacer_short.html</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Source: <a href="https://github.com/robjohncolson/Lesson_planning">github.com/robjohncolson/Lesson_planning</a></p>
+</footer>
+
+</body>
+</html>
