@@ -14,6 +14,7 @@ import segno
 BASE_URL = "https://robjohncolson.github.io/Lesson_planning"
 
 PACERS = [
+    ("index.html",             "qr_index.svg"),
     ("Day_2_Pacer.html",       "qr_day2_pacer.svg"),
     ("Day_3_Pacer.html",       "qr_day3_pacer.svg"),
     ("Day_3_Pacer_short.html", "qr_day3_pacer_short.svg"),
