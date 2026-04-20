@@ -238,16 +238,29 @@ def build_do_now(path):
     p.add_run("    y = x\u00b3 + 3x\u00b2 + x + 3,  shown in the graph?").italic = True
     doc.add_paragraph()
 
-    # Embed the graph + MC choices directly
-    added = add_image_from_bank(doc, DO_NOW_ID, width=Inches(3.3))
-    if not added:
+    # Clean student-facing graph (no answer indication) generated via
+    # build_lq_q4_graph.py.  NOT the bank image \u2014 that one marks the correct
+    # choice because it was cropped from the teacher\u2019s key.
+    student_graph = "assets/lq_q4_student_graph.png"
+    if os.path.exists(student_graph):
+        doc.add_picture(student_graph, width=Inches(3.6))
+    else:
         p = doc.add_paragraph()
-        r = p.add_run("[ graph image missing \u2014 see Savvas Lesson Quiz Q4 in teacher materials ]")
+        r = p.add_run("[ student-facing graph missing \u2014 run `python build_lq_q4_graph.py` ]")
         r.italic = True
         r.font.color.rgb = RGBColor(0x88, 0x00, 0x00)
 
     doc.add_paragraph()
-    header_line(doc, "Your answer: A  /  B  /  C  /  D", size=12)
+
+    # Typed MC choices (so no image gives away the answer)
+    q = qb.get_for_packet([DO_NOW_ID])[0]
+    answers = q.get("answers", [])
+    letters = "ABCD"
+    header_line(doc, "Circle one:", size=12)
+    for i, ans in enumerate(answers[:4]):
+        p = doc.add_paragraph()
+        r = p.add_run(f"    ({letters[i]})  {_format_unicode(ans)}")
+        r.font.size = Pt(11)
     doc.add_paragraph()
 
     header_line(doc, "Explain how you know (1 sentence):", size=12)
