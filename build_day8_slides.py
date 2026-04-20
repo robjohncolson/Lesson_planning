@@ -302,7 +302,7 @@ def build(path):
     add_text(sw, [
         "Collect:  Do Now sheets  \u00b7  Quiz packets  \u00b7  Student packets",
         "",
-        "Lesson 3-5 complete. On to Lesson 3-6.",
+        "Lesson 3-5 complete. On to Lesson 4-1.",
     ],
         Inches(0.6), Inches(4.1), Inches(12), Inches(2),
         size=22, color=RGBColor(0xDD, 0xEE, 0xFF),
