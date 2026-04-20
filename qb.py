@@ -201,6 +201,61 @@ def get_for_packet(ids: list[str]) -> list[dict]:
     return [found[qid] for qid in ids]
 
 
+def visuals_for(qids: list[str]) -> list[dict]:
+    """For a packet's ordered IDs, return a visuals manifest.
+
+    Each row: id, visual_type, source_image, needs_cleanup, clean_asset, has_visual.
+    Useful for a pre-print checklist so the teacher can verify every embedded
+    asset (photo, graph, table, map, diagram) before sending to the printer.
+    """
+    items = {q["id"]: q for q in load()}
+    out = []
+    for qid in qids:
+        q = items.get(qid)
+        if q is None:
+            continue
+        vt = q.get("visual_type", "none")
+        if vt == "none":
+            continue  # nothing to print-verify
+        out.append({
+            "id": qid,
+            "visual_type": vt,
+            "source_image": q.get("image"),
+            "needs_cleanup": bool(q.get("visual_needs_cleanup", False)),
+            "clean_asset": q.get("visual_clean_asset"),
+            "has_visual": bool(q.get("has_visual", False)),
+            "source_label": q.get("source", ""),
+        })
+    return out
+
+
+def write_visuals_checklist(qids: list[str], path: str | Path, *, title: str = "Visuals Checklist") -> None:
+    """Emit a Markdown checklist of every visual asset a packet needs.
+
+    The teacher reviews this before print to confirm each photo/graph/table
+    is embedded cleanly (not cropped from an answer key, no answer leak, etc.).
+    """
+    rows = visuals_for(qids)
+    path = Path(path)
+    lines = [
+        f"# {title}",
+        "",
+        f"Generated from {len(qids)} packet items; {len(rows)} carry visuals.",
+        "",
+        "| # | ID | Type | Needs cleanup? | Clean asset | Source image | Source label |",
+        "|---|---|---|---|---|---|---|",
+    ]
+    for i, r in enumerate(rows, 1):
+        flag = "**YES**" if r["needs_cleanup"] else "no"
+        clean = r["clean_asset"] or "—"
+        lines.append(
+            f"| {i} | `{r['id']}` | {r['visual_type']} | {flag} | `{clean}` | `{r['source_image']}` | {r['source_label']} |"
+        )
+    lines.append("")
+    lines.append("**Legend:** `needs_cleanup=YES` means the source image contains an answer key leak or combines multiple items — create or paste a clean version before print.")
+    path.write_text("\n".join(lines), encoding="utf-8")
+
+
 def stats() -> dict:
     items = load()
     by_lesson: dict[str, dict] = {}

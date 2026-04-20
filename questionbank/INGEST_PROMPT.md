@@ -17,6 +17,13 @@ or similar — follow these steps.
      `"Lesson Quiz"`, etc.
    - `image` — path relative to repo root, e.g. `"questionbank/images/foo.png"`
    - `has_visual` — true only if solving requires reading a graph/figure
+   - `visual_type` — one of: `none` / `photo` / `graph` / `table` / `diagram` / `map`.
+     Set per the dominant visual element; use `none` if the item is text-only.
+   - `visual_needs_cleanup` — true if the source image has an answer-key leak
+     (margin commentary that reveals the answer) OR contains multiple items
+     on one page (e.g., Example + its Try It share a page). Review for print.
+   - `visual_clean_asset` — optional path to a pre-made clean replacement
+     (like `assets/lq_q4_student_graph.png`). Null if none exists yet.
    - `prompt` — transcribed text. Preserve math as plain text:
      `^` for exponents, `√` for roots, proper minus `−` (U+2212), `·` for
      multiplication where useful.

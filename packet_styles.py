@@ -236,3 +236,42 @@ def framework_phase_header(doc, *, phase: str, framework_tag: str,
             p = right.paragraphs[0] if j == 0 else right.add_paragraph()
             p.add_run("\u2022 " + line if len(lines) > 1 else line)
     doc.add_paragraph()
+
+
+# ---------------------------------------------------------------------
+# Visuals checklist hook for packet builders.
+#
+# Call once per builder (after all docx files are saved) to emit a
+# sidecar `<Day>_Visuals_Checklist.md` listing every embedded visual
+# the packet relies on. Teacher reviews this before print to confirm
+# photos/graphs/tables/maps are embedded cleanly (no answer-key leak,
+# no multi-item crops).
+#
+# Usage (e.g. build_day6_packets.py __main__):
+#     import qb
+#     from packet_styles import emit_visuals_checklist
+#     emit_visuals_checklist(_ALL_IDS, "Day_6_Visuals_Checklist.md",
+#                            title="Day 6 - Visuals Checklist")
+# ---------------------------------------------------------------------
+
+def emit_visuals_checklist(packet_ids, out_path, *, title=None):
+    """Write a visuals checklist for the given packet IDs.
+
+    Thin wrapper around qb.write_visuals_checklist() so each builder
+    can emit its own sidecar with one import. Prints a confirmation
+    line if any visual items were found, else notes that none were.
+    """
+    import qb
+    from pathlib import Path
+    qb.write_visuals_checklist(
+        packet_ids,
+        out_path,
+        title=title or f"{Path(out_path).stem} - Visuals Checklist",
+    )
+    rows = qb.visuals_for(packet_ids)
+    n_flag = sum(1 for r in rows if r["needs_cleanup"])
+    if rows:
+        flag = f" ({n_flag} need cleanup)" if n_flag else ""
+        print(f"  + {out_path}: {len(rows)} visual(s){flag}")
+    else:
+        print(f"  + {out_path}: (no visuals in this packet)")

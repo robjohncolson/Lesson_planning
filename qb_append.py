@@ -33,6 +33,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
 REQUIRED = {"lesson", "prompt", "dok"}
+VISUAL_TYPES = {"none", "photo", "graph", "table", "diagram", "map"}
 
 
 def slugify(s: str, limit: int = 40) -> str:
@@ -74,6 +75,11 @@ def validate(entry: dict) -> None:
         n = len(entry.get("answers", []))
         if n and not (1 <= entry["correct"] <= n):
             raise SystemExit(f"ERROR: correct={entry['correct']} out of range for {n} answers")
+    vt = entry.get("visual_type")
+    if vt is not None and vt not in VISUAL_TYPES:
+        raise SystemExit(f"ERROR: visual_type={vt!r} not in {sorted(VISUAL_TYPES)}")
+    if entry.get("has_visual") and vt in (None, "none"):
+        print(f"warn: has_visual=true but visual_type={vt!r} — consider setting a specific type", file=sys.stderr)
 
 
 def normalize(entry: dict, taken: set[str], existing_prompts: set[str], force: bool) -> dict | None:
@@ -90,6 +96,9 @@ def normalize(entry: dict, taken: set[str], existing_prompts: set[str], force: b
         "page": entry.get("page"),
         "image": entry.get("image"),
         "has_visual": bool(entry.get("has_visual", False)),
+        "visual_type": entry.get("visual_type", "none" if not entry.get("has_visual") else "photo"),
+        "visual_needs_cleanup": bool(entry.get("visual_needs_cleanup", False)),
+        "visual_clean_asset": entry.get("visual_clean_asset"),
         "prompt": entry["prompt"],
         "answers": entry.get("answers", []),
         "correct": entry.get("correct"),
