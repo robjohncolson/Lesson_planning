@@ -15,9 +15,28 @@ This file captures only (a) the next task and (b) session-transient details that
 
 Work laptop (`C:/Users/ColsonR/...`). Student materials + Savvas PDFs live here. Home laptop has the Obsidian wiki.
 
-## Next task: Lesson 4-3 packet build
+## Next task: Lesson 5-1 packet build (PIVOT — priority reorder on 2026-04-20)
 
-**Lesson 4-3 bank is ingested** (70 items, committed). Next: build the 3-period Klimsara packets + slides + pacer, same pattern as L41.
+User pivoted off the 4-x sequence to start Topic 5 early. Pick up **Lesson 5-1** next: ingest the bank from Savvas, then build 3-period Klimsara packets + slides + pacer on the L41/L43 template.
+
+Lesson 5-1 is early-Topic-5 quick-hit (per CLAUDE.md roadmap: "5-1 quick, 5-4, 5-5 quick"). Check `envAlg2_05_01_*` or similar LaTeX/PDF in repo before re-ingesting from scratch — the LaTeX pipeline (`ingest_lesson_from_latex.py`) was used successfully for 4-3.
+
+### Lesson 4-3 — BUILT but open flags (return to before teaching)
+
+4-3 packets + slides + pacer shipped 2026-04-20 (commit forthcoming). NOT eye-checked. Before teaching 4-3:
+
+1. **Eye-check P2 teacher packet** — most structurally novel (DOK-3 callout + bridged Do Now from Q25). `L43_P2_Teacher_Packet.docx`.
+2. **Browser-verify `L43_Pacer.html`** — tab switcher + timer + ⭐ item styling on Q13/Q19.
+3. **Clean Example 6 SA/V diagram** — flagged `visual_needs_cleanup: true` in `L43_P3_Visuals_Checklist.md`. Manual image staging before P3 print.
+4. **4-1 open flags still unresolved:** q16 y-value reconstructed as `2/3`, q18 domain tail reconstructed as "real numbers except 0" — user eye-check.
+
+### Skipped (per user priority reorder — may return after 5-1)
+
+- **Lesson 4-4** (Topic 4 LEHS Q#19: length from area/width). Reference: `lesson_4-4_rational_expressions.{tex,pdf}`.
+- **Lesson 4-5** (LEHS Q#6, Q#7). Reference: `envAlg2_04_05_LessonPacket.{tex,pdf}`.
+- **Topic 4 LEHS assessment day** — 8 Qs from `a2topic4assess.docx` (#2, 3, 4, 5, 6, 7, 15, 19). Build an `L4X_Assessment_Day` wrapper like `L35_P4_*`.
+
+### (Former Lesson 4-3 plan — kept for reference in case we backfill)
 
 ### Known before starting
 
@@ -45,14 +64,13 @@ Phase timings per the Klimsara template (Do Now 5, Launch 12, Explore 33, Share 
 - **4-3 Practice #1-#10** — concept-review items in SE not in TE; not yet ingested. Low priority unless a packet needs them.
 - **4-3 Example 6** — one image placeholder (rectangular prism + cylinder diagrams). Manual image staging if the packet uses it.
 
-## Roadmap after 4-3
+## Roadmap after 5-1 (revised 2026-04-20 pivot)
 
-1. **4-4** (Topic 4 LEHS Q#19: length from area/width). Has `lesson_4-4_rational_expressions.{tex,pdf}` already in repo as reference.
-2. **4-5** (Topic 4 LEHS Q#6 solve rational equation, Q#7 work-rate). Klimsara reference: `envAlg2_04_05_LessonPacket.{tex,pdf}`.
-3. **Topic 4 LEHS assessment day** — 8 Qs from `a2topic4assess.docx` (#2, 3, 4, 5, 6, 7, 15, 19). Build an L4X_Assessment_Day wrapper like `L35_P4_*`.
-4. **Unit 5** (5-1 quick, 5-4, 5-5 quick) — pilot the unit-at-a-time Gemini/GPT ingest if 4-3/4-4/4-5 go smoothly.
-5. **Trig SOH CAH TOA** — external-to-textbook topic. Will need a curated problem set.
-6. **Unit 6** (6-3, 6-4, 6-5).
+1. **5-1 THIS SESSION** — see top of file.
+2. **5-4, 5-5 quick** — continue Unit 5 sweep.
+3. **4-4 / 4-5 / Topic 4 assessment day** — return to Unit 4 backlog before Topic 4 assessment. Decide based on pacing.
+4. **Trig SOH CAH TOA** — external-to-textbook topic. Will need a curated problem set.
+5. **Unit 6** (6-3, 6-4, 6-5).
 
 End of school: **2026-06-20**.
 

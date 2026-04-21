@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L43 Pacer · Periods 1, 2, 3</title>
+<style>
+  :root {
+    --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
+    --gold:#c88b14; --red:#b23a3a; --accent:#d94e2f;
+    --bg:#eaf2fb; --card:#ffffff; --ink:#112233; --muted:#556677;
+    --pale-teal:#d4edda; --pale-gold:#fff2cc; --pale-red:#f7d7d7;
+    --pale-navy:#cfe2f3; --pale-orange:#fce5cd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.4;
+  }
+  header {
+    background: var(--navy); color: #fff; padding: 12px 24px;
+    display:flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+  header .meta { font-size: 0.85rem; color: #bbd0e6; }
+  .tabs {
+    display:flex; gap: 4px; background:#fff; padding: 6px 24px;
+    border-bottom: 1px solid #ccc;
+  }
+  .tab {
+    padding: 10px 20px; border: none; background: #dfe9f3;
+    color: var(--navy); font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; border-radius: 6px 6px 0 0;
+    transition: background 0.15s;
+  }
+  .tab:hover { background: #c9dcf0; }
+  .tab.active { background: var(--navy); color: #fff; }
+  .panel { display: none; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .panel.active { display: block; }
+  .timer-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--navy); color: #fff; padding: 10px 16px;
+    border-radius: 8px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .timer-bar .countdown { font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
+  .timer-bar button {
+    background: var(--gold); color: #fff; border: none;
+    padding: 8px 16px; border-radius: 4px; font-weight: 600;
+    cursor: pointer; font-size: 0.9rem;
+  }
+  .timer-bar button.stop { background: var(--red); }
+  .timer-bar button:hover { filter: brightness(1.1); }
+  .timer-bar .phase-title { font-size: 1rem; color: #bbd0e6; }
+  .phase-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .phase-chip {
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
+    font-weight: 600; border: 2px solid transparent;
+  }
+  .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
+  .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
+  .phase-card {
+    background: var(--card); border-radius: 8px; padding: 18px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px;
+  }
+  .phase-card h2 {
+    margin: 0 0 6px 0; color: var(--navy); font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badges { display:flex; gap: 6px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.72rem; font-weight: 700; color: #fff;
+  }
+  .badge.dok { background: var(--gold); }
+  .badge.min { background: var(--green); }
+  .badge.fw { background: var(--blue); }
+  .callout {
+    padding: 12px 14px; border-radius: 6px; margin: 12px 0;
+    border-left: 5px solid var(--teal);
+  }
+  .callout.teacher { background: var(--pale-navy); border-color: var(--navy); }
+  .callout.answer  { background: var(--pale-teal); border-color: var(--green); }
+  .callout.rule    { background: var(--pale-gold); border-color: var(--gold); }
+  .callout.warn    { background: var(--pale-red); border-color: var(--red); }
+  .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout .label {
+    font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    display: block; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout.answer .label { color: var(--green); }
+  .callout.rule .label { color: var(--gold); }
+  .callout.warn .label { color: var(--red); }
+  .callout.bridge .label { color: var(--accent); }
+  .callout ul { margin: 4px 0; padding-left: 22px; }
+  .item {
+    border-left: 3px solid var(--blue); padding: 10px 14px;
+    background: #f7faff; margin: 8px 0; border-radius: 4px;
+  }
+  .item .qid {
+    font-size: 0.75rem; color: var(--muted); font-family: monospace;
+  }
+  .item.dok3 { border-left-color: var(--accent); background: #fff5ef; }
+  .item.assess { border-left-color: var(--gold); background: #fffbea; }
+  .item .star { font-weight: 700; }
+  .item.dok3 .star { color: var(--accent); }
+  .item.assess .star { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lesson 4-3 Pacer</h1>
+    <div class="meta">Periods 1–3 · Rational Expressions (Multiply, Divide, Domain)</div>
+  </div>
+  <div class="meta" id="dateLabel"></div>
+</header>
+
+<nav class="tabs" id="tabBar">
+  <button class="tab active" data-tab="p1">P1 · Equivalent &amp; Simplify</button>
+  <button class="tab" data-tab="p2">P2 · Multiply/Divide + ⭐ DOK-3</button>
+  <button class="tab" data-tab="p3">P3 · Modeling + Assessment-Critical</button>
+</nav>
+
+<main id="panels"></main>
+
+<script>
+const PACER = {
+  p1: {
+    label: "Period 1 · Equivalent & Simplify · 55 min base",
+    total_min: 55,
+    phases: [
+      { id:"donow", title:"Do Now — Notice & Wonder",
+        fw:"exploration", dok:"1-2", min:5,
+        items:[{qid:"4-3-savvas-model-discuss-lesson-4-3-launch", label:"Explore & Reason: line with a missing point — what must be true of the equation?"}],
+        teacher:[
+          "Pass Do Now on entry",
+          "Name 2 things we notice + 1 thing we wonder",
+          "Bridge: when a value is 'skipped' on a graph, that value must be excluded from the domain"
+        ],
+        bridge:"This 'hole' is a domain restriction — today we find them from algebra without graphing.",
+      },
+      { id:"launch", title:"Launch — Equivalent & Simplify (Ex 1 + Ex 2)",
+        fw:"teacher models", dok:"2", min:12,
+        items:[
+          {qid:"4-3-savvas-example-1-lesson-4-3", label:"Example 1"},
+          {qid:"4-3-savvas-example-2-lesson-4-3", label:"Example 2"},
+        ],
+        teacher:[
+          "Model Ex 1 fully; gradual-release into Ex 2 — students factor, you record",
+          "Emphasize: canceled factor still excludes its zero"
+        ],
+        rules:[
+          "Factor fully → cancel FACTORS only → domain excludes zeros of the ORIGINAL denominator (including canceled factors)."
+        ],
+      },
+      { id:"explore", title:"Explore — Think-Pair-Share (7 items)",
+        fw:"student work", dok:"2", min:33,
+        items:[
+          {qid:"4-3-savvas-try-it-1-lesson-4-3", label:"TI 1: write equivalent"},
+          {qid:"4-3-savvas-try-it-2-lesson-4-3", label:"TI 2: simplify two parts"},
+          {qid:"4-3-savvas-q20", label:"#20 equivalent under restricted domain"},
+          {qid:"4-3-savvas-q22", label:"#22 simplify y²−5y−24 over y²+3y"},
+          {qid:"4-3-savvas-q24", label:"#24 simplify x²+8x+15 over x²−x−12"},
+          {qid:"4-3-savvas-q17", label:"#17 define simplest form"},
+          {qid:"4-3-savvas-q19", label:"#19 domain from cubic denominator"},
+        ],
+        teacher:[
+          "4-lap circulation: Launch 0–8, 8–16, 16–24, 24–32 min",
+          "Stall = factor first, THEN cancel",
+          "ELL: point to sentence frame on packet"
+        ],
+        warn:"Watch for students canceling TERMS across + or −. Redirect with 'what is a factor vs. a term?'",
+      },
+      { id:"share", title:"Share / Summary",
+        fw:"academic conversation", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Cold-call two pairs for Q#22 and Q#19",
+          "Record domain restrictions together on the board"
+        ],
+        answer:"Q#19 domain: x ≠ −5, 0, 2 (zeros of x³+3x²−10x = x(x+5)(x−2))",
+      },
+      { id:"exit", title:"Exit Ticket — Summary Recap",
+        fw:"not graded", dok:"1-2", min:3,
+        items:[{qid:"4-3-savvas-q25", label:"Q25 as packet-back reinforcement (optional HW)"}],
+        teacher:[
+          "Collect Summary Exit box",
+          "Preview: tomorrow we multiply and divide these — same factor/cancel/restrict rules"
+        ],
+      },
+    ]
+  },
+
+  p2: {
+    label: "Period 2 · Multiply/Divide + DOK-3 · 55 min base",
+    total_min: 55,
+    phases: [
+      { id:"donow", title:"Do Now — Quick simplify check",
+        fw:"bridge from P1", dok:"1", min:5,
+        items:[{qid:"4-3-savvas-q25", label:"#25 simplify (x³+9x²−10x)/(x³−9x²−10x)"}],
+        teacher:[
+          "Bridge from P1: factor first, THEN cancel",
+          "Exit Do Now: students state domain"
+        ],
+        bridge:"Same simplify move — today we push it through multiplication and division.",
+      },
+      { id:"launch", title:"Launch — Multiply/Divide (Ex 3 only)",
+        fw:"teacher models", dok:"2", min:12,
+        items:[
+          {qid:"4-3-savvas-example-3-lesson-4-3", label:"Example 3"},
+        ],
+        teacher:[
+          "Klimsara: model ONE example only — gradual release for TI 3 immediately after"
+        ],
+        rules:[
+          "Factor everything → division becomes × reciprocal → cancel factors across any num/denom → domain = union of ALL denominator zeros including the reciprocal's new denom."
+        ],
+      },
+      { id:"explore", title:"Explore — TPS + ⭐ DOK-3 Spine",
+        fw:"student work + DOK-3", dok:"2-3", min:33,
+        items:[
+          {qid:"4-3-savvas-try-it-3-lesson-4-3", label:"TI 3: product of three"},
+          {qid:"4-3-savvas-q27", label:"#27 ((x−y)²/(x+y)) · ((3x+3y)/(x²−y²))"},
+          {qid:"4-3-savvas-try-it-4-lesson-4-3", label:"TI 4: multiply by polynomial"},
+          {qid:"4-3-savvas-q29", label:"#29 polynomial product"},
+          {qid:"4-3-savvas-try-it-5-lesson-4-3", label:"TI 5: two quotients"},
+          {qid:"4-3-savvas-q32", label:"#32 (25x²−4)/(x²−9) ÷ (5x−2)/(x+3)"},
+          {qid:"4-3-savvas-q13", label:"⭐ DOK-3: Why closed under × and ÷? Paragraph + one product + one quotient example", dok3:true, note:"Plan ~12–15 min. DO NOT give scaffolding before 24 min in."},
+        ],
+        teacher:[
+          "DO NOT give Q13 scaffolding before 24 min in",
+          "Circulation protocol same as P1",
+          "Stall on Q13 = 'what does closure mean for integers? Extend.'"
+        ],
+        warn:"Q13 is the spine. If a student produces only a numeric example (not an algebraic one), push back: 'show with variables.'",
+      },
+      { id:"share", title:"Share / Summary",
+        fw:"academic conversation", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Two students present Q13 paragraphs — one product, one quotient",
+          "Class votes: does the argument cover BOTH operations?"
+        ],
+      },
+      { id:"exit", title:"Exit Ticket — Summary Recap",
+        fw:"not graded", dok:"1-2", min:3,
+        items:[{qid:"4-3-savvas-q40", label:"Q40 performance-task finance (optional HW reinforce)"}],
+        teacher:[
+          "Collect Summary Exit box",
+          "Preview: P3 — modeling with SA:V ratios + assessment rehearsal for Topic 4 LEHS"
+        ],
+      },
+    ]
+  },
+
+  p3: {
+    label: "Period 3 · Modeling + Assessment-Critical · 55 min base",
+    total_min: 55,
+    short_note: "P3 prepares students for Topic 4 LEHS assessment. Q#22 rehearses LEHS Q#4 format (simplify + domain). Q#19 is THE rehearsal item for LEHS Q#2 (domain from cubic denominator). Conference any student who misses Q#19 before the assessment.",
+    phases: [
+      { id:"donow", title:"Do Now — Why does it equal 1?",
+        fw:"bridge from P2", dok:"2", min:5,
+        items:[{qid:"4-3-savvas-q11", label:"#11 Why does (4x²−7)/(4x²−7) = 1? Under what domain?"}],
+        teacher:[
+          "Bridge to today: when numerator equals denominator (or a factor pattern does), we get 1 — except where that shared expression is zero"
+        ],
+      },
+      { id:"launch", title:"Launch — Ex 2 + Ex 6 (assessment-critical pair)",
+        fw:"teacher models 2 examples", dok:"2", min:12,
+        items:[
+          {qid:"4-3-savvas-example-2-lesson-4-3", label:"Example 2 (assessment-critical — LEHS Q#4 format)"},
+          {qid:"4-3-savvas-example-6-lesson-4-3", label:"Example 6 (SA/V ratio modeling)"},
+        ],
+        teacher:[
+          "Ex 2 is assessment-critical — SAME as Topic 4 LEHS Q#4 format",
+          "Ex 6 models SA:V ratio (cylinder vs prism) — the real-world spine"
+        ],
+        rules:[
+          "DOMAIN: excludes zeros of every denominator in every step. MODELING: name ratio in words → translate to rationals with units → simplify with restrictions → interpret in context."
+        ],
+      },
+      { id:"explore", title:"Explore — TPS · Modeling + Assessment Rehearsal (6 items)",
+        fw:"student work · DOK-2", dok:"2", min:33,
+        items:[
+          {qid:"4-3-savvas-try-it-6-lesson-4-3", label:"TI 6: SA:V comparison (two prisms)"},
+          {qid:"4-3-savvas-q14", label:"#14 domain via graphing — holes vs asymptotes"},
+          {qid:"4-3-savvas-q22", label:"#22 simplify + domain (LEHS Q#4 rehearsal)", assess:true, note:"Assessment rehearsal — same format as Topic 4 LEHS Q#4."},
+          {qid:"4-3-savvas-q34", label:"#34 volume ratio Fig A : Fig B"},
+          {qid:"4-3-savvas-q37", label:"#37 parallelogram base from area/height"},
+          {qid:"4-3-savvas-q19", label:"⭐ #19 Assessment rehearsal — domain from x³+3x²−10x (Topic 4 LEHS Q#2 format)", assess:true, note:"TOPIC 4 ASSESSMENT REHEARSAL — treat it like the real test. Plan ~8 min."},
+        ],
+        teacher:[
+          "Q19 is the TOPIC 4 ASSESSMENT REHEARSAL — treat it like the real test",
+          "4-lap circulation prioritizing struggling students on Q19"
+        ],
+        warn:"If students get Q19 wrong on first pass — they will likely miss LEHS Q#2. Conference before Share.",
+      },
+      { id:"share", title:"Share / Summary",
+        fw:"LEHS preview", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Whole-class: every student states their Q19 answer aloud before packet closes"
+        ],
+        answer:"Q19: x ≠ −5, 0, 2. Factor x³+3x²−10x = x(x+5)(x−2).",
+      },
+      { id:"exit", title:"Exit Ticket — Pre-Assessment Confidence",
+        fw:"confidence check", dok:"1-2", min:3,
+        items:[{qid:"4-3-savvas-q39", label:"Q39 SAT/ACT (optional HW reinforce)"}],
+        teacher:[
+          "Collect Summary Exit box",
+          "Tonight: scan Q19 responses — if any student missed it, insert 5-min recap Do Now before LEHS assessment day"
+        ],
+      },
+    ]
+  },
+};
+
+const panels = document.getElementById("panels");
+const tabBar = document.getElementById("tabBar");
+document.getElementById("dateLabel").textContent = new Date().toDateString();
+
+function renderPanel(tabId) {
+  const data = PACER[tabId];
+  const panel = document.createElement("div");
+  panel.className = "panel";
+  panel.id = "panel-" + tabId;
+  panel.innerHTML = `
+    <div class="timer-bar">
+      <div>
+        <div class="phase-title" id="phaseTitle-${tabId}">Select a phase to begin</div>
+      </div>
+      <div class="countdown" id="timer-${tabId}">--:--</div>
+      <div>
+        <button onclick="startPhase('${tabId}')" id="startBtn-${tabId}">Start</button>
+        <button class="stop" onclick="stopPhase('${tabId}')">Stop</button>
+      </div>
+    </div>
+    <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    ${data.short_note ? `<div style="background:#fffbea; border-left:4px solid var(--gold); padding:10px 14px; border-radius:6px; font-size:0.9rem; margin:12px 0;">⭐ ${data.short_note}</div>` : ""}
+    <div class="phase-list" id="chips-${tabId}"></div>
+    <div id="phase-card-${tabId}"></div>
+  `;
+  panels.appendChild(panel);
+  const chipBar = panel.querySelector(`#chips-${tabId}`);
+  data.phases.forEach((ph, idx) => {
+    const chip = document.createElement("button");
+    chip.className = "phase-chip";
+    chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0]} · ${ph.min}m`;
+    chip.onclick = () => selectPhase(tabId, idx);
+    chipBar.appendChild(chip);
+  });
+  selectPhase(tabId, 0);
+}
+
+function selectPhase(tabId, idx) {
+  const data = PACER[tabId];
+  const ph = data.phases[idx];
+  const card = document.getElementById(`phase-card-${tabId}`);
+  let html = `<div class="phase-card">
+    <h2>${ph.title}
+      <span class="badges">
+        <span class="badge dok">DOK ${ph.dok}</span>
+        <span class="badge min">${ph.min} min</span>
+        <span class="badge fw">${ph.fw}</span>
+      </span>
+    </h2>`;
+  if (ph.items && ph.items.length) {
+    ph.items.forEach(it => {
+      let cls = "item";
+      if (it.dok3) cls = "item dok3";
+      else if (it.assess) cls = "item assess";
+      const star = it.dok3 ? '<span class="star">⭐ DOK-3 </span>' :
+                    it.assess ? '<span class="star">⭐ ASSESS </span>' : '';
+      html += `<div class="${cls}">${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>${it.note ? `<div>${it.note}</div>` : ""}</div>`;
+    });
+  }
+  if (ph.teacher && ph.teacher.length) {
+    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
+    ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.rules && ph.rules.length) {
+    html += `<div class="callout rule"><span class="label">📘 Rules / stems</span><ul>`;
+    ph.rules.forEach(r => html += `<li>${r}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.answer) {
+    html += `<div class="callout answer"><span class="label">✅ Answer key</span>${ph.answer}</div>`;
+  }
+  if (ph.bridge) {
+    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
+  }
+  if (ph.warn) {
+    html += `<div class="callout warn"><span class="label">⚠️ Warning / Note</span>${ph.warn}</div>`;
+  }
+  html += `</div>`;
+  card.innerHTML = html;
+  document.querySelectorAll(`#chips-${tabId} .phase-chip`).forEach((c, i) => {
+    c.classList.toggle("active", i === idx);
+  });
+  document.getElementById(`phaseTitle-${tabId}`).textContent = ph.title;
+  currentPhase[tabId] = idx;
+  stopPhase(tabId);
+  document.getElementById(`timer-${tabId}`).textContent =
+    `${String(ph.min).padStart(2,'0')}:00`;
+}
+
+const timers = {}, currentPhase = {};
+
+function startPhase(tabId) {
+  const idx = currentPhase[tabId];
+  const ph = PACER[tabId].phases[idx];
+  let remaining = ph.min * 60;
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  clearInterval(timers[tabId]);
+  timers[tabId] = setInterval(() => {
+    remaining--;
+    if (remaining < 0) {
+      clearInterval(timers[tabId]);
+      timerEl.textContent = "TIME";
+      timerEl.style.color = "#ff6b6b";
+      if (idx + 1 < PACER[tabId].phases.length) {
+        document.querySelectorAll(`#chips-${tabId} .phase-chip`)[idx].classList.add("done");
+      }
+      return;
+    }
+    const m = Math.floor(remaining / 60), s = remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    timerEl.style.color = remaining < 60 ? "#ff6b6b" : "#ffffff";
+  }, 1000);
+}
+
+function stopPhase(tabId) {
+  clearInterval(timers[tabId]);
+  const idx = currentPhase[tabId];
+  if (idx === undefined) return;
+  const ph = PACER[tabId].phases[idx];
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  timerEl.textContent = `${String(ph.min).padStart(2,'0')}:00`;
+  timerEl.style.color = "#ffffff";
+}
+
+Object.keys(PACER).forEach(renderPanel);
+document.querySelector('.panel').classList.add('active');
+
+tabBar.addEventListener("click", e => {
+  if (!e.target.matches(".tab")) return;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  e.target.classList.add("active");
+  document.getElementById("panel-" + e.target.dataset.tab).classList.add("active");
+});
+</script>
+
+</body>
+</html>
