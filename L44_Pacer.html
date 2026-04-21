@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L44 Pacer · Single Period</title>
+<style>
+  :root {
+    --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
+    --gold:#c88b14; --red:#b23a3a; --accent:#d94e2f;
+    --bg:#eaf2fb; --card:#ffffff; --ink:#112233; --muted:#556677;
+    --pale-teal:#d4edda; --pale-gold:#fff2cc; --pale-red:#f7d7d7;
+    --pale-navy:#cfe2f3; --pale-orange:#fce5cd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.4;
+  }
+  header {
+    background: var(--navy); color: #fff; padding: 12px 24px;
+    display:flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+  header .meta { font-size: 0.85rem; color: #bbd0e6; }
+  .panel { display: block; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .timer-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--navy); color: #fff; padding: 10px 16px;
+    border-radius: 8px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .timer-bar .countdown { font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
+  .timer-bar button {
+    background: var(--gold); color: #fff; border: none;
+    padding: 8px 16px; border-radius: 4px; font-weight: 600;
+    cursor: pointer; font-size: 0.9rem;
+  }
+  .timer-bar button.stop { background: var(--red); }
+  .timer-bar button:hover { filter: brightness(1.1); }
+  .timer-bar .phase-title { font-size: 1rem; color: #bbd0e6; }
+  .phase-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .phase-chip {
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
+    font-weight: 600; border: 2px solid transparent;
+  }
+  .phase-chip:hover { background: #c9dcf0; }
+  .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
+  .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
+  .phase-card {
+    background: var(--card); border-radius: 8px; padding: 18px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px;
+  }
+  .phase-card h2 {
+    margin: 0 0 6px 0; color: var(--navy); font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badges { display:flex; gap: 6px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.72rem; font-weight: 700; color: #fff;
+  }
+  .badge.dok { background: var(--gold); }
+  .badge.min { background: var(--green); }
+  .badge.fw { background: var(--blue); }
+  .callout {
+    padding: 12px 14px; border-radius: 6px; margin: 12px 0;
+    border-left: 5px solid var(--teal);
+  }
+  .callout.teacher { background: var(--pale-navy); border-color: var(--navy); }
+  .callout.answer  { background: var(--pale-teal); border-color: var(--green); }
+  .callout.rule    { background: var(--pale-gold); border-color: var(--gold); }
+  .callout.warn    { background: var(--pale-red); border-color: var(--red); }
+  .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout .label {
+    font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    display: block; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout.answer .label { color: var(--green); }
+  .callout.rule .label { color: var(--gold); }
+  .callout.warn .label { color: var(--red); }
+  .callout.bridge .label { color: var(--accent); }
+  .callout ul { margin: 4px 0; padding-left: 22px; }
+  .item {
+    border-left: 3px solid var(--blue); padding: 10px 14px;
+    background: #f7faff; margin: 8px 0; border-radius: 4px;
+  }
+  .item .qid {
+    font-size: 0.75rem; color: var(--muted); font-family: monospace;
+  }
+  .item.dok3 { border-left-color: var(--accent); background: #fff5ef; }
+  .item.assess { border-left-color: var(--gold); background: #fffbea; }
+  .item .star { font-weight: 700; }
+  .item.dok3 .star { color: var(--accent); }
+  .item.assess .star { color: var(--gold); }
+</style>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)'], ['$','$']], displayMath: [['\\[','\\]'], ['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lesson 4-4 Pacer</h1>
+    <div class="meta">Single Period (Quick) · Adding &amp; Subtracting Rational Expressions + DOK-3 Electrical Resistance (Topic 4 LEHS Q#15 Prep)</div>
+  </div>
+  <div class="meta" id="dateLabel"></div>
+</header>
+
+<main>
+  <div class="panel" id="panel-p1"></div>
+</main>
+
+<script>
+const PACER = {
+  p1: {
+    label: "Single Period · Add/Subtract Rational Expressions + DOK-3 Resistance · 58 min",
+    total_min: 58,
+    phases: [
+      { id:"donow", title:"Do Now — Model &amp; Discuss: 1/2 + 1/3 conflict",
+        fw:"exploration", dok:"1", min:5,
+        items:[{qid:"4-4-savvas-model-discuss-lesson-4-4-launch", label:"Two students add 1/2 + 1/3 in conflicting ways — which is right?"}],
+        teacher:[
+          "Hand out at door. Circulate 3 min.",
+          "Cold-call one student: \"Yesterday we MULTIPLIED rational expressions. Today we ADD. What new move does adding require that multiplying didn't?\"",
+          "Write LCM = 6 on the board after student answers."
+        ],
+        bridge:"Lesson 4-3 (multiply/divide) &rarr; Lesson 4-4 (add/subtract). Addition requires a <strong>common denominator</strong> — multiplication didn't. Connects 1/2 + 1/3 = 5/6 directly to \\(\\tfrac{a}{x} + \\tfrac{b}{y} = \\tfrac{ay + bx}{xy}\\).",
+      },
+      { id:"launch", title:"Launch — Examples 3 &amp; 4 + Rules [COMPRESSED]",
+        fw:"teacher models", dok:"1-2", min:13,
+        items:[
+          {qid:"4-4-savvas-example-3-lesson-4-4", label:"Example 3: ADD rational expressions with unlike denominators"},
+          {qid:"4-4-savvas-example-4-lesson-4-4", label:"Example 4: SUBTRACT rational expressions with unlike denominators"},
+        ],
+        teacher:[
+          "\"Watch me add two rational expressions with different denominators.\"",
+          "Step 1 factor each denom. Step 2 find LCM. Step 3 rewrite each fraction over LCM. Step 4 combine numerators. Step 5 simplify.",
+          "Transition to Example 4 without stopping: \"Subtraction looks identical UNTIL the distribute step — watch the minus sign.\"",
+          "Distribute the minus across EVERY term of the second numerator.",
+          "30-sec pause: \"Turn to partner — where does the minus-sign trap catch students? What do you do to avoid it?\"",
+          "Release at minute 18. Do NOT solve Try-Its."
+        ],
+        rules:[
+          "LIKE denominators: combine numerators, keep the denominator, simplify.",
+          "UNLIKE: factor each denom &rarr; find LCM &rarr; rewrite each fraction over LCM &rarr; combine numerators &rarr; simplify.",
+          "LCM takes every <strong>distinct factor</strong> at its <strong>highest power</strong> across both denominators.",
+          "After combining, check for a common factor to cancel.",
+          "Sign trap (subtraction): distribute the minus across <strong>every term</strong> of the second numerator."
+        ],
+        warn:"COMPRESSED LESSON — two Examples modeled in Launch. Deviation from standard Klimsara one-example rule is justified: adding and subtracting are distinct assessment skills on Topic 4 LEHS.",
+      },
+      { id:"explore", title:"Explore — TPS (TI 3, TI 4, #12, #16, #26, ⭐ #32)",
+        fw:"student work", dok:"2-3", min:32,
+        items:[
+          {qid:"4-4-savvas-try-it-3-lesson-4-4", label:"TI 3: add rational expressions (unlike denominators)"},
+          {qid:"4-4-savvas-try-it-4-lesson-4-4", label:"TI 4: subtract rational expressions (unlike denominators)"},
+          {qid:"4-4-savvas-q12", label:"#12 like denominators — quick confidence build"},
+          {qid:"4-4-savvas-q16", label:"#16 unlike denominators — factor first, then LCM"},
+          {qid:"4-4-savvas-q26", label:"#26 subtract with SIGN-DISTRIBUTION TRAP"},
+          {qid:"4-4-savvas-q32", label:"⭐ DOK-3 ELECTRICAL RESISTANCE — parallel circuits, 1/R_total = 1/R₁ + 1/R₂, form ratio R_A/R_B as a single simplified rational expression. Topic 4 LEHS Q#15 rehearsal.", dok3:true, note:"Plan ~10 min. Do NOT give CER answer. Pairs present at Share."},
+        ],
+        teacher:[
+          "5 laps across 32 min.",
+          "Lap 1 (4m): TI 3 — press pairs on LCM construction.",
+          "Lap 2 (4m): TI 4 — watch for sign-distribution errors.",
+          "Lap 3 (3m): #12 — like denoms; confidence build.",
+          "Lap 4 (4+5m): #16 + #26. On #26 press \"where does the minus sign go?\" on every pair.",
+          "Lap 5 (10m): ⭐ #32 Electrical Resistance — the capstone. Students build common denominators for reciprocal sums, then form the ratio."
+        ],
+        bridge:"CER expectation on #32: <strong>(C)</strong> ratio as a single simplified rational expression; <strong>(E)</strong> algebra steps — common denom, add, simplify; <strong>(R)</strong> parallel-resistor formula \\(\\tfrac{1}{R_{\\text{total}}} = \\tfrac{1}{R_1} + \\tfrac{1}{R_2}\\), with observation that the ratio's form depends only on the constituent resistances. Press: <em>\"What's the LCM of the two denominators?\"</em> — once they have it, the rest is algebra.",
+        warn:"45-min Wed F variant: cut #16 + #26. <strong>Never cut #32.</strong> Students will stall on the reciprocal flip from 1/R_total to R_total — remind them: flip the whole equation (reciprocate both sides).",
+      },
+      { id:"share", title:"Share / Summary — Resistance Reveal + Q#15 Bridge",
+        fw:"academic conversation", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Cold-call 1 pair (ideally one that struggled on #32) to present their resistance solution using the sentence frame.",
+          "Class signals thumbs. Write the LCM step on board.",
+          "Bridge aloud: \"This is the structural reasoning on Topic 4 LEHS Q#15. You have now rehearsed it.\""
+        ],
+        answer:"#32: \\(\\tfrac{1}{R_{\\text{total}}} = \\tfrac{1}{R_1} + \\tfrac{1}{R_2} = \\tfrac{R_2 + R_1}{R_1 R_2}\\) &rArr; \\(R_{\\text{total}} = \\tfrac{R_1 R_2}{R_1 + R_2}\\). Form the ratio \\(R_A/R_B\\) using that form for each circuit. Sentence frame: \"For the parallel circuit, \\(\\tfrac{1}{R_{\\text{total}}} = \\tfrac{1}{R_1} + \\tfrac{1}{R_2}\\). I found a common denominator of ___, added the reciprocals to get ___, then flipped to get \\(R_{\\text{total}}\\) = ___.\"",
+      },
+      { id:"exit", title:"Exit Ticket — Summary Recap",
+        fw:"not graded", dok:"1-2", min:3,
+        items:[],
+        teacher:[
+          "Collect at door.",
+          "Scan stem 2 (reciprocal-sum &harr; rational-expression addition parallel).",
+          "Plan re-teach if many students can't articulate the structural parallel."
+        ],
+        rules:[
+          "Stem 1: To add rational expressions with unlike denominators, I must first find the ___ of the denominators.",
+          "Stem 2: Practice #32 (resistance) showed me that reciprocal-sum problems (1/R₁ + 1/R₂) use the same algebraic steps as adding rational expressions because ___.",
+          "Stem 3: One biggest thing I learned today: _____"
+        ],
+      },
+    ]
+  },
+};
+
+document.getElementById("dateLabel").textContent = new Date().toDateString();
+
+function renderPanel(tabId) {
+  const data = PACER[tabId];
+  const panel = document.getElementById("panel-" + tabId);
+  panel.innerHTML = `
+    <div class="timer-bar">
+      <div>
+        <div class="phase-title" id="phaseTitle-${tabId}">Select a phase to begin</div>
+      </div>
+      <div class="countdown" id="timer-${tabId}">--:--</div>
+      <div>
+        <button onclick="startPhase('${tabId}')" id="startBtn-${tabId}">Start</button>
+        <button class="stop" onclick="stopPhase('${tabId}')">Stop</button>
+      </div>
+    </div>
+    <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    <div class="phase-list" id="chips-${tabId}"></div>
+    <div id="phase-card-${tabId}"></div>
+  `;
+  const chipBar = panel.querySelector(`#chips-${tabId}`);
+  data.phases.forEach((ph, idx) => {
+    const chip = document.createElement("button");
+    chip.className = "phase-chip";
+    chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0]} · ${ph.min}m`;
+    chip.onclick = () => selectPhase(tabId, idx);
+    chipBar.appendChild(chip);
+  });
+  selectPhase(tabId, 0);
+}
+
+function selectPhase(tabId, idx) {
+  const data = PACER[tabId];
+  const ph = data.phases[idx];
+  const card = document.getElementById(`phase-card-${tabId}`);
+  let html = `<div class="phase-card">
+    <h2>${ph.title}
+      <span class="badges">
+        <span class="badge dok">DOK ${ph.dok}</span>
+        <span class="badge min">${ph.min} min</span>
+        <span class="badge fw">${ph.fw}</span>
+      </span>
+    </h2>`;
+  if (ph.items && ph.items.length) {
+    ph.items.forEach(it => {
+      let cls = "item";
+      if (it.dok3) cls = "item dok3";
+      else if (it.assess) cls = "item assess";
+      const star = it.dok3 ? '<span class="star">⭐ DOK-3 </span>' :
+                    it.assess ? '<span class="star">⭐ ASSESS </span>' : '';
+      html += `<div class="${cls}">${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>${it.note ? `<div>${it.note}</div>` : ""}</div>`;
+    });
+  }
+  if (ph.teacher && ph.teacher.length) {
+    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
+    ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.rules && ph.rules.length) {
+    html += `<div class="callout rule"><span class="label">📘 Rules / stems</span><ul>`;
+    ph.rules.forEach(r => html += `<li>${r}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.answer) {
+    html += `<div class="callout answer"><span class="label">✅ Answer key</span>${ph.answer}</div>`;
+  }
+  if (ph.bridge) {
+    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
+  }
+  if (ph.warn) {
+    html += `<div class="callout warn"><span class="label">⚠️ Warning / Note</span>${ph.warn}</div>`;
+  }
+  html += `</div>`;
+  card.innerHTML = html;
+  document.querySelectorAll(`#chips-${tabId} .phase-chip`).forEach((c, i) => {
+    c.classList.toggle("active", i === idx);
+  });
+  document.getElementById(`phaseTitle-${tabId}`).textContent = ph.title;
+  currentPhase[tabId] = idx;
+  stopPhase(tabId);
+  document.getElementById(`timer-${tabId}`).textContent =
+    `${String(ph.min).padStart(2,'0')}:00`;
+}
+
+const timers = {}, currentPhase = {};
+
+function startPhase(tabId) {
+  const idx = currentPhase[tabId];
+  const ph = PACER[tabId].phases[idx];
+  let remaining = ph.min * 60;
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  clearInterval(timers[tabId]);
+  timers[tabId] = setInterval(() => {
+    remaining--;
+    if (remaining < 0) {
+      clearInterval(timers[tabId]);
+      timerEl.textContent = "TIME";
+      timerEl.style.color = "#ff6b6b";
+      if (idx + 1 < PACER[tabId].phases.length) {
+        document.querySelectorAll(`#chips-${tabId} .phase-chip`)[idx].classList.add("done");
+      }
+      return;
+    }
+    const m = Math.floor(remaining / 60), s = remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    timerEl.style.color = remaining < 60 ? "#ff6b6b" : "#ffffff";
+  }, 1000);
+}
+
+function stopPhase(tabId) {
+  clearInterval(timers[tabId]);
+  const idx = currentPhase[tabId];
+  if (idx === undefined) return;
+  const ph = PACER[tabId].phases[idx];
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  timerEl.textContent = `${String(ph.min).padStart(2,'0')}:00`;
+  timerEl.style.color = "#ffffff";
+}
+
+renderPanel("p1");
+</script>
+
+</body>
+</html>
