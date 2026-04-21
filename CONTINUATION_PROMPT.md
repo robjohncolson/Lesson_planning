@@ -42,34 +42,44 @@ Tooling:
 - **Chain 1 runs through six lessons.** 3-5-q27 → 4-1-q17 → 5-1-q50 → 6-3-q54 → 6-4-q28/q33 → 6-5-q40. Same "extract a hidden variable from a model" archetype across polynomial → rational → rational-exponent → log → exponential-inverse representations. This is the year's structural spine.
 - **Unit 4 has its own intra-unit chain** (rate-reciprocal: 4-1-q26 → 4-4-q26 → 4-5-q25).
 
-**Nothing is eye-checked yet.**
+**Nothing is eye-checked yet.** User is deliberately holding off on the packet audit until the DAG → lesson material pipeline is squared away. The diagnostic reports in `graph/` are not yet translated into builder edits.
+
+## The pipeline gap (current focus)
+
+Today the DAG emits three reports (`skill_bridge_gaps.md`, `nominal_rehearsals.md`, `redundant_practice.md`) spanning all 11 lessons at once. To act on them the human must: open three files, filter to one lesson, cross-reference with the builder's ID list, decide swaps, edit the builder, rebuild the packet, re-tag. That's too many context switches per edit.
+
+**The missing piece: a per-lesson polish worksheet.** One markdown file per builder (`graph/polish/L41_P1.md`, etc.) that consolidates:
+- Current operational items (from the builder's DO_NOW_IDS / LAUNCH_IDS / EXPLORE_IDS / REINFORCE_IDS)
+- Gaps, redundancies, and nominal rehearsals specific to this lesson
+- Concrete swap proposals (drop item X, replace with pool item Y) with reasons
+- A proposed ID-list diff the human can hand-apply
+
+This is the immediate next build. Once worksheets exist, eye-checking a packet becomes: (1) read the worksheet, (2) accept/reject each swap, (3) apply diffs to builder, (4) rebuild + re-tag + re-diagnose.
 
 ## Next task (user pick)
 
 In priority order:
 
-1. **Eye-check the regenerated Word packets.** Critical files first:
+1. **Build `qb_polish_worksheet.py`.** Emit one `graph/polish/L{NN}_P{N}.md` per builder. Must pull from all three diagnostic reports + the builder's current ID lists. Each worksheet ends with a "proposed builder edit" section showing the actual Python list changes. Do NOT auto-apply edits. Format: concise, one worksheet fits on one screen.
+2. **Human review pass.** Walk one lesson's worksheet (start with L41_P1 or L54_P2 since those have the most tagged material). Decide which swaps to accept, apply the edit to the builder manually, rebuild, re-run `merge_tags.py && qb_graph.py && qb_diagnose.py`, verify the next worksheet shows fewer gaps.
+3. **Scale to all 11 lessons** once worksheet + review cycle works on one.
+4. **Then** eye-check the Word packets (the deferred audit):
    - `L54_P2_Teacher_Packet.docx` — Topic 5 DOK-3 spine (Q#41 half-life).
    - `L44_P1_Teacher_Packet.docx` — Topic 4 DOK-3 spine (Q#32 electrical resistance).
    - `L45_P1_Teacher_Packet.docx` — Topic 4 DOK-3 spine (Q#33 chemistry mixture).
    - `L46_P1_Teacher_Packet.docx` — 8-item intervention table for Topic 4 assessment day.
    - Every Topic 6 packet (`L63/L64/L65_P1_*`) — never eye-checked.
-2. **Visual audit.** Savvas source PDFs are in repo. Verify flagged items per each `L*_Visuals_Checklist.md`.
-3. **Browser-verify pacers.** Hard refresh (Ctrl+F5) to bypass cache.
-4. **Act on DAG findings (optional but compounding).**
-   - Plant a `read-from-representation`-flavor DOK-3 seed earlier (candidate: re-cast one existing Unit 5 item).
-   - Name Chain 1 aloud to students when planting L51 q50 (Cylinder Capstone): "remember Storage Box? Same move."
-   - Decide whether `4-3-q13` (prove-by-properties DOK-3) needs an earlier warm-up item in Unit 3.
-5. **Act on diagnostic reports.** Three concrete classes of edit, each from an existing `graph/` report:
-   - `skill_bridge_gaps.md` — 27 gaps. For each DOK-3 driver skill with no in-lesson rehearsal, decide: swap a Practice item in, or teach the skill explicitly in Launch.
-   - `redundant_practice.md` — 88 groups. Drop a redundant item, swap in a pool candidate that adds a DOK-3-needed token.
-   - `nominal_rehearsals.md` — 1 mismatch. Resolve the `translate-parent-function` ↔ `describe-translation` token-glossary question.
-6. **T2/T3 auto-tag pass** (~650 DOK-1 Practice + Blooket leaves). Scripted regex tagging. Only worth running if diagnostic coverage still shows blind spots after the T1 pass.
+5. **Visual audit** + **browser-verify pacers** — unchanged from before.
+6. **T2/T3 auto-tag pass** (~650 DOK-1 Practice + Blooket leaves). Scripted regex tagging. Only worth running if polish worksheets still show blind spots after T1 edits are applied.
 
 ## Deferred (not blocking)
 
-- **Topic 5 `-2`-suffixed registry rows.** Duplicate IDs from pre-2026-04-20 two-pass ingest. Harmless for `qb.get_for_packet` but should be cleaned. `qb_graph.py` currently counts both.
-- **Assessment-shell backfill.** Topic 3/4/5/6 assessment items registered only for items referenced by `rehearses` in the 148-item pilot. A full shell pass is cheap and would make the DAG honest.
+- **Topic 5 `-2`-suffixed registry rows.** 128 suspicious pairs survived dedup (different items, shared ID-prefix by coincidence). Harmless but should be renamed for clarity.
+- **Assessment-shell backfill.** Only 11 shells exist — pointers referenced by the 148-item pilot. A full 30-item shell pass would make the `nominal_rehearsals.md` check honest across all DOK-3 drivers.
+- **Act on DAG findings directly** (no code needed, compounding):
+  - Plant a `read-from-representation`-flavor DOK-3 seed earlier (candidate: re-cast one existing Unit 5 item).
+  - Name Chain 1 aloud to students when planting L51 q50 (Cylinder Capstone): "remember Storage Box? Same move." See `graph/chain1_callbacks.md` + `chain2_callbacks.md` for full teacher scripts.
+  - Decide whether `4-3-q13` (prove-by-properties DOK-3) needs an earlier warm-up item in Unit 3.
 
 End of school: **2026-06-20**.
 
@@ -83,4 +93,6 @@ End of school: **2026-06-20**.
 - **Item-analysis table failures fall through to inline DOK.** When `\begin{item-analysis}` is empty/malformed, DOK is read from the second arg of `\begin{practice}{N}{dok}` in the TE.
 - Large pushes (100+ files) may hit `send-pack: unexpected disconnect`. Fix: `git config http.postBuffer 524288000` then retry.
 - **Assessment day shell** is a separate artifact from the assessment itself. Pattern lives in `build_L46_P1_assessment_day.py` (Topic 4) and `build_L35_P4_assessment_day.py` (Topic 3).
-- **Tag before edit.** When modifying a lesson's operational items, re-run `python merge_tags.py && python qb_graph.py` so the DAG matches reality. Pilot files under `tagging/` are the source of truth for v2 fields.
+- **Tag before edit.** When modifying a lesson's operational items, re-run `python merge_tags.py && python qb_graph.py && python qb_diagnose.py` so the DAG matches reality. Pilot files under `tagging/` are the source of truth for v2 fields.
+- **`merge_tags.py` loads T1 first, pilots second.** Same-ID patches from pilots overwrite T1's weaker tagging. If you add a new pilot file pattern (not `*_pilot.jsonl` or `*_t1_coverage.jsonl`), update the `patterns` tuple in `load_pilot_patches()` or the rows will be silently dropped.
+- **Cross-agent dispatch to Codex (`runner/cross-agent.py`) has a 600s hard timeout** that isn't configurable from the calling side. Don't send Codex a 7-point validation checklist — chunk into 2-3 smaller calls or validate inline. See `state/cross-agent/*.result.json` if a call appears to vanish.
