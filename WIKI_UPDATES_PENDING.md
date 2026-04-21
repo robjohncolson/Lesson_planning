@@ -337,4 +337,99 @@ Every new builder MUST route its prompt strings through `render_prompt()`. If yo
 
 ---
 
+## 8. NEW FILE: `obsidian-wiki/wiki/concepts/Assessment Day Shell Packet.md`
+
+```markdown
+# Assessment Day Shell Packet
+
+The packet you hand out on the day students take a topic assessment — separate from the assessment itself. The assessment is a different document (e.g. `a2topic4assess.docx`); the shell frames the period so another teacher could run it without having written the assessment.
+
+## Student packet (zero assessment items)
+
+- Cover sheet: topic title, date/name/period fields.
+- Time policy: X-min assessment + 5-min Do Now = Y-min budget.
+- Calculator + phone policy.
+- Formula reference card (ELL support) — keyed to the topic. For Topic 4: reciprocal $f(x)=1/x$, inverse variation $xy=k$, work-rate $1/a+1/b=1/t$, domain restriction rule, asymptote rule.
+- N-item tracker checklist. Just the Q-numbers the assessment uses (e.g. Q2 ☐ Q3 ☐ Q4 ☐...) — lets students self-pace and catch skipped items.
+- No items. No hints. No partial answers.
+
+## Teacher packet (N-row intervention table)
+
+- Entry routine: pass out, remind policy, start clock.
+- Minute-by-minute timing plan.
+- **Intervention table: one row per assessment item.** Columns: Q#, paraphrased stem, source lesson, if-stuck cue. The cue is teacher-awareness only — flagged in a red callout "never say aloud during assessment."
+- Post-assessment debrief rubric: if >30% miss each item, which source lesson's Do Now to target next day. Cross-check against exit-slip "topic to review" tallies.
+- Adult role: circulate, redirect off-task, zero content help.
+
+## Do Now (5 min, before assessment starts)
+
+One registry-pulled review item that primes a commonly-missed skill. Prefer an item from the most recent lesson so it loads the freshest procedural knowledge. Never one that overlaps an assessment item directly.
+
+## Pacer HTML
+
+Phases: Entry/Do Now (5) · Assessment (~45) · Early-Finisher (5) · Exit (3). No MathJax (no formulas on screen during assessment). No teacher scripts during the Assessment phase — just the timer. Exit prompts: "which item felt hardest and why" + "which topic do you want to review tomorrow."
+
+## Naming
+
+Place the shell as `L{topic_close_lesson+1}_P1_*` — e.g. L36 for Topic 3, L46 for Topic 4. Not a "real" lesson but preserves the naming convention.
+
+## Why separate from the assessment
+
+- The assessment is test security; the shell is pedagogy.
+- A sub can run the shell without having written the assessment.
+- Debrief rubric is reusable across substitute teachers and across years.
+- Formula reference + tracker are ELL/SPED accommodations that don't belong on the assessment itself.
+
+## Related
+
+- [[Assessment-Forward vs DOK-3-Forward Workflow]] — the decision context that chose the assessment items.
+- [[Klimsara-Adapted Lesson Pattern]] — the lessons whose DOK-3 spines rehearse these items.
+- [[Single-DOK3 Lesson Spine]] — why each lesson only needs one assessment-rehearsal driver.
+```
+
+---
+
+## 9. NEW FILE: `obsidian-wiki/wiki/concepts/Work-Backwards Topic Build Recipe.md`
+
+```markdown
+# Work-Backwards Topic Build Recipe
+
+Concrete workflow for building a topic from its assessment, validated end-to-end on Topic 4 (2026-04-21).
+
+## Recipe
+
+1. **Read the LEHS assessment (the 8-item subset, not the full Savvas assessment).** Transcribe the stems. For each item, identify which Savvas lesson covers it.
+2. **Check registry for every source lesson.** For any lesson not yet ingested, run the LaTeX pipeline (SE+TE concatenated), strip chat-UI chrome first. The inline-DOK fallback usually fills `dok=3` correctly even when the item-analysis table fails to parse — verify before spine picking.
+3. **For each unbuilt lesson, pick one DOK-3 spine from the Savvas-declared DOK-3 items that directly rehearses assessment items mapped to that lesson.** If multiple candidates exist, prefer the one that rehearses the largest number of assessment items OR the one with the richest context (performance task > computational DOK-3). Example: Topic 4 L45 picked Q#33 (chemistry mixture perf task) because it rehearses LEHS Q#6 and Q#7 simultaneously.
+4. **Pick cadence per lesson.** Full Klimsara 3-period for conceptually dense lessons; single-period quick for lessons adjacent to the assessment where the cost of 3 periods is higher than the benefit. At end-of-year pressure, default to quick.
+5. **Build packets + slides + pacer** using the matching template (L43/L54 for 3-period, L51/L55 for 1-period quick).
+6. **Build the assessment-day shell** (see [[Assessment Day Shell Packet]]).
+
+## What this solves
+
+The naive build order is lesson-by-lesson in curricular order, spine-by-spine by whatever the lesson emphasizes. That produces lessons that are individually solid but whose DOK-3 items don't necessarily align with what the assessment will ask. Work-backwards guarantees every lesson has at least one DOK-3 rehearsal for an assessment item the student will face.
+
+## Compatibility
+
+- If the assessment is a single Performance Assessment with chained items (like Topic 5), use DOK-3-forward workflow instead — you build ONE DOK-3 driver that rehearses the whole performance task.
+- If the assessment is 8+ discrete items (Topic 4, most LEHS assessments), use this recipe.
+
+See [[Assessment-Forward vs DOK-3-Forward Workflow]] for the decision tree.
+
+## Concrete example — Topic 4 (2026-04-21)
+
+Assessment items 2, 3, 4, 5, 6, 7, 15, 19.
+
+| Lesson | Assessment items | Spine chosen | Rationale |
+|---|---|---|---|
+| 4-1 | Q#3, Q#5 | (built prior) | Asymptotes + translations |
+| 4-3 | Q#4 | (built prior) | Simplify + domain |
+| 4-4 | Q#15, Q#19 | **Q#32** (electrical resistance) | Closure/operations structural reasoning |
+| 4-5 | Q#2, Q#6, Q#7 | **Q#33** (chemistry mixture perf task) | Rehearses Q#6 solve + Q#7 rate together |
+
+One spine per unbuilt lesson. Each spine is a Savvas-declared DOK-3 item. Each spine rehearses at least one assessment item mapped to its lesson.
+```
+
+---
+
 Once pasted on home laptop, delete this staging file (`WIKI_UPDATES_PENDING.md`) from the repo.
