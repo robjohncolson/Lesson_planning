@@ -298,4 +298,43 @@ Add a new "Gotchas" section before "Known limitations":
 
 ---
 
+## 7. NEW FILE: `obsidian-wiki/wiki/concepts/Unicode Pre-Render for docx.md`
+
+```markdown
+# Unicode Pre-Render for docx
+
+Python-docx has no math rendering engine. Raw LaTeX tokens like `\log_3`, `\sqrt[6]{}`, `\ne`, `^{2}` land in the student packet as literal text (`\log_3 50` instead of `log₃ 50`). Before the pivot, lessons looked unreadable in Word even when the PDFs (MiKTeX) compiled fine.
+
+## The fix (2026-04-21)
+
+`packet_styles.py` gained two helpers:
+
+- `latex_to_unicode(s)` — substitutes common math tokens with Unicode equivalents: subscripts, superscripts, radicals, operators.
+- `render_prompt(s)` — wrapper every builder now calls before emitting a paragraph to the docx.
+
+Every builder under `build_L*_packets.py` (17 of them) was patched to route prompt/answer strings through `render_prompt()`. Result: 33 regenerated docx files show no raw-LaTeX paragraphs.
+
+## What's covered
+
+- Log subscripts: `\log_3 x` → `log₃ x`, `\log_{10}` → `log₁₀`.
+- Superscripts: `^{2}` → `²`, `^{24}` → `²⁴`, `^{18}` → `¹⁸`.
+- Indexed radicals: `\sqrt[6]{729a^{24}b^{18}}` → `⁶√(729a²⁴b¹⁸)`.
+- Inequality: `\ne` → `≠`, `\neq` → `≠`.
+- Natural log: `\ln` → `ln`.
+
+## What's NOT covered yet (backlog)
+
+`\circ` → `°`, `\square` → `□`, `\mid` → `|`, `\checkmark` → `✓`, `\leftrightarrow` → `↔`. Add as they show up in lessons.
+
+## Why pre-render, not post-process
+
+Word's equation editor (OMML) would be ideal but requires python-docx extensions we don't have. Unicode pre-render is the 80/20 win: readable in Word, printable, no extra dependencies, portable to any docx consumer. The tradeoff is fidelity — `a²⁴b¹⁸` reads fine but doesn't typeset like LaTeX. For student-facing pages that's acceptable.
+
+## Convention
+
+Every new builder MUST route its prompt strings through `render_prompt()`. If you see raw `\frac`, `\sqrt`, or `\log_` tokens in a docx output, the builder is skipping the render step.
+```
+
+---
+
 Once pasted on home laptop, delete this staging file (`WIKI_UPDATES_PENDING.md`) from the repo.
