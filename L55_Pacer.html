@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L55 Pacer · Single Period</title>
+<style>
+  :root {
+    --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
+    --gold:#c88b14; --red:#b23a3a; --accent:#d94e2f;
+    --bg:#eaf2fb; --card:#ffffff; --ink:#112233; --muted:#556677;
+    --pale-teal:#d4edda; --pale-gold:#fff2cc; --pale-red:#f7d7d7;
+    --pale-navy:#cfe2f3; --pale-orange:#fce5cd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.4;
+  }
+  header {
+    background: var(--navy); color: #fff; padding: 12px 24px;
+    display:flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+  header .meta { font-size: 0.85rem; color: #bbd0e6; }
+  .main-panel { padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .timer-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--navy); color: #fff; padding: 10px 16px;
+    border-radius: 8px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .timer-bar .countdown { font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
+  .timer-bar button {
+    background: var(--gold); color: #fff; border: none;
+    padding: 8px 16px; border-radius: 4px; font-weight: 600;
+    cursor: pointer; font-size: 0.9rem;
+  }
+  .timer-bar button.stop { background: var(--red); }
+  .timer-bar button:hover { filter: brightness(1.1); }
+  .timer-bar .phase-title { font-size: 1rem; color: #bbd0e6; }
+  .phase-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .phase-chip {
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
+    font-weight: 600; border: 2px solid transparent;
+  }
+  .phase-chip:hover { background: #c9dcf0; }
+  .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
+  .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
+  .phase-card {
+    background: var(--card); border-radius: 8px; padding: 18px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px;
+  }
+  .phase-card h2 {
+    margin: 0 0 6px 0; color: var(--navy); font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badges { display:flex; gap: 6px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.72rem; font-weight: 700; color: #fff;
+  }
+  .badge.dok { background: var(--gold); }
+  .badge.min { background: var(--green); }
+  .badge.fw  { background: var(--blue); }
+  .callout {
+    padding: 12px 14px; border-radius: 6px; margin: 12px 0;
+    border-left: 5px solid var(--teal);
+  }
+  .callout.teacher { background: var(--pale-navy);   border-color: var(--navy); }
+  .callout.answer  { background: var(--pale-teal);   border-color: var(--green); }
+  .callout.rule    { background: var(--pale-gold);   border-color: var(--gold); }
+  .callout.warn    { background: var(--pale-red);    border-color: var(--red); }
+  .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout .label {
+    font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    display: block; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout.answer .label { color: var(--green); }
+  .callout.rule   .label { color: var(--gold); }
+  .callout.warn   .label { color: var(--red); }
+  .callout.bridge .label { color: var(--accent); }
+  .callout ul { margin: 4px 0; padding-left: 22px; }
+  .item {
+    border-left: 3px solid var(--blue); padding: 10px 14px;
+    background: #f7faff; margin: 8px 0; border-radius: 4px;
+  }
+  .item .qid {
+    font-size: 0.75rem; color: var(--muted); font-family: monospace;
+  }
+  .item.dok3   { border-left-color: var(--accent); background: #fff5ef; }
+  .item.assess { border-left-color: var(--gold);   background: #fffbea; }
+  .item .star  { font-weight: 700; }
+  .item.dok3   .star { color: var(--accent); }
+  .item.assess .star { color: var(--gold); }
+  .label-bar {
+    font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lesson 5-5 Pacer</h1>
+    <div class="meta">Single Period · Function Operations + DOK-3 Composition Order (Standalone — NOT on Topic 5 Assessment)</div>
+  </div>
+  <div class="meta" id="dateLabel"></div>
+</header>
+
+<div class="main-panel" id="mainPanel"></div>
+
+<script>
+const PACER = {
+  p1: {
+    label: "Single Period · Function Operations + DOK-3 · 58 min",
+    total_min: 58,
+    phases: [
+      { id:"donow", title:"Do Now — Profit = Revenue − Cost",
+        fw:"exploration", dok:"3", min:5,
+        items:[{qid:"5-5-savvas-model-discuss-lesson-5-5-launch", label:"Profit = revenue − cost — model discuss launch"}],
+        teacher:[
+          "Sets up function subtraction as a real-world operation",
+          "Bridge: if we can add/subtract functions, can we multiply/divide/compose them?"
+        ],
+        bridge:"Function subtraction is already familiar as P = R − C. Today we extend to all four operations AND composition.",
+      },
+      { id:"launch", title:"Launch — Ex 1 + Ex 4 + Rules",
+        fw:"teacher models", dok:"2", min:12,
+        items:[
+          {qid:"5-5-savvas-example-1-lesson-5-5", label:"Example 1: Add, Subtract, Multiply, Divide"},
+          {qid:"5-5-savvas-example-4-lesson-5-5", label:"Example 4: Composition f∘g and g∘f"},
+        ],
+        teacher:[
+          "Two examples because operations span 4 types + composition",
+          "Emphasize composition order FIRST with a concrete number plug"
+        ],
+        rules:[
+          "(f±g)(x) = f(x)±g(x)",
+          "(fg)(x) = f(x)·g(x)",
+          "(f/g)(x) = f(x)/g(x), g ≠ 0",
+          "(f∘g)(x) = f(g(x)) — g FIRST",
+          "f∘g ≠ g∘f in general",
+        ],
+      },
+      { id:"explore", title:"Explore — Think-Pair-Share",
+        fw:"student work", dok:"2→3", min:33,
+        items:[
+          {qid:"5-5-savvas-try-it-1-lesson-5-5",   label:"TI 1: add and subtract two functions"},
+          {qid:"5-5-savvas-try-it-4-lesson-5-5",   label:"TI 4: compose f∘g and g∘f — are they equal?"},
+          {qid:"5-5-savvas-q20", label:"#20 (f+g)(x) — state domain"},
+          {qid:"5-5-savvas-q21", label:"#21 (f−g)(x) and (fg)(x)"},
+          {qid:"5-5-savvas-q24", label:"#24 (f/g)(x) — state domain restriction"},
+          {qid:"5-5-savvas-q28", label:"#28 evaluate a composition at a specific value"},
+          {qid:"5-5-savvas-q34", label:"#34 mixed function operations"},
+          {qid:"5-5-savvas-q32", label:"⭐ DOK-3: music store double discount — order matters", dok3:true,
+           note:"Plan ~15 min. DOK-3 STANDALONE — composition order with real context. Force WRITTEN comparison."},
+        ],
+        teacher:[
+          "q32 is the DOK-3 — music store double discount. Order matters.",
+          "Assessment note: composition is NOT on Topic 5 assessment; teach for its own reasoning value."
+        ],
+        warn:"Students will intuit ‘percent first saves more’ WITHOUT justifying. Force the WRITTEN comparison: compute BOTH compositions, state both final prices, then explain which is lower and WHY.",
+      },
+      { id:"share", title:"Share / Summary",
+        fw:"academic conversation", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Cold-call two pairs: one for each composition order",
+          "Record both answers on board side-by-side before revealing which is better"
+        ],
+        answer:"q32: (a) 15%-off first ⇒ 0.85(x−5) = 0.85x−4.25 ⇒ price = $72.25. (b) $5-off first ⇒ 0.85x−5 ⇒ price = $71.50. (c) 15% FIRST is better. The $5 saved on a smaller base after %-off is worth less than 15% applied to a larger base.",
+      },
+      { id:"exit", title:"Exit Ticket — f(g(5)) SAT/ACT Reinforce",
+        fw:"not graded", dok:"1-2", min:3,
+        items:[{qid:"5-5-savvas-q35", label:"#35 reinforce: evaluate f(g(5)) — SAT/ACT f(g(x)) format"}],
+        teacher:[
+          "Collect Summary Exit box",
+          "Remind students: composition is NOT on Topic 5 assessment — but will appear on SAT/ACT"
+        ],
+      },
+    ]
+  }
+};
+
+document.getElementById("dateLabel").textContent = new Date().toDateString();
+
+const panel = document.getElementById("mainPanel");
+const data = PACER.p1;
+let currentIdx = 0;
+let timerInterval = null;
+
+panel.innerHTML = `
+  <div class="timer-bar">
+    <div>
+      <div class="phase-title" id="phaseTitle">Select a phase to begin</div>
+    </div>
+    <div class="countdown" id="timerDisplay">--:--</div>
+    <div>
+      <button onclick="startPhase()" id="startBtn">Start</button>
+      <button class="stop" onclick="stopPhase()">Stop</button>
+    </div>
+  </div>
+  <div class="label-bar">${data.label}</div>
+  <div class="phase-list" id="chipBar"></div>
+  <div id="phaseCard"></div>
+`;
+
+const chipBar = document.getElementById("chipBar");
+data.phases.forEach((ph, idx) => {
+  const chip = document.createElement("button");
+  chip.className = "phase-chip";
+  chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0]} · ${ph.min}m`;
+  chip.id = `chip-${idx}`;
+  chip.onclick = () => selectPhase(idx);
+  chipBar.appendChild(chip);
+});
+
+function selectPhase(idx) {
+  currentIdx = idx;
+  stopPhase();
+  const ph = data.phases[idx];
+
+  document.querySelectorAll(".phase-chip").forEach((c, i) => {
+    c.classList.toggle("active", i === idx);
+  });
+
+  document.getElementById("phaseTitle").textContent = ph.title;
+  document.getElementById("timerDisplay").textContent =
+    `${String(ph.min).padStart(2,"0")}:00`;
+  document.getElementById("timerDisplay").style.color = "#ffffff";
+
+  let html = `<div class="phase-card">
+    <h2>${ph.title}
+      <span class="badges">
+        <span class="badge dok">DOK ${ph.dok}</span>
+        <span class="badge min">${ph.min} min</span>
+        <span class="badge fw">${ph.fw}</span>
+      </span>
+    </h2>`;
+
+  if (ph.items && ph.items.length) {
+    ph.items.forEach(it => {
+      let cls = "item";
+      if (it.dok3)   cls = "item dok3";
+      else if (it.assess) cls = "item assess";
+      const star = it.dok3   ? '<span class="star">⭐ DOK-3 </span>' :
+                   it.assess ? '<span class="star">⭐ ASSESS </span>' : "";
+      html += `<div class="${cls}">${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>${it.note ? `<div style="margin-top:4px;font-size:0.85rem;">${it.note}</div>` : ""}</div>`;
+    });
+  }
+
+  if (ph.teacher && ph.teacher.length) {
+    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
+    ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+
+  if (ph.rules && ph.rules.length) {
+    html += `<div class="callout rule"><span class="label">📘 Rules</span><ul>`;
+    ph.rules.forEach(r => html += `<li>${r}</li>`);
+    html += `</ul></div>`;
+  }
+
+  if (ph.answer) {
+    html += `<div class="callout answer"><span class="label">✅ Answer key</span>${ph.answer}</div>`;
+  }
+
+  if (ph.bridge) {
+    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
+  }
+
+  if (ph.warn) {
+    html += `<div class="callout warn"><span class="label">⚠️ Warning / Note</span>${ph.warn}</div>`;
+  }
+
+  html += `</div>`;
+  document.getElementById("phaseCard").innerHTML = html;
+}
+
+function startPhase() {
+  const ph = data.phases[currentIdx];
+  let remaining = ph.min * 60;
+  const timerEl = document.getElementById("timerDisplay");
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    remaining--;
+    if (remaining < 0) {
+      clearInterval(timerInterval);
+      timerEl.textContent = "TIME";
+      timerEl.style.color = "#ff6b6b";
+      const chip = document.getElementById(`chip-${currentIdx}`);
+      if (chip) chip.classList.add("done");
+      return;
+    }
+    const m = Math.floor(remaining / 60), s = remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+    timerEl.style.color = remaining < 60 ? "#ff6b6b" : "#ffffff";
+  }, 1000);
+}
+
+function stopPhase() {
+  clearInterval(timerInterval);
+  const ph = data.phases[currentIdx];
+  const timerEl = document.getElementById("timerDisplay");
+  if (timerEl) {
+    timerEl.textContent = `${String(ph.min).padStart(2,"0")}:00`;
+    timerEl.style.color = "#ffffff";
+  }
+}
+
+// Auto-select phase 1 on load
+selectPhase(0);
+</script>
+
+</body>
+</html>
