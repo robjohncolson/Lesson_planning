@@ -123,4 +123,68 @@ Previous pacers were one HTML file per day (e.g., `Day_23_Pacer.html`, `Day_45_P
 
 ---
 
+---
+
+## 4. NEW FILE: `obsidian-wiki/wiki/concepts/LaTeX Ingest Pipeline.md`
+
+```markdown
+# LaTeX Ingest Pipeline
+
+The high-throughput alternative to screenshot-by-screenshot ingest. Added 2026-04-20 after burning 3 hours on Lesson 4-1's manual ingest (30+ screenshots, per-item transcription). Used for Lesson 4-3 and will be used for everything after.
+
+## Pipeline
+
+1. **User has a Savvas TE PDF + SE PDF for the target lesson.**
+2. **User pastes the prompt template + PDFs into Gemini or ChatGPT.** Both work; GPT's structural output matches the parser more literally, but Gemini's prose is often richer. Try both if unsure.
+3. **Output arrives as a single `.tex` file** using custom environments.
+4. **Save to `source/<lesson>_savvas_{SE,TE}.tex`** in the repo.
+5. **Run `python ingest_lesson_from_latex.py source/<lesson>_SE.tex source/<lesson>_TE.tex`.**
+6. **Review the output files:** `skeletons/<lesson>_from_latex.json` + `questionbank/calibration/<lesson>.json`.
+7. **Commit to registry:** `python qb_append.py skeletons/<lesson>_from_latex.json`.
+
+## Gemini/GPT prompt template
+
+Full prompt in `CLAUDE.md` → Toolchain section, or see git history commit `a4da1de`. Key bits:
+
+- Wrap structural blocks in custom environments: `lesson-meta`, `item-analysis`, `model-discuss`, `example{N}`, `tryit{N}`, `practice{N}{DOK}`, `concept-box`, `concept-summary`, `te-addendum{anchor}{type}`.
+- Use `\answer{...}`, `\placeholder{type}{desc}`, `\uncertain{best}{alts}` as helper commands.
+- TE type shortnames: `PurposefulQuestions`, `ElicitEvidence`, `CommonError`, `HabitsOfMind`, `RtISupport`, `RtIExtend`, `ELLAddendum`, `LearnTogether`.
+- Photos/maps that can't be TikZ'd → `\placeholder{photo}{description with any text labels}`.
+- Flag any transcription uncertainty with `\uncertain{best_guess}{alternatives}` rather than silently guessing.
+
+## What the parser handles
+
+- Savvas item-analysis tabular (handles `\hline`, `\toprule`/`\bottomrule`, en-dash ranges `14--16`).
+- Multi-file input (SE + TE concatenated).
+- Gemini descriptive TE anchors (`{Explore & Reason}{Establish Math Goals}`) — kept as strings.
+- GPT numeric TE anchors (`{1}{PurposefulQuestions}`) — standard path.
+- Visual auto-detection: placeholder → photo/map, tikzpicture → graph, tabular → table.
+- DOK override: if item-analysis table disagrees with inline `{N}{D}` arg, item-analysis wins (Gemini/GPT often default to DOK=1 when they don't have the table).
+
+## Known limitations
+
+- **Multiple-choice answer options don't populate `answers[]`** — if a practice item is MC, edit the JSON stub before `qb_append.py`.
+- **Image placeholders still need manual staging** — photos/maps aren't renderable from TikZ, so the source image needs to be screenshotted + copied to `questionbank/images/` with a sane name + registry entry updated with the path.
+- **Practice items #1-#10** in Savvas are concept-review (ESSENTIAL QUESTION restatement, vocabulary) and typically in the SE only, not TE. If TE-only ingest, those items are missed.
+
+## Throughput
+
+- Lesson 4-1 (manual screenshot ingest): ~3 hours, 47 items.
+- Lesson 4-3 (LaTeX pipeline): ~15 minutes (Gemini + GPT round-trips + review), 70 items.
+- Target: **one Unit per session** once prompt templates are dialed in.
+
+## When to fall back to manual screenshots
+
+- Topic assessments with heavy graphics (may be faster to screenshot directly).
+- Half-lessons or supplementary handouts not covered by Savvas.
+- Any item that fails transcription 2+ times (just screenshot it and hand-ingest).
+
+## Related
+
+- [[Klimsara-Adapted Lesson Pattern]] — what you do WITH the ingested bank.
+- [[Single-DOK3 Lesson Spine]] — how to pick a DOK-3 driver from the ingested practice items.
+```
+
+---
+
 Once pasted on home laptop, delete this staging file (`WIKI_UPDATES_PENDING.md`) from the repo.
