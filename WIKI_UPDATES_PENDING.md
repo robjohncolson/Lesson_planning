@@ -187,4 +187,115 @@ Full prompt in `CLAUDE.md` → Toolchain section, or see git history commit `a4d
 
 ---
 
+---
+
+## 4. NEW FILE: `obsidian-wiki/wiki/concepts/Assessment-Forward vs DOK-3-Forward Workflow.md`
+
+```markdown
+# Assessment-Forward vs DOK-3-Forward Workflow
+
+Two distinct workflows for building a unit's lesson materials, picked based on the shape of the topic assessment.
+
+## Assessment-Forward (default)
+
+When the topic assessment is **8–11 discrete items** (like Topic 3 and Topic 4 LEHS), work BACKWARD:
+1. List the assessment items.
+2. For each item, identify the lesson + Example it tests.
+3. Pick the lesson period that will rehearse each item most faithfully (the "assessment-critical period", usually P3).
+4. Pick DOK-3 drivers that reinforce the assessment skills.
+5. Toss lesson content that has no assessment alignment.
+
+This is how Lesson 3-5 and Lesson 4-1 were built.
+
+## DOK-3-Forward (pivot)
+
+When the topic assessment is **a single Performance Assessment** (one scenario, 2–4 chained items — like Topic 5 Form B's underwater pyramid), work FORWARD:
+1. Scan each lesson for its Savvas-declared DOK-3 items.
+2. Pick the richest, most-teachable DOK-3 as the topic spine (usually from the "main" lesson of the unit).
+3. Cross-reference the Performance Assessment's skills back to the DOK-3 candidates — some lessons' DOK-3s will NOT align (e.g., 5-5 function composition has zero Topic 5 assessment payoff).
+4. Accept non-aligned DOK-3s on their own reasoning merits — they're still worth teaching, just not as the spine.
+5. Build assessment-critical rehearsal periods around the DOK-3-forward picks.
+
+This is how Lessons 5-1 / 5-4 / 5-5 were built. Topic 5's whole assessment chains off rational-exponent evaluation (5-4 Q#41 half-life), so 5-4 P2 carries the spine, 5-1 Q#50 cylinder is a supporting DOK-3 (Item 1A rehearsal), and 5-5 Q#32 music store is standalone.
+
+## Detecting which workflow applies
+
+Open the topic assessment source. If it's a numbered list of 8+ independent items → assessment-forward. If it's a single scenario with Part A / Part B / Item 2 / Item 3 → DOK-3-forward.
+
+## Related
+
+- [[Single-DOK3 Lesson Spine]] — per-period DOK-3 selection heuristic.
+- [[Klimsara-Adapted Lesson Pattern]] — the 3-period container.
+- [[Single-Period Compressed Klimsara]] — when a lesson only gets one period.
+```
+
+---
+
+## 5. NEW FILE: `obsidian-wiki/wiki/concepts/Single-Period Compressed Klimsara.md`
+
+```markdown
+# Single-Period Compressed Klimsara
+
+A one-period variant of the Klimsara-adapted lesson pattern, for "quick" lessons inside a topic that don't warrant a full 3-period treatment.
+
+## When to use
+
+- The lesson is declared "quick" in the unit roadmap (e.g., 5-1 and 5-5 were quick; 5-4 was the main focus).
+- The lesson's content is narrower than the 3-period norm (one major skill, not a skill-ladder).
+- End-of-year pacing pressure — you'd skip the lesson otherwise.
+
+## Structure
+
+Clone the P2 period builder (`build_L{NN}_P2_packets.py`) — not P1, because P2's template has the DOK-3 capstone machinery a quick lesson needs. Single-period lessons typically still carry their own DOK-3.
+
+Departures from standard Klimsara:
+
+- **Launch uses TWO examples, not one.** The Klimsara "model ONE" rule assumes 3 periods will cover all examples over time. One period has to front-load enough examples to make the Explore worth doing. Note this exception in a comment at the top of the builder.
+- **Explore stays 33 min** — do not compress the student-work time. If you need to cut, drop Reinforce items, not Explore.
+- **No P1/P2/P3 sub-tabs on the pacer.** Strip the tab switcher; render the single phase list directly. The `PACER` object has one key (`p1`) instead of three.
+- **Slides: one `build_p1(path)` function only.** Delete `build_p2` and `build_p3` from the slides builder.
+
+## Pacer HTML — tab-stripping
+
+Three things to remove from the L43 pacer clone:
+1. `<nav class="tabs">` and all tab buttons.
+2. The `Object.keys(PACER).forEach(renderPanel)` loop.
+3. The `tabBar` click listener.
+
+Replace with a single `<div id="panel-p1">` declared with `display: block` (not `none`), and a single `renderPanel("p1")` boot call.
+
+## Examples
+
+- **Lesson 5-1** (nth roots + rational exponents + ⭐ Q#50 cylinder DOK-3) — supports Topic 5 Assessment Item 1A.
+- **Lesson 5-5** (function operations + ⭐ Q#32 music-store DOK-3) — standalone, no assessment alignment.
+
+Both lessons clone `build_L43_P2_packets.py` and `build_L43_slides.py` / `L43_Pacer.html`.
+
+## Output naming
+
+Still `L{NN}_P1_*.{docx,pptx,md}` and `L{NN}_Pacer.html`, even though "P1" is the only period. Preserves the naming convention across lesson types.
+
+## Related
+
+- [[Klimsara-Adapted Lesson Pattern]] — the full 3-period pattern this compresses.
+- [[Assessment-Forward vs DOK-3-Forward Workflow]] — the decision context for when quick lessons are appropriate.
+```
+
+---
+
+## 6. UPDATE: `obsidian-wiki/wiki/concepts/LaTeX to Registry Pipeline.md`
+
+Add a new "Gotchas" section before "Known limitations":
+
+```markdown
+## Gotchas
+
+- **Chat-UI chrome prefix.** LaTeX pasted from AI chat exports (Gemini, ChatGPT) often begins with UI artifacts like `code`, `Latex`, `download`, `content_copy`, `expand_less` before the `\documentclass`. Strip every line before `\documentclass` — the parser chokes on them. Standard pre-processing step for every fresh ingest.
+- **Duplicate `-2`-suffixed IDs from SE+TE.** If both SE and TE files contain the same examples/try-its/practices (they usually do, with slightly different wording), the ingest creates `*-lesson-N-M` AND `*-lesson-N-M-2` versions in the registry. For packet-building, reference only the non-`-2` variants. The duplicates are harmless for `qb.get_for_packet` but inflate counts and should be cleaned up periodically.
+- **Item-analysis table failures silently default to DOK 2.** If Gemini or GPT fails to transcribe the Savvas item-analysis table, every practice item defaults to DOK 2 at ingest. Verify Savvas-declared DOK-3 items made it into the registry with `dok=3` after ingest — if not, hand-patch with a small Python script (don't use `qb_append.py`, it's append-only).
+- **SE + TE must be ingested as one concatenated file OR carefully merged.** If you run the pipeline twice (once per file), you'll produce two skeleton JSONs. Either concatenate the `.tex` files before ingest OR merge the skeletons before `qb_append.py`.
+```
+
+---
+
 Once pasted on home laptop, delete this staging file (`WIKI_UPDATES_PENDING.md`) from the repo.

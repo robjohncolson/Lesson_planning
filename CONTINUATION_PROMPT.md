@@ -15,72 +15,81 @@ This file captures only (a) the next task and (b) session-transient details that
 
 Work laptop (`C:/Users/ColsonR/...`). Student materials + Savvas PDFs live here. Home laptop has the Obsidian wiki.
 
-## Next task: Lesson 5-1 packet build (PIVOT — priority reorder on 2026-04-20)
+## Next task: Topic 6 build (priority shift on 2026-04-20)
 
-User pivoted off the 4-x sequence to start Topic 5 early. Pick up **Lesson 5-1** next: ingest the bank from Savvas, then build 3-period Klimsara packets + slides + pacer on the L41/L43 template.
+**Framing:** The goal has shifted from "what I need to teach next" to "curriculum other teachers can actually use." One peer teacher is already on Topic 5, so shipping DOK-framework-aligned Topic 5 (done) + Topic 6 (next) materials positions the user as a curriculum leader rather than someone behind pace. Topic 4 backlog waits until after Topic 6 is built.
 
-Lesson 5-1 is early-Topic-5 quick-hit (per CLAUDE.md roadmap: "5-1 quick, 5-4, 5-5 quick"). Check `envAlg2_05_01_*` or similar LaTeX/PDF in repo before re-ingesting from scratch — the LaTeX pipeline (`ingest_lesson_from_latex.py`) was used successfully for 4-3.
+**Topic 6 lessons to build:** 6-3, 6-4, 6-5 (per CLAUDE.md roadmap).
 
-### Lesson 4-3 — BUILT but open flags (return to before teaching)
+### Sources inventory
 
-4-3 packets + slides + pacer shipped 2026-04-20 (commit forthcoming). NOT eye-checked. Before teaching 4-3:
+| Lesson | SE | TE | Notes |
+|---|---|---|---|
+| 6-3 | `a2_6-3_SE.tex` | `a2_6-3_TE.tex` | Ready to ingest |
+| 6-4 | `a2_6-4_SE.tex` | **MISSING** | User must supply before ingest |
+| 6-5 | `a2_6-5_SE.tex` | **MISSING** | User must supply before ingest |
 
-1. **Eye-check P2 teacher packet** — most structurally novel (DOK-3 callout + bridged Do Now from Q25). `L43_P2_Teacher_Packet.docx`.
-2. **Browser-verify `L43_Pacer.html`** — tab switcher + timer + ⭐ item styling on Q13/Q19.
-3. **Clean Example 6 SA/V diagram** — flagged `visual_needs_cleanup: true` in `L43_P3_Visuals_Checklist.md`. Manual image staging before P3 print.
-4. **4-1 open flags still unresolved:** q16 y-value reconstructed as `2/3`, q18 domain tail reconstructed as "real numbers except 0" — user eye-check.
+Topic 6 assessment:
+- `Topic6Assess.docx` (full text)
+- `Topic6AssessAnswer.pdf` (answer key)
+- `Topic6AssessFormB.tex` (typeset LaTeX — use this, same pattern as Topic 5 Form B)
 
-### Skipped (per user priority reorder — may return after 5-1)
+### Workflow for next session
 
-- **Lesson 4-4** (Topic 4 LEHS Q#19: length from area/width). Reference: `lesson_4-4_rational_expressions.{tex,pdf}`.
-- **Lesson 4-5** (LEHS Q#6, Q#7). Reference: `envAlg2_04_05_LessonPacket.{tex,pdf}`.
-- **Topic 4 LEHS assessment day** — 8 Qs from `a2topic4assess.docx` (#2, 3, 4, 5, 6, 7, 15, 19). Build an `L4X_Assessment_Day` wrapper like `L35_P4_*`.
+1. **Ask user for 6-4 TE and 6-5 TE** before starting. Don't ingest partial lessons.
+2. **Detect workflow mode.** Open `Topic6AssessFormB.tex`:
+   - If it's a single Performance Assessment with chained items (like Topic 5) → DOK-3-forward workflow.
+   - If it's 8+ discrete items (like Topic 4) → assessment-forward workflow.
+   - See wiki `concepts/Assessment-Forward vs DOK-3-Forward Workflow.md` (pending on home laptop) or `WIKI_UPDATES_PENDING.md` section 4.
+3. **Sanity-scan DOK-3 candidates** across 6-3 / 6-4 / 6-5 BEFORE committing to a spine. Decide which lesson is the "main focus" of Topic 6 (full 3-period) and which are "quick" (single-period compressed Klimsara).
+4. **Ingest via LaTeX pipeline** (`source/6-{3,4,5}_savvas_{SE,TE}.tex` → `ingest_lesson_from_latex.py` → `qb_append.py`). Remember to strip chat-UI chrome ("code Latex download content_copy expand_less") from the top of each `.tex` file before ingest.
+5. **Build packets + slides + pacers.** Clone from L43 (3-period) or L51/L55 (single-period compressed). Preserve star styling on DOK-3 capstones and ⭐ on assessment-rehearsal items.
 
-### (Former Lesson 4-3 plan — kept for reference in case we backfill)
+### Pitch framing (for the "other teachers can use" lens)
 
-### Known before starting
+The packets need to be immediately usable by a teacher who didn't write them:
 
-| Decision | Value |
-|---|---|
-| **DOK-3 driver** (single-spine, P2) | **Practice #13** — the only Savvas-declared DOK-3 item; anchors to Example 5 (Divide Rational Expressions). Multiplies rational expressions through a specific algebraic manipulation. |
-| **Assessment-critical period** | **P3** — Topic 4 LEHS 8-Q assessment items #2 (domain), #4 (simplify + domain) both come from 4-3 Examples 1 and 2. Lean P3 hard on Ex 2 simplification + domain restrictions. |
-| **Likely P1 scope** | Example 1 (write equivalent rational expressions) + Example 2 (simplify). Foundation for domain work. |
-| **Likely P2 scope** | Example 3 (multiply) + Example 4 (multiply by polynomial) + Example 5 + ⭐ DOK-3 Practice #13. |
-| **Likely P3 scope** | Example 6 (division modeling, SA/V ratio) + Concept Summary review + assessment-aligned Practice items (#2, #4 prep). |
+- Teacher packet carries `Questions to ask:` and `Adult role:` per phase (already in `packet_styles.framework_phase_header`).
+- Do Now answer keys visible on teacher packet, hidden on student packet (existing convention).
+- Pacer HTML is the self-contained "lesson plan in a browser tab" — another teacher opens it, hits the timer, and runs the period. Keep this promise.
+- Rules cards are the per-lesson cheat-sheet. Write them so a substitute could teach from them.
 
-### Workflow
+## Topic 5 — BUILT (2026-04-20) but open flags before teaching
 
-Copy the L41 builder pattern:
-- `build_L43_P1_packets.py`, `build_L43_P2_packets.py`, `build_L43_P3_packets.py`
-- `build_L43_slides.py` (3 deck functions)
-- `L43_Pacer.html` (single file, 3 tabs)
+All 5 periods (L54 P1/P2/P3 + L51 + L55) committed as `fff7cd8`. NOT eye-checked. Before any period goes live:
 
-Phase timings per the Klimsara template (Do Now 5, Launch 12, Explore 33, Share 5, Exit 2–3). Framework fields (DOK / minutes / teacher_does / students_do / Qs / adult_role) per `DOKframework.txt`.
+1. **Eye-check L54 P2 teacher packet** — carries the Topic 5 DOK-3 spine (Q#41 half-life). Most important artifact in Topic 5.
+2. **Browser-verify `L54_Pacer.html`** (3-tab) and `L51_Pacer.html` / `L55_Pacer.html` (single-pane, tab-stripped). Confirm timer + ⭐ styling renders.
+3. **Clean 7 visuals flagged `needs_cleanup`** across L51 (2), L54 (3), L55 (2) checklists. See each `L5N_PN_Visuals_Checklist.md` for specifics.
+4. **Registry has `-2`-suffixed duplicates** (SE+TE both got ingested). Not breaking anything, but clean when time permits.
 
-### Open flags carried from prior ingests
+## Topic 4 backlog — deferred past Topic 6
 
-- **4-1 q16** — y-value reconstructed as `2/3` (source image cut off). User to eye-check.
-- **4-1 q18** — domain tail reconstructed as "real numbers except 0". User to eye-check.
-- **4-3 Practice #1-#10** — concept-review items in SE not in TE; not yet ingested. Low priority unless a packet needs them.
-- **4-3 Example 6** — one image placeholder (rectangular prism + cylinder diagrams). Manual image staging if the packet uses it.
+- **Lesson 4-4** (LEHS Q#19): `lesson_4-4_rational_expressions.{tex,pdf}` in repo.
+- **Lesson 4-5** (LEHS Q#6, Q#7): `envAlg2_04_05_LessonPacket.{tex,pdf}`.
+- **Topic 4 LEHS assessment day** — 8 Qs from `a2topic4assess.docx` (#2, 3, 4, 5, 6, 7, 15, 19).
 
-## Roadmap after 5-1 (revised 2026-04-20 pivot)
+## Topic 4-3 — BUILT but open flags (2026-04-20)
 
-1. **5-1 THIS SESSION** — see top of file.
-2. **5-4, 5-5 quick** — continue Unit 5 sweep.
-3. **4-4 / 4-5 / Topic 4 assessment day** — return to Unit 4 backlog before Topic 4 assessment. Decide based on pacing.
-4. **Trig SOH CAH TOA** — external-to-textbook topic. Will need a curated problem set.
-5. **Unit 6** (6-3, 6-4, 6-5).
+- Eye-check P2 teacher packet (DOK-3 Q#13 closure argument) + P3 teacher packet.
+- Browser-verify `L43_Pacer.html`.
+- Clean Example 6 SA/V diagram (`L43_P3_Visuals_Checklist.md` flagged).
+- 4-1 open: q16 y-value `2/3` and q18 domain tail "real numbers except 0" both reconstructed — user eye-check.
+
+## Roadmap
+
+1. **Topic 6** (THIS NEXT SESSION) — 6-3/6-4/6-5 packets once TE files land.
+2. **Topic 4 backlog** — 4-4, 4-5, Topic 4 assessment day.
+3. **Trig SOH CAH TOA** — external-to-textbook; curated problem set needed.
+4. **Eye-check + print prep** all built lessons (4-3, 5-1, 5-4, 5-5, 6-x).
 
 End of school: **2026-06-20**.
 
 ## Class calendar pinned
 
-- Week of 4/27 (Topic 3 close-out): Mon A 65, Tue F 65 + A 55, Wed A 65 + F **45**, Thu F 65 + A 55, Fri F 65.
-- Thursday 4/30: Topic 3 Assessment both sections.
-- Friday 5/1: Period F starts L41 P1.
-- Monday 5/4: Period A starts L41 P1.
-- After L41: both sections on L43 (this session's build).
+- Two sections: Period A (one period behind Period F at start of Unit 4).
+- Wednesday F = **45 min** — short variant with Explore cut 8 min.
+- Solo teacher, class ≤10, ELL-heavy.
 
 ## Gotchas worth remembering
 
@@ -89,3 +98,6 @@ End of school: **2026-06-20**.
 - Every builder should end with `emit_visuals_checklist(_ALL_IDS, "L{NN}_P{N}_Visuals_Checklist.md")`.
 - `packet_styles.framework_phase_header` requires `dok`, `minutes`, `teacher_does`, `students_do`, `questions_to_ask`, `adult_role` — all keyword-only.
 - Pacer HTML tabs: browser cache can show stale version. Hard refresh (Ctrl+F5).
+- **Chat-UI chrome on pasted LaTeX** — strip lines before `\documentclass` before ingest. See `WIKI_UPDATES_PENDING.md` section 6.
+- **SE+TE ingest creates `-2` duplicates** — reference only non-`-2` IDs in builders.
+- **Item-analysis table parse failures silently default DOK to 2** — verify Savvas-declared DOK-3 items have `dok=3` in registry after ingest.
