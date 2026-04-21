@@ -28,12 +28,22 @@ def load_registry() -> list[dict]:
 
 def load_pilot_patches() -> dict[str, dict]:
     patches: dict[str, dict] = {}
-    for p in sorted(PILOT_DIR.glob("*_pilot.jsonl")):
-        for line in p.read_text(encoding="utf-8").splitlines():
-            if not line.strip():
-                continue
-            row = json.loads(line)
-            patches[row["id"]] = {**row, "_source_file": p.name}
+    # Order matters: T1 coverage (pool items, weaker tagging) loads FIRST,
+    # then pilots overwrite with richer operational-spine tagging.
+    patterns = ("*_t1_coverage.jsonl", "*_pilot.jsonl")
+    for pattern in patterns:
+        for p in sorted(PILOT_DIR.glob(pattern)):
+            for line in p.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                # Normalize rehearses to list[str] (schema v2 requires list; early pilots used string)
+                r = row.get("rehearses")
+                if isinstance(r, str):
+                    row["rehearses"] = [r] if r else []
+                elif r is None:
+                    row["rehearses"] = []
+                patches[row["id"]] = {**row, "_source_file": p.name}
     return patches
 
 
