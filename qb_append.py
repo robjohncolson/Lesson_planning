@@ -34,6 +34,12 @@ if hasattr(sys.stdout, "reconfigure"):
 
 REQUIRED = {"lesson", "prompt", "dok"}
 VISUAL_TYPES = {"none", "photo", "graph", "table", "diagram", "map"}
+ROLES = {
+    "do-now-explore", "do-now-bridge", "launch-model-1", "launch-model-2",
+    "explore-tps", "explore-practice", "optional-stretch",
+    "dok3-driver", "exit-recap", "assessment-rehearsal", "assessment-shell",
+}
+V2_LIST_FIELDS = ("standards", "prereq_ids", "rehearses", "echoes", "skill_tokens")
 
 
 def slugify(s: str, limit: int = 40) -> str:
@@ -80,6 +86,13 @@ def validate(entry: dict) -> None:
         raise SystemExit(f"ERROR: visual_type={vt!r} not in {sorted(VISUAL_TYPES)}")
     if entry.get("has_visual") and vt in (None, "none"):
         print(f"warn: has_visual=true but visual_type={vt!r} — consider setting a specific type", file=sys.stderr)
+    role = entry.get("role")
+    if role is not None and role not in ROLES:
+        raise SystemExit(f"ERROR: role={role!r} not in {sorted(ROLES)}")
+    for f in V2_LIST_FIELDS:
+        v = entry.get(f)
+        if v is not None and not isinstance(v, list):
+            raise SystemExit(f"ERROR: {f} must be a list, got {type(v).__name__}")
 
 
 def normalize(entry: dict, taken: set[str], existing_prompts: set[str], force: bool) -> dict | None:
@@ -109,6 +122,12 @@ def normalize(entry: dict, taken: set[str], existing_prompts: set[str], force: b
         "used_in": entry.get("used_in", []),
         "notes": entry.get("notes", ""),
         "created_at": entry.get("created_at") or dt.date.today().isoformat(),
+        "role": entry.get("role"),
+        "standards": entry.get("standards", []),
+        "prereq_ids": entry.get("prereq_ids", []),
+        "rehearses": entry.get("rehearses", []),
+        "echoes": entry.get("echoes", []),
+        "skill_tokens": entry.get("skill_tokens", []),
     }
     taken.add(out["id"])
     existing_prompts.add(out["prompt"])

@@ -14,7 +14,14 @@ High school Algebra 2 lesson materials — Topic 3 (Polynomials) closing, Topic 
 
 ## Current structure — Klimsara-adapted (Unit 4+)
 
-Three periods per lesson. One pacer with three sub-tabs (P1/P2/P3) replaces per-day pacers.
+Each lesson picks ONE cadence:
+
+- **Full 3-period** = `L{NN}_P1_*` + `L{NN}_P2_*` + `L{NN}_P3_*`. Pacer has three sub-tabs.
+- **Single-period quick** = `L{NN}_P1_*` only. Condensed Klimsara, DOK-3 spine inside the one period. Functionally complete — NOT a stub awaiting P2/P3. File naming keeps `_P1_` for builder-output consistency.
+
+To tell which cadence a lesson uses, read the builder docstring (`build_L{NN}_P1_packets.py` line 1–24). Assessment-day shells follow `L{topic_close+1}_*` (e.g. `L35_P4_*`, `L46_*`).
+
+The three-period template below describes the full cadence:
 
 | Period | Role | DOK arc | Typical Explore load |
 |---|---|---|---|
