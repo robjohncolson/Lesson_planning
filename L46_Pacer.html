@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L46 Pacer · Topic 4 Assessment Day</title>
+<style>
+  :root {
+    --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
+    --gold:#c88b14; --red:#b23a3a; --accent:#d94e2f;
+    --bg:#eaf2fb; --card:#ffffff; --ink:#112233; --muted:#556677;
+    --pale-teal:#d4edda; --pale-gold:#fff2cc; --pale-red:#f7d7d7;
+    --pale-navy:#cfe2f3; --pale-orange:#fce5cd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.4;
+  }
+  header {
+    background: var(--navy); color: #fff; padding: 12px 24px;
+    display:flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+  header .meta { font-size: 0.85rem; color: #bbd0e6; }
+  .main-panel { padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .timer-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--navy); color: #fff; padding: 10px 16px;
+    border-radius: 8px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .timer-bar .countdown { font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
+  .timer-bar button {
+    background: var(--gold); color: #fff; border: none;
+    padding: 8px 16px; border-radius: 4px; font-weight: 600;
+    cursor: pointer; font-size: 0.9rem;
+  }
+  .timer-bar button.stop { background: var(--red); }
+  .timer-bar button:hover { filter: brightness(1.1); }
+  .timer-bar .phase-title { font-size: 1rem; color: #bbd0e6; }
+  .phase-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .phase-chip {
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
+    font-weight: 600; border: 2px solid transparent;
+  }
+  .phase-chip:hover { background: #c9dcf0; }
+  .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
+  .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
+  .phase-card {
+    background: var(--card); border-radius: 8px; padding: 18px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px;
+  }
+  .phase-card h2 {
+    margin: 0 0 6px 0; color: var(--navy); font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badges { display:flex; gap: 6px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.72rem; font-weight: 700; color: #fff;
+  }
+  .badge.dok { background: var(--gold); }
+  .badge.min { background: var(--green); }
+  .badge.fw  { background: var(--blue); }
+  .callout {
+    padding: 12px 14px; border-radius: 6px; margin: 12px 0;
+    border-left: 5px solid var(--teal);
+  }
+  .callout.teacher { background: var(--pale-navy);   border-color: var(--navy); }
+  .callout.answer  { background: var(--pale-teal);   border-color: var(--green); }
+  .callout.rule    { background: var(--pale-gold);   border-color: var(--gold); }
+  .callout.warn    { background: var(--pale-red);    border-color: var(--red); }
+  .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout .label {
+    font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    display: block; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout.answer .label { color: var(--green); }
+  .callout.rule   .label { color: var(--gold); }
+  .callout.warn   .label { color: var(--red); }
+  .callout.bridge .label { color: var(--accent); }
+  .callout ul { margin: 4px 0; padding-left: 22px; }
+  .item {
+    border-left: 3px solid var(--blue); padding: 10px 14px;
+    background: #f7faff; margin: 8px 0; border-radius: 4px;
+  }
+  .item .qid {
+    font-size: 0.75rem; color: var(--muted); font-family: monospace;
+  }
+  .item.assess { border-left-color: var(--gold); background: #fffbea; }
+  .item .star  { font-weight: 700; color: var(--gold); }
+  .label-bar {
+    font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lesson 4-6 Pacer — Topic 4 Assessment Day</h1>
+    <div class="meta">Single Period · LEHS 8-Item Subset (Q#2, 3, 4, 5, 6, 7, 15, 19) · 58 min</div>
+  </div>
+  <div class="meta" id="dateLabel"></div>
+</header>
+
+<div class="main-panel" id="mainPanel"></div>
+
+<script>
+const PACER = {
+  p1: {
+    label: "Single Period · Topic 4 Assessment (LEHS 8-item) · 58 min",
+    total_min: 58,
+    phases: [
+      { id:"entry", title:"Entry / Do Now — 4-5 Try-It 1 (solve rational eq)",
+        fw:"bridge warm-up", dok:"2", min:5,
+        items:[{qid:"4-5-savvas-try-it-1-lesson-4-5", label:"Quick warm-up: solve a rational equation; check extraneous"}],
+        teacher:[
+          "Hand out Do Now + cover sheet + assessment (face down) at the door",
+          "Phones → caddy. Calculators on desks.",
+          "At 4:30: '30 seconds.' At 5:00: 'Pencils down. Flip. Begin.'"
+        ],
+        bridge:"Do Now mirrors Q#6 (solve rational eq) and primes Q#7 (work-rate). Keep silent — no content help."
+      },
+      { id:"assess", title:"Assessment — Topic 4 (8 items)",
+        fw:"proctoring", dok:"1-3 mix", min:45,
+        items:[
+          {qid:"a2topic4assess Q#2",  label:"Q#2 — domain of a rational function", assess:true, note:"Source: Lesson 4-5 (domain restrictions)"},
+          {qid:"a2topic4assess Q#3",  label:"Q#3 — H/V asymptotes of a rational graph", assess:true, note:"Source: Lesson 4-1 (reciprocal asymptotes)"},
+          {qid:"a2topic4assess Q#4",  label:"Q#4 — simplify rational expression + domain", assess:true, note:"Source: Lesson 4-3"},
+          {qid:"a2topic4assess Q#5",  label:"Q#5 — describe translation of y = 1/x", assess:true, note:"Source: Lesson 4-1"},
+          {qid:"a2topic4assess Q#6",  label:"Q#6 — solve rational equation", assess:true, note:"Source: Lesson 4-5"},
+          {qid:"a2topic4assess Q#7",  label:"Q#7 — work-rate (Luke + Nora, peeling carrots)", assess:true, note:"Source: Lesson 4-5"},
+          {qid:"a2topic4assess Q#15", label:"Q#15 — rational operations / closure", assess:true, note:"Source: Lesson 4-4"},
+          {qid:"a2topic4assess Q#19", label:"Q#19 — polynomial division (area ÷ width = length)", assess:true, note:"Source: Lesson 4-4"},
+        ],
+        teacher:[
+          "Silent circulate every 10 min",
+          "Announcements: m20 '25 left', m35 '10 left, revisit skips', m43 '2 min', m45 'pencils down'",
+          "Collect face-down. Check names."
+        ],
+        warn:"NO content help of any kind. If a student freezes, the only allowed cue is: 'Skip it, come back if time.' Intervention cues in the teacher packet are for your AWARENESS only — never spoken aloud during the assessment."
+      },
+      { id:"finisher", title:"Early-Finisher Reflection",
+        fw:"buffer / silent", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Finishers get the half-sheet silently — others keep working",
+          "At minute 50, cut off: move whole class to Exit"
+        ],
+        rules:[
+          "Prompt: 'If you finish early, look back at the 8 items. For any ONE you were unsure about, write one sentence explaining your strategy.'"
+        ]
+      },
+      { id:"exit", title:"Exit — Turn in + 2-Item Reflection",
+        fw:"self-reflection", dok:"1", min:3,
+        items:[],
+        teacher:[
+          "Read aloud: '(1) Which item felt hardest and why? (2) Which topic do you want to review tomorrow — 4-1, 4-3, 4-4, or 4-5?'",
+          "Collect at the door. Confirm names on assessments.",
+          "Tonight: tally misses per item → plan next-day Do Now re-teach if any item > 30% miss."
+        ],
+        answer:"Re-teach triggers: Q2/Q6/Q7 > 30% → 4-5 (solve/work-rate). Q3/Q5 > 30% → 4-1 (reciprocal/asymptotes). Q4 > 30% → 4-3 (simplify + domain). Q15/Q19 > 30% → 4-4 (operations/division)."
+      },
+    ]
+  }
+};
+
+document.getElementById("dateLabel").textContent = new Date().toDateString();
+
+const panel = document.getElementById("mainPanel");
+const data = PACER.p1;
+let currentIdx = 0;
+let timerInterval = null;
+
+panel.innerHTML = `
+  <div class="timer-bar">
+    <div>
+      <div class="phase-title" id="phaseTitle">Select a phase to begin</div>
+    </div>
+    <div class="countdown" id="timerDisplay">--:--</div>
+    <div>
+      <button onclick="startPhase()" id="startBtn">Start</button>
+      <button class="stop" onclick="stopPhase()">Stop</button>
+    </div>
+  </div>
+  <div class="label-bar">${data.label}</div>
+  <div class="phase-list" id="chipBar"></div>
+  <div id="phaseCard"></div>
+`;
+
+const chipBar = document.getElementById("chipBar");
+data.phases.forEach((ph, idx) => {
+  const chip = document.createElement("button");
+  chip.className = "phase-chip";
+  chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0]} · ${ph.min}m`;
+  chip.id = `chip-${idx}`;
+  chip.onclick = () => selectPhase(idx);
+  chipBar.appendChild(chip);
+});
+
+function selectPhase(idx) {
+  currentIdx = idx;
+  stopPhase();
+  const ph = data.phases[idx];
+
+  document.querySelectorAll(".phase-chip").forEach((c, i) => {
+    c.classList.toggle("active", i === idx);
+  });
+
+  document.getElementById("phaseTitle").textContent = ph.title;
+  document.getElementById("timerDisplay").textContent =
+    `${String(ph.min).padStart(2,"0")}:00`;
+  document.getElementById("timerDisplay").style.color = "#ffffff";
+
+  let html = `<div class="phase-card">
+    <h2>${ph.title}
+      <span class="badges">
+        <span class="badge dok">DOK ${ph.dok}</span>
+        <span class="badge min">${ph.min} min</span>
+        <span class="badge fw">${ph.fw}</span>
+      </span>
+    </h2>`;
+
+  if (ph.items && ph.items.length) {
+    ph.items.forEach(it => {
+      let cls = "item";
+      if (it.assess) cls = "item assess";
+      const star = it.assess ? '<span class="star">⭐ ASSESS </span>' : "";
+      html += `<div class="${cls}">${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>${it.note ? `<div style="margin-top:4px;font-size:0.85rem;">${it.note}</div>` : ""}</div>`;
+    });
+  }
+
+  if (ph.teacher && ph.teacher.length) {
+    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
+    ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+
+  if (ph.rules && ph.rules.length) {
+    html += `<div class="callout rule"><span class="label">📘 Early-finisher prompt</span><ul>`;
+    ph.rules.forEach(r => html += `<li>${r}</li>`);
+    html += `</ul></div>`;
+  }
+
+  if (ph.answer) {
+    html += `<div class="callout answer"><span class="label">✅ Debrief plan</span>${ph.answer}</div>`;
+  }
+
+  if (ph.bridge) {
+    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
+  }
+
+  if (ph.warn) {
+    html += `<div class="callout warn"><span class="label">⚠️ Proctor rule</span>${ph.warn}</div>`;
+  }
+
+  html += `</div>`;
+  document.getElementById("phaseCard").innerHTML = html;
+}
+
+function startPhase() {
+  const ph = data.phases[currentIdx];
+  let remaining = ph.min * 60;
+  const timerEl = document.getElementById("timerDisplay");
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    remaining--;
+    if (remaining < 0) {
+      clearInterval(timerInterval);
+      timerEl.textContent = "TIME";
+      timerEl.style.color = "#ff6b6b";
+      const chip = document.getElementById(`chip-${currentIdx}`);
+      if (chip) chip.classList.add("done");
+      return;
+    }
+    const m = Math.floor(remaining / 60), s = remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+    timerEl.style.color = remaining < 60 ? "#ff6b6b" : "#ffffff";
+  }, 1000);
+}
+
+function stopPhase() {
+  clearInterval(timerInterval);
+  const ph = data.phases[currentIdx];
+  const timerEl = document.getElementById("timerDisplay");
+  if (timerEl) {
+    timerEl.textContent = `${String(ph.min).padStart(2,"0")}:00`;
+    timerEl.style.color = "#ffffff";
+  }
+}
+
+selectPhase(0);
+</script>
+
+</body>
+</html>
