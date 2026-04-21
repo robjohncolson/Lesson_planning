@@ -1,0 +1,528 @@
+code
+Latex
+download
+content_copy
+expand_less
+\documentclass{article}
+\usepackage{amsmath, amssymb, graphicx, tikz, pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs, xcolor}
+
+\newenvironment{lesson-meta}{}{}
+\newenvironment{item-analysis}{}{}
+\newenvironment{model-discuss}{}{}
+\newenvironment{concept-box}{}{}
+\newenvironment{concept-summary}{}{}
+\newenvironment{example}[1]{}{}
+\newenvironment{tryit}[1]{}{}
+\newenvironment{practice}[2]{}{}
+\newenvironment{te-addendum}[2]{}{}
+\newcommand{\answer}[1]{}
+\newcommand{\placeholder}[2]{}
+\newcommand{\uncertain}[2]{#1}
+\newcommand{\te}[1]{}
+
+\begin{document}
+
+\begin{lesson-meta}
+\textbf{5-5 Function Operations}
+
+\textbf{I CAN...} perform operations on functions to answer real-world questions.
+
+\textbf{VOCABULARY}
+\begin{itemize}
+    \item composite function
+    \item composition of functions
+\end{itemize}
+
+\textbf{ESSENTIAL QUESTION} How do you combine, multiply, divide, and compose functions, and how do you find the domain of the resulting function?
+\end{lesson-meta}
+
+\textbf{COMMUNICATE PRECISELY}
+Defining a function includes describing its domain. The domain of $f \pm g$ is the intersection of the domains of $f$ and $g$.
+
+\begin{model-discuss}
+In business, the term \textit{profit} is used to describe the difference between the money the business earns (revenue) and the money the business spends (cost).
+
+\placeholder{photo}{Illustration of a man grooming a bulldog, with a sign reading "GROOMING \$25 per pet".}
+
+\textbf{A.} Let $x$ represent the number of pets groomed in a month at Grooming USA. Define a revenue function for the business.
+
+\textbf{B.} Materials and labor for each pet groomed cost \$15. The business also has fixed costs of \$1,000 each month. Define a cost function for this business.
+
+\textbf{C.} Last month, Grooming USA groomed 95 pets. Did they earn a profit? What would the profit be if the business groomed 110 pets in a month?
+
+\textbf{D. Generalize} Explain your procedure for calculating the profit for Grooming USA. Suppose you wanted to calculate the profit for several different scenarios. How could you simplify your process?
+\end{model-discuss}
+
+\begin{example}{1}
+\textbf{Add and Subtract Functions}
+
+\textbf{How do you define the sum, $f + g$, and the difference, $f - g$, of the functions $f(x) = 3x + 4$ and $g(x) = x^2 - 5x + 2$?}
+
+\textbf{A. What is the sum of $f(x) = 3x + 4$ and $g(x) = x^2 - 5x + 2$?}
+
+To define the sum of two functions with known rules, add their rules.
+\begin{align*}
+(f + g)(x) &= f(x) + g(x) \\
+&= (3x + 4) + (x^2 - 5x + 2) \\
+&= x^2 + (3x - 5x) + (4 + 2) \\
+&= x^2 - 2x + 6
+\end{align*}
+
+The domain of $f$ is $\{x \mid x \text{ is a real number}\}$.
+
+The domain of $g$ is $\{x \mid x \text{ is a real number}\}$.
+
+So the domain of $f + g$ is $\{x \mid x \text{ is a real number}\}$.
+
+The sum of the two functions is $x^2 - 2x + 6$.
+
+\textbf{B. What is the difference of $f(x) = 3x + 4$ and $g(x) = x^2 - 5x + 2$?}
+
+To define the difference of two functions with known rules, subtract their rules.
+\begin{align*}
+(f - g)(x) &= f(x) - g(x) \\
+&= (3x + 4) - (x^2 - 5x + 2) \\
+&= 3x + 4 - x^2 + 5x - 2 \\
+&= -x^2 + 8x + 2
+\end{align*}
+
+The domain of $f$ is $\{x \mid x \text{ is a real number}\}$. The domain of $g$ is $\{x \mid x \text{ is a real number}\}$. So the domain of $f - g$ is $\{x \mid x \text{ is a real number}\}$.
+
+The difference of the two functions is $-x^2 + 8x + 2$.
+\end{example}
+
+\begin{tryit}{1}
+Let $f(x) = 2x^2 + 7x - 1$ and $g(x) = 3 - 2x$. Identify rules for the following functions.
+
+\textbf{a.} $f + g$ \qquad \textbf{b.} $f - g$
+\end{tryit}
+
+\textbf{USE STRUCTURE}
+You can use the Associative and Commutative Properties to add and multiply functions, since these operations are based on addition and multiplication of real numbers.
+
+\begin{example}{2}
+\textbf{Multiply Functions}
+
+\textbf{The demand $d$, in units sold, for a company's new brand of cell phone at price $x$, in dollars, is $d(x) = 5,000 - 10x$. The cost to manufacture the cell phone is $c(x) = 2,200 + 80x$. What is the company's expected profit from cell phone sales in terms of the price, $x$?}
+
+\placeholder{illustration}{A profit chart equals a cell phone with a price tag times many cell phones representing demand minus cell phone parts representing cost}
+
+The company's profit will equal the price of its cell phones multiplied by the demand for its phones less the cost to manufacture.
+\[ \text{Profit} = \text{price} \times \text{demand} - \text{cost} \]
+
+The demand is the function $d(x)$. The price is the function $p(x)$.
+
+\begin{tabular}{lll}
+& & \underline{Domains} \\
+Price: & $p(x) = x$ & $p(x): 0 \leq x$ \\
+Demand: & $d(x) = 5,000 - 10x$ & $d(x): 0 \leq x \leq 500$ \\
+Cost: & $c(x) = 2,200 + 80x$ & $c(x): 0 \leq x \leq 500$ \\
+Profit: & $P(x) = p(x) \cdot d(x) - c(x)$ & $P(x): 0 \leq x \leq 500$ \\
+\end{tabular}
+
+\textit{Note: Price, demand, and cost cannot be negative. Domain is the intersection of the domains of $p$, $d$, and $c$.}
+
+\begin{align*}
+P(x) &= x(5,000 - 10x) - (2,200 + 80x) \\
+&= 5,000x - 10x^2 - 2,200 - 80x \\
+&= -10x^2 + 4,920x - 2,200
+\end{align*}
+
+The profit the company will earn in terms of the cell phone price $x$ is represented by $P(x) = -10x^2 + 4,920x - 2,200$.
+\end{example}
+
+\begin{tryit}{2}
+Suppose demand, $d$, for a company's product at cost, $x$, is predicted by the function $d(x) = -0.25x^2 + 1,000$, and price, $p$, that the company can charge for the product is given by $p(x) = x + 16$. Find the company's revenue function. Revenue is demand times price.
+\end{tryit}
+
+\textbf{COMMON ERROR}
+You may think that the domain of $\frac{f}{g}$ is the set of real numbers since $f$ and $g$ are defined for all real numbers. However, $x \neq -\frac{1}{2}$ or $x \neq 7$ because $g$ is now in the denominator.
+
+\begin{example}{3}
+\textbf{Divide Functions}
+
+\textbf{How do you define the quotient $\frac{f}{g}$ of the functions $f(x) = x - 7$ and $g(x) = 2x^2 - 13x - 7$?}
+
+To define the quotient of two functions, take the quotient of their rules: $\left(\frac{f}{g}\right)(x) = \frac{f(x)}{g(x)}$
+\begin{align*}
+\left(\frac{f}{g}\right)(x) &= \frac{f(x)}{g(x)} = \frac{x - 7}{2x^2 - 13x - 7} \\
+&= \frac{x - 7}{(2x + 1)(x - 7)} \\
+&= \frac{1}{2x + 1}
+\end{align*}
+
+The quotient of $\frac{f}{g}$ is $\frac{1}{2x + 1}$. The domain of $\frac{f}{g}$ is the set of all values for which $f$, $g$, and $\frac{f}{g}$ are defined, so $g$ cannot be 0. This is the set of all real numbers $x$ such that $x \neq 7$ and $x \neq -\frac{1}{2}$.
+\end{example}
+
+\begin{tryit}{3}
+Identify the rule and domain for $\frac{f}{g}$ for each pair of functions.
+
+\textbf{a.} $f(x) = x^2 - 3x - 18, g(x) = x + 3$
+
+\textbf{b.} $f(x) = x - 3, g(x) = x^2 - x - 6$
+\end{tryit}
+
+\textbf{LOOK FOR RELATIONSHIPS}
+When finding the rule for $f(g(x))$, work from the inside parenthesis to the outside ones. Notice that $g(x)$ takes the place of the variable $x$ in the function $f(x)$.
+
+\begin{example}{4}
+\textbf{Compose Functions}
+
+\textbf{Let $f(x) = x^2$ and let $g(x) = x + 1$. Investigate what happens when you apply the rule for $g$ and then the rule for $f$ to a number or variable.}
+
+\textbf{A. Find the values of $f(g(0)), f(g(3)), f(g(-2))$.}
+
+For each value of $x$, first apply the rule for $g$. Then apply the rule for $f$ to the result.
+
+\begin{center}
+\begin{tabular}{c|c|c}
+\toprule
+$x$ & $g(x)$ & $f(g(x))$ \\
+\midrule
+$0$ & $g(0) = 0 + 1 = 1$ & $f(g(0)) = 1^2 = 1$ \\
+$3$ & $g(3) = 3 + 1 = 4$ & $f(g(3)) = 4^2 = 16$ \\
+$-2$ & $g(-2) = -2 + 1 = -1$ & $f(g(-2)) = (-1)^2 = 1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{B. Find the rule for $f(g(x))$.}
+\begin{align*}
+g(x) &= x + 1 \\
+f(g(x)) &= f(x + 1) \\
+&= (x + 1)^2 \\
+&= x^2 + 2x + 1
+\end{align*}
+$f(g(x)) = x^2 + 2x + 1$
+
+When you apply the rule for one function to the rule of another function, you create a new function.
+\end{example}
+
+\begin{tryit}{4}
+Let $f(x) = 2x - 1$ and $g(x) = 3x$. Find the value or identify the rule for the following functions.
+
+\textbf{a.} $f(g(2))$ \qquad \textbf{b.} $f(g(x))$
+\end{tryit}
+
+\begin{concept-box}
+\textbf{CONCEPT Composite Function}
+
+A \textbf{composite function} is the result of applying the rule for one function, $f$, to the rule of another function, $g$. The new rule is denoted as $f \circ g$.
+\[ (f \circ g)(x) = f(g(x)) \]
+The operation, $\circ$, that forms a composite function is called \textbf{composition of functions}.
+
+The domain of $f \circ g$ is the set of all real numbers $x$ in the domain of $g$ such that $g(x)$ is in the domain of $f$.
+
+So the domain of the composition is the intersection of the domains of $g$ and $f \circ g$, but not $f$.
+\end{concept-box}
+
+\textbf{MAKE SENSE AND PERSEVERE}
+When finding the rule for the composition of functions, $f \circ g$, the rule for $g$ is substituted into the rule for $f$. How would you find the rule for $g \circ f$?
+
+\begin{example}{5}
+\textbf{Write a Rule for a Composite Function}
+
+\textbf{What is the rule for the composition $(f \circ g)(x)$?}
+
+\textbf{A.} $f(x) = \sqrt{x + 7}$ and $g(x) = 2x - 5$
+\begin{align*}
+(f \circ g)(x) &= f(g(x)) \\
+&= f(2x - 5) \\
+&= \sqrt{(2x - 5) + 7} \\
+&= \sqrt{2x + 2}
+\end{align*}
+
+The rule for the composition $(f \circ g)(x)$ is $\sqrt{2x + 2}$. The domain is $x \geq -1$, which is the intersection of the domains of $g$ and $f \circ g$, which are all real numbers and $x \geq -1$.
+
+\textbf{B.} $f(x) = x^2 + x + 2$ and $g(x) = 4 - x$
+\begin{align*}
+(f \circ g)(x) &= f(g(x)) \\
+&= f(4 - x) \\
+&= (4 - x)^2 + (4 - x) + 2 \\
+&= 16 - 8x + x^2 + 4 - x + 2 \\
+&= x^2 - 9x + 22
+\end{align*}
+
+The rule for the composition $(f \circ g)(x)$ is $x^2 - 9x + 22$, and the domain is all real numbers.
+\end{example}
+
+\begin{tryit}{5}
+Identify the rules for $f \circ g$ and $g \circ f$.
+
+\textbf{a.} $f(x) = x^3, g(x) = x + 1$ \qquad \textbf{b.} $f(x) = 3\sqrt[3]{2x}, g(x) = 4x + 11$
+\end{tryit}
+
+\textbf{STUDY TIP}
+Using a model can help solve a problem. By writing functions to model the discounts, determine which sequence of functions provides a better deal for the customer.
+
+\begin{example}{6}
+\textbf{Use a Composite Function Model}
+
+\textbf{A clothing store posts discounts on social media. Followers are allowed to use multiple discounts. They simply need to tell the cashier in which order they want the discounts.}
+
+\textbf{On their next trip to the store, in which order should they ask for the discounts to save the most money?}
+
+\placeholder{photo}{Smartphone screen showing two coupons: "\$5 OFF NEXT PURCHASE" and "10\% OFF NEXT PURCHASE"}
+
+Write functions to model the discounts, letting $x$ represent the price of the purchase.
+\begin{align*}
+f(x) &= x - 5 \\
+g(x) &= x - 0.1x \quad (\text{price} - 10\% \text{ of price}) \\
+&= 0.9x
+\end{align*}
+
+10\% off, then \$5 off $\Rightarrow$ Identify the rule for $f \circ g$.
+\begin{align*}
+(f \circ g)(x) &= f(g(x)) \\
+&= f(0.9x) \\
+&= 0.9x - 5 \quad (\text{This is the better deal.})
+\end{align*}
+
+\$5 off, then 10\% off $\Rightarrow$ Identify the rule for $g \circ f$.
+\begin{align*}
+(g \circ f)(x) &= g(f(x)) \\
+&= g(x - 5) \\
+&= 0.9(x - 5) \\
+&= 0.9x - 4.5
+\end{align*}
+
+Suppose a shirt costs \$30.00 before the discounts. Applying the discounts as $(f \circ g)(x)$ means the new cost is $(0.9)(30) - 5 = 22$, or \$22.00. Applying the discounts as $(g \circ f)(x)$ means the new cost is $(0.9)(30) - 4.5 = 22.5$, or \$22.50.
+
+The first method yields the better deal.
+\end{example}
+
+\begin{tryit}{6}
+As a member of the Games Shop rewards program, you get a 20\% discount on purchases. All sales are subject to a 6\% sales tax. Write functions to model the discount and the sales tax, then identify the rule for the composition function that calculates the final price you would pay at Games Shop.
+\end{tryit}
+
+\begin{concept-summary}
+\textbf{Function Operations}
+
+\begin{tabular}{p{1.5cm} p{4cm} p{4cm} p{4cm}}
+\toprule
+& \textbf{Add or Subtract Functions} & \textbf{Multiply or Divide Functions} & \textbf{Compose Functions} \\
+\midrule
+\textbf{ALGEBRA} & 
+$(f + g)(x) = f(x) + g(x)$ \newline
+$(f - g)(x) = f(x) - g(x)$ & 
+$(f \cdot g)(x) = f(x) \cdot g(x)$ \newline
+$\left(\frac{f}{g}\right)(x) = \frac{f(x)}{g(x)}$ & 
+$(f \circ g)(x) = f(g(x))$ \newline
+$(g \circ f)(x) = g(f(x))$ \\
+\midrule
+\textbf{WORDS} & 
+The domain of the sum or difference of $f$ and $g$ is the intersection of the domain of $f$ and the domain of $g$. & 
+The domain is the set of all real numbers for which $f$ and $g$ and the new function are defined. & 
+The domain of $f \circ g$ is the set of all real numbers $x$, in the domain of $g$, such that $g(x)$ is in the domain of $f$. \\
+\midrule
+\textbf{NUMBERS} & 
+Let $f(x) = 3x + 5$ \newline
+and $g(x) = x - 3$ \newline
+$f + g = (3x + 5) + (x - 3) = 4x + 2$ \newline
+$f - g = (3x + 5) - (x - 3) = 2x + 8$ & 
+Let $f(x) = 3x + 5$ \newline
+and $g(x) = x - 3$ \newline
+$f \cdot g = (3x + 5)(x - 3) = 3x^2 - 4x - 15$ \newline
+$\frac{f}{g} = \frac{3x + 5}{x - 3}$ for $x \neq 3$ & 
+Let $f(x) = 3x + 5$ \newline
+and $g(x) = x - 3$ \newline
+$f \circ g = 3(x - 3) + 5 = 3x - 4$ \newline
+$g \circ f = (3x + 5) - 3 = 3x + 2$ \\
+\bottomrule
+\end{tabular}
+\end{concept-summary}
+
+\section*{Do You UNDERSTAND?}
+\begin{enumerate}
+\item \textbf{ESSENTIAL QUESTION} How do you combine, multiply, divide, and compose functions, and how do you find the domain of the resulting function?
+\item \textbf{Vocabulary} In your own words, define and provide an example of a composite function.
+\item \textbf{Error Analysis} Roble said the domain of $\frac{f}{g}$ when $f(x) = 5x^2$ and $g(x) = x + 3$ is the set of real numbers. Explain why Roble is incorrect.
+\item \textbf{Use Structure} Explain why changing the order in which two functions occur affects the result when subtracting and dividing the functions.
+\end{enumerate}
+
+\section*{Do You KNOW HOW?}
+Let $f(x) = 3x^2 + 5x + 1$ and $g(x) = 2x - 1$.
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item Identify the rule for $f + g$.
+\item Identify the rule for $f - g$.
+\item Identify the rule for $g - f$.
+\end{enumerate}
+Let $f(x) = x^2 + 2x + 1$ and $g(x) = x - 4$.
+\begin{enumerate}
+\setcounter{enumi}{7}
+\item Identify the rule for $f \cdot g$.
+\item Identify the rule for $\frac{f}{g}$, and state the domain.
+\item Identify the rule for $\frac{g}{f}$, and state the domain.
+\item If $f(x) = 2x^2 + 5$ and $g(x) = -3x$, what is $f(g(x))$?
+\end{enumerate}
+
+\section*{PRACTICE \& PROBLEM SOLVING}
+
+\subsection*{UNDERSTAND}
+
+\begin{practice}{12}{}
+\textbf{Generalize} Does $f \circ g$ always equal $g \circ f$? Justify your response.
+\end{practice}
+
+\begin{practice}{13}{}
+\textbf{Construct Arguments} Explain why the domain for the quotient of functions might not be the set of all real numbers.
+\end{practice}
+
+\begin{practice}{14}{}
+\textbf{Error Analysis} Describe and correct the error a student made in finding the rule for the composition $f \circ g$ of the functions $f(x) = 3x^2 - x + 2$ and $g(x) = 2x + 1$.
+\begin{align*}
+f \circ g &= f(g(x)) \\
+&= 3(2x + 1)^2 - 2x + 1 + 2 \\
+&= 3(4x^2 + 4x + 1) - 2x + 1 + 2 \\
+&= 12x^2 + 12x + 3 - 2x + 1 + 2 \\
+&= 12x^2 + 10x + 6 \qquad \text{\Large \textcolor{red}{\textbf{X}}}
+\end{align*}
+\end{practice}
+
+\begin{practice}{15}{}
+\textbf{Make Sense and Persevere} Identify the rules for two functions, $f(x)$ and $g(x)$, for which $f \circ g = g \circ f$.
+\end{practice}
+
+\begin{practice}{16}{}
+\textbf{Higher Order Thinking} Suppose two functions, $f(x)$ and $g(x)$ are only defined by the ordered pairs listed below.
+
+$f = (6, 7), (5, 2), (4, 1), (10, 8)$
+
+$g = (5, 4), (3, 6), (1, 5), (2, 10)$
+
+Find the ordered pairs that comprise $(f \circ g)(x)$.
+\end{practice}
+
+\begin{practice}{17}{}
+\textbf{Mathematical Connections} Relate evaluating $(f \circ g)(3)$ to finding the composition rule $(f \circ g)(x)$. What are the benefits of each?
+\end{practice}
+
+\begin{practice}{18}{}
+\textbf{Make Sense and Persevere} Identify rules for two functions $f(x)$ and $g(x)$, for which $f(g(x)) = x$.
+\end{practice}
+
+\begin{practice}{19}{}
+\textbf{Construct Arguments} Is it possible that $f(x) - g(x) = c$, where $c$ is a constant? If so, give an example. What must be true about two linear functions? If not, explain why it is not possible.
+\end{practice}
+
+\subsection*{PRACTICE}
+
+Let $f(x) = \frac{5}{3}x^2 + 2x - \frac{5}{8}$ and $g(x) = 3x^2$. Identify the rules for the following functions. \textsc{SEE EXAMPLE 1}
+\begin{practice}{20}{}
+$f + g$
+\end{practice}
+
+\begin{practice}{21}{}
+$f - g$
+\end{practice}
+
+\begin{practice}{22}{}
+Suppose the demand $d$, in units sold, for a company's jeans at price $x$, in dollars, is $d(x) = 6,500 - 6.83x$.
+\begin{enumerate}
+\item[\textbf{a.}] If $\text{revenue} = \text{price} \times \text{demand}$, write the rule for the function $R(x)$, which represent the company's expected revenue in jean sales. Then state the domain of this function.
+\item[\textbf{b.}] If the cost to manufacture the jeans is $c(x) = 386 + 1.27x$, find the equation for the company's profit. How much does the company earn if the price is \$79?
+\end{enumerate}
+\textsc{SEE EXAMPLE 2}
+\end{practice}
+
+\begin{practice}{23}{}
+Identify the rule and domain for $\frac{f}{g}$ when $f(x) = 10x^2 + 3x - 18$ and $g(x) = 2x + 3$. \textsc{SEE EXAMPLE 3}
+\end{practice}
+
+Let $f(x) = 4x - 5$ and $g(x) = -7x$. Evaluate each expression. \textsc{SEE EXAMPLE 4}
+\begin{practice}{24}{}
+$f(g(3))$
+\end{practice}
+
+\begin{practice}{25}{}
+$f(g(x))$
+\end{practice}
+
+\begin{practice}{26}{}
+$g(f(2))$
+\end{practice}
+
+\begin{practice}{27}{}
+$g(f(x))$
+\end{practice}
+
+Let $f(x) = x^2 + x$ and $g(x) = 9 - 2x$. Identify the rules for the following functions. \textsc{SEE EXAMPLE 5}
+\begin{practice}{28}{}
+$f \circ g$
+\end{practice}
+
+\begin{practice}{29}{}
+$g \circ f$
+\end{practice}
+
+\begin{practice}{30}{}
+A sporting goods store is running a summer sale on its snowboards. Kadia is interested in a snowboard that normally costs \$400. The store is offering two special offers.
+
+In which order should these special offers be applied to the cost of the snowboard in order to benefit Kadia? Explain. \textsc{SEE EXAMPLE 6}
+
+\placeholder{illustration}{Snowboards on display in a store, with two circular stickers indicating offers: "\$50 INSTANT REBATE" and "10\% DISCOUNT".}
+\end{practice}
+
+\subsection*{APPLY}
+
+\begin{practice}{31}{}
+\textbf{Model With Mathematics} The cost (in dollars) to produce $x$ shovels in a factory is given by the function $C(x) = 20x + 500$. The factory produces 30 shovels in one hour.
+\begin{enumerate}
+\item[\textbf{a.}] Find the rule for $C(h(x))$, where the function $h(x)$ is the number of shovels produced in $x$ hours.
+\item[\textbf{b.}] Find the cost when $h = 8$ hours.
+\item[\textbf{c.}] Explain what the function $C(h(x))$ represents.
+\end{enumerate}
+\end{practice}
+
+\begin{practice}{32}{}
+\textbf{Use Structure} A music store is running the following promotions.
+
+\placeholder{illustration}{A drum set with a sign: "HUGE SAVINGS AT O'RILEY'S MUSIC". Coupons show "\$5 off a purchase of \$20 or more" and "Save an additional 15\% off your total purchase when you open a charge account".}
+
+\begin{enumerate}
+\item[\textbf{a.}] Use composition of functions to find the sale price of a \$90 purchase when the \$5 off discount is applied prior to the 15\% off discount.
+\item[\textbf{b.}] Use composition of functions to find the sale price of a \$90 purchase when the 15\% off discount is applied prior to the \$5 off discount.
+\item[\textbf{c.}] In which order is the deal better for the consumer? Explain.
+\end{enumerate}
+\end{practice}
+
+\begin{practice}{33}{}
+\textbf{Reason} From 2000 to 2015, the number of births, $b$, (in the hundreds) in Fairfield County can be modeled by the function $b(x) = 300 - 5x$. The number of deaths, $d$, (in the hundreds) can be modeled by the function $d(x) = 10x + 5$. The variable $x$ represents the number of years since 2000.
+\begin{enumerate}
+\item[\textbf{a.}] Which function operation can be used to represent the net increase in the population?
+\item[\textbf{b.}] Write and simplify a function which represents the net increase in the population, $p$, against $x$, the number of years since 2000. State the domain of this function.
+\end{enumerate}
+\end{practice}
+
+\subsection*{ASSESSMENT PRACTICE}
+
+\begin{practice}{34}{}
+Given that $f(x) = x^2 + 8x + 3$ and $g(x) = -x - 7$, which of the following are true? Select all that apply.
+\begin{itemize}
+\item[$\square$] $f + g = x^2 + 7x - 4$
+\item[$\square$] $f(g(x)) = x^2 + 6x - 4$
+\item[$\square$] The domain of $\frac{f}{g}$ is the set of all real numbers.
+\item[$\square$] $f(x) \cdot g(x) = -x^3 - 15x^2 + 53x + 21$
+\item[$\square$] In the composition $g \circ f$, the output $f(x)$ is used as the input for $g$.
+\end{itemize}
+\end{practice}
+
+\begin{practice}{35}{}
+\textbf{SAT/ACT} Find the value of $f(g(5))$ if $f(x) = 4x + 1$ and $g(x) = x^2 + 6$.
+
+\textcircled{A} 101 \quad \textcircled{B} 124 \quad \textcircled{C} 125 \quad \textcircled{D} 676 \quad \textcircled{E} 682
+\end{practice}
+
+\begin{practice}{36}{}
+\textbf{Performance Task} The temperature in degrees Celsius is 32 less than the Fahrenheit temperature, multiplied by five-ninths. The temperature in degrees Kelvin is the number of degrees Celsius plus 273.
+
+\placeholder{diagram}{Three vertical thermometers side-by-side labeled Celsius, $^\circ$C, Fahrenheit, $^\circ$F, and Kelvin, K. A red dashed line horizontally connects $0^\circ$C, $32^\circ$F, and $273$ K. The Celsius scale has markings from $-40$ to $60$. The Fahrenheit scale has markings from $-50$ to $150$. The Kelvin scale has markings from $230$ to $330$.}
+
+\textbf{Part A} Derive a conversion formula for finding the number of degrees Kelvin, given the temperature in Fahrenheit.
+
+\textbf{Part B} Using your conversion formula from part (a), find the temperature in degrees Kelvin when the temperature is $27^\circ\text{F}$. Round to the nearest whole number if necessary.
+\end{practice}
+
+\end{document}

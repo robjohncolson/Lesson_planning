@@ -104,12 +104,13 @@ def bank_item_block(doc, q, *, label=None, space_after_inches=1.0):
         r.font.size = Pt(11)
         r.font.color.rgb = RGBColor(0x0B, 0x5C, 0x7B)
     prompt_p = doc.add_paragraph()
-    prompt_p.add_run(q["prompt"]).font.size = Pt(11)
+    ps.render_prompt(prompt_p, q["prompt"], font_size=11)
     if q.get("answers"):
         for i, a in enumerate(q["answers"]):
             line = doc.add_paragraph()
             line.paragraph_format.left_indent = Inches(0.3)
-            line.add_run(f"  ({chr(65+i)})  {a}").font.size = Pt(11)
+            run = line.add_run(f"  ({chr(65+i)})  " + ps.latex_to_unicode(a))
+            run.font.size = Pt(11)
     sp = doc.add_paragraph()
     sp.paragraph_format.space_after = Inches(space_after_inches)
 

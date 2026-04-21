@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L63 Pacer · Single Period</title>
+<style>
+  :root {
+    --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
+    --gold:#c88b14; --red:#b23a3a; --accent:#d94e2f;
+    --bg:#eaf2fb; --card:#ffffff; --ink:#112233; --muted:#556677;
+    --pale-teal:#d4edda; --pale-gold:#fff2cc; --pale-red:#f7d7d7;
+    --pale-navy:#cfe2f3; --pale-orange:#fce5cd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.4;
+  }
+  header {
+    background: var(--navy); color: #fff; padding: 12px 24px;
+    display:flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+  header .meta { font-size: 0.85rem; color: #bbd0e6; }
+  .panel { display: block; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .timer-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--navy); color: #fff; padding: 10px 16px;
+    border-radius: 8px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .timer-bar .countdown { font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
+  .timer-bar button {
+    background: var(--gold); color: #fff; border: none;
+    padding: 8px 16px; border-radius: 4px; font-weight: 600;
+    cursor: pointer; font-size: 0.9rem;
+  }
+  .timer-bar button.stop { background: var(--red); }
+  .timer-bar button:hover { filter: brightness(1.1); }
+  .timer-bar .phase-title { font-size: 1rem; color: #bbd0e6; }
+  .phase-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .phase-chip {
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
+    font-weight: 600; border: 2px solid transparent;
+  }
+  .phase-chip:hover { background: #c9dcf0; }
+  .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
+  .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
+  .phase-card {
+    background: var(--card); border-radius: 8px; padding: 18px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px;
+  }
+  .phase-card h2 {
+    margin: 0 0 6px 0; color: var(--navy); font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badges { display:flex; gap: 6px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.72rem; font-weight: 700; color: #fff;
+  }
+  .badge.dok { background: var(--gold); }
+  .badge.min { background: var(--green); }
+  .badge.fw { background: var(--blue); }
+  .callout {
+    padding: 12px 14px; border-radius: 6px; margin: 12px 0;
+    border-left: 5px solid var(--teal);
+  }
+  .callout.teacher { background: var(--pale-navy); border-color: var(--navy); }
+  .callout.answer  { background: var(--pale-teal); border-color: var(--green); }
+  .callout.rule    { background: var(--pale-gold); border-color: var(--gold); }
+  .callout.warn    { background: var(--pale-red); border-color: var(--red); }
+  .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout .label {
+    font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    display: block; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout.answer .label { color: var(--green); }
+  .callout.rule .label { color: var(--gold); }
+  .callout.warn .label { color: var(--red); }
+  .callout.bridge .label { color: var(--accent); }
+  .callout ul { margin: 4px 0; padding-left: 22px; }
+  .item {
+    border-left: 3px solid var(--blue); padding: 10px 14px;
+    background: #f7faff; margin: 8px 0; border-radius: 4px;
+  }
+  .item .qid {
+    font-size: 0.75rem; color: var(--muted); font-family: monospace;
+  }
+  .item.dok3 { border-left-color: var(--accent); background: #fff5ef; }
+  .item.assess { border-left-color: var(--gold); background: #fffbea; }
+  .item .star { font-weight: 700; }
+  .item.dok3 .star { color: var(--accent); }
+  .item.assess .star { color: var(--gold); }
+</style>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)'], ['$','$']], displayMath: [['\\[','\\]'], ['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lesson 6-3 Pacer</h1>
+    <div class="meta">Single Period · Logarithms + ⭐ DOK-3 Spine q15 (exp↔log inverse via graph)</div>
+  </div>
+  <div class="meta" id="dateLabel"></div>
+</header>
+
+<main>
+  <div class="panel" id="panel-p1"></div>
+</main>
+
+<script>
+const PACER = {
+  p1: {
+    label: "Single Period · Logarithms + ⭐ DOK-3 Spine q15 · 50 min (45-min variant: drop q53+q54) — NOTE: PT#58 dropped, not Form-B-aligned. q15 covers Form B Q7/Q10/Q11.",
+    total_min: 50,
+    phases: [
+      { id:"donow", title:"Do Now — 3 log warm-up items",
+        fw:"bridge", dok:"1-2", min:7,
+        items:[
+          {qid:"6-3-savvas-q14", label:"Error analysis: e^t = 98 (what step undoes the exponential?)"},
+          {qid:"6-3-savvas-q16", label:"Reasoning: log_4 x < 0 (when is a log negative?)"},
+          {qid:"6-3-savvas-q3",  label:"Vocabulary: common log vs. natural log"},
+        ],
+        teacher:[
+          "Cold-call on q14: 'What error did the student make? How do you undo \\(e^t\\)?'",
+          "Bridge: logs undo exponentials — that's today's key idea",
+        ],
+        bridge:"\\(\\log_b x = y\\) means \\(b^y = x\\). So logs and exponentials are INVERSES — the x-value where \\(3^x = 50\\) IS \\(\\log_3 50\\). → connects to q15 DOK-3 spine.",
+        rules:[
+          "LOG ↔ EXP:   \\(\\log_b x = y \\iff b^y = x\\)",
+          "COMMON LOG:  \\(\\log x = \\log_{10} x\\)",
+          "NATURAL LOG: \\(\\ln x = \\log_e x\\)",
+          "KEY:         \\(\\ln(e^t) = t\\)     (this solves continuous growth!)",
+          "UNDEFINED:   \\(\\log_b 0\\) and \\(\\log_b(\\text{negative})\\) — no real answer",
+          "IDENTITY:    \\(\\log_b(b^k) = k\\)",
+        ],
+      },
+      { id:"launch", title:"Launch — Example 3: Evaluate Logarithms",
+        fw:"teacher models", dok:"1-2", min:8,
+        items:[
+          {qid:"6-3-savvas-example-3-lesson-6-3", label:"Example 3: \\(\\log_5 125\\) / \\(\\log_{1/4} 16\\) / \\(\\log_3 0\\) / \\(\\log_2 2^8\\)"},
+        ],
+        teacher:[
+          "Think aloud: \\(\\log_5 125\\) → \\(5^{?} = 125\\) → answer 3",
+          "Think aloud: \\(\\log_{1/4} 16\\) → \\((1/4)^{?} = 16\\) → answer −2 (negative exponent!)",
+          "Think aloud: \\(\\log_3 0\\) → \\(3^{?} = 0\\) → UNDEFINED — no real exponent reaches 0",
+          "Think aloud: \\(\\log_2 2^8\\) → identity \\(\\log_b(b^k) = k\\) → answer 8",
+          "Flag Rules card. Release at minute 15.",
+        ],
+        rules:[
+          "LOG ↔ EXP:   \\(\\log_b x = y \\iff b^y = x\\)",
+          "COMMON LOG:  \\(\\log x = \\log_{10} x\\)",
+          "NATURAL LOG: \\(\\ln x = \\log_e x\\)",
+          "KEY:         \\(\\ln(e^t) = t\\)     (solves continuous growth!)",
+          "UNDEFINED:   \\(\\log_b 0\\) and \\(\\log_b(\\text{negative})\\) — no real answer",
+          "IDENTITY:    \\(\\log_b(b^k) = k\\)",
+        ],
+      },
+      { id:"explore", title:"Explore — Think-Pair-Share (⭐ q15, q52, q53, q54, q17)",
+        fw:"student work", dok:"2-3", min:25,
+        items:[
+          {qid:"6-3-savvas-q15", label:"⭐ DOK-3 SPINE: Use the graph of \\(y=3^x\\) to estimate \\(\\log_3 50\\). Explain your reasoning. [GRAPH PLACEHOLDER — \\(y=3^x\\), \\(x\\in[-1,4.5]\\), \\(y\\in[0,85]\\), gridlines. Teacher copy: + dashed \\(y=50\\) line + read-off annotation. needs_cleanup=YES]", dok3:true, note:"Plan 10 min TPS + 5 min pair presentations. DO NOT tell students where y=50 is — let them find it."},
+          {qid:"6-3-savvas-q52", label:"#52 DOK-2 application — log↔exp definition (Form B Q9)"},
+          {qid:"6-3-savvas-q53", label:"#53 DOK-2 — solve exp with logs / Change of Base (Form B Q14)  [45-min variant: SKIP]"},
+          {qid:"6-3-savvas-q54", label:"#54 DOK-2 — multi-part log modeling (Form B Q9+Q14)  [45-min variant: SKIP]"},
+          {qid:"6-3-savvas-q17", label:"#17 DOK-3 proof-style (promoted to core): critique log_3(1/27) = -3 (Form B Q13 condense reasoning)"},
+        ],
+        teacher:[
+          "q15: press 'Where on the graph is \\(y=50\\)? Between which x-values?'",
+          "q15: after 10 min, pair presentations — 'Why does reading x give you the log?'",
+          "q17: press 'Is \\(\\log_3(1/27) = -3\\) correct? Write it in exp form to check.'",
+          "Lap on q52: 'which log rule applies here?'",
+          "45-min variant: drop q53 + q54 entirely. Never cut q15.",
+        ],
+        warn:"PT#58 dropped as spine — not Form-B-aligned. q15 rehearses 3 of 8 Form B items through exp↔log inverse relationship. The continuous-growth modeling of PT#58 will live in a future lesson if the class picks up 6-6+.",
+        answer:"q15: \\(\\log_3 50 \\approx 3.56\\). On graph: \\(3^3=27\\), \\(3^4=81\\), so answer between 3 and 4, closer to 3.5. WHY: \\(\\log_3 50 = x\\) means \\(3^x = 50\\) — the x-value where exp graph hits \\(y=50\\) IS the log (inverse relationship). q17: \\(\\log_3(1/27) = -3\\) is CORRECT — \\(3^{-3} = 1/27\\). Full credit for showing the exp form check.",
+      },
+      { id:"share", title:"Share / Summary — DOK-3 Reveal + 6-4 Bridge",
+        fw:"academic conversation", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Cold-call the pair that got q15 — hold them accountable to the 'why'",
+          "Write on board: \\(\\log_3 50 = x\\) means \\(3^x = 50\\)",
+          "Write: \\(x \\approx 3.56\\) (between \\(3^3=27\\) and \\(3^4=81\\), closer to 3.5)",
+          "Key takeaway: exp and log are inverses — reading x from the graph IS the log",
+        ],
+        answer:"q15: \\(\\log_3 50 \\approx 3.56\\). Sentence frame: 'I found \\(\\log_3 50 \\approx\\) ___ by reading the x-value where the graph hits \\(y=50\\). This works because logarithms and exponentials are ___.'",
+        bridge:"Lesson 6-4: logarithmic FUNCTIONS — graphing \\(y = \\log_b x\\). Domain: \\(x > 0\\). Asymptote: \\(x = 0\\). Today's log ↔ exp definition is the foundation.",
+      },
+      { id:"exit", title:"Exit Ticket — Summary Recap",
+        fw:"not graded", dok:"1-2", min:5,
+        items:[{qid:"6-3-savvas-q18", label:"Optional #18: \\(\\ln 1000 \\neq 3\\)? Verify using the definition (fast finisher only)"}],
+        teacher:[
+          "Collect Summary Exit box",
+          "Scan blank 3 (\\(e^t = 6.125\\) → ln): if students write 'log' without specifying base e, re-teach ln tomorrow",
+          "Scan blank 1: if students write 'b times y = x' (not \\(b^y = x\\)), re-teach log definition",
+          "If students left q15 blank or wrote only a number without explanation, re-teach exp↔log inverse tomorrow",
+        ],
+      },
+    ]
+  },
+};
+
+document.getElementById("dateLabel").textContent = new Date().toDateString();
+
+function renderPanel(tabId) {
+  const data = PACER[tabId];
+  const panel = document.getElementById("panel-" + tabId);
+  panel.innerHTML = `
+    <div class="timer-bar">
+      <div>
+        <div class="phase-title" id="phaseTitle-${tabId}">Select a phase to begin</div>
+      </div>
+      <div class="countdown" id="timer-${tabId}">--:--</div>
+      <div>
+        <button onclick="startPhase('${tabId}')" id="startBtn-${tabId}">Start</button>
+        <button class="stop" onclick="stopPhase('${tabId}')">Stop</button>
+      </div>
+    </div>
+    <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    <div class="phase-list" id="chips-${tabId}"></div>
+    <div id="phase-card-${tabId}"></div>
+  `;
+  const chipBar = panel.querySelector(`#chips-${tabId}`);
+  data.phases.forEach((ph, idx) => {
+    const chip = document.createElement("button");
+    chip.className = "phase-chip";
+    chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0]} · ${ph.min}m`;
+    chip.onclick = () => selectPhase(tabId, idx);
+    chipBar.appendChild(chip);
+  });
+  selectPhase(tabId, 0);
+}
+
+function selectPhase(tabId, idx) {
+  const data = PACER[tabId];
+  const ph = data.phases[idx];
+  const card = document.getElementById(`phase-card-${tabId}`);
+  let html = `<div class="phase-card">
+    <h2>${ph.title}
+      <span class="badges">
+        <span class="badge dok">DOK ${ph.dok}</span>
+        <span class="badge min">${ph.min} min</span>
+        <span class="badge fw">${ph.fw}</span>
+      </span>
+    </h2>`;
+  if (ph.items && ph.items.length) {
+    ph.items.forEach(it => {
+      let cls = "item";
+      if (it.dok3) cls = "item dok3";
+      else if (it.assess) cls = "item assess";
+      const star = it.dok3 ? '<span class="star">⭐ DOK-3 </span>' :
+                    it.assess ? '<span class="star">⭐ ASSESS </span>' : '';
+      html += `<div class="${cls}">${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>${it.note ? `<div>${it.note}</div>` : ""}</div>`;
+    });
+  }
+  if (ph.teacher && ph.teacher.length) {
+    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
+    ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.rules && ph.rules.length) {
+    html += `<div class="callout rule"><span class="label">📘 Rules / stems</span><ul>`;
+    ph.rules.forEach(r => html += `<li>${r}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.answer) {
+    html += `<div class="callout answer"><span class="label">✅ Answer key</span>${ph.answer}</div>`;
+  }
+  if (ph.bridge) {
+    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
+  }
+  if (ph.warn) {
+    html += `<div class="callout warn"><span class="label">⚠️ Warning / Note</span>${ph.warn}</div>`;
+  }
+  html += `</div>`;
+  card.innerHTML = html;
+  document.querySelectorAll(`#chips-${tabId} .phase-chip`).forEach((c, i) => {
+    c.classList.toggle("active", i === idx);
+  });
+  document.getElementById(`phaseTitle-${tabId}`).textContent = ph.title;
+  currentPhase[tabId] = idx;
+  stopPhase(tabId);
+  document.getElementById(`timer-${tabId}`).textContent =
+    `${String(ph.min).padStart(2,'0')}:00`;
+}
+
+const timers = {}, currentPhase = {};
+
+function startPhase(tabId) {
+  const idx = currentPhase[tabId];
+  const ph = PACER[tabId].phases[idx];
+  let remaining = ph.min * 60;
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  clearInterval(timers[tabId]);
+  timers[tabId] = setInterval(() => {
+    remaining--;
+    if (remaining < 0) {
+      clearInterval(timers[tabId]);
+      timerEl.textContent = "TIME";
+      timerEl.style.color = "#ff6b6b";
+      if (idx + 1 < PACER[tabId].phases.length) {
+        document.querySelectorAll(`#chips-${tabId} .phase-chip`)[idx].classList.add("done");
+      }
+      return;
+    }
+    const m = Math.floor(remaining / 60), s = remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    timerEl.style.color = remaining < 60 ? "#ff6b6b" : "#ffffff";
+  }, 1000);
+}
+
+function stopPhase(tabId) {
+  clearInterval(timers[tabId]);
+  const idx = currentPhase[tabId];
+  if (idx === undefined) return;
+  const ph = PACER[tabId].phases[idx];
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  timerEl.textContent = `${String(ph.min).padStart(2,'0')}:00`;
+  timerEl.style.color = "#ffffff";
+}
+
+renderPanel("p1");
+</script>
+
+</body>
+</html>

@@ -61,7 +61,7 @@ All 5 periods (L54 P1/P2/P3 + L51 + L55) committed as `fff7cd8`. NOT eye-checked
 1. **Eye-check L54 P2 teacher packet** — carries the Topic 5 DOK-3 spine (Q#41 half-life). Most important artifact in Topic 5.
 2. **Browser-verify `L54_Pacer.html`** (3-tab) and `L51_Pacer.html` / `L55_Pacer.html` (single-pane, tab-stripped). Confirm timer + ⭐ styling renders.
 3. **Clean 7 visuals flagged `needs_cleanup`** across L51 (2), L54 (3), L55 (2) checklists. See each `L5N_PN_Visuals_Checklist.md` for specifics.
-4. **Registry has `-2`-suffixed duplicates** (SE+TE both got ingested). Not breaking anything, but clean when time permits.
+4. **Registry has `-2`-suffixed duplicates** on Topic 5 lessons (SE+TE both ingested before the 2026-04-20 fix). Topic 6 lessons are clean. Not breaking anything, but clean Topic 5 when time permits.
 
 ## Topic 4 backlog — deferred past Topic 6
 
@@ -99,5 +99,5 @@ End of school: **2026-06-20**.
 - `packet_styles.framework_phase_header` requires `dok`, `minutes`, `teacher_does`, `students_do`, `questions_to_ask`, `adult_role` — all keyword-only.
 - Pacer HTML tabs: browser cache can show stale version. Hard refresh (Ctrl+F5).
 - **Chat-UI chrome on pasted LaTeX** — strip lines before `\documentclass` before ingest. See `WIKI_UPDATES_PENDING.md` section 6.
-- **SE+TE ingest creates `-2` duplicates** — reference only non-`-2` IDs in builders.
-- **Item-analysis table parse failures silently default DOK to 2** — verify Savvas-declared DOK-3 items have `dok=3` in registry after ingest.
+- **SE+TE ingest dedupes practice/example/try-it blocks by number** (fixed 2026-04-20). Registry no longer gets duplicate-ID rows from two-pass ingest. Older lessons ingested before the fix may still have `-2`-suffixed rows in the registry; reference non-`-2` IDs in builders for those.
+- **Item-analysis table parse failures fall through to per-item inline DOK** — when `\begin{item-analysis}` is empty/malformed, DOK is read from the second arg of `\begin{practice}{N}{dok}` in the TE. Still verify Savvas-declared DOK-3 items have `dok=3` in the registry after any ingest.

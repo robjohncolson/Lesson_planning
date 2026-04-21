@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>L65 Pacer · Single Period</title>
+<style>
+  :root {
+    --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
+    --gold:#c88b14; --red:#b23a3a; --accent:#d94e2f;
+    --bg:#eaf2fb; --card:#ffffff; --ink:#112233; --muted:#556677;
+    --pale-teal:#d4edda; --pale-gold:#fff2cc; --pale-red:#f7d7d7;
+    --pale-navy:#cfe2f3; --pale-orange:#fce5cd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.4;
+  }
+  header {
+    background: var(--navy); color: #fff; padding: 12px 24px;
+    display:flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+  header .meta { font-size: 0.85rem; color: #bbd0e6; }
+  .panel { display: block; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .timer-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--navy); color: #fff; padding: 10px 16px;
+    border-radius: 8px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .timer-bar .countdown { font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
+  .timer-bar button {
+    background: var(--gold); color: #fff; border: none;
+    padding: 8px 16px; border-radius: 4px; font-weight: 600;
+    cursor: pointer; font-size: 0.9rem;
+  }
+  .timer-bar button.stop { background: var(--red); }
+  .timer-bar button:hover { filter: brightness(1.1); }
+  .timer-bar .phase-title { font-size: 1rem; color: #bbd0e6; }
+  .phase-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .phase-chip {
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
+    font-weight: 600; border: 2px solid transparent;
+  }
+  .phase-chip:hover { background: #c9dcf0; }
+  .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
+  .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
+  .phase-card {
+    background: var(--card); border-radius: 8px; padding: 18px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px;
+  }
+  .phase-card h2 {
+    margin: 0 0 6px 0; color: var(--navy); font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badges { display:flex; gap: 6px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.72rem; font-weight: 700; color: #fff;
+  }
+  .badge.dok { background: var(--gold); }
+  .badge.min { background: var(--green); }
+  .badge.fw { background: var(--blue); }
+  .callout {
+    padding: 12px 14px; border-radius: 6px; margin: 12px 0;
+    border-left: 5px solid var(--teal);
+  }
+  .callout.teacher { background: var(--pale-navy); border-color: var(--navy); }
+  .callout.answer  { background: var(--pale-teal); border-color: var(--green); }
+  .callout.rule    { background: var(--pale-gold); border-color: var(--gold); }
+  .callout.warn    { background: var(--pale-red); border-color: var(--red); }
+  .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout .label {
+    font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    display: block; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout.answer .label { color: var(--green); }
+  .callout.rule .label { color: var(--gold); }
+  .callout.warn .label { color: var(--red); }
+  .callout.bridge .label { color: var(--accent); }
+  .callout ul { margin: 4px 0; padding-left: 22px; }
+  .item {
+    border-left: 3px solid var(--blue); padding: 10px 14px;
+    background: #f7faff; margin: 8px 0; border-radius: 4px;
+  }
+  .item .qid {
+    font-size: 0.75rem; color: var(--muted); font-family: monospace;
+  }
+  .item.dok3 { border-left-color: var(--accent); background: #fff5ef; }
+  .item.assess { border-left-color: var(--gold); background: #fffbea; }
+  .item .star { font-weight: 700; }
+  .item.dok3 .star { color: var(--accent); }
+  .item.assess .star { color: var(--gold); }
+</style>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)'], ['$','$']], displayMath: [['\\[','\\]'], ['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lesson 6-5 Pacer</h1>
+    <div class="meta">Single Period · Properties of Logarithms + DOK-3 Power Property Proof &amp; Richter Generalization</div>
+  </div>
+  <div class="meta" id="dateLabel"></div>
+</header>
+
+<main>
+  <div class="panel" id="panel-p1"></div>
+</main>
+
+<script>
+const PACER = {
+  p1: {
+    label: "Single Period · Properties of Logarithms + DOK-3 Paired Capstone · 50 min (45-min Wed-F: skip q3)",
+    total_min: 50,
+    phases: [
+      { id:"donow", title:"Do Now — Error Analysis + Expand + Condense",
+        fw:"bridge to launch", dok:"1-2", min:7,
+        items:[
+          {qid:"6-5-savvas-q12", label:"#12: Change-of-base error analysis — find the mistake"},
+          {qid:"6-5-savvas-q4",  label:"#4: Expand log₆(49/5) with Quotient Property"},
+          {qid:"6-5-savvas-q5",  label:"#5: Condense 5 ln s + 6 ln t into single log"},
+        ],
+        teacher:[
+          "Cold-call q12: 'Where is the error? Which rule did the student violate?'",
+          "q4: Quotient Property — log of a quotient = difference of logs",
+          "q5: Power Property first (coefficients → exponents), then Product Property to combine (\\(5\\ln s + 6\\ln t = \\ln s^5 t^6\\))",
+        ],
+        bridge:"Change of base denominator must match: \\(\\log_b x = (\\log x)/(\\log b)\\). q5 order: Power → Product.",
+      },
+      { id:"launch", title:"Launch — Example 3: Write as a Single Logarithm",
+        fw:"teacher models", dok:"1-2", min:5,
+        items:[
+          {qid:"6-5-savvas-example-3-lesson-6-5", label:"Example 3: condensing — activates Product, Quotient, AND Power simultaneously"},
+        ],
+        teacher:[
+          "Project Example 3. Think aloud: order is Power first (coefficients → exponents), then Product/Quotient to merge.",
+          "Flag the Rules card — students copy POWER PROPERTY into margin.",
+          "30-sec pause: 'What would expanding look like? Same properties, opposite direction.'",
+          "Release at minute 12. Do NOT start Explore items.",
+        ],
+        rules:[
+          "PRODUCT: \\(\\log_b(MN) = \\log_b M + \\log_b N\\)",
+          "QUOTIENT: \\(\\log_b(M/N) = \\log_b M - \\log_b N\\)",
+          "POWER: \\(\\log_b(M^n) = n \\cdot \\log_b M\\)",
+          "IDENTITY: \\(\\log_b b = 1\\), \\(\\log_b 1 = 0\\)",
+          "CHANGE OF BASE: \\(\\log_b x = (\\log x)/(\\log b) = (\\ln x)/(\\ln b)\\)",
+          "SOLVING: \\(b^x = k \\Rightarrow x = (\\log k)/(\\log b)\\)",
+        ],
+      },
+      { id:"explore", title:"Explore — TPS (#19, #21, #34, #3, ⭐ #13, ⭐ #40 Part C)",
+        fw:"student work", dok:"2-3", min:28,
+        items:[
+          {qid:"6-5-savvas-q19", label:"#19: Condense \\(\\log_5 6 + \\tfrac{1}{2}\\log_5 y\\) — Power Property first"},
+          {qid:"6-5-savvas-q21", label:"#21: Condense \\(\\tfrac{1}{3}\\ln 27 - 3\\ln(2y)\\) — simplify \\(\\tfrac{1}{3}\\ln 27\\) first"},
+          {qid:"6-5-savvas-q34", label:"#34: Solve \\(7^x = 100\\) via change of base"},
+          {qid:"6-5-savvas-q3",  label:"#3: Amanda's expand error on log₄(c²d⁵)  [SKIP on Wed-F 45-min]"},
+          {qid:"6-5-savvas-q13", label:"⭐ DOK-3 PROOF: Prove \\(\\log_b(M^n) = n\\cdot\\log_b M\\) using exponent laws. Let \\(x = \\log_b M\\), raise to nth power, convert back.", dok3:true, note:"Plan 6 min. DO NOT give the let-x step before 4 min in."},
+          {qid:"6-5-savvas-q40", label:"⭐ DOK-3 RICHTER Part C: One earthquake is 150× more intense. How much greater is its Richter magnitude? Generalize.", dok3:true, note:"Plan 6 min. Press: write \\(R(150A_0)\\) and \\(R(A_0)\\) separately, then subtract and apply Quotient Property."},
+        ],
+        teacher:[
+          "#13 + #40 are the paired DOK-3 capstone — Form B DOK-3 rehearsal.",
+          "#13 answer: Let \\(x = \\log_b M \\Rightarrow b^x = M\\). Raise to \\(n\\): \\(b^{nx} = M^n\\). By log def: \\(\\log_b(M^n) = nx = n\\cdot\\log_b M\\).",
+          "#40 Part C answer: \\(R(150A_0) - R(A_0) = \\log(150A_0/S) - \\log(A_0/S) = \\log 150 \\approx 2.18\\).",
+        ],
+        warn:"Wed-F 45-min: skip q3. Never skip #13 or #40. If a pair finishes early, hand out #40 Part A (direct numerical Richter).",
+      },
+      { id:"share", title:"Share / Summary — DOK-3 Reveal + Topic 6 Bridge",
+        fw:"academic conversation", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Cold-call 1 pair to narrate the Power Property proof (#13) using sentence frame",
+          "Cold-call 1 pair to present Richter generalization (#40 Part C): \\(\\log 150 \\approx 2.18\\)",
+          "Write \\(\\log_b(M^n) = n\\cdot\\log_b M\\) on board",
+          "Topic 6 bridge: 'Both items are the exact DOK-3 pattern on Form B. You have now rehearsed both.'",
+        ],
+        answer:"#13: Let \\(x = \\log_b M\\), \\(b^x = M\\), raise to \\(n\\), \\(b^{nx} = M^n\\), so \\(\\log_b(M^n) = nx = n\\cdot\\log_b M\\). ✓  |  #40 Part C: \\(R(150A_0) - R(A_0) = \\log 150 \\approx 2.18\\).",
+        bridge:"⚠️ SCOPE: Form B Q8 and Q15 (geometric series) are NOT on the Topic 6 assessment. Do not prep for those.",
+      },
+      { id:"exit", title:"Exit Ticket — Two-Part Summary",
+        fw:"not graded", dok:"1-2", min:5,
+        items:[],
+        teacher:[
+          "Collect at door.",
+          "Scan part (b): if students wrote t = 25 (not cube root), they dropped the Power Property step.",
+          "Plan a 2-min re-teach before next Topic 6 item if many students blank on part (b).",
+        ],
+        answer:"(a) \\(P = \\log(4t^3)\\) — Power Property on \\(3\\log t\\), then Product Property with \\(\\log 4\\).  (b) \\(10^2 = 4t^3 \\rightarrow t^3 = 25 \\rightarrow t = 25^{1/3} \\approx 2.924\\).",
+      },
+    ]
+  },
+};
+
+document.getElementById("dateLabel").textContent = new Date().toDateString();
+
+function renderPanel(tabId) {
+  const data = PACER[tabId];
+  const panel = document.getElementById("panel-" + tabId);
+  panel.innerHTML = `
+    <div class="timer-bar">
+      <div>
+        <div class="phase-title" id="phaseTitle-${tabId}">Select a phase to begin</div>
+      </div>
+      <div class="countdown" id="timer-${tabId}">--:--</div>
+      <div>
+        <button onclick="startPhase('${tabId}')" id="startBtn-${tabId}">Start</button>
+        <button class="stop" onclick="stopPhase('${tabId}')">Stop</button>
+      </div>
+    </div>
+    <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    <div class="phase-list" id="chips-${tabId}"></div>
+    <div id="phase-card-${tabId}"></div>
+  `;
+  const chipBar = panel.querySelector(`#chips-${tabId}`);
+  data.phases.forEach((ph, idx) => {
+    const chip = document.createElement("button");
+    chip.className = "phase-chip";
+    chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0]} · ${ph.min}m`;
+    chip.onclick = () => selectPhase(tabId, idx);
+    chipBar.appendChild(chip);
+  });
+  selectPhase(tabId, 0);
+}
+
+function selectPhase(tabId, idx) {
+  const data = PACER[tabId];
+  const ph = data.phases[idx];
+  const card = document.getElementById(`phase-card-${tabId}`);
+  let html = `<div class="phase-card">
+    <h2>${ph.title}
+      <span class="badges">
+        <span class="badge dok">DOK ${ph.dok}</span>
+        <span class="badge min">${ph.min} min</span>
+        <span class="badge fw">${ph.fw}</span>
+      </span>
+    </h2>`;
+  if (ph.items && ph.items.length) {
+    ph.items.forEach(it => {
+      let cls = "item";
+      if (it.dok3) cls = "item dok3";
+      else if (it.assess) cls = "item assess";
+      const star = it.dok3 ? '<span class="star">&#11088; DOK-3 </span>' :
+                    it.assess ? '<span class="star">&#11088; ASSESS </span>' : '';
+      html += `<div class="${cls}">${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>${it.note ? `<div>${it.note}</div>` : ""}</div>`;
+    });
+  }
+  if (ph.teacher && ph.teacher.length) {
+    html += `<div class="callout teacher"><span class="label">&#127908; Teacher does</span><ul>`;
+    ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.rules && ph.rules.length) {
+    html += `<div class="callout rule"><span class="label">&#128216; Rules / stems</span><ul>`;
+    ph.rules.forEach(r => html += `<li>${r}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.answer) {
+    html += `<div class="callout answer"><span class="label">&#9989; Answer key</span>${ph.answer}</div>`;
+  }
+  if (ph.bridge) {
+    html += `<div class="callout bridge"><span class="label">&#128279; Bridge / Scope</span>${ph.bridge}</div>`;
+  }
+  if (ph.warn) {
+    html += `<div class="callout warn"><span class="label">&#9888;&#65039; Warning / Note</span>${ph.warn}</div>`;
+  }
+  html += `</div>`;
+  card.innerHTML = html;
+  document.querySelectorAll(`#chips-${tabId} .phase-chip`).forEach((c, i) => {
+    c.classList.toggle("active", i === idx);
+  });
+  document.getElementById(`phaseTitle-${tabId}`).textContent = ph.title;
+  currentPhase[tabId] = idx;
+  stopPhase(tabId);
+  document.getElementById(`timer-${tabId}`).textContent =
+    `${String(ph.min).padStart(2,'0')}:00`;
+}
+
+const timers = {}, currentPhase = {};
+
+function startPhase(tabId) {
+  const idx = currentPhase[tabId];
+  const ph = PACER[tabId].phases[idx];
+  let remaining = ph.min * 60;
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  clearInterval(timers[tabId]);
+  timers[tabId] = setInterval(() => {
+    remaining--;
+    if (remaining < 0) {
+      clearInterval(timers[tabId]);
+      timerEl.textContent = "TIME";
+      timerEl.style.color = "#ff6b6b";
+      if (idx + 1 < PACER[tabId].phases.length) {
+        document.querySelectorAll(`#chips-${tabId} .phase-chip`)[idx].classList.add("done");
+      }
+      return;
+    }
+    const m = Math.floor(remaining / 60), s = remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    timerEl.style.color = remaining < 60 ? "#ff6b6b" : "#ffffff";
+  }, 1000);
+}
+
+function stopPhase(tabId) {
+  clearInterval(timers[tabId]);
+  const idx = currentPhase[tabId];
+  if (idx === undefined) return;
+  const ph = PACER[tabId].phases[idx];
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  timerEl.textContent = `${String(ph.min).padStart(2,'0')}:00`;
+  timerEl.style.color = "#ffffff";
+}
+
+renderPanel("p1");
+</script>
+
+</body>
+</html>

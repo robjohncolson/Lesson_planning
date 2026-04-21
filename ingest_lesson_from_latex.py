@@ -553,9 +553,13 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
             visual_type=vt, visual_needs_cleanup=nc,
         ))
 
-    # Examples
+    # Examples — dedupe by number (SE and TE both contain Example N blocks).
+    example_groups: dict[int, list[str]] = {}
     for args, body in find_blocks(tex, "example", arg_count=1):
-        n = int(args[0])
+        example_groups.setdefault(int(args[0]), []).append(body)
+    for n in sorted(example_groups.keys()):
+        # Richest body (typically TE has added teacher commentary) as prompt source.
+        body = max(example_groups[n], key=len)
         body_clean, uncert = resolve_uncertain(body)
         body_clean, phs = strip_placeholders(body_clean)
         vt, nc = detect_visual_type(body)
@@ -569,9 +573,12 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
             visual_type=vt, visual_needs_cleanup=nc,
         ))
 
-    # Try-Its
+    # Try-Its — dedupe by number (SE and TE both contain Try-It N blocks).
+    tryit_groups: dict[int, list[str]] = {}
     for args, body in find_blocks(tex, "tryit", arg_count=1):
-        n = int(args[0])
+        tryit_groups.setdefault(int(args[0]), []).append(body)
+    for n in sorted(tryit_groups.keys()):
+        body = max(tryit_groups[n], key=len)
         body_clean, uncert = resolve_uncertain(body)
         body_clean, phs = strip_placeholders(body_clean)
         vt, nc = detect_visual_type(body)
@@ -585,14 +592,41 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
             visual_type=vt, visual_needs_cleanup=nc,
         ))
 
-    # Practice items
+    # Practice items — dedupe by item number when SE+TE both contain the block.
+    # SE typically declares DOK as '?' (unknown, defaults to 2); TE declares the
+    # authoritative DOK. For each item number, pick the block with a real inline
+    # DOK over a '?'-defaulted one, and prefer the longer body as the prompt
+    # source when both are real (richer TE annotations won't clobber a fuller SE
+    # body if the SE body is longer).
+    practice_groups: dict[int, list[tuple[list[str], str, int, bool]]] = {}
     for args, body in find_blocks(tex, "practice", arg_count=2):
-        n, dok_raw = int(args[0]), args[1]
+        n = int(args[0])
+        dok_raw = args[1]
+        raw_stripped = dok_raw.strip().replace("DOK", "").replace("dok", "").strip()
         try:
-            inline_dok = int(dok_raw.strip().replace("DOK", "").replace("dok", "").strip())
+            inline_dok = int(raw_stripped)
+            dok_is_real = True
         except ValueError:
-            print(f"WARN: practice #{n} has bad DOK {dok_raw!r} — defaulting to 2", file=sys.stderr)
             inline_dok = 2
+            dok_is_real = False
+        practice_groups.setdefault(n, []).append((args, body, inline_dok, dok_is_real))
+
+    for n in sorted(practice_groups.keys()):
+        blocks = practice_groups[n]
+        # Pick DOK source: any block with a real declaration wins over defaulted ones.
+        real_doks = [b for b in blocks if b[3]]
+        if real_doks:
+            # If multiple TE blocks declare DOK, take the highest (declared-DOK-3 wins).
+            inline_dok = max(b[2] for b in real_doks)
+            if len(set(b[2] for b in real_doks)) > 1:
+                print(f"WARN: practice #{n} has conflicting declared DOKs across SE/TE — using max={inline_dok}",
+                      file=sys.stderr)
+        else:
+            print(f"WARN: practice #{n} has no real DOK declaration (all '?') — defaulting to 2",
+                  file=sys.stderr)
+            inline_dok = 2
+        # Pick body source: longest body (richest prompt text).
+        _, body, _, _ = max(blocks, key=lambda b: len(b[1]))
         # Prefer DOK from Savvas Item Analysis table (authoritative) over inline arg
         ia_dok = dok_for_practice(item_analysis, n)
         dok = ia_dok if ia_dok is not None else inline_dok

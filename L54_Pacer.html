@@ -109,6 +109,14 @@
   .item.dok3 .star { color: var(--accent); }
   .item.assess .star { color: var(--gold); }
 </style>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)'], ['$','$']], displayMath: [['\\[','\\]'], ['$$','$$']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
 </head>
 <body>
 
@@ -141,7 +149,7 @@ const PACER = {
           "Bridge: isolate-then-undo applies to any power, not just squares",
           "Launch students into 'what if the power were ½ or ⅓?'"
         ],
-        bridge:"This isolate-then-raise move is the engine for ALL radical + rational exponent equations today.",
+        bridge:"This isolate-then-raise move is the engine for ALL radical and rational exponent equations today.",
       },
       { id:"launch", title:"Launch — Examples 1 & 3 + Rules",
         fw:"teacher models", dok:"2", min:12,
@@ -154,7 +162,7 @@ const PACER = {
           "Emphasize: squaring is NOT reversible — always CHECK in original"
         ],
         rules:[
-          "1. Isolate the radical. 2. Raise both sides to the index power. 3. Solve. 4. CHECK in the ORIGINAL equation — reject extraneous."
+          "1. Isolate the radical. 2. Raise both sides to the index power. 3. Solve. 4. CHECK in the ORIGINAL equation — reject extraneous roots."
         ],
       },
       { id:"explore", title:"Explore — Think-Pair-Share (6 items)",
@@ -184,7 +192,7 @@ const PACER = {
       },
       { id:"exit", title:"Exit Ticket — Summary Recap",
         fw:"not graded", dok:"1-2", min:3,
-        items:[{qid:"5-4-savvas-q21", label:"Q21 ∛x+8=13 as optional HW reinforce"}],
+        items:[{qid:"5-4-savvas-q21", label:"Q21 \\(\\sqrt[3]{x}+8=13\\) as optional HW reinforce"}],
         teacher:[
           "Collect Summary Exit box",
           "Preview: tomorrow we use rational exponents — same raise-to-reciprocal move"
@@ -197,9 +205,9 @@ const PACER = {
     label: "Period 2 · Rational Exponents + DOK-3 Half-Life · 55 min base",
     total_min: 55,
     phases: [
-      { id:"donow", title:"Do Now — ∛x+8=13 solve",
+      { id:"donow", title:"Do Now — \\(\\sqrt[3]{x}+8=13\\) solve",
         fw:"bridge from P1", dok:"1", min:5,
-        items:[{qid:"5-4-savvas-q21", label:"#21 ∛x+8=13 — solve"}],
+        items:[{qid:"5-4-savvas-q21", label:"#21 \\(\\sqrt[3]{x}+8=13\\) — solve"}],
         teacher:[
           "Same isolate-then-raise move, cube root instead of square root"
         ],
@@ -214,7 +222,7 @@ const PACER = {
           "Klimsara: model ONE example only — gradual release for TI 4 immediately after"
         ],
         rules:[
-          "1. x^(m/n) = (ⁿ√x)^m. 2. Raise to reciprocal power n/m. 3. Check — even denominator → possible extraneous. 4. Half-life: y = a·(0.5)^(t/h)."
+          "1. \\(x^{m/n} = (\\sqrt[n]{x})^m\\). 2. Raise to reciprocal power \\(n/m\\). 3. Check — even denominator → possible extraneous. 4. Half-life: \\(y = a \\cdot (0.5)^{t/h}\\)."
         ],
       },
       { id:"explore", title:"Explore — TPS + ⭐ DOK-3 Half-Life Spine",
@@ -224,12 +232,12 @@ const PACER = {
           {qid:"5-4-savvas-q12", label:"#12 solve rational exponent equation"},
           {qid:"5-4-savvas-q33", label:"#33 solve — check even denom"},
           {qid:"5-4-savvas-q34", label:"#34 solve — identify reciprocal exponent"},
-          {qid:"5-4-savvas-q41", label:"⭐ DOK-3: Half-life — 50·(0.5)^(t/5), find remaining after 16 hr. Answer ≈ 5.44 mL", dok3:true, note:"Plan ~12 min. DO NOT scaffold before minute 24 of Explore. Prompt if stalled: '16÷5 = ?'"},
+          {qid:"5-4-savvas-q41", label:"⭐ DOK-3: Half-life — \\(50 \\cdot (0.5)^{t/5}\\), find remaining after 16 hr. Answer ≈ 5.44 mL", dok3:true, note:"Plan ~12 min. DO NOT scaffold before minute 24 of Explore. Prompt if stalled: '16÷5 = ?'"},
         ],
         teacher:[
           "DO NOT give Q41 scaffolding before 24 min in",
           "Circulation protocol same as P1",
-          "q41 answer: 50·(0.5)^3.2 ≈ 5.44 mL",
+          "q41 answer: \\(50 \\cdot (0.5)^{3.2} \\approx 5.44\\) mL",
           "Stall on Q41 = 'that\'s 16÷5 = ?, what decimal does that give?'"
         ],
         warn:"q41 is THE topic spine. If a student writes 50·(0.5)^(16/5) and stalls, prompt: 'that\'s 16÷5 = ?'",
@@ -240,7 +248,7 @@ const PACER = {
         teacher:[
           "Two students present Q41 — one shows computation, one gives interpretation"
         ],
-        answer:"q41 ≈ 5.44 mL. Interpretation: about 5.44 mL of the 50 mL drink remains after 16 hours.",
+        answer:"q41 \\(\\approx 5.44\\) mL. Interpretation: about 5.44 mL of the 50 mL drink remains after 16 hours.",
       },
       { id:"exit", title:"Exit Ticket — Summary Recap",
         fw:"not graded", dok:"1-2", min:3,
@@ -270,7 +278,7 @@ const PACER = {
         fw:"teacher models 2 examples", dok:"2", min:12,
         items:[
           {qid:"5-4-savvas-example-2-lesson-5-4", label:"Example 2 (rewrite formula — Golden Gate)"},
-          {qid:"5-4-savvas-q44", label:"⭐ Q44 — complete table for y=∛(2x+z)−12 (assessment-rehearsal)", assess:true, note:"IDENTICAL structure to assessment Item 2 answer key."},
+          {qid:"5-4-savvas-q44", label:"⭐ Q44 — complete table for \\(y=\\sqrt[3]{2x+z}-12\\) (assessment-rehearsal)", assess:true, note:"IDENTICAL structure to assessment Item 2 answer key."},
         ],
         teacher:[
           "Ex 2 is assessment-critical — isolate variable LIFO from outer-most op inward",

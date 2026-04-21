@@ -1,0 +1,1018 @@
+% Source PDF: :contentReference[oaicite:0]{index=0}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+\begin{lesson-meta}
+Lesson code: 5-5
+
+Title: Function Operations
+
+Objective: Students will be able to combine functions by addition, subtraction, multiplication, or division and identify the domain of the result. Students will be able to compose functions, specifying the order in which the functions are applied and describing the domain of the composite function.
+
+I CAN objective: I CAN... perform operations on functions to answer real-world questions.
+
+Essential Question: How do you combine, multiply, divide, and compose functions, and how do you find the domain of the resulting function?
+
+Essential Understanding: Functions can be combined by operations \((+, -, \times, \div)\) and by composition. The result of the operation or composition can be described as a single function. The domain of the result may be different from the domains of the original functions.
+
+Lesson vocabulary: composite function; composition of functions.
+
+Topic vocabulary: domain; substitution.
+\end{lesson-meta}
+
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 20--21 & 1 \\
+1 & 19, 33 & 2 \\
+2 & 22 & 2 \\
+3 & 23 & 1 \\
+3 & 13 & 2 \\
+4 & 24--27, 35 & 1 \\
+4 & 18, 31, 36 & 2 \\
+5 & 28, 29 & 1 \\
+5 & 12, 14, 34 & 2 \\
+5 & 15, 17, 30 & 2 \\
+6 & 16, 32 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+
+\begin{model-discuss}
+In business, the term profit is used to describe the difference between the money the business earns (revenue) and the money the business spends (cost).
+
+\placeholder{photo}{Groomer with a dog and a sign reading ``GROOMING \$25 per pet.''}
+
+A. Let \(x\) represent the number of pets groomed in a month at Grooming USA. Define a revenue function for the business.
+
+B. Materials and labor for each pet groomed cost \(\$15\). The business also has fixed costs of \(\$1{,}000\) each month. Define a cost function for this business.
+
+C. Last month, Grooming USA groomed 95 pets. Did they earn a profit? What would the profit be if the business groomed 110 pets in a month?
+
+D. Generalize Explain your procedure for calculating the profit for Grooming USA. Suppose you wanted to calculate the profit for several different values. How could you simplify your process?
+
+\answer{A. \(r(x)=25x\). B. \(c(x)=15x+1000\). C. No; grooming only 95 pets results in a loss of \(\$50\) for Grooming USA. Grooming 110 pets results in a profit of \(\$100\). D. To find the profit from 95 pets, I calculated \(r(95)-c(95)\); to find the profit from 110 pets, I calculated \(r(110)-c(110)\). If I needed to find the profit for several different values, it would make sense to find a function rule for profit and apply that simplified rule rather than applying two different functions and finding the difference of their values.}
+\end{model-discuss}
+
+\begin{te-addendum}{ModelDiscuss}{LearnTogether}
+INSTRUCTIONAL FOCUS Students explore what it means to combine two functions. They see that the combination by subtraction has a practical meaning, and they express the combination of two functions as a single function.
+
+STUDENT COMPANION Students can complete the Model \& Discuss activity in their Student Companion.
+
+Before WHOLE CLASS
+
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+
+Q: What do the terms revenue and cost mean?
+\answer{Revenue is income; cost is an expense of the company.}
+
+Q: How is profit related to revenue and cost?
+\answer{Profit equals revenue minus cost.}
+
+During SMALL GROUP
+
+Support Productive Struggle in Learning Mathematics ETP
+
+Q: What is the difference between a fixed cost and a variable cost?
+\answer{A fixed cost does not change, while a variable cost changes based on the number of items involved.}
+
+Q: Do both the revenue and the cost functions have both fixed and variable terms?
+\answer{No, the cost function has a fixed term and a variable term, but the revenue function has only a variable term.}
+
+For Early Finishers
+
+Q: Last month, Grooming USA made a profit of \(\$300\). What will their profit be if they double the number of pets they groom this month? How many pets do they have to groom this month to double last month's profit?
+\answer{\(\$1{,}600\); 160 pets.}
+
+Q: Does their profit double when the number of pets that are groomed doubles?
+\answer{No; they only need to groom 30 more pets to double their profit. When they double the number of pets they groom, their profit is increased by more than 5 times.}
+
+After WHOLE CLASS
+
+Facilitate Meaningful Mathematical Discourse ETP
+
+Q: How many functions were generated in this activity?
+\answer{Two functions: one for revenue and one for cost.}
+
+Q: How can the two functions be combined to make a profit function?
+\answer{By subtracting the function for cost from the function for revenue.}
+\end{te-addendum}
+
+\begin{te-addendum}{ModelDiscuss}{HabitsOfMind}
+Make Sense and Persevere A business ``breaks even'' when its revenue equals its costs. How many pets would Grooming USA have to groom in order to break even?
+\answer{100 pets.}
+\end{te-addendum}
+
+\begin{te-addendum}{EssentialQuestion}{GeneralizeETP}
+Establish Mathematics Goals to Focus Learning ETP
+
+Use operations with integers to discuss how combining integers by addition, subtraction, and multiplication always results in an integer, while combining integers by division does not always result in an integer. Tell students to compare those ideas to the results they see in this lesson when they combine functions by addition, subtraction, multiplication, and division.
+\end{te-addendum}
+
+\begin{concept-box}
+COMMUNICATE PRECISELY Defining a function includes describing its domain. The domain of \(f \pm g\) is the intersection of the domains of \(f\) and \(g\).
+\end{concept-box}
+
+\begin{example}{1}
+Add and Subtract Functions
+
+How do you define the sum, \(f+g\), and the difference, \(f-g\), of the functions \(f(x)=3x+4\) and \(g(x)=x^2-5x+2\)?
+
+A. What is the sum of \(f(x)=3x+4\) and \(g(x)=x^2-5x+2\)?
+
+To define the sum of two functions with known rules, add their rules.
+\[
+\begin{aligned}
+(f+g)(x) &= f(x)+g(x)\\
+&= (3x+4)+(x^2-5x+2)\\
+&= x^2+(3x-5x)+(4+2)\\
+&= x^2-2x+6
+\end{aligned}
+\]
+The domain of \(f\) is \(\{x\mid x \text{ is a real number}\}\).
+
+The domain of \(g\) is \(\{x\mid x \text{ is a real number}\}\).
+
+So the domain of \(f+g\) is \(\{x\mid x \text{ is a real number}\}\).
+
+The sum of the two functions is \(x^2-2x+6\).
+
+B. What is the difference of \(f(x)=3x+4\) and \(g(x)=x^2-5x+2\)?
+
+To define the difference of two functions with known rules, subtract their rules.
+\[
+\begin{aligned}
+(f-g)(x) &= f(x)-g(x)\\
+&= (3x+4)-(x^2-5x+2)\\
+&= 3x+4-x^2+5x-2\\
+&= -x^2+8x+2
+\end{aligned}
+\]
+The domain of \(f\) is \(\{x\mid x \text{ is a real number}\}\). The domain of \(g\) is \(\{x\mid x \text{ is a real number}\}\). So the domain of \(f-g\) is \(\{x\mid x \text{ is a real number}\}\).
+
+The difference of the two functions is \(-x^2+8x+2\).
+
+\answer{The sum is \(x^2-2x+6\), and the difference is \(-x^2+8x+2\). Both domains are all real numbers.}
+\end{example}
+
+\begin{te-addendum}{1}{PurposefulQuestions}
+Q: How do you combine functions by addition or subtraction?
+\answer{Combine the like terms of the two functions.}
+
+Q: How do you know that the combined function has the same domain as the two original functions?
+\answer{The possible elements for the combined function are the same as the possible elements for the original functions.}
+
+Q: What new notation is used in the example and what does it mean?
+\answer{\((f+g)(x)\) means \(f(x)+g(x)\), and \((f-g)(x)\) means \(f(x)-g(x)\).}
+\end{te-addendum}
+
+\begin{tryit}{1}
+Let \(f(x)=2x^2+7x-1\) and \(g(x)=3-2x\). Identify rules for the following functions.
+
+a. \(f+g\)
+
+b. \(f-g\)
+
+\answer{a. \(f+g=2x^2+5x+2\). b. \(f-g=2x^2+9x-4\).}
+\end{tryit}
+
+\begin{te-addendum}{1}{ElicitEvidence}
+Q: A student said that \(f+g\) and \(f-g\) are shorthand for longer expressions. Explain what the student means.
+\answer{\(f+g\) is a shorter way to express \((2x^2+7x-1)+(3-2x)\), and \(f-g\) is a shorter way to express \((2x^2+7x-1)-(3-2x)\).}
+\end{te-addendum}
+
+\begin{concept-box}
+USE STRUCTURE You can use the Associative and Commutative Properties to add and multiply functions, since these operations are based on addition and multiplication of real numbers.
+\end{concept-box}
+
+\begin{example}{2}
+Multiply Functions
+
+The demand \(d\), in units sold, for a company's new brand of cell phone at price \(x\), in dollars, is \(d(x)=5{,}000-10x\). The cost to manufacture the cell phone is \(c(x)=2{,}200+80x\). What is the company's expected profit from cell phone sales in terms of the price, \(x\)?
+
+\placeholder{illustration}{Equation model with icons: Profit equals Price times Demand minus Cost. The icons are labeled Profit, Price, Demand, and Cost.}
+
+The company's profit will equal the price of its cell phones multiplied by the demand for its phones less the cost to manufacture.
+
+\[
+\text{Profit}=\text{price}\times\text{demand}-\text{cost}
+\]
+
+The demand is the function \(d(x)\). The price is the function \(p(x)\).
+
+\begin{tabular}{ll}
+Price: & \(p(x)=x\) \\
+Demand: & \(d(x)=5{,}000-10x\) \\
+Cost: & \(c(x)=2{,}200+80x\) \\
+Profit: & \(P(x)=p(x)\cdot d(x)-c(x)\) \\
+\end{tabular}
+\qquad
+\begin{tabular}{ll}
+Domains & \\
+\(p(x):\) & \(0\le x\) \\
+\(d(x):\) & \(0\le x\le 500\) \\
+\(c(x):\) & \(0\le x\le 500\) \\
+\(P(x):\) & \(0\le x\le 500\) \\
+\end{tabular}
+
+Price, demand, and cost cannot be negative. Domain is the intersection of the domains of \(p\), \(d\), and \(c\).
+\[
+\begin{aligned}
+P(x)&=p(x)\cdot d(x)-c(x)\\
+&=x(5{,}000-10x)-(2{,}200+80x)\\
+&=5{,}000x-10x^2-2{,}200-80x\\
+&=-10x^2+4{,}920x-2{,}200
+\end{aligned}
+\]
+The profit the company will earn in terms of the cell phone price \(x\) is represented by \(P(x)=-10x^2+4{,}920x-2{,}200\).
+
+\answer{\(P(x)=-10x^2+4{,}920x-2{,}200\), with domain \(0\le x\le 500\).}
+\end{example}
+
+\begin{te-addendum}{2}{PurposefulQuestions}
+Q: How does the example involve multiplying functions?
+\answer{The problem describes three functions---demand, price, and revenue---and revenue can be calculated by multiplying demand times price.}
+
+Q: How do you multiply two functions?
+\answer{Multiply each term of one function by each term of the other function and combine like terms.}
+
+Q: For the demand function \(d(x)\) and the price function \(p(x)\), is \(d(x)\cdot p(x)\) equal to \(p(x)\cdot d(x)\)?
+\answer{Yes; the products are equal because of the Commutative Property of Multiplication.}
+\end{te-addendum}
+
+\begin{tryit}{2}
+Suppose demand, \(d\), for a company's product at cost, \(x\), is predicted by the function \(d(x)=-0.25x^2+1{,}000\), and price, \(p\), that the company can charge for the product is given by \(p(x)=x+16\). Find the company's revenue function. Revenue is demand times price.
+
+\answer{\((d\cdot p)(x)=-0.25x^3-4x^2+1{,}000x+16{,}000\).}
+\end{tryit}
+
+\begin{te-addendum}{2}{ElicitEvidence}
+Q: Is it possible for \(x\) to have the value 64?
+\answer{No; if \(x=64\), then \(d(64)=-0.25(64)^2+1{,}000=-24\), and \(d(x)\) cannot be less than 0.}
+\end{te-addendum}
+
+\begin{concept-box}
+COMMON ERROR You may think that the domain of \(\frac{f}{g}\) is the set of real numbers since \(f\) and \(g\) are defined for all real numbers. However, \(x\ne -\frac12\) or \(x\ne 7\) because \(g\) is now in the denominator.
+\end{concept-box}
+
+\begin{example}{3}
+Divide Functions
+
+How do you define the quotient \(\frac{f}{g}\) of the functions \(f(x)=x-7\) and \(g(x)=2x^2-13x-7\)?
+
+To define the quotient of two functions, take the quotient of their rules:
+\[
+\left(\frac{f}{g}\right)(x)=\frac{f(x)}{g(x)}
+\]
+\[
+\begin{aligned}
+\left(\frac{f}{g}\right)(x)&=\frac{f(x)}{g(x)}\\
+&=\frac{x-7}{2x^2-13x-7}\\
+&=\frac{x-7}{(2x+1)(x-7)}\\
+&=\frac{1}{2x+1}
+\end{aligned}
+\]
+The quotient of \(\frac{f}{g}\) is \(\frac{1}{2x+1}\). The domain of \(\frac{f}{g}\) is the set of all values for which \(f\), \(g\), and \(\frac{f}{g}\) are defined, so \(g\) cannot be 0. This is the set of all real numbers \(x\) such that \(x\ne 7\) and \(x\ne -\frac12\).
+
+\answer{\(\left(\frac{f}{g}\right)(x)=\frac{1}{2x+1}\). The domain is all real numbers \(x\) such that \(x\ne 7\) and \(x\ne -\frac12\).}
+\end{example}
+
+\begin{te-addendum}{3}{PurposefulQuestions}
+Q: How are the domains of \(g\) and \(\frac{f}{g}\) different?
+\answer{\(g\) can have domain values that make the function equal zero, but those values cannot be in the domain of \(\frac{f}{g}\).}
+\end{te-addendum}
+
+\begin{tryit}{3}
+Identify the rule and domain for \(\frac{f}{g}\) for each pair of functions.
+
+a. \(f(x)=x^2-3x-18,\quad g(x)=x+3\)
+
+b. \(f(x)=x-3,\quad g(x)=x^2-x-6\)
+
+\answer{a. \(\frac{f}{g}=x-6\). The domain is all real numbers \(x\) such that \(x\ne -3\). b. \(\frac{f}{g}=\frac{1}{x+2}\). The domain is all real numbers \(x\) such that \(x\ne 3\) and \(x\ne -2\).}
+\end{tryit}
+
+\begin{te-addendum}{3}{ElicitEvidence}
+Q: Explain how you would find the domain of \(\frac{g}{f}\).
+\answer{First, identify the domains of \(g\) and \(f\). Then find the values that make \(f(x)\) equal zero and eliminate them from the domain.}
+\end{te-addendum}
+
+\begin{te-addendum}{3}{RtIExtend}
+USE WITH EXAMPLE 3 Have students define and state the domains of the following quotients when \(f(x)=x^2+2x-3\), \(g(x)=x^2-1\), and \(h(x)=x^2+4x+3\).
+
+a. \(\frac{f}{g+h}=\frac{x^2+2x-3}{2x^2+4x+2}\).
+\answer{The domain is the set of all real numbers \(x\) such that \(x\ne -1\).}
+
+b. \(\frac{f-h}{g}=\frac{-2x-6}{x^2-1}\).
+\answer{The domain is the set of all real numbers \(x\) such that \(x\ne -1\) and \(x\ne 1\).}
+
+c. \(\frac{h-g}{g-f}=\frac{2x+2}{-x+1}\).
+\answer{The domain is the set of all real numbers \(x\) such that \(x\ne 1\).}
+
+Q: How do you find the zeros of each denominator?
+\answer{Set the denominator equal to zero, and solve for the variable.}
+
+Q: How do the zeros of the denominator affect the domain of the function?
+\answer{The zeros of the denominator are excluded from the domain of the function.}
+\end{te-addendum}
+
+\begin{te-addendum}{1--3}{HabitsOfMind}
+Communicate Precisely How are the domains of \(f+g\), \(f-g\), \(f\cdot g\), and \(\frac{f}{g}\) related to the domains of \(f\) and \(g\)?
+\answer{If \(f\) and \(g\) have the same domain, the domains of \(f+g\), \(f-g\), and \(f\cdot g\) are that same domain. The domain of \(\frac{f}{g}\) is that same domain, but without any values for which \(g\) is zero. If \(f\) and \(g\) have different domains as in Example 2, the domain for \(f+g\), \(f-g\), and \(f\cdot g\) is the intersection of the two domains. The domain of \(\frac{f}{g}\) is further restricted by removing any values for which \(g\) is zero.}
+\end{te-addendum}
+
+\begin{concept-box}
+LOOK FOR RELATIONSHIPS When finding the rule for \(f(g(x))\), work from the inside parentheses to the outside ones. Notice that \(g(x)\) takes the place of the variable \(x\) in the function \(f(x)\).
+\end{concept-box}
+
+\begin{example}{4}
+Compose Functions
+
+Let \(f(x)=x^2\) and let \(g(x)=x+1\). Investigate what happens when you apply the rule for \(g\) and then the rule for \(f\) to a number or variable.
+
+A. Find the values of \(f(g(0))\), \(f(g(3))\), \(f(g(-2))\).
+
+For each value of \(x\), first apply the rule for \(g\). Then apply the rule for \(f\) to the result.
+
+\begin{tabular}{lll}
+\toprule
+\(x\) & \(g(x)\) & \(f(g(x))\) \\
+\midrule
+0 & \(g(0)=0+1=1\) & \(f(g(0))=1^2=1\) \\
+3 & \(g(3)=3+1=4\) & \(f(g(3))=4^2=16\) \\
+\(-2\) & \(g(-2)=-2+1=-1\) & \(f(g(-2))=(-1)^2=1\) \\
+\bottomrule
+\end{tabular}
+
+B. Find the rule for \(f(g(x))\).
+\[
+\begin{aligned}
+g(x)&=x+1\\
+f(g(x))&=f(x+1)\\
+&=(x+1)^2\\
+&=x^2+2x+1
+\end{aligned}
+\]
+\[
+f(g(x))=x^2+2x+1
+\]
+
+When you apply the rule for one function to the rule of another function, you create a new function.
+
+\answer{\(f(g(0))=1\), \(f(g(3))=16\), \(f(g(-2))=1\), and \(f(g(x))=x^2+2x+1\).}
+\end{example}
+
+\begin{te-addendum}{4}{PurposefulQuestions}
+Q: What is the difference between the two notations \(f(x)\cdot g(x)\) and \(f(g(x))\)?
+\answer{\(f(x)\cdot g(x)\) is the product of two expressions, and \(f(g(x))\) uses the function \(g(x)\) as the variable for the function \(f(x)\).}
+\end{te-addendum}
+
+\begin{te-addendum}{4}{RtIExtend}
+Additional Example 4
+
+Let \(f(x)=2x^2-3\) and let \(g(x)=4x-2\). Find \(f(g(x))\) and find \(g(f(x))\).
+\[
+\begin{aligned}
+f(g(x))&=2(4x-2)^2-3\\
+&=2(16x^2-16x+4)-3\\
+&=32x^2-32x+8-3\\
+&=32x^2-32x+5
+\end{aligned}
+\]
+\[
+\begin{aligned}
+g(f(x))&=4(2x^2-3)-2\\
+&=8x^2-12-2\\
+&=8x^2-14
+\end{aligned}
+\]
+Q: What is the first step for each problem?
+\answer{Replace the expression inside the outer parentheses.}
+\end{te-addendum}
+
+\begin{tryit}{4}
+Let \(f(x)=2x-1\) and \(g(x)=3x\). Find the value or identify the rule for the following functions.
+
+a. \(f(g(2))\)
+
+b. \(f(g(x))\)
+
+\answer{a. \(f(g(2))=11\). b. \(f(g(x))=6x-1\).}
+\end{tryit}
+
+\begin{te-addendum}{4}{CommonError}
+Try It! 4b When evaluating \(f(3x)\), students may write \(2(3x-1)\) rather than \(2(3x)-1\). Encourage them to write the function as \(f(\square)=2(\square)-1\) to emphasize that the expression that appears in the parentheses after the \(f\) should appear within parentheses on the right side of the equation in place of the variable \(x\).
+\end{te-addendum}
+
+\begin{concept-box}
+Composite Function
+
+A composite function is the result of applying the rule for one function, \(f\), to the rule of another function, \(g\). The new rule is denoted as \(f\circ g\).
+\[
+(f\circ g)(x)=f(g(x))
+\]
+The operation, \(\circ\), that forms a composite function is called composition of functions.
+
+The domain of \(f\circ g\) is the set of all real numbers \(x\) in the domain of \(g\) such that \(g(x)\) is in the domain of \(f\).
+
+So the domain of the composition is the intersection of the domains of \(g\) and \(f\circ g\), but not \(f\).
+\end{concept-box}
+
+\begin{concept-box}
+MAKE SENSE AND PERSEVERE When finding the rule for the composition of functions, \(f\circ g\), the rule for \(g\) is substituted into the rule for \(f\). How would you find the rule for \(g\circ f\)?
+\end{concept-box}
+
+\begin{example}{5}
+Write a Rule for a Composite Function
+
+What is the rule for the composition \((f\circ g)(x)\)?
+
+A. \(f(x)=\sqrt{x+7}\) and \(g(x)=2x-5\)
+\[
+\begin{aligned}
+(f\circ g)(x)&=f(g(x))\\
+&=f(2x-5)\\
+&=\sqrt{(2x-5)+7}\\
+&=\sqrt{2x+2}
+\end{aligned}
+\]
+The rule for the composition \((f\circ g)(x)\) is \(\sqrt{2x+2}\). The domain is \(x\ge -1\), which is the intersection of the domains of \(g\) and \(f\circ g\), which are all real numbers and \(x\ge -1\).
+
+B. \(f(x)=x^2+x+2\) and \(g(x)=4-x\)
+\[
+\begin{aligned}
+(f\circ g)(x)&=f(g(x))\\
+&=f(4-x)\\
+&=(4-x)^2+(4-x)+2\\
+&=16-8x+x^2+4-x+2\\
+&=x^2-9x+22
+\end{aligned}
+\]
+The rule for the composition \((f\circ g)(x)\) is \(x^2-9x+22\), and the domain is all real numbers.
+
+\answer{A. \((f\circ g)(x)=\sqrt{2x+2}\), domain \(x\ge -1\). B. \((f\circ g)(x)=x^2-9x+22\), domain all real numbers.}
+\end{example}
+
+\begin{te-addendum}{5}{PurposefulQuestions}
+Q: What notation is introduced in the example and what does it mean?
+\answer{The operation symbol \(\circ\) in \(f\circ g\) means ``apply the rule for \(g\), and then apply the rule for \(f\).''}
+
+Q: What procedure do you perform to find the rule for \(f\circ g\)?
+\answer{Substitute the expression \(g(x)\) for the variable in \(f(x)\), then apply the operations indicated by \(f(x)\).}
+\end{te-addendum}
+
+\begin{te-addendum}{5}{RtISupport}
+USE WITH EXAMPLE 5 Help students focus on specific aspects of the example by discussing the following questions.
+
+Q: What does the expression \(f(g(x))\) in Part A mean?
+\answer{Evaluate \(g(x)\) to get a number or an expression. Then evaluate the function \(f\) for that number or expression.}
+
+Q: How is \(g(f(x))\) in Part B different from \(f(g(x))\)?
+\answer{The difference is the order of using the functions. Evaluate the ``inside'' expression first, then use the result to evaluate the ``outside'' expression.}
+\end{te-addendum}
+
+\begin{tryit}{5}
+Identify the rules for \(f\circ g\) and \(g\circ f\).
+
+a. \(f(x)=x^3,\quad g(x)=x+1\)
+
+b. \(f(x)=3\sqrt{2x},\quad g(x)=4x+11\)
+
+\answer{a. \((f\circ g)(x)=x^3+3x^2+3x+1\) and \((g\circ f)(x)=x^3+1\). b. \((f\circ g)(x)=3\sqrt{8x+22}\) and \((g\circ f)(x)=12\sqrt{2x}+11\).}
+\end{tryit}
+
+\begin{te-addendum}{5}{ElicitEvidence}
+Q: Part a: For the two given functions \(f\) and \(g\), how can you tell when \(f\circ g\) will be negative?
+\answer{\(f(x)=x^3\), so \(f(g(x))\) will be negative when \(g(x)\) is negative. Because \(g(x)\) is negative when \(x+1<0\), \(f\circ g\) is negative when \(x<-1\).}
+\end{te-addendum}
+
+\begin{concept-box}
+STUDY TIP Using a model can help solve a problem. By writing functions to model the discounts, determine which sequence of functions provides a better deal for the customer.
+\end{concept-box}
+
+\begin{example}{6}
+Use a Composite Function Model
+
+A clothing store posts discounts on social media. Followers are allowed to use multiple discounts. They simply need to tell the cashier in which order they want the discounts.
+
+On their next trip to the store, in which order should they ask for the discounts to save the most money?
+
+Write functions to model the discounts, letting \(x\) represent the price of the purchase.
+
+\placeholder{illustration}{Smartphone social media post with discount text: ``EXCLUSIVELY FOR OUR SOCIAL MEDIA FOLLOWERS,'' ``\$5 OFF NEXT PURCHASE,'' and ``10\% OFF NEXT PURCHASE.''}
+
+\[
+f(x)=x-5
+\]
+\[
+\begin{aligned}
+g(x)&=x-0.1x\\
+&=0.9x
+\end{aligned}
+\]
+
+\(10\%\) off, then \(\$5\) off \(\rightarrow\) Identify the rule for \(f\circ g\).
+\[
+\begin{aligned}
+(f\circ g)(x)&=f(g(x))\\
+&=f(0.9x)\\
+&=0.9x-5
+\end{aligned}
+\]
+This is the better deal.
+
+\(\$5\) off, then \(10\%\) off \(\rightarrow\) Identify the rule for \(g\circ f\).
+\[
+\begin{aligned}
+(g\circ f)(x)&=g(f(x))\\
+&=g(x-5)\\
+&=0.9(x-5)\\
+&=0.9x-4.5
+\end{aligned}
+\]
+
+Suppose a shirt costs \(\$30.00\) before the discounts. Applying the discounts as \((f\circ g)(x)\) means the new cost is \((0.9)(30)-5=22\), or \(\$22.00\). Applying the discounts as \((g\circ f)(x)\) means the new cost is \((0.9)(30)-4.5=22.5\), or \(\$22.50\).
+
+The first method yields the better deal.
+
+\answer{Use the \(10\%\) off discount first, and then use the \(\$5\) off discount.}
+\end{example}
+
+\begin{te-addendum}{6}{PurposefulQuestions}
+Q: Why does order matter for discounts?
+\answer{The amount of a percent coupon depends on the base price. To maximize a percent coupon, take it off the larger price; that is, before a dollars-off coupon.}
+\end{te-addendum}
+
+\begin{te-addendum}{6}{RtIExtend}
+Additional Example 6
+
+A member currently has 75,000 awards points. In what order should the member take the bonuses?
+
+First take 10,000 points, then take 5\% bonus.
+\[
+10{,}000+75{,}000=85{,}000
+\]
+\[
+1.05(85{,}000)=89{,}250
+\]
+
+Take a 5\% bonus, then add 10,000 points.
+\[
+1.05(75{,}000)=78{,}750
+\]
+\[
+78{,}750+10{,}000=88{,}750
+\]
+
+The overall bonus is 500 points more if you add the 10,000 points first, and then take the 5\% bonus.
+
+Q: How do you decide which bonus to take first?
+\answer{The greater total will occur when 5\% is taken on the additional 10,000 award points.}
+
+Q: Why do the two orders have different outcomes?
+\answer{Adding 5\% first yields less because you are adding 5\% of a smaller number.}
+\end{te-addendum}
+
+\begin{tryit}{6}
+As a member of the Games Shop rewards program, you get a \(20\%\) discount on purchases. All sales are subject to a \(6\%\) sales tax. Write functions to model the discount and the sales tax, then identify the rule for the composition function that calculates the final price you would pay at Games Shop.
+
+\answer{Let \(x=\) purchase price. Discount: \(d(x)=0.8x\). Tax: \(t(x)=1.06x\). Actual price with discount: \(t\circ d=0.848x\).}
+\end{tryit}
+
+\begin{te-addendum}{4--6}{HabitsOfMind}
+Reason Let \(f(x)=\frac{1}{3}(x-2)\) and \(g(x)=3x+2\). Find \(f\circ g\) and \(g\circ f\). Are they equivalent? If so, does this prove that the composition of two functions is commutative?
+\answer{\(f(g(x))=x\) and \(g(f(x))=x\), so in this case \(f\circ g=g\circ f\). One example is not a proof, so this does not prove that composition of functions is commutative.}
+\end{te-addendum}
+
+\begin{te-addendum}{6}{ELLAddendum}
+English Language Learners Use with EXAMPLE 6
+
+LISTENING BEGINNING Point out the words order and sequence in the example and explain that they mean the same thing. Have students listen as you read the definition of order: ``the arrangement of things following one after another, as in space or time.''
+
+Q: How is order important in the problem?
+\answer{The final price changes depending on which discount is used first.}
+
+Q: What is an example of when you can not change the order of operations in a problem?
+\answer{When you simplify an expression, you must follow the same order of operations.}
+
+SPEAKING DEVELOPING Choose some words from the example, such as discounts, deal, customers, cashier, etc. Have students take turns describing a word to the other students and have the others guess the word.
+
+Q: How might a customer and a cashier interact?
+\answer{A cashier helps a customer buy items in a store; he rings up the purchases, and the customer gives the cashier money for the purchases.}
+
+Q: How are discounts and deals related?
+\answer{A discount is money off the price of an item, and a deal is a good price on an item.}
+
+WRITING EXPANDING There are some advanced verbs used in the example. Point out the words applying, posts, identify, and yields. Challenge students to write their own sentences correctly using these verbs.
+
+Q: What does it mean to post on social media?
+\answer{To put a statement, advertisement, or photo online to share with other people.}
+
+Q: What is a word that means the same thing as the word yields, as it is used in this example?
+\answer{Produces or gives.}
+\end{te-addendum}
+
+\begin{concept-summary}
+Function Operations
+
+\begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+\toprule
+Add or Subtract Functions & Multiply or Divide Functions & Compose Functions \\
+\midrule
+ALGEBRA
+
+\((f+g)(x)=f(x)+g(x)\)
+
+\((f-g)(x)=f(x)-g(x)\)
+&
+ALGEBRA
+
+\((f\cdot g)(x)=f(x)\cdot g(x)\)
+
+\(\left(\frac{f}{g}\right)(x)=\frac{f(x)}{g(x)}\)
+&
+ALGEBRA
+
+\((f\circ g)(x)=f(g(x))\)
+
+\((g\circ f)(x)=g(f(x))\)
+\\
+\midrule
+WORDS
+
+The domain of the sum or difference of \(f\) and \(g\) is the intersection of the domain of \(f\) and the domain of \(g\).
+&
+WORDS
+
+The domain is the set of all real numbers for which \(f\) and \(g\) and the new function are defined.
+&
+WORDS
+
+The domain of \(f\circ g\) is the set of all real numbers \(x\), in the domain of \(g\), such that \(g(x)\) is in the domain of \(f\).
+\\
+\midrule
+NUMBERS
+
+Let \(f(x)=3x+5\) and \(g(x)=x-3\).
+
+\(f+g=(3x+5)+(x-3)=4x+2\)
+
+\(f-g=(3x+5)-(x-3)=2x+8\)
+&
+NUMBERS
+
+Let \(f(x)=3x+5\) and \(g(x)=x-3\).
+
+\(f\cdot g=(3x+5)(x-3)=3x^2-4x-15\)
+
+\(\frac{f}{g}=\frac{3x+5}{x-3}\) for \(x\ne 3\)
+&
+NUMBERS
+
+Let \(f(x)=3x+5\) and \(g(x)=x-3\).
+
+\(f\circ g=3(x-3)+5=3x-4\)
+
+\(g\circ f=(3x+5)-3=3x+2\)
+\\
+\bottomrule
+\end{tabular}
+
+Do You UNDERSTAND?
+
+1. ESSENTIAL QUESTION How do you combine, multiply, divide, and compose functions, and how do you find the domain of the resulting function?
+\answer{To perform an arithmetic operation on a pair of functions, substitute their rules and perform the operation on them. The domain of the resulting function will be the set of all real numbers for which the original two functions and the resulting function are defined. To compose functions, apply one function to the rule of the other. The domain of the resulting function will be the set of all real numbers for which both the composite function and the inner function, the first function applied, are defined.}
+
+2. Vocabulary In your own words, define and provide an example of a composite function.
+\answer{A composite function is a method of combining functions such that the output of one function is the input of the other function. Example: Given \(f(x)=2x\) and \(g(x)=x+1\), the composite function \(f\circ g=f(g(x))=2(x+1)=2x+2\).}
+
+3. Error Analysis Roble said the domain of \(\frac{f}{g}\) when \(f(x)=5x^2\) and \(g(x)=x+3\) is the set of real numbers. Explain why Roble is incorrect.
+\answer{The domain is all real numbers except \(x=-3\), for which \(g(x)\) is equal to 0. \(g(x)\) is in the denominator, so when \(x=-3\), \(\frac{f}{g}\) is undefined.}
+
+4. Use Structure Explain why changing the order in which two functions occur affects the result when subtracting and dividing the functions.
+\answer{The operations of subtraction and division are not commutative.}
+
+Do You KNOW HOW?
+
+Let \(f(x)=3x^2+5x+1\) and \(g(x)=2x-1\).
+
+5. Identify the rule for \(f+g\).
+\answer{\(3x^2+7x\).}
+
+6. Identify the rule for \(f-g\).
+\answer{\(3x^2+3x+2\).}
+
+7. Identify the rule for \(g-f\).
+\answer{\(-3x^2-3x-2\).}
+
+Let \(f(x)=x^2+2x+1\) and \(g(x)=x-4\).
+
+8. Identify the rule for \(f\cdot g\).
+\answer{\(x^3-2x^2-7x-4\).}
+
+9. Identify the rule for \(\frac{f}{g}\), and state the domain.
+\answer{\(\frac{x^2+2x+1}{x-4}\) for all real numbers \(x\), such that \(x\ne 4\).}
+
+10. Identify the rule for \(\frac{g}{f}\), and state the domain.
+\answer{\(\frac{x-4}{x^2+2x+1}\), or \(\frac{x-4}{(x+1)^2}\), for all real numbers \(x\), when \(x\ne -1\).}
+
+11. If \(f(x)=2x^2+5\) and \(g(x)=-3x\), what is \(f(g(x))\)?
+\answer{\(18x^2+5\).}
+\end{concept-summary}
+
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+Q: How do operations on functions relate to what you have learned before?
+\answer{Performing operations on functions is very similar to performing operations on integers, rational numbers, and polynomials.}
+\end{te-addendum}
+
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercise 10 Some students may believe that a zero of any function is not in the domain of a combination of functions. Encourage students to use a graphing utility to graph the combined function and look for asymptotes. The domain is only restricted for values where an asymptote occurs.
+\end{te-addendum}
+
+\begin{practice}{12}{2}
+Generalize Does \(f\circ g\) always equal \(g\circ f\)? Justify your response.
+
+\answer{In general \(f\circ g\) and \(g\circ f\) are usually not equal. Sample: If \(f(x)=x+1\) and \(g(x)=4x\), then \((f\circ g)(x)=4x+1\) and \((g\circ f)(x)=4x+4\).}
+\end{practice}
+
+\begin{practice}{13}{2}
+Construct Arguments Explain why the domain for the quotient of functions might not be the set of all real numbers.
+
+\answer{Because there are restrictions on the \(x\)-values in the denominator of a fraction such that it cannot be defined.}
+\end{practice}
+
+\begin{practice}{14}{2}
+Error Analysis Describe and correct the error a student made in finding the rule for the composition \(f\circ g\) of the functions \(f(x)=3x^2-x+2\) and \(g(x)=2x+1\).
+\[
+\begin{aligned}
+f\circ g&=f(g(x))\\
+&=3(2x+1)^2-2x+1+2\\
+&=3(4x^2+4x+1)-2x+1+2\\
+&=12x^2+12x+3-2x+1+2\\
+&=12x^2+10x+6
+\end{aligned}
+\]
+
+\answer{When \(2x+1\) was substituted into \(3x^2-x+2\) for \(x\) and when \(-x\) was replaced with \(2x+1\), the negative sign was not distributed. Corrected: \(f(g(x))=3(2x+1)^2-(2x+1)+2=12x^2+10x+4\).}
+\end{practice}
+
+\begin{practice}{15}{2}
+Make Sense and Persevere Identify the rules for two functions, \(f(x)\) and \(g(x)\), for which \(f\circ g=g\circ f\).
+
+\answer{Answers may vary. Sample: When \(f(x)=2x\) and \(g(x)=5x\), \((f\circ g)(x)=10x\) and \((g\circ f)(x)=10x\).}
+\end{practice}
+
+\begin{practice}{16}{3}
+Higher Order Thinking Suppose two functions, \(f(x)\) and \(g(x)\) are only defined by the ordered pairs listed below.
+\[
+f=\{(6,7),(5,2),(4,1),(10,8)\}
+\]
+\[
+g=\{(5,4),(3,6),(1,5),(2,10)\}
+\]
+Find the ordered pairs that comprise \((f\circ g)(x)\).
+
+\answer{\((f\circ g)(x)=\{(5,1),(3,7),(1,2),(2,8)\}\).}
+\end{practice}
+
+\begin{practice}{17}{2}
+Mathematical Connections Relate evaluating \((f\circ g)(3)\) to finding the composition rule \((f\circ g)(x)\). What are the benefits of each?
+
+\answer{Evaluating function composition for a specific value is finding \(g(3)\) and then substituting \(g(3)\) for \(x\) in \(f(x)\). This approach is good when you only want to find a few values. Finding the rule of \((f\circ g)(x)\) is similar in that you evaluate \(f(x)\) for the rule \(g(x)\), that is \(f(g(x))\). You can then recognize key features of the new function, including domain, range, and end behavior.}
+\end{practice}
+
+\begin{practice}{18}{2}
+Make Sense and Persevere Identify rules for two functions \(f(x)\) and \(g(x)\), for which \(f(g(x))=x\).
+
+\answer{Sample answer: If \(f(x)=\frac{1}{2}x\) and \(g(x)=2x\), then \(f(g(x))=x\).}
+\end{practice}
+
+\begin{practice}{19}{2}
+Construct Arguments Is it possible that \(f(x)-g(x)=c\), where \(c\) is a constant? If so, give an example. What must be true about two linear functions? If not, explain why it is not possible.
+
+\answer{It is possible; Sample: If the graphs of the two linear functions are parallel, then their difference will be a horizontal line; \(f(x)=3x-4\) and \(g(x)=3x+2\), so \(f(x)-g(x)=-6\), which represents a horizontal line.}
+\end{practice}
+
+\begin{practice}{20}{1}
+Let \(f(x)=\frac{5}{3}x^2+2x-\frac{5}{8}\) and \(g(x)=3x^2\). Identify the rules for the following functions. SEE EXAMPLE 1
+
+\(f+g\)
+
+\answer{\(f+g=\frac{14}{3}x^2+2x-\frac{5}{8}\).}
+\end{practice}
+
+\begin{practice}{21}{1}
+Let \(f(x)=\frac{5}{3}x^2+2x-\frac{5}{8}\) and \(g(x)=3x^2\). Identify the rules for the following functions. SEE EXAMPLE 1
+
+\(f-g\)
+
+\answer{\(f-g=-\frac{4}{3}x^2+2x-\frac{5}{8}\).}
+\end{practice}
+
+\begin{practice}{22}{2}
+Suppose the demand \(d\), in units sold, for a company's jeans at price \(x\), in dollars, is \(d(x)=6{,}500-6.83x\).
+
+a. If revenue \(=\) price \(\times\) demand, write the rule for the function \(R(x)\), which represents the company's expected revenue in jean sales. Then state the domain of this function.
+
+b. If the cost to manufacture the jeans is \(c(x)=386+1.27x\), find the equation for the company's profit. How much does the company earn if the price is \(\$79\)? SEE EXAMPLE 2
+
+\answer{a. \(R(x)=6{,}500x-6.83x^2\) for \(0\le x\le 951.68\). b. \(P(x)=-6.83x^2+6{,}498.73x-386\); \(P(79)=\$470{,}387.64\).}
+\end{practice}
+
+\begin{practice}{23}{1}
+Identify the rule and domain for \(\frac{f}{g}\) when \(f(x)=10x^2+3x-18\) and \(g(x)=2x+3\). SEE EXAMPLE 3
+
+\answer{\(\left(\frac{f}{g}\right)(x)=5x-6\) for all real numbers \(x\), such that \(x\ne -\frac{3}{2}\).}
+\end{practice}
+
+\begin{practice}{24}{1}
+Let \(f(x)=4x-5\) and \(g(x)=-7x\). Evaluate each expression. SEE EXAMPLE 4
+
+\(f(g(3))\)
+
+\answer{\(-89\).}
+\end{practice}
+
+\begin{practice}{25}{1}
+Let \(f(x)=4x-5\) and \(g(x)=-7x\). Evaluate each expression. SEE EXAMPLE 4
+
+\(f(g(x))\)
+
+\answer{\(-28x-5\).}
+\end{practice}
+
+\begin{practice}{26}{1}
+Let \(f(x)=4x-5\) and \(g(x)=-7x\). Evaluate each expression. SEE EXAMPLE 4
+
+\(g(f(2))\)
+
+\answer{\(-21\).}
+\end{practice}
+
+\begin{practice}{27}{1}
+Let \(f(x)=4x-5\) and \(g(x)=-7x\). Evaluate each expression. SEE EXAMPLE 4
+
+\(g(f(x))\)
+
+\answer{\(-28x+35\).}
+\end{practice}
+
+\begin{practice}{28}{1}
+Let \(f(x)=x^2+x\) and \(g(x)=9-2x\). Identify the rules for the following functions. SEE EXAMPLE 5
+
+\(f\circ g\)
+
+\answer{\(4x^2-38x+90\).}
+\end{practice}
+
+\begin{practice}{29}{1}
+Let \(f(x)=x^2+x\) and \(g(x)=9-2x\). Identify the rules for the following functions. SEE EXAMPLE 5
+
+\(g\circ f\)
+
+\answer{\(-2x^2-2x+9\).}
+\end{practice}
+
+\begin{practice}{30}{2}
+A sporting goods store is running a summer sale on its snowboards. Kadia is interested in a snowboard that normally costs \(\$400\). The store is offering two special offers.
+
+\placeholder{illustration}{Snowboards in a store with two circular labels: ``\$50 INSTANT REBATE'' and ``10\% DISCOUNT.''}
+
+In which order should these special offers be applied to the cost of the snowboard in order to benefit Kadia? Explain. SEE EXAMPLE 6
+
+\answer{It is better for Kadia if the \(10\%\) discount is applied before the \(\$50\) instant rebate because he will save \(\$5\) more.}
+\end{practice}
+
+\begin{practice}{31}{2}
+Model With Mathematics The cost (in dollars) to produce \(x\) shovels in a factory is given by the function \(C(x)=20x+500\). The factory produces 30 shovels in one hour.
+
+a. Find the rule for \(C(h(x))\), where the function \(h(x)\) is the number of shovels produced in \(x\) hours.
+
+b. Find the cost when \(h=8\) hours.
+
+c. Explain what the function \(C(h(x))\) represents.
+
+\answer{a. \(C(h(x))=600x+500\). b. \(\$5{,}300\). c. \(C(h(x))\) represents the cost to produce \(x\) hours' worth of shovels.}
+\end{practice}
+
+\begin{practice}{32}{3}
+Use Structure A music store is running the following promotions.
+
+\placeholder{illustration}{Promotional ad reading ``HUGE SAVINGS AT O'RILEY'S MUSIC,'' ``\$5 off a purchase of \$20 or more,'' and ``Save an additional 15\% off your total purchase when you open a charge account.''}
+
+a. Use composition of functions to find the sale price of a \(\$90\) purchase when the \(\$5\) off discount is applied prior to the \(15\%\) off discount.
+
+b. Use composition of functions to find the sale price of a \(\$90\) purchase when the \(15\%\) off discount is applied prior to the \(\$5\) off discount.
+
+c. In which order is the deal better for the consumer? Explain.
+
+\answer{a. \(\$72.25\). b. \(\$71.50\). c. Since \(\$71.50<\$72.25\), it is a better deal for the consumer if the \(15\%\) discount is applied prior to the \(\$5\) off discount.}
+\end{practice}
+
+\begin{practice}{33}{2}
+Reason From 2000 to 2015, the number of births, \(b\), in the hundreds, in Fairfield County can be modeled by the function \(b(x)=300-5x\). The number of deaths, \(d\), in the hundreds, can be modeled by the function \(d(x)=10x+5\). The variable \(x\) represents the number of years since 2000.
+
+a. Which function operation can be used to represent the net increase in the population?
+
+b. Write and simplify a function which represents the net increase in the population, \(p\), against \(x\), the number of years since 2000. State the domain of this function.
+
+\answer{a. subtraction. b. \(p(x)=b(x)-d(x)=-15x+295\); the domain is the set of all real numbers \(x\) such that \(0<x<15\).}
+\end{practice}
+
+\begin{practice}{34}{2}
+Given that \(f(x)=x^2+8x+3\) and \(g(x)=-x-7\), which of the following are true? Select all that apply.
+
+\(\square\quad f+g=x^2+7x-4\)
+
+\(\square\quad f(g(x))=x^2+6x-4\)
+
+\(\square\quad\) The domain of \(\frac{f}{g}\) is the set of all real numbers.
+
+\(\square\quad f(x)\cdot g(x)=-x^3-15x^2+53x+21\)
+
+\(\square\quad\) In the composition \(g\circ f\), the output \(f(x)\) is used as the input for \(g\).
+
+\answer{The true statements are \(f+g=x^2+7x-4\), \(f(g(x))=x^2+6x-4\), and in the composition \(g\circ f\), the output \(f(x)\) is used as the input for \(g\).}
+\end{practice}
+
+\begin{practice}{35}{1}
+SAT/ACT Find the value of \(f(g(5))\) if \(f(x)=4x+1\) and \(g(x)=x^2+6\).
+
+A 101 \qquad B 124 \qquad C 125 \qquad D 676 \qquad E 682
+
+\answer{125.}
+\end{practice}
+
+\begin{practice}{36}{2}
+Performance Task The temperature in degrees Celsius is 32 less than the Fahrenheit temperature, multiplied by five-ninths. The temperature in degrees Kelvin is the number of degrees Celsius plus 273.
+
+\begin{tikzpicture}[x=1cm,y=0.035cm]
+% Celsius thermometer
+\node at (0,125) {Celsius, \({}^{\circ}\mathrm{C}\)};
+\draw (0,0) -- (0,110);
+\draw (0,-45) circle (5);
+\draw (0,-40) -- (0,60);
+\foreach \v in {-40,-20,0,20,40,60} {
+  \draw (-0.08,\v) -- (0.08,\v);
+  \node[left] at (-0.15,\v) {\(\v\)};
+}
+\node[left] at (-0.18,0) {\(0^{\circ}\mathrm{C}\)};
+% Fahrenheit thermometer
+\begin{scope}[xshift=3.1cm]
+\node at (0,125) {Fahrenheit, \({}^{\circ}\mathrm{F}\)};
+\draw (0,-50) -- (0,150);
+\draw (0,-55) circle (5);
+\foreach \v in {-50,-25,0,25,50,75,100,125,150} {
+  \draw (-0.08,\v) -- (0.08,\v);
+  \node[left] at (-0.15,\v) {\(\v\)};
+}
+\end{scope}
+% Kelvin thermometer
+\begin{scope}[xshift=6.2cm]
+\node at (0,125) {Kelvin, K};
+\draw (0,230) -- (0,330);
+\draw (0,225) circle (5);
+\foreach \v in {230,250,270,290,310,330} {
+  \draw (-0.08,\v-230) -- (0.08,\v-230);
+  \node[left] at (-0.15,\v-230) {\(\v\)};
+}
+\end{scope}
+% comparison horizontal line
+\draw (-0.7,0) -- (0.7,0);
+\draw (2.4,32) -- (3.8,32);
+\draw (5.5,43) -- (6.9,43);
+\end{tikzpicture}
+
+Part A Derive a conversion formula for finding the number of degrees Kelvin, given the temperature in Fahrenheit.
+
+Part B Using your conversion formula from part (a), find the temperature in degrees Kelvin when the temperature is \(27^{\circ}\mathrm{F}\). Round to the nearest whole number if necessary.
+
+\answer{Part A \(K=\frac{5}{9}(F-32)+273\). Part B \(270\text{ K}\).}
+\end{practice}
+
+\end{document}
