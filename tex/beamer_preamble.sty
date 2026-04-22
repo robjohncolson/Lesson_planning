@@ -1,0 +1,86 @@
+% Shared beamer slide style for Algebra 2 lesson decks.
+% Import in each L{NN}_P{N}_slides.tex via \usepackage{beamer_preamble}.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamer_preamble}[2026/04/22 Shared slide style]
+
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\RequirePackage{amsmath}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{xcolor}
+\pgfplotsset{compat=1.18}
+
+% ---- Color palette (mirrors tex/preamble.sty) ----
+\definecolor{slidenavy}{HTML}{0B3C6C}
+\definecolor{slideblue}{HTML}{1E6FC8}
+\definecolor{slidelight}{HTML}{EAF2FB}
+\definecolor{slidedark}{HTML}{112233}
+\definecolor{slidegray}{HTML}{556677}
+\definecolor{slideaccent}{HTML}{D94E2F}
+\definecolor{slidegreen}{HTML}{2E8B57}
+\definecolor{slidegold}{HTML}{C88B14}
+
+% ---- Beamer theme ----
+\usetheme{default}
+\usecolortheme{default}
+\setbeamercolor{background canvas}{bg=slidelight}
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamercolor{frametitle}{fg=white,bg=slidenavy}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.1cm,dp=0.2cm,leftskip=0.4cm]{frametitle}%
+    \vspace{0.1cm}%
+    \usebeamerfont{frametitle}\insertframetitle%
+    \hfill\usebeamerfont{footline}{\color{white}\small\insertframesubtitle}%
+    \hspace{0.3cm}%
+  \end{beamercolorbox}%
+}
+
+% ---- Phase header badge (DOK + minutes + tag) ----
+% Usage: \phasebadges{DOK}{minutes}{framework-tag}
+\newcommand{\phasebadges}[3]{%
+  \begin{flushright}
+    \tcbox[on line, colback=slidegold, colframe=slidegold, coltext=white,
+           boxrule=0pt, arc=2pt, boxsep=2pt, left=4pt, right=4pt]{\small\bfseries DOK~#1}%
+    \hspace{2pt}%
+    \tcbox[on line, colback=slidegreen, colframe=slidegreen, coltext=white,
+           boxrule=0pt, arc=2pt, boxsep=2pt, left=4pt, right=4pt]{\small\bfseries #2~min}%
+    \hspace{2pt}%
+    \tcbox[on line, colback=slideblue, colframe=slideblue, coltext=white,
+           boxrule=0pt, arc=2pt, boxsep=2pt, left=4pt, right=4pt]{\small\itshape #3}%
+  \end{flushright}
+}
+
+% ---- Projection-card environment (one centered box per slide) ----
+% Usage: \begin{projcard}{Title}{color}...body...\end{projcard}
+\newtcolorbox{projcard}[2]{%
+  enhanced,
+  colback=white,
+  colframe=#2,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=10pt,
+  right=10pt,
+  top=8pt,
+  bottom=8pt,
+  title={\color{#2}\large\bfseries #1},
+  coltitle=#2,
+  fonttitle=\bfseries,
+  attach title to upper={},
+}
+
+% ---- Title slide helper ----
+\newcommand{\titleslide}[2]{%
+  {\setbeamercolor{background canvas}{bg=slidenavy}
+   \begin{frame}[plain]
+   \vspace{1.2cm}
+   \begin{center}
+     {\color{white}\fontsize{32pt}{36pt}\selectfont\bfseries #1\par}
+     \vspace{0.8cm}
+     {\color{slidelight}\Large #2\par}
+     \vspace{1.5cm}
+     {\color{slidelight!70}\normalsize Klimsara-adapted \textperiodcentered\ Student-centered \textperiodcentered\ No Blooket\par}
+   \end{center}
+   \end{frame}}%
+}
