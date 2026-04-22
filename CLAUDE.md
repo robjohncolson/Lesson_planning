@@ -4,6 +4,7 @@ High school Algebra 2 lesson materials — Topic 3 (Polynomials) closing, Topic 
 
 ## Hard rules
 
+- **LaTeX is canonical for student-facing output** (as of 2026-04-22). The `tex/L{NN}_P{N}_{student,teacher}.pdf` files are what prints and what students/evaluators see. docx outputs are retired to `legacy/docx/` for reference. Python builders (`build_L*_packets.py`) remain as the structural intent source and drive the eye-check / polish worksheet tooling, but their docx outputs are no longer shipped. Edits to student-facing content go into `tex/*.tex` directly; regenerate PDF with `pdflatex --miktex-enable-installer`.
 - **Savvas-only for student-facing work.** Every problem, Try It, Do Now, Practice, or Exit item on a student packet MUST trace to a Savvas bank ID in `questionbank/registry.jsonl`. No fabricated items. If the right Savvas item isn't in the bank, ingest it first (screenshots live in `questionbank/images/`).
 - **Single-DOK3 spine, per period.** One DOK-3 driver per period, self-contained with all rules printed on the page. A lesson's P3 may have no DOK-3 driver (pure DOK-2 mastery day) when P2 already carried the spine. See wiki `concepts/Single-DOK3 Lesson Spine.md`.
 - **Summary exit, not CER.** Walk-out tasks recap the day's learning with fill-in + one "biggest thing learned" sentence. Full CER writing in 5 min is unrealistic.
@@ -56,15 +57,30 @@ Originally 8 days. Retired to `legacy/`. Replaced by Klimsara close-out:
 
 ## Standard toolchain
 
-- `qb.py` — registry accessor. `qb.get_for_packet(ids)` wires items into builders. `qb.visuals_for(ids)` + `qb.write_visuals_checklist(ids, path)` emit pre-print checklists.
+**Canonical output path (LaTeX):**
+- `tex/preamble.sty` — shared LaTeX style package (tcolorbox callouts, framework_phase_header, sentence_frame_box, summary_exit_box, bank_item, day_banner, section_banner; ASCII emoji macros for portability).
+- `tex/L{NN}_P{N}_{student,teacher}.tex` + `.pdf` — per-lesson packets. Edits go here directly. Regenerate PDF with `pdflatex --miktex-enable-installer L{NN}_P{N}_{student,teacher}.tex`.
+
+**Content source & intent tooling:**
+- `qb.py` — registry accessor. `qb.get_for_packet(ids)` used by both LaTeX prompts (read-only) and retired docx builders.
 - `qb_append.py` — validates + appends registry entries. Required fields: `lesson`, `prompt`, `dok`. Optional schema includes `visual_type` (enum: `none`/`photo`/`graph`/`table`/`diagram`/`map`), `visual_needs_cleanup` (bool), `visual_clean_asset` (path).
-- `generate_practice_skeletons.py` — given a lesson's calibration file, emits pre-filled JSON stubs for every Savvas practice item. Cuts per-item ingest time from ~90s to ~20s. `python generate_practice_skeletons.py <lesson>` writes `skeletons/<lesson>_practice_skeletons.json`.
-- `packet_styles.py` — shared docx formatting helpers + `framework_phase_header` (with DOK/minutes/teacher_does/students_do/Qs/adult_role) + `emit_visuals_checklist()` hook for builders.
-- `build_L{35,41}_P{N}_packets.py` — lesson builders. Each emits Do Now + Student Packet + Teacher Packet + Visuals Checklist.
-- `build_L{35,41}_slides.py` — per-lesson slide decks (one builder, N deck functions).
-- `L{35,41}_Pacer.html` — single-file pacer per lesson, 3 sub-tabs (one per period), countdown timer, inline teacher scripts / answer keys / rules / bridges / warnings.
-- `backfill_visuals_4-1.py` — historical one-off that populated visual_type fields on already-ingested 4-1 items. Kept for reference; re-runnable.
-- `legacy/` — retired Day 2-8 artifacts + Blooket CSVs from pre-Klimsara Lesson 3-5.
+- `generate_practice_skeletons.py` — given a lesson's calibration file, emits pre-filled JSON stubs for every Savvas practice item.
+- `fix_registry_mojibake.py` — ftfy-based registry encoding cleanup (e.g. `Ã‚Â°` → `°`).
+- `extract_intent_anchors.py` — walks `build_L*_packets.py` via AST and emits `graph/eye_check/L{NN}_P{N}.md` briefs of every callout, phase header, bank item in source order. Used as the spec for LaTeX dispatches.
+- `qb_polish_worksheet.py` — per-builder polish worksheets in `graph/polish/` with prereq/rehearses-aware redundancy filter.
+- `qb_diagnose.py` — emits `graph/{skill_bridge_gaps,nominal_rehearsals,redundant_practice}.md`.
+
+**Retired (still present for reference):**
+- `packet_styles.py`, `packet_build.py` — docx primitives. No longer the shipping path. Builders still import them for AST-extractable intent.
+- `build_L*_packets.py` — docx emitters. Retained so `extract_intent_anchors.py` and `qb_polish_worksheet.py` can read the source of truth for lesson structure. When editing lesson content, edit the `.tex` directly; the `.py` builder is not the authoring interface anymore.
+- `backfill_visuals_4-1.py` — historical one-off, kept for reference.
+
+**Operational:**
+- `L{35,41}_Pacer.html` — single-file pacer per lesson, 3 sub-tabs per period, countdown timer, inline teacher scripts / answer keys / rules / bridges. Used live in the classroom — NOT deprecated.
+- `build_L{35,41}_slides.py` — per-lesson slide decks. Not yet migrated to LaTeX; stays as-is pending demand.
+
+**Archive:**
+- `legacy/` — retired Day 2-8 artifacts, Blooket CSVs, and (as of 2026-04-22) the docx packet outputs + Visuals Checklists.
 
 ## Class context (as of 2026-04-20)
 
