@@ -1,0 +1,370 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\IconCheck}{[CHECK]}
+\newcommand{\IconMic}{[MIC]}
+\newcommand{\IconClipboard}{[CLIPBOARD]}
+\newcommand{\lessonrow}[2]{\textbf{#1} & #2 \\ \hline}
+
+\newcommand{\phasetag}[1]{%
+  {\small\itshape Tag: #1\par}
+}
+
+\newcommand{\phaseitems}[1]{%
+  \begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  #1
+  \end{itemize}%
+}
+
+\newcommand{\teacheranswerbox}[2]{%
+  \begin{callout}{#1}{calloutgreen}
+  #2
+  \end{callout}
+}
+
+\newcommand{\qfifteengraphteacher}{%
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.88\linewidth,
+  height=2.75in,
+  xmin=-1,
+  xmax=4.5,
+  ymin=0,
+  ymax=85,
+  xtick={-1,0,1,2,3,4},
+  ytick={0,10,20,30,40,50,60,70,80},
+  xlabel={$x$},
+  ylabel={$y$},
+  grid=major,
+  minor tick num=1,
+  tick label style={font=\small},
+  label style={font=\small},
+  every axis plot/.append style={line width=1pt}
+]
+\addplot[tealheader, smooth, domain=-1:4.0, samples=250] {3^x};
+\addplot[only marks, mark=*, mark size=2pt, color=dayblue] coordinates {
+  (-1,0.3333333333)
+  (0,1)
+  (1,3)
+  (2,9)
+  (3,27)
+  (4,81)
+};
+\addplot[warmred, dashed, domain=0:3.56, samples=2] {50};
+\addplot[warmred, dashed, domain=0:50, samples=2] ({ln(50)/ln(3)}, x);
+\addplot[only marks, mark=*, mark size=2.4pt, color=warmred] coordinates {
+  ({ln(50)/ln(3)},50)
+};
+\node[anchor=south west, font=\small] at (axis cs:3.18,33) {$y=3^x$};
+\node[anchor=south east, font=\small, color=warmred] at (axis cs:3.45,52) {$y=50$};
+\node[anchor=west, font=\small, color=warmred] at (axis cs:3.63,12) {$x \approx 3.56$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}
+
+\newcommand{\richterplaceholder}{%
+\begin{center}
+\fbox{%
+\parbox{0.9\linewidth}{%
+\textbf{[IMAGE:} Cracked wall photo with Richter scale overlay numbered 1 through 10 and labels ``Not felt'' at 1 and ``Extreme'' near 9--10; callout text: ``At a richter magnitude of 4 and above, the walls in your house may start to crack.''\textbf{]}%
+}%
+}
+\end{center}
+}
+
+\begin{document}
+
+\packetheading{Lesson 6-3 \textperiodcentered\ Quick \textperiodcentered\ Teacher Edition}{Logarithms + DOK-3 Spine: q15 (exp\(\leftrightarrow\)log inverse via graph)}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Math Objective}{Evaluate logarithms using the definition \(\log_b x = y \Leftrightarrow b^y = x\), distinguish common (\(\log\)) vs natural (\(\ln\)) logs, and use the graph of \(y=3^x\) to estimate logarithmic values through the exp\(\leftrightarrow\)log inverse relationship.}
+\lessonrow{Language Objective}{Explain the inverse relationship between exponential and logarithmic equations using ``undo'' language.}
+\lessonrow{Essential Understanding}{A logarithm answers the question: what exponent? -- logs undo exponentials. If I know how to graph \(y = 3^x\), I can use that same picture to estimate \(\log_3 50\) because logarithms and exponentials are inverses.}
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Topic Goals}{Fluency evaluating logarithms; use the exp\(\leftrightarrow\)log inverse relationship graphically (Topic 6 Form B prep: q15 covers Q7, Q10, Q11; q17 covers Q13).}
+\lessonrow{Essential Question}{If I know how to graph \(y = 3^x\), how can I use that same picture to estimate \(\log_3 50\) --- and why does this work?}
+\lessonrow{Materials}{Student packet with printed \(y=3^x\) graph (\(x \in [-1, 4.5]\), \(y \in [0, 85]\), gridlines). Teacher copy adds dashed \(y=50\) line and read-off annotation. [GRAPH PLACEHOLDER --- needs\_cleanup=YES, see Visuals Checklist].}
+\end{tabular}
+}
+
+\begin{callout}{\IconPin\ PRE-FLIGHT --- SINGLE-PERIOD COMPRESSED LESSON + DOK-3 SPINE q15}{calloutpink}
+This is a single-period quick treatment of Lesson 6-3. ONE example modeled in Launch (Ex 3: Evaluate Logarithms). DOK-3 spine q15 drives Explore.\\
+q15: Use the graph of \(y=3^x\) to estimate \(\log_3 50\). Students find \(y=50\) on the graph and read off the x-value. Since \(3^3=27\) and \(3^4=81\), answer is between 3 and 4, closer to 3.5. Formally \(\log_3 50 \approx 3.56\). Pair-share: why does this work? (Because \(\log_3 50 = x\) means \(3^x = 50\) --- logs and exp are inverses.)\\
+VISUAL REQUIRED: Student packet needs printed \(y=3^x\) graph (\(x \in [-1, 4.5]\), \(y \in [0, 85]\), gridlines). Teacher copy: same graph + dashed \(y=50\) line + read-off annotation. See Visuals Checklist --- needs\_cleanup=YES.\\
+PT\#58 dropped as spine --- not Form-B-aligned. q15 rehearses 3 of 8 Form B items through exp\(\leftrightarrow\)log inverse relationship. The continuous-growth modeling of PT\#58 will live in a future lesson if the class picks up 6-6+.\\
+Pace: Do Now (7) \(\rightarrow\) Launch (8) \(\rightarrow\) Explore q15 (15 min) + q52 (4) + q53 (3) + q54 (3) \(\rightarrow\) Share (5) \(\rightarrow\) Exit (5). \(\approx\) 48 min. Buffer in q53+q54.\\
+45-min Wed F variant: cut q53 + q54 from Explore. NEVER cut q15.
+\end{callout}
+
+\phasetag{bridge to logarithms launch}
+\frameworkphaseheader{Do Now}{1--2}{7}{%
+\phaseitems{
+  \item Hand out at door.
+  \item Circulate 3 min.
+  \item Cold-call 1 student on q14 error analysis.
+  \item Pull sheets at 7 min.
+}%
+}{%
+\phaseitems{
+  \item Error analysis on \(e^t = 98\) (q14).
+  \item Reason about \(\log_4 x < 0\) (q16).
+  \item Sort vocab: common vs. natural log (q3).
+}%
+}{%
+\phaseitems{
+  \item What is the student's error in q14? What step undoes the exponential?
+  \item For q16: what base-4 power gives a value less than 1?
+  \item What's the base for log x vs. ln x?
+}%
+}{Solo teacher: circulate silently. No hints on q14 --- let pairs argue.}
+
+\bankitem{Do Now \#1 --- Error Analysis (q14) (6-3-savvas-q14)}{%
+Error Analysis Describe and correct the error a student made in solving an exponential equation.
+
+\[
+\begin{aligned}
+16e^t &= 98 \\
+e^t &= 6.125 \\
+6.125t &= \ln e \\
+t &= \frac{\ln e}{6.125}
+\end{aligned}
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY / ANTICIPATED TALK}{%
+Answer key (from source): The student did not convert to logarithmic form correctly. The solution should be \(t=\ln 6.125\).
+}
+
+\bankitem{Do Now \#2 --- Reasoning (q16) (6-3-savvas-q16)}{%
+Generalize For what values of x is the expression \(\log_4 x<0\) true?
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY / ANTICIPATED TALK}{%
+Answer key (from source): \(\{x\mid0<x<1\}\)
+}
+
+\bankitem{Do Now \#3 --- Vocabulary (q3) (6-3-savvas-q3)}{%
+Vocabulary Explain the difference between the common logarithm and the natural logarithm.
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY / ANTICIPATED TALK}{%
+(verify before class)
+}
+
+\phasetag{teacher think-aloud Example 3 (Evaluate Logarithms)}
+\frameworkphaseheader{Launch}{1--2}{8}{%
+\phaseitems{
+  \item Project Example 3. Think aloud: \(\log_b x = y \Leftrightarrow b^y = x\).
+  \item Walk through \(\log_5 125 = 3\) (ask: \(5^{?} = 125\)).
+  \item Walk through \(\log_{1/4} 16 = -2\) (negative exponent --- flag this!).
+  \item Walk through \(\log_3 0\): Is there any power of 3 that gives 0? No -- undefined.
+  \item Walk through \(\log_2 2^8 = 8\) using the identity \(\log_b(b^k) = k\).
+  \item Flag Rules card --- students mark it on student packet.
+  \item 30-sec pause: Turn to partner: rewrite \(\log_4 64\) using the definition.
+  \item Do NOT solve Practice items --- release at minute 15.
+}%
+}{%
+\phaseitems{
+  \item Watch Example 3 silently. Copy the log \(\leftrightarrow\) exp switch.
+  \item Note: \(\log_b 0\) is undefined (no real answer).
+  \item Mark the Rules card on their student packet.
+  \item During pause: rewrite \(\log_4 64\) with partner.
+}%
+}{%
+\phaseitems{
+  \item \(\log_5 125 =\) ? --- what power does 5 need?
+  \item \(\log_{1/4} 16 =\) ? --- why is the answer negative?
+  \item Why is \(\log_3 0\) undefined?
+  \item Use the identity: \(\log_2 2^8 =\) ?
+}%
+}{Project Example 3 only. Release promptly at minute 15.}
+
+\begin{callout}{\IconMic\ TEACHER SCRIPT}{calloutblue}
+1. 'A logarithm asks: what exponent does b need to produce x?'\\
+2. 'log\_5 125: what power of 5 is 125? \(5^1=5\), \(5^2=25\), \(5^3=125\). Answer: 3.'\\
+3. 'log\_\{1/4\} 16: tricky --- \((1/4)^{?} = 16\). \((1/4)^{-2} = 4^2 = 16\). Answer: -2.'\\
+4. 'log\_3 0: no power of 3 ever reaches 0 --- UNDEFINED.'\\
+5. 'log\_2 \(2^8\): identity \(\log_b(b^k) = k\). Answer: 8. No work needed.'\\
+6. 'For today's DOK-3 spine: on the graph of \(y=3^x\), we can read \(\log_3 50\) directly --- because exp and log are inverses, the x-value IS the log.'\\
+7. Release to Explore.
+\end{callout}
+
+\phasetag{TPS + DOK-3 driver}
+\frameworkphaseheader{Explore}{2--3}{25}{%
+\phaseitems{
+  \item 4 laps across 25 min.
+  \item Lap 1 (10 min): \IconStar\ q15 DOK-3 spine. Press pairs: 'Where on the graph is \(y=50\)? What x-value does that correspond to?' Do NOT give the answer.
+  \item After 10 min: pair presentations (5 min). One pair explains: 'Why does reading the x-value on the exp graph give you the log?'
+  \item Lap 2 (4 min): q52. Press: 'Which log rule applies here?'
+  \item Lap 3 (3 min): q53. Press conversion between log and exp forms.
+  \item Lap 4 (3 min): q54. Press asymptote and domain reasoning.
+  \item Then q17: press 'Is \(\log_3(1/27) = -3\) correct? Use the definition to check.'
+  \item 45-min variant: skip q53 and q54. Budget extra time on q15.
+}%
+}{%
+\phaseitems{
+  \item 5 items in order: q15 \(\rightarrow\) q52 \(\rightarrow\) q53 \(\rightarrow\) q54 \(\rightarrow\) q17.
+  \item For q15: use the printed \(y=3^x\) graph. Find \(y=50\), read the x-value.
+  \item Pair-share for q15: explain WHY reading the x-value gives \(\log_3 50\).
+  \item q17: verify or refute \(\log_3(1/27) = -3\) using the definition.
+  \item Justify each step using sentence frame.
+}%
+}{%
+\phaseitems{
+  \item q15: on the graph, where is \(y=50\)? Between which two integer x-values?
+  \item q15: why does the x-value where the graph hits \(y=50\) equal \(\log_3 50\)?
+  \item q15: \(3^3 = 27\), \(3^4 = 81\) --- so \(\log_3 50\) is between \_\_\_ and \_\_\_?
+  \item q17: what does \(\log_3(1/27) = y\) mean in exponential form?
+  \item q52: does the log change or the argument?
+  \item q53: can you rewrite in exponential form first?
+  \item q54: what is the domain of \(\log_b x\)? What is the asymptote?
+}%
+}{Solo teacher: 4 laps. On q15, press the 'why does this work?' reasoning --- that's the Form B Q10/Q11 assessment-critical move.}
+
+\bankitem{Practice \#15 \IconStar\ DOK-3 SPINE (6-3-savvas-q15)}{%
+Higher Order Thinking Use the graph of \(y=3^x\) to estimate the value of \(\log_3 50\). Explain your reasoning.
+
+\textit{[GRAPH / TIKZ figure]}
+
+\qfifteengraphteacher
+}{}
+
+\begin{callout}{\IconStar\ DOK-3 SPINE --- Practice \#15 (exp\(\leftrightarrow\)log inverse via graph)}{calloutpink}
+Prompt: Use the graph of \(y=3^x\) to estimate the value of \(\log_3 50\). Explain your reasoning.\\
+GRAPH: Student packet has \(y=3^x\) graph (\(x \in [-1, 4.5]\), \(y \in [0, 85]\)). Teacher copy: same graph + dashed \(y=50\) line + read-off annotation. [GRAPH PLACEHOLDER --- needs\_cleanup=YES]\\
+Expected reasoning: Find \(y=50\) on graph, read x-value. \(3^3=27\), \(3^4=81\) \(\rightarrow\) answer between 3 and 4, closer to 3.5. Formally \(\log_3 50 \approx 3.56\).\\
+Pair-share: why does this work? Because \(\log_3 50 = x\) means \(3^x = 50\) --- the x-value where the exp graph hits \(y=50\) IS the log.\\
+Form B alignment: Q7 (inverse of exp), Q10 (inverse from graph), Q11 (log VA).
+\end{callout}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): 3.5; \(\log_3 50\) is an expression equivalent to \(3^x=50\), so you need to find the value of x for which \(y=50\).
+}
+
+\bankitem{Practice \#52 (6-3-savvas-q52)}{%
+How long does it take for \$250 to grow to \$600 at 4\% annual percentage rate compounded continuously? Round to the nearest year.
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+(no answer key --- verify before class)
+}
+
+\bankitem{Practice \#53 (6-3-savvas-q53)}{%
+Model with Mathematics Michael invests \$1{,}000 in an account that earns a 4.75\% annual percentage rate compounded continuously. Peter invests \$1{,}200 in an account that earns a 4.25\% annual percentage rate compounded continuously. Which person's account will grow to \$1{,}800 first?
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+(no answer key --- verify before class)
+}
+
+\bankitem{Practice \#54 (6-3-savvas-q54)}{%
+Reason The Richter magnitude of an earthquake is \(R=0.67\log(0.37E)+1.46\), where \(E\) is the energy (in kilowatt-hours) released by the earthquake.
+
+\richterplaceholder
+
+\textbf{a.} What is the magnitude of an earthquake that releases 11{,}800{,}000{,}000 kilowatt-hours of energy? Round to the nearest tenth.
+
+\textbf{b.} How many kilowatt-hours of energy would earthquake have to release in order to be an 8.2 on the Richter scale? Round to the nearest whole number.
+
+\textbf{c.} What number of kilowatt-hours of energy would an earthquake have to release in order for walls to crack? Round to the nearest whole number.
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): a. magnitude 7.9 b. 31,009,857,353 kWh c. 16,705 kWh \textperiodcentered\ IMAGE PLACEHOLDER [photo]: Cracked wall photo with Richter scale overlay numbered 1 through 10 and labels ``Not felt'' at 1 and ``Extreme'' near 9--10; callout text: ``At a richter magnitude of 4 and above, the walls in your house may start to crack.''
+}
+
+\bankitem{Practice \#17 (promoted to core) (6-3-savvas-q17)}{%
+Use Structure A student says that \(\log_3\left(\frac{1}{27}\right)\) simplifies to -3. Is the student correct? Explain.
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+(no answer key --- verify before class)
+}
+
+\begin{callout}{\IconPuzzle\ FORM B ASSESSMENT ALIGNMENT}{calloutblue}
+\textbullet\ q15 (spine) \(\rightarrow\) Form B Q7 (inverse of exp), Q10 (inverse from graph), Q11 (log VA)\\
+\textbullet\ q17 \(\rightarrow\) Form B Q13 (condense argument reasoning)\\
+\textbullet\ q52 \(\rightarrow\) Form B Q9 (log\(\leftrightarrow\)exp definition)\\
+\textbullet\ q53 \(\rightarrow\) Form B Q14 (solve exp with logs, Change of Base)\\
+\textbullet\ q54 \(\rightarrow\) Form B Q9 + Q14 (multi-part log modeling)
+\end{callout}
+
+\phasetag{academic conversation + 6-4 bridge}
+\frameworkphaseheader{Share / Summary}{2}{5}{%
+\phaseitems{
+  \item Cold-call 1 pair to present q15 reasoning using sentence frame.
+  \item Class signals thumbs. Write on board: \(\log_3 50 = x\) means \(3^x = 50\).
+  \item 6-4 bridge: 'Next lesson: logarithmic FUNCTIONS --- graphing \(y = \log_b x\). Today's log \(\leftrightarrow\) exp definition is the foundation.'
+}%
+}{%
+\phaseitems{
+  \item Presenting pair explains: 'I found \(y=50\) on the graph and read \(x \approx 3.56\). This works because \(\log_3 50 = x\) means \(3^x = 50\).'
+  \item Rest of class signals and writes takeaway in margin.
+}%
+}{%
+\phaseitems{
+  \item Summarize: how does the graph of \(y=3^x\) let you find \(\log_3 50\)?
+  \item Why is it that reading x gives you the log? What is the relationship?
+}%
+}{Cold-call a pair that got the estimation --- hold them accountable to naming the exp\(\leftrightarrow\)log inverse relationship explicitly.}
+
+\phasetag{summary recap (not graded)}
+\frameworkphaseheader{Exit Ticket}{1--2}{5}{%
+\phaseitems{
+  \item Collect at door.
+  \item Scan blank 3 (\(e^t = 6.125 \rightarrow \ln\)). Plan re-teach if many students write `log' instead of `ln' or leave the base blank.
+}%
+}{%
+\phaseitems{
+  \item 4 sentence stems, honest.
+}%
+}{%
+\phaseitems{
+  \item Did students correctly state \(\log_b x = y\) means \(b^y = x\)?
+  \item Did students get \(\log_2 32 = 5\) (since \(2^5 = 32\))?
+  \item Did students write \(\ln\) (not \(\log\)) for base e?
+}%
+}{Collect. No grade.}
+
+\begin{callout}{\IconClipboard\ EXIT TICKET --- Student Form}{calloutyellow}
+\(\log_b x = y\) means \_\_\_\_.\\
+\(\log_2 32 =\) \_\_\_\_ because \(2^{?} = 32\).\\
+To solve \(e^t = 6.125\), take the \_\_\_\_ of both sides giving \(t =\) \_\_\_\_.\\
+One biggest thing I learned today: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_.
+\end{callout}
+
+\clearpage
+
+\begin{callout}{\IconClock\ PERIOD A / PERIOD F --- 50-MIN CLASS NOTES}{calloutpink}
+Base lesson is 50 min. If 65 min: use extra 15 min on Explore q15 (richer pair-share on why exp\(\leftrightarrow\)log inversion works) and q53/q54.\\
+45-min Wed F variant: cut q53 + q54 from Explore. NEVER cut q15.\\
+If finished early: hand out Practice \#18 (\(\ln 1000 \neq 3\) --- fast finisher).
+\end{callout}
+
+\begin{callout}{\IconPuzzle\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS}{calloutiep}
+\textbullet\ Provide the Log \(\leftrightarrow\) Exp Rules card as a sticker/cut-out.\\
+\textbullet\ For q15, pre-label the y-axis at y=27, y=50, y=81 so students can locate the target values without visual confusion.\\
+\textbullet\ Accept 'between 3 and 4, closer to 3.5' as full credit for the estimate.
+\end{callout}
+
+\begin{callout}{\IconGlobe\ SUPPORTS FOR ELL STUDENTS}{calloutell}
+\textbullet\ Sentence frames on student page (don't skip).\\
+\textbullet\ Word cards: 'logarithm' = the exponent; 'inverse' = undoes; 'estimate' = approximate value, not exact.\\
+\textbullet\ 'UNDEFINED' = no real number answer (not zero).\\
+\textbullet\ Pair ELL students with English-dominant partners for TPS.
+\end{callout}
+
+\end{document}
