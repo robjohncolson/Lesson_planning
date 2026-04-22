@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>L51 Pacer · Single Period</title>
+<title>L51 Pacer · Period 1 · Single-Period Quick</title>
 <style>
   :root {
     --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
@@ -23,7 +23,20 @@
   }
   header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
   header .meta { font-size: 0.85rem; color: #bbd0e6; }
-  .panel { display: block; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .tabs {
+    display:flex; gap: 4px; background:#fff; padding: 6px 24px;
+    border-bottom: 1px solid #ccc;
+  }
+  .tab {
+    padding: 10px 20px; border: none; background: #dfe9f3;
+    color: var(--navy); font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; border-radius: 6px 6px 0 0;
+    transition: background 0.15s;
+  }
+  .tab:hover { background: #c9dcf0; }
+  .tab.active { background: var(--navy); color: #fff; }
+  .panel { display: none; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .panel.active { display: block; }
   .timer-bar {
     position: sticky; top: 0; z-index: 10;
     background: var(--navy); color: #fff; padding: 10px 16px;
@@ -46,7 +59,6 @@
     background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
     font-weight: 600; border: 2px solid transparent;
   }
-  .phase-chip:hover { background: #c9dcf0; }
   .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
   .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
   .phase-card {
@@ -97,102 +109,134 @@
   .item.dok3 .star { color: var(--accent); }
   .item.assess .star { color: var(--gold); }
 </style>
-<script>
-window.MathJax = {
-  tex: { inlineMath: [['\\(','\\)'], ['$','$']], displayMath: [['\\[','\\]'], ['$$','$$']], processEscapes: true },
-  svg: { fontCache: 'global' },
-  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
-};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
 </head>
 <body>
 
 <header>
   <div>
-    <h1>Lesson 5-1 Pacer</h1>
-    <div class="meta">Single Period · nth Roots + Rational Exponents + DOK-3 Cylinder (Topic 5 Assessment Item 1A Prep)</div>
+    <h1>Lesson 5-1 Pacer &middot; Single-Period Quick &middot; Klimsara-Adapted</h1>
+    <div class="meta">Period 1 &middot; nth Roots + Rational Exponents + Cylinder DOK-3 &middot; Single DOK-3 spine &middot; No Blooket</div>
   </div>
   <div class="meta" id="dateLabel"></div>
 </header>
 
-<main>
-  <div class="panel" id="panel-p1"></div>
-</main>
+<nav class="tabs" id="tabBar">
+  <button class="tab active" data-tab="p1">P1 &middot; nth Roots + Rational Exponents ⭐</button>
+</nav>
+
+<main id="panels"></main>
 
 <script>
 const PACER = {
   p1: {
-    label: "Single Period · nth Roots + Rational Exponents + DOK-3 · 58 min",
+    label: "Period 1 · nth Roots + Rational Exponents + Cylinder DOK-3 · 55 min base (65 min A & F). 45-min Wed F variant: cut #37 + #48, never cut #50.",
     total_min: 58,
+    short_note: "Single-period quick. TWO examples modeled in Launch (content density requires it — deviation from standard one-example rule). Release at minute 18. DOK-3 capstone: Practice #50 (cylinder) — same algebraic move as Topic 5 Assessment Item 1A. Never cut #50.",
     phases: [
-      { id:"donow", title:"Do Now — Explore & Reason: y=x² graph",
-        fw:"exploration", dok:"3", min:5,
-        items:[{qid:"5-1-savvas-model-discuss-lesson-5-1-launch", label:"Explore & Reason: y=x² graph"}],
+      { id:"donow", title:"Do Now — Explore & Reason: y = x²",
+        fw:"bridge to nth roots", dok:"1-2", min:5,
+        items:[{qid:"5-1-savvas-explore-reason-y-x2-graph", label:"Do Now — Explore & Reason: y = x² graph (Parts A, B, C)"}],
         teacher:[
-          "Roots as input values that produce a given output",
-          "Bridge to ½ power = √"
-        ],
-        bridge:"What x-value gives y = 9? y = 2? y = −1? → even-n roots of negatives are undefined in \\(\\mathbb{R}\\) → connects to \\(\\tfrac{1}{2}\\) power.",
-      },
-      { id:"launch", title:"Launch — Example 1 + Example 3",
-        fw:"teacher models", dok:"2", min:12,
-        items:[
-          {qid:"5-1-savvas-example-1-lesson-5-1", label:"Example 1: evaluate nth roots + rational exponents"},
-          {qid:"5-1-savvas-example-3-lesson-5-1", label:"Example 3: simplify + rationalize nth-root denominators"},
-        ],
-        teacher:[
-          "Two examples because this is a compressed lesson — both needed for bank/assessment coverage"
+          "Hand out at door.",
+          "Circulate silently 3 min — no hints.",
+          "Cold-call 1 student for Part A(e): ‘If y = 4, what are ALL x values?’ → ±2.",
+          "Bridge to Launch: ‘Finding x when y is given — that’s a ROOT. Today we generalize to nth roots.’"
         ],
         rules:[
-          "\\(x^{1/n} = \\sqrt[n]{x}\\).",
-          "\\(x^{m/n} = (\\sqrt[n]{x})^m\\).",
-          "Rationalize \\(\\sqrt[n]{x}\\) denom: \\(\\times \\sqrt[n]{x^{n-1}}\\).",
-          "Even n: negative radicand undefined in \\(\\mathbb{R}\\)."
+          "Part A: find x or y so the point is on y = x²",
+          "Part B: write instructions for approximating √13 using the graph",
+          "Part C: draw y = x³ and approximate ∛5, ∛(−5), ∛8"
+        ],
+        answer:"A(a) 4, A(b) 9, A(c) 9, A(d) 25, A(e) x = ±2, A(f) no real x (negative radicand, even index), A(g) x = ±√7 ≈ ±2.65, A(h) x = ±√5 ≈ ±2.24. Part B: locate 13 on y-axis, move horizontally to y = x², drop to x-axis → √13 ≈ 3.61. Part C: ∛5 ≈ 1.71, ∛(−5) ≈ −1.71, ∛8 = 2.",
+      },
+      { id:"launch", title:"Launch — Ex 1 + Ex 3 (nth roots + rational exponents)",
+        fw:"teacher models", dok:"2", min:13,
+        items:[],
+        teacher:[
+          "⚠️ COMPRESSED — model BOTH Example 1 AND Example 3 back-to-back without stopping.",
+          "Example 1 (~6 min): index n, principal root, even-index domain restriction. ‘Even n → radicand ≥ 0 in Reals.’",
+          "Transition aloud: ‘Now the same concept in rational-exponent form.’",
+          "Example 3 (~6 min): x^(m/n) ↔ (ⁿ√x)^m. Think aloud the conversion. Flag Rules card — students copy into margin.",
+          "30-sec partner pause: ‘Rewrite your answer in the other notation.’",
+          "Do NOT solve Try-Its or Practice items. Release at minute 18.",
+          "Teacher script: (1) ‘Watch me find a real nth root. The index tells me which root.’ (2) ‘Step 1: identify index n. Even index → radicand ≥ 0 in Reals.’ (3) ‘Step 2: find the principal (non-negative) root.’ (4) ‘Now Example 3 — same idea, rational-exponent form.’ (5) ‘x^(m/n) = (ⁿ√x)^m. I can go radical → exponent or exponent → radical — pick the easier path.’ (6) ‘Today’s DOK-3 task uses this to derive a radius from a volume formula, then rationalize. That’s the exact move on your Topic 5 Assessment.’"
+        ],
+        rules:[
+          "1. x^(1/n) = ⁿ√x  (principal nth root)",
+          "2. x^(m/n) = (ⁿ√x)^m = ⁿ√(x^m)",
+          "3. To rationalize an nth-root denominator: multiply num/denom by ⁿ√(x^(n−1))",
+          "4. Even index → radicand ≥ 0 in Reals; odd index → any real radicand",
+          "⚠️ COMMON ERROR: confusing index and exponent — the index n is OUTSIDE/ABOVE the radical"
         ],
       },
-      { id:"explore", title:"Explore — Think-Pair-Share (TI 1, TI 3, #28, #30, #37, #48, ⭐ #50)",
-        fw:"student work", dok:"2-3", min:33,
+      { id:"explore", title:"Explore — Think-Pair-Share (7 items, 32 min)",
+        fw:"student work + DOK-3", dok:"1-3", min:32,
         items:[
-          {qid:"5-1-savvas-try-it-1-lesson-5-1", label:"TI 1: evaluate nth roots / rational-exponent form"},
-          {qid:"5-1-savvas-try-it-3-lesson-5-1", label:"TI 3: simplify + rationalize nth-root denominator"},
-          {qid:"5-1-savvas-q28", label:"#28 evaluate/simplify — \\(x^{1/n} = \\sqrt[n]{x}\\)"},
-          {qid:"5-1-savvas-q30", label:"#30 simplify rational exponent expression"},
-          {qid:"5-1-savvas-q37", label:"#37 rationalize nth-root denominator"},
-          {qid:"5-1-savvas-q48", label:"#48 mixed: evaluate + simplify; even-n rule"},
-          {qid:"5-1-savvas-q50", label:"⭐ DOK-3 CAPSTONE: Cylinder \\(V=\\pi r^2 h\\), \\(h=2r\\) → derive \\(r\\) from \\(V\\), find lateral SA. Topic 5 Assessment Item 1A rehearsal.", dok3:true, note:"Plan ~15 min. DO NOT give h=2r substitution hint before 20 min in."},
+          {qid:"5-1-savvas-try-it-1", label:"Try It 1 — Real nth roots (4 min)"},
+          {qid:"5-1-savvas-try-it-3", label:"Try It 3 — Evaluate rational exponents (4 min)"},
+          {qid:"5-1-savvas-q28",      label:"Practice #28 — nth roots with variables (3 min)"},
+          {qid:"5-1-savvas-q30",      label:"Practice #30 — Rational exponent form (3 min)"},
+          {qid:"5-1-savvas-q37",      label:"Practice #37 — Simplify: mixed radical/rational (4 min)"},
+          {qid:"5-1-savvas-q48",      label:"Practice #48 — Multi-step rational exponent (4 min)"},
+          {qid:"5-1-savvas-q50",      label:"Practice #50 ⭐ DOK-3 CYLINDER MODELING — Topic 5 Assessment Item 1A prep (10 min)", dok3:true, note:"Part A: lateral surface area. Part B: largest number of containers stackable in 20 ft cargo hold. Students set up V = πr²h with h = 2r, solve for r in rational-exponent form, rationalize. NEVER cut this item."},
         ],
         teacher:[
-          "q50 is the DOK-3 capstone — Topic 5 Assessment Item 1A rehearsal. Derive \\(r\\) from \\(V=\\pi r^2 h\\) with \\(h=2r\\), then use in lateral surface area formula."
+          "5 laps across 32 min.",
+          "Lap 1 (4 min): Try-It 1 — press index and principal root on each part.",
+          "Lap 2 (4 min): Try-It 3 — watch for notation confusion (m and n swapped).",
+          "Lap 3 (3+3 min): #28 + #30 — press conversion between radical and rational-exponent form.",
+          "Lap 4 (4+4 min): #37 + #48 — multi-step; confirm form choice before computing.",
+          "Lap 5 (10 min): ⭐ #50 Cylinder — press the h = 2r substitution AND the rationalization step. Do NOT give answers — pairs present at Share.",
+          "45-min Wed F variant: cut #37 + #48. Never cut #50.",
+          "CHAIN CALLBACK before #50: ‘Storage Box in April. Wavelength-and-frequency in May. Today: milk cylinder. In all three — physical object, constraint, hidden dimension. What’s new: the radius comes out under a cube root. We need rational exponents to finish the same move we’ve been doing all year.’"
         ],
-        warn:"Students will forget h=2r substitution. Redirect with 'what does the problem TELL us about height and diameter?'",
+        answer:"Try It 1: a. ±3 (real fourth roots of 81); b. 4 (real cube root of 64). Try It 3: a. −8 (−(16^(3/4)) = −(⁴√16)³ = −2³); b. 3.5^(4/5) ≈ 2.72. #28: ±5 (real square roots of 25). #30: 729^(1/6). #37: 3a⁴b³ (⁶√(729a²⁴b¹⁸) = 3a⁴b³). #48: a. Yes; b. Yes; c. No; d. No; e. No. #50 Part A: 36π ft² (V = 2πr³ = 169.65 → r ≈ 3 ft, h = 6 ft, S = 2πrh = 4πr² = 36π). #50 Part B: 3 containers (20 ÷ 6 = 3 whole).",
+        warn:"45-min Wed F: cut #37 and #48 from Explore. NEVER cut #50. Rationalization key for #50: multiply by ∛((2π)²) in numerator and denominator to clear the cube-root denominator. Key criteria on #50: (1) correct substitution h = 2r, (2) rational-exponent form for r, (3) rationalization shown.",
       },
-      { id:"share", title:"Share / Summary — DOK-3 Reveal",
+      { id:"share", title:"Share / Summary + Topic 5 Bridge",
         fw:"academic conversation", dok:"2", min:5,
         items:[],
         teacher:[
-          "Cold-call two students to narrate their q50 solution path",
-          "Record key step: substitute \\(h=2r\\) into \\(V=\\pi r^2 h\\) → \\(V=2\\pi r^3\\) → \\(r = \\left(\\dfrac{V}{2\\pi}\\right)^{1/3}\\)"
+          "Cold-call 1 pair (preferably one that struggled on #50) to present their cylinder solution.",
+          "Pair reads: substitution h = 2r → V = 2πr³ → r = (V/(2π))^(1/3). Rationalization step named.",
+          "Write r = (V/(2π))^(1/3) on board.",
+          "Class signals thumbs up / sideways.",
+          "Topic 5 bridge: ‘This is the exact move on your Topic 5 Assessment Item 1A. You have now rehearsed it.’"
         ],
-        answer:"q50: \\(r = \\left(\\dfrac{V}{2\\pi}\\right)^{1/3}\\). Lateral SA \\(= 4\\pi r^2\\). For \\(V=169.65\\) ft³: \\(r \\approx 3\\) ft, SA \\(\\approx 113\\) ft².",
+        rules:[
+          "SUMMARY: x^(m/n) = (ⁿ√x)^m = ⁿ√(x^m) — choose the easier form",
+          "Cylinder move: V = πr²h + h = 2r → V = 2πr³ → r = (V/(2π))^(1/3)",
+          "Rationalize: multiply by ∛((2π)²) to clear the cube-root denominator"
+        ],
+        bridge:"Topic 5 Assessment Item 1A: same structure — isolate a variable, convert to rational-exponent form, rationalize. Today’s #50 IS that rehearsal.",
       },
-      { id:"exit", title:"Exit Ticket — SAT/ACT Reinforce",
+      { id:"exit", title:"Exit Ticket — Summary Recap",
         fw:"not graded", dok:"1-2", min:3,
-        items:[{qid:"5-1-savvas-q49", label:"#49 SAT/ACT rational-exponent item (reinforce)"}],
+        items:[],
         teacher:[
-          "Collect Summary Exit box",
-          "Scan q50 responses tonight — if students missed h=2r substitution, add a 3-min recap before next Topic 5 item"
+          "Collect at door.",
+          "Scan stem 2 (rationalize). Plan re-teach if many students blank on the ⁿ√(x^(n−1)) multiplier.",
+          "Scan stem 3 for big-picture takeaways to read aloud next class."
+        ],
+        rules:[
+          "x^(m/n) is the same as ___ in radical form.",
+          "To rationalize a cube-root denominator I ___.",
+          "One biggest thing I learned today: ___."
         ],
       },
     ]
   },
 };
 
+const panels = document.getElementById("panels");
+const tabBar = document.getElementById("tabBar");
 document.getElementById("dateLabel").textContent = new Date().toDateString();
 
 function renderPanel(tabId) {
   const data = PACER[tabId];
-  const panel = document.getElementById("panel-" + tabId);
+  const panel = document.createElement("div");
+  panel.className = "panel";
+  panel.id = "panel-" + tabId;
   panel.innerHTML = `
     <div class="timer-bar">
       <div>
@@ -205,9 +249,11 @@ function renderPanel(tabId) {
       </div>
     </div>
     <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    ${data.short_note ? `<div style="background:#fffbea; border-left:4px solid var(--gold); padding:10px 14px; border-radius:6px; font-size:0.9rem; margin:12px 0;">⭐ ${data.short_note}</div>` : ""}
     <div class="phase-list" id="chips-${tabId}"></div>
     <div id="phase-card-${tabId}"></div>
   `;
+  panels.appendChild(panel);
   const chipBar = panel.querySelector(`#chips-${tabId}`);
   data.phases.forEach((ph, idx) => {
     const chip = document.createElement("button");
@@ -307,7 +353,16 @@ function stopPhase(tabId) {
   timerEl.style.color = "#ffffff";
 }
 
-renderPanel("p1");
+Object.keys(PACER).forEach(renderPanel);
+document.querySelector('.panel').classList.add('active');
+
+tabBar.addEventListener("click", e => {
+  if (!e.target.matches(".tab")) return;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  e.target.classList.add("active");
+  document.getElementById("panel-" + e.target.dataset.tab).classList.add("active");
+});
 </script>
 
 </body>

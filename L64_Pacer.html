@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>L64 Pacer · Single Period</title>
+<title>L64 Pacer · Period 1 (Single-Period Quick)</title>
 <style>
   :root {
     --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
@@ -23,7 +23,20 @@
   }
   header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
   header .meta { font-size: 0.85rem; color: #bbd0e6; }
-  .panel { display: block; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .tabs {
+    display:flex; gap: 4px; background:#fff; padding: 6px 24px;
+    border-bottom: 1px solid #ccc;
+  }
+  .tab {
+    padding: 10px 20px; border: none; background: #dfe9f3;
+    color: var(--navy); font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; border-radius: 6px 6px 0 0;
+    transition: background 0.15s;
+  }
+  .tab:hover { background: #c9dcf0; }
+  .tab.active { background: var(--navy); color: #fff; }
+  .panel { display: none; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .panel.active { display: block; }
   .timer-bar {
     position: sticky; top: 0; z-index: 10;
     background: var(--navy); color: #fff; padding: 10px 16px;
@@ -46,7 +59,6 @@
     background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
     font-weight: 600; border: 2px solid transparent;
   }
-  .phase-chip:hover { background: #c9dcf0; }
   .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
   .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
   .phase-card {
@@ -97,117 +109,134 @@
   .item.dok3 .star { color: var(--accent); }
   .item.assess .star { color: var(--gold); }
 </style>
-<script>
-window.MathJax = {
-  tex: { inlineMath: [['\\(','\\)'], ['$','$']], displayMath: [['\\[','\\]'], ['$$','$$']], processEscapes: true },
-  svg: { fontCache: 'global' },
-  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
-};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
 </head>
 <body>
 
 <header>
   <div>
-    <h1>Lesson 6-4 Pacer</h1>
-    <div class="meta">Single Period · Logarithmic Functions + Inverses + DOK-3 Sales Revenue (Item 28)</div>
+    <h1>Lesson 6-4 Pacer · Single-Period Quick</h1>
+    <div class="meta">Period 1 · Logarithmic Functions + DOK-3 Sales Revenue Inverse · No Blooket</div>
   </div>
   <div class="meta" id="dateLabel"></div>
 </header>
 
-<main>
-  <div class="panel" id="panel-p1"></div>
-</main>
+<nav class="tabs" id="tabBar">
+  <button class="tab active" data-tab="p1">P1 · Log Functions + DOK-3 Sales Revenue ⭐</button>
+</nav>
+
+<main id="panels"></main>
 
 <script>
 const PACER = {
   p1: {
-    label: "Single Period · Log Functions + Inverses + DOK-3 · 50 min (45-min Wed F: skip q9)",
+    label: "Period 1 · Single-Period Quick · Logarithmic Functions + DOK-3 Sales Revenue Inverse · 50 min base (45-min Wed F: drop q9)",
     total_min: 50,
+    short_note: "DOK-3 driver: Practice #28 (R = 12log(a+1)+25 — Sales Revenue Inverse). Students find the inverse function and judge which form is easier for specific R values. NEVER cut #28. 45-min Wed F: cut q9 only.",
     phases: [
-      { id:"donow", title:"Do Now — 3 Items: q31, q5, q32",
-        fw:"bridge", dok:"1-2", min:7,
+      { id:"donow", title:"Do Now — Log Translations Bridge",
+        fw:"bridge to log inverses launch", dok:"1-2", min:7,
         items:[
-          {qid:"6-4-savvas-q31", label:"q31: translation identification multi-select for h(x)=ln(x+2)−1"},
-          {qid:"6-4-savvas-q5",  label:"q5: graph y=log₄ x; state domain/range/VA/x-int/end behavior"},
-          {qid:"6-4-savvas-q32", label:"q32: SAT/ACT — inverse of f(x)=5^(x+1)"},
+          {qid:"6-4-savvas-q31", label:"Do Now 1 — Translation identification: h(x) = ln(x+2)−1"},
+          {qid:"6-4-savvas-q5",  label:"Do Now 2 — Graph y = log₄ x; state key features"},
+          {qid:"6-4-savvas-q32", label:"Do Now 3 — SAT/ACT: inverse of f(x) = 5^(x+1)"},
         ],
         teacher:[
-          "Hand out at door. Circulate 4 min.",
-          "Cold-call on q31: 'which transformation shifts the VA? From x=0 to x=−2?'",
-          "Pull sheets before Launch."
-        ],
-        bridge:"q31: +2 inside → left 2, VA \\(x=0\\)→\\(x=-2\\). q5: \\(\\log_4 x\\) domain \\(x>0\\), VA \\(x=0\\), x-int \\((1,0)\\), through \\((4,1)\\). q32: swap → \\(\\log_5 x = y+1\\) → \\(y=\\log_5 x - 1\\).",
-      },
-      { id:"launch", title:"Launch — Ex 3B: Inverse of g(x)=log₇(x+5) + Composition Check",
-        fw:"teacher models", dok:"2", min:8,
-        items:[
-          {qid:"6-4-savvas-example-3-lesson-6-4", label:"Example 3B: inverse of g(x)=log₇(x+5); verify with composition"},
-        ],
-        teacher:[
-          "Model Ex 3B: swap \\(x\\leftrightarrow y\\) → \\(x=\\log_7(y+5)\\) → \\(7^x=y+5\\) → \\(g^{-1}(x)=7^x-5\\)",
-          "Composition check: \\(g(g^{-1}(x))=\\log_7(7^x-5+5)=\\log_7(7^x)=x\\). ✔",
-          "90-sec contrast: Ex 3A (inverting exponential) → same swap-and-solve, direction reversed",
-          "Flag Rules card — students copy VA rule + inverse rules",
-          "Release to Explore at minute 15"
+          "Hand out at door.",
+          "Circulate 4 min.",
+          "Cold-call on q31: ask which transformation shifts the VA.",
+          "Pull sheets at minute 7."
         ],
         rules:[
-          "\\(\\log_b 1 = 0\\);  \\(\\log_b b = 1\\).",
-          "\\(y = \\log_b x\\):  Domain \\(x>0\\),  VA \\(x=0\\),  x-int \\((1,0)\\),  passes \\((b,1)\\).",
-          "\\(y = \\log_b(x-h)+k\\):  VA \\(x=h\\),  Domain \\(x>h\\),  point \\((b+h,\\, 1+k)\\).",
-          "Inverse: \\(y=a \\cdot b^x \\Rightarrow y=\\log_b(x/a)\\).",
-          "Inverse: \\(y=\\log_b(x-h)+k \\Rightarrow y=b^{x-k}+h\\).",
-          "Composition check: \\(f(f^{-1}(x))=x\\)."
+          "q31: translation multi-select for h(x) = ln(x+2)−1",
+          "q5: graph y = log₄ x with all key features",
+          "q32: find inverse of f(x) = 5^(x+1) (SAT/ACT)"
         ],
+        answer:"q31: translated 2 units to the left; translated 1 unit downward; vertical asymptote shifts 2 units to the left. q5: Domain x > 0; range all reals; x-intercept 1; asymptote y-axis; end behavior: as x→0, y→−∞; as x→∞, y→∞. q32: (B) f⁻¹(x) = log₅ x − 1. Swap x and y: x = 5^(y+1), so y+1 = log₅ x and y = log₅ x − 1.",
+        warn:"Solo teacher: circulate silently. No hints on q32.",
       },
-      { id:"explore", title:"Explore — TPS: ⭐ q28, q21, q24, q13, q9",
-        fw:"student work", dok:"2-3", min:25,
-        items:[
-          {qid:"6-4-savvas-q28", label:"⭐ DOK-3: Sales Revenue \\(R=12\\cdot\\log(a+1)+25\\) — find inverse, judge which form is easier for specific R values.", dok3:true, note:"Plan ~10 min. DO NOT give the inverse formula. Redirect: 'what does it mean to undo R?'"},
-          {qid:"6-4-savvas-q21", label:"q21: inverse of 5^(x−3)  [Form B Q7 rehearsal]"},
-          {qid:"6-4-savvas-q24", label:"q24: inverse of log₂(8x), token drag  [Form B Q12 rehearsal]"},
-          {qid:"6-4-savvas-q13", label:"q13: asymptote of translated log from graph  [Form B Q11 rehearsal]"},
-          {qid:"6-4-savvas-q9",  label:"q9: are graphs inverses? inverse from graph  [Form B Q9/Q10]  ⚠️ 45-min Wed F: SKIP"},
-        ],
-        teacher:[
-          "Lap 1 (10 min): ⭐ q28 DOK-3. Press: 'how do you undo +25? Then ÷12? Then log?'",
-          "Lap 2 (4 min): q21. Press notation — \\(\\log_5\\) undoes \\(5^x\\).",
-          "Lap 3 (4 min): q24. Press domain of inverse.",
-          "Lap 4 (4 min): q13. Find VA from shifted graph.",
-          "Lap 5 (3 min): q9. Key test: reflection symmetry over y=x."
-        ],
-        warn:"45-min Wed F: skip q9. Never cut q28. Students may rush the judgment step on q28 — require them to write which form is easier AND cite a specific computation.",
-      },
-      { id:"share", title:"Share / Summary — DOK-3 Reveal + 6-5 Bridge",
-        fw:"academic conversation", dok:"2", min:5,
+      { id:"launch", title:"Launch — Inverse of a Log Function (Ex 3B modeled + 90-sec Ex 3A contrast)",
+        fw:"teacher models", dok:"2", min:8,
         items:[],
         teacher:[
-          "Cold-call 1 pair: present q28 inverse formula and form-choice justification",
-          "Write on board: \\(a = 10^{(R-25)/12} - 1\\)",
-          "\\(R=49 \\Rightarrow a=99\\).  \\(R=61 \\Rightarrow a=999\\)."
+          "Project Ex 3B. Think aloud: g(x) = log₇(x+5). Step 1: swap x and y. Step 2: write 7^x = y+5. Step 3: solve → y = 7^x − 5.",
+          "'Now verify with composition: g(g⁻¹(x)) = log₇((7^x−5)+5) = log₇(7^x) = x. ✓'",
+          "90-sec contrast: Ex 3A (inverse of exponential, e.g. y = 3·5^x). 'Swap x and y → x = 3·5^y → x/3 = 5^y → y = log₅(x/3). Same swap-and-solve.'",
+          "Flag the Rules card — students copy VA shift rule and inverse rules into margin.",
+          "30-sec pause: partner repeats the inverse steps in their own words.",
+          "Do NOT solve Explore items — release at minute 15."
         ],
-        answer:"q28: \\(a = 10^{(R-25)/12} - 1\\). For \\(R=49\\): \\(a=99\\). For \\(R=61\\): \\(a=999\\). Inverse form easier when R is given (direct substitution). Original form easier for checking.",
-        bridge:"→ 6-5: log properties (product, quotient, power rules) will let you expand/condense these expressions and make equation-solving faster.",
+        rules:[
+          "LOG FUNCTION KEY FEATURES (y = log_b x, b > 0, b ≠ 1):",
+          "  Domain: x > 0 | Range: all reals | VA: x = 0 | x-intercept: (1, 0) | passes through (b, 1)",
+          "TRANSLATION (y = log_b(x−h) + k):",
+          "  VA shifts to x = h | Domain: x > h | Point: (b+h, 1+k)",
+          "INVERSE RULES:",
+          "  y = a·b^x  ⟹  inverse: y = log_b(x/a)",
+          "  y = log_b(x−h)+k  ⟹  inverse: y = b^(x−k) + h",
+          "COMPOSITION CHECK: f(f⁻¹(x)) = x"
+        ],
+        answer:"Ex 3B: g⁻¹(x) = 7^x − 5. Composition: g(g⁻¹(x)) = log₇(7^x−5+5) = log₇ 7^x = x ✓. Ex 3A contrast: inverse of f(x) = 10^(x+1) is f⁻¹(x) = log x − 1.",
       },
-      { id:"exit", title:"Exit Ticket — Inverse of f(x)=3·log₅(x−2)+1 + Asymptotes",
+      { id:"explore", title:"Explore — Think-Pair-Share: ⭐ q28 → q21 → q24 → q13 → q9",
+        fw:"TPS + DOK-3 driver", dok:"2-3", min:25,
+        items:[
+          {qid:"6-4-savvas-q28", label:"Practice #28 ⭐ DOK-3 SALES REVENUE INVERSE — Form B model-then-invert rehearsal", dok3:true, note:"R = 12log(a+1)+25. Students: (a) find inverse a = 10^((R−25)/12) − 1, (b) judge which form is easier for R=49 and R=61. Plan 10 min. NEVER cut."},
+          {qid:"6-4-savvas-q21", label:"Practice #21 — Inverse of 5^(x−3) [Form B Q7 rehearsal]"},
+          {qid:"6-4-savvas-q24", label:"Practice #24 — Inverse of log₂(8x), token drag [Form B Q12 rehearsal]"},
+          {qid:"6-4-savvas-q13", label:"Practice #13 — Asymptote of translated log from graph [Form B Q11 rehearsal]"},
+          {qid:"6-4-savvas-q9",  label:"Practice #9 — Are graphs inverses? Inverse from graph [Form B Q9/Q10 rehearsal]"},
+        ],
+        teacher:[
+          "4 laps across 25 min.",
+          "Lap 1 (10 min): ⭐ q28 DOK-3. Press pairs on inverse setup and form comparison. DO NOT give the inverse formula — redirect with 'what does it mean to undo R?'",
+          "Lap 2 (4 min): q21. Press notation: what is the inverse of 5^(x−3)?",
+          "Lap 3 (4 min): q24. Press: inverse of log₂(8x) — watch for domain.",
+          "Lap 4 (4 min): q13. Press: how does the horizontal shift move the VA?",
+          "Lap 5 (3 min): q9. Are graphs inverses? Key test: reflective symmetry over y=x.",
+          "45-min Wed F: skip q9."
+        ],
+        answer:"q28 (DOK-3): Inverse is a = 10^((R−25)/12) − 1. It is easier to use the inverse to find a when R is known (direct substitution vs. solving a log equation). For R=49: a = 10^(24/12)−1 = 10²−1 = 99. For R=61: a = 10^(36/12)−1 = 10³−1 = 999. q21: f⁻¹(x) = log₅ x + 3. q24: f⁻¹(x) = 2^x / 8. q13: g(x) = log₃(x−2)+1 (VA at x=2). q9: No; the x-intercept of the blue function (log₂ x) is not equal to the y-intercept of the red function (2^x+1, which has y-intercept 2, not 1).",
+        warn:"Solo teacher: 4 laps. On q28, press the judgment step (which form and why) — that is the DOK-3 performance criterion.",
+      },
+      { id:"share", title:"Share / Summary + 6-5 Bridge",
+        fw:"academic conversation + 6-5 bridge", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Cold-call 1 pair to present q28 solution and form-choice justification.",
+          "Class signals thumbs. Write a = 10^((R−25)/12) − 1 on board.",
+          "6-5 bridge: 'Log properties (product/quotient/power rules) will let you expand and condense log expressions — making inverses and equations faster.'"
+        ],
+        bridge:"In 6-5 you will learn log properties (product, quotient, power rules). Those properties let you expand or condense log expressions — which makes solving equations like the one in #28 much faster.",
+      },
+      { id:"exit", title:"Exit Ticket — Inverse + Asymptote",
         fw:"not graded", dok:"1-2", min:5,
         items:[],
         teacher:[
           "Collect at door.",
-          "Scan: (1) swap x/y done correctly? (2) solved to 5^((x−1)/3)+2? (3) stated VA=2 and HA=2?"
+          "Scan: (1) Did students swap x/y correctly? (2) Did students solve for y in exponential form? (3) Did they state VA of f as x=2 and HA of f⁻¹ as y=2?",
+          "No grade. Use responses to plan any re-teach before 6-5."
         ],
-        answer:"\\(f^{-1}(x) = 5^{(x-1)/3} + 2\\).  VA of \\(f\\): \\(x=2\\).  HA of \\(f^{-1}\\): \\(y=2\\).",
+        rules:[
+          "Find the inverse of f(x) = 3·log₅(x − 2) + 1.",
+          "State the vertical asymptote of f.  VA: x = ___",
+          "State the horizontal asymptote of f⁻¹.  HA: y = ___",
+          "One biggest thing I learned today: ___"
+        ],
+        answer:"f⁻¹(x) = 5^((x−1)/3) + 2. VA of f: x = 2. HA of f⁻¹: y = 2 (the VA of f becomes the HA of the inverse).",
       },
     ]
   },
 };
 
+const panels = document.getElementById("panels");
+const tabBar = document.getElementById("tabBar");
 document.getElementById("dateLabel").textContent = new Date().toDateString();
 
 function renderPanel(tabId) {
   const data = PACER[tabId];
-  const panel = document.getElementById("panel-" + tabId);
+  const panel = document.createElement("div");
+  panel.className = "panel";
+  panel.id = "panel-" + tabId;
   panel.innerHTML = `
     <div class="timer-bar">
       <div>
@@ -220,9 +249,11 @@ function renderPanel(tabId) {
       </div>
     </div>
     <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    ${data.short_note ? `<div style="background:#fffbea; border-left:4px solid var(--gold); padding:10px 14px; border-radius:6px; font-size:0.9rem; margin:12px 0;">⭐ ${data.short_note}</div>` : ""}
     <div class="phase-list" id="chips-${tabId}"></div>
     <div id="phase-card-${tabId}"></div>
   `;
+  panels.appendChild(panel);
   const chipBar = panel.querySelector(`#chips-${tabId}`);
   data.phases.forEach((ph, idx) => {
     const chip = document.createElement("button");
@@ -322,7 +353,16 @@ function stopPhase(tabId) {
   timerEl.style.color = "#ffffff";
 }
 
-renderPanel("p1");
+Object.keys(PACER).forEach(renderPanel);
+document.querySelector('.panel').classList.add('active');
+
+tabBar.addEventListener("click", e => {
+  if (!e.target.matches(".tab")) return;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  e.target.classList.add("active");
+  document.getElementById("panel-" + e.target.dataset.tab).classList.add("active");
+});
 </script>
 
 </body>

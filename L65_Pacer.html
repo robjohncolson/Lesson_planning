@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>L65 Pacer · Single Period</title>
+<title>L65 Pacer · Period 1 · Single-Period Quick</title>
 <style>
   :root {
     --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
@@ -23,7 +23,20 @@
   }
   header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
   header .meta { font-size: 0.85rem; color: #bbd0e6; }
-  .panel { display: block; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .tabs {
+    display:flex; gap: 4px; background:#fff; padding: 6px 24px;
+    border-bottom: 1px solid #ccc;
+  }
+  .tab {
+    padding: 10px 20px; border: none; background: #dfe9f3;
+    color: var(--navy); font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; border-radius: 6px 6px 0 0;
+    transition: background 0.15s;
+  }
+  .tab:hover { background: #c9dcf0; }
+  .tab.active { background: var(--navy); color: #fff; }
+  .panel { display: none; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .panel.active { display: block; }
   .timer-bar {
     position: sticky; top: 0; z-index: 10;
     background: var(--navy); color: #fff; padding: 10px 16px;
@@ -46,7 +59,6 @@
     background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
     font-weight: 600; border: 2px solid transparent;
   }
-  .phase-chip:hover { background: #c9dcf0; }
   .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
   .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
   .phase-card {
@@ -97,117 +109,149 @@
   .item.dok3 .star { color: var(--accent); }
   .item.assess .star { color: var(--gold); }
 </style>
-<script>
-window.MathJax = {
-  tex: { inlineMath: [['\\(','\\)'], ['$','$']], displayMath: [['\\[','\\]'], ['$$','$$']], processEscapes: true },
-  svg: { fontCache: 'global' },
-  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
-};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
 </head>
 <body>
 
 <header>
   <div>
-    <h1>Lesson 6-5 Pacer</h1>
-    <div class="meta">Single Period · Properties of Logarithms + DOK-3 Power Property Proof &amp; Richter Generalization</div>
+    <h1>Lesson 6-5 Pacer &middot; Single-Period Quick</h1>
+    <div class="meta">P1 &middot; Properties of Logarithms + DOK-3 Power Property Proof &amp; Richter Generalization &middot; No Blooket</div>
   </div>
   <div class="meta" id="dateLabel"></div>
 </header>
 
-<main>
-  <div class="panel" id="panel-p1"></div>
-</main>
+<nav class="tabs" id="tabBar">
+  <button class="tab active" data-tab="p1">P1 &middot; Log Properties + DOK-3 Proof &amp; Richter ⭐⭐</button>
+</nav>
+
+<main id="panels"></main>
 
 <script>
 const PACER = {
   p1: {
-    label: "Single Period · Properties of Logarithms + DOK-3 Paired Capstone · 50 min (45-min Wed-F: skip q3)",
+    label: "Period 1 · Single-Period Quick · 50 min (45-min Wed-F variant: skip q3 in Explore)",
     total_min: 50,
+    short_note: "DOK-3 PAIRED DRIVER: #13 Power Property Proof + #40 Part C Richter Generalization — both are Form B DOK-3 rehearsal items. NEVER cut these. SCOPE NOTE: Form B Q8 and Q15 (geometric series) are NOT on the Topic 6 assessment and are NOT covered here.",
     phases: [
       { id:"donow", title:"Do Now — Error Analysis + Expand + Condense",
         fw:"bridge to launch", dok:"1-2", min:7,
         items:[
-          {qid:"6-5-savvas-q12", label:"#12: Change-of-base error analysis — find the mistake"},
-          {qid:"6-5-savvas-q4",  label:"#4: Expand log₆(49/5) with Quotient Property"},
-          {qid:"6-5-savvas-q5",  label:"#5: Condense 5 ln s + 6 ln t into single log"},
+          {qid:"6-5-savvas-q12", label:"Do Now #1 — Error Analysis: Change of Base (log₂ 9 ≈ ?)"},
+          {qid:"6-5-savvas-q4",  label:"Do Now #2 — Expand: log₆(49/5) with Quotient Property"},
+          {qid:"6-5-savvas-q5",  label:"Do Now #3 — Condense: 5 ln s + 6 ln t into single logarithm"},
         ],
         teacher:[
-          "Cold-call q12: 'Where is the error? Which rule did the student violate?'",
-          "q4: Quotient Property — log of a quotient = difference of logs",
-          "q5: Power Property first (coefficients → exponents), then Product Property to combine (\\(5\\ln s + 6\\ln t = \\ln s^5 t^6\\))",
-        ],
-        bridge:"Change of base denominator must match: \\(\\log_b x = (\\log x)/(\\log b)\\). q5 order: Power → Product.",
-      },
-      { id:"launch", title:"Launch — Example 3: Write as a Single Logarithm",
-        fw:"teacher models", dok:"1-2", min:5,
-        items:[
-          {qid:"6-5-savvas-example-3-lesson-6-5", label:"Example 3: condensing — activates Product, Quotient, AND Power simultaneously"},
-        ],
-        teacher:[
-          "Project Example 3. Think aloud: order is Power first (coefficients → exponents), then Product/Quotient to merge.",
-          "Flag the Rules card — students copy POWER PROPERTY into margin.",
-          "30-sec pause: 'What would expanding look like? Same properties, opposite direction.'",
-          "Release at minute 12. Do NOT start Explore items.",
+          "Hand out at door.",
+          "Circulate 4 min.",
+          "Cold-call 1 student on q12: change-of-base error. No hints — students must identify the error type.",
+          "q12: what must the denominator be in change-of-base? Same base or same argument?",
+          "q4: name the property. What does log₆(49/5) expand to?",
+          "q5: Power Property first (coefficient → exponent), then Product Property to combine."
         ],
         rules:[
-          "PRODUCT: \\(\\log_b(MN) = \\log_b M + \\log_b N\\)",
-          "QUOTIENT: \\(\\log_b(M/N) = \\log_b M - \\log_b N\\)",
-          "POWER: \\(\\log_b(M^n) = n \\cdot \\log_b M\\)",
-          "IDENTITY: \\(\\log_b b = 1\\), \\(\\log_b 1 = 0\\)",
-          "CHANGE OF BASE: \\(\\log_b x = (\\log x)/(\\log b) = (\\ln x)/(\\ln b)\\)",
-          "SOLVING: \\(b^x = k \\Rightarrow x = (\\log k)/(\\log b)\\)",
+          "Change of base: log_b x = (log x)/(log b) = (ln x)/(ln b). Numerator = log of argument, denominator = log of base.",
+          "q4: Quotient Property → log₆ 49 − log₆ 5 → then Power Property on log₆ 49 = log₆(7²) = 2 log₆ 7.",
+          "q5: Power Property applied to each term first (move coefficients as exponents), then Product Property to combine into ln(s⁵ · t⁶)."
+        ],
+        answer:"q12: Student swapped numerator and denominator. Correct: log₂ 9 = (log 9)/(log 2) = (ln 9)/(ln 2). She wrote (ln 2)/(ln 9). | q4: 2 log₆ 7 − log₆ 5 (Quotient Property first, then Power Property on the log₆ 49 term). | q5: ln(s⁵ · t⁶) — Power Property applied to each term first, then Product Property to combine.",
+        bridge:"Sentence frame: 'For Do Now #1, the error is ___ because change of base says log_b x = (log ___) / (log ___). For #2, log₆(49/5) = log₆ ___ − log₆ ___ (Quotient Property). For #3, I used the ___ Property to write 5 ln s = ln(s^___), then the ___ Property to combine.'"
+      },
+      { id:"launch", title:"Launch — Example 3: Write as a Single Logarithm (teacher models)",
+        fw:"teacher models", dok:"2", min:5,
+        items:[],
+        teacher:[
+          "Project Example 3. Think aloud: identify which property applies at each step.",
+          "'Condensing forces you to recognize all three properties at once — Power first (coefficients become exponents), then Product/Quotient to merge.'",
+          "Flag the Rules card — students copy POWER PROPERTY into margin.",
+          "30-sec pause: 'Turn to partner: what would expanding look like? Same properties, opposite direction.'",
+          "Do NOT solve any Explore items. Release at minute 12.",
+          "Script step 1: 'Any coefficient in front of a log? → Power Property: move it up as exponent.'",
+          "Script step 2: 'Added logs → Product Property: log_b(MN). Subtracted logs → Quotient Property: log_b(M/N).'",
+          "Script step 3: 'Today’s DOK-3 task asks you to PROVE why the Power Property works — using nothing but the definition of logarithm and exponent laws.'"
+        ],
+        rules:[
+          "PRODUCT: log_b(MN) = log_b M + log_b N",
+          "QUOTIENT: log_b(M/N) = log_b M − log_b N",
+          "POWER: log_b(M^n) = n · log_b M  ← students copy into margin",
+          "IDENTITY: log_b b = 1  |  log_b 1 = 0  |  b^(log_b x) = x",
+          "CHANGE OF BASE: log_b x = (log x)/(log b) = (ln x)/(ln b)",
+          "SOLVING: b^x = k ⇒ x = log_b k = (log k)/(log b)",
+          "Example 3A: 4 log₄ m + 3 log₄ n − log₄ p → Power → Product → Quotient → log₄(m⁴n³/p)",
+          "Example 3B: 3 ln 2 − 2 ln 5 → ln(2³) − ln(5²) → ln(8/25)"
         ],
       },
-      { id:"explore", title:"Explore — TPS (#19, #21, #34, #3, ⭐ #13, ⭐ #40 Part C)",
-        fw:"student work", dok:"2-3", min:28,
+      { id:"explore", title:"Explore — Think-Pair-Share (28 min · 25 min Wed-F)",
+        fw:"student work + DOK-3", dok:"2-3", min:28,
         items:[
-          {qid:"6-5-savvas-q19", label:"#19: Condense \\(\\log_5 6 + \\tfrac{1}{2}\\log_5 y\\) — Power Property first"},
-          {qid:"6-5-savvas-q21", label:"#21: Condense \\(\\tfrac{1}{3}\\ln 27 - 3\\ln(2y)\\) — simplify \\(\\tfrac{1}{3}\\ln 27\\) first"},
-          {qid:"6-5-savvas-q34", label:"#34: Solve \\(7^x = 100\\) via change of base"},
-          {qid:"6-5-savvas-q3",  label:"#3: Amanda's expand error on log₄(c²d⁵)  [SKIP on Wed-F 45-min]"},
-          {qid:"6-5-savvas-q13", label:"⭐ DOK-3 PROOF: Prove \\(\\log_b(M^n) = n\\cdot\\log_b M\\) using exponent laws. Let \\(x = \\log_b M\\), raise to nth power, convert back.", dok3:true, note:"Plan 6 min. DO NOT give the let-x step before 4 min in."},
-          {qid:"6-5-savvas-q40", label:"⭐ DOK-3 RICHTER Part C: One earthquake is 150× more intense. How much greater is its Richter magnitude? Generalize.", dok3:true, note:"Plan 6 min. Press: write \\(R(150A_0)\\) and \\(R(A_0)\\) separately, then subtract and apply Quotient Property."},
+          {qid:"6-5-savvas-q19", label:"Practice #19 — Condense: log₅ 6 + ½ log₅ y"},
+          {qid:"6-5-savvas-q21", label:"Practice #21 — Condense: ⅓ ln 27 − 3 ln(2y)"},
+          {qid:"6-5-savvas-q34", label:"Practice #34 — Solve: 7^x = 100 via change of base"},
+          {qid:"6-5-savvas-q3",  label:"Practice #3 — Amanda’s expand error on log₄(c²d⁵)  [SKIP on Wed-F 45-min]"},
+          {qid:"6-5-savvas-q13", label:"Practice #13 ★ DOK-3 PROOF — Prove the Power Property: log_b(M^n) = n · log_b M using exponent laws", dok3:true, note:"Plan ~6 min. DO NOT give the let-x substitution before 4 min in."},
+          {qid:"6-5-savvas-q40", label:"Practice #40 Part C ★ DOK-3 RICHTER — Generalize: one earthquake is 150× more intense; how much greater is its Richter magnitude?", dok3:true, note:"Plan ~6 min. Press: write R(150A₀) and R(A₀) separately first, then subtract and apply Quotient Property."},
         ],
         teacher:[
-          "#13 + #40 are the paired DOK-3 capstone — Form B DOK-3 rehearsal.",
-          "#13 answer: Let \\(x = \\log_b M \\Rightarrow b^x = M\\). Raise to \\(n\\): \\(b^{nx} = M^n\\). By log def: \\(\\log_b(M^n) = nx = n\\cdot\\log_b M\\).",
-          "#40 Part C answer: \\(R(150A_0) - R(A_0) = \\log(150A_0/S) - \\log(A_0/S) = \\log 150 \\approx 2.18\\).",
+          "4 laps across 28 min.",
+          "Lap 1 (4+4 min): q19 + q21. Press: which property, in what order?",
+          "Lap 2 (4+4 min): q34 + q3. q34: change of base for solving. q3: name the error type.",
+          "Lap 3 (12 min): ★ #13 + #40 paired. DO NOT give the let-x substitution for #13 before 4 min in. For #40 Part C: press 'write R(150A₀) and R(A₀) separately first.'",
+          "On Wed-F 45-min: skip q3. Move directly from q34 to #13 + #40. NEVER cut #13 or #40.",
+          "q19 press: which property handles the ½ coefficient? Power Property first.",
+          "q21 press: what is ⅓ ln 27? Simplify before subtracting.",
+          "q34 press: change of base — which base do you use on the calculator?",
+          "q3 press: Amanda wrote log₄(c²d⁵) = 2·log₄c·5·log₄d. Which property did she confuse? (Power ≠ Product of coefficients.)",
+          "#13 press: if b^x = M and you raise both sides to n, what exponent rule gives b^(nx) = M^n?",
+          "#40 Part C press: write R(150A₀) − R(A₀) = log(150A₀/S) − log(A₀/S). Now apply the Quotient Property. What remains?"
         ],
-        warn:"Wed-F 45-min: skip q3. Never skip #13 or #40. If a pair finishes early, hand out #40 Part A (direct numerical Richter).",
+        answer:"q19: log₅(6y^(1/2)). | q21: ln(3/(8y³)). | q34: x = (log 100)/(log 7) ≈ 2.367. | q3: Amanda multiplied instead of adding — Power Property moves coefficients as exponents, then Product Property ADDS the log terms. Correct: log₄(c²d⁵) = 2 log₄ c + 5 log₄ d. | #13 (DOK-3 PROOF): Let x = log_b M ⇒ b^x = M. Raise both sides to n: (b^x)^n = M^n ⇒ b^(nx) = M^n. By log definition: log_b(M^n) = nx = n·log_b M. Key criteria: (1) correct let-x substitution, (2) exponent-power rule applied, (3) final step cites log definition. | #40 Part C (DOK-3 RICHTER): R(150A₀) − R(A₀) = log(150A₀/S) − log(A₀/S) = log(150) ≈ 2.18. The larger earthquake is about 2.18 Richter units greater.",
+        warn:"45-min Wed-F variant: cut q3. NEVER cut #13 or #40. If a pair finishes early: hand out Practice #40 Part A (direct numerical Richter computation). SCOPE NOTE: Form B Q8 and Q15 (geometric series) are NOT covered and NOT on the Topic 6 assessment.",
       },
       { id:"share", title:"Share / Summary — DOK-3 Reveal + Topic 6 Bridge",
         fw:"academic conversation", dok:"2", min:5,
         items:[],
         teacher:[
-          "Cold-call 1 pair to narrate the Power Property proof (#13) using sentence frame",
-          "Cold-call 1 pair to present Richter generalization (#40 Part C): \\(\\log 150 \\approx 2.18\\)",
-          "Write \\(\\log_b(M^n) = n\\cdot\\log_b M\\) on board",
-          "Topic 6 bridge: 'Both items are the exact DOK-3 pattern on Form B. You have now rehearsed both.'",
+          "Cold-call 1 pair to narrate the Power Property proof (#13) using sentence frame.",
+          "Cold-call 1 pair to present the Richter generalization (#40 Part C): log 150 ≈ 2.18.",
+          "Class signals thumbs. Write log_b(M^n) = n·log_b M on board.",
+          "Topic 6 bridge: 'The Power Property proof and the Richter generalization are the exact DOK-3 pattern on Form B. You have now rehearsed both.'",
+          "SCOPE NOTE: Form B Q8 and Q15 (geometric series) are NOT on the assessment.",
+          "Cold-call a pair that struggled on #13 — hold them accountable to the let-x substitution step."
         ],
-        answer:"#13: Let \\(x = \\log_b M\\), \\(b^x = M\\), raise to \\(n\\), \\(b^{nx} = M^n\\), so \\(\\log_b(M^n) = nx = n\\cdot\\log_b M\\). ✓  |  #40 Part C: \\(R(150A_0) - R(A_0) = \\log 150 \\approx 2.18\\).",
-        bridge:"⚠️ SCOPE: Form B Q8 and Q15 (geometric series) are NOT on the Topic 6 assessment. Do not prep for those.",
+        rules:[
+          "Sentence frame (Power Property proof): 'Let x = log_b M. Then b^x = M. Raising both sides to the nth power: (b^x)^n = M^n, so b^(nx) = M^n. By the definition of log, log_b(M^n) = nx = n·log_b M. ✓'",
+          "Sentence frame (Richter): 'R(150A₀) − R(A₀) = log(150A₀/S) − log(A₀/S) = log 150 ≈ 2.18. So the larger earthquake is about 2.18 Richter units greater.'"
+        ],
+        bridge:"Chain 1 capstone: 'We started the year extracting a specific dimension from a specific object. Here we extract a pattern — not what’s the magnitude when amplitude is 150× reference, but what does the magnitude do for any amplitude multiple? That’s the same move one level up — finding structure, not just a number. If Storage Box taught us to extract a length, this teaches us to extract a law.' Chain 2 handoff: 'Today, Richter asks you to do both at once — the formula is given (Chain 2), but Part C asks you to generalize the pattern, which is the same mental move as building a constraint (Chain 1). This is the year in one problem.'"
       },
       { id:"exit", title:"Exit Ticket — Two-Part Summary",
         fw:"not graded", dok:"1-2", min:5,
         items:[],
         teacher:[
           "Collect at door.",
-          "Scan part (b): if students wrote t = 25 (not cube root), they dropped the Power Property step.",
-          "Plan a 2-min re-teach before next Topic 6 item if many students blank on part (b).",
+          "Scan part (b): if students wrote t = 25 (not cube root), they dropped the Power Property step. Plan a 2-min re-teach before next Topic 6 item.",
+          "No grade."
         ],
-        answer:"(a) \\(P = \\log(4t^3)\\) — Power Property on \\(3\\log t\\), then Product Property with \\(\\log 4\\).  (b) \\(10^2 = 4t^3 \\rightarrow t^3 = 25 \\rightarrow t = 25^{1/3} \\approx 2.924\\).",
+        rules:[
+          "A biologist models a population as P = 3 log t + log 4.",
+          "(a) Write P as a single logarithm: P = log(___)",
+          "(b) Solve for t when P = 2: t = ___",
+          "One biggest thing I learned today: ___."
+        ],
+        answer:"(a) P = log(4t³) — Power Property on 3 log t (coefficient 3 becomes exponent), then Product Property combines with log 4. | (b) log(4t³) = 2 → 4t³ = 10² = 100 → t³ = 25 → t = 25^(1/3) ≈ 2.924.",
       },
     ]
   },
 };
 
+const panels = document.getElementById("panels");
+const tabBar = document.getElementById("tabBar");
 document.getElementById("dateLabel").textContent = new Date().toDateString();
 
 function renderPanel(tabId) {
   const data = PACER[tabId];
-  const panel = document.getElementById("panel-" + tabId);
+  const panel = document.createElement("div");
+  panel.className = "panel";
+  panel.id = "panel-" + tabId;
   panel.innerHTML = `
     <div class="timer-bar">
       <div>
@@ -220,9 +264,11 @@ function renderPanel(tabId) {
       </div>
     </div>
     <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    ${data.short_note ? `<div style="background:#fffbea; border-left:4px solid var(--gold); padding:10px 14px; border-radius:6px; font-size:0.9rem; margin:12px 0;">⭐ ${data.short_note}</div>` : ""}
     <div class="phase-list" id="chips-${tabId}"></div>
     <div id="phase-card-${tabId}"></div>
   `;
+  panels.appendChild(panel);
   const chipBar = panel.querySelector(`#chips-${tabId}`);
   data.phases.forEach((ph, idx) => {
     const chip = document.createElement("button");
@@ -251,29 +297,29 @@ function selectPhase(tabId, idx) {
       let cls = "item";
       if (it.dok3) cls = "item dok3";
       else if (it.assess) cls = "item assess";
-      const star = it.dok3 ? '<span class="star">&#11088; DOK-3 </span>' :
-                    it.assess ? '<span class="star">&#11088; ASSESS </span>' : '';
+      const star = it.dok3 ? '<span class="star">⭐ DOK-3 </span>' :
+                    it.assess ? '<span class="star">⭐ ASSESS </span>' : '';
       html += `<div class="${cls}">${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>${it.note ? `<div>${it.note}</div>` : ""}</div>`;
     });
   }
   if (ph.teacher && ph.teacher.length) {
-    html += `<div class="callout teacher"><span class="label">&#127908; Teacher does</span><ul>`;
+    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
     ph.teacher.forEach(t => html += `<li>${t}</li>`);
     html += `</ul></div>`;
   }
   if (ph.rules && ph.rules.length) {
-    html += `<div class="callout rule"><span class="label">&#128216; Rules / stems</span><ul>`;
+    html += `<div class="callout rule"><span class="label">📘 Rules / stems</span><ul>`;
     ph.rules.forEach(r => html += `<li>${r}</li>`);
     html += `</ul></div>`;
   }
   if (ph.answer) {
-    html += `<div class="callout answer"><span class="label">&#9989; Answer key</span>${ph.answer}</div>`;
+    html += `<div class="callout answer"><span class="label">✅ Answer key</span>${ph.answer}</div>`;
   }
   if (ph.bridge) {
-    html += `<div class="callout bridge"><span class="label">&#128279; Bridge / Scope</span>${ph.bridge}</div>`;
+    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
   }
   if (ph.warn) {
-    html += `<div class="callout warn"><span class="label">&#9888;&#65039; Warning / Note</span>${ph.warn}</div>`;
+    html += `<div class="callout warn"><span class="label">⚠️ Warning / Note</span>${ph.warn}</div>`;
   }
   html += `</div>`;
   card.innerHTML = html;
@@ -322,7 +368,16 @@ function stopPhase(tabId) {
   timerEl.style.color = "#ffffff";
 }
 
-renderPanel("p1");
+Object.keys(PACER).forEach(renderPanel);
+document.querySelector('.panel').classList.add('active');
+
+tabBar.addEventListener("click", e => {
+  if (!e.target.matches(".tab")) return;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  e.target.classList.add("active");
+  document.getElementById("panel-" + e.target.dataset.tab).classList.add("active");
+});
 </script>
 
 </body>

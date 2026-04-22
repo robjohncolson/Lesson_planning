@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>L45 Pacer · Single Period</title>
+<title>L45 Pacer · Period 1 · Solving Rational Equations</title>
 <style>
   :root {
     --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
@@ -23,7 +23,20 @@
   }
   header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
   header .meta { font-size: 0.85rem; color: #bbd0e6; }
-  .panel { display: block; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .tabs {
+    display:flex; gap: 4px; background:#fff; padding: 6px 24px;
+    border-bottom: 1px solid #ccc;
+  }
+  .tab {
+    padding: 10px 20px; border: none; background: #dfe9f3;
+    color: var(--navy); font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; border-radius: 6px 6px 0 0;
+    transition: background 0.15s;
+  }
+  .tab:hover { background: #c9dcf0; }
+  .tab.active { background: var(--navy); color: #fff; }
+  .panel { display: none; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+  .panel.active { display: block; }
   .timer-bar {
     position: sticky; top: 0; z-index: 10;
     background: var(--navy); color: #fff; padding: 10px 16px;
@@ -46,7 +59,6 @@
     background: #dfe9f3; color: var(--navy); font-size: 0.85rem;
     font-weight: 600; border: 2px solid transparent;
   }
-  .phase-chip:hover { background: #c9dcf0; }
   .phase-chip.active { background: var(--teal); color: #fff; border-color: var(--navy); }
   .phase-chip.done { background: #c9dcf0; color: #789; text-decoration: line-through; }
   .phase-card {
@@ -110,99 +122,121 @@ window.MathJax = {
 
 <header>
   <div>
-    <h1>Lesson 4-5 Pacer</h1>
-    <div class="meta">Single Period (Quick) · Solving Rational Equations + DOK-3 Chemistry Mixture (Topic 4 LEHS Q#2/Q#6/Q#7 Prep)</div>
+    <h1>Lesson 4-5 Pacer · Klimsara-Adapted · Single-Period Quick</h1>
+    <div class="meta">Period 1 · Solving Rational Equations + DOK-3 Chemistry Mixture · Single DOK-3 spine · No Blooket</div>
   </div>
   <div class="meta" id="dateLabel"></div>
 </header>
 
-<main>
+<nav class="tabs" id="tabBar">
+  <button class="tab active" data-tab="p1">P1 · Rational Equations + DOK-3 Chemistry ⭐</button>
+</nav>
+
+<main id="panels">
   <div class="panel" id="panel-p1"></div>
 </main>
 
 <script>
 const PACER = {
   p1: {
-    label: "Single Period · Solving Rational Equations + DOK-3 Chemistry · 58 min",
+    label: "Period 1 · Single-Period Quick · Solving Rational Equations + DOK-3 Chemistry · 55 min base (65 min A &amp; F)",
     total_min: 58,
+    short_note: "SINGLE-PERIOD QUICK LESSON. TWO examples modeled in Launch (deviation from standard one-example rule — solving AND extraneous-checking are both assessment-critical). DOK-3 capstone: Practice #33 Chemistry Mixture (Topic 4 LEHS Q#6 + Q#7 prep). 45-min Wed F variant: cut #14 + #25 from Explore. Never cut #33. Use extra 10 min (65-min class) on Explore #33.",
     phases: [
-      { id:"donow", title:"Do Now — Model &amp; Discuss: conflicting candidates",
-        fw:"exploration", dok:"1", min:5,
-        items:[{qid:"4-5-savvas-model-discuss-lesson-4-5-launch", label:"Two students solve a rational equation, get different candidates — which (if any) is valid?"}],
+      { id:"donow", title:"Do Now — Critique &amp; Explain (Nicky vs. Tavon)",
+        fw:"bridge from 4-4", dok:"1", min:5,
+        items:[{qid:"4-5-savvas-model-discuss-lesson-4-5-launch", label:"Savvas Model &amp; Discuss — Nicky vs. Tavon solve (1/2)x + (2/5) = 9/10 (Parts A/B/C)"}],
         teacher:[
-          "Hand out at door. Circulate 3 min.",
-          "Cold-call one student: \"If a candidate solution makes the original denominator zero, is it a real solution?\"",
-          "Introduce the word EXTRANEOUS on the board."
-        ],
-        bridge:"Lesson 4-4 (add/subtract rational expressions) &rarr; Lesson 4-5 (solve rational <em>equations</em>). Same algebra, but now there's an equation to solve — and a new trap: extraneous solutions. Clearing denominators by multiplying both sides by an expression containing variables can introduce values that don't belong in the original.",
-      },
-      { id:"launch", title:"Launch — Examples 1 &amp; 3 + Rules [COMPRESSED]",
-        fw:"teacher models", dok:"1-2", min:13,
-        items:[
-          {qid:"4-5-savvas-example-1-lesson-4-5", label:"Example 1: SOLVE a rational equation"},
-          {qid:"4-5-savvas-example-3-lesson-4-5", label:"Example 3: identify EXTRANEOUS solution"},
-        ],
-        teacher:[
-          "\"Watch me solve a rational equation. Step 1: find the LCD.\"",
-          "Step 2 multiply both sides by LCD to clear fractions. Step 3 solve polynomial → candidates. Step 4 CHECK each candidate in ORIGINAL — any that zeros a denominator is extraneous.",
-          "Transition to Example 3 without stopping: \"Now watch what happens when a candidate IS extraneous.\"",
-          "State domain restrictions FIRST — before solving.",
-          "30-sec pause: \"Turn to partner — why does clearing denominators sometimes produce extraneous solutions? What's the mechanism?\"",
-          "Release at minute 18. Do NOT solve Try-Its."
+          "Hand out at door.",
+          "Circulate silently for 3 min — no hints.",
+          "Cold-call 1 student on the conflicting candidate solutions.",
+          "Bridge aloud (read): 'Topic 4 so far: inverse variation, reciprocal functions, multiplying/adding rational expressions. Today: SOLVING rational EQUATIONS. Same algebra, but a new trap — extraneous solutions. Which candidate (if any) is valid?'"
         ],
         rules:[
-          "1. Find the LCD of all fractions.",
-          "2. Multiply BOTH SIDES by the LCD to clear fractions.",
-          "3. Solve the resulting polynomial equation for candidates.",
-          "4. CHECK each candidate in the <strong>ORIGINAL</strong> equation. Any that makes a denominator zero is <strong>extraneous</strong>.",
-          "Domain restrictions are set BEFORE clearing. A candidate that violates a restriction is extraneous even if it satisfies the cleared equation."
+          "Nicky: isolates (1/2)x, gets x = 1.",
+          "Tavon: multiplies both sides by LCD = 10, gets 5x + 4 = 9, x = 1.",
+          "Part A: explain strategies + pros/cons.",
+          "Part B: both methods are correct — both get x = 1.",
+          "Part C: Tavon chose 10 (LCD); could use any multiple, but LCD clears ALL fractions at once (key bridge to today's procedure)."
         ],
-        warn:"COMPRESSED LESSON — two Examples in Launch. Solving (Ex 1) and extraneous checking (Ex 3) are distinct assessment skills on Topic 4 LEHS.",
+        bridge:"Lesson 4-4 (add/subtract rational expressions) → Lesson 4-5 (solve rational equations). Same LCD move, but now we SOLVE for x. New trap: clearing denominators by multiplying both sides by a variable expression can introduce values that make a denominator zero — EXTRANEOUS solutions. Tavon's LCD move scales up to rational equations in x today.",
       },
-      { id:"explore", title:"Explore — TPS (TI 1, TI 3, #10, #14, #25, ⭐ #33)",
-        fw:"student work", dok:"2-3", min:32,
+      { id:"launch", title:"Launch — Ex 1 + Ex 3 [COMPRESSED — 2 examples]",
+        fw:"teacher models", dok:"2", min:13,
+        items:[],
+        teacher:[
+          "PROJECT Example 1. Think aloud: 'Step 1: find the LCD. Step 2: multiply BOTH SIDES by the LCD — clears all fractions. Step 3: solve the resulting polynomial equation — you get candidate solutions. Step 4: CHECK each candidate in the ORIGINAL equation. Any candidate that makes a denominator zero is extraneous — throw it out.'",
+          "Transition to Example 3 without stopping. Announce: 'Now watch what happens when a candidate IS extraneous.'",
+          "PROJECT Example 3. Think aloud: state domain restrictions FIRST before solving; test each candidate against the restrictions.",
+          "Point to the Rules card — students copy into margin.",
+          "30-sec partner pause: 'Turn to partner — why does clearing denominators sometimes produce extraneous solutions? What is the mechanism?' (Rule 1d).",
+          "Do NOT solve Try-Its or Practice items during Launch.",
+          "Release to Explore at minute 18."
+        ],
+        rules:[
+          "STEP 1: find the LCD of all fractions in the equation.",
+          "STEP 2: multiply BOTH SIDES by the LCD to clear all fractions.",
+          "STEP 3: solve the resulting polynomial equation (candidates).",
+          "STEP 4: CHECK each candidate in the ORIGINAL equation — any value that makes a denominator zero is EXTRANEOUS (discard it).",
+          "Domain restrictions are stated BEFORE clearing denominators. A candidate that violates a restriction is extraneous even if it algebraically satisfies the cleared equation.",
+          "Work-rate setup: 1/a + 1/b = 1/t (a, b = individual times; t = together time).",
+          "Mixture setup: concentration × volume = amount of substance per stream → set up rational equation for target concentration.",
+          "⚠️ COMMON ERROR: checking candidates in the cleared equation instead of the ORIGINAL equation."
+        ],
+        warn:"COMPRESSED — two Examples in Launch. Solving (Ex 1) and extraneous-solution checking (Ex 3) are distinct assessment moves on Topic 4 LEHS Q#2 and Q#6. Release to Explore at minute 18 — do not bleed into Explore time.",
+      },
+      { id:"explore", title:"Explore — Think-Pair-Share (6 items)",
+        fw:"student work + DOK-3", dok:"2-3", min:32,
         items:[
-          {qid:"4-5-savvas-try-it-1-lesson-4-5", label:"TI 1: solve a rational equation"},
-          {qid:"4-5-savvas-try-it-3-lesson-4-5", label:"TI 3: identify the extraneous solution"},
-          {qid:"4-5-savvas-q10", label:"#10 solve + check (confirm candidates in original)"},
-          {qid:"4-5-savvas-q14", label:"#14 extraneous trap — state domain BEFORE clearing"},
-          {qid:"4-5-savvas-q25", label:"#25 work-rate application: 1/a + 1/b = 1/t"},
-          {qid:"4-5-savvas-q33", label:"⭐ DOK-3 CHEMISTRY MIXTURE — 50 gal of 2% alcohol + x gal of 6% → 5% target; solve for x; Part B TABLE verification. Topic 4 LEHS Q#6+Q#7 rehearsal.", dok3:true, note:"Plan ~10 min. Answer: x = 150 gallons. Do NOT reveal before Share."},
+          {qid:"4-5-savvas-try-it-1-lesson-4-5", label:"Try It 1 — Solve a rational equation (parts a &amp; b)"},
+          {qid:"4-5-savvas-try-it-3-lesson-4-5", label:"Try It 3 — Identify the extraneous solution"},
+          {qid:"4-5-savvas-q10", label:"Practice #10 — Error Analysis: find and correct Miranda's mistake"},
+          {qid:"4-5-savvas-q14", label:"Practice #14 — Extraneous trap (identity — unique solution)"},
+          {qid:"4-5-savvas-q25", label:"Practice #25 — Work-rate application (Kenji + Oscar, 1/a + 1/b = 1/t)"},
+          {qid:"4-5-savvas-q33", label:"Practice #33 ⭐ DOK-3 CHEMISTRY MIXTURE — Topic 4 LEHS Q#6 + Q#7 rehearsal", dok3:true, note:"Part A: how much 6% solution to reach 5% concentration? Part B: explain graphing-calculator TABLE verification. Plan ~10 min. Do NOT reveal Part A answer before Share."},
         ],
         teacher:[
           "6 laps across 32 min.",
-          "Lap 1 (4m): TI 1 — press LCD identification.",
-          "Lap 2 (4m): TI 3 — watch for students who skip the check.",
-          "Lap 3 (4m): #10 — confirm the check step.",
-          "Lap 4 (4m): #14 — press \"which candidate violates the original domain?\"",
-          "Lap 5 (6m): #25 — work-rate setup 1/a + 1/b = 1/t.",
-          "Lap 6 (10m): ⭐ #33 Chemistry — mixture equation, clear, solve for x, TABLE verification."
+          "Lap 1 (4 min): Try It 1 — press pairs on LCD identification BEFORE they compute.",
+          "Lap 2 (4 min): Try It 3 — watch for students who skip the extraneous check; press 'which candidate makes the ORIGINAL denominator zero?'",
+          "Lap 3 (4 min): #10 error analysis — confirm they find Miranda's sign error on the right side (should be (x−4)(x+2), not (x+4)(x+2)).",
+          "Lap 4 (4 min): #14 — press 'state the domain restrictions BEFORE you clear denominators'; this is the identity case.",
+          "Lap 5 (6 min): #25 — confirm 1/a + 1/b = 1/t setup and units.",
+          "Lap 6 (10 min): ⭐ #33 Chemistry — press the mixture-equation SETUP step AND the gallons reasonableness check BEFORE they compute.",
+          "Do NOT give #33 Part A numeric answer. Pairs present argument at Share.",
+          "45-min Wed F variant: cut #14 + #25. Never cut #33."
         ],
-        bridge:"DOK-3 setup on #33: \\(f(x) = \\tfrac{50 \\cdot 0.02 + 0.06x}{50 + x} = 0.05\\). Clear the denominator: \\(1 + 0.06x = 0.05(50 + x) = 2.5 + 0.05x\\) &rArr; \\(0.01x = 1.5\\) &rArr; \\(x = 150\\) gallons. Part B: enter \\(y_1 =\\) numerator, \\(y_2 = 0.05(50+x)\\), use TABLE to find where they intersect. Press: <em>\"What would x mean in gallons? Does your answer make sense?\"</em> BEFORE they compute — anchors the reasonableness check.",
-        warn:"45-min Wed F variant: cut #14 + #25. <strong>Never cut #33.</strong> Common trap: students forget Part B entirely (just give Part A numeric). Force them to WRITE the TABLE verification plan, even if they don't have a calculator in hand.",
+        answer:"Try It 1: (a) x = −4.5 [LCD = x+5; 2 = 4(x+5) → x = −4.5]; (b) x = 7.5 [LCD = x−7; 1 = 2(x−7) → x = 7.5]. Try It 3: no solution — both candidates x = 2 and x = −2 make the original denominators zero (extraneous). #10: Miranda expanded right side as (x+4)(x+2) instead of (x−4)(x+2). Correct right side = x²−2x−8. Correct equation: −3x+6 = −2x−8 → x = 14. #14: solution is all reals except x = −2 (numerator factors as (x−9)(x+2); (x−9)(x+2)/(x+2) = x−9 is an identity). #25: 1.2 hours [1/2 + 1/3 = 1/t → 5/6 = 1/t → t = 6/5]. #33 Part A: 150 gallons [set f(x)=0.05: 50(0.02)+0.06x = 0.05(50+x) → 1+0.06x = 2.5+0.05x → 0.01x = 1.5 → x = 150]. Part B: enter y₁ = 2.5+0.05x and y₂ = 1+0.06x; TABLE shows y₁ = y₂ at x = 150.",
+        warn:"45-min Wed F variant: cut #14 + #25. Never cut #33. Use extra 10 min (65-min class) on Explore #33 — richer reasonableness and TABLE-verification talk pays off on Topic 4 LEHS Q#6/Q#7. Common trap: students give only Part A numeric answer and skip Part B (TABLE explanation). Force them to WRITE the verification plan.",
       },
       { id:"share", title:"Share / Summary — Chemistry Reveal + Q#2/Q#6/Q#7 Bridge",
         fw:"academic conversation", dok:"2", min:5,
         items:[],
         teacher:[
-          "Cold-call 1 pair (ideally one that struggled on #33) to present their chemistry solution using the sentence frame.",
+          "Cold-call 1 pair that struggled on #33 — hold them accountable to the setup step.",
           "Class signals thumbs. Write x = 150 gallons on board.",
-          "Bridge aloud: \"This is the exact move on Topic 4 LEHS Q#6, the domain reasoning is Q#2, and the rate reasoning is Q#7. You have now rehearsed all three.\""
+          "Bridge aloud: 'This is the exact algebraic move on Topic 4 LEHS Q#6. The domain-restriction reasoning is Q#2. The rate reasoning is Q#7. You have now rehearsed all three.'"
         ],
-        answer:"#33 Part A: \\(\\tfrac{50(0.02) + 0.06x}{50+x} = 0.05\\) &rArr; \\(1 + 0.06x = 2.5 + 0.05x\\) &rArr; \\(0.01x = 1.5\\) &rArr; <strong>x = 150 gallons</strong>. Part B: \\(y_1 = 50(0.02) + 0.06x\\), \\(y_2 = 0.05(50+x)\\); TABLE shows \\(y_1 = y_2\\) at \\(x = 150\\). Sentence frame: \"I set up \\(f(x) = 0.05\\), cleared the denominator, and solved for x to get ___ gallons. I verified with TABLE by entering \\(y_1 = \\)___ and \\(y_2 = \\)___.\"",
+        rules:[
+          "Sentence frame (pair share): 'I set up f(x) = (50·0.02 + 0.06x)/(50+x) = 0.05. After clearing the denominator I got ___. Solving for x gave x = ___ gallons. I verified with a calculator TABLE by entering y₁ = ___ and y₂ = ___.'",
+          "Whole class: one pair reads their chemistry solution. Class signals thumbs up / sideways."
+        ],
+        answer:"#33 Part A: 150 gallons. Set f(x) = 0.05 → multiply both sides by (50+x): 50(0.02) + 0.06x = 0.05(50+x) → 1 + 0.06x = 2.5 + 0.05x → 0.01x = 1.5 → x = 150. Part B: enter y₁ = 2.5+0.05x, y₂ = 1+0.06x; TABLE shows y₁ = y₂ at x = 150.",
+        bridge:"Topic 4 LEHS assessment: Q#2 = domain reasoning (extraneous-solution check), Q#6 = solve rational equation (same move as #33 Part A), Q#7 = work-rate reasoning (same structure as #25). You own all three from today.",
       },
       { id:"exit", title:"Exit Ticket — Summary Recap",
         fw:"not graded", dok:"1-2", min:3,
         items:[],
         teacher:[
           "Collect at door.",
-          "Scan stem 1 (original / extraneous). Plan re-teach if many students can't articulate WHY the check is required.",
-          "If finished early: hand out Practice #8 (work-rate validity) as fast-finisher — rehearses Q#7 specifically."
+          "Scan stem 1 (original / extraneous) — plan re-teach if many students can't articulate WHY the check is required.",
+          "Scan stem 2 (mixture setup) — did students connect f(x) to the equation they solved?",
+          "If finished early: hand out Practice #8 (work-rate validity reasoning) as fast-finisher — rehearses Q#7 specifically."
         ],
         rules:[
-          "Stem 1: After clearing denominators in a rational equation, I must check each candidate solution in the ___ equation to catch ___ solutions.",
-          "Stem 2: In Practice #33 (chemistry), the equation came from setting ___ equal to the target concentration 0.05.",
-          "Stem 3: One biggest thing I learned today: _____"
+          "After clearing denominators in a rational equation, I must check each candidate solution in the ___ equation to catch ___ solutions.",
+          "In Practice #33 (chemistry), the equation came from setting ___ equal to the target concentration 0.05.",
+          "One biggest thing I learned today: ___"
         ],
       },
     ]
@@ -226,6 +260,7 @@ function renderPanel(tabId) {
       </div>
     </div>
     <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
+    ${data.short_note ? `<div style="background:#fffbea; border-left:4px solid var(--gold); padding:10px 14px; border-radius:6px; font-size:0.9rem; margin:12px 0;">⭐ ${data.short_note}</div>` : ""}
     <div class="phase-list" id="chips-${tabId}"></div>
     <div id="phase-card-${tabId}"></div>
   `;
@@ -328,7 +363,17 @@ function stopPhase(tabId) {
   timerEl.style.color = "#ffffff";
 }
 
-renderPanel("p1");
+Object.keys(PACER).forEach(renderPanel);
+document.querySelector('.panel').classList.add('active');
+
+const tabBar = document.getElementById("tabBar");
+tabBar.addEventListener("click", e => {
+  if (!e.target.matches(".tab")) return;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  e.target.classList.add("active");
+  document.getElementById("panel-" + e.target.dataset.tab).classList.add("active");
+});
 </script>
 
 </body>
