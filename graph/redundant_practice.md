@@ -1,8 +1,8 @@
 # Redundant Practice
 
-Per lesson: explore-practice and explore-tps items with IDENTICAL skill_token sets. Keeping one from each group frees a packet slot for a DOK-3-needed token.
+Per lesson: explore-practice and explore-tps items with IDENTICAL skill_token sets **AND** matching `prereq_ids` chain **AND** matching `rehearses` targets. Items sharing tokens but scaffolded from different Try-Its or rehearsing different assessment items are NOT grouped — they serve distinct pedagogical roles.
 
-**88 redundant group(s)** found across 11 lessons.
+**83 redundant group(s)** found across 11 lessons.
 
 
 ## Lesson 3-5
@@ -33,24 +33,6 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `4-1-savvas-q21` adds ['interpret-answer-in-context', 'model-inverse-variation-context']
   - `4-1-savvas-example-3-lesson-4-1-use-an-inver` adds ['model-inverse-variation-context']
 
-Redundant group (same tokens: ['recognize-inverse-variation', 'test-constant-product']):
-- `4-1-savvas-try-it-1-lesson-4-1-matches-examp` [recognize-inverse-variation, test-constant-product]
-- `4-1-savvas-q14` [recognize-inverse-variation, test-constant-product]
-Suggestion: keep 1, drop 1.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-1-savvas-q23` adds ['interpret-answer-in-context', 'model-inverse-variation-context']
-  - `4-1-savvas-q21` adds ['interpret-answer-in-context', 'model-inverse-variation-context']
-  - `4-1-savvas-example-3-lesson-4-1-use-an-inver` adds ['model-inverse-variation-context']
-
-Redundant group (same tokens: ['evaluate-inverse-variation', 'solve-for-k']):
-- `4-1-savvas-try-it-2-lesson-4-1-matches-examp` [evaluate-inverse-variation, solve-for-k]
-- `4-1-savvas-q16` [evaluate-inverse-variation, solve-for-k]
-Suggestion: keep 1, drop 1.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-1-savvas-q23` adds ['interpret-answer-in-context', 'model-inverse-variation-context']
-  - `4-1-savvas-q21` adds ['interpret-answer-in-context', 'model-inverse-variation-context']
-  - `4-1-savvas-example-3-lesson-4-1-use-an-inver` adds ['model-inverse-variation-context']
-
 Redundant group (same tokens: ['model-inverse-variation-context', 'recognize-inverse-variation']):
 - `4-1-savvas-teacher-s-edition-example-3-elici` [model-inverse-variation-context, recognize-inverse-variation]
 - `4-1-savvas-q20` [model-inverse-variation-context, recognize-inverse-variation]
@@ -59,40 +41,12 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `4-1-savvas-q23` adds ['interpret-answer-in-context']
   - `4-1-savvas-q21` adds ['interpret-answer-in-context']
 
-Redundant group (same tokens: ['graph-reciprocal-function', 'identify-asymptotes', 'state-domain-range']):
-- `4-1-savvas-try-it-4-lesson-4-1-matches-examp` [graph-reciprocal-function, identify-asymptotes, state-domain-range]
-- `4-1-savvas-teacher-s-edition-try-it-4-answer` [graph-reciprocal-function, identify-asymptotes, state-domain-range]
-- `4-1-savvas-q18` [graph-reciprocal-function, identify-asymptotes, state-domain-range]
-Suggestion: keep 1, drop 2.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-1-savvas-q23` adds ['interpret-answer-in-context', 'model-inverse-variation-context']
-  - `4-1-savvas-q21` adds ['interpret-answer-in-context', 'model-inverse-variation-context']
-  - `4-1-savvas-example-3-lesson-4-1-use-an-inver` adds ['model-inverse-variation-context']
-
 ## Lesson 4-3
 
 
 Redundant group (same tokens: ['distractor-analysis', 'factor-polynomial', 'multiply-rational-expressions']):
 - `4-3-savvas-example-3-lesson-4-3` [distractor-analysis, factor-polynomial, multiply-rational-expressions]
 - `4-3-savvas-example-4-lesson-4-3` [distractor-analysis, factor-polynomial, multiply-rational-expressions]
-Suggestion: keep 1, drop 1.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-3-savvas-q14` adds ['construct-argument']
-  - `4-3-savvas-q16` adds ['construct-argument']
-  - `4-3-savvas-q17` adds ['construct-argument']
-
-Redundant group (same tokens: ['rewrite-rational-expression', 'state-domain-restriction']):
-- `4-3-savvas-try-it-1-lesson-4-3` [rewrite-rational-expression, state-domain-restriction]
-- `4-3-savvas-q20` [rewrite-rational-expression, state-domain-restriction]
-Suggestion: keep 1, drop 1.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-3-savvas-q14` adds ['construct-argument']
-  - `4-3-savvas-q16` adds ['construct-argument']
-  - `4-3-savvas-q17` adds ['construct-argument']
-
-Redundant group (same tokens: ['divide-rational-expressions', 'reciprocal-then-multiply']):
-- `4-3-savvas-try-it-5-lesson-4-3` [divide-rational-expressions, reciprocal-then-multiply]
-- `4-3-savvas-q32` [divide-rational-expressions, reciprocal-then-multiply]
 Suggestion: keep 1, drop 1.
 Candidate replacement from pool (adds DOK-3-needed tokens):
   - `4-3-savvas-q14` adds ['construct-argument']
@@ -118,33 +72,6 @@ Redundant group (same tokens: ['simplify-rational-expression']):
 - `4-3-savvas-teacher-edition-habitsofmind-less-3` [simplify-rational-expression]
 - `4-3-savvas-teacher-edition-habitsofmind-less-4` [simplify-rational-expression]
 Suggestion: keep 1, drop 3.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-3-savvas-q14` adds ['construct-argument']
-  - `4-3-savvas-q16` adds ['construct-argument']
-  - `4-3-savvas-q17` adds ['construct-argument']
-
-Redundant group (same tokens: ['factor-polynomial', 'simplify-rational-expression', 'state-domain-restriction']):
-- `4-3-savvas-q22` [factor-polynomial, simplify-rational-expression, state-domain-restriction]
-- `4-3-savvas-q24` [factor-polynomial, simplify-rational-expression, state-domain-restriction]
-Suggestion: keep 1, drop 1.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-3-savvas-q14` adds ['construct-argument']
-  - `4-3-savvas-q16` adds ['construct-argument']
-  - `4-3-savvas-q17` adds ['construct-argument']
-
-Redundant group (same tokens: ['multiply-rational-expressions']):
-- `4-3-savvas-q27` [multiply-rational-expressions]
-- `4-3-savvas-q29` [multiply-rational-expressions]
-Suggestion: keep 1, drop 1.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-3-savvas-q14` adds ['construct-argument']
-  - `4-3-savvas-q16` adds ['construct-argument']
-  - `4-3-savvas-q17` adds ['construct-argument']
-
-Redundant group (same tokens: ['ratio-modeling', 'simplify-rational-expression']):
-- `4-3-savvas-q34` [ratio-modeling, simplify-rational-expression]
-- `4-3-savvas-q36` [ratio-modeling, simplify-rational-expression]
-Suggestion: keep 1, drop 1.
 Candidate replacement from pool (adds DOK-3-needed tokens):
   - `4-3-savvas-q14` adds ['construct-argument']
   - `4-3-savvas-q16` adds ['construct-argument']
@@ -368,10 +295,8 @@ Redundant group (same tokens: ['evaluate-nth-root']):
 - `5-1-savvas-q3` [evaluate-nth-root]
 - `5-1-savvas-q9` [evaluate-nth-root]
 - `5-1-savvas-q24` [evaluate-nth-root]
-- `5-1-savvas-q28` [evaluate-nth-root]
-- `5-1-savvas-q28` [evaluate-nth-root]
 - `5-1-savvas-teacher-edition-habitsofmind-less` [evaluate-nth-root]
-Suggestion: keep 1, drop 6.
+Suggestion: keep 1, drop 4.
 Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-1-savvas-try-it-6-lesson-5-1` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
   - `5-1-savvas-q17` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
@@ -382,9 +307,7 @@ Redundant group (same tokens: ['simplify-nth-root-with-variables']):
 - `5-1-savvas-q10` [simplify-nth-root-with-variables]
 - `5-1-savvas-q15` [simplify-nth-root-with-variables]
 - `5-1-savvas-q16` [simplify-nth-root-with-variables]
-- `5-1-savvas-q37` [simplify-nth-root-with-variables]
-- `5-1-savvas-q37` [simplify-nth-root-with-variables]
-Suggestion: keep 1, drop 5.
+Suggestion: keep 1, drop 3.
 Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-1-savvas-try-it-6-lesson-5-1` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
   - `5-1-savvas-q17` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
@@ -464,16 +387,6 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-1-savvas-q17` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
   - `5-1-savvas-q43` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
 
-Redundant group (same tokens: ['convert-radical-to-rational-exp']):
-- `5-1-savvas-q7` [convert-radical-to-rational-exp]
-- `5-1-savvas-q30` [convert-radical-to-rational-exp]
-- `5-1-savvas-q30` [convert-radical-to-rational-exp]
-Suggestion: keep 1, drop 2.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `5-1-savvas-try-it-6-lesson-5-1` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
-  - `5-1-savvas-q17` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
-  - `5-1-savvas-q43` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
-
 Redundant group (same tokens: ['count-real-nth-roots', 'identify-zeros']):
 - `5-1-savvas-q11` [count-real-nth-roots, identify-zeros]
 - `5-1-savvas-q12` [count-real-nth-roots, identify-zeros]
@@ -501,6 +414,37 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-1-savvas-q17` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
   - `5-1-savvas-q43` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
 
+Redundant group (same tokens: ['evaluate-nth-root']):
+  Shared prereq chain: ['5-1-savvas-try-it-1-lesson-5-1']
+- `5-1-savvas-q28` [evaluate-nth-root]
+- `5-1-savvas-q28` [evaluate-nth-root]
+Suggestion: keep 1, drop 1.
+Candidate replacement from pool (adds DOK-3-needed tokens):
+  - `5-1-savvas-try-it-6-lesson-5-1` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
+  - `5-1-savvas-q17` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
+  - `5-1-savvas-q43` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
+
+Redundant group (same tokens: ['convert-radical-to-rational-exp']):
+  Shared prereq chain: ['5-1-savvas-try-it-3-lesson-5-1-2']
+- `5-1-savvas-q30` [convert-radical-to-rational-exp]
+- `5-1-savvas-q30` [convert-radical-to-rational-exp]
+Suggestion: keep 1, drop 1.
+Candidate replacement from pool (adds DOK-3-needed tokens):
+  - `5-1-savvas-try-it-6-lesson-5-1` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
+  - `5-1-savvas-q17` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
+  - `5-1-savvas-q43` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
+
+Redundant group (same tokens: ['simplify-nth-root-with-variables']):
+  Shared prereq chain: ['5-1-savvas-example-4-lesson-5-1-2', '5-1-savvas-q30']
+  Shared rehearses target: ['5-1-savvas-q50']
+- `5-1-savvas-q37` [simplify-nth-root-with-variables]
+- `5-1-savvas-q37` [simplify-nth-root-with-variables]
+Suggestion: keep 1, drop 1.
+Candidate replacement from pool (adds DOK-3-needed tokens):
+  - `5-1-savvas-try-it-6-lesson-5-1` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
+  - `5-1-savvas-q17` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
+  - `5-1-savvas-q43` adds ['extract-dimension-from-volume', 'interpret-answer-in-context']
+
 Redundant group (same tokens: ['extract-dimension-from-volume']):
 - `5-1-savvas-q45` [extract-dimension-from-volume]
 - `5-1-savvas-q45` [extract-dimension-from-volume]
@@ -511,6 +455,7 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-1-savvas-q43` adds ['interpret-answer-in-context']
 
 Redundant group (same tokens: ['convert-radical-to-rational-exp', 'recognize-equivalent-expressions']):
+  Shared prereq chain: ['5-1-savvas-q30']
 - `5-1-savvas-q48` [convert-radical-to-rational-exp, recognize-equivalent-expressions]
 - `5-1-savvas-q48` [convert-radical-to-rational-exp, recognize-equivalent-expressions]
 Suggestion: keep 1, drop 1.
@@ -534,7 +479,6 @@ Redundant group (same tokens: ['solve-radical-equation']):
 - `5-4-savvas-q14` [solve-radical-equation]
 - `5-4-savvas-q16` [solve-radical-equation]
 - `5-4-savvas-q20` [solve-radical-equation]
-- `5-4-savvas-q22` [solve-radical-equation]
 - `5-4-savvas-q23` [solve-radical-equation]
 - `5-4-savvas-q24` [solve-radical-equation]
 - `5-4-savvas-q28` [solve-radical-equation]
@@ -549,7 +493,6 @@ Redundant group (same tokens: ['solve-radical-equation']):
 - `5-4-savvas-q42` [solve-radical-equation]
 - `5-4-savvas-q43` [solve-radical-equation]
 - `5-4-savvas-q16` [solve-radical-equation]
-- `5-4-savvas-q22` [solve-radical-equation]
 - `5-4-savvas-q23` [solve-radical-equation]
 - `5-4-savvas-q24` [solve-radical-equation]
 - `5-4-savvas-q28` [solve-radical-equation]
@@ -573,7 +516,7 @@ Redundant group (same tokens: ['solve-radical-equation']):
 - `5-4-savvas-teacher-edition-elicitevidence-le-4` [solve-radical-equation]
 - `5-4-savvas-teacher-edition-purposefulquestio-7` [solve-radical-equation]
 - `5-4-savvas-teacher-edition-habitsofmind-less-4` [solve-radical-equation]
-Suggestion: keep 1, drop 49.
+Suggestion: keep 1, drop 47.
 Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-4-savvas-try-it-4-lesson-5-4` adds ['solve-rational-exponent-equation']
   - `5-4-savvas-q1` adds ['solve-rational-exponent-equation']
@@ -581,29 +524,10 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
 
 Redundant group (same tokens: ['identify-extraneous-solution', 'solve-radical-equation']):
 - `5-4-savvas-example-5-lesson-5-4` [identify-extraneous-solution, solve-radical-equation]
-- `5-4-savvas-try-it-3-lesson-5-4` [identify-extraneous-solution, solve-radical-equation]
 - `5-4-savvas-q3` [identify-extraneous-solution, solve-radical-equation]
-- `5-4-savvas-q8` [identify-extraneous-solution, solve-radical-equation]
 - `5-4-savvas-teacher-edition-purposefulquestio-4` [identify-extraneous-solution, solve-radical-equation]
 - `5-4-savvas-teacher-edition-habitsofmind-less-3` [identify-extraneous-solution, solve-radical-equation]
-Suggestion: keep 1, drop 5.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `5-4-savvas-try-it-4-lesson-5-4` adds ['solve-rational-exponent-equation']
-  - `5-4-savvas-q1` adds ['solve-rational-exponent-equation']
-  - `5-4-savvas-q12` adds ['solve-rational-exponent-equation']
-
-Redundant group (same tokens: ['rewrite-formula', 'solve-for-variable']):
-- `5-4-savvas-try-it-2-lesson-5-4` [rewrite-formula, solve-for-variable]
-- `5-4-savvas-q10` [rewrite-formula, solve-for-variable]
-- `5-4-savvas-q25` [rewrite-formula, solve-for-variable]
-- `5-4-savvas-q26` [rewrite-formula, solve-for-variable]
-- `5-4-savvas-q27` [rewrite-formula, solve-for-variable]
-- `5-4-savvas-q40` [rewrite-formula, solve-for-variable]
-- `5-4-savvas-q25` [rewrite-formula, solve-for-variable]
-- `5-4-savvas-q26` [rewrite-formula, solve-for-variable]
-- `5-4-savvas-q27` [rewrite-formula, solve-for-variable]
-- `5-4-savvas-q40` [rewrite-formula, solve-for-variable]
-Suggestion: keep 1, drop 9.
+Suggestion: keep 1, drop 3.
 Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-4-savvas-try-it-4-lesson-5-4` adds ['solve-rational-exponent-equation']
   - `5-4-savvas-q1` adds ['solve-rational-exponent-equation']
@@ -617,15 +541,6 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-4-savvas-try-it-4-lesson-5-4` adds ['solve-rational-exponent-equation']
   - `5-4-savvas-q1` adds ['solve-rational-exponent-equation']
   - `5-4-savvas-q12` adds ['solve-rational-exponent-equation']
-
-Redundant group (same tokens: ['solve-rational-exponent-equation']):
-- `5-4-savvas-q12` [solve-rational-exponent-equation]
-- `5-4-savvas-teacher-edition-rtiextend-lesson-` [solve-rational-exponent-equation]
-Suggestion: keep 1, drop 1.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `5-4-savvas-q39` adds ['interpret-answer-in-context']
-  - `5-4-savvas-q39` adds ['interpret-answer-in-context']
-  - `5-4-savvas-teacher-edition-elicitevidence-le-5` adds ['interpret-answer-in-context']
 
 Redundant group (same tokens: ['error-analysis-radical', 'solve-for-variable']):
 - `5-4-savvas-q17` [error-analysis-radical, solve-for-variable]
@@ -645,7 +560,32 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-4-savvas-q1` adds ['solve-rational-exponent-equation']
   - `5-4-savvas-q12` adds ['solve-rational-exponent-equation']
 
+Redundant group (same tokens: ['solve-radical-equation']):
+  Shared prereq chain: ['5-4-savvas-try-it-1-lesson-5-4']
+- `5-4-savvas-q22` [solve-radical-equation]
+- `5-4-savvas-q22` [solve-radical-equation]
+Suggestion: keep 1, drop 1.
+Candidate replacement from pool (adds DOK-3-needed tokens):
+  - `5-4-savvas-try-it-4-lesson-5-4` adds ['solve-rational-exponent-equation']
+  - `5-4-savvas-q1` adds ['solve-rational-exponent-equation']
+  - `5-4-savvas-q12` adds ['solve-rational-exponent-equation']
+
+Redundant group (same tokens: ['rewrite-formula', 'solve-for-variable']):
+  Shared prereq chain: ['5-4-savvas-q10']
+- `5-4-savvas-q25` [rewrite-formula, solve-for-variable]
+- `5-4-savvas-q26` [rewrite-formula, solve-for-variable]
+- `5-4-savvas-q27` [rewrite-formula, solve-for-variable]
+- `5-4-savvas-q25` [rewrite-formula, solve-for-variable]
+- `5-4-savvas-q26` [rewrite-formula, solve-for-variable]
+- `5-4-savvas-q27` [rewrite-formula, solve-for-variable]
+Suggestion: keep 1, drop 5.
+Candidate replacement from pool (adds DOK-3-needed tokens):
+  - `5-4-savvas-try-it-4-lesson-5-4` adds ['solve-rational-exponent-equation']
+  - `5-4-savvas-q1` adds ['solve-rational-exponent-equation']
+  - `5-4-savvas-q12` adds ['solve-rational-exponent-equation']
+
 Redundant group (same tokens: ['isolate-before-inverting', 'solve-rational-exponent-equation']):
+  Shared prereq chain: ['5-4-savvas-q12']
 - `5-4-savvas-q33` [isolate-before-inverting, solve-rational-exponent-equation]
 - `5-4-savvas-q33` [isolate-before-inverting, solve-rational-exponent-equation]
 Suggestion: keep 1, drop 1.
@@ -655,6 +595,7 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-4-savvas-teacher-edition-elicitevidence-le-5` adds ['interpret-answer-in-context']
 
 Redundant group (same tokens: ['isolate-before-inverting', 'solve-radical-equation']):
+  Shared prereq chain: ['5-4-savvas-q12']
 - `5-4-savvas-q34` [isolate-before-inverting, solve-radical-equation]
 - `5-4-savvas-q34` [isolate-before-inverting, solve-radical-equation]
 Suggestion: keep 1, drop 1.
@@ -664,8 +605,18 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-4-savvas-q12` adds ['solve-rational-exponent-equation']
 
 Redundant group (same tokens: ['interpret-answer-in-context', 'rewrite-formula', 'solve-for-variable']):
+  Shared prereq chain: ['5-4-savvas-q10']
 - `5-4-savvas-q39` [interpret-answer-in-context, rewrite-formula, solve-for-variable]
 - `5-4-savvas-q39` [interpret-answer-in-context, rewrite-formula, solve-for-variable]
+Suggestion: keep 1, drop 1.
+Candidate replacement from pool (adds DOK-3-needed tokens):
+  - `5-4-savvas-try-it-4-lesson-5-4` adds ['solve-rational-exponent-equation']
+  - `5-4-savvas-q1` adds ['solve-rational-exponent-equation']
+  - `5-4-savvas-q12` adds ['solve-rational-exponent-equation']
+
+Redundant group (same tokens: ['rewrite-formula', 'solve-for-variable']):
+- `5-4-savvas-q40` [rewrite-formula, solve-for-variable]
+- `5-4-savvas-q40` [rewrite-formula, solve-for-variable]
 Suggestion: keep 1, drop 1.
 Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-4-savvas-try-it-4-lesson-5-4` adds ['solve-rational-exponent-equation']
@@ -704,7 +655,6 @@ Redundant group (same tokens: ['compose-functions']):
 - `5-5-savvas-q16` [compose-functions]
 - `5-5-savvas-q17` [compose-functions]
 - `5-5-savvas-q18` [compose-functions]
-- `5-5-savvas-q28` [compose-functions]
 - `5-5-savvas-q30` [compose-functions]
 - `5-5-savvas-q33` [compose-functions]
 - `5-5-savvas-q36` [compose-functions]
@@ -712,7 +662,6 @@ Redundant group (same tokens: ['compose-functions']):
 - `5-5-savvas-q16` [compose-functions]
 - `5-5-savvas-q17` [compose-functions]
 - `5-5-savvas-q18` [compose-functions]
-- `5-5-savvas-q28` [compose-functions]
 - `5-5-savvas-q30` [compose-functions]
 - `5-5-savvas-q33` [compose-functions]
 - `5-5-savvas-q36` [compose-functions]
@@ -724,19 +673,19 @@ Redundant group (same tokens: ['compose-functions']):
 - `5-5-savvas-teacher-edition-rtisupport-lesson` [compose-functions]
 - `5-5-savvas-teacher-edition-elicitevidence-le-4` [compose-functions]
 - `5-5-savvas-teacher-edition-purposefulquestio-7` [compose-functions]
-Suggestion: keep 1, drop 29.
+Suggestion: keep 1, drop 27.
 Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-5-savvas-try-it-6-lesson-5-5` adds ['model-discount-context']
   - `5-5-savvas-teacher-edition-rtiextend-lesson--3` adds ['decide-application-order']
 
 Redundant group (same tokens: ['add-subtract-functions']):
+  Shared prereq chain: ['5-5-savvas-example-1-lesson-5-5']
 - `5-5-savvas-try-it-1-lesson-5-5` [add-subtract-functions]
 - `5-5-savvas-q20` [add-subtract-functions]
 - `5-5-savvas-q21` [add-subtract-functions]
 - `5-5-savvas-q20` [add-subtract-functions]
 - `5-5-savvas-q21` [add-subtract-functions]
-- `5-5-savvas-teacher-edition-elicitevidence-le` [add-subtract-functions]
-Suggestion: keep 1, drop 5.
+Suggestion: keep 1, drop 4.
 Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-5-savvas-try-it-6-lesson-5-5` adds ['compose-functions', 'model-discount-context']
   - `5-5-savvas-model-discuss-lesson-5-5-launch` adds ['compose-functions']
@@ -776,6 +725,7 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-5-savvas-example-3-lesson-5-5` adds ['compose-functions']
 
 Redundant group (same tokens: ['evaluate-composition']):
+  Shared prereq chain: ['5-5-savvas-example-4-lesson-5-5']
 - `5-5-savvas-q24` [evaluate-composition]
 - `5-5-savvas-q24` [evaluate-composition]
 Suggestion: keep 1, drop 1.
@@ -784,7 +734,17 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `5-5-savvas-model-discuss-lesson-5-5-launch` adds ['compose-functions']
   - `5-5-savvas-example-3-lesson-5-5` adds ['compose-functions']
 
+Redundant group (same tokens: ['compose-functions']):
+  Shared prereq chain: ['5-5-savvas-example-4-lesson-5-5']
+- `5-5-savvas-q28` [compose-functions]
+- `5-5-savvas-q28` [compose-functions]
+Suggestion: keep 1, drop 1.
+Candidate replacement from pool (adds DOK-3-needed tokens):
+  - `5-5-savvas-try-it-6-lesson-5-5` adds ['model-discount-context']
+  - `5-5-savvas-teacher-edition-rtiextend-lesson--3` adds ['decide-application-order']
+
 Redundant group (same tokens: ['add-subtract-functions', 'compose-functions', 'recognize-equivalent-expressions']):
+  Shared prereq chain: ['5-5-savvas-example-1-lesson-5-5', '5-5-savvas-example-4-lesson-5-5']
 - `5-5-savvas-q34` [add-subtract-functions, compose-functions, recognize-equivalent-expressions]
 - `5-5-savvas-q34` [add-subtract-functions, compose-functions, recognize-equivalent-expressions]
 Suggestion: keep 1, drop 1.
@@ -943,12 +903,6 @@ Candidate replacement from pool (adds DOK-3-needed tokens):
   - `6-4-savvas-example-1-lesson-6-4` adds ['find-inverse-function']
   - `6-4-savvas-example-3-lesson-6-4` adds ['find-inverse-function']
   - `6-4-savvas-q11` adds ['find-inverse-function']
-
-Redundant group (same tokens: ['find-inverse-function']):
-- `6-4-savvas-q21` [find-inverse-function]
-- `6-4-savvas-q24` [find-inverse-function]
-Suggestion: keep 1, drop 1.
-No pool replacement found with needed tokens ['interpret-answer-in-context', 'model-physical-context', 'solve-exponential-equation'].
 
 Redundant group (same tokens: ['evaluate-log', 'find-inverse-function']):
 - `6-4-savvas-q26` [evaluate-log, find-inverse-function]

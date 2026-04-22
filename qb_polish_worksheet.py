@@ -151,12 +151,19 @@ def collect_builder_ids(builder_ids: dict) -> set[str]:
     return ids
 
 
-def format_id_lists(builder_ids: dict) -> str:
+def format_id_lists(builder_ids: dict, annotations: dict[str, str] | None = None) -> str:
+    annotations = annotations or {}
     lines = []
     for key in ("DO_NOW_IDS", "LAUNCH_IDS", "EXPLORE_IDS", "PRACTICE_IDS",
                "REINFORCE_IDS", "DOK3_ID", "DOK3_PAIR_ID"):
         if key in builder_ids:
-            lines.append(f"- `{key}` ({len(builder_ids[key])}): {', '.join(f'`{x}`' for x in builder_ids[key])}")
+            lines.append(f"- **`{key}`** ({len(builder_ids[key])}):")
+            for item_id in builder_ids[key]:
+                note = annotations.get(item_id)
+                if note:
+                    lines.append(f"    - `{item_id}` — {note}")
+                else:
+                    lines.append(f"    - `{item_id}`")
     return "\n".join(lines)
 
 
@@ -166,6 +173,7 @@ def emit_worksheet(builder: str, info: dict,
                    redundant_by_lesson: dict) -> str:
     lesson, period = builder_to_lesson(builder)
     ids = info["ids"]
+    annotations = info.get("annotations", {})
     builder_ids_flat = collect_builder_ids(ids)
     dok3 = set(ids.get("DOK3_ID", []) + ids.get("DOK3_PAIR_ID", []))
 
@@ -177,7 +185,7 @@ def emit_worksheet(builder: str, info: dict,
     # Current operational items
     out.append("## Current operational items")
     out.append("")
-    out.append(format_id_lists(ids) or "_(none)_")
+    out.append(format_id_lists(ids, annotations) or "_(none)_")
     out.append("")
 
     # --- Skill-bridge gaps scoped to this period's DOK-3 ---
@@ -241,7 +249,9 @@ def emit_worksheet(builder: str, info: dict,
             out.append(f"Group members (🟢 = in this period):")
             for item in g["items"]:
                 marker = "🟢" if item in builder_ids_flat else "  "
-                out.append(f"- {marker} `{item}`")
+                note = annotations.get(item)
+                suffix = f" — _{note}_" if note else ""
+                out.append(f"- {marker} `{item}`{suffix}")
             out.append(f"- _Keep 1, drop {g['drop_count']}._")
             if g["replacements"]:
                 out.append("")
@@ -257,7 +267,7 @@ def emit_worksheet(builder: str, info: dict,
     # --- Proposed builder edits ---
     out.append("## Proposed builder edit")
     out.append("")
-    edits = propose_edits(ids, period_gap_entries, period_groups, period_nominals)
+    edits = propose_edits(ids, period_gap_entries, period_groups, period_nominals, annotations)
     if not edits:
         out.append("_No edits proposed — this period looks clean._")
     else:
@@ -274,7 +284,9 @@ def emit_worksheet(builder: str, info: dict,
 
 def propose_edits(ids: dict, gap_entries: list[dict],
                   redundant_groups: list[tuple],
-                  nominals: list[dict]) -> list[str]:
+                  nominals: list[dict],
+                  annotations: dict[str, str] | None = None) -> list[str]:
+    annotations = annotations or {}
     """Emit Python-shaped comments describing swaps, no auto-apply."""
     lines: list[str] = []
 
@@ -312,9 +324,15 @@ def propose_edits(ids: dict, gap_entries: list[dict],
                 if isinstance(v, list) and d in v:
                     drop_key = k
                     break
+            drop_note = annotations.get(d)
+            keep_note = annotations.get(keep)
+            reason = f"same tokens as '{keep}'"
+            if drop_note:
+                reason += f" — but drop candidate is annotated: '{drop_note}'"
+            if keep_note:
+                reason += f" (keep is: '{keep_note}')"
             lines.append(
-                f"# DROP from {drop_key or '?'}: '{d}'  "
-                f"# redundant with '{keep}' (same tokens)"
+                f"# DROP from {drop_key or '?'}: '{d}'  # {reason}"
             )
         if g["replacements"]:
             rid, rtok = g["replacements"][0]

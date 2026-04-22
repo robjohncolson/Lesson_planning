@@ -233,8 +233,10 @@ def main() -> int:
 
     redundant_lines: list[str] = ["# Redundant Practice\n",
                                   "Per lesson: explore-practice and explore-tps items with IDENTICAL "
-                                  "skill_token sets. Keeping one from each group frees a packet slot for "
-                                  "a DOK-3-needed token.\n"]
+                                  "skill_token sets **AND** matching `prereq_ids` chain **AND** matching "
+                                  "`rehearses` targets. Items sharing tokens but scaffolded from different "
+                                  "Try-Its or rehearsing different assessment items are NOT grouped — they "
+                                  "serve distinct pedagogical roles.\n"]
 
     total_redundant_groups = 0
 
@@ -248,19 +250,33 @@ def main() -> int:
             if r.get("role") == "dok3-driver":
                 driver_tokens.update(token_set(r))
 
-        # Group by identical token sets
-        groups: dict[frozenset, list[dict]] = defaultdict(list)
+        # Group by (token_set, prereq chain, rehearses targets). Items with same
+        # tokens but different scaffolding parents or different assessment targets
+        # serve distinct purposes and must not be grouped.
+        groups: dict[tuple, list[dict]] = defaultdict(list)
         for r in practice_items:
             tset = token_set(r)
-            if tset:  # skip items with no tokens (teacher-edition etc.)
-                groups[tset].append(r)
+            if not tset:  # skip items with no tokens (teacher-edition etc.)
+                continue
+            prereq = tuple(sorted(r.get("prereq_ids") or []))
+            rehearses_list = r.get("rehearses") or []
+            if isinstance(rehearses_list, str):
+                rehearses_list = [rehearses_list]
+            rehearses_key = tuple(sorted(rehearses_list))
+            groups[(tset, prereq, rehearses_key)].append(r)
 
         lesson_redundant: list[str] = []
-        for tset, group in groups.items():
+        for (tset, prereq_key, rehearses_key), group in groups.items():
             if len(group) < 2:
                 continue
             total_redundant_groups += 1
             lesson_redundant.append(f"\nRedundant group (same tokens: {sorted(tset)}):")
+            if prereq_key:
+                lesson_redundant.append(
+                    f"  Shared prereq chain: {list(prereq_key)}")
+            if rehearses_key:
+                lesson_redundant.append(
+                    f"  Shared rehearses target: {list(rehearses_key)}")
             for item in group:
                 lesson_redundant.append(f"- `{item['id']}` [{', '.join(sorted(token_set(item)))}]")
             lesson_redundant.append(f"Suggestion: keep 1, drop {len(group) - 1}.")
