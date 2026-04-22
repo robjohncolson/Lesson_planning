@@ -70,10 +70,15 @@ Originally 8 days. Retired to `legacy/`. Replaced by Klimsara close-out:
 - `qb_polish_worksheet.py` — per-builder polish worksheets in `graph/polish/` with prereq/rehearses-aware redundancy filter.
 - `qb_diagnose.py` — emits `graph/{skill_bridge_gaps,nominal_rehearsals,redundant_practice}.md`.
 
-**Retired (still present for reference):**
-- `packet_styles.py`, `packet_build.py` — docx primitives. No longer the shipping path. Builders still import them for AST-extractable intent.
-- `build_L*_packets.py` — docx emitters. Retained so `extract_intent_anchors.py` and `qb_polish_worksheet.py` can read the source of truth for lesson structure. When editing lesson content, edit the `.tex` directly; the `.py` builder is not the authoring interface anymore.
-- `backfill_visuals_4-1.py` — historical one-off, kept for reference.
+**Retired (moved to `legacy/py/` 2026-04-22):**
+- `legacy/py/build_L*_packets.py` — original docx emitters (18 lessons). Frozen. Not re-run; any structural edits go into `tex/*.tex` or `lessons/*.yaml` instead.
+- `legacy/py/packet_styles.py`, `legacy/py/packet_build.py` — docx primitives called only by the retired builders.
+- `legacy/py/refactor_builders_to_packet_build.py` — historical one-shot refactor utility.
+- `legacy/py/extract_intent_anchors.py` — AST-walks the retired builders → `graph/eye_check/*.md` briefs. The briefs are already committed and were consumed as inputs to the LaTeX-dispatch pass; not regenerated going forward.
+- `legacy/py/tagging/extract_operational_ids.py` — AST-walks the retired builders → `tagging/operational_ids.json`. The JSON is already committed and is the snapshot `qb_polish_worksheet.py` reads against.
+- `backfill_visuals_4-1.py` — historical one-off, kept at repo root.
+
+Polish worksheets (`qb_polish_worksheet.py`) still runnable: they read the frozen `tagging/operational_ids.json`, not the Python builders. Useful if the questionbank registry changes.
 
 **Operational:**
 - `L{35,41}_Pacer.html` — single-file pacer per lesson, 3 sub-tabs per period, countdown timer, inline teacher scripts / answer keys / rules / bridges. Used live in the classroom — NOT deprecated.
