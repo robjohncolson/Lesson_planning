@@ -1,0 +1,81 @@
+## Task: render the L43_P3 Student packet to LaTeX
+
+You are working in `C:/Users/rober/Downloads/Projects/Lesson_planning`. The
+docx-emitting Python toolchain has a parallel LaTeX path being built. Your
+job is one .tex file. The L41_P2 lesson is already converted — read its
+.tex files first to copy the style.
+
+### Inputs you must read
+
+1. `graph/eye_check/L43_P3.md` — the structured intent brief. The
+   `## build_student` section in that file lists every callout,
+   framework_phase_header, sentence frame, bank-item label, and section
+   in source order. **Treat this as the spec — preserve verbatim.**
+2. `tex/preamble.sty` — already exists. Use its commands and environments
+   (callout, sentenceframebox, summaryexitbox, framework_phase_header,
+   bankitem, packetheading, daybanner, sectionbanner, IconBook/Warn/Star
+   etc.). **Do NOT modify it.** If you need a teacher-specific helper
+   like \phasetag / \phaseitems / \teacheranswerbox, define it inline
+   at the top of your output .tex file.
+3. `tex/L41_P2_student.tex` — reference rendering for the same
+   edition type. Copy its coding style (tcolorbox calls, math wrapping
+   in \(...\), TikZ usage, table style for objectives).
+4. `build_L43_P3_packets.py` — the Python builder for this lesson. Use
+   only as a reference for visual hierarchy and bank-item ordering. Do
+   NOT modify it.
+5. `L43_P3_Student_Packet.docx` — canonical visual reference.
+6. `questionbank/registry.jsonl` — read items by ID. Render `prompt` and
+   `answers` (if any) verbatim — do NOT paraphrase.
+
+### Output (one new file)
+
+`tex/L43_P3_student.tex` — standalone document, starts with:
+```
+\documentclass[11pt]{article}
+\usepackage{preamble}
+```
+plus any file-local helper commands you need.
+
+Must include:
+- The standard packetheading (subtitle marked "· Student Packet")
+- The Objectives table and Topic Goals/Essential Question/Materials table
+- All callouts in the brief's `## build_student` section in source order
+- All EXPLORE bank items with prompts (no answer keys for student edition)
+- Sentence frame box for Share/Summary
+- Summary exit box for Exit Ticket
+- (back) Optional Reinforcement section after a `\clearpage`
+
+### Must preserve (non-negotiable)
+
+- All callout titles AND body lines verbatim — these are 'rules printed
+  on the page' and ELL-supports.
+- Sentence frames verbatim — ELL non-negotiable.
+- Bank-item ordering and labels exactly as listed in the brief's
+  "Bank-item labels (in order)" section.
+- Section ordering in source order from the brief.
+
+
+### May restructure
+
+- Margin sizes, font choices — match the docx visual hierarchy but use
+  LaTeX-native idioms.
+- Color hex values — use closest equivalent from preamble's palette.
+- Where to place answer keys (teacher only) — inline below each item or
+  as an appendix. Pick whichever stays evaluator-friendly.
+
+### Validation before reporting done
+
+1. Run `pdflatex tex/L43_P3_student.tex --miktex-enable-installer`
+   (or lualatex if pdflatex chokes on unicode).
+2. Confirm a PDF was produced; report page count.
+3. Sample-check via pdftotext that key anchors from the brief appear.
+4. Brief summary: engine used, page count, any anchor not preserved.
+
+### Constraints
+
+- Write ONLY to `tex/L43_P3_student.tex`. Do not modify the
+  preamble, the python builders, the docx files, or anything outside
+  this single file.
+- Do not commit or push.
+- Hard timeout 600s. If time-pressured, prioritize compile-clean PDF
+  with all callouts present over visual polish.

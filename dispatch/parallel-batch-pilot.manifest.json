@@ -1,0 +1,64 @@
+{
+  "$schema": "../../Agent/schema/parallel-runner-manifest.schema.json",
+  "version": 1,
+  "batch_name": "latex-scale-pilot-v1",
+  "target_branch": "main",
+  "base_ref": "main",
+  "codex_approval_mode": "full-auto",
+  "verify_commands": [],
+  "agents": [
+    {
+      "name": "l41_p3_student",
+      "description": "LaTeX rendering of L41_P3 student packet",
+      "prompt_file": "dispatch/prompts/latex-scale/l41_p3_student.md",
+      "owned_paths": [
+        "tex/L41_P3_student.tex"
+      ]
+    },
+    {
+      "name": "l41_p3_teacher",
+      "description": "LaTeX rendering of L41_P3 teacher packet",
+      "prompt_file": "dispatch/prompts/latex-scale/l41_p3_teacher.md",
+      "owned_paths": [
+        "tex/L41_P3_teacher.tex"
+      ]
+    },
+    {
+      "name": "l44_p1_student",
+      "description": "LaTeX rendering of L44_P1 student packet",
+      "prompt_file": "dispatch/prompts/latex-scale/l44_p1_student.md",
+      "owned_paths": [
+        "tex/L44_P1_student.tex"
+      ]
+    },
+    {
+      "name": "l44_p1_teacher",
+      "description": "LaTeX rendering of L44_P1 teacher packet",
+      "prompt_file": "dispatch/prompts/latex-scale/l44_p1_teacher.md",
+      "owned_paths": [
+        "tex/L44_P1_teacher.tex"
+      ]
+    },
+    {
+      "name": "l63_p1_student",
+      "description": "LaTeX rendering of L63_P1 student packet",
+      "prompt_file": "dispatch/prompts/latex-scale/l63_p1_student.md",
+      "owned_paths": [
+        "tex/L63_P1_student.tex"
+      ]
+    },
+    {
+      "name": "l63_p1_teacher",
+      "description": "LaTeX rendering of L63_P1 teacher packet",
+      "prompt_file": "dispatch/prompts/latex-scale/l63_p1_teacher.md",
+      "owned_paths": [
+        "tex/L63_P1_teacher.tex"
+      ]
+    }
+  ],
+  "merge": {
+    "enabled": true,
+    "commit_prefix": "latex-pilot",
+    "verify_commands": []
+  }
+}
