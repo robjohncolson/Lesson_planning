@@ -18,14 +18,13 @@ Phases (55 min base; Period F 65-min):
 import sys, io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-from docx import Document
-from docx.shared import Pt, Inches, RGBColor
-
 import qb
 import packet_styles as ps
 
-TABLE_STYLE = "Table Grid"
-
+from packet_build import (
+    TABLE_STYLE, new_packet_doc,
+    set_cell, add_callout, bank_item_block, add_header_block,
+)
 DO_NOW_ID   = "4-1-savvas-q13"
 EXPLORE_IDS = [
     "4-1-savvas-try-it-4-lesson-4-1-matches-examp",
@@ -70,76 +69,16 @@ FRAMEWORK_HEADER = [
 ]
 
 
-# ── Helpers ──────────────────────────────────────────────────────────────
-
-def set_cell(cell, lines, bold_first=False):
-    if isinstance(lines, str):
-        lines = [lines]
-    cell.text = ""
-    for i, line in enumerate(lines):
-        p = cell.paragraphs[0] if i == 0 else cell.add_paragraph()
-        run = p.add_run(line)
-        if bold_first and i == 0:
-            run.bold = True
-
-
-def add_callout(doc, title, body_lines, color_hex="CFE2F3"):
-    t = doc.add_table(rows=1, cols=1)
-    t.style = TABLE_STYLE
-    cell = t.cell(0, 0)
-    ps.shade_cell(cell, color_hex)
-    set_cell(cell, [title] + list(body_lines), bold_first=True)
-    doc.add_paragraph()
-
-
-def bank_item_block(doc, q, *, label=None, space_after_inches=1.0):
-    if label:
-        p = doc.add_paragraph()
-        r = p.add_run(label)
-        r.bold = True
-        r.font.size = Pt(11)
-        r.font.color.rgb = RGBColor(0x0B, 0x5C, 0x7B)
-    prompt_p = doc.add_paragraph()
-    ps.render_prompt(prompt_p, q["prompt"], font_size=11)
-    if q.get("answers"):
-        for i, a in enumerate(q["answers"]):
-            line = doc.add_paragraph()
-            line.paragraph_format.left_indent = Inches(0.3)
-            run = line.add_run(f"  ({chr(65+i)})  " + ps.latex_to_unicode(a))
-            run.font.size = Pt(11)
-    sp = doc.add_paragraph()
-    sp.paragraph_format.space_after = Inches(space_after_inches)
-
-
-def add_header_block(doc, *, for_teacher=False):
-    ps.running_header_name_block(doc, label_right="BLOCK")
-    ps.day_banner(doc, 3, LESSON_TITLE,
-                  subtitle=LESSON_LABEL + (" · Teacher Edition" if for_teacher else ""))
-    t = doc.add_table(rows=len(OBJECTIVES), cols=2)
-    t.style = TABLE_STYLE
-    for r, (label, body) in enumerate(OBJECTIVES):
-        t.cell(r, 0).width = Inches(1.6)
-        set_cell(t.cell(r, 0), label, bold_first=True)
-        set_cell(t.cell(r, 1), body)
-    doc.add_paragraph()
-    t = doc.add_table(rows=len(FRAMEWORK_HEADER), cols=2)
-    t.style = TABLE_STYLE
-    for r, (label, body) in enumerate(FRAMEWORK_HEADER):
-        t.cell(r, 0).width = Inches(1.6)
-        set_cell(t.cell(r, 0), label, bold_first=True)
-        set_cell(t.cell(r, 1), body)
-    doc.add_paragraph()
+def _header(doc, *, for_teacher=False):
+    add_header_block(doc, lesson_title=LESSON_TITLE, lesson_label=LESSON_LABEL,
+                     objectives=OBJECTIVES, framework_header=FRAMEWORK_HEADER,
+                     for_teacher=for_teacher, day_number=3)
 
 
 # ── Do Now ───────────────────────────────────────────────────────────────
 
 def build_do_now(path):
-    doc = Document()
-    for section in doc.sections:
-        section.top_margin = Inches(0.6)
-        section.bottom_margin = Inches(0.6)
-        section.left_margin = Inches(0.75)
-        section.right_margin = Inches(0.75)
+    doc = new_packet_doc(top=0.6, bottom=0.6, left=0.75, right=0.75)
     ps.running_header_name_block(doc, label_right="BLOCK")
     ps.day_banner(doc, 3, "Do Now — " + LESSON_TITLE, subtitle=LESSON_LABEL)
 
@@ -174,14 +113,8 @@ def build_do_now(path):
 # ── Student packet ───────────────────────────────────────────────────────
 
 def build_student(path):
-    doc = Document()
-    for section in doc.sections:
-        section.top_margin = Inches(0.55)
-        section.bottom_margin = Inches(0.55)
-        section.left_margin = Inches(0.7)
-        section.right_margin = Inches(0.7)
-
-    add_header_block(doc, for_teacher=False)
+    doc = new_packet_doc(top=0.55, bottom=0.55, left=0.7, right=0.7)
+    _header(doc, for_teacher=False)
 
     ps.teal_section(doc, "LAUNCH — Reciprocal Function + Translations (teacher models Ex 4 + Ex 5)", [])
     add_callout(doc, "📘  RECIPROCAL FUNCTION — PARENT f(x) = 1/x",
@@ -263,14 +196,8 @@ def build_student(path):
 # ── Teacher packet ───────────────────────────────────────────────────────
 
 def build_teacher(path):
-    doc = Document()
-    for section in doc.sections:
-        section.top_margin = Inches(0.5)
-        section.bottom_margin = Inches(0.5)
-        section.left_margin = Inches(0.7)
-        section.right_margin = Inches(0.7)
-
-    add_header_block(doc, for_teacher=True)
+    doc = new_packet_doc(top=0.5, bottom=0.5, left=0.7, right=0.7)
+    _header(doc, for_teacher=True)
 
     add_callout(doc, "📌  PRE-FLIGHT — P3 IS ASSESSMENT-CRITICAL",
                 [
