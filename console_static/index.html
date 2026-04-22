@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Klimsara Teacher Console</title>
+  <link rel="stylesheet" href="/static/console.css" />
+</head>
+<body>
+
+  <!-- ── App header ──────────────────────────────────────────────────────── -->
+  <header id="app-header">
+    <h1>Klimsara Teacher Console</h1>
+    <span id="health-dot" title="Server health"></span>
+    <span id="health-label">Checking…</span>
+  </header>
+
+  <!-- ── Server-down banner ───────────────────────────────────────────────── -->
+  <div id="server-banner">
+    Server not running — start it with: <code>python console.py</code>
+  </div>
+
+  <!-- ── Main layout ──────────────────────────────────────────────────────── -->
+  <div id="main">
+
+    <!-- ── Sidebar: lesson grid ─────────────────────────────────────────── -->
+    <nav id="sidebar" aria-label="Lesson list">
+      <div id="sidebar-search">
+        <input
+          id="filter-input"
+          type="search"
+          placeholder="Filter lessons…"
+          aria-label="Filter lessons by ID or title"
+        />
+      </div>
+      <div id="lesson-list" role="listbox" aria-label="Lessons"></div>
+    </nav>
+
+    <!-- ── Detail pane ──────────────────────────────────────────────────── -->
+    <section id="detail" aria-label="Lesson detail">
+
+      <!-- Empty state -->
+      <div id="detail-empty">Select a lesson from the list.</div>
+
+      <!-- Populated header (hidden until a lesson is selected) -->
+      <div id="detail-header" style="display:none;">
+        <span id="detail-title"></span>
+
+        <!-- PDF open-in-tab buttons -->
+        <button id="btn-student-pdf" class="btn btn-navy"   disabled title="Open student PDF in new tab">Student PDF</button>
+        <button id="btn-teacher-pdf" class="btn btn-navy"   disabled title="Open teacher PDF in new tab">Teacher PDF</button>
+        <button id="btn-slides"      class="btn btn-teal"   disabled title="Open slides PDF in new tab">Slides</button>
+        <button id="btn-pacer"       class="btn btn-teal"   disabled title="Open pacer HTML in new tab">Pacer</button>
+        <button id="btn-registry"    class="btn btn-gold"   title="View registry items for this lesson">Registry</button>
+        <button id="btn-regen"       class="btn btn-accent" title="Regenerate PDFs (Ctrl+Enter)">Regenerate &#x21BB;</button>
+      </div>
+
+      <!-- Workspace (editor + preview) — hidden until a lesson is selected -->
+      <div id="workspace" style="display:none;">
+
+        <!-- ── YAML editor column ─────────────────────────────────────── -->
+        <div id="editor-col">
+          <div id="editor-toolbar">
+            <span class="toolbar-label">YAML spec</span>
+            <span id="save-status"></span>
+            <button id="btn-save" class="btn btn-blue" title="Save YAML (Ctrl+S)">Save</button>
+          </div>
+
+          <!-- CodeMirror host -->
+          <div id="cm-host" aria-label="YAML editor"></div>
+
+          <!-- No-YAML fallback message -->
+          <div id="no-yaml-msg"></div>
+
+          <!-- Error / regen log panel -->
+          <div id="error-panel" role="alert" aria-live="assertive"></div>
+        </div>
+
+        <!-- ── PDF preview column ─────────────────────────────────────── -->
+        <div id="preview-col">
+          <!-- Toggle bar is part of the workspace header, rendered inline here -->
+          <div style="display:flex;align-items:center;gap:8px;padding:7px 12px;background:#f0f6fc;border-bottom:1px solid #c6d8ea;flex-shrink:0;">
+            <span style="font-size:0.78rem;color:var(--muted);font-weight:600;flex:1;">PDF preview</span>
+            <div id="preview-toggle" role="group" aria-label="Preview edition">
+              <button id="toggle-student" class="active" aria-pressed="true">Student</button>
+              <button id="toggle-teacher" aria-pressed="false">Teacher</button>
+            </div>
+          </div>
+
+          <iframe
+            id="pdf-frame"
+            sandbox="allow-same-origin"
+            title="PDF preview"
+            style="display:none;"
+          ></iframe>
+
+          <div id="preview-placeholder">No PDF to display.</div>
+        </div>
+
+      </div><!-- /workspace -->
+
+    </section><!-- /detail -->
+
+  </div><!-- /main -->
+
+  <!-- ── Registry modal ───────────────────────────────────────────────────── -->
+  <div id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="modal-box">
+      <div id="modal-header">
+        <h2 id="modal-title">Registry</h2>
+        <button id="btn-modal-close" class="btn btn-muted" aria-label="Close modal">Close</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ── Console JS (ES module, loads CodeMirror from CDN) ─────────────────── -->
+  <script type="module" src="/static/console.js"></script>
+
+</body>
+</html>
