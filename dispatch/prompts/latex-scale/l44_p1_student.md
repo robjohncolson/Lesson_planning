@@ -53,6 +53,14 @@ Must include:
 - Bank-item ordering and labels exactly as listed in the brief's
   "Bank-item labels (in order)" section.
 - Section ordering in source order from the brief.
+- **Do not substitute computed answers into prompt content.** If a
+  Savvas item describes a curve as `w = k/f`, your TikZ/text annotation
+  must also say `w = k/f` — NOT `w = 300000/f` even though k=300000
+  follows from the given pair. Pre-computing k strips the problem of
+  its pedagogical purpose. (Teacher edition is the only place computed
+  k values may appear, and only inside the answer-key block.)
+- TikZ annotations should mirror the prompt's symbolic form, not your
+  derived numeric form.
 
 
 ### May restructure
