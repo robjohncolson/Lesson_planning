@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\IconCheck}{[CHECK]}
+\newcommand{\phasetag}[1]{{\small\itshape Tag: #1\par}}
+\newcommand{\teacheranswerbox}[2]{\begin{callout}{#1}{calloutgreen}#2\end{callout}}
+
+\begin{document}
+
+\packetheading{AP Statistics \textperiodcentered\ Topic 6.4 \textperiodcentered\ Teacher Edition}{Setting Up a Test for a Population Proportion}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Math Objective} & Set up a one-proportion \(z\)-test by (1) stating \(H_0\) and \(H_a\) using correct parameter notation \(p\), (2) verifying all three conditions (Random, 10\%, Large Counts), and (3) computing the test statistic \(z = \dfrac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}\). \\ \hline
+\textbf{Language Objective} & Students will use the frame ``If the true proportion is \underline{\hspace{1.1cm}}, the probability of getting a sample proportion as extreme as \underline{\hspace{1.1cm}} by chance alone is \underline{\hspace{1.1cm}}.'' to interpret a \(p\)-value in context. \\ \hline
+\textbf{Essential Understanding} & A significance test answers ONE question: is the observed sample proportion far enough from \(p_0\) that we can reject the null? The three-condition check is not busywork --- it validates that the \(z\)-statistic formula is trustworthy for this sample. \\ \hline
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Topic Goals} & Students move from informal "is this surprising?" thinking (Do Now) to the formal four-step AP test structure. Explore runs the full hypothesis-testing sequence on one continuous context so each step builds on the last. \\ \hline
+\textbf{Essential Question} & How do we decide whether an observed sample proportion is statistically surprising, and what conditions must hold before we can trust that decision? \\ \hline
+\textbf{Materials} & Pencils; student packet; calculator (normalcdf / z-table for optional reinforcement). No Chromebooks required during Explore. \\ \hline
+\end{tabular}
+}
+
+\begin{callout}{\IconPin\ PRE-FLIGHT --- SINGLE-PERIOD QUICK: DOK-3 SPINE INSIDE ONE PERIOD}{calloutpink}
+Today's conceptual core is Practice \#4 (DOK-3 Performance Task). Students design their own scenario, state hypotheses, and justify conditions. That design step IS the deepest content.\\
+Pace: Do Now (7 min) \(\rightarrow\) Launch (10 min) \(\rightarrow\) Explore \#1--3 (18 min) \(\rightarrow\) DOK-3 \#4 (10 min) \(\rightarrow\) Share (5 min) \(\rightarrow\) Exit (5 min). \(\sim\)55 min total.\\
+If running tight: cut Explore \#2 (conditions check can be done as teacher-led rapid fire). Never cut \#4.
+\end{callout}
+
+\phasetag{bridge from sampling distributions}
+\frameworkphaseheader{Do Now}{1}{7}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item Hand out at door.
+  \item Circulate 3 min.
+  \item Cold-call 1 student for \(\hat{p}\) computation.
+  \item Bridge aloud: 'Today we make that informal intuition formal.'
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item Compute \(\hat{p}\) from given counts.
+  \item Compare to stated \(p_0\) and write one-sentence informal judgment.
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item What does \(\hat{p}\) represent vs.\ \(p\)?
+  \item How far from \(p_0\) is 'far enough' to be suspicious?
+\end{itemize}
+}{Solo teacher: circulate, time 7 min, pull sheets.}
+
+\bankitem{Do Now}{%
+A coin is flipped 80 times and lands heads 52 times. (a) What is \(\hat{p}\), the sample proportion of heads? (b) If the coin were fair, what would you expect \(\hat{p}\) to equal? (c) Does your result from (a) convince you the coin is unfair? Explain in one sentence using symbolic form.
+}{%
+}
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+(no answer key --- verify before class)
+}
+
+\phasetag{model the four-step test structure}
+\frameworkphaseheader{Launch}{2}{10}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item Write the four AP steps on board: Hypotheses / Conditions / Test Statistic / Conclusion.
+  \item Walk through the SETUP RULES callout completely.
+  \item Model only Step 1 (hypotheses) on one fresh example out loud.
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item Copy the four-step framework into margin.
+  \item Fill in the hypothesis example as teacher models.
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item What is the null hypothesis ALWAYS claiming about \(p\)?
+  \item When do we use \(<\), \(>\), or \(\neq\) in \(H_a\)?
+\end{itemize}
+}{Teacher models ONE step only. Students finish the rest in Explore.}
+
+\begin{callout}{\IconBook\ SETUP RULES: ONE-PROPORTION \(z\)-TEST (keep printed on your page)}{calloutgreen}
+\textbf{Four AP Steps} (write these before every significance test):
+\begin{enumerate}[leftmargin=2.1em,itemsep=1pt,topsep=3pt]
+  \item \textbf{Hypotheses:} State \(H_0\!: p = p_0\) and \(H_a\!: p \neq p_0\) (or \(<\), \(>\)). Always about the \textit{parameter} \(p\).
+  \item \textbf{Conditions:} (i) Random sample/assignment. (ii) Independence: \(n < 10\%\) of population. (iii) Large Counts: \(np_0 \geq 10\) and \(n(1-p_0) \geq 10\).
+  \item \textbf{Test Statistic:} \(z = \dfrac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}\). Use \(p_0\), NOT \(\hat{p}\), in the denominator.
+  \item \textbf{Conclusion:} State whether you reject or fail to reject \(H_0\), in context, at the given \(\alpha\) level.
+\end{enumerate}
+\end{callout}
+
+\begin{callout}{\IconWarn\ COMMON ERRORS (both appear on AP Free Response!)}{calloutred}
+ERROR 1: Writing \(H_0\!: \hat{p} = p_0\). The null is about the \textit{parameter} \(p\), never the \textit{statistic} \(\hat{p}\).\\
+ERROR 2: Using \(\hat{p}\) instead of \(p_0\) in the standard error denominator. The formula assumes the null is true.\\
+ERROR 3: Concluding ``we proved \(H_0\)'' when you fail to reject. We only ever \textit{fail to reject} --- never accept \(H_0\).
+\end{callout}
+
+\phasetag{TPS + DOK-3 driver}
+\frameworkphaseheader{Explore}{2-3}{28}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item 4 laps circulation (\(\sim\)7 min each).
+  \item Lap 1: \#1 (hypotheses). Lap 2: \#2 (conditions). Lap 3: \#3 (\(z\)-stat). Lap 4: \#4 (DOK-3).
+  \item Do NOT give DOK-3 answers. Pairs present at Share.
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item Work with partner, in order.
+  \item For \#4, choose their own real-world claim before writing a single symbol.
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item \#2: which condition is hardest to verify in practice? Why?
+  \item \#4: why does your scenario call for one-sided vs.\ two-sided?
+\end{itemize}
+}{Press pairs on \#4 direction choice. That IS the DOK-3 judgment.}
+
+\bankitem{Practice \#1 --- State the hypotheses}{%
+A city council claims that 60\% of residents support a new park. A survey of 120 randomly selected residents finds 64 who support the park. State the null and alternative hypotheses (using parameter \(p\)) for a two-sided test of the council's claim.
+}{%
+}
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+(no answer key --- verify before class)
+}
+
+\bankitem{Practice \#2 --- Check all three conditions}{%
+Using the park-survey context from Practice \#1 (\(n = 120\), \(p_0 = 0.60\)): verify all three conditions for a one-proportion \(z\)-test. Show each check symbolically.
+}{%
+}
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+(no answer key --- verify before class)
+}
+
+\bankitem{Practice \#3 --- Compute the test statistic \(z\)}{%
+Still using the park-survey context (\(\hat{p} = 64/120\), \(p_0 = 0.60\), \(n = 120\)): compute the test statistic using the formula \(z = \dfrac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}\). Leave intermediate values in symbolic form until the final step.
+}{%
+}
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+(no answer key --- verify before class)
+}
+
+\bankitem{Practice \#4 \IconStar\ PERFORMANCE TASK --- Design your own 1-prop test}{%
+\IconStar\ PERFORMANCE TASK: Choose a real-world claim about a population proportion (e.g., school attendance rate, recycling rate, seat-belt use). (A) State \(H_0\) and \(H_a\) with the correct parameter \(p\) and direction. (B) Describe a realistic sample design and check whether all three conditions would plausibly be met. (C) Explain why a researcher would choose a one-sided vs.\ two-sided alternative for your scenario.
+}{%
+}
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+(no answer key --- verify before class)
+}
+
+\phasetag{DOK-3 pair presents + bridge to p-value}
+\frameworkphaseheader{Share Summary}{2}{5}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item Cold-call a pair that struggled on \#4 direction choice.
+  \item Bridge: 'Tomorrow we compute the \(p\)-value and make a formal conclusion.'
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item Presenting pair uses the sentence frame for \#4 direction justification.
+  \item Rest of class signals thumbs up/sideways and writes takeaway.
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item What would make you change from two-sided to one-sided?
+  \item Preview: if \(p\)-value \(< \alpha\), what do we say about \(H_0\)?
+\end{itemize}
+}{Cold-call the pair that had the most interesting scenario --- hold them accountable.}
+
+\begin{callout}{\IconSearch\ BRIDGE TO NEXT LESSON}{calloutpeach}
+Next class we compute the \(p\)-value (using a \(z\)-table or normalcdf) and write the full four-step conclusion. The setup you practiced today is the foundation. If you are unsure of any step, re-read the Setup Rules callout before next class.
+\end{callout}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames}
+
+Direction justification: "I chose a     (one/two)-sided alternative because I wanted to detect whether the proportion was specifically     than \(p_0\), not just different."
+
+Conditions check: "The Large Counts condition is met because \(n p_0 = \)    \(\geq 10\) and \(n(1-p_0) = \)    \(\geq 10\)."
+
+\end{sentenceframebox}
+
+\phasetag{summary recap (not graded)}
+\frameworkphaseheader{Exit}{1-2}{5}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item Collect at door.
+  \item Scan \#3 (students who can't set up the formula). Plan tomorrow's Do Now if many are stuck.
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item 3 sentence stems, honest.
+\end{itemize}
+}{%
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  \item Did students correctly identify the direction of \(H_a\)?
+\end{itemize}
+}{Collect. No grade.}
+
+\begin{summaryexitbox}{EXIT TICKET --- Summary Recap}
+The null hypothesis for a one-proportion \(z\)-test always states \dotfill
+
+The condition I found hardest to verify today was \dotfill because \dotfill
+
+I distinguish a one-sided from a two-sided alternative by \dotfill
+
+\end{summaryexitbox}
+
+\clearpage
+
+\sectionbanner{OPTIONAL REINFORCEMENT (not collected)}
+
+\bankitem{Optional \#1 --- Interpret the \(p\)-value in context}{%
+The park-survey test yields \(z \approx -1.49\) and \(p\text{-value} \approx 0.136\). Interpret this \(p\)-value in context using the sentence frame: ``If the true proportion of residents who support the park is \_\_\_, the probability of getting a sample proportion as far from \_\_\_ as \_\_\_ by chance alone is \_\_\_.'' Then state your conclusion at the \(\alpha = 0.05\) level.
+}{%
+}
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+(no answer key --- verify before class)
+}
+
+\clearpage
+
+\begin{callout}{\IconClock\ PERIOD VARIANTS --- 55-MIN vs 65-MIN}{calloutpink}
+55 min (standard): Run as written above.\\
+65 min (extra period): Add 10 min to Explore --- pairs share DOK-3 scenarios with a second pair (gallery-walk style) before whole-class share. Richer DOK-3 payoff.\\
+45-min short day: Cut Explore \#2 (run conditions check as teacher-led rapid fire, 2 min). Keep \#4.
+\end{callout}
+
+\begin{callout}{\IconPuzzle\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS}{calloutiep}
+\textbullet\ Provide the Setup Rules callout as a laminated reference card.\\
+\textbullet\ For \#4, provide a pre-structured template: ``Claim: \_\_\_ \% of \_\_\_ do/are \_\_\_. \(H_0\!: p = \underline{\hspace{0.8cm}}\). \(H_a\!: p \neq \underline{\hspace{0.8cm}}\).''\\
+\textbullet\ Accept verbal sentence-frame completion in lieu of written for exit ticket.
+\end{callout}
+
+\begin{callout}{\IconGlobe\ SUPPORTS FOR ELL STUDENTS}{calloutell}
+\textbullet\ Word cards: ``parameter'' = true value for the whole population; ``statistic'' = computed from the sample.\\
+\textbullet\ ``Null hypothesis'' = the boring claim (nothing unusual is happening).\\
+\textbullet\ ``Fail to reject'' \(\neq\) ``accept'' --- display both phrases side-by-side.\\
+\textbullet\ Pair ELL students with English-dominant partners for DOK-3 scenario brainstorm.
+\end{callout}
+
+\end{document}

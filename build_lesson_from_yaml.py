@@ -49,11 +49,19 @@ TEX_DIR = ROOT / "tex"
 def load_registry() -> dict[str, dict]:
     out: dict[str, dict] = {}
     with REGISTRY.open(encoding="utf-8") as f:
-        for line in f:
+        for lineno, line in enumerate(f, start=1):
             line = line.strip()
-            if line:
+            if not line:
+                continue
+            try:
                 row = json.loads(line)
-                out[row["id"]] = row
+            except json.JSONDecodeError as e:
+                hint = line[:80] + ("..." if len(line) > 80 else "")
+                raise SystemExit(
+                    f"registry.jsonl line {lineno}: JSON decode error ({e.msg} at col {e.colno}).\n"
+                    f"  first 80 chars: {hint}"
+                ) from e
+            out[row["id"]] = row
     return out
 
 

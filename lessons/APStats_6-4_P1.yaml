@@ -1,0 +1,213 @@
+# AP Statistics · Topic 6.4 — Setting Up a Test for a Population Proportion
+#
+# Single-period-quick Klimsara lesson (self-contained; NOT a stub).
+# `python build_lesson_from_yaml.py lessons/APStats_6-4_P1.yaml` emits:
+#   tex/APStats_6-4_P1_student.tex + tex/APStats_6-4_P1_teacher.tex
+#
+# Vitality-check proof: first APStats YAML through the generator (2026-04-22).
+# Content mirrors the College Board CED for 6.4 (DAT-3, VAR-6).
+#
+# Authoring gotcha (surfaced by vitality check): string content in YAML is
+# passed VERBATIM to LaTeX. In tabular cells (objectives table) and anywhere
+# LaTeX treats `_` as math-mode, use `\_` for literal underscores —
+# `___` fill-in blanks break the tabular column. Use `\_\_\_` or
+# `\underline{\hspace{2cm}}` inside tabular fields, not raw underscores.
+
+lesson_id: APStats_6-4_P1
+title: "Setting Up a Test for a Population Proportion"
+label: "AP Statistics \\textperiodcentered\\ Topic 6.4"
+period: 1
+cadence: single_period_quick
+
+objectives:
+  - label: Math Objective
+    body: >-
+      Set up a one-proportion \(z\)-test by (1) stating \(H_0\) and \(H_a\)
+      using correct parameter notation \(p\), (2) verifying all three
+      conditions (Random, 10\%, Large Counts), and (3) computing the test
+      statistic \(z = \dfrac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}\).
+  - label: Language Objective
+    body: >-
+      Students will use the frame ``If the true proportion is \underline{\hspace{1.1cm}}, the
+      probability of getting a sample proportion as extreme as \underline{\hspace{1.1cm}} by chance
+      alone is \underline{\hspace{1.1cm}}.'' to interpret a \(p\)-value in context.
+  - label: Essential Understanding
+    body: >-
+      A significance test answers ONE question: is the observed sample
+      proportion far enough from \(p_0\) that we can reject the null? The
+      three-condition check is not busywork --- it validates that the
+      \(z\)-statistic formula is trustworthy for this sample.
+
+framework_header:
+  - label: Topic Goals
+    body: >-
+      Students move from informal "is this surprising?" thinking (Do Now) to
+      the formal four-step AP test structure. Explore runs the full
+      hypothesis-testing sequence on one continuous context so each step
+      builds on the last.
+  - label: Essential Question
+    body: >-
+      How do we decide whether an observed sample proportion is statistically
+      surprising, and what conditions must hold before we can trust that
+      decision?
+  - label: Materials
+    body: >-
+      Pencils; student packet; calculator (normalcdf / z-table for optional
+      reinforcement). No Chromebooks required during Explore.
+
+preflight:
+  title: "PRE-FLIGHT --- SINGLE-PERIOD QUICK: DOK-3 SPINE INSIDE ONE PERIOD"
+  color: calloutpink
+  body: |
+    Today's conceptual core is Practice \#4 (DOK-3 Performance Task). Students design their own scenario, state hypotheses, and justify conditions. That design step IS the deepest content.\\
+    Pace: Do Now (7 min) \(\rightarrow\) Launch (10 min) \(\rightarrow\) Explore \#1--3 (18 min) \(\rightarrow\) DOK-3 \#4 (10 min) \(\rightarrow\) Share (5 min) \(\rightarrow\) Exit (5 min). \(\sim\)55 min total.\\
+    If running tight: cut Explore \#2 (conditions check can be done as teacher-led rapid fire). Never cut \#4.
+
+phases:
+  do_now:
+    framework_tag: "bridge from sampling distributions"
+    dok: "1"
+    minutes: 7
+    teacher_does:
+      - "Hand out at door."
+      - "Circulate 3 min."
+      - "Cold-call 1 student for \\(\\hat{p}\\) computation."
+      - "Bridge aloud: 'Today we make that informal intuition formal.'"
+    students_do:
+      - "Compute \\(\\hat{p}\\) from given counts."
+      - "Compare to stated \\(p_0\\) and write one-sentence informal judgment."
+    questions_to_ask:
+      - "What does \\(\\hat{p}\\) represent vs.\\ \\(p\\)?"
+      - "How far from \\(p_0\\) is 'far enough' to be suspicious?"
+    adult_role: "Solo teacher: circulate, time 7 min, pull sheets."
+  launch:
+    framework_tag: "model the four-step test structure"
+    dok: "2"
+    minutes: 10
+    teacher_does:
+      - "Write the four AP steps on board: Hypotheses / Conditions / Test Statistic / Conclusion."
+      - "Walk through the SETUP RULES callout completely."
+      - "Model only Step 1 (hypotheses) on one fresh example out loud."
+    students_do:
+      - "Copy the four-step framework into margin."
+      - "Fill in the hypothesis example as teacher models."
+    questions_to_ask:
+      - "What is the null hypothesis ALWAYS claiming about \\(p\\)?"
+      - "When do we use \\(<\\), \\(>\\), or \\(\\neq\\) in \\(H_a\\)?"
+    adult_role: "Teacher models ONE step only. Students finish the rest in Explore."
+  explore:
+    framework_tag: "TPS + DOK-3 driver"
+    dok: "2-3"
+    minutes: 28
+    teacher_does:
+      - "4 laps circulation (\\(\\sim\\)7 min each)."
+      - "Lap 1: \\#1 (hypotheses). Lap 2: \\#2 (conditions). Lap 3: \\#3 (\\(z\\)-stat). Lap 4: \\#4 (DOK-3)."
+      - "Do NOT give DOK-3 answers. Pairs present at Share."
+    students_do:
+      - "Work with partner, in order."
+      - "For \\#4, choose their own real-world claim before writing a single symbol."
+    questions_to_ask:
+      - "\\#2: which condition is hardest to verify in practice? Why?"
+      - "\\#4: why does your scenario call for one-sided vs.\\ two-sided?"
+    adult_role: "Press pairs on \\#4 direction choice. That IS the DOK-3 judgment."
+  share_summary:
+    framework_tag: "DOK-3 pair presents + bridge to p-value"
+    dok: "2"
+    minutes: 5
+    teacher_does:
+      - "Cold-call a pair that struggled on \\#4 direction choice."
+      - "Bridge: 'Tomorrow we compute the \\(p\\)-value and make a formal conclusion.'"
+    students_do:
+      - "Presenting pair uses the sentence frame for \\#4 direction justification."
+      - "Rest of class signals thumbs up/sideways and writes takeaway."
+    questions_to_ask:
+      - "What would make you change from two-sided to one-sided?"
+      - "Preview: if \\(p\\)-value \\(< \\alpha\\), what do we say about \\(H_0\\)?"
+    adult_role: "Cold-call the pair that had the most interesting scenario --- hold them accountable."
+  exit:
+    framework_tag: "summary recap (not graded)"
+    dok: "1-2"
+    minutes: 5
+    teacher_does:
+      - "Collect at door."
+      - "Scan \\#3 (students who can't set up the formula). Plan tomorrow's Do Now if many are stuck."
+    students_do:
+      - "3 sentence stems, honest."
+    questions_to_ask:
+      - "Did students correctly identify the direction of \\(H_a\\)?"
+    adult_role: "Collect. No grade."
+
+items:
+  do_now: ["apstats-6-4-do-now-q1"]
+  explore:
+    - id: "apstats-6-4-explore-q1"
+      label: "Practice \\#1 --- State the hypotheses"
+    - id: "apstats-6-4-explore-q2"
+      label: "Practice \\#2 --- Check all three conditions"
+    - id: "apstats-6-4-explore-q3"
+      label: "Practice \\#3 --- Compute the test statistic \\(z\\)"
+    - id: "apstats-6-4-explore-q4-dok3"
+      label: "Practice \\#4 \\IconStar\\ PERFORMANCE TASK --- Design your own 1-prop test"
+      dok3: true
+  reinforcement:
+    - id: "apstats-6-4-reinforcement-q1"
+      label: "Optional \\#1 --- Interpret the \\(p\\)-value in context"
+
+callouts:
+  - section: launch
+    title: "\\IconBook\\ SETUP RULES: ONE-PROPORTION \\(z\\)-TEST (keep printed on your page)"
+    color: calloutgreen
+    body: |
+      \textbf{Four AP Steps} (write these before every significance test):
+      \begin{enumerate}[leftmargin=2.1em,itemsep=1pt,topsep=3pt]
+        \item \textbf{Hypotheses:} State \(H_0\!: p = p_0\) and \(H_a\!: p \neq p_0\) (or \(<\), \(>\)). Always about the \textit{parameter} \(p\).
+        \item \textbf{Conditions:} (i) Random sample/assignment. (ii) Independence: \(n < 10\%\) of population. (iii) Large Counts: \(np_0 \geq 10\) and \(n(1-p_0) \geq 10\).
+        \item \textbf{Test Statistic:} \(z = \dfrac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}\). Use \(p_0\), NOT \(\hat{p}\), in the denominator.
+        \item \textbf{Conclusion:} State whether you reject or fail to reject \(H_0\), in context, at the given \(\alpha\) level.
+      \end{enumerate}
+  - section: launch
+    title: "\\IconWarn\\ COMMON ERRORS (both appear on AP Free Response!)"
+    color: calloutred
+    body: |
+      ERROR 1: Writing \(H_0\!: \hat{p} = p_0\). The null is about the \textit{parameter} \(p\), never the \textit{statistic} \(\hat{p}\).\\
+      ERROR 2: Using \(\hat{p}\) instead of \(p_0\) in the standard error denominator. The formula assumes the null is true.\\
+      ERROR 3: Concluding ``we proved \(H_0\)'' when you fail to reject. We only ever \textit{fail to reject} --- never accept \(H_0\).
+  - section: share_summary
+    title: "\\IconSearch\\ BRIDGE TO NEXT LESSON"
+    color: calloutpeach
+    body: |
+      Next class we compute the \(p\)-value (using a \(z\)-table or normalcdf) and write the full four-step conclusion. The setup you practiced today is the foundation. If you are unsure of any step, re-read the Setup Rules callout before next class.
+
+sentence_frames:
+  section: share_summary
+  frames:
+    - "Direction justification: \"I chose a \_\_\_ (one/two)-sided alternative because I wanted to detect whether the proportion was specifically \_\_\_ than \\(p_0\\), not just different.\""
+    - "Conditions check: \"The Large Counts condition is met because \\(n p_0 = \\)\_\_\_ \\(\\geq 10\\) and \\(n(1-p_0) = \\)\_\_\_ \\(\\geq 10\\).\""
+
+exit_ticket:
+  title: "EXIT TICKET --- Summary Recap"
+  items:
+    - "The null hypothesis for a one-proportion \\(z\\)-test always states \\dotfill"
+    - "The condition I found hardest to verify today was \\dotfill because \\dotfill"
+    - "I distinguish a one-sided from a two-sided alternative by \\dotfill"
+
+teacher_callouts:
+  - title: "\\IconClock\\ PERIOD VARIANTS --- 55-MIN vs 65-MIN"
+    color: calloutpink
+    body: |
+      55 min (standard): Run as written above.\\
+      65 min (extra period): Add 10 min to Explore --- pairs share DOK-3 scenarios with a second pair (gallery-walk style) before whole-class share. Richer DOK-3 payoff.\\
+      45-min short day: Cut Explore \#2 (run conditions check as teacher-led rapid fire, 2 min). Keep \#4.
+  - title: "\\IconPuzzle\\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS"
+    color: calloutiep
+    body: |
+      \textbullet\ Provide the Setup Rules callout as a laminated reference card.\\
+      \textbullet\ For \#4, provide a pre-structured template: ``Claim: \_\_\_ \% of \_\_\_ do/are \_\_\_. \(H_0\!: p = \underline{\hspace{0.8cm}}\). \(H_a\!: p \neq \underline{\hspace{0.8cm}}\).''\\
+      \textbullet\ Accept verbal sentence-frame completion in lieu of written for exit ticket.
+  - title: "\\IconGlobe\\ SUPPORTS FOR ELL STUDENTS"
+    color: calloutell
+    body: |
+      \textbullet\ Word cards: ``parameter'' = true value for the whole population; ``statistic'' = computed from the sample.\\
+      \textbullet\ ``Null hypothesis'' = the boring claim (nothing unusual is happening).\\
+      \textbullet\ ``Fail to reject'' \(\neq\) ``accept'' --- display both phrases side-by-side.\\
+      \textbullet\ Pair ELL students with English-dominant partners for DOK-3 scenario brainstorm.

@@ -1,0 +1,122 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\phasetag}[1]{{\small\itshape Tag: #1\par}}
+
+\begin{document}
+
+\packetheading{AP Statistics \textperiodcentered\ Topic 6.4 \textperiodcentered\ Student Packet}{Setting Up a Test for a Population Proportion}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Math Objective} & Set up a one-proportion \(z\)-test by (1) stating \(H_0\) and \(H_a\) using correct parameter notation \(p\), (2) verifying all three conditions (Random, 10\%, Large Counts), and (3) computing the test statistic \(z = \dfrac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}\). \\ \hline
+\textbf{Language Objective} & Students will use the frame ``If the true proportion is \underline{\hspace{1.1cm}}, the probability of getting a sample proportion as extreme as \underline{\hspace{1.1cm}} by chance alone is \underline{\hspace{1.1cm}}.'' to interpret a \(p\)-value in context. \\ \hline
+\textbf{Essential Understanding} & A significance test answers ONE question: is the observed sample proportion far enough from \(p_0\) that we can reject the null? The three-condition check is not busywork --- it validates that the \(z\)-statistic formula is trustworthy for this sample. \\ \hline
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Topic Goals} & Students move from informal "is this surprising?" thinking (Do Now) to the formal four-step AP test structure. Explore runs the full hypothesis-testing sequence on one continuous context so each step builds on the last. \\ \hline
+\textbf{Essential Question} & How do we decide whether an observed sample proportion is statistically surprising, and what conditions must hold before we can trust that decision? \\ \hline
+\textbf{Materials} & Pencils; student packet; calculator (normalcdf / z-table for optional reinforcement). No Chromebooks required during Explore. \\ \hline
+\end{tabular}
+}
+
+\sectionbanner{DO NOW}
+
+\bankitem{Do Now}{%
+A coin is flipped 80 times and lands heads 52 times. (a) What is \(\hat{p}\), the sample proportion of heads? (b) If the coin were fair, what would you expect \(\hat{p}\) to equal? (c) Does your result from (a) convince you the coin is unfair? Explain in one sentence using symbolic form.
+}{%
+}
+
+\sectionbanner{LAUNCH}
+
+\begin{callout}{\IconBook\ SETUP RULES: ONE-PROPORTION \(z\)-TEST (keep printed on your page)}{calloutgreen}
+\textbf{Four AP Steps} (write these before every significance test):
+\begin{enumerate}[leftmargin=2.1em,itemsep=1pt,topsep=3pt]
+  \item \textbf{Hypotheses:} State \(H_0\!: p = p_0\) and \(H_a\!: p \neq p_0\) (or \(<\), \(>\)). Always about the \textit{parameter} \(p\).
+  \item \textbf{Conditions:} (i) Random sample/assignment. (ii) Independence: \(n < 10\%\) of population. (iii) Large Counts: \(np_0 \geq 10\) and \(n(1-p_0) \geq 10\).
+  \item \textbf{Test Statistic:} \(z = \dfrac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}\). Use \(p_0\), NOT \(\hat{p}\), in the denominator.
+  \item \textbf{Conclusion:} State whether you reject or fail to reject \(H_0\), in context, at the given \(\alpha\) level.
+\end{enumerate}
+\end{callout}
+
+\begin{callout}{\IconWarn\ COMMON ERRORS (both appear on AP Free Response!)}{calloutred}
+ERROR 1: Writing \(H_0\!: \hat{p} = p_0\). The null is about the \textit{parameter} \(p\), never the \textit{statistic} \(\hat{p}\).\\
+ERROR 2: Using \(\hat{p}\) instead of \(p_0\) in the standard error denominator. The formula assumes the null is true.\\
+ERROR 3: Concluding ``we proved \(H_0\)'' when you fail to reject. We only ever \textit{fail to reject} --- never accept \(H_0\).
+\end{callout}
+
+\sectionbanner{EXPLORE}
+
+\textbf{Bank-item labels (in order):}
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,topsep=2pt]
+  \item Practice \#1 --- State the hypotheses
+  \item Practice \#2 --- Check all three conditions
+  \item Practice \#3 --- Compute the test statistic \(z\)
+  \item Practice \#4 \IconStar\ PERFORMANCE TASK --- Design your own 1-prop test
+\end{enumerate}
+
+\bankitem{Practice \#1 --- State the hypotheses}{%
+A city council claims that 60\% of residents support a new park. A survey of 120 randomly selected residents finds 64 who support the park. State the null and alternative hypotheses (using parameter \(p\)) for a two-sided test of the council's claim.
+}{%
+}
+
+\bankitem{Practice \#2 --- Check all three conditions}{%
+Using the park-survey context from Practice \#1 (\(n = 120\), \(p_0 = 0.60\)): verify all three conditions for a one-proportion \(z\)-test. Show each check symbolically.
+}{%
+}
+
+\bankitem{Practice \#3 --- Compute the test statistic \(z\)}{%
+Still using the park-survey context (\(\hat{p} = 64/120\), \(p_0 = 0.60\), \(n = 120\)): compute the test statistic using the formula \(z = \dfrac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}\). Leave intermediate values in symbolic form until the final step.
+}{%
+}
+
+\bankitem{Practice \#4 \IconStar\ PERFORMANCE TASK --- Design your own 1-prop test}{%
+\IconStar\ PERFORMANCE TASK: Choose a real-world claim about a population proportion (e.g., school attendance rate, recycling rate, seat-belt use). (A) State \(H_0\) and \(H_a\) with the correct parameter \(p\) and direction. (B) Describe a realistic sample design and check whether all three conditions would plausibly be met. (C) Explain why a researcher would choose a one-sided vs.\ two-sided alternative for your scenario.
+}{%
+}
+
+\sectionbanner{SHARE / SUMMARY}
+
+\begin{callout}{\IconSearch\ BRIDGE TO NEXT LESSON}{calloutpeach}
+Next class we compute the \(p\)-value (using a \(z\)-table or normalcdf) and write the full four-step conclusion. The setup you practiced today is the foundation. If you are unsure of any step, re-read the Setup Rules callout before next class.
+\end{callout}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames}
+
+Direction justification: "I chose a     (one/two)-sided alternative because I wanted to detect whether the proportion was specifically     than \(p_0\), not just different."
+
+Conditions check: "The Large Counts condition is met because \(n p_0 = \)    \(\geq 10\) and \(n(1-p_0) = \)    \(\geq 10\)."
+
+\end{sentenceframebox}
+
+\sectionbanner{EXIT}
+
+\begin{summaryexitbox}{EXIT TICKET --- Summary Recap}
+The null hypothesis for a one-proportion \(z\)-test always states \dotfill
+
+The condition I found hardest to verify today was \dotfill because \dotfill
+
+I distinguish a one-sided from a two-sided alternative by \dotfill
+
+\end{summaryexitbox}
+
+\clearpage
+
+\sectionbanner{OPTIONAL REINFORCEMENT (not collected)}
+
+\bankitem{Optional \#1 --- Interpret the \(p\)-value in context}{%
+The park-survey test yields \(z \approx -1.49\) and \(p\text{-value} \approx 0.136\). Interpret this \(p\)-value in context using the sentence frame: ``If the true proportion of residents who support the park is \_\_\_, the probability of getting a sample proportion as far from \_\_\_ as \_\_\_ by chance alone is \_\_\_.'' Then state your conclusion at the \(\alpha = 0.05\) level.
+}{%
+}
+
+\end{document}
