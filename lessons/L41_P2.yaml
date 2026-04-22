@@ -1,0 +1,251 @@
+# Lesson 4-1 · Period 2 — Inverse Variation Applications + DOK-3 Performance Task
+#
+# This is the first YAML-driven lesson spec (2026-04-22 proof-of-concept).
+# `python build_lesson_from_yaml.py lessons/L41_P2.yaml` emits:
+#   tex/L41_P2_student.tex + tex/L41_P2_teacher.tex
+#
+# Schema is documented in build_lesson_from_yaml.py. Item prompts/answers
+# come from questionbank/registry.jsonl — this file carries lesson STRUCTURE
+# only (phases, callouts, ordering, accommodations), not item content.
+
+lesson_id: L41_P2
+title: "Inverse Variation Applications + DOK-3 Performance Task"
+label: "Lesson 4-1 · Period 2"
+period: 2
+cadence: full_three_period   # full_three_period | single_period_quick
+
+objectives:
+  - label: Math Objective
+    body: >-
+      Apply inverse variation to real-world contexts (wavelength, gas
+      pressure, travel distance), and distinguish DIRECT variation
+      (\(y = kx\)) from INVERSE variation (\(xy = k\)) inside a single
+      multi-part problem.
+  - label: Language Objective
+    body: >-
+      Students will use the frame "This is ___ variation because as
+      ___ ___, ___ ___ proportionally." to justify whether a relationship
+      is direct or inverse.
+  - label: Essential Understanding
+    body: >-
+      Not every covariation is inverse variation. Direct variation has a
+      constant RATIO (\(y/x = k\)); inverse variation has a constant
+      PRODUCT (\(xy = k\)). A single scenario can contain BOTH types
+      across different variable pairs.
+
+framework_header:
+  - label: Topic Goals
+    body: >-
+      Students model 4 contextual inverse-variation problems, then tackle
+      a Performance Task (Ramón's road trip) that embeds direct and
+      inverse variation in one scenario. Every item is Savvas-sourced.
+  - label: Essential Question
+    body: >-
+      How does inverse variation model real-world relationships, and how
+      is it different from direct variation?
+  - label: Materials
+    body: "Pencils; student packet; calculator. No Chromebooks required."
+
+# Teacher-only preflight at top of teacher body
+preflight:
+  title: "PRE-FLIGHT --- P2 IS THE DOK-3 SPINE DAY"
+  color: calloutpink
+  body: |
+    Today's conceptual core is Practice \#26 (Ramón). Part A is direct variation, Part B is inverse --- same scenario, different variable pairs. That contrast IS the lesson's deepest content.\\
+    Pace: Try-It 3 (5 min) \(\rightarrow\) \#12 (4 min) \(\rightarrow\) \#17 (5 min) \(\rightarrow\) \#23 (7 min) \(\rightarrow\) \#26 (12-15 min). \(\sim\)33-36 min total Explore.\\
+    If running tight: cut \#12 (the HOT inverse-square is tangent, not central). Never cut \#26.
+
+# Framework phase headers (teacher-edition only)
+phases:
+  do_now:
+    framework_tag: "bridge from P1"
+    dok: "1"
+    minutes: 5
+    teacher_does:
+      - "Hand out at door."
+      - "Circulate 3 min."
+      - "Cold-call 1 student for \\(xy\\) computation."
+    students_do:
+      - "Compute \\(xy\\) for each column."
+      - "State \\(k\\) if constant; explain if not."
+    questions_to_ask:
+      - "What do you multiply to check for inverse variation?"
+      - "What would make this NOT inverse? (\\(xy\\) not constant.)"
+    adult_role: "Solo teacher: circulate, time 5 min, pull sheets."
+  launch:
+    framework_tag: "model inverse variation in context"
+    dok: "2"
+    minutes: 12
+    teacher_does:
+      - "Project Example 3 (bouzouki) and walk through the 4-step rule card."
+      - "Compute k = 26 × 329.63 out loud."
+    students_do:
+      - "Copy the rule card into the margin if helpful."
+      - "Solve for the new frequency as the teacher models."
+    questions_to_ask:
+      - "What TWO quantities are varying inversely here?"
+      - "Why does longer string → lower frequency?"
+    adult_role: "Teacher models ONE example fully. No side excursions."
+  explore:
+    framework_tag: "TPS + DOK-3 driver"
+    dok: "2-3"
+    minutes: 33
+    teacher_does:
+      - "5 laps circulation (~6 min each)."
+      - "Lap 1: Try-It 3. Lap 2: #12. Lap 3: #17. Lap 4: #23. Lap 5: #26."
+      - "Do NOT give #26 answers. Pairs present argument at Share."
+    students_do:
+      - "Work with partner, move in order."
+      - "For #26, write direct-vs-inverse classification BEFORE solving."
+    questions_to_ask:
+      - "#26 Part A: what's constant — the ratio or the product?"
+      - "#26 Part B: if time doubles, what happens to the gas remaining?"
+    adult_role: "Press pairs on #26 direct-vs-inverse distinction. It IS the DOK-3."
+  share_summary:
+    framework_tag: "DOK-3 pair presents + Wed bridge"
+    dok: "2"
+    minutes: 5
+    teacher_does:
+      - "Cold-call a pair that struggled on #26."
+      - "Wed bridge: \"Tomorrow we graph these inverse functions and name the features.\""
+    students_do:
+      - "Presenting pair uses sentence frame for Parts A and B."
+      - "Rest of class signals and writes takeaway in margin."
+    questions_to_ask:
+      - "Summarize: how do you test direct vs inverse?"
+      - "Wednesday preview: what shape do you think y = k/x graphs as?"
+    adult_role: "Cold-call a pair that struggled on #26 --- hold them accountable to the distinction."
+  exit:
+    framework_tag: "summary recap (not graded)"
+    dok: "1-2"
+    minutes: 3
+    teacher_does:
+      - "Collect at door."
+      - "Scan #3 (how to distinguish direct from inverse). Plan P3 Do Now if many are fuzzy."
+    students_do:
+      - "3 sentence stems, honest."
+    questions_to_ask:
+      - "Did students articulate the test (y/x constant = direct; xy constant = inverse)?"
+    adult_role: "Collect. No grade."
+
+# Item IDs → rendered bank-item blocks. Pulls prompt + answers from registry.
+items:
+  do_now: ["4-1-savvas-q15"]
+  explore:
+    - id: "4-1-savvas-try-it-3-lesson-4-1-matches-examp"
+      label: "Try It 3 --- Ice cube melting"
+    - id: "4-1-savvas-q12"
+      label: "Practice \\#12 --- HOT: inverse SQUARE variation"
+    - id: "4-1-savvas-q17"
+      label: "Practice \\#17 --- Radio wavelength (graph)"
+      visual: radio_wavelength_graph
+    - id: "4-1-savvas-q23"
+      label: "Practice \\#23 --- Boyle's Law (volleyball vs basketball)"
+    - id: "4-1-savvas-q26"
+      label: "Practice \\#26 \\IconStar\\ PERFORMANCE TASK --- Ramón's road trip"
+      dok3: true
+      visual: ramon_route_diagram
+  reinforcement:
+    - id: "4-1-savvas-q25"
+      label: "Optional \\#1 (Savvas Practice, SAT/ACT style)"
+
+# Section-anchored callouts (rendered in both editions unless teacher_only)
+callouts:
+  - section: launch
+    title: "\\IconBook\\ APPLICATION RULES (keep printed on your page)"
+    color: calloutgreen
+    body: |
+      \textbullet\ To model an inverse variation in context:
+      \begin{enumerate}[leftmargin=2.1em,itemsep=1pt,topsep=3pt]
+        \item Identify the two varying quantities and their constant product \(k\).
+        \item Compute \(k\) from one given pair: \(k =\) (quantity 1) \(\times\) (quantity 2).
+        \item Write the equation: \(y = k/x\) (or rename variables to fit the context).
+        \item Solve for the unknown quantity.
+      \end{enumerate}
+      \textbullet\ Example (Savvas Ex 3, bouzouki): string length \(s\) varies inversely with frequency \(f\).\\
+      \hspace*{1.6em}26-inch string \(\rightarrow\) 329.63 cycles/sec \(\rightarrow\) \(k = 26 \times 329.63 = 8{,}570.38\).\\
+      \hspace*{1.6em}New length 13 inches \(\rightarrow\) \(f = 8{,}570.38 / 13 = 659.26\) cycles/sec.
+  - section: launch
+    title: "\\IconWarn\\ DIRECT vs INVERSE (both appear in today's DOK-3!)"
+    color: calloutred
+    body: |
+      DIRECT: \(y = kx\) \(\rightarrow\) \(y/x\) is constant. As \(x\) increases, \(y\) INCREASES proportionally.\\
+      INVERSE: \(y = k/x\) (\(xy = k\)). As \(x\) increases, \(y\) DECREASES proportionally.\\
+      Test: compute \(y/x\) (direct) AND \(xy\) (inverse). Whichever is constant tells you the relationship.
+  - section: share_summary
+    title: "\\IconSearch\\ BRIDGE TO P3 (Wednesday)"
+    color: calloutpeach
+    body: |
+      Tomorrow we graph the RECIPROCAL FUNCTION \(y = 1/x\) and its translations. Watch for: the graph of inverse variation has asymptotes and a specific shape --- a hyperbola. You've been drawing them already; we'll name the features.
+
+sentence_frames:
+  section: share_summary
+  frames:
+    - "Pair share (Ramón task): \"Part A is ___ variation because distance and time have a constant RATIO of ___. Part B is ___ variation because gas and time have a constant PRODUCT of ___.\""
+    - "Whole class: one pair reads the contrast. Class signals thumbs up/sideways."
+
+exit_ticket:
+  title: "EXIT TICKET --- Summary Recap"
+  items:
+    - "Today I learned that \\dotfill"
+    - "The biggest trap in Ramón's task was \\dotfill"
+    - "I distinguish direct from inverse variation by \\dotfill"
+
+# Teacher-only trailing callouts (period variants, accommodations)
+teacher_callouts:
+  - title: "\\IconClock\\ PERIOD A / PERIOD F --- 65-MIN CLASS NOTES"
+    color: calloutpink
+    body: |
+      Both sections should have 65 min for P2. Use the extra 10 min on Explore \#26 (Ramón) --- the richer discussion, the better the DOK-3 payoff.\\
+      If finished early: hand out Practice \#25 (SAT/ACT MC) as fast-finisher.
+  - title: "\\IconPuzzle\\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS"
+    color: calloutiep
+    body: |
+      \textbullet\ Provide the Application Rules card as a sticker/cut-out.\\
+      \textbullet\ For \#26, provide pre-formatted work space: "PART A: distance = ___ × time" etc.\\
+      \textbullet\ Accept verbal sentence-frame completion in lieu of written.
+  - title: "\\IconGlobe\\ SUPPORTS FOR ELL STUDENTS"
+    color: calloutell
+    body: |
+      \textbullet\ Sentence frames on student page (don't skip).\\
+      \textbullet\ Word cards: "frequency" = how often; "volume" = space inside; "pressure" = push.\\
+      \textbullet\ "Performance Task" = an assessment task with multiple parts.\\
+      \textbullet\ Pair ELL students with English-dominant partners for TPS.
+
+# Chain callbacks (teacher-only, anchored to specific item)
+chain_callbacks:
+  - chain: 1
+    anchor_item: "4-1-savvas-q17"
+    title: "Wavelength/Frequency (first callback)"
+    body: |
+      \textit{When to say:} Before students start Practice \#17.
+
+      \smallskip
+      ``Remember Storage Box? We had a volume constraint, we wanted a dimension. Here we have a \textbf{product constraint} --- wavelength times frequency equals the speed of light --- and we still want to pull out one side given the other. Different equation, same job.''
+
+      \smallskip
+      \textit{Secondary plant:} this is where inverse variation becomes the thematic bridge between polynomial modeling (Topic 3) and the reciprocal/log families (Topics 4--6). Name it.
+
+# Visual specs — referenced by `visual:` in items above. Rendered as TikZ.
+visuals:
+  radio_wavelength_graph:
+    kind: pgfplot
+    xlabel: "Frequency (kilohertz)"
+    ylabel: "Wavelength (m)"
+    xmin: 0
+    xmax: 10000
+    ymin: 0
+    ymax: 1200
+    curve_expression: "300000/x"
+    curve_label: "w = \\dfrac{k}{f}"
+    curve_domain: [250, 10000]
+    data_points: [[1000, 300], [2000, 150], [4000, 75], [6000, 50], [8000, 37.5], [10000, 30]]
+  ramon_route_diagram:
+    kind: tikz_boxes
+    boxes:
+      - {pos: [0, 0], label: "Cleveland, OH", fill: frameshade}
+      - {pos: [5.0, 0], label: "Pittsburgh, PA", fill: frameshade}
+    arrow: {from: cle, to: pit, label: "133 miles\\\\2 hours"}
+    extra:
+      - {pos: [2.5, -1.0], label: "After 2 h: 9 gal in tank", fill: calloutyellow}
+      - {pos: [2.5, -2.0], label: "Continue for 5 more hours", fill: calloutpeach}
