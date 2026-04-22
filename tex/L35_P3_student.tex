@@ -1,0 +1,218 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\IconRuler}{[RULER]}
+
+\newcommand{\tryitthreeagraph}{%
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.76\linewidth,
+  height=2.35in,
+  xmin=-1,
+  xmax=5,
+  ymin=-18,
+  ymax=18,
+  axis lines=middle,
+  grid=both,
+  minor tick num=1,
+  xtick={-1,0,1,2,3,4,5},
+  ytick={-15,-10,-5,0,5,10,15},
+  tick label style={font=\small},
+  label style={font=\small},
+  major grid style={draw=black!25},
+  minor grid style={draw=black!10},
+  clip=true,
+  xlabel={$x$},
+  ylabel={$y$},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south}
+]
+\addplot[tealheader, thick, smooth, domain=-0.5:4.35, samples=240] {2*x^3 - 8*x^2 + 9*x - 9};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}
+
+\newcommand{\tryitthreebgraph}{%
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.76\linewidth,
+  height=2.35in,
+  xmin=-3,
+  xmax=3,
+  ymin=-8,
+  ymax=18,
+  axis lines=middle,
+  grid=both,
+  minor tick num=1,
+  xtick={-3,-2,-1,0,1,2,3},
+  ytick={-8,-4,0,4,8,12,16},
+  tick label style={font=\small},
+  label style={font=\small},
+  major grid style={draw=black!25},
+  minor grid style={draw=black!10},
+  clip=true,
+  xlabel={$x$},
+  ylabel={$y$},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south}
+]
+\addplot[tealheader, thick, smooth, domain=-2.6:2.6, samples=260] {x^4 - 3*x^2 - 4};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}
+
+\newcommand{\practiceqsevengraph}{%
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.76\linewidth,
+  height=2.35in,
+  xmin=-3,
+  xmax=5,
+  ymin=-15,
+  ymax=25,
+  axis lines=middle,
+  grid=both,
+  minor tick num=1,
+  xtick={-3,-2,-1,0,1,2,3,4,5},
+  ytick={-15,-10,-5,0,5,10,15,20,25},
+  tick label style={font=\small},
+  label style={font=\small},
+  major grid style={draw=black!25},
+  minor grid style={draw=black!10},
+  clip=true,
+  xlabel={$x$},
+  ylabel={$y$},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south}
+]
+\addplot[tealheader, thick, smooth, domain=-2.3:3.95, samples=240] {x^3 - x^2 - 4*x - 6};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}
+
+\begin{document}
+
+\packetheading{Lesson 3-5 \(\cdot\) Period 3 \(\cdot\) Student Packet}{Real + Complex Zeros, and Modeling}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Math Objective} & Find all zeros (real and complex) of a polynomial function, and use the factored form to model a volume-constrained application. \\ \hline
+\textbf{Language Objective} & Students will use the frame ``The zeros are \_\_\_; because \_\_\_, the complex conjugate \_\_\_ must also be a zero.'' to justify complex-zero reasoning. \\ \hline
+\textbf{Essential Understanding} & Complex zeros of a polynomial with real coefficients come in conjugate pairs. A cubic model of a physical quantity (volume, profit) can be solved for specific values by factoring and solving. \\ \hline
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Topic Goals} & Students find all zeros (real + complex) of two cubics, then model a Storage Box volume problem end-to-end. Every item is Savvas-sourced. \\ \hline
+\textbf{Essential Question} & How do real and complex zeros together describe a polynomial, and how do you use that structure to answer a real-world model? \\ \hline
+\textbf{Materials} & Pencils; student packet; calculator (optional). Desmos allowed for Try-It 3 check only, NOT for Practice \#27. \\ \hline
+\end{tabular}
+}
+
+\sectionbanner{LAUNCH --- Complex Zeros + Modeling (teacher models on screen)}
+
+\begin{callout}{\IconBook\ COMPLEX-ZERO RULES (keep printed on your page)}{calloutgreen}
+\textbullet\ A polynomial with real coefficients that has complex zeros has them in CONJUGATE PAIRS.\\
+\textbullet\ If \(a + bi\) is a zero, then \(a - bi\) must also be a zero.\\
+\textbullet\ A degree-\(n\) polynomial has exactly \(n\) zeros (counting multiplicity). Some may be real, some complex.\\
+\textbullet\ Example: if a cubic has a real zero at \(x = 4\) and a complex zero \(2 + 3i\), its third zero must be \(2 - 3i\).
+\end{callout}
+
+\begin{callout}{\IconRuler\ MODELING RULES (for the Storage Box)}{calloutyellow}
+\textbullet\ Set up a factored-form volume function \(V(x) = (\text{expr}_1)(\text{expr}_2)(\text{expr}_3)\).\\
+\textbullet\ Each factor is a physical dimension --- label each: length, width, height.\\
+\textbullet\ Use the physical constraint (e.g., ``length is greatest'') to decide which factor is which dimension.\\
+\textbullet\ To find dimensions at \(V = 10\) ft\(^3\), solve the cubic equation --- show all work.
+\end{callout}
+
+\sectionbanner{EXPLORE --- Think-Pair-Share (38 min)}
+\textit{Work with a partner. Use the rule cards above. Storage Box (Practice \#27) is the big one --- plan 20 min for it.}
+
+\textbf{Bank-item labels (in order):}
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,topsep=2pt]
+  \item Try It 3a
+  \item Try It 3b
+  \item Practice \#17
+  \item Practice \#27 \IconStar\ MODELING
+\end{enumerate}
+
+\bankitem{Try It 3a}{%
+What are all the real and complex zeros of the polynomial function shown in the graph? \(f(x) = 2x^3 - 8x^2 + 9x - 9\).
+\tryitthreeagraph
+}{}
+
+\bankitem{Try It 3b}{%
+What are all the real and complex zeros of the polynomial function shown in the graph? \(f(x) = x^4 - 3x^2 - 4\).
+\tryitthreebgraph
+}{}
+
+\bankitem{Practice \#17}{%
+What are all the real and complex zeros of the polynomial function shown in the graph? \(f(x) = x^3 - x^2 - 4x - 6\).
+\practiceqsevengraph
+}{}
+
+\bankitem{Practice \#27 \IconStar\ MODELING}{%
+Model With Mathematics: The height of a rectangular storage box is less than both its length and width. The function \(f(x) = x^3 + 2x^2 - 3x\) represents the volume of the rectangular box, where \(x\) represents the width of the box, in feet.
+
+(a) Find the factored form of \(f(x)\).
+
+(b) Find the zeros of the function.
+
+(c) You know \(x\) represents the width of the box. What do the other two factors represent?
+
+(d) Find the dimensions of the box when the volume is \(10\) ft\(^3\).
+}{}
+
+\sectionbanner{SHARE / SUMMARY (7 min)}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames}
+
+Pair share: ``For the Storage Box, the factored form was \_\_\_. I chose \_\_\_ as the length because \_\_\_. To find \(V = 10\) ft\(^3\), I \_\_\_.''
+
+Whole class: one pair at random presents Part (a)-(b)-(c)-(d) of \#27.
+\end{sentenceframebox}
+
+\sectionbanner{EXIT}
+
+\begin{summaryexitbox}{EXIT TICKET --- Summary Recap}
+Today I learned that \dotfill
+
+For the Storage Box, the hardest step was \dotfill
+
+Thursday's assessment will test \dotfill
+\end{summaryexitbox}
+
+\clearpage
+
+\sectionbanner{OPTIONAL REINFORCEMENT (not collected)}
+\textit{If you finish early or want extra practice before Thursday's assessment.}
+
+\bankitem{Optional \#1  (Savvas Practice)}{%
+Complete each statement so it means the same as ``4 is a zero of the function'': (1) The graph of the function crosses the \_\_\_\_\_\_ at 4. (2) \_\_\_\_\_\_ is a factor of the polynomial.
+}{}
+
+\bankitem{Optional \#2  (Savvas Practice)}{%
+Performance Task: Venetta opened several deli sandwich franchises in 2000. The profit \(P\) (in hundreds of dollars) of the franchises in \(t\) years (since the franchises opened) can be modeled by the function \(P(t) = t^3 + t^2 - 6t\).
+
+Part A: Sketch a graph of the function.
+
+Part B: Based on the model, during what years did Venetta not make a profit?
+
+Part C: If the model is appropriate, predict the amount of profit Venetta will receive from her franchises in 2020.
+}{}
+
+\end{document}

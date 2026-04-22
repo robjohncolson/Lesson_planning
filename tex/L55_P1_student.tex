@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\lessonrow}[2]{\textbf{#1} & #2 \\ \hline}
+\newcommand{\checkbox}{%
+  \tikz[baseline=-0.6ex]\draw[line width=0.4pt] (0,0) rectangle (0.16,0.16);
+}
+\newcommand{\musicstorepromo}{%
+  \begin{center}
+  \begin{tikzpicture}[x=1in,y=1in,font=\small,line width=0.8pt]
+    \draw[rounded corners=4pt, fill=frameshade, draw=framegray!55] (0,0) rectangle (5.9,2.95);
+    \node[
+      draw=warmred!70,
+      fill=calloutpink,
+      rounded corners=4pt,
+      minimum width=5.2in,
+      minimum height=0.45in,
+      align=center
+    ] at (2.95,2.52) {\bfseries HUGE SAVINGS AT O'RILEY'S MUSIC};
+
+    % Stylized drum set for the promo art.
+    \draw[fill=white] (2.95,1.2) ellipse (0.45 and 0.28);
+    \draw[fill=white] (2.45,1.52) circle (0.24);
+    \draw[fill=white] (3.45,1.52) circle (0.24);
+    \draw[fill=white] (2.2,2.0) circle (0.18);
+    \draw[fill=white] (3.7,2.0) circle (0.18);
+    \draw (2.2,1.82) -- (2.35,1.6);
+    \draw (3.7,1.82) -- (3.55,1.6);
+    \draw (2.95,0.92) -- (2.75,0.4);
+    \draw (2.95,0.92) -- (3.15,0.4);
+    \draw (2.72,0.4) -- (3.18,0.4);
+    \draw (2.45,1.28) -- (2.45,0.58);
+    \draw (3.45,1.28) -- (3.45,0.58);
+    \draw (2.95,1.48) -- (2.45,1.72);
+    \draw (2.95,1.48) -- (3.45,1.72);
+
+    \node[
+      draw=warmred!70,
+      fill=calloutyellow,
+      rounded corners=4pt,
+      text width=1.55in,
+      minimum height=0.92in,
+      align=center
+    ] at (1.05,0.9) {\bfseries \$5 off\\a purchase of\\\$20 or more};
+
+    \node[
+      draw=dayblue!70,
+      fill=calloutblue,
+      rounded corners=4pt,
+      text width=1.95in,
+      minimum height=1.08in,
+      align=center
+    ] at (4.82,0.9) {\bfseries Save an additional 15\% off\\your total purchase\\when you open a charge account};
+  \end{tikzpicture}
+  \end{center}
+}
+
+\begin{document}
+
+\packetheading{Lesson 5-5 $\cdot$ Quick $\cdot$ Student Packet}{Function Operations + Composition Order DOK-3 (Standalone)}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Math Objective}{Combine functions via \(+\), \(-\), \(\times\), \(\div\), and composition; track how domain restrictions change; recognize that composition is non-commutative and explain when the order of operations changes the outcome.}
+\lessonrow{Language Objective}{Justify in writing which order of a two-step discount gives a better price, using function composition.}
+\lessonrow{Essential Understanding}{\(f\circ g \neq g\circ f\) in general --- the ORDER of composition matters and often changes the answer, which matters for real-world decisions.}
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Topic Goals}{Add, subtract, multiply, divide, and compose functions; recognize non-commutativity of composition.}
+\lessonrow{Essential Question}{Why does the ORDER of a two-step discount or two-function composition change the result, and when does it not?}
+\lessonrow{Materials}{Student packet, pencil. DOK-3 Practice \#32 (music store) is the lesson's standalone reasoning capstone --- no Topic 5 assessment overlap, treated on its own merits.}
+\end{tabular}
+}
+
+\sectionbanner{LAUNCH --- Function Operations + Composition (teacher models Ex 1 \& Ex 4)}
+
+\begin{callout}{\IconBook\ FUNCTION OPERATIONS RULES (keep printed on your page)}{calloutgreen}
+FUNCTION OPERATIONS\\
+1. \((f\pm g)(x) = f(x)\pm g(x);\ (fg)(x) = f(x)\cdot g(x);\ (f/g)(x) = f(x)/g(x),\ g(x)\neq 0.\)\\
+2. Domain of combined function = intersection of domains, minus any new excluded values (e.g., \(g(x)=0\) for quotient).\\
+3. Composition: \((f\circ g)(x) = f(g(x))\) --- apply \(g\) FIRST, then \(f\).\\
+4. \(f\circ g \neq g\circ f\) in general. ORDER MATTERS. Always check with a test value if unsure.
+\end{callout}
+
+\begin{callout}{\IconWarn\ COMPOSITION IS NOT COMMUTATIVE}{calloutred}
+\((f\circ g)(x) = f(g(x)) \neq (g\circ f)(x) = g(f(x))\) in general.\\
+Step 1: identify which function is applied FIRST (the inner function).\\
+Step 2: substitute the entire inner function as the input to the outer function.\\
+Step 3: simplify. Then check: would reversing the order change the answer?
+\end{callout}
+
+\sectionbanner{EXPLORE --- Think-Pair-Share (33 min)}
+\textit{Work with a partner. Move in order. Practice \#32 (Music Store) is the big one --- plan \(\sim\)12 min for it.}\\
+\textit{45-min Wed F variant: skip q34 and q28.}
+
+\textbf{Bank-item labels (in order):}
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,topsep=2pt]
+  \item Try It 1 --- Add/subtract functions
+  \item Try It 4 --- Compose functions
+  \item Practice \#20 --- Function operations
+  \item Practice \#21 --- Function operations
+  \item Practice \#24 --- Domain of combined function
+  \item Practice \#28 --- Composition evaluation
+  \item Practice \#34 --- Mixed operations
+  \item Practice \#32 \IconStar\ DOK-3 ORDER-MATTERS --- Music Store Double Discount
+\end{enumerate}
+
+\bankitem{Try It 1 --- Add/subtract functions}{%
+Let \(f(x) = 2x^2 + 7x - 1\) and \(g(x) = 3 - 2x\). Identify rules for the following functions.
+
+\begin{enumerate}[label=\textbf{\alph*.},leftmargin=1.8em,itemsep=3pt,topsep=4pt]
+  \item \(f + g\)
+  \item \(f - g\)
+\end{enumerate}
+}{}
+
+\bankitem{Try It 4 --- Compose functions}{%
+Let \(f(x) = 2x - 1\) and \(g(x) = 3x\). Find the value or identify the rule for the following functions.
+
+\begin{enumerate}[label=\textbf{\alph*.},leftmargin=1.8em,itemsep=3pt,topsep=4pt]
+  \item \(f(g(2))\)
+  \item \(f(g(x))\)
+\end{enumerate}
+}{}
+
+\bankitem{Practice \#20 --- Function operations}{%
+Let \(f(x)=\frac{5}{3}x^2+2x-\frac{5}{8}\) and \(g(x)=3x^2\). Identify the rules for the following functions. SEE EXAMPLE 1
+
+\(f+g\)
+}{}
+
+\bankitem{Practice \#21 --- Function operations}{%
+Let \(f(x)=\frac{5}{3}x^2+2x-\frac{5}{8}\) and \(g(x)=3x^2\). Identify the rules for the following functions. SEE EXAMPLE 1
+
+\(f-g\)
+}{}
+
+\bankitem{Practice \#24 --- Domain of combined function}{%
+Let \(f(x)=4x-5\) and \(g(x)=-7x\). Evaluate each expression. SEE EXAMPLE 4
+
+\(f(g(3))\)
+}{}
+
+\bankitem{Practice \#28 --- Composition evaluation}{%
+Let \(f(x)=x^2+x\) and \(g(x)=9-2x\). Identify the rules for the following functions. SEE EXAMPLE 5
+
+\(f\circ g\)
+}{}
+
+\bankitem{Practice \#34 --- Mixed operations}{%
+Given that \(f(x)=x^2+8x+3\) and \(g(x)=-x-7\), which of the following are true? Select all that apply.
+
+\begin{itemize}[leftmargin=1.8em,itemsep=4pt,topsep=4pt]
+  \item[\checkbox] \(f+g=x^2+7x-4\)
+  \item[\checkbox] \(f(g(x))=x^2+6x-4\)
+  \item[\checkbox] The domain of \((f)/(g)\) is the set of all real numbers.
+  \item[\checkbox] \(f(x)\cdot g(x)=-x^3-15x^2+53x+21\)
+  \item[\checkbox] In the composition \(g\circ f\), the output \(f(x)\) is used as the input for \(g\).
+\end{itemize}
+}{}
+
+\bankitem{Practice \#32 \IconStar\ DOK-3 ORDER-MATTERS --- Music Store Double Discount}{%
+\textbf{Use Structure} A music store is running the following promotions.
+
+\musicstorepromo
+
+\begin{enumerate}[label=\textbf{\alph*.},leftmargin=1.8em,itemsep=4pt,topsep=4pt]
+  \item Use composition of functions to find the sale price of a \$90 purchase when the \$5 off discount is applied prior to the 15\% off discount.
+  \item Use composition of functions to find the sale price of a \$90 purchase when the 15\% off discount is applied prior to the \$5 off discount.
+  \item In which order is the deal better for the consumer? Explain.
+\end{enumerate}
+}{}
+
+\sectionbanner{SHARE / SUMMARY (5 min)}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames}
+
+Pair share (\#32 Music Store): ``Applying \_\_\_ first gives \_\_\_, then \_\_\_ gives \_\_\_. If I reverse the order I get \_\_\_, so \((f\circ g)(x) = \_\_\_ \neq g\circ f = \_\_\_\).''
+
+Whole class: one pair presents their order-matters argument. Class signals thumbs up/sideways.
+\end{sentenceframebox}
+
+\begin{callout}{\IconSearch\ LESSON WRAP}{calloutpeach}
+This is a standalone lesson --- composition order is the key idea to carry forward. It appears in real decisions: discounts, conversions, multi-step processes.
+\end{callout}
+
+\sectionbanner{EXIT}
+
+\begin{summaryexitbox}{EXIT TICKET --- Summary Recap}
+\(f\circ g\) means \_\_\_ is applied \_\_\_.\\[0.55em]
+An example where \(f\circ g \neq g\circ f\) is \_\_\_.\\[0.55em]
+For a double discount, the better order for the consumer is \_\_\_ because \_\_\_.\\[0.55em]
+One biggest thing I learned today: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{summaryexitbox}
+
+\clearpage
+
+\sectionbanner{OPTIONAL REINFORCEMENT (not collected)}
+\textit{If you finish Explore early. \#35 is a SAT/ACT-style item requiring you to evaluate \(f(g(5))\).}
+
+\bankitem{Optional \#1  (Savvas Practice, SAT/ACT f(g(5)))}{%
+SAT/ACT Find the value of \(f(g(5))\) if \(f(x)=4x+1\) and \(g(x)=x^2+6\).
+
+\textbf{A} 101 \qquad \textbf{B} 124 \qquad \textbf{C} 125 \qquad \textbf{D} 676 \qquad \textbf{E} 682
+}{}
+
+\end{document}

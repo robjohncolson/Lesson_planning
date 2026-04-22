@@ -1,0 +1,223 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\definecolor{factorysteel}{HTML}{8EA9C1}
+\definecolor{cylinderorange}{HTML}{E69138}
+\definecolor{cylinderoutline}{HTML}{A64B00}
+
+\newcommand{\lessonrow}[2]{\textbf{#1} & #2 \\ \hline}
+
+\newcommand{\promptplaceholder}[1]{%
+  \begin{center}
+  \fcolorbox{framegray!45}{frameshade}{%
+    \parbox{0.84\linewidth}{\centering\small #1}%
+  }
+  \end{center}
+}
+
+\newcommand{\checkbox}{%
+  \tikz[baseline=-0.6ex]\draw[line width=0.4pt] (0,0) rectangle (0.16,0.16);
+}
+
+\newcommand{\qfiftyfigure}{%
+  \begin{center}
+  \begin{tikzpicture}[font=\small, line width=0.8pt]
+    \fill[frameshade] (-0.30,-0.20) rectangle (5.90,2.45);
+    \draw[framegray!55] (-0.30,-0.20) rectangle (5.90,2.45);
+
+    \fill[factorysteel!22] (0.05,0.45) rectangle (1.05,1.55);
+    \draw[factorysteel!90!black] (0.05,0.45) rectangle (1.05,1.55);
+    \fill[factorysteel!32] (0.20,1.55) rectangle (0.90,1.90);
+    \draw[factorysteel!90!black] (0.20,1.55) rectangle (0.90,1.90);
+    \draw[factorysteel!90!black, line width=3pt] (1.05,1.00) -- (1.90,1.00);
+
+    \fill[cylinderorange] (2.20,0.55) rectangle (3.80,1.85);
+    \fill[cylinderorange!92] (3.00,1.85) ellipse (0.80 and 0.18);
+    \draw[cylinderoutline, line width=1pt] (2.20,0.55) -- (2.20,1.85);
+    \draw[cylinderoutline, line width=1pt] (3.80,0.55) -- (3.80,1.85);
+    \draw[cylinderoutline, line width=1pt] (3.00,1.85) ellipse (0.80 and 0.18);
+    \draw[cylinderoutline, line width=1pt] (2.20,0.55) arc[start angle=180,end angle=360,x radius=0.80,y radius=0.18];
+    \draw[cylinderoutline, densely dashed, line width=1pt] (3.80,0.55) arc[start angle=0,end angle=180,x radius=0.80,y radius=0.18];
+
+    \draw[factorysteel!90!black, line width=3pt] (3.80,1.00) -- (4.75,1.00);
+    \fill[factorysteel!22] (4.75,0.40) rectangle (5.55,1.60);
+    \draw[factorysteel!90!black] (4.75,0.40) rectangle (5.55,1.60);
+    \draw[factorysteel!90!black] (5.15,0.40) -- (5.15,0.10);
+    \draw[factorysteel!90!black] (5.35,0.40) -- (5.35,0.10);
+
+    \node[
+      draw,
+      rounded corners,
+      fill=white,
+      inner sep=3pt,
+      align=center
+    ] at (3.00,1.12) {volume \(169.65\text{ ft}^3\)};
+  \end{tikzpicture}
+  \end{center}
+}
+
+\begin{document}
+
+\packetheading{Lesson 5-1 \textperiodcentered\ Quick \textperiodcentered\ Student Packet}{nth Roots, Rational Exponents + Cylinder DOK-3 (Item 1A Prep)}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Math Objective}{Relate nth roots to rational exponents, simplify radicals with variables, evaluate rational-exponent expressions, and use nth roots to solve geometric-modeling problems.}
+\lessonrow{Language Objective}{Explain why \((x^{1/n})^n = x\), using radical and rational-exponent notation interchangeably.}
+\lessonrow{Essential Understanding}{Rational exponents ARE radicals --- \(x^{m/n} = \sqrt[n]{x^m} = (\sqrt[n]{x})^m\). Choose whichever form makes the computation easier.}
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Topic Goals}{Fluency with nth roots and rational exponents; apply both to volume/radius modeling problems (Topic 5 assessment Item 1A prep).}
+\lessonrow{Essential Question}{When is rational-exponent form easier than radical form, and how do we rationalize denominators in cube-root expressions?}
+\lessonrow{Materials}{Student packet, pencil, calculator. DOK-3 Practice \#50 (cylinder) is the lesson's capstone and rehearses the Topic 5 Assessment Item 1A move (derive variable from volume using rational exponents, then rationalize).}
+\end{tabular}
+}
+
+\sectionbanner{LAUNCH --- nth Roots + Rational Exponents (teacher models Ex 1 + Ex 3)}
+
+\begin{callout}{\IconBook\ nth ROOTS \(\leftrightarrow\) RATIONAL EXPONENTS (keep printed on your page)}{calloutgreen}
+nth ROOTS \(\leftrightarrow\) RATIONAL EXPONENTS
+\begin{enumerate}[leftmargin=1.8em,itemsep=1pt,topsep=3pt]
+  \item \(x^{1/n} = \sqrt[n]{x}\) (principal nth root).
+  \item \(x^{m/n} = (\sqrt[n]{x})^m = \sqrt[n]{x^m}\).
+  \item To rationalize an nth-root denominator: multiply num/denom by \(\sqrt[n]{x^{n-1}}\).
+  \item Negative nth roots: only odd \(n\) gives a real negative root; even \(n\) is undefined for negative radicands in Reals.
+\end{enumerate}
+\end{callout}
+
+\begin{callout}{\IconWarn\ COMPRESSED LESSON --- TWO EXAMPLES IN LAUNCH}{calloutred}
+This is a single-period quick treatment. Teacher models BOTH Example 1 (real nth roots) AND Example 3 (evaluate rational exponents) during Launch.\\
+Pay attention to the switch between radical form and rational-exponent form in Example 3 --- that conversion is the core skill for the DOK-3 task.
+\end{callout}
+
+\sectionbanner{EXPLORE --- Think-Pair-Share (32 min)}
+\textit{Work with a partner. Move in order. Practice \#50 (Cylinder Modeling) is the big one --- plan \(\sim\)10 min for it.}
+
+\textbf{Bank-item labels (in order):}
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,topsep=2pt]
+  \item Try It 1 --- Real nth roots
+  \item Try It 3 --- Evaluate rational exponents
+  \item Practice \#28 --- nth roots with variables
+  \item Practice \#30 --- Rational exponent form
+  \item Practice \#37 --- Simplify: mixed radical/rational
+  \item Practice \#48 --- Multi-step rational exponent
+  \item Practice \#50 \IconStar\ DOK-3 CYLINDER MODELING --- Topic 5 Assessment Item 1A prep
+\end{enumerate}
+
+\bankitem{Try It 1 --- Real nth roots}{%
+Find the specified roots of each number.
+
+\begin{enumerate}[label=\textbf{\alph*.},leftmargin=1.8em,itemsep=3pt,topsep=4pt]
+  \item real fourth roots of 81
+  \item real cube roots of 64
+\end{enumerate}
+}{}
+
+\bankitem{Try It 3 --- Evaluate rational exponents}{%
+What is the value of each expression? Round to the nearest hundredth if necessary.
+
+\begin{enumerate}[label=\textbf{\alph*.},leftmargin=1.8em,itemsep=3pt,topsep=4pt]
+  \item \(-(16^{(3)/(4)})\)
+  \item \(\sqrt[5]{3.5^4}\)
+\end{enumerate}
+}{}
+
+\bankitem{Practice \#28 --- nth roots with variables}{%
+Find the specified roots of each number.
+
+The real square roots of 25.
+}{}
+
+\bankitem{Practice \#30 --- Rational exponent form}{%
+Rewrite each expression using a fractional exponent.
+
+\(\sqrt[6]{729}\)
+}{}
+
+\bankitem{Practice \#37 --- Simplify: mixed radical/rational}{%
+Simplify each expression. Assume all variables are positive.
+
+\(\sqrt[6]{729a^{24}b^{18}}\)
+}{}
+
+\bankitem{Practice \#48 --- Multi-step rational exponent}{%
+Determine if each expression is another way to write \(b^{\frac34}\). Select Yes or No.
+
+{\small
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\begin{tabular}{|p{3.35in}|c|c|}
+\hline
+\textbf{Expression} & \textbf{Yes} & \textbf{No} \\ \hline
+a. \(\sqrt[4]{b^3}\) & \checkbox & \checkbox \\ \hline
+b. \((b^3)^{\frac14}\) & \checkbox & \checkbox \\ \hline
+c. \(b^{\frac43}\) & \checkbox & \checkbox \\ \hline
+d. \(\sqrt[3]{b^4}\) & \checkbox & \checkbox \\ \hline
+e. \(\dfrac{b^3}{b^4}\) & \checkbox & \checkbox \\ \hline
+\end{tabular}
+\end{center}
+}
+}{}
+
+\bankitem{Practice \#50 \IconStar\ DOK-3 CYLINDER MODELING --- Topic 5 Assessment Item 1A prep}{%
+\textbf{Performance Task} A milk processing company uses cylindrical-shaped containers. The height of the container is equal to the diameter of the base.
+
+\qfiftyfigure
+\promptplaceholder{[IMAGE: Milk processing machine with an orange cylindrical container; label reads ``volume \(169.65\text{ ft}^3\).'' ]}
+
+\textbf{Part A} How much material is needed to make the lateral surface area of the shipping container?
+
+\textbf{Part B} The cargo hold of a ship is \(20\text{ ft}\) high. What is the largest number of these shipping containers that could be stacked on top of each other inside the cargo hold?
+}{}
+
+\sectionbanner{SHARE / SUMMARY (5 min)}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames}
+
+Pair share (Cylinder): ``I isolated \(r\) from \(V = \pi r^2h\) by substituting \(h = 2r\), giving \(V =\) \_\_\_. Solving for \(r\), I got \(r =\) \_\_\_. In rational-exponent form, \(r = (V/(2\pi))^{1/3}\). To rationalize I multiplied by \_\_\_ to get \_\_\_.'' 
+
+Whole class: one pair reads their cylinder solution. Class signals thumbs up/sideways.
+\end{sentenceframebox}
+
+\begin{callout}{\IconSearch\ BRIDGE TO TOPIC 5 ASSESSMENT}{calloutpeach}
+The cylinder move --- isolate a variable, convert to rational-exponent form, rationalize --- is exactly what the Topic 5 Assessment Item 1A asks. You have now rehearsed it.
+\end{callout}
+
+\sectionbanner{EXIT}
+
+\begin{summaryexitbox}{EXIT TICKET --- Summary Recap}
+\(x^{m/n}\) is the same as \blank[1.8in] in radical form.
+
+To rationalize a cube-root denominator I \blank[2.15in].
+
+One biggest thing I learned today: \blank[2.9in]
+\end{summaryexitbox}
+
+\clearpage
+
+\sectionbanner{OPTIONAL REINFORCEMENT (not collected)}
+\textit{If you finish Explore early. \#49 is an SAT/ACT cube-root item that extends rational-exponent fluency with large radicands.}
+
+\bankitem{Optional \#1  (Savvas Practice \#49 --- SAT/ACT \(\sqrt[3]{4{,}096x^{18}y^{30}}\))}{%
+\textbf{SAT/ACT} Which of the following is equivalent to \(\sqrt[6]{4{,}096x^{18}y^{30}}\), where \(x>0\) and \(y>0\)?
+
+\begin{enumerate}[label=\textbf{\Alph*.},leftmargin=1.8em,itemsep=3pt,topsep=4pt]
+  \item \(682.7x^{15}y^{24}\)
+  \item \(4x^{1.6}y^{1.8}\)
+  \item \(4{,}096x^3y^5\)
+  \item \(4x^3y^5\)
+  \item \(682.7x^3y^5\)
+\end{enumerate}
+}{}
+
+\end{document}

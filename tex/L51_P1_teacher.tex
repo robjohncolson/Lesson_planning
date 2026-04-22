@@ -1,0 +1,439 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\IconCheck}{[CHECK]}
+\newcommand{\IconMic}{[MIC]}
+\newcommand{\IconClipboard}{[CLIPBOARD]}
+\newcommand{\IconBridge}{[BRIDGE]}
+\newcommand{\lessonrow}[2]{\textbf{#1} & #2 \\ \hline}
+\newcommand{\checkbox}{\fbox{\rule{0pt}{1.4ex}\hspace{1.2ex}}}
+
+\newcommand{\phasetag}[1]{%
+  {\small\itshape Tag: #1\par}
+}
+
+\newcommand{\phaseitems}[1]{%
+  \begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  #1
+  \end{itemize}%
+}
+
+\newcommand{\teacheranswerbox}[2]{%
+  \begin{callout}{#1}{calloutgreen}
+  #2
+  \end{callout}
+}
+
+\newcommand{\donowparabolagraph}{%
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.82\linewidth,
+  height=2.8in,
+  xmin=-5.5,
+  xmax=5.5,
+  ymin=-18,
+  ymax=28,
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+  ytick={-16,-8,0,4,8,12,16,20,24},
+  grid=major,
+  tick label style={font=\small},
+  label style={font=\small}
+]
+\addplot[tealheader, smooth, domain=-5:5, samples=250] {x^2};
+\addplot[only marks, mark=*, mark size=2.2pt, color=dayblue] coordinates {
+  (-4,16) (-3,9) (-2,4) (-1,1) (0,0) (1,1) (2,4) (3,9) (4,16) (5,25)
+};
+\node[anchor=south east, font=\small] at (axis cs:5,23) {$y=x^2$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}
+
+\newcommand{\milkcontainerplaceholder}{%
+\begin{center}
+\begin{tikzpicture}[font=\small]
+\draw[rounded corners=4pt, fill=frameshade, draw=framegray!60] (-3.6,-1.8) rectangle (3.6,2.2);
+\draw[line width=0.8pt, framegray!70] (-3.1,-1.25) -- (3.1,-1.25);
+\draw[line width=0.8pt, framegray!70] (-2.8,-0.55) -- (2.8,-0.55);
+\fill[orange!70] (-0.95,-0.9) rectangle (0.95,1.05);
+\draw[orange!80!black, line width=0.8pt] (-0.95,-0.9) -- (-0.95,1.05);
+\draw[orange!80!black, line width=0.8pt] (0.95,-0.9) -- (0.95,1.05);
+\draw[orange!80!black, fill=orange!50] (0,1.05) ellipse (0.95 and 0.24);
+\draw[orange!80!black] (0,-0.9) ellipse (0.95 and 0.24);
+\draw[rounded corners=3pt, fill=calloutyellow, draw=framegray!70] (1.25,0.25) rectangle (3.0,1.0);
+\node[align=center] at (2.125,0.625) {volume\\$169.65$ ft$^3$};
+\node[align=center, framegray!80] at (0,-1.48) {Milk processing machine with an orange cylindrical container};
+\end{tikzpicture}
+\end{center}
+}
+
+\begin{document}
+
+\packetheading{Lesson 5-1 \textperiodcentered\ Quick \textperiodcentered\ Teacher Edition}{nth Roots, Rational Exponents + Cylinder DOK-3 (Item 1A Prep)}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Math Objective}{Relate nth roots to rational exponents, simplify radicals with variables, evaluate rational-exponent expressions, and use nth roots to solve geometric-modeling problems.}
+\lessonrow{Language Objective}{Explain why \((x^{(1)/(n)})^n = x\), using radical and rational-exponent notation interchangeably.}
+\lessonrow{Essential Understanding}{Rational exponents ARE radicals --- \(x^{(m)/(n)} = \sqrt[n]{x^m} = (\sqrt[n]{x})^m\). Choose whichever form makes the computation easier.}
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Topic Goals}{Fluency with nth roots and rational exponents; apply both to volume/radius modeling problems (Topic 5 assessment Item 1A prep).}
+\lessonrow{Essential Question}{When is rational-exponent form easier than radical form, and how do we rationalize denominators in cube-root expressions?}
+\lessonrow{Materials}{Student packet, pencil, calculator. DOK-3 Practice \#50 (cylinder) is the lesson's capstone and rehearses the Topic 5 Assessment Item 1A move (derive variable from volume using rational exponents, then rationalize).}
+\end{tabular}
+}
+
+\begin{callout}{\IconPin\ PRE-FLIGHT --- SINGLE-PERIOD COMPRESSED LESSON + DOK-3 CAPSTONE}{calloutpink}
+This is a single-period quick treatment of Lesson 5-1. TWO examples are modeled in Launch (deviation from standard Klimsara one-example rule --- content density requires it). Release promptly at minute 18.\\
+Today's capstone is Practice \#50 (cylindrical milk container). Students must (a) isolate \(r\) from \(V = \pi r^2 h\) with \(h = 2r\), giving \(r = (V/(2\pi))^{(1)/(3)}\), (b) substitute into lateral surface formula \(S = 2\pi rh = 4\pi r^2\), (c) revisit \(r\) to count stackable containers against the 20 ft cargo height. Same algebraic move as pyramid assessment Item 1A.\\
+Pace: Try-It 1 (4 min) \(\rightarrow\) Try-It 3 (4 min) \(\rightarrow\) \#28 (3 min) \(\rightarrow\) \#30 (3 min) \(\rightarrow\) \#37 (4 min) \(\rightarrow\) \#48 (4 min) \(\rightarrow\) \#50 (10 min). \(\sim\)32 min total Explore.\\
+45-min Wed F variant: cut q37 + q48. Never cut \#50.
+\end{callout}
+
+\phasetag{bridge to nth roots launch}
+\frameworkphaseheader{Do Now}{1}{5}{%
+\phaseitems{
+  \item Hand out at door.
+  \item Circulate 3 min.
+  \item Cold-call 1 student for \(y = x^2\) pair identification and root connection.
+}%
+}{%
+\phaseitems{
+  \item Identify \((x, y)\) pairs on \(y = x^2\).
+  \item Connect output \(y\) to the concept of nth root.
+}%
+}{%
+\phaseitems{
+  \item If \(y = 16\), what are all real \(x\) values?
+  \item What happens for negative \(y\) on \(y = x^2\)?
+}%
+}{Solo teacher: circulate silently. No hints.}
+
+\bankitem{Do Now --- Explore \& Reason: \(y = x^2\) graph}{%
+\textbf{EXPLORE \& REASON}
+
+The graph shows \(y = x^2\).
+
+\textit{[GRAPH / TIKZ figure]}
+
+\donowparabolagraph
+
+\textbf{A.} Find all possible values of \(x\) or \(y\) so that the point is on the graph.
+\begin{enumerate}[label=(\alph*),leftmargin=2.2em,itemsep=2pt,topsep=3pt]
+  \item \((2, \underline{\hspace{1.2cm}})\)
+  \item \((3, \underline{\hspace{1.2cm}})\)
+  \item \((-3, \underline{\hspace{1.2cm}})\)
+  \item \((5, \underline{\hspace{1.2cm}})\)
+  \item \((\underline{\hspace{1.2cm}}, 4)\)
+  \item \((\underline{\hspace{1.2cm}}, -16)\)
+  \item \((\underline{\hspace{1.2cm}}, 7)\)
+  \item \((\underline{\hspace{1.2cm}}, 5)\)
+\end{enumerate}
+
+\textbf{B. Communicate Precisely} Write a precise set of instructions that show how to find an approximate value of \(\sqrt{13}\) using the graph.
+
+\textbf{C.} Draw a graph of \(y = x^3\). Use the graph to approximate each value.
+\begin{enumerate}[label=(\alph*),leftmargin=2.2em,itemsep=2pt,topsep=3pt]
+  \item \(\sqrt[3]{5}\)
+  \item \(\sqrt[3]{-5}\)
+  \item \(\sqrt[3]{8}\)
+  \item A solution to \(x^3 = 5\)
+  \item A solution to \(x^3 = -5\)
+  \item A solution to \(x^3 = 8\)
+\end{enumerate}
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY}{%
+\textbf{Answer key:} A(a) \(4\), A(b) \(9\), A(c) \(9\), A(d) \(25\), A(e) \(x = \pm 2\), A(f) no real value of \(x\), A(g) \(x = \pm \sqrt{7} \approx \pm 2.65\), A(h) \(x = \pm \sqrt{5} \approx \pm 2.24\).\\
+\textbf{Part B sample instructions:} Locate \(13\) on the \(y\)-axis, move horizontally to the graph of \(y=x^2\), then move down to the \(x\)-axis; the positive \(x\)-value is \(\sqrt{13} \approx 3.61\).\\
+\textbf{Part C:} \(\sqrt[3]{5} \approx 1.71\), \(\sqrt[3]{-5} \approx -1.71\), \(\sqrt[3]{8} = 2\), a solution to \(x^3 = 5\) is \(\approx 1.71\), a solution to \(x^3 = -5\) is \(\approx -1.71\), and a solution to \(x^3 = 8\) is \(2\).
+}
+
+\begin{callout}{\IconTarget\ SENTENCE FRAME}{calloutyellow}
+``For \(y = x^2\), the input \(x =\) \_\_\_ gives output \(y =\) \_\_\_. This means the square root of \_\_\_ is \_\_\_. There are \_\_\_ real values of \(x\) because \_\_\_.'' 
+\end{callout}
+
+\sectionbanner{LAUNCH --- nth Roots + Rational Exponents (teacher models Ex 1 + Ex 3)}
+
+\begin{callout}{\IconBook\ nth ROOTS \(\leftrightarrow\) RATIONAL EXPONENTS (keep printed on your page)}{calloutgreen}
+nth ROOTS \(\leftrightarrow\) RATIONAL EXPONENTS\\
+1. \(x^{(1)/(n)} = \sqrt[n]{x}\) (principal nth root).\\
+2. \(x^{(m)/(n)} = (\sqrt[n]{x})^m = \sqrt[n]{x^m}\).\\
+3. To rationalize an nth-root denominator: multiply num/denom by \(\sqrt[n]{x^{(n-1)}}\).\\
+4. Negative nth roots: only odd \(n\) gives a real negative root; even \(n\) is undefined for negative radicands in Reals.
+\end{callout}
+
+\begin{callout}{\IconWarn\ COMPRESSED LESSON --- TWO EXAMPLES IN LAUNCH}{calloutred}
+This is a single-period quick treatment. Teacher models BOTH Example 1 (real nth roots) AND Example 3 (evaluate rational exponents) during Launch.\\
+Pay attention to the switch between radical form and rational-exponent form in Example 3 --- that conversion is the core skill for the DOK-3 task.
+\end{callout}
+
+\phasetag{teacher models Example 1 + Example 3 [COMPRESSED --- 2 examples]}
+\frameworkphaseheader{Launch}{1--2}{13}{%
+\phaseitems{
+  \item Project Example 1. Think aloud: index \(n\) of root, principal root, even-index domain restriction.
+  \item ``For even \(n\), the radicand must be non-negative. For odd \(n\), any real works.''
+  \item Transition to Example 3 without stopping --- announce: ``Now watch the same concept in rational-exponent form.''
+  \item Project Example 3. Think aloud: \(x^{(m)/(n)} \leftrightarrow (\sqrt[n]{x})^m\).
+  \item Flag the Rules card --- students copy into margin.
+  \item 30-sec pause: ``Turn to partner: rewrite your answer in the other notation.''
+  \item Do NOT solve Try-Its or Practice items --- release at minute 18.
+}%
+}{%
+\phaseitems{
+  \item Watch Example 1 silently. Note the even-index rule.
+  \item Watch Example 3. Copy the \(x^{(m)/(n)} \leftrightarrow\) radical conversion.
+  \item During pause: convert partner's answer to the other notation.
+  \item Copy Rules card into margin.
+}%
+}{%
+\phaseitems{
+  \item What is the index \(n\) in \(\sqrt[4]{81}\)? What principal root does it give?
+  \item Why can't we take the square root of a negative number in Reals?
+  \item Rewrite \(8^{(2)/(3)}\) in radical form. Which form is easier to evaluate?
+  \item If \(x^{(1)/(n)} = \sqrt[n]{x}\), what is \((x^{(1)/(n)})^n\) equal to?
+}%
+}{Project both examples back-to-back. Release promptly at minute 18.}
+
+\begin{callout}{\IconMic\ TEACHER SCRIPT}{calloutblue}
+1. ``Watch me find a real nth root. The index tells me which root.''\\
+2. ``Step 1: Identify the index \(n\). Even index \(\rightarrow\) radicand \(\ge 0\) in Reals.''\\
+3. ``Step 2: Find the principal (non-negative) root.''\\
+4. ``Now Example 3 --- same idea, rational-exponent form.''\\
+5. ``\(x^{(m)/(n)} = (\sqrt[n]{x})^m\). I can go radical \(\rightarrow\) exponent or exponent \(\rightarrow\) radical --- pick the easier path.''\\
+6. ``Today's DOK-3 task uses this to derive a radius from a volume formula, then rationalize. That's the exact move on your Topic 5 Assessment.''\\
+7. Release to Explore.
+\end{callout}
+
+\sectionbanner{EXPLORE --- Think-Pair-Share (32 min)}
+Work with a partner. Move in order. Practice \#50 (Cylinder Modeling) is the big one --- plan \(\sim\)10 min for it.
+
+\phasetag{TPS + DOK-3 driver}
+\frameworkphaseheader{Explore}{2--3}{32}{%
+\phaseitems{
+  \item 5 laps across 32 min.
+  \item Lap 1 (4 min): Try-It 1 --- nth roots. Press pairs on index and principal root.
+  \item Lap 2 (4 min): Try-It 3 --- rational exponents. Watch for notation confusion.
+  \item Lap 3 (3+3 min): \#28 + \#30. Press conversion between forms.
+  \item Lap 4 (4+4 min): \#37 + \#48. Multi-step --- confirm form choice.
+  \item Lap 5 (10 min): \IconStar\ \#50 Cylinder Modeling. Students set up \(V = \pi r^2 h\) with \(h = 2r\), solve for \(r\) in rational-exponent form, then rationalize.
+  \item Do NOT give \#50 answers. Pairs present argument at Share.
+}%
+}{%
+\phaseitems{
+  \item 7 items in order: Try-It 1 \(\rightarrow\) Try-It 3 \(\rightarrow\) \#28 \(\rightarrow\) \#30 \(\rightarrow\) \#37 \(\rightarrow\) \#48 \(\rightarrow\) \#50.
+  \item For \#50: BEFORE computing, write out \(V = \pi r^2(2r) = 2\pi r^3\) and plan the rational-exponent isolation step.
+  \item Justify rationalization step with sentence frame.
+}%
+}{%
+\phaseitems{
+  \item Try-It 1: what is the index? Is the radicand non-negative?
+  \item \#28: how do you simplify a variable inside an nth root with exponent?
+  \item \#30: convert to radical form first --- which form is easier to evaluate?
+  \item \#37: do you simplify inside or outside the radical first?
+  \item \#48: what is \((x^{(1)/(3)})^3\)? Use that to check your answer.
+  \item \#50: after substituting \(h = 2r\), what formula do you get? Now isolate \(r\) using rational exponents.
+  \item \#50: to rationalize \(\sqrt[3]{V/(2\pi)}\), what do you multiply numerator and denominator by?
+}%
+}{Solo teacher: 5 laps. On \#50, press the substitution \(h = 2r\) and the rationalization step --- those are the assessment-critical moves.}
+
+\bankitem{Try It 1}{%
+Find the specified roots of each number.
+
+\textbf{a.} real fourth roots of \(81\) \hspace{1.5em} \textbf{b.} real cube roots of \(64\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} a. \(\pm 3\); b. \(4\)
+}
+
+\bankitem{Try It 3}{%
+What is the value of each expression? Round to the nearest hundredth if necessary.
+
+\textbf{a.} \(-\left(16^{(3)/(4)}\right)\) \hspace{1.5em} \textbf{b.} \(\sqrt[5]{3.5^4}\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key:} a. \(-8\); b. \(3.5^{(4)/(5)} \approx 2.72\)
+}
+
+\bankitem{Practice \#28}{%
+Find the specified roots of each number.
+
+The real square roots of \(25\).
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \(\pm 5\)
+}
+
+\bankitem{Practice \#30}{%
+Rewrite each expression using a fractional exponent.
+
+\(\sqrt[6]{729}\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \(729^{\frac16}\)
+}
+
+\bankitem{Practice \#37}{%
+Simplify each expression. Assume all variables are positive.
+
+\(\sqrt[6]{729a^{24}b^{18}}\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \(3a^4b^3\)
+}
+
+\bankitem{Practice \#48}{%
+Determine if each expression is another way to write \(b^{\frac34}\). Select Yes or No.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|p{2.7in}|c|c|}
+\hline
+\textbf{Expression} & \textbf{Yes} & \textbf{No} \\ \hline
+a. \(\sqrt[4]{b^3}\) & \checkbox & \checkbox \\ \hline
+b. \((b^3)^{\frac14}\) & \checkbox & \checkbox \\ \hline
+c. \(b^{\frac43}\) & \checkbox & \checkbox \\ \hline
+d. \(\sqrt[3]{b^4}\) & \checkbox & \checkbox \\ \hline
+e. \(\dfrac{b^3}{b^4}\) & \checkbox & \checkbox \\ \hline
+\end{tabular}
+\end{center}
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} a. Yes; b. Yes; c. No; d. No; e. No.
+}
+
+\bankitem{Practice \#50 \IconStar\ DOK-3 CYLINDER MODELING}{%
+Performance Task A milk processing company uses cylindrical-shaped containers. The height of the container is equal to the diameter of the base.
+
+\textit{[IMAGE: Milk processing machine with an orange cylindrical container; label reads ``volume 169.65 ft\(^3\).'' ]}
+
+\milkcontainerplaceholder
+
+\textbf{Part A} How much material is needed to make the lateral surface area of the shipping container?
+
+\textbf{Part B} The cargo hold of a ship is 20 ft high. What is the largest number of these shipping containers that could be stacked on top of each other inside the cargo hold?
+}{}
+
+\begin{callout}{\IconStar\ DOK-3 CYLINDER MODELING --- Practice \#50 (Topic 5 Assessment Item 1A prep)}{calloutpink}
+Students must (a) isolate \(r\) from \(V = \pi r^2 h\) with \(h = 2r\), giving \(r = (V/(2\pi))^{(1)/(3)}\), (b) substitute into lateral surface formula \(S = 2\pi rh = 4\pi r^2\), (c) revisit \(r\) to count stackable containers against the 20 ft cargo height. Same algebraic move as pyramid assessment Item 1A.\\
+Key criteria: (1) correct substitution \(h = 2r\), (2) rational-exponent form for \(r\), (3) rationalization shown with multiplication by \(\sqrt[3]{(2\pi)^2}\).
+\end{callout}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} Part A \(36\pi\) ft\(^2\). Part B 3 containers.\\
+\textbf{Teacher work:} \(V = \pi r^2 h\) with \(h = 2r\) gives \(169.65 = 2\pi r^3\), so \(r = (169.65/(2\pi))^{(1)/(3)} \approx 3\) ft and \(h = 6\) ft. Then \(S = 2\pi rh = 4\pi r^2 = 36\pi\) ft\(^2\), and \(20/6 = 3\) whole containers can be stacked.
+}
+
+\phasetag{academic conversation + Topic 5 bridge}
+\frameworkphaseheader{Share / Summary}{2}{5}{%
+\phaseitems{
+  \item Cold-call 1 pair to present their cylinder solution using sentence frame.
+  \item Class signals thumbs. Write \(r = (V/(2\pi))^{(1)/(3)}\) on board.
+  \item Topic 5 bridge: ``This is the exact move on your Topic 5 Assessment Item 1A. You have now rehearsed it.''
+}%
+}{%
+\phaseitems{
+  \item Presenting pair reads their solution and cites the rationalization step.
+  \item Rest of class signals and writes takeaway in margin.
+}%
+}{%
+\phaseitems{
+  \item Summarize: how did you convert \(V = 2\pi r^3\) to \(r = (V/(2\pi))^{(1)/(3)}\)?
+  \item Why did you need to rationalize? What did you multiply by?
+}%
+}{Cold-call a pair that struggled on \#50 --- hold them accountable to the rationalization step.}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames:}\\
+Pair share (Cylinder): ``I isolated \(r\) from \(V = \pi r^2 h\) by substituting \(h = 2r\), giving \(V =\) \_\_\_. Solving for \(r\), I got \(r =\) \_\_\_. In rational-exponent form, \(r = (V/(2\pi))^{(1)/(3)}\). To rationalize I multiplied by \_\_\_ to get \_\_\_.''\\
+Whole class: one pair reads their cylinder solution. Class signals thumbs up/sideways.
+\end{sentenceframebox}
+
+\begin{callout}{\IconBridge\ BRIDGE TO TOPIC 5 ASSESSMENT}{calloutpeach}
+The cylinder move --- isolate a variable, convert to rational-exponent form, rationalize --- is exactly what the Topic 5 Assessment Item 1A asks. You have now rehearsed it.
+\end{callout}
+
+\phasetag{summary recap (not graded)}
+\frameworkphaseheader{Exit Ticket}{1--2}{3}{%
+\phaseitems{
+  \item Collect at door.
+  \item Scan stem 2 (rationalize). Plan re-teach if many students blank on the \(\sqrt[n]{x^{(n-1)}}\) move.
+}%
+}{%
+\phaseitems{
+  \item 3 sentence stems, honest.
+}%
+}{%
+\phaseitems{
+  \item Did students connect \(x^{(m)/(n)}\) to radical form correctly?
+  \item Did students explain the rationalization multiplier?
+}%
+}{Collect. No grade.}
+
+\begin{callout}{\IconClipboard\ EXIT TICKET --- Student Form}{calloutyellow}
+\(x^{(m)/(n)}\) is the same as \_\_\_ in radical form.\\
+To rationalize a cube-root denominator I \_\_\_.\\
+One biggest thing I learned today: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_.
+\end{callout}
+
+\sectionbanner{OPTIONAL REINFORCEMENT (not collected)}
+If you finish Explore early. \#49 is an SAT/ACT cube-root item that extends rational-exponent fluency with large radicands.
+
+\bankitem{Optional \#1  (Savvas Practice \#49 --- SAT/ACT \(\sqrt[3]{4{,}096x^{18}y^{30}}\))}{%
+SAT/ACT Which of the following is equivalent to \(\sqrt[6]{4{,}096x^{18}y^{30}}\), where \(x>0\) and \(y>0\)?
+
+\begin{enumerate}[label=\Alph*.,leftmargin=2.2em,itemsep=2pt,topsep=3pt]
+  \item \(682.7x^{15}y^{24}\)
+  \item \(4x^{1.6}y^{1.8}\)
+  \item \(4{,}096x^3y^5\)
+  \item \(4x^3y^5\)
+  \item \(682.7x^3y^5\)
+\end{enumerate}
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} D. \(4x^3y^5\)
+}
+
+\clearpage
+
+\begin{callout}{\IconClock\ PERIOD A / PERIOD F --- 65-MIN CLASS NOTES}{calloutpink}
+Both sections should have 65 min for this lesson. Use the extra 10 min on Explore \#50 (Cylinder Modeling) --- the richer the rationalization argument, the better the Topic 5 Assessment prep payoff.\\
+45-min Wed F variant: cut q37 + q48 from Explore. Never cut \#50.\\
+If finished early: hand out Practice \#49 (SAT/ACT cube-root stretch).
+\end{callout}
+
+\begin{callout}{\IconPuzzle\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS}{calloutiep}
+\textbullet\ Provide the nth Roots \(\leftrightarrow\) Rational Exponents Rules card as a sticker/cut-out.\\
+\textbullet\ For \#50, provide the setup: \(V = \pi r^2 h\) with \(h = 2r \rightarrow V = 2\pi r^3\). Students solve from that point.\\
+\textbullet\ Accept verbal rationalization explanation in lieu of written steps.
+\end{callout}
+
+\begin{callout}{\IconGlobe\ SUPPORTS FOR ELL STUDENTS}{calloutell}
+\textbullet\ Sentence frames on student page (don't skip).\\
+\textbullet\ Word cards: ``index'' = the small number outside the radical; ``rational exponent'' = fraction exponent; ``rationalalize'' = remove the radical from the denominator.\\
+\textbullet\ ``Principal root'' = the non-negative root (even index only).\\
+\textbullet\ Pair ELL students with English-dominant partners for TPS.
+\end{callout}
+
+\end{document}

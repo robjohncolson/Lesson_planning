@@ -1,0 +1,368 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\IconCheck}{[CHECK]}
+\newcommand{\IconMic}{[MIC]}
+\newcommand{\IconClipboard}{[CLIPBOARD]}
+\newcommand{\lessonrow}[2]{\textbf{#1} & #2 \\ \hline}
+
+\newcommand{\phasetag}[1]{%
+  {\small\itshape Tag: #1\par}
+}
+
+\newcommand{\phaseitems}[1]{%
+  \begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  #1
+  \end{itemize}%
+}
+
+\newcommand{\teacheranswerbox}[2]{%
+  \begin{callout}{#1}{calloutgreen}
+  #2
+  \end{callout}
+}
+
+\newcommand{\placeholdertext}[1]{%
+  {\small\itshape #1\par}
+}
+
+\newcommand{\chemistfigure}{%
+\begin{center}
+\begin{tikzpicture}[font=\small, line width=0.9pt]
+\node[
+  draw,
+  rounded corners,
+  fill=frameshade,
+  minimum width=2.0in,
+  minimum height=1.45in,
+  align=center
+] (chem) at (0,0) {\textbf{Chemist}\\pouring liquid\\into a container};
+\node[
+  draw,
+  rounded corners,
+  fill=calloutyellow,
+  minimum width=2.0in,
+  minimum height=0.62in,
+  align=center
+] (six) at (-2.45,-1.45) {\(x\) gallons of\\6\% alcohol};
+\node[
+  draw,
+  rounded corners,
+  fill=calloutpeach,
+  minimum width=2.1in,
+  minimum height=0.62in,
+  align=center
+] (two) at (2.45,-1.45) {50 gallons of\\2\% alcohol};
+\draw[->, tealheader] (six.north east) .. controls (-1.6,-0.7) and (-0.8,-0.35) .. (chem.south west);
+\draw[->, tealheader] (two.north west) .. controls (1.6,-0.7) and (0.8,-0.35) .. (chem.south east);
+\end{tikzpicture}
+\end{center}
+}
+
+\begin{document}
+
+\packetheading{Lesson 4-5 $\cdot$ Quick $\cdot$ Teacher Edition}{Solving Rational Equations + Chemistry DOK-3 (Q\#2/Q\#6/Q\#7 Prep)}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Math Objective}{Solve rational equations in one variable by clearing denominators, check for extraneous solutions, and apply rational equations to real-world rate and mixture problems.}
+\lessonrow{Language Objective}{Justify why a candidate solution is extraneous, using the domain restrictions of the original rational equation.}
+\lessonrow{Essential Understanding}{Multiplying both sides of a rational equation by an expression containing variables can introduce extraneous solutions --- values that satisfy the cleared equation but violate the original domain.}
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Topic Goals}{Fluency solving rational equations; identifying extraneous solutions; applying to work-rate and mixture problems (Topic 4 LEHS Q\#2, Q\#6, Q\#7 prep).}
+\lessonrow{Essential Question}{When you solve a rational equation by clearing denominators, why must you check every candidate solution against the original equation?}
+\lessonrow{Materials}{Student packet, pencil, calculator. DOK-3 Practice \#33 (chemistry mixture performance task) rehearses Topic 4 LEHS Q\#6 (solve rational equation) and Q\#7 (work-rate reasoning).}
+\end{tabular}
+}
+
+\begin{callout}{\IconPin\ PRE-FLIGHT --- SINGLE-PERIOD COMPRESSED LESSON + DOK-3 CAPSTONE}{calloutpink}
+This is a single-period quick treatment of Lesson 4-5. TWO examples are modeled in Launch (deviation from standard Klimsara one-example rule --- solving AND extraneous checking are both assessment-critical). Release promptly at minute 18.\\
+Today's capstone is Practice \#33 (chemistry alcohol mixture). Students must (a) set up \(f(x) = (50\cdot0.02 + 0.06x)/(50+x) = 0.05\), (b) clear the denominator and solve --- \(50\cdot0.02 + 0.06x = 0.05(50+x) \rightarrow 1 + 0.06x = 2.5 + 0.05x \rightarrow 0.01x = 1.5 \rightarrow x = 150\) gallons, (c) explain calculator TABLE verification. Same algebraic move as Topic 4 LEHS Q\#6; same reasoning as Q\#7.\\
+Pace: Try-It 1 (4 min) \(\rightarrow\) Try-It 3 (4 min) \(\rightarrow\) \#10 (4 min) \(\rightarrow\) \#14 (4 min) \(\rightarrow\) \#25 (6 min) \(\rightarrow\) \#33 (10 min). \(\sim\)32 min total Explore.\\
+45-min Wed F variant: cut \#14 + \#25. Never cut \#33.
+\end{callout}
+
+\phasetag{bridge from 4-4 to solving rational equations}
+\frameworkphaseheader{Do Now}{1}{5}{%
+\phaseitems{
+  \item Hand out at door.
+  \item Circulate 3 min.
+  \item Cold-call 1 student on the conflicting candidate solutions.
+}%
+}{%
+\phaseitems{
+  \item Read and decide whether either candidate is valid.
+  \item Identify which (if any) is extraneous.
+}%
+}{%
+\phaseitems{
+  \item What does it mean for a candidate solution to be `extraneous'?
+  \item Why do we check candidates in the ORIGINAL equation, not the cleared one?
+}%
+}{Solo teacher: circulate silently. No hints.}
+
+\begin{callout}{\IconMic\ BRIDGE SCRIPT (read aloud after Do Now)}{calloutblue}
+"Topic 4 so far: inverse variation, reciprocal functions, multiplying and adding rational expressions. Today: SOLVING rational EQUATIONS. Same algebra, but with an equation to solve and a new trap --- extraneous solutions. The Model \& Discuss shows two students solving a rational equation and getting different candidate solutions. Which (if any) is valid?"
+\end{callout}
+
+\bankitem{Do Now (4-5-savvas-model-discuss-lesson-4-5-launch)}{%
+\textbf{CRITIQUE \& EXPLAIN}
+
+Nicky and Tavon used different methods to solve the equation \(\frac{1}{2}x + \frac{2}{5} = \frac{9}{10}\).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|p{2.55in}|p{2.55in}|}
+\hline
+\textbf{Nicky} & \textbf{Tavon} \\ \hline
+\(\frac{1}{2}x + \frac{2}{5} = \frac{9}{10}\) & \(\frac{1}{2}x + \frac{2}{5} = \frac{9}{10}\) \\ \hline
+\(\frac{1}{2}x = \frac{9}{10} - \frac{2}{5}\) & \(10\left(\frac{1}{2}x + \frac{2}{5}\right) = 10\left(\frac{9}{10}\right)\) \\ \hline
+\(\frac{1}{2}x = \frac{5}{10}\) & \(5x + 4 = 9\) \\ \hline
+\(x = 1\) & \(5x = 5\) \\ \hline
+The solution is 1. & \(x = 1\) \\ \hline
+ & The solution is 1. \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=1.6em,itemsep=3pt,topsep=3pt]
+\item Explain the different strategies that Nicky and Tavon used and the advantages or disadvantages of each.
+\item Did Nicky use a correct method to solve the equation? Did Tavon?
+\item Use Structure Why might Tavon have chosen to multiply both sides of the equation by 10? Could he have used another number? Explain.
+\end{enumerate}
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY}{%
+(verify)
+}
+
+\phasetag{teacher models Example 1 + Example 3 [COMPRESSED --- 2 examples]}
+\frameworkphaseheader{Launch}{1--2}{13}{%
+\phaseitems{
+  \item Project Example 1 (solve rational equation). Think aloud: find LCD, multiply both sides, solve polynomial, check in original.
+  \item "Every candidate must be checked in the ORIGINAL equation --- clearing denominators can introduce values that don't belong."
+  \item Transition to Example 3 without stopping --- announce: "Now watch what happens when a candidate IS extraneous."
+  \item Project Example 3. Think aloud: state domain restrictions FIRST, then solve; test each candidate against the restrictions.
+  \item Flag the Rules card --- students copy into margin.
+  \item 30-sec pause: "Turn to partner: why does clearing denominators sometimes produce extraneous solutions? What's the mechanism?"
+  \item Do NOT solve Try-Its or Practice items --- release at minute 18.
+}%
+}{%
+\phaseitems{
+  \item Watch Example 1 silently. Note the four-step procedure.
+  \item Watch Example 3. Mark the domain-restriction identification step.
+  \item During pause: explain mechanism to partner using Rule 1(d).
+  \item Copy Rules card into margin.
+}%
+}{%
+\phaseitems{
+  \item What is the LCD in Example 1?
+  \item After you clear denominators, what kind of equation do you get?
+  \item In Example 3, what values are forbidden by the original denominators?
+  \item Why does multiplying by an expression containing variables sometimes introduce extraneous roots?
+}%
+}{Project both examples back-to-back. Release promptly at minute 18.}
+
+\begin{callout}{\IconMic\ TEACHER SCRIPT}{calloutblue}
+\begin{enumerate}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+\item "Watch me solve a rational equation. Step 1: find the LCD."
+\item "Step 2: Multiply BOTH SIDES by the LCD. This clears all fractions."
+\item "Step 3: Solve the resulting polynomial equation --- you'll get candidate solutions."
+\item "Step 4: CHECK each candidate in the ORIGINAL equation. Any candidate that makes a denominator zero is extraneous --- throw it out."
+\item "Example 3: watch what happens when a candidate IS extraneous. I state the domain restrictions FIRST --- before I even start solving --- so I know what's forbidden."
+\item "Today's DOK-3 task is a chemistry alcohol mixture. Same procedure --- set up rational equation, clear, solve, check. Same algebraic move as Topic 4 LEHS Q\#6."
+\item Release to Explore.
+\end{enumerate}
+\end{callout}
+
+\phasetag{TPS + DOK-3 driver}
+\frameworkphaseheader{Explore}{2--3}{32}{%
+\phaseitems{
+  \item 5 laps across 32 min.
+  \item Lap 1 (4 min): Try-It 1 --- solve. Press pairs on the LCD identification.
+  \item Lap 2 (4 min): Try-It 3 --- extraneous. Watch for students who skip the check.
+  \item Lap 3 (4 min): \#10 --- solve + check. Confirm the check step.
+  \item Lap 4 (4 min): \#14 --- extraneous trap. Press "which candidate violates the original domain?" on every pair.
+  \item Lap 5 (6 min): \#25 --- work-rate. Use the \(1/a + 1/b = 1/t\) setup.
+  \item Lap 6 (10 min): \IconStar\ \#33 Chemistry. Students set up the mixture equation, clear, solve for \(x\), and explain TABLE verification.
+  \item Do NOT give \#33 Part A numeric answer. Pairs present argument at Share.
+}%
+}{%
+\phaseitems{
+  \item 6 items in order: Try-It 1 \(\rightarrow\) Try-It 3 \(\rightarrow\) \#10 \(\rightarrow\) \#14 \(\rightarrow\) \#25 \(\rightarrow\) \#33.
+  \item For \#33: BEFORE computing, write out \(f(x) = (50\cdot0.02 + 0.06x)/(50+x)\) and set equal to 0.05. Ask: what would \(x\) mean in gallons?
+  \item Justify TABLE verification with sentence frame.
+}%
+}{%
+\phaseitems{
+  \item Try-It 1: what's the LCD of the fractions?
+  \item Try-It 3: which candidate makes the original denominator zero?
+  \item \#10: after you solve, WHY do you still need to check?
+  \item \#14: state the domain restrictions BEFORE you clear denominators.
+  \item \#25: how does \(1/a + 1/b = 1/t\) capture the work-rate idea?
+  \item \#33 Part A: set up the mixture equation. What does \(x\) represent in gallons --- does your answer make sense?
+  \item \#33 Part B: how do you use \(y_1\) and \(y_2\) in the TABLE to verify?
+}%
+}{Solo teacher: 6 laps. On \#33, press the mixture-equation setup AND the gallons reasonableness check --- those are the assessment-critical moves.}
+
+\bankitem{Try It 1 (4-5-savvas-try-it-1-lesson-4-5)}{%
+What is the solution to each equation?
+
+\begin{enumerate}[label=\textbf{\alph*.}, leftmargin=1.6em,itemsep=3pt,topsep=3pt]
+\item \(\frac{2}{x+5} = 4\)
+\item \(\frac{1}{x-7} = 2\)
+\end{enumerate}
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): \(x = -4.5\)
+}
+
+\bankitem{Try It 3 (4-5-savvas-try-it-3-lesson-4-5)}{%
+What is the solution to the equation \(\frac{1}{x+2} + \frac{1}{x-2} = \frac{4}{(x+2)(x-2)}\)?
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): no solution
+}
+
+\bankitem{Practice \#10 (4-5-savvas-q10)}{%
+Error Analysis Describe and correct the error Miranda made in solving the rational equation.
+\[
+\begin{aligned}
+\frac{1}{x-2} + \frac{x-2}{x+2} &= \frac{x-4}{x-2} \\
+(x+2)(x-2)\left(\frac{1}{x-2} + \frac{x-2}{x+2}\right) &= \left(\frac{x-4}{x-2}\right)(x+2)(x-2) \\
+(x+2)(1) + (x-2)(x-2) &= (x+4)(x+2) \\
+x + 2 + x^2 - 4x + 4 &= x^2 + 6x + 8 \\
+-3x + 6 &= 6x + 8 \\
+-2 &= 9x; \text{ or } x = -\frac{2}{9}\ \text{X}
+\end{aligned}
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): Miranda incorrectly expanded the right side as \((x+4)(x+2)\) instead of \((x-4)(x+2)\). The correct right side is \(x^2 - 2x - 8\). Solving \(-3x + 6 = -2x - 8\) yields \(x = 14\).
+}
+
+\bankitem{Practice \#14 (4-5-savvas-q14)}{%
+Make Sense and Persevere Solve the rational equation shown. Explain what is unique about the solution.
+\[
+\frac{x^2 - 7x - 18}{x+2} = x - 9
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): The solution is all real numbers except \(x = -2\). Factoring the numerator shows that the equation is an identity \(((x-9)(x+2))/(x+2) = x-9\), which is true for all \(x\) in the domain.
+}
+
+\bankitem{Practice \#25 (4-5-savvas-q25)}{%
+Make Sense and Persevere Kenji can finish a puzzle in 2 hours working alone. Oscar can finish the same puzzle in 3 hours working alone. How long would it take Oscar and Kenji to finish the puzzle if they worked on it together?
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): 1.2 hours
+}
+
+\bankitem{Practice \#33 \IconStar\ DOK-3 CHEMISTRY MIXTURE (4-5-savvas-q33)}{%
+\textbf{Performance Task}
+
+A chemist needs alcohol solution in the correct concentration for her experiment. She adds a 6\% alcohol solution to 50 gallons of solution that is 2\% alcohol. The function that represents the percent of alcohol in the resulting solution is
+\[
+f(x) = \frac{50(0.02)+x(0.06)}{50+x},
+\]
+where \(x\) is the amount of 6\% solution added.
+
+\chemistfigure
+\placeholdertext{[IMAGE: Chemist pouring liquid into a container; labels ``x gallons of 6\% alcohol'' and ``50 gallons of 2\% alcohol.'']}
+
+\textbf{Part A} How much 6\% solution should be added to create a solution that is 5\% alcohol?
+
+\textbf{Part B} Use Appropriate Tools Explain the steps you could take to use your graphing calculator to verify the correctness of your answer to part (A).
+}{}
+
+\begin{callout}{\IconStar\ DOK-3 CHEMISTRY MIXTURE --- Practice \#33 (Topic 4 LEHS Q\#6 + Q\#7 prep)}{calloutpink}
+q33 is the chemistry alcohol-mixture performance task: 50 gal of 2\% alcohol solution, add \(x\) gal of 6\% alcohol, resulting concentration \(f(x) = (50\cdot0.02 + 0.06x)/(50+x)\). Part A: solve \(f(x) = 0.05\) for \(x\). Part B: explain how to verify with a graphing calculator table.\\
+"The move Part A wants is: set up the rational equation, clear the denominator, solve the resulting linear equation for \(x\). Students should recognize this as a rational equation in disguise --- same moves as Ex 1."\\
+For Part B: enter \(y_1 =\) numerator, \(y_2 = 0.05(50+x)\), use TABLE to find where they intersect.\\
+If stuck: ask `what would the answer \(x\) mean in gallons?' before they compute, to anchor the reasonableness check.\\
+Answer: 150 gallons.\\
+Sentence frame required for ELL.
+\end{callout}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): Part A 150 gallons. Part B Using the graphing function of your calculator, enter \(2.5+0.05x\) for \(y_1\), and \(1+0.06x\) for \(y_2\). Then use the TABLE function to find the \(y\)-values of the functions that are equivalent when \(x=150\). \textbullet\ IMAGE PLACEHOLDER [illustration]: Chemist pouring liquid into a container; labels ``x gallons of 6\% alcohol'' and ``50 gallons of 2\% alcohol.''
+}
+
+\phasetag{academic conversation + Topic 4 LEHS Q\#2/Q\#6/Q\#7 bridge}
+\frameworkphaseheader{Share / Summary}{2}{5}{%
+\phaseitems{
+  \item Cold-call 1 pair to present their chemistry solution using sentence frame.
+  \item Class signals thumbs. Write \(x = 150\) gallons on board.
+  \item Topic 4 bridge: "This is the exact move on Topic 4 LEHS Q\#6, the domain reasoning is Q\#2, and the rate reasoning is Q\#7. You have now rehearsed all three."
+}%
+}{%
+\phaseitems{
+  \item Presenting pair reads their solution and cites the TABLE verification.
+  \item Rest of class signals and writes takeaway in margin.
+}%
+}{%
+\phaseitems{
+  \item Summarize: how did you get from \(f(x) = 0.05\) to \(x = 150\)?
+  \item Why did 150 gallons make sense as an answer?
+}%
+}{Cold-call a pair that struggled on \#33 --- hold them accountable to the setup step.}
+
+\phasetag{summary recap (not graded)}
+\frameworkphaseheader{Exit Ticket}{1--2}{3}{%
+\phaseitems{
+  \item Collect at door.
+  \item Scan stem 1 (original / extraneous). Plan re-teach if many students can't articulate WHY the check is required.
+}%
+}{%
+\phaseitems{
+  \item 3 sentence stems, honest.
+}%
+}{%
+\phaseitems{
+  \item Did students connect the `check in original' step to avoiding extraneous solutions?
+  \item Did students correctly describe the mixture-equation setup?
+}%
+}{Collect. No grade.}
+
+\begin{callout}{\IconClipboard\ EXIT TICKET --- Student Form}{calloutyellow}
+After clearing denominators in a rational equation, I must check each candidate solution in the \_\_\_\_\_ equation to catch \_\_\_\_\_ solutions.\\
+In Practice \#33 (chemistry), the equation came from setting \_\_\_\_\_ equal to the target concentration 0.05.\\
+One biggest thing I learned today: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{callout}
+
+\clearpage
+
+\begin{callout}{\IconClock\ PERIOD A / PERIOD F --- 65-MIN CLASS NOTES}{calloutpink}
+Both sections should have 65 min for this lesson. Use the extra 10 min on Explore \#33 (Chemistry) --- richer reasonableness and TABLE-verification talk pays off on Topic 4 LEHS Q\#6/Q\#7.\\
+45-min Wed F variant: cut \#14 + \#25 from Explore. Never cut \#33.\\
+If finished early: hand out Practice \#8 (work-rate validity reasoning) as fast-finisher; rehearses Q\#7 specifically.
+\end{callout}
+
+\begin{callout}{\IconPuzzle\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS}{calloutiep}
+\textbullet\ Provide the Solving Rational Equations Rules card as a sticker/cut-out.\\
+\textbullet\ For \#33, provide the setup: "\(f(x) = (50\cdot0.02 + 0.06x)/(50+x) = 0.05\). Multiply both sides by \((50+x)\)." Students solve from there.\\
+\textbullet\ Accept verbal TABLE-verification explanation in lieu of written steps.
+\end{callout}
+
+\begin{callout}{\IconGlobe\ SUPPORTS FOR ELL STUDENTS}{calloutell}
+\textbullet\ Sentence frames on student page (don't skip).\\
+\textbullet\ Word cards: "extraneous" = an answer that looks right algebraically but doesn't actually work in the original equation; "LCD" = least common denominator; "domain restriction" = a value that \(x\) is not allowed to be.\\
+\textbullet\ "Concentration" = amount of substance per unit of mixture; "mixture" = two solutions combined.\\
+\textbullet\ Pair ELL students with English-dominant partners for TPS.
+\end{callout}
+
+\end{document}

@@ -1,0 +1,358 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\IconCheck}{[CHECK]}
+\newcommand{\IconMic}{[MIC]}
+\newcommand{\IconClipboard}{[CLIPBOARD]}
+
+\newcommand{\phasetag}[1]{%
+  {\small\itshape Tag: #1\par}
+}
+
+\newcommand{\phaseitems}[1]{%
+  \begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  #1
+  \end{itemize}%
+}
+
+\newcommand{\teacheranswerbox}[2]{%
+  \begin{callout}{#1}{calloutgreen}
+  #2
+  \end{callout}
+}
+
+\newcommand{\donowfullgraph}{%
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.43\linewidth,
+  height=2.15in,
+  xmin=-3,
+  xmax=6,
+  ymin=-1,
+  ymax=8,
+  axis lines=middle,
+  grid=major,
+  minor tick num=1,
+  xlabel={$x$},
+  ylabel={$y$},
+  tick label style={font=\small},
+  label style={font=\small}
+]
+\addplot[tealheader, line width=1.2pt, domain=-3:6, samples=2] {x+2};
+\end{axis}
+\end{tikzpicture}%
+}
+
+\newcommand{\donowholegraph}{%
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.43\linewidth,
+  height=2.15in,
+  xmin=-3,
+  xmax=6,
+  ymin=-1,
+  ymax=8,
+  axis lines=middle,
+  grid=major,
+  minor tick num=1,
+  xlabel={$x$},
+  ylabel={$y$},
+  tick label style={font=\small},
+  label style={font=\small}
+]
+\addplot[tealheader, line width=1.2pt, domain=-3:1.95, samples=2] {x+2};
+\addplot[tealheader, line width=1.2pt, domain=2.05:6, samples=2] {x+2};
+\addplot[
+  only marks,
+  mark=o,
+  mark size=3pt,
+  mark options={draw=tealheader, fill=white, line width=0.9pt}
+] coordinates {(2,4)};
+\end{axis}
+\end{tikzpicture}%
+}
+
+\begin{document}
+
+\packetheading{Lesson 4-3 · Period 1 · Teacher Edition}{Rational Expressions --- Equivalent \& Simplify}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Math Objective} & Write equivalent rational expressions over a restricted domain, identify domain restrictions from factored denominators, and simplify rational expressions by canceling common factors. \\ \hline
+\textbf{Language Objective} & Explain, in writing and orally using sentence frames, why a value is excluded from the domain and why we cancel factors but not terms. \\ \hline
+\textbf{Essential Understanding} & A rational expression equals an equivalent simpler form ONLY when both share the same domain --- canceling a factor never erases the restriction it imposed. \\ \hline
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Topic Goals} & Write equivalent rational expressions, simplify, and identify domain restrictions from polynomial denominators. \\ \hline
+\textbf{Essential Question} & Why does canceling a common factor not remove its domain restriction? \\ \hline
+\textbf{Materials} & Student packet, pencil, highlighter. Teacher displays worked Example 1 then gradual-release into Example 2. \\ \hline
+\end{tabular}
+}
+
+\begin{callout}{\IconPin\ PRE-FLIGHT NOTE (read before class)}{calloutpink}
+Explore is 7 bank items: Try-It 1 \(\rightarrow\) \#20 \(\rightarrow\) \#22 \(\rightarrow\) \#24 \(\rightarrow\) Try-It 2 \(\rightarrow\) \#17 \(\rightarrow\) \#19 (extension). Paced for \(\sim\)4--5 min per item.\\
+If pairs finish early, push them to the Optional Reinforcement: Model \& Discuss Parts B + C (verbal/TPS), then Practice \#25.\\
+If pace slows, cut \#19 (extension) --- it's the DOK-2 stretch; the core DOK-1 arc (Try-It 1 \(\rightarrow\) \#20/\#22/\#24 \(\rightarrow\) Try-It 2 \(\rightarrow\) \#17) is the minimum viable set.
+\end{callout}
+
+\phasetag{notice \& wonder}
+\frameworkphaseheader{Do Now}{2}{5}{%
+\phaseitems{
+  \item Project the graph (or use printed Do Now sheet).
+  \item Circulate silently. Do NOT teach during this phase.
+  \item Collect at 5 min sharp.
+}%
+}{%
+\phaseitems{
+  \item Write 1 notice + 1 wonder.
+  \item Write one sentence about what the equation must be doing at the skipped \(x\)-value.
+}%
+}{%
+\phaseitems{
+  \item (None during the phase --- teacher harvests answers in Launch.)
+}%
+}{Solo teacher: circulate silently. Resist the urge to give hints.}
+
+\bankitem{Do Now (4-3-savvas-model-discuss-lesson-4-3-launch)}{%
+\textbf{EXPLORE \& REASON}
+
+Consider the following graph of the function \(y=x+2\).
+
+\begin{center}
+\donowfullgraph
+\end{center}
+
+\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=1.6em,itemsep=3pt,topsep=3pt]
+\item What is the domain of this function?
+\item Sketch a function that resembles the graph, but restrict its domain to exclude 2.
+\item Use Structure Consider the function you have sketched. What kind of function might have a graph like this? Explain.
+\end{enumerate}
+
+\textbf{Sample Student Work}
+
+\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=1.6em,itemsep=3pt,topsep=3pt]
+\item all real numbers.
+\item
+\begin{center}
+\donowholegraph
+\end{center}
+\item An equation where the denominator equals zero when \(x=2\). For example, \(y=(2x-4)/(x-2)\).
+\end{enumerate}
+}{}
+
+\begin{callout}{\IconCheck\ ANTICIPATED STUDENT RESPONSES}{calloutgreen}
+NOTICE (typical): ``There's a hole in the graph.'' ``The line has a gap.'' ``One point is missing.''\\
+WONDER (typical): ``Why is there a hole?'' ``What happens at that \(x\)?'' ``Can you have an equation that does this?''\\
+SENTENCES: students might write ``the denominator equals zero at that \(x\)'' or ``the equation is undefined there.''\\
+KEY MOVE in Launch: surface the insight that when the denominator \(= 0\), the expression is undefined --- this is a domain restriction.
+\end{callout}
+
+\phasetag{teacher models Example 1 + Example 2}
+\frameworkphaseheader{Launch}{1--2}{12}{%
+\phaseitems{
+  \item Bridge from Do Now: ``You noticed the graph skips a point. That happens because the denominator equals zero at that \(x\)-value --- we call it a domain restriction.''
+  \item Project Example 1 (Savvas Topic 4-3). Think aloud: factor numerator and denominator, identify what \(x\)-values make the denominator zero, write the equivalent expression with restriction stated.
+  \item Project Example 2. Think aloud: factor completely, cancel the common factor, but keep the domain restriction from the canceled factor in the final answer.
+  \item Pause \(1\times\) for 30-sec partner-check: ``What \(x\)-value is excluded in Example 1?''
+  \item Do NOT solve Try-Its. Release promptly at minute 17.
+}%
+}{%
+\phaseitems{
+  \item Watch silently through Example 1.
+  \item During partner-check: identify the excluded \(x\)-value.
+  \item Copy the Equivalent + Simplify Rules card into their page margin.
+  \item Note the COMMON ERROR warning: cancel only factors, never terms.
+}%
+}{%
+\phaseitems{
+  \item ``What values make the denominator zero?''
+  \item ``Can I cancel this factor? Is it a factor of the entire numerator?''
+  \item ``After canceling, does the domain restriction disappear?''
+}%
+}{Project, think aloud. Do NOT give students Try-Its to work until minute 17.}
+
+\begin{callout}{\IconMic\ TEACHER SCRIPT}{calloutblue}
+1. ``From the Do Now, you noticed the graph skips a point. That \(x\)-value is excluded from the domain because the denominator equals zero there.''\\
+2. Example 1 walk-through: ``Watch me. I factor top and bottom. Any \(x\) that makes the denominator zero is restricted --- I write \(x \ne\) that value next to my answer.''\\
+3. Example 2 walk-through: ``Now I simplify. I factor, find the matching factor in numerator and denominator, and cancel it. But --- critical --- the restriction from that canceled factor STAYS. Canceling doesn't erase the hole.''\\
+4. Common-error flag: ``Don't cancel terms that are added or subtracted. Factor FIRST, then cancel only matching factor pairs.''\\
+5. Release: ``Now you try. Try-It 1 asks for an equivalent expression. Try-It 2 asks you to simplify completely.''
+\end{callout}
+
+\phasetag{Think-Pair-Share + Practice}
+\frameworkphaseheader{Explore}{1--2}{33}{%
+\phaseitems{
+  \item 5 laps circulation across 33 min (\(\sim\)6--7 min each).
+  \item Lap 1: Try-It 1 --- press pairs to factor before writing the equivalent form.
+  \item Lap 2: \#20 + \#22 --- check that pairs identify domain restrictions correctly.
+  \item Lap 3: \#24 + Try-It 2 --- press pairs to factor completely before canceling.
+  \item Lap 4: \#17 --- verify pairs state the domain restriction alongside the simplified form.
+  \item Lap 5: \#19 (extension) --- stretch. Cut if pace slows.
+  \item Do not give answers. Use sentence frame to press justification.
+}%
+}{%
+\phaseitems{
+  \item Pairs move in order through 7 items: 2 Try-Its + 5 Practice.
+  \item For each item: factor completely FIRST, then cancel, then state restriction.
+  \item For Practice \#19 (simplify with domain restrictions): show all steps.
+  \item Justify with sentence frame before writing.
+}%
+}{%
+\phaseitems{
+  \item Did you factor completely before canceling?
+  \item What \(x\)-values make the denominator zero?
+  \item After simplifying, what is the domain restriction?
+  \item Can you use the sentence frame to explain your answer?
+  \item For \#19: what is the domain restriction from the canceled factor?
+}%
+}{Solo teacher: 5 laps. Press pairs to justify using the rule card. No answers.}
+
+\bankitem{Try It 1 (4-3-savvas-try-it-1-lesson-4-3)}{%
+Write an expression equivalent to \((x-4)/(x)\) over the domain \(\{x\mid x\ne 0 \text{ or } -2\}\).
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \((x^2-2x-8)/(x^2+2x)\)
+}
+
+\bankitem{Practice \#20 --- Identify equivalent (4-3-savvas-q20)}{%
+Write an equivalent expression over the given domain.
+
+\[
+\frac{x(x-2)}{x-5} \text{ for all } x \text{ except } 5 \text{ and } -6
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \((x^3+4x^2-12x)/(x^2+x-30)\)
+}
+
+\bankitem{Practice \#22 (4-3-savvas-q22)}{%
+What is the simplified form of the rational expression? What is the domain?
+
+\[
+\frac{y^2-5y-24}{y^2+3y}
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \((y-8)/(y)\) for all \(y\) except \(0\) and \(-3\).
+}
+
+\bankitem{Practice \#24 (4-3-savvas-q24)}{%
+What is the simplified form of the rational expression? What is the domain?
+
+\[
+\frac{x^2+8x+15}{x^2-x-12}
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \((x+5)/(x-4)\), \(x\ne -3,4\).
+}
+
+\bankitem{Try It 2 (4-3-savvas-try-it-2-lesson-4-3)}{%
+Simplify each expression and state the domain.
+
+\begin{enumerate}[label=\textbf{\alph*.}, leftmargin=1.6em,itemsep=3pt,topsep=3pt]
+\item \(\dfrac{x^2+2x+1}{x^3-2x^2-3x}\)
+\item \(\dfrac{x^3+4x^2-x-4}{x^2+3x-4}\)
+\end{enumerate}
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} a. \((x+1)/(x(x-3))\) for all \(x\) except \(0\), \(-1\), and \(3\). b. \(x+1\) for all \(x\) except \(1\) and \(-4\).
+}
+
+\bankitem{Practice \#17 --- Simplify (4-3-savvas-q17)}{%
+\textbf{Construct Arguments} Explain how you can tell whether a rational expression is in simplest form.
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} A rational expression is in simplest form when the numerator and denominator have no common factors other than 1.
+}
+
+\bankitem{Practice \#19 --- Simplify with domain restrictions (4-3-savvas-q19)}{%
+\textbf{Reason} If the denominator of a rational expression is \(x^3+3x^2-10x\), what value(s) must be restricted from the domain for \(x\)?
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \(-5\), \(0\), \(2\)
+}
+
+\phasetag{academic conversation}
+\frameworkphaseheader{Share / Summary}{2}{5}{%
+\phaseitems{
+  \item Cold-call 2 pairs to read their sentence-frame sentence.
+  \item Write one student-generated sentence on board.
+  \item Preview P2: ``Next class we'll multiply and divide rational expressions --- the same factor-and-cancel logic applies.''
+}%
+}{%
+\phaseitems{
+  \item Presenting pair reads their sentence.
+  \item Class signals thumbs up/sideways.
+  \item Note: next class extends this to multiplication and division.
+}%
+}{%
+\phaseitems{
+  \item ``What's a sentence that captures today's rule about domain restrictions?''
+  \item ``Why can't we just ignore the restriction after we cancel?''
+}%
+}{Cold-call 2 pairs. Keep it brief --- 5 min.}
+
+\phasetag{summary recap (not graded)}
+\frameworkphaseheader{Exit Ticket}{1--2}{2}{%
+\phaseitems{
+  \item Collect at door.
+  \item Scan the fill-in items --- misconceptions about domain restrictions tell you what to re-hit in P2 Do Now.
+}%
+}{%
+\phaseitems{
+  \item Complete the fill-in stems.
+  \item Be honest about confusion.
+}%
+}{%
+\phaseitems{
+  \item Did students correctly identify domain restrictions from the original denominator?
+}%
+}{Collect. No grade.}
+
+\begin{callout}{\IconClipboard\ EXIT TICKET --- Student Form}{calloutyellow}
+To simplify \((x^2+3x-10)/(x^2-4)\) I first factor to \_\_\_.\\
+The restricted domain values are \(x \ne\) \_\_\_.\\
+After canceling the factor \_\_\_, my simplified expression is \_\_\_.\\
+One biggest thing I learned today: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{callout}
+
+\clearpage
+
+\begin{callout}{\IconClock\ PERIOD A \& F --- 65-MIN CLASS NOTES}{calloutpink}
+Both sections get 65 min for P1. Use the extra 10 min on Explore, NOT Launch.\\
+Suggested add: project Savvas Practice \#22 and \#24 on screen for 2 more TPS rounds if pairs finish fast.\\
+Or: extend Model \& Discuss Parts B + C with ``write one more rational expression that has the same restriction --- then simplify it.''
+\end{callout}
+
+\begin{callout}{\IconPuzzle\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS}{calloutiep}
+\textbullet\ Provide the Equivalent + Simplify Rules card as a sticker/cut-out on their desk.\\
+\textbullet\ For Try-It 1, allow students to factor with a reference list of factoring patterns.\\
+\textbullet\ Accept verbal sentence-frame completions in lieu of written.
+\end{callout}
+
+\begin{callout}{\IconGlobe\ SUPPORTS FOR ELL STUDENTS}{calloutell}
+\textbullet\ Sentence frames printed on student packet (don't skip).\\
+\textbullet\ Word card: ``domain restriction'' = an \(x\)-value that makes the denominator zero; excluded from the domain.\\
+\textbullet\ ``cancel'' = divide out a common factor from numerator and denominator.\\
+\textbullet\ ``factor'' = rewrite as a product of simpler expressions.\\
+\textbullet\ Pair ELL students with English-dominant partners for TPS.
+\end{callout}
+
+\end{document}

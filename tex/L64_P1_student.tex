@@ -1,0 +1,218 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\lessonrow}[2]{\textbf{#1} & #2 \\ \hline}
+\newcommand{\salesrevenuegraphic}{%
+\begin{center}
+\begin{tikzpicture}[x=1in,y=1in,>=stealth, line width=0.9pt, font=\small]
+\node[draw, rounded corners=5pt, fill=calloutyellow, minimum width=2.2in, minimum height=1.2in] (sales) at (0,0) {};
+\node[draw, rounded corners=5pt, fill=calloutblue!55, minimum width=2.2in, minimum height=1.2in] (ads) at (4.2,0) {};
+
+\draw[fill=yellow!70!white] (-0.55,0.34) ellipse (0.19 and 0.045);
+\draw[fill=yellow!70!white] (-0.55,0.24) ellipse (0.19 and 0.045);
+\draw[fill=yellow!70!white] (-0.55,0.14) ellipse (0.19 and 0.045);
+\draw[fill=yellow!70!white] (-0.15,0.28) ellipse (0.19 and 0.045);
+\draw[fill=yellow!70!white] (-0.15,0.18) ellipse (0.19 and 0.045);
+\draw[fill=yellow!70!white] (0.25,0.22) ellipse (0.19 and 0.045);
+\node[align=center] at (0,-0.26) {\textbf{Sales Revenue, \(R\)}};
+
+\draw[fill=white] (3.45,0.08) rectangle (4.00,0.50);
+\draw (3.48,0.45) -- (3.97,0.45);
+\draw (3.56,0.14) -- (3.89,0.14);
+\draw (3.56,0.22) -- (3.89,0.22);
+\draw (3.56,0.30) -- (3.89,0.30);
+\draw[fill=white, rounded corners=2pt] (4.18,0.00) rectangle (4.46,0.54);
+\draw (4.24,0.46) -- (4.40,0.46);
+\fill (4.32,0.06) circle (0.02);
+\node[align=center] at (4.2,-0.26) {\textbf{Advertising Costs, \(a\)}};
+
+\draw[->, color=tealheader] (1.2,0.02) -- node[above, fill=white, inner sep=2pt] {\(R = 12\log(a + 1) + 25\)} (3.0,0.02);
+\end{tikzpicture}
+\end{center}
+}
+\newcommand{\practiceNineGraph}{%
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.7\linewidth,
+  height=2.45in,
+  axis lines=middle,
+  xmin=-4.5,
+  xmax=4.5,
+  ymin=-4.5,
+  ymax=4.5,
+  xtick={-4,-2,0,2,4},
+  ytick={-4,-2,0,2,4},
+  grid=both,
+  grid style={line width=.1pt, draw=gray!30},
+  xlabel={$x$},
+  ylabel={$y$},
+  tick label style={font=\small},
+  label style={font=\small}
+]
+\addplot[warmred, thick, domain=-4.5:1.6, samples=120] {2^x + 1};
+\addplot[dayblue, thick, domain=0.05:4.5, samples=120] {ln(x)/ln(2)};
+\draw[framegray, dashed] (axis cs:0,-4.5) -- (axis cs:0,4.5);
+\draw[framegray, dashed] (axis cs:-4.5,1) -- (axis cs:4.5,1);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}
+\newcommand{\practiceThirteenGraph}{%
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.62\linewidth,
+  height=2.4in,
+  axis lines=middle,
+  xmin=0,
+  xmax=8,
+  ymin=-3,
+  ymax=5,
+  xtick={0,2,4,6,8},
+  ytick={-2,0,2,4},
+  grid=both,
+  grid style={line width=.1pt, draw=gray!30},
+  xlabel={$x$},
+  ylabel={$y$},
+  tick label style={font=\small},
+  label style={font=\small}
+]
+\addplot[warmred, thick, domain=2.03:8, samples=120] {ln(x-2)/ln(3) + 1};
+\draw[framegray, dashed] (axis cs:2,-3) -- (axis cs:2,5);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}
+
+\begin{document}
+
+\packetheading{Lesson 6-4 \textperiodcentered\ Quick \textperiodcentered\ Student Packet}{Logarithmic Functions + DOK-3 Sales Revenue Inverse (Item 28)}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Math Objective}{Graph logarithmic functions, identify key features (asymptote, domain, range, intercepts), and find equations of inverses of exponential and logarithmic functions.}
+\lessonrow{Language Objective}{Describe how transforming a log function shifts its asymptote and key points; explain why the inverse of a log is an exponential.}
+\lessonrow{Essential Understanding}{Log and exponential functions are inverses --- swap \(x\) and \(y\), solve. The asymptote of a log is the \(y\)-axis mirror of an exp function's horizontal asymptote.}
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Topic Goals}{Fluency with graphing log functions and finding inverses; apply to the Sales Revenue DOK-3 task (Item 28 rehearsal for Form B model-then-invert structure).}
+\lessonrow{Essential Question}{How do the graphs of logarithmic and exponential functions relate, and how do we find one from the other?}
+\lessonrow{Materials}{Student packet, pencil, calculator. Rules card: \(\log_b 1 = 0\); \(\log_b b = 1\); \(y = \log_b x\) has VA at \(x = 0\); \(y = \log_b(x-h) + k\) has VA at \(x = h\); inverse of \(y = a\cdot b^x\) is \(y = \log_b(x/a)\); inverse of \(y = \log_b(x-h) + k\) is \(y = b^{(x-k)} + h\).}
+\end{tabular}
+}
+
+\sectionbanner{LAUNCH --- Inverse of a Log Function (teacher models Ex 3B)}
+
+\begin{callout}{\IconBook\ LOG FUNCTION KEY FEATURES + INVERSE RULES (keep printed on your page)}{calloutgreen}
+LOG FUNCTION KEY FEATURES (\(y = \log_b x\), \(b > 0\), \(b \neq 1\)):\\
+\textbullet\ Domain: \(x > 0\) \hfill \textbullet\ Range: all real numbers\\
+\textbullet\ VA: \(x = 0\) (\(y\)-axis) \hfill \textbullet\ \(x\)-intercept: \((1, 0)\)\\
+\textbullet\ Passes through \((b, 1)\)\\
+TRANSLATION (\(y = \log_b(x-h) + k\)):\\
+\textbullet\ VA shifts to \(x = h\) \hfill \textbullet\ Domain: \(x > h\)\\
+\textbullet\ Point \((b + h, 1 + k)\)\\
+INVERSE RULES:\\
+\textbullet\ \(y = a\cdot b^x\) \(\Rightarrow\) inverse \(y = \log_b(x/a)\)\\
+\textbullet\ \(y = \log_b(x-h) + k\) \(\Rightarrow\) inverse \(y = b^{(x-k)} + h\)\\
+COMPOSITION CHECK: \(f(f^{-1}(x)) = x\)
+\end{callout}
+
+\begin{callout}{\IconWarn\ ONE EXAMPLE IN LAUNCH --- Ex 3B: inverse of \(g(x)=\log_7(x+5)\)}{calloutblue}
+Teacher models Example 3B: find the inverse of \(g(x) = \log_7(x+5)\), then verify using composition \(f(f^{-1}(x)) = x\).\\
+Contrast: Ex 3A (inverse of an exponential) covered in 90 sec --- same swap-and-solve process, direction reversed.\\
+Key move: swap \(x\) and \(y\) \(\rightarrow\) \(7^x = y + 5\) \(\rightarrow\) solve for \(y\).
+\end{callout}
+
+\sectionbanner{EXPLORE --- Think-Pair-Share (25 min)}
+\textit{Work with a partner. Start with \IconStar\ Practice \#28 (DOK-3 Sales Revenue). Then DOK-2 items in order.}\\
+\textit{45-min Wed F: q9 is dropped. Skip to Exit after q13.}
+
+\textbf{Bank-item labels (in order):}
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,topsep=2pt]
+  \item Practice \#28  \IconStar\ DOK-3 SALES REVENUE INVERSE --- Form B model-then-invert rehearsal
+  \item Practice \#21 --- Inverse of exponential \(5^{(x-3)}\)  [Form B Q7 rehearsal]
+  \item Practice \#24 --- Inverse of \(\log_2(8x)\), token drag  [Form B Q12 rehearsal]
+  \item Practice \#13 --- Asymptote of translated log from graph  [Form B Q11 rehearsal]
+  \item Practice \#9 --- Are graphs inverses? Inverse from graph  [Form B Q9/Q10 rehearsal]
+\end{enumerate}
+
+\bankitem{Practice \#28  \IconStar\ DOK-3 SALES REVENUE INVERSE --- Form B model-then-invert rehearsal}{%
+A company uses this function to relate sales revenue, \(R\), and advertising costs, \(a\). What is the equation of the inverse of the equation? Which equation would be easier to use to find a value of \(a\) for a particular value of \(R\)?
+
+\salesrevenuegraphic
+}{}
+
+\bankitem{Practice \#21 --- Inverse of exponential \(5^{(x-3)}\)  [Form B Q7 rehearsal]}{%
+Find the equation of the inverse of each function. \(f(x)=5^{x-3}\).
+}{}
+
+\bankitem{Practice \#24 --- Inverse of \(\log_2(8x)\), token drag  [Form B Q12 rehearsal]}{%
+Find the equation of the inverse of each function. \(f(x)=\log_2(8x)\).
+}{}
+
+\bankitem{Practice \#13 --- Asymptote of translated log from graph  [Form B Q11 rehearsal]}{%
+\textbf{Use Structure} The graph shows a transformation of the parent graph \(f(x)=\log_3 x\). Write an equation for the graph.
+
+\practiceThirteenGraph
+}{}
+
+\bankitem{Practice \#9 --- Are graphs inverses? Inverse from graph  [Form B Q9/Q10 rehearsal]}{%
+\textbf{Look for Relationships} Are the logarithmic and exponential functions shown inverses of each other? Explain.
+
+\practiceNineGraph
+}{}
+
+\sectionbanner{SHARE / SUMMARY (5 min)}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames}
+
+DOK-3 pair share: ``For Practice \#28, I found the inverse by \_\_\_. For revenue \(R =\) \_\_\_ dollars, the original form \(R = 12\cdot\log(a+1)+25\) is easier because \_\_\_. The inverse form \(a =\) \_\_\_ is easier when \_\_\_.''
+
+Bridge to 6-5: log properties let us rewrite and simplify log expressions --- that makes inverses and equations easier.
+\end{sentenceframebox}
+
+\begin{callout}{\IconSearch\ BRIDGE TO LESSON 6-5}{calloutpeach}
+In 6-5 you will learn log properties (product, quotient, power rules). Those properties let you expand or condense log expressions --- which makes solving equations like the one in \#28 much faster.
+\end{callout}
+
+\sectionbanner{EXIT}
+
+\begin{summaryexitbox}{EXIT TICKET --- Inverse + Asymptote}
+Find the inverse of \(f(x) = 3\cdot\log_5(x - 2) + 1\).
+
+State the vertical asymptote of \(f\).
+
+State the horizontal asymptote of \(f^{-1}\).
+
+One biggest thing I learned today: \rule{2.6in}{0.4pt}
+\end{summaryexitbox}
+
+\clearpage
+
+\sectionbanner{OPTIONAL REINFORCEMENT (not collected)}
+\textit{If you finish Explore early. \#33 is a Savvas performance task (telescope) that extends inverse/log fluency to a modeling context.}
+
+\bankitem{Optional \#1  (Savvas Practice \#33 --- Telescope PT)}{%
+\textbf{Performance Task} The logarithmic function \(M(d) = 5\log d + 2\) is used to find the limiting magnitude of a telescope, where \(d\) represents the diameter of the lens of the telescope (mm) that is being used for the observation.
+
+\textbf{Part A} Find the limiting magnitude of a telescope having a lens diameter of \(40\) mm.
+
+\textbf{Part B} Find the equation of the inverse of this function.
+
+\textbf{Part C} Interpret why astronomers may wish to use the inverse of this function. Justify your reasoning.
+
+\textbf{Part D} Using the inverse function, find the diameter of the lens that has a limiting magnitude of \(13.5\). Check your answer with the table function of your graphing calculator.
+}{}
+
+\end{document}

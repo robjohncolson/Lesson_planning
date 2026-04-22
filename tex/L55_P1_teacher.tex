@@ -1,0 +1,317 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+\usepackage{amssymb}
+
+\newcommand{\IconCheck}{[CHECK]}
+\newcommand{\IconMic}{[MIC]}
+\newcommand{\IconClipboard}{[CLIPBOARD]}
+
+\newcommand{\phasetag}[1]{%
+  {\small\itshape Tag: #1\par}
+}
+
+\newcommand{\phaseitems}[1]{%
+  \begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  #1
+  \end{itemize}%
+}
+
+\newcommand{\teacheranswerbox}[2]{%
+  \begin{callout}{#1}{calloutgreen}
+  #2
+  \end{callout}
+}
+
+\newcommand{\imageplaceholder}[1]{%
+  \begin{center}
+  \fbox{\parbox{0.88\linewidth}{\centering\textit{[IMAGE: #1]}}}
+  \end{center}
+}
+
+\begin{document}
+
+\packetheading{Lesson 5-5 \(\cdot\) Quick \(\cdot\) Teacher Edition}{Function Operations + Composition Order DOK-3 (Standalone)}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Math Objective} & Combine functions via \(+\), \(-\), \(\times\), \(\div\), and composition; track how domain restrictions change; recognize that composition is non-commutative and explain when the order of operations changes the outcome. \\ \hline
+\textbf{Language Objective} & Justify in writing which order of a two-step discount gives a better price, using function composition. \\ \hline
+\textbf{Essential Understanding} & \(f \circ g \neq g \circ f\) in general --- the ORDER of composition matters and often changes the answer, which matters for real-world decisions. \\ \hline
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Topic Goals} & Add, subtract, multiply, divide, and compose functions; recognize non-commutativity of composition. \\ \hline
+\textbf{Essential Question} & Why does the ORDER of a two-step discount or two-function composition change the result, and when does it not? \\ \hline
+\textbf{Materials} & Student packet, pencil. DOK-3 Practice \#32 (music store) is the lesson's standalone reasoning capstone --- no Topic 5 assessment overlap, treated on its own merits. \\ \hline
+\end{tabular}
+}
+
+\begin{callout}{\IconPin\ PRE-FLIGHT --- STANDALONE DOK-3, NOT ASSESSED}{calloutpink}
+Today's conceptual core is Practice \#32 (Music Store Double Discount). Students must set up TWO different compositions: \((\$5 \text{ off}) \circ (15\% \text{ off})\) and \((15\% \text{ off}) \circ (\$5 \text{ off})\), apply to \(\$90\), compute both, AND justify in writing which order is better for the consumer.\\
+The justification in Part C is the DOK-3 move. Accepted answers: (a) \(\$72.25\), (b) \(\$71.50\), (c) \(15\%\) first is better (the \(\$5\) saved on a smaller base is worth less than \(15\%\) off the larger base).\\
+NOTE: Function composition is NOT on the Topic 5 assessment. Accept \#32 on its own merits as a rich reasoning item.\\
+Pace: Try-It 1 (4 min) \(\rightarrow\) Try-It 4 (4 min) \(\rightarrow\) \#20/\#21 (4 min) \(\rightarrow\) \#24 (3 min) \(\rightarrow\) \#28/\#34 (4 min) \(\rightarrow\) \#32 (12 min). \(\sim\)35 min total Explore.\\
+45-min Wed F variant: cut \#34 and \#28. Never cut \#32.
+\end{callout}
+
+\phasetag{lesson hook}
+\frameworkphaseheader{Do Now}{1}{5}{%
+\phaseitems{
+  \item Hand out at door.
+  \item Circulate 3 min.
+  \item Cold-call 1 student for profit function notation.
+}%
+}{%
+\phaseitems{
+  \item Write \(P(x) = R(x) - C(x)\) from the model-discuss prompt.
+  \item Connect function subtraction to the algebraic definition.
+}%
+}{%
+\phaseitems{
+  \item What operation on functions gives us profit?
+  \item Could we combine functions with other operations? (Yes --- preview of today.)
+}%
+}{Solo teacher: circulate silently. No hints.}
+
+\bankitem{Do Now (5-5-savvas-model-discuss-lesson-5-5-launch)}{%
+In business, the term profit is used to describe the difference between the money the business earns (revenue) and the money the business spends (cost).\par\medskip
+\imageplaceholder{Illustration of a man grooming a bulldog, with a sign reading ``GROOMING \$25 per pet''.}
+A. Let \(x\) represent the number of pets groomed in a month at Grooming USA. Define a revenue function for the business.\par\medskip
+B. Materials and labor for each pet groomed cost \(\$15\). The business also has fixed costs of \(\$1{,}000\) each month. Define a cost function for this business.\par\medskip
+C. Last month, Grooming USA groomed 95 pets. Did they earn a profit? What would the profit be if the business groomed 110 pets in a month?\par\medskip
+D. Generalize Explain your procedure for calculating the profit for Grooming USA. Suppose you wanted to calculate the profit for several different scenarios. How could you simplify your process?
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY}{%
+Answer key (from source): A. \(r(x)=25x\). B. \(c(x)=15x+1000\). C. No; grooming only 95 pets results in a loss of \(\$50\) for Grooming USA. Grooming 110 pets results in a profit of \(\$100\). D. To find the profit from 95 pets, I calculated \(r(95)-c(95)\); to find the profit from 110 pets, I calculated \(r(110)-c(110)\). If I needed to find the profit for several different values, it would make sense to find a function rule for profit and apply that simplified rule rather than applying two different functions and finding the difference of their values. \textbullet\ IMAGE PLACEHOLDER [photo]: Groomer with a dog and a sign reading ``GROOMING \$25 per pet.''
+}
+
+\phasetag{teacher models Example 1 (add/subtract) + Example 4 (compose)}
+\frameworkphaseheader{Launch}{2}{12}{%
+\phaseitems{
+  \item Project Example 1. Think aloud: \((f+g)(x) = f(x) + g(x)\). Domain = intersection.
+  \item Project Example 4. Think aloud: \((f \circ g)(x) = f(g(x))\) --- apply \(g\) FIRST.
+  \item Flag the Function Operations Rules card --- print it in student minds.
+  \item 30-sec pause: ``What's the difference between \(f(g(x))\) and \(g(f(x))\)? Check with \(x=2\).'' (partner check)
+  \item Do NOT solve Try-Its or Practice items --- release at minute 17.
+}%
+}{%
+\phaseitems{
+  \item Watch Example 1 silently; copy combined-function notation.
+  \item Watch Example 4 silently; note the inner/outer function structure.
+  \item During pause: test \(f(g(2))\) vs \(g(f(2))\) with partner.
+  \item Copy Rules card into margin.
+}%
+}{%
+\phaseitems{
+  \item In \((f \circ g)(x)\), which function do I apply first?
+  \item Does \(f(g(x))\) always equal \(g(f(x))\)? When might it?
+  \item If \(g(x) = 0\) for some \(x\), what happens to \((f/g)(x)\) at that point?
+}%
+}{Project. Think aloud. Release promptly at minute 17.}
+
+\begin{callout}{\IconMic\ TEACHER SCRIPT}{calloutblue}
+1. ``Watch me add two functions. The domain of the combined function is the intersection of the two original domains.''\\
+2. ``Now composition: \((f \circ g)(x)\) means I substitute \(g(x)\) ENTIRELY into \(f\). \(g\) goes in first.''\\
+3. ``I'll test \(x=2\): \(f(g(2))\) vs \(g(f(2))\). Watch what happens --- the results are different.''\\
+4. ``This is the big idea today: ORDER MATTERS in composition. It's like putting on your shoes before your socks vs. socks before shoes.''\\
+5. ``Today's DOK-3 (\#32) asks you to decide which order of a double discount is better for the consumer. You'll set up both compositions and compare.''\\
+6. Release to Explore.
+\end{callout}
+
+\phasetag{TPS + DOK-3 driver}
+\frameworkphaseheader{Explore}{2-3}{33}{%
+\phaseitems{
+  \item 5 laps across 33 min.
+  \item Lap 1 (4 min): Try-It 1 --- add/subtract. Press pairs to use function notation.
+  \item Lap 2 (4 min): Try-It 4 --- compose. Watch for inner/outer confusion.
+  \item Lap 3 (4 min): \#20/\#21 --- operations. Confirm domain intersections.
+  \item Lap 4 (4 min): \#24/\#28/\#34 --- domain + evaluation. Watch for \#24 domain restrictions.
+  \item Lap 5 (12 min): \IconStar\ \#32 Music Store. Students set up BOTH orders, compute both, and justify Part C in writing.
+  \item Do NOT give \#32 Part C answers. Pairs present argument to each other; one pair presents at Share.
+}%
+}{%
+\phaseitems{
+  \item 8 items in order: Try-It 1 \(\rightarrow\) Try-It 4 \(\rightarrow\) \#20 \(\rightarrow\) \#21 \(\rightarrow\) \#24 \(\rightarrow\) \#28 \(\rightarrow\) \#34 \(\rightarrow\) \#32.
+  \item For \#32: BEFORE computing, identify which function represents which discount and set up both compositions.
+  \item Justify Part C with sentence frame.
+}%
+}{%
+\phaseitems{
+  \item Try-It 1: is \((f+g)(x)\) the same as \(f(x+g)\)? (No --- watch the notation.)
+  \item Try-It 4: which value goes in FIRST --- the inner function output or \(x\)?
+  \item \#24: what domain values are excluded, and why?
+  \item \#32: what does the \(\$5\)-off function look like? The \(15\%\)-off function?
+  \item \#32: apply each to \(\$90\). Which gives a lower price?
+  \item \#32 Part C: WHY is one order better? (The \(15\%\) acts on a larger base amount.)
+}%
+}{Solo teacher: 5 laps. Press COMPOSITION ORDER justification on \#32 Part C.}
+
+\bankitem{Try It 1 (5-5-savvas-try-it-1-lesson-5-5)}{%
+Let \(f(x) = 2x^2 + 7x - 1\) and \(g(x) = 3 - 2x\). Identify rules for the following functions.\par\medskip
+a. \(f + g\)\quad b. \(f - g\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): a. \(f+g=2x^2+5x+2\). b. \(f-g=2x^2+9x-4\).
+}
+
+\bankitem{Try It 4 (5-5-savvas-try-it-4-lesson-5-5)}{%
+Let \(f(x) = 2x - 1\) and \(g(x) = 3x\). Find the value or identify the rule for the following functions.\par\medskip
+a. \(f(g(2))\)\quad b. \(f(g(x))\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): a. \(f(g(2))=11\). b. \(f(g(x))=6x-1\).
+}
+
+\bankitem{Practice \#20 (5-5-savvas-q20)}{%
+Let \(f(x)=(5)/(3)x^2+2x-(5)/(8)\) and \(g(x)=3x^2\). Identify the rules for the following functions. SEE EXAMPLE 1\par\medskip
+\(f+g\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): \(f+g=(14)/(3)x^2+2x-(5)/(8)\).
+}
+
+\bankitem{Practice \#21 (5-5-savvas-q21)}{%
+Let \(f(x)=(5)/(3)x^2+2x-(5)/(8)\) and \(g(x)=3x^2\). Identify the rules for the following functions. SEE EXAMPLE 1\par\medskip
+\(f-g\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): \(f-g=-(4)/(3)x^2+2x-(5)/(8)\).
+}
+
+\bankitem{Practice \#24 (5-5-savvas-q24)}{%
+Let \(f(x)=4x-5\) and \(g(x)=-7x\). Evaluate each expression. SEE EXAMPLE 4\par\medskip
+\(f(g(3))\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): \(-89\).
+}
+
+\bankitem{Practice \#28 (5-5-savvas-q28)}{%
+Let \(f(x)=x^2+x\) and \(g(x)=9-2x\). Identify the rules for the following functions. SEE EXAMPLE 5\par\medskip
+\(f \circ g\)
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): \(4x^2-38x+90\).
+}
+
+\bankitem{Practice \#34 (5-5-savvas-q34)}{%
+Given that \(f(x)=x^2+8x+3\) and \(g(x)=-x-7\), which of the following are true? Select all that apply.
+\begin{itemize}[leftmargin=1.8em,label={\(\square\)},itemsep=2pt,topsep=4pt]
+  \item \(f+g=x^2+7x-4\)
+  \item \(f(g(x))=x^2+6x-4\)
+  \item The domain of \((f)/(g)\) is the set of all real numbers.
+  \item \(f(x)\cdot g(x)=-x^3-15x^2+53x+21\)
+  \item In the composition \(g \circ f\), the output \(f(x)\) is used as the input for \(g\).
+\end{itemize}
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): The true statements are \(f+g=x^2+7x-4\), \(f(g(x))=x^2+6x-4\), and in the composition \(g \circ f\), the output \(f(x)\) is used as the input for \(g\).
+}
+
+\bankitem{Practice \#32 \IconStar\ DOK-3 ORDER-MATTERS --- Music Store Double Discount (5-5-savvas-q32)}{%
+Use Structure A music store is running the following promotions.\par\medskip
+\imageplaceholder{Promotional ad reading ``HUGE SAVINGS AT O'RILEY'S MUSIC,'' ``\$5 off a purchase of \$20 or more,'' and ``Save an additional 15\% off your total purchase when you open a charge account.''}
+a. Use composition of functions to find the sale price of a \(\$90\) purchase when the \(\$5\) off discount is applied prior to the \(15\%\) off discount.\par\medskip
+b. Use composition of functions to find the sale price of a \(\$90\) purchase when the \(15\%\) off discount is applied prior to the \(\$5\) off discount.\par\medskip
+c. In which order is the deal better for the consumer? Explain.
+}{}
+
+\begin{callout}{\IconStar\ DOK-3 ORDER-MATTERS --- Practice \#32 (standalone reasoning --- NOT on Topic 5 assessment)}{calloutpink}
+Students must set up TWO different compositions: \((\$5 \text{ off}) \circ (15\% \text{ off})\) and \((15\% \text{ off}) \circ (\$5 \text{ off})\), apply to \(\$90\), compute both, AND justify in writing which order is better for the consumer.\\
+The justification in Part C is the DOK-3 move.\\
+Accepted answers: (a) \(\$72.25\), (b) \(\$71.50\), (c) \(15\%\) first is better (the \(\$5\) saved on a smaller base is worth less than \(15\%\) off the larger base).\\
+Anchor to Ex 4/Ex 6 (composition modeling). Sentence frame required for ELL.
+\end{callout}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+Answer key (from source): a. \(\$72.25\). b. \(\$71.50\). c. Since \(\$71.50<\$72.25\), it is a better deal for the consumer if the \(15\%\) discount is applied prior to the \(\$5\) off discount. \textbullet\ IMAGE PLACEHOLDER [illustration]: Promotional ad reading ``HUGE SAVINGS AT O'RILEY'S MUSIC,'' ``\$5 off a purchase of \$20 or more,'' and ``Save an additional 15\% off your total purchase when you open a charge account.''
+}
+
+\phasetag{academic conversation + lesson wrap}
+\frameworkphaseheader{Share / Summary}{2}{5}{%
+\phaseitems{
+  \item Cold-call 1 pair to present their \#32 Part C justification using sentence frame.
+  \item Class signals thumbs. Write the composition-order definition on board: \(f \circ g \neq g \circ f\).
+  \item Lesson wrap: ``Composition order matters --- real decisions (discounts, unit conversions, multi-step processes) depend on it.''
+}%
+}{%
+\phaseitems{
+  \item Presenting pair reads their Part C and shows both computations.
+  \item Rest of class signals and writes takeaway in margin.
+}%
+}{%
+\phaseitems{
+  \item Why does \(15\%\) off first give a better price than \(\$5\) off first?
+  \item Can you think of a case where the order of two functions WOULDN'T matter?
+}%
+}{Cold-call a pair that struggled on \#32 Part C --- hold them to the justification structure.}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames}
+
+Pair share (\#32 Music Store): ``Applying \_\_\_ first gives \_\_\_, then \_\_\_ gives \_\_\_. If I reverse the order I get \_\_\_, so \((f \circ g)(x) = \_\_\_ \neq g \circ f = \_\_\_.\)'' 
+
+Whole class: one pair presents their order-matters argument. Class signals thumbs up/sideways.
+\end{sentenceframebox}
+
+\phasetag{summary recap (not graded)}
+\frameworkphaseheader{Exit Ticket}{1-2}{3}{%
+\phaseitems{
+  \item Collect at door.
+  \item Scan stem 3 (discount order). Plan review if many students missed the direction of the inequality.
+}%
+}{%
+\phaseitems{
+  \item 4 sentence stems, honest.
+}%
+}{%
+\phaseitems{
+  \item Did students correctly identify which order is better and give a mathematical reason?
+}%
+}{Collect. No grade.}
+
+\begin{callout}{\IconClipboard\ EXIT TICKET --- Student Form}{calloutyellow}
+\(f \circ g\) means \_\_\_ is applied \_\_\_.\\
+An example where \(f \circ g \neq g \circ f\) is \_\_\_.\\
+For a double discount, the better order for the consumer is \_\_\_ because \_\_\_.\\
+One biggest thing I learned today: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{callout}
+
+\clearpage
+
+\begin{callout}{\IconClock\ PERIOD A / PERIOD F --- 65-MIN CLASS NOTES}{calloutpink}
+Both sections should have 65 min. Use the extra 10 min on Explore \#32 (Music Store) --- the richer the written justification, the better the DOK-3 payoff.\\
+45-min Wed F variant: cut \#34 and \#28 from Explore. Never cut \#32.\\
+If finished early: hand out Practice \#35 (SAT/ACT \(f(g(5))\)) as fast-finisher.
+\end{callout}
+
+\begin{callout}{\IconPuzzle\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS}{calloutiep}
+\textbullet\ Provide the Function Operations Rules card as a sticker/cut-out.\\
+\textbullet\ For \#32, provide a starter: ``Let \(D(x) = x - 5\) (the \(\$5\)-off function) and \(P(x) = 0.85x\) (the \(15\%\)-off function). Now find \(P(D(90))\) and \(D(P(90))\).''\\
+\textbullet\ Accept verbal Part C justification in lieu of written paragraph.
+\end{callout}
+
+\begin{callout}{\IconGlobe\ SUPPORTS FOR ELL STUDENTS}{calloutell}
+\textbullet\ Sentence frames on student page (don't skip).\\
+\textbullet\ Word cards: ``composition'' = apply one function's OUTPUT as the next function's INPUT; ``inner function'' = applied first; ``outer function'' = applied second.\\
+\textbullet\ ``Order matters'' = changing the sequence changes the answer.\\
+\textbullet\ Pair ELL students with English-dominant partners for TPS.
+\end{callout}
+
+\end{document}

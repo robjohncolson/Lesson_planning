@@ -1,0 +1,404 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\IconCheck}{[CHECK]}
+\newcommand{\IconMic}{[MIC]}
+\newcommand{\IconClipboard}{[CLIPBOARD]}
+\newcommand{\lessonrow}[2]{\textbf{#1} & #2 \\ \hline}
+
+\newcommand{\phasetag}[1]{%
+  {\small\itshape Tag: #1\par}
+}
+
+\newcommand{\phaseitems}[1]{%
+  \begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+  #1
+  \end{itemize}%
+}
+
+\newcommand{\teacheranswerbox}[2]{%
+  \begin{callout}{#1}{calloutgreen}
+  #2
+  \end{callout}
+}
+
+\newcommand{\teachermodeledbox}[2]{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=framegray!45,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=8pt,
+    right=8pt,
+    top=5pt,
+    bottom=5pt
+  ]
+  {\color{dayblue}\bfseries #1\par}
+  #2
+  \end{tcolorbox}
+}
+
+\begin{document}
+
+\packetheading{Lesson 6-5 \textperiodcentered\ Quick \textperiodcentered\ Teacher Edition}{Properties of Logarithms + DOK-3 Power Property Proof \& Richter Generalization}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Math Objective}{Use the Product, Quotient, and Power Properties of Logarithms, plus the Change of Base Formula, to expand, condense, and evaluate logarithmic expressions and solve exponential equations.}
+\lessonrow{Language Objective}{State each log property in ``words'' form (``the log of a product equals the sum of the logs''), and justify a condensing step by naming which property applies.}
+\lessonrow{Essential Understanding}{The log properties come directly from the exponent laws --- every property of logarithms IS a property of exponents written in inverse form.}
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Topic Goals}{Fluency with all four log properties + change of base; apply to condense, expand, and solve; prove Power Property from first principles (DOK-3).}
+\lessonrow{Essential Question}{How do the properties of exponents become the properties of logarithms, and how do we use them to simplify or solve equations?}
+\lessonrow{Materials}{Student packet, pencil, calculator. DOK-3 paired driver (\#13 proof + \#40 Richter) is the lesson capstone and rehearses Form B DOK-3 generalization reasoning. Note: Form B Q8 and Q15 (geometric series) are NOT on the Topic 6 assessment and are NOT covered here.}
+\end{tabular}
+}
+
+\begin{callout}{\IconPin\ PRE-FLIGHT --- SINGLE-PERIOD COMPRESSED LESSON + DOK-3 PAIRED CAPSTONE}{calloutpink}
+This is a single-period quick treatment of Lesson 6-5. ONE example is modeled in Launch (Example 3: condensing). Release promptly at minute 12.\\
+Today's DOK-3 driver is PAIRED: \#13 (prove Power Property) + \#40 Part C (Richter generalization). Students must connect the proof to the application. Both are Form B DOK-3 rehearsal items.\\
+Pace: q19 (4 min) \(\rightarrow\) q21 (4 min) \(\rightarrow\) q34 (4 min) \(\rightarrow\) q3 (4 min, skip Wed-F) \(\rightarrow\) \#13 + \#40 paired (12 min). \(\sim\)28 min total Explore.\\
+45-min Wed-F variant: cut q3. Never cut \#13 or \#40.\\
+SCOPE NOTE: Form B Q8 and Q15 (geometric series) are NOT covered in this lesson and have been dropped from the Topic 6 assessment. Do NOT prep students for those items.
+\end{callout}
+
+\begin{callout}{\IconPuzzle\ ASSESSMENT ALIGNMENT --- Form B Rehearsal Mapping}{calloutiep}
+q19, q21 \(\rightarrow\) Form B Q13 (condense logs) + Q16 (step-by-step condense token drag)\\
+q34 \(\rightarrow\) Form B Q14 (solve exponential equation with logs)\\
+q3 \(\rightarrow\) Form B Q3 (substitution/simplification in rational/log expressions)\\
+q13 + q40 \(\rightarrow\) DOK-3 rehearsal for Form B generalization reasoning\\
+\IconWarn\ Form B Q8 and Q15 (geometric series) are NOT on the Topic 6 assessment and are NOT covered in this lesson.
+\end{callout}
+
+\phasetag{bridge to log properties launch}
+\frameworkphaseheader{Do Now}{1--2}{7}{%
+\phaseitems{
+  \item Hand out at door.
+  \item Circulate 4 min.
+  \item Cold-call 1 student on q12: change-of-base error.
+}%
+}{%
+\phaseitems{
+  \item Error analysis (q12), expand with Quotient Property (q4), condense with Power + Product Properties (q5).
+}%
+}{%
+\phaseitems{
+  \item q12: what must the denominator be in change-of-base? Same base or same argument?
+  \item q4: name the property. What does \(\log_6(49/5)\) expand to?
+  \item q5: Power Property first (coefficient \(\rightarrow\) exponent), then Product Property to combine.
+}%
+}{Solo teacher: circulate silently. No hints on q12 --- students must identify the error type.}
+
+\bankitem{Do Now \#1 --- Error Analysis: Change of Base (6-5-savvas-q12)}{%
+Error Analysis A student wants to approximate \(\log_2 9\) with her calculator. She enters the equivalent expression \(\dfrac{\ln2}{\ln9}\), but the decimal value is not close to her estimate of 3. What happened?
+
+\[
+\log_2 9=(\ln2)/(\ln9)
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY}{%
+\textbf{Answer key (from source):} The student applied the change of base property incorrectly.
+}
+
+\bankitem{Do Now \#2 --- Expand: \(\log_6(49/5)\) (6-5-savvas-q4)}{%
+Use the properties of logarithms to expand each expression.
+
+\[
+\log_6\dfrac{49}{5}
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY}{%
+\textbf{Answer:} \(\log_6 49 - \log_6 5 = \log_6(7^2) - \log_6 5 = 2\log_6 7 - \log_6 5\) (Quotient Property, then Power Property)
+}
+
+\bankitem{Do Now \#3 --- Condense: \(5\ln s + 6\ln t\) (6-5-savvas-q5)}{%
+Use the properties of logarithms to write each expression as a single logarithm.
+
+\[
+5\ln s + 6\ln t
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY}{%
+\textbf{Answer:} \(\ln(s^5 * t^6)\) --- Power Property applied to each term first, then Product Property to combine
+}
+
+\begin{callout}{\IconTarget\ SENTENCE FRAME}{calloutyellow}
+``For Do Now \#1, the error is \_\_\_ because change of base says \(\log_b x = (\log \_\_\_)/(\log \_\_\_)\). For \#2, \(\log_6(49/5) = \log_6 \_\_\_ - \log_6 \_\_\_\) (Quotient Property). For \#3, I used the \_\_\_ Property to write \(5\ln s = \ln(s^{\_\_\_})\), then the \_\_\_ Property to combine.''
+\end{callout}
+
+\phasetag{teacher models Example 3 [condensing --- all 3 properties active]}
+\frameworkphaseheader{Launch}{1--2}{5}{%
+\phaseitems{
+  \item Project Example 3. Think aloud: identify which property applies at each step.
+  \item ``Condensing forces you to recognize all three properties at once --- Power first (coefficients become exponents), then Product/Quotient to merge.''
+  \item Flag the Rules card --- students copy POWER PROPERTY into margin.
+  \item 30-sec pause: `Turn to partner: what would expanding look like? Same properties, opposite direction.'
+  \item Do NOT solve any Explore items. Release at minute 12.
+}%
+}{%
+\phaseitems{
+  \item Watch Example 3 silently. Note the order: Power \(\rightarrow\) Product/Quotient.
+  \item Copy the Power Property rule into margin.
+  \item During pause: describe expanding vs. condensing to partner.
+}%
+}{%
+\phaseitems{
+  \item Which property lets us move the coefficient \(n\) in front of \(\log_b M\)?
+  \item After applying Power Property, which property combines two logs into one?
+  \item If I have \(\log_b M + \log_b N\), what single log equals that? What if it's a subtraction?
+  \item How does Example 3 connect to exponent laws? (That's the DOK-3 proof you'll do.)
+}%
+}{Project Example 3 only. Release promptly at minute 12.}
+
+\begin{callout}{\IconMic\ TEACHER SCRIPT}{calloutblue}
+1. ``Watch me condense this expression into a single logarithm.''\\
+2. ``Step 1: Any coefficient in front of a log? \(\rightarrow\) Power Property: move it up as exponent.''\\
+3. ``Step 2: Now I have log terms being added or subtracted.''\\
+4. ``Added logs \(\rightarrow\) Product Property: \(\log_b(MN)\). Subtracted logs \(\rightarrow\) Quotient Property: \(\log_b(M/N)\).''\\
+5. ``Result: one single logarithm. That's condensing.''\\
+6. ``Today's DOK-3 task asks you to PROVE why the Power Property works --- using nothing but the definition of logarithm and exponent laws.''\\
+7. Release to Explore.
+\end{callout}
+
+\teachermodeledbox{Teacher-modeled Launch example from registry (6-5-savvas-example-3-lesson-6-5)}{%
+Write Expressions as Single Logarithms
+
+What is each expression written as a single logarithm?
+
+\textbf{A.} \(4\log_4 m + 3\log_4 n - \log_4 p\)
+\begin{align*}
+4\log_4 m + 3\log_4 n - \log_4 p &= \log_4(m^4) + \log_4(n^3) - \log_4 p \\
+&= \log_4(m^4 n^3) - \log_4 p \\
+&= \log_4\!\left(\dfrac{m^4 n^3}{p}\right)
+\end{align*}
+
+\textbf{B.} \(3\ln 2 - 2\ln 5\)
+\begin{align*}
+3\ln 2 - 2\ln 5 &= \ln(2^3) - \ln(5^2) \\
+&= \ln\!\left(\dfrac{2^3}{5^2}\right) \\
+&= \ln\!\left(\dfrac{8}{25}\right)
+\end{align*}
+}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY / TEACHER NOTE}{%
+\textbf{Teacher-modeled.} COMPRESSED Launch (1 example doing 3 properties simultaneously --- justified in builder docstring). The reason this lesson can skip Ex 1/Ex 2 Launch is that the Do Now already drills them.
+}
+
+\phasetag{TPS + DOK-3 paired driver}
+\frameworkphaseheader{Explore}{2--3}{28}{%
+\phaseitems{
+  \item 4 laps across 28 min.
+  \item Lap 1 (4+4 min): q19 + q21. Press: which property, in what order?
+  \item Lap 2 (4+4 min): q34 + q3. q34: change of base for solving. q3: name the error type.
+  \item Lap 3 (12 min): \IconStar\ \#13 + \#40 paired. DO NOT give the let-\(x\) substitution for \#13 before 6 min in. For \#40 Part C: press `write \(R(150A_0)\) and \(R(A_0)\) separately first.'
+  \item On Wed-F 45-min: skip q3. Move directly from q34 to \#13 + \#40.
+}%
+}{%
+\phaseitems{
+  \item 6 items in order (5 on Wed-F): q19 \(\rightarrow\) q21 \(\rightarrow\) q34 \(\rightarrow\) q3 (skip Wed-F) \(\rightarrow\) \#13 \(\rightarrow\) \#40 Part C.
+  \item For \#13: let \(x = \log_b M\). Rewrite \(b^x = M\). Raise both sides to \(n\). Apply log definition.
+  \item For \#40 Part C: compute \(R(150A_0) - R(A_0)\) using the log properties. Generalize.
+}%
+}{%
+\phaseitems{
+  \item q19: which property handles the \(\tfrac{1}{2}\) coefficient? Apply Power Property first.
+  \item q21: what is \(\tfrac{1}{3}\ln 27\)? Simplify before subtracting.
+  \item q34: change of base --- which base do you use on the calculator?
+  \item q3: Amanda wrote \(\log_4(c^2d^5) = 2\cdot\log_4 c \cdot 5\cdot\log_4 d\). Which property did she confuse? (Power \(\neq\) Product of coefficients.)
+  \item \#13: if \(b^x = M\) and you raise both sides to \(n\), what exponent rule gives \(b^{(nx)} = M^n\)?
+  \item \#40 Part C: write \(R(150A_0) - R(A_0) = \log(150A_0/S) - \log(A_0/S)\). Now apply the Quotient Property. What remains?
+}%
+}{Solo teacher: 4 laps. On \#13, press the `let \(x = \log_b M\)' substitution and the exponent-law bridge. On \#40 Part C, press the Quotient Property simplification to isolate \(\log 150\).}
+
+\bankitem{Practice \#19 (6-5-savvas-q19)}{%
+Use the properties of logarithms to write each expression as a single logarithm.
+
+\[
+\log_5 6+\dfrac{1}{2}\log_5 y
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \(\log_5(6y^{1/2})\)
+}
+
+\bankitem{Practice \#21 (6-5-savvas-q21)}{%
+Use the properties of logarithms to write each expression as a single logarithm.
+
+\[
+\dfrac{1}{3}\ln27-3\ln(2y)
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \(\ln\!\left(\dfrac{3}{8y^3}\right)\)
+}
+
+\bankitem{Practice \#34 (6-5-savvas-q34)}{%
+Use the Change of Base Formula to solve each equation for \(x\). Give an exact solution as a logarithm and an approximate solution rounded to the nearest thousandth.
+
+\[
+7^x=100
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} \(\dfrac{\log100}{\log7};\ 2.367\)
+}
+
+\bankitem{Practice \#3 (6-5-savvas-q3)}{%
+Error Analysis Amanda used the properties of logarithms to expand \(\log_4(c^2 d^5)\). Her work is shown below. Describe and correct the error.
+
+\[
+\log_4(c^2 d^5) = 2 \cdot \log_4 c \cdot 5 \cdot \log_4 d
+\]
+}{}
+
+\teacheranswerbox{\IconCheck\ ANSWER / ANTICIPATED TALK}{%
+\textbf{Answer key (from source):} Amanda multiplied the exponents as coefficients AND then multiplied the two resulting terms together, confusing the Power Property with multiplication and the Product Property with multiplication. Correct: \(\log_4(c^2 d^5) = \log_4(c^2) + \log_4(d^5) = 2\log_4 c + 5\log_4 d\) (Product Property first, then Power Property --- adding, not multiplying).
+}
+
+\bankitem{Practice \#13 \IconStar\ DOK-3 PROOF (6-5-savvas-q13)}{%
+Use the properties of exponents to prove the Power Property of Logarithms.
+}{}
+
+\begin{callout}{\IconStar\ DOK-3 PROOF --- Practice \#13}{calloutpink}
+Students prove: \(\log_b(M^n) = n\cdot\log_b M\).\\
+Expected argument: Let \(x = \log_b M \Rightarrow b^x = M\). Raise both sides to \(n\): \((b^x)^n = M^n \Rightarrow b^{(nx)} = M^n\). By log definition: \(\log_b(M^n) = nx = n\cdot\log_b M\). [CHECK]\\
+Key criteria: (1) correct let-\(x\) substitution, (2) exponent-power rule applied, (3) final step cites log definition.
+\end{callout}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY (SOURCE)}{%
+\textbf{Answer key (from source):} Let \(\log_b(m^n)=x\).
+\[
+\begin{aligned}
+b^x&=m^n \\
+\left(b^x\right)^{1/n}&=\left(m^n\right)^{1/n} \\
+b^{x/n}&=m \\
+\frac{x}{n}&=\log_b m \\
+x&=n\log_b m \\
+\log_b(m^n)&=n\log_b(m)
+\end{aligned}
+\]
+}
+
+\bankitem{Practice \#40 Part C \IconStar\ DOK-3 RICHTER (6-5-savvas-q40)}{%
+Performance Task The magnitude, or intensity, of an earthquake is measured on the Richter scale. For an earthquake where the amplitude of its seismographic trace is \(A\), its magnitude is modeled by the function:
+
+\[
+R(A)=\log(A)/(A_0),
+\]
+
+where \(A_0\) represents the amplitude of the smallest detectable earthquake.
+
+\textbf{Part A} An earthquake occurs with an amplitude 200 times greater than the amplitude of the smallest detectable earthquake, \(A_0\). What is the magnitude of this earthquake on the Richter scale?
+
+\textbf{Part B} Approximately how many times as great is the amplitude of an earthquake measuring 6.8 on the Richter scale than the amplitude of an earthquake measuring 5.9 on the Richter scale?
+
+\textbf{Part C} Suppose the intensity of one earthquake is 150 times as great as that of another. How much greater is the magnitude of the more intense earthquake than the less intense earthquake?
+}{}
+
+\begin{callout}{\IconStar\ DOK-3 RICHTER --- Practice \#40 Part C}{calloutpink}
+Students must generalize: if one earthquake has intensity \(150A_0\), how much larger is its Richter magnitude?\\
+Expected: \(R(150A_0) - R(A_0) = \log(150A_0/S) - \log(A_0/S) = \log(150) \approx 2.18.\)\\
+Key criteria: (1) write both \(R\) values using the formula, (2) apply Quotient Property to get \(\log(150)\), (3) evaluate \(\log 150 \approx 2.18\) and interpret in context.
+\end{callout}
+
+\teacheranswerbox{\IconCheck\ ANSWER KEY (SOURCE)}{%
+\textbf{Answer key (from source):} Part A 2.3; Part B \(10^{0.9}\), or about 7.94, times greater; Part C The magnitude of the more intense earthquake is about 2.2 greater than the magnitude of the less intense earthquake.
+}
+
+\phasetag{academic conversation + Topic 6 assess bridge}
+\frameworkphaseheader{Share / Summary}{2}{5}{%
+\phaseitems{
+  \item Cold-call 1 pair to narrate the Power Property proof (\#13) using sentence frame.
+  \item Cold-call 1 pair to present the Richter generalization (\#40 Part C).
+  \item Class signals thumbs. Write \(\log_b(M^n) = n\cdot\log_b M\) on board.
+  \item Topic 6 bridge: ``The Power Property proof and the Richter generalization are the exact DOK-3 pattern on Form B. You have now rehearsed both.''
+  \item SCOPE NOTE: Form B Q8 and Q15 (geometric series) are NOT on the assessment.
+}%
+}{%
+\phaseitems{
+  \item Presenting pair reads proof and names each exponent-law step.
+  \item Second pair reads Richter result: \(\log 150 \approx 2.18\) with context sentence.
+  \item Rest of class signals and writes takeaway in margin.
+}%
+}{%
+\phaseitems{
+  \item Summarize: which exponent law did you use to go from \(b^x\) to \(b^{(nx)}\)?
+  \item Why does \(R(150A_0) - R(A_0)\) equal \(\log 150\) exactly? Which property did that?
+}%
+}{Cold-call a pair that struggled on \#13 --- hold them accountable to the let-\(x\) substitution step.}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames:}
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,topsep=2pt]
+\item Pair share (Power Property proof): ``Let \(x = \log_b M\). Then \(b^x = M\). Raising both sides to the \(n\)th power: \((b^x)^n = M^n\), so \(b^{(nx)} = M^n\). By the definition of log, \(\log_b(M^n) = nx = n\cdot\log_b M\).'' [CHECK]
+\item Richter: ``\(R(150A_0) - R(A_0) = \log(150A_0/S) - \log(A_0/S) = \log 150 \approx 2.18.\) So the larger earthquake is about 2.18 Richter units greater.''
+\item Whole class: one pair reads the proof. Class signals thumbs up/sideways.
+\end{itemize}
+\end{sentenceframebox}
+
+\phasetag{two-part summary (not graded)}
+\frameworkphaseheader{Exit Ticket}{1--2}{5}{%
+\phaseitems{
+  \item Collect at door.
+  \item Scan part (b): if students wrote \(t = 25\) (not cube root), they dropped the exponent. Plan a 2-min re-teach before next Topic 6 item.
+}%
+}{%
+\phaseitems{
+  \item Two-part exit: condense, then solve.
+}%
+}{%
+\phaseitems{
+  \item Did students apply Power Property correctly to get \(\log(4t^3)\)?
+  \item Did students solve \(10^2 = 4t^3 \rightarrow t^3 = 25 \rightarrow t = 25^{(1/3)}\)?
+}%
+}{Collect. No grade.}
+
+\begin{callout}{\IconClipboard\ EXIT TICKET --- Student Form}{calloutyellow}
+A biologist models a population as \(P = 3\log t + \log 4\).\\
+(a) Write \(P\) as a single logarithm: \(P = \log(\_\_\_)\)\\
+(b) Solve for \(t\) when \(P = 2\): \(t = \_\_\_\)\\
+Expected: (a) \(P = \log(4t^3)\) \hspace{1em} (b) \(t = (25)^{(1/3)} \approx 2.924\)\\
+One biggest thing I learned today: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_.
+\end{callout}
+
+\clearpage
+
+\begin{callout}{\IconClock\ PERIOD A / PERIOD F --- 50-MIN CLASS NOTES}{calloutpink}
+Both sections have 50 min for this lesson. This is a compressed single-period treatment with a paired DOK-3 driver (\#13 proof + \#40 Richter).\\
+45-min Wed-F variant: cut q3 from Explore. Never cut \#13 or \#40.\\
+If a pair finishes \#13 + \#40 early: hand out Practice \#40 Part A (direct numerical Richter computation).
+\end{callout}
+
+\begin{callout}{\IconPuzzle\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS}{calloutiep}
+\textbullet\ Provide the Properties of Logarithms Rules card as a sticker/cut-out.\\
+\textbullet\ For \#13, provide the first step: `Let \(x = \log_b M\), so \(b^x = M\).' Students complete from there.\\
+\textbullet\ For \#40 Part C, provide: `Write \(R(150A_0) = \log(150A_0/S)\) and \(R(A_0) = \log(A_0/S)\). Now subtract.' Students apply Quotient Property.\\
+\textbullet\ Accept verbal proof explanation in lieu of written algebraic steps.
+\end{callout}
+
+\begin{callout}{\IconGlobe\ SUPPORTS FOR ELL STUDENTS}{calloutell}
+\textbullet\ Sentence frames on student page (don't skip).\\
+\textbullet\ Word cards: `condense' = write as one log; `expand' = write as separate logs; `property' = a rule that is always true.\\
+\textbullet\ `Proof' = show WHY the rule works, step by step, with algebra.\\
+\textbullet\ Pair ELL students with English-dominant partners for TPS on \#13.
+\end{callout}
+
+\end{document}
