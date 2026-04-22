@@ -1,0 +1,189 @@
+% Shared lesson packet style for Algebra 2 LaTeX packets.
+% Emoji-bearing callout titles from the source documents are intentionally
+% substituted with ASCII tags such as [BOOK], [WARN], [SEARCH], [STAR],
+% [TARGET], [PIN], [CLOCK], [PUZZLE], and [GLOBE] so the files remain
+% pdflatex-safe on machines without emoji fonts.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{preamble}[2026/04/21 Shared lesson packet style]
+
+\RequirePackage[letterpaper,margin=0.75in]{geometry}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amsmath}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\RequirePackage{enumitem}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{xcolor}
+
+\pgfplotsset{compat=1.18}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\definecolor{dayblue}{HTML}{2B5C8A}
+\definecolor{tealheader}{HTML}{0097A7}
+\definecolor{lightgray}{HTML}{F2F2F2}
+\definecolor{warmred}{HTML}{C0392B}
+\definecolor{warmredlt}{HTML}{FCEAE8}
+\definecolor{framegray}{HTML}{666666}
+\definecolor{frameshade}{HTML}{F4F7FB}
+\definecolor{calloutgreen}{HTML}{D9EAD3}
+\definecolor{calloutred}{HTML}{F4CCCC}
+\definecolor{calloutpeach}{HTML}{FCE5CD}
+\definecolor{calloutyellow}{HTML}{FFF2CC}
+\definecolor{calloutblue}{HTML}{CFE2F3}
+\definecolor{calloutpink}{HTML}{FFD9E0}
+\definecolor{calloutiep}{HTML}{E2F0D9}
+\definecolor{calloutell}{HTML}{DEEBF7}
+
+\newcommand{\IconBook}{[BOOK]}
+\newcommand{\IconWarn}{[WARN]}
+\newcommand{\IconSearch}{[SEARCH]}
+\newcommand{\IconStar}{[STAR]}
+\newcommand{\IconTarget}{[TARGET]}
+\newcommand{\IconPin}{[PIN]}
+\newcommand{\IconClock}{[CLOCK]}
+\newcommand{\IconPuzzle}{[PUZZLE]}
+\newcommand{\IconGlobe}{[GLOBE]}
+
+\newcommand{\nameblock}{%
+  \noindent\textbf{FULL NAME:} \rule{2.7in}{0.4pt}\hfill
+  \textbf{BLOCK:} \rule{1.15in}{0.4pt}\par\vspace{0.5em}
+}
+
+\newcommand{\daybanner}[2]{%
+  \begin{tcolorbox}[
+    enhanced,
+    boxrule=0pt,
+    arc=2pt,
+    colback=dayblue,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt
+  ]
+  {\color{white}\Large\bfseries #2\par}
+  {\color{white}\small #1}
+  \end{tcolorbox}
+}
+
+\newcommand{\packetheading}[2]{%
+  \nameblock
+  \daybanner{#1}{#2}
+}
+
+\newcommand{\sectionbanner}[1]{%
+  \vspace{0.5em}%
+  \begin{tcolorbox}[
+    enhanced,
+    boxrule=0pt,
+    arc=0pt,
+    colback=tealheader,
+    left=7pt,
+    right=7pt,
+    top=6pt,
+    bottom=6pt
+  ]
+  {\color{white}\bfseries #1}
+  \end{tcolorbox}
+}
+
+\newtcolorbox{callout}[2]{
+  enhanced,
+  breakable,
+  colback=#2,
+  colframe=black!55,
+  coltitle=black,
+  boxrule=0.7pt,
+  arc=2pt,
+  left=8pt,
+  right=8pt,
+  top=5pt,
+  bottom=5pt,
+  fonttitle=\bfseries,
+  title={#1}
+}
+
+\newtcolorbox{sentenceframebox}{
+  enhanced,
+  breakable,
+  colback=lightgray,
+  colframe=framegray!45,
+  borderline west={2pt}{0pt}{tealheader},
+  boxrule=0.4pt,
+  arc=2pt,
+  left=8pt,
+  right=8pt,
+  top=5pt,
+  bottom=5pt
+}
+
+\newtcolorbox{summaryexitbox}[1]{
+  enhanced,
+  breakable,
+  colback=warmredlt,
+  colframe=warmred,
+  coltitle=warmred,
+  boxrule=1pt,
+  arc=2pt,
+  left=8pt,
+  right=8pt,
+  top=5pt,
+  bottom=5pt,
+  fonttitle=\bfseries,
+  title={#1}
+}
+
+\newcommand{\answerchoice}[2]{\item[\textbf{#1.}] #2}
+
+\newcommand{\bankitem}[3]{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=framegray!45,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=8pt,
+    right=8pt,
+    top=5pt,
+    bottom=5pt
+  ]
+  {\color{dayblue}\bfseries #1\par}
+  #2%
+  \if\relax\detokenize{#3}\relax
+  \else
+    \vspace{0.35em}
+    \begin{itemize}[leftmargin=1.6em,itemsep=2pt,topsep=2pt]
+      #3
+    \end{itemize}
+  \fi
+  \end{tcolorbox}
+}
+
+\newcommand{\blank}[1][1.6in]{\rule{#1}{0.4pt}}
+
+\newcommand{\frameworkphaseheader}[7]{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=tealheader,
+    boxrule=0.8pt,
+    arc=2pt,
+    left=8pt,
+    right=8pt,
+    top=6pt,
+    bottom=6pt
+  ]
+  {\bfseries #1}\hfill \textbf{DOK:} #2\hfill \textbf{Minutes:} #3\par\medskip
+  \textbf{Teacher does}\par
+  #4\par\medskip
+  \textbf{Students do}\par
+  #5\par\medskip
+  \textbf{Questions to ask}\par
+  #6\par\medskip
+  \textbf{Adult role}\par
+  #7
+  \end{tcolorbox}
+}

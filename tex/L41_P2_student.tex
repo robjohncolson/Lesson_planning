@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\begin{document}
+
+\packetheading{Lesson 4-1 · Period 2 · Student Packet}{Inverse Variation Applications + DOK-3 Performance Task}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Math Objective} & Apply inverse variation to real-world contexts (wavelength, gas pressure, travel distance), and distinguish DIRECT variation (\(y = kx\)) from INVERSE variation (\(xy = k\)) inside a single multi-part problem. \\ \hline
+\textbf{Language Objective} & Students will use the frame “This is \_\_\_ variation because as \_\_\_ \_\_\_, \_\_\_ \_\_\_ proportionally.” to justify whether a relationship is direct or inverse. \\ \hline
+\textbf{Essential Understanding} & Not every covariation is inverse variation. Direct variation has a constant RATIO (\(y/x = k\)); inverse variation has a constant PRODUCT (\(xy = k\)). A single scenario can contain BOTH types across different variable pairs. \\ \hline
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\textbf{Topic Goals} & Students model 4 contextual inverse-variation problems, then tackle a Performance Task (Ramón's road trip) that embeds direct and inverse variation in one scenario. Every item is Savvas-sourced. \\ \hline
+\textbf{Essential Question} & How does inverse variation model real-world relationships, and how is it different from direct variation? \\ \hline
+\textbf{Materials} & Pencils; student packet; calculator. No Chromebooks required. \\ \hline
+\end{tabular}
+}
+
+\sectionbanner{LAUNCH — Inverse Variation in Context (teacher models Example 3)}
+
+\begin{callout}{\IconBook\ APPLICATION RULES (keep printed on your page)}{calloutgreen}
+\textbullet\ To model an inverse variation in context:
+\begin{enumerate}[leftmargin=2.1em,itemsep=1pt,topsep=3pt]
+  \item Identify the two varying quantities and their constant product \(k\).
+  \item Compute \(k\) from one given pair: \(k =\) (quantity 1) \(\times\) (quantity 2).
+  \item Write the equation: \(y = k/x\) (or rename variables to fit the context).
+  \item Solve for the unknown quantity.
+\end{enumerate}
+\textbullet\ Example (Savvas Ex 3, bouzouki): string length \(s\) varies inversely with frequency \(f\).\\
+\hspace*{1.6em}26-inch string \(\rightarrow\) 329.63 cycles/sec \(\rightarrow\) \(k = 26 \times 329.63 = 8{,}570.38\).\\
+\hspace*{1.6em}New length 13 inches \(\rightarrow\) \(f = 8{,}570.38 / 13 = 659.26\) cycles/sec.
+\end{callout}
+
+\begin{callout}{\IconWarn\ DIRECT vs INVERSE (both appear in today's DOK-3!)}{calloutred}
+DIRECT: \(y = kx\) \(\rightarrow\) \(y/x\) is constant. As \(x\) increases, \(y\) INCREASES proportionally.\\
+INVERSE: \(y = k/x\) (\(xy = k\)). As \(x\) increases, \(y\) DECREASES proportionally.\\
+Test: compute \(y/x\) (direct) AND \(xy\) (inverse). Whichever is constant tells you the relationship.
+\end{callout}
+
+\sectionbanner{EXPLORE — Think-Pair-Share (33 min)}
+\textit{Work with a partner. Move in order. Practice \#26 (Ramón) is the big one — plan \(\sim\)15 min for it.}
+
+\textbf{Bank-item labels (in order):}
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,topsep=2pt]
+  \item Try It 3 — Ice cube melting
+  \item Practice \#12 — HOT: inverse SQUARE variation
+  \item Practice \#17 — Radio wavelength (graph)
+  \item Practice \#23 — Boyle's Law (volleyball vs basketball)
+  \item Practice \#26  \IconStar\ PERFORMANCE TASK · Ramón's road trip
+\end{enumerate}
+
+\bankitem{Try It 3 — Ice cube melting}{%
+Try It 3. The amount of time it takes for an ice cube to melt varies inversely with the air temperature in degrees Celsius. At 20Â°C, the ice will melt in 20 minutes. How long will it take the ice to melt if the temperature is 30Â°C?
+}{}
+
+\bankitem{Practice \#12 — HOT: inverse SQUARE variation}{%
+12. Higher Order Thinking: Suppose \(y\) varies inversely as the square of \(x\). If \(x\) is multiplied by 4, what is true for the value of \(y\)?
+}{}
+
+\bankitem{Practice \#17 — Radio wavelength (graph)}{%
+17. The wavelength, \(w\), of a radio wave varies inversely to its frequency, \(f\), as shown in the graph. The graph shows \(w\) (m) on the y-axis from 0 to 1200, and \(f\) (kilohertz) on the x-axis from 0 to 10000, with the curve \(w = k/f\) passing through data points including (1000, 300), (2000, 150), (4000, 75), (6000, 50), (8000, 37.5), (10000, 30). A radio wave with a frequency of 1,000 kilohertz has a length of 300 m. What is the frequency when the wavelength is 375 m?
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.9\linewidth,
+  height=2.6in,
+  xmin=0,
+  xmax=10000,
+  ymin=0,
+  ymax=1200,
+  xlabel={Frequency (kilohertz)},
+  ylabel={Wavelength (m)},
+  grid=major,
+  minor tick num=1,
+  tick label style={font=\small},
+  label style={font=\small},
+  every axis plot/.append style={line width=1pt}
+]
+\addplot[tealheader, smooth, domain=250:10000, samples=250] {300000/x};
+\addplot[only marks, mark=*, mark size=2.2pt, color=dayblue] coordinates {
+  (1000,300)
+  (2000,150)
+  (4000,75)
+  (6000,50)
+  (8000,37.5)
+  (10000,30)
+};
+\node[anchor=south east, font=\small] at (axis cs:9800, 1040) {\(w = \dfrac{300000}{f}\)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}{}
+
+\bankitem{Practice \#23 — Boyle's Law (volleyball vs basketball)}{%
+23. Model With Mathematics: Boyle's Law states that the pressure exerted by fixed quantity of a gas, \(P\), varies inversely with the volume the gas occupies, \(V\), assuming constant temperature. The volume and air pressure of a volleyball are 300 in\(^{3}\) and 4.5 psi. The volume and air pressure of a basketball are 415 in\(^{3}\) and 8 psi. How much smaller would the volleyball have to be to be equal the air pressure of the basketball?
+}{}
+
+\bankitem{Practice \#26  \IconStar\ PERFORMANCE TASK · Ramón's road trip}{%
+26. Performance Task. Suppose Ramón takes a road trip. He starts from his home in the suburbs of Cleveland, OH and travels to Pittsburgh, PA to visit his aunt and uncle.
+
+Part A: The distance Ramón drives from Cleveland to Pittsburgh is 133 miles. The trip takes him 2 hours. The distance \(d\) in miles that Ramón drives varies directly with the amount of time \(t\) in hours he spends driving. Write the equation of the direct variation. Use the given relationship and the equation to find the number of miles Ramón would travel if he continues on for 5 more hours.
+
+Part B: The amount of gas in Ramón's car is 9 gal after he drives for 2 h. The amount of gas \(g\) in gallons in his tank varies inversely with the amount of time \(t\) in hours he spends driving. Write the equation of the inverse variation. Use the given relationship and the equation to find the number of gallons in Ramón's tank after 5 more hours of driving.
+
+\begin{center}
+\begin{tikzpicture}[>=stealth, line width=0.9pt, font=\small]
+\node[draw, rounded corners, fill=frameshade, minimum width=1.7in, minimum height=0.58in] (cle) at (0,0) {\textbf{Cleveland, OH}};
+\node[draw, rounded corners, fill=frameshade, minimum width=1.7in, minimum height=0.58in] (pit) at (5.0,0) {\textbf{Pittsburgh, PA}};
+\draw[->, tealheader] (cle.east) -- node[above, align=center] {133 miles\\2 hours} (pit.west);
+\node[draw, rounded corners, fill=calloutyellow, minimum width=2.1in, minimum height=0.6in] at (2.5,-1.0) {After 2 h: 9 gal in tank};
+\node[draw, rounded corners, fill=calloutpeach, minimum width=2.3in, minimum height=0.6in] at (2.5,-2.0) {Continue for 5 more hours};
+\end{tikzpicture}
+\end{center}
+}{}
+
+\sectionbanner{SHARE / SUMMARY (5 min)}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames}
+
+Pair share (Ramón task): “Part A is \_\_\_ variation because distance and time have a constant RATIO of \_\_\_. Part B is \_\_\_ variation because gas and time have a constant PRODUCT of \_\_\_.”
+
+Whole class: one pair reads the contrast. Class signals thumbs up/sideways.
+\end{sentenceframebox}
+
+\begin{callout}{\IconSearch\ BRIDGE TO P3 (Wednesday)}{calloutpeach}
+Tomorrow we graph the RECIPROCAL FUNCTION \(y = 1/x\) and its translations. Watch for: the graph of inverse variation has asymptotes and a specific shape — a hyperbola. You've been drawing them already; we'll name the features.
+\end{callout}
+
+\sectionbanner{EXIT}
+
+\begin{summaryexitbox}{EXIT TICKET — Summary Recap}
+Today I learned that \dotfill
+
+The biggest trap in Ramón's task was \dotfill
+
+I distinguish direct from inverse variation by \dotfill
+\end{summaryexitbox}
+
+\clearpage
+
+\sectionbanner{OPTIONAL REINFORCEMENT (not collected)}
+\textit{If you finish Explore early. \#25 is a fast SAT-style question that stretches the inverse-variation idea.}
+
+\bankitem{Optional \#1 (Savvas Practice, SAT/ACT style)}{%
+25. SAT/ACT. In a given set of experiments, \(t\) and \(w\) always vary inversely. When \(t = 0.4\) seconds, \(w = 172.8\) grams. How much time has passed when \(w = 14.4\) grams?
+}{%
+  \answerchoice{A}{2.4 s}
+  \answerchoice{B}{4.8 s}
+  \answerchoice{C}{27.648 s}
+  \answerchoice{D}{995.328 s}
+}
+
+\end{document}
