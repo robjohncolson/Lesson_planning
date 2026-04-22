@@ -1,0 +1,178 @@
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\newcommand{\IconGraph}{[GRAPH]}
+\newcommand{\IconNote}{[NOTE]}
+\newcommand{\lessonrow}[2]{\textbf{#1} & #2 \\ \hline}
+\newcommand{\rulescardcontent}{%
+LOG \(\Leftrightarrow\) EXP: \ \ \(\log_b x = y\) \ \(\Leftrightarrow\)\ \ \(b^y = x\)\\
+COMMON LOG: \ \(\log x = \log_{10} x\)\\
+NATURAL LOG: \(\ln x = \log_e x\)\\
+KEY: \ \ \ \ \ \ \ \ \(\ln(e^t) = t\) \ \ \ \ (this solves continuous growth!)\\
+UNDEFINED: \(\log_b 0\) and \(\log_b(\text{negative})\) --- no real answer\\
+IDENTITY: \ \ \(\log_b(b^k) = k\)%
+}
+\newcommand{\qfifteengraph}{%
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.88\linewidth,
+  height=2.75in,
+  xmin=-1,
+  xmax=4.5,
+  ymin=0,
+  ymax=85,
+  xtick={-1,0,1,2,3,4},
+  ytick={0,10,20,30,40,50,60,70,80},
+  xlabel={$x$},
+  ylabel={$y$},
+  grid=major,
+  minor tick num=1,
+  tick label style={font=\small},
+  label style={font=\small},
+  every axis plot/.append style={line width=1pt}
+]
+\addplot[tealheader, smooth, domain=-1:4.0, samples=250] {3^x};
+\addplot[only marks, mark=*, mark size=2pt, color=dayblue] coordinates {
+  (-1,0.3333333333)
+  (0,1)
+  (1,3)
+  (2,9)
+  (3,27)
+  (4,81)
+};
+\node[anchor=south west, font=\small] at (axis cs:3.18,33) {$y=3^x$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}
+\newcommand{\richterplaceholder}{%
+\begin{center}
+\fbox{%
+\parbox{0.9\linewidth}{%
+\textbf{[IMAGE:} Cracked wall photo with Richter scale overlay numbered 1 through 10 and labels ``Not felt'' at 1 and ``Extreme'' near 9--10; callout text: ``At a richter magnitude of 4 and above, the walls in your house may start to crack.''\textbf{]}%
+}%
+}
+\end{center}
+}
+
+\begin{document}
+
+\packetheading{Lesson 6-3 \textperiodcentered\ Quick \textperiodcentered\ Student Packet}{Logarithms + DOK-3 Spine: q15 (exp\(\leftrightarrow\)log inverse via graph)}
+
+\sectionbanner{OBJECTIVES}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Math Objective}{Evaluate logarithms using the definition \(\log_b x = y \Leftrightarrow b^y = x\), distinguish common (\(\log\)) vs natural (\(\ln\)) logs, and use the graph of \(y=3^x\) to estimate logarithmic values through the exp\(\leftrightarrow\)log inverse relationship.}
+\lessonrow{Language Objective}{Explain the inverse relationship between exponential and logarithmic equations using ``undo'' language.}
+\lessonrow{Essential Understanding}{A logarithm answers the question: what exponent? -- logs undo exponentials. If I know how to graph \(y = 3^x\), I can use that same picture to estimate \(\log_3 50\) because logarithms and exponentials are inverses.}
+\end{tabular}
+}
+
+\sectionbanner{TOPIC GOALS / ESSENTIAL QUESTION / MATERIALS}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{|p{1.8in}|p{4.8in}|}
+\hline
+\lessonrow{Topic Goals}{Fluency evaluating logarithms; use the exp\(\leftrightarrow\)log inverse relationship graphically (Topic 6 Form B prep: q15 covers Q7, Q10, Q11; q17 covers Q13).}
+\lessonrow{Essential Question}{If I know how to graph \(y = 3^x\), how can I use that same picture to estimate \(\log_3 50\) --- and why does this work?}
+\lessonrow{Materials}{Student packet with printed \(y=3^x\) graph (\(x \in [-1, 4.5]\), \(y \in [0, 85]\), gridlines). Teacher copy adds dashed \(y=50\) line and read-off annotation. [GRAPH PLACEHOLDER --- needs\_cleanup=YES, see Visuals Checklist].}
+\end{tabular}
+}
+
+\sectionbanner{LAUNCH --- Evaluate Logarithms (teacher think-aloud Ex 3)}
+
+\begin{callout}{\IconBook\ LOG \(\leftrightarrow\) EXP RULES (keep printed on your page)}{calloutgreen}
+\rulescardcontent
+\end{callout}
+
+\sectionbanner{EXPLORE --- Think-Pair-Share (25 min)}
+\textit{Work with a partner. Start with \IconStar\ Practice \#15 (DOK-3 spine --- 10 min TPS + 5 min pair presentations). Then move to \#52, \#53, \#54, and \#17.}
+
+\begin{callout}{\IconGraph\ GRAPH FOR q15 --- \(y = 3^x\) [GRAPH PLACEHOLDER]}{calloutyellow}
+[GRAPH PLACEHOLDER --- print the \(y=3^x\) graph here: \(x \in [-1, 4.5]\), \(y \in [0, 85]\), with gridlines. Source: a2\_6-3\_SE.pdf near end of practice problems. See Visuals Checklist --- needs\_cleanup=YES.]
+
+\qfifteengraph
+\end{callout}
+
+\textbf{Bank-item labels (in order):}
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,topsep=2pt]
+  \item Practice \#15 \IconStar\ DOK-3 SPINE --- Higher Order Thinking: Use \(y=3^x\) graph to estimate \(\log_3 50\)
+  \item Practice \#52 --- DOK-2 Application
+  \item Practice \#53 --- DOK-2 Application [45-min variant: skip]
+  \item Practice \#54 --- DOK-2 Application [45-min variant: skip]
+  \item Practice \#17 --- DOK-3 Proof-style: critique \(\log_3\left(\frac{1}{27}\right) = -3\) (supports Form B Q13)
+\end{enumerate}
+
+\bankitem{Practice \#15 \IconStar\ DOK-3 SPINE --- Higher Order Thinking: Use \(y=3^x\) graph to estimate \(\log_3 50\)}{%
+Higher Order Thinking Use the graph of \(y=3^x\) to estimate the value of \(\log_3 50\). Explain your reasoning.
+
+\textit{[GRAPH / TIKZ figure]}
+}{}
+
+\bankitem{Practice \#52 --- DOK-2 Application}{%
+How long does it take for \$250 to grow to \$600 at 4\% annual percentage rate compounded continuously? Round to the nearest year.
+}{}
+
+\bankitem{Practice \#53 --- DOK-2 Application [45-min variant: skip]}{%
+Model with Mathematics Michael invests \$1{,}000 in an account that earns a 4.75\% annual percentage rate compounded continuously. Peter invests \$1{,}200 in an account that earns a 4.25\% annual percentage rate compounded continuously. Which person's account will grow to \$1{,}800 first?
+}{}
+
+\bankitem{Practice \#54 --- DOK-2 Application [45-min variant: skip]}{%
+Reason The Richter magnitude of an earthquake is \(R = 0.67\log(0.37E) + 1.46\), where \(E\) is the energy (in kilowatt-hours) released by the earthquake.
+
+\richterplaceholder
+
+\textbf{a.} What is the magnitude of an earthquake that releases 11{,}800{,}000{,}000 kilowatt-hours of energy? Round to the nearest tenth.
+
+\textbf{b.} How many kilowatt-hours of energy would earthquake have to release in order to be an 8.2 on the Richter scale? Round to the nearest whole number.
+
+\textbf{c.} What number of kilowatt-hours of energy would an earthquake have to release in order for walls to crack? Round to the nearest whole number.
+}{}
+
+\bankitem{Practice \#17 --- DOK-3 Proof-style: critique \(\log_3\left(\frac{1}{27}\right) = -3\) (supports Form B Q13)}{%
+Use Structure A student says that \(\log_3\left(\frac{1}{27}\right)\) simplifies to -3. Is the student correct? Explain.
+}{}
+
+\begin{callout}{\IconNote\ LOG \(\leftrightarrow\) EXP RULES --- Reference Card (print this!)}{calloutyellow}
+\rulescardcontent
+\end{callout}
+
+\sectionbanner{SHARE / SUMMARY (5 min)}
+
+\begin{sentenceframebox}
+\textbf{Sentence frames}
+
+Pair share (q15): On the graph of \(y = 3^x\), I found \(\log_3 50\) by looking for \(y =\) \blank[0.5in] and reading the x-value. Since \(3^3 =\) \blank[0.45in] and \(3^4 =\) \blank[0.45in], the answer is between \blank[0.45in] and \blank[0.45in], closer to \blank[0.65in]. This works because \(\log_3 50 = x\) means \(3^x =\) \blank[0.45in], so the exponential and logarithm are \blank[1in].
+
+Whole class: one pair explains why reading the graph works. Class signals thumbs up/sideways.
+\end{sentenceframebox}
+
+\begin{callout}{\IconSearch\ BRIDGE TO LESSON 6-4}{calloutpeach}
+Lesson 6-4 shifts to logarithmic FUNCTIONS --- graphing \(y = \log_b x\), identifying domain, range, and asymptotes. Today's log \(\leftrightarrow\) exp definition is the foundation.
+\end{callout}
+
+\sectionbanner{EXIT}
+
+\begin{summaryexitbox}{EXIT TICKET --- Summary Recap}
+\(\log_b x = y\) means \blank[1.5in].
+
+\(\log_2 32 =\) \blank[0.5in] because \(2^{?} = 32\).
+
+To solve \(e^t = 6.125\), take the \blank[0.9in] of both sides giving \(t =\) \blank[0.8in].
+
+One biggest thing I learned today: \blank[2.7in]
+\end{summaryexitbox}
+
+\clearpage
+
+\sectionbanner{OPTIONAL REINFORCEMENT (not collected)}
+\textit{If you finish Explore early. \#18 asks you to evaluate whether \(\ln 1000 = 3\) --- use the log \(\leftrightarrow\) exp definition and the value of \(e\) to verify or refute.}
+
+\bankitem{Optional \#1 \ \ (Savvas Practice \#18 --- \(\ln 1000 \neq 3\)?)}{%
+Use Structure Explain why the expression \(\ln 1{,}000\) is not equal to 3.
+}{}
+
+\end{document}

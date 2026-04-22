@@ -161,7 +161,10 @@ def main() -> None:
                 "name": agent_name,
                 "description": f"LaTeX rendering of {lesson} {edition} packet",
                 "prompt_file": f"dispatch/prompts/latex-scale/{agent_name}.md",
-                "owned_paths": [f"tex/{lesson}_{edition}.tex"],
+                # Glob covers .tex, .pdf, .aux, .log, .out, .synctex.gz so the
+                # build artifacts pdflatex emits in-place don't trigger
+                # ownership-enforcement rejection.
+                "owned_paths": [f"tex/{lesson}_{edition}.*"],
             })
 
     manifest = {
