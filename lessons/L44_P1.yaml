@@ -1,0 +1,259 @@
+# Lesson 4-4 · Period 1 (single-period quick) — Adding & Subtracting Rational Expressions
+#
+# Back-extracted from tex/L44_P1_{student,teacher}.tex (2026-04-22 scouting run).
+# `python build_lesson_from_yaml.py lessons/L44_P1.yaml` emits:
+#   tex/L44_P1_student_regen.tex + tex/L44_P1_teacher_regen.tex
+#
+# EXTRACTION NOTES (see lessons/L44_P1_back_extraction_notes.md):
+#   - item prompts now come from registry (not inlined) — round-trip is registry-driven
+#   - \resistancefigure (custom TikZ for q32 circuit diagram) is LOST; regen uses
+#     "[GRAPH / TIKZ figure]" placeholder from registry prompt
+#   - \promptplaceholder{...} inline image captions on student tex are also lost
+#   - teacher-only bridge script callout (calloutblue, anchored to do_now) is preserved
+#     via callouts: section: do_now
+#   - extra teacher macros (\IconMic, \IconClipboard, \IconTarget) used in the hand-
+#     authored teacher tex are not in the generator's preamble — regen will use
+#     generator defaults
+#   - sentence_frames on the teacher edition is a bulleted list in the source;
+#     the generator emits it as plain newline-separated frames
+
+lesson_id: L44_P1
+title: "Adding \\& Subtracting Rational Expressions + Resistance DOK-3 (Q\\#15 Prep)"
+label: "Lesson 4-4 \\textperiodcentered\\ Quick"
+period: 1
+cadence: single_period_quick
+
+objectives:
+  - label: Math Objective
+    body: >-
+      Add and subtract rational expressions with like and unlike denominators;
+      identify the LCM of polynomial denominators; simplify results.
+  - label: Language Objective
+    body: >-
+      Explain why adding rational expressions requires common denominators,
+      using the word `LCM' and referring to the analogy with fractions.
+  - label: Essential Understanding
+    body: >-
+      Rational expressions behave like rational numbers --- closed under
+      addition and subtraction, and requiring a common denominator before
+      you can combine them.
+
+framework_header:
+  - label: Topic Goals
+    body: >-
+      Fluency adding/subtracting rational expressions; understanding closure
+      under these operations (Topic 4 assessment Q\#15 prep).
+  - label: Essential Question
+    body: >-
+      When you add two rational expressions with different denominators,
+      why must you find the LCM first?
+  - label: Materials
+    body: >-
+      Student packet, pencil, calculator. DOK-3 Practice \#32 (electrical
+      resistance) is the capstone and rehearses the structural reasoning
+      tested on Topic 4 LEHS Q\#15.
+
+# Teacher-only preflight
+preflight:
+  title: "PRE-FLIGHT --- SINGLE-PERIOD COMPRESSED LESSON + DOK-3 CAPSTONE"
+  color: calloutpink
+  body: |
+    This is a single-period quick treatment of Lesson 4-4. TWO examples are modeled in Launch (deviation from standard Klimsara one-example rule --- adding and subtracting are distinct assessment skills). Release promptly at minute 18.\\
+    Today's capstone is Practice \#32 (electrical resistance parallel circuit). Students must (a) recognize that \(1/R_{\text{total}} = 1/R_A + 1/R_B\) is a sum of rational expressions, (b) build a common denominator, (c) form the ratio of two such resistances as a single simplified rational expression. Same structural reasoning as Topic 4 LEHS Q\#15.\\
+    Pace: Try-It 3 (4 min) \(\rightarrow\) Try-It 4 (4 min) \(\rightarrow\) \#12 (3 min) \(\rightarrow\) \#16 (4 min) \(\rightarrow\) \#26 (5 min) \(\rightarrow\) \#32 (10 min). \(\sim\)30 min total Explore (2 min buffer for transitions).\\
+    45-min Wed F variant: cut \#16 + \#26. Never cut \#32.
+
+phases:
+  do_now:
+    framework_tag: "bridge from 4-3 to adding rational expressions"
+    dok: "1"
+    minutes: 5
+    teacher_does:
+      - "Hand out at door."
+      - "Circulate 3 min."
+      - "Cold-call 1 student on the \\(1/2 + 1/3\\) conflict resolution."
+    students_do:
+      - "Read conflict and decide which student's method is correct."
+      - "Justify with the word `common denominator'."
+    questions_to_ask:
+      - "What's the LCM of 2 and 3?"
+      - "Why can't you add \\(1/2 + 1/3\\) by adding numerators and denominators?"
+    adult_role: "Solo teacher: circulate silently. No hints."
+  launch:
+    framework_tag: "teacher models Example 3 + Example 4 [COMPRESSED --- 2 examples]"
+    dok: "1--2"
+    minutes: 13
+    teacher_does:
+      - "Project Example 3 (add unlike denominators). Think aloud: factor each denominator, identify LCM, rewrite each fraction."
+      - "\"The LCM takes every distinct factor at its highest power.\""
+      - "Transition to Example 4 without stopping --- announce: \"Subtracting looks identical UNTIL the distribute step. Watch the minus sign.\""
+      - "Project Example 4. Think aloud: after combining numerators, distribute the negative across EVERY term."
+      - "Flag the Rules card --- students copy into margin."
+      - "30-sec pause: \"Turn to partner: where does the minus sign trap catch students? What do you do to avoid it?\""
+      - "Do NOT solve Try-Its or Practice items --- release at minute 18."
+    students_do:
+      - "Watch Example 3 silently. Note the LCM-building procedure."
+      - "Watch Example 4. Mark the sign-distribution step."
+      - "During pause: explain sign trap to partner using Rule 2(d)."
+      - "Copy Rules card into margin."
+    questions_to_ask:
+      - "What's the LCM of \\((x-2)\\) and \\((x+3)\\)?"
+      - "How do we rewrite \\(5/(x-2)\\) so it has denominator \\((x-2)(x+3)\\)?"
+      - "When we subtract, where does the minus sign apply --- to the first term only, or every term of the second numerator?"
+      - "After combining, what's the LAST thing you check before you finish?"
+    adult_role: "Project both examples back-to-back. Release promptly at minute 18."
+  explore:
+    framework_tag: "TPS + DOK-3 driver"
+    dok: "2--3"
+    minutes: 32
+    teacher_does:
+      - "5 laps across 32 min."
+      - "Lap 1 (4 min): Try-It 3 --- add unlike. Press pairs on LCM construction."
+      - "Lap 2 (4 min): Try-It 4 --- subtract unlike. Watch for sign-distribution errors."
+      - "Lap 3 (3 min): \\#12 --- like denominators (quick confidence build)."
+      - "Lap 4 (4+5 min): \\#16 + \\#26. \\#26 is the sign-trap item --- press \"where does the minus go?\" on every pair."
+      - "Lap 5 (10 min): \\IconStar\\ \\#32 Electrical Resistance. Students build common denominators for reciprocal sums, then form the ratio."
+      - "Do NOT give \\#32 CER answers. Pairs present argument at Share."
+    students_do:
+      - "6 items in order: Try-It 3 \\(\\rightarrow\\) Try-It 4 \\(\\rightarrow\\) \\#12 \\(\\rightarrow\\) \\#16 \\(\\rightarrow\\) \\#26 \\(\\rightarrow\\) \\#32."
+      - "For \\#32: BEFORE computing, write out \\(1/R_{\\text{total}} = 1/R_A + 1/R_B\\) for each circuit and identify the LCM."
+      - "Justify the ratio form with sentence frame."
+    questions_to_ask:
+      - "Try-It 3: what's the LCM of the two denominators?"
+      - "Try-It 4: where does the minus sign distribute?"
+      - "\\#12: like denominators --- what's the one step you can skip compared to unlike?"
+      - "\\#16: factor both denominators first. Now what's the LCM?"
+      - "\\#26: watch the subtraction. Where do students typically lose the sign?"
+      - "\\#32: what's the LCM for \\(1/R_1 + 1/R_2\\)? How do you flip to get \\(R_{\\text{total}}\\)?"
+      - "\\#32: how do you form the ratio \\(R_A/R_B\\) as a SINGLE simplified rational expression?"
+    adult_role: >-
+      Solo teacher: 5 laps. On \#32, press the LCM-of-reciprocals move and
+      the final single-expression form --- those are the assessment-critical moves.
+  share_summary:
+    framework_tag: "academic conversation + Topic 4 LEHS Q\\#15 bridge"
+    dok: "2"
+    minutes: 5
+    teacher_does:
+      - "Cold-call 1 pair to present their resistance solution using sentence frame."
+      - "Class signals thumbs. Write the LCM step on board."
+      - "Topic 4 bridge: \"This is the structural reasoning on Topic 4 LEHS Q\\#15. You have now rehearsed it.\""
+    students_do:
+      - "Presenting pair reads their solution and cites the LCM step."
+      - "Rest of class signals and writes takeaway in margin."
+    questions_to_ask:
+      - "Summarize: how did you get from \\(1/R_1 + 1/R_2\\) to a single rational expression?"
+      - "Why does the ratio simplify the way it does?"
+    adult_role: "Cold-call a pair that struggled on \\#32 --- hold them accountable to the LCM step."
+  exit:
+    framework_tag: "summary recap (not graded)"
+    dok: "1--2"
+    minutes: 3
+    teacher_does:
+      - "Collect at door."
+      - "Scan stem 2 (reciprocal-sum connection). Plan re-teach if many students can't explain the parallel to adding rational expressions."
+    students_do:
+      - "3 sentence stems, honest."
+    questions_to_ask:
+      - "Did students connect LCM to the addition procedure?"
+      - "Did students recognize the structural parallel between parallel circuits and rational-expression addition?"
+    adult_role: "Collect. No grade."
+
+items:
+  do_now: ["4-4-savvas-model-discuss-lesson-4-4-launch"]
+  explore:
+    - id: "4-4-savvas-try-it-3-lesson-4-4"
+      label: "Try It 3 --- Add rational expressions (unlike denominators)"
+    - id: "4-4-savvas-try-it-4-lesson-4-4"
+      label: "Try It 4 --- Subtract rational expressions (unlike denominators)"
+    - id: "4-4-savvas-q12"
+      label: "Practice \\#12 --- Like denominators"
+    - id: "4-4-savvas-q16"
+      label: "Practice \\#16 --- Unlike denominators, factor first"
+    - id: "4-4-savvas-q26"
+      label: "Practice \\#26 --- Subtract with sign-distribution trap"
+    - id: "4-4-savvas-q32"
+      label: "Practice \\#32 \\IconStar\\ DOK-3 ELECTRICAL RESISTANCE --- Topic 4 LEHS Q\\#15 prep"
+      dok3: true
+  reinforcement:
+    - id: "4-4-savvas-q34"
+      label: "Optional \\#1 (Savvas Practice \\#34 --- compound-fraction multi-select)"
+
+callouts:
+  # --- do_now section: teacher-only bridge script ---
+  - section: do_now
+    title: "\\IconMic\\ BRIDGE SCRIPT (read aloud after Do Now)"
+    color: calloutblue
+    body: |
+      "Yesterday (Lesson 4-3) you practiced MULTIPLYING and DIVIDING rational expressions. Today you'll ADD and SUBTRACT them --- which requires one new move that multiplication didn't: finding a common denominator first. The Model \& Discuss prompt shows two students adding \(1/2 + 1/3\) in conflicting ways. Which is right?"
+
+  # --- launch section callouts (appear in both editions) ---
+  - section: launch
+    title: "\\IconBook\\ RULES --- ADD/SUBTRACT RATIONAL EXPRESSIONS (keep printed on your page)"
+    color: calloutgreen
+    body: |
+      \begin{enumerate}[leftmargin=2.1em,itemsep=1pt,topsep=3pt]
+        \item LIKE denominators: combine numerators, keep the denominator, simplify.
+        \item UNLIKE denominators:
+        \begin{enumerate}[label=(\alph*),leftmargin=1.8em,itemsep=1pt,topsep=2pt]
+          \item factor each denominator,
+          \item find the LCM,
+          \item rewrite each fraction with the LCM as denominator,
+          \item combine numerators,
+          \item simplify.
+        \end{enumerate}
+        \item The LCM of two polynomial denominators includes every DISTINCT factor, taken to its highest power across both.
+        \item Always check whether the final expression can be simplified by cancelling a common factor.
+      \end{enumerate}
+
+  - section: launch
+    title: "\\IconWarn\\ COMPRESSED LESSON --- TWO EXAMPLES IN LAUNCH"
+    color: calloutred
+    body: |
+      This is a single-period quick treatment. Teacher models BOTH Example 3 (add unlike denominators) AND Example 4 (subtract unlike denominators) during Launch.\\
+      Watch carefully on Example 4 --- when you subtract, you must distribute the minus sign across every term of the second numerator. This is the \#1 error source.
+
+  # --- share_summary section ---
+  - section: share_summary
+    title: "\\IconSearch\\ BRIDGE TO TOPIC 4 LEHS Q\\#15"
+    color: calloutpeach
+    body: |
+      The resistance move --- find LCM, combine reciprocals into a single rational expression --- is the structural reasoning tested on Topic 4 LEHS Q\#15 (operations/closure). You have now rehearsed it.
+
+sentence_frames:
+  section: share_summary
+  frames:
+    - >-
+      Pair share (Resistance): "For the parallel circuit,
+      \(1/R_{\text{total}} = 1/R_1 + 1/R_2\). I found a common denominator
+      of \_\_\_, added the reciprocals to get \(1/R_{\text{total}} =\)
+      \_\_\_, then flipped to get \(R_{\text{total}} =\) \_\_\_. The ratio
+      \(R_A/R_B\) simplified to \_\_\_ because \_\_\_."
+    - "Whole class: one pair reads their resistance solution. Class signals thumbs up/sideways."
+
+exit_ticket:
+  title: "EXIT TICKET --- Summary Recap"
+  items:
+    - "To add rational expressions with unlike denominators, I must first find the \\_\\_\\_\\_\\_ of the denominators."
+    - "Practice \\#32 (resistance) showed me that reciprocal-sum problems (like \\(1/R_1 + 1/R_2\\)) use the same algebraic steps as adding rational expressions because \\_\\_\\_\\_\\_."
+    - "One biggest thing I learned today: \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_"
+
+teacher_callouts:
+  - title: "\\IconClock\\ PERIOD A / PERIOD F --- 65-MIN CLASS NOTES"
+    color: calloutpink
+    body: |
+      Both sections should have 65 min for this lesson. Use the extra 10 min on Explore \#32 (Resistance) --- the richer the LCM argument, the better the Topic 4 LEHS Q\#15 payoff.\\
+      45-min Wed F variant: cut \#16 + \#26 from Explore. Never cut \#32.\\
+      If finished early: hand out Practice \#34 (compound-fraction multi-select) as fast-finisher.
+  - title: "\\IconPuzzle\\ MODIFICATIONS / SUPPORT FOR IEP STUDENTS"
+    color: calloutiep
+    body: |
+      \textbullet\ Provide the Add/Subtract Rational Expressions Rules card as a sticker/cut-out.\\
+      \textbullet\ For \#32, provide the setup: "\(1/R_{\text{total}} = 1/R_1 + 1/R_2\) for each circuit. Find a common denominator for each side."\\
+      \textbullet\ Accept verbal explanation of the LCM step in lieu of written steps.
+  - title: "\\IconGlobe\\ SUPPORTS FOR ELL STUDENTS"
+    color: calloutell
+    body: |
+      \textbullet\ Sentence frames on student page (don't skip).\\
+      \textbullet\ Word cards: "LCM" = least common multiple --- the smallest expression both denominators divide into; "rational expression" = a fraction of polynomials; "closure" = if you add two of them, you get another one of the same kind.\\
+      \textbullet\ "Parallel circuit" = a circuit where the current splits across multiple resistors.\\
+      \textbullet\ Pair ELL students with English-dominant partners for TPS.
