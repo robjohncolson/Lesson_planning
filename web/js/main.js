@@ -28,7 +28,11 @@ const itemList      = document.getElementById("item-list");
 const itemDetail    = document.getElementById("item-detail");
 const btnBack       = document.getElementById("btn-back-to-items");
 
-const SUB_VIEWS = ["yaml-view", "tex-view", "item-list-view", "item-detail-view"];
+const SUB_VIEWS = ["yaml-view", "tex-view", "pdf-view", "item-list-view", "item-detail-view"];
+
+const pdfEmbed     = document.getElementById("pdf-embed");
+const pdfLabel     = document.getElementById("pdf-view-label");
+const pdfOpenTab   = document.getElementById("pdf-open-tab");
 
 // ── State ───────────────────────────────────────────────────────────────────
 
@@ -61,17 +65,24 @@ function highlightToolbarBtn(active) {
   btnTexTeacher.classList.toggle("active", active === "tex-teacher");
 }
 
-// ── PDF link helpers ─────────────────────────────────────────────────────────
+// ── PDF inline preview ─────────────────────────────────────────────────────
+// Buttons are <button> (not <a>) so we can open the preview pane in-app
+// instead of jumping out to a new tab. A separate "Open in new tab" link
+// lives inside the preview pane as an escape hatch.
 
-function setPdfLinks(lesson) {
-  // Grey out links for PDFs that don't exist; still set href so nothing is broken
-  btnStudentPdf.href = pdfUrl(lesson.id, "student");
-  btnTeacherPdf.href = pdfUrl(lesson.id, "teacher");
-  btnSlides.href     = pdfUrl(lesson.id, "slides");
+function setPdfButtons(lesson) {
+  btnStudentPdf.disabled = !lesson.has_pdf_student;
+  btnTeacherPdf.disabled = !lesson.has_pdf_teacher;
+  btnSlides.disabled     = !lesson.has_slides_pdf;
+}
 
-  btnStudentPdf.classList.toggle("unavailable", !lesson.has_pdf_student);
-  btnTeacherPdf.classList.toggle("unavailable", !lesson.has_pdf_teacher);
-  btnSlides.classList.toggle("unavailable",     !lesson.has_slides_pdf);
+function openPdfView(kind) {
+  if (!activeLessonId) return;
+  const url = pdfUrl(activeLessonId, kind) + `?t=${Date.now()}`; // cache-bust
+  pdfLabel.textContent = `${activeLessonId} / ${kind}`;
+  pdfOpenTab.href = url;
+  pdfEmbed.src = url;
+  showView("pdf-view");
 }
 
 // ── Lesson selection ─────────────────────────────────────────────────────────
@@ -89,7 +100,7 @@ async function selectLesson(id) {
     detailHeader.style.display = "";
     detailTitle.textContent    = `${lesson.id}${lesson.title ? " — " + lesson.title : ""}`;
 
-    setPdfLinks(lesson);
+    setPdfButtons(lesson);
 
     // YAML button disabled if no spec yet; Items always available
     btnYaml.disabled = !lesson.yaml_text;
@@ -204,10 +215,12 @@ async function _doRebuildOnce() {
   } else {
     texLog.style.display = "none";
   }
-  if (result.ok && result.pdf_student_url) {
+  // Fresh build — flip the PDF embed if it's currently showing this lesson,
+  // otherwise the teacher re-opens Student/Teacher PDF and gets the new file.
+  if (result.ok && pdfEmbed.src && pdfEmbed.src.includes(activeLessonId)) {
     const t = Date.now();
-    btnStudentPdf.href = result.pdf_student_url + `?t=${t}`;
-    btnTeacherPdf.href = (result.pdf_teacher_url ?? pdfUrl(activeLessonId, "teacher")) + `?t=${t}`;
+    const cur = pdfEmbed.src.includes("_student.pdf") ? "student" : "teacher";
+    pdfEmbed.src = pdfUrl(activeLessonId, cur) + `?t=${t}`;
   }
   setStatus(result.ok ? "Build complete" : "Build finished with errors", !result.ok);
 }
@@ -268,6 +281,10 @@ btnTexSave.addEventListener("click",    () => doSave().catch(() => {}));
 btnTexRebuild.addEventListener("click", () => doRebuild().catch(() => {}));
 
 btnBack.addEventListener("click", openItemsView);
+
+btnStudentPdf.addEventListener("click", () => openPdfView("student"));
+btnTeacherPdf.addEventListener("click", () => openPdfView("teacher"));
+btnSlides.addEventListener("click",     () => openPdfView("slides"));
 
 // ── Boot ─────────────────────────────────────────────────────────────────────
 
