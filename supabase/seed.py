@@ -115,31 +115,38 @@ def extract_edges(items: list[dict]) -> tuple[list[dict], list[dict]]:
 
 
 def collect_lessons() -> list[dict]:
-    """Every L*_P*_student.tex becomes a row; yaml_text set if lessons/{id}.yaml exists."""
+    """Every L*_P*_student.tex becomes a row; tex_student/tex_teacher/yaml_text
+    carry the full source text — the lessons table is now the source of truth
+    for tex, not the filesystem."""
     rows: dict[str, dict] = {}
+
+    def base_row(lid: str) -> dict:
+        return {
+            "id": lid, "cadence": None, "title": None, "yaml_text": None,
+            "tex_student": None, "tex_teacher": None,
+            "has_tex_student": False, "has_tex_teacher": False,
+            "has_pdf_student": False, "has_pdf_teacher": False,
+            "has_slides_pdf":  False,
+        }
+
     for tex in sorted(TEX_DIR.glob("L*_P*_student.tex")):
         lid = tex.stem.removesuffix("_student")
-        if lid not in rows:
-            rows[lid] = {
-                "id": lid, "cadence": None, "title": None, "yaml_text": None,
-                "has_tex_student": False, "has_tex_teacher": False,
-                "has_pdf_student": False, "has_pdf_teacher": False,
-                "has_slides_pdf":  False,
-            }
-        rows[lid]["has_tex_student"] = True
+        row = rows.setdefault(lid, base_row(lid))
+        row["has_tex_student"] = True
+        row["tex_student"]     = tex.read_text(encoding="utf-8")
 
     for tex in sorted(TEX_DIR.glob("L*_P*_teacher.tex")):
         lid = tex.stem.removesuffix("_teacher")
-        rows.setdefault(lid, {"id": lid})["has_tex_teacher"] = True
+        row = rows.setdefault(lid, base_row(lid))
+        row["has_tex_teacher"] = True
+        row["tex_teacher"]     = tex.read_text(encoding="utf-8")
+
     for pdf in sorted(TEX_DIR.glob("L*_P*_student.pdf")):
-        lid = pdf.stem.removesuffix("_student")
-        rows.setdefault(lid, {"id": lid})["has_pdf_student"] = True
+        rows.setdefault(pdf.stem.removesuffix("_student"), base_row(pdf.stem.removesuffix("_student")))["has_pdf_student"] = True
     for pdf in sorted(TEX_DIR.glob("L*_P*_teacher.pdf")):
-        lid = pdf.stem.removesuffix("_teacher")
-        rows.setdefault(lid, {"id": lid})["has_pdf_teacher"] = True
+        rows.setdefault(pdf.stem.removesuffix("_teacher"), base_row(pdf.stem.removesuffix("_teacher")))["has_pdf_teacher"] = True
     for pdf in sorted(TEX_DIR.glob("L*_P*_slides.pdf")):
-        lid = pdf.stem.removesuffix("_slides")
-        rows.setdefault(lid, {"id": lid})["has_slides_pdf"] = True
+        rows.setdefault(pdf.stem.removesuffix("_slides"), base_row(pdf.stem.removesuffix("_slides")))["has_slides_pdf"] = True
 
     for y in sorted(LESSONS_DIR.glob("L*_P*.yaml")):
         lid = y.stem
@@ -148,7 +155,7 @@ def collect_lessons() -> list[dict]:
             meta = yaml.safe_load(txt) or {}
         except yaml.YAMLError:
             meta = {}
-        row = rows.setdefault(lid, {"id": lid})
+        row = rows.setdefault(lid, base_row(lid))
         row["yaml_text"] = txt
         row["cadence"]   = (meta or {}).get("cadence")
         row["title"]     = (meta or {}).get("title")

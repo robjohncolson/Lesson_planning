@@ -108,3 +108,18 @@ Port `console_static/console.css` palette (blue/gold/teal on white for index.htm
 - Regenerate button / pdflatex (Phase A step 3: Railway)
 - Tagging UI (Phase B)
 - Auth / passcode (Phase B — reads are currently public)
+
+## Phase A step 3 — tex editing + rebuild (DOM additions)
+
+New IDs added to `index.html` inside `#tex-view`:
+
+| ID | Purpose |
+|---|---|
+| `#tex-editing-label` | Displays current `lessonId / edition` being edited |
+| `#btn-tex-save` | Saves tex to Railway (`PUT /tex/{id}/{edition}`) |
+| `#btn-tex-rebuild` | Saves then triggers Railway build (`POST /build/{id}`) |
+| `#tex-save-status` | Inline status text (Saved / Building… / error messages) |
+| `#tex-log` | Scrollable build log pane; hidden when empty |
+
+Config addition: `RAILWAY_URL` exported from `config.js` / `config.example.js`.
+Passcode stored in `localStorage` under key `lp.passcode` (`web/js/passcode.js`).

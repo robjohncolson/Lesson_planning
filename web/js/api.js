@@ -1,5 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from "/config.js";
+import { SUPABASE_URL, SUPABASE_ANON_KEY, RAILWAY_URL } from "/config.js";
+import { passcode } from "/js/passcode.js";
 
 // schema option routes all queries to lesson_planning without per-call overrides
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
@@ -92,28 +93,61 @@ export const api = {
   },
 };
 
-// jsdelivr serves binary files with correct Content-Type and NO
-// Content-Disposition: attachment header — so PDFs render inline in the
-// browser instead of downloading (which raw.githubusercontent.com forces).
-// Placeholder URL scheme until Railway pdflatex service wires up (step 3).
+// jsdelivr: slides PDFs still live in git (not Supabase Storage).
 const CDN_BASE = "https://cdn.jsdelivr.net/gh/robjohncolson/Lesson_planning@main";
 
+// PDF URLs: student + teacher come from Supabase Storage; slides stay on jsdelivr.
 export function pdfUrl(lessonId, kind) {
-  const fileMap = {
-    student: `tex/${lessonId}_student.pdf`,
-    teacher: `tex/${lessonId}_teacher.pdf`,
-    slides:  `tex/${lessonId}_slides.pdf`,
-  };
-  return `${CDN_BASE}/${fileMap[kind]}`;
+  if (kind === "slides") {
+    return `${CDN_BASE}/tex/${lessonId}_slides.pdf`;
+  }
+  return `${SUPABASE_URL}/storage/v1/object/public/lesson-pdfs/${lessonId}_${kind}.pdf`;
 }
 
-// Tex source fetch — the Flask console lets teachers view tex when no
-// YAML spec exists. We fetch from jsdelivr as plain text. Returns null
-// on 404 so the caller can show a graceful fallback.
-export async function getTex(lessonId, kind) {
-  const file = `tex/${lessonId}_${kind}.tex`;
-  const r = await fetch(`${CDN_BASE}/${file}`, { cache: "no-cache" });
-  if (r.status === 404) return null;
-  if (!r.ok) throw new Error(`getTex ${file}: HTTP ${r.status}`);
-  return await r.text();
+// Tex source: read from Supabase lessons.tex_{edition} column.
+// Returns string or null (null = column empty / lesson not found).
+export async function getTex(lessonId, edition) {
+  const col = `tex_${edition}`;
+  const { data, error } = await supabase
+    .from("lessons")
+    .select(col)
+    .eq("id", lessonId)
+    .maybeSingle();
+  if (error) raise(`getTex ${lessonId}/${edition}`, error);
+  return data ? (data[col] ?? null) : null;
+}
+
+// saveTex: PUT tex source to Railway. Throws on non-2xx.
+// On 401: clears stored passcode and throws a WrongPasscode error.
+export async function saveTex(lessonId, edition, body) {
+  const pc = passcode.get();
+  const r = await fetch(`${RAILWAY_URL}/tex/${lessonId}/${edition}`, {
+    method: "PUT",
+    headers: { "Content-Type": "text/plain", "X-Passcode": pc },
+    body,
+  });
+  if (r.status === 401) {
+    passcode.clear();
+    const err = new Error("Wrong passcode — please try again.");
+    err.name = "WrongPasscode";
+    throw err;
+  }
+  if (!r.ok) throw new Error(`saveTex ${lessonId}/${edition}: HTTP ${r.status}`);
+}
+
+// rebuildPdf: POST to Railway build endpoint. Returns parsed JSON response.
+export async function rebuildPdf(lessonId) {
+  const pc = passcode.get();
+  const r = await fetch(`${RAILWAY_URL}/build/${lessonId}`, {
+    method: "POST",
+    headers: { "X-Passcode": pc },
+  });
+  if (r.status === 401) {
+    passcode.clear();
+    const err = new Error("Wrong passcode — please try again.");
+    err.name = "WrongPasscode";
+    throw err;
+  }
+  if (!r.ok) throw new Error(`rebuildPdf ${lessonId}: HTTP ${r.status}`);
+  return await r.json();
 }

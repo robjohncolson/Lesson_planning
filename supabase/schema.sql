@@ -78,7 +78,9 @@ CREATE TABLE lesson_planning.lessons (
   cadence         TEXT,
   title           TEXT,
   yaml_text       TEXT,
-  has_tex_student BOOLEAN DEFAULT FALSE,  -- tracked server-side from Storage
+  tex_student     TEXT,                    -- source of truth for student tex
+  tex_teacher     TEXT,                    -- source of truth for teacher tex
+  has_tex_student BOOLEAN DEFAULT FALSE,
   has_tex_teacher BOOLEAN DEFAULT FALSE,
   has_pdf_student BOOLEAN DEFAULT FALSE,
   has_pdf_teacher BOOLEAN DEFAULT FALSE,
