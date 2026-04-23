@@ -40,6 +40,7 @@ const btnRegen      = $("btn-regen");
 const btnDiff       = $("btn-diff");
 const btnPacer      = $("btn-pacer");
 const btnRegistry   = $("btn-registry");
+const btnDag        = $("btn-dag");
 const btnStudentPdf = $("btn-student-pdf");
 const btnTeacherPdf = $("btn-teacher-pdf");
 const btnSlides     = $("btn-slides");
@@ -450,6 +451,17 @@ btnPacer.addEventListener("click", () => {
 
 btnRegistry.addEventListener("click", openRegistry);
 btnDiff.addEventListener("click", openDiff);
+
+// Map console lesson IDs (L41_P2) to DAG group IDs (4-1)
+function lessonIdToGroup(lid) {
+  const m = /^L(\d)(\d)/.exec(lid || "");
+  return m ? `${m[1]}-${m[2]}` : null;
+}
+btnDag.addEventListener("click", () => {
+  const group = lessonIdToGroup(activeLessonId);
+  const qs = group ? `?lesson=${encodeURIComponent(group)}` : "";
+  window.open(`/api/graph${qs}`, "_blank");
+});
 
 btnStudentPdf.addEventListener("click", () => {
   if (activeLessonId && activeMeta?.has_student_pdf)

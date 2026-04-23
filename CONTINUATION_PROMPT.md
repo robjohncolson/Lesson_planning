@@ -50,8 +50,8 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 - **Teacher Console Phase 2:**
   - ✅ CodeMirror 6 bundled locally (`console_vendor/` → `console_static/vendor/codemirror.js`, 412 KB min.). YAML syntax highlight + Ctrl+S save + Ctrl+Enter regen. Smoke: `smoke_test_console_codemirror.py`.
   - ✅ Diff viewer — regen endpoint returns unified diff of `{lesson_id}_{student,teacher}.tex` before/after; frontend shows Diff button (enabled post-regen) opening a tabbed modal with colored +/- lines. Smoke: `smoke_test_console_diff.py`.
+  - ✅ Curriculum DAG viz — reused existing `graph/graph.html` (vis-network, self-contained). Console adds DAG button that opens `/api/graph?lesson={group}` in a new tab; graph.html reads the param, fades non-focus nodes, fits camera to the lesson's subgraph, shows focus banner. Smoke: `smoke_test_console_dag.py`.
   - Streaming `/api/registry` (current full-load is fine at 1057 rows; will matter at 5000+).
-  - Curriculum DAG visualization (d3.js).
   - Auth gate for remote hosting + teacher verification.
   - Real install screenshots (`docs/install_screenshots/`).
 - **Deferred (harmless):** Topic 5 `-2`-suffixed registry rows (128 pairs, rename for clarity); retired Topic 3 assessment shells (Q1/Q3/Q4/Q7/Q9/Q11 point at retired lessons, inert).

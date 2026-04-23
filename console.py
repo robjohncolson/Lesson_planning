@@ -19,6 +19,7 @@ TEX_DIR = REPO_ROOT / "tex"
 LESSONS_DIR = REPO_ROOT / "lessons"
 STATIC_DIR = REPO_ROOT / "console_static"
 REGISTRY_PATH = REPO_ROOT / "questionbank" / "registry.jsonl"
+GRAPH_HTML_PATH = REPO_ROOT / "graph" / "graph.html"
 
 app = Flask(__name__, static_folder=None)
 _LESSON_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")  # must start alphanumeric — blocks `-flag`-style injection into pdflatex argv
@@ -295,6 +296,13 @@ def api_pacer(lesson_id: str):
     if not pacer_path.exists():
         abort(404)
     return send_file(pacer_path, mimetype="text/html")
+
+
+@app.route("/api/graph")
+def api_graph():
+    if not GRAPH_HTML_PATH.exists():
+        abort(404, description="graph/graph.html not found — run qb_diagnose.py")
+    return send_file(GRAPH_HTML_PATH, mimetype="text/html")
 
 
 @app.route("/api/registry")

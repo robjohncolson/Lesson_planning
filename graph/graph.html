@@ -33,5 +33,25 @@
     edges: { smooth: { type: 'continuous' }, arrows: { to: { scaleFactor: 0.5 } } },
     groups: {},
   });
+
+  // Optional ?lesson=4-1 query param — fade non-focus nodes and fit to focused set.
+  const _hl = new URLSearchParams(location.search).get("lesson");
+  if (_hl) {
+    const focus = nodes.get({ filter: n => n.group === _hl });
+    if (focus.length) {
+      nodes.update(nodes.get().map(n => n.group === _hl
+        ? { id: n.id, opacity: 1, borderWidth: 3 }
+        : { id: n.id, opacity: 0.18 }
+      ));
+      const focusIds = focus.map(n => n.id);
+      network.once("stabilizationIterationsDone", () => {
+        network.fit({ nodes: focusIds, animation: { duration: 400 } });
+      });
+      const banner = document.createElement("div");
+      banner.style.cssText = "position:absolute;top:112px;right:16px;background:#fbbc04;color:#202124;padding:4px 10px;border-radius:3px;font-size:12px;font-weight:600;z-index:10;";
+      banner.textContent = `Focused: lesson ${_hl} (${focus.length} nodes)`;
+      document.body.appendChild(banner);
+    }
+  }
 </script>
 </body></html>
