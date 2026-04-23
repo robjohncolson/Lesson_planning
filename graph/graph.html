@@ -100,13 +100,44 @@
     );
   });
 
-  // Lesson-sibling index (same `group` field) — fallback for nodes that lack
-  // explicit prereq/rehearses/echoes edges so the panel always has somewhere
-  // to navigate to.
+  // Lesson-sibling index (same `group` field).
   const siblingsByLesson = {};
   nodes.get().forEach(n => {
     if (!n.group || n.group === "?") return;
     (siblingsByLesson[n.group] = siblingsByLesson[n.group] || []).push(n.id);
+  });
+
+  // Parse node titles ONCE and index by skill + standard — powers the
+  // cross-lesson "shares skill" / "shares standard" navigation and the
+  // assessment coverage view.
+  const nodeAttrs = {};   // id -> {skills, standards, role, lesson, dok}
+  const bySkill = {};     // skill-token -> [nodeId, ...]
+  const byStandard = {};  // standards code -> [nodeId, ...]
+  function parseAttrs(nodeId) {
+    const raw = (titleById[nodeId] || "").replace(/\\n/g, "\n");
+    const header = raw.split(/\n\n/)[0].split("\n").slice(1);
+    const rows = [];
+    for (const line of header) {
+      const pairs = line.split(/\s{2,}/);
+      for (const pair of pairs) {
+        const m = /^([^:]+):\s*(.+)$/.exec(pair.trim());
+        if (m) rows.push([m[1].trim().toLowerCase(), m[2].trim()]);
+      }
+    }
+    const get = (k) => (rows.find(r => r[0] === k) || [])[1] || "";
+    return {
+      skills:    get("skills").split(/,\s*/).filter(Boolean),
+      standards: get("standards").split(/,\s*/).filter(Boolean),
+      role:      get("role"),
+      lesson:    get("lesson"),
+      dok:       get("dok"),
+    };
+  }
+  nodes.get().forEach(n => {
+    const a = parseAttrs(n.id);
+    nodeAttrs[n.id] = a;
+    a.skills.forEach(s    => (bySkill[s]    = bySkill[s]    || []).push(n.id));
+    a.standards.forEach(s => (byStandard[s] = byStandard[s] || []).push(n.id));
   });
 
   function escHtml(s) {
@@ -167,6 +198,20 @@
         ).join("")
         + '</div>').join("");
 
+    // Track which ids we've already shown so later sections dedupe.
+    const shown = new Set([node.id]);
+    for (const n of neighbors) shown.add(n.id);
+
+    // Chip renderer — caps list at 18 with "+N more" tail.
+    function chips(ids, borderColor) {
+      const capped = ids.slice(0, 18);
+      const tail = ids.length > 18 ? ' <span class="tag" style="background:#2a2d32">+' + (ids.length - 18) + ' more</span>' : "";
+      return capped.map(i =>
+        '<a class="neighbor" data-target="' + escHtml(i) +
+        '" style="border-left-color:' + borderColor + ';">' + escHtml(i) + '</a>'
+      ).join("") + tail;
+    }
+
     detail.className = "";
     detail.innerHTML =
       '<h2>' + escHtml(id) + '</h2>' +
@@ -183,19 +228,70 @@
         escHtml(prompt) + '</div></div>' : "") +
       neighborHtml;
 
-    // "Other items in this lesson" fallback — always surface siblings so
-    // teachers can walk a lesson even when explicit typed edges are missing.
-    const siblings = (siblingsByLesson[node.group] || []).filter(id => id !== node.id);
+    const attrs = nodeAttrs[node.id] || { skills: [], standards: [], role: "" };
+
+    // ── Assessment coverage (only for assessment-shell nodes) ───────────────
+    // For each tested skill, show which NON-assessment items rehearse it.
+    // Skills with 0 rehearsers are flagged as gaps.
+    if (attrs.role === "assessment-shell" && attrs.skills.length) {
+      const covRow = document.createElement("div");
+      covRow.className = "meta-row";
+      covRow.style.cssText = "border-top:1px dashed #555;padding-top:10px;margin-top:14px;";
+      let html = '<strong style="color:#fbbc04;">Rehearsal coverage:</strong>';
+      for (const skill of attrs.skills) {
+        const rehearsers = (bySkill[skill] || [])
+          .filter(i => i !== node.id)
+          .filter(i => (nodeAttrs[i] || {}).role !== "assessment-shell");
+        const label = escHtml(skill);
+        if (rehearsers.length === 0) {
+          html += '<div style="margin-top:6px;"><span class="tag" style="background:#5c2a2a;color:#f6b6b6;">' +
+            label + ' — no rehearsal (GAP)</span></div>';
+        } else {
+          html += '<div style="margin-top:6px;"><strong style="font-size:11px;color:#b8c0c8;">' + label +
+            ' (' + rehearsers.length + ')</strong><br>' + chips(rehearsers, "#1a73e8") + '</div>';
+          rehearsers.forEach(i => shown.add(i));
+        }
+      }
+      covRow.innerHTML = html;
+      detail.appendChild(covRow);
+    }
+
+    // ── Other items in this lesson (sibling fallback) ───────────────────────
+    const siblings = (siblingsByLesson[node.group] || []).filter(i => !shown.has(i));
     if (siblings.length) {
       const siblingRow = document.createElement("div");
       siblingRow.className = "meta-row";
       siblingRow.innerHTML = '<strong>Other items in lesson ' + escHtml(node.group) +
-        ':</strong> ' + siblings.map(id =>
-          '<a class="neighbor sibling" data-target="' + escHtml(id) +
-          '" style="border-left-color:#666;">' + escHtml(id) + '</a>'
-        ).join("");
+        ':</strong> ' + chips(siblings, "#666");
       detail.appendChild(siblingRow);
-    } else if (!neighborHtml) {
+      siblings.slice(0, 18).forEach(i => shown.add(i));
+    }
+
+    // ── Cross-lesson: shared skill ──────────────────────────────────────────
+    for (const skill of attrs.skills) {
+      const others = (bySkill[skill] || []).filter(i => !shown.has(i));
+      if (!others.length) continue;
+      const row = document.createElement("div");
+      row.className = "meta-row";
+      row.innerHTML = '<strong>Shares skill <code style="color:#8ab4f8;">' + escHtml(skill) +
+        '</code>:</strong> ' + chips(others, "#34a853");
+      detail.appendChild(row);
+      others.slice(0, 18).forEach(i => shown.add(i));
+    }
+
+    // ── Cross-lesson: shared standard ───────────────────────────────────────
+    for (const std of attrs.standards) {
+      const others = (byStandard[std] || []).filter(i => !shown.has(i));
+      if (!others.length) continue;
+      const row = document.createElement("div");
+      row.className = "meta-row";
+      row.innerHTML = '<strong>Shares standard <code style="color:#c084fc;">' + escHtml(std) +
+        '</code>:</strong> ' + chips(others, "#c084fc");
+      detail.appendChild(row);
+      others.slice(0, 18).forEach(i => shown.add(i));
+    }
+
+    if (!neighborHtml && shown.size === 1) {
       const empty = document.createElement("div");
       empty.className = "meta-row";
       empty.style.cssText = "color:#7a828a;font-style:italic;";
