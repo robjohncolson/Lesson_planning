@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher Console</title>
+  <link rel="stylesheet" href="/styles/console.css" />
+</head>
+<body>
+
+  <header id="app-header">
+    <h1>Teacher Console</h1>
+    <nav>
+      <a href="/" class="nav-link active">Lessons</a>
+      <a href="/dag.html" class="nav-link">DAG</a>
+    </nav>
+    <span id="health-indicator" title="Supabase connectivity">Checking…</span>
+  </header>
+
+  <div id="error-banner" role="alert" aria-live="assertive"></div>
+
+  <div id="main">
+
+    <nav id="sidebar" aria-label="Lesson list">
+      <div id="sidebar-search">
+        <input id="filter-input" type="search"
+               placeholder="Filter lessons…"
+               aria-label="Filter lessons by ID or title" />
+      </div>
+      <div id="lesson-list" role="listbox" aria-label="Lessons"></div>
+    </nav>
+
+    <section id="detail" aria-label="Lesson detail">
+
+      <div id="detail-empty">Select a lesson from the list.</div>
+
+      <div id="detail-header" style="display:none;">
+        <h2 id="detail-title"></h2>
+        <div class="toolbar">
+          <button id="btn-yaml"         class="btn btn-navy" disabled>YAML</button>
+          <button id="btn-items"        class="btn btn-gold">Items</button>
+          <a    id="btn-student-pdf" class="btn btn-teal" target="_blank" rel="noopener">Student PDF</a>
+          <a    id="btn-teacher-pdf" class="btn btn-teal" target="_blank" rel="noopener">Teacher PDF</a>
+          <a    id="btn-slides"      class="btn btn-teal" target="_blank" rel="noopener">Slides</a>
+        </div>
+      </div>
+
+      <!-- Three mutually-exclusive views within #detail -->
+      <div id="yaml-view" style="display:none;">
+        <pre id="yaml-content"></pre>
+      </div>
+
+      <div id="item-list-view" style="display:none;">
+        <div id="item-list"></div>
+      </div>
+
+      <div id="item-detail-view" style="display:none;">
+        <button id="btn-back-to-items" class="btn btn-muted" style="margin-bottom:10px;">&larr; Back to items</button>
+        <div id="item-detail"></div>
+      </div>
+
+    </section>
+  </div>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Curriculum DAG · Teacher Console</title>
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #202124; color: #e8eaed;
+           display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+    #legend { padding: 8px 16px; background: #303134; border-bottom: 1px solid #5f6368; flex-shrink: 0; }
+    #legend span { margin-right: 16px; font-size: 13px; }
+    #legend a { color: #8ab4f8; margin-right: 18px; text-decoration: none; }
+    #legend a:hover { text-decoration: underline; }
+    .sw { display: inline-block; width: 12px; height: 12px; margin-right: 4px; vertical-align: middle; border-radius: 2px; }
+    #main { display: flex; flex: 1; min-height: 0; }
+    #net { flex: 1; background: #202124; min-width: 0; }
+    #detail {
+      width: 360px; flex-shrink: 0; overflow: auto;
+      background: #292b2f; border-left: 1px solid #444; padding: 18px 18px 40px 18px;
+      box-sizing: border-box; font-size: 13px; line-height: 1.5;
+    }
+    #detail.empty { color: #7a828a; font-style: italic; padding-top: 40%; text-align: center; }
+    #detail h2 { margin: 0 0 4px; font-size: 15px; color: #fbbc04; word-break: break-all; }
+    #detail .meta-row { margin: 10px 0; }
+    #detail .meta-row strong { color: #e8eaed; margin-right: 4px; }
+    #detail .tag {
+      display: inline-block; background: #3a3d42; color: #dadce0;
+      padding: 2px 7px; border-radius: 3px; font-size: 11px; margin: 2px 4px 2px 0;
+    }
+    #detail .dok {
+      display: inline-block; padding: 2px 7px; border-radius: 3px;
+      font-size: 11px; font-weight: 600; color: #fff;
+    }
+    #detail .dok-1 { background: #8ab4f8; color: #202124; }
+    #detail .dok-2 { background: #fbbc04; color: #202124; }
+    #detail .dok-3 { background: #ea4335; }
+    #detail .prompt {
+      background: #1f2125; border-radius: 4px; padding: 10px 12px;
+      margin-top: 12px; font-family: Consolas, Menlo, monospace;
+      font-size: 12px; white-space: pre-wrap; color: #e8eaed;
+    }
+    #detail a.neighbor {
+      display: inline-block; margin: 3px 4px 3px 0; padding: 3px 8px;
+      background: #3a3d42; color: #8ab4f8; border-left: 3px solid #888;
+      border-radius: 2px; cursor: pointer; font-size: 11px;
+      font-family: Consolas, Menlo, monospace; text-decoration: none;
+    }
+    #detail a.neighbor:hover { background: #4a4d52; color: #fff; }
+    #focus-badge {
+      display: inline-block; background: #fbbc04; color: #202124;
+      padding: 2px 8px; border-radius: 3px; font-size: 12px;
+      font-weight: 600; margin-left: 12px; vertical-align: middle;
+    }
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      color: #8ab4f8; font-size: 14px;
+    }
+    #error-banner {
+      display: none; padding: 8px 16px; background: #5c2a2a; color: #f6b6b6;
+      font-size: 13px; border-bottom: 1px solid #8b4949;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="legend">
+    <nav style="display:inline-block;">
+      <a href="/">&larr; Lessons</a>
+    </nav>
+    <strong>Curriculum DAG</strong>
+    &nbsp;Nodes colored by role, bordered by DOK-3 flavor. Edges:
+    <span style="color:#5f6368">prereq</span>,
+    <span style="color:#1a73e8">rehearses</span>,
+    <span style="color:#ea4335">echoes</span>.
+    <br>
+    <span><span class="sw" style="background:#ea4335"></span>dok3-driver</span>
+    <span><span class="sw" style="background:#34a853"></span>launch</span>
+    <span><span class="sw" style="background:#fbbc04"></span>try-it</span>
+    <span><span class="sw" style="background:#f28b82"></span>practice</span>
+    <span><span class="sw" style="background:#8ab4f8"></span>do-now</span>
+    <span><span class="sw" style="background:#c084fc"></span>assessment</span>
+    <span><span class="sw" style="background:#dadce0"></span>stretch</span>
+  </div>
+
+  <div id="error-banner" role="alert" aria-live="assertive"></div>
+
+  <div id="main">
+    <div id="net"></div>
+    <aside id="detail" class="empty">Loading…</aside>
+  </div>
+
+  <div id="loading">Loading graph from Supabase…</div>
+
+  <script type="module" src="/js/dag.js"></script>
+</body>
+</html>
