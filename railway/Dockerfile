@@ -34,4 +34,6 @@ COPY tex/beamer_preamble.sty .
 
 EXPOSE 8080
 
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8080"]
+# Shell form so $PORT expands (Railway injects PORT at runtime).
+# Exec form ["uvicorn", ...] would pass the literal "$PORT" to uvicorn.
+CMD uvicorn server:app --host 0.0.0.0 --port ${PORT:-8080}
