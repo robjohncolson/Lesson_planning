@@ -30,6 +30,7 @@ const noYamlMsg     = $("no-yaml-msg");
 const errorPanel    = $("error-panel");
 const saveStatus    = $("save-status");
 const pdfFrame      = $("pdf-frame");
+const pdfFallbackLink = $("pdf-fallback-link");
 const previewPlaceholder = $("preview-placeholder");
 const modalOverlay  = $("modal-overlay");
 const modalTitle    = $("modal-title");
@@ -268,15 +269,22 @@ function loadPdfPreview(cacheBust = false) {
 
   if (!hasPdf) {
     pdfFrame.style.display = "none";
+    pdfFallbackLink.style.display = "none";
     previewPlaceholder.style.display = "flex";
     previewPlaceholder.textContent = `No ${previewEdition} PDF available.`;
     return;
   }
 
+  const ts = cacheBust ? `?t=${Date.now()}` : "";
+  const url = `/api/pdf/${encodeURIComponent(activeLessonId)}/${previewEdition}${ts}`;
   pdfFrame.style.display = "block";
   previewPlaceholder.style.display = "none";
-  const ts = cacheBust ? `?t=${Date.now()}` : "";
-  pdfFrame.src = `/api/pdf/${encodeURIComponent(activeLessonId)}/${previewEdition}${ts}`;
+  pdfFrame.src = url;
+  // Always wire up a "open in new tab" fallback link — shows if the embed
+  // fails to render (Edge sometimes blocks inline PDF; user can click out).
+  pdfFallbackLink.href = url;
+  pdfFallbackLink.textContent = `Open ${previewEdition} PDF in new tab`;
+  pdfFallbackLink.style.display = "block";
 }
 
 // ── Save YAML ─────────────────────────────────────────────────────────────────
@@ -365,9 +373,8 @@ async function triggerRegen() {
 async function openRegistry() {
   if (!activeLessonId) return;
 
-  // Extract lesson prefix: e.g. "L41_P2" → "4-1" (best-effort)
-  // We pass lesson_id as the ?lesson= query parameter and let server filter.
-  const prefix = activeLessonId;
+  // Registry uses "N-N" lesson IDs (e.g. "3-5"), not the "LNN_Pn" format.
+  const prefix = lessonIdToGroup(activeLessonId) || activeLessonId;
 
   modalTitle.textContent = `Registry — ${prefix}`;
   modalBody.innerHTML    = `<p style="color:var(--muted);font-size:0.85rem;">Loading…</p>`;

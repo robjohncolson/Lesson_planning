@@ -89,12 +89,19 @@
             </div>
           </div>
 
-          <iframe
+          <!-- <embed> drives Edge's built-in PDF viewer; iframe + sandbox
+               was too restrictive and Edge refused to render. -->
+          <embed
             id="pdf-frame"
-            sandbox="allow-same-origin"
+            type="application/pdf"
             title="PDF preview"
             style="display:none;"
-          ></iframe>
+          />
+          <a
+            id="pdf-fallback-link"
+            style="display:none;padding:12px 16px;font-size:0.85rem;"
+            target="_blank"
+          >Open PDF in a new tab</a>
 
           <div id="preview-placeholder">No PDF to display.</div>
         </div>

@@ -73,6 +73,9 @@ def _scan_lessons() -> list[dict]:
     for lid in sorted(lesson_ids):
         meta = _read_yaml_meta(lid)
         has_yaml = bool(meta) or (LESSONS_DIR / f"{lid}.yaml").exists()
+        # Pacer HTMLs are per-lesson (L35_Pacer.html), not per-period.
+        lesson_prefix = re.match(r"^(L\d{2})_P\d$", lid)
+        pacer_name = (lesson_prefix.group(1) + "_Pacer.html") if lesson_prefix else f"{lid}_Pacer.html"
         results.append({
             "lesson_id": lid,
             "cadence": meta.get("cadence", "unknown") if meta else "unknown",
@@ -80,7 +83,7 @@ def _scan_lessons() -> list[dict]:
             "has_student_pdf": (TEX_DIR / f"{lid}_student.pdf").exists(),
             "has_teacher_pdf": (TEX_DIR / f"{lid}_teacher.pdf").exists(),
             "has_slides_pdf": (TEX_DIR / f"{lid}_slides.pdf").exists(),
-            "has_pacer_html": (REPO_ROOT / f"{lid}_Pacer.html").exists(),
+            "has_pacer_html": (REPO_ROOT / pacer_name).exists(),
             "title": meta.get("title") or None,
         })
     return results
@@ -332,7 +335,10 @@ def api_slides(lesson_id: str):
 @app.route("/api/pacer/<lesson_id>")
 def api_pacer(lesson_id: str):
     _validate_lesson_id(lesson_id)
-    pacer_path = _safe_path(REPO_ROOT, f"{lesson_id}_Pacer.html")
+    # Pacer HTMLs are per-lesson (L35_Pacer.html), not per-period.
+    lesson_prefix = re.match(r"^(L\d{2})_P\d$", lesson_id)
+    name = (lesson_prefix.group(1) + "_Pacer.html") if lesson_prefix else f"{lesson_id}_Pacer.html"
+    pacer_path = _safe_path(REPO_ROOT, name)
     if not pacer_path.exists():
         abort(404)
     return send_file(pacer_path, mimetype="text/html")
