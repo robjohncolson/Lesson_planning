@@ -152,3 +152,27 @@ Returns `{ action, changed_at, changed_by }` or `null`. **Never throws** — cat
 ### `X-User-Name` header
 
 `saveTex` and `rebuildPdf` include `"X-User-Name": username.get()` alongside `X-Passcode`. Railway forwards this to the Supabase audit trigger as the `x-user-name` request header, which the trigger stores in `audit.changed_by`.
+
+## Phase 2 — Realtime presence
+
+### New DOM IDs
+
+| ID | Purpose |
+|---|---|
+| `#tex-presence` | Span inside `.tex-toolbar`; shows "N editing: X, Y" when others are present (hidden when alone) |
+| `#tex-remote-banner` | Banner above `.tex-toolbar` inside `#tex-view`; shown when a remote save lands on the active edition |
+| `#remote-banner-msg` | Text inside the banner ("Someone just saved {edition}.tex") |
+| `#btn-take-theirs` | Replaces textarea content with `pendingRemoteValue`; clears `texDirty` |
+| `#btn-dismiss-banner` | Hides banner; discards `pendingRemoteValue` |
+
+### Channel naming
+
+One channel per open lesson: `lesson:{lessonId}` (e.g. `lesson:L41_P2`).
+
+### Presence payload shape
+
+`{ username: string, joined_at: ISO-string }` — tracked on `SUBSCRIBED`.
+
+### `onRemoteSave` firing rule
+
+Fires only when the changed field matches `tex_{activeTexEdition}` (e.g. `tex_student`). Changes to other editions or `yaml_text` while a different edition is open are silently ignored. Own-save echoes are filtered when `new_value === texContent.value && !texDirty`.

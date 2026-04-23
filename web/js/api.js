@@ -4,7 +4,7 @@ import { passcode } from "/js/passcode.js";
 import { username } from "/js/username.js";
 
 // schema option routes all queries to lesson_planning without per-call overrides
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   db: { schema: "lesson_planning" },
 });
 

@@ -3,6 +3,7 @@ import { passcode } from "/js/passcode.js";
 import { username } from "/js/username.js";
 import { createLessonList } from "/js/lesson-list.js";
 import { renderItemList, renderItemDetail } from "/js/item-detail.js";
+import { subscribeLesson } from "/js/realtime.js";
 
 // ── DOM refs ────────────────────────────────────────────────────────────────
 
@@ -29,7 +30,12 @@ const texSaveStatus = document.getElementById("tex-save-status");
 const texLog        = document.getElementById("tex-log");
 const itemList      = document.getElementById("item-list");
 const itemDetail    = document.getElementById("item-detail");
-const btnBack       = document.getElementById("btn-back-to-items");
+const btnBack           = document.getElementById("btn-back-to-items");
+const texPresence       = document.getElementById("tex-presence");
+const texRemoteBanner   = document.getElementById("tex-remote-banner");
+const remoteBannerMsg   = document.getElementById("remote-banner-msg");
+const btnTakeTheirs     = document.getElementById("btn-take-theirs");
+const btnDismissBanner  = document.getElementById("btn-dismiss-banner");
 
 const SUB_VIEWS = ["yaml-view", "tex-view", "pdf-view", "item-list-view", "item-detail-view"];
 
@@ -39,10 +45,12 @@ const pdfOpenTab   = document.getElementById("pdf-open-tab");
 
 // ── State ───────────────────────────────────────────────────────────────────
 
-let activeLessonId   = null;
-let activeLesson     = null;
-let activeTexEdition = null;   // "student" | "teacher" | "slides"
-let texDirty         = false;
+let activeLessonId      = null;
+let activeLesson        = null;
+let activeTexEdition    = null;   // "student" | "teacher" | "slides"
+let texDirty            = false;
+let unsubscribeRealtime = null;
+let pendingRemoteValue  = null;
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -106,6 +114,10 @@ function openPdfView(kind) {
 
 async function selectLesson(id) {
   clearError();
+  if (unsubscribeRealtime) {
+    await unsubscribeRealtime();
+    unsubscribeRealtime = null;
+  }
   try {
     const lesson = await api.getLesson(id);
     if (!lesson) { showError(`Lesson ${id} not found.`); return; }
@@ -166,6 +178,9 @@ async function openTexView(edition) {
   texLastEdited.textContent = "";
   texLog.style.display = "none";
   texLog.textContent   = "";
+  texPresence.textContent = "";
+  texRemoteBanner.style.display = "none";
+  pendingRemoteValue = null;
 
   // Fire tex fetch and audit lookup in parallel. Capture the lesson id at
   // call time — if the teacher clicks a different lesson before the audit
@@ -195,6 +210,44 @@ async function openTexView(edition) {
 
   // Let audit run; ignore its outcome (already caught above)
   auditPromise;
+
+  // Tear down any existing subscription, then subscribe to the newly opened lesson.
+  if (unsubscribeRealtime) {
+    await unsubscribeRealtime();
+    unsubscribeRealtime = null;
+  }
+  const currentEdition = activeTexEdition;
+  const currentLesson  = activeLessonId;
+  const currentUser    = username.get() || "(anonymous)";
+
+  unsubscribeRealtime = subscribeLesson({
+    lessonId: currentLesson,
+    username: currentUser,
+
+    onPresenceChange(users) {
+      // Only render when others are also present
+      const others = users.filter((u) => u !== currentUser);
+      if (others.length === 0) {
+        texPresence.textContent = "";
+      } else {
+        const total = others.length + 1;
+        texPresence.textContent = `${total} editing: ${others.join(", ")}`;
+      }
+    },
+
+    onRemoteSave({ field, new_value, changed_at }) {
+      // Only react when the changed field matches what's currently open
+      if (field !== `tex_${currentEdition}`) return;
+      // Filter own-save echoes: if new_value matches what's in the textarea
+      // and it's not dirty, this is almost certainly our own save bouncing back.
+      if (new_value === texContent.value && !texDirty) return;
+      pendingRemoteValue = new_value;
+      const edition = currentEdition;
+      const when = changed_at ? formatWhen(changed_at) : "";
+      remoteBannerMsg.textContent = `Someone just saved ${edition}.tex${when ? " (" + when + ")" : ""}.`;
+      texRemoteBanner.style.display = "";
+    },
+  });
 }
 
 // ── Tex dirty tracking ───────────────────────────────────────────────────────
@@ -316,6 +369,20 @@ btnTexSave.addEventListener("click",    () => doSave().catch(() => {}));
 btnTexRebuild.addEventListener("click", () => doRebuild().catch(() => {}));
 
 btnBack.addEventListener("click", openItemsView);
+
+btnTakeTheirs.addEventListener("click", () => {
+  if (pendingRemoteValue !== null) {
+    texContent.value = pendingRemoteValue;
+    texDirty = false;
+    pendingRemoteValue = null;
+  }
+  texRemoteBanner.style.display = "none";
+});
+
+btnDismissBanner.addEventListener("click", () => {
+  pendingRemoteValue = null;
+  texRemoteBanner.style.display = "none";
+});
 
 btnStudentPdf.addEventListener("click", () => openPdfView("student"));
 btnTeacherPdf.addEventListener("click", () => openPdfView("teacher"));
