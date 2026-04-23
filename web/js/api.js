@@ -43,7 +43,12 @@ export const api = {
     return data;
   },
 
-  async itemsForLesson(lesson) {
+  async itemsForLesson(lessonOrId) {
+    // Lessons table uses LNN_Pn ids (e.g. "L35_P2") but items.lesson in the
+    // registry uses the topic-subtopic form (e.g. "3-5"). Convert LNN_Pn to
+    // N-N; pass-through anything else (e.g. "3-5" directly).
+    const m = /^L(\d)(\d)_P\d$/.exec(lessonOrId || "");
+    const lesson = m ? `${m[1]}-${m[2]}` : lessonOrId;
     const { data, error } = await supabase
       .from("items")
       .select("*")
