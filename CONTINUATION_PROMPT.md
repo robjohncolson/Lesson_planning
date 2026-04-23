@@ -38,11 +38,15 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 ## Open tasks (as of 2026-04-22 post-session)
 
 **Time-critical — user handles:**
-- Topic 4 week-of prep (L41 starts Fri 5/1 F / Mon 5/4 A). Verify L41_Pacer via Selenium, re-run `qb_polish_worksheet.py` on latest registry.
+- Topic 4 week-of prep (L41 starts Fri 5/1 F / Mon 5/4 A). L41_Pacer Selenium smoke test passes (`smoke_test_L41_pacer.py`); polish worksheets regenerated against latest registry.
+
+**Completed 2026-04-22 (second session):**
+- ✅ L41_Pacer Selenium smoke test (3 tabs, Start fires, no JS errors). Template: `smoke_test_L41_pacer.py`.
+- ✅ Polish-worksheet + DAG-diagnostics regen (1057 rows, 27 skill-bridge gaps, 83 redundant groups, 18 lessons).
+- ✅ Registry answer backfill: `teacher_answer` field added to 88 registry rows, auto-extracted from `tex/L*_teacher.tex` via `extract_teacher_answers.py` (bankitem→teacheranswerbox pairing with fuzzy-prompt fallback). Generator `build_lesson_from_yaml.py:212-218` now emits backfilled body instead of placeholder. L41_P2 regen: 7/8 boxes filled; L44_P1 regen: 5/9 filled. Remaining gaps: L54_P1_teacher.tex (0 pairs — different answer-encoding pattern), plus items whose answers live only in Savvas source.
+- ✅ Generator schema extensions: `kind: raw_tikz` (`body:` + `wrap_center:` bool) and `section_notes:` (per-phase `\textit{...}\par` prose below section banner, accepts str or list). Both fields optional, backwards-compatible. All 3 existing YAML lessons regen cleanly.
 
 **Backlog — pick when idle:**
-- **Registry answer backfill** (~130 items across ~17 lessons). Surfaced by L44_P1 back-extraction: most pre-Klimsara registry rows have `answers:[]`, so regen teacher packets emit `(no answer key --- verify before class)` placeholders. Biggest real gap for back-extraction feasibility. See `lessons/L44_P1_back_extraction_notes.md`.
-- **Generator schema gaps** — `kind: raw_tikz` for custom per-lesson TikZ (L44 circuit, L45 chemistry, L51 cylinder), `section_notes:` per-phase for free-form `\textit{...}` prose under section banners.
 - **Teacher Console Phase 2:**
   - CodeMirror via bundled distribution or pinned import map (CDN dual-load of `@codemirror/state` broke Phase 1; textarea fallback ships now).
   - Streaming `/api/registry` (current full-load is fine at 1057 rows; will matter at 5000+).

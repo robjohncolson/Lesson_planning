@@ -2,7 +2,7 @@
 
 Per lesson: skill_tokens on dok3-driver items that have NO earlier-role item (do-now, launch, explore-tps, or explore-practice) providing that token in the same lesson.
 
-**Total gaps: 27** across 11 lessons.
+**Total gaps: 27** across 12 lessons.
 
 
 ## Lesson 3-5

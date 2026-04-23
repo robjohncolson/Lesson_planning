@@ -2,7 +2,7 @@
 
 Per lesson: explore-practice and explore-tps items with IDENTICAL skill_token sets **AND** matching `prereq_ids` chain **AND** matching `rehearses` targets. Items sharing tokens but scaffolded from different Try-Its or rehearsing different assessment items are NOT grouped — they serve distinct pedagogical roles.
 
-**83 redundant group(s)** found across 11 lessons.
+**83 redundant group(s)** found across 12 lessons.
 
 
 ## Lesson 3-5

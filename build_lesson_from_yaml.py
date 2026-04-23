@@ -1,4 +1,4 @@
-"""Read lessons/L{NN}_P{N}.yaml → emit tex/L{NN}_P{N}_{student,teacher}.tex.
+r"""Read lessons/L{NN}_P{N}.yaml → emit tex/L{NN}_P{N}_{student,teacher}.tex.
 
 Single shared generator; each lesson becomes a ~200-line YAML config.
 Future new-unit onboarding (Algebra 1, APStats) writes YAML + an item
@@ -25,7 +25,10 @@ Schema (overview):
   exit_ticket: {title, items[]}
   teacher_callouts: [{title, color, body}]  # IEP / ELL / period variants
   chain_callbacks: [{chain, anchor_item, title, body}]
-  visuals: {<name>: {kind: pgfplot|tikz_boxes, ...}}
+  visuals: {<name>: {kind: pgfplot|tikz_boxes|raw_tikz, ...}}
+  section_notes: {do_now|launch|explore|share_summary|exit: str | [str]}
+    # emitted as \textit{...}\par immediately after the section banner,
+    # before callouts/items; use for free-form "work with a partner..." prose
 
 Content is pulled from questionbank/registry.jsonl by item id.
 """
@@ -74,7 +77,22 @@ def render_visual(name: str, spec: dict) -> str:
         return render_pgfplot(spec)
     if kind == "tikz_boxes":
         return render_tikz_boxes(spec)
+    if kind == "raw_tikz":
+        return render_raw_tikz(spec)
     return f"% unknown visual kind: {kind}\n"
+
+
+def render_raw_tikz(s: dict) -> str:
+    """Emit an author-provided TikZ body verbatim.
+
+    Schema: {kind: raw_tikz, body: "<latex>", wrap_center: true|false}
+    The body is written inside `\\begin{center}...\\end{center}` when
+    wrap_center is true (default).
+    """
+    body = s.get("body", "").rstrip()
+    if s.get("wrap_center", True):
+        return "\\begin{center}\n" + body + "\n\\end{center}\n"
+    return body + "\n"
 
 
 def render_pgfplot(s: dict) -> str:
@@ -210,12 +228,11 @@ def bank_item_block(item_spec: dict, registry: dict, visuals: dict, for_teacher:
             out.append(f"  \\answerchoice{{{chr(65 + i)}}}{{{a}}}")
     out.append("}")
     if for_teacher:
-        # teacher-edition appends a placeholder answer-key block; detail comes
-        # from registry.notes or separate teacher_answers field later.
         out.append(
             "\\teacheranswerbox{\\IconCheck\\ ANSWER / ANTICIPATED TALK}{%"
         )
-        out.append("(no answer key --- verify before class)")
+        body = (q.get("teacher_answer") or "").strip()
+        out.append(body if body else "(no answer key --- verify before class)")
         out.append("}")
     return "\n".join(out) + "\n\n"
 
@@ -260,9 +277,20 @@ def emit_student(lesson: dict, registry: dict) -> str:
     do_now_ids = items.get("do_now", [])
     explore_items = items.get("explore", [])
 
+    section_notes = lesson.get("section_notes", {}) or {}
+
+    def _notes(name: str) -> str:
+        val = section_notes.get(name)
+        if not val:
+            return ""
+        if isinstance(val, list):
+            return "".join(f"\\textit{{{line}}}\\par\n" for line in val) + "\n"
+        return f"\\textit{{{val}}}\\par\n\n"
+
     # DO NOW
     if callouts_by_section.get("do_now") or do_now_ids:
         parts.append(f"\\sectionbanner{{{section_labels['do_now']}}}\n\n")
+        parts.append(_notes("do_now"))
         for c in callouts_by_section.get("do_now", []):
             parts.append(callout_block(c["title"], c["color"], c["body"]))
         for iid in do_now_ids:
@@ -270,11 +298,13 @@ def emit_student(lesson: dict, registry: dict) -> str:
 
     # LAUNCH
     parts.append(f"\\sectionbanner{{{section_labels['launch']}}}\n\n")
+    parts.append(_notes("launch"))
     for c in callouts_by_section.get("launch", []):
         parts.append(callout_block(c["title"], c["color"], c["body"]))
 
     # EXPLORE
     parts.append(f"\\sectionbanner{{{section_labels['explore']}}}\n\n")
+    parts.append(_notes("explore"))
     if explore_items:
         parts.append("\\textbf{Bank-item labels (in order):}\n")
         parts.append("\\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,topsep=2pt]\n")
@@ -286,6 +316,7 @@ def emit_student(lesson: dict, registry: dict) -> str:
 
     # SHARE / SUMMARY
     parts.append(f"\\sectionbanner{{{section_labels['share_summary']}}}\n\n")
+    parts.append(_notes("share_summary"))
     for c in callouts_by_section.get("share_summary", []):
         parts.append(callout_block(c["title"], c["color"], c["body"]))
     sf = lesson.get("sentence_frames")
@@ -299,6 +330,7 @@ def emit_student(lesson: dict, registry: dict) -> str:
     exit_t = lesson.get("exit_ticket")
     if exit_t:
         parts.append(f"\\sectionbanner{{{section_labels['exit']}}}\n\n")
+        parts.append(_notes("exit"))
         parts.append(f"\\begin{{summaryexitbox}}{{{exit_t['title']}}}\n")
         for it in exit_t["items"]:
             parts.append(f"{it}\n\n")
@@ -350,10 +382,21 @@ def emit_teacher(lesson: dict, registry: dict) -> str:
         ("exit", []),
     ]
 
+    section_notes = lesson.get("section_notes", {}) or {}
+
+    def _notes(name: str) -> str:
+        val = section_notes.get(name)
+        if not val:
+            return ""
+        if isinstance(val, list):
+            return "".join(f"\\textit{{{line}}}\\par\n" for line in val) + "\n"
+        return f"\\textit{{{val}}}\\par\n\n"
+
     for phase_name, phase_items in phase_order:
         ph = phases.get(phase_name)
         if ph:
             parts.append(phase_header(phase_name, ph))
+        parts.append(_notes(phase_name))
         for c in callouts_by_section.get(phase_name, []):
             parts.append(callout_block(c["title"], c["color"], c["body"]))
         for it in phase_items:
