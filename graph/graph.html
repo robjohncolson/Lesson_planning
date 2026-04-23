@@ -100,6 +100,15 @@
     );
   });
 
+  // Lesson-sibling index (same `group` field) — fallback for nodes that lack
+  // explicit prereq/rehearses/echoes edges so the panel always has somewhere
+  // to navigate to.
+  const siblingsByLesson = {};
+  nodes.get().forEach(n => {
+    if (!n.group || n.group === "?") return;
+    (siblingsByLesson[n.group] = siblingsByLesson[n.group] || []).push(n.id);
+  });
+
   function escHtml(s) {
     return String(s || "")
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -172,7 +181,27 @@
         skills.split(/,\s*/).map(s => '<span class="tag">' + escHtml(s) + '</span>').join("") + '</div>' : "") +
       (prompt ? '<div class="meta-row"><strong>Prompt:</strong><div class="prompt">' +
         escHtml(prompt) + '</div></div>' : "") +
-      (neighborHtml || '<div class="meta-row" style="color:#7a828a;font-style:italic;">No connections.</div>');
+      neighborHtml;
+
+    // "Other items in this lesson" fallback — always surface siblings so
+    // teachers can walk a lesson even when explicit typed edges are missing.
+    const siblings = (siblingsByLesson[node.group] || []).filter(id => id !== node.id);
+    if (siblings.length) {
+      const siblingRow = document.createElement("div");
+      siblingRow.className = "meta-row";
+      siblingRow.innerHTML = '<strong>Other items in lesson ' + escHtml(node.group) +
+        ':</strong> ' + siblings.map(id =>
+          '<a class="neighbor sibling" data-target="' + escHtml(id) +
+          '" style="border-left-color:#666;">' + escHtml(id) + '</a>'
+        ).join("");
+      detail.appendChild(siblingRow);
+    } else if (!neighborHtml) {
+      const empty = document.createElement("div");
+      empty.className = "meta-row";
+      empty.style.cssText = "color:#7a828a;font-style:italic;";
+      empty.textContent = "No connections.";
+      detail.appendChild(empty);
+    }
 
     detail.querySelectorAll("a.neighbor").forEach(a => {
       a.addEventListener("click", () => {
