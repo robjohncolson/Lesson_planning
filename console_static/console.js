@@ -37,6 +37,7 @@ const modalBody     = $("modal-body");
 
 const btnSave       = $("btn-save");
 const btnRegen      = $("btn-regen");
+const btnDiff       = $("btn-diff");
 const btnPacer      = $("btn-pacer");
 const btnRegistry   = $("btn-registry");
 const btnStudentPdf = $("btn-student-pdf");
@@ -53,6 +54,7 @@ let activeMeta = null;          // metadata object for active lesson
 let previewEdition = "student"; // "student" | "teacher"
 let editorView = null;          // CodeMirror 6 EditorView
 let regenInProgress = false;
+let lastDiff = null;            // { student_tex, teacher_tex } from last regen
 
 const readOnlyCompartment = new Compartment();
 
@@ -187,10 +189,12 @@ async function selectLesson(lesson) {
   btnSlides.disabled     = !lesson.has_slides_pdf;
   btnPacer.disabled      = !lesson.has_pacer_html;
 
-  // Reset error / save status
+  // Reset error / save status / diff
   hideError();
   saveStatus.textContent = "";
   saveStatus.className   = "";
+  lastDiff = null;
+  btnDiff.disabled = true;
 
   // Load YAML
   await loadYaml(lesson.lesson_id);
@@ -306,12 +310,17 @@ async function triggerRegen() {
       const tail = d.log_tail || "(no log output)";
       showError(`Regeneration failed:\n${tail}`);
     } else {
+      // Capture diff for review
+      lastDiff = d.diff || null;
+      const hasDiff = lastDiff && (lastDiff.student_tex || lastDiff.teacher_tex);
+      btnDiff.disabled = !hasDiff;
+
       // Reload PDF with cache-bust
       loadPdfPreview(true);
       // Refresh lesson list to update artifact indicators
       await loadLessons();
-      saveStatus.textContent = "PDF updated";
-      setTimeout(() => { saveStatus.textContent = ""; }, 3000);
+      saveStatus.textContent = hasDiff ? "PDF updated (diff available)" : "PDF updated (no tex changes)";
+      setTimeout(() => { saveStatus.textContent = ""; }, 3500);
     }
   } catch (e) {
     showError(`Regenerate failed: ${e.message}`);
@@ -362,6 +371,51 @@ function renderRegistryItems(items) {
     </div>`).join("");
 }
 
+// ── Diff modal ────────────────────────────────────────────────────────────────
+function openDiff() {
+  if (!lastDiff) return;
+  const student = lastDiff.student_tex || "";
+  const teacher = lastDiff.teacher_tex || "";
+
+  modalTitle.textContent = `Diff — ${activeLessonId} (last regenerate)`;
+  modalBody.innerHTML = `
+    <div id="diff-tabs" role="tablist">
+      <button type="button" class="diff-tab active" data-side="student"
+        ${student ? "" : "disabled"}>Student ${student ? "" : "(no change)"}</button>
+      <button type="button" class="diff-tab" data-side="teacher"
+        ${teacher ? "" : "disabled"}>Teacher ${teacher ? "" : "(no change)"}</button>
+    </div>
+    <pre id="diff-view" class="diff-view"></pre>`;
+
+  const pickSide = (side) => {
+    const txt = side === "student" ? student : teacher;
+    modalBody.querySelectorAll(".diff-tab").forEach(el =>
+      el.classList.toggle("active", el.dataset.side === side));
+    const view = $("diff-view");
+    if (!txt) {
+      view.innerHTML = `<span class="diff-empty">(no changes)</span>`;
+      return;
+    }
+    view.innerHTML = txt.split("\n").map(line => {
+      const cls =
+        line.startsWith("+++") || line.startsWith("---") ? "diff-meta"
+        : line.startsWith("@@")  ? "diff-hunk"
+        : line.startsWith("+")   ? "diff-add"
+        : line.startsWith("-")   ? "diff-del"
+        : "diff-ctx";
+      return `<span class="diff-line ${cls}">${escHtml(line) || "&nbsp;"}</span>`;
+    }).join("\n");
+  };
+
+  modalBody.querySelectorAll(".diff-tab").forEach(el =>
+    el.addEventListener("click", () => {
+      if (!el.disabled) pickSide(el.dataset.side);
+    }));
+
+  pickSide(student ? "student" : "teacher");
+  modalOverlay.classList.add("visible");
+}
+
 // ── Error panel ───────────────────────────────────────────────────────────────
 function showError(msg) {
   errorPanel.textContent = msg;
@@ -395,6 +449,7 @@ btnPacer.addEventListener("click", () => {
 });
 
 btnRegistry.addEventListener("click", openRegistry);
+btnDiff.addEventListener("click", openDiff);
 
 btnStudentPdf.addEventListener("click", () => {
   if (activeLessonId && activeMeta?.has_student_pdf)

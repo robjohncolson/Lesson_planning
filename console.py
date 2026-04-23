@@ -2,6 +2,7 @@
 Usage: python console.py [--no-open] [--port PORT]
 """
 import argparse
+import difflib
 import json
 import os
 import re
@@ -168,6 +169,29 @@ def api_lesson_yaml_put(lesson_id: str):
     return jsonify({"ok": True})
 
 
+def _read_tex(stem: str) -> str:
+    p = TEX_DIR / f"{stem}.tex"
+    try:
+        return p.read_text(encoding="utf-8") if p.exists() else ""
+    except OSError:
+        return ""
+
+
+def _unified_diff(before: str, after: str, label: str) -> str:
+    """Return unified diff, or empty string if no change."""
+    if before == after:
+        return ""
+    return "".join(
+        difflib.unified_diff(
+            before.splitlines(keepends=True),
+            after.splitlines(keepends=True),
+            fromfile=f"{label} (before)",
+            tofile=f"{label} (after)",
+            n=3,
+        )
+    )
+
+
 @app.route("/api/lesson/<lesson_id>/regenerate", methods=["POST"])
 def api_lesson_regenerate(lesson_id: str):
     _validate_lesson_id(lesson_id)
@@ -175,6 +199,10 @@ def api_lesson_regenerate(lesson_id: str):
     yaml_path = _safe_path(LESSONS_DIR, f"{lesson_id}.yaml")
     if not yaml_path.exists():
         return jsonify({"ok": False, "error": "No YAML spec found"}), 404
+
+    # Capture pre-regen tex for diff
+    before_student = _read_tex(f"{lesson_id}_student")
+    before_teacher = _read_tex(f"{lesson_id}_teacher")
 
     log_tail: list[str] = []
     build_result = subprocess.run(
@@ -220,12 +248,21 @@ def api_lesson_regenerate(lesson_id: str):
     student_pdf = str(TEX_DIR / f"{lesson_id}_student.pdf") if student_ok else None
     teacher_pdf = str(TEX_DIR / f"{lesson_id}_teacher.pdf") if teacher_ok else None
 
+    # Diff post-regen tex against pre-regen snapshot
+    after_student = _read_tex(f"{lesson_id}_student")
+    after_teacher = _read_tex(f"{lesson_id}_teacher")
+    diff = {
+        "student_tex": _unified_diff(before_student, after_student, f"{lesson_id}_student.tex"),
+        "teacher_tex": _unified_diff(before_teacher, after_teacher, f"{lesson_id}_teacher.tex"),
+    }
+
     return jsonify(
         {
             "ok": overall_ok,
             "student_pdf": student_pdf,
             "teacher_pdf": teacher_pdf,
             "log_tail": log_tail,
+            "diff": diff,
         }
     )
 
