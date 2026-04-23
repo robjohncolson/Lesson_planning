@@ -176,3 +176,48 @@ One channel per open lesson: `lesson:{lessonId}` (e.g. `lesson:L41_P2`).
 ### `onRemoteSave` firing rule
 
 Fires only when the changed field matches `tex_{activeTexEdition}` (e.g. `tex_student`). Changes to other editions or `yaml_text` while a different edition is open are silently ignored. Own-save echoes are filtered when `new_value === texContent.value && !texDirty`.
+
+## Phase 3 — 3-pane merge view on save conflict
+
+### New DOM IDs
+
+| ID | Purpose |
+|---|---|
+| `#merge-view` | Top-level sub-view container for the conflict merge UI; mutually exclusive with the other sub-views |
+| `#merge-msg` | Header span; shows "Conflict: {changedBy} saved while you were editing. Review and choose." |
+| `#merge-theirs` | `<pre>` diff pane — server's current tex, lines removed vs yours highlighted in light red |
+| `#merge-yours` | `<pre>` diff pane — editor's content, lines added vs theirs highlighted in light green |
+| `#merge-merged` | `<textarea>` — editable merge pane; starts with yours; user edits before applying |
+| `#btn-apply-merged` | Applies the merge textarea content: re-saves with sha(theirs) as the new baseSha |
+| `#btn-take-theirs-m` | Copies theirs into the merge textarea (focuses it — does not auto-apply) |
+| `#btn-keep-yours` | Copies yours into the merge textarea (focuses it — does not auto-apply) |
+| `#btn-cancel-merge` | Discards merge view, returns to tex-view (local textarea unchanged) |
+
+`"merge-view"` is included in the `SUB_VIEWS` array in `main.js` so `showView()` hides it alongside the others.
+
+### baseSha tracking (`main.js`)
+
+`let baseSha = null` — module-level state in `main.js`.
+
+- Set to `await sha256Hex(src ?? "")` in `openTexView` after the tex body is loaded.
+- Updated to `await sha256Hex(body)` on every successful `doSave`.
+- Passed as the 4th argument to `saveTex(lessonId, edition, body, baseSha)`.
+
+### `saveTex` If-Match-Sha contract
+
+When `baseSha` is provided, the Railway server checks the stored sha before writing. On mismatch it responds with an error that `api.js` raises as:
+
+```js
+err.name        === "TexConflict"
+err.current_tex  // server's current body
+err.current_sha  // hex sha of current_tex
+err.changed_by   // string | null — last editor's username
+```
+
+### Conflict flow
+
+1. `doSave` catches `err.name === "TexConflict"` and calls `openMergeView(...)`.
+2. `openMergeView` (in `merge.js`) populates the three panes, wires the four buttons, and swaps to `#merge-view`.
+3. On "Apply merged": `sha256Hex(theirs)` is computed as `newBaseSha`; `saveTex` is called again with the merged text. On success, `texContent.value` and `baseSha` are updated and the view returns to `tex-view`.
+4. On a second conflict during Apply (rare): `openMergeView` is called recursively with the newer server state.
+5. On "Cancel": `showView("tex-view")` — local textarea is untouched.

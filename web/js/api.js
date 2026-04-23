@@ -135,13 +135,23 @@ export async function getTex(lessonId, edition) {
   return data ? (data[col] ?? null) : null;
 }
 
+// sha256Hex: hex sha256 of a string (empty string for null/undefined).
+export async function sha256Hex(s) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s || ""));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
 // saveTex: PUT tex source to Railway. Throws on non-2xx.
 // On 401: clears stored passcode and throws a WrongPasscode error.
-export async function saveTex(lessonId, edition, body) {
+// On 409: throws a TexConflict error with current_tex, current_sha, changed_by.
+// baseSha (optional): hex sha256 of the tex the editor loaded; when set,
+//   sends If-Match-Sha so the server can detect concurrent edits.
+export async function saveTex(lessonId, edition, body, baseSha) {
   const pc = passcode.get();
   const un = username.get();
   const headers = { "Content-Type": "text/plain", "X-Passcode": pc };
   if (un) headers["X-User-Name"] = un;  // omit header when user cancelled prompt
+  if (baseSha) headers["If-Match-Sha"] = baseSha;
   const r = await fetch(`${RAILWAY_URL}/tex/${lessonId}/${edition}`, {
     method: "PUT",
     headers,
@@ -151,6 +161,16 @@ export async function saveTex(lessonId, edition, body) {
     passcode.clear();
     const err = new Error("Wrong passcode — please try again.");
     err.name = "WrongPasscode";
+    throw err;
+  }
+  if (r.status === 409) {
+    const payload = await r.json();
+    const err = new Error("Tex conflict: document was modified by another user.");
+    err.name = "TexConflict";
+    err.conflict = true;
+    err.current_tex = payload.current_tex;
+    err.current_sha = payload.current_sha;
+    err.changed_by = payload.changed_by;
     throw err;
   }
   if (!r.ok) throw new Error(`saveTex ${lessonId}/${edition}: HTTP ${r.status}`);

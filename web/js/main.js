@@ -1,9 +1,10 @@
-import { api, pdfUrl, getTex, saveTex, rebuildPdf } from "/js/api.js";
+import { api, pdfUrl, getTex, saveTex, rebuildPdf, sha256Hex } from "/js/api.js";
 import { passcode } from "/js/passcode.js";
 import { username } from "/js/username.js";
 import { createLessonList } from "/js/lesson-list.js";
 import { renderItemList, renderItemDetail } from "/js/item-detail.js";
 import { subscribeLesson } from "/js/realtime.js";
+import { openMergeView } from "/js/merge.js";
 
 // ── DOM refs ────────────────────────────────────────────────────────────────
 
@@ -37,7 +38,7 @@ const remoteBannerMsg   = document.getElementById("remote-banner-msg");
 const btnTakeTheirs     = document.getElementById("btn-take-theirs");
 const btnDismissBanner  = document.getElementById("btn-dismiss-banner");
 
-const SUB_VIEWS = ["yaml-view", "tex-view", "pdf-view", "item-list-view", "item-detail-view"];
+const SUB_VIEWS = ["yaml-view", "tex-view", "pdf-view", "merge-view", "item-list-view", "item-detail-view"];
 
 const pdfEmbed     = document.getElementById("pdf-embed");
 const pdfLabel     = document.getElementById("pdf-view-label");
@@ -49,6 +50,7 @@ let activeLessonId      = null;
 let activeLesson        = null;
 let activeTexEdition    = null;   // "student" | "teacher" | "slides"
 let texDirty            = false;
+let baseSha             = null;   // sha256 of the tex content as loaded/last-saved
 let unsubscribeRealtime = null;
 let pendingRemoteValue  = null;
 
@@ -197,6 +199,7 @@ async function openTexView(edition) {
   try {
     const src = await getTex(activeLessonId, edition);
     texContent.value = src ?? "";
+    baseSha = await sha256Hex(src ?? "");
     if (!src) {
       texSaveStatus.textContent = `(no ${edition} tex stored yet)`;
     }
@@ -205,6 +208,7 @@ async function openTexView(edition) {
     btnTexRebuild.disabled = false;
   } catch (err) {
     texContent.value = "";
+    baseSha = null;
     showError(err.message);
   }
 
@@ -268,20 +272,67 @@ function setStatus(msg, isError = false) {
   }
 }
 
+// Returns an async onApply handler for openMergeView. Named function so it can
+// reference itself for the rare double-conflict case without arguments.callee.
+function makeMergeApplyHandler() {
+  async function applyHandler(mergedText, newBaseSha) {
+    setStatus("Saving merged…");
+    try {
+      await saveTex(activeLessonId, activeTexEdition, mergedText, newBaseSha);
+      texContent.value = mergedText;
+      baseSha = await sha256Hex(mergedText);
+      texDirty = false;
+      showView("tex-view");
+      setStatus("Merged and saved");
+    } catch (saveErr) {
+      if (saveErr.name === "TexConflict") {
+        // A further conflict during apply — open merge view again with newer server state.
+        openMergeView({
+          theirs:    saveErr.current_tex,
+          yours:     mergedText,
+          changedBy: saveErr.changed_by,
+          onApply:   applyHandler,
+          onDismiss: () => { showView("tex-view"); },
+        });
+        setStatus("Conflict again — review merge view", true);
+      } else {
+        setStatus(saveErr.message, true);
+        showView("tex-view");
+      }
+    }
+  }
+  return applyHandler;
+}
+
 async function doSave() {
   if (!activeLessonId || !activeTexEdition) return;
   const body = texContent.value;
   setStatus("Saving…");
   try {
-    await saveTex(activeLessonId, activeTexEdition, body);
+    await saveTex(activeLessonId, activeTexEdition, body, baseSha);
     texDirty = false;
+    baseSha = await sha256Hex(body);
     setStatus("Saved");
   } catch (err) {
-    if (err.name === "WrongPasscode") {
+    if (err.name === "TexConflict") {
+      openMergeView({
+        theirs:    err.current_tex,
+        yours:     texContent.value,
+        changedBy: err.changed_by,
+
+        onApply: makeMergeApplyHandler(),
+
+        onDismiss() {
+          showView("tex-view");
+        },
+      });
+      setStatus("Conflict — review merge view", true);
+    } else if (err.name === "WrongPasscode") {
       // re-prompt once: passcode.clear() already called inside saveTex
       setStatus("Wrong passcode — retrying…", true);
-      await saveTex(activeLessonId, activeTexEdition, body);
+      await saveTex(activeLessonId, activeTexEdition, body, baseSha);
       texDirty = false;
+      baseSha = await sha256Hex(body);
       setStatus("Saved");
     } else {
       setStatus(err.message, true);

@@ -249,6 +249,37 @@ body {
   font-size: 0.72rem; color: var(--muted); margin-left: auto;
 }
 
+/* ── Merge view (3-pane conflict resolver) ───────────── */
+#merge-view {
+  flex: 1; display: flex; flex-direction: column; min-height: 0;
+}
+.merge-header {
+  padding: 10px 14px; background: #fff8d7; border-bottom: 1px solid #e3b34a;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; flex-shrink: 0;
+}
+.merge-panes {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px; padding: 10px; flex: 1; min-height: 0;
+}
+.merge-pane {
+  display: flex; flex-direction: column; min-height: 0;
+}
+.pane-label {
+  font-size: 0.72rem; color: var(--muted); padding: 4px 0; flex-shrink: 0;
+}
+.diff-pane {
+  font-family: Consolas, monospace; font-size: 12px;
+  white-space: pre; overflow: auto;
+  padding: 10px 12px; background: #fafbfc;
+  border: 1px solid var(--border); margin: 0;
+  flex: 1; min-height: 0;
+}
+.merge-editable {
+  resize: none; border: 2px solid var(--blue);
+}
+.diff-removed { background: #fbe9e6; }
+.diff-added   { background: #e8f4ee; }
+
 /* ── Scrollbar polish ─────────────────────────────────── */
 ::-webkit-scrollbar { width: 7px; height: 7px; }
 ::-webkit-scrollbar-track { background: transparent; }

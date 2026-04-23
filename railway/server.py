@@ -13,6 +13,7 @@ trips StreamReset errors against Supabase's Cloudflare edge.
 """
 from __future__ import annotations
 
+import hashlib
 import logging
 import os
 import re
@@ -25,6 +26,7 @@ from pathlib import Path
 import requests
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 log = logging.getLogger(__name__)
@@ -70,7 +72,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_headers=["Content-Type", "X-Passcode", "X-User-Name"],
+    allow_headers=["Content-Type", "X-Passcode", "X-User-Name", "If-Match-Sha"],
     allow_methods=["GET", "POST", "PUT", "OPTIONS"],
 )
 
@@ -102,6 +104,30 @@ def _rest_update_lesson(lesson_id: str, patch: dict, user_name: str | None = Non
         timeout=15,
     )
     r.raise_for_status()
+
+
+def _rest_last_audit_changed_by(lesson_id: str) -> str | None:
+    """Return the most recent changed_by for a lessons row, or None on any error."""
+    try:
+        r = requests.get(
+            f"{SUPABASE_URL}/rest/v1/audit",
+            headers=_rest_headers(),
+            params={
+                "table_name": "eq.lessons",
+                "row_id": f"eq.{lesson_id}",
+                "select": "changed_by",
+                "order": "changed_at.desc",
+                "limit": "1",
+            },
+            timeout=10,
+        )
+        r.raise_for_status()
+        rows = r.json()
+        if not rows:
+            return None
+        return rows[0].get("changed_by")
+    except Exception:
+        return None
 
 
 def _storage_upload(object_path: str, body: bytes, content_type: str) -> None:
@@ -399,6 +425,7 @@ async def put_tex(
     request: Request,
     x_passcode: str | None = Header(default=None),
     x_user_name: str | None = Header(default=None),
+    if_match_sha: str | None = Header(default=None, alias="if-match-sha"),
 ) -> dict:
     _validate_lesson_id(lesson_id)
     _validate_edition(edition)
@@ -406,6 +433,23 @@ async def put_tex(
 
     body = await request.body()
     tex_text = body.decode("utf-8")
+
+    if if_match_sha:
+        row = _rest_get_lesson(lesson_id)
+        col = f"tex_{edition}"
+        current_tex = (row.get(col) or "") if row else ""
+        server_sha = hashlib.sha256(current_tex.encode("utf-8")).hexdigest()
+        if server_sha != if_match_sha:
+            changed_by = _rest_last_audit_changed_by(lesson_id)
+            return JSONResponse(
+                status_code=409,
+                content={
+                    "conflict": True,
+                    "current_tex": current_tex,
+                    "current_sha": server_sha,
+                    "changed_by": changed_by,
+                },
+            )
 
     _rest_update_lesson(lesson_id, {f"tex_{edition}": tex_text}, x_user_name)
     return {"ok": True}
