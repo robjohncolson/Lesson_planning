@@ -6,6 +6,10 @@ Endpoints:
   PUT  /tex/{lesson_id}/{edition}     — write tex source back to Supabase
 
 Auth: X-Passcode header must match REBUILD_PASSCODE env var.
+
+Uses `requests` (HTTP/1.1) directly against Supabase REST + Storage APIs,
+not supabase-py. supabase-py's httpx-based HTTP/2 client intermittently
+trips StreamReset errors against Supabase's Cloudflare edge.
 """
 from __future__ import annotations
 
@@ -18,9 +22,9 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from fastapi import FastAPI, Header, HTTPException, Request, Response
+import requests
+from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from supabase import create_client, Client
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 log = logging.getLogger(__name__)
@@ -29,22 +33,27 @@ log = logging.getLogger(__name__)
 # Config
 # ---------------------------------------------------------------------------
 
-SUPABASE_URL = os.environ["SUPABASE_URL"]
+SUPABASE_URL = os.environ["SUPABASE_URL"].rstrip("/")
 SUPABASE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
-# Explicit required — no default. An unset passcode with CORS=* would let the
-# whole internet hit /build and /tex. Refuse to start.
 REBUILD_PASSCODE = os.environ["REBUILD_PASSCODE"]
 
 LESSON_ID_RE = re.compile(r"^L\d{2}_P\d$")
 EDITIONS = {"student", "teacher"}
 
-# Bundled assets copied alongside server.py in the container
 HERE = Path(__file__).parent
 PREAMBLE_STY = HERE / "preamble.sty"
 BEAMER_STY = HERE / "beamer_preamble.sty"
 YAML_BUILDER = HERE / "build_lesson_from_yaml.py"
 
+SCHEMA = "lesson_planning"
 BUCKET = "lesson-pdfs"
+
+REST_HEADERS = {
+    "apikey": SUPABASE_KEY,
+    "Authorization": f"Bearer {SUPABASE_KEY}",
+    "Accept-Profile": SCHEMA,
+    "Content-Profile": SCHEMA,
+}
 
 # ---------------------------------------------------------------------------
 # App + CORS
@@ -59,22 +68,65 @@ app.add_middleware(
 )
 
 
-def _db() -> Client:
-    return create_client(SUPABASE_URL, SUPABASE_KEY)
+# ---------------------------------------------------------------------------
+# Supabase REST helpers (plain requests — HTTP/1.1)
+# ---------------------------------------------------------------------------
+
+def _rest_get_lesson(lesson_id: str) -> dict | None:
+    r = requests.get(
+        f"{SUPABASE_URL}/rest/v1/lessons",
+        headers=REST_HEADERS,
+        params={"id": f"eq.{lesson_id}",
+                "select": "tex_student,tex_teacher,yaml_text"},
+        timeout=15,
+    )
+    r.raise_for_status()
+    rows = r.json()
+    return rows[0] if rows else None
+
+
+def _rest_update_lesson(lesson_id: str, patch: dict) -> None:
+    r = requests.patch(
+        f"{SUPABASE_URL}/rest/v1/lessons",
+        headers={**REST_HEADERS, "Content-Type": "application/json",
+                 "Prefer": "return=minimal"},
+        params={"id": f"eq.{lesson_id}"},
+        json=patch,
+        timeout=15,
+    )
+    r.raise_for_status()
+
+
+def _storage_upload(object_path: str, body: bytes, content_type: str) -> None:
+    """Upload (or replace) an object in Supabase Storage. x-upsert: true so a
+    previous PDF is overwritten cleanly."""
+    r = requests.post(
+        f"{SUPABASE_URL}/storage/v1/object/{BUCKET}/{object_path}",
+        headers={
+            "Authorization": f"Bearer {SUPABASE_KEY}",
+            "apikey": SUPABASE_KEY,
+            "Content-Type": content_type,
+            "x-upsert": "true",
+        },
+        data=body,
+        timeout=30,
+    )
+    if not r.ok:
+        raise RuntimeError(f"storage upload {object_path}: {r.status_code} {r.text[:200]}")
+
+
+def _storage_public_url(object_path: str) -> str:
+    return f"{SUPABASE_URL}/storage/v1/object/public/{BUCKET}/{object_path}"
 
 
 # ---------------------------------------------------------------------------
-# Auth helper
+# Validation + auth helpers
 # ---------------------------------------------------------------------------
 
 def _check_passcode(x_passcode: str | None) -> None:
     if x_passcode != REBUILD_PASSCODE:
         raise HTTPException(status_code=401, detail="Invalid or missing X-Passcode")
 
-
-# ---------------------------------------------------------------------------
-# Validation helpers
-# ---------------------------------------------------------------------------
 
 def _validate_lesson_id(lesson_id: str) -> None:
     if not LESSON_ID_RE.match(lesson_id):
@@ -115,6 +167,32 @@ def _run_pdflatex(tex_name: str, work_dir: Path) -> tuple[bool, str]:
 
 
 # ---------------------------------------------------------------------------
+# Internal helpers
+# ---------------------------------------------------------------------------
+
+def _write_build_status(
+    lesson_id: str,
+    *,
+    ok: bool,
+    log_tail: str,
+    has_pdf_student: bool = False,
+    has_pdf_teacher: bool = False,
+) -> None:
+    payload: dict = {
+        "last_build_at": datetime.now(timezone.utc).isoformat(),
+        "last_build_ok": ok,
+        "last_build_log": log_tail if not ok else "",
+    }
+    if has_pdf_student or has_pdf_teacher:
+        payload["has_pdf_student"] = has_pdf_student
+        payload["has_pdf_teacher"] = has_pdf_teacher
+    try:
+        _rest_update_lesson(lesson_id, payload)
+    except Exception as exc:
+        log.error("Failed to write build status for %s: %s", lesson_id, exc)
+
+
+# ---------------------------------------------------------------------------
 # Endpoints
 # ---------------------------------------------------------------------------
 
@@ -134,24 +212,13 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
     _validate_lesson_id(lesson_id)
     _check_passcode(x_passcode)
 
-    db = _db()
-
-    # Read lesson row
-    resp = (
-        db.schema("lesson_planning")
-        .table("lessons")
-        .select("tex_student, tex_teacher, yaml_text")
-        .eq("id", lesson_id)
-        .single()
-        .execute()
-    )
-    row = resp.data
+    row = _rest_get_lesson(lesson_id)
     if not row:
-        raise HTTPException(status_code=404, detail=f"Lesson {lesson_id} not found in Supabase")
+        raise HTTPException(status_code=404, detail=f"Lesson {lesson_id} not found")
 
-    tex_student: str | None = row.get("tex_student")
-    tex_teacher: str | None = row.get("tex_teacher")
-    yaml_text: str | None = row.get("yaml_text")
+    tex_student = row.get("tex_student")
+    tex_teacher = row.get("tex_teacher")
+    yaml_text = row.get("yaml_text")
 
     if not yaml_text and not tex_student and not tex_teacher:
         raise HTTPException(
@@ -168,26 +235,21 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
     with tempfile.TemporaryDirectory() as tmp_str:
         tmp = Path(tmp_str)
 
-        # Copy shared style files into temp dir so pdflatex finds them
+        # Shared style files into temp dir so pdflatex finds them
         if PREAMBLE_STY.exists():
             (tmp / "preamble.sty").write_bytes(PREAMBLE_STY.read_bytes())
         if BEAMER_STY.exists():
             (tmp / "beamer_preamble.sty").write_bytes(BEAMER_STY.read_bytes())
 
         # Source-of-truth policy:
-        #   - If stored tex exists, compile it. Web edits persist through
-        #     rebuilds this way (the whole point of the tex-editor flow).
-        #   - Only regenerate from YAML when neither tex edition is stored,
-        #     i.e. a fresh lesson that has only a YAML spec.
+        #   - Stored tex wins when present; web edits persist through rebuilds.
+        #   - Only regenerate from YAML when neither tex edition is stored.
         if tex_student or tex_teacher:
             if tex_student:
                 (tmp / f"{lesson_id}_student.tex").write_text(tex_student, encoding="utf-8")
             if tex_teacher:
                 (tmp / f"{lesson_id}_teacher.tex").write_text(tex_teacher, encoding="utf-8")
         elif yaml_text:
-            # Parse YAML first to defense-in-depth validate its lesson_id — the
-            # generator writes files named after YAML's lesson_id field, which
-            # would otherwise allow path traversal via a malicious YAML value.
             try:
                 import yaml as _yaml
                 parsed = _yaml.safe_load(yaml_text) or {}
@@ -213,11 +275,10 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
             gen_out = gen_result.stdout + gen_result.stderr
             if gen_result.returncode != 0:
                 log.error("build_lesson_from_yaml failed for %s", lesson_id)
-                _write_build_status(db, lesson_id, ok=False, log_tail=gen_out[-4096:])
+                _write_build_status(lesson_id, ok=False, log_tail=gen_out[-4096:])
                 return {"ok": False, "log_tail": gen_out[-4096:],
                         "pdf_student_url": None, "pdf_teacher_url": None}
 
-            # Generator writes to tex/ relative to HERE; move outputs into tmp
             gen_student = HERE / "tex" / f"{lesson_id}_student.tex"
             gen_teacher = HERE / "tex" / f"{lesson_id}_teacher.tex"
             if gen_student.exists():
@@ -225,7 +286,6 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
             if gen_teacher.exists():
                 (tmp / f"{lesson_id}_teacher.tex").write_bytes(gen_teacher.read_bytes())
 
-        # Compile student
         student_tex = tmp / f"{lesson_id}_student.tex"
         if student_tex.exists():
             student_ok, student_log = _run_pdflatex(student_tex.name, tmp)
@@ -233,9 +293,8 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
                 log_tail = student_log
         else:
             student_ok = False
-            log_tail = f"{lesson_id}_student.tex not found in temp dir"
+            log_tail = f"{lesson_id}_student.tex not found"
 
-        # Compile teacher
         teacher_tex = tmp / f"{lesson_id}_teacher.tex"
         if teacher_tex.exists():
             teacher_ok, teacher_log = _run_pdflatex(teacher_tex.name, tmp)
@@ -244,34 +303,24 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
         else:
             teacher_ok = False
             if not log_tail:
-                log_tail = f"{lesson_id}_teacher.tex not found in temp dir"
+                log_tail = f"{lesson_id}_teacher.tex not found"
 
-        # Upload PDFs to Supabase Storage
         if student_ok:
             pdf_path = tmp / f"{lesson_id}_student.pdf"
             if pdf_path.exists():
-                storage_key = f"{lesson_id}_student.pdf"
-                db.storage.from_(BUCKET).upload(
-                    storage_key,
-                    pdf_path.read_bytes(),
-                    {"content-type": "application/pdf", "upsert": "true"},
-                )
-                pdf_student_url = f"{SUPABASE_URL}/storage/v1/object/public/{BUCKET}/{storage_key}"
+                obj = f"{lesson_id}_student.pdf"
+                _storage_upload(obj, pdf_path.read_bytes(), "application/pdf")
+                pdf_student_url = _storage_public_url(obj)
 
         if teacher_ok:
             pdf_path = tmp / f"{lesson_id}_teacher.pdf"
             if pdf_path.exists():
-                storage_key = f"{lesson_id}_teacher.pdf"
-                db.storage.from_(BUCKET).upload(
-                    storage_key,
-                    pdf_path.read_bytes(),
-                    {"content-type": "application/pdf", "upsert": "true"},
-                )
-                pdf_teacher_url = f"{SUPABASE_URL}/storage/v1/object/public/{BUCKET}/{storage_key}"
+                obj = f"{lesson_id}_teacher.pdf"
+                _storage_upload(obj, pdf_path.read_bytes(), "application/pdf")
+                pdf_teacher_url = _storage_public_url(obj)
 
     overall_ok = student_ok and teacher_ok
     _write_build_status(
-        db,
         lesson_id,
         ok=overall_ok,
         log_tail="" if overall_ok else log_tail,
@@ -301,38 +350,5 @@ async def put_tex(
     body = await request.body()
     tex_text = body.decode("utf-8")
 
-    db = _db()
-    db.schema("lesson_planning").table("lessons").update(
-        {f"tex_{edition}": tex_text}
-    ).eq("id", lesson_id).execute()
-
+    _rest_update_lesson(lesson_id, {f"tex_{edition}": tex_text})
     return {"ok": True}
-
-
-# ---------------------------------------------------------------------------
-# Internal helpers
-# ---------------------------------------------------------------------------
-
-def _write_build_status(
-    db: Client,
-    lesson_id: str,
-    *,
-    ok: bool,
-    log_tail: str,
-    has_pdf_student: bool = False,
-    has_pdf_teacher: bool = False,
-) -> None:
-    payload: dict = {
-        "last_build_at": datetime.now(timezone.utc).isoformat(),
-        "last_build_ok": ok,
-        "last_build_log": log_tail if not ok else "",
-    }
-    if has_pdf_student or has_pdf_teacher:
-        payload["has_pdf_student"] = has_pdf_student
-        payload["has_pdf_teacher"] = has_pdf_teacher
-    try:
-        db.schema("lesson_planning").table("lessons").update(payload).eq(
-            "id", lesson_id
-        ).execute()
-    except Exception as exc:
-        log.error("Failed to write build status for %s: %s", lesson_id, exc)
