@@ -56,6 +56,8 @@ let previewEdition = "student"; // "student" | "teacher"
 let editorView = null;          // CodeMirror 6 EditorView
 let regenInProgress = false;
 let lastDiff = null;            // { student_tex, teacher_tex } from last regen
+let editorMode = "yaml";        // "yaml" | "tex" — which source type the editor is showing
+const toolbarLabel = document.querySelector("#editor-toolbar .toolbar-label");
 
 const readOnlyCompartment = new Compartment();
 
@@ -197,41 +199,62 @@ async function selectLesson(lesson) {
   lastDiff = null;
   btnDiff.disabled = true;
 
-  // Load YAML
-  await loadYaml(lesson.lesson_id);
-
-  // Load PDF preview (default: student)
+  // Default preview edition
   previewEdition = "student";
   btnToggleStudent.classList.add("active");
   btnToggleTeacher.classList.remove("active");
+
+  // Load editor source (YAML if it exists, else tex of current edition)
+  await loadEditor(lesson.lesson_id);
   loadPdfPreview();
 }
 
-async function loadYaml(lessonId) {
-  cmHost.style.display   = "block";
+// Try YAML first; fall back to the student tex if no YAML exists. Updates
+// `editorMode` so save/regen know which endpoint to hit.
+async function loadEditor(lessonId) {
+  cmHost.style.display    = "block";
   noYamlMsg.style.display = "none";
 
+  // Attempt YAML
   try {
     const r = await fetch(`/api/lesson/${encodeURIComponent(lessonId)}/yaml`);
+    if (r.ok) {
+      editorMode = "yaml";
+      toolbarLabel.textContent = "YAML spec";
+      createEditor(await r.text());
+      return;
+    }
+    if (r.status !== 404) throw new Error(`HTTP ${r.status}`);
+  } catch (e) {
+    showError(`Failed to load YAML: ${e.message}`);
+    createEditor("");
+    return;
+  }
+
+  // No YAML — load tex of the active edition
+  await loadTex(lessonId, previewEdition);
+}
+
+async function loadTex(lessonId, edition) {
+  try {
+    const r = await fetch(`/api/lesson/${encodeURIComponent(lessonId)}/tex/${edition}`);
     if (r.status === 404) {
       cmHost.style.display    = "none";
       noYamlMsg.style.display = "block";
       noYamlMsg.innerHTML = `
-        <p><strong>No YAML spec found for ${escHtml(lessonId)}.</strong></p>
-        <p style="margin-top:8px;">
-          The LaTeX source files may exist — use the
-          ${activeMeta?.has_student_pdf ? `<a href="/api/pdf/${encodeURIComponent(lessonId)}/student" target="_blank">Student PDF</a>` : "Student PDF (missing)"}
-          or
-          ${activeMeta?.has_teacher_pdf ? `<a href="/api/pdf/${encodeURIComponent(lessonId)}/teacher" target="_blank">Teacher PDF</a>` : "Teacher PDF (missing)"}
-          buttons to view them.
+        <p><strong>No source files found for ${escHtml(lessonId)}.</strong></p>
+        <p style="margin-top:8px;color:var(--muted);font-size:0.85rem;">
+          Neither <code>lessons/${escHtml(lessonId)}.yaml</code> nor
+          <code>tex/${escHtml(lessonId)}_${escHtml(edition)}.tex</code> exists on disk.
         </p>`;
       return;
     }
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const text = await r.text();
-    createEditor(text);
+    editorMode = "tex";
+    toolbarLabel.textContent = `${edition === "student" ? "Student" : "Teacher"} tex`;
+    createEditor(await r.text());
   } catch (e) {
-    showError(`Failed to load YAML: ${e.message}`);
+    showError(`Failed to load tex: ${e.message}`);
     createEditor("");
   }
 }
@@ -266,15 +289,19 @@ async function saveYaml() {
   saveStatus.textContent = "Saving…";
   saveStatus.className   = "";
 
+  const url = editorMode === "yaml"
+    ? `/api/lesson/${encodeURIComponent(activeLessonId)}/yaml`
+    : `/api/lesson/${encodeURIComponent(activeLessonId)}/tex/${previewEdition}`;
+
   try {
-    const r = await fetch(`/api/lesson/${encodeURIComponent(activeLessonId)}/yaml`, {
+    const r = await fetch(url, {
       method: "PUT",
       headers: { "Content-Type": "text/plain" },
       body,
     });
     if (r.status === 400) {
       const detail = await r.text();
-      showError(`YAML error:\n${detail}`);
+      showError(`${editorMode === "yaml" ? "YAML" : "Save"} error:\n${detail}`);
       saveStatus.textContent = "Error";
       saveStatus.className   = "error";
       return;
@@ -478,21 +505,19 @@ btnSlides.addEventListener("click", () => {
     window.open(`/api/slides/${encodeURIComponent(activeLessonId)}`, "_blank");
 });
 
-btnToggleStudent.addEventListener("click", () => {
-  if (previewEdition === "student") return;
-  previewEdition = "student";
-  btnToggleStudent.classList.add("active");
-  btnToggleTeacher.classList.remove("active");
+async function switchEdition(edition) {
+  if (previewEdition === edition) return;
+  previewEdition = edition;
+  btnToggleStudent.classList.toggle("active", edition === "student");
+  btnToggleTeacher.classList.toggle("active", edition === "teacher");
+  // In tex mode, also swap the editor contents. YAML mode: preview only.
+  if (editorMode === "tex" && activeLessonId) {
+    await loadTex(activeLessonId, edition);
+  }
   loadPdfPreview();
-});
-
-btnToggleTeacher.addEventListener("click", () => {
-  if (previewEdition === "teacher") return;
-  previewEdition = "teacher";
-  btnToggleTeacher.classList.add("active");
-  btnToggleStudent.classList.remove("active");
-  loadPdfPreview();
-});
+}
+btnToggleStudent.addEventListener("click", () => switchEdition("student"));
+btnToggleTeacher.addEventListener("click", () => switchEdition("teacher"));
 
 btnModalClose.addEventListener("click", () => modalOverlay.classList.remove("visible"));
 modalOverlay.addEventListener("click", e => {

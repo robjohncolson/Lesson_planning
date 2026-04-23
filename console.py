@@ -158,6 +158,34 @@ def api_lesson_yaml_get(lesson_id: str):
     return Response(yaml_path.read_text(encoding="utf-8"), mimetype="text/plain")
 
 
+def _validate_edition(edition: str) -> None:
+    if edition not in ("student", "teacher"):
+        abort(400, description="edition must be 'student' or 'teacher'")
+
+
+@app.route("/api/lesson/<lesson_id>/tex/<edition>", methods=["GET"])
+def api_lesson_tex_get(lesson_id: str, edition: str):
+    _validate_lesson_id(lesson_id)
+    _validate_edition(edition)
+    tex_path = _safe_path(TEX_DIR, f"{lesson_id}_{edition}.tex")
+    if not tex_path.exists():
+        abort(404, description=f"{lesson_id}_{edition}.tex not found")
+    return Response(tex_path.read_text(encoding="utf-8"), mimetype="text/plain")
+
+
+@app.route("/api/lesson/<lesson_id>/tex/<edition>", methods=["PUT"])
+def api_lesson_tex_put(lesson_id: str, edition: str):
+    _validate_lesson_id(lesson_id)
+    _validate_edition(edition)
+    tex_path = _safe_path(TEX_DIR, f"{lesson_id}_{edition}.tex")
+    raw = request.get_data(as_text=True)
+    TEX_DIR.mkdir(parents=True, exist_ok=True)
+    tmp_path = tex_path.with_suffix(tex_path.suffix + ".tmp")
+    tmp_path.write_text(raw, encoding="utf-8", newline="\n")
+    os.replace(tmp_path, tex_path)
+    return jsonify({"ok": True})
+
+
 @app.route("/api/lesson/<lesson_id>/yaml", methods=["PUT"])
 def api_lesson_yaml_put(lesson_id: str):
     _validate_lesson_id(lesson_id)
@@ -204,31 +232,37 @@ def api_lesson_regenerate(lesson_id: str):
     _validate_lesson_id(lesson_id)
 
     yaml_path = _safe_path(LESSONS_DIR, f"{lesson_id}.yaml")
-    if not yaml_path.exists():
-        return jsonify({"ok": False, "error": "No YAML spec found"}), 404
+    student_tex_exists = (TEX_DIR / f"{lesson_id}_student.tex").exists()
+    teacher_tex_exists = (TEX_DIR / f"{lesson_id}_teacher.tex").exists()
+
+    if not yaml_path.exists() and not (student_tex_exists or teacher_tex_exists):
+        return jsonify({"ok": False, "error": "No YAML spec and no tex files found"}), 404
 
     # Capture pre-regen tex for diff
     before_student = _read_tex(f"{lesson_id}_student")
     before_teacher = _read_tex(f"{lesson_id}_teacher")
 
     log_tail: list[str] = []
-    build_result = subprocess.run(
-        [sys.executable, str(REPO_ROOT / "build_lesson_from_yaml.py"), str(yaml_path)],
-        cwd=str(REPO_ROOT),
-        capture_output=True,
-        text=True,
-        shell=False,
-        timeout=60,
-    )
-    if build_result.returncode != 0:
-        err_lines = (build_result.stdout + build_result.stderr).splitlines()
-        return jsonify(
-            {
-                "ok": False,
-                "error": "build_lesson_from_yaml failed",
-                "log_tail": err_lines[-50:],
-            }
-        ), 500
+    # When YAML exists, regenerate tex from it; otherwise pdflatex runs directly
+    # on the existing (possibly hand-edited) tex.
+    if yaml_path.exists():
+        build_result = subprocess.run(
+            [sys.executable, str(REPO_ROOT / "build_lesson_from_yaml.py"), str(yaml_path)],
+            cwd=str(REPO_ROOT),
+            capture_output=True,
+            text=True,
+            shell=False,
+            timeout=60,
+        )
+        if build_result.returncode != 0:
+            err_lines = (build_result.stdout + build_result.stderr).splitlines()
+            return jsonify(
+                {
+                    "ok": False,
+                    "error": "build_lesson_from_yaml failed",
+                    "log_tail": err_lines[-50:],
+                }
+            ), 500
 
     def run_pdflatex(stem: str) -> "tuple[bool, list[str]]":
         tex_file = TEX_DIR / f"{stem}.tex"
