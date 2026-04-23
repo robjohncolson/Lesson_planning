@@ -201,10 +201,24 @@ def main() -> int:
     print(f"  registry.jsonl:         {len(reg)} rows")
     print(f"  assessment_shells.jsonl:{len(shells)} rows")
 
-    items = (
+    raw_items = (
         [registry_to_row(r, is_shell=False) for r in reg]
         + [registry_to_row(r, is_shell=True) for r in shells]
     )
+    # Dedupe by id (last-seen wins). Registry has 85 "-2 suffix" duplicates
+    # — matches the in-repo by_id dict-lookup behavior.
+    seen, items = {}, []
+    dup_count = 0
+    for r in raw_items:
+        if r["id"] in seen:
+            dup_count += 1
+            items[seen[r["id"]]] = r  # replace earlier entry
+        else:
+            seen[r["id"]] = len(items)
+            items.append(r)
+    if dup_count:
+        print(f"  -> {dup_count} duplicate-id items collapsed (last-seen wins)")
+
     edges, dropped = extract_edges(reg + shells)
     # Dedupe edges (identical tuples are fine to collapse)
     edges = list({(e["from_id"], e["to_id"], e["kind"]): e for e in edges}.values())

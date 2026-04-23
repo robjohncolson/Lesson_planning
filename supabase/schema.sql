@@ -137,8 +137,9 @@ END; $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER items_audit AFTER INSERT OR UPDATE OR DELETE ON lesson_planning.items
   FOR EACH ROW EXECUTE FUNCTION lesson_planning.log_audit();
-CREATE TRIGGER edges_audit AFTER INSERT OR UPDATE OR DELETE ON lesson_planning.edges
-  FOR EACH ROW EXECUTE FUNCTION lesson_planning.log_audit();
+-- No audit trigger on edges: they have a composite PK (from_id, to_id, kind)
+-- which doesn't fit the generic `NEW.id` shape, and edges are trivially
+-- reconstructable from items' prereq_ids/rehearses/echoes fields anyway.
 
 -- ── RLS: public read, writes via service_role only ─────────────────────────
 -- MVP auth: no per-user accounts. The Vercel frontend uses the anon key for
