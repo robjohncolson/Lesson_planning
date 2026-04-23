@@ -257,15 +257,29 @@ body {
   padding: 10px 14px; background: #fff8d7; border-bottom: 1px solid #e3b34a;
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap; flex-shrink: 0;
 }
+/* Theirs + Yours side-by-side up top (compare), Merge editable full-width
+   below (workspace). The merge pane gets more vertical real estate since
+   it's the only one you actually type into. */
 .merge-panes {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px; padding: 10px; flex: 1; min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1.5fr);
+  grid-template-areas:
+    "theirs yours"
+    "merge  merge";
+  gap: 10px; padding: 10px;
+  flex: 1; min-height: 0;
 }
+.merge-pane.pane-theirs { grid-area: theirs; }
+.merge-pane.pane-yours  { grid-area: yours; }
+.merge-pane.pane-merge  { grid-area: merge; }
+
 .merge-pane {
   display: flex; flex-direction: column; min-height: 0;
 }
 .pane-label {
   font-size: 0.72rem; color: var(--muted); padding: 4px 0; flex-shrink: 0;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
 }
 .diff-pane {
   font-family: Consolas, monospace; font-size: 12px;
@@ -275,10 +289,19 @@ body {
   flex: 1; min-height: 0;
 }
 .merge-editable {
-  resize: none; border: 2px solid var(--blue);
+  resize: none; border: 2px solid var(--blue); outline: none;
 }
 .diff-removed { background: #fbe9e6; }
 .diff-added   { background: #e8f4ee; }
+
+/* Narrow viewports: stack all three vertically, each gets meaningful height. */
+@media (max-width: 900px) {
+  .merge-panes {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(140px, 1fr) minmax(140px, 1fr) minmax(180px, 1.3fr);
+    grid-template-areas: "theirs" "yours" "merge";
+  }
+}
 
 /* ── Scrollbar polish ─────────────────────────────────── */
 ::-webkit-scrollbar { width: 7px; height: 7px; }
