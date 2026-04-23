@@ -10,6 +10,19 @@ function raise(ctx, error) {
   throw new Error(`${ctx}: ${error.message}`);
 }
 
+async function paginateAll(table, select, pageSize = 1000) {
+  let out = [];
+  let from = 0;
+  while (true) {
+    const { data, error } = await supabase
+      .from(table).select(select).range(from, from + pageSize - 1);
+    if (error) raise(`paginate ${table}`, error);
+    out = out.concat(data);
+    if (data.length < pageSize) return out;
+    from += pageSize;
+  }
+}
+
 export const api = {
   async listLessons() {
     const { data, error } = await supabase
@@ -51,21 +64,14 @@ export const api = {
   },
 
   async listAllItems() {
-    // prompt is included so the DAG detail panel can render it; truncated at
-    // render time, not here. ~1006 rows total; payload is still <1MB gzipped.
-    const { data, error } = await supabase
-      .from("items")
-      .select("id, lesson, role, dok, topics, skill_tokens, standards, tags, prompt");
-    if (error) raise("listAllItems", error);
-    return data;
+    // Paginate — PostgREST defaults to a 1000-row page cap; ~1006 items means
+    // the first page silently truncates without explicit range requests.
+    return paginateAll("items",
+      "id, lesson, role, dok, topics, skill_tokens, standards, tags, prompt");
   },
 
   async listAllEdges() {
-    const { data, error } = await supabase
-      .from("edges")
-      .select("from_id, to_id, kind");
-    if (error) raise("listAllEdges", error);
-    return data;
+    return paginateAll("edges", "from_id, to_id, kind");
   },
 
   async checkHealth() {
@@ -81,13 +87,28 @@ export const api = {
   },
 };
 
-// GitHub raw URL — placeholder until Railway pdflatex service wires up (Phase A step 3)
+// jsdelivr serves binary files with correct Content-Type and NO
+// Content-Disposition: attachment header — so PDFs render inline in the
+// browser instead of downloading (which raw.githubusercontent.com forces).
+// Placeholder URL scheme until Railway pdflatex service wires up (step 3).
+const CDN_BASE = "https://cdn.jsdelivr.net/gh/robjohncolson/Lesson_planning@main";
+
 export function pdfUrl(lessonId, kind) {
   const fileMap = {
     student: `tex/${lessonId}_student.pdf`,
     teacher: `tex/${lessonId}_teacher.pdf`,
     slides:  `tex/${lessonId}_slides.pdf`,
   };
-  const file = fileMap[kind];
-  return `https://raw.githubusercontent.com/robjohncolson/Lesson_planning/main/${file}`;
+  return `${CDN_BASE}/${fileMap[kind]}`;
+}
+
+// Tex source fetch — the Flask console lets teachers view tex when no
+// YAML spec exists. We fetch from jsdelivr as plain text. Returns null
+// on 404 so the caller can show a graceful fallback.
+export async function getTex(lessonId, kind) {
+  const file = `tex/${lessonId}_${kind}.tex`;
+  const r = await fetch(`${CDN_BASE}/${file}`, { cache: "no-cache" });
+  if (r.status === 404) return null;
+  if (!r.ok) throw new Error(`getTex ${file}: HTTP ${r.status}`);
+  return await r.text();
 }

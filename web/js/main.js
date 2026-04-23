@@ -1,4 +1,4 @@
-import { api, pdfUrl } from "/js/api.js";
+import { api, pdfUrl, getTex } from "/js/api.js";
 import { createLessonList } from "/js/lesson-list.js";
 import { renderItemList, renderItemDetail } from "/js/item-detail.js";
 
@@ -14,12 +14,15 @@ const btnTeacherPdf = document.getElementById("btn-teacher-pdf");
 const btnSlides     = document.getElementById("btn-slides");
 const btnItems      = document.getElementById("btn-items");
 const btnYaml       = document.getElementById("btn-yaml");
+const btnTexStudent = document.getElementById("btn-tex-student");
+const btnTexTeacher = document.getElementById("btn-tex-teacher");
 const yamlContent   = document.getElementById("yaml-content");
+const texContent    = document.getElementById("tex-content");
 const itemList      = document.getElementById("item-list");
 const itemDetail    = document.getElementById("item-detail");
 const btnBack       = document.getElementById("btn-back-to-items");
 
-const SUB_VIEWS = ["yaml-view", "item-list-view", "item-detail-view"];
+const SUB_VIEWS = ["yaml-view", "tex-view", "item-list-view", "item-detail-view"];
 
 // ── State ───────────────────────────────────────────────────────────────────
 
@@ -46,6 +49,8 @@ function clearError() {
 function highlightToolbarBtn(active) {
   btnItems.classList.toggle("active", active === "items");
   btnYaml.classList.toggle("active",  active === "yaml");
+  btnTexStudent.classList.toggle("active", active === "tex-student");
+  btnTexTeacher.classList.toggle("active", active === "tex-teacher");
 }
 
 // ── PDF link helpers ─────────────────────────────────────────────────────────
@@ -111,6 +116,20 @@ function openYamlView() {
   yamlContent.textContent = activeLesson.yaml_text ?? "(no YAML spec for this lesson)";
 }
 
+async function openTexView(edition) {
+  if (!activeLessonId) return;
+  highlightToolbarBtn(`tex-${edition}`);
+  showView("tex-view");
+  texContent.textContent = "Loading…";
+  try {
+    const src = await getTex(activeLessonId, edition);
+    texContent.textContent = src ?? `(no ${edition} tex on the CDN yet — may still be building or absent)`;
+  } catch (err) {
+    texContent.textContent = "";
+    showError(err.message);
+  }
+}
+
 // ── Toolbar event listeners ──────────────────────────────────────────────────
 
 btnItems.addEventListener("click", () => {
@@ -122,6 +141,9 @@ btnYaml.addEventListener("click", () => {
   if (!activeLessonId) return;
   openYamlView();
 });
+
+btnTexStudent.addEventListener("click", () => openTexView("student"));
+btnTexTeacher.addEventListener("click", () => openTexView("teacher"));
 
 btnBack.addEventListener("click", openItemsView);
 
