@@ -72,8 +72,19 @@
   const network = new vis.Network(document.getElementById('net'), {nodes, edges}, {
     physics: { solver: 'forceAtlas2Based', stabilization: { iterations: 300 } },
     interaction: { hover: true, tooltipDelay: 999999 },  // native tooltip off
-    nodes: { shape: 'dot', font: { color: '#e8eaed', size: 11 } },
-    edges: { smooth: { type: 'continuous' }, arrows: { to: { scaleFactor: 0.5 } } },
+    nodes: {
+      shape: 'dot',
+      font: { color: '#e8eaed', size: 11 },
+      // Disable vis-network's default "chosen" tint — it was recoloring
+      // hovered/selected nodes blue and making the role palette unreadable.
+      chosen: { node: false, label: false },
+      scaling: { min: 14, max: 32 },
+    },
+    edges: {
+      smooth: { type: 'continuous' },
+      arrows: { to: { scaleFactor: 0.5 } },
+      chosen: { edge: false, label: false },
+    },
     groups: {},
   });
 
