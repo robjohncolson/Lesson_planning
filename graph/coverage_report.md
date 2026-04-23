@@ -1,24 +1,25 @@
 # Coverage report
 
-Tagged items: **609**. Assessment shells: **11**.
+Tagged items: **615**. Assessment shells: **34**.
 
 ## Standards × Lesson
 
-| Lesson | A-APR.B.3 | A-APR.D.6 | A-APR.D.7 | A-CED.A.1 | A-CED.A.2 | A-CED.A.4 | A-REI.A.2 | A-REI.D.11 | A-SSE.A.2 | F-BF.A.1a | F-BF.A.1b | F-BF.A.1c | F-BF.B.3 | F-BF.B.4 | F-BF.B.5 | F-IF.B.6 | F-IF.C.7c | F-IF.C.7d | F-IF.C.7e | F-LE.A.4 | F-LE.B.5 | G-GMD.A.3 | N-CN.C.9 | N-RN.A.1 | N-RN.A.2 | total |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 3-5 | 20 | . | . | 1 | 1 | . | . | . | . | 1 | . | . | . | . | . | . | 10 | . | . | . | . | 1 | 4 | . | . | **38** |
-| 4-1 | . | 2 | . | . | 35 | 1 | . | . | . | . | . | . | 2 | . | . | 1 | . | 24 | . | . | 1 | . | . | . | . | **66** |
-| 4-3 | . | 39 | 40 | . | . | 1 | . | . | 6 | . | . | . | . | . | . | . | . | . | . | . | . | 3 | . | . | . | **89** |
-| 4-4 | . | . | 63 | 2 | . | . | . | . | 55 | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | **120** |
-| 4-5 | . | . | . | 53 | . | . | 59 | . | 1 | . | . | . | . | . | . | . | . | . | . | . | 1 | . | . | . | . | **114** |
-| 5-1 | . | . | . | 1 | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | 1 | . | 70 | 74 | **146** |
-| 5-4 | . | . | . | . | . | 69 | 74 | . | . | . | . | . | . | . | . | . | . | . | . | 1 | 2 | . | . | . | . | **146** |
-| 5-5 | . | . | . | 1 | . | . | . | . | . | . | 46 | 48 | . | . | . | . | . | . | . | . | . | . | . | . | . | **95** |
-| 6-3 | . | . | . | . | . | . | . | 1 | . | . | . | . | . | . | 60 | . | . | . | 1 | 57 | 2 | . | . | . | . | **121** |
-| 6-4 | . | . | . | . | . | 1 | . | . | . | . | . | . | 41 | 5 | 1 | . | . | . | 41 | . | 1 | . | . | . | . | **90** |
-| 6-5 | . | . | . | . | . | . | . | . | 2 | . | . | . | . | . | 51 | . | . | . | . | 44 | 1 | . | . | . | . | **98** |
+| Lesson | A-APR.B.3 | A-APR.D.6 | A-APR.D.7 | A-CED.A.1 | A-CED.A.2 | A-CED.A.4 | A-REI.A.2 | A-REI.D.11 | A-SSE.A.2 | DAT-3.A | DAT-3.B | DAT-3.C | DAT-3.E | F-BF.A.1a | F-BF.A.1b | F-BF.A.1c | F-BF.B.3 | F-BF.B.4 | F-BF.B.5 | F-IF.B.6 | F-IF.C.7c | F-IF.C.7d | F-IF.C.7e | F-LE.A.4 | F-LE.B.5 | G-GMD.A.3 | N-CN.C.9 | N-RN.A.1 | N-RN.A.2 | VAR-6.A | VAR-6.C | VAR-6.D | VAR-6.E | VAR-6.F | total |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 3-5 | 20 | . | . | 1 | 1 | . | . | . | . | . | . | . | . | 1 | . | . | . | . | . | . | 10 | . | . | . | . | 1 | 4 | . | . | . | . | . | . | . | **38** |
+| 4-1 | . | 2 | . | . | 35 | 1 | . | . | . | . | . | . | . | . | . | . | 2 | . | . | 1 | . | 24 | . | . | 1 | . | . | . | . | . | . | . | . | . | **66** |
+| 4-3 | . | 39 | 40 | . | . | 1 | . | . | 6 | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | 3 | . | . | . | . | . | . | . | . | **89** |
+| 4-4 | . | . | 63 | 2 | . | . | . | . | 55 | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | **120** |
+| 4-5 | . | . | . | 53 | . | . | 59 | . | 1 | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | 1 | . | . | . | . | . | . | . | . | . | **114** |
+| 5-1 | . | . | . | 1 | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | 1 | . | 70 | 74 | . | . | . | . | . | **146** |
+| 5-4 | . | . | . | . | . | 69 | 74 | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | 1 | 2 | . | . | . | . | . | . | . | . | . | **146** |
+| 5-5 | . | . | . | 1 | . | . | . | . | . | . | . | . | . | . | 46 | 48 | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | **95** |
+| 6-3 | . | . | . | . | . | . | . | 1 | . | . | . | . | . | . | . | . | . | . | 60 | . | . | . | 1 | 57 | 2 | . | . | . | . | . | . | . | . | . | **121** |
+| 6-4 | . | . | . | . | . | 1 | . | . | . | . | . | . | . | . | . | . | 41 | 5 | 1 | . | . | . | 41 | . | 1 | . | . | . | . | . | . | . | . | . | **90** |
+| 6-5 | . | . | . | . | . | . | . | . | 2 | . | . | . | . | . | . | . | . | . | 51 | . | . | . | . | 44 | 1 | . | . | . | . | . | . | . | . | . | **98** |
+| APStats-6-4 | . | . | . | . | . | . | . | . | . | 1 | 3 | 1 | 1 | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | . | 1 | 2 | 2 | 1 | 1 | **13** |
 
-**Thinly-covered standards** (≤1 tagged item): A-REI.D.11, F-BF.A.1a, F-IF.B.6
+**Thinly-covered standards** (≤1 tagged item): A-REI.D.11, DAT-3.A, DAT-3.C, DAT-3.E, F-BF.A.1a, F-IF.B.6, VAR-6.A, VAR-6.E, VAR-6.F
 
 ## DOK-3 flavor × Lesson
 
@@ -35,6 +36,7 @@ Tagged items: **609**. Assessment shells: **11**.
 | 6-3 | . | . | . | 1 |
 | 6-4 | 1 | . | . | . |
 | 6-5 | . | 1 | 1 | . |
+| APStats-6-4 | . | . | . | . |
 
 **Flavor totals:** derive-from-constraint=6, prove-by-properties=2, model-then-extract=4, read-from-representation=1
 
@@ -42,7 +44,7 @@ Tagged items: **609**. Assessment shells: **11**.
 
 ## Orphans
 
-Items with no inbound edges and no do-now/launch role (unexpected): **506**
+Items with no inbound edges and no do-now/launch role (unexpected): **508**
 - `3-5-tryit-2b` (lesson 3-5, role=explore-practice)
 - `3-5-tryit-3b` (lesson 3-5, role=explore-practice)
 - `3-5-tryit-4` (lesson 3-5, role=explore-practice)
@@ -549,3 +551,5 @@ Items with no inbound edges and no do-now/launch role (unexpected): **506**
 - `4-5-savvas-teacher-edition-habitsofmind-less-6` (lesson 4-5, role=explore-practice)
 - `4-5-savvas-teacher-edition-elicitevidence-le-6` (lesson 4-5, role=explore-practice)
 - `4-5-savvas-teacher-edition-commonerror-lesso-3` (lesson 4-5, role=explore-practice)
+- `apstats-6-4-explore-q4-dok3` (lesson APStats-6-4, role=explore-practice)
+- `apstats-6-4-reinforcement-q1` (lesson APStats-6-4, role=reinforcement)
