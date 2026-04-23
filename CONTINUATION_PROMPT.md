@@ -48,7 +48,7 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 
 **Backlog — pick when idle:**
 - **Teacher Console Phase 2:**
-  - CodeMirror via bundled distribution or pinned import map (CDN dual-load of `@codemirror/state` broke Phase 1; textarea fallback ships now).
+  - ✅ CodeMirror 6 bundled locally (`console_vendor/` → `console_static/vendor/codemirror.js`, 412 KB min.). YAML syntax highlight + Ctrl+S save + Ctrl+Enter regen. Smoke: `smoke_test_console_codemirror.py`.
   - Streaming `/api/registry` (current full-load is fine at 1057 rows; will matter at 5000+).
   - Curriculum DAG visualization (d3.js).
   - Diff viewer (regen vs canonical).

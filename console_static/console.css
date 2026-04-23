@@ -290,34 +290,19 @@ body {
   overflow: hidden;
   font-size: 0.85rem;
   display: flex;
+  min-height: 0;
 }
 
-#cm-host .yaml-editor {
+/* CodeMirror 6 — editor fills the host; theme colors set in console.js */
+#cm-host .cm-editor {
   flex: 1;
   width: 100%;
-  height: 100%;
-  border: 0;
-  padding: 12px 14px;
-  font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
-  font-size: 0.84rem;
-  line-height: 1.45;
-  color: var(--ink);
-  background: #fafbfc;
-  resize: none;
-  outline: none;
-  tab-size: 2;
-  white-space: pre;
-  overflow: auto;
+  min-height: 0;
 }
 
-#cm-host .yaml-editor:focus {
-  background: #fff;
-  box-shadow: inset 3px 0 0 var(--blue);
-}
-
-#cm-host .yaml-editor[readonly] {
+#cm-host.readonly .cm-editor {
   background: #eef1f4;
-  color: var(--muted);
+  opacity: 0.75;
 }
 
 /* No-YAML placeholder */

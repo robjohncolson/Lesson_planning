@@ -1,12 +1,17 @@
 /**
  * Klimsara Teacher Console — console.js
- * Vanilla JS, no bundler, no external deps.
- *
- * Phase 1 MVP uses a plain <textarea> editor. CodeMirror 6 was attempted
- * but its CDN-only ESM distribution double-loaded @codemirror/state,
- * breaking instanceof checks. Phase 2 will add CodeMirror properly via
- * a bundled file (or pin to an import-map of matched versions).
+ * CodeMirror 6 editor bundled into /static/vendor/codemirror.js.
+ * Rebuild via `npm run build` in console_vendor/.
  */
+import {
+  EditorView,
+  EditorState,
+  Compartment,
+  basicSetup,
+  keymap,
+  yaml,
+  indentWithTab,
+} from "/static/vendor/codemirror.js";
 
 // ── DOM handles ──────────────────────────────────────────────────────────────
 const $ = id => document.getElementById(id);
@@ -46,28 +51,49 @@ let allLessons = [];            // full list from /api/lessons
 let activeLessonId = null;      // currently selected lesson_id
 let activeMeta = null;          // metadata object for active lesson
 let previewEdition = "student"; // "student" | "teacher"
-let editorEl = null;            // HTMLTextAreaElement for the YAML editor
+let editorView = null;          // CodeMirror 6 EditorView
 let regenInProgress = false;
 
-// ── Editor setup (plain textarea — Phase 1) ─────────────────────────────────
+const readOnlyCompartment = new Compartment();
+
+// ── Editor setup (CodeMirror 6) ─────────────────────────────────────────────
 function createEditor(doc = "") {
+  if (editorView) { editorView.destroy(); editorView = null; }
   cmHost.innerHTML = "";
-  editorEl = document.createElement("textarea");
-  editorEl.className = "yaml-editor";
-  editorEl.value = doc;
-  editorEl.spellcheck = false;
-  editorEl.autocomplete = "off";
-  editorEl.autocapitalize = "off";
-  editorEl.wrap = "off";
-  editorEl.addEventListener("keydown", e => {
-    if (e.ctrlKey && e.key === "s") { e.preventDefault(); saveYaml(); }
-    else if (e.ctrlKey && e.key === "Enter") { e.preventDefault(); triggerRegen(); }
+
+  const state = EditorState.create({
+    doc,
+    extensions: [
+      basicSetup,
+      yaml(),
+      readOnlyCompartment.of(EditorState.readOnly.of(false)),
+      keymap.of([
+        indentWithTab,
+        { key: "Ctrl-s", preventDefault: true, run: () => { saveYaml(); return true; } },
+        { key: "Ctrl-Enter", preventDefault: true, run: () => { triggerRegen(); return true; } },
+      ]),
+      EditorView.theme({
+        "&": { height: "100%", fontSize: "0.84rem", background: "#fafbfc" },
+        "&.cm-focused": { outline: "none", background: "#fff" },
+        ".cm-scroller": { fontFamily: "'Consolas', 'Menlo', 'Courier New', monospace", lineHeight: "1.45" },
+        ".cm-content": { padding: "10px 0" },
+        ".cm-gutters": { background: "#f0f3f7", border: "0", color: "#8892a0" },
+      }),
+    ],
   });
-  cmHost.appendChild(editorEl);
+  editorView = new EditorView({ state, parent: cmHost });
 }
 
 function setEditorReadonly(readonly) {
-  if (editorEl) editorEl.readOnly = readonly;
+  if (!editorView) return;
+  editorView.dispatch({
+    effects: readOnlyCompartment.reconfigure(EditorState.readOnly.of(readonly)),
+  });
+  cmHost.classList.toggle("readonly", !!readonly);
+}
+
+function getEditorDoc() {
+  return editorView ? editorView.state.doc.toString() : "";
 }
 
 // ── Health check ─────────────────────────────────────────────────────────────
@@ -230,7 +256,7 @@ async function saveYaml() {
   if (!activeLessonId || regenInProgress) return;
   if (cmHost.style.display === "none") return;   // no editor visible
 
-  const body = editorEl ? editorEl.value : "";
+  const body = getEditorDoc();
   hideError();
   saveStatus.textContent = "Saving…";
   saveStatus.className   = "";
