@@ -1,4 +1,4 @@
-"""Klimsara Teacher Console — localhost-only Flask backend.
+"""Teacher Console — localhost-only Flask backend.
 Usage: python console.py [--no-open] [--port PORT]
 """
 import argparse
@@ -53,15 +53,21 @@ def _read_yaml_meta(lesson_id: str) -> dict:
         return {}
 
 
+_ALGEBRA2_ID_RE = re.compile(r"^L\d{2}_P\d$")  # L41_P2, L35_P4 — exclude APStats_*, etc.
+
+
 def _scan_lessons() -> list[dict]:
-    """Build lesson catalogue from tex/ and lessons/."""
+    """Build lesson catalogue from tex/ and lessons/ — Algebra 2 only."""
     lesson_ids: set[str] = set()
     if TEX_DIR.exists():
         for f in TEX_DIR.glob("*_student.tex"):
-            lesson_ids.add(f.stem.removesuffix("_student"))
+            lid = f.stem.removesuffix("_student")
+            if _ALGEBRA2_ID_RE.match(lid):
+                lesson_ids.add(lid)
     if LESSONS_DIR.exists():
         for f in LESSONS_DIR.glob("*.yaml"):
-            lesson_ids.add(f.stem)
+            if _ALGEBRA2_ID_RE.match(f.stem):
+                lesson_ids.add(f.stem)
 
     results = []
     for lid in sorted(lesson_ids):
@@ -357,7 +363,7 @@ def json_error(exc):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Klimsara Teacher Console")
+    parser = argparse.ArgumentParser(description="Teacher Console")
     parser.add_argument("--no-open", action="store_true", help="Skip browser launch")
     parser.add_argument("--port", type=int, default=5173, help="Port (default 5173)")
     args = parser.parse_args()

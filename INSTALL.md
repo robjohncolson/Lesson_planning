@@ -1,6 +1,6 @@
-# Installing the Klimsara Teacher Console
+# Installing the Teacher Console
 
-The Klimsara Teacher Console is a lesson-management tool that runs entirely on your laptop — no account, no internet connection required once set up. It gives you a browser-based interface where you can view and edit lesson YAML files and regenerate student and teacher PDF packets.
+The Teacher Console is a lesson-management tool that runs entirely on your laptop — no account, no internet connection required once set up. It gives you a browser-based interface where you can view and edit lesson YAML files and regenerate student and teacher PDF packets.
 
 This guide is for Windows 10 or Windows 11 users who have not used Git, Python, or a terminal before. Follow every step in order.
 
