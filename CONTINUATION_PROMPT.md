@@ -70,6 +70,7 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 10. **CodeMirror 6 via CDN double-loads `@codemirror/state`** on both jsdelivr `+esm` and esm.sh without an import-map — breaks `instanceof` checks silently. For bundled editors, use a build step or pinned import map. MVP uses `<textarea>`.
 11. **Template literal → string-concat regressions** — sonnet agents rewriting pacer HTMLs sometimes convert ```` ` `` ``` template literals to `'...' + var + '...'` concat, and escape-quote wrong (`('` + `'tabId`' + `')'` → `startPhase(tabId)` without string quoting). Detect with `grep -q "panel.innerHTML = \`"`.
 12. **Emoji → HTML-entity drift** — sonnet sometimes replaces `⭐` with `&#11088;` in copied JS. Detect with `grep "&#11088;\|&#127908;"`. Fixup is a straight text substitution.
+13. **`pkill -f` is unreliable on Git Bash / Windows** — it reports success but the Windows python.exe process keeps running. If you spawn background servers (e.g. `python console.py &`) during tests, they survive the `pkill` and keep holding ports. Use `taskkill //F //IM python.exe` to actually kill them (note the double-slash for MSYS flag escaping). Verify with `curl http://127.0.0.1:<port>/api/health --connect-timeout 1` — should return exit 000 when dead. Better: track PIDs explicitly via `$!` and `kill $PID` on a specific process.
 
 ## Session-gotchas worth reading once
 
