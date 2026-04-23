@@ -25,6 +25,223 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 
+# ── HTML template for graph.html ─────────────────────────────────────────────
+# Kept as a plain (non-f) string so JS braces don't need doubling. Placeholders:
+#   __NODES__   — replaced with json.dumps(vis_nodes)
+#   __EDGES__   — replaced with json.dumps(vis_edges)
+DAG_HTML_TEMPLATE = r"""<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Algebra 2 Curriculum DAG</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #202124; color: #e8eaed;
+         display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+  #legend { padding: 8px 16px; background: #303134; border-bottom: 1px solid #5f6368; flex-shrink: 0; }
+  #legend span { margin-right: 16px; font-size: 13px; }
+  .sw { display: inline-block; width: 12px; height: 12px; margin-right: 4px; vertical-align: middle; border-radius: 2px; }
+  #main { display: flex; flex: 1; min-height: 0; }
+  #net { flex: 1; background: #202124; min-width: 0; }
+  #detail {
+    width: 360px; flex-shrink: 0; overflow: auto;
+    background: #292b2f; border-left: 1px solid #444; padding: 18px 18px 40px 18px;
+    box-sizing: border-box; font-size: 13px; line-height: 1.5;
+  }
+  #detail.empty { color: #7a828a; font-style: italic; padding-top: 40%; text-align: center; }
+  #detail h2 { margin: 0 0 4px; font-size: 15px; color: #fbbc04; word-break: break-all; }
+  #detail .meta-row { margin: 10px 0; }
+  #detail .meta-row strong { color: #e8eaed; margin-right: 4px; }
+  #detail .meta-row .value { color: #b8c0c8; }
+  #detail .tag {
+    display: inline-block; background: #3a3d42; color: #dadce0;
+    padding: 2px 7px; border-radius: 3px; font-size: 11px; margin: 2px 4px 2px 0;
+  }
+  #detail .dok {
+    display: inline-block; padding: 2px 7px; border-radius: 3px;
+    font-size: 11px; font-weight: 600; color: #fff;
+  }
+  #detail .dok-1 { background: #8ab4f8; color: #202124; }
+  #detail .dok-2 { background: #fbbc04; color: #202124; }
+  #detail .dok-3 { background: #ea4335; }
+  #detail .prompt {
+    background: #1f2125; border-radius: 4px; padding: 10px 12px;
+    margin-top: 12px; font-family: Consolas, Menlo, monospace;
+    font-size: 12px; white-space: pre-wrap; color: #e8eaed;
+  }
+  #detail a.neighbor {
+    display: inline-block; margin: 3px 4px 3px 0; padding: 3px 8px;
+    background: #3a3d42; color: #8ab4f8; border-left: 3px solid #888;
+    border-radius: 2px; cursor: pointer; font-size: 11px;
+    font-family: Consolas, Menlo, monospace; text-decoration: none;
+  }
+  #detail a.neighbor:hover { background: #4a4d52; color: #fff; }
+  #focus-badge {
+    display: inline-block; background: #fbbc04; color: #202124;
+    padding: 2px 8px; border-radius: 3px; font-size: 12px;
+    font-weight: 600; margin-left: 12px; vertical-align: middle;
+  }
+</style>
+</head><body>
+<div id="legend">
+  <strong>Curriculum DAG</strong>
+  &nbsp;Nodes colored by role, bordered by DOK-3 flavor. Edges: <span style="color:#5f6368">prereq</span>, <span style="color:#1a73e8">rehearses</span>, <span style="color:#ea4335">echoes</span>.
+  <br>
+  <span><span class="sw" style="background:#ea4335"></span>dok3-driver</span>
+  <span><span class="sw" style="background:#34a853"></span>launch</span>
+  <span><span class="sw" style="background:#fbbc04"></span>try-it</span>
+  <span><span class="sw" style="background:#f28b82"></span>practice</span>
+  <span><span class="sw" style="background:#8ab4f8"></span>do-now</span>
+  <span><span class="sw" style="background:#c084fc"></span>assessment</span>
+  <span><span class="sw" style="background:#dadce0"></span>stretch</span>
+</div>
+<div id="main">
+  <div id="net"></div>
+  <aside id="detail" class="empty">Click a node to see its details.</aside>
+</div>
+<script>
+  const nodes = new vis.DataSet(__NODES__);
+  const edges = new vis.DataSet(__EDGES__);
+  const network = new vis.Network(document.getElementById('net'), {nodes, edges}, {
+    physics: { solver: 'forceAtlas2Based', stabilization: { iterations: 300 } },
+    interaction: { hover: true, tooltipDelay: 999999 },  // native tooltip off
+    nodes: { shape: 'dot', font: { color: '#e8eaed', size: 11 } },
+    edges: { smooth: { type: 'continuous' }, arrows: { to: { scaleFactor: 0.5 } } },
+    groups: {},
+  });
+
+  // Cache titles + strip from node data so vis-network doesn't render the
+  // raw hover tooltip (literal \n characters).
+  const titleById = {};
+  nodes.get().forEach(n => { titleById[n.id] = n.title; });
+  nodes.update(nodes.get().map(n => ({ id: n.id, title: undefined })));
+
+  // Build adjacency for neighbor navigation in the detail panel.
+  const EDGE_KIND = {
+    "#5f6368": "prereq",
+    "#1a73e8": "rehearses",
+    "#ea4335": "echoes",
+  };
+  const neighborsByNode = {};
+  edges.get().forEach(e => {
+    const kind = EDGE_KIND[e.color] || "link";
+    (neighborsByNode[e.from] = neighborsByNode[e.from] || []).push(
+      { id: e.to, color: e.color, kind, direction: "out" }
+    );
+    (neighborsByNode[e.to] = neighborsByNode[e.to] || []).push(
+      { id: e.from, color: e.color, kind, direction: "in" }
+    );
+  });
+
+  function escHtml(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function renderDetail(node) {
+    const detail = document.getElementById("detail");
+    if (!node) {
+      detail.className = "empty";
+      detail.innerHTML = "Click a node to see its details.";
+      return;
+    }
+    // Titles embed literal "\n" two-char sequences, not real newlines.
+    const rawTitle = titleById[node.id] || node.title || "";
+    const raw = rawTitle.replace(/\\n/g, "\n").replace(/\r/g, "");
+    const parts = raw.split(/\n\n/);
+    const header = (parts[0] || "").split("\n");
+    const prompt = parts.slice(1).join("\n\n").trim();
+
+    const id = header[0] || node.id;
+    const rows = [];
+    for (const line of header.slice(1)) {
+      const pairs = line.split(/\s{2,}/);
+      for (const pair of pairs) {
+        const m = /^([^:]+):\s*(.+)$/.exec(pair.trim());
+        if (m) rows.push([m[1].trim().toLowerCase(), m[2].trim()]);
+      }
+    }
+    const get = (k) => (rows.find(r => r[0] === k) || [])[1] || "";
+    const dok  = get("dok");
+    const role = get("role");
+    const lesson = get("lesson");
+    const standards = get("standards");
+    const skills = get("skills");
+
+    const neighbors = neighborsByNode[node.id] || [];
+    const buckets = {
+      "prereq-in":    { label: "Prerequisites (incoming)",   items: [] },
+      "prereq-out":   { label: "Leads to (outgoing)",        items: [] },
+      "rehearses-in": { label: "Rehearsed by",               items: [] },
+      "rehearses-out":{ label: "Rehearses",                  items: [] },
+      "echoes-in":    { label: "Echoed by",                  items: [] },
+      "echoes-out":   { label: "Echoes",                     items: [] },
+    };
+    for (const n of neighbors) {
+      const key = n.kind + "-" + n.direction;
+      (buckets[key] || (buckets[key] = { label: n.kind + " (" + n.direction + ")", items: [] }))
+        .items.push(n);
+    }
+    const neighborHtml = Object.entries(buckets)
+      .filter(([_, b]) => b.items.length > 0)
+      .map(([key, b]) => '<div class="meta-row"><strong>' + escHtml(b.label) + ':</strong> '
+        + b.items.map(n =>
+          '<a class="neighbor" data-target="' + escHtml(n.id) +
+          '" style="border-left-color:' + escHtml(n.color || "#888") + ';">' + escHtml(n.id) + '</a>'
+        ).join("")
+        + '</div>').join("");
+
+    detail.className = "";
+    detail.innerHTML =
+      '<h2>' + escHtml(id) + '</h2>' +
+      '<div class="meta-row">' +
+        (lesson ? '<span class="tag">lesson ' + escHtml(lesson) + '</span>' : "") +
+        (role ? '<span class="tag">' + escHtml(role) + '</span>' : "") +
+        (dok ? '<span class="dok dok-' + escHtml(dok) + '">DOK ' + escHtml(dok) + '</span>' : "") +
+      '</div>' +
+      (standards ? '<div class="meta-row"><strong>Standards:</strong> ' +
+        standards.split(/,\s*/).map(s => '<span class="tag">' + escHtml(s) + '</span>').join("") + '</div>' : "") +
+      (skills ? '<div class="meta-row"><strong>Skills:</strong> ' +
+        skills.split(/,\s*/).map(s => '<span class="tag">' + escHtml(s) + '</span>').join("") + '</div>' : "") +
+      (prompt ? '<div class="meta-row"><strong>Prompt:</strong><div class="prompt">' +
+        escHtml(prompt) + '</div></div>' : "") +
+      (neighborHtml || '<div class="meta-row" style="color:#7a828a;font-style:italic;">No connections.</div>');
+
+    detail.querySelectorAll("a.neighbor").forEach(a => {
+      a.addEventListener("click", () => {
+        const target = a.dataset.target;
+        const n = nodes.get(target);
+        if (n) { network.selectNodes([target]); renderDetail(n); }
+      });
+    });
+  }
+  network.on("click", (params) => {
+    if (params.nodes.length === 0) { renderDetail(null); return; }
+    renderDetail(nodes.get(params.nodes[0]));
+  });
+
+  // Optional ?lesson=4-1 query param — fade non-focus nodes, fit to focused set.
+  const _hl = new URLSearchParams(location.search).get("lesson");
+  if (_hl) {
+    const focus = nodes.get({ filter: n => n.group === _hl });
+    if (focus.length) {
+      nodes.update(nodes.get().map(n => n.group === _hl
+        ? { id: n.id, opacity: 1, borderWidth: 3 }
+        : { id: n.id, opacity: 0.18 }
+      ));
+      const focusIds = focus.map(n => n.id);
+      network.once("stabilizationIterationsDone", () => {
+        network.fit({ nodes: focusIds, animation: { duration: 400 } });
+      });
+      const badge = document.createElement("span");
+      badge.id = "focus-badge";
+      badge.textContent = "Focused: lesson " + _hl + " (" + focus.length + " nodes)";
+      document.getElementById("legend").appendChild(badge);
+    }
+  }
+</script>
+</body></html>
+"""
+
+
 # --- DOK-3 flavor classifier --------------------------------------------------
 # Flavor inference from skill_tokens. Order matters: first match wins.
 FLAVOR_RULES = [
@@ -256,43 +473,11 @@ def main() -> int:
             if t in nodes_to_include:
                 vis_edges.append({"from": rid, "to": t, "color": "#ea4335", "dashes": [2, 4]})
 
-    html = f"""<!doctype html>
-<html><head><meta charset="utf-8">
-<title>Algebra 2 Curriculum DAG</title>
-<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-<style>
-  body {{ font-family: system-ui, sans-serif; margin: 0; background: #202124; color: #e8eaed; }}
-  #net {{ width: 100vw; height: calc(100vh - 100px); background: #202124; }}
-  #legend {{ padding: 8px 16px; background: #303134; border-bottom: 1px solid #5f6368; }}
-  #legend span {{ margin-right: 16px; font-size: 13px; }}
-  .sw {{ display: inline-block; width: 12px; height: 12px; margin-right: 4px; vertical-align: middle; border-radius: 2px; }}
-</style>
-</head><body>
-<div id="legend">
-  <strong>Curriculum DAG</strong>
-  &nbsp;Nodes colored by role, bordered by DOK-3 flavor. Edges: <span style="color:#5f6368">prereq</span>, <span style="color:#1a73e8">rehearses</span>, <span style="color:#ea4335">echoes</span>.
-  <br>
-  <span><span class="sw" style="background:#ea4335"></span>dok3-driver</span>
-  <span><span class="sw" style="background:#34a853"></span>launch</span>
-  <span><span class="sw" style="background:#fbbc04"></span>try-it</span>
-  <span><span class="sw" style="background:#f28b82"></span>practice</span>
-  <span><span class="sw" style="background:#8ab4f8"></span>do-now</span>
-  <span><span class="sw" style="background:#c084fc"></span>assessment</span>
-  <span><span class="sw" style="background:#dadce0"></span>stretch</span>
-</div>
-<div id="net"></div>
-<script>
-  const nodes = new vis.DataSet({json.dumps(vis_nodes)});
-  const edges = new vis.DataSet({json.dumps(vis_edges)});
-  const network = new vis.Network(document.getElementById('net'), {{nodes, edges}}, {{
-    physics: {{ solver: 'forceAtlas2Based', stabilization: {{ iterations: 300 }} }},
-    interaction: {{ hover: true, tooltipDelay: 100 }},
-    nodes: {{ shape: 'dot', font: {{ color: '#e8eaed', size: 11 }} }},
-    edges: {{ smooth: {{ type: 'continuous' }}, arrows: {{ to: {{ scaleFactor: 0.5 }} }} }},
-    groups: {{}},
-  }});
-</script>
-</body></html>"""
+    # Template is a plain (non-f) string so JS braces don't need doubling.
+    # Two placeholders (__NODES__ / __EDGES__) get filled via replace().
+    html = DAG_HTML_TEMPLATE \
+        .replace("__NODES__", json.dumps(vis_nodes)) \
+        .replace("__EDGES__", json.dumps(vis_edges))
     (OUT / "graph.html").write_text(html, encoding="utf-8")
     print(f"Wrote {OUT / 'graph.html'} ({len(vis_nodes)} nodes, {len(vis_edges)} edges)")
 

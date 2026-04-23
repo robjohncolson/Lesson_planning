@@ -48,13 +48,9 @@ def main() -> int:
             driver.get(f"{URL}/api/graph?lesson=4-1")
             wait = WebDriverWait(driver, 20)
             wait.until(EC.presence_of_element_located((By.ID, "net")))
-            # Focus banner is created after physics stabilizes — vis-network
-            # fires "stabilizationIterationsDone" once layout settles.
-            banner = wait.until(lambda d: next(
-                (el for el in d.find_elements(By.TAG_NAME, "div")
-                 if "Focused: lesson 4-1" in (el.text or "")),
-                None))
-            assert banner, "focus banner not found"
+            # Focus badge lives inside #legend (a span). Wait for its text.
+            badge = wait.until(lambda d: d.find_element(By.ID, "focus-badge"))
+            assert "Focused: lesson 4-1" in badge.text, f"badge text: {badge.text!r}"
 
             logs = driver.get_log("browser")
             errs = [
