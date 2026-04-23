@@ -123,7 +123,7 @@ def collect_lessons() -> list[dict]:
     def base_row(lid: str) -> dict:
         return {
             "id": lid, "cadence": None, "title": None, "yaml_text": None,
-            "tex_student": None, "tex_teacher": None,
+            "tex_student": None, "tex_teacher": None, "tex_slides": None,
             "has_tex_student": False, "has_tex_teacher": False,
             "has_pdf_student": False, "has_pdf_teacher": False,
             "has_slides_pdf":  False,
@@ -140,6 +140,11 @@ def collect_lessons() -> list[dict]:
         row = rows.setdefault(lid, base_row(lid))
         row["has_tex_teacher"] = True
         row["tex_teacher"]     = tex.read_text(encoding="utf-8")
+
+    for tex in sorted(TEX_DIR.glob("L*_P*_slides.tex")):
+        lid = tex.stem.removesuffix("_slides")
+        row = rows.setdefault(lid, base_row(lid))
+        row["tex_slides"]      = tex.read_text(encoding="utf-8")
 
     for pdf in sorted(TEX_DIR.glob("L*_P*_student.pdf")):
         rows.setdefault(pdf.stem.removesuffix("_student"), base_row(pdf.stem.removesuffix("_student")))["has_pdf_student"] = True

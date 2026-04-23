@@ -1,5 +1,6 @@
 import { api, pdfUrl, getTex, saveTex, rebuildPdf } from "/js/api.js";
 import { passcode } from "/js/passcode.js";
+import { username } from "/js/username.js";
 import { createLessonList } from "/js/lesson-list.js";
 import { renderItemList, renderItemDetail } from "/js/item-detail.js";
 
@@ -17,6 +18,8 @@ const btnItems      = document.getElementById("btn-items");
 const btnYaml       = document.getElementById("btn-yaml");
 const btnTexStudent = document.getElementById("btn-tex-student");
 const btnTexTeacher = document.getElementById("btn-tex-teacher");
+const btnTexSlides  = document.getElementById("btn-tex-slides");
+const texLastEdited = document.getElementById("tex-last-edited");
 const yamlContent   = document.getElementById("yaml-content");
 const texContent    = document.getElementById("tex-content");   // now a <textarea>
 const texEditLabel  = document.getElementById("tex-editing-label");
@@ -38,7 +41,7 @@ const pdfOpenTab   = document.getElementById("pdf-open-tab");
 
 let activeLessonId   = null;
 let activeLesson     = null;
-let activeTexEdition = null;   // "student" | "teacher"
+let activeTexEdition = null;   // "student" | "teacher" | "slides"
 let texDirty         = false;
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
@@ -63,6 +66,20 @@ function highlightToolbarBtn(active) {
   btnYaml.classList.toggle("active",  active === "yaml");
   btnTexStudent.classList.toggle("active", active === "tex-student");
   btnTexTeacher.classList.toggle("active", active === "tex-teacher");
+  btnTexSlides.classList.toggle("active",  active === "tex-slides");
+}
+
+// ── Relative time formatter ──────────────────────────────────────────────────
+
+function formatWhen(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return `${mins || 1} min ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs} hr${hrs > 1 ? "s" : ""} ago`;
+  const d = new Date(iso);
+  return d.toLocaleString("en-US", { month: "short", day: "numeric",
+    hour: "numeric", minute: "2-digit" });
 }
 
 // ── PDF inline preview ─────────────────────────────────────────────────────
@@ -146,8 +163,22 @@ async function openTexView(edition) {
   btnTexSave.disabled    = true;
   btnTexRebuild.disabled = true;
   texSaveStatus.textContent = "";
+  texLastEdited.textContent = "";
   texLog.style.display = "none";
   texLog.textContent   = "";
+
+  // Fire tex fetch and audit lookup in parallel. Capture the lesson id at
+  // call time — if the teacher clicks a different lesson before the audit
+  // fetch resolves, don't paint the old lesson's audit onto the new view.
+  const requestedLesson = activeLessonId;
+  const auditPromise = api.getLastAudit(requestedLesson).then((row) => {
+    if (requestedLesson !== activeLessonId) return;
+    if (row) {
+      const who = row.changed_by || "(anonymous)";
+      texLastEdited.textContent = `Last edit: ${who} · ${formatWhen(row.changed_at)}`;
+    }
+  }).catch(() => {});
+
   try {
     const src = await getTex(activeLessonId, edition);
     texContent.value = src ?? "";
@@ -161,6 +192,9 @@ async function openTexView(edition) {
     texContent.value = "";
     showError(err.message);
   }
+
+  // Let audit run; ignore its outcome (already caught above)
+  auditPromise;
 }
 
 // ── Tex dirty tracking ───────────────────────────────────────────────────────
@@ -276,6 +310,7 @@ btnYaml.addEventListener("click", () => {
 
 btnTexStudent.addEventListener("click", () => openTexView("student"));
 btnTexTeacher.addEventListener("click", () => openTexView("teacher"));
+btnTexSlides.addEventListener("click",  () => openTexView("slides"));
 
 btnTexSave.addEventListener("click",    () => doSave().catch(() => {}));
 btnTexRebuild.addEventListener("click", () => doRebuild().catch(() => {}));

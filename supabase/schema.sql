@@ -80,6 +80,7 @@ CREATE TABLE lesson_planning.lessons (
   yaml_text       TEXT,
   tex_student     TEXT,                    -- source of truth for student tex
   tex_teacher     TEXT,                    -- source of truth for teacher tex
+  tex_slides      TEXT,                    -- source of truth for slides tex
   has_tex_student BOOLEAN DEFAULT FALSE,
   has_tex_teacher BOOLEAN DEFAULT FALSE,
   has_pdf_student BOOLEAN DEFAULT FALSE,

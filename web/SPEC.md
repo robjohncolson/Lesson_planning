@@ -123,3 +123,32 @@ New IDs added to `index.html` inside `#tex-view`:
 
 Config addition: `RAILWAY_URL` exported from `config.js` / `config.example.js`.
 Passcode stored in `localStorage` under key `lp.passcode` (`web/js/passcode.js`).
+
+## Phase 1 — usernames + slides editing + last-edited display
+
+### New DOM IDs
+
+| ID | Purpose |
+|---|---|
+| `#btn-tex-slides` | Opens slides `.tex` editor (adjacent to Student/Teacher .tex in toolbar) |
+| `#tex-last-edited` | Span inside `.tex-toolbar`; shows "Last edit: Name · time" or empty |
+
+### `/js/username.js`
+
+Exports `{ username }`. Storage key: `lp.username` in `localStorage`.
+- `username.get()` — returns stored name or prompts until valid; strips whitespace; rejects empty, >40 chars, or strings containing `\r`/`\n` (HTTP header safety). Returns `""` if user cancels prompt.
+- `username.clear()` — removes stored name; next `.get()` re-prompts.
+
+### `api.getLastAudit(lessonId)`
+
+Queries `lesson_planning.audit` (same supabase client, schema already scoped):
+```
+select action, changed_at, changed_by from audit
+where table_name = 'lessons' and row_id = lessonId
+order by changed_at desc limit 1
+```
+Returns `{ action, changed_at, changed_by }` or `null`. **Never throws** — catches all errors and network failures, returning `null` silently.
+
+### `X-User-Name` header
+
+`saveTex` and `rebuildPdf` include `"X-User-Name": username.get()` alongside `X-Passcode`. Railway forwards this to the Supabase audit trigger as the `x-user-name` request header, which the trigger stores in `audit.changed_by`.

@@ -38,7 +38,7 @@ SUPABASE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
 REBUILD_PASSCODE = os.environ["REBUILD_PASSCODE"]
 
 LESSON_ID_RE = re.compile(r"^L\d{2}_P\d$")
-EDITIONS = {"student", "teacher"}
+EDITIONS = {"student", "teacher", "slides"}
 
 HERE = Path(__file__).parent
 PREAMBLE_STY = HERE / "preamble.sty"
@@ -48,12 +48,19 @@ YAML_BUILDER = HERE / "build_lesson_from_yaml.py"
 SCHEMA = "lesson_planning"
 BUCKET = "lesson-pdfs"
 
-REST_HEADERS = {
+_REST_HEADERS_BASE = {
     "apikey": SUPABASE_KEY,
     "Authorization": f"Bearer {SUPABASE_KEY}",
     "Accept-Profile": SCHEMA,
     "Content-Profile": SCHEMA,
 }
+
+
+def _rest_headers(user_name: str | None = None) -> dict:
+    h = dict(_REST_HEADERS_BASE)
+    if user_name:
+        h["x-user-name"] = user_name
+    return h
 
 # ---------------------------------------------------------------------------
 # App + CORS
@@ -63,7 +70,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_headers=["Content-Type", "X-Passcode"],
+    allow_headers=["Content-Type", "X-Passcode", "X-User-Name"],
     allow_methods=["GET", "POST", "PUT", "OPTIONS"],
 )
 
@@ -72,12 +79,12 @@ app.add_middleware(
 # Supabase REST helpers (plain requests — HTTP/1.1)
 # ---------------------------------------------------------------------------
 
-def _rest_get_lesson(lesson_id: str) -> dict | None:
+def _rest_get_lesson(lesson_id: str, user_name: str | None = None) -> dict | None:
     r = requests.get(
         f"{SUPABASE_URL}/rest/v1/lessons",
-        headers=REST_HEADERS,
+        headers=_rest_headers(user_name),
         params={"id": f"eq.{lesson_id}",
-                "select": "tex_student,tex_teacher,yaml_text"},
+                "select": "tex_student,tex_teacher,tex_slides,yaml_text"},
         timeout=15,
     )
     r.raise_for_status()
@@ -85,10 +92,10 @@ def _rest_get_lesson(lesson_id: str) -> dict | None:
     return rows[0] if rows else None
 
 
-def _rest_update_lesson(lesson_id: str, patch: dict) -> None:
+def _rest_update_lesson(lesson_id: str, patch: dict, user_name: str | None = None) -> None:
     r = requests.patch(
         f"{SUPABASE_URL}/rest/v1/lessons",
-        headers={**REST_HEADERS, "Content-Type": "application/json",
+        headers={**_rest_headers(user_name), "Content-Type": "application/json",
                  "Prefer": "return=minimal"},
         params={"id": f"eq.{lesson_id}"},
         json=patch,
@@ -135,7 +142,7 @@ def _validate_lesson_id(lesson_id: str) -> None:
 
 def _validate_edition(edition: str) -> None:
     if edition not in EDITIONS:
-        raise HTTPException(status_code=400, detail="edition must be 'student' or 'teacher'")
+        raise HTTPException(status_code=400, detail="edition must be 'student', 'teacher', or 'slides'")
 
 
 # ---------------------------------------------------------------------------
@@ -177,6 +184,8 @@ def _write_build_status(
     log_tail: str,
     has_pdf_student: bool = False,
     has_pdf_teacher: bool = False,
+    has_slides: bool = False,
+    user_name: str | None = None,
 ) -> None:
     payload: dict = {
         "last_build_at": datetime.now(timezone.utc).isoformat(),
@@ -186,8 +195,10 @@ def _write_build_status(
     if has_pdf_student or has_pdf_teacher:
         payload["has_pdf_student"] = has_pdf_student
         payload["has_pdf_teacher"] = has_pdf_teacher
+    if has_slides:
+        payload["has_slides_pdf"] = True
     try:
-        _rest_update_lesson(lesson_id, payload)
+        _rest_update_lesson(lesson_id, payload, user_name)
     except Exception as exc:
         log.error("Failed to write build status for %s: %s", lesson_id, exc)
 
@@ -208,19 +219,24 @@ def health() -> dict:
 
 
 @app.post("/build/{lesson_id}")
-def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict:
+def build(
+    lesson_id: str,
+    x_passcode: str | None = Header(default=None),
+    x_user_name: str | None = Header(default=None),
+) -> dict:
     _validate_lesson_id(lesson_id)
     _check_passcode(x_passcode)
 
-    row = _rest_get_lesson(lesson_id)
+    row = _rest_get_lesson(lesson_id, x_user_name)
     if not row:
         raise HTTPException(status_code=404, detail=f"Lesson {lesson_id} not found")
 
     tex_student = row.get("tex_student")
     tex_teacher = row.get("tex_teacher")
+    tex_slides = row.get("tex_slides")
     yaml_text = row.get("yaml_text")
 
-    if not yaml_text and not tex_student and not tex_teacher:
+    if not yaml_text and not tex_student and not tex_teacher and not tex_slides:
         raise HTTPException(
             status_code=422,
             detail="Lesson has no yaml_text and no tex sources; nothing to build",
@@ -229,8 +245,10 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
     log_tail = ""
     student_ok = False
     teacher_ok = False
+    slides_ok = False
     pdf_student_url = None
     pdf_teacher_url = None
+    pdf_slides_url = None
 
     with tempfile.TemporaryDirectory() as tmp_str:
         tmp = Path(tmp_str)
@@ -275,9 +293,11 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
             gen_out = gen_result.stdout + gen_result.stderr
             if gen_result.returncode != 0:
                 log.error("build_lesson_from_yaml failed for %s", lesson_id)
-                _write_build_status(lesson_id, ok=False, log_tail=gen_out[-4096:])
+                _write_build_status(lesson_id, ok=False, log_tail=gen_out[-4096:],
+                                    user_name=x_user_name)
                 return {"ok": False, "log_tail": gen_out[-4096:],
-                        "pdf_student_url": None, "pdf_teacher_url": None}
+                        "pdf_student_url": None, "pdf_teacher_url": None,
+                        "pdf_slides_url": None}
 
             gen_student = HERE / "tex" / f"{lesson_id}_student.tex"
             gen_teacher = HERE / "tex" / f"{lesson_id}_teacher.tex"
@@ -286,6 +306,7 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
             if gen_teacher.exists():
                 (tmp / f"{lesson_id}_teacher.tex").write_bytes(gen_teacher.read_bytes())
 
+        # --- student ---
         student_tex = tmp / f"{lesson_id}_student.tex"
         if student_tex.exists():
             student_ok, student_log = _run_pdflatex(student_tex.name, tmp)
@@ -295,6 +316,7 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
             student_ok = False
             log_tail = f"{lesson_id}_student.tex not found"
 
+        # --- teacher ---
         teacher_tex = tmp / f"{lesson_id}_teacher.tex"
         if teacher_tex.exists():
             teacher_ok, teacher_log = _run_pdflatex(teacher_tex.name, tmp)
@@ -305,6 +327,17 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
             if not log_tail:
                 log_tail = f"{lesson_id}_teacher.tex not found"
 
+        # --- slides (independent: missing tex_slides is not a failure) ---
+        if tex_slides:
+            slides_tex_path = tmp / f"{lesson_id}_slides.tex"
+            slides_tex_path.write_text(tex_slides, encoding="utf-8")
+            slides_ok, slides_log = _run_pdflatex(slides_tex_path.name, tmp)
+            if not slides_ok:
+                log.warning("slides build failed for %s: %s", lesson_id, slides_log[-500:])
+                if not log_tail:
+                    log_tail = slides_log
+
+        # --- upload ---
         if student_ok:
             pdf_path = tmp / f"{lesson_id}_student.pdf"
             if pdf_path.exists():
@@ -319,19 +352,42 @@ def build(lesson_id: str, x_passcode: str | None = Header(default=None)) -> dict
                 _storage_upload(obj, pdf_path.read_bytes(), "application/pdf")
                 pdf_teacher_url = _storage_public_url(obj)
 
-    overall_ok = student_ok and teacher_ok
+        if slides_ok:
+            pdf_path = tmp / f"{lesson_id}_slides.pdf"
+            if pdf_path.exists():
+                obj = f"{lesson_id}_slides.pdf"
+                _storage_upload(obj, pdf_path.read_bytes(), "application/pdf")
+                pdf_slides_url = _storage_public_url(obj)
+
+    # overall_ok: only editions that were attempted must succeed; slides are
+    # independent — a slides failure doesn't poison the overall flag when
+    # student/teacher both succeeded (or weren't attempted).
+    attempted_packet = bool(tex_student or tex_teacher or yaml_text)
+    overall_ok = (not attempted_packet or (student_ok and teacher_ok))
+    if tex_slides and not slides_ok:
+        overall_ok = False
+
+    built_editions = [e for e, flag in [("student", student_ok),
+                                         ("teacher", teacher_ok),
+                                         ("slides", slides_ok)] if flag]
+    log.info("%s build done — built: %s", lesson_id,
+             ", ".join(built_editions) if built_editions else "none")
+
     _write_build_status(
         lesson_id,
         ok=overall_ok,
         log_tail="" if overall_ok else log_tail,
         has_pdf_student=bool(pdf_student_url),
         has_pdf_teacher=bool(pdf_teacher_url),
+        has_slides=bool(pdf_slides_url),
+        user_name=x_user_name,
     )
 
     return {
         "ok": overall_ok,
         "pdf_student_url": pdf_student_url,
         "pdf_teacher_url": pdf_teacher_url,
+        "pdf_slides_url": pdf_slides_url,
         "log_tail": "" if overall_ok else log_tail,
     }
 
@@ -342,6 +398,7 @@ async def put_tex(
     edition: str,
     request: Request,
     x_passcode: str | None = Header(default=None),
+    x_user_name: str | None = Header(default=None),
 ) -> dict:
     _validate_lesson_id(lesson_id)
     _validate_edition(edition)
@@ -350,5 +407,5 @@ async def put_tex(
     body = await request.body()
     tex_text = body.decode("utf-8")
 
-    _rest_update_lesson(lesson_id, {f"tex_{edition}": tex_text})
+    _rest_update_lesson(lesson_id, {f"tex_{edition}": tex_text}, x_user_name)
     return {"ok": True}
