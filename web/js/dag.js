@@ -73,6 +73,83 @@ function buildTitle(item) {
   ].join("\\n");
 }
 
+// ── Local cache (localStorage) ────────────────────────────────────────────────
+// Strategy: render from cache instantly, then ask Supabase for items updated
+// since our watermark and re-fetch the edge set (composite PK, no updated_at,
+// rarely changes). If anything changed, update the cache and surface a
+// "reload to see latest" banner — no live mutation of vis-network.
+
+const CACHE_KEY = "dag_cache_v1";
+const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;  // full-resync floor
+
+function loadCache() {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const obj = JSON.parse(raw);
+    if (!Array.isArray(obj.items) || !Array.isArray(obj.edges) || !obj.fetched_at) return null;
+    if (Date.now() - new Date(obj.fetched_at).getTime() > CACHE_TTL_MS) return null;
+    return obj;
+  } catch { return null; }
+}
+
+function saveCache(items, edges) {
+  try {
+    const maxUpdated = items.reduce(
+      (acc, it) => (it.updated_at && it.updated_at > acc ? it.updated_at : acc),
+      "1970-01-01T00:00:00Z",
+    );
+    localStorage.setItem(CACHE_KEY, JSON.stringify({
+      items, edges,
+      max_updated_at: maxUpdated,
+      fetched_at: new Date().toISOString(),
+    }));
+  } catch (e) {
+    console.warn("dag cache save failed:", e.message);
+  }
+}
+
+function edgeSetsEqual(a, b) {
+  if (a.length !== b.length) return false;
+  const key = e => `${e.from_id}|${e.to_id}|${e.kind}`;
+  const setA = new Set(a.map(key));
+  for (const e of b) if (!setA.has(key(e))) return false;
+  return true;
+}
+
+function showReloadBanner(nItems, edgeChanged) {
+  if (document.getElementById("dag-refresh-banner")) return;
+  const b = document.createElement("div");
+  b.id = "dag-refresh-banner";
+  b.style.cssText =
+    "position:fixed;top:12px;right:12px;background:#1a73e8;color:#fff;" +
+    "padding:8px 14px;border-radius:6px;font-size:12px;cursor:pointer;" +
+    "z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,0.4);";
+  const parts = [];
+  if (nItems) parts.push(`${nItems} item${nItems === 1 ? "" : "s"} updated`);
+  if (edgeChanged) parts.push("edges changed");
+  b.textContent = `Graph changed (${parts.join(", ")}) — click to reload`;
+  b.addEventListener("click", () => location.reload());
+  document.body.appendChild(b);
+}
+
+async function refreshInBackground(cache) {
+  try {
+    const [newItems, freshEdges] = await Promise.all([
+      api.listItemsUpdatedSince(cache.max_updated_at),
+      api.listAllEdges(),
+    ]);
+    const edgeChanged = !edgeSetsEqual(freshEdges, cache.edges);
+    if (newItems.length === 0 && !edgeChanged) return;
+    const byId = new Map(cache.items.map(it => [it.id, it]));
+    for (const it of newItems) byId.set(it.id, it);
+    saveCache([...byId.values()], freshEdges);
+    showReloadBanner(newItems.length, edgeChanged);
+  } catch (e) {
+    console.warn("dag delta refresh failed:", e.message);
+  }
+}
+
 // ── Main ───────────────────────────────────────────────────────────────────────
 
 async function init() {
@@ -84,17 +161,37 @@ async function init() {
   if (loadingEl) loadingEl.style.display = "";
 
   let items, edges;
-  try {
-    [items, edges] = await Promise.all([api.listAllItems(), api.listAllEdges()]);
-  } catch (err) {
-    // Hide loading, show error banner, bail.
-    if (loadingEl) loadingEl.style.display = "none";
-    if (errorBanner) {
-      errorBanner.textContent = `Failed to load graph data from Supabase: ${err.message}`;
-      errorBanner.style.display = "";
+  const cache = loadCache();
+  let renderedFromCache = false;
+
+  if (cache) {
+    items = cache.items;
+    edges = cache.edges;
+    renderedFromCache = true;
+  } else {
+    try {
+      [items, edges] = await Promise.all([api.listAllItems(), api.listAllEdges()]);
+    } catch (err) {
+      // Hide loading, show error banner, bail.
+      if (loadingEl) loadingEl.style.display = "none";
+      if (errorBanner) {
+        errorBanner.textContent = `Failed to load graph data from Supabase: ${err.message}`;
+        errorBanner.style.display = "";
+      }
+      return;
     }
-    return;
+    saveCache(items, edges);
   }
+
+  // Filter out deprecated / out-of-scope items before anything downstream:
+  //   - Blooket rows (DOK-1 recall, deprecated Unit 4+)
+  //   - APStats proof-of-concept lesson (wrong subject for this DAG)
+  items = items.filter(it =>
+    !/-blooket-/i.test(it.id || "") &&
+    !(typeof it.lesson === "string" && it.lesson.toLowerCase().startsWith("apstats"))
+  );
+  const keep = new Set(items.map(it => it.id));
+  edges = edges.filter(e => keep.has(e.from_id) && keep.has(e.to_id));
 
   // ── Build vis DataSets ─────────────────────────────────────────────────────
 
@@ -499,6 +596,11 @@ async function init() {
   if (loadingEl) loadingEl.style.display = "none";
   detailEl.className = "empty";
   detailEl.innerHTML = "Click a node to see its details.";
+
+  // ── Background delta check (cache-hit path only) ──────────────────────────
+  // Cold load already fetched fresh, so skip; cache-hit needs to verify that
+  // nothing was updated under us and prompt the user to reload if so.
+  if (renderedFromCache) refreshInBackground(cache);
 }
 
 init();

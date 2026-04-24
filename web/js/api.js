@@ -74,7 +74,27 @@ export const api = {
     // Paginate — PostgREST defaults to a 1000-row page cap; ~1006 items means
     // the first page silently truncates without explicit range requests.
     return paginateAll("items",
-      "id, lesson, role, dok, topics, skill_tokens, standards, tags, prompt");
+      "id, lesson, role, dok, topics, skill_tokens, standards, tags, prompt, updated_at");
+  },
+
+  // Delta fetch for dag.js cache: rows with updated_at strictly greater than
+  // the caller's watermark. Paginated to survive large backfills.
+  async listItemsUpdatedSince(isoTimestamp) {
+    let out = [];
+    let from = 0;
+    const pageSize = 1000;
+    while (true) {
+      const { data, error } = await supabase
+        .from("items")
+        .select("id, lesson, role, dok, topics, skill_tokens, standards, tags, prompt, updated_at")
+        .gt("updated_at", isoTimestamp)
+        .order("updated_at", { ascending: true })
+        .range(from, from + pageSize - 1);
+      if (error) raise("listItemsUpdatedSince", error);
+      out = out.concat(data);
+      if (data.length < pageSize) return out;
+      from += pageSize;
+    }
   },
 
   async listAllEdges() {
