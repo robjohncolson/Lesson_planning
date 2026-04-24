@@ -120,8 +120,9 @@ DAG_HTML_TEMPLATE = r"""<!doctype html>
 </div>
 <div id="visual-bar">
   <span class="vstat" id="vstat-summary">Visuals: …</span>
-  <label><input type="checkbox" id="filter-visuals">Only visuals (has_visual=true)</label>
-  <label><input type="checkbox" id="filter-images">Only with images on disk</label>
+  <label>Lesson: <select id="lesson-select" style="background:#3a3d42;color:#dadce0;border:1px solid #555;padding:2px 6px;border-radius:3px;font-size:12px;"><option value="">(all)</option></select></label>
+  <label><input type="checkbox" id="filter-visuals">Only visuals</label>
+  <label><input type="checkbox" id="filter-images">Only with images</label>
   <button id="toggle-matrix" style="background:#3a3d42;color:#dadce0;border:1px solid #555;padding:3px 9px;border-radius:3px;cursor:pointer;font-size:12px;">Show coverage matrix</button>
   <span style="color:#7a828a;">Emoji prefix on node label = visual_type.</span>
 </div>
@@ -497,24 +498,76 @@ DAG_HTML_TEMPLATE = r"""<!doctype html>
     }
   };
 
-  // Optional ?lesson=4-1 query param — fade non-focus nodes, fit to focused set.
-  const _hl = new URLSearchParams(location.search).get("lesson");
-  if (_hl) {
-    const focus = nodes.get({ filter: n => n.group === _hl });
-    if (focus.length) {
-      nodes.update(nodes.get().map(n => n.group === _hl
-        ? { id: n.id, opacity: 1, borderWidth: 3 }
-        : { id: n.id, opacity: 0.18 }
-      ));
-      const focusIds = focus.map(n => n.id);
-      network.once("stabilizationIterationsDone", () => {
-        network.fit({ nodes: focusIds, animation: { duration: 400 } });
-      });
-      const badge = document.createElement("span");
-      badge.id = "focus-badge";
-      badge.textContent = "Focused: lesson " + _hl + " (" + focus.length + " nodes)";
-      document.getElementById("legend").appendChild(badge);
+  // Lesson focus — populate dropdown from distinct groups, wire URL param,
+  // and swap colors (not opacity — vis-network's standalone build doesn't
+  // always honor opacity on node.color objects).
+  const _origColorById = {};
+  nodes.get().forEach(n => {
+    _origColorById[n.id] = {
+      background: (n.color && n.color.background) || "#dadce0",
+      border:     (n.color && n.color.border)     || "#202124",
+      borderWidth: n.borderWidth || 1,
+    };
+  });
+
+  const lessonSelect = document.getElementById("lesson-select");
+  const lessons = [...new Set(nodes.get().map(n => n.group).filter(g => g && g !== "?"))].sort();
+  lessons.forEach(L => {
+    const o = document.createElement("option");
+    o.value = L; o.textContent = L;
+    lessonSelect.appendChild(o);
+  });
+
+  let focusBadge = null;
+  function applyFocus(L) {
+    if (!L) {
+      // Restore original colors.
+      nodes.update(nodes.get().map(n => {
+        const orig = _origColorById[n.id];
+        return {
+          id: n.id,
+          color: { background: orig.background, border: orig.border },
+          borderWidth: orig.borderWidth,
+        };
+      }));
+      if (focusBadge) { focusBadge.remove(); focusBadge = null; }
+      network.fit({ animation: { duration: 400 } });
+      return;
     }
+    const focus = nodes.get({ filter: n => n.group === L });
+    if (!focus.length) return;
+    nodes.update(nodes.get().map(n => {
+      const orig = _origColorById[n.id];
+      if (n.group === L) {
+        // Focus: keep role color, add bright yellow ring.
+        return {
+          id: n.id,
+          color: { background: orig.background, border: "#fbbc04" },
+          borderWidth: 4,
+        };
+      }
+      // Non-focus: dim to near-background so the lesson pops.
+      return {
+        id: n.id,
+        color: { background: "#2a2d32", border: "#3a3d42" },
+        borderWidth: 1,
+      };
+    }));
+    const focusIds = focus.map(n => n.id);
+    network.fit({ nodes: focusIds, animation: { duration: 400 } });
+    if (focusBadge) focusBadge.remove();
+    focusBadge = document.createElement("span");
+    focusBadge.id = "focus-badge";
+    focusBadge.textContent = "Focused: lesson " + L + " (" + focus.length + " nodes)";
+    document.getElementById("legend").appendChild(focusBadge);
+  }
+
+  lessonSelect.addEventListener("change", (e) => applyFocus(e.target.value));
+
+  const _hl = new URLSearchParams(location.search).get("lesson");
+  if (_hl && lessons.includes(_hl)) {
+    lessonSelect.value = _hl;
+    network.once("stabilizationIterationsDone", () => applyFocus(_hl));
   }
 </script>
 </body></html>
