@@ -124,6 +124,7 @@ def collect_lessons() -> list[dict]:
         return {
             "id": lid, "cadence": None, "title": None, "yaml_text": None,
             "tex_student": None, "tex_teacher": None, "tex_slides": None,
+            "tex_do_now": None,
             "has_tex_student": False, "has_tex_teacher": False,
             "has_pdf_student": False, "has_pdf_teacher": False,
             "has_slides_pdf":  False,
@@ -149,6 +150,11 @@ def collect_lessons() -> list[dict]:
         lid = tex.stem.removesuffix("_slides")
         row = rows.setdefault(lid, base_row(lid))
         row["tex_slides"]      = tex.read_text(encoding="utf-8")
+
+    for tex in _globs("do_now.tex"):
+        lid = tex.stem.removesuffix("_do_now")
+        row = rows.setdefault(lid, base_row(lid))
+        row["tex_do_now"]      = tex.read_text(encoding="utf-8")
 
     for pdf in _globs("student.pdf"):
         rows.setdefault(pdf.stem.removesuffix("_student"), base_row(pdf.stem.removesuffix("_student")))["has_pdf_student"] = True

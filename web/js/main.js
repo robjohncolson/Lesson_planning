@@ -23,6 +23,7 @@ const btnYaml       = document.getElementById("btn-yaml");
 const btnTexStudent = document.getElementById("btn-tex-student");
 const btnTexTeacher = document.getElementById("btn-tex-teacher");
 const btnTexSlides  = document.getElementById("btn-tex-slides");
+const btnTexDoNow   = document.getElementById("btn-tex-do-now");
 const texLastEdited = document.getElementById("tex-last-edited");
 const yamlContent   = document.getElementById("yaml-content");
 const texContent    = document.getElementById("tex-content");   // now a <textarea>
@@ -79,6 +80,7 @@ function highlightToolbarBtn(active) {
   btnTexStudent.classList.toggle("active", active === "tex-student");
   btnTexTeacher.classList.toggle("active", active === "tex-teacher");
   btnTexSlides.classList.toggle("active",  active === "tex-slides");
+  btnTexDoNow.classList.toggle("active",   active === "tex-do_now");
 }
 
 // ── Relative time formatter ──────────────────────────────────────────────────
@@ -443,6 +445,7 @@ btnYaml.addEventListener("click", () => {
 btnTexStudent.addEventListener("click", () => openTexView("student"));
 btnTexTeacher.addEventListener("click", () => openTexView("teacher"));
 btnTexSlides.addEventListener("click",  () => openTexView("slides"));
+btnTexDoNow.addEventListener("click",   () => openTexView("do_now"));
 
 btnTexSave.addEventListener("click",    () => doSave().catch(() => {}));
 btnTexRebuild.addEventListener("click", () => doRebuild().catch(() => {}));

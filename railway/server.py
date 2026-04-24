@@ -40,7 +40,7 @@ SUPABASE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
 REBUILD_PASSCODE = os.environ["REBUILD_PASSCODE"]
 
 LESSON_ID_RE = re.compile(r"^L\d{2}_P\d$")
-EDITIONS = {"student", "teacher", "slides"}
+EDITIONS = {"student", "teacher", "slides", "do_now"}
 
 HERE = Path(__file__).parent
 PREAMBLE_STY = HERE / "preamble.sty"
@@ -86,7 +86,7 @@ def _rest_get_lesson(lesson_id: str, user_name: str | None = None) -> dict | Non
         f"{SUPABASE_URL}/rest/v1/lessons",
         headers=_rest_headers(user_name),
         params={"id": f"eq.{lesson_id}",
-                "select": "tex_student,tex_teacher,tex_slides,yaml_text"},
+                "select": "tex_student,tex_teacher,tex_slides,tex_do_now,yaml_text"},
         timeout=15,
     )
     r.raise_for_status()
@@ -168,7 +168,7 @@ def _validate_lesson_id(lesson_id: str) -> None:
 
 def _validate_edition(edition: str) -> None:
     if edition not in EDITIONS:
-        raise HTTPException(status_code=400, detail="edition must be 'student', 'teacher', or 'slides'")
+        raise HTTPException(status_code=400, detail="edition must be 'student', 'teacher', 'slides', or 'do_now'")
 
 
 # ---------------------------------------------------------------------------
@@ -260,9 +260,10 @@ def build(
     tex_student = row.get("tex_student")
     tex_teacher = row.get("tex_teacher")
     tex_slides = row.get("tex_slides")
+    tex_do_now = row.get("tex_do_now")
     yaml_text = row.get("yaml_text")
 
-    if not yaml_text and not tex_student and not tex_teacher and not tex_slides:
+    if not yaml_text and not tex_student and not tex_teacher and not tex_slides and not tex_do_now:
         raise HTTPException(
             status_code=422,
             detail="Lesson has no yaml_text and no tex sources; nothing to build",
@@ -272,9 +273,11 @@ def build(
     student_ok = False
     teacher_ok = False
     slides_ok = False
+    do_now_ok = False
     pdf_student_url = None
     pdf_teacher_url = None
     pdf_slides_url = None
+    pdf_do_now_url = None
 
     with tempfile.TemporaryDirectory() as tmp_str:
         tmp = Path(tmp_str)
@@ -323,7 +326,7 @@ def build(
                                     user_name=x_user_name)
                 return {"ok": False, "log_tail": gen_out[-4096:],
                         "pdf_student_url": None, "pdf_teacher_url": None,
-                        "pdf_slides_url": None}
+                        "pdf_slides_url": None, "pdf_do_now_url": None}
 
             gen_student = HERE / "tex" / f"{lesson_id}_student.tex"
             gen_teacher = HERE / "tex" / f"{lesson_id}_teacher.tex"
@@ -363,6 +366,16 @@ def build(
                 if not log_tail:
                     log_tail = slides_log
 
+        # --- do_now (independent: missing tex_do_now is not a failure) ---
+        if tex_do_now:
+            do_now_tex_path = tmp / f"{lesson_id}_do_now.tex"
+            do_now_tex_path.write_text(tex_do_now, encoding="utf-8")
+            do_now_ok, do_now_log = _run_pdflatex(do_now_tex_path.name, tmp)
+            if not do_now_ok:
+                log.warning("do_now build failed for %s: %s", lesson_id, do_now_log[-500:])
+                if not log_tail:
+                    log_tail = do_now_log
+
         # --- upload ---
         if student_ok:
             pdf_path = tmp / f"{lesson_id}_student.pdf"
@@ -385,6 +398,13 @@ def build(
                 _storage_upload(obj, pdf_path.read_bytes(), "application/pdf")
                 pdf_slides_url = _storage_public_url(obj)
 
+        if do_now_ok:
+            pdf_path = tmp / f"{lesson_id}_do_now.pdf"
+            if pdf_path.exists():
+                obj = f"{lesson_id}_do_now.pdf"
+                _storage_upload(obj, pdf_path.read_bytes(), "application/pdf")
+                pdf_do_now_url = _storage_public_url(obj)
+
     # overall_ok: only editions that were attempted must succeed; slides are
     # independent — a slides failure doesn't poison the overall flag when
     # student/teacher both succeeded (or weren't attempted).
@@ -392,10 +412,13 @@ def build(
     overall_ok = (not attempted_packet or (student_ok and teacher_ok))
     if tex_slides and not slides_ok:
         overall_ok = False
+    if tex_do_now and not do_now_ok:
+        overall_ok = False
 
     built_editions = [e for e, flag in [("student", student_ok),
                                          ("teacher", teacher_ok),
-                                         ("slides", slides_ok)] if flag]
+                                         ("slides", slides_ok),
+                                         ("do_now", do_now_ok)] if flag]
     log.info("%s build done — built: %s", lesson_id,
              ", ".join(built_editions) if built_editions else "none")
 
@@ -414,6 +437,7 @@ def build(
         "pdf_student_url": pdf_student_url,
         "pdf_teacher_url": pdf_teacher_url,
         "pdf_slides_url": pdf_slides_url,
+        "pdf_do_now_url": pdf_do_now_url,
         "log_tail": "" if overall_ok else log_tail,
     }
 

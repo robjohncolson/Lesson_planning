@@ -4,7 +4,7 @@
 
 import { supabase } from "/js/api.js";
 
-const TEX_FIELDS = ["tex_student", "tex_teacher", "tex_slides", "yaml_text"];
+const TEX_FIELDS = ["tex_student", "tex_teacher", "tex_slides", "tex_do_now", "yaml_text"];
 
 export function subscribeLesson({ lessonId, username, onRemoteSave, onPresenceChange }) {
   const channel = supabase.channel(`lesson:${lessonId}`);
