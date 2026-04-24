@@ -16,6 +16,7 @@ const detailTitle   = document.getElementById("detail-title");
 const btnStudentPdf = document.getElementById("btn-student-pdf");
 const btnTeacherPdf = document.getElementById("btn-teacher-pdf");
 const btnSlides     = document.getElementById("btn-slides");
+const btnPacer      = document.getElementById("btn-pacer");
 const btnItems      = document.getElementById("btn-items");
 const btnYaml       = document.getElementById("btn-yaml");
 const btnTexStudent = document.getElementById("btn-tex-student");
@@ -137,6 +138,15 @@ async function selectLesson(id) {
     detailTitle.textContent    = `${lesson.id}${lesson.title ? " — " + lesson.title : ""}`;
 
     setPdfButtons(lesson);
+
+    // Pacer link: derive L{NN} prefix from lesson id (e.g. L41_P2 -> L41)
+    const pacerPrefix = (id.match(/^L\d+/) || [])[0];
+    if (pacerPrefix && btnPacer) {
+      btnPacer.href = `/pacers/${pacerPrefix}_Pacer.html`;
+      btnPacer.style.display = "";
+    } else if (btnPacer) {
+      btnPacer.style.display = "none";
+    }
 
     // YAML button disabled if no spec yet; Items always available
     btnYaml.disabled = !lesson.yaml_text;
@@ -456,6 +466,13 @@ async function boot() {
     await lessonList.init();
   } catch (err) {
     showError("Could not load lessons: " + err.message);
+  }
+
+  // Deep-link support: /?lesson=L35_P2 auto-selects on load (used by schedule page)
+  const deepLink = new URLSearchParams(location.search).get("lesson");
+  if (deepLink) {
+    lessonList.setActive(deepLink);
+    selectLesson(deepLink);
   }
 }
 

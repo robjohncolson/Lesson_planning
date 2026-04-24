@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Schedule · Teacher Console</title>
+  <link rel="stylesheet" href="/styles/console.css" />
+  <style>
+    #sched-main { padding: 18px 22px; overflow: auto; }
+    .sched-intro { color: #556677; font-size: 13px; margin-bottom: 14px; }
+    .sched-intro strong { color: #112233; }
+    table.sched {
+      border-collapse: collapse; width: 100%;
+      background: #fff; font-size: 13px;
+    }
+    table.sched th, table.sched td {
+      border: 1px solid #d0d7de; padding: 8px 10px; vertical-align: top;
+      text-align: left;
+    }
+    table.sched th {
+      background: #0b3c6c; color: #fff; font-weight: 600; white-space: nowrap;
+    }
+    table.sched th.date-col { width: 150px; }
+    table.sched tr.week-break td {
+      background: #eaf2fb; font-weight: 600; color: #0b3c6c;
+      text-align: center; padding: 4px;
+    }
+    td.day-cell { min-width: 260px; }
+    td.day-cell.tbd { background: #fff9e6; }
+    td.day-cell.assess { background: #fde2e2; }
+    td.day-cell.buffer { background: #eee; color: #666; font-style: italic; }
+    td.day-cell.today { outline: 3px solid #d94e2f; outline-offset: -3px; }
+    .lesson-tag {
+      display: inline-block; background: #0b5c7b; color: #fff;
+      padding: 2px 8px; border-radius: 3px; font-weight: 600; font-size: 12px;
+      text-decoration: none; margin-right: 6px;
+    }
+    .lesson-tag:hover { background: #1e6fc8; }
+    .day-tag {
+      display: inline-block; background: #c88b14; color: #fff;
+      padding: 1px 6px; border-radius: 3px; font-size: 11px; margin-right: 4px;
+    }
+    .day-tag.assess { background: #b23a3a; }
+    .day-tag.review { background: #556677; }
+    .day-tag.buffer { background: #888; }
+    .mins { color: #556677; font-size: 12px; }
+    .mins.short { color: #b23a3a; font-weight: 600; }
+    .pacer-link {
+      display: inline-block; margin-top: 6px; font-size: 12px;
+      color: #1e6fc8; text-decoration: none;
+    }
+    .pacer-link:hover { text-decoration: underline; }
+    .notes { display: block; margin-top: 4px; color: #556677; font-size: 11px; font-style: italic; }
+    .loading { color: #556677; font-style: italic; padding: 40px; }
+    .error { color: #b23a3a; padding: 20px; }
+  </style>
+</head>
+<body>
+
+  <header id="app-header">
+    <h1>Schedule</h1>
+    <nav>
+      <a href="/" class="nav-link">Lessons</a>
+      <a href="/dag.html" class="nav-link">DAG</a>
+      <a href="/schedule.html" class="nav-link active">Schedule</a>
+    </nav>
+    <span id="health-indicator">&nbsp;</span>
+  </header>
+
+  <div id="sched-main">
+    <div class="sched-intro">
+      7-week view through end of school (<strong>2026-06-20</strong>).
+      Cells show lesson day + minutes + pacer link. Yellow = <strong>TBD — confirm</strong>.
+      Red outline = today. Click a lesson tag to open the packet editor.
+    </div>
+    <div id="sched-body" class="loading">Loading schedule…</div>
+  </div>
+
+  <script type="module">
+    import { api } from "/js/api.js";
+
+    const root = document.getElementById("sched-body");
+    const healthEl = document.getElementById("health-indicator");
+
+    function fmtDate(iso) {
+      const d = new Date(iso + "T00:00:00");
+      return d.toLocaleDateString("en-US", {
+        weekday: "short", month: "short", day: "numeric"
+      });
+    }
+
+    function weekOf(iso) {
+      const d = new Date(iso + "T00:00:00");
+      const day = d.getDay(); // 0=Sun, 1=Mon...
+      const offset = day === 0 ? -6 : 1 - day;
+      d.setDate(d.getDate() + offset);
+      return d.toISOString().slice(0, 10);
+    }
+
+    function pacerHref(lessonId) {
+      if (!lessonId) return null;
+      const m = lessonId.match(/^L\d+/);
+      return m ? `/pacers/${m[0]}_Pacer.html` : null;
+    }
+
+    function cellHtml(row, isToday) {
+      if (!row) return '<td class="day-cell buffer">—</td>';
+
+      const tbd = row.notes && row.notes.toLowerCase().includes("tbd");
+      const isAssess = row.day_of_lesson === "ASSESS";
+      const isBuf = row.day_of_lesson === "BUFFER" || row.day_of_lesson === "REVIEW";
+      const classes = ["day-cell"];
+      if (tbd) classes.push("tbd");
+      if (isAssess) classes.push("assess");
+      if (isBuf && !row.lesson_id) classes.push("buffer");
+      if (isToday) classes.push("today");
+
+      let lessonTag = "";
+      if (row.lesson_id) {
+        lessonTag = `<a class="lesson-tag" href="/?lesson=${encodeURIComponent(row.lesson_id)}">${row.lesson_id}</a>`;
+      }
+
+      let dayTag = "";
+      if (row.day_of_lesson) {
+        const dayClass = row.day_of_lesson === "ASSESS" ? "assess"
+                       : row.day_of_lesson === "REVIEW" ? "review"
+                       : row.day_of_lesson === "BUFFER" ? "buffer"
+                       : "";
+        dayTag = `<span class="day-tag ${dayClass}">${row.day_of_lesson}</span>`;
+      }
+
+      let mins = "";
+      if (row.minutes != null) {
+        const shortClass = row.minutes < 50 ? "short" : "";
+        mins = `<span class="mins ${shortClass}">${row.minutes} min</span>`;
+      }
+
+      const ph = pacerHref(row.lesson_id);
+      const pacerLine = ph
+        ? `<a class="pacer-link" href="${ph}" target="_blank" rel="noopener">Pacer ↗</a>`
+        : "";
+
+      const notes = row.notes ? `<span class="notes">${escape(row.notes)}</span>` : "";
+
+      return `<td class="${classes.join(" ")}">
+        ${lessonTag}${dayTag}${mins}
+        ${pacerLine}
+        ${notes}
+      </td>`;
+    }
+
+    function escape(s) {
+      return String(s).replace(/[&<>"']/g, c =>
+        ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+    }
+
+    function render(rows) {
+      if (!rows.length) {
+        root.innerHTML = '<div class="error">No schedule rows found. Run <code>supabase/seed_schedule.py</code> and apply migration 004.</div>';
+        return;
+      }
+
+      // Group by date → { A: row, F: row }
+      const byDate = new Map();
+      for (const r of rows) {
+        if (!byDate.has(r.class_date)) byDate.set(r.class_date, {});
+        byDate.get(r.class_date)[r.period] = r;
+      }
+
+      const todayIso = new Date().toISOString().slice(0, 10);
+
+      // Sort dates
+      const dates = [...byDate.keys()].sort();
+
+      // Group into weeks
+      let currentWeek = null;
+      const lines = [
+        '<table class="sched">',
+        '<thead><tr>',
+        '<th class="date-col">Date</th>',
+        '<th>Period A</th>',
+        '<th>Period F</th>',
+        '</tr></thead>',
+        '<tbody>',
+      ];
+
+      for (const date of dates) {
+        const wk = weekOf(date);
+        if (wk !== currentWeek) {
+          currentWeek = wk;
+          lines.push(`<tr class="week-break"><td colspan="3">Week of ${fmtDate(wk)}</td></tr>`);
+        }
+        const cells = byDate.get(date);
+        const isToday = date === todayIso;
+        lines.push(
+          "<tr>",
+          `<td><strong>${fmtDate(date)}</strong></td>`,
+          cellHtml(cells.A, isToday),
+          cellHtml(cells.F, isToday),
+          "</tr>"
+        );
+      }
+      lines.push("</tbody></table>");
+      root.innerHTML = lines.join("");
+    }
+
+    async function boot() {
+      try {
+        const ok = await api.checkHealth();
+        healthEl.textContent = ok ? "Connected" : "Offline";
+        healthEl.className = ok ? "ok" : "error";
+        const rows = await api.listSchedule();
+        render(rows);
+      } catch (err) {
+        root.innerHTML = `<div class="error">Failed to load schedule: ${err.message}</div>`;
+      }
+    }
+    boot();
+  </script>
+</body>
+</html>

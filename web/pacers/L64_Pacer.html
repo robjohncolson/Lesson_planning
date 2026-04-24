@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>L44 Pacer · Period 1 · Single-Period Quick</title>
+<title>L64 Pacer · Period 1 (Single-Period Quick)</title>
 <style>
   :root {
     --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
@@ -114,14 +114,14 @@
 
 <header>
   <div>
-    <h1>Lesson 4-4 Pacer</h1>
-    <div class="meta">Single Period (Quick) &middot; Adding &amp; Subtracting Rational Expressions + DOK-3 Electrical Resistance &middot; No Blooket</div>
+    <h1>Lesson 6-4 Pacer · Single-Period Quick</h1>
+    <div class="meta">Period 1 · Logarithmic Functions + DOK-3 Sales Revenue Inverse · No Blooket</div>
   </div>
   <div class="meta" id="dateLabel"></div>
 </header>
 
 <nav class="tabs" id="tabBar">
-  <button class="tab active" data-tab="p1">P1 &middot; Add/Subtract Rational Expressions ⭐</button>
+  <button class="tab active" data-tab="p1">P1 · Log Functions + DOK-3 Sales Revenue ⭐</button>
 </nav>
 
 <main id="panels"></main>
@@ -129,94 +129,100 @@
 <script>
 const PACER = {
   p1: {
-    label: "Period 1 · Single-Period Quick · Adding & Subtracting Rational Expressions · 55 min base (65 min for both A & F sections)",
-    total_min: 58,
-    short_note: "Single-period-quick lesson: two examples modeled in Launch (justified deviation from standard one-example rule — adding and subtracting are distinct assessment skills on Topic 4 LEHS). DOK-3 capstone: Practice #32 (electrical resistance parallel circuit) rehearses Topic 4 LEHS Q#15 structural reasoning. 45-min Wed F variant: cut #16 + #26. NEVER cut #32.",
+    label: "Period 1 · Single-Period Quick · Logarithmic Functions + DOK-3 Sales Revenue Inverse · 50 min base (45-min Wed F: drop q9)",
+    total_min: 50,
+    short_note: "DOK-3 driver: Practice #28 (R = 12log(a+1)+25 — Sales Revenue Inverse). Students find the inverse function and judge which form is easier for specific R values. NEVER cut #28. 45-min Wed F: cut q9 only.",
     phases: [
-      { id:"donow", title:"Do Now — Critique & Explain: 1/2 + 1/3 conflict",
-        fw:"bridge from 4-3", dok:"1-2", min:5,
-        items:[{qid:"4-4-savvas-model-discuss-lesson-4-4-launch", label:"Model & Discuss — Teo vs Evander: who found the correct common denominator for 1/2 + 1/3 + 1/9?"}],
+      { id:"donow", title:"Do Now — Log Translations Bridge",
+        fw:"bridge to log inverses launch", dok:"1-2", min:7,
+        items:[
+          {qid:"6-4-savvas-q31", label:"Do Now 1 — Translation identification: h(x) = ln(x+2)−1"},
+          {qid:"6-4-savvas-q5",  label:"Do Now 2 — Graph y = log₄ x; state key features"},
+          {qid:"6-4-savvas-q32", label:"Do Now 3 — SAT/ACT: inverse of f(x) = 5^(x+1)"},
+        ],
         teacher:[
           "Hand out at door.",
-          "Circulate silently 3 min. No hints.",
-          "Cold-call 1 student on the 1/2 + 1/3 conflict resolution.",
-          "BRIDGE SCRIPT (read aloud): 'Yesterday (Lesson 4-3) you practiced MULTIPLYING and DIVIDING rational expressions. Today you’ll ADD and SUBTRACT them — which requires one new move that multiplication didn’t: finding a common denominator first. The Model & Discuss prompt shows two students adding 1/2 + 1/3 in conflicting ways. Which is right?'"
+          "Circulate 4 min.",
+          "Cold-call on q31: ask which transformation shifts the VA.",
+          "Pull sheets at minute 7."
         ],
         rules:[
-          "Part A: Teo claims common denom = 2+3+9=14. Evander claims 2×3×9=54. Who is correct?",
-          "Part B: Find the actual sum, explaining the method you use.",
-          "Part C: Is multiplying the denominators together always the quickest way to find the common denominator?"
+          "q31: translation multi-select for h(x) = ln(x+2)−1",
+          "q5: graph y = log₄ x with all key features",
+          "q32: find inverse of f(x) = 5^(x+1) (SAT/ACT)"
         ],
-        answer:"A. Only Evander is correct. A common denominator must have each denominator as a factor — you cannot add them together. B. 17/18; convert each fraction to denominator 18. C. No — it may be faster to use the LCM (least common denominator) rather than multiplying all denominators. For 1/2 + 1/3 + 1/9, the LCM is 18, not 54.",
+        answer:"q31: translated 2 units to the left; translated 1 unit downward; vertical asymptote shifts 2 units to the left. q5: Domain x > 0; range all reals; x-intercept 1; asymptote y-axis; end behavior: as x→0, y→−∞; as x→∞, y→∞. q32: (B) f⁻¹(x) = log₅ x − 1. Swap x and y: x = 5^(y+1), so y+1 = log₅ x and y = log₅ x − 1.",
+        warn:"Solo teacher: circulate silently. No hints on q32.",
       },
-      { id:"launch", title:"Launch — Ex 3 (add unlike) + Ex 4 (subtract unlike) [COMPRESSED]",
-        fw:"teacher models", dok:"2", min:13,
+      { id:"launch", title:"Launch — Inverse of a Log Function (Ex 3B modeled + 90-sec Ex 3A contrast)",
+        fw:"teacher models", dok:"2", min:8,
         items:[],
         teacher:[
-          "Project Example 3 (add unlike denominators). Think aloud: factor each denominator, identify LCM, rewrite each fraction over LCM, combine, simplify.",
-          "'The LCM takes every distinct factor at its highest power.'",
-          "Transition to Example 4 WITHOUT stopping — announce: 'Subtracting looks identical UNTIL the distribute step. Watch the minus sign.'",
-          "Project Example 4. Think aloud: after combining numerators, distribute the negative across EVERY term of the second numerator.",
-          "Flag the Rules card on the student packet — students copy into margin.",
-          "30-sec pause: 'Turn to partner: where does the minus-sign trap catch students? What do you do to avoid it?'",
-          "Do NOT solve Try-Its or Practice items. Release at minute 18."
+          "Project Ex 3B. Think aloud: g(x) = log₇(x+5). Step 1: swap x and y. Step 2: write 7^x = y+5. Step 3: solve → y = 7^x − 5.",
+          "'Now verify with composition: g(g⁻¹(x)) = log₇((7^x−5)+5) = log₇(7^x) = x. ✓'",
+          "90-sec contrast: Ex 3A (inverse of exponential, e.g. y = 3·5^x). 'Swap x and y → x = 3·5^y → x/3 = 5^y → y = log₅(x/3). Same swap-and-solve.'",
+          "Flag the Rules card — students copy VA shift rule and inverse rules into margin.",
+          "30-sec pause: partner repeats the inverse steps in their own words.",
+          "Do NOT solve Explore items — release at minute 15."
         ],
         rules:[
-          "LIKE denominators: combine numerators, keep the denominator, simplify.",
-          "UNLIKE denominators: (a) factor each denominator, (b) find the LCM, (c) rewrite each fraction with LCM as denominator, (d) combine numerators, (e) simplify.",
-          "LCM of two polynomial denominators = every DISTINCT factor at its HIGHEST power across both.",
-          "After combining, always check whether the final expression can be simplified by cancelling a common factor.",
-          "⚠️ SIGN TRAP (subtraction): distribute the minus sign across EVERY term of the second numerator — not just the first."
+          "LOG FUNCTION KEY FEATURES (y = log_b x, b > 0, b ≠ 1):",
+          "  Domain: x > 0 | Range: all reals | VA: x = 0 | x-intercept: (1, 0) | passes through (b, 1)",
+          "TRANSLATION (y = log_b(x−h) + k):",
+          "  VA shifts to x = h | Domain: x > h | Point: (b+h, 1+k)",
+          "INVERSE RULES:",
+          "  y = a·b^x  ⟹  inverse: y = log_b(x/a)",
+          "  y = log_b(x−h)+k  ⟹  inverse: y = b^(x−k) + h",
+          "COMPOSITION CHECK: f(f⁻¹(x)) = x"
         ],
-        warn:"COMPRESSED LESSON — two examples modeled back-to-back in Launch. This deviates from the standard one-example rule because adding and subtracting are distinct assessment-tested skills. Release to Explore promptly at minute 18.",
+        answer:"Ex 3B: g⁻¹(x) = 7^x − 5. Composition: g(g⁻¹(x)) = log₇(7^x−5+5) = log₇ 7^x = x ✓. Ex 3A contrast: inverse of f(x) = 10^(x+1) is f⁻¹(x) = log x − 1.",
       },
-      { id:"explore", title:"Explore — TPS (TI 3, TI 4, #12, #16, #26, ⭐ #32 DOK-3)",
-        fw:"student work + DOK-3", dok:"2-3", min:32,
+      { id:"explore", title:"Explore — Think-Pair-Share: ⭐ q28 → q21 → q24 → q13 → q9",
+        fw:"TPS + DOK-3 driver", dok:"2-3", min:25,
         items:[
-          {qid:"4-4-savvas-try-it-3-lesson-4-4", label:"Try It 3 — Add rational expressions (unlike denominators)"},
-          {qid:"4-4-savvas-try-it-4-lesson-4-4", label:"Try It 4 — Subtract rational expressions (unlike denominators)"},
-          {qid:"4-4-savvas-q12", label:"Practice #12 — Generalize (like vs unlike rational expressions)"},
-          {qid:"4-4-savvas-q16", label:"Practice #16 — Find LCM of polynomial denominators (factor first)"},
-          {qid:"4-4-savvas-q26", label:"Practice #26 — Ahmed bike ride (sign-distribution trap)"},
-          {qid:"4-4-savvas-q32", label:"Practice #32 ⭐ DOK-3 ELECTRICAL RESISTANCE · Topic 4 LEHS Q#15 prep", dok3:true, note:"Model With Mathematics: find the ratio of Circuit A resistance to Circuit B resistance. Each resistance = sum of reciprocals (parallel resistors). Plan ~10 min. Do NOT give CER answer — pairs present at Share."},
+          {qid:"6-4-savvas-q28", label:"Practice #28 ⭐ DOK-3 SALES REVENUE INVERSE — Form B model-then-invert rehearsal", dok3:true, note:"R = 12log(a+1)+25. Students: (a) find inverse a = 10^((R−25)/12) − 1, (b) judge which form is easier for R=49 and R=61. Plan 10 min. NEVER cut."},
+          {qid:"6-4-savvas-q21", label:"Practice #21 — Inverse of 5^(x−3) [Form B Q7 rehearsal]"},
+          {qid:"6-4-savvas-q24", label:"Practice #24 — Inverse of log₂(8x), token drag [Form B Q12 rehearsal]"},
+          {qid:"6-4-savvas-q13", label:"Practice #13 — Asymptote of translated log from graph [Form B Q11 rehearsal]"},
+          {qid:"6-4-savvas-q9",  label:"Practice #9 — Are graphs inverses? Inverse from graph [Form B Q9/Q10 rehearsal]"},
         ],
         teacher:[
-          "5 laps across 32 min.",
-          "Lap 1 (4 min): Try-It 3 — press pairs on LCM construction. 'What are the factors of each denominator? What is the LCM?'",
-          "Lap 2 (4 min): Try-It 4 — watch for sign-distribution errors. 'Where does the minus sign distribute?'",
-          "Lap 3 (3 min): #12 — like denominators, quick confidence build. 'What’s the one step you can skip compared to unlike?'",
-          "Lap 4 (4+5 min): #16 + #26. On #26 (sign-trap item) press every pair: 'Where does the minus go?'",
-          "Lap 5 (10 min): ⭐ #32 Electrical Resistance — the capstone. Students must (a) recognize 1/R_total = 1/R_A + 1/R_B for each circuit, (b) build common denominator, (c) form ratio as single simplified rational expression.",
-          "Do NOT give #32 CER answers. Pairs present argument at Share.",
-          "45-min Wed F variant: cut #16 + #26. NEVER cut #32."
+          "4 laps across 25 min.",
+          "Lap 1 (10 min): ⭐ q28 DOK-3. Press pairs on inverse setup and form comparison. DO NOT give the inverse formula — redirect with 'what does it mean to undo R?'",
+          "Lap 2 (4 min): q21. Press notation: what is the inverse of 5^(x−3)?",
+          "Lap 3 (4 min): q24. Press: inverse of log₂(8x) — watch for domain.",
+          "Lap 4 (4 min): q13. Press: how does the horizontal shift move the VA?",
+          "Lap 5 (3 min): q9. Are graphs inverses? Key test: reflective symmetry over y=x.",
+          "45-min Wed F: skip q9."
         ],
-        answer:"Try It 3: a. (x+7)/[(x+2)(x-3)], x≠−2,−2,3. b. (8x²−13x−12)/[(2x−1)(3x+4)], x≠−4/3, 1/2. | Try It 4: a. (x−2)/(2x²), x≠0. b. 1/(x−5), x≠−5,5. | #12: Same basic procedure as for rational numbers — find common denominator, rewrite, combine, simplify; difference is that denominators are polynomials. | #16: LCM = 3(3x+1)(x+2). | #26: Total time = 30(x+1)/[x(x+2)]; 2.75 hours when first-half speed = 12 mph. | ⭐ #32 DOK-3: ratio R_A/R_B = (x−5)(x+4) : 1, i.e., x²−x−20. KEY MOVE: apply 1/R_total = 1/R_1 + 1/R_2 for each parallel circuit → add via LCM → flip to get R_total → form and simplify ratio. This IS the structural reasoning tested on Topic 4 LEHS Q#15.",
-        warn:"ELL: sentence frame required on #32. IEP support: provide the setup '1/R_total = 1/R_1 + 1/R_2 for each circuit. Find a common denominator for each side.' Accept verbal explanation of LCM step in lieu of written steps. Students will stall on flipping 1/R_total to R_total — remind: reciprocate both sides of the equation.",
+        answer:"q28 (DOK-3): Inverse is a = 10^((R−25)/12) − 1. It is easier to use the inverse to find a when R is known (direct substitution vs. solving a log equation). For R=49: a = 10^(24/12)−1 = 10²−1 = 99. For R=61: a = 10^(36/12)−1 = 10³−1 = 999. q21: f⁻¹(x) = log₅ x + 3. q24: f⁻¹(x) = 2^x / 8. q13: g(x) = log₃(x−2)+1 (VA at x=2). q9: No; the x-intercept of the blue function (log₂ x) is not equal to the y-intercept of the red function (2^x+1, which has y-intercept 2, not 1).",
+        warn:"Solo teacher: 4 laps. On q28, press the judgment step (which form and why) — that is the DOK-3 performance criterion.",
       },
-      { id:"share", title:"Share / Summary — Resistance Reveal + Topic 4 LEHS Q#15 Bridge",
-        fw:"academic conversation", dok:"2", min:5,
+      { id:"share", title:"Share / Summary + 6-5 Bridge",
+        fw:"academic conversation + 6-5 bridge", dok:"2", min:5,
         items:[],
         teacher:[
-          "Cold-call 1 pair (ideally one that struggled on #32) to present their resistance solution using the sentence frame.",
-          "Class signals thumbs up/sideways. Write the LCM step on the board.",
-          "Bridge aloud: 'This resistance move — find LCM, combine reciprocals into a single rational expression — IS the structural reasoning on Topic 4 LEHS Q#15. You have now rehearsed it.'"
+          "Cold-call 1 pair to present q28 solution and form-choice justification.",
+          "Class signals thumbs. Write a = 10^((R−25)/12) − 1 on board.",
+          "6-5 bridge: 'Log properties (product/quotient/power rules) will let you expand and condense log expressions — making inverses and equations faster.'"
         ],
-        answer:"#32 answer key: ratio R_A/R_B = (x−5)(x+4) : 1. Sentence frame: 'For the parallel circuit, 1/R_total = 1/R_1 + 1/R_2. I found a common denominator of ___, added the reciprocals to get 1/R_total = ___, then flipped to get R_total = ___. The ratio R_A/R_B simplified to ___ because ___.'"
+        bridge:"In 6-5 you will learn log properties (product, quotient, power rules). Those properties let you expand or condense log expressions — which makes solving equations like the one in #28 much faster.",
       },
-      { id:"exit", title:"Exit Ticket — Summary Recap",
-        fw:"not graded", dok:"1-2", min:3,
+      { id:"exit", title:"Exit Ticket — Inverse + Asymptote",
+        fw:"not graded", dok:"1-2", min:5,
         items:[],
         teacher:[
           "Collect at door.",
-          "Scan stem 2 (reciprocal-sum connection to rational-expression addition). Plan re-teach if many students cannot articulate the structural parallel.",
-          "Both A and F sections: use extra 10 min (65-min classes) on Explore #32 for richer LCM argument."
+          "Scan: (1) Did students swap x/y correctly? (2) Did students solve for y in exponential form? (3) Did they state VA of f as x=2 and HA of f⁻¹ as y=2?",
+          "No grade. Use responses to plan any re-teach before 6-5."
         ],
         rules:[
-          "1. To add rational expressions with unlike denominators, I must first find the ___ of the denominators.",
-          "2. Practice #32 (resistance) showed me that reciprocal-sum problems (like 1/R_1 + 1/R_2) use the same algebraic steps as adding rational expressions because ___.",
-          "3. One biggest thing I learned today: ___."
+          "Find the inverse of f(x) = 3·log₅(x − 2) + 1.",
+          "State the vertical asymptote of f.  VA: x = ___",
+          "State the horizontal asymptote of f⁻¹.  HA: y = ___",
+          "One biggest thing I learned today: ___"
         ],
-        bridge:"Single-period-quick lesson — no P2 or P3 for 4-4. Topic 4 LEHS Q#15 structural reasoning rehearsed via Practice #32 today. Next lesson: 4-5 (complex fractions and rational equations).",
+        answer:"f⁻¹(x) = 5^((x−1)/3) + 2. VA of f: x = 2. HA of f⁻¹: y = 2 (the VA of f becomes the HA of the inverse).",
       },
     ]
   },

@@ -92,7 +92,7 @@ def title_slide(prs, title, subtitle):
          size=44, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
     text(s, subtitle, Inches(0.8), Inches(3.85), Inches(11.7), Inches(0.8),
          size=24, color=RGBColor(0xBB, 0xD0, 0xE6), align=PP_ALIGN.CENTER)
-    text(s, "Klimsara-adapted · Student-centered · NOT on Topic 5 Assessment",
+    text(s, "Student-centered · NOT on Topic 5 Assessment",
          Inches(0.8), Inches(5.8), Inches(11.7), Inches(0.6),
          size=18, color=RGBColor(0x88, 0xAA, 0xCC), align=PP_ALIGN.CENTER)
 

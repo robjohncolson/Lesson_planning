@@ -1,4 +1,4 @@
-"""L54_P{1,2,3}_Slides.pptx — projection decks for Lesson 5-4 Klimsara-adapted.
+"""L54_P{1,2,3}_Slides.pptx — projection decks for Lesson 5-4 .
 
 Three decks, one per period. Same slide helpers as build_L43_slides.py.
 """
@@ -92,7 +92,7 @@ def title_slide(prs, title, subtitle):
          size=54, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
     text(s, subtitle, Inches(0.8), Inches(3.8), Inches(11.7), Inches(0.8),
          size=28, color=RGBColor(0xBB, 0xD0, 0xE6), align=PP_ALIGN.CENTER)
-    text(s, "Klimsara-adapted · Student-centered · No Blooket",
+    text(s, "Student-centered · No Blooket",
          Inches(0.8), Inches(5.8), Inches(11.7), Inches(0.6),
          size=18, color=RGBColor(0x88, 0xAA, 0xCC), align=PP_ALIGN.CENTER)
 

@@ -113,6 +113,16 @@ export const api = {
     }
   },
 
+  async listSchedule() {
+    const { data, error } = await supabase
+      .from("schedule")
+      .select("id, class_date, period, lesson_id, day_of_lesson, minutes, notes")
+      .order("class_date")
+      .order("period");
+    if (error) raise("listSchedule", error);
+    return data;
+  },
+
   // getLastAudit: returns the most recent audit row for a lesson, or null.
   // The audit table lives in lesson_planning schema (same client scope).
   // Never throws — silently returns null on error or empty result.

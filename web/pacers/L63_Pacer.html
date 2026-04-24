@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>L44 Pacer · Period 1 · Single-Period Quick</title>
+<title>L63 Pacer · Period 1 (Quick)</title>
 <style>
   :root {
     --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
@@ -114,14 +114,14 @@
 
 <header>
   <div>
-    <h1>Lesson 4-4 Pacer</h1>
-    <div class="meta">Single Period (Quick) &middot; Adding &amp; Subtracting Rational Expressions + DOK-3 Electrical Resistance &middot; No Blooket</div>
+    <h1>Lesson 6-3 Pacer · Quick (Single Period)</h1>
+    <div class="meta">Logarithms &middot; DOK-3 Spine: q15 (exp&#x2194;log inverse via graph) &middot; No Blooket</div>
   </div>
   <div class="meta" id="dateLabel"></div>
 </header>
 
 <nav class="tabs" id="tabBar">
-  <button class="tab active" data-tab="p1">P1 &middot; Add/Subtract Rational Expressions ⭐</button>
+  <button class="tab active" data-tab="p1">P1 &middot; Logarithms + DOK-3 Spine &#x2B50;</button>
 </nav>
 
 <main id="panels"></main>
@@ -129,94 +129,106 @@
 <script>
 const PACER = {
   p1: {
-    label: "Period 1 · Single-Period Quick · Adding & Subtracting Rational Expressions · 55 min base (65 min for both A & F sections)",
-    total_min: 58,
-    short_note: "Single-period-quick lesson: two examples modeled in Launch (justified deviation from standard one-example rule — adding and subtracting are distinct assessment skills on Topic 4 LEHS). DOK-3 capstone: Practice #32 (electrical resistance parallel circuit) rehearses Topic 4 LEHS Q#15 structural reasoning. 45-min Wed F variant: cut #16 + #26. NEVER cut #32.",
+    label: "Period 1 · Single-Period Quick · ~48 min (50-min class). 45-min Wed F variant: cut q53 + q54. NEVER cut q15.",
+    total_min: 48,
+    short_note: "DOK-3 spine: Practice #15 — Use graph of y=3^x to estimate log₃(50). Rehearses Form B Q7, Q10, Q11 through exp↔log inverse relationship. PT#58 dropped; q15 is the sole DOK-3 driver.",
     phases: [
-      { id:"donow", title:"Do Now — Critique & Explain: 1/2 + 1/3 conflict",
-        fw:"bridge from 4-3", dok:"1-2", min:5,
-        items:[{qid:"4-4-savvas-model-discuss-lesson-4-4-launch", label:"Model & Discuss — Teo vs Evander: who found the correct common denominator for 1/2 + 1/3 + 1/9?"}],
+      { id:"donow", title:"Do Now — Error Analysis + Reasoning",
+        fw:"bridge to logarithms launch", dok:"1-2", min:7,
+        items:[
+          {qid:"6-3-savvas-q14", label:"Do Now #1 — Error Analysis (q14): 16e^t = 98 solve error"},
+          {qid:"6-3-savvas-q16", label:"Do Now #2 — Reasoning (q16): log₄(x) < 0"},
+          {qid:"6-3-savvas-q3",  label:"Do Now #3 — Vocabulary (q3): common vs natural log"},
+        ],
         teacher:[
           "Hand out at door.",
-          "Circulate silently 3 min. No hints.",
-          "Cold-call 1 student on the 1/2 + 1/3 conflict resolution.",
-          "BRIDGE SCRIPT (read aloud): 'Yesterday (Lesson 4-3) you practiced MULTIPLYING and DIVIDING rational expressions. Today you’ll ADD and SUBTRACT them — which requires one new move that multiplication didn’t: finding a common denominator first. The Model & Discuss prompt shows two students adding 1/2 + 1/3 in conflicting ways. Which is right?'"
+          "Circulate 3 min silently — no hints on q14. Let pairs argue.",
+          "Cold-call 1 student on q14 error analysis at 5 min.",
+          "Pull sheets at 7 min."
         ],
         rules:[
-          "Part A: Teo claims common denom = 2+3+9=14. Evander claims 2×3×9=54. Who is correct?",
-          "Part B: Find the actual sum, explaining the method you use.",
-          "Part C: Is multiplying the denominators together always the quickest way to find the common denominator?"
+          "q14 prompt: 16e^t = 98 → e^t = 6.125 → 6.125t = ln(e) → t = ln(e)/6.125. Identify and correct the error.",
+          "q16 prompt: For what values of x is log₄(x) < 0 true?",
+          "q3 prompt: Explain the difference between the common logarithm and the natural logarithm."
         ],
-        answer:"A. Only Evander is correct. A common denominator must have each denominator as a factor — you cannot add them together. B. 17/18; convert each fraction to denominator 18. C. No — it may be faster to use the LCM (least common denominator) rather than multiplying all denominators. For 1/2 + 1/3 + 1/9, the LCM is 18, not 54.",
+        answer:"q14: Student did not convert to logarithmic form correctly. Correct: t = ln(6.125). | q16: {x | 0 < x < 1}. | q3: common log = log base 10 (log x); natural log = log base e (ln x).",
       },
-      { id:"launch", title:"Launch — Ex 3 (add unlike) + Ex 4 (subtract unlike) [COMPRESSED]",
-        fw:"teacher models", dok:"2", min:13,
+      { id:"launch", title:"Launch — Evaluate Logarithms (Ex 3 think-aloud)",
+        fw:"teacher models", dok:"2", min:8,
         items:[],
         teacher:[
-          "Project Example 3 (add unlike denominators). Think aloud: factor each denominator, identify LCM, rewrite each fraction over LCM, combine, simplify.",
-          "'The LCM takes every distinct factor at its highest power.'",
-          "Transition to Example 4 WITHOUT stopping — announce: 'Subtracting looks identical UNTIL the distribute step. Watch the minus sign.'",
-          "Project Example 4. Think aloud: after combining numerators, distribute the negative across EVERY term of the second numerator.",
-          "Flag the Rules card on the student packet — students copy into margin.",
-          "30-sec pause: 'Turn to partner: where does the minus-sign trap catch students? What do you do to avoid it?'",
-          "Do NOT solve Try-Its or Practice items. Release at minute 18."
+          "Project Example 3. Think aloud: log₂(x) = y ⇔ b^y = x.",
+          "Walk through log₅(125) = 3: '5 to what power is 125? 5³=125. Answer: 3.'",
+          "Walk through log₁⁄₄(16) = −2: '(1/4)^{−2} = 4² = 16. Answer: −2. Flag negative exponent!'",
+          "Walk through log₃(0): 'No power of 3 ever reaches 0 — UNDEFINED.'",
+          "Walk through log₂(2⁸) = 8 using identity log_b(b^k) = k. 'No work needed.'",
+          "Flag Rules card on student packet — students mark it.",
+          "30-sec pause: partner rewrite log₄(64) using the definition.",
+          "Do NOT solve Practice items. Release promptly at minute 15."
         ],
         rules:[
-          "LIKE denominators: combine numerators, keep the denominator, simplify.",
-          "UNLIKE denominators: (a) factor each denominator, (b) find the LCM, (c) rewrite each fraction with LCM as denominator, (d) combine numerators, (e) simplify.",
-          "LCM of two polynomial denominators = every DISTINCT factor at its HIGHEST power across both.",
-          "After combining, always check whether the final expression can be simplified by cancelling a common factor.",
-          "⚠️ SIGN TRAP (subtraction): distribute the minus sign across EVERY term of the second numerator — not just the first."
+          "LOG ↔ EXP: log_b(x) = y  ⇔  b^y = x",
+          "COMMON LOG: log x = log₁₀(x)",
+          "NATURAL LOG: ln x = log_e(x)",
+          "KEY: ln(e^t) = t  (this solves continuous growth!)",
+          "UNDEFINED: log_b(0) and log_b(negative) — no real answer",
+          "IDENTITY: log_b(b^k) = k",
+          "TEACHER SCRIPT: (1) 'A logarithm asks: what exponent does b need to produce x?' | (2) 'log₅(125): 5³=125. Answer: 3.' | (3) 'log₁⁄₄(16): (1/4)^{−2}=16. Answer: −2.' | (4) 'log₃(0): no power of 3 reaches 0 — UNDEFINED.' | (5) 'log₂(2⁸): identity, log_b(b^k)=k. Answer: 8.' | (6) 'Today’s DOK-3 spine: on the graph of y=3^x, we can read log₃(50) directly — because exp and log are inverses, the x-value IS the log.' | (7) Release to Explore."
         ],
-        warn:"COMPRESSED LESSON — two examples modeled back-to-back in Launch. This deviates from the standard one-example rule because adding and subtracting are distinct assessment-tested skills. Release to Explore promptly at minute 18.",
       },
-      { id:"explore", title:"Explore — TPS (TI 3, TI 4, #12, #16, #26, ⭐ #32 DOK-3)",
-        fw:"student work + DOK-3", dok:"2-3", min:32,
+      { id:"explore", title:"Explore — TPS + ⭐ DOK-3 Spine q15 (25 min)",
+        fw:"student work + DOK-3", dok:"2-3", min:25,
         items:[
-          {qid:"4-4-savvas-try-it-3-lesson-4-4", label:"Try It 3 — Add rational expressions (unlike denominators)"},
-          {qid:"4-4-savvas-try-it-4-lesson-4-4", label:"Try It 4 — Subtract rational expressions (unlike denominators)"},
-          {qid:"4-4-savvas-q12", label:"Practice #12 — Generalize (like vs unlike rational expressions)"},
-          {qid:"4-4-savvas-q16", label:"Practice #16 — Find LCM of polynomial denominators (factor first)"},
-          {qid:"4-4-savvas-q26", label:"Practice #26 — Ahmed bike ride (sign-distribution trap)"},
-          {qid:"4-4-savvas-q32", label:"Practice #32 ⭐ DOK-3 ELECTRICAL RESISTANCE · Topic 4 LEHS Q#15 prep", dok3:true, note:"Model With Mathematics: find the ratio of Circuit A resistance to Circuit B resistance. Each resistance = sum of reciprocals (parallel resistors). Plan ~10 min. Do NOT give CER answer — pairs present at Share."},
+          {qid:"6-3-savvas-q15", label:"Practice #15 ⭐ DOK-3 SPINE — Use graph of y=3^x to estimate log₃(50). Explain reasoning.", dok3:true, note:"10 min TPS + 5 min pair presentations. NEVER cut. Press: 'Where is y=50 on the graph? What x-value? WHY does that x-value equal the log?' Form B: Q7, Q10, Q11."},
+          {qid:"6-3-savvas-q52", label:"Practice #52 — DOK-2: $250 → $600 at 4% APR compounded continuously. Round to nearest year.", note:"4 min. Chain 2 Callback before this item. Press: 'Which log rule applies?'"},
+          {qid:"6-3-savvas-q53", label:"Practice #53 — DOK-2: Michael vs Peter investment race [45-min variant: skip]", note:"3 min. Press conversion between log and exp forms."},
+          {qid:"6-3-savvas-q54", label:"Practice #54 — DOK-2: Richter magnitude, 3-part (R = 0.67 log(0.37E) + 1.46) [45-min variant: skip]", note:"3 min. Chain 1 Callback before this item. Press asymptote and domain reasoning."},
+          {qid:"6-3-savvas-q17", label:"Practice #17 — DOK-3 Proof-style: Is log₃(1/27) = −3 correct? Explain. (Form B Q13)", note:"Press: 'Use the definition to check.'"},
         ],
         teacher:[
-          "5 laps across 32 min.",
-          "Lap 1 (4 min): Try-It 3 — press pairs on LCM construction. 'What are the factors of each denominator? What is the LCM?'",
-          "Lap 2 (4 min): Try-It 4 — watch for sign-distribution errors. 'Where does the minus sign distribute?'",
-          "Lap 3 (3 min): #12 — like denominators, quick confidence build. 'What’s the one step you can skip compared to unlike?'",
-          "Lap 4 (4+5 min): #16 + #26. On #26 (sign-trap item) press every pair: 'Where does the minus go?'",
-          "Lap 5 (10 min): ⭐ #32 Electrical Resistance — the capstone. Students must (a) recognize 1/R_total = 1/R_A + 1/R_B for each circuit, (b) build common denominator, (c) form ratio as single simplified rational expression.",
-          "Do NOT give #32 CER answers. Pairs present argument at Share.",
-          "45-min Wed F variant: cut #16 + #26. NEVER cut #32."
+          "4 laps across 25 min.",
+          "Lap 1 (10 min): ⭐ q15 DOK-3 spine. Press pairs: 'Where on the graph is y=50? What x-value does that correspond to?' Do NOT give the answer.",
+          "After 10 min: pair presentations (5 min). One pair explains: 'Why does reading the x-value on the exp graph give you the log?'",
+          "Say Chain 2 Callback before q52: 'We’ve done this three times — polynomial, rational, exponential decay. Today: continuous compound, y = Pe^{rt}. To invert e^t we need a new tool, the natural log. That’s why this unit exists — to give us the lock-pick for exponential equations.'",
+          "Lap 2 (4 min): q52. Press: 'Which log rule applies here?'",
+          "Lap 3 (3 min): q53. Press conversion between log and exp forms.",
+          "Say Chain 1 Callback before q54: 'Given a formula tying two quantities together (amplitude A and magnitude R), we want to extract one given the other. The difference: this time the link is a logarithm, not a polynomial or cube root.'",
+          "Lap 4 (3 min): q54. Press asymptote and domain reasoning.",
+          "Then q17: press 'Is log₃(1/27) = −3 correct? Use the definition to check.'",
+          "45-min Wed F variant: skip q53 and q54. Budget extra time on q15.",
+          "Solo teacher: 4 laps. On q15, press the 'why does this work?' reasoning — that’s the Form B Q10/Q11 assessment-critical move."
         ],
-        answer:"Try It 3: a. (x+7)/[(x+2)(x-3)], x≠−2,−2,3. b. (8x²−13x−12)/[(2x−1)(3x+4)], x≠−4/3, 1/2. | Try It 4: a. (x−2)/(2x²), x≠0. b. 1/(x−5), x≠−5,5. | #12: Same basic procedure as for rational numbers — find common denominator, rewrite, combine, simplify; difference is that denominators are polynomials. | #16: LCM = 3(3x+1)(x+2). | #26: Total time = 30(x+1)/[x(x+2)]; 2.75 hours when first-half speed = 12 mph. | ⭐ #32 DOK-3: ratio R_A/R_B = (x−5)(x+4) : 1, i.e., x²−x−20. KEY MOVE: apply 1/R_total = 1/R_1 + 1/R_2 for each parallel circuit → add via LCM → flip to get R_total → form and simplify ratio. This IS the structural reasoning tested on Topic 4 LEHS Q#15.",
-        warn:"ELL: sentence frame required on #32. IEP support: provide the setup '1/R_total = 1/R_1 + 1/R_2 for each circuit. Find a common denominator for each side.' Accept verbal explanation of LCM step in lieu of written steps. Students will stall on flipping 1/R_total to R_total — remind: reciprocate both sides of the equation.",
+        answer:"q15: log₃(50) ≈ 3.56. Find y=50 on graph, read x-value. 3³=27 and 3⁴=81 → answer between 3 and 4, closer to 3.5. Formally ≈3.56. WHY: log₃(50)=x means 3^x=50 — the x-value where the exp graph hits y=50 IS the log. | q52: verify before class (use A = Pe^{rt}: 600 = 250e^{0.04t} → t = ln(2.4)/0.04 ≈ 21 yr). | q53: verify before class. | q54: a. magnitude 7.9  b. 31,009,857,353 kWh  c. 16,705 kWh. | q17: correct — log₃(1/27) = −3 because 3^{−3} = 1/27.",
+        warn:"45-min Wed F variant: cut q53 + q54. NEVER cut q15. | Form B alignment: q15→Q7,Q10,Q11 | q17→Q13 | q52→Q9 | q53→Q14 | q54→Q9+Q14.",
       },
-      { id:"share", title:"Share / Summary — Resistance Reveal + Topic 4 LEHS Q#15 Bridge",
-        fw:"academic conversation", dok:"2", min:5,
+      { id:"share", title:"Share / Summary + 6-4 Bridge",
+        fw:"academic conversation + 6-4 bridge", dok:"2", min:5,
         items:[],
         teacher:[
-          "Cold-call 1 pair (ideally one that struggled on #32) to present their resistance solution using the sentence frame.",
-          "Class signals thumbs up/sideways. Write the LCM step on the board.",
-          "Bridge aloud: 'This resistance move — find LCM, combine reciprocals into a single rational expression — IS the structural reasoning on Topic 4 LEHS Q#15. You have now rehearsed it.'"
+          "Cold-call 1 pair to present q15 reasoning using sentence frame.",
+          "Class signals thumbs. Write on board: log₃(50) = x means 3^x = 50.",
+          "6-4 bridge: 'Next lesson: logarithmic FUNCTIONS — graphing y = log_b(x). Today’s log ↔ exp definition is the foundation.'"
         ],
-        answer:"#32 answer key: ratio R_A/R_B = (x−5)(x+4) : 1. Sentence frame: 'For the parallel circuit, 1/R_total = 1/R_1 + 1/R_2. I found a common denominator of ___, added the reciprocals to get 1/R_total = ___, then flipped to get R_total = ___. The ratio R_A/R_B simplified to ___ because ___.'"
+        rules:[
+          "Sentence frame (q15): On the graph of y = 3^x, I found log₃(50) by looking for y = ___ and reading the x-value. Since 3³ = ___ and 3⁴ = ___, the answer is between ___ and ___, closer to ___. This works because log₃(50) = x means 3^x = ___, so the exponential and logarithm are ___."
+        ],
+        bridge:"Lesson 6-4 shifts to logarithmic FUNCTIONS — graphing y = log_b(x), identifying domain, range, and asymptotes. Today’s log ↔ exp definition is the foundation.",
       },
       { id:"exit", title:"Exit Ticket — Summary Recap",
-        fw:"not graded", dok:"1-2", min:3,
+        fw:"not graded", dok:"1-2", min:5,
         items:[],
         teacher:[
           "Collect at door.",
-          "Scan stem 2 (reciprocal-sum connection to rational-expression addition). Plan re-teach if many students cannot articulate the structural parallel.",
-          "Both A and F sections: use extra 10 min (65-min classes) on Explore #32 for richer LCM argument."
+          "Scan blank 3 (e^t = 6.125 → ln). Plan re-teach if many students write 'log' instead of 'ln' or leave the base blank.",
+          "No grade."
         ],
         rules:[
-          "1. To add rational expressions with unlike denominators, I must first find the ___ of the denominators.",
-          "2. Practice #32 (resistance) showed me that reciprocal-sum problems (like 1/R_1 + 1/R_2) use the same algebraic steps as adding rational expressions because ___.",
-          "3. One biggest thing I learned today: ___."
+          "1. log_b(x) = y means ___.",
+          "2. log₂(32) = ___ because 2^{?} = 32.",
+          "3. To solve e^t = 6.125, take the ___ of both sides giving t = ___.",
+          "4. One biggest thing I learned today: ___."
         ],
-        bridge:"Single-period-quick lesson — no P2 or P3 for 4-4. Topic 4 LEHS Q#15 structural reasoning rehearsed via Practice #32 today. Next lesson: 4-5 (complex fractions and rational equations).",
+        answer:"1. b^y = x. | 2. 5 (since 2⁵ = 32). | 3. natural log (ln); t = ln(6.125). | 4. Open response.",
       },
     ]
   },
@@ -243,7 +255,7 @@ function renderPanel(tabId) {
       </div>
     </div>
     <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
-    ${data.short_note ? `<div style="background:#fffbea; border-left:4px solid var(--gold); padding:10px 14px; border-radius:6px; font-size:0.9rem; margin:12px 0;">⭐ ${data.short_note}</div>` : ""}
+    ${data.short_note ? `<div style="background:#fffbea; border-left:4px solid var(--gold); padding:10px 14px; border-radius:6px; font-size:0.9rem; margin:12px 0;">&#x2B50; ${data.short_note}</div>` : ""}
     <div class="phase-list" id="chips-${tabId}"></div>
     <div id="phase-card-${tabId}"></div>
   `;
@@ -276,29 +288,29 @@ function selectPhase(tabId, idx) {
       let cls = "item";
       if (it.dok3) cls = "item dok3";
       else if (it.assess) cls = "item assess";
-      const star = it.dok3 ? '<span class="star">⭐ DOK-3 </span>' :
-                    it.assess ? '<span class="star">⭐ ASSESS </span>' : '';
+      const star = it.dok3 ? '<span class="star">&#x2B50; DOK-3 </span>' :
+                    it.assess ? '<span class="star">&#x2B50; ASSESS </span>' : '';
       html += `<div class="${cls}">${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>${it.note ? `<div>${it.note}</div>` : ""}</div>`;
     });
   }
   if (ph.teacher && ph.teacher.length) {
-    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
+    html += `<div class="callout teacher"><span class="label">&#x1F3A4; Teacher does</span><ul>`;
     ph.teacher.forEach(t => html += `<li>${t}</li>`);
     html += `</ul></div>`;
   }
   if (ph.rules && ph.rules.length) {
-    html += `<div class="callout rule"><span class="label">📘 Rules / stems</span><ul>`;
+    html += `<div class="callout rule"><span class="label">&#x1F4D8; Rules / stems</span><ul>`;
     ph.rules.forEach(r => html += `<li>${r}</li>`);
     html += `</ul></div>`;
   }
   if (ph.answer) {
-    html += `<div class="callout answer"><span class="label">✅ Answer key</span>${ph.answer}</div>`;
+    html += `<div class="callout answer"><span class="label">&#x2705; Answer key</span>${ph.answer}</div>`;
   }
   if (ph.bridge) {
-    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
+    html += `<div class="callout bridge"><span class="label">&#x1F517; Bridge</span>${ph.bridge}</div>`;
   }
   if (ph.warn) {
-    html += `<div class="callout warn"><span class="label">⚠️ Warning / Note</span>${ph.warn}</div>`;
+    html += `<div class="callout warn"><span class="label">&#x26A0;&#xFE0F; Warning / Note</span>${ph.warn}</div>`;
   }
   html += `</div>`;
   card.innerHTML = html;

@@ -117,7 +117,7 @@ def title_slide(prs, title, subtitle):
          size=44, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
     text(s, subtitle, Inches(0.8), Inches(3.85), Inches(11.7), Inches(0.8),
          size=24, color=RGBColor(0xBB, 0xD0, 0xE6), align=PP_ALIGN.CENTER)
-    text(s, "Klimsara-adapted · Student-centered · Topic 4 LEHS Q#2/Q#6/Q#7 rehearsal",
+    text(s, "Student-centered · Topic 4 LEHS Q#2/Q#6/Q#7 rehearsal",
          Inches(0.8), Inches(5.8), Inches(11.7), Inches(0.6),
          size=18, color=RGBColor(0x88, 0xAA, 0xCC), align=PP_ALIGN.CENTER)
 
