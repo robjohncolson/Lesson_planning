@@ -2,6 +2,35 @@
 \documentclass[11pt]{article}
 \usepackage{preamble}
 
+\newcommand{\donowparabolagraph}{%
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.82\linewidth,
+  height=2.8in,
+  xmin=-5.5,
+  xmax=5.5,
+  ymin=-18,
+  ymax=28,
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+  ytick={-16,-8,0,4,8,12,16,20,24},
+  grid=major,
+  tick label style={font=\small},
+  label style={font=\small}
+]
+\addplot[tealheader, smooth, domain=-5:5, samples=250] {x^2};
+\addplot[only marks, mark=*, mark size=2.2pt, color=dayblue] coordinates {
+  (-4,16) (-3,9) (-2,4) (-1,1) (0,0) (1,1) (2,4) (3,9) (4,16) (5,25)
+};
+\node[anchor=south east, font=\small] at (axis cs:5,23) {$y=x^2$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+}
+
 \begin{document}
 
 \packetheading{Lesson 5-1 \textperiodcentered\ Period 1 \textperiodcentered\ Do Now}{L51 P1}
@@ -13,7 +42,38 @@
 \vspace{0.5em}
 
 \bankitem{Do Now --- Explore \& Reason: \(y = x^2\) graph}{%
-\vspace{1em}
+%
+\textbf{EXPLORE \& REASON}
+
+The graph shows \(y = x^2\).
+
+\textit{[GRAPH / TIKZ figure]}
+
+\donowparabolagraph
+
+\textbf{A.} Find all possible values of \(x\) or \(y\) so that the point is on the graph.
+\begin{enumerate}[label=(\alph*),leftmargin=2.2em,itemsep=2pt,topsep=3pt]
+  \item \((2, \underline{\hspace{1.2cm}})\)
+  \item \((3, \underline{\hspace{1.2cm}})\)
+  \item \((-3, \underline{\hspace{1.2cm}})\)
+  \item \((5, \underline{\hspace{1.2cm}})\)
+  \item \((\underline{\hspace{1.2cm}}, 4)\)
+  \item \((\underline{\hspace{1.2cm}}, -16)\)
+  \item \((\underline{\hspace{1.2cm}}, 7)\)
+  \item \((\underline{\hspace{1.2cm}}, 5)\)
+\end{enumerate}
+
+\textbf{B. Communicate Precisely} Write a precise set of instructions that show how to find an approximate value of \(\sqrt{13}\) using the graph.
+
+\textbf{C.} Draw a graph of \(y = x^3\). Use the graph to approximate each value.
+\begin{enumerate}[label=(\alph*),leftmargin=2.2em,itemsep=2pt,topsep=3pt]
+  \item \(\sqrt[3]{5}\)
+  \item \(\sqrt[3]{-5}\)
+  \item \(\sqrt[3]{8}\)
+  \item A solution to \(x^3 = 5\)
+  \item A solution to \(x^3 = -5\)
+  \item A solution to \(x^3 = 8\)
+\end{enumerate}
 }{}
 \vspace{2.5in}
 
