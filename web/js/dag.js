@@ -422,27 +422,77 @@ async function init() {
     renderDetail(visNodes.get(params.nodes[0]));
   });
 
-  // ── ?lesson=4-1 focus mode ────────────────────────────────────────────────
-  const focusLesson = new URLSearchParams(location.search).get("lesson");
-  if (focusLesson) {
-    const focusNodes = visNodes.get({ filter: n => n.group === focusLesson });
-    if (focusNodes.length) {
-      visNodes.update(
-        visNodes.get().map(n =>
-          n.group === focusLesson
-            ? { id: n.id, opacity: 1,    borderWidth: 3  }
-            : { id: n.id, opacity: 0.18 }
-        )
-      );
-      const focusIds = focusNodes.map(n => n.id);
-      network.once("stabilizationIterationsDone", () => {
-        network.fit({ nodes: focusIds, animation: { duration: 400 } });
-      });
-      const badge = document.createElement("span");
-      badge.id = "focus-badge";
-      badge.textContent = "Focused: lesson " + focusLesson + " (" + focusNodes.length + " nodes)";
-      document.getElementById("legend").appendChild(badge);
+  // ── Lesson focus: dropdown + color-swap ───────────────────────────────────
+  // (opacity doesn't reliably render on vis-network's standalone build with
+  // color objects — swap to a dim gray background + bright yellow ring on
+  // the focused lesson instead.)
+  const origColorById = {};
+  visNodes.get().forEach(n => {
+    origColorById[n.id] = {
+      background:  (n.color && n.color.background) || DEFAULT_COLOR,
+      border:      (n.color && n.color.border)     || "#202124",
+      borderWidth: n.borderWidth || 1,
+    };
+  });
+
+  const lessonSelect = document.getElementById("lesson-select");
+  const lessons = [...new Set(visNodes.get().map(n => n.group).filter(g => g && g !== "?"))].sort();
+  if (lessonSelect) {
+    lessons.forEach(L => {
+      const opt = document.createElement("option");
+      opt.value = L; opt.textContent = L;
+      lessonSelect.appendChild(opt);
+    });
+  }
+
+  let focusBadge = null;
+  function applyFocus(L) {
+    if (!L) {
+      visNodes.update(visNodes.get().map(n => {
+        const orig = origColorById[n.id];
+        return {
+          id: n.id,
+          color: { background: orig.background, border: orig.border },
+          borderWidth: orig.borderWidth,
+        };
+      }));
+      if (focusBadge) { focusBadge.remove(); focusBadge = null; }
+      network.fit({ animation: { duration: 400 } });
+      return;
     }
+    const focus = visNodes.get({ filter: n => n.group === L });
+    if (!focus.length) return;
+    visNodes.update(visNodes.get().map(n => {
+      const orig = origColorById[n.id];
+      if (n.group === L) {
+        return {
+          id: n.id,
+          color: { background: orig.background, border: "#fbbc04" },
+          borderWidth: 4,
+        };
+      }
+      return {
+        id: n.id,
+        color: { background: "#2a2d32", border: "#3a3d42" },
+        borderWidth: 1,
+      };
+    }));
+    network.fit({ nodes: focus.map(n => n.id), animation: { duration: 400 } });
+    if (focusBadge) focusBadge.remove();
+    focusBadge = document.createElement("span");
+    focusBadge.id = "focus-badge";
+    focusBadge.textContent = "Focused: lesson " + L + " (" + focus.length + " nodes)";
+    document.getElementById("legend").appendChild(focusBadge);
+  }
+
+  if (lessonSelect) {
+    lessonSelect.addEventListener("change", e => applyFocus(e.target.value));
+  }
+
+  const focusLesson = new URLSearchParams(location.search).get("lesson");
+  if (focusLesson && lessons.includes(focusLesson)) {
+    if (lessonSelect) lessonSelect.value = focusLesson;
+    network.once("stabilizationIterationsDone", () => applyFocus(focusLesson));
   }
 
   // ── Hide loading, reset detail placeholder ────────────────────────────────

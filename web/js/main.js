@@ -127,6 +127,11 @@ async function selectLesson(id) {
     activeLessonId = id;
     activeLesson   = lesson;
 
+    // Carry the active lesson into the DAG nav link so clicking "DAG"
+    // opens focused on this lesson instead of the full graph.
+    const navDag = document.getElementById("nav-dag");
+    if (navDag) navDag.href = `/dag.html?lesson=${encodeURIComponent(id)}`;
+
     detailEmpty.style.display  = "none";
     detailHeader.style.display = "";
     detailTitle.textContent    = `${lesson.id}${lesson.title ? " — " + lesson.title : ""}`;
