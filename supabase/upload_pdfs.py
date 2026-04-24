@@ -59,10 +59,12 @@ def main() -> int:
     url = env("SUPABASE_URL").rstrip("/")
     key = env("SUPABASE_SERVICE_ROLE_KEY")
 
-    # student + teacher + slides, all L*_P*_*.pdf
+    # student + teacher + slides + do_now, all L*_P*_*.pdf (+ APStats_*)
     pdfs = sorted(TEX_DIR.glob("L*_P*_student.pdf")) \
          + sorted(TEX_DIR.glob("L*_P*_teacher.pdf")) \
-         + sorted(TEX_DIR.glob("L*_P*_slides.pdf"))
+         + sorted(TEX_DIR.glob("L*_P*_slides.pdf")) \
+         + sorted(TEX_DIR.glob("L*_P*_do_now.pdf")) \
+         + sorted(TEX_DIR.glob("APStats_*_do_now.pdf"))
 
     print(f"uploading {len(pdfs)} PDFs to {BUCKET} bucket...\n")
     ok = 0

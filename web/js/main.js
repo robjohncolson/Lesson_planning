@@ -16,6 +16,7 @@ const detailTitle   = document.getElementById("detail-title");
 const btnStudentPdf = document.getElementById("btn-student-pdf");
 const btnTeacherPdf = document.getElementById("btn-teacher-pdf");
 const btnSlides     = document.getElementById("btn-slides");
+const btnDoNowPdf   = document.getElementById("btn-do-now-pdf");
 const btnPacer      = document.getElementById("btn-pacer");
 const btnItems      = document.getElementById("btn-items");
 const btnYaml       = document.getElementById("btn-yaml");
@@ -138,6 +139,18 @@ async function selectLesson(id) {
     detailTitle.textContent    = `${lesson.id}${lesson.title ? " — " + lesson.title : ""}`;
 
     setPdfButtons(lesson);
+
+    // Do Now PDF: no flag in the lessons row, so HEAD-probe the public URL.
+    // Fire-and-forget — don't block selectLesson on this.
+    btnDoNowPdf.style.display = "none";
+    const doNowLesson = id;
+    fetch(pdfUrl(id, "do_now"), { method: "HEAD" })
+      .then((r) => {
+        if (r.ok && doNowLesson === activeLessonId) {
+          btnDoNowPdf.style.display = "";
+        }
+      })
+      .catch(() => {});
 
     // Pacer link: derive L{NN} prefix from lesson id (e.g. L41_P2 -> L41)
     const pacerPrefix = (id.match(/^L\d+/) || [])[0];
@@ -453,6 +466,7 @@ btnDismissBanner.addEventListener("click", () => {
 btnStudentPdf.addEventListener("click", () => openPdfView("student"));
 btnTeacherPdf.addEventListener("click", () => openPdfView("teacher"));
 btnSlides.addEventListener("click",     () => openPdfView("slides"));
+btnDoNowPdf.addEventListener("click",   () => openPdfView("do_now"));
 
 // ── Boot ─────────────────────────────────────────────────────────────────────
 
