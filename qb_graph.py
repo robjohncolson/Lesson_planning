@@ -79,6 +79,31 @@ DAG_HTML_TEMPLATE = r"""<!doctype html>
     padding: 2px 8px; border-radius: 3px; font-size: 12px;
     font-weight: 600; margin-left: 12px; vertical-align: middle;
   }
+  #visual-bar {
+    padding: 6px 16px; background: #26292e; border-bottom: 1px solid #444;
+    font-size: 12px; color: #b8c0c8; flex-shrink: 0;
+    display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+  }
+  #visual-bar .vstat { color: #dadce0; }
+  #visual-bar label { cursor: pointer; user-select: none; }
+  #visual-bar input[type=checkbox] { vertical-align: middle; margin-right: 4px; }
+  #detail .vthumb {
+    display: block; max-width: 100%; max-height: 320px;
+    margin: 10px 0; border: 1px solid #444; border-radius: 4px;
+    background: #fff;
+  }
+  #detail .vsnippet {
+    background: #1f2125; border-radius: 4px; padding: 8px 10px;
+    margin-top: 8px; font-family: Consolas, Menlo, monospace;
+    font-size: 11px; color: #8ab4f8; white-space: pre-wrap;
+    word-break: break-all; cursor: pointer;
+  }
+  #detail .vsnippet:hover { background: #2a2d32; }
+  #detail .vsnippet.copied { color: #34a853; }
+  #detail .vneeds-cleanup {
+    display: inline-block; background: #5c4a2a; color: #fbbc04;
+    padding: 2px 7px; border-radius: 3px; font-size: 11px; margin-left: 6px;
+  }
 </style>
 </head><body>
 <div id="legend">
@@ -93,6 +118,17 @@ DAG_HTML_TEMPLATE = r"""<!doctype html>
   <span><span class="sw" style="background:#c084fc"></span>assessment</span>
   <span><span class="sw" style="background:#dadce0"></span>stretch</span>
 </div>
+<div id="visual-bar">
+  <span class="vstat" id="vstat-summary">Visuals: …</span>
+  <label><input type="checkbox" id="filter-visuals">Only visuals (has_visual=true)</label>
+  <label><input type="checkbox" id="filter-images">Only with images on disk</label>
+  <button id="toggle-matrix" style="background:#3a3d42;color:#dadce0;border:1px solid #555;padding:3px 9px;border-radius:3px;cursor:pointer;font-size:12px;">Show coverage matrix</button>
+  <span style="color:#7a828a;">Emoji prefix on node label = visual_type.</span>
+</div>
+<div id="matrix-panel" style="display:none;padding:10px 16px;background:#26292e;border-bottom:1px solid #444;overflow:auto;">
+  <table id="matrix-table" style="border-collapse:collapse;font-size:12px;color:#dadce0;">
+  </table>
+</div>
 <div id="main">
   <div id="net"></div>
   <aside id="detail" class="empty">Click a node to see its details.</aside>
@@ -100,6 +136,8 @@ DAG_HTML_TEMPLATE = r"""<!doctype html>
 <script>
   const nodes = new vis.DataSet(__NODES__);
   const edges = new vis.DataSet(__EDGES__);
+  const VISUAL_STATS = __VISUAL_STATS__;
+  const VTYPE_EMOJI = {photo:"📷", graph:"📊", table:"🔢", diagram:"📐", map:"🗺"};
   const network = new vis.Network(document.getElementById('net'), {nodes, edges}, {
     physics: { solver: 'forceAtlas2Based', stabilization: { iterations: 300 } },
     interaction: { hover: true, tooltipDelay: 999999 },  // native tooltip off
@@ -354,6 +392,111 @@ DAG_HTML_TEMPLATE = r"""<!doctype html>
     renderDetail(nodes.get(params.nodes[0]));
   });
 
+  // ── Visuals: summary bar + image panel + filters ──────────────────────────
+  (function wireVisuals() {
+    const s = VISUAL_STATS || {};
+    const parts = [];
+    const byType = s.byType || {};
+    ["photo","graph","table","diagram","map"].forEach(t => {
+      if (byType[t]) parts.push((VTYPE_EMOJI[t]||"?") + " " + t + " " + byType[t]);
+    });
+    const summary = document.getElementById("vstat-summary");
+    if (summary) {
+      summary.textContent = "Visuals: " + (parts.join(" · ") || "none") +
+        "  ·  has_visual=" + (s.totalHasVisual || 0) +
+        "  ·  images-on-disk=" + (s.totalWithImage || 0);
+    }
+
+    function applyFilter() {
+      const onlyVis = document.getElementById("filter-visuals").checked;
+      const onlyImg = document.getElementById("filter-images").checked;
+      nodes.update(nodes.get().map(n => {
+        const show = (!onlyVis || n.has_visual) && (!onlyImg || n.image);
+        return { id: n.id, hidden: !show };
+      }));
+    }
+    document.getElementById("filter-visuals").addEventListener("change", applyFilter);
+    document.getElementById("filter-images").addEventListener("change", applyFilter);
+
+    // Coverage matrix: lesson × visual_type from VISUAL_STATS.byLesson.
+    const matrixPanel = document.getElementById("matrix-panel");
+    const matrixTable = document.getElementById("matrix-table");
+    const types = ["photo","graph","table","diagram","map"];
+    function renderMatrix() {
+      const lessons = Object.keys(s.byLesson || {}).sort();
+      const th = '<th style="text-align:left;padding:4px 10px;border-bottom:1px solid #555;">lesson</th>' +
+        types.map(t => '<th style="padding:4px 10px;border-bottom:1px solid #555;">' +
+          (VTYPE_EMOJI[t]||"") + " " + t + '</th>').join("") +
+        '<th style="padding:4px 10px;border-bottom:1px solid #555;">total</th>';
+      const rows = lessons.map(L => {
+        const row = s.byLesson[L] || {};
+        const total = types.reduce((a,t) => a + (row[t]||0), 0);
+        return '<tr><td style="padding:3px 10px;color:#8ab4f8;cursor:pointer;" onclick="location.search=\'?lesson=' + L + '\';">' + L + '</td>' +
+          types.map(t => '<td style="padding:3px 10px;text-align:center;color:' +
+            (row[t] ? '#dadce0' : '#555') + ';">' + (row[t] || '·') + '</td>').join("") +
+          '<td style="padding:3px 10px;text-align:center;color:#fbbc04;">' + total + '</td></tr>';
+      }).join("");
+      matrixTable.innerHTML = '<thead><tr>' + th + '</tr></thead><tbody>' + rows + '</tbody>';
+    }
+    document.getElementById("toggle-matrix").addEventListener("click", (e) => {
+      const open = matrixPanel.style.display === "none";
+      matrixPanel.style.display = open ? "block" : "none";
+      e.target.textContent = open ? "Hide coverage matrix" : "Show coverage matrix";
+      if (open) renderMatrix();
+    });
+  })();
+
+  // Augment the detail panel with the visual block (type + image + \includegraphics).
+  // We hook renderDetail by wrapping it after it finishes.
+  const _origRenderDetail = renderDetail;
+  renderDetail = function(node) {
+    _origRenderDetail(node);
+    if (!node) return;
+    const detail = document.getElementById("detail");
+    const vt = node.visual_type;
+    const img = node.image;
+    if (!node.has_visual && !vt && !img) return;
+    const row = document.createElement("div");
+    row.className = "meta-row";
+    row.style.cssText = "border-top:1px dashed #555;padding-top:10px;margin-top:14px;";
+    const emoji = VTYPE_EMOJI[vt] || "🖼";
+    let html = '<strong style="color:#fbbc04;">Visual:</strong> ' +
+      '<span class="tag">' + emoji + " " + escHtml(vt || "untyped") + '</span>';
+    if (node.visual_needs_cleanup) html += '<span class="vneeds-cleanup">needs cleanup</span>';
+    if (img) {
+      // image paths are stored relative to repo root (questionbank/images/…);
+      // graph.html lives in graph/, so prefix with ../
+      const rel = img.replace(/^\/+/, "");
+      const src = "../" + rel;
+      html += '<img class="vthumb" src="' + escHtml(src) + '" alt="" ' +
+              'onerror="this.style.display=\'none\';this.nextElementSibling&&(this.nextElementSibling.textContent=\'(image missing on disk: \'+this.src+\')\');">';
+      html += '<div style="color:#7a828a;font-size:11px;">' + escHtml(rel) + '</div>';
+      // preamble.sty loads graphicx + \graphicspath{{../questionbank/images/}{../}},
+      // so the bare filename resolves. Emit just the basename.
+      const base = rel.split("/").pop();
+      const snippet = "\\includegraphics[width=0.85\\linewidth]{" + base + "}";
+      html += '<div class="vsnippet" title="Click to copy">' + escHtml(snippet) + '</div>';
+    } else if (node.has_visual) {
+      html += '<div style="color:#7a828a;font-size:11px;margin-top:6px;">' +
+              'Tagged has_visual=true but no image file linked yet.</div>';
+    }
+    row.innerHTML = html;
+    detail.appendChild(row);
+    // Wire copy-on-click for the snippet.
+    const snip = row.querySelector(".vsnippet");
+    if (snip) {
+      snip.addEventListener("click", () => {
+        const text = snip.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          snip.classList.add("copied");
+          const orig = snip.textContent;
+          snip.textContent = "✓ copied — " + orig;
+          setTimeout(() => { snip.classList.remove("copied"); snip.textContent = orig; }, 1400);
+        });
+      });
+    }
+  };
+
   // Optional ?lesson=4-1 query param — fade non-focus nodes, fit to focused set.
   const _hl = new URLSearchParams(location.search).get("lesson");
   if (_hl) {
@@ -414,7 +557,13 @@ def main() -> int:
     all_items = registry + shells
     by_id = {r["id"]: r for r in all_items}
 
-    tagged = [r for r in registry if r.get("role") or r.get("skill_tokens") or r.get("standards")]
+    # Include any row with a semantic tag OR a meaningful visual asset.
+    # visual_type == "none" is explicit "no visual" — don't treat it as tagged.
+    def _has_visual_meta(r: dict) -> bool:
+        vt = r.get("visual_type")
+        return bool(r.get("image")) or (vt is not None and vt != "none")
+    tagged = [r for r in registry if r.get("role") or r.get("skill_tokens")
+              or r.get("standards") or _has_visual_meta(r)]
     print(f"Registry: {len(registry)} rows, {len(tagged)} tagged, {len(shells)} assessment shells.")
 
     OUT.mkdir(exist_ok=True)
@@ -570,6 +719,16 @@ def main() -> int:
     vis_nodes = []
     vis_edges = []
 
+    # Emoji prefix hint for node labels — keeps the label identifier visible.
+    VTYPE_EMOJI = {"photo": "📷", "graph": "📊", "table": "🔢",
+                   "diagram": "📐", "map": "🗺"}
+    visual_stats = {
+        "byType": Counter(),
+        "totalHasVisual": 0,
+        "totalWithImage": 0,
+        "byLesson": defaultdict(lambda: Counter()),
+    }
+
     nodes_to_include = {r["id"] for r in tagged} | {s["id"] for s in shells}
     for r in list(tagged) + list(shells):
         rid = r["id"]
@@ -585,16 +744,42 @@ def main() -> int:
         prompt = re.sub(r"[^\x20-\x7e]", "?", prompt)
         tokens = ", ".join(r.get("skill_tokens", []) or [])
         standards = ", ".join(r.get("standards", []) or [])
+
+        vtype = r.get("visual_type") or None
+        if vtype == "none":
+            vtype = None
+        has_visual = bool(r.get("has_visual"))
+        image = r.get("image") or None
+        needs_cleanup = bool(r.get("visual_needs_cleanup"))
+
+        if has_visual:
+            visual_stats["totalHasVisual"] += 1
+        if image:
+            visual_stats["totalWithImage"] += 1
+        if vtype:
+            visual_stats["byType"][vtype] += 1
+            visual_stats["byLesson"][r.get("lesson", "?")][vtype] += 1
+
+        base_label = rid.replace("-savvas-", "-").replace("-lesson-", "-")[:28]
+        emoji = VTYPE_EMOJI.get(vtype, "")
+        label = (emoji + " " + base_label) if emoji else base_label
+
         title = (f"{rid}\\nlesson: {r.get('lesson','?')}  dok: {dok}  role: {role}"
-                 f"\\nstandards: {standards}\\nskills: {tokens}\\n\\n{prompt}")
+                 f"\\nstandards: {standards}\\nskills: {tokens}"
+                 f"\\nvisual: {vtype or '-'}  image: {image or '-'}"
+                 f"\\n\\n{prompt}")
         vis_nodes.append({
             "id": rid,
-            "label": rid.replace("-savvas-", "-").replace("-lesson-", "-")[:28],
+            "label": label,
             "title": title,
             "color": {"background": color, "border": border},
             "borderWidth": 3 if flavor else 1,
             "size": size,
             "group": r.get("lesson", "?"),
+            "visual_type": vtype,
+            "has_visual": has_visual,
+            "image": image,
+            "visual_needs_cleanup": needs_cleanup,
         })
 
     for r in tagged:
@@ -611,9 +796,16 @@ def main() -> int:
 
     # Template is a plain (non-f) string so JS braces don't need doubling.
     # Two placeholders (__NODES__ / __EDGES__) get filled via replace().
+    visual_stats_out = {
+        "byType": dict(visual_stats["byType"]),
+        "totalHasVisual": visual_stats["totalHasVisual"],
+        "totalWithImage": visual_stats["totalWithImage"],
+        "byLesson": {L: dict(c) for L, c in visual_stats["byLesson"].items()},
+    }
     html = DAG_HTML_TEMPLATE \
         .replace("__NODES__", json.dumps(vis_nodes)) \
-        .replace("__EDGES__", json.dumps(vis_edges))
+        .replace("__EDGES__", json.dumps(vis_edges)) \
+        .replace("__VISUAL_STATS__", json.dumps(visual_stats_out))
     (OUT / "graph.html").write_text(html, encoding="utf-8")
     print(f"Wrote {OUT / 'graph.html'} ({len(vis_nodes)} nodes, {len(vis_edges)} edges)")
 
