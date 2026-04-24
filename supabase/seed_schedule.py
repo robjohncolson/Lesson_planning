@@ -42,13 +42,13 @@ def env(name: str) -> str:
 # Wed F = 45 min (compressed); all others 55 or 65 min per memory.
 ROWS = [
     # ── Week of 4/27 — L35 close-out + Topic 3 assessment (CONFIRMED) ───────
-    ("2026-04-27", "A", "L35_P1", "P1",     65, "Finish Day 1"),
+    ("2026-04-27", "A", None,     "P1",     65, "Finish Day 1 (L35 close-out)"),
     ("2026-04-28", "F", "L35_P2", "P2",     65, None),
     ("2026-04-28", "A", "L35_P2", "P2",     55, None),
     ("2026-04-29", "A", "L35_P3", "P3",     65, "DOK-3: Storage Box #27"),
     ("2026-04-29", "F", "L35_P3", "P3",     45, "Compressed — Wed F short"),
-    ("2026-04-30", "A", "L35_P4", "ASSESS", 55, "Topic 3 Assessment"),
-    ("2026-04-30", "F", "L35_P4", "ASSESS", 65, "Topic 3 Assessment"),
+    ("2026-04-30", "A", None,     "ASSESS", 55, "Topic 3 Assessment (a2topic3assess.docx)"),
+    ("2026-04-30", "F", None,     "ASSESS", 65, "Topic 3 Assessment (a2topic3assess.docx)"),
     ("2026-05-01", "F", "L41_P1", "P1",     65, "F starts 4-1"),
 
     # ── Week of 5/4 — Lesson 4-1 (BEST-GUESS) ───────────────────────────────
@@ -73,8 +73,8 @@ ROWS = [
 
     # ── Week of 5/18 — Lesson 4-4 / 4-5 (BEST-GUESS) ────────────────────────
     ("2026-05-18", "A", "L45_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-19", "F", "L46",     "ASSESS", 65, "TBD — Topic 4 assessment"),
-    ("2026-05-19", "A", "L46",     "ASSESS", 55, "TBD — Topic 4 assessment"),
+    ("2026-05-19", "F", None,      "ASSESS", 65, "TBD — Topic 4 assessment"),
+    ("2026-05-19", "A", None,      "ASSESS", 55, "TBD — Topic 4 assessment"),
     ("2026-05-20", "A", "L51_P1", "P1", 65, "TBD — confirm"),
     ("2026-05-20", "F", "L51_P1", "P1", 45, "Wed F compressed — TBD"),
     ("2026-05-21", "A", "L51_P1", "P1", 55, "TBD — confirm"),
