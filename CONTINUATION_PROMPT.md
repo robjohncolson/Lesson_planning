@@ -26,7 +26,7 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 
 - **Supabase** (project `bzqbhtrurzzavhqbgqrs`, schema `lesson_planning`) holds items, edges, lessons, audit. `tex_student/tex_teacher/tex_slides` columns on `lessons` are the source of truth for tex source. RLS: public SELECT, writes via service_role only.
 - **Railway** (`https://lessonplanning-production.up.railway.app`) runs a FastAPI + TeXLive service that rebuilds PDFs (`POST /build/:id`) and takes tex writes (`PUT /tex/:id/:edition`). Auth: shared `REBUILD_PASSCODE` header `X-Passcode`; writer identity via `X-User-Name` → forwarded to PostgREST → captured by the audit trigger.
-- **Vercel** (`https://lessonplanning-lyart.vercel.app`) serves the static frontend. Plain HTML + ES modules, no bundler. Supabase Realtime for presence + "someone just saved" banners. Sha-based optimistic concurrency on save → 3-pane merge view on conflict.
+- **Vercel** (`https://lessonplanning-lyart.vercel.app`) serves the static frontend. Plain HTML + ES modules, no bundler. Supabase Realtime for presence + "someone just saved" banners. Sha-based optimistic concurrency on save → 3-pane merge view on conflict. **Deploys on push to `main` via the Vercel GitHub integration** — project → Settings → Git, root directory `web/`. Do NOT use `vercel --prod` manually; push to main instead so the source-of-truth matches what's deployed.
 - **Local Flask console** (`console.py`) is still the fastest path for the owner. Localhost-only; not shared.
 
 **For current artifact counts, shipped decks, or "what's in tex/", run `ls tex/` and `git log --oneline` — do not re-summarize here, it drifts.**
@@ -124,7 +124,8 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 
 ### Deploy sequencing
 
-28. **When the web app breaks with "Failed to fetch" on save/rebuild**, the most common causes in order: (a) Railway env var missing or has embedded `\n`, (b) Railway container failing to start (check deploy logs, not just /health), (c) CORS preflight OK but POST rejected server-side — needs the full Python traceback from `railway logs`. The CLI needs a project-scoped token (set via `RAILWAY_TOKEN` env) — see `state/cross-agent/*.request.json` for example commands.
+28. **Vercel GitHub integration expects `web/` as the project root.** If a previous session used `vercel --prod` from the repo root, the project was probably configured with root=`.` and a manual `vercel.json` — confirm Project Settings → General → Root Directory = `web/` before relying on push-to-deploy, or builds will fail / serve the wrong directory.
+29. **When the web app breaks with "Failed to fetch" on save/rebuild**, the most common causes in order: (a) Railway env var missing or has embedded `\n`, (b) Railway container failing to start (check deploy logs, not just /health), (c) CORS preflight OK but POST rejected server-side — needs the full Python traceback from `railway logs`. The CLI needs a project-scoped token (set via `RAILWAY_TOKEN` env) — see `state/cross-agent/*.request.json` for example commands.
 
 ## Session-gotchas worth reading once
 
