@@ -129,31 +129,36 @@ def collect_lessons() -> list[dict]:
             "has_slides_pdf":  False,
         }
 
-    for tex in sorted(TEX_DIR.glob("L*_P*_student.tex")):
+    # Glob both Algebra 2 (L{NN}_P{N}_*) and APStats (APStats_{U}-{L}_P{N}_*) artifacts.
+    def _globs(suffix: str) -> list[Path]:
+        return sorted(TEX_DIR.glob(f"L*_P*_{suffix}")) + sorted(TEX_DIR.glob(f"APStats_*_P*_{suffix}"))
+
+    for tex in _globs("student.tex"):
         lid = tex.stem.removesuffix("_student")
         row = rows.setdefault(lid, base_row(lid))
         row["has_tex_student"] = True
         row["tex_student"]     = tex.read_text(encoding="utf-8")
 
-    for tex in sorted(TEX_DIR.glob("L*_P*_teacher.tex")):
+    for tex in _globs("teacher.tex"):
         lid = tex.stem.removesuffix("_teacher")
         row = rows.setdefault(lid, base_row(lid))
         row["has_tex_teacher"] = True
         row["tex_teacher"]     = tex.read_text(encoding="utf-8")
 
-    for tex in sorted(TEX_DIR.glob("L*_P*_slides.tex")):
+    for tex in _globs("slides.tex"):
         lid = tex.stem.removesuffix("_slides")
         row = rows.setdefault(lid, base_row(lid))
         row["tex_slides"]      = tex.read_text(encoding="utf-8")
 
-    for pdf in sorted(TEX_DIR.glob("L*_P*_student.pdf")):
+    for pdf in _globs("student.pdf"):
         rows.setdefault(pdf.stem.removesuffix("_student"), base_row(pdf.stem.removesuffix("_student")))["has_pdf_student"] = True
-    for pdf in sorted(TEX_DIR.glob("L*_P*_teacher.pdf")):
+    for pdf in _globs("teacher.pdf"):
         rows.setdefault(pdf.stem.removesuffix("_teacher"), base_row(pdf.stem.removesuffix("_teacher")))["has_pdf_teacher"] = True
-    for pdf in sorted(TEX_DIR.glob("L*_P*_slides.pdf")):
+    for pdf in _globs("slides.pdf"):
         rows.setdefault(pdf.stem.removesuffix("_slides"), base_row(pdf.stem.removesuffix("_slides")))["has_slides_pdf"] = True
 
-    for y in sorted(LESSONS_DIR.glob("L*_P*.yaml")):
+    yaml_globs = sorted(LESSONS_DIR.glob("L*_P*.yaml")) + sorted(LESSONS_DIR.glob("APStats_*_P*.yaml"))
+    for y in yaml_globs:
         lid = y.stem
         txt = y.read_text(encoding="utf-8")
         try:
