@@ -20,31 +20,127 @@ function truncate(s, max = 80) {
   return str.length > max ? str.slice(0, max) + "…" : str;
 }
 
+// Phase display order + human labels. Matches the CHECK constraint in
+// supabase/migrations/005_lesson_phases.sql.
+const PHASE_ORDER = ["do_now", "launch", "explore", "share_summary", "exit", "reinforcement"];
+const PHASE_LABELS = {
+  do_now:         "Do Now",
+  launch:         "Launch",
+  explore:        "Explore",
+  share_summary:  "Share / Summary",
+  exit:           "Exit Ticket",
+  reinforcement:  "Optional Reinforcement",
+};
+
+function renderItemRow(item, onItemClick) {
+  const row = document.createElement("div");
+  row.className = "item-row";
+  row.dataset.id = item.id;
+  row.innerHTML =
+    `<span class="item-id">${escHtml(item.id)}</span>` +
+    `<span class="item-role">${escHtml(item.role ?? "")}</span>` +
+    dokBadge(item.dok) +
+    `<span class="item-prompt">${escHtml(truncate(item.prompt))}</span>`;
+  row.addEventListener("click", () => onItemClick(item.id));
+  return row;
+}
+
+function renderUnmatchedRow(label) {
+  const row = document.createElement("div");
+  row.className = "item-row item-row-unmatched";
+  row.innerHTML =
+    `<span class="item-prompt" style="opacity:.75">${escHtml(truncate(label, 120))}</span>` +
+    `<span class="item-role" style="color:#888">(unmatched)</span>`;
+  return row;
+}
+
 export async function renderItemList(lesson, container, onItemClick) {
   container.innerHTML = '<div class="loading">Loading items…</div>';
-  let items;
+
+  // Fetch items and phases in parallel. The phases query uses lesson_id
+  // (LNN_Pn form); items uses the LNN_Pn -> N-N conversion done inside
+  // api.itemsForLesson. If the caller passed "3-5" directly, phase lookup
+  // will return [] and we fall back to the flat list.
+  let items, phases;
   try {
-    items = await api.itemsForLesson(lesson);
+    [items, phases] = await Promise.all([
+      api.itemsForLesson(lesson),
+      api.listPhasesForLesson(lesson),
+    ]);
   } catch (err) {
     container.innerHTML = `<div class="empty-msg">Failed to load items: ${escHtml(err.message)}</div>`;
     return;
   }
-  if (!items.length) {
+
+  if (!items.length && (!phases || !phases.length)) {
     container.innerHTML = '<div class="empty-msg">No items for this lesson.</div>';
     return;
   }
+
   container.innerHTML = "";
-  for (const item of items) {
-    const row = document.createElement("div");
-    row.className = "item-row";
-    row.dataset.id = item.id;
-    row.innerHTML =
-      `<span class="item-id">${escHtml(item.id)}</span>` +
-      `<span class="item-role">${escHtml(item.role ?? "")}</span>` +
-      dokBadge(item.dok) +
-      `<span class="item-prompt">${escHtml(truncate(item.prompt))}</span>`;
-    row.addEventListener("click", () => onItemClick(item.id));
-    container.appendChild(row);
+
+  // Fall-through: no phase data → flat list (legacy behavior + note).
+  if (!phases || !phases.length) {
+    const note = document.createElement("div");
+    note.className = "phase-fallback-note";
+    note.style.cssText = "padding:6px 0;color:#888;font-size:.9em;";
+    note.textContent = "No phase data yet for this period — showing all items for the lesson code.";
+    container.appendChild(note);
+    for (const item of items) {
+      container.appendChild(renderItemRow(item, onItemClick));
+    }
+    return;
+  }
+
+  // Phase-grouped rendering.
+  const itemsById = new Map(items.map(i => [i.id, i]));
+  const usedItemIds = new Set();
+
+  // Bucket phases
+  const byPhase = new Map();
+  for (const p of phases) {
+    if (!byPhase.has(p.phase)) byPhase.set(p.phase, []);
+    byPhase.get(p.phase).push(p);
+  }
+
+  for (const phaseKey of PHASE_ORDER) {
+    const rows = byPhase.get(phaseKey);
+    if (!rows || !rows.length) continue;
+
+    const header = document.createElement("h3");
+    header.className = `phase-header phase-${phaseKey}`;
+    header.style.cssText =
+      "margin:14px 0 4px;padding:4px 8px;font-size:1em;border-left:4px solid #4a90e2;background:#f4f8fc;";
+    header.textContent = PHASE_LABELS[phaseKey] || phaseKey;
+    container.appendChild(header);
+
+    // Phase rows are ordered by position from the query
+    rows.sort((a, b) => a.position - b.position);
+    for (const pr of rows) {
+      if (pr.item_id && itemsById.has(pr.item_id)) {
+        usedItemIds.add(pr.item_id);
+        container.appendChild(renderItemRow(itemsById.get(pr.item_id), onItemClick));
+      } else {
+        // Show the literal label so teacher can still see the item slot.
+        container.appendChild(renderUnmatchedRow(pr.label || pr.item_id || "(missing)"));
+      }
+    }
+  }
+
+  // "Other items in this lesson code" — collapsed <details> with the rest.
+  const others = items.filter(i => !usedItemIds.has(i.id));
+  if (others.length) {
+    const details = document.createElement("details");
+    details.className = "phase-other-items";
+    details.style.cssText = "margin-top:16px;padding:6px 0;border-top:1px dashed #ccc;";
+    const summary = document.createElement("summary");
+    summary.style.cssText = "cursor:pointer;color:#666;font-size:.95em;padding:4px 0;";
+    summary.textContent = `Other items in this lesson code (${others.length})`;
+    details.appendChild(summary);
+    for (const item of others) {
+      details.appendChild(renderItemRow(item, onItemClick));
+    }
+    container.appendChild(details);
   }
 }
 

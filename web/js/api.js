@@ -48,9 +48,15 @@ export const api = {
   async itemsForLesson(lessonOrId) {
     // Lessons table uses LNN_Pn ids (e.g. "L35_P2") but items.lesson in the
     // registry uses the topic-subtopic form (e.g. "3-5"). Convert LNN_Pn to
-    // N-N; pass-through anything else (e.g. "3-5" directly).
-    const m = /^L(\d)(\d)_P\d$/.exec(lessonOrId || "");
-    const lesson = m ? `${m[1]}-${m[2]}` : lessonOrId;
+    // N-N. AP Stats uses APStats_6-4_P1 -> APStats-6-4. Pass through anything
+    // else (e.g. "3-5" directly).
+    const algebra = /^L(\d)(\d)_P\d$/.exec(lessonOrId || "");
+    const apStats = /^APStats_(\d+)-(\d+)_P\d$/.exec(lessonOrId || "");
+    const lesson = algebra
+      ? `${algebra[1]}-${algebra[2]}`
+      : apStats
+        ? `APStats-${apStats[1]}-${apStats[2]}`
+        : lessonOrId;
     const { data, error } = await supabase
       .from("items")
       .select("*")
@@ -111,6 +117,20 @@ export const api = {
     } catch {
       return false;
     }
+  },
+
+  // Per-period phase mapping — see supabase/migrations/005_lesson_phases.sql.
+  // Ordered by phase then position. Returns [] if no phases seeded for this
+  // lesson_id — caller should fall back to flat item list.
+  async listPhasesForLesson(lessonId) {
+    const { data, error } = await supabase
+      .from("lesson_phases")
+      .select("id, lesson_id, phase, position, item_id, label")
+      .eq("lesson_id", lessonId)
+      .order("phase")
+      .order("position");
+    if (error) raise("listPhasesForLesson", error);
+    return data;
   },
 
   async listSchedule() {
