@@ -22,12 +22,12 @@ REGISTRY_PATH = REPO_ROOT / "questionbank" / "registry.jsonl"
 GRAPH_HTML_PATH = REPO_ROOT / "graph" / "graph.html"
 
 app = Flask(__name__, static_folder=None)
-_LESSON_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")  # must start alphanumeric — blocks `-flag`-style injection into pdflatex argv
+_LESSON_ID_RE = re.compile(r"^L\d{2}_P\d(?:_[a-z][a-z0-9_]*)?$")  # L41_P2, L35_P2_obs
 
 
 def _validate_lesson_id(lesson_id: str) -> None:
     if not _LESSON_ID_RE.match(lesson_id):
-        abort(400, description=f"Invalid lesson_id: {lesson_id!r}")
+        abort(400, description=f"Invalid lesson_id: {lesson_id!r}. Expected L##_P# or L##_P#_<suffix>")
 
 
 def _safe_path(base: Path, *parts: str) -> Path:
@@ -53,7 +53,7 @@ def _read_yaml_meta(lesson_id: str) -> dict:
         return {}
 
 
-_ALGEBRA2_ID_RE = re.compile(r"^L\d{2}_P\d$")  # L41_P2, L35_P4 — exclude APStats_*, etc.
+_ALGEBRA2_ID_RE = _LESSON_ID_RE
 
 
 def _scan_lessons() -> list[dict]:
@@ -74,8 +74,13 @@ def _scan_lessons() -> list[dict]:
         meta = _read_yaml_meta(lid)
         has_yaml = bool(meta) or (LESSONS_DIR / f"{lid}.yaml").exists()
         # Pacer HTMLs are per-lesson (L35_Pacer.html), not per-period.
-        lesson_prefix = re.match(r"^(L\d{2})_P\d$", lid)
+        lesson_prefix = re.match(r"^(L\d{2})_P\d", lid)  # works for L35_P2 and L35_P2_obs
         pacer_name = (lesson_prefix.group(1) + "_Pacer.html") if lesson_prefix else f"{lid}_Pacer.html"
+        suffix_m = re.search(r"_P\d(_[a-z][a-z0-9_]*)$", lid)
+        suffix_label = suffix_m.group(1).lstrip("_") if suffix_m else None  # e.g. "obs"
+        base_title = meta.get("title") or None
+        display_title = (f"{base_title} ({suffix_label})" if base_title and suffix_label
+                         else base_title or (f"({suffix_label})" if suffix_label else None))
         results.append({
             "lesson_id": lid,
             "cadence": meta.get("cadence", "unknown") if meta else "unknown",
@@ -84,7 +89,8 @@ def _scan_lessons() -> list[dict]:
             "has_teacher_pdf": (TEX_DIR / f"{lid}_teacher.pdf").exists(),
             "has_slides_pdf": (TEX_DIR / f"{lid}_slides.pdf").exists(),
             "has_pacer_html": (REPO_ROOT / pacer_name).exists(),
-            "title": meta.get("title") or None,
+            "title": display_title,
+            "variant_suffix": suffix_label,
         })
     return results
 
@@ -336,7 +342,7 @@ def api_slides(lesson_id: str):
 def api_pacer(lesson_id: str):
     _validate_lesson_id(lesson_id)
     # Pacer HTMLs are per-lesson (L35_Pacer.html), not per-period.
-    lesson_prefix = re.match(r"^(L\d{2})_P\d$", lesson_id)
+    lesson_prefix = re.match(r"^(L\d{2})_P\d", lesson_id)  # works for L35_P2 and L35_P2_obs
     name = (lesson_prefix.group(1) + "_Pacer.html") if lesson_prefix else f"{lesson_id}_Pacer.html"
     pacer_path = _safe_path(REPO_ROOT, name)
     if not pacer_path.exists():
