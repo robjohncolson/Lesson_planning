@@ -10,10 +10,16 @@ Usage:
 
 Weeks seeded: 4/27 through 6/19 (end of school 2026-06-20).
 
-Week-of-4/27 data is CONFIRMED (from memory, owner-provided). Subsequent weeks
-are BEST-GUESS based on the Topic 4/5/6 roadmap + the Klimsara 3-period cadence
-+ F-one-period-ahead-by-Friday pattern. Rows with notes='TBD — confirm' need
-owner review.
+RE-BASELINED 2026-04-30: Original plan had Topic 3 assessment on 4/30 and
+L41_P1 starting 5/1. Reality on 4/30 is still on L35_P2. New pacing:
+  - L35_P2 stretches through Thu 5/7
+  - Fri 5/8 = TEACHER OBSERVATION (L35_P2_obs lesson — gradual-release Launch
+    + DOK-3 Mystery Graph in Explore + DOK-1 cool-down Exit)
+  - L35_P3 (Storage Box DOK-3): week of 5/11
+  - Topic 3 Assessment: 5/15 (F) / 5/18 (A)
+  - L41 (full 3-period, LEHS-critical): 5/19 → ~5/27
+  - Everything else (4-3, 4-4, 4-5, 5-1, 5-4, 5-5, 6-3, 6-4): single-period
+    quick. 6-5 dropped per realistic cuts (see roadmap memory).
 """
 from __future__ import annotations
 import argparse
@@ -41,85 +47,86 @@ def env(name: str) -> str:
 # Period A gets Mon/Tue/Wed/Thu; Period F gets Tue/Wed/Thu/Fri.
 # Wed F = 45 min (compressed); all others 55 or 65 min per memory.
 ROWS = [
-    # ── Week of 4/27 — L35 close-out + Topic 3 assessment (CONFIRMED) ───────
-    ("2026-04-27", "A", None,     "P1",     65, "Finish Day 1 (L35 close-out)"),
+    # ── Week of 4/27 — L35_P2 stretch (re-baselined 2026-04-30) ─────────────
+    # Reality: still on L35_P2 on 4/30. Stretch P2 through 5/7. Observation 5/8.
+    ("2026-04-27", "A", "L35_P1", "P1",     65, "L35_P1 close-out"),
     ("2026-04-28", "F", "L35_P2", "P2",     65, None),
     ("2026-04-28", "A", "L35_P2", "P2",     55, None),
-    ("2026-04-29", "A", "L35_P3", "P3",     65, "DOK-3: Storage Box #27"),
-    ("2026-04-29", "F", "L35_P3", "P3",     45, "Compressed — Wed F short"),
-    ("2026-04-30", "A", None,     "ASSESS", 55, "Topic 3 Assessment (a2topic3assess.docx)"),
-    ("2026-04-30", "F", None,     "ASSESS", 65, "Topic 3 Assessment (a2topic3assess.docx)"),
-    ("2026-05-01", "F", "L41_P1", "P1",     65, "F starts 4-1"),
+    ("2026-04-29", "A", "L35_P2", "P2",     65, "Re-baselined: P2 stretched"),
+    ("2026-04-29", "F", "L35_P2", "P2",     45, "Wed F compressed — P2 stretched"),
+    ("2026-04-30", "F", "L35_P2", "P2",     65, "P2 continues"),
+    ("2026-04-30", "A", "L35_P2", "P2",     55, "P2 continues"),
+    ("2026-05-01", "F", "L35_P2", "P2",     65, "P2 continues"),
 
-    # ── Week of 5/4 — Lesson 4-1 (BEST-GUESS) ───────────────────────────────
-    ("2026-05-04", "A", "L41_P1", "P1", 65, "A starts 4-1 — TBD confirm"),
-    ("2026-05-05", "F", "L41_P2", "P2", 65, "TBD — confirm"),
-    ("2026-05-05", "A", "L41_P2", "P2", 55, "TBD — confirm"),
-    ("2026-05-06", "A", "L41_P3", "P3", 65, "TBD — confirm"),
-    ("2026-05-06", "F", "L41_P3", "P3", 45, "Wed F compressed — TBD"),
-    ("2026-05-07", "A", "L43_P1", "P1", 55, "TBD — confirm"),
-    ("2026-05-07", "F", "L43_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-08", "F", "L43_P1", "P1", 65, "TBD — F one ahead"),
+    # ── Week of 5/4 — Finish L35_P2 + OBSERVATION (5/8) ─────────────────────
+    ("2026-05-04", "A", "L35_P2", "P2", 65, "P2 continues"),
+    ("2026-05-05", "F", "L35_P2", "P2", 65, "P2 continues"),
+    ("2026-05-05", "A", "L35_P2", "P2", 55, "P2 continues"),
+    ("2026-05-06", "A", "L35_P2", "P2", 65, "P2 continues"),
+    ("2026-05-06", "F", "L35_P2", "P2", 45, "Wed F compressed"),
+    ("2026-05-07", "F", "L35_P2", "P2", 65, "P2 continues (A: no class)"),
+    ("2026-05-07", "A", "L35_P2", "P2", 55, "P2 last day before obs"),
+    ("2026-05-08", "F", "L35_P2", "P2", 65, "★ TEACHER OBSERVATION (L35_P2_obs)"),
 
-    # ── Week of 5/11 — Lesson 4-3 (BEST-GUESS) ──────────────────────────────
-    ("2026-05-11", "A", "L43_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-12", "F", "L43_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-12", "A", "L43_P1", "P1", 55, "TBD — confirm"),
-    ("2026-05-13", "A", "L44_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-13", "F", "L44_P1", "P1", 45, "Wed F compressed — TBD"),
-    ("2026-05-14", "A", "L44_P1", "P1", 55, "TBD — confirm"),
-    ("2026-05-14", "F", "L44_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-15", "F", "L45_P1", "P1", 65, "TBD — confirm"),
+    # ── Week of 5/11 — L35_P3 (Storage Box DOK-3) ───────────────────────────
+    ("2026-05-11", "A", "L35_P3", "P3", 65, "Storage Box DOK-3 (A starts)"),
+    ("2026-05-12", "F", "L35_P3", "P3", 65, "Storage Box DOK-3"),
+    ("2026-05-12", "A", "L35_P3", "P3", 55, "Storage Box DOK-3"),
+    ("2026-05-13", "A", "L35_P3", "P3", 65, "P3 close"),
+    ("2026-05-13", "F", "L35_P3", "P3", 45, "Wed F compressed — P3 close"),
+    ("2026-05-14", "F", "L35_P3", "P3", 65, "P3 finish"),
+    ("2026-05-14", "A", "L35_P3", "P3", 55, "P3 finish"),
+    ("2026-05-15", "F", None,     "ASSESS", 65, "Topic 3 Assessment (F)"),
 
-    # ── Week of 5/18 — Lesson 4-4 / 4-5 (BEST-GUESS) ────────────────────────
-    ("2026-05-18", "A", "L45_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-19", "F", None,      "ASSESS", 65, "TBD — Topic 4 assessment"),
-    ("2026-05-19", "A", None,      "ASSESS", 55, "TBD — Topic 4 assessment"),
-    ("2026-05-20", "A", "L51_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-20", "F", "L51_P1", "P1", 45, "Wed F compressed — TBD"),
-    ("2026-05-21", "A", "L51_P1", "P1", 55, "TBD — confirm"),
-    ("2026-05-21", "F", "L51_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-22", "F", "L54_P1", "P1", 65, "TBD — confirm"),
+    # ── Week of 5/18 — Topic 3 Assess (A) + Start L41 (full 3-period) ──────
+    ("2026-05-18", "A", None,     "ASSESS", 65, "Topic 3 Assessment (A)"),
+    ("2026-05-19", "F", "L41_P1", "P1", 65, "F starts 4-1"),
+    ("2026-05-19", "A", "L41_P1", "P1", 55, "A starts 4-1"),
+    ("2026-05-20", "A", "L41_P1", "P1", 65, "4-1 P1 continues"),
+    ("2026-05-20", "F", "L41_P2", "P2", 45, "Wed F compressed — 4-1 P2"),
+    ("2026-05-21", "F", "L41_P2", "P2", 65, "4-1 P2"),
+    ("2026-05-21", "A", "L41_P2", "P2", 55, "4-1 P2"),
+    ("2026-05-22", "F", "L41_P3", "P3", 65, "4-1 P3 (LEHS-critical)"),
 
-    # ── Week of 5/25 — Memorial Day + Lesson 5-x ────────────────────────────
-    ("2026-05-25", "A", None,     "BUFFER", 0,  "Memorial Day (holiday) — TBD confirm"),
-    ("2026-05-26", "F", "L54_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-26", "A", "L54_P1", "P1", 55, "TBD — confirm"),
-    ("2026-05-27", "A", "L54_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-27", "F", "L54_P1", "P1", 45, "Wed F compressed — TBD"),
-    ("2026-05-28", "A", "L55_P1", "P1", 55, "TBD — confirm"),
-    ("2026-05-28", "F", "L55_P1", "P1", 65, "TBD — confirm"),
-    ("2026-05-29", "F", "L55_P1", "P1", 65, "TBD — confirm"),
+    # ── Week of 5/25 — Memorial Day + L41 finish + start single-period quicks
+    ("2026-05-25", "A", None,     "BUFFER", 0,  "Memorial Day (holiday)"),
+    ("2026-05-26", "F", "L41_P3", "P3", 65, "4-1 P3 finish"),
+    ("2026-05-26", "A", "L41_P3", "P3", 55, "4-1 P3"),
+    ("2026-05-27", "A", "L41_P3", "P3", 65, "4-1 P3 finish (A)"),
+    ("2026-05-27", "F", "L43_P1", "P1", 45, "Wed F — 4-3 single-period quick"),
+    ("2026-05-28", "F", "L43_P1", "P1", 65, "4-3 (F)"),
+    ("2026-05-28", "A", "L43_P1", "P1", 55, "4-3 (A)"),
+    ("2026-05-29", "F", "L44_P1", "P1", 65, "4-4 single-period quick (F)"),
 
-    # ── Week of 6/1 — Lesson 6-3 (BEST-GUESS) ───────────────────────────────
-    ("2026-06-01", "A", "L55_P1", "P1", 65, "TBD — confirm"),
-    ("2026-06-02", "F", "L63_P1", "P1", 65, "TBD — confirm"),
-    ("2026-06-02", "A", "L63_P1", "P1", 55, "TBD — confirm"),
-    ("2026-06-03", "A", "L63_P1", "P1", 65, "TBD — confirm"),
-    ("2026-06-03", "F", "L63_P1", "P1", 45, "Wed F compressed — TBD"),
-    ("2026-06-04", "A", "L64_P1", "P1", 55, "TBD — confirm"),
-    ("2026-06-04", "F", "L64_P1", "P1", 65, "TBD — confirm"),
-    ("2026-06-05", "F", "L64_P1", "P1", 65, "TBD — confirm"),
+    # ── Week of 6/1 — Finish Unit 4 + Topic 4 Assess + start Unit 5 ─────────
+    ("2026-06-01", "A", "L44_P1", "P1", 65, "4-4 (A)"),
+    ("2026-06-02", "F", "L45_P1", "P1", 65, "4-5 single-period quick (F)"),
+    ("2026-06-02", "A", "L45_P1", "P1", 55, "4-5 (A)"),
+    ("2026-06-03", "A", None,     "ASSESS", 65, "Topic 4 LEHS Assessment (A)"),
+    ("2026-06-03", "F", None,     "ASSESS", 45, "Topic 4 LEHS Assessment (F, Wed compressed)"),
+    ("2026-06-04", "F", "L51_P1", "P1", 65, "5-1 single-period quick (F)"),
+    ("2026-06-04", "A", "L51_P1", "P1", 55, "5-1 (A)"),
+    ("2026-06-05", "F", "L54_P1", "P1", 65, "5-4 single-period quick (F)"),
 
-    # ── Week of 6/8 — Lesson 6-4 / 6-5 (BEST-GUESS) ─────────────────────────
-    ("2026-06-08", "A", "L64_P1", "P1", 65, "TBD — confirm"),
-    ("2026-06-09", "F", "L65_P1", "P1", 65, "TBD — confirm"),
-    ("2026-06-09", "A", "L65_P1", "P1", 55, "TBD — confirm"),
-    ("2026-06-10", "A", "L65_P1", "P1", 65, "TBD — confirm"),
-    ("2026-06-10", "F", "L65_P1", "P1", 45, "Wed F compressed — TBD"),
-    ("2026-06-11", "A", None,     "REVIEW", 55, "Final review — TBD"),
-    ("2026-06-11", "F", None,     "REVIEW", 65, "Final review — TBD"),
-    ("2026-06-12", "F", None,     "REVIEW", 65, "Final review — TBD"),
+    # ── Week of 6/8 — Unit 5 finish + start Unit 6 ──────────────────────────
+    ("2026-06-08", "A", "L54_P1", "P1", 65, "5-4 (A)"),
+    ("2026-06-09", "F", "L55_P1", "P1", 65, "5-5 single-period quick (F)"),
+    ("2026-06-09", "A", "L55_P1", "P1", 55, "5-5 (A)"),
+    ("2026-06-10", "A", "L63_P1", "P1", 65, "6-3 single-period quick (A)"),
+    ("2026-06-10", "F", "L63_P1", "P1", 45, "Wed F — 6-3"),
+    ("2026-06-11", "F", "L64_P1", "P1", 65, "6-4 single-period quick (F)"),
+    ("2026-06-11", "A", "L64_P1", "P1", 55, "6-4 (A)"),
+    ("2026-06-12", "F", None,     "REVIEW", 65, "Final review (6-5 dropped per realistic cuts)"),
 
     # ── Week of 6/15 — Finals / end of year ─────────────────────────────────
-    ("2026-06-15", "A", None, "REVIEW", 65, "Finals week — TBD confirm"),
-    ("2026-06-16", "F", None, "REVIEW", 65, "Finals week — TBD confirm"),
-    ("2026-06-16", "A", None, "REVIEW", 55, "Finals week — TBD confirm"),
-    ("2026-06-17", "A", None, "REVIEW", 65, "Finals week — TBD confirm"),
-    ("2026-06-17", "F", None, "REVIEW", 45, "Finals week — TBD confirm"),
-    ("2026-06-18", "A", None, "REVIEW", 55, "Finals week — TBD confirm"),
-    ("2026-06-18", "F", None, "REVIEW", 65, "Finals week — TBD confirm"),
-    ("2026-06-19", "F", None, "BUFFER", 65, "Last day — TBD confirm"),
+    ("2026-06-15", "A", None, "REVIEW", 65, "Finals week — review"),
+    ("2026-06-16", "F", None, "REVIEW", 65, "Finals week — review"),
+    ("2026-06-16", "A", None, "REVIEW", 55, "Finals week — review"),
+    ("2026-06-17", "A", None, "REVIEW", 65, "Finals week"),
+    ("2026-06-17", "F", None, "REVIEW", 45, "Finals week (Wed F compressed)"),
+    ("2026-06-18", "A", None, "REVIEW", 55, "Finals week"),
+    ("2026-06-18", "F", None, "REVIEW", 65, "Finals week"),
+    ("2026-06-19", "F", None, "BUFFER", 65, "Last day"),
 ]
 
 
