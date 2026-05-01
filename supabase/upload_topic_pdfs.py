@@ -38,15 +38,21 @@ def ensure_bucket(url: str, key: str, dry: bool) -> None:
     r = requests.get(f"{url}/storage/v1/bucket/{BUCKET}", headers=headers, timeout=10)
     if r.status_code == 200:
         return
-    if r.status_code == 404:
+    # Supabase sometimes returns HTTP 400 with body {"statusCode":"404",...} for
+    # missing buckets — treat any "Bucket not found" as a create-needed signal.
+    body_text = r.text or ""
+    needs_create = (r.status_code == 404) or ("Bucket not found" in body_text) or ('"404"' in body_text)
+    if needs_create:
         body = {"id": BUCKET, "name": BUCKET, "public": True}
         cr = requests.post(f"{url}/storage/v1/bucket", headers=headers,
                            json=body, timeout=10)
+        if cr.status_code == 409 or (cr.text and "already exists" in cr.text.lower()):
+            return  # raced with another caller; bucket exists now
         if not cr.ok:
             sys.exit(f"error: could not create bucket {BUCKET}: {cr.status_code} {cr.text[:200]}")
         print(f"created bucket {BUCKET}")
     else:
-        sys.exit(f"error: bucket check failed: {r.status_code} {r.text[:200]}")
+        sys.exit(f"error: bucket check failed: {r.status_code} {body_text[:200]}")
 
 
 def upload(url: str, key: str, pdf: Path, dry: bool) -> str:

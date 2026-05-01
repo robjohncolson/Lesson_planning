@@ -145,6 +145,8 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 22. **Vercel default respects `.gitignore`.** `web/.gitignore` ignores `config.js`. First `vercel --prod` will miss the config unless you either (a) commit `config.js` (anon key is safe to embed) or (b) remove it from `.gitignore` / add a prebuild step. Currently: committed per Phase A step 2 README option 1.
 23. **Vercel static deploy routes `/dag.html` through a 308 → `/dag`** because of `cleanUrls: true`. Both resolve; the internal nav href uses `/dag.html` for now.
 24. **GitHub raw PDFs force-download** (Content-Disposition: attachment); jsdelivr CDN serves them inline. `pdfUrl` used to fall back to jsdelivr; now all three kinds come from Supabase Storage which also serves inline.
+24a. **Supabase Storage `GET /bucket/{name}` returns HTTP 400 with body `{"statusCode":"404","error":"Bucket not found"}` for missing buckets** — not an HTTP 404 as expected. Bucket-check helpers must inspect both the status code AND the response body for "Bucket not found" / `"404"` substring before deciding to error. Patched `supabase/upload_topic_pdfs.py` and `supabase/upload_docx.py` 2026-05-01.
+
 25. **CodeMirror 6 via CDN double-loads `@codemirror/state`** on both jsdelivr `+esm` and esm.sh without an import-map — breaks `instanceof` checks silently. Local console uses a bundled build. Web app uses plain `<textarea>` (no CM on the hosted path).
 26. **Template literal → string-concat regressions** — sonnet agents rewriting JS sometimes convert template literals `` ` `` to `'...' + var + '...'`. Detect with `grep "panel.innerHTML = \`"`.
 27. **Emoji → HTML-entity drift** — sonnet sometimes replaces `⭐` with `&#11088;` in copied JS. Detect with `grep "&#11088;\|&#127908;"`.
