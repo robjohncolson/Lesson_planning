@@ -184,10 +184,8 @@ async function init() {
   }
 
   // Filter out deprecated / out-of-scope items before anything downstream:
-  //   - Blooket rows (DOK-1 recall, deprecated Unit 4+)
   //   - APStats proof-of-concept lesson (wrong subject for this DAG)
   items = items.filter(it =>
-    !/-blooket-/i.test(it.id || "") &&
     !(typeof it.lesson === "string" && it.lesson.toLowerCase().startsWith("apstats"))
   );
   const keep = new Set(items.map(it => it.id));

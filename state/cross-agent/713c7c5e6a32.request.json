@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "713c7c5e6a32",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 480,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Review web/js/*.js and web/index.html, web/dag.html, web/styles/console.css, web/vercel.json, web/config.example.js against web/SPEC.md and supabase/schema.sql.\n\nContext: Phase A step 2 of a read-only Supabase-backed mirror of the Flask-based Teacher Console at console.py. Two sonnet subagents produced the JS files independently; I wrote scaffolding + CSS. All files are in web/. CSS was aligned to the JS class names post-hoc.\n\nPlease return a concise punch list (under 400 words) of:\n\n1. Bugs or contract violations against SPEC.md (DOM IDs, api.js signatures).\n2. XSS / security holes (unsafe innerHTML, unescaped user content, anon key assumptions).\n3. CSS/JS class mismatches \u2014 any class referenced in JS but missing in CSS, or vice versa (I already fixed the artifact-sq and tag-* families, but double-check).\n4. Any api.js query that will fail against the schema defined in supabase/schema.sql.\n5. Dead code / over-abstraction / CLAUDE.md violations (no new-feature comments, no tests for impossible branches, no framework bloat).\n6. One thing that is clearly broken vs what a user would see.\n\nDo not propose tests. Do not rewrite files. Punch-list only; I'll apply fixes. Include file:line references where possible.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-23T05:02:14Z"
+}

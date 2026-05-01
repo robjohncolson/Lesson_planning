@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "ce3aefa2f804",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 600,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "validate",
+    "prompt": "Validate Sonnet's implementation of the plan in tagging/T1_PLAN.md against plan invariants and success criteria. Correct any defects you find. You may modify files.\n\nWhat Sonnet reports having done:\n- Phase 1: Dedup. 131 -2 pairs scanned, 3 true duplicates dropped, 4 reference rewrites performed, registry 1054 -> 1051. Created dedup_registry.py + tagging/dedup_report.md.\n- Phase 2: T1 coverage fill. 504 items tagged across 11 lessons into tagging/{lesson}_t1_coverage.jsonl. 20 unmatched items logged to tagging/skill_tokens_new_from_t1.md.\n- Phase 3: qb_diagnose.py built. Outputs graph/skill_bridge_gaps.md (27 gaps), graph/nominal_rehearsals.md (2 mismatches, 14 aligned), graph/redundant_practice.md (88 redundant groups).\n\nValidation checklist \u2014 work through each, correct defects in place, report what you changed:\n\n1. DEDUP CORRECTNESS. Verify tagging/dedup_report.md shows only rows with matching normalized prompts got dropped. Spot-check 3 suspicious-pair-not-dropped entries to confirm they are genuinely different items. Re-run dedup_registry.py --dry-run on the current registry and confirm output is now empty/no-action.\n\n2. SCHEMA CONSISTENCY IN COVERAGE FILES. Verify every row in tagging/*_t1_coverage.jsonl has: role=explore-practice, echoes=[], prereq_ids=[], rehearses=[]. Look for any row that violates this. Also verify no fabricated skill_tokens (every token must exist in tagging/skill_tokens.md).\n\n3. FIELD-TYPE CONSISTENCY. The plan specifies rehearses as list[str]. But the 5-1_pilot.jsonl and possibly other early pilots have rehearses as a single string. Decide if this inconsistency is a bug that qb_diagnose.py handled correctly, or whether pilot files need rehearses normalized to list form. If normalize, do it and re-run merge_tags.py (dry-run first).\n\n4. DIAGNOSTIC CORRECTNESS. Spot-check graph/skill_bridge_gaps.md by picking 2 reported gaps and verifying (a) the DOK-3 driver really uses that token and (b) no earlier-role item in the same lesson uses it. Same spot-check for graph/nominal_rehearsals.md and graph/redundant_practice.md.\n\n5. NO BUILDER-SCRIPT EDITS. git status should show no modifications to build_L*_packets.py, packet_styles.py, or qb.py. If any appear, investigate and revert if unauthorized.\n\n6. MERGE_TAGS IS IDEMPOTENT AND CLEAN. Run python merge_tags.py --dry-run and confirm 652 resolutions or similar (148 old pilots + 504 new coverage). If any rows fail to resolve to registry IDs, investigate.\n\n7. REPORT FORMAT. Each of the three graph/*.md reports should be readable markdown. No JSON dumps, no raw Python repr output.\n\nIf everything passes, report all-green. If you made corrections, list them. Do not commit. Report in under 500 words.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": false,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-21T21:41:39Z"
+}

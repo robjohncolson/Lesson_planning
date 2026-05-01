@@ -8,7 +8,7 @@ Normalizing to short forms unblocks future tooling, makes the registry humanly i
 
 ## Scope (TIGHT)
 
-**Rename only Try-It and Example IDs.** Skip everything else (Savvas Practice items are already short; teacher-edition addendums are rarely-referenced and have meaningful suffixes; Blooket items are legacy; concept-box items are launch-side and lower-value).
+**Rename only Try-It and Example IDs.** Skip everything else (Savvas Practice items are already short; teacher-edition addendums are rarely-referenced and have meaningful suffixes; concept-box items are launch-side and lower-value).
 
 | Old form | New form | Count |
 |---|---|---|
@@ -25,7 +25,6 @@ Normalizing to short forms unblocks future tooling, makes the registry humanly i
 - `<L>-savvas-qN` (already short)
 - `<L>-savvas-teacher-edition-*` (teacher addendums — keep verbose suffixes; they encode role)
 - `<L>-savvas-concept-box-*`, `<L>-savvas-concept-summary-*`
-- `<L>-blooket-*`
 - `<L>-bridge-*`, `<L>-rti-*`, `<L>-lq-*`
 - APStats and assessment shell IDs
 

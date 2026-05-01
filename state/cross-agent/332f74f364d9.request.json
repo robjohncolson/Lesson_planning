@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "332f74f364d9",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 240,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Spot-review L43_Pacer.html (3-tab pacer for Lesson 4-3 Periods 1, 2, 3). Compare to template L41_Pacer.html and source packets tex/L43_P{1,2,3}_teacher.tex + tex/L43_P{1,2,3}_student.tex.\n\nCheck (each: ISSUE file:line + fix, or OK):\n1. CSS/HTML/JS copied VERBATIM from L41_Pacer.html \u2014 no new CSS classes, no new JS functions. Diff the <style> and <script> blocks structurally.\n2. Phase minute counts EXACTLY match teacher-packet \\frameworkphaseheader{...}{DOK}{min}{...} per period.\n3. Bank qids in PACER items arrays match registry.jsonl IDs (each qid exists as a registry row).\n4. Answers live ONLY in phase.answer fields \u2014 never in phase.teacher[], phase.rules[], or item.label.\n5. P2 has the DOK-3 driver (Practice #13 Closure Argument) flagged dok3:true.\n6. P3 surfaces the Topic 4 LEHS Q#2 rehearsal claim on Practice #19.\n7. All 5 framework phases per tab (Do Now, Launch, Explore, Share/Summary, Exit Ticket).\n\nOutput: 7 numbered findings + verdict SHIP / NEEDS-FIX.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-22T21:11:40Z"
+}

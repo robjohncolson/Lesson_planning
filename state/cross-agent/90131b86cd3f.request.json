@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "90131b86cd3f",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 300,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Review the new lesson_phases feature. Plan is in PLAN_lesson_phases.md at repo root. Files to review:\n\n1. supabase/migrations/005_lesson_phases.sql (51 lines) \u2014 new table + RLS\n2. supabase/seed_lesson_phases.py (429 lines) \u2014 teacher-tex parser + upsert seed\n3. web/js/api.js lines 116-128 \u2014 new listPhasesForLesson method\n4. web/js/item-detail.js (183 lines) \u2014 phase-grouped renderItemList\n\nDry-run output: 152 rows across 19 lessons, 21 unmatched labels (mostly prose-only Do Nows and Optional Practice without numeric ID \u2014 acceptable per plan).\n\nReview focus:\n- Parser correctness: brace-balanced extraction, phase detection (\\sectionbanner / \\frameworkphaseheader / \\phasetag), label\u2192id resolution (parens / Try It N / Practice #N). Any edge cases missed?\n- SQL safety: migration 005 is idempotent re-run-safe? FK ON DELETE behavior correct? RLS + grants match 004 pattern?\n- Seed idempotency: per-lesson DELETE-then-INSERT avoids position collisions on re-run?\n- Web UI: does renderItemList correctly handle (a) empty phases \u2192 flat fallback, (b) phase with item_id=NULL \u2192 non-clickable label row, (c) 'Other items' collapsible showing items NOT in any phase?\n- Anything that would silently break if the data is slightly unexpected (empty file, missing sectionbanner, item_id that references deleted item)?\n\nDo NOT run the seed with --apply (no SUPABASE env). Do NOT modify code unless you find a real bug \u2014 if you do, make the minimal fix. Report findings + any edits under 400 words.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": false,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-24T16:45:15Z"
+}

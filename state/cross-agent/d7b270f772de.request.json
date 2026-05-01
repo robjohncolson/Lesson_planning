@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "d7b270f772de",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 300,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Security + correctness review of the Klimsara Teacher Console MVP in C:/Users/rober/Downloads/Projects/Lesson_planning.\n\nFiles to review:\n- console.py (Flask backend, localhost-only, ~320 lines)\n- console_static/index.html (frontend shell)\n- console_static/console.js (client logic \u2014 note: CodeMirror was removed due to CDN double-load issue; now uses plain textarea)\n- console_static/console.css (styles)\n- INSTALL.md (Windows install guide)\n\nCheck (each: ISSUE file:line + fix, or OK):\n\n1. **Path-traversal hardening.** The backend accepts <lesson_id> in URL paths. Verify: (a) lesson_id regex is enforced on ALL endpoints that use it, (b) filesystem paths are resolved and checked against repo root, (c) no endpoint does unsafe os.path.join. List any endpoint that bypasses the regex.\n\n2. **Command injection.** /api/lesson/<id>/regenerate shells out to pdflatex + build_lesson_from_yaml.py. Verify: args are a list (not string), shell=False, lesson_id is sanitized by the time it hits subprocess.run. Flag any string interpolation of user input into subprocess args.\n\n3. **YAML write validation.** PUT /api/lesson/<id>/yaml must parse with yaml.safe_load (NOT yaml.load) before writing. Reject with 400 on parse error. Check that the write is atomic or at least recoverable.\n\n4. **localhost-only binding.** console.py must bind 127.0.0.1 not 0.0.0.0. Flag any listener that accepts remote connections.\n\n5. **Frontend XSS.** console.js constructs innerHTML from API responses. Check that every user-origin string (lesson titles, YAML filenames, error messages) is escaped before insertion into innerHTML. Grep for 'innerHTML =' and trace each source.\n\n6. **Registry endpoint safety.** GET /api/registry accepts query params. Verify: max result cap enforced, no SQL-like injection surface (it's JSONL, so the risk is path-traversal or memory exhaustion).\n\n7. **INSTALL.md correctness.** Walk through the install steps mentally. Flag any: (a) wrong command-line flags, (b) missing package in , (c) step order problem that would confuse a non-dev teacher, (d) Windows-path gotchas (forward/back slashes).\n\nOutput: 7 numbered findings + one-line verdict SHIP / NEEDS-FIX. Include file:line for each ISSUE.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-22T23:46:50Z"
+}

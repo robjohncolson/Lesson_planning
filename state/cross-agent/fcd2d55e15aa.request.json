@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "fcd2d55e15aa",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 600,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Review the newly built Algebra 2 Lesson 3-5 materials for Day 6, 7, 8 and short variants. Context: this session just completed the 8-day plan (previously only Days 1, 2-3, 4-5 were done).\n\n## New files to audit\n\nCode:\n- build_day6_packets.py  +  build_day6_slides.py\n- build_day7_packets.py  +  build_day7_slides.py\n- build_day8_packets.py  +  build_day8_slides.py\n\nHTML pacers (all self-contained v2 pattern, should match Day_23_Pacer.html's CSS+JS verbatim):\n- Day_6_Pacer.html\n- Day_7_Pacer.html\n- Day_8_Pacer.html\n- Day_23_Pacer_short.html (new 45-min F Wed variant)\n- Day_45_Pacer_short.html (new 45-min F Wed variant)\n- Day_45_Pacer.html (upgraded v1 -> v2 this session)\n\nOther:\n- build_pacer_qr.py  (5 new PACERS entries)\n- index.html  (added 5 new cards)\n\n## Hard rules the work MUST satisfy (check and flag any violation)\n\n1. **Savvas-only for student-facing work.** Every problem on a student packet must trace to a Savvas bank ID via qb.get_for_packet. No fabricated items. Check: grep the new build_day*.py files for items NOT loaded via get_for_packet or qb.select.\n\n2. **Single-DOK3 spine.** Exactly one DOK-3 phase per day:\n   - Day 6: NONE (DOK 1-2 practice day) -- confirm no phase is labeled DOK 3.\n   - Day 7: ONE (Savvas Practice #30 Venetta, in Explore phase).\n   - Day 8: NONE (quiz day, mixed DOK 1-2).\n\n3. **Savvas vocabulary only.** Grep all new files for forbidden strings: 'flatten', 'flatten-through'. Zero hits allowed. Accepted vocabulary: 'crosses', 'tangent', 'turning point', 'touches and turns back'.\n\n4. **Summary exit, not CER.** Every day's Exit phase must be a recap (fill-in-the-blank + one synthesis sentence). No claim/evidence/reasoning structure.\n\n5. **Solo teacher, no-aide language.** Grep all new files for 'aide' (should be zero hits except possibly 'guide'/'inside' false-positives). Cold-call phrasing should be low-stakes.\n\n6. **Blooket = DOK-1 rule recall only.** Check Day 6 and Day 7 Blooket phases do not include procedural factoring problems.\n\n7. **Self-contained pacer v2 pattern.** Each new pacer's PHASES array must:\n   - Have substeps[].sec values summing to the phase duration (or no substeps key at all).\n   - Total pacer duration for short variants must equal 2700 seconds (45 min) exactly.\n   - Include inline answer keys (.callout.answer), teacher scripts (.callout.script), warnings (.callout.warn).\n\n8. **Every phase in teacher packets has Questions-to-ask and Adult-role labels** via packet_styles.framework_phase_header.\n\n## How to check\n\nRead the files directly. Grep for specific strings. Run the builders yourself to confirm they succeed:\n\n    cd C:/Users/rober/Downloads/Projects/Lesson_planning\n    python build_day6_packets.py\n    python build_day7_packets.py\n    python build_day8_packets.py\n\nDo NOT write or edit anything (read-only review). Do NOT rebuild .pptx/.docx unless needed to confirm builders work.\n\n## Deliverable\n\nA written report (Markdown) with:\n- **PASS/FAIL verdict per hard rule** (1-8 above).\n- **List of concrete violations** with file:line references where possible.\n- **List of likely problems that are not outright violations** (e.g., phase timing tight, unclear teacher script, missing transition cue).\n- **Quick-win fixes** a follow-up pass could make in <10 minutes.\n\nKeep under 700 words. Focus on correctness, not polish.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-20T05:48:02Z"
+}

@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "314db0de809b",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 300,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Review tex/L41_P3_slides.tex for a high school Algebra 2 Beamer deck (Lesson 4-1 Period 3, Reciprocal Function + Translations, DOK 2, ASSESSMENT-CRITICAL for Topic 4 LEHS Q#3 + Q#5). Compare to (a) the template tex/L41_P2_slides.tex for style consistency, and (b) the source packets tex/L41_P3_student.tex + tex/L41_P3_teacher.tex for content fidelity. Also read CLAUDE.md for Klimsara framework phase rules.\n\nChecks (report ISSUE / OK for each):\n1. **No answer leaks** \u2014 slide prompt content must be SYMBOLIC. If the packet shows g(x)=1/(x-h)+k or asks to find intercepts, the slide must not pre-print the intercepts. Grep projcard bodies for suspicious numeric answers where the source is symbolic.\n2. **Savvas-only items** \u2014 every Practice/Try-It bank ID on a slide must appear in L41_P3_student.tex. No invented items.\n3. **Phase badges** \u2014 minute counts in \\phasebadges{DOK}{min}{tag} must match phase timings in L41_P3_teacher.tex. Cite teacher-packet line if off.\n4. **Assessment-critical surfacing** \u2014 Share/Summary must use slideaccent color and explicitly name 'Topic 4 LEHS Q#3 + Q#5'. Practice #19 should be tagged as the keystone rehearsal item.\n5. **Style consistency with L41_P2_slides.tex** \u2014 macro vocabulary (only \\phasebadges, projcard, titleslide), color semantics (gold=Do Now/Exit, green=Launch/rules, blue=Explore items, accent=DOK-3/critical/assessment-rehearsal), no invented macros.\n6. **Framework phases present** \u2014 Do Now, Launch, Explore, Share/Summary, Exit Ticket all have frames.\n7. **LaTeX cleanliness** \u2014 actual errors only (cosmetic vbox overflow \u2264100pt is acceptable, matches P2 pattern).\n\nOutput format: 7 numbered findings, each ISSUE (file:line + suggested fix) or OK. End with one-line verdict: SHIP / NEEDS-FIX.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-22T20:06:31Z"
+}

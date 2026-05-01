@@ -1,0 +1,13 @@
+{
+  "protocol": "cross-agent/v1",
+  "call_id": "e4487811c575",
+  "status": "completed",
+  "result": {
+    "summary": "Spot-review found one release-blocking answer leak in tex/L54_P3_slides.tex; the other five requested checks passed.",
+    "files_changed": [],
+    "answer": "1. ISSUE tex/L54_P3_slides.tex:61. The Example 2 projcard prints worked solution steps and the final numeric answer (`When x = 200: y \\u2248 224 ft.`), so the slide is not symbolic-only. Fix: keep that card prompt-only (`Given ... isolate y`) and, if you want #44 shown on-slide, render the blank source table from teacher `\\\\qfortyfourtable` rather than any worked rows.\\n2. OK tex/L54_P3_slides.tex:13,56,65,80,84,89,95. Every slide item traces to the packets: Do Now q19, Example 2, and Practice #44 are in tex/L54_P3_teacher.tex:128,182,208; Try It 2 / #10 / #25 / #26 / #27 / #39 are in tex/L54_P3_student.tex:66,70,74,78,82,86.\\n3. OK tex/L54_P3_slides.tex:11,29,54,76,103,125. The phase badges match the teacher `\\\\frameworkphaseheader` minute counts exactly: Do Now 5, Launch 12, Explore 35, Share/Summary 5, Exit Ticket 3 (tex/L54_P3_teacher.tex:110,160,238,325,369).\\n4. OK tex/L54_P3_slides.tex:65,84,113. Assessment-critical elements are on `slideaccent` for Practice #44, Practice #10, and the assessment preview, and Share/Summary explicitly names Topic 5 assessment Items 1A/1B and Item 2, matching tex/L54_P3_teacher.tex:329.\\n5. OK tex/L54_P3_slides.tex:10,28,53,75,102,124. All five framework phases are present as frames; Launch is split across two frames, but no required phase is missing.\\n6. OK tex/L54_P3_slides.tex:7,11,13. The deck stays within the template's slide-structure vocabulary: `\\\\titleslide`, `\\\\phasebadges`, and `projcard` are the only custom slide macros/environments used; no invented slide wrapper macros appear.\\nVerdict: NEEDS-FIX.",
+    "confidence": 0.94,
+    "follow_up_needed": false,
+    "notes": "Read-only review only; no files modified beyond this result handoff file, and no verification commands were run per subagent instructions."
+  }
+}

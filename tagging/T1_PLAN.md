@@ -126,7 +126,7 @@ Write `qb_diagnose.py` that reads the post-merge registry + shells and emits thr
 3. Phase 3 depends on Phase 2 being merged.
 
 ## Out of scope
-- T2/T3 auto-tagging (DOK-1 Practice + Blooket pool). Defer until after diagnostics output is reviewed.
+- T2/T3 auto-tagging (DOK-1 Practice pool). Defer until after diagnostics output is reviewed.
 - Adding echo edges. Hand-curated only.
 - Writing new curriculum content. All edits work from registry items that already exist.
 - Any edit to builder scripts (`build_L*_packets.py`). Diagnostics output is *recommendations* for the human, not automated packet edits.

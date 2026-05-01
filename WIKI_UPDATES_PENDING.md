@@ -60,7 +60,7 @@ Period F on Wednesday is a 45-min short class. Standard adjustments:
 
 - [[Single-DOK3 Lesson Spine]] — updated to reflect per-period scope
 - [[Self-Contained Pacer Pattern]] — v3 tabbed variant
-- [[Do Now A-B-C Framework]] — superseded by the unified Do Now above (no more A/B/C sub-phases now that Blooket is dropped)
+- [[Do Now A-B-C Framework]] — superseded by the unified Do Now above (no more A/B/C sub-phases)
 ```
 
 ---

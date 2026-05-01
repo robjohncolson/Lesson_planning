@@ -1,0 +1,31 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "5448770a1533",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 600,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "implement",
+    "prompt": "## Task: convert the L41_P2 TEACHER packet from docx to LaTeX\n\nYou are working in `C:/Users/rober/Downloads/Projects/Lesson_planning`. The\nstudent-edition LaTeX path is already proven \u2014 see `tex/L41_P2_student.tex`\nand `tex/preamble.sty`. This task adds the teacher edition for the same lesson.\n\n### Inputs you must read\n\n1. `graph/eye_check/L41_P2.md` \u2014 the structured intent brief. Look at the\n   `## build_teacher` section specifically; it lists every callout, every\n   framework_phase_header, every IEP/ELL accommodation block in source order.\n2. `tex/preamble.sty` \u2014 already exists. Reuse all its commands and environments\n   (callout, sentenceframebox, summaryexitbox, framework_phase_header,\n   bankitem, packetheading, daybanner, sectionbanner, IconBook/Warn/Star/etc.).\n   Add new commands ONLY if a teacher-specific element needs one (e.g. a\n   shaded answer-key inline block, a \"PRE-FLIGHT\" callout color).\n3. `tex/L41_P2_student.tex` \u2014 the student-edition reference. Match its\n   coding style (tcolorbox calls, math wrapping, TikZ usage).\n4. `build_L41_P2_packets.py` \u2014 the docx-emitting builder. Look at\n   `build_teacher` (around line 187 onward) to see the exact ordering of\n   PRE-FLIGHT callout, framework_phase_header blocks for each phase, the\n   `add_callout` calls for `\ud83c\udfaf PERIOD A / PERIOD F \u2014 65-MIN CLASS NOTES`,\n   `\ud83e\udde9 MODIFICATIONS / SUPPORT FOR IEP STUDENTS`, and `\ud83c\udf0d SUPPORTS FOR ELL\n   STUDENTS` near the end.\n5. `L41_P2_Teacher_Packet.docx` \u2014 canonical visual reference (recently\n   regenerated; encoding is now clean).\n6. `questionbank/registry.jsonl` \u2014 read items by ID. The teacher edition\n   includes the same EXPLORE_IDS as the student, but for each item should\n   show the prompt + answers + a teacher-only Answer Key block (look at\n   `bank_item_block` calls in build_teacher to see how the answer is added \u2014\n   typically follows each item).\n\n### Output (one new file)\n\n`tex/L41_P2_teacher.tex` \u2014 standalone document, `\\usepackage{preamble}` like\nthe student version. Must include:\n\n- The standard packetheading (use the same banner style; subtitle marked\n  \"\u00b7 Teacher Edition\")\n- The same Objectives and Topic Goals/Essential Question/Materials tables\n- A `\ud83d\udccc PRE-FLIGHT \u2014 P2 IS THE DOK-3 SPINE DAY` callout (color: pink-ish,\n  e.g. calloutpink) at the top of the body\n- One `\\frameworkphaseheader` block for each phase: Do Now, Launch, Explore,\n  Share/Summary, Exit Ticket \u2014 copy DOK / minutes / teacher_does /\n  students_do / questions_to_ask / adult_role verbatim from the brief's\n  `build_teacher` section\n- Each bank item with both prompt AND answer key \u2014 pick a clean visual\n  pattern (e.g. a small `\\textbf{Answer:}` line under each `\\bankitem`\n  body). Define a small helper command in the .tex preamble area or use\n  inline tcolorbox if needed; do NOT modify `tex/preamble.sty` unless the\n  helper is genuinely reusable across all teacher editions.\n- Page break before the trailing 65-MIN / IEP / ELL accommodation callouts\n  (mirroring the docx `doc.add_page_break()` placement)\n\n### Must preserve (non-negotiable)\n\n- All callout titles AND body lines verbatim (PRE-FLIGHT, MODIFICATIONS,\n  ELL SUPPORTS, PERIOD A / PERIOD F)\n- Every framework_phase_header field (DOK, minutes, teacher_does,\n  students_do, questions_to_ask, adult_role) \u2014 evaluators look for these\n- Bank-item ordering and labels exactly as listed in the brief\n- Section ordering follows the brief's build_teacher block in source order\n\n### May restructure\n\n- Where to place answer keys (inline below each item, or as a separate\n  appendix at the end \u2014 your call; pick whichever stays evaluator-friendly)\n- Color hex of the PRE-FLIGHT callout \u2014 calloutpink is fine, or pick from\n  preamble's existing palette\n\n### Validation before reporting done\n\n1. Run `pdflatex tex/L41_P2_teacher.tex` (or lualatex if pdflatex chokes;\n   you may need `--miktex-enable-installer` on Windows MiKTeX).\n2. Confirm a PDF was produced; report page count.\n3. Sample-check via pdftotext that these anchors are present:\n   - \"PRE-FLIGHT \u2014 P2 IS THE DOK-3 SPINE DAY\"\n   - \"MODIFICATIONS / SUPPORT FOR IEP STUDENTS\"\n   - \"SUPPORTS FOR ELL STUDENTS\"\n   - \"PERIOD A / PERIOD F \u2014 65-MIN\"\n   - At least one DOK and minutes value from a phase header\n4. Brief summary: engine used, page count, any anchor not preserved and why.\n\n### Constraints\n\n- Write ONLY to `tex/L41_P2_teacher.tex`. Do not modify the student .tex,\n  the preamble, the python builders, or anything outside `tex/`.\n- Do not commit or push.\n- Hard timeout 600s. If time-pressured, prioritize compile-clean PDF with\n  all callouts present over visual polish.",
+    "constraints": {
+      "owned_paths": [
+        "tex/L41_P2_teacher.tex"
+      ],
+      "read_only": false,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "code-changes"
+  },
+  "created_at": "2026-04-22T03:14:54Z"
+}

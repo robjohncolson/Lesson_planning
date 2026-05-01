@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "180d69a301d5",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 240,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Spot-review L54_Pacer.html (3-tab pacer for Lesson 5-4 Periods 1, 2, 3). Compare to template L41_Pacer.html and source packets tex/L54_P{1,2,3}_teacher.tex + tex/L54_P{1,2,3}_student.tex.\n\nCheck (each: ISSUE file:line + fix, or OK):\n1. CSS/HTML/JS copied VERBATIM from L41_Pacer.html \u2014 no new CSS, no new JS functions.\n2. Phase minute counts EXACTLY match teacher-packet \\frameworkphaseheader per period.\n3. Bank qids match registry.jsonl IDs.\n4. Answers only in phase.answer \u2014 never in phase.teacher[], phase.rules[], or item.label.\n5. P2 has DOK-3 driver (Practice #41 Half-Life) flagged dok3:true.\n6. P3 surfaces Topic 5 Performance Assessment Items 1A/1B + 2 rehearsal claims (look for 5-4-savvas-q10 for Item 1A, Practice #44 for Item 2).\n7. All 5 framework phases per tab.\n\nOutput: 7 numbered findings + verdict SHIP / NEEDS-FIX.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-22T21:11:45Z"
+}

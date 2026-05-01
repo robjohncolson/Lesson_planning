@@ -1,0 +1,31 @@
+{
+  "status": "completed",
+  "summary": "Reviewed the migration, seed parser, API, and item-detail UI. SQL is rerun-safe and follows the 004 RLS/grant pattern; delete-then-insert keeps positions idempotent; the grouped UI handles flat fallback, null-item rows, and the collapsed 'Other items' list correctly.",
+  "findings": [
+    {
+      "severity": "high",
+      "file": "supabase/seed_lesson_phases.py:233",
+      "issue": "APStats Practice/Optional labels did not resolve to existing ids.",
+      "detail": "The resolver only tried `${lesson_code}-savvas-qN`. APStats registry ids are `apstats-6-4-explore-q1` / `...-reinforcement-q1`, so those rows would seed as unmatched even when a real item exists.",
+      "fixed": true
+    },
+    {
+      "severity": "high",
+      "file": "web/js/api.js:48",
+      "issue": "APStats lesson ids could not load items in the detail pane.",
+      "detail": "`itemsForLesson()` only converted `L35_P2`-style ids. `APStats_6-4_P1` was querying `items.lesson = APStats_6-4_P1` instead of `APStats-6-4`, so valid phase rows rendered as unmatched/non-clickable.",
+      "fixed": true
+    },
+    {
+      "severity": "medium",
+      "file": "supabase/seed_lesson_phases.py:92",
+      "issue": "`summary recap` phasetags normalize to `share_summary`.",
+      "detail": "Current teacher packets also include nearby Exit headers, so rows still land correctly now. A future phasetag-only exit section would be misclassified."
+    }
+  ],
+  "edits": [
+    "Updated `web/js/api.js` so `itemsForLesson()` converts `APStats_<unit>-<lesson>_Pn` to `APStats-<unit>-<lesson>`.",
+    "Updated `supabase/seed_lesson_phases.py` so `Practice #N` / `Optional #N` can fall back to lesson-scoped `qN` ids, preferring `explore` and `reinforcement` ids respectively."
+  ],
+  "verification": "Not run per subagent instructions."
+}

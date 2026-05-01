@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "8393795b387e",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 600,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Review the Phase A step 3 additions for the Teacher Console collaborative web app:\n\nFiles to review:\n- railway/server.py, railway/Dockerfile, railway/railway.toml, railway/requirements.txt (new Railway pdflatex build service)\n- web/js/api.js (new saveTex/rebuildPdf methods, getTex now reads Supabase, pdfUrl switched to Supabase Storage)\n- web/js/passcode.js (new localStorage-backed passcode module)\n- web/js/main.js (tex editor wiring, Save/Rebuild flow, keyboard shortcuts, 401 retry)\n- web/index.html (tex-view is now editable <textarea> + toolbar + log pane)\n- supabase/schema.sql (added tex_student/tex_teacher columns to lessons)\n- supabase/migrations/001_tex_columns.sql (idempotent migration + Storage bucket)\n- supabase/seed.py (updated collect_lessons to populate tex columns)\n\nContext: Railway service runs a build (pdflatex) triggered by a POST with X-Passcode header. Web app writes tex via PUT /tex/:id/:edition, then POST /build/:id. PDFs go to public Supabase Storage bucket 'lesson-pdfs'.\n\nReturn a concise punch list (<400 words) of:\n\n1. Security bugs \u2014 path traversal in lesson_id handling, command injection in subprocess calls, passcode comparison via '==' (timing attack irrelevant at this scale, but flag if it's truly missing).\n2. Resource leaks \u2014 temp dir cleanup on exception paths, pdflatex processes hanging past timeout.\n3. Supabase Python client API misuse \u2014 the upload call uses dict for file_options; confirm supabase-py v2 expects 'upsert' as string \"true\" vs boolean True. Also check .schema() usage pattern.\n4. Race conditions in web: Save followed immediately by Rebuild may not see the updated tex if Supabase is eventually consistent; any pattern issues.\n5. Dockerfile: any missing apt packages that pdflatex needs for tcolorbox/beamer/tikz. Size concerns.\n6. CORS: currently allow_origins=[\"*\"] \u2014 fine for MVP but flag if X-Passcode is intended as auth (it is).\n7. Any file the dockerfile copies that's needed by build_lesson_from_yaml.py but not present \u2014 check the generator's imports/file-opens.\n8. Web: the 401 retry path calls saveTex again with the cleared passcode, which triggers a NEW window.prompt \u2014 does that work, or does it need explicit handling?\n\nPunch-list only; no rewrites. File:line references where useful.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-23T05:37:28Z"
+}

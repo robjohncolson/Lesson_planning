@@ -59,9 +59,17 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 - **L41 (full 3-period) starts F 5/15 / A 5/18**, runs through ~5/27.
 
 **Time-critical — user handles:**
-- Push the rebaselined schedule live: `python supabase/seed_schedule.py` (no `--dry-run`) once SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY are set. Schedule is idempotent upsert on (class_date, period).
-- Rotate the Supabase service-role key (it's been pasted in chat logs multiple times). Dashboard → Settings → API → Reset. Then `railway variables --set "SUPABASE_SERVICE_ROLE_KEY=<new_one_line>"`.
+- Rotate the Supabase service-role key (pasted in chat logs multiple times). Dashboard → Settings → API → Reset. Then `railway variables --set "SUPABASE_SERVICE_ROLE_KEY=<new_one_line>"`.
 - Delete the Railway project access token `cc-debug-session` at https://railway.com/account/tokens once debugging sessions wrap.
+
+**Completed 2026-04-30 (L35_P3_obs polish + Blooket destructive strip):**
+- ✅ **Schedule live** in Supabase: 64 rows pushed; 5/8 F = `L35_P3_obs`, 5/14 = Topic 3 Assess (both periods), L41 starts F 5/15 / A 5/18. `seed_schedule.py` now uses `?on_conflict=class_date,period` + nulled-out the L35_P1 FK.
+- ✅ **L35_P3_obs lesson row** + **PDFs in Storage** (4 files: student/teacher rebuilt + slides/do_now reused from non-obs L35_P3).
+- ✅ **Student packet** (`tex/L35_P3_obs_student.tex`): Day 3 label, tcolorbox 3-section objectives header (Math Obj / Language Obj / Essential Understanding), 18 write-space doublings, You-do + grid pinned to same page via `samepage`, Mystery Graph TikZ clipped to y∈[-2,2] (curve no longer plunges off-page).
+- ✅ **Teacher packet** (`tex/L35_P3_obs_teacher.tex`): xltabular `\hsize`-multiplier columns replaced with explicit `p{}` widths on pages 3-6 (root cause of narrow-prose-stretched-vertically). Doc went 7 → 6 pages. Page 2 metadata fixed (was "L35_P2 student packet" / "Period 2", now "L35_P3_obs" / "Day 3 / Period 3 Observation").
+- ✅ **Metadata yaml** at `lessons/L35_P3_obs.yaml` (back-extracted, 233 lines). Schema parity with `L41_P2.yaml` (`questions_to_ask` not `teacher_questions`, `minutes` not `duration_min`). Header comment notes: METADATA only, NOT a generator input — the tex stays hand-canonical. New top-level fields `day_of_cadence` and `topic` added (day_of_cadence is decoupled from calendar drift — P3 = Day 3 even if you're on calendar day 8).
+- ✅ **Blooket destructive strip**: 48 items removed from `questionbank/registry.jsonl` (40 with `*-blooket-*` ids, 8 `*-bridge-day*` tagged `blooket-pool`). 25+ supporting files cleaned (pacers, slide builders, qb.py, web/js/dag.js, tagging docs). `import_blooket_csv.py` + `Blooket_Import_Zeros_of_Polynomials.csv` moved to `legacy/`. Supabase items table also cleaned via direct DELETE on `id ilike '*blooket*'`. Final count: 949 registry rows, 898 items in DB.
+- Codex cross-review (via cross-agent.py) caught the `teacher_questions` schema-drift BLOCKER + cross-prong "Period 2" leftover, both fixed before commit.
 
 **Completed 2026-04-22 (local Flask console Phase 2):**
 - ✅ CodeMirror 6 bundled locally (`console_vendor/` → `console_static/vendor/codemirror.js`, 412 KB min.).
@@ -106,12 +114,16 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 
 7. **`browser-harness` doesn't work on Windows** — AF_UNIX unavailable. Use Selenium + Edge headless. Template in `~/.claude/projects/.../memory/reference_browser_automation_windows.md`.
 8. **Pacer HTMLs are JS-rendered** — can't grep static HTML for rendered content. Use Selenium smoke-test pattern.
+8a. **Edge's PDF viewer ignores `#page=N` URL fragments** — driving `driver.get("file://...pdf#page=3")` returns page 1 every time. For per-page PDF screenshots, render via pdftoppm/MuPDF or use the Read tool's `pages:` parameter directly instead.
 9. **Windows terminal mojibake** — math symbols display wrong in stdout; FILES are fine. Use `pdftotext -enc UTF-8` for text checks.
 10. **Registry mojibake survives ingestion** — run `python fix_registry_mojibake.py --apply` after any new item ingest.
 11. **`pkill -f` is unreliable on Git Bash / Windows** — it reports success but Windows python.exe keeps running. Use `taskkill //F //IM python.exe`. Better: track PIDs explicitly.
 12. **PowerShell line continuation (`` ` `` + newline) embeds literal `\n` in env var values.** If you `railway variables --set "KEY=val1\ncontinued"` across lines, the value includes a newline. `requests` library rejects headers with `\n` (HTTP header injection guard) → service 500s with `InvalidHeader`. Always paste secrets as ONE LINE.
 
 ### Web stack specifics
+
+12a. **PostgREST upsert defaults to PRIMARY KEY conflict resolution.** If your unique constraint is on a non-PK column (e.g. `(class_date, period)` on `schedule`), `Prefer: resolution=merge-duplicates` alone returns 409 — you must also pass `?on_conflict=col1,col2` on the endpoint. Fixed in `seed_schedule.py`.
+12b. **Lessons table FK can block schedule seed.** A row in `schedule` with `lesson_id` that has no matching `lessons.id` fails the FK constraint. If a legacy lesson_id has no yaml/tex (e.g. `L35_P1`), null the schedule lesson_id and keep the date+notes for the historical record.
 
 13. **Railway CMD must be shell-form so `$PORT` expands.** Exec-form `CMD ["uvicorn","--port","$PORT"]` passes literal `$PORT` to uvicorn. Use `CMD uvicorn ... --port ${PORT:-8080}`. `startCommand` in `railway.toml` also reserves literal unless wrapped in `/bin/sh -c`.
 14. **`railway.toml` must sit at repo root** (where `railway init` runs), not inside `railway/`. Railway CLI looks at the project root for config.

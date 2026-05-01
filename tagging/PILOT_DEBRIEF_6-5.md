@@ -35,10 +35,9 @@ Zero echoes for q13 (prove-by-properties) is *also* a useful signal: this flavor
 
 You flagged earlier that you want to tag the remaining 900+ rows, not just the operational spine.
 
-**Where I'd push back, gently:** the 900+ rows include ~6× duplication (most Examples/Try-Its were re-ingested with `-2` suffixes), the full Savvas practice pool per lesson (most items unused by any builder), and Blooket-pool items (DOK-1 flashcard fodder). Tagging these has diminishing returns:
+**Where I'd push back, gently:** the 900+ rows include ~6× duplication (most Examples/Try-Its were re-ingested with `-2` suffixes), and the full Savvas practice pool per lesson (most items unused by any builder). Tagging these has diminishing returns:
 - Duplicates → dedup them first, don't tag both.
 - Unused Savvas → tag only when you pull one into a future lesson.
-- Blooket-pool → DOK 1, no prereqs, no DOK-3 relevance. A single skill-token tag suffices (`evaluate-nth-root`, etc.); they're leaves on the DAG, not edges.
 
 **Where you're right:** the operational spine (~120 items) is not enough to show standards coverage accurately, because the standards assessment items cover ground the spine doesn't hit. A middle-tier tagging pass — the ~300 items that are either (a) in a builder OR (b) appear in any assessment OR (c) are the unique representative of a skill-token not yet covered — gives you standards coverage without tagging flashcard drill.
 

@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "94cbe31064fc",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 300,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Review a small feature: adding 'do_now' as a fourth tex edition (alongside student/teacher/slides). Plan in PLAN_do_now_tex_editing.md.\n\nChanges (all small, mirror existing patterns):\n1. supabase/migrations/006_tex_do_now.sql \u2014 ALTER TABLE ADD COLUMN IF NOT EXISTS tex_do_now TEXT (~14 lines)\n2. supabase/seed.py \u2014 glob *_do_now.tex into lessons.tex_do_now (~6 lines added around line 154)\n3. railway/server.py \u2014 EDITIONS set now {student, teacher, slides, do_now}; select clause at line 89 includes tex_do_now; build block at line 369 + upload block after (mirrors slides pattern)\n4. web/index.html \u2014 new 'Do Now .tex' navy button (1 line)\n5. web/js/main.js \u2014 DOM ref + highlightToolbarBtn toggle + click listener (3 lines)\n\nSonnet's key finding: PUT /tex/:id/:edition was already parameterized via col = f'tex_{edition}' so no PUT handler edits needed \u2014 adding 'do_now' to EDITIONS enables PUT automatically.\n\nReview focus (tight \u2014 this should take <5 min):\n- Railway build block: is the do_now build/upload block truly independent of student/teacher failure? (missing tex_do_now should NOT fail the overall build)\n- Railway overall_ok logic: does it correctly include do_now (i.e. overall_ok=False only if a non-empty tex_do_now failed to build)?\n- Select clause column list: does PostgREST accept tex_do_now before the user reloads schema cache? If the column is new, reads may return null until schema reload \u2014 but that's a deploy concern, not a code bug.\n- seed.py base_row: does the new tex_do_now key have consistent None-default and flow through to upsert?\n- Any missed spot (log messages, comments, error strings) that references only the old 3 editions?\n\nDo NOT commit. If you find a real bug, make the minimal fix. Report findings + any edits under 300 words.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": false,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-24T20:30:16Z"
+}

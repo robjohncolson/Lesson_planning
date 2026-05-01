@@ -19,9 +19,8 @@ questionbank/
 
 | File | Role |
 |---|---|
-| `qb.py` | Load/select/to-Blooket-CSV, no API needed |
+| `qb.py` | Load/select items from registry, no API needed |
 | `qb_append.py` | Validates a JSON entry and appends to `registry.jsonl` |
-| `import_blooket_csv.py` | Bulk-seeds the registry from an existing Blooket CSV |
 
 ## Workflow (in-session, no API)
 
@@ -59,14 +58,9 @@ The script:
 ## Using the bank
 
 ```python
-from qb import select, to_blooket_csv
+from qb import select
 dok2_mult = select(lesson="3-5", dok=2, topics=["multiplicity"])
-to_blooket_csv([q["id"] for q in dok2_mult], "Blooket_Day3_Multiplicity.csv")
 ```
-
-Existing Blooket CSVs have already been seeded into the registry with
-`dok=1` and `seeded-from-blooket` tag. Upgrade their DOK and add topic
-tags as you encounter them in the wild.
 
 ## DOK calibration principle
 

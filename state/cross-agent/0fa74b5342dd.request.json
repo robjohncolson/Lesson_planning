@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "0fa74b5342dd",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 480,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Independent review of a 4-prong refactor on the L35_P3_obs observation lesson (5/8/26). All changes are uncommitted in git working tree. Run `git diff HEAD` to see the full scope.\n\nFocus your review on these high-risk areas \u2014 DO NOT line-by-line audit the 30+ trivial doc/comment edits.\n\n## Prong A \u2014 tex/L35_P3_obs_student.tex (student packet)\nHand-edited tex with these intentional changes:\n- 'Day 2' -> 'Day 3' on line ~30 (P3 = day 3 of the 3-period cadence)\n- New tcolorbox-wrapped objectives header (Math Obj / Language Obj / Essential Understanding) inserted after title block\n- 18 write-space doublings (\\framedline width increases, extra ruled lines, doubled \\vspace)\n- 'You-do' block + paired coordinate grid wrapped in samepage to land on same physical page\n- Mystery Graph TikZ clipped to y in [-2,2] via \\clip + \\path[use as bounding box] to crop excessive bottom whitespace\n- Audit: no blooket items referenced (none were present)\n\nCHECK: does the rebuilt PDF (tex/L35_P3_obs_student.pdf) actually achieve these \u2014 especially same-page You-do+grid landing on page 2, and the Mystery Graph not being too cramped after the crop? Any LaTeX warnings or errors? Does the tcolorbox styling match the L41_P2_student.tex pattern?\n\n## Prong B \u2014 tex/L35_P3_obs_teacher.tex (teacher packet)\nPages 3-6 had narrow tables. Fix: switched xltabular X-with-\\hsize-multiplier columns to explicit p{} widths summing within textwidth (~5.80in / 6.5in). Doc went 7 -> 6 pages.\n\nCHECK: are the new p{} widths sensible? Any cell still overflowing or any orphan rows after the Launch row consolidation? Look at the rebuilt PDF.\n\n## Prong C \u2014 lessons/L35_P3_obs.yaml (NEW file)\nBack-extracted metadata yaml matching the L41_P2.yaml schema. Header comment notes it is METADATA only, not a generator input (the tex is hand-canonical).\n\nCHECK: schema parity with L41_P2.yaml. Phase keys, objectives shape, top-level fields. Note: an early version used 'duration_min' but was renamed to 'minutes' to match L41_P2 \u2014 confirm this rename is consistent throughout.\n\n## Prong D \u2014 Blooket destructive strip\n- 48 items removed from questionbank/registry.jsonl (40 with 'blooket' in id, 8 'bridge-day*' tagged 'blooket-pool')\n- ~25 supporting files cleaned (pacers, slide builders, tagging docs, qb.py, web/js/dag.js)\n- legacy/ moves: import_blooket_csv.py + Blooket_Import_Zeros_of_Polynomials.csv\n\nCHECK: `grep -ric blooket .` should return 0 outside of CLAUDE.md (policy rule), CONTINUATION_PROMPT.md, and legacy/. Run that grep yourself. Also confirm questionbank/registry.jsonl is still well-formed JSONL (each line valid JSON, total line count = pre-strip - 48 = 949).\n\n## Reporting format\nFor each prong, give a verdict (PASS / NIT / BLOCKER) and at most 3 sentences. End with a global verdict and any cross-prong consistency issues you spot. Keep total report under 600 words.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": false,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-05-01T03:00:51Z"
+}

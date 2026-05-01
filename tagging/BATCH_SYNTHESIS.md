@@ -66,7 +66,7 @@ Assessment shells live in `questionbank/assessment_shells.jsonl` (separate file,
 3. **The other 900 items.** You flagged wanting these tagged. Three sensible tiers:
    - **Tier 1 (~120 coverage-fill items):** every Savvas Example/Try-It not in a builder + every Practice item tagged DOK≥2. Gets standards coverage honest. 4 hrs.
    - **Tier 2 (~200 DOK-1 practice, the flashcard pool):** regex-auto-tag `skill_tokens` from prompt text, leave other fields empty. The DAG treats them as leaves. 30 min scripted.
-   - **Tier 3 (~480 Blooket pool + duplicates):** dedupe duplicates first (especially the `-2`-suffix Example/Try-It re-ingests). Then Tier-2 treatment. Likely 2 hrs of dedup + 30 min scripted.
+   - **Tier 3 (~480 duplicates):** dedupe duplicates first (especially the `-2`-suffix Example/Try-It re-ingests). Then Tier-2 treatment. Likely 2 hrs of dedup + 30 min scripted.
 
 Total for "everything tagged" would be ≈7–8 hrs of which only Tier 1 requires judgment. Tiers 2 and 3 are mechanical.
 

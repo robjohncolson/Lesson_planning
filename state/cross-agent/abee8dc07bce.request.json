@@ -1,0 +1,31 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "abee8dc07bce",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 600,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "implement",
+    "prompt": "## Task: render the L45_P1 Student packet to LaTeX\r\n\r\nYou are working in `C:/Users/rober/Downloads/Projects/Lesson_planning`. The\r\ndocx-emitting Python toolchain has a parallel LaTeX path being built. Your\r\njob is one .tex file. The L41_P2 lesson is already converted \u2014 read its\r\n.tex files first to copy the style.\r\n\r\n### Inputs you must read\r\n\r\n1. `graph/eye_check/L45_P1.md` \u2014 the structured intent brief. The\r\n   `## build_student` section in that file lists every callout,\r\n   framework_phase_header, sentence frame, bank-item label, and section\r\n   in source order. **Treat this as the spec \u2014 preserve verbatim.**\r\n2. `tex/preamble.sty` \u2014 already exists. Use its commands and environments\r\n   (callout, sentenceframebox, summaryexitbox, framework_phase_header,\r\n   bankitem, packetheading, daybanner, sectionbanner, IconBook/Warn/Star\r\n   etc.). **Do NOT modify it.** If you need a teacher-specific helper\r\n   like \\phasetag / \\phaseitems / \\teacheranswerbox, define it inline\r\n   at the top of your output .tex file.\r\n3. `tex/L41_P2_student.tex` \u2014 reference rendering for the same\r\n   edition type. Copy its coding style (tcolorbox calls, math wrapping\r\n   in \\(...\\), TikZ usage, table style for objectives).\r\n4. `build_L45_P1_packets.py` \u2014 the Python builder for this lesson. Use\r\n   only as a reference for visual hierarchy and bank-item ordering. Do\r\n   NOT modify it.\r\n5. `L45_P1_Student_Packet.docx` \u2014 canonical visual reference.\r\n6. `questionbank/registry.jsonl` \u2014 read items by ID. Render `prompt` and\r\n   `answers` (if any) verbatim \u2014 do NOT paraphrase.\r\n\r\n### Output (one new file)\r\n\r\n`tex/L45_P1_student.tex` \u2014 standalone document, starts with:\r\n```\r\n\\documentclass[11pt]{article}\r\n\\usepackage{preamble}\r\n```\r\nplus any file-local helper commands you need.\r\n\r\nMust include:\r\n- The standard packetheading (subtitle marked \"\u00b7 Student Packet\")\r\n- The Objectives table and Topic Goals/Essential Question/Materials table\r\n- All callouts in the brief's `## build_student` section in source order\r\n- All EXPLORE bank items with prompts (no answer keys for student edition)\r\n- Sentence frame box for Share/Summary\r\n- Summary exit box for Exit Ticket\r\n- (back) Optional Reinforcement section after a `\\clearpage`\r\n\r\n### Must preserve (non-negotiable)\r\n\r\n- All callout titles AND body lines verbatim \u2014 these are 'rules printed\r\n  on the page' and ELL-supports.\r\n- Sentence frames verbatim \u2014 ELL non-negotiable.\r\n- Bank-item ordering and labels exactly as listed in the brief's\r\n  \"Bank-item labels (in order)\" section.\r\n- Section ordering in source order from the brief.\r\n- **Do not substitute computed answers into prompt content.** If a\r\n  Savvas item describes a curve as `w = k/f`, your TikZ/text annotation\r\n  must also say `w = k/f` \u2014 NOT `w = 300000/f` even though k=300000\r\n  follows from the given pair. Pre-computing k strips the problem of\r\n  its pedagogical purpose. (Teacher edition is the only place computed\r\n  k values may appear, and only inside the answer-key block.)\r\n- TikZ annotations should mirror the prompt's symbolic form, not your\r\n  derived numeric form.\r\n\r\n\r\n### May restructure\r\n\r\n- Margin sizes, font choices \u2014 match the docx visual hierarchy but use\r\n  LaTeX-native idioms.\r\n- Color hex values \u2014 use closest equivalent from preamble's palette.\r\n- Where to place answer keys (teacher only) \u2014 inline below each item or\r\n  as an appendix. Pick whichever stays evaluator-friendly.\r\n\r\n### Validation before reporting done\r\n\r\n1. Run `pdflatex tex/L45_P1_student.tex --miktex-enable-installer`\r\n   (or lualatex if pdflatex chokes on unicode).\r\n2. Confirm a PDF was produced; report page count.\r\n3. Sample-check via pdftotext that key anchors from the brief appear.\r\n4. Brief summary: engine used, page count, any anchor not preserved.\r\n\r\n### Constraints\r\n\r\n- Write ONLY to `tex/L45_P1_student.tex`. Do not modify the\r\n  preamble, the python builders, the docx files, or anything outside\r\n  this single file.\r\n- Do not commit or push.\r\n- Hard timeout 600s. If time-pressured, prioritize compile-clean PDF\r\n  with all callouts present over visual polish.",
+    "constraints": {
+      "owned_paths": [
+        "tex/L45_P1_student.tex"
+      ],
+      "read_only": false,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "code-changes"
+  },
+  "created_at": "2026-04-22T05:59:05Z"
+}

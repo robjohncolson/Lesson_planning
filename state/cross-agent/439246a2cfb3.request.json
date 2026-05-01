@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "439246a2cfb3",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 300,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Review the following uncommitted diff in this repo and verify correctness. Goal of the change: allow new \"observation lesson\" file pairs like tex/L35_P2_obs_{student,teacher}.tex to flow through:\n  - the local Flask Teacher Console (console.py)\n  - the Vercel-hosted web app (web/js/api.js)\n  - the Railway pdflatex build service (railway/server.py)\n\nwithout breaking existing L{NN}_P{N} lessons. The supabase seed (supabase/seed.py) was intentionally NOT modified \u2014 its existing tex glob already produces a lessons-table row with id \"L35_P2_obs\" automatically.\n\nThe CURRENT DIFF (uncommitted) is:\n\n\\$\\$\\$DIFF\\$\\$\\$\n\nPlease verify:\n1. Regexes accept BOTH the old shape (L41_P2) AND the new shape (L35_P2_obs) and reject obvious garbage (APStats_*, raw \"3-5\", path traversal etc.).\n2. itemsForLesson stripping logic handles edge cases: APStats ids, raw \"3-5\", null/empty input, double-suffixed (impossible but defensive).\n3. Pacer-link extraction in console.py still produces L35_Pacer.html for both L35_P2 and L35_P2_obs.\n4. No silent regressions in routes that take \\`lesson_id\\` (e.g. railway server tex PUT, build POST). Inspect railway/server.py routes to confirm.\n5. Title display for _obs in the console \u2014 does it look reasonable when the underlying yaml lacks a title?\n\nIf you find a bug, fix it directly via patch. If everything looks correct, return a SHORT confirmation. Do NOT commit. Do NOT run pdflatex. Do NOT run seed scripts. Do NOT modify any tex files. Keep the response under 250 words plus any patches you applied.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-30T19:19:09Z"
+}

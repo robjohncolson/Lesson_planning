@@ -1,16 +1,14 @@
 """Question-bank accessor module.
 
-Load the registry, filter by lesson/DOK/topics, export to Blooket CSV, and
-resolve image paths for packet/slide builders.
+Load the registry, filter by lesson/DOK/topics, and resolve image paths for
+packet/slide builders.
 
 Usage:
-    from qb import select, to_blooket_csv, get
+    from qb import select, get
     questions = select(lesson="3-5", dok=2, topics=["multiplicity"])
-    to_blooket_csv([q["id"] for q in questions], "Blooket_Day3_Multiplicity.csv")
 """
 from __future__ import annotations
 
-import csv
 import json
 from pathlib import Path
 from typing import Iterable
@@ -99,60 +97,6 @@ def load_calibration(lesson: str) -> dict | None:
     if not f.exists():
         return None
     return json.loads(f.read_text(encoding="utf-8"))
-
-
-# ----------------------------------------------------------------------
-# Blooket CSV export — matches Blooket_Import_Template row shape:
-# 26 columns: Q#, Text, A1, A2, A3, A4, Time, Correct, then 18 trailing empties.
-# ----------------------------------------------------------------------
-
-BLOOKET_HEADER_ROWS = [
-    ['"Blooket\nImport Template"'] + [""] * 25,
-]
-
-
-def to_blooket_csv(ids: list[str], path: str | Path) -> None:
-    """Emit a Blooket-importable CSV from registry IDs.
-
-    Skips questions that have no `answers` or no integer `correct`
-    (Blooket format requires multiple choice).
-    """
-    path = Path(path)
-    qs = [get(qid) for qid in ids]
-    missing = [qid for qid, q in zip(ids, qs) if q is None]
-    if missing:
-        raise KeyError(f"IDs not in registry: {missing}")
-
-    # Write with UTF-8 BOM so Blooket parses em-dashes / unicode math cleanly.
-    with path.open("w", encoding="utf-8-sig", newline="") as f:
-        w = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
-        # Blooket's own header block (two lines).
-        w.writerow(['Blooket\nImport Template'] + [""] * 25)
-        w.writerow([
-            "Question #", "Question Text",
-            "Answer 1", "Answer 2",
-            "Answer 3\n(Optional)", "Answer 4\n(Optional)",
-            "Time Limit (sec)\n(Max: 300 seconds)",
-            "Correct Answer(s)\n(Only include Answer #)",
-        ] + [""] * 18)
-
-        for i, q in enumerate(qs, 1):
-            answers = q.get("answers") or []
-            if len(answers) < 2 or not isinstance(q.get("correct"), int):
-                continue
-            a1 = answers[0] if len(answers) > 0 else ""
-            a2 = answers[1] if len(answers) > 1 else ""
-            a3 = answers[2] if len(answers) > 2 else ""
-            a4 = answers[3] if len(answers) > 3 else ""
-            time_limit = q.get("time_limit", _default_time(q.get("dok", 2)))
-            w.writerow([
-                i, q["prompt"], a1, a2, a3, a4,
-                time_limit, q["correct"],
-            ] + [""] * 18)
-
-
-def _default_time(dok: int) -> int:
-    return {1: 15, 2: 20, 3: 25, 4: 30}.get(dok, 20)
 
 
 # ----------------------------------------------------------------------

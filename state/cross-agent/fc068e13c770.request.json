@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "fc068e13c770",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 480,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Review Phase 1 changes for the Teacher Console collaborative web app:\n\nFiles:\n- railway/server.py (slides edition added; X-User-Name forwarding to Supabase PostgREST so audit trigger records changed_by)\n- web/js/username.js (new; localStorage-backed username prompt, parallel to passcode.js)\n- web/js/api.js (getTex accepts 'slides'; new getLastAudit; saveTex/rebuildPdf send X-User-Name header)\n- web/js/main.js (btnTexSlides wired; openTexView supports 'slides'; shows Last edit line from audit)\n- web/index.html (Slides .tex button, #tex-last-edited span)\n- web/styles/console.css (minor additions)\n- web/SPEC.md (Phase 1 doc section appended)\n- supabase/schema.sql + supabase/migrations/002_tex_slides_and_audit.sql (tex_slides column; improved audit trigger reads x-user-name from request.header.* AND request.headers JSON bag)\n- supabase/seed.py (populates tex_slides)\n\nReturn a concise punch list (<400 words) of:\n\n1. Security: any XSS in the new #tex-last-edited rendering path (changed_by is user-controlled). Username validation strictness (what prevents someone entering a 10KB string or CRLF injection that evades the <40 char cap?).\n2. Audit flow: does the x-user-name header actually make it from frontend -> Railway -> PostgREST -> audit trigger? Any layer that strips/renames it? Case sensitivity of header name between Railway (forwards as 'x-user-name') and the trigger's current_setting lookups?\n3. Slides build: does a slides-only compilation failure poison the student/teacher success path? Is has_slides_pdf correctly cleared when a previously-successful slides build is removed from the DB?\n4. Frontend: after openTexView runs, can the audit fetch continue after the tex fetch errors (and vice versa)? Any race where texLastEdited gets populated for the WRONG lesson if the user clicks lessons fast?\n5. SPEC.md accuracy: DOM IDs mentioned match the actual HTML?\n6. supabase-js schema scope: api.getLastAudit queries 'audit' table \u2014 the client is created with db.schema=lesson_planning so that's the schema it hits; confirm audit lives there in the migration.\n7. Any Phase 1 feature missing per the prompt.\n\nPunch-list only, file:line refs where possible. No rewrites.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-23T15:58:30Z"
+}

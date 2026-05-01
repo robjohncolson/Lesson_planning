@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "d12ffc16a404",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 300,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Review tex/L41_P1_slides.tex for a high school Algebra 2 Beamer deck (Lesson 4-1 Period 1, Inverse Variation Introduction, DOK 1\u21922). Compare to (a) the template tex/L41_P2_slides.tex for style consistency (frame shapes, \\phasebadges usage, projcard density, color convention), and (b) the source packets tex/L41_P1_student.tex + tex/L41_P1_teacher.tex for content fidelity. Also read CLAUDE.md for Klimsara framework phase rules.\n\nChecks (report ISSUE / OK for each):\n1. **No answer leaks** \u2014 slide prompt content must be SYMBOLIC. If the student packet shows a function/equation, the slide must too; NEVER substitute the computed numeric answer into a question body. (Past failure: Codex substituted k=300000 into a TikZ label.) Grep for suspicious numeric values in projcard bodies where the source has a symbolic form.\n2. **Savvas-only items** \u2014 every Practice/Try-It bank ID referenced on a slide must already appear in L41_P1_student.tex. No invented items.\n3. **Phase badges match teacher packet** \u2014 the minute counts in \\phasebadges{DOK}{min}{tag} must match the phase timings in L41_P1_teacher.tex's framework phase headers. If off, cite the teacher-packet line and the slide line.\n4. **Style consistency with L41_P2_slides.tex** \u2014 macro vocabulary (only \\phasebadges, projcard, titleslide), color semantics (gold=Do Now/Exit, green=Launch/rules, blue=Explore items, accent=DOK-3/critical), no invented macros.\n5. **Framework phases present** \u2014 Do Now, Launch, Explore, Share/Summary, Exit Ticket all have frames.\n6. **LaTeX cleanliness** \u2014 any actual errors (not the cosmetic vbox overflows which match P2's pattern).\n\nOutput format: 6 numbered findings, each ISSUE (with file:line + suggested fix) or OK. End with a one-line verdict: SHIP / NEEDS-FIX.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-04-22T20:06:24Z"
+}
