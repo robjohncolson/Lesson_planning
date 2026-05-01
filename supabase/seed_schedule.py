@@ -67,7 +67,7 @@ ROWS = [
     ("2026-05-06", "F", "L35_P2", "P2", 45, "Wed F compressed"),
     ("2026-05-07", "F", "L35_P2", "P2", 65, "P2 continues (A: no class)"),
     ("2026-05-07", "A", "L35_P2", "P2", 55, "P2 last day before obs"),
-    ("2026-05-08", "F", "L35_P3", "P3", 65, "★ TEACHER OBSERVATION (L35_P3_obs — canonical P3)"),
+    ("2026-05-08", "F", "L35_P3_obs", "P3", 65, "★ TEACHER OBSERVATION (L35_P3_obs — canonical P3)"),
 
     # ── Week of 5/11 — L35_P3 (Storage Box DOK-3) ───────────────────────────
     ("2026-05-11", "A", "L35_P3", "P3", 65, "Storage Box DOK-3 (A starts)"),
