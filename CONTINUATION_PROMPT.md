@@ -49,10 +49,17 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 | One-off PDF bulk upload | `supabase/upload_pdfs.py` |
 | Parallel dispatch (legacy) | `dispatch/parallel-batch.manifest.json` + `dispatch/prompts/latex-scale/` |
 
-## Open tasks (as of 2026-04-23)
+## Open tasks (as of 2026-04-30)
+
+**Current pacing (re-baselined 2026-04-30, see `supabase/seed_schedule.py`):**
+- Still on **L35_P2** as of 4/30 (behind original plan). P2 stretches through Thu 5/7.
+- **Fri 5/8 F = TEACHER OBSERVATION** = `L35_P3_obs` (canonical P3, gradual-release Launch + DOK-3 Mystery Graph). The obs files were originally misnamed `L35_P2_obs_*` — renamed in commit `7573061`.
+- Week of 5/11 (Mon-Wed): L35_P3 continuation (Storage Box DOK-3 follow-up, uses existing non-obs `L35_P3_*` tex).
+- **Thu 5/14 = Topic 3 Assessment** for both periods (compressed onto one day, was 5/15 F + 5/18 A).
+- **L41 (full 3-period) starts F 5/15 / A 5/18**, runs through ~5/27.
 
 **Time-critical — user handles:**
-- Topic 4 week-of prep (L41 starts Fri 5/1 F / Mon 5/4 A). L41_Pacer Selenium smoke test passes (`smoke_test_L41_pacer.py`); polish worksheets regenerated against latest registry.
+- Push the rebaselined schedule live: `python supabase/seed_schedule.py` (no `--dry-run`) once SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY are set. Schedule is idempotent upsert on (class_date, period).
 - Rotate the Supabase service-role key (it's been pasted in chat logs multiple times). Dashboard → Settings → API → Reset. Then `railway variables --set "SUPABASE_SERVICE_ROLE_KEY=<new_one_line>"`.
 - Delete the Railway project access token `cc-debug-session` at https://railway.com/account/tokens once debugging sessions wrap.
 
