@@ -39,7 +39,7 @@ SUPABASE_URL = os.environ["SUPABASE_URL"].rstrip("/")
 SUPABASE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
 REBUILD_PASSCODE = os.environ["REBUILD_PASSCODE"]
 
-LESSON_ID_RE = re.compile(r"^L\d{2}_P\d(?:_[a-z][a-z0-9_]*)?$")  # e.g. L41_P2 or L35_P2_obs
+LESSON_ID_RE = re.compile(r"^L\d{2}_P\d(?:_[a-z][a-z0-9_]*)?$")  # e.g. L41_P2 or L35_P3_obs
 EDITIONS = {"student", "teacher", "slides", "do_now"}
 
 HERE = Path(__file__).parent

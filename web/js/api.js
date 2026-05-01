@@ -51,7 +51,7 @@ export const api = {
     // N-N. AP Stats uses APStats_6-4_P1 -> APStats-6-4. Pass through anything
     // else (e.g. "3-5" directly).
     // Strip optional variant suffix (e.g. _obs) before converting id to registry lesson field.
-    // L35_P2_obs → L35_P2 so itemsForLesson looks up the same "3-5" registry entries.
+    // L35_P3_obs → L35_P3 so itemsForLesson looks up the same "3-5" registry entries.
     const strippedId = (lessonOrId || "").replace(/(_P\d)_[a-z][a-z0-9_]*$/, "$1");
     const algebra = /^L(\d)(\d)_P\d$/.exec(strippedId);
     const apStats = /^APStats_(\d+)-(\d+)_P\d$/.exec(strippedId);

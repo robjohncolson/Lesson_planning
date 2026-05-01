@@ -22,7 +22,7 @@ REGISTRY_PATH = REPO_ROOT / "questionbank" / "registry.jsonl"
 GRAPH_HTML_PATH = REPO_ROOT / "graph" / "graph.html"
 
 app = Flask(__name__, static_folder=None)
-_LESSON_ID_RE = re.compile(r"^L\d{2}_P\d(?:_[a-z][a-z0-9_]*)?$")  # L41_P2, L35_P2_obs
+_LESSON_ID_RE = re.compile(r"^L\d{2}_P\d(?:_[a-z][a-z0-9_]*)?$")  # L41_P2, L35_P3_obs
 
 
 def _validate_lesson_id(lesson_id: str) -> None:
@@ -74,7 +74,7 @@ def _scan_lessons() -> list[dict]:
         meta = _read_yaml_meta(lid)
         has_yaml = bool(meta) or (LESSONS_DIR / f"{lid}.yaml").exists()
         # Pacer HTMLs are per-lesson (L35_Pacer.html), not per-period.
-        lesson_prefix = re.match(r"^(L\d{2})_P\d", lid)  # works for L35_P2 and L35_P2_obs
+        lesson_prefix = re.match(r"^(L\d{2})_P\d", lid)  # works for L35_P2 and L35_P3_obs
         pacer_name = (lesson_prefix.group(1) + "_Pacer.html") if lesson_prefix else f"{lid}_Pacer.html"
         suffix_m = re.search(r"_P\d(_[a-z][a-z0-9_]*)$", lid)
         suffix_label = suffix_m.group(1).lstrip("_") if suffix_m else None  # e.g. "obs"
@@ -342,7 +342,7 @@ def api_slides(lesson_id: str):
 def api_pacer(lesson_id: str):
     _validate_lesson_id(lesson_id)
     # Pacer HTMLs are per-lesson (L35_Pacer.html), not per-period.
-    lesson_prefix = re.match(r"^(L\d{2})_P\d", lesson_id)  # works for L35_P2 and L35_P2_obs
+    lesson_prefix = re.match(r"^(L\d{2})_P\d", lesson_id)  # works for L35_P2 and L35_P3_obs
     name = (lesson_prefix.group(1) + "_Pacer.html") if lesson_prefix else f"{lesson_id}_Pacer.html"
     pacer_path = _safe_path(REPO_ROOT, name)
     if not pacer_path.exists():

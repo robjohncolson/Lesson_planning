@@ -10,14 +10,15 @@ Usage:
 
 Weeks seeded: 4/27 through 6/19 (end of school 2026-06-20).
 
-RE-BASELINED 2026-04-30: Original plan had Topic 3 assessment on 4/30 and
-L41_P1 starting 5/1. Reality on 4/30 is still on L35_P2. New pacing:
+RE-BASELINED 2026-04-30 (v2): The 5/8 observation lesson is the canonical P3
+(L35_P3_obs), not P2 — corrected from earlier mislabel. Topic 3 assessment
+collapses onto a single Thursday (5/14) for both periods. New pacing:
   - L35_P2 stretches through Thu 5/7
-  - Fri 5/8 = TEACHER OBSERVATION (L35_P2_obs lesson — gradual-release Launch
-    + DOK-3 Mystery Graph in Explore + DOK-1 cool-down Exit)
-  - L35_P3 (Storage Box DOK-3): week of 5/11
-  - Topic 3 Assessment: 5/15 (F) / 5/18 (A)
-  - L41 (full 3-period, LEHS-critical): 5/19 → ~5/27
+  - Fri 5/8 = TEACHER OBSERVATION (L35_P3_obs — canonical P3, gradual-release
+    Launch + DOK-3 Mystery Graph in Explore + DOK-1 cool-down Exit)
+  - L35_P3 continuation (Storage Box DOK-3 follow-up): Mon-Wed 5/11–5/13
+  - Topic 3 Assessment: Thu 5/14 (F + A simultaneous)
+  - L41 (full 3-period, LEHS-critical): F starts 5/15, A starts 5/18 → ~5/27
   - Everything else (4-3, 4-4, 4-5, 5-1, 5-4, 5-5, 6-3, 6-4): single-period
     quick. 6-5 dropped per realistic cuts (see roadmap memory).
 """
@@ -66,7 +67,7 @@ ROWS = [
     ("2026-05-06", "F", "L35_P2", "P2", 45, "Wed F compressed"),
     ("2026-05-07", "F", "L35_P2", "P2", 65, "P2 continues (A: no class)"),
     ("2026-05-07", "A", "L35_P2", "P2", 55, "P2 last day before obs"),
-    ("2026-05-08", "F", "L35_P2", "P2", 65, "★ TEACHER OBSERVATION (L35_P2_obs)"),
+    ("2026-05-08", "F", "L35_P3", "P3", 65, "★ TEACHER OBSERVATION (L35_P3_obs — canonical P3)"),
 
     # ── Week of 5/11 — L35_P3 (Storage Box DOK-3) ───────────────────────────
     ("2026-05-11", "A", "L35_P3", "P3", 65, "Storage Box DOK-3 (A starts)"),
@@ -74,14 +75,14 @@ ROWS = [
     ("2026-05-12", "A", "L35_P3", "P3", 55, "Storage Box DOK-3"),
     ("2026-05-13", "A", "L35_P3", "P3", 65, "P3 close"),
     ("2026-05-13", "F", "L35_P3", "P3", 45, "Wed F compressed — P3 close"),
-    ("2026-05-14", "F", "L35_P3", "P3", 65, "P3 finish"),
-    ("2026-05-14", "A", "L35_P3", "P3", 55, "P3 finish"),
-    ("2026-05-15", "F", None,     "ASSESS", 65, "Topic 3 Assessment (F)"),
+    ("2026-05-14", "F", None,     "ASSESS", 65, "Topic 3 Assessment (F)"),
+    ("2026-05-14", "A", None,     "ASSESS", 55, "Topic 3 Assessment (A)"),
+    ("2026-05-15", "F", "L41_P1", "P1", 65, "F starts 4-1"),
 
-    # ── Week of 5/18 — Topic 3 Assess (A) + Start L41 (full 3-period) ──────
-    ("2026-05-18", "A", None,     "ASSESS", 65, "Topic 3 Assessment (A)"),
-    ("2026-05-19", "F", "L41_P1", "P1", 65, "F starts 4-1"),
-    ("2026-05-19", "A", "L41_P1", "P1", 55, "A starts 4-1"),
+    # ── Week of 5/18 — A starts L41 + L41 P1/P2 ────────────────────────────
+    ("2026-05-18", "A", "L41_P1", "P1", 65, "A starts 4-1"),
+    ("2026-05-19", "F", "L41_P1", "P1", 65, "4-1 P1 (F)"),
+    ("2026-05-19", "A", "L41_P1", "P1", 55, "4-1 P1 (A)"),
     ("2026-05-20", "A", "L41_P1", "P1", 65, "4-1 P1 continues"),
     ("2026-05-20", "F", "L41_P2", "P2", 45, "Wed F compressed — 4-1 P2"),
     ("2026-05-21", "F", "L41_P2", "P2", 65, "4-1 P2"),
