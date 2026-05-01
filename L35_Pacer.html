@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>L35 Pacer · Periods 2, 3, 4</title>
+<title>L35 Pacer · P2 / P3-OBS / P3-cont / P4</title>
 <style>
   :root {
     --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
@@ -119,15 +119,16 @@
 <header>
   <div>
     <h1>Lesson 3-5 Pacer</h1>
-    <div class="meta">Periods 2-4 · Tue–Thu · Single DOK-3 spine</div>
+    <div class="meta">P2 (5/4–5/7) · P3-OBS (5/8) · P3-cont (5/11–5/13) · P4 Assessment (5/14) · Single DOK-3 spine</div>
   </div>
   <div class="meta" id="dateLabel"></div>
 </header>
 
 <nav class="tabs" id="tabBar">
-  <button class="tab active" data-tab="p2">P2 · Tue · Multiplicity</button>
-  <button class="tab" data-tab="p3">P3 · Wed · Zeros + Modeling</button>
-  <button class="tab" data-tab="p4">P4 · Thu · Topic 3 Assessment</button>
+  <button class="tab active" data-tab="p2">P2 · Multiplicity (5/4–5/7)</button>
+  <button class="tab" data-tab="p3obs">P3-OBS · Mystery Graph (Fri 5/8) ★</button>
+  <button class="tab" data-tab="p3cont">P3-cont · Storage Box (5/11–5/13)</button>
+  <button class="tab" data-tab="p4">P4 · Topic 3 Assessment (Thu 5/14)</button>
 </nav>
 
 <main id="panels"></main>
@@ -136,7 +137,7 @@
 // ── Pacer data ─────────────────────────────────────────────────────────────
 const PACER = {
   p2: {
-    label: "Period 2 · Tuesday · 55 min (A) / 65 min (F)",
+    label: "Period 2 · Multi-day stretch 5/4–5/7 · 55 min (A) / 65 min (F)",
     total_min: 55,
     phases: [
       { id: "donow",   title: "Do Now — Zeros from factored form",
@@ -194,15 +195,149 @@ const PACER = {
       },
     ]
   },
-  p3: {
-    label: "Period 3 · Wednesday · 65 min (A) / 45 min (F — SHORT)",
+  p3obs: {
+    label: "Period 3 · OBSERVATION LESSON · Fri 5/8 · Period F · 55 min ★",
+    total_min: 55,
+    short_note: "★ OBSERVATION LESSON — evaluator present. Gradual-release Launch (I-do → you-do → I-check → we-do). DOK-3 Mystery Graph front-loaded in Explore. DOK-1 cool-down Exit.",
+    phases: [
+      { id: "donow", title: "Do Now — Zeros from factored form (warm-up)",
+        fw: "low floor entry", dok: "1", min: 5,
+        items: [
+          {qid:"3-5-obs-donow-1", label:"Prompt 1", note:"f(x) = (x−2)(x+5) — list the zeros."},
+          {qid:"3-5-obs-donow-2", label:"Prompt 2", note:"g(x) = (x−1)²(x+3) — list the zeros; circle anything unusual."},
+          {qid:"3-5-obs-donow-3", label:"Prompt 3", note:"h(x) = x(x−4)(x+2) — list the zeros."},
+        ],
+        teacher: [
+          "Project 3 factored polynomials. Students list zeros only — no graphing yet.",
+          "Adult role: spot-check; flag #2 (the squared factor) for the Launch hook.",
+          "Keep energy low-stakes and welcoming — evaluator in the room.",
+        ],
+        answer: "Zeros: (1) x=2, −5 | (2) x=1, −3 — note (x−1)² is squared | (3) x=0, 4, −2",
+      },
+      { id: "launch-ido", title: "Launch — I do (teacher models)",
+        fw: "teacher models", dok: "2", min: 4,
+        items: [],
+        teacher: [
+          "Project f(x) = (x−2)²(x+3). Think aloud while sketching:",
+          "\"Zero at x=2, factor squared → even multiplicity → TOUCHES. Zero at x=−3, first power → odd multiplicity → CROSSES. Degree 3, leading coeff +, so end behavior: down-up.\"",
+          "Write the touch/cross rule explicitly on the board.",
+        ],
+        rules: [
+          "ODD multiplicity → graph CROSSES the x-axis",
+          "EVEN multiplicity → graph TOUCHES (tangent — turns back)",
+          "Degree parity + leading coeff sign → end behavior",
+        ],
+      },
+      { id: "launch-youdo", title: "Launch — You do (students apply rule)",
+        fw: "independent practice", dok: "2", min: 4,
+        items: [
+          {qid:"3-5-obs-launch-youdo", label:"g(x) = (x+1)(x−4)²", note:"Students sketch independently in packet using the touch/cross rule."},
+        ],
+        teacher: [
+          "Project g(x) = (x+1)(x−4)². Say: \"Use the rule — sketch this on your own.\"",
+          "Circulate silently. Do NOT help yet. Watch for touch/cross confusion.",
+        ],
+        answer: "x=−1 crosses (mult 1 odd), x=4 touches (mult 2 even). Degree 3, pos lead coeff → end behavior down-up.",
+      },
+      { id: "launch-icheck", title: "Launch — I check (address misconceptions)",
+        fw: "targeted feedback", dok: "2", min: 3,
+        items: [],
+        teacher: [
+          "Pull 2 student sketches to project — one correct, one with touch/cross swapped.",
+          "Name the misconception out loud without judgment: \"This is the most common mix-up — let's fix it together.\"",
+          "Correct and move forward.",
+        ],
+        warn: "Don't linger — 3 min max. The we-do step comes next.",
+      },
+      { id: "launch-wedo", title: "Launch — We do together (harder example)",
+        fw: "call-and-response", dok: "2", min: 4,
+        items: [
+          {qid:"3-5-obs-launch-wedo", label:"h(x) = −x(x+2)²(x−1)", note:"Negative leading coeff, three zeros, one touch."},
+        ],
+        teacher: [
+          "Project h(x) = −x(x+2)²(x−1). Conduct whole-class call-and-response:",
+          "\"Where are the zeros?\" → \"x=0, −2, 1\"",
+          "\"Which one touches?\" → \"x=−2 because squared.\"",
+          "\"Why does it open downward?\" → \"Negative leading coeff — ends point down-down.\"",
+          "Teacher writes on board while students respond. Read content + language objectives aloud at end of Launch.",
+        ],
+        rules: [
+          "Sentence frame (ELL support): \"The factor for x = ___ must be ___ because the graph ___.\"",
+          "Sentence frame: \"The leading coefficient is ___ because the ends go ___.\"",
+          "Sentence frame: \"I notice ___, so I think ___.\"",
+        ],
+      },
+      { id: "explore-dok3", title: "Explore — Mystery Graph (DOK-3 TPS)",
+        fw: "student DOK-3", dok: "3", min: 10,
+        items: [
+          {qid:"3-5-obs-mystery-graph", label:"Mystery Graph ⭐ DOK-3 DRIVER", dok3: true,
+           note:"Zeros at x=−1 (TOUCH) and x=3 (CROSS). Both ends point DOWNWARD. Build a factored form. Justify every piece — factors, their powers, and the leading coefficient."},
+        ],
+        teacher: [
+          "Project the Mystery Graph. Pose: \"Build a possible factored form. Justify every piece — factors, powers, and leading coefficient.\"",
+          "\"Note: this is harder than Launch — ends-down forces you to reason about leading coefficient AND degree together.\"",
+          "3 min independent think → 3 min partner share → 4 min whole-group.",
+          "Circulate; tag 2–3 different responses. In whole-group: press 'Why must the leading coefficient be negative?' and 'Could the degree be 4 instead of 3? What would change?'",
+        ],
+        answer: "Possible form: f(x) = −a(x+1)²(x−3), a > 0. Touch at x=−1 requires even mult (squared). Cross at x=3 requires odd mult (linear). Both ends down → negative leading coeff AND degree even OR negative leading coeff with degree odd — min degree 3 works: neg × (even mult 2 + odd mult 1) = degree 3, neg lead → down-down. Also valid: f(x) = −a(x+1)⁴(x−3) (degree 5). All share neg lead coeff.",
+        rules: [
+          "Touch at x=−1 → (x+1) must have EVEN power (at least 2)",
+          "Cross at x=3 → (x−3) must have ODD power (at least 1)",
+          "Both ends down → leading coefficient is NEGATIVE",
+          "Minimum-degree valid answer: f(x) = −(x+1)²(x−3)",
+          "Sentence frame: \"The factor for x = ___ must be ___ because the graph ___.\"",
+        ],
+      },
+      { id: "explore-dok2", title: "Explore — DOK-2 Consolidation (TPS)",
+        fw: "student work", dok: "2", min: 15,
+        items: [
+          {qid:"3-5-savvas-q14", label:"Item 1 — Factored → Graph (standard mult)"},
+          {qid:"3-5-savvas-q16", label:"Item 2 — Factored → Graph (mult-3 factor)"},
+          {qid:"3-5-savvas-q15", label:"Item 3 — Graph → Factored (lower stakes than Mystery Graph)"},
+        ],
+        teacher: [
+          "\"Now apply the rule to 3 more items — in pairs.\"",
+          "Circulate: 'Where does the graph touch vs. cross? Why?' · 'What does end behavior tell you?' · 'How would you check your factored form?'",
+          "4–6 laps. Pull struggling pair for a re-teach huddle if needed. Tag exemplars for Share.",
+          "Students verify with Desmos at end of each item.",
+        ],
+        warn: "Keep TPS active — no whole-class lecture here. Your job is circulation + purposeful Qs.",
+      },
+      { id: "share", title: "Share / Summary — Synthesis",
+        fw: "academic conversation", dok: "2", min: 5,
+        items: [],
+        teacher: [
+          "Re-state the multiplicity rule using STUDENT language from Launch.",
+          "Press: 'Where in today's items did the rule save you time?'",
+          "Project objectives. Ask: 'Which one did you hit? Where did you struggle?' — 2 volunteer responses.",
+          "POST the bridge cue for 5/11 (P3-cont Storage Box).",
+        ],
+        bridge: "Bridge to 5/11 (P3-cont): same factored-form reasoning applied to a volume model (Storage Box #27). Same zeros logic, new physical context.",
+      },
+      { id: "exit", title: "Exit Ticket — DOK-1 Cool-Down",
+        fw: "not graded", dok: "1", min: 5,
+        items: [],
+        teacher: [
+          "Project exit prompt. Students complete independently and turn in at door.",
+          "Tonight: scan for consistent touch/cross confusion → adjust 5/11 Do Now accordingly.",
+        ],
+        rules: [
+          "1. A factor of (x−4)² produces a ___ at x=4 (touch / cross).",
+          "2. A factor of (x+1) produces a ___ at x=−1 (touch / cross).",
+          "3. The biggest thing I learned today was ___.",
+        ],
+      },
+    ]
+  },
+  p3cont: {
+    label: "Period 3-cont · Multi-day stretch 5/11–5/13 · 65 min (A) / 45 min (F — SHORT)",
     total_min: 65,
-    short_note: "Period F on Wednesday is only 45 min. Apply the SHORT VARIANT cuts flagged in each phase.",
+    short_note: "Period F on Wednesday (if applicable) is only 45 min. Apply the SHORT VARIANT cuts flagged in each phase.",
     phases: [
       { id: "donow",  title: "Do Now — Intersection + bridge prompt",
-        fw: "bridge from Tuesday", dok: "1-2", min: 5,
+        fw: "bridge from prior P3-OBS day", dok: "1-2", min: 5,
         items: [{qid:"3-5-savvas-q11", label:"Savvas #11", note:"Find intersection points of f(x) = x³ − 2x² − 16x + 20 and g(x) = −12."}],
-        teacher: ["Hand out at door. POST Tuesday's bridge prompt visibly.",
+        teacher: ["Hand out at door. POST prior bridge prompt visibly.",
                   "Circulate 3 min. Cold-call 1 student for one intersection point.",
                   "Then pivot: \"Who thought about last night's bridge prompt?\""],
         answer: "Intersection: x-values where the cubic equals −12. Set x³ − 2x² − 16x + 20 = −12 → x³ − 2x² − 16x + 32 = 0 → factor to find x = 2 (among others). Students sketch or solve.",
@@ -254,15 +389,15 @@ const PACER = {
         fw: "not graded", dok: "1-2", min: 3,
         items: [],
         teacher: ["Collect at door.",
-                  "Scan #3 (assessment prediction). Use tonight to adjust Thu Do Now."],
+                  "Scan #3 (assessment prediction). Use tonight to adjust 5/14 assessment Do Now."],
         rules: ["1. Today I learned that ___.",
                 "2. For the Storage Box, the hardest step was ___.",
-                "3. Thursday's assessment will test ___."],
+                "3. Thursday's (5/14) assessment will test ___."],
       },
     ]
   },
   p4: {
-    label: "Period 4 · Thursday · 55 min (A) / 65 min (F) · Topic 3 Assessment",
+    label: "Period 4 · Thursday 5/14 · 55 min (A) / 65 min (F) · Topic 3 Assessment",
     total_min: 55,
     phases: [
       { id: "donow", title: "Do Now — Gentle warm-up",
@@ -297,15 +432,15 @@ const PACER = {
         ],
         rules: [
           "Q#1 Remainder Theorem (3-4)",
-          "Q#2 Cubic with conjugate irrational pair (3-5 Tue bridge prompt)",
+          "Q#2 Cubic with conjugate irrational pair (3-5 P3-OBS bridge prompt)",
           "Q#3 Binomial Theorem (3-3)",
           "Q#4 Simplify to standard form (3-2/3)",
-          "Q#5 Zeros + end behavior from graph (3-5 Tue)",
-          "Q#6 Lucy's tray volume model (3-5 Wed — parallel to #27)",
+          "Q#5 Zeros + end behavior from graph (3-5 P3-OBS)",
+          "Q#6 Lucy's tray volume model (3-5 P3-cont — parallel to #27)",
           "Q#7 Polynomial identities factoring (3-3)",
           "Q#8 Cube vs sphere growth (3-1/2)",
           "Q#9 Synthetic division (3-4)",
-          "Q#10 Identify zeros (3-5 Tue)",
+          "Q#10 Identify zeros (3-5 P3-OBS)",
           "Q#11 Graph transformations (3-1/2)"
         ],
         warn: "Silent proctoring only. No content support during the test.",

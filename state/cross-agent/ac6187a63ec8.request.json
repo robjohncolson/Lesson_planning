@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "ac6187a63ec8",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 480,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "Independent review of two parallel prongs. All changes uncommitted. Run `git diff HEAD` to see scope.\n\n## Prong A \u2014 tex/L35_P3_obs_student.tex (aesthetics polish)\nEight aesthetic fixes applied to the 5/8 observation student packet:\n1. Essential Understanding hyphenation: \\mbox{Understanding} prevents mid-word break\n2. Language Objective body: literal _ chars replaced with \\framedline{} blanks\n3. I-do table: switched tabularx X-cols to fixed p{1.7in}/p{4.8in}\n4. tcolorbox internal borders: removed | colspec separators + \\hline row rules\n5. DOK-2 item 1 grid: wrapped in \\begin{minipage}{\\textwidth} to prevent orphan\n6. Grid sizing: added 'sketch shape only' notes under both blank grids (keeps grid small)\n7. End behavior '(Why? ___)' moved to its own line\n8. (x\u00b2+9) bullet: 2 ruled lines -> 3\n\nCHECK: rebuilt PDF page count = 4. Each fix actually landed visually. Mention any LaTeX log warnings beyond a single sub-pixel overfull. Confirm DOK-2 item 1 prompt + grid render together (page 3 OR page 4, not split).\n\n## Prong B \u2014 L35_Pacer.html (and web/pacers/L35_Pacer.html mirror)\nRe-baselined for new schedule. 3 tabs -> 4 tabs:\n- P2 \u00b7 Multiplicity (5/4\u20135/7)\n- P3-OBS \u00b7 Mystery Graph (Fri 5/8) \u2605 \u2014 NEW (observation lesson)\n- P3-cont \u00b7 Storage Box (5/11\u20135/13) \u2014 renamed from old P3\n- P4 \u00b7 Topic 3 Assessment (Thu 5/14)\n\nInline teacher content added for P3-OBS: Mystery Graph script + answer key, sentence frames, touch/cross rules.\n\nCHECK: \n- Both files identical (`diff L35_Pacer.html web/pacers/L35_Pacer.html` should show nothing)\n- Tabs render in expected order (read the HTML)\n- Phase chip JS handlers and timer JS still work \u2014 look for broken references to old tab IDs (`p2`, `p3`, `p4`) vs new ones; if the ids changed, all chip onclick handlers and renderPanel iteration must match\n- Dates in tab labels match the schedule (5/8 obs, 5/14 assess)\n- No references to deprecated 'Tue/Wed/Thu' hard-coded labels remain\n\n## Reporting format\nFor each prong: PASS / NIT / BLOCKER + at most 3 sentences. Global verdict + any cross-prong consistency issues. Total under 500 words.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": false,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-05-01T03:36:33Z"
+}
