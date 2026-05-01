@@ -50,7 +50,7 @@ def env(name: str) -> str:
 ROWS = [
     # ── Week of 4/27 — L35_P2 stretch (re-baselined 2026-04-30) ─────────────
     # Reality: still on L35_P2 on 4/30. Stretch P2 through 5/7. Observation 5/8.
-    ("2026-04-27", "A", "L35_P1", "P1",     65, "L35_P1 close-out"),
+    ("2026-04-27", "A", None,     "P1",     65, "L35_P1 close-out (no yaml; lessons row absent)"),
     ("2026-04-28", "F", "L35_P2", "P2",     65, None),
     ("2026-04-28", "A", "L35_P2", "P2",     55, None),
     ("2026-04-29", "A", "L35_P2", "P2",     65, "Re-baselined: P2 stretched"),
@@ -132,7 +132,7 @@ ROWS = [
 
 
 def upsert(url: str, key: str, rows: list[dict], dry_run: bool) -> int:
-    endpoint = f"{url}/rest/v1/schedule"
+    endpoint = f"{url}/rest/v1/schedule?on_conflict=class_date,period"
     headers = {
         "apikey":          key,
         "Authorization":   f"Bearer {key}",
