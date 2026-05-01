@@ -1,4 +1,7 @@
-import { api, pdfUrl, getTex, saveTex, rebuildPdf, sha256Hex } from "/js/api.js";
+import {
+  api, pdfUrl, getTex, saveTex, rebuildPdf, sha256Hex,
+  topicPdfUrl, docxUrl, pptxUrl, screenshotUrl, lessonIdToTopic, uploadAsset,
+} from "/js/api.js";
 import { passcode } from "/js/passcode.js";
 import { username } from "/js/username.js";
 import { createLessonList } from "/js/lesson-list.js";
@@ -40,6 +43,10 @@ const texRemoteBanner   = document.getElementById("tex-remote-banner");
 const remoteBannerMsg   = document.getElementById("remote-banner-msg");
 const btnTakeTheirs     = document.getElementById("btn-take-theirs");
 const btnDismissBanner  = document.getElementById("btn-dismiss-banner");
+
+// ── New asset section DOM refs ───────────────────────────────────────────────
+const textbookSection   = document.getElementById("textbook-section");
+const docxSection       = document.getElementById("docx-section");
 
 const SUB_VIEWS = ["yaml-view", "tex-view", "pdf-view", "merge-view", "item-list-view", "item-detail-view"];
 
@@ -116,10 +123,163 @@ function openPdfView(kind) {
   showView("pdf-view");
 }
 
+// ── Asset-upload helper ──────────────────────────────────────────────────────
+// Shared upload flow: open file picker, POST to railway, then re-run refresh.
+function triggerUpload({ accept, endpoint, onSuccess, onError }) {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = accept;
+  input.addEventListener("change", async () => {
+    const file = input.files[0];
+    if (!file) return;
+    const pc = passcode.get();
+    const un = username.get();
+    try {
+      const r = await uploadAsset(endpoint, file, pc, un);
+      if (r.status === 401) { passcode.clear(); throw new Error("Wrong passcode"); }
+      if (!r.ok) throw new Error(`Upload failed: HTTP ${r.status}`);
+      if (onSuccess) onSuccess();
+    } catch (err) {
+      if (onError) onError(err.message);
+      else showError(err.message);
+    }
+  });
+  input.click();
+}
+
+// ── Textbook section (Savvas) ────────────────────────────────────────────────
+
+async function renderTextbookSection(lessonId) {
+  if (!textbookSection) return;
+  const topic = lessonIdToTopic(lessonId);
+  if (!topic) {
+    // APStats or unrecognised → hide the whole section
+    textbookSection.style.display = "none";
+    return;
+  }
+  textbookSection.style.display = "";
+
+  const seUrl = topicPdfUrl(topic, "SE");
+  const teUrl = topicPdfUrl(topic, "TE");
+
+  // HEAD-probe both editions in parallel
+  const [seOk, teOk] = await Promise.all([
+    fetch(seUrl, { method: "HEAD" }).then(r => r.ok).catch(() => false),
+    fetch(teUrl, { method: "HEAD" }).then(r => r.ok).catch(() => false),
+  ]);
+
+  // Capture the active lesson at probe time so stale callbacks are ignored.
+  if (lessonId !== activeLessonId) return;
+
+  function makeEditionRow(label, exists, url, edition) {
+    const row = document.createElement("div");
+    row.className = "asset-row";
+    if (exists) {
+      const btn = document.createElement("a");
+      btn.className = "btn btn-teal";
+      btn.href = url;
+      btn.target = "_blank";
+      btn.rel = "noopener";
+      btn.textContent = label;
+      row.appendChild(btn);
+    } else {
+      const hint = document.createElement("span");
+      hint.className = "asset-missing";
+      hint.textContent = `${label} (not yet uploaded)`;
+      row.appendChild(hint);
+    }
+    const upBtn = document.createElement("button");
+    upBtn.className = "btn btn-muted btn-sm";
+    upBtn.textContent = "Upload";
+    upBtn.addEventListener("click", () => {
+      triggerUpload({
+        accept: ".pdf",
+        endpoint: `/upload/topic-pdf/${encodeURIComponent(topic)}/${edition}`,
+        onSuccess: () => renderTextbookSection(activeLessonId),
+      });
+    });
+    row.appendChild(upBtn);
+    return row;
+  }
+
+  const body = textbookSection.querySelector(".asset-section-body");
+  body.innerHTML = "";
+  body.appendChild(makeEditionRow("Student Edition (PDF)", seOk, seUrl, "SE"));
+  body.appendChild(makeEditionRow("Teacher Edition (PDF)", teOk, teUrl, "TE"));
+}
+
+// ── DOCX / PPTX section ──────────────────────────────────────────────────────
+
+async function renderDocxSection(lessonId) {
+  if (!docxSection) return;
+  docxSection.style.display = "";
+
+  const slots = [
+    { label: "Student DOCX",  url: docxUrl(lessonId, "student"),  endpoint: `/upload/docx/${encodeURIComponent(lessonId)}/student`,  accept: ".docx" },
+    { label: "Teacher DOCX",  url: docxUrl(lessonId, "teacher"),  endpoint: `/upload/docx/${encodeURIComponent(lessonId)}/teacher`,  accept: ".docx" },
+    { label: "Slides PPTX",   url: pptxUrl(lessonId),             endpoint: `/upload/docx/${encodeURIComponent(lessonId)}/slides`,   accept: ".pptx" },
+  ];
+
+  // Probe all three in parallel
+  const exists = await Promise.all(
+    slots.map(s => fetch(s.url, { method: "HEAD" }).then(r => r.ok).catch(() => false))
+  );
+
+  if (lessonId !== activeLessonId) return;
+
+  const body = docxSection.querySelector(".asset-section-body");
+  body.innerHTML = "";
+
+  slots.forEach((slot, i) => {
+    const row = document.createElement("div");
+    row.className = "asset-row";
+
+    if (exists[i]) {
+      const btn = document.createElement("a");
+      btn.className = "btn btn-navy";
+      btn.href = slot.url;
+      btn.target = "_blank";
+      btn.rel = "noopener";
+      btn.textContent = `${slot.label} ↓`;
+      row.appendChild(btn);
+    } else {
+      const hint = document.createElement("span");
+      hint.className = "asset-missing";
+      hint.textContent = `${slot.label} (not yet uploaded)`;
+      row.appendChild(hint);
+    }
+
+    const upBtn = document.createElement("button");
+    upBtn.className = "btn btn-muted btn-sm";
+    upBtn.textContent = "Upload";
+    const slotSnapshot = slot;
+    upBtn.addEventListener("click", () => {
+      triggerUpload({
+        accept: slotSnapshot.accept,
+        endpoint: slotSnapshot.endpoint,
+        onSuccess: () => renderDocxSection(activeLessonId),
+      });
+    });
+    row.appendChild(upBtn);
+    body.appendChild(row);
+  });
+}
+
 // ── Lesson selection ─────────────────────────────────────────────────────────
 
 async function selectLesson(id) {
   clearError();
+  // Reset asset sections immediately so stale content doesn't linger during re-probe
+  if (textbookSection) {
+    textbookSection.style.display = "none";
+    const b = textbookSection.querySelector(".asset-section-body");
+    if (b) b.innerHTML = "";
+  }
+  if (docxSection) {
+    docxSection.style.display = "none";
+    const b = docxSection.querySelector(".asset-section-body");
+    if (b) b.innerHTML = "";
+  }
   if (unsubscribeRealtime) {
     await unsubscribeRealtime();
     unsubscribeRealtime = null;
@@ -153,6 +313,10 @@ async function selectLesson(id) {
         }
       })
       .catch(() => {});
+
+    // Textbook + DOCX sections — fire-and-forget, parallel with Do Now probe
+    renderTextbookSection(id).catch(() => {});
+    renderDocxSection(id).catch(() => {});
 
     // Pacer link: derive L{NN} prefix from lesson id (e.g. L41_P2 -> L41)
     const pacerPrefix = (id.match(/^L\d+/) || [])[0];

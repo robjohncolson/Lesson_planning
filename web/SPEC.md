@@ -52,8 +52,10 @@ Element IDs referenced by JS — **match these exactly**.
 | `#yaml-view`         | Wraps `#yaml-content` (pre) |
 | `#item-list-view`    | Wraps `#item-list` (container for per-item cards) |
 | `#item-detail-view`  | Wraps `#item-detail` (single item) |
+| `#textbook-section`  | Savvas textbook PDF section (Algebra-2 lessons only; hidden for APStats). Contains `.asset-section-body` populated by `renderTextbookSection()` in `main.js`. |
+| `#docx-section`      | Editable-formats section (DOCX/PPTX). Contains `.asset-section-body` populated by `renderDocxSection()` in `main.js`. |
 
-Three detail sub-views (`yaml-view`, `item-list-view`, `item-detail-view`) are mutually exclusive — show one, hide the others.
+Three detail sub-views (`yaml-view`, `item-list-view`, `item-detail-view`) are mutually exclusive — show one, hide the others. The two asset sections (`#textbook-section`, `#docx-section`) are persistent overlays above the sub-views, visible whenever a lesson is selected.
 
 ## DOM contract (dag.html)
 

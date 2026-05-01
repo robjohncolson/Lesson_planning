@@ -58,6 +58,14 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 - **Thu 5/14 = Topic 3 Assessment** for both periods (compressed onto one day, was 5/15 F + 5/18 A).
 - **L41 (full 3-period) starts F 5/15 / A 5/18**, runs through ~5/27.
 
+**Completed 2026-05-01 (asset upload pipeline — textbook PDFs / DOCX / per-item screenshots):**
+- ✅ **Three new Supabase Storage buckets** (auto-created on Railway startup, idempotent): `topic-pdfs` (Savvas SE/TE chapter PDFs as `a2_<topic>_<SE|TE>.pdf`), `lesson-docx` (`<lesson_id>_<student|teacher>.docx` + `<lesson_id>_slides.pptx`), `item-screenshots` (`<item_id>.<png|jpg>` for textbook source images of registry items).
+- ✅ **Three new Railway endpoints** in `railway/server.py` (X-Passcode + X-User-Name auth like existing /tex and /build): `POST /upload/topic-pdf/{topic}/{edition}`, `POST /upload/docx/{lesson_id}/{kind}`, `POST /upload/screenshot/{item_id}`. Path-traversal-safe (regex validation BEFORE storage path construction). MIME enforced per endpoint. `x-upsert: "true"` literal string per failure mode #19.
+- ✅ **Web UI** (`web/index.html` + `web/js/main.js` + `web/js/item-detail.js` + `web/js/api.js` + `web/styles/console.css`): two new lesson-page sections — "Textbook (Savvas)" linking to topic SE/TE PDFs (Algebra 2 only; APStats hidden via `lessonIdToTopic`==null) and "Editable formats" with Student DOCX / Teacher DOCX / Slides PPTX slots. Items browser shows per-item screenshot thumbnails (HEAD-probed in parallel via `Promise.all`). All sections gracefully degrade on 404 (upload button instead of download).
+- ✅ **Bulk uploaders** at `supabase/upload_topic_pdfs.py` and `supabase/upload_docx.py` — run on home machine where the source PDFs live (`a2_4-3_SE.pdf` through `a2_6-5_TE.pdf` etc.). Idempotent, 50MB guard, ASCII-safe console output.
+- ✅ **Pull-back utility** at `supabase/pull_screenshots.py` — pulls Supabase `item-screenshots/*` to local `questionbank/images/<item_id>.<ext>`, paginated (1000-row Storage list cap), size-skip if local matches remote Content-Length. Keeps the on-disk pattern in sync without requiring Railway to write to your laptop.
+- Note: web uploads go through Railway → Supabase only. Local `questionbank/images/` is updated via `pull_screenshots.py` (pull model, not push).
+
 **Time-critical — user handles:**
 - Rotate the Supabase service-role key (pasted in chat logs multiple times). Dashboard → Settings → API → Reset. Then `railway variables --set "SUPABASE_SERVICE_ROLE_KEY=<new_one_line>"`.
 - Delete the Railway project access token `cc-debug-session` at https://railway.com/account/tokens once debugging sessions wrap.

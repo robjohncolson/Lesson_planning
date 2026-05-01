@@ -24,7 +24,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
-from fastapi import FastAPI, Header, HTTPException, Request
+from fastapi import FastAPI, Header, HTTPException, Request, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -477,3 +477,268 @@ async def put_tex(
 
     _rest_update_lesson(lesson_id, {f"tex_{edition}": tex_text}, x_user_name)
     return {"ok": True}
+
+
+# ---------------------------------------------------------------------------
+# Upload-endpoint constants
+# ---------------------------------------------------------------------------
+
+TOPIC_PDF_RE = re.compile(r"^\d-\d$")
+ITEM_ID_RE   = re.compile(r"^[a-zA-Z0-9-]+(?:-[a-zA-Z0-9]+)*$")
+
+DOCX_KINDS = {"student", "teacher", "slides"}
+
+# MIME types for upload validation
+MIME_PDF   = "application/pdf"
+MIME_DOCX  = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+MIME_PPTX  = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+MIME_PNG   = "image/png"
+MIME_JPG   = "image/jpeg"
+
+# Bucket names for the three new upload families
+BUCKET_TOPIC_PDF    = "topic-pdfs"
+BUCKET_LESSON_DOCX  = "lesson-docx"
+BUCKET_SCREENSHOTS  = "item-screenshots"
+
+
+# ---------------------------------------------------------------------------
+# Bucket-creation helper
+# ---------------------------------------------------------------------------
+
+def _ensure_bucket(name: str, *, public_read: bool = True) -> None:
+    """Create bucket if it doesn't already exist. Idempotent — 409 is success."""
+    r = requests.post(
+        f"{SUPABASE_URL}/storage/v1/bucket",
+        headers={
+            "Authorization": f"Bearer {SUPABASE_KEY}",
+            "apikey": SUPABASE_KEY,
+            "Content-Type": "application/json",
+        },
+        json={"name": name, "public": public_read},
+        timeout=10,
+    )
+    if r.status_code not in (200, 201, 409):
+        log.warning("_ensure_bucket(%s): unexpected response %s %s", name, r.status_code, r.text[:200])
+
+
+def _storage_upload_to(bucket: str, object_path: str, body: bytes, content_type: str) -> None:
+    """Upload (or replace) an object in the given Supabase Storage bucket."""
+    r = requests.post(
+        f"{SUPABASE_URL}/storage/v1/object/{bucket}/{object_path}",
+        headers={
+            "Authorization": f"Bearer {SUPABASE_KEY}",
+            "apikey": SUPABASE_KEY,
+            "Content-Type": content_type,
+            "x-upsert": "true",
+        },
+        data=body,
+        timeout=30,
+    )
+    if not r.ok:
+        raise RuntimeError(f"storage upload {bucket}/{object_path}: {r.status_code} {r.text[:200]}")
+
+
+def _storage_public_url_bucket(bucket: str, object_path: str) -> str:
+    return f"{SUPABASE_URL}/storage/v1/object/public/{bucket}/{object_path}"
+
+
+# Ensure the three new buckets exist at startup (idempotent).
+try:
+    _ensure_bucket(BUCKET_TOPIC_PDF)
+    _ensure_bucket(BUCKET_LESSON_DOCX)
+    _ensure_bucket(BUCKET_SCREENSHOTS)
+except Exception as _e:
+    log.warning("startup _ensure_bucket failed (non-fatal): %s", _e)
+
+
+# ---------------------------------------------------------------------------
+# Upload auth helper
+# ---------------------------------------------------------------------------
+
+def _check_upload_auth(x_passcode: str | None, x_user_name: str | None) -> str:
+    """Check passcode + require non-empty X-User-Name. Returns user_name."""
+    _check_passcode(x_passcode)
+    if not x_user_name or not x_user_name.strip():
+        raise HTTPException(status_code=401, detail="X-User-Name header is required for uploads")
+    return x_user_name.strip()
+
+
+# ---------------------------------------------------------------------------
+# A. POST /upload/topic-pdf/{topic}/{edition}
+# ---------------------------------------------------------------------------
+#
+# Smoke-test (curl):
+#   curl -X POST http://localhost:8080/upload/topic-pdf/4-3/SE \
+#        -H "X-Passcode: changeme123" \
+#        -H "X-User-Name: testuser" \
+#        -F "file=@a2_4-3_SE.pdf"
+
+@app.post("/upload/topic-pdf/{topic}/{edition}")
+async def upload_topic_pdf(
+    topic: str,
+    edition: str,
+    file: UploadFile = File(...),
+    x_passcode: str | None = Header(default=None),
+    x_user_name: str | None = Header(default=None),
+) -> dict:
+    user = _check_upload_auth(x_passcode, x_user_name)
+
+    if not TOPIC_PDF_RE.match(topic):
+        raise HTTPException(status_code=400, detail="topic must match digit-digit (e.g. 4-3)")
+    if edition not in ("SE", "TE"):
+        raise HTTPException(status_code=400, detail="edition must be SE or TE")
+
+    # Content-Type validation: allow application/pdf OR filename ending in .pdf
+    ct = (file.content_type or "").lower()
+    fname = (file.filename or "").lower()
+    if ct != MIME_PDF and not fname.endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="File must be a PDF (application/pdf or .pdf extension)")
+
+    body = await file.read()
+    object_path = f"a2_{topic}_{edition}.pdf"
+
+    try:
+        _storage_upload_to(BUCKET_TOPIC_PDF, object_path, body, MIME_PDF)
+    except RuntimeError as exc:
+        log.error("upload/topic-pdf %s/%s failed: %s", topic, edition, exc)
+        raise HTTPException(status_code=502, detail=str(exc))
+
+    url = _storage_public_url_bucket(BUCKET_TOPIC_PDF, object_path)
+    log.info("upload/topic-pdf topic=%s edition=%s user=%s size=%d ok", topic, edition, user, len(body))
+    return {"ok": True, "url": url, "size": len(body), "uploaded_by": user}
+
+
+# ---------------------------------------------------------------------------
+# B. POST /upload/docx/{lesson_id}/{kind}
+# ---------------------------------------------------------------------------
+#
+# Smoke-test (curl):
+#   curl -X POST http://localhost:8080/upload/docx/L41_P2/student \
+#        -H "X-Passcode: changeme123" \
+#        -H "X-User-Name: testuser" \
+#        -F "file=@L41_P2_student.docx"
+#
+#   curl -X POST http://localhost:8080/upload/docx/L41_P2/slides \
+#        -H "X-Passcode: changeme123" \
+#        -H "X-User-Name: testuser" \
+#        -F "file=@L41_P2_slides.pptx"
+
+_DOCX_KIND_META = {
+    # kind -> (expected_mime, expected_ext, storage_ext)
+    "student": (MIME_DOCX, ".docx", ".docx"),
+    "teacher": (MIME_DOCX, ".docx", ".docx"),
+    "slides":  (MIME_PPTX, ".pptx", ".pptx"),
+}
+
+
+@app.post("/upload/docx/{lesson_id}/{kind}")
+async def upload_docx(
+    lesson_id: str,
+    kind: str,
+    file: UploadFile = File(...),
+    x_passcode: str | None = Header(default=None),
+    x_user_name: str | None = Header(default=None),
+) -> dict:
+    user = _check_upload_auth(x_passcode, x_user_name)
+    _validate_lesson_id(lesson_id)
+
+    if kind not in DOCX_KINDS:
+        raise HTTPException(status_code=400, detail="kind must be student, teacher, or slides")
+
+    expected_mime, expected_ext, storage_ext = _DOCX_KIND_META[kind]
+    ct = (file.content_type or "").lower()
+    fname = (file.filename or "").lower()
+
+    if ct != expected_mime and not fname.endswith(expected_ext):
+        raise HTTPException(
+            status_code=400,
+            detail=f"kind={kind!r} requires {expected_ext} file (MIME {expected_mime}); got content-type={ct!r}, filename={file.filename!r}",
+        )
+
+    body = await file.read()
+    object_path = f"{lesson_id}_{kind}{storage_ext}"
+
+    try:
+        _storage_upload_to(BUCKET_LESSON_DOCX, object_path, body, expected_mime)
+    except RuntimeError as exc:
+        log.error("upload/docx %s/%s failed: %s", lesson_id, kind, exc)
+        raise HTTPException(status_code=502, detail=str(exc))
+
+    url = _storage_public_url_bucket(BUCKET_LESSON_DOCX, object_path)
+    log.info("upload/docx lesson=%s kind=%s user=%s size=%d ok", lesson_id, kind, user, len(body))
+    return {"ok": True, "url": url, "size": len(body), "uploaded_by": user}
+
+
+# ---------------------------------------------------------------------------
+# C. POST /upload/screenshot/{item_id}
+# ---------------------------------------------------------------------------
+#
+# Smoke-test (curl):
+#   curl -X POST http://localhost:8080/upload/screenshot/4-1-savvas-q26 \
+#        -H "X-Passcode: changeme123" \
+#        -H "X-User-Name: testuser" \
+#        -F "file=@question_screenshot.png"
+#
+#   curl -X POST http://localhost:8080/upload/screenshot/3-5-savvas-q12 \
+#        -H "X-Passcode: changeme123" \
+#        -H "X-User-Name: testuser" \
+#        -F "file=@question_screenshot.jpg"
+
+_SCREENSHOT_MIMES = {MIME_PNG, MIME_JPG}
+_SCREENSHOT_EXTS  = {".png", ".jpg", ".jpeg"}
+_SCREENSHOT_EXT_MAP = {
+    MIME_PNG: ".png",
+    MIME_JPG: ".jpg",
+    # fallback by filename extension
+    ".png": ".png",
+    ".jpg": ".jpg",
+    ".jpeg": ".jpg",
+}
+
+
+@app.post("/upload/screenshot/{item_id}")
+async def upload_screenshot(
+    item_id: str,
+    file: UploadFile = File(...),
+    x_passcode: str | None = Header(default=None),
+    x_user_name: str | None = Header(default=None),
+) -> dict:
+    user = _check_upload_auth(x_passcode, x_user_name)
+
+    if not ITEM_ID_RE.match(item_id):
+        raise HTTPException(
+            status_code=400,
+            detail="item_id must be alphanumeric+dashes (e.g. 4-1-savvas-q26)",
+        )
+
+    ct = (file.content_type or "").lower()
+    fname = (file.filename or "").lower()
+
+    # Determine storage extension: prefer MIME, fall back to filename ext
+    if ct in _SCREENSHOT_MIMES:
+        storage_ext = _SCREENSHOT_EXT_MAP[ct]
+    else:
+        # Try filename extension
+        for ext in (".png", ".jpg", ".jpeg"):
+            if fname.endswith(ext):
+                storage_ext = _SCREENSHOT_EXT_MAP[ext]
+                break
+        else:
+            raise HTTPException(
+                status_code=400,
+                detail="Screenshot must be PNG or JPG (image/png, image/jpeg, or .png/.jpg extension)",
+            )
+
+    body = await file.read()
+    object_path = f"{item_id}{storage_ext}"
+    upload_mime = MIME_PNG if storage_ext == ".png" else MIME_JPG
+
+    try:
+        _storage_upload_to(BUCKET_SCREENSHOTS, object_path, body, upload_mime)
+    except RuntimeError as exc:
+        log.error("upload/screenshot %s failed: %s", item_id, exc)
+        raise HTTPException(status_code=502, detail=str(exc))
+
+    url = _storage_public_url_bucket(BUCKET_SCREENSHOTS, object_path)
+    log.info("upload/screenshot item=%s user=%s size=%d ok", item_id, user, len(body))
+    return {"ok": True, "url": url, "size": len(body), "uploaded_by": user}

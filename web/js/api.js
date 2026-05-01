@@ -174,6 +174,52 @@ export function pdfUrl(lessonId, kind) {
   return `${SUPABASE_URL}/storage/v1/object/public/lesson-pdfs/${lessonId}_${kind}.pdf`;
 }
 
+// Textbook PDFs (Savvas): stored in topic-pdfs bucket.
+// topic: "4-1" | "4-3" | etc.  edition: "SE" | "TE"
+export function topicPdfUrl(topic, edition) {
+  return `${SUPABASE_URL}/storage/v1/object/public/topic-pdfs/a2_${topic}_${edition}.pdf`;
+}
+
+// Editable formats: DOCX lives in lesson-docx bucket.
+// kind: "student" | "teacher"
+export function docxUrl(lessonId, kind) {
+  return `${SUPABASE_URL}/storage/v1/object/public/lesson-docx/${lessonId}_${kind}.docx`;
+}
+
+// PPTX (slides) in same lesson-docx bucket.
+export function pptxUrl(lessonId) {
+  return `${SUPABASE_URL}/storage/v1/object/public/lesson-docx/${lessonId}_slides.pptx`;
+}
+
+// Per-item screenshots: item-screenshots bucket.
+// ext: "png" | "jpg" (default "png")
+export function screenshotUrl(itemId, ext = "png") {
+  return `${SUPABASE_URL}/storage/v1/object/public/item-screenshots/${itemId}.${ext}`;
+}
+
+// Derive Algebra-2 topic string from lesson id.
+// L41_P2 -> "4-1"   L35_P3_obs -> "3-5"
+// APStats_* and anything unrecognised -> null (textbook section hidden).
+export function lessonIdToTopic(lessonId) {
+  const m = /^L(\d)(\d)_P\d/.exec(lessonId || "");
+  return m ? `${m[1]}-${m[2]}` : null;
+}
+
+// Upload a file asset to a Railway endpoint with auth headers.
+// endpoint: e.g. "/upload/topic-pdf/4-1/SE"
+// Returns the fetch Response (caller checks .ok).
+export async function uploadAsset(endpoint, file, pc, un) {
+  const fd = new FormData();
+  fd.append("file", file);
+  const headers = { "X-Passcode": pc };
+  if (un) headers["X-User-Name"] = un;
+  return fetch(`${RAILWAY_URL}${endpoint}`, {
+    method: "POST",
+    headers,
+    body: fd,
+  });
+}
+
 // Tex source: read from Supabase lessons.tex_{edition} column.
 // edition: "student" | "teacher" | "slides"
 // Returns string or null (null = column empty / lesson not found).

@@ -33,8 +33,28 @@ Set the three required environment variables in Railway > Variables before the f
 | `GET` | `/health` | Returns `{"ok": true, "tex": "<pdflatex version>"}` |
 | `POST` | `/build/{lesson_id}` | Compile and upload PDFs. Auth: `X-Passcode` header. |
 | `PUT` | `/tex/{lesson_id}/{edition}` | Write tex source to Supabase. Body: raw text. Auth: `X-Passcode` header. `edition` = `student` or `teacher`. |
+| `POST` | `/upload/topic-pdf/{topic}/{edition}` | Upload a topic-level PDF (e.g. `4-3`, edition `SE` or `TE`). Multipart field `file`. |
+| `POST` | `/upload/docx/{lesson_id}/{kind}` | Upload a .docx or .pptx artifact. `kind` = `student`, `teacher`, or `slides`. Multipart field `file`. |
+| `POST` | `/upload/screenshot/{item_id}` | Upload a PNG or JPG screenshot for a question-bank item (e.g. `4-1-savvas-q26`). Multipart field `file`. |
 
-`lesson_id` must match `L##_P#` (e.g. `L41_P2`).
+`lesson_id` must match `L##_P#` (e.g. `L41_P2`). All upload endpoints require `X-Passcode` AND `X-User-Name` headers.
+
+### Upload response shape
+
+```json
+{"ok": true, "url": "<public_url>", "size": <bytes>, "uploaded_by": "<X-User-Name>"}
+```
+
+### Storage buckets
+
+| Bucket | Public | Contents |
+|---|---|---|
+| `lesson-pdfs` | yes | Compiled lesson PDFs (managed by `/build`) |
+| `topic-pdfs` | yes | Manually uploaded topic-level PDFs (`a2_{topic}_{edition}.pdf`) |
+| `lesson-docx` | yes | Docx/pptx artifacts (`{lesson_id}_{kind}.{docx,pptx}`) |
+| `item-screenshots` | yes | Question-bank screenshots (`{item_id}.{png,jpg}`) |
+
+The three new buckets are created automatically at server startup if they don't exist (idempotent — 409 is treated as success).
 
 ## Storage CDN cache invalidation
 

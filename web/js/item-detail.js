@@ -1,4 +1,6 @@
-import { api } from "/js/api.js";
+import { api, screenshotUrl, uploadAsset } from "/js/api.js";
+import { passcode } from "/js/passcode.js";
+import { username } from "/js/username.js";
 
 function escHtml(s) {
   return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -20,6 +22,67 @@ function truncate(s, max = 80) {
   return str.length > max ? str.slice(0, max) + "…" : str;
 }
 
+// ── Screenshot helpers ───────────────────────────────────────────────────────
+// Probe all item IDs for screenshots in parallel (one HEAD each).
+// Returns Map<itemId, { exists: bool, ext: "png"|"jpg", url: string }>.
+async function probeScreenshots(itemIds) {
+  const results = new Map();
+  await Promise.all(itemIds.map(async (id) => {
+    // Try png first, then jpg
+    for (const ext of ["png", "jpg"]) {
+      const url = screenshotUrl(id, ext);
+      const ok = await fetch(url, { method: "HEAD" }).then(r => r.ok).catch(() => false);
+      if (ok) {
+        results.set(id, { exists: true, ext, url });
+        return;
+      }
+    }
+    results.set(id, { exists: false, ext: "png", url: screenshotUrl(id, "png") });
+  }));
+  return results;
+}
+
+function attachScreenshotWidget(row, itemId, screenshotInfo, onReprobe) {
+  const widget = document.createElement("span");
+  widget.className = "screenshot-widget";
+
+  if (screenshotInfo && screenshotInfo.exists) {
+    const link = document.createElement("a");
+    link.className = "screenshot-view-link";
+    link.href = screenshotInfo.url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.title = "View screenshot";
+    link.textContent = "📷 view";
+    widget.appendChild(link);
+  } else {
+    const upBtn = document.createElement("button");
+    upBtn.className = "btn-screenshot-upload";
+    upBtn.title = "Upload screenshot for this item";
+    upBtn.textContent = "📷 upload";
+    upBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); // don't open item detail
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/png,image/jpeg";
+      input.addEventListener("change", async () => {
+        const file = input.files[0];
+        if (!file) return;
+        try {
+          const r = await uploadAsset(
+            `/upload/screenshot/${encodeURIComponent(itemId)}`,
+            file, passcode.get(), username.get()
+          );
+          if (r.ok && onReprobe) onReprobe(itemId, widget);
+        } catch {}
+      });
+      input.click();
+    });
+    widget.appendChild(upBtn);
+  }
+  row.appendChild(widget);
+}
+
 // Phase display order + human labels. Matches the CHECK constraint in
 // supabase/migrations/005_lesson_phases.sql.
 const PHASE_ORDER = ["do_now", "launch", "explore", "share_summary", "exit", "reinforcement"];
@@ -32,7 +95,7 @@ const PHASE_LABELS = {
   reinforcement:  "Optional Reinforcement",
 };
 
-function renderItemRow(item, onItemClick) {
+function renderItemRow(item, onItemClick, screenshotInfo, onReprobe) {
   const row = document.createElement("div");
   row.className = "item-row";
   row.dataset.id = item.id;
@@ -42,6 +105,8 @@ function renderItemRow(item, onItemClick) {
     dokBadge(item.dok) +
     `<span class="item-prompt">${escHtml(truncate(item.prompt))}</span>`;
   row.addEventListener("click", () => onItemClick(item.id));
+  // Screenshot widget appended after click handler so stopPropagation works
+  attachScreenshotWidget(row, item.id, screenshotInfo, onReprobe);
   return row;
 }
 
@@ -77,6 +142,29 @@ export async function renderItemList(lesson, container, onItemClick) {
     return;
   }
 
+  // Fire all screenshot probes in parallel — one HEAD per item (tries png then jpg).
+  // Build the map before rendering so widgets render with correct initial state.
+  const screenshotMap = await probeScreenshots(items.map(i => i.id));
+
+  // onReprobe: after an upload, re-probe that single item and refresh its widget.
+  function onReprobe(itemId, widget) {
+    probeScreenshots([itemId]).then(m => {
+      const info = m.get(itemId);
+      // Replace old widget contents in place
+      widget.innerHTML = "";
+      if (info && info.exists) {
+        const link = document.createElement("a");
+        link.className = "screenshot-view-link";
+        link.href = info.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.title = "View screenshot";
+        link.textContent = "📷 view";
+        widget.appendChild(link);
+      }
+    }).catch(() => {});
+  }
+
   container.innerHTML = "";
 
   // Fall-through: no phase data → flat list (legacy behavior + note).
@@ -87,7 +175,7 @@ export async function renderItemList(lesson, container, onItemClick) {
     note.textContent = "No phase data yet for this period — showing all items for the lesson code.";
     container.appendChild(note);
     for (const item of items) {
-      container.appendChild(renderItemRow(item, onItemClick));
+      container.appendChild(renderItemRow(item, onItemClick, screenshotMap.get(item.id), onReprobe));
     }
     return;
   }
@@ -119,7 +207,7 @@ export async function renderItemList(lesson, container, onItemClick) {
     for (const pr of rows) {
       if (pr.item_id && itemsById.has(pr.item_id)) {
         usedItemIds.add(pr.item_id);
-        container.appendChild(renderItemRow(itemsById.get(pr.item_id), onItemClick));
+        container.appendChild(renderItemRow(itemsById.get(pr.item_id), onItemClick, screenshotMap.get(pr.item_id), onReprobe));
       } else {
         // Show the literal label so teacher can still see the item slot.
         container.appendChild(renderUnmatchedRow(pr.label || pr.item_id || "(missing)"));
@@ -138,7 +226,7 @@ export async function renderItemList(lesson, container, onItemClick) {
     summary.textContent = `Other items in this lesson code (${others.length})`;
     details.appendChild(summary);
     for (const item of others) {
-      details.appendChild(renderItemRow(item, onItemClick));
+      details.appendChild(renderItemRow(item, onItemClick, screenshotMap.get(item.id), onReprobe));
     }
     container.appendChild(details);
   }
