@@ -67,8 +67,13 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 - Note: web uploads go through Railway → Supabase only. Local `questionbank/images/` is updated via `pull_screenshots.py` (pull model, not push).
 
 **Time-critical — user handles:**
-- Rotate the Supabase service-role key (pasted in chat logs multiple times). Dashboard → Settings → API → Reset. Then `railway variables --set "SUPABASE_SERVICE_ROLE_KEY=<new_one_line>"`.
+- 🔴 **URGENT (2026-05-03): legacy `service_role` JWT for `bzqbhtrurzzavhqbgqrs` was disabled** during a connect-repo cleanup mishap (user clicked Disable on the wrong project's API page). **Railway pdflatex endpoint is currently broken** — every `POST /build/*` and `PUT /tex/*` call from the web app returns 401/403 against the curriculum project. Recovery (~3 min):
+  1. https://supabase.com/dashboard/project/bzqbhtrurzzavhqbgqrs/settings/api-keys → "Create new secret key" (Supabase migrated this project to the new `sb_publishable_*` / `sb_secret_*` model — there is no JWT secret rotation control anymore). Name it e.g. `lesson-planning-writers`.
+  2. `cd railway && railway variables --set "SUPABASE_SERVICE_ROLE_KEY=sb_secret_..."` (one line, no continuations — see failure mode #12). Auto-redeploys.
+  3. No code changes needed — `sb_secret_*` is a drop-in bearer-token replacement for service_role JWTs; PostgREST recognizes it and grants service_role privileges. `railway/server.py:39` and the `supabase/upload_*.py` / `seed*.py` scripts work unchanged.
+  4. For local upload/seed runs after rotation: `$env:SUPABASE_SERVICE_ROLE_KEY = "sb_secret_..."` (PowerShell) or `set "SUPABASE_SERVICE_ROLE_KEY=sb_secret_..."` (cmd) before invoking.
 - Delete the Railway project access token `cc-debug-session` at https://railway.com/account/tokens once debugging sessions wrap.
+- (Optional) Audit `Lesson_planning` for any plaintext-committed legacy `eyJ...` service-role JWT — same audit pattern that flagged it in the `connect` repo.
 
 **Completed 2026-04-30 (L35_P3_obs polish + Blooket destructive strip):**
 - ✅ **Schedule live** in Supabase: 64 rows pushed; 5/8 F = `L35_P3_obs`, 5/14 = Topic 3 Assess (both periods), L41 starts F 5/15 / A 5/18. `seed_schedule.py` now uses `?on_conflict=class_date,period` + nulled-out the L35_P1 FK.
@@ -95,6 +100,7 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 - ✅ Bulk-uploaded 54 existing PDFs (18 × student/teacher/slides) to Supabase Storage `lesson-pdfs` bucket via `supabase/upload_pdfs.py`.
 
 **Backlog — pick when idle:**
+- **sish-on-Railway tunnel bouncer** (originally scoped 2026-05-02, never started). Replaces the cloudflared dependency on the work laptop with a stable port-443 SSH endpoint via a sish container on Railway Pro. Athena maintains a persistent reverse SSH tunnel; clients use built-in OpenSSH (`ssh -p <railway-tcp-port> athena@<bouncer-host>`). Outbound TCP to arbitrary ports verified open from work laptop (2026-05-02). Lives in `connect/` repo, not here. Rationale: CrowdStrike Falcon on the work laptop quarantines `cloudflared.exe` and `tailscale.exe` on sight; only the built-in Windows OpenSSH client is usable. Path-A fallback (browser shell via `ttyd` behind existing Athena cloudflared) is fine but doesn't support `scp` / VS Code Remote-SSH.
 - **Phase 4 voting** — explicit voting on conflicts (Brian vs Peter, quorum resolution). Specified but deferred — same-room sessions can resolve by talking. Skip unless remote/async collab emerges.
 - **Standalone diff viewer in the web app** — diff rendering already exists inside the merge view; could be exposed as its own button ("see what changed since I opened this"). ~30 min.
 - **Google OAuth + RLS gating** — currently the anon Vercel URL exposes all `teacher_answer` fields + teacher tex with answer keys. Safe to share with trusted staff only; NOT safe to link from a student-reachable page. ~2-3 hours.
