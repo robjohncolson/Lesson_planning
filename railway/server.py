@@ -1,15 +1,21 @@
 """Railway pdflatex build service for the Teacher Console.
 
 Endpoints:
-  GET  /health                        — smoke test
-  POST /build/{lesson_id}             — read tex from Supabase, compile, upload PDFs
-  PUT  /tex/{lesson_id}/{edition}     — write tex source back to Supabase
+  GET  /health                                  — smoke test
+  POST /build/{lesson_id}                       — read tex from Supabase, compile, upload PDFs
+  PUT  /tex/{lesson_id}/{edition}               — write tex source back to Supabase
+  POST /upload/topic-pdf/{topic}/{edition}      — Savvas chapter PDF (SE/TE) -> topic-pdfs bucket
+  POST /upload/docx/{lesson_id}/{kind}          — externally-converted DOCX/PPTX -> lesson-docx bucket
+  POST /upload/screenshot/{item_id}             — registry-item textbook source PNG/JPG -> item-screenshots bucket
 
 Auth: X-Passcode header must match REBUILD_PASSCODE env var.
 
 Uses `requests` (HTTP/1.1) directly against Supabase REST + Storage APIs,
 not supabase-py. supabase-py's httpx-based HTTP/2 client intermittently
 trips StreamReset errors against Supabase's Cloudflare edge.
+
+Deployed via Railway GitHub integration: pushes to main auto-build + deploy
+(no manual `railway up` needed). Service root dir = railway/.
 """
 from __future__ import annotations
 
