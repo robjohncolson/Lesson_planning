@@ -1,0 +1,279 @@
+% L35 P3-OBS Pacer — printable hard copy of the live web pacer.
+% Mirrors the admin's Lesson Plan Template (Teachers will / Students will /
+% Questions to consider) with absolute time stamps for Period F (7:45--8:50).
+%
+% Compile: pdflatex --miktex-enable-installer L35_P3_obs_pacer.tex
+\documentclass[10pt]{article}
+\usepackage{preamble}
+
+% Tighter margins for the pacer (more content per page)
+\geometry{letterpaper, top=0.55in, bottom=0.7in, left=0.55in, right=0.55in}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\textbf{L35 P3-OBS Pacer}}
+\fancyhead[R]{\textit{Fri 5/8/26 \textbullet{} Period F \textbullet{} 7:45--8:50}}
+\fancyfoot[C]{\small Page \thepage{} of \pageref{LastPage} \quad \textbullet{} \quad Single source of truth: \texttt{web/pacers/L35\_Pacer.html} (P3-OBS tab)}
+\usepackage{lastpage}
+
+\setlength{\parskip}{4pt}
+
+% ── Phase block macro ──────────────────────────────────────────────────────
+% \phasehead{N}{title}{time range}{DOK}{minutes}{framework descriptor}
+\newcommand{\phasehead}[6]{%
+  \vspace{0.25em}
+  \noindent\colorbox{tealheader}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+    \color{white}\bfseries #1.\ #2 \hfill \normalfont\bfseries #3 \textbullet{} DOK #4 \textbullet{} #5 min%
+  }}\par
+  {\small\itshape\color{framegray}#6}\par
+  \smallskip
+}
+
+% \itembox{label}{body}
+\newcommand{\itembox}[2]{%
+  \begin{tcolorbox}[
+    enhanced, breakable, colback=frameshade, colframe=dayblue,
+    boxrule=0.6pt, arc=2pt, left=7pt, right=7pt, top=4pt, bottom=4pt
+  ]
+  \textbf{Item:} \textbf{#1}\par#2
+  \end{tcolorbox}
+}
+
+\begin{document}
+
+% ── Banner ──────────────────────────────────────────────────────────────────
+\daybanner%
+{Observation Lesson \textbullet{} 65 min \textbullet{} Mirrors admin's Lesson Plan Template (Teachers will / Students will / Questions to consider)}%
+{Lesson 3-5 \textbullet{} Day 3 \textbullet{} Apply / Performance Task}
+
+\begin{tcolorbox}[
+  enhanced, colback=calloutyellow, colframe=warmred,
+  boxrule=0.5pt, arc=2pt, left=8pt, right=8pt, top=4pt, bottom=4pt
+]
+\textbf{Phase plan (65 min):} 7:45--7:55 Do Now (10) \textbullet{} 7:55--8:00 Launch (5) \textbullet{} 8:00--8:15 Fireworks (15) \textbullet{} 8:15--8:35 Venetta Performance Task (20) \textbullet{} 8:35--8:45 Share/Summary (10) \textbullet{} 8:45--8:50 Exit (5)
+\end{tcolorbox}
+
+\begin{tcolorbox}[
+  enhanced, colback=lightgray, colframe=framegray!50,
+  boxrule=0.5pt, arc=2pt, left=8pt, right=8pt, top=4pt, bottom=4pt
+]
+\textbf{Math Obj:} (1) Identify zeros via factoring or synthetic division. (2) Use zeros to graph a polynomial. (3) Interpret features in a real-world context.\par
+\textbf{Language Obj:} Explain solutions verbally and in writing using sentence frames + structured talk-time.\par
+\textbf{Essential Q:} How are the zeros of a polynomial related to its equation and graph?
+\end{tcolorbox}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PHASE 1 — DO NOW
+% ════════════════════════════════════════════════════════════════════════════
+\phasehead{1}{Do Now --- SAT practice from 3-5}{7:45--7:55}{2}{10}{Less than 10 min \textbullet{} low-floor entry}
+
+\itembox{SAT practice (3-5)}{Without using a graphing calculator, determine which of the given graphs matches $f(x) = x^3 + x^2 - 4x$. Explain why you made that choice.}
+
+\begin{callout}{\IconSpeak{} Teachers will\ldots}{calloutblue}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Display problem on board
+  \item Read prompt
+  \item Tell students they have 3-5 minutes to work on problem (*no calculator)
+  \item Set timer for 3 minutes independently think/write
+  \item After timer, 3 minutes to pair up and share answers with each other
+  \item After 5 minutes, class discussion
+\end{itemize}
+\end{callout}
+
+\begin{callout}{[STUDENT] Students will\ldots}{calloutell}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Actively listen to prompt
+  \item Record initial ideas on their paper (3 min)
+  \item Share with a partner and record explanation for their choice (3 min)
+  \item Share out in class discussion (2-3)
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconPuzzle{} Questions to consider\ldots}{calloutyellow}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item How can you engage students in the lesson?
+  \item How can you hook them?
+  \item How are all adults intentionally planned for?
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconStar{} Answer key}{calloutgreen}
+Factor: $f(x) = x(x^2 + x - 4)$. Zero at $x=0$ from the linear factor; quadratic factor has discriminant $1 - 4(1)(-4) = 17 > 0$, giving $x \approx -2.56$ and $x \approx 1.56$. Three real zeros total. Degree 3 + positive leading coefficient $\Rightarrow$ end behavior DOWN--UP. Eliminate graphs that miss $x=0$, show wrong end behavior, or have fewer than 3 zeros.
+\end{callout}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PHASE 2 — LAUNCH
+% ════════════════════════════════════════════════════════════════════════════
+\phasehead{2}{Launch --- Unpack objectives + connect to prior}{7:55--8:00}{1-2}{5}{5--15 min \textbullet{} academic conversation}
+
+\begin{callout}{\IconSpeak{} Teachers will\ldots}{calloutblue}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Teacher asks for volunteers to read objectives
+  \item Connect to previously learned skills / why we're doing what we're doing
+\end{itemize}
+\end{callout}
+
+\begin{callout}{[STUDENT] Students will\ldots}{calloutell}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Volunteers read objectives
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconPuzzle{} Questions to consider\ldots}{calloutyellow}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item What will you explicitly model and how?
+  \item How will you know if students are ready to work alone?
+  \item How are all adults intentionally planned for?
+\end{itemize}
+\end{callout}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PHASE 3 — EXPLORE: FIREWORKS
+% ════════════════════════════════════════════════════════════════════════════
+\phasehead{3}{Explore --- Fireworks Problem}{8:00--8:15}{2}{15}{15 min \textbullet{} TWPS \textbullet{} cognitively demanding}
+
+\itembox{Fireworks: $h(t) = -16t^2 + 32t + 6.5$}{Three parts: (a) reasonable domain, (b) zeros + meaning, (c) vertex + meaning. Apply / Make Sense and Persevere section of the student packet.}
+
+\begin{callout}{\IconSpeak{} Teachers will\ldots}{calloutblue}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Teacher asks student to read the problem(s). Cue up students to TWPS.
+  \item \textbf{Questions to ask:} Discuss domain. Why is it important to think about the domain before starting? Why would only values $> 0$ work? What is domain talking about in this case? What are possible values for $t$? Can we have negative time? Why/why not?
+  \item Instruct students 3-4 minutes to think/pair and prepare to share with class
+  \item Circulate while students are thinking/pairing to identify students to warm-call to share out
+  \item Ask students to share out
+  \item Display on Desmos
+  \item Release students to work on B and C in pairs. Communicate clear expectations (5-min timer to let them productively struggle). Add 2-3 more minutes as needed
+  \item Circulate to ask open questions, assess progress, redirect as needed, clarify common misconceptions as a class
+  \item Ask students to share their thinking (whoever did not participate in part A)
+\end{itemize}
+\end{callout}
+
+\begin{callout}{[STUDENT] Students will\ldots}{calloutell}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Actively listen to problem being read
+  \item Respond to questions the teacher asks
+  \item Think independently (1 min)
+  \item Pair up w/partner and share thinking (2 min)
+  \item Students share their thinking when called on (2-3 min)
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconStar{} Answer key}{calloutgreen}
+\textbf{(a) Domain:} $0 \le t \le \approx 2.19$ s (launch to ground impact). $t < 0$ has no physical meaning.\par
+\textbf{(b) Zeros:} Solve $-16t^2 + 32t + 6.5 = 0 \Rightarrow t \approx 2.19$ s (the negative root $\approx -0.19$ s is rejected). The positive zero is the moment the firework hits the ground.\par
+\textbf{(c) Vertex:} $t = -b/(2a) = -32/(-32) = 1$ s. $h(1) = -16 + 32 + 6.5 = 22.5$ m. Vertex represents \textbf{maximum height} (22.5 m at $t = 1$ s).
+\end{callout}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PHASE 4 — EXPLORE: VENETTA PERFORMANCE TASK (DOK-3 DRIVER)
+% ════════════════════════════════════════════════════════════════════════════
+\phasehead{4}{Explore --- Performance Task: Venetta Deli {[STAR] DOK-3 DRIVER}}{8:15--8:35}{3}{20}{15--20 min \textbullet{} TPS \textbullet{} DOK-3 driver \textbullet{} *Connect back to PBL}
+
+\itembox{Venetta profit: $P(t) = t(t+3)(t-2)$ \quad {\IconStar} DOK-3}{Profit in hundreds of dollars, $t$ years after 2000. \textbf{(A)} Sketch + confirm with Desmos. \textbf{(B)} During what years did Venetta NOT make a profit? \textbf{(C)} Predict 2020 profit if the model is appropriate.}
+
+\begin{callout}{\IconSpeak{} Teachers will\ldots}{calloutblue}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item \textbf{Connect it to real-world:} ``Does anyone know anyone that owns or operates any food businesses/restaurants/shops?''
+  \item ``Well, it can be stressful---business owners aren't always profitable. Why could that be? This is what this could look like in real life---but with Algebra.''
+  \item ``Does anyone remember the profit equation from PBL/project?'' *Connect back to PBL
+  \item Teacher frames the problem (3-4 min): here's another profit equation for another store (not pizza, but deli sandwiches this time)
+  \item What variables do we see here? What does $t$ mean?
+  \item Read task itself and then go to part A (5 min). \textbf{Question:} How can you identify the zeros from the factored form? How can you determine the behavior?
+  \item \textbf{Summarize:} show student work from iPad and ask students ``what do you think about this?'' ``do you agree or disagree?''
+  \item B/C---Read and release students to think/pair/share their thinking ($\sim$7 min)
+  \item \textbf{Question:} How do you know, looking at a graph, if you have a profit?
+  \item For part C, explore a variety of pathways to get that answer
+\end{itemize}
+\end{callout}
+
+\begin{callout}{[STUDENT] Students will\ldots}{calloutell}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Engage in discussion around food businesses/profits/etc.
+  \item Recall prior knowledge to PBL project
+  \item Work in pairs/triads on B and C
+  \item Engage in discussion around B and C with one another, and respond to questions from teacher as needed
+  \item Share their thinking with the class
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconPuzzle{} Questions to consider\ldots}{calloutyellow}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item What will students do for most of the session? What will they practice? How?
+  \item What type of academic conversations will students engage in?
+  \item How will you be interacting with them?
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconStar{} Answer key}{calloutgreen}
+\textbf{(A) Zeros:} $t = 0, -3, 2$. Only $t \ge 0$ meaningful. Graph dips below $t$-axis on $0 < t < 2$, crosses up at $t = 2$, climbs as a cubic with $+$ leading coefficient.\par
+\textbf{(B) No profit:} on $0 < t < 2 \Rightarrow$ \textbf{years 2000--2001} (broke even at start of 2002).\par
+\textbf{(C) 2020 prediction:} $t = 20 \Rightarrow P(20) = 20 \cdot 23 \cdot 18 = 8280$ hundreds of dollars $= \$828{,}000$. \textbf{CAVEAT (DOK-3 pivot):} 20-year extrapolation overshoots dramatically---cubic growth, market saturation, competition. \emph{Discuss model limits.}
+\end{callout}
+
+\begin{callout}{\IconWarn{} Warning / Variant}{calloutred}
+\textbf{Part C is the DOK-3 pivot} --- students must JUDGE model validity, not just compute $P(20)$. Press the model-limits discussion or this stays at DOK-2.
+\end{callout}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PHASE 5 — SHARE / SUMMARY
+% ════════════════════════════════════════════════════════════════════════════
+\phasehead{5}{Share / Summary}{8:35--8:45}{2}{10}{5--15 min \textbullet{} synthesis \textbullet{} return to objectives}
+
+\begin{callout}{\IconSpeak{} Teachers will\ldots}{calloutblue}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item After $\sim$7 min, call group back together to report their thinking/findings. \textbf{Ensure equity of voice.}
+  \item Share key takeaways
+\end{itemize}
+\end{callout}
+
+\begin{callout}{[STUDENT] Students will\ldots}{calloutell}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Report thinking and findings to class
+  \item Engage in equity of voice --- listen and let others share
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconPuzzle{} Questions to consider\ldots}{calloutyellow}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item How will students express what they have learned? This should be directly related to the mini-lesson and objective.
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconChain{} Bridge}{calloutpeach}
+Bridge to Mon 5/11 (P3-cont, Storage Box \#27): same factored-form reasoning, but now zeros are physical dimensions of a box.
+\end{callout}
+
+% ════════════════════════════════════════════════════════════════════════════
+% PHASE 6 — EXIT TICKET
+% ════════════════════════════════════════════════════════════════════════════
+\phasehead{6}{Exit Ticket --- Baseball + reflection}{8:45--8:50}{2}{5}{5 min \textbullet{} DOK-2 cool-down}
+
+\itembox{Baseball --- explain why graph shows only one zero}{Height of a baseball thrown in the air, modeled by a quadratic. \textbf{Explain why the graph shows only ONE zero.} Hint: domain restriction.}
+
+\begin{callout}{\IconSpeak{} Teachers will\ldots}{calloutblue}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Project exit prompt. Students complete independently and turn in at the door
+  \item Tonight: scan answers; if many miss the domain-restriction idea, open Mon 5/11 with a Do Now bridge
+\end{itemize}
+\end{callout}
+
+\begin{callout}{[STUDENT] Students will\ldots}{calloutell}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item Complete the Baseball reflection independently
+  \item Submit at the door
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconPuzzle{} Questions to consider\ldots}{calloutyellow}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=1pt]
+  \item How will students show what they've learned based on the objective?
+\end{itemize}
+\end{callout}
+
+\begin{callout}{\IconStar{} Answer key}{calloutgreen}
+A quadratic can have two mathematical zeros, but only one is in the meaningful domain ($t \ge 0$). The other zero is at \textbf{negative time} --- before the ball was thrown --- which has no physical meaning. The graph shows only the zero where the ball lands. Same idea as Fireworks (a) and Venetta (B): real-world contexts restrict which mathematical zeros are physically relevant.
+\end{callout}
+
+\end{document}
