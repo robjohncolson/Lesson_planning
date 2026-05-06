@@ -85,11 +85,18 @@
     padding: 12px 14px; border-radius: 6px; margin: 12px 0;
     border-left: 5px solid var(--teal);
   }
-  .callout.teacher { background: var(--pale-navy); border-color: var(--navy); }
-  .callout.answer  { background: var(--pale-teal); border-color: var(--green); }
-  .callout.rule    { background: var(--pale-gold); border-color: var(--gold); }
-  .callout.warn    { background: var(--pale-red); border-color: var(--red); }
-  .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout.teacher  { background: var(--pale-navy); border-color: var(--navy); }
+  .callout.students { background: #e0ecf8; border-color: var(--blue); }
+  .callout.questions{ background: #ede4f8; border-color: #6b3fa0; }
+  .callout.answer   { background: var(--pale-teal); border-color: var(--green); }
+  .callout.rule     { background: var(--pale-gold); border-color: var(--gold); }
+  .callout.warn     { background: var(--pale-red); border-color: var(--red); }
+  .callout.bridge   { background: var(--pale-orange); border-color: var(--accent); }
+  .callout.students .label  { color: var(--blue); }
+  .callout.questions .label { color: #6b3fa0; }
+  .badge.time { background: #6b3fa0; }
+  .tab:not(.active) { opacity: 0.45; }
+  .tab:not(.active):hover { opacity: 0.85; }
   .callout .label {
     font-weight: 700; color: var(--navy); margin-bottom: 4px;
     display: block; font-size: 0.85rem; text-transform: uppercase;
@@ -151,8 +158,8 @@
 </header>
 
 <nav class="tabs" id="tabBar">
-  <button class="tab active" data-tab="p2">P2 · Multiplicity (5/4–5/7)</button>
-  <button class="tab" data-tab="p3obs">P3-OBS · Apply / Performance Task (Fri 5/8) ★</button>
+  <button class="tab" data-tab="p2">P2 · Multiplicity (5/4–5/7)</button>
+  <button class="tab active" data-tab="p3obs">P3-OBS · Apply / Performance Task (Fri 5/8) ★</button>
   <button class="tab" data-tab="p3cont">P3-cont · Storage Box (5/11–5/13)</button>
   <button class="tab" data-tab="p4">P4 · Topic 3 Assessment (Thu 5/14)</button>
 </nav>
@@ -222,124 +229,159 @@ const PACER = {
     ]
   },
   p3obs: {
-    label: "Period 3 · OBSERVATION LESSON · Fri 5/8 · Period F · 65 min ★",
+    label: "Period F · OBSERVATION LESSON · Fri 5/8 · 7:45–8:50 (65 min) ★",
     total_min: 65,
-    short_note: "★ OBSERVATION LESSON — evaluator present. Admin-adjusted plan: SAT-style Do Now → volunteer-read objectives Launch → TWO real-world contexts (Fireworks DOK-2, Venetta Deli DOK-3 Performance Task) → Synthesis Share → Baseball + reflection Exit.",
+    short_note: "★ OBSERVATION LESSON — mirrors admin's Lesson Plan Template (Teachers will / Students will / Questions to consider). Period F runs 7:45–8:50.",
     phases: [
-      { id: "donow", title: "Do Now — SAT practice (3-5, no calculator)",
-        fw: "low-floor entry · TWPS", dok: "2", min: 10,
+      { id: "donow", title: "Do Now — SAT practice from 3-5",
+        start: "7:45", end: "7:55",
+        fw: "Less than 10 min", dok: "2", min: 10,
         items: [
           {qid:"3-5-obs-donow-sat", label:"SAT practice (3-5)",
-           note:"Without using a graphing calculator, determine which of the given graphs matches f(x) = x³ + x² − 4x. Explain your choice."},
+           note:"Without using a graphing calculator, determine which of the given graphs matches f(x) = x³ + x² − 4x. Explain why you made that choice."},
         ],
         teacher: [
-          "Display problem. Read prompt aloud. Confirm: NO graphing calculator.",
-          "Set 3-min timer for independent think + write.",
-          "3 min pair-share — partners must explain WHY, not just compare letters.",
-          "2-3 min class discussion. Warm-call a student you saw with strong reasoning during the pair phase.",
-          "Adult role: spot-check during pair phase; redirect anyone who jumped to a graph without reasoning.",
+          "Display problem on board",
+          "Read prompt",
+          "Tell students they have 3-5 minutes to work on problem (*no calculator)",
+          "Set timer for 3 minutes independently think/write",
+          "After timer, 3 minutes to pair up and share answers with each other",
+          "After 5 minutes, class discussion",
         ],
-        answer: "Factor: f(x) = x(x² + x − 4). One zero is x = 0 (from the linear factor). The quadratic factor x² + x − 4 has discriminant 1 − 4(1)(−4) = 17 > 0, giving two more real (irrational) zeros at x ≈ −2.56 and x ≈ 1.56. Three real zeros total. Degree 3 with positive leading coefficient → end behavior DOWN–UP. Eliminate any graph that (a) misses x = 0 as a zero, (b) shows wrong end behavior, or (c) shows fewer than 3 distinct zeros.",
-        rules: [
-          "Step 1: factor out the GCF (here, x) to surface one zero immediately",
-          "Step 2: check the leftover quadratic's discriminant for additional real zeros",
-          "Step 3: end behavior = degree parity (odd → opposite ends) + leading-coefficient sign",
-          "Sentence frame: \"This graph cannot be f(x) because ___.\"",
+        students: [
+          "Actively listen to prompt",
+          "Record initial ideas on their paper (3 min)",
+          "Share with a partner and record explanation for their choice (3 min)",
+          "Share out in class discussion (2-3)",
         ],
+        questions: [
+          "How can you engage students in the lesson?",
+          "How can you hook them?",
+          "How are all adults intentionally planned for?",
+        ],
+        answer: "Factor: f(x) = x(x² + x − 4). Zero at x = 0 from the linear factor; quadratic factor has discriminant 1 − 4(1)(−4) = 17 > 0, giving x ≈ −2.56 and x ≈ 1.56. Three real zeros total. Degree 3 + positive leading coefficient → end behavior DOWN–UP. Eliminate graphs that miss x = 0, show wrong end behavior, or have fewer than 3 zeros.",
       },
-      { id: "launch", title: "Launch — Unpack objectives + connect to prior learning",
-        fw: "academic conversation", dok: "1-2", min: 5,
+      { id: "launch", title: "Launch — Unpack objectives + connect to prior",
+        start: "7:55", end: "8:00",
+        fw: "5–15 min · academic conversation", dok: "1-2", min: 5,
         items: [],
         teacher: [
-          "Ask volunteers to read the math objectives, language objective, and essential question aloud.",
-          "Connect: \"Yesterday we factored polynomials and found zeros from factored form. Today we use those zeros to interpret REAL-WORLD problems.\"",
-          "Preview: \"Two contexts — a fireworks display, then a sandwich shop. In both, the zeros mean something physical.\"",
-          "Adult role: model active listening — repeat one student's paraphrase of the essential question back to the class.",
+          "Teacher asks for volunteers to read objectives",
+          "Connect to previously learned skills / why we're doing what we're doing",
+        ],
+        students: [
+          "Volunteers read objectives",
+        ],
+        questions: [
+          "What will you explicitly model and how?",
+          "How will you know if students are ready to work alone?",
+          "How are all adults intentionally planned for?",
         ],
         rules: [
           "Math Obj 1: Identify zeros using factoring or synthetic division",
           "Math Obj 2: Use zeros to graph a polynomial",
           "Math Obj 3: Interpret features of polynomials in a real-world context",
-          "Language Obj: Explain solutions verbally and in writing using sentence frames + structured talk-time",
+          "Language Obj: Explain solutions verbally and in writing using sentence frames",
           "Essential Question: How are the zeros of a polynomial related to its equation and graph?",
         ],
       },
-      { id: "explore-fireworks", title: "Explore — Fireworks (DOK-2 application)",
-        fw: "TWPS · real-world", dok: "2", min: 17,
+      { id: "explore-fireworks", title: "Explore — Fireworks Problem",
+        start: "8:00", end: "8:15",
+        fw: "15 min · TWPS · cognitively demanding", dok: "2", min: 15,
         items: [
           {qid:"3-5-obs-fireworks", label:"Apply — Fireworks: h(t) = −16t² + 32t + 6.5",
-           note:"3 parts: (a) reasonable domain, (b) zeros + meaning, (c) vertex + meaning. Student packet — Apply / Make Sense and Persevere section."},
+           note:"Three parts: (a) reasonable domain, (b) zeros + meaning, (c) vertex + meaning."},
         ],
         teacher: [
-          "Student reads problem aloud: \"firework launched vertically; height in meters; t in seconds.\"",
-          "Cue TWPS for part (a) — DOMAIN. 3 min think → 4 min pair → 1 min whole-class share.",
-          "Questions to ask: \"Why think about domain BEFORE solving?\" · \"Why must t ≥ 0?\" · \"What is the t-domain talking about here?\" · \"Can we have negative time? Why or why not?\"",
-          "Display on Desmos to confirm the domain conversation.",
-          "Release pairs to work parts (b) zeros + (c) vertex — 5 min productive struggle (add 2-3 if needed).",
-          "Circulate: open Qs, redirect, surface one common misconception to the whole class.",
-          "Final ~2 min: warm-call a DIFFERENT pair (not the part-a sharer) to present (b) and (c).",
+          "Teacher asks student to read the problem(s). Cue up students to TWPS.",
+          "Questions to ask: Discuss domain. Why is it important to think about the domain of the function before starting? Why would only values greater than 0 work? What is domain talking about in this case? What are possible values for t? Can we have negative time? Why/why not?",
+          "Instruct students 3-4 minutes to think/pair and prepare to share with class",
+          "Circulate while students are thinking/pairing to identify students to warm call to share out",
+          "Ask students to share out",
+          "Display on Desmos",
+          "Release students to work on B and C in pairs. Communicate clear expectations (set timer for 5 minutes to let them productively struggle). Add 2-3 more minutes as needed",
+          "Circulate to ask open questions, assess progress, redirect as needed, clarify common misconceptions as a class",
+          "Ask students to share their thinking (whoever did not participate in part A)",
         ],
-        answer: "(a) Reasonable domain: 0 ≤ t ≤ ~2.19 sec (launch to ground impact). t < 0 has no physical meaning. (b) Solve −16t² + 32t + 6.5 = 0 with the quadratic formula: t ≈ 2.19 s (the negative root ≈ −0.19 s is rejected). The positive zero ≈ 2.19 s = the moment the firework hits the ground. (c) Vertex: t = −b/(2a) = −32/(−32) = 1 s. h(1) = −16 + 32 + 6.5 = 22.5 m. Vertex represents MAXIMUM HEIGHT (22.5 m at t = 1 s).",
-        rules: [
-          "Sentence frame: \"The domain must be ___ because t represents ___.\"",
-          "Sentence frame: \"The zero at t ≈ ___ means the firework ___.\"",
-          "Sentence frame: \"The vertex tells us ___ because ___.\"",
-          "Real-world domain restricts the math — only physically meaningful t-values count",
+        students: [
+          "Actively listen to problem being read",
+          "Respond to questions the teacher asks",
+          "Think independently (1 min)",
+          "Pair up w/partner and share thinking (2 min)",
+          "Students share their thinking when called on (2-3 min)",
         ],
+        answer: "(a) Domain: 0 ≤ t ≤ ~2.19 s (launch to ground impact). t < 0 has no physical meaning. (b) Solve −16t² + 32t + 6.5 = 0 → t ≈ 2.19 s (negative root rejected). Zero = the moment the firework hits the ground. (c) Vertex: t = 1 s, h(1) = 22.5 m → MAXIMUM HEIGHT.",
       },
-      { id: "explore-venetta", title: "Explore — Performance Task: Venetta Deli (DOK-3)",
-        fw: "TPS · DOK-3 driver", dok: "3", min: 18,
+      { id: "explore-venetta", title: "Explore — Performance Task: Venetta Deli",
+        start: "8:15", end: "8:35",
+        fw: "15–20 min · TPS · DOK-3 driver", dok: "3", min: 20,
         items: [
           {qid:"3-5-obs-venetta", label:"Performance Task ⭐ DOK-3 DRIVER", dok3: true,
-           note:"P(t) = t(t+3)(t−2), profit in hundreds of dollars t years after 2000. (A) Sketch + Desmos confirm. (B) During what years did Venetta NOT make a profit? (C) Predict 2020 profit if the model is appropriate."},
+           note:"P(t) = t(t+3)(t−2), profit in hundreds of dollars t years after 2000. (A) Sketch + confirm with Desmos. (B) During what years did Venetta NOT make a profit? (C) Predict 2020 profit if the model is appropriate."},
         ],
         teacher: [
-          "PBL hook (1 min): \"Anyone know someone who runs a food business? Stressful — owners aren't always profitable. Recall the profit equation from our PBL project?\"",
-          "Frame the problem (3 min): different store (deli sandwiches). \"What variables? What does t = 0 mean here? What does P(t) measure?\"",
-          "Read task aloud, then release Part A (5 min): sketch using the factored form; verify with Desmos.",
-          "Questions to ask: \"How do you identify zeros from factored form?\" · \"How do you determine end behavior of a cubic?\" · \"Where does the graph cross vs. stay above/below the t-axis?\"",
-          "Mid-share: project a student's iPad sketch — \"Do you agree? Why?\" Equity of voice: call on a student who didn't share for the Fireworks problem.",
-          "Parts B + C — TPS, ~7 min: \"How do you know FROM A GRAPH if there's a profit?\"",
-          "Press Part C (the DOK-3 pivot): \"Is extrapolating to 2020 reasonable? Why might it NOT be? What would change your confidence?\"",
+          "Connect it to real-world: \"Does anyone know anyone that owns or operates any food businesses/restaurants/shops?\"",
+          "\"Well, it can be stressful — business owners aren't always profitable. Why could that be? This is what this could look like in real life — but with Algebra.\"",
+          "\"Does anyone remember the profit equation from PBL/project?\" *Connect back to PBL",
+          "Teacher frames the problem (3-4 minutes): here's another profit equation for another store (not pizza, but deli sandwiches this time)",
+          "What variables do we see here? What does t mean?",
+          "Read task itself and then go to part A (5 min). Question: How can you identify the zeros from the factored form? How can you determine the behavior?",
+          "Summarize: show student work from iPad and ask students \"what do you think about this?\" \"do you agree or disagree?\"",
+          "B/C Read and release students to think/pair/share their thinking (~7 minutes)",
+          "Question: How do you know, looking at a graph, if you have a profit?",
+          "For part C, explore a variety of pathways to get that answer",
         ],
-        answer: "(A) Zeros at t = 0, −3, 2. Only t ≥ 0 is meaningful (years after 2000). Graph dips below the t-axis on 0 < t < 2, crosses up at t = 2, then climbs as a cubic with positive leading coefficient. (B) NO profit when P(t) < 0 → 0 < t < 2 → years 2000 and 2001 (broke even at the start of 2002). (C) 2020 → t = 20. P(20) = 20 · 23 · 18 = 8280 hundreds of dollars = $828,000. CAVEAT (DOK-3 pivot): a 20-year extrapolation is unrealistic — cubic growth means the model overshoots dramatically. Real businesses face market saturation, competition, etc. Discuss model limits.",
-        rules: [
-          "Factored form makes zeros visible: P(t) = t(t+3)(t−2) → zeros at t = 0, −3, 2",
-          "Sign analysis on intervals between zeros tells you profit (P > 0) vs. loss (P < 0)",
-          "Real-world domain restricts which mathematical zeros matter (here, t ≥ 0)",
-          "Extrapolation warning: a polynomial model's accuracy decays far from the data window",
-          "Sentence frame: \"Venetta did not profit during ___ because P(t) is ___ on that interval.\"",
+        students: [
+          "Engage in discussion around food businesses/profits/etc.",
+          "Recall prior knowledge to PBL project",
+          "Students work in pairs/triads on B and C",
+          "Students engage in discussion around B and C with one another, and respond to questions from teacher as needed",
+          "Students share their thinking with the class",
         ],
-        warn: "Part C is the DOK-3 pivot — students must JUDGE model validity, not just compute P(20). Press the model-limits discussion or this stays at DOK-2.",
+        questions: [
+          "What will students do for most of the session? What will they practice? How?",
+          "What type of academic conversations will students engage in?",
+          "How will you be interacting with them?",
+        ],
+        answer: "(A) Zeros at t = 0, −3, 2; only t ≥ 0 meaningful. Graph dips below t-axis on 0 < t < 2, crosses up at t = 2, climbs as a cubic. (B) NO profit on 0 < t < 2 → years 2000-2001 (broke even start of 2002). (C) P(20) = 20·23·18 = 8280 hundreds = $828,000. CAVEAT (DOK-3 pivot): 20-year extrapolation overshoots — market saturation, competition, etc. Discuss model limits.",
+        warn: "Part C is the DOK-3 pivot — students must JUDGE model validity, not just compute P(20). Press the model-limits discussion.",
       },
-      { id: "share", title: "Share / Summary — Synthesis",
-        fw: "academic conversation", dok: "2", min: 10,
+      { id: "share", title: "Share / Summary",
+        start: "8:35", end: "8:45",
+        fw: "5–15 min · synthesis", dok: "2", min: 10,
         items: [],
         teacher: [
-          "Regroup. Equity of voice: call on a student who hasn't shared yet today.",
-          "Press: \"Where did identifying zeros help you answer a real-world question today?\"",
-          "Return to objectives + essential question. Ask 1-2 students: \"How are zeros related to the equation AND the graph?\"",
-          "Name the pattern out loud: zeros are the SAME numbers expressed three ways — in factored form, as solutions to f(x) = 0, and as x-intercepts on a graph.",
-          "Exit-ticket cue: \"You'll see one more real-world problem on the way out.\"",
+          "After ~7 minutes, call group back together to report their thinking/findings. Ensure equity of voice",
+          "Share key takeaways",
         ],
-        bridge: "Bridge to Mon 5/11 (P3-cont, Storage Box #27): same factored-form reasoning, but now the zeros are physical dimensions of a box. Different context, same logic.",
+        students: [
+          "Report thinking and findings to class",
+          "Engage in equity of voice — listen and let others share",
+        ],
+        questions: [
+          "How will students express what they have learned? This should be directly related to the mini-lesson and objective.",
+        ],
+        bridge: "Bridge to Mon 5/11 (P3-cont, Storage Box #27): same factored-form reasoning, but now zeros are physical dimensions of a box.",
       },
       { id: "exit", title: "Exit Ticket — Baseball + reflection",
-        fw: "not graded · DOK-2", dok: "2", min: 5,
+        start: "8:45", end: "8:50",
+        fw: "5 min · DOK-2 cool-down", dok: "2", min: 5,
         items: [
           {qid:"3-5-obs-baseball", label:"Baseball — explain why graph shows only one zero",
-           note:"Height of a baseball thrown in the air, modeled by a quadratic. Explain why the graph of this function shows only ONE zero (hint: domain restriction)."},
+           note:"Height of a baseball thrown in the air, modeled by a quadratic. Explain why the graph shows only ONE zero (hint: domain restriction)."},
         ],
         teacher: [
-          "Project exit prompt. Students complete independently and turn in at the door.",
-          "Tonight: scan answers. If many students miss the domain-restriction idea, open Mon 5/11 with a Do Now bridge that revisits it.",
+          "Project exit prompt. Students complete independently and turn in at the door",
+          "Tonight: scan answers; if many miss the domain-restriction idea, open Mon 5/11 with a Do Now bridge",
         ],
-        rules: [
-          "1. Why does the baseball graph show only one zero? (Hint: think about the domain — what t-values make sense for time?)",
-          "2. What is something you learned today?",
-          "3. What is something you liked about this lesson?",
+        students: [
+          "Complete the Baseball reflection independently",
+          "Submit at the door",
         ],
-        answer: "Mathematically a quadratic can have two zeros, but only one falls in the meaningful domain (t ≥ 0). The other zero corresponds to NEGATIVE time — before the baseball was thrown — which has no physical meaning. So the graph only shows the zero where the ball lands. Same idea as Fireworks part (a) and Venetta part (B): real-world contexts restrict which mathematical zeros are physically relevant.",
+        questions: [
+          "How will students show what they've learned based on the objective?",
+        ],
+        answer: "A quadratic can have two mathematical zeros, but only one is in the meaningful domain (t ≥ 0). The other zero is at NEGATIVE time — before the ball was thrown — which has no physical meaning. The graph shows only the zero where the ball lands. Same idea as Fireworks (a) and Venetta (B): real-world contexts restrict mathematical zeros.",
       },
     ]
   },
@@ -532,6 +574,7 @@ function selectPhase(tabId, idx) {
     <h2>
       ${ph.title}
       <span class="badges">
+        ${ph.start && ph.end ? `<span class="badge time">${ph.start}–${ph.end}</span>` : ""}
         <span class="badge dok">DOK ${ph.dok}</span>
         <span class="badge min">${ph.min} min</span>
         <span class="badge fw">${ph.fw}</span>
@@ -548,8 +591,18 @@ function selectPhase(tabId, idx) {
     });
   }
   if (ph.teacher && ph.teacher.length) {
-    html += `<div class="callout teacher"><span class="label">🎤 Teacher does</span><ul>`;
+    html += `<div class="callout teacher"><span class="label">🎤 Teachers will…</span><ul>`;
     ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.students && ph.students.length) {
+    html += `<div class="callout students"><span class="label">🎓 Students will…</span><ul>`;
+    ph.students.forEach(s => html += `<li>${s}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.questions && ph.questions.length) {
+    html += `<div class="callout questions"><span class="label">❓ Questions to consider…</span><ul>`;
+    ph.questions.forEach(q => html += `<li>${q}</li>`);
     html += `</ul></div>`;
   }
   if (ph.rules && ph.rules.length) {
@@ -622,7 +675,8 @@ function stopPhase(tabId) {
 
 // ── Tab switcher ──────────────────────────────────────────────────────────
 Object.keys(PACER).forEach(renderPanel);
-document.querySelector('.panel').classList.add('active');
+// Default to the P3-OBS panel (this pacer's focus) — overrideable by clicking other tabs.
+document.getElementById('panel-p3obs').classList.add('active');
 
 tabBar.addEventListener("click", e => {
   if (!e.target.matches(".tab")) return;
