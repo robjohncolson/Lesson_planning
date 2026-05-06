@@ -21,6 +21,7 @@ const btnTeacherPdf = document.getElementById("btn-teacher-pdf");
 const btnSlides     = document.getElementById("btn-slides");
 const btnDoNowPdf   = document.getElementById("btn-do-now-pdf");
 const btnPacer      = document.getElementById("btn-pacer");
+const btnPacerPdf   = document.getElementById("btn-pacer-pdf");
 const btnItems      = document.getElementById("btn-items");
 const btnYaml       = document.getElementById("btn-yaml");
 const btnTexStudent = document.getElementById("btn-tex-student");
@@ -325,6 +326,23 @@ async function selectLesson(id) {
       btnPacer.style.display = "";
     } else if (btnPacer) {
       btnPacer.style.display = "none";
+    }
+
+    // Per-period printable Pacer PDF (static asset under /pacers/).
+    // HEAD-probe so the button only shows for lessons that actually have a PDF
+    // (currently just L35_P3_obs). Fire-and-forget — don't block selectLesson.
+    if (btnPacerPdf) {
+      btnPacerPdf.style.display = "none";
+      const pacerPdfPath = `/pacers/${id}_pacer.pdf`;
+      const pacerPdfLesson = id;
+      fetch(pacerPdfPath, { method: "HEAD" })
+        .then((r) => {
+          if (r.ok && pacerPdfLesson === activeLessonId) {
+            btnPacerPdf.href = pacerPdfPath;
+            btnPacerPdf.style.display = "";
+          }
+        })
+        .catch(() => {});
     }
 
     // YAML button disabled if no spec yet; Items always available
