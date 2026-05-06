@@ -9,7 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.by import By
 
-HTML = Path(__file__).parent / "L41_Pacer.html"
+HTML = Path(__file__).parent / "web" / "pacers" / "L41_Pacer.html"
 
 opts = Options()
 opts.add_argument("--headless=new")

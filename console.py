@@ -20,6 +20,7 @@ LESSONS_DIR = REPO_ROOT / "lessons"
 STATIC_DIR = REPO_ROOT / "console_static"
 REGISTRY_PATH = REPO_ROOT / "questionbank" / "registry.jsonl"
 GRAPH_HTML_PATH = REPO_ROOT / "graph" / "graph.html"
+PACERS_DIR = REPO_ROOT / "web" / "pacers"  # canonical pacer location (also served by Vercel)
 
 app = Flask(__name__, static_folder=None)
 _LESSON_ID_RE = re.compile(r"^L\d{2}_P\d(?:_[a-z][a-z0-9_]*)?$")  # L41_P2, L35_P3_obs
@@ -344,7 +345,7 @@ def api_pacer(lesson_id: str):
     # Pacer HTMLs are per-lesson (L35_Pacer.html), not per-period.
     lesson_prefix = re.match(r"^(L\d{2})_P\d", lesson_id)  # works for L35_P2 and L35_P3_obs
     name = (lesson_prefix.group(1) + "_Pacer.html") if lesson_prefix else f"{lesson_id}_Pacer.html"
-    pacer_path = _safe_path(REPO_ROOT, name)
+    pacer_path = _safe_path(PACERS_DIR, name)
     if not pacer_path.exists():
         abort(404)
     return send_file(pacer_path, mimetype="text/html")
