@@ -2,7 +2,7 @@
 
 Per lesson: skill_tokens on dok3-driver items that have NO earlier-role item (do-now, launch, explore-tps, or explore-practice) providing that token in the same lesson.
 
-**Total gaps: 27** across 12 lessons.
+**Total gaps: 28** across 10 lessons.
 
 
 ## Lesson 3-5
@@ -17,14 +17,6 @@ Per lesson: skill_tokens on dok3-driver items that have NO earlier-role item (do
 - DOK-3 uses `interpret-answer-in-context` but no earlier-role item in 3-5 exercises it.
   Candidates from pool: [_none in this lesson_]
 
-## Lesson 4-1
-
-
-### DOK-3: `4-1-savvas-q26`
-
-- DOK-3 uses `build-equation-from-constraint` but no earlier-role item in 4-1 exercises it.
-  Candidates from pool: [_none in this lesson_]
-
 ## Lesson 4-3
 
 
@@ -33,6 +25,13 @@ Per lesson: skill_tokens on dok3-driver items that have NO earlier-role item (do
 - DOK-3 uses `closure-argument` but no earlier-role item in 4-3 exercises it.
   Candidates from pool: [_none in this lesson_]
 - DOK-3 uses `prove-via-exponent-laws` but no earlier-role item in 4-3 exercises it.
+  Candidates from pool: [_none in this lesson_]
+
+### DOK-3: `4-3-savvas-q36-partC-evaluate-fairness`
+
+- DOK-3 uses `evaluate-rational-expression` but no earlier-role item in 4-3 exercises it.
+  Candidates from pool: [_none in this lesson_]
+- DOK-3 uses `make-qualitative-judgment` but no earlier-role item in 4-3 exercises it.
   Candidates from pool: [_none in this lesson_]
 
 ## Lesson 4-4

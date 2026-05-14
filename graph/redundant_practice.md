@@ -2,7 +2,7 @@
 
 Per lesson: explore-practice and explore-tps items with IDENTICAL skill_token sets **AND** matching `prereq_ids` chain **AND** matching `rehearses` targets. Items sharing tokens but scaffolded from different Try-Its or rehearsing different assessment items are NOT grouped — they serve distinct pedagogical roles.
 
-**83 redundant group(s)** found across 12 lessons.
+**81 redundant group(s)** found across 10 lessons.
 
 
 ## Lesson 3-5
@@ -17,29 +17,6 @@ Redundant group (same tokens: ['identify-zeros']):
 - `3-5-savvas-q25` [identify-zeros]
 Suggestion: keep 1, drop 5.
 No pool replacement found with needed tokens ['build-equation-from-constraint', 'extract-dimension-from-volume', 'interpret-answer-in-context'].
-
-## Lesson 4-1
-
-
-Redundant group (same tokens: ['recognize-inverse-variation']):
-- `4-1-savvas-model-discuss-lesson-4-1-launch` [recognize-inverse-variation]
-- `4-1-savvas-teacher-s-edition-ell-addendum-fo` [recognize-inverse-variation]
-- `4-1-savvas-q22` [recognize-inverse-variation]
-- `4-1-savvas-q24` [recognize-inverse-variation]
-- `4-1-savvas-q8` [recognize-inverse-variation]
-Suggestion: keep 1, drop 4.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-1-savvas-q23` adds ['interpret-answer-in-context', 'model-inverse-variation-context']
-  - `4-1-savvas-q21` adds ['interpret-answer-in-context', 'model-inverse-variation-context']
-  - `4-1-ex-3` adds ['model-inverse-variation-context']
-
-Redundant group (same tokens: ['model-inverse-variation-context', 'recognize-inverse-variation']):
-- `4-1-savvas-teacher-s-edition-example-3-elici` [model-inverse-variation-context, recognize-inverse-variation]
-- `4-1-savvas-q20` [model-inverse-variation-context, recognize-inverse-variation]
-Suggestion: keep 1, drop 1.
-Candidate replacement from pool (adds DOK-3-needed tokens):
-  - `4-1-savvas-q23` adds ['interpret-answer-in-context']
-  - `4-1-savvas-q21` adds ['interpret-answer-in-context']
 
 ## Lesson 4-3
 

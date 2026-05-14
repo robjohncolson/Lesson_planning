@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>L43 Pacer &middot; Periods 1, 2, 3</title>
+<title>L43 Pacer · P1 Observation (Fri 5/15)</title>
 <style>
   :root {
     --navy:#0b3c6c; --blue:#1e6fc8; --teal:#0b5c7b; --green:#1f7a4c;
     --gold:#c88b14; --red:#b23a3a; --accent:#d94e2f;
     --bg:#eaf2fb; --card:#ffffff; --ink:#112233; --muted:#556677;
     --pale-teal:#d4edda; --pale-gold:#fff2cc; --pale-red:#f7d7d7;
-    --pale-navy:#cfe2f3; --pale-orange:#fce5cd;
+    --pale-navy:#cfe2f3; --pale-orange:#fce5cd; --pale-blue:#e0ecf8;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
-    background: var(--bg); color: var(--ink); line-height: 1.4;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
   }
   header {
     background: var(--navy); color: #fff; padding: 12px 24px;
@@ -49,7 +49,7 @@
   .timer-bar button {
     background: var(--gold); color: #fff; border: none;
     padding: 8px 16px; border-radius: 4px; font-weight: 600;
-    cursor: pointer; font-size: 0.9rem;
+    cursor: pointer; font-size: 0.9rem; margin-left: 4px;
   }
   .timer-bar button.stop { background: var(--red); }
   .timer-bar button:hover { filter: brightness(1.1); }
@@ -68,9 +68,9 @@
   }
   .phase-card h2 {
     margin: 0 0 6px 0; color: var(--navy); font-size: 1.35rem;
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   }
-  .badges { display:flex; gap: 6px; }
+  .badges { display:flex; gap: 6px; flex-wrap: wrap; }
   .badge {
     display: inline-block; padding: 3px 10px; border-radius: 12px;
     font-size: 0.72rem; font-weight: 700; color: #fff;
@@ -78,15 +78,19 @@
   .badge.dok { background: var(--gold); }
   .badge.min { background: var(--green); }
   .badge.fw { background: var(--blue); }
+  .badge.time { background: var(--teal); }
   .callout {
     padding: 12px 14px; border-radius: 6px; margin: 12px 0;
     border-left: 5px solid var(--teal);
   }
   .callout.teacher { background: var(--pale-navy); border-color: var(--navy); }
+  .callout.students { background: var(--pale-blue); border-color: var(--blue); }
+  .callout.questions { background: #fff7e0; border-color: var(--gold); }
   .callout.answer  { background: var(--pale-teal); border-color: var(--green); }
   .callout.rule    { background: var(--pale-gold); border-color: var(--gold); }
   .callout.warn    { background: var(--pale-red); border-color: var(--red); }
   .callout.bridge  { background: var(--pale-orange); border-color: var(--accent); }
+  .callout.threereads { background: #efe7f5; border-color: #6b3fa0; }
   .callout .label {
     font-weight: 700; color: var(--navy); margin-bottom: 4px;
     display: block; font-size: 0.85rem; text-transform: uppercase;
@@ -96,19 +100,20 @@
   .callout.rule .label { color: var(--gold); }
   .callout.warn .label { color: var(--red); }
   .callout.bridge .label { color: var(--accent); }
+  .callout.questions .label { color: var(--gold); }
+  .callout.threereads .label { color: #6b3fa0; }
   .callout ul { margin: 4px 0; padding-left: 22px; }
   .item {
     border-left: 3px solid var(--blue); padding: 10px 14px;
     background: #f7faff; margin: 8px 0; border-radius: 4px;
   }
-  .item .qid {
-    font-size: 0.75rem; color: var(--muted); font-family: monospace;
-  }
+  .item .qid { font-size: 0.75rem; color: var(--muted); font-family: monospace; }
   .item.dok3 { border-left-color: var(--accent); background: #fff5ef; }
-  .item.assess { border-left-color: var(--gold); background: #fffbea; }
-  .item .star { font-weight: 700; }
-  .item.dok3 .star { color: var(--accent); }
-  .item.assess .star { color: var(--gold); }
+  .item.dok3 .dok3-star { color: var(--accent); font-weight: 700; }
+  .short-note {
+    background: #fff8e0; padding: 10px 14px; border-radius: 6px;
+    margin-bottom: 12px; font-size: 0.92rem; border-left: 4px solid var(--gold);
+  }
   @media (max-width: 768px) {
     header { padding: 10px 14px; flex-wrap: wrap; gap: 4px; }
     header h1 { font-size: 1.05rem; }
@@ -124,7 +129,6 @@
     .phase-chip { padding: 6px 10px; font-size: 0.75rem; }
     .phase-card { padding: 12px 14px; }
     .phase-card h2 { font-size: 1.1rem; flex-wrap: wrap; gap: 6px; }
-    .phase-card .obj { font-size: 0.85rem; }
     .badges { flex-wrap: wrap; }
     .badge { font-size: 0.65rem; padding: 2px 8px; }
     .callout { padding: 10px 12px; margin: 10px 0; font-size: 0.92rem; }
@@ -141,285 +145,225 @@
 <header>
   <div>
     <h1>Lesson 4-3 Pacer</h1>
-    <div class="meta">Periods 1-3 &middot; Rational Expressions: Equivalent, Simplify, Multiply/Divide, Model &middot; Single DOK-3 spine (P2)</div>
+    <div class="meta">P1 OBSERVATION · Fri 2026-05-15 · Multiply &amp; Divide Rational Expressions · Single DOK-3 spine (#36-partC)</div>
   </div>
   <div class="meta" id="dateLabel"></div>
 </header>
 
 <nav class="tabs" id="tabBar">
-  <button class="tab active" data-tab="p1">P1 &middot; Equivalent &amp; Simplify</button>
-  <button class="tab" data-tab="p2">P2 &middot; Multiply/Divide + DOK-3 &#x2B50;</button>
-  <button class="tab" data-tab="p3">P3 &middot; Modeling + Assessment Rehearsal &#x2B50;</button>
+  <button class="tab active" data-tab="p1obs">P1 OBS · Fri 5/15 ★</button>
 </nav>
 
 <main id="panels"></main>
 
 <script>
 const PACER = {
-  p1: {
-    label: "Period 1 · Rational Expressions: Equivalent & Simplify · 55 min base (65 min for both A & F)",
-    total_min: 55,
+  p1obs: {
+    label: "Period F · OBSERVATION LESSON · Fri 5/15 · 7:45–8:50 (65 min) ★",
+    total_min: 65,
+    short_note: "★ OBS DAY — student packet mirrors L35_P3_obs DOCX (Do Now / Apply / Performance Task / Exit). 3-Reads routine on Apply (full scaffold) and Performance Task (gradual release). Groups of 2–3 labeled A, B, C. Teacher circulates with iPad to identify student work to spotlight; collect group thinking instead of giving answers.",
     phases: [
-      { id:"donow", title:"Do Now — Notice & Wonder (graph with hole)",
-        fw:"notice & wonder", dok:"2", min:5,
-        items:[{qid:"4-3-savvas-model-discuss-lesson-4-3-launch", label:"Model & Discuss — Graph of y = x + 2 with excluded point at x = 2"}],
-        teacher:[
-          "Project the graph of y = x + 2 with a hole at x = 2 (printed Do Now sheet or screen).",
-          "Circulate SILENTLY — do not teach during this phase.",
-          "Collect at 5 min sharp."
+      { id: "donow", title: "Do Now — Explore & Reason (graph of y = x+2)",
+        start: "7:45", end: "7:55",
+        fw: "≤10 min · conceptual gateway", dok: "2", min: 10,
+        items: [
+          {qid: "4-3-savvas-model-discuss-lesson-4-3-launch",
+           label: "Savvas Model & Discuss — Explore & Reason",
+           note: "Graph of y = x+2 with parts A (domain), B (sketch with x=2 excluded), C (Use Structure: what kind of function might have a graph like this?)."},
         ],
-        rules:[
+        teacher: [
+          "Hand out student packet at the door. Project Page 1 (Do Now graph).",
+          "Read prompt aloud once.",
+          "Set timer 4 min: silent independent work on Parts A, B, C.",
+          "Set timer 4 min: pair-share with elbow partner.",
+          "Cold-call 1–2 pairs to share Part C answer.",
+          "Bridge to Apply: 'When the denominator equals zero, the function is undefined — that's a domain restriction. Today we'll see this everywhere.'",
+        ],
+        students: [
+          "Read prompt silently.",
+          "Work Part A independently (1–2 min).",
+          "Sketch Part B in the blank grid (excluded point at x = 2).",
+          "Discuss Part C with elbow partner using the printed sentence frame.",
+          "Volunteer (or be cold-called) to share thinking.",
+        ],
+        questions: [
+          "How can you engage students in the lesson?",
+          "How can you hook them into rational expressions?",
+          "How are all adults intentionally planned for?",
+        ],
+        rules: [
           "A) What is the domain of this function?",
           "B) Sketch a function that resembles the graph, but restrict its domain to exclude x = 2.",
-          "C) What kind of function might have a graph like this? Explain."
+          "C) What kind of function might have a graph like this? Explain.",
         ],
-        answer:"Anticipated notices: 'There's a hole in the graph.' 'The line has a gap.' 'One point is missing.' Anticipated wonders: 'Why is there a hole?' 'What happens at that x?' KEY MOVE in Launch: surface that when the denominator = 0, the expression is undefined — this is a domain restriction. Sample answer C: y = (2x−4)/(x−2).",
+        answer: "A: Domain is all real numbers (no restriction on y = x+2). B: Sketch should resemble y = x+2 but with an open circle at (2, 4) — a hole. C: A rational function whose denominator is zero at x = 2, e.g., y = ((x-2)(x+2)) / (x-2) — equivalent to x+2 EXCEPT at x = 2.",
+        bridge: "Anchor for the day's throughline: 'Domain restriction is the soul of a rational expression — it survives even when factors cancel.'",
       },
-      { id:"launch", title:"Launch — Ex 1 + Ex 2 (Equivalent & Simplify)",
-        fw:"teacher models", dok:"1-2", min:12,
-        items:[],
-        teacher:[
-          "Bridge from Do Now: 'You noticed the graph skips a point. That happens because the denominator equals zero at that x-value — we call it a domain restriction.'",
-          "Project Example 1. Think aloud: factor numerator and denominator, identify zeros, write equivalent expression with restriction stated.",
-          "Project Example 2. Think aloud: factor completely, cancel the common factor, but KEEP the domain restriction from the canceled factor.",
-          "Pause 1× for 30-sec partner-check: 'What x-value is excluded in Example 1?'",
-          "Do NOT solve Try-Its. Release promptly at minute 17."
-        ],
-        rules:[
-          "EQUIVALENT + SIMPLIFY RULES:",
-          "1. Factor the numerator AND denominator completely.",
-          "2. Cancel only common FACTORS (never terms across + or −).",
-          "3. State domain restrictions: every zero of the ORIGINAL denominator is excluded — including factors you canceled.",
-          "⚠️ COMMON ERROR: Do NOT cancel terms added or subtracted. Factor FIRST, then cancel identical factor pairs."
-        ],
-      },
-      { id:"explore", title:"Explore — Think-Pair-Share (7 items)",
-        fw:"student work", dok:"1-2", min:33,
-        items:[
-          {qid:"4-3-savvas-try-it-1-lesson-4-3", label:"Try It 1 — Write an equivalent rational expression"},
-          {qid:"4-3-savvas-q20", label:"Practice #20 — Identify equivalent expressions"},
-          {qid:"4-3-savvas-q22", label:"Practice #22 — Identify domain restrictions"},
-          {qid:"4-3-savvas-q24", label:"Practice #24 — Apply domain restrictions"},
-          {qid:"4-3-savvas-try-it-2-lesson-4-3", label:"Try It 2 — Simplify by factoring and canceling"},
-          {qid:"4-3-savvas-q17", label:"Practice #17 — Construct Arguments: what is simplest form?"},
-          {qid:"4-3-savvas-q19", label:"Practice #19 — Simplify with domain restrictions (extension stretch)"},
-        ],
-        teacher:[
-          "5 laps across 33 min (~6–7 min each).",
-          "Lap 1: Try-It 1 — press pairs to factor before writing the equivalent form.",
-          "Lap 2: #20 + #22 — check that pairs identify domain restrictions correctly.",
-          "Lap 3: #24 + Try-It 2 — press pairs to factor completely before canceling.",
-          "Lap 4: #17 — verify pairs state the domain restriction alongside the simplified form.",
-          "Lap 5: #19 (extension) — stretch. Cut if pace slows.",
-          "Do not give answers. Sentence frame: 'The factored form is ___, so the domain excludes x = ___. After canceling ___, the simplified expression is ___ with the same domain restriction.'"
-        ],
-        answer:"Try It 1: (x²−2x−8)/(x²+2x). #20: (x³+4x²−12x)/(x²+x−30). #22: (y−8)/y for all y except 0 and −3. #24: (x+5)/(x−4), x ≠ −3, 4. Try It 2a: (x+1)/(x(x−3)) for all x except 0, −1, 3. Try It 2b: x+1 for all x except 1 and −4. #17: A rational expression is in simplest form when numerator and denominator have no common factors other than 1. #19: x = −5, 0, 2.",
-        warn:"Period A & F (65 min) → use extra 10 min on Explore, NOT Launch. IEP support: provide Equivalent + Simplify Rules card as a sticker/cut-out. ELL: sentence frames on student packet are non-negotiable.",
-      },
-      { id:"share", title:"Share / Summary",
-        fw:"academic conversation", dok:"2", min:5,
-        items:[],
-        teacher:[
-          "Cold-call 2 pairs to read their sentence-frame sentence.",
-          "Write one student-generated sentence on board.",
-          "Preview P2: 'Next class we multiply and divide rational expressions — same factor-and-cancel logic applies.'"
-        ],
-        bridge:"P2: multiply and divide rational expressions (Example 3). DOK-3 Closure Argument (#13) — students write a paragraph with worked examples proving closure under multiplication and division. Same factor-and-cancel habits carry over.",
-      },
-      { id:"exit", title:"Exit Ticket — Summary Recap",
-        fw:"not graded", dok:"1-2", min:2,
-        items:[],
-        teacher:[
-          "Collect at door.",
-          "Scan fill-in stems — misconceptions about domain restrictions tell you what to re-hit in P2 Do Now."
-        ],
-        rules:[
-          "To simplify (x²+3x−10)/(x²−4) I first factor to ___.",
-          "The restricted domain values are x ≠ ___.",
-          "After canceling the factor ___, my simplified expression is ___.",
-          "One biggest thing I learned today: ___"
-        ],
-      },
-    ]
-  },
 
-  p2: {
-    label: "Period 2 · Multiply & Divide Rational Expressions + DOK-3 Closure · 55 min base",
-    total_min: 55,
-    phases: [
-      { id:"donow", title:"Do Now — Simplify (bridge from P1)",
-        fw:"bridge from P1", dok:"1", min:5,
-        items:[{qid:"4-3-savvas-q25", label:"Do Now — Simplify (x³+9x²−10x)/(x³−9x²−10x)"}],
-        teacher:[
-          "Hand out at door.",
-          "Circulate 3 min.",
-          "Cold-call 1 student for factoring and domain restriction."
+      { id: "apply", title: "Apply — #35 Cylinders V/SA · 3-READS (full scaffold)",
+        start: "7:55", end: "8:10",
+        fw: "Make Sense & Persevere · 3-Reads", dok: "2", min: 15,
+        items: [
+          {qid: "4-3-savvas-q35",
+           label: "Savvas Practice #35 — Cylinder A (radius 2r, height r) vs Cylinder B (radius r, height 3r). Compare V/SA ratios.",
+           note: "DOK-1 per Savvas; we treat as DOK-2 because of the multi-step modeling + comparison."},
+          {qid: "4-3-savvas-q35-partc-design",
+           label: "Derived: 'What does that mean about the design?'",
+           note: "Interpretive layer added to part c."},
         ],
-        answer:"(x+10)(x−1) / [(x−10)(x+1)], x ≠ −1, 0, 10. Domain excludes 0 because x is a factor of the original denominator; excludes −1 and 10 from remaining factors.",
+        teacher: [
+          "FULL 3-READS routine — see purple callout below.",
+          "Part a (5 min): students work INDIVIDUALLY on cylinder A V/SA. T circulates with iPad noting interesting work.",
+          "After 5 min: gather responses from groups A, B, C in turn. DO NOT give the answer — collect thinking, surface differences.",
+          "Part b (5 min): 2 min individual + 3 min turn-and-talk. Share out + review.",
+          "Part c (3 min): TPS structure. Surface ratio comparison + design implication using the printed sentence frame.",
+          "Time-cap: 15 min total. Move to PT even if c isn't fully shared.",
+        ],
+        students: [
+          "Listen during Read 1 (no writing).",
+          "Highlight key info during Read 2 — formulas, dimensions of A and B, the question.",
+          "Work Part a individually for 5 min.",
+          "Be ready to share when called by group letter (A / B / C).",
+          "Work Part b individually for 2 min, then discuss with elbow partner for 3.",
+          "Apply same TPS pattern to Part c.",
+          "Use the printed sentence frame to share the comparison.",
+        ],
+        questions: [
+          "What will you explicitly model and how?",
+          "How will you know if students are ready to work alone?",
+          "How will you elicit student thinking without revealing the answer?",
+          "How are all adults intentionally planned for?",
+        ],
+        rules: [
+          "V = πr²h    SA = 2πrh + 2πr²",
+          "Cylinder A: radius 2r, height r",
+          "Cylinder B: radius r, height 3r",
+          "Group labels: A, B, C — share-out by group letter",
+        ],
+        answer: "Part a: Cylinder A → V = π(2r)²·r = 4πr³;  SA = 2π(2r)(r) + 2π(2r)² = 4πr² + 8πr² = 12πr²;  V/SA = 4πr³ / 12πr² = r/3. Part b: Cylinder B → V = π(r)²(3r) = 3πr³;  SA = 2π(r)(3r) + 2π(r²) = 6πr² + 2πr² = 8πr²;  V/SA = 3πr³ / 8πr² = 3r/8. Part c: Compare r/3 vs 3r/8 → cross-multiply 8r vs 9r → 3r/8 > r/3 (for r > 0). CYLINDER B has the greater V/SA — bigger volume per unit of material, the more efficient design.",
       },
-      { id:"launch", title:"Launch — Example 3 (Multiply & Divide)",
-        fw:"teacher models", dok:"2", min:12,
-        items:[],
-        teacher:[
-          "Project Example 3. Think aloud: factor every numerator and denominator BEFORE canceling.",
-          "'For division I flip the second fraction — the RECIPROCAL — before I do anything else.'",
-          "Flag the Multiply/Divide Rules card — print it in student minds.",
-          "30-sec pause: 'What domain values did I exclude and why?' (partner check)",
-          "Do NOT solve Try-Its or Practice items — release at minute 17."
-        ],
-        rules:[
-          "MULTIPLY / DIVIDE RULES:",
-          "1. Factor every numerator AND denominator completely.",
-          "2. For division, rewrite as multiplication by the RECIPROCAL of the divisor.",
-          "3. Cancel only common FACTORS across any numerator with any denominator.",
-          "4. State domain: exclude every zero of every denominator in ANY step, including the reciprocal's new denominator.",
-          "⚠️ Never cancel across the ÷ sign — flip FIRST, then cancel."
-        ],
-      },
-      { id:"explore", title:"Explore — TPS + ⭐ DOK-3 Closure Argument",
-        fw:"student work + DOK-3", dok:"2-3", min:33,
-        items:[
-          {qid:"4-3-savvas-try-it-3-lesson-4-3", label:"Try It 3 — Multiply rational expressions"},
-          {qid:"4-3-savvas-q27", label:"Practice #27 — Multiply with factoring"},
-          {qid:"4-3-savvas-try-it-4-lesson-4-3", label:"Try It 4 — Divide rational expressions"},
-          {qid:"4-3-savvas-q29", label:"Practice #29 — Divide: rewrite as multiplication"},
-          {qid:"4-3-savvas-try-it-5-lesson-4-3", label:"Try It 5 — Mixed multiply/divide"},
-          {qid:"4-3-savvas-q32", label:"Practice #32 — Multi-step multiply/divide"},
-          {qid:"4-3-savvas-q13", label:"Practice #13 ⭐ DOK-3 CLOSURE ARGUMENT — Why are rational expressions closed under multiplication and division?", dok3:true, note:"Write a paragraph with ONE worked product example AND one quotient example, concluding the result is rational. Plan ~12 min."},
-        ],
-        teacher:[
-          "5 laps across 33 min.",
-          "Lap 1 (4 min): Try-It 3 — press pairs to factor before canceling.",
-          "Lap 2 (4 min): #27 — watch for premature canceling.",
-          "Lap 3 (4 min): Try-It 4 — check that pairs flip FIRST for division.",
-          "Lap 4 (4 min): #29 — confirm domain restriction includes reciprocal's new denominator.",
-          "Lap 5 (12 min): ⭐ #13 Closure Argument. Press: cite factoring + cancellation by name, show domain tracking, explicitly conclude result is rational.",
-          "Do NOT give #13 answers — pairs present argument to each other; one pair presents at Share.",
-          "If running tight: cut Try-It 5 or #32. Never cut #13."
-        ],
-        answer:"Try It 3a: −(x−4) for all x except 9, −10, −4. Try It 3b: x(x−6) / [32(x+3)] for all x except 0 and −3. #27: 3(x−y)/(x+y) for all x except x=y or x=−y. Try It 4a: x²(x+2)(x−2)(x+1)/(3x+1) for all x except 5/2 and −1/3. Try It 4b: 3x(x+2)²/(x−7) for all x except 7 and −7. #29: 2x(3x+1)/(x−1) for all x except −1, 1, 5. Try It 5a: −3/(x+9) for all x except 0, −9, 6. Try It 5b: 2x for all x except 6 and −5. #32: (5x+2)/(x−3) for all x except −3, 2/5, 3. #13: Sample — (a/b)·(c/d)=ac/bd; (a/b)÷(c/d)=(a/b)·(d/c)=ad/bc. Key criteria: cites factoring + cancellation, shows domain tracking, explicitly concludes result is rational.",
-      },
-      { id:"share", title:"Share / Summary + P3 Bridge",
-        fw:"academic conversation", dok:"2", min:5,
-        items:[],
-        teacher:[
-          "Cold-call a pair that struggled on #13 — hold them accountable to the closure-argument structure.",
-          "Class signals thumbs. Write the closure definition on board.",
-          "P3 bridge: 'Next period we apply these skills to modeling problems AND the assessment-critical domain item.'"
-        ],
-        bridge:"P3: rational expression modeling (SA/V ratio, Ex 6) + Practice #19 (ASSESSMENT-CRITICAL — domain restrictions from a cubic denominator, Topic 4 8-Q Q#2). Bring domain-restriction list habit.",
-      },
-      { id:"exit", title:"Exit Ticket — Summary Recap",
-        fw:"not graded", dok:"1-2", min:3,
-        items:[],
-        teacher:[
-          "Collect at door.",
-          "Scan stem 3 (domain restrictions). Plan P3 Do Now if many students miss the reciprocal's denominator."
-        ],
-        rules:[
-          "To divide rational expressions I first ___.",
-          "I cancel common factors, not ___.",
-          "My domain restriction list must include zeros from ___.",
-          "One biggest thing I learned today: ___"
-        ],
-      },
-    ]
-  },
 
-  p3: {
-    label: "Period 3 · Rational Expression Modeling + Assessment-Critical Simplify · 55 min base · ASSESSMENT-CRITICAL",
-    total_min: 55,
-    short_note: "P3 prepares students for Topic 4 8-Q assessment Q#2 (domain restrictions from a cubic denominator). Practice #19 is THE rehearsal item — factor x³+3x²−10x and identify all excluded values. No DOK-3 driver today (P2 owned the spine). Pure DOK-2 mastery.",
-    phases: [
-      { id:"donow", title:"Do Now — Justify an identity + SA/V Prediction",
-        fw:"bridge from P2", dok:"2", min:5,
-        items:[{qid:"4-3-savvas-q11", label:"Do Now — Why is (4x²−7)/(4x²−7) = 1 a valid identity?"}],
-        teacher:[
-          "Hand out at door.",
-          "Circulate 3 min.",
-          "Cold-call for domain restriction reasoning.",
-          "30-sec prediction: 'Before we model SA/V together, write what you think the ratio SA/Volume simplifies to for a cube with side x. No wrong answers — just predict.'"
+      { id: "pt", title: "Performance Task ⭐ — #36 Lupe Carnival · 3-READS (gradual release)",
+        start: "8:10", end: "8:30",
+        fw: "Model with Mathematics · DOK-3 SPINE", dok: "3", min: 20,
+        items: [
+          {qid: "4-3-savvas-q36",
+           label: "Savvas Practice #36 — Lupe Carnival (probability ratio from geometry)",
+           note: "Bare Savvas: 'Find the ratio that represents this probability in simplified form.' DOK-2 per Savvas."},
+          {qid: "4-3-savvas-q36-partA-build",
+           label: "Derived A: Build the rational expression",
+           note: "DOK-1 — identify areas, form ratio."},
+          {qid: "4-3-savvas-q36-partB-simplify-domain",
+           label: "Derived B: Simplify + state domain in physical context",
+           note: "DOK-2 — procedural simplify + interpretive domain."},
+          {qid: "4-3-savvas-q36-partC-evaluate-fairness",
+           label: "Derived C: Evaluate at x=4, judge fairness",
+           dok3: true,
+           note: "DOK-3 SPINE — numerical evaluation + qualitative judgment."},
         ],
-        answer:"Using difference of squares: (4x²−7)/(4x²−7) = (2x+√7)(2x−√7) / [(2x+√7)(2x−√7)] = 1 for all x except ±√7/2. Domain restricted because denominator = 0 at those values. SA/V prediction reveal in Launch: both prism and cylinder simplify to 3/x.",
+        teacher: [
+          "GRADUAL-RELEASE 3-Reads routine — see purple callout.",
+          "Group work on Parts A, B, C in groups of 2–3.",
+          "T circulates with iPad: capture build strategies, errors, domain interpretations.",
+          "Mid-explore CHECKPOINT (10 min mark): 'Is your simplified expression x/(6(x+1))? Anyone get something else?' Don't reveal correct — surface discussion.",
+          "End: cold-call by group letter — Group A shares Part A reasoning; Group B shares Part B (simplify + domain); Group C shares Part C (fairness judgment). Rotate based on iPad notes.",
+          "DO NOT give the answer — let groups defend their builds.",
+        ],
+        students: [
+          "Read silently first (Read 1) — no teacher read aloud.",
+          "Discuss with group what the question is asking (Read 2).",
+          "Build the rational expression as a group on Part A.",
+          "Simplify and state domain restrictions in physical context (Part B).",
+          "Substitute x = 4 and judge fairness (Part C).",
+          "Use the printed sentence frames.",
+          "Share out one part per group letter at end of phase.",
+        ],
+        questions: [
+          "What will students do for most of the session? What will they practice?",
+          "What type of academic conversations will students engage in?",
+          "How will you know which groups need re-direction?",
+          "How will you press for the DOK-3 lift (build → simplify → judge) without revealing the path?",
+        ],
+        rules: [
+          "Black rectangle dimensions: x by (1/2)x  →  area = x²/2",
+          "Box face dimensions: 3x by (x+1)  →  area = 3x(x+1) = 3x² + 3x",
+          "Probability of winning = (black area) / (box area)",
+          "Group labels: A, B, C — each group shares one part at end",
+        ],
+        answer: "Part A: P = (x · (x/2)) / (3x · (x+1)) = (x²/2) / (3x² + 3x) = (x²/2) / (3x(x+1)). Part B: simplify by canceling x → P = x / (6(x+1)). Domain: x ≠ 0 (no box) AND x ≠ -1 (denominator zero). PHYSICAL meaning: x represents a real-world length, so x must be POSITIVE — x > 0 covers both restrictions implicitly, but the CANCELED x = 0 still excludes 'no box at all.' Part C: at x = 4, P = 4/(6·5) = 4/30 = 2/15 ≈ 13.3%. Fairness judgment: a 'fair' game is typically 50/50; 13% gives the operator a significant edge. Defensible answer either way — 'unfair to the player' OR 'fair as a carnival game where the operator profits.' KEY: student must articulate a CRITERION for fairness, not just compute the probability.",
+        warn: "This is the DOK-3 spine. Press the fairness judgment — students must JUDGE based on a criterion, not just compute. If a group writes 'P = 2/15' and stops, push: 'Fair compared to what? What would make a carnival game fair?'",
       },
-      { id:"launch", title:"Launch — Ex 2 (simplify) + Ex 6 (SA/V modeling)",
-        fw:"teacher models 2 examples", dok:"2", min:12,
-        items:[
-          {qid:"4-3-savvas-example-2-lesson-4-3", label:"Example 2 — Simplify (4−x²)/(x²+3x−10)"},
-          {qid:"4-3-savvas-example-6-lesson-4-3", label:"Example 6 — SA/V modeling: prism vs. cylinder"},
+
+      { id: "share", title: "Share / Summary — Throughline synthesis",
+        start: "8:30", end: "8:40",
+        fw: "synthesis · academic conversation", dok: "2", min: 10,
+        items: [],
+        teacher: [
+          "Synthesize the day's THROUGHLINE on whiteboard:",
+          "  'Domain restriction is the soul of a rational expression — it survives even when factors cancel.'",
+          "Connect Do Now → Apply → PT explicitly: each problem returned to the same idea.",
+          "Cold-call 1 pair to re-state the throughline in their own words.",
+          "Preview Topic 4 LEHS Q#3 and Q#5: 'Asymptotes you'll see on the assessment come from these same domain restrictions.'",
         ],
-        teacher:[
-          "FIRST 6 min (Example 2): teacher-model the factor → cancel → restrict-domain sequence. Emphasize: canceled factor STILL restricts.",
-          "NEXT 5 min (Example 6): teacher-model the SA/V ratio build for both prism and cylinder. Press: why does simplifying to the same ratio matter?",
-          "30 sec: point at rule cards. 'Mark them. Assessment reference.'",
-          "Do NOT solve Try-Its. Release at minute 17."
+        students: [
+          "Listen + add to discussion.",
+          "One pair re-states the throughline (cold-call).",
+          "Use the word bank if helpful: domain restriction, simplified, equivalent, closed, undefined.",
         ],
-        answer:"Example 2: top factors to (2−x)(2+x) = −(x−2)(x+2); bottom to (x−2)(x+5); cancel (x−2); domain x ≠ 2, x ≠ −5. Example 6: rectangular prism and cylinder SA/V ratios both simplify to 3/x; interpret as 'as x grows, ratio shrinks — bigger packages more efficient; both designs equally efficient at equivalent dimensions.'",
-        rules:[
-          "DOMAIN RULES:",
-          "1. Domain = all reals EXCEPT zeros of every denominator in every step.",
-          "2. Write the simplified form AND the restriction list together.",
-          "3. Canceled factors still exclude their zeros.",
-          "MODELING RULES:",
-          "1. Identify the ratio in words first (what / what).",
-          "2. Translate each quantity to a rational expression, with units.",
-          "3. Simplify, restrict domain, then interpret the simplified ratio in context."
+        questions: [
+          "How will students express what they have learned?",
+          "How does today's lesson connect to the upcoming Topic 4 assessment?",
         ],
+        bridge: "Bridge to L43 P2/P3: today's groundwork (single-expression simplification + domain) sets up multiplying & dividing rational expressions next period (Klimsara Examples 3 + 5). The fairness-judgment muscle from #36-partC carries forward to #13 (closure proof) when we get there.",
       },
-      { id:"explore", title:"Explore — TPS · Assessment Rehearsal (6 items)",
-        fw:"student work · pure DOK-2", dok:"2", min:35,
-        items:[
-          {qid:"4-3-savvas-try-it-6-lesson-4-3", label:"Try It 6 — SA/V ratio: two prism options"},
-          {qid:"4-3-savvas-q14", label:"Practice #14 — Explain domain restrictions graphically"},
-          {qid:"4-3-savvas-q22", label:"Practice #22 — Simplify: identify domain"},
-          {qid:"4-3-savvas-q34", label:"Practice #34 — Modeling: ratio of two volumes"},
-          {qid:"4-3-savvas-q37", label:"Practice #37 — Modeling: find base of parallelogram"},
-          {qid:"4-3-savvas-q19", label:"Practice #19 ⭐ ASSESSMENT-CRITICAL — Domain restrictions from cubic denominator (LEHS Q#2)", assess:true, note:"Factor x³+3x²−10x completely → identify all excluded values. Plan ~8 min. Never cut this."},
+
+      { id: "exit", title: "Exit Ticket — #14 Use Appropriate Tools (DOK-2)",
+        start: "8:40", end: "8:50",
+        fw: "summary recap · not graded", dok: "2", min: 10,
+        items: [
+          {qid: "4-3-savvas-q14",
+           label: "Savvas Practice #14 — Use Appropriate Tools",
+           note: "Explain why domain restrictions are necessary to show that (-6x²+21x)/(3x) and -2x+7 are equivalent. What is true about the graphs at x=0?"},
         ],
-        teacher:[
-          "6 laps across 35 min.",
-          "Laps 1-3: Try-It 6 + #14 + #22 — abstract simplification with domain (5-6 min each).",
-          "Laps 4-5: #34 + #37 — modeling items. Build ratio → simplify → interpret.",
-          "Lap 6: #19 — assessment rehearsal. Press: 'State ALL denominator zeros BEFORE simplifying. Factor the cubic completely first.'",
-          "Sentence frame: 'This ratio compares ___ to ___. The rational model is ___/___. After factoring and canceling, it simplifies to ___ with x ≠ ___, which means in context that ___.'",
-          "If pace slows: cut #37 (modeling) first. Never cut #19."
+        teacher: [
+          "Direct students to Page 4 of packet (Exit Ticket).",
+          "Set timer 5 min for the HOT prompt + sentence frames.",
+          "Set timer 5 min for the two reflection prompts ('What did you learn?' / 'What did you like?').",
+          "Collect at the door as students leave.",
+          "Tonight: scan exits for misconceptions about (-6x²+21x)/(3x) vs -2x+7 at x=0 — the should-be-a-hole vs defined-point distinction. If many students miss it, open Monday's Do Now with a bridge re-prompt.",
         ],
-        answer:"Try It 6: the rectangular-base prism has a smaller SA/V ratio than the square-base prism. #14: y=(−6x²+21x)/(3x) and y=−2x+7 look identical graphically but differ at x=0 — the rational expression is undefined there, −2x+7 equals 7. Domain restriction proves they are NOT equivalent at x=0. #22: (y−8)/y for all y except 0 and −3. #34: 3(x+1)/[2(x+2)] for all x > 0. #37: base = 3/5 units. #19: x³+3x²−10x = x(x+5)(x−2) → excluded values: x = −5, 0, 2.",
-        warn:"⭐ Practice #19 IS the Topic 4 8-Q Q#2 rehearsal. Its structure (domain ID from a cubic denominator) matches the assessment exactly. Press on factoring the cubic completely — students must find all three roots.",
-      },
-      { id:"share", title:"Share / Summary + Assessment Preview",
-        fw:"LEHS 8-Q preview", dok:"2", min:5,
-        items:[],
-        teacher:[
-          "Cold-call 1 pair to present #19 (domain restrictions from cubic denominator, using sentence frame).",
-          "Project Concept Summary (in student packet).",
-          "Announce: 'Topic 4 8-Q expects Q#2 on domain ID from a cubic. You just rehearsed it. Cubic denominator → factor completely FIRST — up to 3 zeros.'"
+        students: [
+          "Read #14 prompt.",
+          "Use the sentence frames if needed.",
+          "Complete the two reflection prompts.",
+          "Hand to teacher at the door.",
         ],
-        rules:[
-          "SIMPLIFYING: FACTOR → CANCEL → RESTRICT (every step's denominator zeros).",
-          "MODELING: NAME ratio in words → BUILD expressions → SIMPLIFY → INTERPRET in context.",
-          "Assessment Q#2: cubic denominator may have up to 3 zeros — factor completely first."
+        questions: [
+          "How will students show what they've learned based on the objective?",
+          "Are the sentence frames being used?",
         ],
-        bridge:"Topic 4 8-Q assessment covers 4-1, 4-3, 4-4, 4-5 content. You own Q#2 (domain restrictions) from today. Same simplify-and-restrict habit carries through all of Unit 4.",
-      },
-      { id:"exit", title:"Exit Ticket — Pre-Assessment Confidence",
-        fw:"pre-assessment confidence check", dok:"1-2", min:3,
-        items:[],
-        teacher:[
-          "Collect at door.",
-          "Tonight: scan for students who leave the restriction blank or can't factor the cubic. Insert 5-min Do Now recap when 8-Q lands."
-        ],
-        rules:[
-          "A rational model needs factoring because ___.",
-          "My simplified ratio is ___, valid when x ≠ ___.",
-          "In context this means ___.",
-          "One biggest thing I learned today: ___"
-        ],
+        answer: "At x = 0, the original (-6x²+21x)/(3x) has denominator 3x = 0 → UNDEFINED (a hole in the graph). The simplified -2x+7 evaluates at x=0 to 7 (a defined point). The two graphs are IDENTICAL EVERYWHERE EXCEPT at x = 0, where the original has a hole and the simplified has the point (0, 7). The domain restriction x ≠ 0 (from the original denominator) is necessary to declare the two expressions 'equivalent' — without it, they disagree at one point.",
       },
     ]
   },
 };
 
+// ── 3-READS routine reusable callout (rendered if phase has threereads field) ──
+const THREE_READS_FULL = "<strong>FULL SCAFFOLD (2 min total):</strong><ul>" +
+  "<li><strong>Read 1 (1 min):</strong> Teacher reads aloud. Students put pencils down and listen. Ask: <em>What is this problem about?</em></li>" +
+  "<li><strong>Read 2 (1 min):</strong> Students re-read silently and HIGHLIGHT the key info (formulas, dimensions, the question). Ask: <em>What information do we need?</em></li>" +
+  "</ul>";
+
+const THREE_READS_GRADUAL = "<strong>GRADUAL RELEASE (2 min total):</strong><ul>" +
+  "<li><strong>Read 1 (1 min):</strong> Students read silently FIRST (no teacher read aloud). Ask: <em>What's the question?</em></li>" +
+  "<li><strong>Read 2 (1 min):</strong> Pair share — <em>What information do we need to build the probability?</em></li>" +
+  "</ul>";
+
+// Inject 3-Reads into Apply + PT
+PACER.p1obs.phases[1].threereads = THREE_READS_FULL;
+PACER.p1obs.phases[2].threereads = THREE_READS_GRADUAL;
+
+// ── Renderer ───────────────────────────────────────────────────────────────
 const panels = document.getElementById("panels");
 const tabBar = document.getElementById("tabBar");
 document.getElementById("dateLabel").textContent = new Date().toDateString();
@@ -441,16 +385,17 @@ function renderPanel(tabId) {
       </div>
     </div>
     <div style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;">${data.label}</div>
-    ${data.short_note ? `<div style="background:#fffbea; border-left:4px solid var(--gold); padding:10px 14px; border-radius:6px; font-size:0.9rem; margin:12px 0;">⭐ ${data.short_note}</div>` : ""}
+    ${data.short_note ? `<div class="short-note">${data.short_note}</div>` : ""}
     <div class="phase-list" id="chips-${tabId}"></div>
     <div id="phase-card-${tabId}"></div>
   `;
   panels.appendChild(panel);
+
   const chipBar = panel.querySelector(`#chips-${tabId}`);
   data.phases.forEach((ph, idx) => {
     const chip = document.createElement("button");
     chip.className = "phase-chip";
-    chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0]} · ${ph.min}m`;
+    chip.textContent = `${idx+1}. ${ph.title.split(" — ")[0].split(" · ")[0]} · ${ph.min}m`;
     chip.onclick = () => selectPhase(tabId, idx);
     chipBar.appendChild(chip);
   });
@@ -460,61 +405,80 @@ function renderPanel(tabId) {
 function selectPhase(tabId, idx) {
   const data = PACER[tabId];
   const ph = data.phases[idx];
-  const card = document.getElementById("phase-card-" + tabId);
-  let html = '<div class="phase-card"><h2>' + ph.title +
-    '<span class="badges">' +
-    '<span class="badge dok">DOK ' + ph.dok + '</span>' +
-    '<span class="badge min">' + ph.min + ' min</span>' +
-    '<span class="badge fw">' + ph.fw + '</span>' +
-    '</span></h2>';
+  const card = document.getElementById(`phase-card-${tabId}`);
+  let html = `<div class="phase-card">
+    <h2>
+      ${ph.title}
+      <span class="badges">
+        ${ph.start && ph.end ? `<span class="badge time">${ph.start}–${ph.end}</span>` : ""}
+        <span class="badge dok">DOK ${ph.dok}</span>
+        <span class="badge min">${ph.min} min</span>
+        <span class="badge fw">${ph.fw}</span>
+      </span>
+    </h2>`;
   if (ph.items && ph.items.length) {
     ph.items.forEach(it => {
-      let cls = "item";
-      if (it.dok3) cls = "item dok3";
-      else if (it.assess) cls = "item assess";
-      const star = it.dok3 ? '<span class="star">&#x2B50; DOK-3 </span>' :
-                    it.assess ? '<span class="star">&#x2B50; ASSESS </span>' : '';
-      html += '<div class="' + cls + '">' + star + '<strong>' + it.label + '</strong> <span class="qid">' + it.qid + '</span>' + (it.note ? '<div>' + it.note + '</div>' : '') + '</div>';
+      const cls = it.dok3 ? "item dok3" : "item";
+      const star = it.dok3 ? '<span class="dok3-star">⭐ </span>' : '';
+      html += `<div class="${cls}">
+        ${star}<strong>${it.label}</strong> <span class="qid">${it.qid}</span>
+        ${it.note ? `<div>${it.note}</div>` : ""}
+      </div>`;
     });
   }
+  if (ph.threereads) {
+    html += `<div class="callout threereads"><span class="label">📖 3-Reads Routine</span>${ph.threereads}</div>`;
+  }
   if (ph.teacher && ph.teacher.length) {
-    html += '<div class="callout teacher"><span class="label">&#x1F3A4; Teacher does</span><ul>';
-    ph.teacher.forEach(t => html += '<li>' + t + '</li>');
-    html += '</ul></div>';
+    html += `<div class="callout teacher"><span class="label">🎤 Teachers will…</span><ul>`;
+    ph.teacher.forEach(t => html += `<li>${t}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.students && ph.students.length) {
+    html += `<div class="callout students"><span class="label">🎓 Students will…</span><ul>`;
+    ph.students.forEach(s => html += `<li>${s}</li>`);
+    html += `</ul></div>`;
+  }
+  if (ph.questions && ph.questions.length) {
+    html += `<div class="callout questions"><span class="label">❓ Questions to consider…</span><ul>`;
+    ph.questions.forEach(q => html += `<li>${q}</li>`);
+    html += `</ul></div>`;
   }
   if (ph.rules && ph.rules.length) {
-    html += '<div class="callout rule"><span class="label">&#x1F4D8; Rules / stems</span><ul>';
-    ph.rules.forEach(r => html += '<li>' + r + '</li>');
-    html += '</ul></div>';
+    html += `<div class="callout rule"><span class="label">📘 Rules / stems</span><ul>`;
+    ph.rules.forEach(r => html += `<li>${r}</li>`);
+    html += `</ul></div>`;
   }
   if (ph.answer) {
-    html += '<div class="callout answer"><span class="label">&#x2705; Answer key</span>' + ph.answer + '</div>';
+    html += `<div class="callout answer"><span class="label">✅ Answer key</span>${ph.answer}</div>`;
   }
   if (ph.bridge) {
-    html += '<div class="callout bridge"><span class="label">&#x1F517; Bridge</span>' + ph.bridge + '</div>';
+    html += `<div class="callout bridge"><span class="label">🔗 Bridge</span>${ph.bridge}</div>`;
   }
   if (ph.warn) {
-    html += '<div class="callout warn"><span class="label">&#x26A0;&#xFE0F; Warning / Note</span>' + ph.warn + '</div>';
+    html += `<div class="callout warn"><span class="label">⚠️ Warning</span>${ph.warn}</div>`;
   }
-  html += '</div>';
+  html += `</div>`;
   card.innerHTML = html;
-  document.querySelectorAll("#chips-" + tabId + " .phase-chip").forEach((c, i) => {
-    c.classList.toggle("active", i === idx);
-  });
-  document.getElementById("phaseTitle-" + tabId).textContent = ph.title;
+
+  const chips = document.querySelectorAll(`#chips-${tabId} .phase-chip`);
+  chips.forEach((c, i) => c.classList.toggle("active", i === idx));
+
+  document.getElementById(`phaseTitle-${tabId}`).textContent = ph.title;
   currentPhase[tabId] = idx;
   stopPhase(tabId);
-  document.getElementById("timer-" + tabId).textContent =
-    String(ph.min).padStart(2,'0') + ":00";
+  document.getElementById(`timer-${tabId}`).textContent =
+    `${String(ph.min).padStart(2,'0')}:00`;
 }
 
-const timers = {}, currentPhase = {};
+const timers = {};
+const currentPhase = {};
 
 function startPhase(tabId) {
   const idx = currentPhase[tabId];
   const ph = PACER[tabId].phases[idx];
   let remaining = ph.min * 60;
-  const timerEl = document.getElementById("timer-" + tabId);
+  const timerEl = document.getElementById(`timer-${tabId}`);
   clearInterval(timers[tabId]);
   timers[tabId] = setInterval(() => {
     remaining--;
@@ -522,13 +486,15 @@ function startPhase(tabId) {
       clearInterval(timers[tabId]);
       timerEl.textContent = "TIME";
       timerEl.style.color = "#ff6b6b";
-      if (idx + 1 < PACER[tabId].phases.length) {
-        document.querySelectorAll("#chips-" + tabId + " .phase-chip")[idx].classList.add("done");
+      const next = idx + 1;
+      if (next < PACER[tabId].phases.length) {
+        document.querySelectorAll(`#chips-${tabId} .phase-chip`)[idx].classList.add("done");
       }
       return;
     }
-    const m = Math.floor(remaining / 60), s = remaining % 60;
-    timerEl.textContent = String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
     timerEl.style.color = remaining < 60 ? "#ff6b6b" : "#ffffff";
   }, 1000);
 }
@@ -538,13 +504,13 @@ function stopPhase(tabId) {
   const idx = currentPhase[tabId];
   if (idx === undefined) return;
   const ph = PACER[tabId].phases[idx];
-  const timerEl = document.getElementById("timer-" + tabId);
-  timerEl.textContent = String(ph.min).padStart(2,'0') + ":00";
+  const timerEl = document.getElementById(`timer-${tabId}`);
+  timerEl.textContent = `${String(ph.min).padStart(2,'0')}:00`;
   timerEl.style.color = "#ffffff";
 }
 
 Object.keys(PACER).forEach(renderPanel);
-document.querySelector('.panel').classList.add('active');
+document.getElementById('panel-p1obs').classList.add('active');
 
 tabBar.addEventListener("click", e => {
   if (!e.target.matches(".tab")) return;
@@ -554,6 +520,5 @@ tabBar.addEventListener("click", e => {
   document.getElementById("panel-" + e.target.dataset.tab).classList.add("active");
 });
 </script>
-
 </body>
 </html>
