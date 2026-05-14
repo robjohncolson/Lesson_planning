@@ -15,6 +15,7 @@ Before you ask "what's going on in this repo?", check these sources:
 - **`web/SPEC.md`** — the shared contract for the Vercel-hosted frontend (DOM ids, api.js surface, Phase 1/2/3 notes).
 - **`railway/README.md`** — deploy + env var sheet for the pdflatex build service.
 - **`supabase/README.md` + `supabase/migrations/*.sql`** — schema, run-order, seed script, migration history.
+- **`tex/L43_P1_obs_{student,teacher}.tex`** + **`web/pacers/L43_Pacer.html`** — **THE TARGET STYLE for all future lessons.** See "Target lesson style" section below. Visual reference: `L35_P3_obs_student.docx` at repo root.
 
 **This file carries only what's NOT in those sources:** currently-pending tasks, durable failure modes, and pointers. It is NOT a repo tour.
 
@@ -30,6 +31,80 @@ LaTeX is canonical for student-facing output; the YAML → tex → PDF pipeline 
 - **Local Flask console** (`console.py`) is still the fastest path for the owner. Localhost-only; not shared.
 
 **For current artifact counts, shipped decks, or "what's in tex/", run `ls tex/` and `git log --oneline` — do not re-summarize here, it drifts.**
+
+## Target lesson style (L43_P1_obs is the template — replicate for every future lesson)
+
+**Going forward, every lesson is authored in the L43_P1_obs format.** Three artifacts per lesson:
+
+1. **Student packet** — `tex/L{NN}_P{N}{,_obs}_student.tex/.pdf`
+2. **Teacher packet** — `tex/L{NN}_P{N}{,_obs}_teacher.tex/.pdf`
+3. **Pacer** — `web/pacers/L{NN}_Pacer.html` (single tab if OBS, multi-tab if 3-period)
+
+The DOCX `L35_P3_obs_student.docx` at repo root is the canonical **visual** reference; `tex/L43_P1_obs_*.tex` is the canonical **structural** reference. Read both before authoring a new lesson.
+
+### Required structure for the student packet (4 problems, mirrors the DOCX)
+
+| Page | Section | Role | Default DOK |
+|---|---|---|---|
+| 1 | Title + 3-row objectives table (Math / Language / Essential Question) + **Do Now** | Conceptual gateway / Explore & Reason | 2 |
+| 2 | **Apply — Make Sense and Persevere** | Multi-step modeling | 2 |
+| 3 | **Performance Task** | DOK-3 spine (the period's only DOK-3) | **3** |
+| 4 | Name field + **Exit Ticket** + 2 reflection prompts ("learned" / "liked") | DOK-2 reflective summary (NOT CER) | 2 |
+
+**Visual hard-rules:**
+- 4 pages, one section per page (`\newpage` between)
+- White-space-as-writing-room (NO ruled lines on free-response — use `\writeline` macro = invisible 12pt strut)
+- Plain bold section heads (NOT tcolorbox-banner)
+- Ruled lines OK only on the Name field and inline `\frameblank` slots inside printed sentence frames
+- TikZ figures for every problem (no rasterized images unless specifically required)
+- Sentence frames printed inline next to every long-explanation prompt (ELL hard-rule)
+- En-dash `--` in section headings, not bullet `\bullet`
+
+### Required structure for the teacher packet (admin's 3-column lesson plan)
+
+- Landscape, 0.5–0.55in margins, ~10pt font
+- Header tables (4 stacked tabularx blocks): Date/Subject/Grade, CCSS+Topic Goals+EQ+Materials, Content Obj+criteria, Language Obj+criteria, IEP/ELL supports
+- Body table (`xltabular`, 4 cols): **Lesson Part | Teachers will… | Students will… | Questions to consider…**
+- One row per phase: Do Now / Launch+Apply / Explore+PT / Share-Summary / Exit
+- **3-Reads routine encoded explicitly**: full scaffold on Apply (Read 1: T reads aloud, Read 2: S read + highlight); gradual release on PT (S read first, pair share, T re-reads if needed)
+- **Group A/B/C cadence**: groups of 2–3 labeled A, B, C; teacher circulates with iPad noting interesting work; gathers responses by group letter; doesn't reveal answers
+- **In-cell line breaks use `\newline` not `\\` (failure mode #25a)**
+
+### Required structure for the pacer
+
+- Single `tex/L{NN}_Pacer.html` based on the L43_Pacer.html pattern (`web/pacers/L43_Pacer.html`)
+- One tab per period (single tab for OBS day)
+- Per-phase chips with countdown timer, sticky timer bar
+- Per-phase callouts (in this order): 📖 3-Reads (where applicable) · 🎤 Teachers · 🎓 Students · ❓ Questions · 📘 Rules · ✅ Answer key · 🔗 Bridge · ⚠️ Warning
+- Inline answer keys (the math worked out so teacher doesn't need to re-derive mid-lesson)
+- DOK-3 item flagged with ⭐ in the items list
+- QR code in header pointing at the pacer's own URL (scan-to-open from projector/print)
+
+### Pre-requisites for authoring a new lesson (L{XX} where XX is the next topic)
+
+You **must** have the Savvas SE/TE LaTeX files for that topic. They live on the school machine at `C:\Users\ColsonR\Lesson_planning\`:
+- `a2_X-Y_SE.tex` (Student Edition — problem statements, page-level structure)
+- `a2_X-Y_TE.tex` (Teacher Edition — DOK labels, teaching notes, ground-truth answers)
+
+Copy both to the home machine repo root before authoring (e.g., `a2_4-3_SE.tex` + `a2_4-3_TE.tex` are already in the repo as the 4-3 reference). Commit them — Codex steelman + future LLMs need to read them during review. They're the **ground truth** for "is this prompt actually in the Savvas bank?" (the Savvas-only hard rule).
+
+If only the PDF exists: convert via `pandoc` or `pdf2tex`, or upload to one of the LaTeX-conversion tools the user has access to (web-claude / ChatGPT / aistudio). The TE conversion is the high-value one — it carries DOK labels per item.
+
+### Authoring workflow (the loop)
+
+1. **Acquire SE/TE tex** — copy from school machine to repo root, commit.
+2. **Pick problems from TE** for the 4 slots:
+   - Do Now: Savvas Model & Discuss / "Explore and Reason" (DOK-2 conceptual gateway). May be the launch prompt for the Savvas lesson.
+   - Apply: a Savvas Practice item tagged Make Sense and Persevere (DOK-2 multi-step), often anchors a numbered Example.
+   - Performance Task: a Savvas Practice item tagged Higher Order Thinking, Model with Mathematics, or Performance Task. Verify it's the period's **only** DOK-3 (single-DOK3-spine hard-rule).
+   - Exit Ticket: a short Savvas reflective prompt (DOK-2 — Use Appropriate Tools, Generalize, etc.). NOT another DOK-3.
+3. **Cull DAG/registry** of any items from skipped lessons (e.g., when 4-1 was skipped, all `4-1-*` items were removed from registry + Supabase + tagging). See "ingest-as-derived" pattern below for adding scaffolds.
+4. **Draft `tex/L{NN}_P{N}{,_obs}_student.tex`** matching the visual hard-rules above. Compile, eyeball, iterate.
+5. **Draft `tex/L{NN}_P{N}{,_obs}_teacher.tex`** in admin 3-column format. Compile, eyeball, iterate.
+6. **Draft `web/pacers/L{NN}_Pacer.html`** based on L43_Pacer.html. Inline the answer keys.
+7. **Codex steelman review** via `cross-agent.py` (see toolchain pointer). Standard prompt structure: Section A (defend each design choice) → B (3-7 risks) → C (concrete fixes) → D (verdict). Apply BLOCKER + WARN fixes before commit.
+8. **Update Supabase** — PATCH the lessons row with new `tex_student/tex_teacher`; **null `tex_do_now` and `tex_slides` if you're not shipping those** (failure mode #25b); DELETE+INSERT lesson_phases for the new structure; trigger `POST /build/{lesson_id}` to regenerate PDFs.
+9. **Commit + push** — Vercel + Railway auto-deploy from `main`.
 
 ## Active toolchain pointers
 
