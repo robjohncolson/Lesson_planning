@@ -182,35 +182,67 @@ const PACER = {
   p1obs: {
     label: "Period F · OBSERVATION LESSON · Fri 5/15 · 7:45–8:50 (65 min) ★",
     total_min: 65,
-    short_note: "★ OBS DAY — student packet mirrors L35_P3_obs DOCX (Do Now / Apply / Performance Task / Exit). 3-Reads routine on Apply (full scaffold) and Performance Task (gradual release). Groups of 2–3 labeled A, B, C. Teacher circulates with iPad to identify student work to spotlight; collect group thinking instead of giving answers.",
+    short_note: "★ OBS DAY (restructured 5/14 per Bonnevie meeting) — 6 phases now. NEW Do Now (function-family match + open/closed circle review) → Explore & Reason (was the old Do Now) → NEW Example 6 guided bridge → Apply → Performance Task → Share → Exit. 3-Reads on Apply (full) and PT (gradual release). Groups of 2–3 labeled A/B/C. Teacher circulates with iPad to spotlight student work; collect thinking, don't give answers.",
     phases: [
-      { id: "donow", title: "Do Now — Explore & Reason (graph of y = x+2)",
+      { id: "donow", title: "Do Now — Function families + Open/Closed circle review",
         start: "7:45", end: "7:55",
-        fw: "≤10 min · conceptual gateway", dok: "2", min: 10,
+        fw: "≤10 min · warm-up + recall", dok: "1-2", min: 10,
+        items: [
+          {qid: "(teacher-authored)",
+           label: "NEW Do Now: Match 4 graphs to function family + compare open/closed circle on number line",
+           note: "Part 1: A=quadratic, B=exponential, C=linear, D=rational. Part 2: closed circle = included (Line 1: x ≥ -3), open circle = excluded (Line 2: x ≠ 2)."},
+        ],
+        teacher: [
+          "Hand out student packet at the door. Project Page 1.",
+          "Part 1 (5 min): Read prompt aloud. 3 min silent matching, 1 min pair check, 1 min cold-call.",
+          "Part 2 (4 min): Read both number lines. 'What's different?' 2 min silent + 2 min pair share. Surface: closed = included, open = excluded.",
+          "Bridge to Explore & Reason: 'Today's family is rational — and the open circle on Line 2 shows up everywhere when we restrict domains.'",
+        ],
+        students: [
+          "Look at each graph; match to function-family word.",
+          "Compare with elbow partner.",
+          "Read both number lines; notice open vs closed circle.",
+          "Write a domain expression for each line (Line 1: x ≥ -3, Line 2: x ≠ 2).",
+        ],
+        questions: [
+          "How can you engage students in the lesson?",
+          "How can you activate prior knowledge of function families?",
+        ],
+        rules: [
+          "Function families in word bank: linear, quadratic, exponential, rational",
+          "Closed circle = value INCLUDED in domain (≤, ≥)",
+          "Open circle = value EXCLUDED from domain (<, >, ≠)",
+        ],
+        answer: "Part 1: A=quadratic (parabola), B=exponential (growth curve through (0, 0.5)), C=linear (straight line), D=rational (vertical asymptote at x=1). Part 2: Closed circle on Line 1 (-3) = -3 is INCLUDED; Line 1 = {x | x ≥ -3}. Open circle on Line 2 (2) = 2 is EXCLUDED; Line 2 = {x | x ≠ 2}.",
+        bridge: "Sets up Explore & Reason: students just identified a rational function (D) and saw an open circle (Line 2 ≠ 2). Now they'll BUILD a graph that combines those — y = x+2 with x = 2 excluded.",
+      },
+
+      { id: "explore", title: "Explore & Reason — y = x+2 with x = 2 excluded",
+        start: "7:55", end: "8:03",
+        fw: "DOK 2 conceptual gateway", dok: "2", min: 8,
         items: [
           {qid: "4-3-savvas-model-discuss-lesson-4-3-launch",
            label: "Savvas Model & Discuss — Explore & Reason",
            note: "Graph of y = x+2 with parts A (domain), B (sketch with x=2 excluded), C (Use Structure: what kind of function might have a graph like this?)."},
         ],
         teacher: [
-          "Hand out student packet at the door. Project Page 1 (Do Now graph).",
-          "Read prompt aloud once.",
-          "Set timer 4 min: silent independent work on Parts A, B, C.",
-          "Set timer 4 min: pair-share with elbow partner.",
+          "Project Page 2.",
+          "Read Parts A, B, C aloud once.",
+          "Set timer 5 min: silent independent work.",
+          "Set timer 2 min: pair-share with elbow partner.",
           "Cold-call 1–2 pairs to share Part C answer.",
-          "Bridge to Apply: 'When the denominator equals zero, the function is undefined — that's a domain restriction. Today we'll see this everywhere.'",
+          "Bridge to Example 6: 'When the denominator equals zero, the function is undefined — domain restriction. Now we'll see SA/V ratios in the next two problems.'",
         ],
         students: [
           "Read prompt silently.",
-          "Work Part A independently (1–2 min).",
-          "Sketch Part B in the blank grid (excluded point at x = 2).",
-          "Discuss Part C with elbow partner using the printed sentence frame.",
-          "Volunteer (or be cold-called) to share thinking.",
+          "Answer Part A (domain of y = x+2).",
+          "Sketch Part B (function with x = 2 excluded).",
+          "Write Part C using the printed sentence frame.",
+          "Volunteer (or be cold-called) to share.",
         ],
         questions: [
-          "How can you engage students in the lesson?",
-          "How can you hook them into rational expressions?",
-          "How are all adults intentionally planned for?",
+          "How are you eliciting prior reasoning before introducing new content?",
+          "How will you handle students who don't yet think of 'rational'?",
         ],
         rules: [
           "A) What is the domain of this function?",
@@ -218,12 +250,45 @@ const PACER = {
           "C) What kind of function might have a graph like this? Explain.",
         ],
         answer: "A: Domain is all real numbers (no restriction on y = x+2). B: Sketch should resemble y = x+2 but with an open circle at (2, 4) — a hole. C: A rational function whose denominator is zero at x = 2, e.g., y = ((x-2)(x+2)) / (x-2) — equivalent to x+2 EXCEPT at x = 2.",
-        bridge: "Anchor for the day's throughline: 'Domain restriction is the soul of a rational expression — it survives even when factors cancel.'",
+        bridge: "Anchors throughline: 'Domain restriction is the soul of a rational expression — it survives even when factors cancel.'",
+      },
+
+      { id: "ex6", title: "Example 6 — Cube vs Cylinder SA/V (guided bridge)",
+        start: "8:03", end: "8:13",
+        fw: "DOK 2 procedural · I do/You do", dok: "2", min: 10,
+        items: [
+          {qid: "(teacher-authored from Savvas Example 6)",
+           label: "NEW Example 6 (guided): cube vs cylinder packaging — both come out to SA/V = 3/x",
+           note: "Source: Savvas TE 4-3 Example 6. Cube side 2x; cylinder radius x, height 2x. Surprise: identical efficiency ratios."},
+        ],
+        teacher: [
+          "Project Page 3.",
+          "We do (4 min): Walk through CUBE side-by-side with students. Show V = (2x)³ = 8x³, SA = 6(2x)² = 24x², SA/V = 24x²/8x³ = 3/x.",
+          "You do (5 min): Students compute CYLINDER on their own. Use V = πr²h, SA = 2πrh + 2πr², r=x, h=2x. Circulate to verify substitution.",
+          "Comparison (1 min): Cold-call. Both should be 3/x — surface the surprise. 'Equal ratios = choose by other criteria (cost, manufacturing).'",
+        ],
+        students: [
+          "Take notes as teacher works the cube.",
+          "Compute V, SA, SA/V for the cylinder independently.",
+          "Compare with the cube ratio.",
+          "Use the sentence frame to articulate the design conclusion.",
+        ],
+        questions: [
+          "What will you explicitly model and how?",
+          "How will you check that students substitute r = x and h = 2x correctly?",
+          "Are students ready for the harder Apply problem after this?",
+        ],
+        rules: [
+          "Formulas: V = πr²h, SA = 2πrh + 2πr²",
+          "Cube side = 2x; Cylinder radius = x, height = 2x",
+        ],
+        answer: "Cube: V = (2x)³ = 8x³, SA = 6(2x)² = 24x², SA/V = 24x²/8x³ = 3/x. Cylinder: V = π(x)²(2x) = 2πx³, SA = 2π(x)(2x) + 2π(x²) = 4πx² + 2πx² = 6πx², SA/V = 6πx²/2πx³ = 3/x. Both ratios = 3/x → identical efficiency. Designer chooses by other criteria (cost, manufacturing, stacking, branding, etc.).",
+        bridge: "Now Apply uses the SAME formulas but two CYLINDERS with different proportions — students extend the technique they just practiced.",
       },
 
       { id: "apply", title: "Apply — #35 Cylinders V/SA · 3-READS (full scaffold)",
-        start: "7:55", end: "8:10",
-        fw: "Make Sense & Persevere · 3-Reads", dok: "2", min: 15,
+        start: "8:13", end: "8:23",
+        fw: "Make Sense & Persevere · 3-Reads", dok: "2", min: 10,
         items: [
           {qid: "4-3-savvas-q35",
            label: "Savvas Practice #35 — Cylinder A (radius 2r, height r) vs Cylinder B (radius r, height 3r). Compare V/SA ratios.",
@@ -265,8 +330,8 @@ const PACER = {
       },
 
       { id: "pt", title: "Performance Task ⭐ — #36 Lupe Carnival · 3-READS (gradual release)",
-        start: "8:10", end: "8:30",
-        fw: "Model with Mathematics · DOK-3 SPINE", dok: "3", min: 20,
+        start: "8:23", end: "8:41",
+        fw: "Model with Mathematics · DOK-3 SPINE", dok: "3", min: 18,
         items: [
           {qid: "4-3-savvas-q36",
            label: "Savvas Practice #36 — Lupe Carnival (probability ratio from geometry)",
@@ -316,8 +381,8 @@ const PACER = {
       },
 
       { id: "share", title: "Share / Summary — Throughline synthesis",
-        start: "8:30", end: "8:40",
-        fw: "synthesis · academic conversation", dok: "2", min: 10,
+        start: "8:41", end: "8:45",
+        fw: "synthesis · academic conversation", dok: "2", min: 4,
         items: [],
         teacher: [
           "Synthesize the day's THROUGHLINE on whiteboard:",
@@ -339,8 +404,8 @@ const PACER = {
       },
 
       { id: "exit", title: "Exit Ticket — #14 Use Appropriate Tools (DOK-2)",
-        start: "8:40", end: "8:50",
-        fw: "summary recap · not graded", dok: "2", min: 10,
+        start: "8:45", end: "8:50",
+        fw: "summary recap · not graded", dok: "2", min: 5,
         items: [
           {qid: "4-3-savvas-q14",
            label: "Savvas Practice #14 — Use Appropriate Tools",
@@ -380,9 +445,10 @@ const THREE_READS_GRADUAL = "<strong>GRADUAL RELEASE (2 min total):</strong><ul>
   "<li><strong>Read 2 (1 min):</strong> Pair share — <em>What information do we need to build the probability?</em></li>" +
   "</ul>";
 
-// Inject 3-Reads into Apply + PT
-PACER.p1obs.phases[1].threereads = THREE_READS_FULL;
-PACER.p1obs.phases[2].threereads = THREE_READS_GRADUAL;
+// Inject 3-Reads into Apply (index 3) + PT (index 4)
+// Phase order: 0=donow, 1=explore, 2=ex6, 3=apply, 4=pt, 5=share, 6=exit
+PACER.p1obs.phases[3].threereads = THREE_READS_FULL;
+PACER.p1obs.phases[4].threereads = THREE_READS_GRADUAL;
 
 // ── Renderer ───────────────────────────────────────────────────────────────
 const panels = document.getElementById("panels");

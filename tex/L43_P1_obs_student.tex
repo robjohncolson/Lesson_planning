@@ -2,15 +2,15 @@
 % Algebra 2  Lesson 4-3, Period 1 (Observation Day)
 % Visual + structural reference: L35_P3_obs_student.docx (repo root)
 %
-% Structure (mirrors the DOCX exactly):
-%   1. Title (centered, bold)
-%   2. 3-row Objectives table (Math / Language / Essential Question)
-%   3. Do Now              -- "Explore & Reason" (DOK-2 conceptual gateway)
+% Structure -- restructured 2026-05-14 per Bonnevie meeting:
+%   1. Title + objectives table + Do Now (function-family match + open/closed-circle review)
+%   2. Explore & Reason   -- y=x+2 with x=2 excluded (DOK-2 conceptual gateway)
+%   3. Example 6 (guided) -- cube vs cylinder SA/V (T does cube, S do cylinder)
 %   4. Apply -- Make Sense and Persevere  -- #35 cylinders V/SA (DOK-2)
-%   5. Performance Task    -- #36 Lupe carnival probability (DOK-2->3 model)
-%   6. Name ___ line + Exit Ticket  -- #13 closure question + 2 reflection prompts
+%   5. Performance Task   -- #36 Lupe carnival probability (DOK-3 SPINE)
+%   6. Name + Exit Ticket -- #14 Use Appropriate Tools (DOK-2 reflective)
 %
-% Throughline (the spine the four problems collectively express):
+% Throughline:
 %   "Domain restriction is the soul of a rational expression --
 %    it survives even when factors cancel."
 
@@ -72,10 +72,108 @@
 \vspace{1em}
 
 % =====================================================================
-% DO NOW -- Explore & Reason  (10 min)
-% Replaces the L35_P3_obs DOCX "Do Now" graph-match item.
+% DO NOW (10 min) -- function-family match + open/closed circle review
+% NEW per Bonnevie meeting: a real warm-up before Explore & Reason
+% Part 1 = recognize 4 function families from graphs
+% Part 2 = compare closed vs open circle on number lines (domain notation)
 % =====================================================================
 \textbf{Do Now}
+
+\vspace{0.2em}
+\textbf{Part 1.}\; Match each graph (A, B, C, D) to its function family.
+
+\begin{center}
+\begin{tabular}{cc}
+% (A) Quadratic
+\begin{tikzpicture}[scale=0.36]
+  \draw[gray!30, very thin] (-4,-3) grid (4,3);
+  \draw[->, thick] (-4.3,0) -- (4.3,0) node[right] {\scriptsize $x$};
+  \draw[->, thick] (0,-3.3) -- (0,3.3) node[above] {\scriptsize $y$};
+  \draw[red, thick, smooth, samples=60, domain=-2.4:2.4] plot (\x, {0.55*\x*\x - 1.5});
+  \node at (0,-4) {\textbf{(A)}};
+\end{tikzpicture}
+&
+% (B) Exponential
+\begin{tikzpicture}[scale=0.36]
+  \draw[gray!30, very thin] (-4,-3) grid (4,3);
+  \draw[->, thick] (-4.3,0) -- (4.3,0) node[right] {\scriptsize $x$};
+  \draw[->, thick] (0,-3.3) -- (0,3.3) node[above] {\scriptsize $y$};
+  \draw[red, thick, smooth, samples=80, domain=-3.5:1.7] plot (\x, {0.5 * pow(2,\x)});
+  \node at (0,-4) {\textbf{(B)}};
+\end{tikzpicture}
+\\[1.2em]
+% (C) Linear
+\begin{tikzpicture}[scale=0.36]
+  \draw[gray!30, very thin] (-4,-3) grid (4,3);
+  \draw[->, thick] (-4.3,0) -- (4.3,0) node[right] {\scriptsize $x$};
+  \draw[->, thick] (0,-3.3) -- (0,3.3) node[above] {\scriptsize $y$};
+  \draw[red, thick, ->] (-3.2,-2.7) -- (3.2,2.7);
+  \node at (0,-4) {\textbf{(C)}};
+\end{tikzpicture}
+&
+% (D) Rational  y = 1/(x-1)
+\begin{tikzpicture}[scale=0.36]
+  \draw[gray!30, very thin] (-4,-3) grid (4,3);
+  \draw[->, thick] (-4.3,0) -- (4.3,0) node[right] {\scriptsize $x$};
+  \draw[->, thick] (0,-3.3) -- (0,3.3) node[above] {\scriptsize $y$};
+  \draw[gray!50, dashed] (1,-3) -- (1,3);
+  \draw[red, thick, smooth, samples=60, domain=-3:0.6] plot (\x, {1/(\x-1)});
+  \draw[red, thick, smooth, samples=60, domain=1.4:3.5] plot (\x, {1/(\x-1)});
+  \node at (0,-4) {\textbf{(D)}};
+\end{tikzpicture}
+\end{tabular}
+\end{center}
+
+\vspace{0.2em}
+\textit{Word bank:} \quad linear \quad $\bullet$ \quad quadratic \quad $\bullet$ \quad exponential \quad $\bullet$ \quad rational
+
+\vspace{0.3em}
+(A) is \framedline{1.6in} \hfill (B) is \framedline{1.6in}\\[6pt]
+(C) is \framedline{1.6in} \hfill (D) is \framedline{1.6in}
+
+\vspace{0.6em}
+\textbf{Part 2.}\; Two number lines. What's different about them?
+
+\begin{center}
+\begin{tikzpicture}[scale=0.55]
+  % Line 1: x >= -3 (closed circle), arrow right
+  \draw[->, thick] (-6,2) -- (6.2,2);
+  \foreach \x in {-5,-4,-3,-2,-1,0,1,2,3,4,5} \draw (\x,1.85) -- (\x,2.15);
+  \foreach \x in {-5,-3,-1,1,3,5} \node[below=2pt, font=\scriptsize] at (\x,1.85) {$\x$};
+  \fill[red] (-3,2) circle (5pt);
+  \draw[red, very thick, ->] (-3,2) -- (6.2,2);
+  \node[left, font=\small] at (-6,2) {\textbf{Line 1:}};
+
+  % Line 2: x != 2 (open circle), arrows both directions
+  \draw[->, thick] (-6,0) -- (6.2,0);
+  \foreach \x in {-5,-4,-3,-2,-1,0,1,2,3,4,5} \draw (\x,-0.15) -- (\x,0.15);
+  \foreach \x in {-5,-3,-1,1,3,5} \node[below=2pt, font=\scriptsize] at (\x,-0.15) {$\x$};
+  \draw[red, very thick, ->] (1.85,0) -- (-6.2,0);
+  \draw[red, very thick, ->] (2.15,0) -- (6.2,0);
+  \draw[white, fill=white] (2,0) circle (5pt);
+  \draw[red, very thick] (2,0) circle (5pt);
+  \node[left, font=\small] at (-6,0) {\textbf{Line 2:}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{What does the closed (filled-in) circle on Line 1 mean?} \\
+\writeline
+
+\vspace{0.2em}
+\textbf{What does the open (hollow) circle on Line 2 mean?} \\
+\writeline
+
+\vspace{0.2em}
+\textbf{Write each as a domain expression}: \quad
+Line 1: \framedline{2in} \qquad Line 2: \framedline{2in}
+
+\newpage
+
+% =====================================================================
+% EXPLORE & REASON (10 min) -- WAS the Do Now in the prior version.
+% Source: Savvas Model & Discuss item.
+% =====================================================================
+\textbf{Explore \& Reason}
 
 \vspace{0.3em}
 Consider the following graph of the function $y = x + 2$.
@@ -113,6 +211,76 @@ Consider the following graph of the function $y = x + 2$.
 \vspace{0.3em}
 \textbf{C.}\; \textbf{Use Structure.}\; What \emph{kind of function} might have a graph like the one you sketched in part B? Explain. \\
 {\small\itshape Frame: ``The graph could come from a function whose denominator is \frameblank, because that makes $x = $ \frameblank\ excluded.''}\\
+\writeline
+
+\newpage
+
+% =====================================================================
+% EXAMPLE 6 (guided) -- cube vs cylinder packaging  (~10 min)
+% Bridge before Apply: T works the cube, students do the cylinder.
+% Source: Savvas TE 4-3 Example 6 (a2_4-3_TE.tex:545-625).
+% =====================================================================
+\textbf{Example 6 -- Cube vs Cylinder (guided)}
+
+\vspace{0.2em}
+A company is comparing two package designs. The more efficient design has the \textbf{smaller} ratio of surface area to volume ($SA/V$).
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+  % Cube (Option 1) -- side 2x
+  \draw (0,0) rectangle (1.6,1.6);
+  \draw (0,1.6)--(0.4,2.0);
+  \draw (1.6,1.6)--(2.0,2.0);
+  \draw (1.6,0)--(2.0,0.4);
+  \draw (0.4,2.0)--(2.0,2.0);
+  \draw (2.0,2.0)--(2.0,0.4);
+  \draw[dashed] (0,0)--(0.4,0.4);
+  \draw[dashed] (0.4,0.4)--(2.0,0.4);
+  \draw[dashed] (0.4,0.4)--(0.4,2.0);
+  \node at (0.8,-0.3) {\small $2x$};
+  \node at (2.3,1.0) {\small $2x$};
+  \node[font=\bfseries] at (0.8,-1.0) {Option 1: Cube};
+
+  % Cylinder (Option 2) -- radius x, height 2x  --  shifted further right
+  \begin{scope}[shift={(7,0)}]
+    \draw (-0.8,0)--(-0.8,1.8);
+    \draw (0.8,0)--(0.8,1.8);
+    \draw (0,1.8) ellipse (0.8 and 0.25);
+    \draw (-0.8,0) arc (180:360:0.8 and 0.25);
+    \draw[dashed] (-0.8,0) arc (180:0:0.8 and 0.25);
+    \draw[<->] (0,1.8) -- (0.8,1.8); \node[above] at (0.4,1.8) {\small $x$};
+    \draw[<->] (1.1,0) -- (1.1,1.8); \node[right] at (1.1,0.9) {\small $2x$};
+    \node[font=\bfseries] at (0,-1.0) {Option 2: Cylinder};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.6em}
+{\small\itshape We will work the \textbf{cube} together. Then you will compute the \textbf{cylinder} on your own.}
+
+\vspace{0.4em}
+\noindent\textbf{Option 1 -- Cube} \quad (we do)\par\smallskip
+$V = (2x)^3 = 8x^3$ \qquad $SA = 6(2x)^2 = 24x^2$
+\[
+\frac{SA}{V} \;=\; \frac{24x^2}{8x^3} \;=\; \frac{3}{x}
+\]
+
+\vspace{0.6em}
+\noindent\textbf{Option 2 -- Cylinder} \quad (your turn)\par\smallskip
+Use $V = \pi r^2 h$ and $SA = 2\pi r h + 2\pi r^2$, with $r = x$ and $h = 2x$.
+
+\vspace{0.3em}
+$V = $ \framedline{4in}
+
+\vspace{0.3em}
+$SA = $ \framedline{4in}
+
+\vspace{0.3em}
+$\dfrac{SA}{V} = $ \framedline{4in}
+
+\vspace{0.6em}
+\textbf{Comparison.}\; Both ratios should come out to \framedline{1in}. What does that tell you about the design choice?\\
+{\small\itshape Frame: ``The ratios are \frameblank, so the company should choose based on \frameblank\ (cost, manufacturing, etc.)''}\\
 \writeline
 
 \newpage
