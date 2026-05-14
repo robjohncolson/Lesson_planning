@@ -20,10 +20,22 @@
   header {
     background: var(--navy); color: #fff; padding: 12px 24px;
     display:flex; justify-content: space-between; align-items: center;
+    gap: 16px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
   header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; }
   header .meta { font-size: 0.85rem; color: #bbd0e6; }
+  .qr-block {
+    display: flex; align-items: center; gap: 10px;
+    background: #fff; padding: 6px 10px; border-radius: 6px;
+    color: var(--navy);
+  }
+  .qr-block img { display: block; width: 64px; height: 64px; }
+  .qr-block .qr-label {
+    font-size: 0.7rem; line-height: 1.25; max-width: 130px;
+  }
+  .qr-block .qr-label strong { display: block; font-size: 0.78rem; }
+  .qr-block .qr-label a { color: var(--blue); text-decoration: none; word-break: break-all; }
   .tabs {
     display:flex; gap: 4px; background:#fff; padding: 6px 24px;
     border-bottom: 1px solid #ccc;
@@ -115,9 +127,10 @@
     margin-bottom: 12px; font-size: 0.92rem; border-left: 4px solid var(--gold);
   }
   @media (max-width: 768px) {
-    header { padding: 10px 14px; flex-wrap: wrap; gap: 4px; }
+    header { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
     header h1 { font-size: 1.05rem; }
     header .meta { font-size: 0.72rem; }
+    .qr-block { display: none; }   /* hide on phones — you ARE the phone */
     .tabs { padding: 4px 8px; flex-wrap: wrap; gap: 2px; }
     .tab { padding: 8px 10px; font-size: 0.78rem; flex: 1 1 auto; min-width: 0; border-radius: 6px; }
     .panel { padding: 10px 12px; }
@@ -146,6 +159,14 @@
   <div>
     <h1>Lesson 4-3 Pacer</h1>
     <div class="meta">P1 OBSERVATION · Fri 2026-05-15 · Multiply &amp; Divide Rational Expressions · Single DOK-3 spine (#36-partC)</div>
+  </div>
+  <div class="qr-block" title="Scan to open this pacer on your phone">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Flessonplanning-lyart.vercel.app%2Fpacers%2FL43_Pacer&size=160x160&margin=2"
+         alt="QR code linking to this pacer">
+    <div class="qr-label">
+      <strong>Scan to open</strong>
+      <a href="https://lessonplanning-lyart.vercel.app/pacers/L43_Pacer">lessonplanning-lyart.vercel.app/pacers/L43_Pacer</a>
+    </div>
   </div>
   <div class="meta" id="dateLabel"></div>
 </header>
