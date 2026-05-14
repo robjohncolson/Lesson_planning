@@ -82,17 +82,20 @@ The DOCX `L35_P3_obs_student.docx` at repo root is the canonical **visual** refe
 
 ### Pre-requisites for authoring a new lesson (L{XX} where XX is the next topic)
 
-You **must** have the Savvas SE/TE LaTeX files for that topic. They live on the school machine at `C:\Users\ColsonR\Lesson_planning\`:
-- `a2_X-Y_SE.tex` (Student Edition — problem statements, page-level structure)
-- `a2_X-Y_TE.tex` (Teacher Edition — DOK labels, teaching notes, ground-truth answers)
+You **must** have the Savvas SE/TE LaTeX files for that topic. They live at the repo root as `a2_X-Y_SE.tex` (Student Edition — problem statements, page-level structure) and `a2_X-Y_TE.tex` (Teacher Edition — DOK labels, teaching notes, ground-truth answers).
 
-Copy both to the home machine repo root before authoring (e.g., `a2_4-3_SE.tex` + `a2_4-3_TE.tex` are already in the repo as the 4-3 reference). Commit them — Codex steelman + future LLMs need to read them during review. They're the **ground truth** for "is this prompt actually in the Savvas bank?" (the Savvas-only hard rule).
+**Already committed (9 pairs, verified 2026-05-14):** `4-3, 4-4, 4-5, 5-1, 5-4, 5-5, 6-3, 6-4, 6-5`. Confirm with:
+```bash
+git ls-files 'a2_*_SE.tex' 'a2_*_TE.tex'
+```
 
-If only the PDF exists: convert via `pandoc` or `pdf2tex`, or upload to one of the LaTeX-conversion tools the user has access to (web-claude / ChatGPT / aistudio). The TE conversion is the high-value one — it carries DOK labels per item.
+**Missing (would need export from Savvas + add to repo):** `5-2, 5-3, 6-1, 6-2`. These are likely department-skipped same as 4-1/4-2. If a future lesson needs them, convert PDF → LaTeX via web-claude / ChatGPT / aistudio (the **TE** conversion is the high-value one — it carries DOK labels per item) and commit at repo root. The school machine at `C:\Users\ColsonR\` is the typical staging point if you have access.
+
+These files are the **ground truth** for the Savvas-only hard rule: "is this prompt actually in the Savvas bank?" Codex steelman reads them directly during review.
 
 ### Authoring workflow (the loop)
 
-1. **Acquire SE/TE tex** — copy from school machine to repo root, commit.
+1. **Verify SE/TE tex is in repo** — `git ls-files 'a2_X-Y_*.tex'`. For 4-3 through 6-5 (minus 4-1/4-2/5-2/5-3/6-1/6-2 which are dept-skipped) it already is. If missing, see Pre-requisites above.
 2. **Pick problems from TE** for the 4 slots:
    - Do Now: Savvas Model & Discuss / "Explore and Reason" (DOK-2 conceptual gateway). May be the launch prompt for the Savvas lesson.
    - Apply: a Savvas Practice item tagged Make Sense and Persevere (DOK-2 multi-step), often anchors a numbered Example.
