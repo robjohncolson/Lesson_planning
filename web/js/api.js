@@ -122,6 +122,27 @@ export const api = {
     }
   },
 
+  // Return the set of item_ids that are actively used in any lesson phase.
+  // Fetches all non-null item_ids from lesson_phases (paginated, though the
+  // count is small relative to the 1000-row page cap). Returns a Set<string>.
+  async listActiveItemIds() {
+    let out = [];
+    let from = 0;
+    const pageSize = 1000;
+    while (true) {
+      const { data, error } = await supabase
+        .from("lesson_phases")
+        .select("item_id")
+        .not("item_id", "is", null)
+        .range(from, from + pageSize - 1);
+      if (error) raise("listActiveItemIds", error);
+      out = out.concat(data);
+      if (data.length < pageSize) break;
+      from += pageSize;
+    }
+    return new Set(out.map(r => r.item_id));
+  },
+
   // Per-period phase mapping — see supabase/migrations/005_lesson_phases.sql.
   // Ordered by phase then position. Returns [] if no phases seeded for this
   // lesson_id — caller should fall back to flat item list.

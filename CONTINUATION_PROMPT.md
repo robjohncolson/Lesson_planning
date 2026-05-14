@@ -20,7 +20,7 @@ Before you ask "what's going on in this repo?", check these sources:
 
 ## Where we are
 
-LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline proven on L41_P2 and APStats. Every shipped Algebra 2 lesson has matching student/teacher packets, a beamer projection deck, and a pacer HTML.
+LaTeX is canonical for student-facing output; the YAML → tex → PDF pipeline is proven (originally on L41_P2 and APStats — both now retired). **As of 2026-05-13 the department skipped L41 (Klimsara confirmed); cadence jumps directly to L43.** L41_P1/P2/P3 tex moved to `legacy/tex/`; APStats_6-4 fully retired (lessons/yaml, 6 registry+Supabase items, tagging/4-1_*.jsonl deleted); L41 and `APStats_6-4_P1` lesson rows deleted from Supabase, with L41 schedule rows having `lesson_id` nulled to preserve calendar dates. L43_P1_obs is the first shipped L43 artifact (see Open tasks).
 
 **The collaborative web app ships and runs (as of 2026-04-23):**
 
@@ -48,15 +48,27 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 | Supabase schema + seed | `supabase/schema.sql`, `supabase/seed.py`, `supabase/migrations/*.sql` |
 | One-off PDF bulk upload | `supabase/upload_pdfs.py` |
 | Parallel dispatch (legacy) | `dispatch/parallel-batch.manifest.json` + `dispatch/prompts/latex-scale/` |
+| Codex steelman review (OBS packets) | `cross-agent.py --task-type review --read-only --timeout 600`; most recent result: `state/cross-agent/32b207239f9d.result.json` |
 
-## Open tasks (as of 2026-04-30)
+**Ingest-as-derived registry pattern (new as of 2026-05-13):** When scaffolding a Savvas item into sub-prompts (build → simplify → interpret), ingest each sub-prompt as a separate registry item with `-partA`/`-partB`/`-partC` suffix. DOK reflects the cognitive demand of the sub-step. `notes` field MUST cite the parent ID + source of scaffolding. Prereq edges link `parent → partA → partB → partC`. Example: `4-3-savvas-q36` → `q36-partA-build` (DOK-1), `q36-partB-simplify-domain` (DOK-2), `q36-partC-evaluate-fairness` (DOK-3 spine). This satisfies the Savvas-only hard rule while preserving OBS-day scaffolding visibility.
 
-**Current pacing (re-baselined 2026-04-30, see `supabase/seed_schedule.py`):**
-- Still on **L35_P2** as of 4/30 (behind original plan). P2 stretches through Thu 5/7.
-- **Fri 5/8 F = TEACHER OBSERVATION** = `L35_P3_obs` (canonical P3, gradual-release Launch + DOK-3 Mystery Graph). The obs files were originally misnamed `L35_P2_obs_*` — renamed in commit `7573061`.
-- Week of 5/11 (Mon-Wed): L35_P3 continuation (Storage Box DOK-3 follow-up, uses existing non-obs `L35_P3_*` tex).
-- **Thu 5/14 = Topic 3 Assessment** for both periods (compressed onto one day, was 5/15 F + 5/18 A).
-- **L41 (full 3-period) starts F 5/15 / A 5/18**, runs through ~5/27.
+## Open tasks (as of 2026-05-13)
+
+**Current pacing (re-baselined 2026-05-13):**
+- **Thu 5/14 = Topic 3 Assessment** for both periods (compressed onto one day).
+- **Fri 5/15 F = TEACHER OBSERVATION** = `L43_P1_obs` (single-period 65 min; Lupe carnival DOK-3 spine). Supabase lesson row + 9 lesson_phases live.
+- **L43 (Rational Functions — Simplifying)** starts F 5/15 / A 5/18; L43_P2 and L43_P3 packets TBD.
+- L41 is fully skipped. APStats_6-4 fully retired. No more L41 or APStats_6-4 rows in Supabase.
+
+**Completed 2026-05-13 (L41 retirement + L43_P1_obs shipped + new registry pattern):**
+- ✅ **L41 retired**: L41_P1/P2/P3 tex → `legacy/tex/`; APStats_6-4 yaml + 6 registry items removed; `tagging/4-1_*.jsonl` deleted; L41 + APStats_6-4_P1 Supabase lesson rows deleted; schedule lesson_id nulled.
+- ✅ **L43_P1_obs student packet** (`tex/L43_P1_obs_student.tex/.pdf`): 4 pages, white-space-as-writing-room (no ruled lines), mirrors `L35_P3_obs_student.docx` visual structure.
+- ✅ **L43_P1_obs teacher packet** (`tex/L43_P1_obs_teacher.tex/.pdf`): 3 pages landscape, admin's 3-column lesson plan format, encodes 3-Reads routine + group A/B/C cadence + iPad circulation pattern.
+- ✅ **L43_Pacer.html** (`web/pacers/L43_Pacer.html`): single-period OBS pacer, countdown timer, 3-Reads callouts (full scaffold on Apply, gradual release on PT), inline answer keys, QR code in header pointing at pacer URL.
+- ✅ **L35_P3_obs tex deprecated** to `legacy/` — `L35_P3_obs_student.docx` at repo root is the canonical visual reference for that lesson.
+- ✅ **Supabase L43_P1 row** updated: tex_student/tex_teacher fields live, 9 lesson_phases (do_now / launch×2 / explore×4 / share_summary / exit), PDFs rebuilt via Railway, `has_slides_pdf=false`.
+- ✅ **Ingest-as-derived pattern applied**: `4-3-savvas-q36` → `q36-partA-build` / `q36-partB-simplify-domain` / `q36-partC-evaluate-fairness`; `4-3-savvas-q35-partc-design` also ingested. See toolchain pointer above for pattern spec.
+- ✅ **Codex steelman review** dispatched before committing L43_P1_obs — flagged 2 ship-blockers + 4 soft risks, all addressed. Result: `state/cross-agent/32b207239f9d.result.json`.
 
 **Completed 2026-05-01 (asset upload pipeline — textbook PDFs / DOCX / per-item screenshots):**
 - ✅ **Three new Supabase Storage buckets** (auto-created on Railway startup, idempotent): `topic-pdfs` (Savvas SE/TE chapter PDFs as `a2_<topic>_<SE|TE>.pdf`), `lesson-docx` (`<lesson_id>_<student|teacher>.docx` + `<lesson_id>_slides.pptx`), `item-screenshots` (`<item_id>.<png|jpg>` for textbook source images of registry items).
@@ -162,14 +174,18 @@ LaTeX is canonical for student-facing output. YAML → tex → PDF pipeline prov
 24. **GitHub raw PDFs force-download** (Content-Disposition: attachment); jsdelivr CDN serves them inline. `pdfUrl` used to fall back to jsdelivr; now all three kinds come from Supabase Storage which also serves inline.
 24a. **Supabase Storage `GET /bucket/{name}` returns HTTP 400 with body `{"statusCode":"404","error":"Bucket not found"}` for missing buckets** — not an HTTP 404 as expected. Bucket-check helpers must inspect both the status code AND the response body for "Bucket not found" / `"404"` substring before deciding to error. Patched `supabase/upload_topic_pdfs.py` and `supabase/upload_docx.py` 2026-05-01.
 
-25. **CodeMirror 6 via CDN double-loads `@codemirror/state`** on both jsdelivr `+esm` and esm.sh without an import-map — breaks `instanceof` checks silently. Local console uses a bundled build. Web app uses plain `<textarea>` (no CM on the hosted path).
-26. **Template literal → string-concat regressions** — sonnet agents rewriting JS sometimes convert template literals `` ` `` to `'...' + var + '...'`. Detect with `grep "panel.innerHTML = \`"`.
-27. **Emoji → HTML-entity drift** — sonnet sometimes replaces `⭐` with `&#11088;` in copied JS. Detect with `grep "&#11088;\|&#127908;"`.
+25. **Bash heredoc + Python `'\\newline'` mangling**: When running `python <<'PY' ... PY` from bash, `\\\\` escapes can mangle to literal `\n` bytes. Symptom: rendered file contains literal "ewline" with no leading backslash. Fix: write Python to a real `.py` file (e.g., `.scratch/`) when literal backslash chars are involved.
+25a. **`xltabular`/`tabularx` in-cell line breaks**: use `\newline` not `\\` for line breaks INSIDE a cell. `\\` is the row terminator and leaks cell content into the next column. Symptom: cell content appears in the wrong column.
+25b. **Railway `/build/{lesson_id}` compiles ALL `tex_*` fields**, not just student/teacher. If `tex_do_now` or `tex_slides` holds stale content with unescaped `&` (e.g., "EXPLORE & REASON"), the build fails with "Misplaced alignment tab character &" and produces no PDF. Fix: when retiring or re-purposing a lessons row, null ALL `tex_*` columns explicitly, not just the ones being updated.
+
+26. **CodeMirror 6 via CDN double-loads `@codemirror/state`** on both jsdelivr `+esm` and esm.sh without an import-map — breaks `instanceof` checks silently. Local console uses a bundled build. Web app uses plain `<textarea>` (no CM on the hosted path).
+27. **Template literal → string-concat regressions** — sonnet agents rewriting JS sometimes convert template literals `` ` `` to `'...' + var + '...'`. Detect with `grep "panel.innerHTML = \`"`.
+28. **Emoji → HTML-entity drift** — sonnet sometimes replaces `⭐` with `&#11088;` in copied JS. Detect with `grep "&#11088;\|&#127908;"`.
 
 ### Deploy sequencing
 
-28. **Vercel GitHub integration expects `web/` as the project root.** If a previous session used `vercel --prod` from the repo root, the project was probably configured with root=`.` and a manual `vercel.json` — confirm Project Settings → General → Root Directory = `web/` before relying on push-to-deploy, or builds will fail / serve the wrong directory.
-29. **When the web app breaks with "Failed to fetch" on save/rebuild**, the most common causes in order: (a) Railway env var missing or has embedded `\n`, (b) Railway container failing to start (check deploy logs, not just /health), (c) CORS preflight OK but POST rejected server-side — needs the full Python traceback from `railway logs`. The CLI needs a project-scoped token (set via `RAILWAY_TOKEN` env) — see `state/cross-agent/*.request.json` for example commands.
+29. **Vercel GitHub integration expects `web/` as the project root.** If a previous session used `vercel --prod` from the repo root, the project was probably configured with root=`.` and a manual `vercel.json` — confirm Project Settings → General → Root Directory = `web/` before relying on push-to-deploy, or builds will fail / serve the wrong directory.
+30. **When the web app breaks with "Failed to fetch" on save/rebuild**, the most common causes in order: (a) Railway env var missing or has embedded `\n`, (b) Railway container failing to start (check deploy logs, not just /health), (c) CORS preflight OK but POST rejected server-side — needs the full Python traceback from `railway logs`. The CLI needs a project-scoped token (set via `RAILWAY_TOKEN` env) — see `state/cross-agent/*.request.json` for example commands.
 
 ## Session-gotchas worth reading once
 

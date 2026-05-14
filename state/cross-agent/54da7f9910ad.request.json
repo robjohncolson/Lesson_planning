@@ -1,0 +1,29 @@
+{
+  "envelope": {
+    "protocol": "cross-agent/v1",
+    "direction": "cc-to-codex",
+    "caller": "claude-code",
+    "call_id": "54da7f9910ad",
+    "depth": 0,
+    "max_depth": 1,
+    "timeout_seconds": 600,
+    "working_dir": "C:/Users/rober/Downloads/Projects/Lesson_planning",
+    "context": {
+      "parent_task": "",
+      "why_delegating": "",
+      "files_relevant": []
+    }
+  },
+  "payload": {
+    "task_type": "review",
+    "prompt": "You are reviewing a multi-track cleanup that just shipped to the Lesson_planning project (high school Algebra 2 lesson materials, prepping a Friday 2026-05-15 observation lesson). Three sonnet sub-agents executed three independent tracks in parallel; you are validating their work against the original acceptance criteria.\n\nREPO: C:\\Users\\rober\\Downloads\\Projects\\Lesson_planning  (read-only review)\n\nTHE THREE TRACKS\n\nTRACK A \u2014 Supabase data cleanup (already executed; verify by reading agent's output, NOT re-running).\nAcceptance criteria:\n- a) NO APStats* rows in lessons table\n- b) lessons.id=\"L35_P3_obs\" title contains a real \u2605 (U+2605), no mojibake `\ufffd`\n- c) L35_P2, L35_P3, L43_P2, L43_P3 all have non-null titles\n- d) L43_P2 + L43_P3 have has_tex_student=false, has_pdf_student=false, has_pdf_teacher=false\n\nYou can read this file for the agent's verification table:\n- Just trust the agent's reported verification or, if you have shell access, query Supabase yourself using the .env file. Either approach is fine; don't burn time re-verifying if the table reads clean.\n\nTRACK B \u2014 DAG dim-unused-items\nFiles modified:\n- web/js/dag.js\n- web/js/api.js\n- web/dag.html\n\nAcceptance criteria:\n1. listActiveItemIds() exists on api.js and queries lesson_phases for non-null item_ids, paginates correctly, returns Set<string>.\n2. Active items render with their ROLE_COLORS appearance + opacity 1.0; inactive items render with light gray (#dadce0) + opacity 0.25.\n3. Edges between two active items: full opacity. Edges touching any inactive: opacity 0.15.\n4. UI toggle exists with two states (\"All items\" / \"Used in lessons only\"). Choice persists in localStorage under key `dag-filter-mode`.\n5. \"Used only\" mode HIDES all inactive nodes AND all edges touching them.\n6. Status caption shows item counts (e.g., \"Showing 1000 items (112 used in lessons)\") and updates on toggle.\n7. Existing functionality preserved: lesson focus dropdown, search, role-color legend, detail panel for nodes (including inactive ones in default mode).\n8. No JS errors apparent from reading the file (look for syntax issues, undefined variables, missing imports).\n\nTRACK C \u2014 CONTINUATION_PROMPT.md update\nFile modified: CONTINUATION_PROMPT.md\nAcceptance criteria:\n1. \"Where we are\" section reflects the L41\u2192L43 pivot (one paragraph).\n2. \"Active toolchain pointers\" includes the derived-items pattern with a concrete example (q36-partA/B/C).\n3. \"Open tasks\" section: L43_P1 OBS marked SHIPPED (under Completed); L43_P2/P3 still TBD; APStats fully retired.\n4. 3 new failure modes added to \"Durable failure modes\" (bash heredoc \\\\newline mangling, xltabular `\\\\` vs `\\newline`, Railway compiles ALL tex_* fields). Numbered to continue the existing sequence.\n5. Brief note about Codex steelman review pattern (one bullet, points at state/cross-agent/32b207239f9d.result.json).\n6. EXISTING failure modes preserved (don't accidentally drop any).\n7. EXISTING section structure preserved (markdown tables, list style, headers).\n8. The doc is still CONCISE \u2014 not narrative, not a session diary.\n\nTRACK D \u2014 .gitignore (already executed; verify by reading file)\nAcceptance: `.scratch/` + `.raw/` + `tex/*.nav` + `tex/*.snm` are present in .gitignore.\n\nYOUR DELIVERABLES\n\nProduce a JSON-style report with these sections:\n\nA. PER-TRACK VERDICT\nFor each of A/B/C/D: PASS / PASS-WITH-NOTES / FAIL with one-paragraph rationale.\n\nB. ISSUES FOUND\nList specific issues with file:line citations. Each issue must include:\n- Severity: BLOCKER / WARN / NIT\n- File and line(s)\n- What's wrong\n- Concrete fix (specific text or code change)\n\nLook especially for:\n- DAG: edge-color object handling correctness in neighborsByNode (Track B agent claimed they added a fix \u2014 verify it works for both string and object color forms)\n- DAG: ordering \u2014 does activeIds get populated BEFORE DataSet construction in dag.js init()?\n- DAG: applyFocus interaction with the new dim system \u2014 when a user focuses a lesson, does focus override dim correctly?\n- CONTINUATION_PROMPT: did any existing failure mode (numbered 25-29 in the original) get dropped instead of renumbered?\n- Supabase: agent reported no APStats lesson_phases pre-existing but found 6 (matched expectation); is that consistent with the prior chat history?\n\nC. CROSS-TRACK CONSISTENCY\nAre there any mismatches between tracks? E.g., does CONTINUATION_PROMPT.md reference something the DAG track's actual implementation doesn't deliver? Do the failure-mode numbers in CONTINUATION align with the existing sequence?\n\nD. VERDICT\nOne of:\n- \"Ship as-is\"\n- \"Ship after fixing X, Y, Z\" (list specific BLOCKER/WARN issues that must be addressed)\n- \"Hold \u2014 fundamental problem with W\"\n\nBe terse, specific, and cite file:line. Do not edit any files \u2014 this is read-only review.",
+    "constraints": {
+      "owned_paths": [],
+      "read_only": true,
+      "no_git_commits": true,
+      "max_files_changed": 10
+    },
+    "expected_output": "analysis"
+  },
+  "created_at": "2026-05-14T05:08:03Z"
+}

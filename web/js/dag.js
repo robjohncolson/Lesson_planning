@@ -82,6 +82,36 @@ function buildTitle(item) {
 const CACHE_KEY = "dag_cache_v1";
 const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;  // full-resync floor
 
+// Active-IDs cache: lesson_phases item_ids (changes less often than items).
+// TTL matches main cache; we always refresh in background on cache-hit path.
+const ACTIVE_IDS_CACHE_KEY = "dag_active_ids_v1";
+const ACTIVE_IDS_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+function loadActiveIdsCache() {
+  try {
+    const raw = localStorage.getItem(ACTIVE_IDS_CACHE_KEY);
+    if (!raw) return null;
+    const obj = JSON.parse(raw);
+    if (!Array.isArray(obj.ids) || !obj.fetched_at) return null;
+    if (Date.now() - new Date(obj.fetched_at).getTime() > ACTIVE_IDS_TTL_MS) return null;
+    return new Set(obj.ids);
+  } catch { return null; }
+}
+
+function saveActiveIdsCache(idSet) {
+  try {
+    localStorage.setItem(ACTIVE_IDS_CACHE_KEY, JSON.stringify({
+      ids: [...idSet],
+      fetched_at: new Date().toISOString(),
+    }));
+  } catch (e) {
+    console.warn("dag active-ids cache save failed:", e.message);
+  }
+}
+
+// Filter mode: "all" (default, active emphasized) | "used" (inactive hidden).
+const FILTER_MODE_KEY = "dag-filter-mode";
+
 function loadCache() {
   try {
     const raw = localStorage.getItem(CACHE_KEY);
@@ -133,18 +163,31 @@ function showReloadBanner(nItems, edgeChanged) {
   document.body.appendChild(b);
 }
 
+function activeIdSetsEqual(a, b) {
+  if (!(a instanceof Set) || !(b instanceof Set)) return false;
+  if (a.size !== b.size) return false;
+  for (const id of a) if (!b.has(id)) return false;
+  return true;
+}
+
 async function refreshInBackground(cache) {
   try {
-    const [newItems, freshEdges] = await Promise.all([
+    const [newItems, freshEdges, freshActiveIds] = await Promise.all([
       api.listItemsUpdatedSince(cache.max_updated_at),
       api.listAllEdges(),
+      api.listActiveItemIds(),
     ]);
     const edgeChanged = !edgeSetsEqual(freshEdges, cache.edges);
-    if (newItems.length === 0 && !edgeChanged) return;
+    // Compare against the cached active-id set BEFORE persisting the fresh one,
+    // so we know whether to surface a reload banner for active-id-only changes.
+    const cachedActiveIds = loadActiveIdsCache() ?? new Set();
+    const activeChanged = !activeIdSetsEqual(freshActiveIds, cachedActiveIds);
+    saveActiveIdsCache(freshActiveIds);
+    if (newItems.length === 0 && !edgeChanged && !activeChanged) return;
     const byId = new Map(cache.items.map(it => [it.id, it]));
     for (const it of newItems) byId.set(it.id, it);
     saveCache([...byId.values()], freshEdges);
-    showReloadBanner(newItems.length, edgeChanged);
+    showReloadBanner(newItems.length, edgeChanged || activeChanged);
   } catch (e) {
     console.warn("dag delta refresh failed:", e.message);
   }
@@ -163,6 +206,9 @@ async function init() {
   let items, edges;
   const cache = loadCache();
   let renderedFromCache = false;
+
+  // Active IDs: try cache first, fall back to a live fetch.
+  let activeIds = loadActiveIdsCache();
 
   if (cache) {
     items = cache.items;
@@ -183,6 +229,17 @@ async function init() {
     saveCache(items, edges);
   }
 
+  // Fetch active IDs if not cached (parallel with whatever else we may do).
+  if (!activeIds) {
+    try {
+      activeIds = await api.listActiveItemIds();
+      saveActiveIdsCache(activeIds);
+    } catch (e) {
+      console.warn("dag active-ids fetch failed, treating all as inactive:", e.message);
+      activeIds = new Set();
+    }
+  }
+
   // Filter out deprecated / out-of-scope items before anything downstream:
   //   - APStats proof-of-concept lesson (wrong subject for this DAG)
   items = items.filter(it =>
@@ -195,18 +252,24 @@ async function init() {
 
   const visNodes = new window.vis.DataSet(
     items.map(item => {
-      const role  = item.role ?? "explore-practice";
-      const dok   = item.dok  ?? 1;
+      const role   = item.role ?? "explore-practice";
+      const dok    = item.dok  ?? 1;
+      const active = activeIds.has(item.id);
       return {
         id:          item.id,
         label:       item.id.replace(/-savvas-/, "-").replace(/-lesson-/, "-").slice(0, 28),
         group:       item.lesson,
-        color: {
-          background: ROLE_COLORS[role] ?? DEFAULT_COLOR,
-          border:     "#202124",
-        },
-        borderWidth: 1,
-        size:        10 + 6 * Number(dok),
+        // _active is a custom property — vis-network ignores unknown fields.
+        _active:     active,
+        // vis-network's standalone build ignores a top-level `opacity` node
+        // field, so we encode alpha directly into rgba() colors. Inactive
+        // nodes get ~25% alpha on both fill and border, which renders as a
+        // muted ghost layer behind the fully-opaque active 112.
+        color: active
+          ? { background: ROLE_COLORS[role] ?? DEFAULT_COLOR, border: "#202124" }
+          : { background: "rgba(218,220,224,0.25)", border: "rgba(176,180,187,0.25)" },
+        borderWidth: active ? 1 : 0,
+        size:        (active ? 10 : 7) + 6 * Number(dok),
         title:       buildTitle(item),
       };
     })
@@ -214,13 +277,19 @@ async function init() {
 
   const visEdges = new window.vis.DataSet(
     edges.map(edge => {
-      const color = EDGE_COLORS[edge.kind] ?? "#5f6368";
+      const bothActive = activeIds.has(edge.from_id) && activeIds.has(edge.to_id);
+      const baseColor  = EDGE_COLORS[edge.kind] ?? "#5f6368";
+      // Dim edges where either endpoint is inactive.
+      const color = bothActive
+        ? baseColor
+        : { color: baseColor, opacity: 0.15 };
       const entry = {
-        from:  edge.from_id,
-        to:    edge.to_id,
+        from:       edge.from_id,
+        to:         edge.to_id,
         color,
-        kind: edge.kind,   // preserved so neighborsByNode doesn't color-reverse
-        chosen: { edge: false, label: false },
+        kind:       edge.kind,   // preserved so neighborsByNode doesn't color-reverse
+        _bothActive: bothActive,  // custom flag for filter-mode toggling
+        chosen:     { edge: false, label: false },
       };
       if (edge.kind === "echoes") {
         entry.dashes = [2, 4];
@@ -274,11 +343,17 @@ async function init() {
   const neighborsByNode = {};
   visEdges.get().forEach(e => {
     const kind = e.kind ?? "link";
+    // e.color may be a string (active) or an object {color, opacity} (dim).
+    // The detail panel uses this as a CSS border-left-color value — always
+    // extract the string form so renderDetail never sees "[object Object]".
+    const colorStr = typeof e.color === "object" && e.color !== null
+      ? (e.color.color ?? "#5f6368")
+      : (e.color ?? "#5f6368");
     (neighborsByNode[e.from] = neighborsByNode[e.from] || []).push(
-      { id: e.to,   color: e.color, kind, direction: "out" }
+      { id: e.to,   color: colorStr, kind, direction: "out" }
     );
     (neighborsByNode[e.to] = neighborsByNode[e.to] || []).push(
-      { id: e.from, color: e.color, kind, direction: "in"  }
+      { id: e.from, color: colorStr, kind, direction: "in"  }
     );
   });
 
@@ -516,6 +591,69 @@ async function init() {
     if (params.nodes.length === 0) { renderDetail(null); return; }
     renderDetail(visNodes.get(params.nodes[0]));
   });
+
+  // ── Active / filter-mode toggle ──────────────────────────────────────────
+  // Count against nodes actually in the DataSet (APStats items were filtered
+  // out of `items` above, so activeIds may contain IDs not in the graph).
+  const totalCount  = visNodes.length;
+  const activeCount = visNodes.get().filter(n => n._active).length;
+
+  // Restore or default the filter mode.
+  let filterMode = localStorage.getItem(FILTER_MODE_KEY) || "all";
+
+  const filterToggleBtn = document.getElementById("dag-filter-toggle");
+  const statusEl        = document.getElementById("dag-status");
+
+  function updateStatusText() {
+    if (!statusEl) return;
+    if (filterMode === "used") {
+      statusEl.textContent = `Showing ${activeCount} items used in lessons`;
+    } else {
+      statusEl.textContent = `Showing ${totalCount} items (${activeCount} used in lessons)`;
+    }
+  }
+
+  function updateToggleLabel() {
+    if (!filterToggleBtn) return;
+    filterToggleBtn.textContent =
+      filterMode === "used" ? "All items (active emphasized)" : "Used in lessons only";
+    filterToggleBtn.title =
+      filterMode === "used"
+        ? "Show all items with inactive ones dimmed"
+        : "Hide unused items — show only those used in a lesson phase";
+  }
+
+  function applyFilterMode(mode) {
+    filterMode = mode;
+    localStorage.setItem(FILTER_MODE_KEY, mode);
+    updateToggleLabel();
+    updateStatusText();
+
+    if (mode === "used") {
+      // Hide inactive nodes and all edges touching them.
+      visNodes.update(visNodes.get().map(n => ({
+        id:     n.id,
+        hidden: !n._active,
+      })));
+      visEdges.update(visEdges.get().map(e => ({
+        id:     e.id,
+        hidden: !e._bothActive,
+      })));
+    } else {
+      // Restore all nodes/edges to visible.
+      visNodes.update(visNodes.get().map(n => ({ id: n.id, hidden: false })));
+      visEdges.update(visEdges.get().map(e => ({ id: e.id, hidden: false })));
+    }
+  }
+
+  if (filterToggleBtn) {
+    filterToggleBtn.addEventListener("click", () => {
+      applyFilterMode(filterMode === "used" ? "all" : "used");
+    });
+  }
+
+  // Apply persisted mode on load (after nodes exist in the DataSet).
+  applyFilterMode(filterMode);
 
   // ── Lesson focus: dropdown + color-swap ───────────────────────────────────
   // (opacity doesn't reliably render on vis-network's standalone build with
