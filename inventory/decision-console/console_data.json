@@ -1,0 +1,2950 @@
+{
+  "meta": {
+    "generated_by": "build_console.py",
+    "generated_at": "2026-07-23T07:03:56.630873+00:00",
+    "frozen_inputs": [
+      {
+        "path": "questionbank/registry.jsonl",
+        "sha256": "a2fe278292e97a432a6275b807fdfe730ab67a38efd09a70e5241355959dba17"
+      },
+      {
+        "path": "inventory/dok-workflow/dok_wave_plan.json",
+        "sha256": "26f578b7cba22397f4015509a17dd097cfd829a2f48250ebf779237d3b9ad82c"
+      },
+      {
+        "path": "inventory/course-map/course_map.json",
+        "sha256": "c8274dfbaab29424d0cb5f15093359bab948112dee70d432ede7597d0fd095c0"
+      },
+      {
+        "path": "inventory/dedup/item_uid_alias_map.json",
+        "sha256": "27b8c13b6c2a03d1c33e86ce4007dcfa27a7e56717044b821ac7db934d2ede5e"
+      },
+      {
+        "path": "inventory/dashboard/content_readiness.json",
+        "sha256": "079de40916e45f8f1593750a6632d12d56df9de86dd1fcccdbf0264d973f5103"
+      },
+      {
+        "path": "inventory/visuals/visual_asset_classification.json",
+        "sha256": "c41f77b1118cab1399ddebc3537e2cca75abffe7caae582f13904f88d42aa132"
+      },
+      {
+        "path": "inventory/tikz-staging/MANIFEST.json",
+        "sha256": "3d98a630ca9b914061b6466a9ce84c667dc4ba55eaec2535d5878df6f8aee41e"
+      },
+      {
+        "path": "questionbank/calibration/3-5.json",
+        "sha256": "993e23f31022ce33bc45819eb2a9ce35b20d46aee745fd742d3fc391b394140f"
+      }
+    ],
+    "locked_counts": {
+      "registry_rows": 900,
+      "active_registry_rows": 878,
+      "merged_alias_rows": 22,
+      "dok_conflict_pairs": 22,
+      "wave0_items": 42,
+      "essential_missing_visuals": 14,
+      "tikz_total_ids": 71,
+      "tikz_compile_pass": 64,
+      "dangling_edges_into_4_1": 4,
+      "canonical_verified_count": 39
+    },
+    "identity_reconciliation": {
+      "raw_registry_identities": 900,
+      "merged_alias_identities": 22,
+      "active_canonical_items": 878,
+      "merged_alias_item_uids": [
+        "iu_18cac1a8167a",
+        "iu_25b106c19a20",
+        "iu_32a6c3b34ca1",
+        "iu_3adc6df8b95d",
+        "iu_3b2700252892",
+        "iu_5663d63244d2",
+        "iu_57481c4ff850",
+        "iu_5d11f886423f",
+        "iu_68d1a5b3e8f8",
+        "iu_6afe9c1960b0",
+        "iu_74cca3783f59",
+        "iu_77d25e1e6131",
+        "iu_80622035e09c",
+        "iu_84131456696f",
+        "iu_8e4e2787396a",
+        "iu_9681eda37337",
+        "iu_a96e5311a459",
+        "iu_beec9e3bdf89",
+        "iu_bf2e53fb5aaa",
+        "iu_c8710e0538db",
+        "iu_e106ef5ef48e",
+        "iu_e7638fcec56e"
+      ],
+      "authorization_record_id": "rc-merge-auth-5-4-2026-07-23",
+      "statement": "raw_registry_identities == active_canonical_items + merged_alias_identities. meta.locked_counts.registry_rows above stays the raw, audit-style total (unchanged by this merge); active_registry_rows is what a student-facing consumer (qb.py) actually selects from."
+    },
+    "approvals_manifest_state": {
+      "path": "tools/dok-review/rubric_approvals.json",
+      "approved_versions": [
+        "v0.2"
+      ],
+      "read_only": true
+    },
+    "proposals_only_disclaimer": "All controls in this console produce PROPOSALS ONLY. Nothing here writes the registry or any source file. A later, separate, teacher-gated step turns exported proposals into changes."
+  },
+  "section1": {
+    "heading": "Lesson 4-1: Revive vs Retire",
+    "evidence": [
+      {
+        "fact": "As of 2026-05-13 the department skipped L41 (Klimsara confirmed); cadence jumped directly to L43.",
+        "source": "CONTINUATION_PROMPT.md:32 (as cited by inventory/topic-4-1/DIAGNOSIS.md)"
+      },
+      {
+        "fact": "An earlier planning note lists 4-1 as part of the planned lesson set: \"4-1,4-3,4-4,4-5 (LEHS 8 question assessment)\".",
+        "source": "A2LessonSelection.txt:4"
+      },
+      {
+        "fact": "CLAUDE.md still reads \"### Lesson 4-1 (ready, Fri F / Mon A start)\" with a full P1/P2/P3 table -- this is stale and contradicts the documented 2026-05-13 retirement.",
+        "source": "CLAUDE.md:45"
+      },
+      {
+        "fact": "questionbank/calibration/4-1.json is fully authored (47 lines), not a placeholder: item_analysis maps all 5 Savvas Examples to practice-item numbers by DOK; notes name practice items #20/#22/#25/#26 (all anchored to Example 3) as the Savvas-declared DOK-3 anchors; dok2_anchors/dok3_anchors arrays are empty by design, meant to be backfilled only after ingestion.",
+        "source": "inventory/topic-4-1/DIAGNOSIS.md lines 22-43 (describing questionbank/calibration/4-1.json)"
+      },
+      {
+        "fact": "61 screenshots exist on disk for lesson 4-1: 2 concept + 1 launch + 6 example/try-it (question only) + 37 practice-item images (q8-q26) + 15 Teacher Edition addenda.",
+        "source": "inventory/topic-4-1/DIAGNOSIS.md lines 45-57 (questionbank/images/4-1_*, cross-checked against inventory-4-1-assets.json)"
+      },
+      {
+        "fact": "15 skeleton stubs exist in skeletons/4-1_practice_skeletons.json (q8-q19, q21, q23, q24); every one is a pristine, un-transcribed \"TODO: transcribe...\" placeholder -- not a single one has been filled in.",
+        "source": "inventory/topic-4-1/DIAGNOSIS.md lines 69-79"
+      },
+      {
+        "fact": "0 registry rows exist for lesson 4-1 (grep-confirmed: grep -c '\"lesson\": \"4-1\"' questionbank/registry.jsonl -> 0).",
+        "source": "inventory/topic-4-1/DIAGNOSIS.md line 92"
+      },
+      {
+        "fact": "No a2_4-1_SE.* or a2_4-1_TE.* (pdf or tex) exists anywhere in the repo, while nine sibling lessons (4-3, 4-4, 4-5, 5-1, 5-4, 5-5, 6-3, 6-4, 6-5) each have both SE and TE source.",
+        "source": "inventory/topic-4-1/DIAGNOSIS.md lines 94-99"
+      },
+      {
+        "fact": "The four DOK-3 anchor items (Savvas practice #20/#22/#25/#26) have BOTH _question.png and _answer.png screenshots on disk, but were never even generated as skeleton stubs -- the gap is one step earlier than \"un-transcribed,\" it is \"not yet generated.\"",
+        "source": "inventory/topic-4-1/DIAGNOSIS.md lines 59-64, 81-84"
+      },
+      {
+        "fact": "tagging/4-1_*.jsonl is documented as deleted during the 2026-05-13 retirement cull, alongside the L41 tex retirement and Supabase row deletion.",
+        "source": "CONTINUATION_PROMPT.md:192 (as cited by inventory/topic-4-1/DIAGNOSIS.md lines 100-101, 128-130)"
+      },
+      {
+        "fact": "L41 lesson tex now lives only in legacy/tex/ (46 files: P1=14, P2=18, P3=14); tex/ has zero L41_* files.",
+        "source": "inventory/topic-4-1/DIAGNOSIS.md lines 102-108"
+      },
+      {
+        "fact": "Whether ingestion into the registry was briefly attempted and then culled during the skip, versus never begun past the skeleton-stub stage, is UNKNOWN from disk alone -- frame as \"never completed/retained, halted by the dept skip,\" not as a certain \"never ingested at all.\"",
+        "source": "inventory/topic-4-1/DIAGNOSIS.md lines 132-158 (epistemic note)"
+      }
+    ],
+    "staged_state": {
+      "calibration": true,
+      "screenshots": 61,
+      "skeleton_stubs": 15,
+      "registry_rows": 0,
+      "se_te": false
+    },
+    "dangling_edges": [
+      {
+        "source_uid": "iu_31a6940d05ec",
+        "source": "4-3-tryit-1",
+        "target": "4-1-savvas-q10",
+        "type": "prereq",
+        "reason": "retirement-gap"
+      },
+      {
+        "source_uid": "iu_2ca6ec6026ce",
+        "source": "6-3-savvas-q54",
+        "target": "4-1-savvas-q17",
+        "type": "echoes",
+        "reason": "retirement-gap"
+      },
+      {
+        "source_uid": "iu_cd24889b7168",
+        "source": "6-4-savvas-q13",
+        "target": "4-1-savvas-q19",
+        "type": "echoes",
+        "reason": "retirement-gap"
+      },
+      {
+        "source_uid": "iu_634d55d82bc5",
+        "source": "4-5-savvas-q25",
+        "target": "4-1-savvas-q26",
+        "type": "echoes",
+        "reason": "retirement-gap"
+      }
+    ],
+    "options": {
+      "revive": {
+        "downstream_effects": [
+          "Unblocks the 4 retirement-gap edges into 4-1 (4-3-tryit-1 prereq→4-1-savvas-q10; 6-3-savvas-q54 echoes→4-1-savvas-q17; 6-4-savvas-q13 echoes→4-1-savvas-q19; 4-5-savvas-q25 echoes→4-1-savvas-q26)"
+        ],
+        "effort_paths": {
+          "revive-ingestion-only": "RECOVERY_PLAN Steps 2+4+5: hand-add 4 skeleton stubs for q20/q22/q25/q26, then transcribe+append all 19 practice items SERIALLY via qb_append.py from the existing screenshots, then backfill calibration anchors. NOT blocked on SE/TE.",
+          "revive-full-rebuild": "All of ingestion-only PLUS SE/TE export from Savvas + PDF→LaTeX conversion + full tex/L41_P{1,2,3} packet + pacer rebuild (RECOVERY_PLAN Steps 3b+6). BLOCKED on acquiring a2_4-1_SE/TE."
+        },
+        "risks": [
+          "Overrides a documented department-level decision -- if the 2026-05-13 skip was POLICY rather than time pressure, revival conflicts with the department",
+          "Ingestion effort (19 serial transcriptions) spent on a lesson that may never be taught",
+          "Full-rebuild path indefinitely blocked on SE/TE acquisition"
+        ]
+      },
+      "retire": {
+        "downstream_effects": [
+          "The 4 lessons carrying dangling edges (4-3-tryit-1 prereq→4-1-savvas-q10; 6-3-savvas-q54 echoes→4-1-savvas-q17; 6-4-savvas-q13 echoes→4-1-savvas-q19; 4-5-savvas-q25 echoes→4-1-savvas-q26) need bridge re-pointing",
+          "course_map.json regeneration to drop/re-point the edges",
+          "CLAUDE.md:45 stale 'ready' table needs correcting to retired"
+        ],
+        "effort": "4 bridge edge re-points across 4 lessons + course-map rebuild + CLAUDE.md correction; no ingestion work",
+        "risks": [
+          "Staged work (61 screenshots + authored calibration) permanently unused",
+          "Inverse variation on-ramp into Topic 4 rational functions lost from the graph",
+          "Re-pointed bridges may be pedagogically weaker than the original 4-1 targets"
+        ]
+      }
+    },
+    "recommendation": {
+      "label": "FABLE RECOMMENDATION",
+      "confidence": 0.7,
+      "visually_distinct": true,
+      "text": "Revive via ingestion-only from the existing 61 screenshots.",
+      "rationale": [
+        "(a) 4 lessons carry dangling retirement-gap edges into 4-1 -- permanent retirement costs 4 bridge edits anyway",
+        "(b) the ingest pipeline is already staged (calibration + screenshots + 15 stubs), making ingestion-only the lowest-effort path to graph integrity",
+        "(c) inverse variation is the conceptual on-ramp for Topic 4's rational functions",
+        "(d) the 4 missing DOK-3 anchor stubs are mechanical to create from their screenshots"
+      ],
+      "residual_risk": "If the 5/13 dept skip was department POLICY rather than time pressure, retire instead and re-point the 4 edges -- that is precisely the judgment only the teacher can make, hence 0.7 not higher."
+    },
+    "decision": {
+      "decision_id": "s1-revive-or-retire-4-1",
+      "actions": [
+        "revive-ingestion-only",
+        "revive-full-rebuild",
+        "retire-and-repoint",
+        "defer"
+      ]
+    }
+  },
+  "section2": {
+    "count": 22,
+    "intro": "Each of the 22 pairs below is one legacy bank id carried by two distinct registry rows (two item_uids) whose DOK labels differ. Both copies are shown in full, side by side. Four actions are available for each pair — keep-both, reconcile-labels (pick the authoritative DOK label; both rows stay), merge-candidate (route to the collision review queue), and needs-source-check — and none is a default or an expected outcome. These pairs are sequenced ahead of the same-DOK prompt-drift collisions only because DOK labels affect wave placement. 21 pairs differ dok1-vs-dok2; 5-4-savvas-q41 is the sole dok2-vs-dok3 pair.",
+    "highlight_id": "5-4-savvas-q41",
+    "actions": [
+      "keep-both",
+      "reconcile-labels",
+      "merge-candidate",
+      "needs-source-check"
+    ],
+    "pairs": [
+      {
+        "legacy_id": "5-4-savvas-q21",
+        "decision_id": "s2-5-4-savvas-q21",
+        "copies": [
+          {
+            "item_uid": "iu_c470845cd9f5",
+            "registry_line": 308,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "optional-stretch",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. (\\sqrt[3]{x}+8=13)",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=125)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #21 (lesson 5-4)",
+            "prompt_sha1": "abb4573a7a4456afcac3fa201df296e5e05e0603",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_bf2e53fb5aaa",
+            "registry_line": 279,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "\\sqrt[3]{x} + 8 = 13",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #21 (lesson 5-4)",
+            "prompt_sha1": "851be241b84037389e97aeb073eebb85c9d7f453",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_bf2e53fb5aaa",
+          "survivor_uid": "iu_c470845cd9f5",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q22",
+        "decision_id": "s2-5-4-savvas-q22",
+        "copies": [
+          {
+            "item_uid": "iu_2687f61c33c5",
+            "registry_line": 309,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. (√(4x)=11)",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=30.25)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #22 (lesson 5-4)",
+            "prompt_sha1": "086e6627a161f5e18107d16a09d44c0f69eb3db6",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_84131456696f",
+            "registry_line": 280,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "√(4x) = 11",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #22 (lesson 5-4)",
+            "prompt_sha1": "f2db3c224ba5323069ad5f49dc4c136ec70737e9",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_84131456696f",
+          "survivor_uid": "iu_2687f61c33c5",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q23",
+        "decision_id": "s2-5-4-savvas-q23",
+        "copies": [
+          {
+            "item_uid": "iu_e067aeabdb5e",
+            "registry_line": 310,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. (√(75+x)-6=14)",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=325)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #23 (lesson 5-4)",
+            "prompt_sha1": "1cb83cb4bee2455039dc78dd5c711268e295b01b",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_5d11f886423f",
+            "registry_line": 281,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "√(75 + x) - 6 = 14",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #23 (lesson 5-4)",
+            "prompt_sha1": "99d40183a8a2f4ecaa9161a614f9b07ddebe9b96",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_5d11f886423f",
+          "survivor_uid": "iu_e067aeabdb5e",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q24",
+        "decision_id": "s2-5-4-savvas-q24",
+        "copies": [
+          {
+            "item_uid": "iu_da8e33db9d06",
+            "registry_line": 311,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. (25-\\sqrt[4]{x}=22)",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=81)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #24 (lesson 5-4)",
+            "prompt_sha1": "ff659f22c01c19399bed78bfa6e2c19f07a7bfaf",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_e106ef5ef48e",
+            "registry_line": 282,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "25 - \\sqrt[4]{x} = 22",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #24 (lesson 5-4)",
+            "prompt_sha1": "f69fe29ee82e57c72e50f07c8edbbf3331db8bf3",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_e106ef5ef48e",
+          "survivor_uid": "iu_da8e33db9d06",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q25",
+        "decision_id": "s2-5-4-savvas-q25",
+        "copies": [
+          {
+            "item_uid": "iu_cd45fbec9dbc",
+            "registry_line": 312,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve for (y). (x=3\\sqrt[3]{15+y})",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (y=(x^3)/(27)-15)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #25 (lesson 5-4)",
+            "prompt_sha1": "20382be507ac705bd6b85b58aa7a10551b35ae30",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_8e4e2787396a",
+            "registry_line": 283,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "x = 3(\\sqrt[3]{15 + y})",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #25 (lesson 5-4)",
+            "prompt_sha1": "d4c6f25e219bbafed873a203affd749890a1e626",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_8e4e2787396a",
+          "survivor_uid": "iu_cd45fbec9dbc",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q26",
+        "decision_id": "s2-5-4-savvas-q26",
+        "copies": [
+          {
+            "item_uid": "iu_323815e656c9",
+            "registry_line": 313,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve for (y). (x=\\frac{√(2y)}{26})",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (y=338x^2)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #26 (lesson 5-4)",
+            "prompt_sha1": "4bbb24ae737e98e8fb6ea7af67593b7702620898",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_68d1a5b3e8f8",
+            "registry_line": 284,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "x = \\frac{√(2y)}{26}",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #26 (lesson 5-4)",
+            "prompt_sha1": "01ba6093b90a84c74734d2f846edfad19041c9fe",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_68d1a5b3e8f8",
+          "survivor_uid": "iu_323815e656c9",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q27",
+        "decision_id": "s2-5-4-savvas-q27",
+        "copies": [
+          {
+            "item_uid": "iu_26a15cb256cd",
+            "registry_line": 314,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve for (y). (x=\\frac{√(y-14.2)}{0.05})",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (y=0.0025x^2+14.2)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #27 (lesson 5-4)",
+            "prompt_sha1": "ae744c7d40ad8b77f60b1e96d27d881eb6e22343",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_9681eda37337",
+            "registry_line": 285,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "x = \\frac{√(y - 14.2)}{0.05}",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #27 (lesson 5-4)",
+            "prompt_sha1": "8cfafc85f2caffb7b10dc94aabc8ff67221e3bb4",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_9681eda37337",
+          "survivor_uid": "iu_26a15cb256cd",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q28",
+        "decision_id": "s2-5-4-savvas-q28",
+        "copies": [
+          {
+            "item_uid": "iu_d2eb395dfeee",
+            "registry_line": 315,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve for (y). (x=(1)/(3)\\sqrt[4]{y})",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (y=81x^4)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #28 (lesson 5-4)",
+            "prompt_sha1": "df4cc34916fd0a5c0dde2ccb3bc0e267ecf1c156",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_18cac1a8167a",
+            "registry_line": 286,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "x = (1)/(3)(\\sqrt[4]{y})",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #28 (lesson 5-4)",
+            "prompt_sha1": "5834a5de847f91215a4d190ce62f35b5b7d589e4",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_18cac1a8167a",
+          "survivor_uid": "iu_d2eb395dfeee",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q29",
+        "decision_id": "s2-5-4-savvas-q29",
+        "copies": [
+          {
+            "item_uid": "iu_6eb3a7c167c0",
+            "registry_line": 316,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. Check for extraneous solutions. (x=√(x+6))",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=3)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #29 (lesson 5-4)",
+            "prompt_sha1": "a45579a48dd16432f0d2f87f7262390b7e84f502",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_e7638fcec56e",
+            "registry_line": 287,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "x = √(x + 6)",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #29 (lesson 5-4)",
+            "prompt_sha1": "436e5d14084cdaff1f46b7e1a8f66cd5e48ee723",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_e7638fcec56e",
+          "survivor_uid": "iu_6eb3a7c167c0",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q30",
+        "decision_id": "s2-5-4-savvas-q30",
+        "copies": [
+          {
+            "item_uid": "iu_3646823c6297",
+            "registry_line": 317,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. Check for extraneous solutions. (2x=√(17x-15))",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=(5)/(4)) and (x=3)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #30 (lesson 5-4)",
+            "prompt_sha1": "a5ee22951be981cc1ecd0f5e734f48a1851ec418",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_32a6c3b34ca1",
+            "registry_line": 288,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "2x = √(17x - 15)",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #30 (lesson 5-4)",
+            "prompt_sha1": "e6410d7cf85fb97aa2c438f0519bd474088da594",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_32a6c3b34ca1",
+          "survivor_uid": "iu_3646823c6297",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q31",
+        "decision_id": "s2-5-4-savvas-q31",
+        "copies": [
+          {
+            "item_uid": "iu_d8950c94a8bc",
+            "registry_line": 318,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. Check for extraneous solutions. (4x=√(6x+10))",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=1)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #31 (lesson 5-4)",
+            "prompt_sha1": "c071200695a4e962049ecf20ca794c33c998031f",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_beec9e3bdf89",
+            "registry_line": 289,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "4x = √(6x + 10)",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #31 (lesson 5-4)",
+            "prompt_sha1": "21193984051ce0062a6eb586f4d93d3010573982",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_beec9e3bdf89",
+          "survivor_uid": "iu_d8950c94a8bc",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q32",
+        "decision_id": "s2-5-4-savvas-q32",
+        "copies": [
+          {
+            "item_uid": "iu_c1771afa2a7f",
+            "registry_line": 319,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. Check for extraneous solutions. (x=√(56-x))",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=7)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #32 (lesson 5-4)",
+            "prompt_sha1": "4b1094e8cc463b67d27cd50753876d1cf8b18e14",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_74cca3783f59",
+            "registry_line": 290,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "x = √(56 - x)",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #32 (lesson 5-4)",
+            "prompt_sha1": "42948144a23315d2ac8d1a41f40416a868f88fa7",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_74cca3783f59",
+          "survivor_uid": "iu_c1771afa2a7f",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q33",
+        "decision_id": "s2-5-4-savvas-q33",
+        "copies": [
+          {
+            "item_uid": "iu_c6ab822e227b",
+            "registry_line": 320,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve. (0.5(x^2+5x+136)^{(2)/(3)}=50)",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=27) and (x=-32)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #33 (lesson 5-4)",
+            "prompt_sha1": "894c695f89256537eb7867742a7b9556b2f774b5",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_3adc6df8b95d",
+            "registry_line": 291,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "0.5(x^2 + 5x + 136)^{2/3} = 50",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #33 (lesson 5-4)",
+            "prompt_sha1": "a1a4da6afa23bfeafc7add83ca0ee72be22d26ad",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_3adc6df8b95d",
+          "survivor_uid": "iu_c6ab822e227b",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q34",
+        "decision_id": "s2-5-4-savvas-q34",
+        "copies": [
+          {
+            "item_uid": "iu_748071c541b9",
+            "registry_line": 321,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve. (2(x^2-12x-4)^{(1)/(2)}-3=15)",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=-5) and (x=17)",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #34 (lesson 5-4)",
+            "prompt_sha1": "99759bdd725020dbcd7414275e1fd9d1029e76ed",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_a96e5311a459",
+            "registry_line": 292,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "2(x^2 - 12x - 4)^{1/2} - 3 = 15",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #34 (lesson 5-4)",
+            "prompt_sha1": "7a64949827acd943d0a59450a1b721d90ac827bd",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_a96e5311a459",
+          "survivor_uid": "iu_748071c541b9",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q35",
+        "decision_id": "s2-5-4-savvas-q35",
+        "copies": [
+          {
+            "item_uid": "iu_22bcc429d37c",
+            "registry_line": 322,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve. ((x^2+4x+5)^{(3)/(2)}+1=0)",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): There are no solutions.",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #35 (lesson 5-4)",
+            "prompt_sha1": "27ba0ac635f559036042af685b27ff440d506151",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_3b2700252892",
+            "registry_line": 293,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "(x^2 + 4x + 5)^{3/2} + 1 = 0",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #35 (lesson 5-4)",
+            "prompt_sha1": "deae0e714db9b6fbe525fb4b350a9abf153b00e1",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_3b2700252892",
+          "survivor_uid": "iu_22bcc429d37c",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q36",
+        "decision_id": "s2-5-4-savvas-q36",
+        "copies": [
+          {
+            "item_uid": "iu_3c4458af5f01",
+            "registry_line": 323,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. Check for extraneous solutions. (√(6+x)-√(x-5)=2)",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=8(1)/(16)) or (x=(129)/(16))",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #36 (lesson 5-4)",
+            "prompt_sha1": "a1f69e923820b62b89103231852648db81784502",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_5663d63244d2",
+            "registry_line": 294,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "√(6 + x) - √(x - 5) = 2",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #36 (lesson 5-4)",
+            "prompt_sha1": "f42f77521c48181de50c2020a5018050bdc0c8b9",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_5663d63244d2",
+          "survivor_uid": "iu_3c4458af5f01",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q37",
+        "decision_id": "s2-5-4-savvas-q37",
+        "copies": [
+          {
+            "item_uid": "iu_994890f62b0f",
+            "registry_line": 324,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. Check for extraneous solutions. (√(4x+5)-√(x+1)=1)",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=-1) and (x=-(5)/(9))",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #37 (lesson 5-4)",
+            "prompt_sha1": "ff91847c7b7d142d2fe87c9d203902d2f313c717",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_c8710e0538db",
+            "registry_line": 295,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "√(4x + 5) - √(x + 1) = 1",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #37 (lesson 5-4)",
+            "prompt_sha1": "e16dab745e4c055bb4ba4697bb2d36483f274fec",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_c8710e0538db",
+          "survivor_uid": "iu_994890f62b0f",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q38",
+        "decision_id": "s2-5-4-savvas-q38",
+        "copies": [
+          {
+            "item_uid": "iu_b04e59b85637",
+            "registry_line": 325,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve each radical equation. Check for extraneous solutions. (√(x+1)+1=√(x+3))",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): (x=-(3)/(4))",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #38 (lesson 5-4)",
+            "prompt_sha1": "d4a07b3f767d404ac2051ea613f5b5644231a90b",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_80622035e09c",
+            "registry_line": 296,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "√(x + 1) + 1 = √(x + 3)",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #38 (lesson 5-4)",
+            "prompt_sha1": "a7949c750d05461139370e81fcf88551b8380f52",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_80622035e09c",
+          "survivor_uid": "iu_b04e59b85637",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q39",
+        "decision_id": "s2-5-4-savvas-q39",
+        "copies": [
+          {
+            "item_uid": "iu_6826655b6fe7",
+            "registry_line": 326,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Solve using the formula (BSA=\\sqrt{\\frac{H· M}{3{,}600}}). A sports medicine specialist determines that a hot-weather training strategy is appropriate for this athlete. To the nearest tenth, what can the mass of the athlete be for the training strategy to be appropriate?\n\n[IMAGE: Athlete in white coat at a finish line with labels \"BSA < 2.0\" and \"165 cm\".]",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): less than (87.3) kg · IMAGE PLACEHOLDER [illustration]: Athlete in white coat at a finish line with labels \"BSA < 2.0\" and \"165 cm\".",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #39 (lesson 5-4)",
+            "prompt_sha1": "a53916ed0c6e4a6505f1e1e207abd62170494b89",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_6afe9c1960b0",
+            "registry_line": 297,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "A sports medicine specialist determines that a hot-weather training strategy is appropriate for this athlete. To the nearest tenth, what can the mass of the athlete be for the training strategy to be appropriate?\n\n[IMAGE: A female runner finishing a race. Labels point to her: \"Finish\", bib number \"1789\", height \"165 cm\", and a note \"BSA < 2.0\".]",
+            "answers": [],
+            "correct": null,
+            "notes": "IMAGE PLACEHOLDER [illustration]: A female runner finishing a race. Labels point to her: \"Finish\", bib number \"1789\", height \"165 cm\", and a note \"BSA < 2.0\".",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #39 (lesson 5-4)",
+            "prompt_sha1": "b5ce5d5856315f444dc1e730dc9957d744220d3b",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_6afe9c1960b0",
+          "survivor_uid": "iu_6826655b6fe7",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q41",
+        "decision_id": "s2-5-4-savvas-q41",
+        "copies": [
+          {
+            "item_uid": "iu_77d25e1e6131",
+            "registry_line": 299,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              3
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "Make Sense and Persevere The half-life of a certain type of soft drink is 5 h. If you drink 50 mL of this drink, the formula y = 50(0.5)^{t/5} tells the amount of the drink left in your system after t hours. How much of the soft drink will be left in your system after 16 hours?",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #41 (lesson 5-4)",
+            "prompt_sha1": "7712d7ead9a5d307942b19cf3e89ec6ff8f60c36",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [3] (match_quality: exact)",
+            "status": "merged-alias"
+          },
+          {
+            "item_uid": "iu_3c70a19c8d36",
+            "registry_line": 328,
+            "lesson": "5-4",
+            "dok": 3,
+            "role": "dok3-driver",
+            "wave": "3",
+            "te_bucket": [
+              3
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Make Sense and Persevere The half-life of a certain type of soft drink is 5 h. If you drink 50 mL of this drink, the formula (y=50(0.5)^{(t)/(5)}) tells the amount of the drink left in your system after (t) hours. How much of the soft drink will be left in your system after 16 hours?",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): about 5.44 mL",
+            "registry_dok_rationale": "Savvas-declared DOK-3 item. Strategic reasoning / modeling / non-routine application.",
+            "source": "Savvas Practice #41 (lesson 5-4)",
+            "prompt_sha1": "ff513465a2458649d9f8a610547f3634b9265da3",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_77d25e1e6131",
+          "survivor_uid": "iu_3c70a19c8d36",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q44",
+        "decision_id": "s2-5-4-savvas-q44",
+        "copies": [
+          {
+            "item_uid": "iu_097a1fc43439",
+            "registry_line": 331,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "launch-model-2",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "Complete the table to solve for the unknown value in the equation (y=\\sqrt[3]{2x+z}-12), using the given values in each row.\n\nTABLE:\n →prule\n(y) | (x) | (z) \\\n\\midrule\n0 | 462 | (\\square) \\\n-3 | (\\square) | 439 \\\n-10 | 1.25 | (\\square) \\\n3 | (\\square) | 16 \\\n\\bottomrule\nEND_TABLE",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): TABLE:\n →prule (y) | (x) | (z) \\ \\midrule 0 | 462 | 804 \\ -3 | 145 | 439 \\ -10 | 1.25 | 5.5 \\ 3 | 1,679.5 | 16 \\ \\bottomrule\nEND_TABLE",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #44 (lesson 5-4)",
+            "prompt_sha1": "852bcd68bd9b9f93a1a28872e0270a225d8297f6",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_25b106c19a20",
+            "registry_line": 302,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "Complete the table to solve for the unknown value in the equation y = \\sqrt[3]{2x + z} - 12, using the given values in each row.\n\n\\begin{center}\nTABLE:\n y | x | z \n\n0 | 462 | -3 | 439 \n\n-10 | 1.25 | 3 | 16\nEND_TABLE\n\\end{center}",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #44 (lesson 5-4)",
+            "prompt_sha1": "c38fe15bf7664abed155d4668098f5fcbe807e27",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_25b106c19a20",
+          "survivor_uid": "iu_097a1fc43439",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      },
+      {
+        "legacy_id": "5-4-savvas-q45",
+        "decision_id": "s2-5-4-savvas-q45",
+        "copies": [
+          {
+            "item_uid": "iu_b69ba77e28bf",
+            "registry_line": 332,
+            "lesson": "5-4",
+            "dok": 1,
+            "role": "explore-practice",
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "verified",
+            "prompt": "SAT/ACT What is the solution to the equation ((x^2+5x+25)^{(3)/(2)}=343)?\n\nA. (-8) only\n\nB. 3 only\n\nC. 77 only\n\nD. (-8) and 3\n\nE. There are no solutions.",
+            "answers": [],
+            "correct": null,
+            "notes": "Answer key (from source): D. (-8) and 3",
+            "registry_dok_rationale": "Savvas-declared DOK-1 item. Single-step recall/recognition.",
+            "source": "Savvas Practice #45 (lesson 5-4)",
+            "prompt_sha1": "0e66a9924284790dfbb57844005615739cd1ffc4",
+            "dok_rationale_derived": "DOK verified via the canonical review-log projection (review_state: verified — tools/dok-review/dok_review.py entry_is_verified under the teacher-approved rubric manifest)",
+            "status": "active"
+          },
+          {
+            "item_uid": "iu_57481c4ff850",
+            "registry_line": 303,
+            "lesson": "5-4",
+            "dok": 2,
+            "role": null,
+            "wave": "4",
+            "te_bucket": [
+              1
+            ],
+            "match_quality": "exact",
+            "dok_status": "unreviewed",
+            "prompt": "SAT/ACT What is the solution to the equation (x^2 + 5x + 25)^{3/2} = 343?\n\n\\begin{itemize}\n \\item[A] -8 only\n \\item[B] 3 only\n \\item[C] 77 only\n \\item[D] -8 and 3\n \\item[E] There are no solutions.\n\\end{itemize}",
+            "answers": [],
+            "correct": null,
+            "notes": "",
+            "registry_dok_rationale": "Savvas-declared DOK-2 item. Routine multi-step procedure.",
+            "source": "Savvas Practice #45 (lesson 5-4)",
+            "prompt_sha1": "dc46fa4883e0798e1458a28df8baf2f873a2dae6",
+            "dok_rationale_derived": "Unreviewed; TE bucket suggests DOK [1] (match_quality: exact)",
+            "status": "merged-alias"
+          }
+        ],
+        "resolved_alias": {
+          "alias_uid": "iu_57481c4ff850",
+          "survivor_uid": "iu_b69ba77e28bf",
+          "merged_at": "2026-07-23T00:53:21-04:00",
+          "authorization_record_id": "rc-merge-auth-5-4-2026-07-23"
+        }
+      }
+    ]
+  },
+  "section3": {
+    "partition": {
+      "regenerated+compile-pass": 63,
+      "reclassified-map->table": 1,
+      "held-teacher": 2,
+      "no-asset": 5,
+      "total_unique_ids": 71,
+      "regenerated_and_compiling_total": 64
+    },
+    "flagged": [
+      {
+        "bank_id": "4-3-ex-6",
+        "lesson": "4-3",
+        "figure_type": "diagram",
+        "staging_file": "4-3-ex-6.tex",
+        "source_prompt_excerpt": "Two packaging options: Option 1 a rectangular prism with square base (edge 2x, height 2x); Option 2 a cylinder with height 2x and diameter 2x (radius x) equal to the prism's base side. Volumes (2x)^3 and (pi)x^2(2x).",
+        "compile_status": "pass",
+        "pdf_bytes": 40582,
+        "status": "regenerated+compile-pass",
+        "batch": "CD_diagrams",
+        "flags": [
+          "needs_teacher_disambiguation"
+        ],
+        "legacy_id": "4-3-ex-6",
+        "item_uid": "iu_5610833d718c",
+        "registry_line": 49,
+        "ambiguous": false,
+        "display_provenance": "NT2 build QA (tikz-staging MANIFEST): compile PASS; PNG rendered during batch QA.",
+        "interpretive_summary": "Interpretive choice flagged by the NT2 build: the source text says 'rectangular prism with a square base'; the figure renders Option 1 as a cube (all edges 2x) because the stated volume (2x)^3 implies height = base side = 2x. The figure shows both package options (Option 1 prism, Option 2 cylinder with r = x, h = 2x). The teacher decision is whether this reading is acceptable.",
+        "flag_kind": "needs_teacher_disambiguation",
+        "decision_id": "s3-fig-4-3-ex-6",
+        "recorded_context": {
+          "status_line": "confirmed by RC 2026-07-20 (Option 1 rendered as a cube, accepted)",
+          "action": "confirm",
+          "reviewer": "RC",
+          "timestamp": "2026-07-20T01:58:30.509803-04:00",
+          "note": "RC confirms the flagged interpretive reading (Option 1 rendered as a cube, edges 2x, per the stated volume (2x)^3) is acceptable."
+        }
+      },
+      {
+        "bank_id": "6-4-savvas-q30",
+        "lesson": "6-4",
+        "figure_type": "diagram",
+        "staging_file": "6-4-savvas-q30.tex",
+        "source_prompt_excerpt": "Cutaway diagram of Earth's surface with focus F below the surface, epicenter E above the focus, seismograph station S on the surface, arc ES, and waves radiating from the focus.",
+        "compile_status": "pass",
+        "pdf_bytes": 42791,
+        "status": "regenerated+compile-pass",
+        "batch": "CD_diagrams",
+        "flags": [
+          "needs_teacher_confirmation"
+        ],
+        "legacy_id": "6-4-savvas-q30",
+        "item_uid": "iu_939654beefb4",
+        "registry_line": 614,
+        "ambiguous": false,
+        "display_provenance": "NT2 build QA (tikz-staging MANIFEST): compile PASS; PNG rendered during batch QA.",
+        "interpretive_summary": "Schematic layout flagged by the NT2 build: focus F below a curved surface; epicenter E on the surface directly above F; station S elsewhere on the surface; arc ES highlighted; dashed arcs from F represent seismic waves. Relative positions follow the item text; exact distances, curvature, and wave count are illustrative choices. The teacher decision is whether this layout is acceptable.",
+        "flag_kind": "needs_teacher_confirmation",
+        "decision_id": "s3-fig-6-4-savvas-q30",
+        "recorded_context": {
+          "status_line": "confirmed by RC 2026-07-20 (vector PDF readable and accepted)",
+          "action": "confirm",
+          "reviewer": "RC",
+          "timestamp": "2026-07-20T01:58:30.509813-04:00",
+          "note": "vector PDF is readable and accepted."
+        }
+      }
+    ],
+    "flag_actions": [
+      "confirm",
+      "reject",
+      "needs-rework"
+    ],
+    "held": [
+      {
+        "bank_id": "4-3-savvas-q36-partA-build",
+        "lesson": "4-3",
+        "figure_type": "diagram",
+        "staging_file": null,
+        "source_prompt_excerpt": "Write the rational expression for the probability of winning. Show what you used for the numerator and denominator.",
+        "compile_status": "held",
+        "pdf_bytes": 0,
+        "status": "held-teacher",
+        "batch": "held",
+        "notes": "DOK-1 scaffold; its own prompt states no carnival-box dimensions (defining data lives only in sibling 4-3-savvas-q36 figure). Held per no-fabrication rule.",
+        "flags": [],
+        "legacy_id": "4-3-savvas-q36-partA-build",
+        "item_uid": "iu_0455b30ed185",
+        "registry_line": 898,
+        "ambiguous": false
+      },
+      {
+        "bank_id": "5-1-savvas-teacher-edition-learntogether-les-5",
+        "lesson": "5-1",
+        "figure_type": "graph",
+        "staging_file": null,
+        "source_prompt_excerpt": "Additional Example 6. A clerk is wrapping two cube-shaped packages... The edge length of the larger package is 3 in. greater... surface area of the larger package is 384 in.^2... [GRAPH/TIKZ figure] 384=6(x+3)^2...",
+        "compile_status": "held",
+        "pdf_bytes": null,
+        "status": "held-teacher",
+        "batch": "B_graphs",
+        "notes": "HELD -- no coordinate function, table, or point set is named anywhere in this item for a graph. The algebra solves 384=6(x+3)^2 for a real-world cube-wrapping word problem; the original [GRAPH/TIKZ figure] most plausibly held a diagram/photo of the two physical wrapped packages, not a coordinate-plane curve, and the text gives nothing plottable (no function of x and y, no table of values). Per the 'fabricate no data' instruction, no .tex was written for this id.",
+        "flags": [],
+        "legacy_id": "5-1-savvas-teacher-edition-learntogether-les-5",
+        "item_uid": "iu_603806528d8c",
+        "registry_line": 241,
+        "ambiguous": false
+      }
+    ],
+    "no_asset": [
+      {
+        "bank_id": "6-3-ex-3",
+        "lesson": "6-3",
+        "figure_type": "none",
+        "staging_file": null,
+        "source_prompt_excerpt": "Evaluate Logarithms\n\nGENERALIZE\nThe output of any exponential function of the form y = b^x, with b > 0, is always a positive number. Therefore, the input of a logarithmic function ",
+        "compile_status": "no-asset",
+        "pdf_bytes": 0,
+        "status": "no-asset",
+        "batch": "reclass",
+        "notes": "has_visual==True but visual_type==none; pure numeric log-eval / blank-grid; no figure asset needed (teacher-confirm).",
+        "flags": [],
+        "legacy_id": "6-3-ex-3",
+        "item_uid": "iu_79412fec03bb",
+        "registry_line": 477,
+        "ambiguous": false
+      },
+      {
+        "bank_id": "6-3-tryit-3",
+        "lesson": "6-3",
+        "figure_type": "none",
+        "staging_file": null,
+        "source_prompt_excerpt": "What is the value of each logarithmic expression?\n\na. \\log_3((1)/(81)) b. \\log_7(-7) c. \\log_5 5^9",
+        "compile_status": "no-asset",
+        "pdf_bytes": 0,
+        "status": "no-asset",
+        "batch": "reclass",
+        "notes": "has_visual==True but visual_type==none; pure numeric log-eval / blank-grid; no figure asset needed (teacher-confirm).",
+        "flags": [],
+        "legacy_id": "6-3-tryit-3",
+        "item_uid": "iu_9306d7a30393",
+        "registry_line": 483,
+        "ambiguous": false
+      },
+      {
+        "bank_id": "6-3-tryit-4",
+        "lesson": "6-3",
+        "figure_type": "none",
+        "staging_file": null,
+        "source_prompt_excerpt": "What is the value of each logarithmic expression to the nearest ten-thousandth?\n\na. \\log 321 b. \\ln 1,215 c. \\log 0.17",
+        "compile_status": "no-asset",
+        "pdf_bytes": 0,
+        "status": "no-asset",
+        "batch": "reclass",
+        "notes": "has_visual==True but visual_type==none; pure numeric log-eval / blank-grid; no figure asset needed (teacher-confirm).",
+        "flags": [],
+        "legacy_id": "6-3-tryit-4",
+        "item_uid": "iu_4df415358168",
+        "registry_line": 484,
+        "ambiguous": false
+      },
+      {
+        "bank_id": "6-3-tryit-5",
+        "lesson": "6-3",
+        "figure_type": "none",
+        "staging_file": null,
+        "source_prompt_excerpt": "Solve each equation. Round to the nearest thousandth.\n\na. \\log (3x - 2) = 2 b. e^{x+2} = 8",
+        "compile_status": "no-asset",
+        "pdf_bytes": 0,
+        "status": "no-asset",
+        "batch": "reclass",
+        "notes": "has_visual==True but visual_type==none; pure numeric log-eval / blank-grid; no figure asset needed (teacher-confirm).",
+        "flags": [],
+        "legacy_id": "6-3-tryit-5",
+        "item_uid": "iu_0543e066a324",
+        "registry_line": 485,
+        "ambiguous": false
+      },
+      {
+        "bank_id": "6-4-tryit-1",
+        "lesson": "6-4",
+        "figure_type": "none",
+        "staging_file": null,
+        "source_prompt_excerpt": "Graph each function and identify the domain and range. List any intercepts or asymptotes. Describe the end behavior.\n\na. y = \\ln x b. y = \\log_{(1)/(2)} x",
+        "compile_status": "no-asset",
+        "pdf_bytes": 0,
+        "status": "no-asset",
+        "batch": "reclass",
+        "notes": "has_visual==True but visual_type==none; pure numeric log-eval / blank-grid; no figure asset needed (teacher-confirm).",
+        "flags": [],
+        "legacy_id": "6-4-tryit-1",
+        "item_uid": "iu_917592ac83b4",
+        "registry_line": 579,
+        "ambiguous": false
+      }
+    ],
+    "reclassified": [
+      {
+        "bank_id": "4-5-savvas-concept-summary-lesson-4-5-2",
+        "lesson": "4-5",
+        "figure_type": "table",
+        "staging_file": "4-5-savvas-concept-summary-lesson-4-5-2.tex",
+        "source_prompt_excerpt": "CONCEPT SUMMARY Solving Rational Equations\n\nWORDS: A rational equation is an equation that contains a rational expression. To solve, identify the domain for the variable. Then multiply both sides of",
+        "compile_status": "pass",
+        "pdf_bytes": 70966,
+        "status": "reclassified-map->table",
+        "batch": "A_tables",
+        "notes": "rep_type is 'map', not a pipe-table; per explicit task override, rendered as a 2-column Words | Algebra booktabs table capturing the WORDS paragraph and the two worked ALGEBRA examples (1/x+2/x=1/6 and (x^2+4)/(x-1)=5/(x-1), each with full derivation via amsmath 'gathered'). Excluded per the same override: the trailing Do-You-Understand/Know-How exercise list, the blank Distance/Rate/Time practice-table stub embedded in that exercise list (its Upstream/Downstream rows have no filled values in the source -- correctly a blank student worksheet stub, not this item's table), and the boat-diagram image reference.",
+        "flags": [],
+        "legacy_id": "4-5-savvas-concept-summary-lesson-4-5-2",
+        "item_uid": "iu_673930da185b",
+        "registry_line": 866,
+        "ambiguous": false
+      }
+    ],
+    "figures": [
+      {
+        "bank_id": "4-3-ex-6",
+        "legacy_id": "4-3-ex-6",
+        "item_uid": "iu_5610833d718c",
+        "registry_line": 49,
+        "ambiguous": false,
+        "lesson": "4-3",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "4-3-ex-6.pdf",
+        "thumb_key": "4-3-ex-6"
+      },
+      {
+        "bank_id": "4-3-savvas-concept-summary-lesson-4-3",
+        "legacy_id": "4-3-savvas-concept-summary-lesson-4-3",
+        "item_uid": "iu_800e2183d5a7",
+        "registry_line": 93,
+        "ambiguous": false,
+        "lesson": "4-3",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "4-3-savvas-concept-summary-lesson-4-3.pdf",
+        "thumb_key": "4-3-savvas-concept-summary-lesson-4-3"
+      },
+      {
+        "bank_id": "4-3-savvas-model-discuss-lesson-4-3-launch",
+        "legacy_id": "4-3-savvas-model-discuss-lesson-4-3-launch",
+        "item_uid": "iu_a657597d6914",
+        "registry_line": 43,
+        "ambiguous": false,
+        "lesson": "4-3",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "4-3-savvas-model-discuss-lesson-4-3-launch.pdf",
+        "thumb_key": "4-3-savvas-model-discuss-lesson-4-3-launch"
+      },
+      {
+        "bank_id": "4-4-savvas-concept-summary-lesson-4-4",
+        "legacy_id": "4-4-savvas-concept-summary-lesson-4-4",
+        "item_uid": "iu_12a69749715f",
+        "registry_line": 787,
+        "ambiguous": false,
+        "lesson": "4-4",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "4-4-savvas-concept-summary-lesson-4-4.pdf",
+        "thumb_key": "4-4-savvas-concept-summary-lesson-4-4"
+      },
+      {
+        "bank_id": "4-4-savvas-q36",
+        "legacy_id": "4-4-savvas-q36",
+        "item_uid": "iu_42607e7b67ea",
+        "registry_line": 774,
+        "ambiguous": false,
+        "lesson": "4-4",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "4-4-savvas-q36.pdf",
+        "thumb_key": "4-4-savvas-q36"
+      },
+      {
+        "bank_id": "4-5-ex-3",
+        "legacy_id": "4-5-ex-3",
+        "item_uid": "iu_accee49f2cfd",
+        "registry_line": 820,
+        "ambiguous": false,
+        "lesson": "4-5",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "4-5-ex-3.pdf",
+        "thumb_key": "4-5-ex-3"
+      },
+      {
+        "bank_id": "4-5-savvas-concept-summary-lesson-4-5-2",
+        "legacy_id": "4-5-savvas-concept-summary-lesson-4-5-2",
+        "item_uid": "iu_673930da185b",
+        "registry_line": 866,
+        "ambiguous": false,
+        "lesson": "4-5",
+        "figure_type": "table",
+        "status": "reclassified-map->table",
+        "compile_status": "pass",
+        "pdf_file": "4-5-savvas-concept-summary-lesson-4-5-2.pdf",
+        "thumb_key": "4-5-savvas-concept-summary-lesson-4-5-2"
+      },
+      {
+        "bank_id": "4-5-savvas-model-discuss-lesson-4-5-launch",
+        "legacy_id": "4-5-savvas-model-discuss-lesson-4-5-launch",
+        "item_uid": "iu_e88dfd1b630d",
+        "registry_line": 816,
+        "ambiguous": false,
+        "lesson": "4-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "4-5-savvas-model-discuss-lesson-4-5-launch.pdf",
+        "thumb_key": "4-5-savvas-model-discuss-lesson-4-5-launch"
+      },
+      {
+        "bank_id": "4-5-savvas-model-discuss-lesson-4-5-launch-2",
+        "legacy_id": "4-5-savvas-model-discuss-lesson-4-5-launch-2",
+        "item_uid": "iu_bb290af69cb6",
+        "registry_line": 817,
+        "ambiguous": false,
+        "lesson": "4-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "4-5-savvas-model-discuss-lesson-4-5-launch-2.pdf",
+        "thumb_key": "4-5-savvas-model-discuss-lesson-4-5-launch-2"
+      },
+      {
+        "bank_id": "4-5-savvas-q31",
+        "legacy_id": "4-5-savvas-q31",
+        "item_uid": "iu_f98e8efdea80",
+        "registry_line": 858,
+        "ambiguous": false,
+        "lesson": "4-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "4-5-savvas-q31.pdf",
+        "thumb_key": "4-5-savvas-q31"
+      },
+      {
+        "bank_id": "5-1-ex-1",
+        "legacy_id": "5-1-ex-1",
+        "item_uid": "iu_bfb71e6f7980",
+        "registry_line": 119,
+        "ambiguous": false,
+        "lesson": "5-1",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-1-ex-1.pdf",
+        "thumb_key": "5-1-ex-1"
+      },
+      {
+        "bank_id": "5-1-ex-5",
+        "legacy_id": "5-1-ex-5",
+        "item_uid": "iu_bbfcf37b49cd",
+        "registry_line": 117,
+        "ambiguous": false,
+        "lesson": "5-1",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-1-ex-5.pdf",
+        "thumb_key": "5-1-ex-5"
+      },
+      {
+        "bank_id": "5-1-savvas-concept-summary-lesson-5-1-2",
+        "legacy_id": "5-1-savvas-concept-summary-lesson-5-1-2",
+        "item_uid": "iu_436c160e2a07",
+        "registry_line": 214,
+        "ambiguous": false,
+        "lesson": "5-1",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-1-savvas-concept-summary-lesson-5-1-2.pdf",
+        "thumb_key": "5-1-savvas-concept-summary-lesson-5-1-2"
+      },
+      {
+        "bank_id": "5-1-savvas-model-discuss-lesson-5-1-launch",
+        "legacy_id": "5-1-savvas-model-discuss-lesson-5-1-launch",
+        "item_uid": "iu_05586ed3a6eb",
+        "registry_line": 113,
+        "ambiguous": false,
+        "lesson": "5-1",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-1-savvas-model-discuss-lesson-5-1-launch.pdf",
+        "thumb_key": "5-1-savvas-model-discuss-lesson-5-1-launch"
+      },
+      {
+        "bank_id": "5-1-savvas-model-discuss-lesson-5-1-launch-2",
+        "legacy_id": "5-1-savvas-model-discuss-lesson-5-1-launch-2",
+        "item_uid": "iu_075af4d15371",
+        "registry_line": 114,
+        "ambiguous": false,
+        "lesson": "5-1",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-1-savvas-model-discuss-lesson-5-1-launch-2.pdf",
+        "thumb_key": "5-1-savvas-model-discuss-lesson-5-1-launch-2"
+      },
+      {
+        "bank_id": "5-1-savvas-q45",
+        "legacy_id": "5-1-savvas-q45",
+        "item_uid": null,
+        "registry_line": null,
+        "ambiguous": true,
+        "uid_candidates": [
+          {
+            "item_uid": "iu_7b2d29db52d4",
+            "registry_line": 171
+          },
+          {
+            "item_uid": "iu_47a86f758dce",
+            "registry_line": 203
+          }
+        ],
+        "lesson": "5-1",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-1-savvas-q45.pdf",
+        "thumb_key": "5-1-savvas-q45"
+      },
+      {
+        "bank_id": "5-1-savvas-q48",
+        "legacy_id": "5-1-savvas-q48",
+        "item_uid": null,
+        "registry_line": null,
+        "ambiguous": true,
+        "uid_candidates": [
+          {
+            "item_uid": "iu_6ccaa1de9864",
+            "registry_line": 174
+          },
+          {
+            "item_uid": "iu_bd157bf28b74",
+            "registry_line": 206
+          }
+        ],
+        "lesson": "5-1",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-1-savvas-q48.pdf",
+        "thumb_key": "5-1-savvas-q48"
+      },
+      {
+        "bank_id": "5-4-ex-1",
+        "legacy_id": "5-4-ex-1",
+        "item_uid": "iu_3f459c2081de",
+        "registry_line": 247,
+        "ambiguous": false,
+        "lesson": "5-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-4-ex-1.pdf",
+        "thumb_key": "5-4-ex-1"
+      },
+      {
+        "bank_id": "5-4-ex-3",
+        "legacy_id": "5-4-ex-3",
+        "item_uid": "iu_01232e57fc32",
+        "registry_line": 249,
+        "ambiguous": false,
+        "lesson": "5-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-4-ex-3.pdf",
+        "thumb_key": "5-4-ex-3"
+      },
+      {
+        "bank_id": "5-4-ex-5",
+        "legacy_id": "5-4-ex-5",
+        "item_uid": "iu_829499411d15",
+        "registry_line": 251,
+        "ambiguous": false,
+        "lesson": "5-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-4-ex-5.pdf",
+        "thumb_key": "5-4-ex-5"
+      },
+      {
+        "bank_id": "5-4-savvas-concept-summary-lesson-5-4",
+        "legacy_id": "5-4-savvas-concept-summary-lesson-5-4",
+        "item_uid": "iu_9525d1a23cab",
+        "registry_line": 346,
+        "ambiguous": false,
+        "lesson": "5-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-4-savvas-concept-summary-lesson-5-4.pdf",
+        "thumb_key": "5-4-savvas-concept-summary-lesson-5-4"
+      },
+      {
+        "bank_id": "5-4-savvas-concept-summary-lesson-5-4-2",
+        "legacy_id": "5-4-savvas-concept-summary-lesson-5-4-2",
+        "item_uid": "iu_2039a5313d59",
+        "registry_line": 347,
+        "ambiguous": false,
+        "lesson": "5-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-4-savvas-concept-summary-lesson-5-4-2.pdf",
+        "thumb_key": "5-4-savvas-concept-summary-lesson-5-4-2"
+      },
+      {
+        "bank_id": "5-4-savvas-q44",
+        "legacy_id": "5-4-savvas-q44",
+        "item_uid": null,
+        "registry_line": null,
+        "ambiguous": true,
+        "uid_candidates": [
+          {
+            "item_uid": "iu_25b106c19a20",
+            "registry_line": 302
+          },
+          {
+            "item_uid": "iu_097a1fc43439",
+            "registry_line": 331
+          }
+        ],
+        "lesson": "5-4",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-4-savvas-q44.pdf",
+        "thumb_key": "5-4-savvas-q44"
+      },
+      {
+        "bank_id": "5-5-ex-4",
+        "legacy_id": "5-5-ex-4",
+        "item_uid": "iu_cc4ebf4bf0ba",
+        "registry_line": 382,
+        "ambiguous": false,
+        "lesson": "5-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-5-ex-4.pdf",
+        "thumb_key": "5-5-ex-4"
+      },
+      {
+        "bank_id": "5-5-savvas-concept-summary-lesson-5-5",
+        "legacy_id": "5-5-savvas-concept-summary-lesson-5-5",
+        "item_uid": "iu_4afe0e6f6448",
+        "registry_line": 448,
+        "ambiguous": false,
+        "lesson": "5-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-5-savvas-concept-summary-lesson-5-5.pdf",
+        "thumb_key": "5-5-savvas-concept-summary-lesson-5-5"
+      },
+      {
+        "bank_id": "5-5-savvas-concept-summary-lesson-5-5-2",
+        "legacy_id": "5-5-savvas-concept-summary-lesson-5-5-2",
+        "item_uid": "iu_0f1e8207cacd",
+        "registry_line": 449,
+        "ambiguous": false,
+        "lesson": "5-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-5-savvas-concept-summary-lesson-5-5-2.pdf",
+        "thumb_key": "5-5-savvas-concept-summary-lesson-5-5-2"
+      },
+      {
+        "bank_id": "5-5-savvas-q36",
+        "legacy_id": "5-5-savvas-q36",
+        "item_uid": null,
+        "registry_line": null,
+        "ambiguous": true,
+        "uid_candidates": [
+          {
+            "item_uid": "iu_b5f838fc172a",
+            "registry_line": 415
+          },
+          {
+            "item_uid": "iu_a11fd8fd0f3a",
+            "registry_line": 439
+          }
+        ],
+        "lesson": "5-5",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "5-5-savvas-q36.pdf",
+        "thumb_key": "5-5-savvas-q36"
+      },
+      {
+        "bank_id": "6-3-ex-1",
+        "legacy_id": "6-3-ex-1",
+        "item_uid": "iu_eb1311d9ee95",
+        "registry_line": 475,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-ex-1.pdf",
+        "thumb_key": "6-3-ex-1"
+      },
+      {
+        "bank_id": "6-3-ex-4",
+        "legacy_id": "6-3-ex-4",
+        "item_uid": "iu_eab0fb8adbc1",
+        "registry_line": 478,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-ex-4.pdf",
+        "thumb_key": "6-3-ex-4"
+      },
+      {
+        "bank_id": "6-3-ex-5",
+        "legacy_id": "6-3-ex-5",
+        "item_uid": "iu_1d691ff060eb",
+        "registry_line": 479,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-ex-5.pdf",
+        "thumb_key": "6-3-ex-5"
+      },
+      {
+        "bank_id": "6-3-ex-6",
+        "legacy_id": "6-3-ex-6",
+        "item_uid": "iu_185fccc72b49",
+        "registry_line": 480,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-ex-6.pdf",
+        "thumb_key": "6-3-ex-6"
+      },
+      {
+        "bank_id": "6-3-savvas-concept-box-lesson-6-3",
+        "legacy_id": "6-3-savvas-concept-box-lesson-6-3",
+        "item_uid": "iu_c6eedcb27a85",
+        "registry_line": 545,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-savvas-concept-box-lesson-6-3.pdf",
+        "thumb_key": "6-3-savvas-concept-box-lesson-6-3"
+      },
+      {
+        "bank_id": "6-3-savvas-concept-summary-lesson-6-3",
+        "legacy_id": "6-3-savvas-concept-summary-lesson-6-3",
+        "item_uid": "iu_8f1fdf425560",
+        "registry_line": 549,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-savvas-concept-summary-lesson-6-3.pdf",
+        "thumb_key": "6-3-savvas-concept-summary-lesson-6-3"
+      },
+      {
+        "bank_id": "6-3-savvas-concept-summary-lesson-6-3-2",
+        "legacy_id": "6-3-savvas-concept-summary-lesson-6-3-2",
+        "item_uid": "iu_ef347a46ae31",
+        "registry_line": 550,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-savvas-concept-summary-lesson-6-3-2.pdf",
+        "thumb_key": "6-3-savvas-concept-summary-lesson-6-3-2"
+      },
+      {
+        "bank_id": "6-3-savvas-model-discuss-lesson-6-3-launch",
+        "legacy_id": "6-3-savvas-model-discuss-lesson-6-3-launch",
+        "item_uid": "iu_13e1b20f4f78",
+        "registry_line": 473,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-savvas-model-discuss-lesson-6-3-launch.pdf",
+        "thumb_key": "6-3-savvas-model-discuss-lesson-6-3-launch"
+      },
+      {
+        "bank_id": "6-3-savvas-model-discuss-lesson-6-3-launch-2",
+        "legacy_id": "6-3-savvas-model-discuss-lesson-6-3-launch-2",
+        "item_uid": "iu_5aea45e223d3",
+        "registry_line": 474,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-savvas-model-discuss-lesson-6-3-launch-2.pdf",
+        "thumb_key": "6-3-savvas-model-discuss-lesson-6-3-launch-2"
+      },
+      {
+        "bank_id": "6-3-savvas-q15",
+        "legacy_id": "6-3-savvas-q15",
+        "item_uid": "iu_b42210bc5d54",
+        "registry_line": 506,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-savvas-q15.pdf",
+        "thumb_key": "6-3-savvas-q15"
+      },
+      {
+        "bank_id": "6-3-savvas-q57",
+        "legacy_id": "6-3-savvas-q57",
+        "item_uid": "iu_eb5fbf00bb0f",
+        "registry_line": 544,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-savvas-q57.pdf",
+        "thumb_key": "6-3-savvas-q57"
+      },
+      {
+        "bank_id": "6-3-savvas-q58",
+        "legacy_id": "6-3-savvas-q58",
+        "item_uid": "iu_f71b6eb8534a",
+        "registry_line": 504,
+        "ambiguous": false,
+        "lesson": "6-3",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-3-savvas-q58.pdf",
+        "thumb_key": "6-3-savvas-q58"
+      },
+      {
+        "bank_id": "6-4-ex-1",
+        "legacy_id": "6-4-ex-1",
+        "item_uid": "iu_5d7302fff76d",
+        "registry_line": 575,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-ex-1.pdf",
+        "thumb_key": "6-4-ex-1"
+      },
+      {
+        "bank_id": "6-4-ex-2",
+        "legacy_id": "6-4-ex-2",
+        "item_uid": "iu_d1c209acae68",
+        "registry_line": 576,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-ex-2.pdf",
+        "thumb_key": "6-4-ex-2"
+      },
+      {
+        "bank_id": "6-4-ex-3",
+        "legacy_id": "6-4-ex-3",
+        "item_uid": "iu_53b700ef54a2",
+        "registry_line": 577,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-ex-3.pdf",
+        "thumb_key": "6-4-ex-3"
+      },
+      {
+        "bank_id": "6-4-savvas-concept-summary-lesson-6-4",
+        "legacy_id": "6-4-savvas-concept-summary-lesson-6-4",
+        "item_uid": "iu_b6b2d0d6ef76",
+        "registry_line": 624,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-concept-summary-lesson-6-4.pdf",
+        "thumb_key": "6-4-savvas-concept-summary-lesson-6-4"
+      },
+      {
+        "bank_id": "6-4-savvas-concept-summary-lesson-6-4-2",
+        "legacy_id": "6-4-savvas-concept-summary-lesson-6-4-2",
+        "item_uid": "iu_beeaa457e0ef",
+        "registry_line": 625,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-concept-summary-lesson-6-4-2.pdf",
+        "thumb_key": "6-4-savvas-concept-summary-lesson-6-4-2"
+      },
+      {
+        "bank_id": "6-4-savvas-q11",
+        "legacy_id": "6-4-savvas-q11",
+        "item_uid": "iu_553c081b0b08",
+        "registry_line": 595,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-q11.pdf",
+        "thumb_key": "6-4-savvas-q11"
+      },
+      {
+        "bank_id": "6-4-savvas-q14",
+        "legacy_id": "6-4-savvas-q14",
+        "item_uid": "iu_d23a69064402",
+        "registry_line": 598,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-q14.pdf",
+        "thumb_key": "6-4-savvas-q14"
+      },
+      {
+        "bank_id": "6-4-savvas-q15",
+        "legacy_id": "6-4-savvas-q15",
+        "item_uid": "iu_1c9746a07e90",
+        "registry_line": 599,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-q15.pdf",
+        "thumb_key": "6-4-savvas-q15"
+      },
+      {
+        "bank_id": "6-4-savvas-q16",
+        "legacy_id": "6-4-savvas-q16",
+        "item_uid": "iu_995cd0567d97",
+        "registry_line": 600,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-q16.pdf",
+        "thumb_key": "6-4-savvas-q16"
+      },
+      {
+        "bank_id": "6-4-savvas-q17",
+        "legacy_id": "6-4-savvas-q17",
+        "item_uid": "iu_e32c4277630f",
+        "registry_line": 601,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-q17.pdf",
+        "thumb_key": "6-4-savvas-q17"
+      },
+      {
+        "bank_id": "6-4-savvas-q29",
+        "legacy_id": "6-4-savvas-q29",
+        "item_uid": "iu_31bf6314c977",
+        "registry_line": 613,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-q29.pdf",
+        "thumb_key": "6-4-savvas-q29"
+      },
+      {
+        "bank_id": "6-4-savvas-q30",
+        "legacy_id": "6-4-savvas-q30",
+        "item_uid": "iu_939654beefb4",
+        "registry_line": 614,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-q30.pdf",
+        "thumb_key": "6-4-savvas-q30"
+      },
+      {
+        "bank_id": "6-4-savvas-q32",
+        "legacy_id": "6-4-savvas-q32",
+        "item_uid": "iu_5e5e0ae929ac",
+        "registry_line": 590,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-q32.pdf",
+        "thumb_key": "6-4-savvas-q32"
+      },
+      {
+        "bank_id": "6-4-savvas-q8",
+        "legacy_id": "6-4-savvas-q8",
+        "item_uid": "iu_12e719e0d838",
+        "registry_line": 593,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-q8.pdf",
+        "thumb_key": "6-4-savvas-q8"
+      },
+      {
+        "bank_id": "6-4-savvas-teacher-edition-learntogether-les-2",
+        "legacy_id": "6-4-savvas-teacher-edition-learntogether-les-2",
+        "item_uid": "iu_76c8bfbc2b8c",
+        "registry_line": 633,
+        "ambiguous": false,
+        "lesson": "6-4",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-4-savvas-teacher-edition-learntogether-les-2.pdf",
+        "thumb_key": "6-4-savvas-teacher-edition-learntogether-les-2"
+      },
+      {
+        "bank_id": "6-5-ex-4",
+        "legacy_id": "6-5-ex-4",
+        "item_uid": "iu_d2a02d6014fe",
+        "registry_line": 647,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "diagram",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-ex-4.pdf",
+        "thumb_key": "6-5-ex-4"
+      },
+      {
+        "bank_id": "6-5-savvas-concept-box-lesson-6-5",
+        "legacy_id": "6-5-savvas-concept-box-lesson-6-5",
+        "item_uid": "iu_6bfae0831865",
+        "registry_line": 690,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-savvas-concept-box-lesson-6-5.pdf",
+        "thumb_key": "6-5-savvas-concept-box-lesson-6-5"
+      },
+      {
+        "bank_id": "6-5-savvas-concept-box-lesson-6-5-2",
+        "legacy_id": "6-5-savvas-concept-box-lesson-6-5-2",
+        "item_uid": "iu_e572911ab377",
+        "registry_line": 691,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-savvas-concept-box-lesson-6-5-2.pdf",
+        "thumb_key": "6-5-savvas-concept-box-lesson-6-5-2"
+      },
+      {
+        "bank_id": "6-5-savvas-concept-summary-lesson-6-5",
+        "legacy_id": "6-5-savvas-concept-summary-lesson-6-5",
+        "item_uid": "iu_253d7c23f6b6",
+        "registry_line": 693,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-savvas-concept-summary-lesson-6-5.pdf",
+        "thumb_key": "6-5-savvas-concept-summary-lesson-6-5"
+      },
+      {
+        "bank_id": "6-5-savvas-concept-summary-lesson-6-5-2",
+        "legacy_id": "6-5-savvas-concept-summary-lesson-6-5-2",
+        "item_uid": "iu_7e4615636f18",
+        "registry_line": 694,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-savvas-concept-summary-lesson-6-5-2.pdf",
+        "thumb_key": "6-5-savvas-concept-summary-lesson-6-5-2"
+      },
+      {
+        "bank_id": "6-5-savvas-model-discuss-lesson-6-5-launch",
+        "legacy_id": "6-5-savvas-model-discuss-lesson-6-5-launch",
+        "item_uid": "iu_9bdf16b9195f",
+        "registry_line": 642,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-savvas-model-discuss-lesson-6-5-launch.pdf",
+        "thumb_key": "6-5-savvas-model-discuss-lesson-6-5-launch"
+      },
+      {
+        "bank_id": "6-5-savvas-model-discuss-lesson-6-5-launch-2",
+        "legacy_id": "6-5-savvas-model-discuss-lesson-6-5-launch-2",
+        "item_uid": "iu_709b11893724",
+        "registry_line": 643,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-savvas-model-discuss-lesson-6-5-launch-2.pdf",
+        "thumb_key": "6-5-savvas-model-discuss-lesson-6-5-launch-2"
+      },
+      {
+        "bank_id": "6-5-savvas-q37",
+        "legacy_id": "6-5-savvas-q37",
+        "item_uid": "iu_a7f25442da1b",
+        "registry_line": 686,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-savvas-q37.pdf",
+        "thumb_key": "6-5-savvas-q37"
+      },
+      {
+        "bank_id": "6-5-savvas-q38",
+        "legacy_id": "6-5-savvas-q38",
+        "item_uid": "iu_953d0fec717c",
+        "registry_line": 687,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "table",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-savvas-q38.pdf",
+        "thumb_key": "6-5-savvas-q38"
+      },
+      {
+        "bank_id": "6-5-savvas-q9",
+        "legacy_id": "6-5-savvas-q9",
+        "item_uid": "iu_b7dbb8fd146e",
+        "registry_line": 658,
+        "ambiguous": false,
+        "lesson": "6-5",
+        "figure_type": "graph",
+        "status": "regenerated+compile-pass",
+        "compile_status": "pass",
+        "pdf_file": "6-5-savvas-q9.pdf",
+        "thumb_key": "6-5-savvas-q9"
+      }
+    ]
+  },
+  "section4": {
+    "items": [
+      {
+        "legacy_id": "4-3-savvas-q34",
+        "item_uid": "iu_60b7f1d72aca",
+        "registry_line": 79,
+        "lesson": "4-3",
+        "visual_type": "graph",
+        "prompt_excerpt": "Find and simplify the ratio of the volume of Figure A to the volume of Figure B. [GRAPH / TIKZ figure]",
+        "depicts": "Figure A/Figure B dimensions exist only in the source figure; the Savvas SE/TE PDF is needed to recover them.",
+        "why_essential": "'Find and simplify the ratio of the volume of Figure A to the volume of Figure B' gives no dimensions or expressions for either figure anywhere in the prompt text.",
+        "registry_source": "Savvas Practice #34 (lesson 4-3, anchors Example 6)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-4-3-savvas-q34-L79"
+      },
+      {
+        "legacy_id": "4-3-savvas-q35",
+        "item_uid": "iu_4433721e6dd1",
+        "registry_line": 80,
+        "lesson": "4-3",
+        "visual_type": "graph",
+        "prompt_excerpt": "Make Sense and Persevere An engineering firm wants to construct a cylindrical structure that will maximize the volume for a given surface area. Compare the ratios of the volume to...",
+        "depicts": "Cylinder A/B dimensions live only in the figure, not restated in text.",
+        "why_essential": "The cylindrical structures A and B are described only as 'shown'; no radius or height values appear in the prompt text.",
+        "registry_source": "Savvas Practice #35 (lesson 4-3, anchors Example 6)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-4-3-savvas-q35-L80"
+      },
+      {
+        "legacy_id": "4-3-savvas-q37",
+        "item_uid": "iu_538942f0c9f1",
+        "registry_line": 82,
+        "lesson": "4-3",
+        "visual_type": "graph",
+        "prompt_excerpt": "Look for Relationships A parallelogram with an area of (3x+12)/(10x+25) square units has a height shown. Find the length of the base of the parallelogram. [GRAPH / TIKZ figure]",
+        "depicts": "The height value needed to find the base length exists only in the original figure.",
+        "why_essential": "The parallelogram's height is described only as 'shown' in the figure; no numeric or symbolic height value appears in the prompt text.",
+        "registry_source": "Savvas Practice #37 (lesson 4-3, anchors Example 6)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-4-3-savvas-q37-L82"
+      },
+      {
+        "legacy_id": "5-1-savvas-q20",
+        "item_uid": "iu_46633f67b24d",
+        "registry_line": 146,
+        "lesson": "5-1",
+        "visual_type": "graph",
+        "prompt_excerpt": "Error Analysis Describe and correct the error a student made in writing this exponential expression in radical form. MP.3 [GRAPH / TIKZ figure]",
+        "depicts": "The wrong student work exists only in the source figure.",
+        "why_essential": "This is an error-analysis item ('Describe and correct the error a student made') whose specific incorrect student work is not reproduced anywhere in the prompt text.",
+        "registry_source": "Savvas Practice #20 (lesson 5-1, anchors Example 2)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-5-1-savvas-q20-L146"
+      },
+      {
+        "legacy_id": "5-4-savvas-q18",
+        "item_uid": "iu_35f3e9014abc",
+        "registry_line": 276,
+        "lesson": "5-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "Use Appropriate Tools Find the point of intersection of the two graphs. \\begin{center} [GRAPH / TIKZ figure] \\end{center}",
+        "depicts": "The two curves and their intersection point exist only in the original figure.",
+        "why_essential": "'Find the point of intersection of the two graphs' gives no equations for either curve anywhere in the prompt text.",
+        "registry_source": "Savvas Practice #18 (lesson 5-4)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-5-4-savvas-q18-L276"
+      },
+      {
+        "legacy_id": "5-4-savvas-q18",
+        "item_uid": "iu_d3ef1d0b4a28",
+        "registry_line": 307,
+        "lesson": "5-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "Use Appropriate Tools Find the point of intersection of the two graphs. [GRAPH / TIKZ figure]",
+        "depicts": "The two curves and their intersection point exist only in the original figure.",
+        "why_essential": "Duplicate occurrence: 'Find the point of intersection of the two graphs' gives no equations for either curve anywhere in the prompt text.",
+        "registry_source": "Savvas Practice #18 (lesson 5-4)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-5-4-savvas-q18-L307"
+      },
+      {
+        "legacy_id": "6-4-savvas-model-discuss-lesson-6-4-launch",
+        "item_uid": "iu_d9f906ec67c6",
+        "registry_line": 573,
+        "lesson": "6-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "EXPLORE & REASON Compare the graphs. \\begin{center} [GRAPH / TIKZ figure] [GRAPH / TIKZ figure] [GRAPH / TIKZ figure] \\end{center} A. Which two graphs represent the inverse of each...",
+        "depicts": "The three functions being compared exist only in the original figures.",
+        "why_essential": "'Compare the graphs...Which two graphs represent the inverse of each other?' gives no equations for any of the three graphs in the prompt text.",
+        "registry_source": "Savvas Model & Discuss (lesson 6-4 Launch)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-6-4-savvas-model-discuss-lesson-6-4-launch-L573"
+      },
+      {
+        "legacy_id": "6-4-savvas-model-discuss-lesson-6-4-launch-2",
+        "item_uid": "iu_ebf284c35a5b",
+        "registry_line": 574,
+        "lesson": "6-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "EXPLORE & REASON Compare the graphs. \\begin{center} [GRAPH / TIKZ figure] \\end{center} A. Which two graphs represent the inverse of each other? Explain. B. Look for Relationships W...",
+        "depicts": "The functions being compared exist only in the original figure.",
+        "why_essential": "Duplicate occurrence (single-graph variant): no equations for the compared graphs appear in the prompt text.",
+        "registry_source": "Savvas Model & Discuss (lesson 6-4 Launch)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-6-4-savvas-model-discuss-lesson-6-4-launch-2-L574"
+      },
+      {
+        "legacy_id": "6-4-savvas-q9",
+        "item_uid": "iu_d66b1aeede5d",
+        "registry_line": 589,
+        "lesson": "6-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "Look for Relationships Are the logarithmic and exponential functions shown inverses of each other? Explain. \\begin{center} [GRAPH / TIKZ figure] \\end{center}",
+        "depicts": "The two functions being compared exist only in the original figure.",
+        "why_essential": "'Are the logarithmic and exponential functions shown inverses of each other?' gives no equations for either function in the prompt text.",
+        "registry_source": "Savvas Practice #9 (lesson 6-4, anchors Example 3)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-6-4-savvas-q9-L589"
+      },
+      {
+        "legacy_id": "6-4-savvas-q13",
+        "item_uid": "iu_cd24889b7168",
+        "registry_line": 597,
+        "lesson": "6-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "Use Structure The graph shows a transformation of the parent graph f(x)=\\log_3 x. Write an equation for the graph. \\begin{center} [GRAPH / TIKZ figure] \\end{center}",
+        "depicts": "The transformation shown must be read off the original figure.",
+        "why_essential": "'The graph shows a transformation of the parent graph f(x)=log_3 x. Write an equation for the graph' -- the specific shift/transformation is not stated anywhere in text.",
+        "registry_source": "Savvas Practice #13 (lesson 6-4, anchors Example 1)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-6-4-savvas-q13-L597"
+      },
+      {
+        "legacy_id": "4-4-savvas-q11",
+        "item_uid": "iu_18d67eda0fc4",
+        "registry_line": 749,
+        "lesson": "4-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "Find the perimeter of the quadrilateral in simplest form. \\begin{center} [GRAPH / TIKZ figure] \\end{center}",
+        "depicts": "The quadrilateral's side-length expressions exist only in the original figure.",
+        "why_essential": "'Find the perimeter of the quadrilateral in simplest form' -- no side lengths or expressions for the quadrilateral appear anywhere in the prompt text.",
+        "registry_source": "Savvas Practice #11 (lesson 4-4)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-4-4-savvas-q11-L749"
+      },
+      {
+        "legacy_id": "4-4-savvas-q14",
+        "item_uid": "iu_f9ac979056e7",
+        "registry_line": 752,
+        "lesson": "4-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "Use Structure Find the slope of the line that passes through the points shown. Express in simplest form. \\begin{center} [GRAPH / TIKZ figure] \\end{center}",
+        "depicts": "The two points needed to compute slope exist only in the original figure.",
+        "why_essential": "'Find the slope of the line that passes through the points shown' -- no point coordinates appear anywhere in the prompt text.",
+        "registry_source": "Savvas Practice #14 (lesson 4-4)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-4-4-savvas-q14-L752"
+      },
+      {
+        "legacy_id": "4-4-savvas-q32",
+        "item_uid": "iu_9d7bab718966",
+        "registry_line": 770,
+        "lesson": "4-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "Model With Mathematics The resistance of electrical circuits A and B are shown. Find the ratio of the resistance of Circuit A to Circuit B. \\begin{center} [GRAPH / TIKZ figure] \\en...",
+        "depicts": "Circuit A/B component values exist only in the original figure.",
+        "why_essential": "'The resistance of electrical circuits A and B are shown' -- no resistance values or circuit diagrams appear in the prompt text.",
+        "registry_source": "Savvas Practice #32 (lesson 4-4)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-4-4-savvas-q32-L770"
+      },
+      {
+        "legacy_id": "4-4-savvas-concept-summary-lesson-4-4-2",
+        "item_uid": "iu_a404852ddb73",
+        "registry_line": 788,
+        "lesson": "4-4",
+        "visual_type": "graph",
+        "prompt_excerpt": "CONCEPT SUMMARY Find Sums and Differences of Rational Expressions Words: To add or subtract rational expressions with common denominators, add the numerators and keep the denominat...",
+        "depicts": "The quadrilateral's dimensions for item 11 exist only in the original figure, same gap as 4-4-savvas-q11.",
+        "why_essential": "Items 1-10 are fully self-contained text, but the closing item 11 ('Find the perimeter of the quadrilateral in simplest form') repeats the same undimensioned quadrilateral figure as 4-4-savvas-q11, with no side lengths given in text.",
+        "registry_source": "Savvas Concept Summary (lesson 4-4)",
+        "registry_page": null,
+        "source_requirement": "source PDF page unknown — needs SE/TE lookup",
+        "decision_id": "s4-4-4-savvas-concept-summary-lesson-4-4-2-L788"
+      }
+    ],
+    "count": 14,
+    "actions": [
+      "provide-source",
+      "accept-gap",
+      "reclassify"
+    ]
+  },
+  "section5": {
+    "rubric": {
+      "version": "v0.2",
+      "watermark": "APPROVED — v0.2 (approved_at 2026-07-20T19:06:13-04:00) — verification is active only for review-log entries recorded at or after each version's own approved_at (no retroactive verification)",
+      "prior_version_status": {
+        "version": "v0.1-PROPOSED",
+        "status": "request-changes by RC 2026-07-20",
+        "note": "That decision is recorded in the RC export (teacher_decisions_rc_v1.json, decision s5-rubric-v0.1); it is shown here as status context only, not re-recorded as a new decision."
+      },
+      "hierarchy": [
+        "Confirmed textbook DOK governs exact, unchanged textbook items.",
+        "Conflicting or provenance-missing textbook labels remain UNRESOLVED pending source verification.",
+        "Adapted, split, extended, and teacher-authored items are rated by their actual cognitive demand.",
+        "DOK measures cognitive demand, not difficulty.",
+        "Any teacher override requires rationale and provenance."
+      ],
+      "surviving_mechanics": [
+        "Reviewer id + ISO timestamp + disposition (confirm / change+new-DOK / needs-source-check) + chosen DOK (when disposition is change+new-DOK) + rationale note required on every disagreement + rubric_version recorded on every future log entry.",
+        "The two-tier VERIFIED predicate as implemented in tools/dok-review/dok_review.py's entry_is_verified: an entry is REVIEWED when well-formed (non-empty reviewed_by, parseable offset-aware reviewed_at, recognized decision, decision-specific required fields), and VERIFIED only when it additionally records a resolved verification-grade disposition (a rule-1 confirm whose provenance resolves on disk and binds to the item itself, or a complete change with item_basis-appropriate provenance), has no unresolved needs-source-check earlier in its item_uid's chain, and carries a rubric_version listed in the approvals manifest with a tool-stamped recorded_at not earlier than that version's approved_at -- no retroactive verification. The tool was aligned to this rubric (NT6), and the wave plan and dashboard now consume this same canonical projection (NT7) -- one projection — the generator and dashboard consume it directly; this console's build guards verify plan-manifest coherence at build time, and the cross-consumer identity suite (inventory/dok-workflow/test_cross_consumer_projection.py) proves per-item agreement across tool, generator, dashboard, and console surfaces. The approvals manifest is APPROVED — v0.2 (approved_at 2026-07-20T19:06:13-04:00) — with 39 item(s) currently verified under it; review-log entries recorded before a version's own approved_at never verify under that version and must be re-reviewed (a new entry, with a new recorded_at, after approval) to become eligible.",
+        "Consistency with tools/dok-review's append-only review_log.jsonl record shape: {item_uid, registry_line, item_id, lesson, reviewed_by, reviewed_at, prior_dok, reviewer_dok, current_dok, new_dok, decision, te_bucket, match_quality, disagreement_resolved, note, rubric_version, rationale, provenance, provenance_resolved, confirmation_basis, item_basis, resolves_source_check, prior_unresolved_nsc, recorded_at (tool-stamped)}."
+      ],
+      "record_shape": {
+        "item_uid": "iu_…",
+        "registry_line": 0,
+        "reviewer": "<reviewer-id>",
+        "timestamp": "<ISO8601>",
+        "disposition": "confirm | change+new-DOK | needs-source-check",
+        "chosen_dok": "1|2|3 (only when disposition=change+new-DOK)",
+        "rubric_version": "v0.2",
+        "note": "required on every disagreement"
+      },
+      "tool_alignment_note": "Shape is consistent with tools/dok-review/dok_review.py's append-only review_log.jsonl records ({item_uid, registry_line, item_id, lesson, reviewed_by, reviewed_at, prior_dok, reviewer_dok, current_dok, new_dok, decision, te_bucket, match_quality, disagreement_resolved, note, rubric_version, rationale, provenance, provenance_resolved, confirmation_basis, item_basis, resolves_source_check, prior_unresolved_nsc, recorded_at (tool-stamped)}); the console reads the tool's semantics for display only and writes NO review-log entries.",
+      "rubric_doc": {
+        "file": "DOK_RUBRIC_v0.2.md",
+        "note": "Full prose for the authority hierarchy, the surviving v0.1 mechanics, and the v0.1 -> v0.2 mapping table lives in DOK_RUBRIC_v0.2.md (same directory). This panel is a structured summary, not a substitute."
+      },
+      "decision_id": "s5-rubric-v0.2",
+      "actions": [
+        "approve-rubric",
+        "request-changes",
+        "defer"
+      ]
+    },
+    "wave0_sample": {
+      "banner": "SAMPLE — NOT RECORDED",
+      "note": "Worked illustration of what a rubric-applied review WOULD record. No review-log entry is written anywhere by this console.",
+      "items": [
+        {
+          "item_uid": "iu_3b42ab3340d5",
+          "registry_line": 41,
+          "legacy_id": "3-5-savvas-q27",
+          "role": "dok3-driver",
+          "dok": 3,
+          "dok_status": "calibrated",
+          "prompt": "Model With Mathematics: The height of a rectangular storage box is less than both its length and width. The function f(x) = x^3 + 2x^2 - 3x represents the volume of the rectangular box, where x represents the width of the box, in feet. (a) Find the factored form of f(x). (b) Find the zeros of the function. (c) You know x represents the width of the box. What do the other two factors represent? (d) Find the dimensions of the box when the volume is 10 ft^3.",
+          "v02_rule_applied": {
+            "rule_number": 1,
+            "hierarchy_rule": "Confirmed textbook DOK governs exact, unchanged textbook items.",
+            "note": "Would be classified under rule 1 (confirmed textbook DOK governs exact, unchanged textbook items) -- as a named anchor, not from dok_status alone: this item is named as a DOK3 calibration anchor in questionbank/calibration/3-5.json (source: 'Savvas Practice #27 (Model With Mathematics, lesson 3-5, anchors Example 4)'), which is a per-row, on-disk textbook DOK trace with an articulated rationale (dok3 rationale: \"Coordinate four sub-problems where each part depends on a strategic interpretation of the previous one — factor, then map factors to physical dimensions using the constraint 'length is greatest', then solve a non-routine cubic equation in context. No single procedure produces all four parts.\"). Because this specific item is one of the on-disk item-level anchors, DOK 3 would stand as the confirmed textbook label. (dok_status 'calibrated' alone is lesson-level provenance only and would NOT, by itself, have been sufficient without this anchor match.) Rule 4 note: this item's apparent difficulty (its length, its word-problem framing, or its multi-part structure) is not itself what would set the DOK -- rule 4 holds that DOK measures cognitive demand, not difficulty."
+          },
+          "would_record": {
+            "item_uid": "iu_3b42ab3340d5",
+            "registry_line": 41,
+            "reviewer": "<teacher-id — placeholder>",
+            "timestamp": "<at review time — placeholder>",
+            "disposition": "(illustration) confirm",
+            "chosen_dok": null,
+            "rubric_version": "v0.2",
+            "note": "(illustration only — not recorded)"
+          }
+        },
+        {
+          "item_uid": "iu_44c5510f90e7",
+          "registry_line": 3,
+          "legacy_id": "3-5-tryit-2a",
+          "role": "explore-practice",
+          "dok": 1,
+          "dok_status": "calibrated",
+          "prompt": "Describe the behavior of the graph of the function at each of its zeros: f(x) = x(x+4)(x-1)^4.",
+          "v02_rule_applied": {
+            "rule_number": 2,
+            "hierarchy_rule": "Conflicting or provenance-missing textbook labels remain UNRESOLVED pending source verification.",
+            "note": "Would be classified under rule 2 (conflicting or provenance-missing textbook labels remain UNRESOLVED pending source verification), for two facts together: (1) dok_status 'calibrated' is a LESSON-LEVEL provenance status only -- per inventory/dok-workflow/gen_dok_wave_plan.py's own comment, 'calibrated' is never earned by a single row being reviewed; and (2) this item (3-5-tryit-2a) is NOT named among the item-level anchors on disk for lesson 3-5 (anchors found there: 3-5-savvas-q18, 3-5-savvas-q27, 3-5-savvas-q30, 3-5-savvas-q7), so no per-row textbook DOK trace exists for it. The registry DOK (1) would therefore be held UNRESOLVED pending source verification, not accepted as a confirmed textbook label."
+          },
+          "would_record": {
+            "item_uid": "iu_44c5510f90e7",
+            "registry_line": 3,
+            "reviewer": "<teacher-id — placeholder>",
+            "timestamp": "<at review time — placeholder>",
+            "disposition": "(illustration) confirm",
+            "chosen_dok": null,
+            "rubric_version": "v0.2",
+            "note": "(illustration only — not recorded)"
+          }
+        },
+        {
+          "item_uid": "iu_4e3bd511e238",
+          "registry_line": 19,
+          "legacy_id": "3-5-savvas-q11",
+          "role": "optional-stretch",
+          "dok": 1,
+          "dok_status": "calibrated",
+          "prompt": "At what points do the graphs of f(x) = x^3 - 2x^2 - 16x + 20 and g(x) = -12 intersect?",
+          "v02_rule_applied": {
+            "rule_number": 2,
+            "hierarchy_rule": "Conflicting or provenance-missing textbook labels remain UNRESOLVED pending source verification.",
+            "note": "Would be classified under rule 2 (conflicting or provenance-missing textbook labels remain UNRESOLVED pending source verification), for two facts together: (1) dok_status 'calibrated' is a LESSON-LEVEL provenance status only -- per inventory/dok-workflow/gen_dok_wave_plan.py's own comment, 'calibrated' is never earned by a single row being reviewed; and (2) this item (3-5-savvas-q11) is NOT named among the item-level anchors on disk for lesson 3-5 (anchors found there: 3-5-savvas-q18, 3-5-savvas-q27, 3-5-savvas-q30, 3-5-savvas-q7), so no per-row textbook DOK trace exists for it. The registry DOK (1) would therefore be held UNRESOLVED pending source verification, not accepted as a confirmed textbook label."
+          },
+          "would_record": {
+            "item_uid": "iu_4e3bd511e238",
+            "registry_line": 19,
+            "reviewer": "<teacher-id — placeholder>",
+            "timestamp": "<at review time — placeholder>",
+            "disposition": "(illustration) confirm",
+            "chosen_dok": null,
+            "rubric_version": "v0.2",
+            "note": "(illustration only — not recorded)"
+          }
+        },
+        {
+          "item_uid": "iu_d3a3c0d48248",
+          "registry_line": 1,
+          "legacy_id": "3-5-tryit-1a",
+          "role": null,
+          "dok": 1,
+          "dok_status": "calibrated",
+          "prompt": "Factor each function. Then use the zeros to sketch its graph: f(x) = 4x^3 + 4x^2 - 24x.",
+          "v02_rule_applied": {
+            "rule_number": 2,
+            "hierarchy_rule": "Conflicting or provenance-missing textbook labels remain UNRESOLVED pending source verification.",
+            "note": "Would be classified under rule 2 (conflicting or provenance-missing textbook labels remain UNRESOLVED pending source verification), for two facts together: (1) dok_status 'calibrated' is a LESSON-LEVEL provenance status only -- per inventory/dok-workflow/gen_dok_wave_plan.py's own comment, 'calibrated' is never earned by a single row being reviewed; and (2) this item (3-5-tryit-1a) is NOT named among the item-level anchors on disk for lesson 3-5 (anchors found there: 3-5-savvas-q18, 3-5-savvas-q27, 3-5-savvas-q30, 3-5-savvas-q7), so no per-row textbook DOK trace exists for it. The registry DOK (1) would therefore be held UNRESOLVED pending source verification, not accepted as a confirmed textbook label."
+          },
+          "would_record": {
+            "item_uid": "iu_d3a3c0d48248",
+            "registry_line": 1,
+            "reviewer": "<teacher-id — placeholder>",
+            "timestamp": "<at review time — placeholder>",
+            "disposition": "(illustration) confirm",
+            "chosen_dok": null,
+            "rubric_version": "v0.2",
+            "note": "(illustration only — not recorded)"
+          }
+        },
+        {
+          "item_uid": "iu_f6f9c1b1a8df",
+          "registry_line": 9,
+          "legacy_id": "3-5-tryit-4",
+          "role": "explore-practice",
+          "dok": 2,
+          "dok_status": "calibrated",
+          "prompt": "Due to a decrease in the cost of materials, the profit function for Acme Innovations has changed to Q(x) = -x^3 + 10x^2 + 13x - 22, where x is the number of lamps in thousands. How many lamps should they make in order to make a profit?",
+          "v02_rule_applied": {
+            "rule_number": 2,
+            "hierarchy_rule": "Conflicting or provenance-missing textbook labels remain UNRESOLVED pending source verification.",
+            "note": "Would be classified under rule 2 (conflicting or provenance-missing textbook labels remain UNRESOLVED pending source verification), for two facts together: (1) dok_status 'calibrated' is a LESSON-LEVEL provenance status only -- per inventory/dok-workflow/gen_dok_wave_plan.py's own comment, 'calibrated' is never earned by a single row being reviewed; and (2) this item (3-5-tryit-4) is NOT named among the item-level anchors on disk for lesson 3-5 (anchors found there: 3-5-savvas-q18, 3-5-savvas-q27, 3-5-savvas-q30, 3-5-savvas-q7), so no per-row textbook DOK trace exists for it. The registry DOK (2) would therefore be held UNRESOLVED pending source verification, not accepted as a confirmed textbook label. Rule 4 note: this item's apparent difficulty (its length, its word-problem framing, or its multi-part structure) is not itself what would set the DOK -- rule 4 holds that DOK measures cognitive demand, not difficulty."
+          },
+          "would_record": {
+            "item_uid": "iu_f6f9c1b1a8df",
+            "registry_line": 9,
+            "reviewer": "<teacher-id — placeholder>",
+            "timestamp": "<at review time — placeholder>",
+            "disposition": "(illustration) confirm",
+            "chosen_dok": null,
+            "rubric_version": "v0.2",
+            "note": "(illustration only — not recorded)"
+          }
+        }
+      ]
+    }
+  },
+  "section6": {
+    "schema_file": "decisions_export.schema.json",
+    "template_file": "teacher_decisions.template.json",
+    "export_note": "The Export button downloads teacher_decisions.json (Blob) and offers a copy-to-clipboard textarea fallback. Proposals only; no registry writes.",
+    "recorded_exclusion_note": "2 Section 3 decision(s) already recorded in teacher_decisions_rc_v1.json are excluded from this export (shown above as recorded, not re-exported; re-deciding one requires a new export revision)."
+  }
+}

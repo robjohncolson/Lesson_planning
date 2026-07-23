@@ -1,0 +1,27 @@
+\documentclass[border=6pt]{standalone}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = {$x$}, ylabel = {$y$},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!30},
+    axis line style={-Stealth},
+    legend style={font=\small},
+    tick label style={font=\small},
+    xmin=-4.3, xmax=4.3, ymin=-2.5, ymax=16.5,
+    xtick={-4,-3,-2,-1,0,1,2,3,4},
+    ytick={0,2,4,6,8,10,12,14,16},
+    width=10cm, height=9cm,
+]
+\addplot[domain=-4:4, samples=150, thick, blue] {x^2};
+\addlegendentry{$y=x^2$}
+\end{axis}
+\end{tikzpicture}
+\end{document}

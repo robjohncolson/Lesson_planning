@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lesson-planning.local/schemas/decisions_export.schema.json",
+  "title": "NT3 Teacher Decision Console — Decisions Export",
+  "description": "Export of teacher decisions from TEACHER_DECISION_CONSOLE.html. PROPOSALS ONLY: this file never mutates questionbank/registry.jsonl or any source; a later, separate, teacher-gated application step is required. The console presents evidence and records choices; it does not itself decide anything, and no state in this document may ever be described as \"verified\" — verification, if any, happens outside this file in the gated application step.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "exported_at", "decisions"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Fixed version tag for this export shape."
+    },
+    "exported_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO 8601 date-time when the console generated this export. Null is allowed ONLY in the blank template (teacher_decisions.template.json) prior to any export; a real export from the console always sets this."
+    },
+    "reviewer_default": {
+      "type": "string",
+      "description": "Optional reviewer id typed into the console's reviewer field, used to prefill each decision's `reviewer` unless overridden per-decision."
+    },
+    "note": {
+      "type": "string",
+      "description": "Optional free-form note about the export as a whole (not tied to any single decision)."
+    },
+    "decisions": {
+      "type": "array",
+      "minItems": 0,
+      "description": "One entry per teacher decision recorded in the console, across sections 1-5. May be empty (e.g. the blank template, or an export before any decisions were made).",
+      "items": { "$ref": "#/$defs/decision" }
+    }
+  },
+  "$defs": {
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["section", "decision_id", "target_item_uids", "registry_lines", "action", "reviewer", "timestamp"],
+      "properties": {
+        "section": {
+          "type": "integer",
+          "enum": [1, 2, 3, 4, 5],
+          "description": "Which of the console's 6 sections this decision belongs to (section 6 is the export mechanism itself and produces no decisions of its own): 1=4-1 revive-vs-retire, 2=DOK-conflict pairs, 3=flagged figures from the 64-figure contact sheet, 4=essential missing visuals, 5=DOK acceptance rubric v0.1-PROPOSED."
+        },
+        "decision_id": {
+          "type": "string",
+          "pattern": "^s[1-5]-",
+          "description": "Stable identifier for this decision, namespaced by section. Conventions: section 1 uses a single fixed id 's1-revive-or-retire-4-1'; section 2 uses 's2-<legacy_id>', one per DOK-conflict pair (e.g. 's2-5-4-savvas-q41' — the sole DOK 2-vs-3 conflict pair; all other pairs conflict on other DOK values); section 3 uses 's3-fig-<bank_id>' for the two teacher-flagged figures ('s3-fig-4-3-ex-6', 's3-fig-6-4-savvas-q30'); section 4 uses 's4-<legacy_id>-L<registry_line>' for the 14 essential missing visuals, where the L<registry_line> suffix disambiguates cases like the duplicated legacy id '5-4-savvas-q18' which appears at registry lines 276 and 307; section 5 uses the fixed id 's5-rubric-v0.1'. Legacy ids embedded in decision_id are for human readability only — see target_item_uids for the authoritative identity key."
+        },
+        "target_item_uids": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^iu_[0-9a-f]{12}$" },
+          "description": "The item(s) this decision applies to, keyed by item_uid — the ONLY valid identity key in this system. Each entry MUST match the opaque uid format '^iu_[0-9a-f]{12}$'; legacy/bank ids (e.g. '5-4-savvas-q41') are display-only convenience labels, are NOT unique (85 legacy ids are shared by two separate registry rows), and will FAIL this pattern if submitted here. Global (lesson- or rubric-scoped) actions may leave this empty; item-scoped actions require at least one uid — see the if/then/else conditional below for exactly which actions require it."
+        },
+        "registry_lines": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 },
+          "description": "1-based line numbers into questionbank/registry.jsonl that this decision touches. Global (lesson- or rubric-scoped) actions may leave this empty (e.g. the section 5 rubric decision, which concerns the rubric document rather than a specific registry row); item-scoped actions require at least one line — see the if/then/else conditional below for exactly which actions require it."
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "revive-ingestion-only",
+            "revive-full-rebuild",
+            "retire-and-repoint",
+            "defer",
+            "keep-both",
+            "reconcile-labels",
+            "merge-candidate",
+            "needs-source-check",
+            "confirm",
+            "reject",
+            "needs-rework",
+            "provide-source",
+            "accept-gap",
+            "reclassify",
+            "approve-rubric",
+            "request-changes"
+          ],
+          "description": "The teacher's chosen action for this decision. Valid actions are grouped by section: Section 1 (4-1 revive-vs-retire): revive-ingestion-only | revive-full-rebuild | retire-and-repoint | defer. Section 2 (DOK-conflict pairs, 22 pairs): keep-both | reconcile-labels | merge-candidate | needs-source-check — all four are EQUAL options; none is a default or recommended choice. Section 3 (flagged figures, e.g. the 2 teacher-flagged figures isolated from the 64-figure contact sheet): confirm | reject | needs-rework. Section 4 (14 essential missing visuals): provide-source | accept-gap | reclassify. Section 5 (DOK acceptance rubric v0.1-PROPOSED): approve-rubric | request-changes | defer. Note 'defer' is shared by sections 1 and 5. The schema DOES enforce a coarser split of this same grouping via the decision object's if/then/else: {revive-ingestion-only, revive-full-rebuild, retire-and-repoint, defer, approve-rubric, request-changes} are 'global' (section 1 + section 5) and may have empty target_item_uids/registry_lines; every other action here is 'item-scoped' (section 2, 3, 4) and requires at least one target_item_uids entry and one registry_lines entry."
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional structured parameters, only meaningful for specific actions.",
+          "properties": {
+            "chosen_dok": {
+              "type": "integer",
+              "enum": [1, 2, 3],
+              "description": "Required semantics (by rubric convention, not enforced by this schema): present only when action is 'reconcile-labels'. Names the authoritative DOK level for a conflicting pair; BOTH registry rows stay in the registry unchanged — this only records which DOK label the teacher considers correct going forward. Not applicable to any other action."
+            },
+            "rubric_version": {
+              "type": "string",
+              "description": "Version tag for the DOK acceptance rubric this decision concerns, e.g. 'v0.1-PROPOSED'. Used on section 5 decisions. The 'PROPOSED' suffix reflects that the rubric is not yet teacher-approved; nothing may be recorded as 'verified' against it until approval, and this schema never uses the word 'verified' to describe any recordable state."
+            },
+            "target_ambiguous": {
+              "type": "boolean",
+              "description": "Set true when this decision's legacy id maps to two registry rows (an ambiguous alias in inventory/dedup/item_uid_alias_map.json) and BOTH candidate item_uids are included in target_item_uids rather than silently pinning one. As of this writing, 4 staged-figure legacy ids are ambiguous in the alias map: '5-1-savvas-q45', '5-1-savvas-q48', '5-4-savvas-q44', '5-5-savvas-q36'."
+            }
+          }
+        },
+        "reviewer": {
+          "type": "string",
+          "description": "Identifier (name/initials/id) of the teacher/reviewer who made this decision. Prefilled from reviewer_default if the console offers that convenience, but recorded per-decision here."
+        },
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "ISO 8601 date-time when this specific decision was made in the console. Null only for decisions not yet made (e.g. in a blank/partial template)."
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-form rationale for this decision. Optional in this schema, but REQUIRED BY RUBRIC (not by this schema) whenever the teacher's choice disagrees with the console's evidence/recommendation or changes a prior decision — the schema intentionally does not enforce this so the console can still export partial/in-progress work, but reviewers should treat a missing note on a disagreement or change as incomplete."
+        }
+      },
+      "if": {
+        "properties": {
+          "action": {
+            "enum": ["revive-ingestion-only", "revive-full-rebuild", "retire-and-repoint", "defer", "approve-rubric", "request-changes"]
+          }
+        },
+        "required": ["action"]
+      },
+      "then": {
+        "description": "Global (lesson- or rubric-scoped) action — section 1 (4-1 revive-vs-retire) and section 5 (rubric) decisions. target_item_uids and registry_lines are allowed to be empty because these actions apply to a lesson or a rubric document as a whole, not to individual registry rows."
+      },
+      "else": {
+        "description": "Item-scoped action — every action outside the global set (keep-both, reconcile-labels, merge-candidate, needs-source-check, confirm, reject, needs-rework, provide-source, accept-gap, reclassify). These name specific registry row(s), so at least one item_uid and one registry line are required.",
+        "properties": {
+          "target_item_uids": { "minItems": 1 },
+          "registry_lines": { "minItems": 1 }
+        }
+      }
+    }
+  }
+}

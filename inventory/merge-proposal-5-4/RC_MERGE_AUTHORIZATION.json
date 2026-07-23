@@ -1,0 +1,36 @@
+{
+  "record_type": "rc-merge-authorization",
+  "record_id": "rc-merge-auth-5-4-2026-07-23",
+  "authorized_by": "RC",
+  "authorized_at": "2026-07-23T00:48:13-04:00",
+  "authorizes": "Execution of the complete 22-pair Lesson 5-4 merge per inventory/merge-proposal-5-4/ (v2 reversible tombstone design)",
+  "proposal_artifacts": {
+    "merge_proposal_5_4.json_sha256": "a3f4a66d3ccc7f5eb2a8d4e363c52d201d2558ae95a740c66062f4ee8a82d5c2",
+    "MERGE_PROPOSAL.md_sha256": "4cd2c02744dfc323b2671a50df9bfd83c68426bbfaab482647f3d3268de1b32f"
+  },
+  "scope": [
+    "All 22 copy-A rows become merged-alias rows; corresponding copy-B rows are canonical survivors; no subset excluded",
+    "No row, item_uid, historical evidence, prompt, or provenance may be deleted",
+    "Copy-B rows must remain byte-identical",
+    "Copy-A rows retain every existing top-level field and receive exactly the four v2 marker fields (status, alias_of, merged_at, merge_authorization)"
+  ],
+  "execution_requirements": [
+    "One offset-aware execution timestamp used consistently across the operation",
+    "resolved_alias enrichment added to the alias-map pipeline without deleting either uid or changing the raw ambiguous calculation",
+    "Alias chains, missing targets, self-aliases, and alias-to-merged-alias targets forbidden",
+    "Alias uids remain resolvable for historical joins; merged aliases excluded from active student-facing item selection",
+    "Every active consumer resolves aliases deliberately; historical comparison reports and review records are not rewritten"
+  ],
+  "reporting_semantics": {
+    "raw_registry_identities": 900,
+    "merged_alias_identities": 22,
+    "active_canonical_items": 878,
+    "raw_ambiguous_legacy_id_groups": 85,
+    "alias_resolved_groups": 22,
+    "unresolved_ambiguous_groups": 63,
+    "rule": "Never mix raw and active denominators; audit/history surfaces report 900; student-facing selection and canonical content-readiness surfaces report 878 with alias access preserved"
+  },
+  "acceptance_gates": "Invariants I1-I6 plus I7 (dual-denominator + 85=22+63 reconciliation); one-hop proof; no student-facing alias emission; historical lookup by either uid; 39 VERIFIED records bound to same copy-B uids; registry rollback to locked hash; full-operation rollback of every modified file; consumer regeneration in documented order; complete suites; change detection before presenting",
+  "boundaries": "Local only; no commit/push/deploy/cloud/Schoology/CDP/secrets/AP-Stats; promotion proposals remain unapplied; return after execution and verification, before any commit",
+  "wording_correction": "Supersede 'copy A is a strict field-subset' with: copy A's field-name/schema set contributes no field absent from copy B, but its prompt and DOK values differ and remain preserved in the alias row"
+}

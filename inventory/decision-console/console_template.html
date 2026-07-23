@@ -1,0 +1,1259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teacher Decision Console — NT3</title>
+<style>
+  :root{
+    color-scheme: light;
+    --bg: #ffffff;
+    --bg-alt: #f4f6f8;
+    --bg-tint: #eef1f4;
+    --text: #1a1d20;
+    --muted: #55606b;
+    --border: #c9d1d9;
+    --border-strong: #8a97a3;
+    --accent: #2c4a68;
+    --accent-contrast: #ffffff;
+  }
+  *, *::before, *::after{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-size: 15px;
+  }
+  .page-wrap{ max-width: 1180px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  h1,h2,h3,h4,h5{ color: var(--text); line-height:1.25; }
+  h1{ font-size:1.6rem; margin: 1rem 0 0.35rem; }
+  h2{ font-size:1.3rem; border-bottom:2px solid var(--accent); padding-bottom:0.35rem; margin-top:0; scroll-margin-top: 76px; }
+  h3{ font-size:1.08rem; margin-bottom:0.4rem; }
+  h4{ font-size:0.95rem; margin: 0.9rem 0 0.3rem; color: var(--muted); text-transform: uppercase; letter-spacing:0.03em; }
+  h5{ font-size:0.88rem; margin: 0.7rem 0 0.25rem; color: var(--muted); }
+  p{ margin: 0.35rem 0 0.6rem; }
+  a{ color: var(--accent); }
+  ul{ margin: 0.25rem 0 0.6rem 1.1rem; padding:0; }
+  li{ margin-bottom: 0.3rem; }
+  section{ scroll-margin-top: 76px; margin-top: 2.25rem; padding-top: 0.25rem; }
+  section:first-of-type{ margin-top: 1rem; }
+  .wrap-text{ white-space: pre-wrap; }
+
+  /* ---------- top nav ---------- */
+  .topnav{
+    position: sticky; top:0; z-index: 50;
+    background: var(--accent); color: var(--accent-contrast);
+    display:flex; flex-wrap:wrap; align-items:center; gap: 0.15rem 1rem;
+    padding: 0.55rem 1rem;
+  }
+  .topnav a{ color: var(--accent-contrast); text-decoration:none; font-size:0.85rem; font-weight:600; padding:0.2rem 0.35rem; border-radius:3px; }
+  .topnav a:hover, .topnav a:focus{ background: rgba(255,255,255,0.18); }
+  .nav-counter{ margin-left:auto; font-size:0.82rem; font-weight:600; background: rgba(255,255,255,0.14); padding:0.25rem 0.6rem; border-radius:4px; white-space:nowrap; }
+
+  /* ---------- template banner ---------- */
+  .template-banner{
+    background:#fff3d6; border: 3px solid #8a6d1a; color:#5a4718;
+    font-weight:700; font-size:1.05rem; text-align:center;
+    padding: 1rem; margin: 1rem 0;
+  }
+  .render-error{
+    background:#fdecec; border:2px solid #b23; color:#6b1414; padding:0.9rem 1rem; margin:1rem 0; font-weight:600;
+  }
+
+  /* ---------- header ---------- */
+  .page-header{ padding-top: 0.25rem; }
+  .meta-line{ color: var(--muted); font-size:0.88rem; }
+  .notice{
+    border: 2px solid var(--accent); background: var(--bg-tint);
+    padding: 0.8rem 1rem; margin: 0.75rem 0 1rem; font-weight:600;
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
+  }
+  details.frozen-inputs{ border:1px solid var(--border); border-radius:4px; padding: 0.5rem 0.75rem; margin: 0.5rem 0; background: var(--bg-alt); }
+  details.frozen-inputs summary{ cursor:pointer; font-weight:600; }
+  .locked-counts{ margin-top: 0.75rem; }
+
+  /* ---------- generic tables / kv ---------- */
+  table{ border-collapse: collapse; width:100%; margin: 0.4rem 0 0.8rem; font-size: 0.9rem; }
+  th, td{ border:1px solid var(--border); padding: 0.35rem 0.55rem; text-align:left; vertical-align: top; }
+  th{ background: var(--bg-alt); }
+  dl.kv{ display:grid; grid-template-columns: max-content 1fr; column-gap: 0.75rem; row-gap: 0.25rem; margin: 0.4rem 0 0.7rem; font-size:0.92rem; }
+  dl.kv dt{ color: var(--muted); font-weight:600; }
+  dl.kv dd{ margin:0; }
+  .badge{
+    display:inline-block; border:1px solid var(--accent); color: var(--accent);
+    border-radius: 3px; padding: 0.1rem 0.5rem; font-size:0.78rem; font-weight:700;
+    letter-spacing:0.03em; margin-right:0.5rem;
+  }
+  pre.prompt-pre, pre.json-block{
+    background: var(--bg-alt); border:1px solid var(--border); border-radius:4px;
+    padding: 0.6rem 0.75rem; white-space: pre-wrap; word-break: break-word;
+    font-family: "Courier New", Consolas, monospace; font-size: 0.85rem; overflow-x:auto;
+  }
+
+  /* ---------- evidence list ---------- */
+  .evidence-list{ margin-left: 1.1rem; }
+  .evidence-fact{ }
+  .evidence-source{ color: var(--muted); font-size: 0.85rem; }
+
+  /* ---------- decision controls (shared) ---------- */
+  .decision-control{ border-top: 1px solid var(--border); margin-top: 0.9rem; padding-top: 0.6rem; }
+  .radio-group{ display:flex; flex-wrap:wrap; gap: 0.5rem 1.25rem; margin: 0.35rem 0 0.5rem; }
+  .radio-option{ display:flex; align-items:center; gap: 0.4rem; font-size:0.92rem; cursor:pointer; }
+  .radio-option input{ margin:0; }
+  .note-wrap{ margin-top:0.5rem; }
+  .note-wrap label{ display:block; font-size:0.82rem; color: var(--muted); margin-bottom:0.2rem; }
+  .note-box{ width:100%; max-width: 640px; font-family: inherit; font-size: 0.9rem; padding:0.4rem; border:1px solid var(--border); border-radius:3px; resize: vertical; }
+  .reconcile-reveal{ margin-top:0.6rem; padding: 0.6rem 0.75rem; background: var(--bg-alt); border:1px solid var(--border); border-radius:4px; }
+  .reconcile-reveal label{ font-size:0.85rem; color: var(--muted); margin-right:0.5rem; }
+  .reveal-note{ font-size:0.85rem; margin:0 0 0.4rem; }
+
+  /* ---------- section 1 ---------- */
+  table.dangling-edges td, table.dangling-edges th{ font-size:0.85rem; }
+  .cards-row{ display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.75rem; }
+  .card{ flex:1 1 320px; border:1px solid var(--border); border-radius:5px; padding:0.9rem 1rem; background: var(--bg); }
+  .recommendation-panel{
+    border: 4px double var(--accent); background: var(--bg-tint); border-radius:5px;
+    padding: 1rem 1.25rem; margin-top: 1.5rem;
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
+  }
+  .rec-heading{ font-weight:700; font-size:1.02rem; margin-bottom:0.6rem; color: var(--accent); }
+  .rec-confidence{ font-weight:600; }
+  .residual-risk{ font-style: italic; color: var(--muted); }
+
+  /* ---------- section 2 ---------- */
+  #s2Highlight{ border:2px solid var(--accent); background: var(--bg-tint); padding:0.6rem 0.85rem; border-radius:4px; font-weight:600; }
+  .pair-block{ border:1px solid var(--border); border-radius:5px; padding: 0.9rem 1.1rem; margin-bottom:1.25rem; }
+  .pair-block.highlighted-pair{ border: 3px solid var(--accent); }
+  .pair-columns{ display:grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .copy-column{ border:1px solid var(--border); border-radius:4px; padding:0.7rem 0.85rem; background: var(--bg-alt); }
+  .dok-badge{ display:inline-block; font-size:1.3rem; font-weight:700; border:2px solid var(--accent); border-radius:4px; padding:0.15rem 0.6rem; margin: 0.3rem 0; }
+  @media (max-width: 780px){ .pair-columns{ grid-template-columns: 1fr; } }
+
+  /* ---------- section 3 ---------- */
+  .flagged-panel{ border: 3px solid var(--border-strong); background: var(--bg-tint); border-radius:6px; padding: 1rem 1.1rem; margin-bottom:1.25rem; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .flagged-item{ border:1px solid var(--border); border-radius:5px; background: var(--bg); padding:0.85rem 1rem; margin-bottom:1rem; }
+  .flagged-item:last-child{ margin-bottom:0; }
+  img.flagged-thumb{ max-width: 360px; width:100%; height:auto; border:1px solid var(--border); background:#fff; cursor:pointer; }
+  .identity-ambiguous{ display:inline; }
+  .badge.ambiguous-badge{ border-style: dashed; }
+  .partition-summary{ font-weight:600; }
+  .thumb-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 0.5rem 0 1.25rem; }
+  .thumb-cell{ border:1px solid var(--border); border-radius:4px; padding:0.5rem; background: var(--bg-alt); }
+  img.thumb-img{ max-width: 220px; width:100%; height:auto; background:#fff; border:1px solid var(--border); cursor:pointer; display:block; margin-bottom:0.4rem; }
+  #imgModal{ position:fixed; inset:0; background:rgba(20,20,20,0.82); display:flex; align-items:center; justify-content:center; z-index:1000; padding:1rem; }
+  #imgModal[hidden]{ display:none; }
+  .modal-inner{ background:#fff; padding:1rem; border-radius:5px; max-width:96vw; max-height:96vh; overflow:auto; text-align:center; position:relative; }
+  #imgModalImg{ display:block; margin:0 auto; max-width:95vw; max-height:88vh; width:auto; height:auto; object-fit:contain; background:#fff; }
+  #imgModalCaption{ margin-top:0.5rem; font-size:0.85rem; color: var(--muted); }
+  #imgModalClose{ position:absolute; top:0.4rem; right:0.5rem; border:1px solid var(--border); background:var(--bg-alt); border-radius:3px; cursor:pointer; padding:0.1rem 0.5rem; font-size:1.1rem; line-height:1; }
+
+  /* ---------- section 3: recorded context (from RC export) ---------- */
+  .recorded-context-badge{
+    display:inline-block; border:3px solid var(--accent); background: var(--bg-tint); color: var(--accent);
+    font-weight:700; padding:0.35rem 0.7rem; border-radius:4px; margin: 0.5rem 0 0.35rem;
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
+  }
+  .recorded-context-note{ font-size:0.9rem; margin: 0.1rem 0 0.2rem; }
+  .recorded-context-source{ font-size:0.8rem; color: var(--muted); font-style: italic; margin: 0 0 0.6rem; }
+  .decision-control.disabled-control{ opacity:0.75; }
+  .disabled-explainer{ font-size:0.85rem; color: var(--muted); font-style: italic; margin: 0.2rem 0 0.5rem; }
+
+  /* ---------- section 4 ---------- */
+  .s4-item{ border:1px solid var(--border); border-radius:5px; padding:0.85rem 1rem; margin-bottom:1rem; }
+  .source-requirement{ font-weight:700; background: var(--bg-tint); border-left:4px solid var(--accent); padding: 0.4rem 0.6rem; }
+
+  /* ---------- section 5 ---------- */
+  .watermark-banner{
+    border: 2px solid var(--border-strong); background: var(--bg-tint); color: var(--text);
+    font-weight:700; text-align:center; padding:0.7rem 1rem; margin: 0.75rem 0;
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
+  }
+  .rubric-panel{ position:relative; overflow:hidden; border:1px solid var(--border); border-radius:6px; padding: 1rem 1.1rem; }
+  .watermark-bg{
+    position:absolute; inset: -20% -10%; z-index:0; pointer-events:none; user-select:none;
+    transform: rotate(-14deg); opacity:0.06; font-size:1.3rem; font-weight:700;
+    white-space: pre-wrap; overflow:hidden; line-height:2.4rem;
+  }
+  .rubric-body{ position:relative; z-index:1; }
+  .illustration-stamp{
+    display:inline-block; font-weight:700; letter-spacing:0.05em; font-size:0.78rem;
+    border:2px solid var(--border-strong); color: var(--muted); padding:0.15rem 0.5rem; margin: 0.4rem 0;
+  }
+  .prior-version-line{
+    border-left: 4px solid var(--border-strong); background: var(--bg-alt); color: var(--muted);
+    padding: 0.5rem 0.75rem; margin: 0.5rem 0 0.9rem; font-size: 0.9rem;
+  }
+  .prior-version-line strong{ color: var(--text); }
+  ol.hierarchy-list{ margin: 0.25rem 0 0.6rem 1.2rem; padding:0; }
+  ol.hierarchy-list li{ margin-bottom: 0.5rem; }
+  ul.mechanics-list{ margin: 0.25rem 0 0.6rem 1.1rem; padding:0; }
+  .rubric-doc-pointer{
+    border:1px solid var(--border); border-radius:4px; background: var(--bg-alt);
+    padding: 0.5rem 0.75rem; margin: 0.6rem 0; font-size: 0.9rem;
+  }
+  .rubric-doc-pointer code{ font-family: "Courier New", Consolas, monospace; }
+  .wave0-panel{ margin-top:1.5rem; }
+  .wave0-item{ border:1px solid var(--border); border-radius:5px; padding:0.8rem 1rem; margin-bottom:1rem; background: var(--bg-alt); }
+  .rule-annotation{
+    border-left: 4px solid var(--accent); background: var(--bg-tint); padding: 0.5rem 0.75rem;
+    margin: 0.5rem 0; font-size: 0.88rem;
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
+  }
+  .rule-annotation .rule-badge{ font-weight:700; color: var(--accent); margin-right:0.3rem; }
+
+  /* ---------- section 6 ---------- */
+  .export-controls{ display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin: 0.75rem 0; }
+  button{ font-family: inherit; font-size:0.92rem; font-weight:600; padding:0.45rem 0.9rem; border-radius:4px; border:1px solid var(--accent); background: var(--accent); color: var(--accent-contrast); cursor:pointer; }
+  button:hover{ opacity:0.9; }
+  #reviewerId{ font-family: inherit; font-size:0.9rem; padding:0.35rem 0.5rem; border:1px solid var(--border); border-radius:3px; }
+  #copyStatus{ font-size:0.85rem; color: var(--muted); }
+  #exportPreview{ width:100%; min-height: 220px; font-family: "Courier New", Consolas, monospace; font-size:0.82rem; padding:0.5rem; border:1px solid var(--border); border-radius:4px; }
+  #unansweredCount{ font-weight:700; }
+
+  @media print{
+    .topnav{ position: static; background: none; color: var(--text); border-bottom:2px solid var(--accent); }
+    .topnav a{ color: var(--text); }
+    .nav-counter{ background:none; }
+    #imgModal{ display:none !important; }
+    .no-print{ display:none !important; }
+    .pair-block, .s4-item, .flagged-item, .wave0-item{ break-inside: avoid; }
+    body{ font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div id="templateBanner" class="template-banner" role="alert" hidden>TEMPLATE — run build_console.py to produce TEACHER_DECISION_CONSOLE.html</div>
+<div id="renderError" class="render-error" role="alert" hidden></div>
+
+<nav class="topnav" id="topnav">
+  <a href="#section1">1. Revive vs Retire</a>
+  <a href="#section2">2. DOK Conflicts</a>
+  <a href="#section3">3. Visual Contact Sheet</a>
+  <a href="#section4">4. Missing Visuals</a>
+  <a href="#section5">5. Rubric</a>
+  <a href="#section6">6. Export</a>
+  <span class="nav-counter" id="navCounter">decisions made: 0 / recorded in rc_v1: 0 / pending: 0</span>
+</nav>
+
+<div class="page-wrap">
+  <header class="page-header">
+    <h1>Teacher Decision Console — NT3</h1>
+    <p class="meta-line">Generated by <span id="metaGeneratedBy"></span> at <span id="metaGeneratedAt"></span></p>
+    <div class="notice wrap-text" id="disclaimerNotice"></div>
+    <details class="frozen-inputs">
+      <summary>Frozen inputs</summary>
+      <table id="frozenInputsTable">
+        <thead><tr><th>Path</th><th>SHA-256</th></tr></thead>
+        <tbody id="frozenInputsBody"></tbody>
+      </table>
+    </details>
+    <div class="locked-counts">
+      <h4>Locked counts</h4>
+      <div id="lockedCounts"></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="section1">
+      <h2>Section 1 — Lesson 4-1: Revive vs Retire</h2>
+      <h3>Evidence</h3>
+      <div id="s1Evidence"></div>
+
+      <h3>Staged state</h3>
+      <div id="s1StagedState"></div>
+
+      <h3>Dangling edges into 4-1</h3>
+      <div id="s1DanglingEdges"></div>
+
+      <h3>Options</h3>
+      <div class="cards-row">
+        <div id="s1CardRevive" class="card"></div>
+        <div id="s1CardRetire" class="card"></div>
+      </div>
+
+      <div id="s1Recommendation" class="recommendation-panel"></div>
+
+      <div id="s1Decision" class="decision-control"></div>
+    </section>
+
+    <section id="section2">
+      <h2>Section 2 — DOK-Conflict Pairs</h2>
+      <div id="s2Intro">
+        <p><span id="s2Count"></span> DOK-conflict pairs are listed below, each with two registry copies of the same legacy id disagreeing on DOK level.</p>
+        <p class="wrap-text" id="s2IntroText"></p>
+        <p id="s2Highlight"></p>
+      </div>
+      <div id="s2Pairs"></div>
+    </section>
+
+    <section id="section3">
+      <h2>Section 3 — Visual Contact Sheet</h2>
+      <h3>Flagged for teacher review</h3>
+      <div id="s3Flagged" class="flagged-panel"></div>
+
+      <h3>Partition summary</h3>
+      <div id="s3Partition"></div>
+
+      <h4>Held — teacher</h4>
+      <div id="s3Held"></div>
+
+      <h4>No asset</h4>
+      <div id="s3NoAsset"></div>
+
+      <h4>Reclassified</h4>
+      <div id="s3Reclassified"></div>
+
+      <h3>Contact sheet (by lesson)</h3>
+      <div id="s3Grid"></div>
+    </section>
+
+    <section id="section4">
+      <h2>Section 4 — Essential Missing Visuals</h2>
+      <p><span id="s4Count"></span> registry items whose visual is essential but absent, each needing the original Savvas source PDF.</p>
+      <div id="s4Items"></div>
+    </section>
+
+    <section id="section5">
+      <h2>Section 5 — DOK Acceptance Rubric</h2>
+      <div class="rubric-panel">
+        <div class="watermark-bg" id="s5WatermarkBg" aria-hidden="true"></div>
+        <div class="rubric-body">
+          <div class="watermark-banner" id="s5WatermarkTop"></div>
+          <p><span class="badge" id="s5VersionBadge"></span></p>
+          <div id="s5RubricBody"></div>
+        </div>
+      </div>
+
+      <div class="wave0-panel">
+        <div class="watermark-banner" id="s5Wave0Banner"></div>
+        <p class="wrap-text" id="s5Wave0Note"></p>
+        <div id="s5Wave0Items"></div>
+      </div>
+    </section>
+
+    <section id="section6">
+      <h2>Section 6 — Export</h2>
+      <div id="s6Info">
+        <p class="wrap-text" id="s6ExportNote"></p>
+        <p>Schema: <code id="s6SchemaFile"></code> — Template: <code id="s6TemplateFile"></code></p>
+      </div>
+
+      <div>
+        <label for="reviewerId">Reviewer id: </label>
+        <input type="text" id="reviewerId" placeholder="name / initials / id">
+      </div>
+
+      <p>Unanswered decisions: <span id="unansweredCount">0</span></p>
+
+      <p class="wrap-text recorded-context-source" id="s6RecordedNote" hidden></p>
+
+      <div class="export-controls">
+        <button type="button" id="btnExport" class="no-print">Export decisions</button>
+        <button type="button" id="btnCopy" class="no-print">Copy to clipboard</button>
+        <span id="copyStatus"></span>
+      </div>
+
+      <label for="exportPreview">Current export JSON (always up to date):</label>
+      <textarea id="exportPreview" readonly></textarea>
+    </section>
+  </main>
+</div>
+
+<div id="imgModal" hidden>
+  <div class="modal-inner">
+    <button type="button" id="imgModalClose" aria-label="Close">×</button>
+    <img id="imgModalImg" alt="Enlarged figure">
+    <div id="imgModalCaption"></div>
+  </div>
+</div>
+
+<script>
+window.CONSOLE_DATA = "__CONSOLE_DATA_JSON__";
+window.THUMBS = "__THUMBNAILS_JSON__";
+</script>
+
+<script>
+(function(){
+  'use strict';
+
+  var THUMBS = null;
+  var decisionRegistry = [];
+  var state = {};
+  var rubricDecisionId = null;
+  var rubricVersionValue = null;
+
+  var SPECIAL_WORDS = {
+    dok: 'DOK', te: 'TE', se: 'SE', tikz: 'TikZ',
+    id: 'ID', ids: 'IDs', uid: 'UID', uids: 'UIDs'
+  };
+
+  function humanize(s){
+    var words = String(s).replace(/[-_]+/g, ' ').trim().split(/\s+/);
+    return words.map(function(w){
+      var lw = w.toLowerCase();
+      if(SPECIAL_WORDS.hasOwnProperty(lw)) return SPECIAL_WORDS[lw];
+      if(w.length === 0) return w;
+      return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+    }).join(' ');
+  }
+
+  function toDisplay(v){
+    if(v === undefined || v === null) return '—';
+    if(typeof v === 'string') return v === '' ? '—' : v;
+    if(typeof v === 'number' || typeof v === 'boolean') return String(v);
+    if(Array.isArray(v)) return v.length ? JSON.stringify(v) : '—';
+    try { return JSON.stringify(v); } catch(e){ return String(v); }
+  }
+
+  function el(tag, opts, children){
+    opts = opts || {};
+    var e = document.createElement(tag);
+    if(opts.className) e.className = opts.className;
+    if(opts.text !== undefined && opts.text !== null) e.textContent = String(opts.text);
+    if(opts.attrs){
+      Object.keys(opts.attrs).forEach(function(k){ e.setAttribute(k, opts.attrs[k]); });
+    }
+    (children || []).forEach(function(c){ if(c) e.appendChild(c); });
+    return e;
+  }
+
+  function byId(id){ return document.getElementById(id); }
+
+  // Duck-types "is this a DOM node I should append, rather than a scalar I
+  // should stringify" -- lets kvList/table cells carry either plain values
+  // or a small pre-built fragment (e.g. the ambiguous-identity tag).
+  function isNode(v){ return !!v && typeof v === 'object' && typeof v.appendChild === 'function'; }
+
+  function kvList(pairs){
+    var dl = el('dl', {className:'kv'});
+    pairs.forEach(function(p){
+      dl.appendChild(el('dt', {text: p[0]}));
+      var dd = el('dd');
+      if(isNode(p[1])){ dd.appendChild(p[1]); } else { dd.textContent = toDisplay(p[1]); }
+      dl.appendChild(dd);
+    });
+    return dl;
+  }
+
+  function table(headers, rows, className){
+    var t = el('table', {className: className || ''});
+    var thead = el('thead');
+    var trh = el('tr');
+    headers.forEach(function(h){ trh.appendChild(el('th', {text:h})); });
+    thead.appendChild(trh);
+    t.appendChild(thead);
+    var tbody = el('tbody');
+    rows.forEach(function(r){
+      var tr = el('tr');
+      r.forEach(function(c){
+        var td = el('td');
+        if(isNode(c)){ td.appendChild(c); } else { td.textContent = toDisplay(c); }
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    t.appendChild(tbody);
+    return t;
+  }
+
+  // --- section 3 identity helpers (legacy_id / item_uid / registry_line,
+  // with an ambiguous-legacy-id fallback carrying both uid_candidates) ---
+  function rowKey(row){
+    return (row.legacy_id !== undefined && row.legacy_id !== null) ? row.legacy_id : row.bank_id;
+  }
+
+  function formatCandidates(row){
+    return (row.uid_candidates || []).map(function(c){
+      return toDisplay(c.item_uid) + ' (line ' + toDisplay(c.registry_line) + ')';
+    }).join(' / ');
+  }
+
+  // Returns either the plain item_uid (non-ambiguous row) or a small tagged
+  // fragment showing BOTH uid_candidates -- never just one of them.
+  function identityCell(row){
+    if(row.ambiguous){
+      return el('span', {className: 'identity-ambiguous'}, [
+        el('span', {className: 'badge ambiguous-badge', text: 'AMBIGUOUS LEGACY ID'}),
+        el('span', {text: ' ' + formatCandidates(row)})
+      ]);
+    }
+    return row.item_uid;
+  }
+
+  function radioGroup(decisionId, options){
+    var wrap = el('div', {className:'radio-group'});
+    (options || []).forEach(function(opt, idx){
+      var input = el('input', {attrs:{type:'radio', name:'action-' + decisionId, id:'radio-' + decisionId + '-' + idx}});
+      input.setAttribute('data-decision-id', decisionId);
+      input.setAttribute('data-field', 'action');
+      input.value = opt;
+      var label = el('label', {className:'radio-option', attrs:{'for':'radio-' + decisionId + '-' + idx}}, [
+        input,
+        el('span', {text: humanize(opt)})
+      ]);
+      wrap.appendChild(label);
+    });
+    return wrap;
+  }
+
+  function noteBox(decisionId){
+    var wrap = el('div', {className:'note-wrap'});
+    wrap.appendChild(el('label', {text:'Note (optional):', attrs:{'for':'note-' + decisionId}}));
+    var ta = el('textarea', {className:'note-box', attrs:{id:'note-' + decisionId, rows:'2'}});
+    ta.setAttribute('data-decision-id', decisionId);
+    ta.setAttribute('data-field', 'note');
+    wrap.appendChild(ta);
+    return wrap;
+  }
+
+  function pairDecisionControl(pair, copyA, copyB, actions){
+    var container = el('div', {className:'decision-control'});
+    container.appendChild(el('h4', {text:'Decision'}));
+
+    // Already EXECUTED by the RC-authorized registry merge (rc-merge-auth-
+    // 5-4-2026-07-23) -- rendered as recorded context, same pattern as
+    // section 3's teacher_decisions_rc_v1.json precedent (renderFlaggedRow):
+    // a badge + explanatory note, then every control in this block disabled
+    // so it cannot be re-answered/re-exported as a NEW decision.
+    var ra = pair.resolved_alias;
+    if(ra){
+      container.appendChild(el('div', {className:'recorded-context-badge', text:
+        'MERGED -- already resolved (rc-merge-auth-5-4-2026-07-23)'
+      }));
+      container.appendChild(el('p', {className:'recorded-context-note wrap-text', text:
+        'Alias ' + toDisplay(ra.alias_uid) + ' -> survivor ' + toDisplay(ra.survivor_uid) + '.'
+      }));
+      container.appendChild(el('p', {className:'recorded-context-source', text:
+        'Merged ' + toDisplay(ra.merged_at) + ' under authorization ' + toDisplay(ra.authorization_record_id) +
+        '. The registry already reflects this resolution -- control shown for context only, not re-answerable here.'
+      }));
+      container.appendChild(el('p', {className:'disabled-explainer wrap-text', text:
+        "This pair's decision is EXECUTED, not pending -- it is excluded from the pending/made counters and " +
+        "from any new export."
+      }));
+    }
+
+    container.appendChild(radioGroup(pair.decision_id, actions));
+
+    var reveal = el('div', {className:'reconcile-reveal', attrs:{id:'reveal-' + pair.decision_id}});
+    reveal.hidden = true;
+    reveal.appendChild(el('p', {className:'reveal-note', text:'both rows stay; label reconciled'}));
+    reveal.appendChild(el('label', {text:'Authoritative DOK:', attrs:{'for':'dok-select-' + pair.decision_id}}));
+    var select = el('select', {attrs:{id:'dok-select-' + pair.decision_id}});
+    select.setAttribute('data-decision-id', pair.decision_id);
+    select.setAttribute('data-field', 'chosenDok');
+    select.appendChild(el('option', {text:'— select —', attrs:{value:''}}));
+    var doks = [];
+    [copyA.dok, copyB.dok].forEach(function(d){ if(doks.indexOf(d) === -1) doks.push(d); });
+    doks.forEach(function(d){ select.appendChild(el('option', {text:String(d), attrs:{value:d}})); });
+    reveal.appendChild(select);
+    container.appendChild(reveal);
+
+    container.appendChild(noteBox(pair.decision_id));
+
+    if(ra){
+      container.classList.add('disabled-control');
+      Array.prototype.forEach.call(container.querySelectorAll('input, select, textarea'), function(node){
+        node.disabled = true;
+      });
+    }
+    return container;
+  }
+
+  function renderCopyColumn(label, copy){
+    var col = el('div', {className:'copy-column'});
+    col.appendChild(el('h4', {text:label}));
+    if(copy.status === 'merged-alias'){
+      col.appendChild(el('div', {className:'recorded-context-badge', text:'MERGED (alias copy) -- see resolution below'}));
+    }
+    col.appendChild(kvList([
+      ['Item UID', copy.item_uid],
+      ['Registry line', copy.registry_line],
+      ['Lesson', copy.lesson]
+    ]));
+    col.appendChild(el('div', {className:'dok-badge', text:'DOK ' + toDisplay(copy.dok)}));
+    col.appendChild(kvList([
+      ['Role', copy.role],
+      ['Wave', copy.wave],
+      ['TE bucket', copy.te_bucket],
+      ['Match quality', copy.match_quality],
+      ['DOK status', copy.dok_status],
+      ['DOK rationale (derived)', copy.dok_rationale_derived],
+      ['Registry DOK rationale', copy.registry_dok_rationale]
+    ]));
+    col.appendChild(el('h5', {text:'Prompt'}));
+    col.appendChild(el('pre', {className:'prompt-pre', text: copy.prompt}));
+    col.appendChild(el('h5', {text:'Registry fields, as-is'}));
+    col.appendChild(kvList([
+      ['Answers', copy.answers],
+      ['Correct', copy.correct],
+      ['Notes', copy.notes]
+    ]));
+    col.appendChild(el('h5', {text:'Provenance'}));
+    col.appendChild(kvList([
+      ['Lesson', copy.lesson],
+      ['Source', copy.source],
+      ['Prompt SHA1', copy.prompt_sha1]
+    ]));
+    return col;
+  }
+
+  function renderOptionCard(container, title, opt){
+    opt = opt || {};
+    container.appendChild(el('h3', {text: title}));
+    container.appendChild(el('h4', {text:'Downstream effects'}));
+    var ul1 = el('ul');
+    (opt.downstream_effects || []).forEach(function(x){ ul1.appendChild(el('li', {text:x})); });
+    container.appendChild(ul1);
+
+    container.appendChild(el('h4', {text:'Effort'}));
+    if(opt.effort_paths && typeof opt.effort_paths === 'object'){
+      var dl = el('dl', {className:'kv'});
+      Object.keys(opt.effort_paths).forEach(function(k){
+        dl.appendChild(el('dt', {text: humanize(k)}));
+        dl.appendChild(el('dd', {text: toDisplay(opt.effort_paths[k])}));
+      });
+      container.appendChild(dl);
+    } else if(opt.effort !== undefined){
+      container.appendChild(el('p', {className:'wrap-text', text: opt.effort}));
+    }
+
+    container.appendChild(el('h4', {text:'Risks'}));
+    var ul2 = el('ul');
+    (opt.risks || []).forEach(function(x){ ul2.appendChild(el('li', {text:x})); });
+    container.appendChild(ul2);
+  }
+
+  function renderRecommendation(container, rec){
+    rec = rec || {};
+    container.appendChild(el('div', {className:'rec-heading', text:"ARCHITECT'S RECOMMENDATION — labeled opinion, not evidence"}));
+    container.appendChild(el('span', {className:'badge', text: rec.label}));
+    container.appendChild(el('p', {className:'rec-confidence', text: 'Confidence: ' + toDisplay(rec.confidence)}));
+    container.appendChild(el('p', {className:'wrap-text', text: rec.text}));
+    var ul = el('ul');
+    (rec.rationale || []).forEach(function(x){ ul.appendChild(el('li', {text:x})); });
+    container.appendChild(ul);
+    container.appendChild(el('p', {className:'residual-risk wrap-text', text: 'Residual risk: ' + toDisplay(rec.residual_risk)}));
+  }
+
+  function renderHeader(data){
+    var meta = data.meta || {};
+    byId('metaGeneratedBy').textContent = toDisplay(meta.generated_by);
+    byId('metaGeneratedAt').textContent = toDisplay(meta.generated_at);
+    byId('disclaimerNotice').textContent = toDisplay(meta.proposals_only_disclaimer);
+
+    var body = byId('frozenInputsBody');
+    (meta.frozen_inputs || []).forEach(function(f){
+      var tr = el('tr', {}, [
+        el('td', {text: f.path}),
+        el('td', {className:'wrap-text', text: f.sha256})
+      ]);
+      body.appendChild(tr);
+    });
+
+    var lc = meta.locked_counts || {};
+    var dl = el('dl', {className:'kv'});
+    Object.keys(lc).forEach(function(k){
+      dl.appendChild(el('dt', {text: humanize(k)}));
+      dl.appendChild(el('dd', {text: toDisplay(lc[k])}));
+    });
+    byId('lockedCounts').appendChild(dl);
+  }
+
+  function renderSection1(data){
+    var s1 = data.section1 || {};
+
+    var evUl = el('ul', {className:'evidence-list'});
+    (s1.evidence || []).forEach(function(ev){
+      var li = el('li', {}, [
+        el('span', {className:'evidence-fact', text: ev.fact}),
+        el('span', {className:'evidence-source', text: ' (Source: ' + toDisplay(ev.source) + ')'})
+      ]);
+      evUl.appendChild(li);
+    });
+    byId('s1Evidence').appendChild(evUl);
+
+    var staged = s1.staged_state || {};
+    byId('s1StagedState').appendChild(
+      kvList(Object.keys(staged).map(function(k){ return [humanize(k), staged[k]]; }))
+    );
+
+    var edgeRows = (s1.dangling_edges || []).map(function(e){
+      return [e.source_uid, e.source, e.target, e.type, e.reason];
+    });
+    byId('s1DanglingEdges').appendChild(
+      table(['Source UID', 'Source', 'Target', 'Type', 'Reason'], edgeRows, 'dangling-edges')
+    );
+
+    var opts = s1.options || {};
+    renderOptionCard(byId('s1CardRevive'), 'REVIVE', opts.revive);
+    renderOptionCard(byId('s1CardRetire'), 'RETIRE', opts.retire);
+
+    renderRecommendation(byId('s1Recommendation'), s1.recommendation);
+
+    var decision = s1.decision || {};
+    var decisionContainer = byId('s1Decision');
+    decisionContainer.appendChild(el('h4', {text:'Decision'}));
+    decisionContainer.appendChild(radioGroup(decision.decision_id, decision.actions));
+    decisionContainer.appendChild(noteBox(decision.decision_id));
+
+    if(decision.decision_id){
+      decisionRegistry.push({decision_id: decision.decision_id, section: 1, targetItemUids: [], registryLines: []});
+    }
+  }
+
+  function renderSection2(data){
+    var s2 = data.section2 || {};
+    byId('s2Count').textContent = toDisplay(s2.count);
+    byId('s2IntroText').textContent = toDisplay(s2.intro);
+    byId('s2Highlight').textContent = 'Highlighted pair: ' + toDisplay(s2.highlight_id) +
+      ' — the sole DOK 2-vs-3 conflict pair (all others conflict on a different DOK combination).';
+
+    var container = byId('s2Pairs');
+    (s2.pairs || []).forEach(function(pair){
+      var copyA = pair.copies[0], copyB = pair.copies[1];
+      var block = el('div', {className: 'pair-block' + (pair.legacy_id === s2.highlight_id ? ' highlighted-pair' : '')});
+      block.appendChild(el('h3', {text: pair.legacy_id}));
+      var cols = el('div', {className:'pair-columns'});
+      cols.appendChild(renderCopyColumn('Copy A', copyA));
+      cols.appendChild(renderCopyColumn('Copy B', copyB));
+      block.appendChild(cols);
+      block.appendChild(pairDecisionControl(pair, copyA, copyB, s2.actions));
+      container.appendChild(block);
+
+      decisionRegistry.push({
+        decision_id: pair.decision_id,
+        section: 2,
+        targetItemUids: [copyA.item_uid, copyB.item_uid],
+        registryLines: [copyA.registry_line, copyB.registry_line],
+        // Already EXECUTED by the RC-authorized registry merge (distinct
+        // provenance from section 3's "recorded" = logged in
+        // teacher_decisions_rc_v1.json -- this is "merged" = already applied
+        // to registry.jsonl itself). Counted/excluded the SAME way updateCounters()
+        // and buildExportObject() already treat d.recorded: never pending,
+        // never made-in-this-session, never (re-)exported.
+        merged: !!pair.resolved_alias
+      });
+    });
+  }
+
+  function renderFlaggedRow(row, flagActions){
+    var key = rowKey(row);
+    var decisionId = row.decision_id || ('s3-fig-' + key);
+    var item = el('div', {className:'flagged-item'});
+
+    var img = el('img', {className:'flagged-thumb', attrs:{alt: 'Figure ' + toDisplay(key)}});
+    var src = (THUMBS && THUMBS[key]) ? THUMBS[key] : '';
+    if(src){ img.setAttribute('src', src); img.addEventListener('click', function(){ openImageModal(src, key); }); }
+    img.addEventListener('error', function(){ img.style.display = 'none'; });
+    item.appendChild(img);
+
+    // Recorded context from the RC/teacher decisions export, if any -- shown
+    // as recorded context near the figure header, not as an approval or
+    // sign-off state established by this console.
+    var rc = row.recorded_context;
+    if(rc){
+      item.appendChild(el('div', {className:'recorded-context-badge', text: rc.status_line}));
+      item.appendChild(el('p', {className:'recorded-context-note wrap-text', text: rc.note}));
+      item.appendChild(el('p', {className:'recorded-context-source', text:
+        'Recorded context from teacher_decisions_rc_v1.json — reviewer ' + toDisplay(rc.reviewer) +
+        ', ' + toDisplay(rc.timestamp) + '.'
+      }));
+    }
+
+    item.appendChild(kvList([
+      ['Legacy ID', row.legacy_id],
+      ['Item UID', identityCell(row)],
+      ['Registry line', row.registry_line],
+      ['Lesson', row.lesson],
+      ['Figure type', row.figure_type],
+      ['Flag kind', row.flag_kind]
+    ]));
+
+    item.appendChild(el('h5', {text:'Display provenance'}));
+    item.appendChild(el('p', {className:'wrap-text', text: row.display_provenance}));
+    item.appendChild(el('h5', {text:'Interpretive summary'}));
+    item.appendChild(el('p', {className:'wrap-text', text: row.interpretive_summary}));
+
+    var ctrl = el('div', {className:'decision-control'});
+    ctrl.appendChild(el('h4', {text:'Decision'}));
+    if(rc){
+      ctrl.appendChild(el('p', {className:'disabled-explainer wrap-text', text:
+        "Decision recorded as '" + toDisplay(rc.action) + "' in teacher_decisions_rc_v1.json — " +
+        "control shown for context; re-enable by exporting a new revision."
+      }));
+    }
+    ctrl.appendChild(radioGroup(decisionId, flagActions));
+    ctrl.appendChild(noteBox(decisionId));
+    if(rc){
+      ctrl.classList.add('disabled-control');
+      Array.prototype.forEach.call(ctrl.querySelectorAll('input, textarea'), function(node){
+        node.disabled = true;
+      });
+    }
+    item.appendChild(ctrl);
+
+    var targetUids, registryLines, targetAmbiguous;
+    if(row.ambiguous){
+      targetUids = (row.uid_candidates || []).map(function(c){ return c.item_uid; });
+      registryLines = (row.uid_candidates || []).map(function(c){ return c.registry_line; });
+      targetAmbiguous = true;
+    } else {
+      targetUids = [row.item_uid];
+      registryLines = [row.registry_line];
+      targetAmbiguous = false;
+    }
+    decisionRegistry.push({
+      decision_id: decisionId, section: 3,
+      targetItemUids: targetUids, registryLines: registryLines,
+      targetAmbiguous: targetAmbiguous,
+      // Already recorded in teacher_decisions_rc_v1.json (rc truthy above) -- its
+      // controls are disabled/never answerable in THIS console session, and it must
+      // count as "recorded", not "pending", in the nav counter and export.
+      recorded: !!rc
+    });
+    return item;
+  }
+
+  function identityRowTuple(row){
+    var reason = (row.reason !== undefined && row.reason !== null && row.reason !== '') ? row.reason : row.notes;
+    return [row.legacy_id, identityCell(row), row.registry_line, row.lesson, reason];
+  }
+
+  function openImageModal(src, label){
+    if(!src) return;
+    var modal = byId('imgModal');
+    byId('imgModalImg').setAttribute('src', src);
+    byId('imgModalCaption').textContent = label;
+    modal.hidden = false;
+  }
+  function closeImageModal(){ byId('imgModal').hidden = true; }
+
+  function renderSection3(data){
+    var s3 = data.section3 || {};
+
+    var flaggedContainer = byId('s3Flagged');
+    (s3.flagged || []).forEach(function(row){
+      flaggedContainer.appendChild(renderFlaggedRow(row, s3.flag_actions));
+    });
+
+    var partition = s3.partition || {};
+    var partitionContainer = byId('s3Partition');
+    partitionContainer.appendChild(el('p', {className:'partition-summary', text:
+      'Total unique IDs: ' + toDisplay(partition.total_unique_ids) +
+      ' — Regenerated & compiling: ' + toDisplay(partition.regenerated_and_compiling_total)
+    }));
+    var otherKeys = Object.keys(partition).filter(function(k){
+      return k !== 'total_unique_ids' && k !== 'regenerated_and_compiling_total';
+    });
+    if(otherKeys.length){
+      partitionContainer.appendChild(
+        table(['Status', 'Count'], otherKeys.map(function(k){ return [k, partition[k]]; }))
+      );
+    }
+
+    var identityHeaders = ['Legacy ID', 'Item UID', 'Registry Line', 'Lesson', 'Reason'];
+    byId('s3Held').appendChild(table(identityHeaders, (s3.held || []).map(identityRowTuple)));
+    byId('s3NoAsset').appendChild(table(identityHeaders, (s3.no_asset || []).map(identityRowTuple)));
+    byId('s3Reclassified').appendChild(table(identityHeaders, (s3.reclassified || []).map(identityRowTuple)));
+
+    var gridContainer = byId('s3Grid');
+    var byLesson = {};
+    (s3.figures || []).forEach(function(fig){
+      var lesson = fig.lesson || 'Unknown';
+      if(!byLesson[lesson]) byLesson[lesson] = [];
+      byLesson[lesson].push(fig);
+    });
+    Object.keys(byLesson).sort().forEach(function(lesson){
+      gridContainer.appendChild(el('h3', {text: 'Lesson ' + lesson}));
+      var grid = el('div', {className:'thumb-grid'});
+      byLesson[lesson].forEach(function(fig){
+        var cell = el('div', {className:'thumb-cell'});
+        var key = rowKey(fig);
+        var img = el('img', {className:'thumb-img', attrs:{alt: toDisplay(key)}});
+        var src = (THUMBS && THUMBS[key]) ? THUMBS[key] : '';
+        if(src){ img.setAttribute('src', src); img.addEventListener('click', function(){ openImageModal(src, key); }); }
+        img.addEventListener('error', function(){ img.style.display = 'none'; });
+        cell.appendChild(img);
+        cell.appendChild(kvList([
+          ['Legacy ID', fig.legacy_id],
+          ['Item UID', identityCell(fig)],
+          ['Registry line', fig.registry_line],
+          ['Figure type', fig.figure_type],
+          ['Compile status', fig.compile_status]
+        ]));
+        grid.appendChild(cell);
+      });
+      gridContainer.appendChild(grid);
+    });
+  }
+
+  function renderSection4(data){
+    var s4 = data.section4 || {};
+    byId('s4Count').textContent = toDisplay(s4.count);
+    var container = byId('s4Items');
+    (s4.items || []).forEach(function(item){
+      var decisionId = item.decision_id || ('s4-' + item.legacy_id + '-L' + item.registry_line);
+      var card = el('div', {className:'s4-item'});
+      card.appendChild(el('h3', {text: toDisplay(item.legacy_id) + ' — Lesson ' + toDisplay(item.lesson)}));
+      card.appendChild(kvList([
+        ['Item UID', item.item_uid],
+        ['Registry line', item.registry_line],
+        ['Visual type', item.visual_type],
+        ['Registry source', item.registry_source],
+        ['Registry page', item.registry_page]
+      ]));
+      card.appendChild(el('h4', {text:'Prompt excerpt'}));
+      card.appendChild(el('p', {className:'prompt-excerpt wrap-text', text: item.prompt_excerpt}));
+      card.appendChild(el('h4', {text:'Depicts'}));
+      card.appendChild(el('p', {className:'wrap-text', text: item.depicts}));
+      card.appendChild(el('h4', {text:'Why essential'}));
+      card.appendChild(el('p', {className:'wrap-text', text: item.why_essential}));
+      card.appendChild(el('h4', {text:'Source requirement'}));
+      card.appendChild(el('p', {className:'source-requirement wrap-text', text: item.source_requirement}));
+
+      var ctrl = el('div', {className:'decision-control'});
+      ctrl.appendChild(el('h4', {text:'Decision'}));
+      ctrl.appendChild(radioGroup(decisionId, s4.actions));
+      ctrl.appendChild(noteBox(decisionId));
+      card.appendChild(ctrl);
+
+      container.appendChild(card);
+
+      decisionRegistry.push({decision_id: decisionId, section: 4, targetItemUids: [item.item_uid], registryLines: [item.registry_line]});
+    });
+  }
+
+  function renderSection5(data){
+    var s5 = data.section5 || {};
+    var rubric = s5.rubric || {};
+    rubricDecisionId = rubric.decision_id;
+    rubricVersionValue = rubric.version;
+
+    byId('s5WatermarkTop').textContent = toDisplay(rubric.watermark);
+    byId('s5VersionBadge').textContent = toDisplay(rubric.version);
+    byId('s5WatermarkBg').textContent = new Array(30).fill(toDisplay(rubric.watermark)).join('   •   ');
+
+    var container = byId('s5RubricBody');
+
+    var prior = rubric.prior_version_status;
+    if(prior){
+      container.appendChild(el('div', {className:'prior-version-line'}, [
+        el('strong', {text: toDisplay(prior.version) + ' status: ' + toDisplay(prior.status)}),
+        el('p', {className:'wrap-text', text: prior.note})
+      ]));
+    }
+
+    container.appendChild(el('h3', {text:'Authority hierarchy'}));
+    var ol = el('ol', {className:'hierarchy-list'});
+    (rubric.hierarchy || []).forEach(function(rule){
+      ol.appendChild(el('li', {className:'wrap-text', text: rule}));
+    });
+    container.appendChild(ol);
+
+    container.appendChild(el('h3', {text:'Surviving v0.1 mechanics'}));
+    var ul = el('ul', {className:'mechanics-list'});
+    (rubric.surviving_mechanics || []).forEach(function(m){
+      ul.appendChild(el('li', {className:'wrap-text', text: m}));
+    });
+    container.appendChild(ul);
+
+    container.appendChild(el('h3', {text:'Record shape'}));
+    container.appendChild(el('pre', {className:'json-block', text: JSON.stringify(rubric.record_shape, null, 2)}));
+
+    container.appendChild(el('h3', {text:'Tool alignment note'}));
+    container.appendChild(el('p', {className:'wrap-text', text: rubric.tool_alignment_note}));
+
+    var doc = rubric.rubric_doc;
+    if(doc){
+      container.appendChild(el('div', {className:'rubric-doc-pointer'}, [
+        el('span', {text: 'Full rubric: '}),
+        el('code', {text: toDisplay(doc.file)}),
+        el('p', {className:'wrap-text', text: doc.note})
+      ]));
+    }
+
+    var ctrl = el('div', {className:'decision-control'});
+    ctrl.appendChild(el('h4', {text:'Decision'}));
+    ctrl.appendChild(radioGroup(rubric.decision_id, rubric.actions));
+    ctrl.appendChild(noteBox(rubric.decision_id));
+    container.appendChild(ctrl);
+
+    if(rubric.decision_id){
+      decisionRegistry.push({decision_id: rubric.decision_id, section: 5, targetItemUids: [], registryLines: []});
+    }
+
+    var w0 = s5.wave0_sample || {};
+    byId('s5Wave0Banner').textContent = toDisplay(w0.banner);
+    byId('s5Wave0Note').textContent = toDisplay(w0.note);
+    var wContainer = byId('s5Wave0Items');
+    (w0.items || []).forEach(function(item){
+      var card = el('div', {className:'wave0-item'});
+      card.appendChild(kvList([
+        ['Legacy ID', item.legacy_id],
+        ['Item UID', item.item_uid],
+        ['Registry line', item.registry_line],
+        ['Role', item.role],
+        ['DOK', item.dok],
+        ['DOK status', item.dok_status]
+      ]));
+      card.appendChild(el('h4', {text:'Prompt'}));
+      card.appendChild(el('pre', {className:'prompt-pre', text: item.prompt}));
+
+      var ruleInfo = item.v02_rule_applied;
+      if(ruleInfo){
+        card.appendChild(el('h4', {text:'v0.2 rule applied (hypothetical)'}));
+        card.appendChild(el('div', {className:'rule-annotation'}, [
+          el('span', {className:'rule-badge', text:'Rule ' + toDisplay(ruleInfo.rule_number) + ':'}),
+          el('span', {text: ruleInfo.hierarchy_rule}),
+          el('p', {className:'wrap-text', text: ruleInfo.note})
+        ]));
+      }
+
+      card.appendChild(el('div', {className:'illustration-stamp', text:'ILLUSTRATION ONLY — NOT RECORDED'}));
+      card.appendChild(el('pre', {className:'json-block', text: JSON.stringify(item.would_record, null, 2)}));
+      wContainer.appendChild(card);
+    });
+  }
+
+  function renderSection6(data){
+    var s6 = data.section6 || {};
+    byId('s6ExportNote').textContent = toDisplay(s6.export_note);
+    byId('s6SchemaFile').textContent = toDisplay(s6.schema_file);
+    byId('s6TemplateFile').textContent = toDisplay(s6.template_file);
+
+    // Only shown when the builder found recorded decisions to exclude (i.e.
+    // teacher_decisions_rc_v1.json was present and had matching section-3 entries) --
+    // stays hidden, not a false "0 excluded" line, when there is nothing to report.
+    var recordedNote = byId('s6RecordedNote');
+    if(recordedNote){
+      if(s6.recorded_exclusion_note){
+        recordedNote.textContent = s6.recorded_exclusion_note;
+        recordedNote.hidden = false;
+      } else {
+        recordedNote.hidden = true;
+      }
+    }
+  }
+
+  function isAnswered(decisionId){
+    var s = state[decisionId];
+    if(!s || !s.action) return false;
+    if(decisionId.indexOf('s2-') === 0 && s.action === 'reconcile-labels' && !s.chosenDok) return false;
+    return true;
+  }
+
+  function updateCounters(){
+    // Recorded decisions (currently: the 2 S3 figure confirmations already logged in
+    // teacher_decisions_rc_v1.json) are counted separately from made/pending -- they
+    // are neither "made in this session" nor "pending", so they must not inflate
+    // pending forever nor be counted as newly made.
+    // Merged decisions (the 22 section-2 pairs already resolved by the RC-authorized
+    // registry merge, rc-merge-auth-5-4-2026-07-23 -- a DIFFERENT provenance than
+    // recorded/rc_v1, since these were applied directly to registry.jsonl, not
+    // logged via a teacher_decisions export) are excluded from pending/made the
+    // SAME way, but counted in their own bucket so the two provenances are never
+    // conflated in the display.
+    var made = 0, recorded = 0, merged = 0, pending = 0;
+    decisionRegistry.forEach(function(d){
+      if(d.recorded){ recorded++; return; }
+      if(d.merged){ merged++; return; }
+      if(isAnswered(d.decision_id)) made++; else pending++;
+    });
+    var navCounter = byId('navCounter');
+    if(navCounter){
+      navCounter.textContent = 'decisions made: ' + made +
+        ' / recorded in rc_v1: ' + recorded +
+        ' / merged (rc-merge-auth-5-4-2026-07-23): ' + merged +
+        ' / pending: ' + pending;
+    }
+    var unansweredEl = byId('unansweredCount');
+    if(unansweredEl) unansweredEl.textContent = String(pending);
+  }
+
+  function buildExportObject(){
+    var now = new Date().toISOString();
+    var reviewerInput = byId('reviewerId');
+    var reviewer = reviewerInput ? reviewerInput.value : '';
+    var decisions = [];
+    decisionRegistry.forEach(function(d){
+      // Explicit exclusion, not incidental: the recorded RC decisions are already
+      // disabled/unanswerable so isAnswered() would return false for them anyway --
+      // but skip them here BY NAME so the exclusion is intentional and doesn't
+      // silently depend on that side effect. They already live in
+      // teacher_decisions_rc_v1.json and must never be re-exported/double-counted.
+      if(d.recorded) return;
+      // Same explicit-exclusion discipline for the 22 already-merged section-2
+      // pairs (rc-merge-auth-5-4-2026-07-23): they are already applied to
+      // registry.jsonl itself and must never be re-exported as a new decision
+      // targeting the alias/survivor uids.
+      if(d.merged) return;
+      if(!isAnswered(d.decision_id)) return;
+      var s = state[d.decision_id];
+      var params = {};
+      if(d.decision_id.indexOf('s2-') === 0 && s.action === 'reconcile-labels' && s.chosenDok){
+        var parsed = parseInt(s.chosenDok, 10);
+        params.chosen_dok = isNaN(parsed) ? s.chosenDok : parsed;
+      }
+      if(rubricDecisionId && d.decision_id === rubricDecisionId){
+        params.rubric_version = rubricVersionValue;
+      }
+      if(d.targetAmbiguous){
+        params.target_ambiguous = true;
+      }
+      decisions.push({
+        section: d.section,
+        decision_id: d.decision_id,
+        target_item_uids: d.targetItemUids,
+        registry_lines: d.registryLines,
+        action: s.action,
+        params: params,
+        reviewer: reviewer,
+        timestamp: now,
+        note: s.note || ''
+      });
+    });
+    return {schema_version: '1.0.0', exported_at: now, decisions: decisions};
+  }
+
+  function refreshExportPreview(){
+    var ta = byId('exportPreview');
+    if(ta) ta.value = JSON.stringify(buildExportObject(), null, 2);
+  }
+
+  function handleControlEvent(e){
+    var t = e.target;
+    if(!t || !t.getAttribute) return;
+    var did = t.getAttribute('data-decision-id');
+    if(!did) return;
+    var field = t.getAttribute('data-field');
+    if(!state[did]) state[did] = {action: null, note: '', chosenDok: null};
+
+    if(field === 'action'){
+      if(t.type === 'radio' && t.checked) state[did].action = t.value;
+      if(did.indexOf('s2-') === 0){
+        var revealEl = byId('reveal-' + did);
+        if(revealEl){
+          if(t.value === 'reconcile-labels'){
+            revealEl.hidden = false;
+          } else {
+            revealEl.hidden = true;
+            state[did].chosenDok = null;
+            var sel = byId('dok-select-' + did);
+            if(sel) sel.value = '';
+          }
+        }
+      }
+    } else if(field === 'note'){
+      state[did].note = t.value;
+    } else if(field === 'chosenDok'){
+      state[did].chosenDok = t.value;
+    }
+
+    updateCounters();
+    refreshExportPreview();
+  }
+
+  function wireGlobalEvents(){
+    document.addEventListener('change', handleControlEvent);
+    document.addEventListener('input', handleControlEvent);
+
+    var reviewerInput = byId('reviewerId');
+    if(reviewerInput) reviewerInput.addEventListener('input', refreshExportPreview);
+
+    var modalClose = byId('imgModalClose');
+    if(modalClose) modalClose.addEventListener('click', closeImageModal);
+    var modal = byId('imgModal');
+    if(modal) modal.addEventListener('click', function(e){ if(e.target === modal) closeImageModal(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeImageModal(); });
+
+    var btnExport = byId('btnExport');
+    if(btnExport) btnExport.addEventListener('click', function(){
+      var obj = buildExportObject();
+      var json = JSON.stringify(obj, null, 2);
+      var blob = new Blob([json], {type: 'application/json'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'teacher_decisions.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+      refreshExportPreview();
+    });
+
+    var btnCopy = byId('btnCopy');
+    if(btnCopy) btnCopy.addEventListener('click', function(){
+      refreshExportPreview();
+      var ta = byId('exportPreview');
+      var status = byId('copyStatus');
+      var text = ta ? ta.value : '';
+      function ok(){ if(status) status.textContent = 'Copied.'; }
+      function fail(){
+        try{
+          ta.focus();
+          ta.select();
+          var success = document.execCommand('copy');
+          if(success){ ok(); } else if(status){ status.textContent = 'Copy failed — select the text manually.'; }
+        } catch(e){
+          if(status) status.textContent = 'Copy failed — select the text manually.';
+        }
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(ok, fail);
+      } else {
+        fail();
+      }
+    });
+  }
+
+  function showRenderError(err){
+    var box = byId('renderError');
+    if(box){
+      box.hidden = false;
+      box.textContent = 'Render error: ' + (err && err.message ? err.message : String(err));
+    }
+  }
+
+  function renderAll(data){
+    try{
+      renderHeader(data);
+      renderSection1(data);
+      renderSection2(data);
+      renderSection3(data);
+      renderSection4(data);
+      renderSection5(data);
+      renderSection6(data);
+      wireGlobalEvents();
+      updateCounters();
+      refreshExportPreview();
+    } catch(err){
+      showRenderError(err);
+    }
+  }
+
+  function boot(){
+    var rawData = window.CONSOLE_DATA;
+    var rawThumbs = window.THUMBS;
+    if(typeof rawData === 'string' || typeof rawThumbs === 'string'){
+      var banner = byId('templateBanner');
+      if(banner) banner.hidden = false;
+      return;
+    }
+    THUMBS = rawThumbs || {};
+    renderAll(rawData || {});
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+</body>
+</html>

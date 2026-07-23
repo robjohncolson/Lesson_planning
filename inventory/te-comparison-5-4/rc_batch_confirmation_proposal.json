@@ -1,0 +1,914 @@
+{
+  "meta": {
+    "artifact": "RC batch confirmation proposal, Lesson 5-4 — rows where registry DOK exactly equals TE DOK",
+    "generated": "2026-07-22",
+    "banner": "PROPOSAL / EVIDENCE ONLY — NOT RECORDED as any decision; no registry mutation; awaiting RC confirmation through the rubric v0.2 review flow.",
+    "sources": [
+      {
+        "path": "questionbank/calibration/5-4.json",
+        "sha256": "ad41a82f03d5a972b44626c9b572ee350bf8ed4e0600ed17e485698954953033",
+        "role": "TE Item Analysis transcription (item_analysis field). Treated as the verified TE transcription per task instructions."
+      },
+      {
+        "path": "questionbank/registry.jsonl",
+        "sha256": "b7f9a040017b8b7c45c1a88f0a089c04db483baf585c95392d983c677d4e56b8",
+        "role": "Registry rows. Lesson 5-4 has 132 total rows; the 61 savvas-q practice rows joined here to the TE table sit at 1-based lines 273-333."
+      },
+      {
+        "path": "inventory/dedup/item_uid_alias_map.json",
+        "sha256": "be4b507b7fb7aee904fead8515686d2583c2732e948aaf3ced134e63d97c7ff1",
+        "role": "legacy_id -> item_uid join table. Every row below is joined to its item_uid via registry_line through this map, never by legacy id alone."
+      },
+      {
+        "path": "inventory/dok-workflow/dok_wave_plan.json",
+        "sha256": "f1dbdd19dcbf35c7f40fc2ab9e4a4336990ae7185edf1a7de82b87fda8df7266",
+        "role": "Cross-check source for te_bucket/match_quality per registry row (lesson 5-4: 61 rows te_bucket-exact, 71 rows te_bucket-none). Used only to verify this comparison's own independent computation; zero mismatches found."
+      }
+    ],
+    "conventions": {
+      "copy_a": "the copy of a duplicated legacy id at the LOWER registry line",
+      "copy_b": "the copy of a duplicated legacy id at the HIGHER registry line",
+      "identity_key": "item_uid, joined by registry_line through inventory/dedup/item_uid_alias_map.json. Legacy id (e.g. '5-4-savvas-q41') is display-only and is NOT unique — 29 of the 32 transcribed item numbers each have two registry rows."
+    },
+    "provenance_cite_template": "Savvas TE printed page 258, Item Analysis table, Example {N} row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+    "classification_enum": [
+      "te-agrees-with-copy-A",
+      "te-agrees-with-copy-B",
+      "te-agrees-with-both",
+      "genuine-disagreement"
+    ],
+    "neutrality_note": "No recommendation language (no \"should\"/\"recommend\"/\"suggest\"/\"likely correct\") appears anywhere in this artifact. Facts and classifications only; no default resolution is implied.",
+    "scope": "All 39 registry rows (of the 61 lesson 5-4 practice rows joined to the Savvas TE Item Analysis table) whose registry_dok exactly equals te_dok. Computed independently per row, then cross-checked against the pair-level decomposition: both copies of the 7 agreeing pairs (14 rows) + copy-B of the 22 conflict pairs, all of which matched TE (22 rows) + the 3 singleton rows, all of which matched TE (3 rows) = 39."
+  },
+  "proposal": {
+    "status": "PROPOSAL — NOT RECORDED",
+    "awaiting": "RC confirmation",
+    "records_decisions": false,
+    "review_flow": "rubric v0.2 review flow (inventory/decision-console/DOK_RUBRIC_v0.2.md)"
+  },
+  "rows": [
+    {
+      "item_uid": "iu_426cc3017f2c",
+      "registry_line": 273,
+      "legacy_id": "5-4-savvas-q15",
+      "item_number": 15,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 3",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 3 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_426cc3017f2c"
+        ],
+        "registry_lines": [
+          273
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_cf96dc8a31e5",
+      "registry_line": 274,
+      "legacy_id": "5-4-savvas-q16",
+      "item_number": 16,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_cf96dc8a31e5"
+        ],
+        "registry_lines": [
+          274
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_6afc10a9b8ed",
+      "registry_line": 305,
+      "legacy_id": "5-4-savvas-q16",
+      "item_number": 16,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_6afc10a9b8ed"
+        ],
+        "registry_lines": [
+          305
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_3fce00d12aad",
+      "registry_line": 275,
+      "legacy_id": "5-4-savvas-q17",
+      "item_number": 17,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_3fce00d12aad"
+        ],
+        "registry_lines": [
+          275
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_9676950b926c",
+      "registry_line": 306,
+      "legacy_id": "5-4-savvas-q17",
+      "item_number": 17,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_9676950b926c"
+        ],
+        "registry_lines": [
+          306
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_35f3e9014abc",
+      "registry_line": 276,
+      "legacy_id": "5-4-savvas-q18",
+      "item_number": 18,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 1",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 1 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_35f3e9014abc"
+        ],
+        "registry_lines": [
+          276
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_d3ef1d0b4a28",
+      "registry_line": 307,
+      "legacy_id": "5-4-savvas-q18",
+      "item_number": 18,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 1",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 1 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_d3ef1d0b4a28"
+        ],
+        "registry_lines": [
+          307
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_e2a361f675b8",
+      "registry_line": 277,
+      "legacy_id": "5-4-savvas-q19",
+      "item_number": 19,
+      "registry_dok": 3,
+      "te_dok": 3,
+      "te_example": "Example 4",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 4 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_e2a361f675b8"
+        ],
+        "registry_lines": [
+          277
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_0910bde55379",
+      "registry_line": 278,
+      "legacy_id": "5-4-savvas-q20",
+      "item_number": 20,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 5",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 5 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_0910bde55379"
+        ],
+        "registry_lines": [
+          278
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_c470845cd9f5",
+      "registry_line": 308,
+      "legacy_id": "5-4-savvas-q21",
+      "item_number": 21,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 1",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 1 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_c470845cd9f5"
+        ],
+        "registry_lines": [
+          308
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_2687f61c33c5",
+      "registry_line": 309,
+      "legacy_id": "5-4-savvas-q22",
+      "item_number": 22,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 1",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 1 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_2687f61c33c5"
+        ],
+        "registry_lines": [
+          309
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_e067aeabdb5e",
+      "registry_line": 310,
+      "legacy_id": "5-4-savvas-q23",
+      "item_number": 23,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 1",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 1 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_e067aeabdb5e"
+        ],
+        "registry_lines": [
+          310
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_da8e33db9d06",
+      "registry_line": 311,
+      "legacy_id": "5-4-savvas-q24",
+      "item_number": 24,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 1",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 1 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_da8e33db9d06"
+        ],
+        "registry_lines": [
+          311
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_cd45fbec9dbc",
+      "registry_line": 312,
+      "legacy_id": "5-4-savvas-q25",
+      "item_number": 25,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_cd45fbec9dbc"
+        ],
+        "registry_lines": [
+          312
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_323815e656c9",
+      "registry_line": 313,
+      "legacy_id": "5-4-savvas-q26",
+      "item_number": 26,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_323815e656c9"
+        ],
+        "registry_lines": [
+          313
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_26a15cb256cd",
+      "registry_line": 314,
+      "legacy_id": "5-4-savvas-q27",
+      "item_number": 27,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_26a15cb256cd"
+        ],
+        "registry_lines": [
+          314
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_d2eb395dfeee",
+      "registry_line": 315,
+      "legacy_id": "5-4-savvas-q28",
+      "item_number": 28,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_d2eb395dfeee"
+        ],
+        "registry_lines": [
+          315
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_6eb3a7c167c0",
+      "registry_line": 316,
+      "legacy_id": "5-4-savvas-q29",
+      "item_number": 29,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 3",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 3 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_6eb3a7c167c0"
+        ],
+        "registry_lines": [
+          316
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_3646823c6297",
+      "registry_line": 317,
+      "legacy_id": "5-4-savvas-q30",
+      "item_number": 30,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 3",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 3 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_3646823c6297"
+        ],
+        "registry_lines": [
+          317
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_d8950c94a8bc",
+      "registry_line": 318,
+      "legacy_id": "5-4-savvas-q31",
+      "item_number": 31,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 3",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 3 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_d8950c94a8bc"
+        ],
+        "registry_lines": [
+          318
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_c1771afa2a7f",
+      "registry_line": 319,
+      "legacy_id": "5-4-savvas-q32",
+      "item_number": 32,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 3",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 3 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_c1771afa2a7f"
+        ],
+        "registry_lines": [
+          319
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_c6ab822e227b",
+      "registry_line": 320,
+      "legacy_id": "5-4-savvas-q33",
+      "item_number": 33,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 4",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 4 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_c6ab822e227b"
+        ],
+        "registry_lines": [
+          320
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_748071c541b9",
+      "registry_line": 321,
+      "legacy_id": "5-4-savvas-q34",
+      "item_number": 34,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 4",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 4 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_748071c541b9"
+        ],
+        "registry_lines": [
+          321
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_22bcc429d37c",
+      "registry_line": 322,
+      "legacy_id": "5-4-savvas-q35",
+      "item_number": 35,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 4",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 4 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_22bcc429d37c"
+        ],
+        "registry_lines": [
+          322
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_3c4458af5f01",
+      "registry_line": 323,
+      "legacy_id": "5-4-savvas-q36",
+      "item_number": 36,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 5",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 5 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_3c4458af5f01"
+        ],
+        "registry_lines": [
+          323
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_994890f62b0f",
+      "registry_line": 324,
+      "legacy_id": "5-4-savvas-q37",
+      "item_number": 37,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 5",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 5 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_994890f62b0f"
+        ],
+        "registry_lines": [
+          324
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_b04e59b85637",
+      "registry_line": 325,
+      "legacy_id": "5-4-savvas-q38",
+      "item_number": 38,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 5",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 5 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_b04e59b85637"
+        ],
+        "registry_lines": [
+          325
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_6826655b6fe7",
+      "registry_line": 326,
+      "legacy_id": "5-4-savvas-q39",
+      "item_number": 39,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 6",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 6 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_6826655b6fe7"
+        ],
+        "registry_lines": [
+          326
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_6c46f0da311e",
+      "registry_line": 298,
+      "legacy_id": "5-4-savvas-q40",
+      "item_number": 40,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_6c46f0da311e"
+        ],
+        "registry_lines": [
+          298
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_f12f2d341680",
+      "registry_line": 327,
+      "legacy_id": "5-4-savvas-q40",
+      "item_number": 40,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_f12f2d341680"
+        ],
+        "registry_lines": [
+          327
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_3c70a19c8d36",
+      "registry_line": 328,
+      "legacy_id": "5-4-savvas-q41",
+      "item_number": 41,
+      "registry_dok": 3,
+      "te_dok": 3,
+      "te_example": "Example 4",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 4 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_3c70a19c8d36"
+        ],
+        "registry_lines": [
+          328
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_0738f4d82434",
+      "registry_line": 300,
+      "legacy_id": "5-4-savvas-q42",
+      "item_number": 42,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 6",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 6 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_0738f4d82434"
+        ],
+        "registry_lines": [
+          300
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_3424ed062602",
+      "registry_line": 329,
+      "legacy_id": "5-4-savvas-q42",
+      "item_number": 42,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 6",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 6 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_3424ed062602"
+        ],
+        "registry_lines": [
+          329
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_9193a0f5443b",
+      "registry_line": 301,
+      "legacy_id": "5-4-savvas-q43",
+      "item_number": 43,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_9193a0f5443b"
+        ],
+        "registry_lines": [
+          301
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_8624e125b308",
+      "registry_line": 330,
+      "legacy_id": "5-4-savvas-q43",
+      "item_number": 43,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_8624e125b308"
+        ],
+        "registry_lines": [
+          330
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_097a1fc43439",
+      "registry_line": 331,
+      "legacy_id": "5-4-savvas-q44",
+      "item_number": 44,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 1",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 1 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_097a1fc43439"
+        ],
+        "registry_lines": [
+          331
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_b69ba77e28bf",
+      "registry_line": 332,
+      "legacy_id": "5-4-savvas-q45",
+      "item_number": 45,
+      "registry_dok": 1,
+      "te_dok": 1,
+      "te_example": "Example 4",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 4 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_b69ba77e28bf"
+        ],
+        "registry_lines": [
+          332
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_dbd1679d5bd4",
+      "registry_line": 304,
+      "legacy_id": "5-4-savvas-q46",
+      "item_number": 46,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_dbd1679d5bd4"
+        ],
+        "registry_lines": [
+          304
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    },
+    {
+      "item_uid": "iu_25711dfdb66a",
+      "registry_line": 333,
+      "legacy_id": "5-4-savvas-q46",
+      "item_number": 46,
+      "registry_dok": 2,
+      "te_dok": 2,
+      "te_example": "Example 2",
+      "provenance": "Savvas TE printed page 258, Item Analysis table, Example 2 row (page footer \"TOPIC 5 | 258 | LESSON 4\"); captures questionbank/calibration/sources/5-4_savvas_te_p258_full_page.png (sha256 af34c4d9469a88b372d7d09b03b724b15c83abe18a83c5f03a820992a2ba3786) and questionbank/calibration/sources/5-4_savvas_te_p258_item_analysis_closeup.png (sha256 273db411184a07e8c92e8b72cdd527f7977bb507a13a43b70fdf6ba710d6ab46); edition caveat: exact TE edition/copyright page not independently re-confirmed in this intake (RC override 2026-07-22).",
+      "decision_shape": {
+        "note": "Structurally mappable to decisions_export.schema.json's per-decision shape (inventory/decision-console/decisions_export.schema.json); this is NOT a decisions export and records no decision.",
+        "target_item_uids": [
+          "iu_25711dfdb66a"
+        ],
+        "registry_lines": [
+          333
+        ]
+      },
+      "status": "PROPOSAL — NOT RECORDED",
+      "awaiting": "RC confirmation",
+      "records_decisions": false
+    }
+  ],
+  "summary": {
+    "row_count": 39,
+    "expected_row_count": 39,
+    "matches_expected": true
+  }
+}

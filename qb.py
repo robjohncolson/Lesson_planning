@@ -6,9 +6,47 @@ packet/slide builders.
 Usage:
     from qb import select, get
     questions = select(lesson="3-5", dok=2, topics=["multiplicity"])
+
+Merged-alias exclusion (rc-merge-auth-5-4-2026-07-23, STUDENT-FACING
+selector -- the critical exclusion point): 22 of the 900 registry rows
+(lesson 5-4) now carry status=="merged-alias" + alias_of (the survivor
+row's item_uid), written by a Fable-authorized merge of 22 of the 85
+ambiguous-legacy-id duplicate pairs. This module NEVER returns a
+merged-alias row's own content from get() / select() / get_for_packet():
+every one of those three public entry points resolves a merged-alias row
+DELIBERATELY to its survivor via alias_of (never by legacy-id ambiguity --
+never first-match, never dict-last-wins on a duplicate id) and fails loudly
+(KeyError/ValueError) if the alias_of target is missing or is itself an
+alias (a chain). The uid used for that resolution is computed independently
+here via the SAME published algorithm as
+inventory/dedup/build_item_uid_map.py (item_uid = 'iu_' +
+sha1(f'{lesson}|{source}|{prompt_sha1}')[:12], prompt_sha1 = sha1(prompt) --
+see _item_uid_for_row below) rather than reading
+inventory/dedup/item_uid_alias_map.json, which is out of this module's
+ownership. Public API signatures (get/select/get_for_packet/stats) are
+unchanged -- only their internal resolution logic is deliberate now.
+stats() reports the dual denominators: raw registry rows (900), active
+canonical items (878), and merged-alias rows (22).
+
+Deliberately OUT OF SCOPE: the other 63 (of 85) ambiguous-legacy-id groups
+that this merge did NOT resolve keep their EXACT pre-merge tie-break
+behavior -- get() returns the FIRST matching row (its original loop-and-
+return-on-match behavior, unchanged); get_for_packet() returns the LAST
+matching row (its original {id: row} dict-comprehension's dict-last-wins
+behavior, unchanged) -- for these 63, no error, no resolution attempt.
+Deliberate survivor resolution (via alias_of) and fail-loud (KeyError/
+ValueError) apply ONLY to a legacy id whose group actually contains a
+merged-alias row, i.e. one of the 22 RC-authorized pairs. RC's
+authorization (rc-merge-auth-5-4-2026-07-23) covers only those 22; silently
+changing the tie-break behavior for the remaining 63 -- even to make it
+"more correct" -- would be unauthorized scope creep on a question-bank
+content decision, not a code-correctness fix, and would regress every
+existing caller (legacy packet/slide builders) that already depends on the
+old tie-break for those ids.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Iterable
@@ -41,9 +79,73 @@ def append(entry: dict) -> None:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
 
+# ----------------------------------------------------------------------
+# Merged-alias resolution (rc-merge-auth-5-4-2026-07-23). See module
+# docstring's "Merged-alias exclusion" section.
+# ----------------------------------------------------------------------
+
+def _sha1_hex(text: str) -> str:
+    return hashlib.sha1(text.encode("utf-8")).hexdigest()
+
+
+def _item_uid_for_row(row: dict) -> str:
+    """Compute item_uid via the published algorithm -- BYTE-IDENTICAL to
+    inventory/dedup/build_item_uid_map.py's compute_item_uid(): item_uid =
+    'iu_' + sha1(f'{lesson}|{source}|{prompt_sha1}')[:12], where
+    prompt_sha1 = sha1(prompt) and a missing/None prompt counts as ''.
+    Computed independently from the row itself -- this module never reads
+    inventory/dedup/item_uid_alias_map.json (out of its ownership)."""
+    lesson = row.get("lesson")
+    source = row.get("source")
+    prompt = row.get("prompt")
+    if prompt is None:
+        prompt = ""
+    prompt_sha1 = _sha1_hex(prompt)
+    basis = f"{lesson}|{source}|{prompt_sha1}"
+    return "iu_" + _sha1_hex(basis)[:12]
+
+
+def _build_uid_index(items: list[dict]) -> dict[str, dict]:
+    """item_uid -> row, one entry per registry row (900 distinct uids for
+    900 rows in the current registry -- see item_uid_alias_map.json's own
+    meta.distinct_item_uids -- so this dict is 1:1, never overwritten by a
+    collision in practice)."""
+    return {_item_uid_for_row(row): row for row in items}
+
+
+def _resolve_alias(row: dict, uid_index: dict[str, dict]) -> dict:
+    """Resolve a merged-alias `row` DELIBERATELY to its survivor via
+    row['alias_of'] -- NEVER by falling back to legacy-id ambiguity. Fails
+    loudly if alias_of is missing/empty, does not resolve to any known
+    item_uid, or itself points at another merged-alias row (an alias
+    chain) -- a data-integrity problem a student-facing selector must
+    never paper over silently."""
+    alias_of = row.get("alias_of")
+    if not alias_of:
+        raise ValueError(
+            f"registry row id={row.get('id')!r} has status=='merged-alias' "
+            "but no (or empty) alias_of -- cannot resolve"
+        )
+    survivor = uid_index.get(alias_of)
+    if survivor is None:
+        raise KeyError(
+            f"registry row id={row.get('id')!r} alias_of={alias_of!r} does "
+            "not resolve to any item_uid in the registry -- dangling alias"
+        )
+    if survivor.get("status") == "merged-alias":
+        raise ValueError(
+            f"registry row id={row.get('id')!r} alias_of={alias_of!r} is "
+            "itself a merged-alias row -- alias chains are not supported"
+        )
+    return survivor
+
+
 def get(qid: str) -> dict | None:
-    for q in load():
+    items = load()
+    for q in items:
         if q.get("id") == qid:
+            if q.get("status") == "merged-alias":
+                return _resolve_alias(q, _build_uid_index(items))
             return q
     return None
 
@@ -63,6 +165,11 @@ def select(
     limit: int | None = None,
 ) -> list[dict]:
     items = load()
+    # Merged-alias rows are never a selectable copy (rc-merge-auth-5-4-
+    # 2026-07-23) -- their content lives on, and is reachable only through,
+    # their survivor row. Dropped first, before any other filter, so this
+    # holds regardless of which other filters are applied.
+    items = [q for q in items if q.get("status") != "merged-alias"]
     if lesson is not None:
         items = [q for q in items if q.get("lesson") == lesson]
     if dok is not None:
@@ -132,17 +239,76 @@ def teacher_prompts(lesson: str, *, anchor_example: int | None = None,
     return out
 
 
+def _resolve_id_group(qid: str, rows: list[dict], uid_index: dict[str, dict]) -> dict:
+    """Resolve every registry row sharing legacy id `qid` to exactly one row.
+
+    Two regimes, drawn EXACTLY at RC's authorization boundary (Codex review
+    C1 fix -- the merge-authorized 22 vs. the untouched 63):
+
+      - NONE of `rows` carries status=='merged-alias' (true for every
+        non-merged id, including the 63 still-unresolved ambiguous legacy
+        ids among the 85): this is UNAUTHORIZED-for-resolution territory --
+        preserve the EXACT pre-merge tie-break, LAST row in registry/file
+        order wins (the old {id: row} dict-comprehension's dict-last-wins
+        behavior), no error, no resolution attempt. This is a deliberate,
+        unconditional behavior match with pre-merge qb.py, not merely "a
+        reasonable default" -- existing callers (legacy packet/slide
+        builders requesting one of these ids) must see byte-identical rows
+        to what they saw before this module ever existed.
+      - At least one row carries status=='merged-alias' (true only for the
+        22 RC-authorized pairs): resolve DELIBERATELY via alias_of -- never
+        by position/ambiguity -- and raise ValueError if more than one
+        distinct item_uid remains afterward (would mean a merge-authorized
+        group somehow still resolves ambiguously -- a data-integrity bug,
+        never something to silently pick one of).
+    """
+    if not any(row.get("status") == "merged-alias" for row in rows):
+        return rows[-1]
+
+    resolved_by_uid: dict[str, dict] = {}
+    for row in rows:
+        if row.get("status") == "merged-alias":
+            survivor = _resolve_alias(row, uid_index)
+        else:
+            survivor = row
+        resolved_by_uid[_item_uid_for_row(survivor)] = survivor
+    if len(resolved_by_uid) > 1:
+        raise ValueError(
+            f"id {qid!r} contains a merged-alias row but still resolves to "
+            f"{len(resolved_by_uid)} distinct items after resolution -- "
+            "unexpected data-integrity problem in an RC-authorized merge "
+            "group, refusing to guess which copy is intended"
+        )
+    return next(iter(resolved_by_uid.values()))
+
+
 def get_for_packet(ids: list[str]) -> list[dict]:
     """Look up a fixed ordered list of registry entries for a packet builder.
 
     Raises KeyError if any id is missing from the registry, so a packet
     build fails loudly rather than silently rendering placeholder text.
+    Raises ValueError if an id resolves to more than one distinct item even
+    after merged-alias resolution (see _resolve_id_group).
+
+    A merged-alias row is never returned here (rc-merge-auth-5-4-2026-07-23)
+    -- resolution to its survivor is deliberate (via alias_of), never the
+    old dict-comprehension's dict-last-wins accident.
     """
-    found = {q["id"]: q for q in load() if q.get("id") in set(ids)}
-    missing = [qid for qid in ids if qid not in found]
+    items = load()
+    id_set = set(ids)
+    rows_by_id: dict[str, list[dict]] = {}
+    for q in items:
+        rid = q.get("id")
+        if rid in id_set:
+            rows_by_id.setdefault(rid, []).append(q)
+
+    missing = [qid for qid in ids if qid not in rows_by_id]
     if missing:
         raise KeyError(f"Bank IDs not in registry: {missing}")
-    return [found[qid] for qid in ids]
+
+    uid_index = _build_uid_index(items)
+    resolved = {qid: _resolve_id_group(qid, rows_by_id[qid], uid_index) for qid in rows_by_id}
+    return [resolved[qid] for qid in ids]
 
 
 def visuals_for(qids: list[str]) -> list[dict]:
@@ -201,17 +367,37 @@ def write_visuals_checklist(qids: list[str], path: str | Path, *, title: str = "
 
 
 def stats() -> dict:
+    """Reports the dual denominators (rc-merge-auth-5-4-2026-07-23): this is
+    an AUDIT-style view (raw_total counts every registry row, alias rows
+    included) alongside active_total/merged_alias_total so the two never get
+    silently conflated. by_lesson stays a raw, per-row breakdown (audit-
+    style, alias rows included and marked via `merged_alias`) -- a lesson's
+    'total' here is its raw registry row count, NOT its active-item count;
+    student-facing selection (get/select/get_for_packet) is what actually
+    excludes/resolves merged-alias rows, not this reporting helper."""
     items = load()
     by_lesson: dict[str, dict] = {}
+    merged_alias_total = 0
     for q in items:
         L = q.get("lesson", "?")
         d = q.get("dok", 0)
-        by_lesson.setdefault(L, {"total": 0, "dok1": 0, "dok2": 0, "dok3": 0, "dok4": 0, "visual": 0})
+        by_lesson.setdefault(
+            L, {"total": 0, "dok1": 0, "dok2": 0, "dok3": 0, "dok4": 0, "visual": 0, "merged_alias": 0}
+        )
         by_lesson[L]["total"] += 1
         by_lesson[L][f"dok{d}"] = by_lesson[L].get(f"dok{d}", 0) + 1
         if q.get("has_visual"):
             by_lesson[L]["visual"] += 1
-    return {"total": len(items), "by_lesson": by_lesson}
+        if q.get("status") == "merged-alias":
+            by_lesson[L]["merged_alias"] += 1
+            merged_alias_total += 1
+    return {
+        "total": len(items),
+        "raw_total": len(items),
+        "active_total": len(items) - merged_alias_total,
+        "merged_alias_total": merged_alias_total,
+        "by_lesson": by_lesson,
+    }
 
 
 if __name__ == "__main__":
