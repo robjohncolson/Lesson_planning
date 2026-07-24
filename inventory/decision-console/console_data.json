@@ -1,27 +1,27 @@
 {
   "meta": {
     "generated_by": "build_console.py",
-    "generated_at": "2026-07-23T07:03:56.630873+00:00",
+    "generated_at": "2026-07-24T04:01:09.771249+00:00",
     "frozen_inputs": [
       {
         "path": "questionbank/registry.jsonl",
-        "sha256": "a2fe278292e97a432a6275b807fdfe730ab67a38efd09a70e5241355959dba17"
+        "sha256": "5a9dff0bacd0c7ccd168d582405f95fa5da42c50b4975bb85555eb644f90d6ad"
       },
       {
         "path": "inventory/dok-workflow/dok_wave_plan.json",
-        "sha256": "26f578b7cba22397f4015509a17dd097cfd829a2f48250ebf779237d3b9ad82c"
+        "sha256": "1aca1e2d955d0da7f907097be1c2d09862a391c4e60145c8227d2b528c91cebf"
       },
       {
         "path": "inventory/course-map/course_map.json",
-        "sha256": "c8274dfbaab29424d0cb5f15093359bab948112dee70d432ede7597d0fd095c0"
+        "sha256": "f2bd625a7aaf2d31e27afd1e5d7700df8a08b20f58f98fbfb557b1fcc706af30"
       },
       {
         "path": "inventory/dedup/item_uid_alias_map.json",
-        "sha256": "27b8c13b6c2a03d1c33e86ce4007dcfa27a7e56717044b821ac7db934d2ede5e"
+        "sha256": "1f45860496344b5caeca774be4d75b5455e93b42bbb025a3f9a1221b7076e860"
       },
       {
         "path": "inventory/dashboard/content_readiness.json",
-        "sha256": "079de40916e45f8f1593750a6632d12d56df9de86dd1fcccdbf0264d973f5103"
+        "sha256": "8c9bf806809ecdd9c70513618ce91ebbaa882b07135b5fb313fd97f9ad84b188"
       },
       {
         "path": "inventory/visuals/visual_asset_classification.json",
@@ -37,20 +37,22 @@
       }
     ],
     "locked_counts": {
-      "registry_rows": 900,
+      "registry_rows": 919,
       "active_registry_rows": 878,
       "merged_alias_rows": 22,
+      "optional_catalog_rows": 19,
       "dok_conflict_pairs": 22,
       "wave0_items": 42,
       "essential_missing_visuals": 14,
       "tikz_total_ids": 71,
       "tikz_compile_pass": 64,
-      "dangling_edges_into_4_1": 4,
+      "dangling_edges_into_4_1": 0,
       "canonical_verified_count": 39
     },
     "identity_reconciliation": {
-      "raw_registry_identities": 900,
+      "raw_registry_identities": 919,
       "merged_alias_identities": 22,
+      "optional_catalog_identities": 19,
       "active_canonical_items": 878,
       "merged_alias_item_uids": [
         "iu_18cac1a8167a",
@@ -76,8 +78,30 @@
         "iu_e106ef5ef48e",
         "iu_e7638fcec56e"
       ],
+      "optional_catalog_item_uids": [
+        "iu_01d98498bba0",
+        "iu_02c306effb29",
+        "iu_11751b2a9981",
+        "iu_3505e057cdd1",
+        "iu_53af93aa4a0d",
+        "iu_549ca1f8a7a0",
+        "iu_57d15babe8c8",
+        "iu_64f93ba6a2c1",
+        "iu_69d85ede35cc",
+        "iu_6e909512e4cb",
+        "iu_77b53af6af82",
+        "iu_afd34b461341",
+        "iu_bf941050b523",
+        "iu_c4d18a2bbd7a",
+        "iu_d211e4d45e2c",
+        "iu_d29881722adc",
+        "iu_d2df726e7681",
+        "iu_f7eb4962bbc6",
+        "iu_f8ff405bd610"
+      ],
       "authorization_record_id": "rc-merge-auth-5-4-2026-07-23",
-      "statement": "raw_registry_identities == active_canonical_items + merged_alias_identities. meta.locked_counts.registry_rows above stays the raw, audit-style total (unchanged by this merge); active_registry_rows is what a student-facing consumer (qb.py) actually selects from."
+      "optional_catalog_authorization_record_id": "nt14-ingest-4-1-2026-07-23",
+      "statement": "raw_registry_identities == active_canonical_items + optional_catalog_identities + merged_alias_identities (919 == 878 + 19 + 22). meta.locked_counts.registry_rows above stays the raw, audit-style total; active_registry_rows is what a student-facing consumer (qb.py) actually selects from. optional_catalog_identities (lesson 4-1, nt14-ingest-4-1-2026-07-23) are rows that exist in the registry but are, by binding course policy, never auto-scheduled, never placed in pacing, and never described as required or ready-to-teach pending a separate, later course-policy decision -- distinct from merged_alias_identities (lesson 5-4), which resolve DELIBERATELY to a survivor row."
     },
     "approvals_manifest_state": {
       "path": "tools/dok-review/rubric_approvals.json",
@@ -116,8 +140,8 @@
         "source": "inventory/topic-4-1/DIAGNOSIS.md lines 69-79"
       },
       {
-        "fact": "0 registry rows exist for lesson 4-1 (grep-confirmed: grep -c '\"lesson\": \"4-1\"' questionbank/registry.jsonl -> 0).",
-        "source": "inventory/topic-4-1/DIAGNOSIS.md line 92"
+        "fact": "NT14 NAMED UPDATE (nt14-ingest-4-1-2026-07-23, 2026-07-23): OUTDATED -- '0 registry rows exist for lesson 4-1' was the pre-ingestion count. 19 registry rows now exist (4-1-savvas-q8..q26, registry.jsonl lines 901-919), every one carrying availability=='optional-catalog'. This does NOT make 4-1 required, ready-to-teach, revived, or auto-scheduled -- see meta.identity_reconciliation.optional_catalog_identities and this section's effort-path notes below.",
+        "source": "questionbank/registry.jsonl lines 901-919 (nt14-ingest-4-1-2026-07-23); supersedes inventory/topic-4-1/DIAGNOSIS.md line 92"
       },
       {
         "fact": "No a2_4-1_SE.* or a2_4-1_TE.* (pdf or tex) exists anywhere in the repo, while nine sibling lessons (4-3, 4-4, 4-5, 5-1, 5-4, 5-5, 6-3, 6-4, 6-5) each have both SE and TE source.",
@@ -136,8 +160,8 @@
         "source": "inventory/topic-4-1/DIAGNOSIS.md lines 102-108"
       },
       {
-        "fact": "Whether ingestion into the registry was briefly attempted and then culled during the skip, versus never begun past the skeleton-stub stage, is UNKNOWN from disk alone -- frame as \"never completed/retained, halted by the dept skip,\" not as a certain \"never ingested at all.\"",
-        "source": "inventory/topic-4-1/DIAGNOSIS.md lines 132-158 (epistemic note)"
+        "fact": "NT14 NAMED UPDATE (2026-07-23): whether ingestion was EVER attempted is no longer unknown going forward -- 19 items were deliberately ingested 2026-07-23 as OPTIONAL CATALOG content (nt14-ingest-4-1-2026-07-23). Whether an EARLIER, pre-NT14 attempt was made and culled during the 2026-05-13 department skip remains UNKNOWN from disk alone, exactly as before; the department-skip history itself is unchanged and is not reversed or reinterpreted by this ingestion.",
+        "source": "inventory/topic-4-1/DIAGNOSIS.md lines 132-158 (original epistemic note); nt14-ingest-4-1-2026-07-23 (2026-07-23 named update)"
       }
     ],
     "staged_state": {
@@ -147,62 +171,31 @@
       "registry_rows": 0,
       "se_te": false
     },
-    "dangling_edges": [
-      {
-        "source_uid": "iu_31a6940d05ec",
-        "source": "4-3-tryit-1",
-        "target": "4-1-savvas-q10",
-        "type": "prereq",
-        "reason": "retirement-gap"
-      },
-      {
-        "source_uid": "iu_2ca6ec6026ce",
-        "source": "6-3-savvas-q54",
-        "target": "4-1-savvas-q17",
-        "type": "echoes",
-        "reason": "retirement-gap"
-      },
-      {
-        "source_uid": "iu_cd24889b7168",
-        "source": "6-4-savvas-q13",
-        "target": "4-1-savvas-q19",
-        "type": "echoes",
-        "reason": "retirement-gap"
-      },
-      {
-        "source_uid": "iu_634d55d82bc5",
-        "source": "4-5-savvas-q25",
-        "target": "4-1-savvas-q26",
-        "type": "echoes",
-        "reason": "retirement-gap"
-      }
-    ],
+    "dangling_edges": [],
     "options": {
       "revive": {
         "downstream_effects": [
-          "Unblocks the 4 retirement-gap edges into 4-1 (4-3-tryit-1 prereq→4-1-savvas-q10; 6-3-savvas-q54 echoes→4-1-savvas-q17; 6-4-savvas-q13 echoes→4-1-savvas-q19; 4-5-savvas-q25 echoes→4-1-savvas-q26)"
+          "NT14 NAMED UPDATE (nt14-ingest-4-1-2026-07-23): the 4 retirement-gap edges into 4-1 (4-3-tryit-1 prereq→4-1-savvas-q10; 6-3-savvas-q54 echoes→4-1-savvas-q17; 6-4-savvas-q13 echoes→4-1-savvas-q19; 4-5-savvas-q25 echoes→4-1-savvas-q26) are ALREADY resolved -- course_map.json was independently regenerated once 4-1 had real (optional-catalog) items to resolve them against, so there is nothing left for a revive decision to unblock on this front. A genuine revive (to required/ready-to-teach) instead means promoting these 19 rows out of availability=='optional-catalog'."
         ],
         "effort_paths": {
-          "revive-ingestion-only": "RECOVERY_PLAN Steps 2+4+5: hand-add 4 skeleton stubs for q20/q22/q25/q26, then transcribe+append all 19 practice items SERIALLY via qb_append.py from the existing screenshots, then backfill calibration anchors. NOT blocked on SE/TE.",
+          "revive-ingestion-only": "NT14 NAMED UPDATE (nt14-ingest-4-1-2026-07-23): the transcribe+append step this path used to describe as future work is DONE -- all 19 practice items (q8-q26) were transcribed and appended to registry.jsonl 2026-07-23, but as availability=='optional-catalog' rows, not as required/ready-to-teach content. What remains for an actual revive decision: backfill calibration dok2_anchors/dok3_anchors (still empty in questionbank/calibration/4-1.json), and a separate course-policy call to flip these 19 rows from optional-catalog to required/active. NOT blocked on SE/TE.",
           "revive-full-rebuild": "All of ingestion-only PLUS SE/TE export from Savvas + PDF→LaTeX conversion + full tex/L41_P{1,2,3} packet + pacer rebuild (RECOVERY_PLAN Steps 3b+6). BLOCKED on acquiring a2_4-1_SE/TE."
         },
         "risks": [
           "Overrides a documented department-level decision -- if the 2026-05-13 skip was POLICY rather than time pressure, revival conflicts with the department",
-          "Ingestion effort (19 serial transcriptions) spent on a lesson that may never be taught",
+          "NT14 NAMED UPDATE: the 19 serial transcriptions are DONE (2026-07-23, as optional-catalog rows) -- this risk is now about promoting already-spent ingestion effort to required status on a lesson that may never be taught, not about spending it in the first place",
           "Full-rebuild path indefinitely blocked on SE/TE acquisition"
         ]
       },
       "retire": {
         "downstream_effects": [
-          "The 4 lessons carrying dangling edges (4-3-tryit-1 prereq→4-1-savvas-q10; 6-3-savvas-q54 echoes→4-1-savvas-q17; 6-4-savvas-q13 echoes→4-1-savvas-q19; 4-5-savvas-q25 echoes→4-1-savvas-q26) need bridge re-pointing",
-          "course_map.json regeneration to drop/re-point the edges",
+          "NT14 NAMED UPDATE (nt14-ingest-4-1-2026-07-23): the 4 lessons that used to carry dangling edges into 4-1 (4-3-tryit-1 prereq→4-1-savvas-q10; 6-3-savvas-q54 echoes→4-1-savvas-q17; 6-4-savvas-q13 echoes→4-1-savvas-q19; 4-5-savvas-q25 echoes→4-1-savvas-q26) no longer need bridge re-pointing -- course_map.json already resolves those edges against 4-1's real (optional-catalog) items. A retire decision now would instead mean formally excluding these 19 rows from the catalog (a distinct action from the pre-ingestion 'never built' state this section originally described).",
           "CLAUDE.md:45 stale 'ready' table needs correcting to retired"
         ],
-        "effort": "4 bridge edge re-points across 4 lessons + course-map rebuild + CLAUDE.md correction; no ingestion work",
+        "effort": "NT14 NAMED UPDATE: bridge re-pointing is no longer part of this effort (course_map.json already resolves the 4 formerly-dangling edges against 4-1's real items) -- retiring today means formally excluding the 19 already-ingested optional-catalog rows from the catalog + CLAUDE.md correction; no further ingestion work.",
         "risks": [
-          "Staged work (61 screenshots + authored calibration) permanently unused",
-          "Inverse variation on-ramp into Topic 4 rational functions lost from the graph",
-          "Re-pointed bridges may be pedagogically weaker than the original 4-1 targets"
+          "Staged work (61 screenshots + authored calibration, now 19 ingested optional-catalog rows) permanently excluded from required content",
+          "Inverse variation on-ramp into Topic 4 rational functions lost from the graph"
         ]
       }
     },
@@ -211,13 +204,14 @@
       "confidence": 0.7,
       "visually_distinct": true,
       "text": "Revive via ingestion-only from the existing 61 screenshots.",
+      "note": "NT14 NAMED UPDATE (2026-07-23): the ingestion-only action this recommendation proposed is DONE (19 rows, availability=='optional-catalog'; see this section's evidence and effort_paths above). This recommendation and its rationale/residual_risk below are preserved as the historical record of what was recommended BEFORE that ingestion -- they are not re-decided or re-scored by this NT14 build. The still-open decision is whether/when to promote these 19 rows to required/ready-to-teach status, per course policy.",
       "rationale": [
-        "(a) 4 lessons carry dangling retirement-gap edges into 4-1 -- permanent retirement costs 4 bridge edits anyway",
+        "(a) NT14 NAMED UPDATE: 4 lessons carried dangling retirement-gap edges into 4-1 at the time this recommendation was made; course_map.json has since been independently regenerated and those edges are now resolved against 4-1's real (optional-catalog) items, so this specific cost no longer applies to a retirement decision made today",
         "(b) the ingest pipeline is already staged (calibration + screenshots + 15 stubs), making ingestion-only the lowest-effort path to graph integrity",
         "(c) inverse variation is the conceptual on-ramp for Topic 4's rational functions",
         "(d) the 4 missing DOK-3 anchor stubs are mechanical to create from their screenshots"
       ],
-      "residual_risk": "If the 5/13 dept skip was department POLICY rather than time pressure, retire instead and re-point the 4 edges -- that is precisely the judgment only the teacher can make, hence 0.7 not higher."
+      "residual_risk": "If the 5/13 dept skip was department POLICY rather than time pressure, retire instead -- that is precisely the judgment only the teacher can make, hence 0.7 not higher. (NT14 named update: retiring today would no longer require re-pointing the 4 edges named above -- course_map.json already resolves them against 4-1's real items -- it would instead mean formally excluding the 19 already-ingested optional-catalog rows from the catalog.)"
     },
     "decision": {
       "decision_id": "s1-revive-or-retire-4-1",

@@ -2,7 +2,7 @@
 
 Purpose: a definitive, per-lesson inventory of what content-readiness material actually exists on disk for all 37 Algebra 2 lesson slots (Topics 1 through 6), covering Savvas SE/TE source availability, questionbank registry coverage, answer-key evidence, visual-asset resolution, DOK review status, calibration status, and known data-quality risks (duplicate ids, source-coordinate collisions, missing topic tags). Everything here is a snapshot of CURRENT on-disk state; where a pattern suggests a history or cause, that history/cause is explicitly marked UNKNOWN rather than asserted.
 
-**generated_at:** 2026-07-23T05:57:25.172720+00:00
+**generated_at:** 2026-07-24T04:00:08.721581+00:00
 
 **Computed from disk, read-only, snapshot-only. No registry or source file was modified.** Every number in this report is computed directly from questionbank/registry.jsonl, questionbank/calibration/*.json, questionbank/images/, questionbank/calibration/sources/, and repo-root/source SE-TE files at generation time — nothing here is hand-entered or hardcoded.
 
@@ -12,8 +12,8 @@ Every metric below was independently computed from disk and checked against the 
 
 | metric | claimed | computed | verdict |
 |---|---|---|---|
-| total registry rows | 900 | 900 | CONFIRMED |
-| unique ids | 815 | 815 | CONFIRMED |
+| total registry rows (required content only; see identity_reconciliation for raw) | 900 | 900 | CONFIRMED |
+| unique ids | 834 | 834 | CONFIRMED |
 | duplicate id strings (ids appearing more than once) | 85 | 85 | CONFIRMED |
 | known-auto DOK rows | 421 | 421 | CONFIRMED |
 | missing-answer rows across the nine | 339 | 339 | CONFIRMED |
@@ -24,17 +24,19 @@ Every metric below was independently computed from disk and checked against the 
 | real screenshots | 114 | 114 | CONFIRMED |
 | merged-alias rows (rc-merge-auth-5-4-2026-07-23) | 22 | 22 | CONFIRMED |
 
-## 1b. Dual-Denominator Identity (rc-merge-auth-5-4-2026-07-23)
+## 1b. Identity Reconciliation (raw / active / optional-catalog / merged-alias)
 
-raw_registry_identities=900, merged_alias_identities=22, active_canonical_items=878 (reconciles: 878 + 22 == 900).
+raw_registry_identities=919, active_canonical_items=878, optional_catalog_identities=19, merged_alias_identities=22 (reconciles: 878 + 19 + 22 == 919).
 
-This inventory's existing metrics above (registry_rows, dok_status_totals, readiness gates, etc.) are registry-row-count based (audit-style): they include all 900 rows, alias rows among them, unchanged by this merge. STUDENT-FACING selection (qb.py) instead resolves each merged-alias row DELIBERATELY to its survivor (via alias_of) and never selects or counts the alias row itself, leaving active_canonical_items (878) as what a packet/quiz build actually draws from. Reconciliation is exact: raw_registry_identities == active_canonical_items + merged_alias_identities (900 == 878 + 22).
+raw_registry_identities (919, all rows currently in registry.jsonl) splits three ways: merged_alias_identities (22, lesson 5-4, rc-merge-auth-5-4-2026-07-23) -- STUDENT-FACING selection (qb.py) resolves each of these DELIBERATELY to its survivor (via alias_of) and never selects or counts the alias row itself; optional_catalog_identities (19, lesson 4-1, nt14-ingest-4-1-2026-07-23) -- these rows exist in the registry but were deliberately excluded from every completion/readiness metric in this report (registry_rows, dok_status_totals, missing_answers, readiness gates, etc. above are all computed over required rows only and never see them; see lessons[] '4-1' entry's own 'optional_catalog' block), never auto-scheduled, never placed in pacing, and never described as required or ready-to-teach -- a later, separate course-policy decision governs student-facing appearance; and active_canonical_items (878) -- what a packet/quiz build actually draws from. Reconciliation is exact: raw_registry_identities == active_canonical_items + optional_catalog_identities + merged_alias_identities (919 == 878 + 19 + 22).
 
-Every OTHER metric in this report (registry_rows, dok_status, readiness gates, etc.) is registry-row-count based (audit-style: all 900 rows, alias rows included, unchanged by this merge). Per-lesson breakdown (only lessons with a nonzero merged_alias_rows shown):
+Every OTHER metric in this report (registry_rows, dok_status, readiness gates, etc.) is computed over REQUIRED rows only (900 total: 878 active_canonical_items + 22 merged-alias rows carried audit-style, exactly as before this ingestion) -- the 19 optional-catalog rows (lesson 4-1) are never blended into them. Per-lesson breakdown (lessons with a nonzero merged_alias_rows, plus 4-1's optional-catalog rows shown separately below):
 
 | lesson | registry_rows | merged_alias_rows | active_registry_rows |
 |---|---|---|---|
 | 5-4 | 132 | 22 | 110 |
+
+Optional-catalog rows (excluded from the table above -- not merged-alias, a distinct category): lesson 4-1 carries 19 rows (nt14-ingest-4-1-2026-07-23), reported on its own lesson block ('optional_catalog') and never in its top-level registry_rows/dok_status/etc fields above (which read 0 for 4-1, matching required-rows-only accounting).
 
 ## 2. The 37-Lesson-Slot Matrix
 
@@ -62,7 +64,7 @@ Every OTHER metric in this report (registry_rows, dok_status, readiness gates, e
 | 3-4 | – | – | – | – | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0/0/0/0 | none | 0 | 0 | 0 | absent |
 | 3-5 | ✓ | ✓ | – | – | 42 | 10 | 32 | 37 | 0 | 7 | 7 | 42 | 0/0/42/0 | none | 0 | 0 | 53 | partial |
 | 3-6 | – | – | – | – | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0/0/0/0 | none | 0 | 0 | 0 | absent |
-| 4-1 | – | – | – | – | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0/0/0/0 | real | 0 | 0 | 61 | blocked |
+| 4-1 | – | – | – | – | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0/0/0/0 | real | 0 | 0 | 61 | optional-catalog |
 | 4-2 | – | – | – | – | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0/0/0/0 | none | 0 | 0 | 0 | absent |
 | 4-3 | ✓ | ✓ | ✓ | ✓ | 74 | 57 | 17 | 8 | 8 | 0 | 8 | 0 | 40/34/0/0 | real | 7 | 0 | 0 | partial |
 | 4-4 | ✓ | ✓ | ✓ | ✓ | 91 | 50 | 41 | 11 | 11 | 0 | 11 | 0 | 55/36/0/0 | empty | 16 | 0 | 0 | partial |
@@ -83,7 +85,7 @@ Every OTHER metric in this report (registry_rows, dok_status, readiness gates, e
 ### Readiness reasons (non-absent slots)
 
 - **3-5** (partial): missing_answers=32>0; visuals_missing_asset=7>0; dok_status.verified=0<42
-- **4-1** (blocked): has staged material (calibration file, 61 screenshots) — 0 registry rows (ingestion status UNKNOWN from disk)
+- **4-1** (optional-catalog): 19 registry row(s) ingested 2026-07-23 (nt14-ingest-4-1-2026-07-23) but carrying availability=='optional-catalog' -- lesson 4-1 was deliberately cut from the department's prior-year course sequence; that history is not reversed or reinterpreted by this ingestion, and no course-policy decision has been made to revive it as required/ready-to-teach content. This lesson is therefore held OUT of the ready/partial/blocked/absent distribution entirely (reported separately), never auto-scheduled, never placed in pacing, and never counted toward any completion percentage. See this lesson's 'optional_catalog' block for the 19-row breakdown.
 - **4-3** (partial): missing_answers=17>0; topics_nonempty=0<74; lesson not calibrated (no real dok2/dok3 anchors); visuals_missing_asset=8>0; dok_status.verified=0<74
 - **4-4** (partial): missing_answers=41>0; topics_nonempty=0<91; lesson not calibrated (no real dok2/dok3 anchors); visuals_missing_asset=11>0; dok_status.verified=0<91
 - **4-5** (partial): missing_answers=21>0; topics_nonempty=0<81; lesson not calibrated (no real dok2/dok3 anchors); visuals_missing_asset=14>0; dok_status.verified=0<81
@@ -101,8 +103,9 @@ Every OTHER metric in this report (registry_rows, dok_status, readiness gates, e
 - **blocked**: some material exists (has_calibration OR screenshots>0 OR se_tex OR te_tex OR se_pdf OR te_pdf) BUT registry_rows==0 — nothing usable to teach from yet.
 - **ready**: registry_rows>0 AND missing_answers==0 AND topics_nonempty==registry_rows AND the lesson is calibrated (real dok2/dok3 anchors) AND visuals_missing_asset==0 AND dok_status.verified==registry_rows.
 - **partial**: registry_rows>0 but at least one ready-gate fails.
+- **optional-catalog** (NT14, nt14-ingest-4-1-2026-07-23): registry rows exist for this lesson but ALL of them carry availability=='optional-catalog' -- ingested, but by binding course policy never auto-scheduled, never placed in pacing, and never counted toward the ready/partial/blocked/absent distribution below (currently only lesson 4-1; see its own 'optional_catalog' block for the 19-row breakdown, and identity_reconciliation above for the registry-wide split).
 
-Distribution across the 37 slots: ready=0, partial=10, blocked=1, absent=26.
+Distribution across the 37 slots: ready=0, partial=10, blocked=0, absent=26, optional-catalog=1 (4-1; reported separately, excluded from the ready/partial/blocked/absent counts above).
 
 ## 4. Method Notes Per Column
 
@@ -129,14 +132,14 @@ Distribution across the 37 slots: ready=0, partial=10, blocked=1, absent=26.
 - **duplicate_id_participating_rows**: Within the lesson, group rows by identical row['id']; for each group with size > 1, sum the FULL group size. Global=170.
 - **screenshots**: count of files in questionbank/images/ whose filename matches the regex ^{lesson}(?=[_.]) (i.e. a '3-5_...' or '3-5.png' style prefix).
 - **has_calibration**: os.path.exists('questionbank/calibration/{lesson}.json').
-- **readiness**: 'absent' = zero material of any kind (no se/te pdf/tex, no calibration, no screenshots, 0 registry rows). 'blocked' = some staged material exists but 0 registry rows (nothing to teach from yet). 'ready' = registry_rows>0 AND missing_answers==0 AND topics_nonempty==registry_rows AND lesson calibrated (real anchors) AND visuals_missing_asset==0 AND dok_status.verified==registry_rows. 'partial' = registry_rows>0 but any ready gate fails.
+- **readiness**: 'absent' = zero material of any kind (no se/te pdf/tex, no calibration, no screenshots, 0 registry rows). 'blocked' = some staged material exists but 0 registry rows (nothing to teach from yet). 'ready' = registry_rows>0 AND missing_answers==0 AND topics_nonempty==registry_rows AND lesson calibrated (real anchors) AND visuals_missing_asset==0 AND dok_status.verified==registry_rows. 'partial' = registry_rows>0 but any ready gate fails. 'optional-catalog' (NT14, nt14-ingest-4-1-2026-07-23) = the lesson's registry rows all carry availability=='optional-catalog' -- ingested, but by binding course policy never auto-scheduled, never placed in pacing, and never counted toward this or any other readiness/completion denominator; a fifth value, disjoint from ready/partial/blocked/absent, reported separately in aggregate.readiness_distribution.optional_catalog (currently only lesson 4-1; see its own 'optional_catalog' block for the breakdown).
 - **readiness_reason**: Human-readable list of the specific gates that failed (or the no-material explanation for absent, or the staged-material-but-zero-registry-rows explanation for blocked — worded as a snapshot observation, not a causal claim).
 
 ## 5. Anomalies & Risks (snapshot observations; cause/history UNKNOWN unless stated)
 
-### 4-1: staged assets present, 0 current registry rows
+### 4-1: NT14 named update -- 19 optional-catalog rows ingested 2026-07-23 (supersedes: "0 registry rows / ingestion status UNKNOWN")
 
-As of this snapshot, 4-1 has a calibration file with a REAL item_analysis (Savvas practice items mapped to 5 examples) and 61 screenshots in questionbank/images/, but 0 registry rows and no SE/TE pdf or tex anywhere on disk. Whether ingestion into registry.jsonl was ever attempted, is pending, or was abandoned is UNKNOWN from these files — only the current on-disk state is observable. readiness=blocked.
+NT14 (nt14-ingest-4-1-2026-07-23, 2026-07-23) ingested 19 Savvas practice rows for lesson 4-1 (4-1-savvas-q8..q26; DOK split 5x DOK-1 / 10x DOK-2 / 4x DOK-3), every one carrying top-level availability=='optional-catalog'. This supersedes the prior snapshot's finding that 0 registry rows existed and that ingestion status was unknown. 4-1's calibration file still has empty dok2_anchors/dok3_anchors (not a calibrated lesson) and no SE/TE pdf or tex exists on disk. The lesson's readiness now reads 'optional-catalog' -- distinct from ready/partial/blocked/absent -- and it is explicitly EXCLUDED from every required-content readiness/completion denominator in this report; see the lessons[] '4-1' entry's own 'optional_catalog' sub-block and aggregate.identity_reconciliation for the full accounting. Department-skip history is unchanged; a course-policy decision on reviving 4-1 for required, student-facing use remains open and is NOT made by this ingestion.
 
 ### Visual-asset gap splits into two distinct issues: absent references vs. repairable broken paths
 
@@ -199,4 +202,4 @@ The following 26 slots are `absent` (zero material found on disk for any of se_p
 
 1-1, 1-2, 1-3, 1-4, 1-5, 1-6, 1-7, 2-1, 2-2, 2-3, 2-4, 2-5, 2-6, 2-7, 3-1, 3-2, 3-3, 3-4, 3-6, 4-2, 4-6, 5-2, 5-3, 5-6, 6-1, 6-2
 
-> Every SE/TE/tex/screenshot/registry/calibration column resolved to a concrete boolean or count from files actually present or absent on disk at generation time — no column value itself is UNKNOWN. The 26 'absent' lesson slots are a definite finding (confirmed zero matching files of any kind), not an unknown. What IS unknown, and called out explicitly in the anomalies above, is HISTORY and CAUSE: whether/when 4-1 ingestion was attempted, whether topics were ever propagated from topic_vocabulary, and what produced the 5-1/5-4/5-5 duplicate ids. These files only prove current state, not how that state came to be.
+> Every SE/TE/tex/screenshot/registry/calibration column resolved to a concrete boolean or count from files actually present or absent on disk at generation time — no column value itself is UNKNOWN. The 26 'absent' lesson slots are a definite finding (confirmed zero matching files of any kind), not an unknown. NT14 NAMED UPDATE (nt14-ingest-4-1-2026-07-23, 2026-07-23): whether 4-1 ingestion was attempted is no longer unknown — 19 rows were deliberately ingested as optional-catalog content (see the '4-1' anomaly above and this lesson's own 'optional_catalog' block); that is a known, current fact, not a snapshot inference. What remains unknown, and is called out explicitly in the anomalies above, is HISTORY and CAUSE unrelated to this ingestion: whether topics were ever propagated from topic_vocabulary, and what produced the 5-1/5-4/5-5 duplicate ids. These files only prove current state, not how that state came to be.

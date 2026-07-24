@@ -1,5 +1,20 @@
 # Content Readiness Dashboard — Spec (WS6)
 
+> **NT14 STATUS NOTE (nt14-ingest-4-1-2026-07-23).** Sections of this spec
+> that describe lesson 4-1 as BLOCKED / stranded / zero-rows document the
+> **pre-NT14 historical state** (accurate when WS6 was authored). On
+> 2026-07-23 4-1's 19 practice items were ingested as **optional catalog
+> content** (`availability: "optional-catalog"` on every registry row):
+> 4-1's live `ws6_state` is now **OPTIONAL-CATALOG** — a distinct state that
+> is NOT ready, NOT required, never auto-scheduled/paced, and excluded from
+> every completion denominator — and the 4 former retirement-gap edges
+> resolved into the course map's `optional_catalog_edges` (never into the
+> required `prereq_edges` chain). The department's 2026-05-13 cut of 4-1 is
+> historical evidence, not permanent policy; a later course-policy decision
+> governs any student-facing revival. Bracketed **[NT14 …]** annotations
+> below mark each affected passage; unmarked 4-1 prose in §5(b)/§6 is
+> retained as the historical diagnosis it was.
+
 ## 1. Purpose & scope
 
 This is the WS6 synthesis workstream: it does not generate new inventory data.
@@ -39,11 +54,12 @@ reconciled taxonomy — the **WS6 state** — that is what the dashboard and
 | **READY** | Base-inventory readiness reads `ready` in full (`registry_rows>0` AND `missing_answers==0` AND all topics tagged AND lesson calibrated AND no visuals missing) **but NOT** every row yet verified (`verified < registry_rows`). This is the **fallback** branch of `derive_ws6_state()`'s precedence: VERIFIED is checked first (`base_readiness=='ready' AND verified==registry_rows`); a lesson that clears every other readiness gate but hasn't finished DOK verification falls through to READY instead. The two states are mutually exclusive by construction, never contradictory: same `base_readiness=='ready'` gate, split only by whether verification is complete. | **0** — no lesson clears every gate simultaneously today. Aspirational top state. |
 | **CALIBRATED** | Lesson has *real* DOK-2/DOK-3 calibration anchors (not auto-assigned), even though other gates (answers, visuals, verification) remain open. | **1** (3-5) |
 | **INCOMPLETE** | Lesson has registry rows and *some* source material but is missing answers, DOK review, and/or visual assets — the "partial, actively worked" bucket. | **9** (4-3, 4-4, 4-5, 5-1, 5-4, 5-5, 6-3, 6-4, 6-5) |
-| **BLOCKED** | Lesson has staged material (calibration file, screenshots, skeleton stubs) but **zero** registry rows — ingestion never completed (or was undone). Distinct from ABSENT because real work product already exists on disk. | **1** (4-1) |
+| **BLOCKED** | Lesson has staged material (calibration file, screenshots, skeleton stubs) but **zero** registry rows — ingestion never completed (or was undone). Distinct from ABSENT because real work product already exists on disk. | **0** — 4-1, the only lesson ever in this state, moved to OPTIONAL-CATALOG when its 19 rows were ingested 2026-07-23 (`nt14-ingest-4-1-2026-07-23`). |
+| **OPTIONAL-CATALOG** | Lesson's registry rows exist ONLY as optional catalog content (every row carries `availability: "optional-catalog"`). The lesson is NOT ready, NOT required, never auto-scheduled/paced, and excluded from every completion denominator — this state is deliberately outside the READY/INCOMPLETE progression. The department's cut (2026-05-13 for 4-1) is historical evidence, not permanent policy; a later course-policy decision governs any student-facing revival. | **1** (4-1: 19 rows, ingested 2026-07-23) |
 | **PROVISIONAL** | Lesson is a front-of-year placeholder: no material yet, but it is an active build target (Topics 1–2 and 3-1..3-4), not a deprecated slot. | **18** (1-1..1-7, 2-1..2-7, 3-1..3-4) |
 | **ABSENT** | Lesson has zero material AND is not on the front-of-year build list — deprecated, department-skipped, or an assessment-day shell. | **8** (3-6, 4-2, 4-6, 5-2, 5-3, 5-6, 6-1, 6-2) |
 
-`1 + 9 + 1 + 18 + 8 = 37`.
+`1 + 9 + 0 + 1 + 18 + 8 = 37` (CALIBRATED + INCOMPLETE + BLOCKED + OPTIONAL-CATALOG + PROVISIONAL + ABSENT).
 
 ### How `ws6_state` is computed
 
@@ -67,8 +83,11 @@ elif registry_rows > 0 and calibrated == registry_rows:
     -> CALIBRATED   # 3-5 (all rows calibrated, real anchors)
 elif base_readiness == "partial":
     -> INCOMPLETE   # the nine
+elif availability == "optional-catalog":
+    -> OPTIONAL-CATALOG  # [NT14] 4-1 (19 rows, catalog-only; checked before
+                         # the blocked branch — see the NT14 status note)
 elif base_readiness == "blocked":
-    -> BLOCKED      # 4-1 staged-not-ingested
+    -> BLOCKED      # historically 4-1 staged-not-ingested; 0 lessons today
 elif course_readiness == "frontload-blocked":
     -> PROVISIONAL  # 18 front-of-year
 else:
@@ -94,7 +113,7 @@ purely from what is on disk, lesson-by-lesson, with no course-wide context:
 |---|---|---|
 | `ready` | 0 | — (no lesson qualifies) |
 | `partial` | 10 | 3-5 → promoted to **CALIBRATED**; the other 9 (4-3..6-5) → **INCOMPLETE** |
-| `blocked` | 1 | 4-1 → stays **BLOCKED** (its own state) |
+| `blocked` | 1 | historically 4-1 → **BLOCKED**. [NT14: 4-1's base row-split now reads 19 optional-catalog rows and it maps to **OPTIONAL-CATALOG** instead; no lesson maps to BLOCKED today.] |
 | `absent` | 26 | split by course-map's front-of-year distinction into **PROVISIONAL** (18) vs **ABSENT** (8) |
 
 ### Mapping from the course-map enum (`frontload-blocked`/`calibrated`/`absent`/`partial`)
@@ -107,7 +126,7 @@ different vocabulary:
 |---|---|---|
 | `frontload-blocked` | 18 | → **PROVISIONAL** (matches 1:1 — these are exactly the 18 front-of-year placeholders) |
 | `calibrated` | 1 | → **CALIBRATED** (3-5, matches 1:1) |
-| `absent` | 9 | → 4-1 (**BLOCKED**, own state) + the 8 truly deprecated lessons (**ABSENT**) |
+| `absent` | 9 | historically → 4-1 (**BLOCKED**, own state) + the 8 truly deprecated lessons (**ABSENT**). [NT14: the course map now reports 4-1 as its own `optional-catalog` readiness, so this bucket is the 8 ABSENT lessons; 4-1 → **OPTIONAL-CATALOG**.] |
 | `partial` | 9 | → **INCOMPLETE** (matches 1:1 — the 9 lessons with registry rows but open gates) |
 
 ### Why WS6 reconciles the two disagreements the way it does
@@ -118,7 +137,9 @@ different vocabulary:
   which have registry rows but zero calibrated DOK — so WS6 gives it a state
   the other 9 cannot claim, even though its answer/visual gates are still
   open (it is not `READY`).
-- **4-1 → its own BLOCKED state, not "absent".** Unlike the 8 truly-ABSENT
+- **4-1 → its own BLOCKED state, not "absent"** *(historical rationale;
+  [NT14] 4-1 has since moved BLOCKED → OPTIONAL-CATALOG — the reasoning
+  below explains why it was never lumped into ABSENT)*. Unlike the 8 truly-ABSENT
   lessons (zero material of any kind) and unlike the 18 PROVISIONAL
   front-of-year lessons (also zero material, but not yet attempted), 4-1 has
   *staged, non-trivial work product*: a calibration file with a real
@@ -139,7 +160,7 @@ edges pointing at or from it") — it is not a failing grade, it is "N/A".
 
 | Dimension | Grey | Green | Amber | Red |
 |---|---|---|---|---|
-| **Content** | `registry_rows==0` and base readiness is `absent` | `registry_rows>0` and 0 collision groups | `registry_rows>0` and ≥1 collision group | `registry_rows==0` and base readiness is `blocked` (i.e. 4-1: staged but uningested) |
+| **Content** | `registry_rows==0` and base readiness is `absent` | `registry_rows>0` and 0 collision groups | `registry_rows>0` and ≥1 collision group | `registry_rows==0` and base readiness is `blocked` (historically 4-1: staged but uningested. [NT14: 4-1 no longer hits this cell — its required-rows count is 0 by design with 19 optional-catalog rows carried separately, and its lesson state is OPTIONAL-CATALOG]) |
 | **Answers** | `registry_rows==0` | `missing==0` and rows>0 (full coverage) | partial coverage (`0 < coverage_pct < 100`) | `with_evidence==0` and rows>0 (no transcribed answers at all) |
 | **DOK** | `registry_rows==0` | `calibrated==registry_rows` (whole lesson has real anchors — only 3-5 today) | rows exist but not fully calibrated (mostly `known_auto`/`unreviewed`) | *(not used — `dim_dok()` takes only `(registry_rows, calibrated)` and returns only grey/green/amber; it has no `verified` input and no red branch. Verification does not surface in this dimension at all: it surfaces at the WS6 layer (`derive_ws6_state`, fed the wave-plan `review_state`-derived per-lesson verified count) and in `dok.verified`/`aggregates.dok`. Giving this dimension a verified-aware state would be a deliberate future code+spec change, not a latent state already defined here)* |
 | **Visuals** | `registry_rows==0` (nothing to have a visual reference at all) | `registry_rows>0` and `absent+broken_path==0` | `absent+broken_path>0` but `essential==0` (missing visuals are all supporting/decorative) | `essential>0` (at least one *essential*, source-PDF-required visual is missing — the answer cannot be derived from text alone) |
@@ -171,7 +192,7 @@ green state — all 9 INCOMPLETE lessons have `visuals_absent>0`, and 3-5 has
 | `collisions.{groups,dok_conflict,prompt_drift}` | `review-queue/collision_review_queue.json` → `groups[]`, joined against `dok-workflow/dok_wave_plan.json` per-id `dok` values (the collision queue itself carries no DOK field) |
 | `prereqs.{upstream_dangling,downstream_dangling}` | `course-map/course_map.json` → `dropped_edges[]`, split by whether the dangling edge's `target` (upstream) or `source` (downstream) id-prefix-matches this lesson. `upstream_dangling` additionally requires the edge's `reason` to be in the **gap family** `{frontload-gap, retirement-gap, retired-missing}` (i.e. *not* `assessment-forward-ref`) — filtered by a reason **set**, not a single hardcoded label, so it stays correct if course_map.json's dropped-edge taxonomy is relabeled again (as it was: the 4 edges into 4-1 moved from `frontload-gap` to the new `retirement-gap` reason without any code change needed here). |
 | `ws6_state`, headline `readiness_ws6` distribution | **Derived**: `derive_ws6_state()` in `build_content_readiness.py`, computed per lesson from `content_readiness_inventory.json` (`lessons[].readiness`, `lessons[].dok_status.calibrated`, `lessons[].registry_rows`), this script's own wave-plan-derived per-lesson verified count (NT7 R3b — single-sourced from `dok_wave_plan.json`'s `review_state`, not `lessons[].dok_status.verified`), and `course-map/course_map.json` (`topics[].lessons[].readiness`), combined via the fixed precedence rule in §2 (locked by the manager brief — the *precedence order* is fixed, but every lesson's state is computed from these signals, not looked up from a per-lesson list) |
-| `four_one_stranded` | `topic-4-1/inventory-4-1-assets.json` → `assets{}`, `teacher_judgment_items[]`, joined against `course-map/course_map.json` → `dropped_edges[]` **filtered by TARGET touching 4-1 and `reason` in the gap family** `{frontload-gap, retirement-gap, retired-missing}` (not a single hardcoded reason string). Today all 4 of those edges read `reason=="retirement-gap"` (4-1 was built, then retired — a *retirement* gap, not a front-of-year gap). The one remaining gap-family edge targeting 3-1 instead (still `reason=="frontload-gap"`, genuinely front-of-year) is reported separately as `fifth_frontload_gap_edge_into_3_1`, filtered by target touching 3-1 AND `reason=="frontload-gap"` specifically — it is not folded into the 4-1 count. `aggregates.edges` is derived the same way: one output key per reason actually present in `course_map["stats"]["edges_dropped_by_reason"]` (`reason.replace("-","_")`), so a new/relabeled reason shows up automatically. |
+| `four_one_stranded` | `topic-4-1/inventory-4-1-assets.json` → `assets{}`, `teacher_judgment_items[]`, joined against `course-map/course_map.json` → `dropped_edges[]` **filtered by TARGET touching 4-1 and `reason` in the gap family** `{frontload-gap, retirement-gap, retired-missing}` (not a single hardcoded reason string). [NT14: at WS6 authoring time all 4 of those edges read `reason=="retirement-gap"` (4-1 was built, then retired — a *retirement* gap, not a front-of-year gap); today ZERO dropped edges target 4-1 — the 4 resolved into `optional_catalog_edges` as `optional-catalog-reference` — so this gap-family filter now matches only the 3-1 frontload edge, and the builder additionally carries a `stale_source_note` because `inventory-4-1-assets.json` is a frozen pre-NT14 diagnosis.] The one remaining gap-family edge targeting 3-1 instead (still `reason=="frontload-gap"`, genuinely front-of-year) is reported separately as `fifth_frontload_gap_edge_into_3_1`, filtered by target touching 3-1 AND `reason=="frontload-gap"` specifically — it is not folded into the 4-1 count. `aggregates.edges` is derived the same way: one output key per reason actually present in `course_map["stats"]["edges_dropped_by_reason"]` (`reason.replace("-","_")`), so a new/relabeled reason shows up automatically. |
 
 ## 5. Synthesis findings
 
@@ -214,6 +235,15 @@ group does not carry, so all 22 should be resolved by a human before any
 bulk auto-merge of the other 63.
 
 ### (b) 4-1 stranded + the 6-edge non-assessment slice of the 18 dropped edges
+
+> **[NT14 — this subsection is a HISTORICAL diagnosis.]** It was accurate
+> when WS6 was authored and is retained as the record of why 4-1 was
+> stranded. As of `nt14-ingest-4-1-2026-07-23`: the 19 practice items ARE
+> ingested (optional-catalog), the 4 retirement-gap edges below now resolve
+> as `optional-catalog-reference` entries in `optional_catalog_edges`
+> (never as required prereqs), and `dropped_edges` is down to 14. The two
+> partial-source gaps found during ingestion (q16 question crop, q18 answer
+> crop) are recorded in `inventory/topic-4-1/NT14_SOURCE_GAP_REPORT.md`.
 
 4-1 (Inverse Variation and the Reciprocal Function) is `stranded_staged_not_ingested`:
 a calibration file exists with a *real* `item_analysis` (5 worked examples
@@ -269,16 +299,23 @@ non-assessment slice** of the course map's 18 dropped edges — the other 12
 are all `assessment-forward-ref` (forward references to not-yet-written
 assessment items, which are expected and not prerequisite gaps).
 
-Three teacher-judgment items are open (from `inventory-4-1-assets.json`,
-verbatim):
+Three teacher-judgment items were open (from `inventory-4-1-assets.json`,
+verbatim), with their NT14 status bracketed:
 
 1. Whether to revive lesson 4-1 at all, given the department's 2026-05-13
    skip decision versus its earlier inclusion in `A2LessonSelection.txt`
    and `CLAUDE.md`'s still-present (stale) "ready" entry.
+   [NT14: **still open** — the optional-catalog ingestion is NOT a revival;
+   a later course-policy decision governs student-facing appearance.]
 2. If revived: registry-ingestion-only vs. a full lesson-packet rebuild
    requiring SE/TE export from Savvas and PDF-to-LaTeX conversion.
+   [NT14: the registry-ingestion half was done as optional catalog
+   (nt14-ingest-4-1-2026-07-23); the packet-rebuild question remains part
+   of the open revival decision above.]
 3. Whether to correct the stale `CLAUDE.md` "ready" table now, independent
    of the revival decision.
+   [NT14: **CLOSED** — `CLAUDE.md`'s 4-1 section was rewritten to the
+   optional-catalog framing with the old plan explicitly archived.]
 
 ## 6. How the dashboard updates as workstreams progress
 
@@ -325,7 +362,7 @@ What moves, and where to look:
 | **Answers get transcribed** (a row's `teacher_answer`/evidence gets filled in) | That lesson's `answers.with_evidence` rises, `coverage_pct` rises, and `dimension_status.answers` can move red→amber→green; `aggregates.answers.with_evidence`/`missing_all` shift course-wide. |
 | **Visuals regenerated or re-pathed** (a TikZ figure built, or a broken path fixed like the 7 in 3-5) | That id drops out of `visual_asset_classification.rows` (or, for 3-5, `broken_path_repair.json`'s count drops from 7); `dimension_status.visuals` can move red/amber→green once `absent+broken_path==0` for that lesson; `aggregates.visuals.absent`/`broken_path` fall course-wide. |
 | **Collisions get merged** (a `merge-candidate` group resolved, one `item_uid` retired) | The group count for that lesson drops in `collision_review_queue.json`; if it was one of the 22 DOK-conflict groups, `aggregates.collisions.dok_conflict` and `dok_conflict_subset.rows` shrink; `dimension_status.content` can move amber→green once a lesson's `collisions.groups` reaches 0. |
-| **4-1 revived (registry-ingested) or formally retired** | If ingested: `registry_rows` for 4-1 goes above 0, `ws6_state` moves out of BLOCKED (likely to INCOMPLETE once it has rows but open gates), and the 4 dangling edges into 4-1 should resolve (move from `dropped_edges` to `prereq_edges` on the next course-map rebuild), clearing 4-1's `prereqs` red state and the upstream-red states on 4-3/6-3/6-4/4-5's downstream side. The course map has *already* taken the first half-step here: the taxonomy re-cut relabeled these 4 edges' reason from `frontload-gap` to the more specific `retirement-gap` (4-1 was built, then retired — not merely never-built), even though `registry_rows` and `ws6_state` are unchanged (BLOCKED, 0 rows) until an actual ingestion or formal-retirement decision is made. If 4-1 is instead formally retired (not revived), the expectation this spec had for that case — "the 4 edges should be deliberately dropped with a different, terminal reason rather than left as `frontload-gap`" — is exactly what `retirement-gap` now is; the remaining step is `ws6_state` moving to ABSENT once that decision is made explicit elsewhere (course-map readiness, `inventory-4-1-assets.json`). |
+| **4-1 optional-catalog ingestion (LANDED 2026-07-23, `nt14-ingest-4-1-2026-07-23`)** | This transition has now happened — but NOT the way this spec originally anticipated. 4-1's 19 rows were ingested as **optional catalog content** (`availability: "optional-catalog"` on every row), so `ws6_state` moved BLOCKED→**OPTIONAL-CATALOG** (a distinct state deliberately outside the READY/INCOMPLETE progression — 4-1 is not "actively worked" required content), and the 4 former retirement-gap edges resolved into the course map's **`optional_catalog_edges`** list as `optional-catalog-reference` entries — deliberately NOT into `prereq_edges` (the required chain, unchanged at 193): optional content must never become a required prereq. The spec's earlier instruction to move those edges into `prereq_edges` described a full *revival*, which this is not. 4-3/6-3/6-4/4-5's downstream dangling flags cleared because the referenced bank content now exists (referential integrity), with the references distinctly marked optional. A later course-policy decision still governs any student-facing revival; if that decision lands, THEN the required-chain question is re-opened deliberately — never automatically. |
 | **Front-of-year lessons get built** (Topics 1–2, 3-1..3-4) | Each lesson moves from PROVISIONAL to (at minimum) INCOMPLETE once it has registry rows; `readiness_ws6.PROVISIONAL` falls and `INCOMPLETE` rises; the `3-1` upstream-dangling edge (from 5-1) should resolve once 3-1 is built, moving 3-1's `prereqs` from red to green/amber. |
 
 Because every number is recomputed from the six inputs rather than hand-maintained, the correct operational habit is: **update the source
@@ -353,4 +390,4 @@ this implementation began.
 | Answers with evidence / missing | 529 / 371 (missing "the nine" = 339) | `content_readiness_inventory.json` (`aggregate.total_answers_with_evidence` etc.) |
 | Course-map edges | 193 resolved (prereq129/rehearses42/echoes22), 18 dropped (assessment-forward-ref12/retirement-gap4/frontload-gap1/retired-missing1) | `course_map.json` (`stats`); `aggregates.edges` derives one key per reason present, so this row updates itself as reasons are relabeled |
 | WS6 readiness distribution | CALIBRATED=1, INCOMPLETE=9, BLOCKED=1, PROVISIONAL=18, ABSENT=8 | WS6 reconciliation (§2), locked by manager brief, asserted in build script |
-| 4-1 dangling edges | 4 into 4-1 (all `retirement-gap`) + 1 into 3-1 (`frontload-gap`) = the "5 dependency-gap edges"; plus 1 `retired-missing` (6-5→6-4) = the 6-edge non-assessment slice of the 18 dropped edges | `course_map.json` (`dropped_edges` filtered by TARGET touching 4-1/3-1 and `reason` in the gap family `{frontload-gap, retirement-gap, retired-missing}` — not a single hardcoded reason string; see §5(b)) |
+| 4-1 dangling edges | Historically: 4 into 4-1 (all `retirement-gap`) + 1 into 3-1 (`frontload-gap`) + 1 `retired-missing` (6-5→6-4) = the 6-edge non-assessment slice of the 18 dropped edges. [NT14: the 4 into 4-1 now resolve as `optional-catalog-reference` entries in `optional_catalog_edges`; `dropped_edges` is 14 and the count into 4-1 is 0.] | `course_map.json` (`dropped_edges` filtered by TARGET touching 4-1/3-1 and `reason` in the gap family `{frontload-gap, retirement-gap, retired-missing}` — not a single hardcoded reason string; see §5(b)) |

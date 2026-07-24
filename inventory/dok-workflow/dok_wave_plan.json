@@ -1,7 +1,7 @@
 {
   "generated_by": "gen_dok_wave_plan.py",
   "source_note": "Base dok_status (known_auto/calibrated/unreviewed) is derived read-only from questionbank/registry.jsonl + questionbank/calibration/*.json + inventory/dedup/item_uid_alias_map.json; none of those are ever modified. The 'verified' overlay and the additive 'review_state' field come from the canonical, read-only verification projection in tools/dok-review/dok_review.py (imported, not reimplemented), applied to tools/dok-review/review_log.jsonl and tools/dok-review/rubric_approvals.json -- see verification_note below for exactly which paths and counts were used this run. Source unmodified.",
-  "identity_note": "Identity key is the opaque item_uid (900 distinct values, one per registry row/line, joined via inventory/dedup/item_uid_alias_map.json by 1-based registry line -- mirrors inventory/course-map/build_course_map.py's node_identity convention). The legacy `id` field is DISPLAY-ONLY: 85 legacy ids are each shared by 2 distinct registry rows (170 rows total), e.g. '5-4-savvas-q41' is both registry line 299 (dok=2, role=None) and registry line 328 (dok=3, role=dok3-driver) -- two different item_uids. Any review/promotion tooling built against this plan MUST key by item_uid, never by id alone. See DOK_VERIFICATION_WORKFLOW.md's Identity key note and REVIEW_INTERFACE_SPEC.md's Data model section.",
+  "identity_note": "Identity key is the opaque item_uid (919 distinct values across the full raw registry, one per registry row/line, joined via inventory/dedup/item_uid_alias_map.json by 1-based registry line -- mirrors inventory/course-map/build_course_map.py's node_identity convention). Of those 919: 900 are the REQUIRED population (waves 0-4) and 19 are OPTIONAL-CATALOG rows (lesson 4-1, nt14-ingest-4-1-2026-07-23, wave key 'optional-catalog' -- never part of required sequencing/pacing/completion counts; see identity_reconciliation below). The legacy `id` field is DISPLAY-ONLY: within the 900 required rows, 85 legacy ids are each shared by 2 distinct registry rows (170 rows total), e.g. '5-4-savvas-q41' is both registry line 299 (dok=2, role=None) and registry line 328 (dok=3, role=dok3-driver) -- two different item_uids. Any review/promotion tooling built against this plan MUST key by item_uid, never by id alone. See DOK_VERIFICATION_WORKFLOW.md's Identity key note and REVIEW_INTERFACE_SPEC.md's Data model section.",
   "assessment_feeding_lessons": [
     "4-3",
     "4-5",
@@ -12,14 +12,16 @@
     "1": "Assessment-feeding DOK-3 spines (4-3, 4-5, 6-4 dok3-driver rows)",
     "2": "Assessment-feeding lesson bodies (remaining 4-3, 4-5, 6-4 rows)",
     "3": "Remaining DOK-3 spines (dok3-driver rows outside the assessment-feeding lessons)",
-    "4": "Remaining lesson bodies (everything else)"
+    "4": "Remaining lesson bodies (everything else)",
+    "optional-catalog": "Optional-catalog audit rows (lesson 4-1, nt14-ingest-4-1-2026-07-23) -- DOK review permitted as audit activity; never part of the required program."
   },
   "wave_counts": {
     "0": 42,
     "1": 4,
     "2": 220,
     "3": 7,
-    "4": 627
+    "4": 627,
+    "optional-catalog": 19
   },
   "verification_note": {
     "review_log_path": "tools/dok-review/review_log.jsonl",
@@ -38,11 +40,13 @@
     "statement": "The ONLY verification predicate used anywhere in this plan is tools/dok-review/dok_review.py's entry_is_verified(), applied per item_uid via tool_state_for() over the review log's latest-entry-per-item_uid projection, gated by the rubric-approvals manifest; it is fail-closed end to end -- a missing or malformed review log or approvals manifest always yields zero verified items, never a fallback to any registry field such as reviewed_by/reviewed_at."
   },
   "identity_reconciliation": {
-    "raw_registry_identities": 900,
+    "raw_registry_identities": 919,
     "merged_alias_identities": 22,
+    "optional_catalog_identities": 19,
     "active_canonical_items": 878,
     "authorization_record_id": "rc-merge-auth-5-4-2026-07-23",
-    "statement": "This plan is an AUDIT surface: it carries ALL raw_registry_identities (900), with the merged_alias_identities (22, rc-merge-auth-5-4-2026-07-23) explicitly marked on their item via status=='merged-alias' + alias_of (verbatim from the registry row) -- never dropped, never silently conflated with their survivor. STUDENT-FACING / canonical-readiness surfaces (e.g. qb.py, the base content-readiness inventory, the dashboard, the decision console) instead report active_canonical_items (878): every merged-alias row resolved DELIBERATELY to its survivor (via alias_of or the dedup map's resolved_alias), never selected or counted itself. Reconciliation is exact and asserted before this file is written: raw_registry_identities == active_canonical_items + merged_alias_identities (900 == 878 + 22)."
+    "optional_catalog_authorization_record_id": "nt14-ingest-4-1-2026-07-23",
+    "statement": "This plan is an AUDIT surface: it carries ALL raw_registry_identities (919), with the merged_alias_identities (22, rc-merge-auth-5-4-2026-07-23) explicitly marked on their item via status=='merged-alias' + alias_of (verbatim from the registry row), and the optional_catalog_identities (19, nt14-ingest-4-1-2026-07-23, lesson 4-1) explicitly marked via availability=='optional-catalog' -- none of these are ever dropped, never silently conflated with another identity. STUDENT-FACING / canonical-readiness surfaces (e.g. qb.py, the base content-readiness inventory, the dashboard, the decision console) instead report active_canonical_items (878): every merged-alias row resolved DELIBERATELY to its survivor (via alias_of or the dedup map's resolved_alias), and every optional-catalog row excluded entirely -- neither is ever selected or counted as active. Optional-catalog rows are an AUDIT-SURFACE-ONLY presence in this plan (review/audit surfaces may carry them, DOK review permitted here as audit activity) -- they are NEVER part of required sequencing, pacing, or completion counts in any downstream consumer. Reconciliation is exact and asserted before this file is written: raw_registry_identities == active_canonical_items + optional_catalog_identities + merged_alias_identities (919 == 878 + 19 + 22)."
   },
   "waves": {
     "0": {
@@ -13268,6 +13272,335 @@
           "match_quality": "none",
           "status": "active",
           "alias_of": null
+        }
+      ]
+    },
+    "optional-catalog": {
+      "4-1": [
+        {
+          "item_uid": "iu_bf941050b523",
+          "id": "4-1-savvas-q8",
+          "registry_line": 901,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_afd34b461341",
+          "id": "4-1-savvas-q9",
+          "registry_line": 902,
+          "dok": 1,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            1
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_01d98498bba0",
+          "id": "4-1-savvas-q10",
+          "registry_line": 903,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_d2df726e7681",
+          "id": "4-1-savvas-q11",
+          "registry_line": 904,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_6e909512e4cb",
+          "id": "4-1-savvas-q12",
+          "registry_line": 905,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_64f93ba6a2c1",
+          "id": "4-1-savvas-q13",
+          "registry_line": 906,
+          "dok": 1,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            1
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_77b53af6af82",
+          "id": "4-1-savvas-q14",
+          "registry_line": 907,
+          "dok": 1,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            1
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_69d85ede35cc",
+          "id": "4-1-savvas-q15",
+          "registry_line": 908,
+          "dok": 1,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            1
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_d211e4d45e2c",
+          "id": "4-1-savvas-q16",
+          "registry_line": 909,
+          "dok": 1,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            1
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog",
+          "source_gap": "given-illegible"
+        },
+        {
+          "item_uid": "iu_02c306effb29",
+          "id": "4-1-savvas-q17",
+          "registry_line": 910,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_549ca1f8a7a0",
+          "id": "4-1-savvas-q18",
+          "registry_line": 911,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog",
+          "source_gap": "answer-truncated"
+        },
+        {
+          "item_uid": "iu_c4d18a2bbd7a",
+          "id": "4-1-savvas-q19",
+          "registry_line": 912,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_11751b2a9981",
+          "id": "4-1-savvas-q20",
+          "registry_line": 913,
+          "dok": 3,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            3
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_f7eb4962bbc6",
+          "id": "4-1-savvas-q21",
+          "registry_line": 914,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_57d15babe8c8",
+          "id": "4-1-savvas-q22",
+          "registry_line": 915,
+          "dok": 3,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            3
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_f8ff405bd610",
+          "id": "4-1-savvas-q23",
+          "registry_line": 916,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_3505e057cdd1",
+          "id": "4-1-savvas-q24",
+          "registry_line": 917,
+          "dok": 2,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            2
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_d29881722adc",
+          "id": "4-1-savvas-q25",
+          "registry_line": 918,
+          "dok": 3,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            3
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
+        },
+        {
+          "item_uid": "iu_53af93aa4a0d",
+          "id": "4-1-savvas-q26",
+          "registry_line": 919,
+          "dok": 3,
+          "role": null,
+          "dok_status": "unreviewed",
+          "review_state": "unreviewed",
+          "assessment_linked": false,
+          "te_bucket": [
+            3
+          ],
+          "match_quality": "exact",
+          "status": "active",
+          "alias_of": null,
+          "availability": "optional-catalog"
         }
       ]
     }

@@ -507,10 +507,15 @@ def self_assert(output, records, alias_groups, dup_group_count, total_rows):
             f"distinct_item_uids={meta['distinct_item_uids']} total_rows={total_rows}",
         ))
 
-    # 3. number of legacy_id keys == unique id strings == 815
+    # 3. number of legacy_id keys == unique id strings == 834 (updated from
+    #    815 by nt14-ingest-4-1-2026-07-23, which appended 19 new,
+    #    mutually-distinct, collision-free Lesson 4-1 legacy ids
+    #    (4-1-savvas-q8..q26) to the registry -- see also
+    #    rc-merge-auth-5-4-2026-07-23, the citation for the resolved_alias
+    #    pins below, which this ingestion does not touch).
     checks.append((
-        "unique_legacy_ids_eq_815",
-        meta["unique_legacy_ids"] == 815,
+        "unique_legacy_ids_eq_834",
+        meta["unique_legacy_ids"] == 834,
         f"unique_legacy_ids={meta['unique_legacy_ids']}",
     ))
     checks.append((
@@ -540,16 +545,22 @@ def self_assert(output, records, alias_groups, dup_group_count, total_rows):
         f"len(dispositions)={len(dispositions)}",
     ))
 
-    # 6. counts reconcile: rows == 900, unique legacy strings == 815,
-    #    ambiguous == 85
+    # 6. counts reconcile: rows == 919 (updated from 900 by
+    #    nt14-ingest-4-1-2026-07-23 -- 19 appended Lesson 4-1 rows, each
+    #    carrying top-level "availability": "optional-catalog"; see also
+    #    rc-merge-auth-5-4-2026-07-23 for the resolved_alias pins below),
+    #    unique legacy strings == 834, ambiguous == 85
     checks.append((
-        "rows_eq_900",
-        total_rows == 900,
+        "rows_eq_919",
+        total_rows == 919,
         f"total_rows={total_rows}",
     ))
 
     # 7. resolved_alias enrichment pins (rc-merge-auth-5-4-2026-07-23):
-    #    frozen-baseline counts, same pin style as the 815/85 pins above.
+    #    frozen-baseline counts, same pin style as the 834/85 pins above
+    #    (834 updated from 815 by nt14-ingest-4-1-2026-07-23; the 22/22/63
+    #    resolved_alias pins immediately below are UNCHANGED by that
+    #    ingestion -- it added zero ambiguous groups).
     checks.append((
         "merged_alias_rows_eq_22",
         meta["merged_alias_rows"] == 22,

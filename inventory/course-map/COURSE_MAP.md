@@ -55,7 +55,7 @@ assessment-shell placeholder) · **frontload-blocked** = front-of-year lesson no
 ### Topic 4 — Rational Functions and Inverse Variation
 | Lesson | Title | Items | Readiness |
 |---|---|---|---|
-| 4-1 | Inverse Variation and the Reciprocal Function | 0 | absent (calibrated but retired — 0 rows) |
+| 4-1 | Inverse Variation and the Reciprocal Function | 19 | **optional-catalog** (nt14-ingest-4-1-2026-07-23 — catalog only, never scheduled/paced/counted; cut 2026-05-13 remains the recorded history) |
 | 4-2 | (placeholder) | 0 | absent (dept-skipped) |
 | **4-3** | **Multiplying and Dividing Rational Expressions** | **74** | **partial** |
 | **4-4** | **Adding and Subtracting Rational Expressions** | **91** | **partial** |
@@ -144,9 +144,11 @@ cohesion signal in the whole DAG:
 - **Intra-Unit-4 rate-reciprocal chain (3 items, 3 lessons: 4-1, 4-4, 4-5):**
   `4-1-savvas-q26` (Ramón's road trip — direct vs. inverse rate) → `4-4-savvas-q26` (Ahmed's bike
   ride — rational-expression rate sum) → `4-5-savvas-q25` (Kenji/Oscar puzzle — work-rate
-  equation). This one stays inside Unit 4, but 4-1 is retired from the registry (0 rows), so all
-  three of its outbound echo edges from later lessons currently dangle (see `prereq_gaps.md` Part
-  A).
+  equation). This one stays inside Unit 4. [NT14 update, nt14-ingest-4-1-2026-07-23: 4-1's rows
+  now exist as optional-catalog content, so these edges no longer dangle — they resolve as
+  optional-catalog references in `optional_catalog_edges`, deliberately outside the required
+  `prereq_edges` chain. The pre-NT14 text here read "retired from the registry (0 rows) …
+  currently dangle"; see the NT14 addendum below.]
 
 **16 cross-unit resolved edges total** — smaller through-lines not named above still connect
 3-5↔5-1, 3-5↔5-4, 3-5↔6-3, 3-5↔6-4, 3-5↔4-5, 4-3↔6-5, 5-4↔4-5, 5-4↔6-3, 5-5↔4-4, 6-3↔5-4,
@@ -165,7 +167,6 @@ cohesion signal in the whole DAG:
 |---|---|---|
 | 3-5 close-out (P2 multiplicity, P3 Storage-Box DOK-3) | multi-day | ~2–3 |
 | Topic 3 Assessment (L35_P4) | assessment | 1 |
-| 4-1 Inverse Variation & Reciprocal | **FULL 3-period** (LEHS-assessed — do not compress) | 3 |
 | 4-3 | single-period quick | 1 |
 | 4-4 | single-period quick | 1 |
 | 4-5 | single-period quick | 1 |
@@ -176,6 +177,14 @@ cohesion signal in the whole DAG:
 | 6-3 | single-period quick | 1 |
 | 6-4 | single-period quick | 1 |
 | 6-5 | DROP / float as bonus (first to cut if pacing slips) | 0–1 |
+
+**Outside pacing — optional catalog (nt14-ingest-4-1-2026-07-23):** 4-1 Inverse
+Variation & Reciprocal is deliberately NOT in the pacing table above. It was cut by
+the department on 2026-05-13 (historical evidence, not permanent policy); its 19
+practice items now exist in the registry as optional-catalog content only — never
+scheduled, paced, or counted toward completion. A later course-policy decision
+governs any student-facing revival. See the NT14 addendum at the bottom of this
+document.
 
 **Skips:** 3-6, 4-2, 4-6, 5-2, 5-3, 5-6, 6-1, 6-2, and SOH-CAH-TOA (deprecated) are not taught
 this cycle.
@@ -199,8 +208,10 @@ Flagged for the teacher to confirm — none of these are resolved by the data al
    `course_map.json`. Adjust freely.
 2. **Prereq-gap interpretation — two distinct kinds, now split.** The dangling edges into
    not-yet-built or retired lessons (`prereq_gaps.md` Part A) split into **`retirement-gap`**
-   (4 edges into 4-1 — 4-1 was calibrated and then pulled from the registry pending teacher
-   revival, per WS1; these will resolve again once 4-1 is re-ingested, not "never built") and
+   (historically, 4 edges into 4-1 — 4-1 was calibrated and then pulled from the registry, per
+   WS1. [NT14 update: those 4 edges HAVE now resolved — as optional-catalog references in
+   `optional_catalog_edges`, NOT as required prereqs; `edges_dropped_by_reason` no longer
+   contains `retirement-gap`. See the NT14 addendum.]) and
    **`frontload-gap`** (1 edge into 3-1 — a genuinely never-yet-built front-of-year lesson). Both
    are *true* upstream dependencies that will need attention, but on different timelines — 4-1
    is a revival, 3-1 is a from-scratch build. The `assessment-forward-ref` edges (12) are a
@@ -216,3 +227,21 @@ Flagged for the teacher to confirm — none of these are resolved by the data al
    point at one of the 85 duplicated legacy ids (all in 5-1/5-4/5-5) and cannot be pinned to a
    specific `item_uid` without a human call on the collision (see `inventory/dedup/DUPLICATE_ID_REMEDIATION.md`).
    Not a course-structure gap — an item-identity cleanup task for the dedup workstream.
+
+---
+
+## NT14 addendum (nt14-ingest-4-1-2026-07-23) — Lesson 4-1 optional catalog
+
+19 Lesson 4-1 rows (`4-1-savvas-q8`..`q26`) were ingested as **optional
+catalog content** (`availability: "optional-catalog"` on every row). The
+counts above this addendum describe the pre-NT14 900-row map; the live
+`course_map.json` now reports the triple split **919 raw = 878
+required-active + 19 optional-catalog + 22 merged-alias** (unique legacy ids
+815 → 834; ambiguous 85 unchanged). 4-1's node carries the new distinct
+readiness state `optional-catalog` — it is **not** READY, not required, not
+in pacing, and not counted toward completion. The 4 former `retirement-gap`
+dropped edges (targets `4-1-savvas-q10/q17/q19/q26`) now resolve as
+optional-catalog **references** in the new `optional_catalog_edges` list —
+deliberately never added to `prereq_edges` (the required chain, unchanged at
+193). The department's 2026-05-13 skip of L41 remains the recorded history;
+a later course-policy decision governs any student-facing appearance.

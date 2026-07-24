@@ -63,14 +63,20 @@ inventory/dedup/item_uid_alias_map.json, the five consumer artifacts, qb.py
 itself via `import qb`). They are still read-only -- nothing in this module
 ever opens a real repository file in a write mode.
 
-NAMED FROZEN-BASELINE PINS (rc-merge-auth-5-4-2026-07-23; if the registry is
-ever touched again by an authorized change these numbers may legitimately
-move -- re-derive and re-pin deliberately, don't just bump the constant to
-make the suite pass):
-    900 registry rows, 878 active (non-alias) + 22 merged-alias
+NAMED FROZEN-BASELINE PINS (rc-merge-auth-5-4-2026-07-23; re-pinned as a
+NAMED update for nt14-ingest-4-1-2026-07-23 -- the NT14 Lesson 4-1
+optional-catalog ingestion appended 19 rows, availability=="optional-catalog",
+at registry lines 901-919; the first 900 lines are byte-identical to the
+pre-NT14 registry. If the registry is ever touched again by an authorized
+change these numbers may legitimately move -- re-derive and re-pin
+deliberately, don't just bump the constant to make the suite pass):
+    919 registry rows == 878 required-active + 19 optional-catalog
+                          + 22 merged-alias
     85 ambiguous legacy ids = 22 resolved (this merge) + 63 unresolved
+       (the 19 new 4-1 ids are all unambiguous single-uid groups)
     merged_at        == "2026-07-23T00:53:21-04:00"  (offset-aware ISO-8601)
     authorization_record_id == "rc-merge-auth-5-4-2026-07-23"
+    optional-catalog record id == "nt14-ingest-4-1-2026-07-23"
 
 Run with:  python test_merge_semantics_5_4.py
    (or)    python -m pytest test_merge_semantics_5_4.py -q
@@ -107,12 +113,16 @@ PROVENANCE_AUDIT_PATH = REPO_ROOT / "inventory" / "provenance-audit" / "provenan
 MERGE_WINDOW_MANIFEST_PATH = REPO_ROOT / "nt11_merge_window_manifest.json"
 MANIFEST_ROOT_DIRS = ("inventory", "tools")
 
-# ---- frozen baseline pins (rc-merge-auth-5-4-2026-07-23) -------------------
+# ---- frozen baseline pins (rc-merge-auth-5-4-2026-07-23; TOTAL_ROWS and the
+# new OPTIONAL_CATALOG_ROWS re-pinned as a NAMED update for
+# nt14-ingest-4-1-2026-07-23: 919 == 878 + 19 + 22) ---------------------------
 FROZEN_MERGED_AT = "2026-07-23T00:53:21-04:00"
 FROZEN_AUTH_RECORD_ID = "rc-merge-auth-5-4-2026-07-23"
-FROZEN_TOTAL_ROWS = 900
+NT14_RECORD_ID = "nt14-ingest-4-1-2026-07-23"
+FROZEN_TOTAL_ROWS = 919
 FROZEN_MERGED_ALIAS_ROWS = 22
 FROZEN_ACTIVE_ROWS = 878
+FROZEN_OPTIONAL_CATALOG_ROWS = 19
 FROZEN_AMBIGUOUS_LEGACY_IDS = 85
 FROZEN_UNRESOLVED_AMBIGUOUS = 63
 
@@ -295,6 +305,12 @@ def generate_merge_window_manifest():
         "generated_by": "test_merge_semantics_5_4.py --regen-manifest",
         "generated_at": datetime.now().astimezone().isoformat(),
         "authorization_record_id": FROZEN_AUTH_RECORD_ID,
+        # nt14-ingest-4-1-2026-07-23: this snapshot was deliberately
+        # regenerated as the NAMED update closing the NT14 optional-catalog
+        # ingestion window (19 Lesson 4-1 rows; dedup map, wave plan, base
+        # inventory, dashboard, console, provenance audit, and course map
+        # all regenerated within it).
+        "nt14_record_id": NT14_RECORD_ID,
         "note": (
             "Frozen hash snapshot of every file under inventory/ and tools/ "
             "(recursive, __pycache__ excluded), captured for the "
@@ -360,10 +376,18 @@ class TestQbSelectorSemantics(unittest.TestCase):
         rows = qb.select()
         self.assertEqual(len(rows), FROZEN_ACTIVE_ROWS)
         self.assertEqual(sum(1 for r in rows if r.get("status") == "merged-alias"), 0)
-        # self-explaining cross-check against the committed alias map's own meta,
-        # so this test doesn't just repeat a magic number: 878 == 900 - 22.
+        # nt14-ingest-4-1-2026-07-23: select() also excludes optional-catalog
+        # rows by default, so the default surface stays exactly the 878
+        # required-active rows.
         self.assertEqual(
-            self.alias_meta["total_rows"] - self.alias_meta["merged_alias_rows"],
+            sum(1 for r in rows if r.get("availability") == "optional-catalog"), 0)
+        # self-explaining cross-check against the committed alias map's own meta,
+        # so this test doesn't just repeat a magic number (NAMED update for
+        # nt14-ingest-4-1-2026-07-23 -- triple split): 878 == 919 - 22 - 19.
+        self.assertEqual(
+            self.alias_meta["total_rows"]
+            - self.alias_meta["merged_alias_rows"]
+            - FROZEN_OPTIONAL_CATALOG_ROWS,
             FROZEN_ACTIVE_ROWS,
         )
 
@@ -608,13 +632,22 @@ class TestDualDenominatorReconciliation(unittest.TestCase):
     test fails loudly rather than skipping a surface it can't find one on."""
 
     def _assert_reconciles(self, label, block):
+        # NAMED update for nt14-ingest-4-1-2026-07-23: every consumer
+        # artifact now reconciles the TRIPLE split
+        # raw == required-active + optional-catalog + merged-alias
+        # (919 == 878 + 19 + 22). A missing optional_catalog_identities
+        # field IS the regression signal, same as a missing block.
         self.assertIsNotNone(block, f"{label}: missing identity_reconciliation block")
         self.assertEqual(block.get("raw_registry_identities"), FROZEN_TOTAL_ROWS, label)
         self.assertEqual(block.get("merged_alias_identities"), FROZEN_MERGED_ALIAS_ROWS, label)
+        self.assertEqual(
+            block.get("optional_catalog_identities"), FROZEN_OPTIONAL_CATALOG_ROWS, label)
         self.assertEqual(block.get("active_canonical_items"), FROZEN_ACTIVE_ROWS, label)
         self.assertEqual(
             block["raw_registry_identities"],
-            block["active_canonical_items"] + block["merged_alias_identities"],
+            block["active_canonical_items"]
+            + block["optional_catalog_identities"]
+            + block["merged_alias_identities"],
             label,
         )
 
@@ -643,6 +676,9 @@ class TestDualDenominatorReconciliation(unittest.TestCase):
         self.assertEqual(lc["registry_rows"], FROZEN_TOTAL_ROWS)
         self.assertEqual(lc["active_registry_rows"], FROZEN_ACTIVE_ROWS)
         self.assertEqual(lc["merged_alias_rows"], FROZEN_MERGED_ALIAS_ROWS)
+        # nt14-ingest-4-1-2026-07-23: the console's locked counts carry the
+        # optional-catalog rows distinctly.
+        self.assertEqual(lc["optional_catalog_rows"], FROZEN_OPTIONAL_CATALOG_ROWS)
 
     def test_provenance_audit_reconciles(self):
         prov = load_json(PROVENANCE_AUDIT_PATH)
@@ -658,11 +694,18 @@ class TestDualDenominatorReconciliation(unittest.TestCase):
         self.assertEqual(meta["unresolved_ambiguous_groups"], FROZEN_UNRESOLVED_AMBIGUOUS)
 
     def test_qb_stats_reconciles(self):
+        # NAMED update for nt14-ingest-4-1-2026-07-23: triple split.
         stats = qb.stats()
         self.assertEqual(stats["total"], FROZEN_TOTAL_ROWS)
         self.assertEqual(stats["active_total"], FROZEN_ACTIVE_ROWS)
+        self.assertEqual(stats["optional_catalog_total"], FROZEN_OPTIONAL_CATALOG_ROWS)
         self.assertEqual(stats["merged_alias_total"], FROZEN_MERGED_ALIAS_ROWS)
-        self.assertEqual(stats["total"], stats["active_total"] + stats["merged_alias_total"])
+        self.assertEqual(
+            stats["total"],
+            stats["active_total"]
+            + stats["optional_catalog_total"]
+            + stats["merged_alias_total"],
+        )
 
 
 # =============================================================================

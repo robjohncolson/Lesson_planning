@@ -135,6 +135,28 @@ alias_of, deliberately -- never by legacy-id ambiguity) and report only the
 performs that resolution -- it only carries the markers other consumers key
 off of.
 
+Optional-catalog overlay (nt14-ingest-4-1-2026-07-23, additive, triple-
+denominator identity): the NT14 ingestion appended 19 new rows (lesson 4-1,
+registry lines 901-919), each carrying a top-level "availability":
+"optional-catalog" marker -- NOT the merged-alias v2 marker fields above, an
+independent, orthogonal overlay. These rows are OPTIONAL CATALOG content:
+never part of the required review program, pacing, or completion counts.
+main() partitions the raw registry rows into the pre-existing REQUIRED
+population (unchanged, still exactly 900 rows) and this new OPTIONAL-
+CATALOG population BEFORE any wave/dok_status/lesson-count aggregation, so
+every pre-existing EXPECTED_* pin runs over exactly the same 900-row
+population it always has. The 19 optional-catalog rows get the SAME per-
+item computation (item_uid, dok_status, review_state, te_bucket,
+match_quality, status/alias_of) as any other row -- review/audit surfaces
+MAY carry them (DOK review is permitted here as audit activity) -- but they
+are placed in a distinct output bucket (wave_counts /
+wave_definitions / waves key "optional-catalog"), never merged into waves
+0-4. The output's 'identity_reconciliation' block publishes the resulting
+THREE-way split -- raw_registry_identities (919), merged_alias_identities
+(22), optional_catalog_identities (19), active_canonical_items (878) -- and
+asserts raw == active + optional_catalog + merged_alias before anything is
+written.
+
 Wave-order algorithm (first match wins):
   Wave 0 -- lesson == '3-5'.
   Wave 1 -- lesson in ASSESSMENT_FEEDING_LESSONS and role == 'dok3-driver'.
@@ -300,6 +322,20 @@ EXPECTED_DERIVED_DISAGREEMENT_IDS = {
 # and deliberately NOT re-pinned here.
 EXPECTED_MERGED_ALIAS_ROWS = 22
 EXPECTED_ACTIVE_CANONICAL_ITEMS = 878
+
+# NT14 optional-catalog re-pin (nt14-ingest-4-1-2026-07-23): the ingestion
+# appended 19 new registry rows (lesson 4-1, registry lines 901-919), each
+# carrying a top-level "availability": "optional-catalog" marker. These rows
+# are OPTIONAL CATALOG content: excluded from the required review program
+# (waves 0-4) entirely and routed instead to a distinct "optional-catalog"
+# wave-plan bucket (see main()'s required/optional split and the
+# identity_reconciliation triple-split below). This is a NEW, additive
+# denominator alongside the existing dual (active/merged-alias) split --
+# dok/role/wave content for the pre-existing 900 required rows is untouched
+# by this ingestion, so every OTHER EXPECTED_* pin above is unaffected and
+# deliberately NOT re-pinned here.
+EXPECTED_OPTIONAL_CATALOG_ROWS = 19
+EXPECTED_RAW_REGISTRY_ROWS = 919  # 900 required + 19 optional-catalog
 
 
 # ---------------------------------------------------------------------------
@@ -534,6 +570,21 @@ def main():
     calibrated_lessons = {les for les, cal in calibration.items() if calibration_has_real_anchors(cal)}
     item_to_dok = build_item_to_dok(calibration)
 
+    # NT14 optional-catalog split (nt14-ingest-4-1-2026-07-23): partition the
+    # raw registry rows into the pre-existing REQUIRED population (unchanged,
+    # still exactly 900 rows at lines 1-900) and the newly-appended OPTIONAL-
+    # CATALOG population (19 rows at lines 901-919, lesson 4-1). The split is
+    # driven by the row's own top-level "availability" field -- never by
+    # position or lesson-name matching -- so this generalizes if a future
+    # ingestion appends more optional-catalog rows for a different lesson.
+    # This split happens BEFORE any of the existing wave/dok_status/
+    # lesson-count aggregation below, so that aggregation runs over exactly
+    # the same 900-row population it always has -- every pre-existing
+    # EXPECTED_* pin is therefore unaffected by this ingestion.
+    indexed_rows = list(enumerate(rows, start=1))
+    required_rows = [(ln, r) for ln, r in indexed_rows if r.get('availability') != 'optional-catalog']
+    optional_catalog_rows = [(ln, r) for ln, r in indexed_rows if r.get('availability') == 'optional-catalog']
+
     # ---- identity: registry_line (1-based, contiguous) -> item_uid --------
     # Mirrors inventory/course-map/build_course_map.py's join exactly: every
     # legacy id's item_uids entries are keyed by their own 1-based
@@ -552,7 +603,7 @@ def main():
     exact_disagreements = []
     derived_disagreements = []
 
-    for line_no, row in enumerate(rows, start=1):
+    for line_no, row in required_rows:
         lesson = row.get('lesson')
         role = row.get('role')
         dok = row.get('dok')
@@ -601,6 +652,56 @@ def main():
             '_item_number': item_number,
         })
 
+    # NT14 optional-catalog rows (nt14-ingest-4-1-2026-07-23): the SAME
+    # per-row computation as the required-population loop above (item_uid,
+    # base dok_status, TE match, assessment_linked, merge/alias fields), but
+    # kept in a SEPARATE list -- never appended to `items` and never fed
+    # into base_dok_status_totals / lesson_row_counts / match_quality_totals
+    # / merge_status_totals / exact_disagreements / derived_disagreements,
+    # so none of the pre-existing EXPECTED_* checks against those counters
+    # can be affected by this ingestion. compute_wave() is deliberately not
+    # called -- these rows never enter waves 0-4; they get a distinct
+    # "optional-catalog" bucket built further below. The row's own
+    # "availability" marker is carried through verbatim as an additive field.
+    optional_items = []
+    for line_no, row in optional_catalog_rows:
+        lesson = row.get('lesson')
+        role = row.get('role')
+        dok = row.get('dok')
+        rid = row.get('id')
+        item_uid = line2uid.get(line_no)
+
+        base_dok_status = compute_dok_status(row, calibrated_lessons)
+        item_number, te_bucket, match_quality = compute_te_match(row, item_to_dok)
+        assessment_linked = lesson in ASSESSMENT_FEEDING_SET
+
+        merge_status = row.get('status') if row.get('status') == 'merged-alias' else 'active'
+        alias_of = row.get('alias_of') if merge_status == 'merged-alias' else None
+
+        optional_item = {
+            'item_uid': item_uid,
+            'registry_line': line_no,
+            'id': rid,
+            'lesson': lesson,
+            'dok': dok,
+            'role': role,
+            'dok_status': base_dok_status,
+            'assessment_linked': assessment_linked,
+            'te_bucket': te_bucket,
+            'match_quality': match_quality,
+            'status': merge_status,
+            'alias_of': alias_of,
+            'availability': row.get('availability'),
+            '_item_number': item_number,
+        }
+        # RC acceptance rule (nt14-ingest-4-1-2026-07-23): carry the
+        # machine-readable known-incomplete marker verbatim on the audit
+        # surface (currently 4-1-savvas-q16 'given-illegible' and q18
+        # 'answer-truncated'). Only present when the registry row has it.
+        if row.get('source_gap'):
+            optional_item['source_gap'] = row['source_gap']
+        optional_items.append(optional_item)
+
     # ------------------------------------------------------------------
     # Canonical verification projection (overlay on top of base dok_status).
     # Uses ONLY tools/dok-review/dok_review.py's own functions -- no local
@@ -622,7 +723,14 @@ def main():
     approved_rubric_versions = dok_review.load_rubric_approvals(approvals_manifest_path)
     latest_by_uid = dok_review.latest_entries_by_uid(review_log_entries)
 
-    for it in items:
+    # Applied to BOTH the required items and the optional-catalog items
+    # (nt14-ingest-4-1-2026-07-23) -- the canonical review-log projection is
+    # keyed purely by item_uid and DOK review is permitted on optional-
+    # catalog rows as audit activity, so they get the same 'review_state' /
+    # 'dok_status' treatment. This never folds optional-catalog rows into
+    # `items` itself, so dok_status_totals / review_state_totals (computed
+    # from `items` alone, below) are unaffected.
+    for it in items + optional_items:
         review_state = dok_review.tool_state_for(
             it['item_uid'],
             latest_by_uid,
@@ -643,8 +751,16 @@ def main():
     # ------------------------------------------------------------------
     errors = []
 
+    # Scope note: `items` is the REQUIRED population only (the 19
+    # optional-catalog rows from nt14-ingest-4-1-2026-07-23 live in
+    # `optional_items`, a separate list -- see its own validation block
+    # below, after the merged-alias checks). So this and every other check
+    # below that reads `items` / lesson_row_counts / base_dok_status_totals
+    # / match_quality_totals / merge_status_totals / wave_counts /
+    # wave_lesson_counts is unaffected by that ingestion and keeps its
+    # pre-existing expected value unchanged.
     if len(items) != 900:
-        errors.append(f'expected 900 registry rows, got {len(items)}')
+        errors.append(f'expected 900 required registry rows, got {len(items)}')
 
     for les, expected_n in EXPECTED_LESSON_ROW_COUNTS.items():
         got = lesson_row_counts.get(les, 0)
@@ -804,6 +920,99 @@ def main():
             f'{bad_alias_rows[:10]} (showing up to 10)'
         )
 
+    # ------------------------------------------------------------------
+    # Optional-catalog validation (nt14-ingest-4-1-2026-07-23). Registry-
+    # derived, so this is invariant while the registry stays frozen -- same
+    # status as the other EXPECTED_* pins above. Mirrors the shape of the
+    # item_uid-identity and merged-alias validation blocks above, but scoped
+    # to `optional_items` / `optional_catalog_rows` only -- it never reads
+    # or mutates `items`, so it cannot affect (or be affected by) any of the
+    # required-population checks above.
+    # ------------------------------------------------------------------
+    if len(rows) != EXPECTED_RAW_REGISTRY_ROWS:
+        errors.append(
+            f'raw registry rows (nt14-ingest-4-1-2026-07-23): expected '
+            f'{EXPECTED_RAW_REGISTRY_ROWS}, got {len(rows)}'
+        )
+    if len(optional_catalog_rows) != EXPECTED_OPTIONAL_CATALOG_ROWS:
+        errors.append(
+            f'optional-catalog rows (nt14-ingest-4-1-2026-07-23): expected '
+            f'{EXPECTED_OPTIONAL_CATALOG_ROWS}, got {len(optional_catalog_rows)}'
+        )
+    unexpected_optional_lessons = {r.get('lesson') for _ln, r in optional_catalog_rows} - {'4-1'}
+    if unexpected_optional_lessons:
+        errors.append(
+            f'optional-catalog row(s) with unexpected lesson (nt14-ingest-4-1-2026-07-23): '
+            f'{sorted(unexpected_optional_lessons)}'
+        )
+    optional_lines = sorted(it['registry_line'] for it in optional_items)
+    if optional_lines != list(range(901, 920)):
+        errors.append(
+            f'optional-catalog registry lines (nt14-ingest-4-1-2026-07-23) not exactly '
+            f'901-919: {optional_lines}'
+        )
+
+    optional_item_uids_present = [it['item_uid'] for it in optional_items if it['item_uid'] is not None]
+    if len(optional_item_uids_present) != len(optional_items):
+        errors.append(
+            f'{len(optional_items) - len(optional_item_uids_present)} optional-catalog '
+            f'item(s) missing an item_uid join (nt14-ingest-4-1-2026-07-23)'
+        )
+    distinct_optional_item_uids = set(optional_item_uids_present)
+    if len(distinct_optional_item_uids) != len(optional_items):
+        errors.append(
+            f'optional-catalog item_uids (nt14-ingest-4-1-2026-07-23) not all distinct: '
+            f'{len(distinct_optional_item_uids)} distinct of {len(optional_items)}'
+        )
+    colliding_uids = distinct_optional_item_uids & distinct_item_uids
+    if colliding_uids:
+        errors.append(
+            f'optional-catalog item_uid(s) collide with required item_uid(s) '
+            f'(nt14-ingest-4-1-2026-07-23): {sorted(colliding_uids)[:10]}'
+        )
+    bad_optional_review_states = [
+        it['item_uid'] for it in optional_items
+        if it['review_state'] not in dok_review.TOOL_STATES
+    ]
+    if bad_optional_review_states:
+        errors.append(
+            f'{len(bad_optional_review_states)} optional-catalog item(s) have a '
+            f'review_state outside dok_review.TOOL_STATES: {bad_optional_review_states[:10]} '
+            '(showing up to 10)'
+        )
+
+    # Cross-check against inventory/dedup/item_uid_alias_map.json's OWN,
+    # independently-computed total_rows / distinct_item_uids counts (SUB-B's
+    # file) -- this generator's registry-derived totals (required + optional-
+    # catalog combined) must agree with those separately validated figures,
+    # not just with itself.
+    alias_map_total_rows = alias.get('meta', {}).get('total_rows')
+    if alias_map_total_rows != len(rows):
+        errors.append(
+            'raw registry row count disagrees with item_uid_alias_map.json meta.total_rows: '
+            f'generator computed {len(rows)}, alias map meta says {alias_map_total_rows}'
+        )
+    alias_map_distinct_item_uids = alias.get('meta', {}).get('distinct_item_uids')
+    generator_distinct_item_uids = len(distinct_item_uids) + len(distinct_optional_item_uids)
+    if alias_map_distinct_item_uids != generator_distinct_item_uids:
+        errors.append(
+            'distinct item_uid count disagrees with item_uid_alias_map.json '
+            f'meta.distinct_item_uids: generator computed {generator_distinct_item_uids}, '
+            f'alias map meta says {alias_map_distinct_item_uids}'
+        )
+
+    # Triple-denominator reconciliation (nt14-ingest-4-1-2026-07-23): every
+    # raw registry identity is accounted for by EXACTLY one of active /
+    # optional-catalog / merged-alias -- the pre-existing dual check above
+    # (merged_alias_count + active_count != len(items)) stays scoped to the
+    # 900 required rows; this is the NEW whole-registry reconciliation.
+    if len(rows) != active_count + len(optional_items) + merged_alias_count:
+        errors.append(
+            'triple-denominator reconciliation failed (nt14-ingest-4-1-2026-07-23): '
+            f'active ({active_count}) + optional_catalog ({len(optional_items)}) + '
+            f'merged_alias ({merged_alias_count}) != raw_registry_identities ({len(rows)})'
+        )
+
     if errors:
         print('=== VALIDATION FAILED -- dok_wave_plan.json NOT WRITTEN ===')
         for e in errors:
@@ -838,12 +1047,49 @@ def main():
             'alias_of': it['alias_of'],
         })
 
+    # NT14 optional-catalog bucket (nt14-ingest-4-1-2026-07-23): a wave key
+    # distinct from '0'-'4', never merged into the required program. Ordered
+    # by registry_line (stable, deterministic) rather than sort_key(), since
+    # sort_key() indexes LESSON_ORDER_INDEX -- which deliberately does not
+    # (and should not) carry an optional-catalog lesson like '4-1'.
+    waves['optional-catalog'] = OrderedDict()
+    for it in sorted(optional_items, key=lambda x: x['registry_line']):
+        les = it['lesson']
+        waves['optional-catalog'].setdefault(les, [])
+        projected = {
+            'item_uid': it['item_uid'],
+            'id': it['id'],
+            'registry_line': it['registry_line'],
+            'dok': it['dok'],
+            'role': it['role'],
+            'dok_status': it['dok_status'],
+            'review_state': it['review_state'],
+            'assessment_linked': it['assessment_linked'],
+            'te_bucket': it['te_bucket'],
+            'match_quality': it['match_quality'],
+            'status': it['status'],
+            'alias_of': it['alias_of'],
+            'availability': it['availability'],
+        }
+        # RC acceptance rule (nt14-ingest-4-1-2026-07-23): surface the
+        # known-incomplete marker on the audit projection, only when the
+        # registry row carries it (q16 'given-illegible', q18
+        # 'answer-truncated').
+        if it.get('source_gap'):
+            projected['source_gap'] = it['source_gap']
+        waves['optional-catalog'][les].append(projected)
+
     wave_definitions = {
         '0': "Calibration / tool-validation (3-5)",
         '1': "Assessment-feeding DOK-3 spines (4-3, 4-5, 6-4 dok3-driver rows)",
         '2': "Assessment-feeding lesson bodies (remaining 4-3, 4-5, 6-4 rows)",
         '3': "Remaining DOK-3 spines (dok3-driver rows outside the assessment-feeding lessons)",
         '4': "Remaining lesson bodies (everything else)",
+        'optional-catalog': (
+            "Optional-catalog audit rows (lesson 4-1, "
+            "nt14-ingest-4-1-2026-07-23) -- DOK review permitted as audit "
+            "activity; never part of the required program."
+        ),
     }
 
     verification_note = {
@@ -881,42 +1127,63 @@ def main():
             'Source unmodified.'
         ),
         'identity_note': (
-            "Identity key is the opaque item_uid (900 distinct values, one per "
-            "registry row/line, joined via inventory/dedup/item_uid_alias_map.json "
-            "by 1-based registry line -- mirrors inventory/course-map/build_course_map.py's "
-            "node_identity convention). The legacy `id` field is DISPLAY-ONLY: 85 "
-            "legacy ids are each shared by 2 distinct registry rows (170 rows total), "
-            "e.g. '5-4-savvas-q41' is both registry line 299 (dok=2, role=None) and "
-            "registry line 328 (dok=3, role=dok3-driver) -- two different item_uids. "
-            "Any review/promotion tooling built against this plan MUST key by "
-            "item_uid, never by id alone. See DOK_VERIFICATION_WORKFLOW.md's "
-            "Identity key note and REVIEW_INTERFACE_SPEC.md's Data model section."
+            "Identity key is the opaque item_uid (919 distinct values across the "
+            "full raw registry, one per registry row/line, joined via "
+            "inventory/dedup/item_uid_alias_map.json by 1-based registry line -- "
+            "mirrors inventory/course-map/build_course_map.py's node_identity "
+            "convention). Of those 919: 900 are the REQUIRED population (waves "
+            "0-4) and 19 are OPTIONAL-CATALOG rows (lesson 4-1, "
+            "nt14-ingest-4-1-2026-07-23, wave key 'optional-catalog' -- never "
+            "part of required sequencing/pacing/completion counts; see "
+            "identity_reconciliation below). The legacy `id` field is "
+            "DISPLAY-ONLY: within the 900 required rows, 85 legacy ids are each "
+            "shared by 2 distinct registry rows (170 rows total), e.g. "
+            "'5-4-savvas-q41' is both registry line 299 (dok=2, role=None) and "
+            "registry line 328 (dok=3, role=dok3-driver) -- two different "
+            "item_uids. Any review/promotion tooling built against this plan "
+            "MUST key by item_uid, never by id alone. See "
+            "DOK_VERIFICATION_WORKFLOW.md's Identity key note and "
+            "REVIEW_INTERFACE_SPEC.md's Data model section."
         ),
         'assessment_feeding_lessons': ASSESSMENT_FEEDING_LESSONS,
         'wave_definitions': wave_definitions,
-        'wave_counts': {str(w): wave_counts.get(w, 0) for w in (0, 1, 2, 3, 4)},
+        'wave_counts': {
+            **{str(w): wave_counts.get(w, 0) for w in (0, 1, 2, 3, 4)},
+            'optional-catalog': len(optional_items),
+        },
         'verification_note': verification_note,
         'identity_reconciliation': {
-            'raw_registry_identities': len(items),
+            'raw_registry_identities': len(rows),
             'merged_alias_identities': merged_alias_count,
+            'optional_catalog_identities': len(optional_items),
             'active_canonical_items': active_count,
             'authorization_record_id': 'rc-merge-auth-5-4-2026-07-23',
+            'optional_catalog_authorization_record_id': 'nt14-ingest-4-1-2026-07-23',
             'statement': (
                 "This plan is an AUDIT surface: it carries ALL "
-                "raw_registry_identities (900), with the "
+                "raw_registry_identities (919), with the "
                 "merged_alias_identities (22, rc-merge-auth-5-4-2026-07-23) "
                 "explicitly marked on their item via status=='merged-alias' "
-                "+ alias_of (verbatim from the registry row) -- never "
-                "dropped, never silently conflated with their survivor. "
-                "STUDENT-FACING / canonical-readiness surfaces (e.g. qb.py, "
-                "the base content-readiness inventory, the dashboard, the "
-                "decision console) instead report active_canonical_items "
-                "(878): every merged-alias row resolved DELIBERATELY to its "
-                "survivor (via alias_of or the dedup map's resolved_alias), "
-                "never selected or counted itself. Reconciliation is exact "
-                "and asserted before this file is written: "
-                "raw_registry_identities == active_canonical_items + "
-                "merged_alias_identities (900 == 878 + 22)."
+                "+ alias_of (verbatim from the registry row), and the "
+                "optional_catalog_identities (19, nt14-ingest-4-1-2026-07-23, "
+                "lesson 4-1) explicitly marked via availability=='optional-"
+                "catalog' -- none of these are ever dropped, never silently "
+                "conflated with another identity. STUDENT-FACING / "
+                "canonical-readiness surfaces (e.g. qb.py, the base "
+                "content-readiness inventory, the dashboard, the decision "
+                "console) instead report active_canonical_items (878): every "
+                "merged-alias row resolved DELIBERATELY to its survivor (via "
+                "alias_of or the dedup map's resolved_alias), and every "
+                "optional-catalog row excluded entirely -- neither is ever "
+                "selected or counted as active. Optional-catalog rows are an "
+                "AUDIT-SURFACE-ONLY presence in this plan (review/audit "
+                "surfaces may carry them, DOK review permitted here as audit "
+                "activity) -- they are NEVER part of required sequencing, "
+                "pacing, or completion counts in any downstream consumer. "
+                "Reconciliation is exact and asserted before this file is "
+                "written: raw_registry_identities == active_canonical_items + "
+                "optional_catalog_identities + merged_alias_identities "
+                "(919 == 878 + 19 + 22)."
             ),
         },
         'waves': waves,
@@ -933,14 +1200,16 @@ def main():
     # Summary (ASCII-safe; never prints prompt/rationale text).
     # ------------------------------------------------------------------
     print('=== DOK WAVE PLAN SUMMARY ===')
-    print('total registry rows:', len(items))
+    print('total required registry rows:', len(items))
+    print('total optional-catalog rows (nt14-ingest-4-1-2026-07-23):', len(optional_items))
+    print('total raw registry rows:', len(rows))
     print('base dok_status totals:', dict(base_dok_status_totals))
     print('dok_status totals (after verified overlay):', dict(dok_status_totals))
     print('review_state totals:', dict(review_state_totals))
     print('review_log_path:', review_log_path, '| entries:', len(review_log_entries))
     print('approvals_manifest_path:', approvals_manifest_path, '| approved versions:', sorted(approved_rubric_versions.keys()))
     print('verified count:', dok_status_totals.get('verified', 0))
-    print('wave counts:', {w: wave_counts.get(w, 0) for w in (0, 1, 2, 3, 4)})
+    print('wave counts:', {**{w: wave_counts.get(w, 0) for w in (0, 1, 2, 3, 4)}, 'optional-catalog': len(optional_items)})
     print()
     print('per (wave, lesson) counts:')
     for w in (0, 1, 2, 3, 4):
@@ -950,18 +1219,22 @@ def main():
         )
         parts = [f'{les}={wave_lesson_counts[(w, les)]}' for les in lessons_in_wave]
         print(f'  wave {w}: ' + ', '.join(parts))
+    optional_lessons_present = sorted({it['lesson'] for it in optional_items})
+    optional_parts = [f'{les}={sum(1 for it in optional_items if it["lesson"] == les)}' for les in optional_lessons_present]
+    print('  wave optional-catalog: ' + ', '.join(optional_parts))
     print()
     print('match_quality totals:', dict(match_quality_totals))
     print('exact disagreements:', len(exact_disagreements))
     print('derived disagreements:', sorted(derived_disagreements))
     print()
-    print(f'item_uid identity: {len(distinct_item_uids)} distinct uids, all 900 registry lines covered exactly once')
+    print(f'item_uid identity: {len(distinct_item_uids)} required distinct uids (lines 1-900), '
+          f'{len(distinct_optional_item_uids)} optional-catalog distinct uids (lines 901-919)')
     print()
     print(
-        f'dual-denominator identity (rc-merge-auth-5-4-2026-07-23): '
-        f'raw_registry_identities={len(items)} merged_alias_identities={merged_alias_count} '
-        f'active_canonical_items={active_count} '
-        f'(reconciles: {active_count} + {merged_alias_count} == {len(items)})'
+        f'triple-denominator identity (nt14-ingest-4-1-2026-07-23 + rc-merge-auth-5-4-2026-07-23): '
+        f'raw_registry_identities={len(rows)} merged_alias_identities={merged_alias_count} '
+        f'optional_catalog_identities={len(optional_items)} active_canonical_items={active_count} '
+        f'(reconciles: {active_count} + {len(optional_items)} + {merged_alias_count} == {len(rows)})'
     )
     print()
     print('ALL ASSERTIONS PASSED')

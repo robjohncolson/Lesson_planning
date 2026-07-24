@@ -42,13 +42,17 @@ Originally 8 days. Retired to `legacy/`. Replaced by Klimsara close-out:
 | P3 (Wed 4/29) | `L35_P3_*` | **Practice #27 (Storage Box)** | Real+complex zeros + modeling |
 | P4 (Thu 4/30) | `L35_P4_*` | — | Topic 3 Assessment (11 Qs, external `a2topic3assess.docx`) |
 
-### Lesson 4-1 (ready, Fri F / Mon A start)
+### Lesson 4-1 (OPTIONAL CATALOG — not scheduled, not required)
+
+4-1 was deliberately cut by the department on 2026-05-13 (Klimsara confirmed; cadence jumped to L43). That skip is **historical evidence, not permanent curriculum policy**. Its 19 Savvas practice items (`4-1-savvas-q8`..`q26`) were ingested 2026-07-23 as **optional catalog content** — every registry row carries the machine-readable marker `"availability": "optional-catalog"` (record `nt14-ingest-4-1-2026-07-23`). Optional-catalog content is never auto-scheduled, never placed in pacing, and never counted toward completion: `qb.select()` excludes it by default (opt in with `include_optional=True`); explicit id access via `qb.get`/`qb.get_for_packet` works for deliberate teacher use. **A later course-policy decision governs any student-facing revival.** This entry closes the stale-"ready" teacher-judgment item WS1 flagged against the previous version of this section (`inventory/topic-4-1/DIAGNOSIS.md`).
+
+Archived 3-period plan from the prior course (historical record ONLY — not current instruction; packets retired to `legacy/tex/L41_*`):
 
 | Period | File prefix | DOK-3 driver | Content |
 |---|---|---|---|
 | P1 | `L41_P1_*` | — | Inverse variation introduction (xy = k, y = k/x) |
 | P2 | `L41_P2_*` | **Practice #26 (Ramón road trip — direct-vs-inverse)** | Applications + DOK-3 performance task |
-| P3 | `L41_P3_*` | — | Reciprocal function + translations (**assessment-critical**: Topic 4 LEHS Q#3 + Q#5) |
+| P3 | `L41_P3_*` | — | Reciprocal function + translations (in the prior course this targeted Topic 4 LEHS Q#3 + Q#5) |
 
 ## Naming conventions
 

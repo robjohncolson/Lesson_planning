@@ -139,10 +139,29 @@ def main():
     # content.
     merged_alias_uids_by_lesson = defaultdict(set)
     merged_alias_uids_all = set()
+    # NT14 (nt14-ingest-4-1-2026-07-23, additive): the wave plan now carries
+    # an extra, NON-NUMERIC "optional-catalog" bucket (19 rows, lesson 4-1)
+    # alongside waves 0-4 -- int(wave_key) below would raise on that key, and
+    # even if it didn't, these rows must NEVER be folded into lesson_waves
+    # (they are never placed in pacing) or into
+    # wave_plan_review_state_totals/review_state_uid_sets/
+    # wave_plan_verified_uids_* (content_readiness_inventory.json's own
+    # dok_review_state_totals -- cross-checked against the first below --
+    # likewise excludes these rows entirely; see that builder's per-lesson
+    # loop). total_wave_rows DOES still count them (it is the raw,
+    # registry-wide total feeding identity_reconciliation.raw_registry_
+    # identities below), and id_occurrences still records them (harmless --
+    # none of lesson 4-1's ids collide with anything, so this cannot affect
+    # the 5-4 DOK-conflict detection below).
+    OPTIONAL_CATALOG_WAVE_KEY = "optional-catalog"
+    optional_catalog_uids_by_lesson = defaultdict(set)
+    optional_catalog_uids_all = set()
     for wave_key, lessons_dict in wave_plan["waves"].items():
-        wnum = int(wave_key)
+        is_optional_catalog_bucket = wave_key == OPTIONAL_CATALOG_WAVE_KEY
+        wnum = None if is_optional_catalog_bucket else int(wave_key)
         for lesson, rows in lessons_dict.items():
-            lesson_waves[lesson].add(wnum)
+            if not is_optional_catalog_bucket:
+                lesson_waves[lesson].add(wnum)
             total_wave_rows += len(rows)
             for r in rows:
                 id_occurrences[r["id"]].append(
@@ -151,6 +170,10 @@ def main():
                         "status": r.get("status", "active"), "alias_of": r.get("alias_of"),
                     }
                 )
+                if is_optional_catalog_bucket:
+                    optional_catalog_uids_by_lesson[lesson].add(r["item_uid"])
+                    optional_catalog_uids_all.add(r["item_uid"])
+                    continue
                 r_review_state = wave_plan_item_review_state(r)
                 wave_plan_review_state_totals[r_review_state] += 1
                 if r_review_state in review_state_uid_sets:
@@ -327,7 +350,12 @@ def main():
     # "frontload-gap" reason into "frontload-gap" (genuinely front-of-year,
     # never built) vs. "retirement-gap" (built, then retired — e.g. 4-1).
     # Deriving this filter from a reason SET, not a single hardcoded label,
-    # keeps the build robust to that kind of relabeling.
+    # keeps the build robust to that kind of relabeling. NT14 named update
+    # (nt14-ingest-4-1-2026-07-23): course_map.json has been independently
+    # regenerated now that 4-1 has real (optional-catalog) items to resolve
+    # prereq/echo edges against, so 0 edges currently carry reason==
+    # 'retirement-gap' -- the reason value is kept in this set for when it
+    # recurs, not removed.
     # -------------------------------------------------------------------
     dropped_edges = course_map["dropped_edges"]
     GAP_FAMILY_REASONS = ("frontload-gap", "retirement-gap", "retired-missing")
@@ -360,12 +388,23 @@ def main():
             return "VERIFIED"       # 0 today (aspirational)
         elif base_readiness == "ready":
             return "READY"          # 0 today (aspirational)
+        # NT14 (nt14-ingest-4-1-2026-07-23): a lesson whose base readiness is
+        # 'optional-catalog' (today: only 4-1) gets its own WS6 state,
+        # checked ahead of every other branch -- it must never fall through
+        # to CALIBRATED/INCOMPLETE/BLOCKED/PROVISIONAL/ABSENT, all of which
+        # would misrepresent it as required/ready-to-teach content in
+        # progress. registry_rows is 0 here (content_readiness_inventory.json
+        # computes it over required rows only), so no other branch below
+        # could match this lesson anyway, but the explicit check keeps that
+        # true by construction rather than by accident.
+        elif base_readiness == "optional-catalog":
+            return "OPTIONAL-CATALOG"  # 1 today (4-1; nt14-ingest-4-1-2026-07-23)
         elif registry_rows > 0 and calibrated == registry_rows:
             return "CALIBRATED"     # 3-5 (all rows calibrated, real anchors)
         elif base_readiness == "partial":
             return "INCOMPLETE"     # the nine
         elif base_readiness == "blocked":
-            return "BLOCKED"        # 4-1 staged-not-ingested
+            return "BLOCKED"        # 0 today (nt14-ingest-4-1-2026-07-23 moved 4-1 to OPTIONAL-CATALOG)
         elif course_readiness == "frontload-blocked":
             return "PROVISIONAL"    # 18 front-of-year
         else:
@@ -391,7 +430,13 @@ def main():
 
     # Guard: fail loudly if the derivation stops matching the locked
     # reconciliation distribution from the manager brief.
-    expected_ws6_dist = {"CALIBRATED": 1, "INCOMPLETE": 9, "BLOCKED": 1, "PROVISIONAL": 18, "ABSENT": 8}
+    # NT14 named update (nt14-ingest-4-1-2026-07-23): BLOCKED 1 -> 0,
+    # OPTIONAL-CATALOG 0 -> 1 (4-1 moves out of BLOCKED into its own state;
+    # see derive_ws6_state above). Every other bucket is unchanged.
+    expected_ws6_dist = {
+        "CALIBRATED": 1, "INCOMPLETE": 9, "BLOCKED": 0, "PROVISIONAL": 18, "ABSENT": 8,
+        "OPTIONAL-CATALOG": 1,
+    }
     actual_ws6_dist = {k: ws6_dist[k] for k in expected_ws6_dist}
     assert actual_ws6_dist == expected_ws6_dist, (
         f"WS6 state distribution mismatch: computed={actual_ws6_dist} expected={expected_ws6_dist}. "
@@ -415,6 +460,12 @@ def main():
             return "grey"
         if registry_rows == 0 and base_readiness == "blocked":
             return "red"
+        # NT14 (nt14-ingest-4-1-2026-07-23): explicit, not the defensive
+        # fallback below -- 4-1's registry_rows reads 0 here (required rows
+        # only) with base_readiness 'optional-catalog', which previously
+        # would have fallen through to the fallback by accident.
+        if registry_rows == 0 and base_readiness == "optional-catalog":
+            return "grey"
         if registry_rows > 0 and coll_groups > 0:
             return "amber"
         if registry_rows > 0 and coll_groups == 0:
@@ -451,8 +502,14 @@ def main():
         return "amber"
 
     def dim_prereqs(lesson, placeholder, upstream, downstream):
-        if lesson == "4-1":
-            return "red"
+        # NT14 named update (nt14-ingest-4-1-2026-07-23): the old hardcoded
+        # "4-1 always red" pin dates from when 4 gap-family edges dangled
+        # into 4-1 (course_map.json's now-superseded pre-ingestion state).
+        # course_map.json has been independently regenerated and those edges
+        # are RESOLVED, not dropped (upstream is empty for 4-1 today) --
+        # removed so 4-1 falls through to the same generic upstream/
+        # downstream/placeholder logic every other lesson uses, rather than
+        # asserting a dependency gap that no longer exists on disk.
         if upstream:
             return "red"
         if downstream:
@@ -468,7 +525,10 @@ def main():
                       upstream, downstream):
         blockers = []
         if readiness_reason:
-            if base_readiness in ("absent", "blocked"):
+            # NT14 (nt14-ingest-4-1-2026-07-23): 'optional-catalog' is prose,
+            # not a semicolon-joined gate list -- treat it like
+            # absent/blocked (single blocker item) rather than splitting it.
+            if base_readiness in ("absent", "blocked", "optional-catalog"):
                 blockers.append(readiness_reason)
             else:
                 blockers.extend(p.strip() for p in readiness_reason.split(";") if p.strip())
@@ -669,7 +729,12 @@ def main():
     base_readiness_dist = inv["aggregate"]["readiness_distribution"]
 
     wave_counts_raw = wave_plan["wave_counts"]
-    wave_counts = {int(k): v for k, v in wave_counts_raw.items()}
+    # NT14: wave_counts_raw now also carries a non-numeric "optional-catalog"
+    # key (19, lesson 4-1) -- int(k) would raise on it, and it is not a
+    # pacing wave, so it is kept out of the numeric wave_counts dict entirely
+    # (reported instead via identity_reconciliation.optional_catalog_identities).
+    wave_counts = {int(k): v for k, v in wave_counts_raw.items() if k != OPTIONAL_CATALOG_WAVE_KEY}
+    optional_catalog_wave_count = wave_counts_raw.get(OPTIONAL_CATALOG_WAVE_KEY, 0)
 
     aggregates = {
         "total_registry_rows": total_registry_rows,
@@ -743,26 +808,40 @@ def main():
             "BLOCKED": ws6_dist["BLOCKED"],
             "PROVISIONAL": ws6_dist["PROVISIONAL"],
             "ABSENT": ws6_dist["ABSENT"],
+            "OPTIONAL_CATALOG": ws6_dist["OPTIONAL-CATALOG"],
         },
-        # Dual-denominator identity (rc-merge-auth-5-4-2026-07-23, additive).
-        # Every OTHER aggregate above (total_registry_rows, dok totals, ws6
-        # distribution, etc.) is registry-row-count based (audit-style: all
-        # 900 rows, alias rows included, unchanged by this merge). This is
-        # the authoritative place to read the RC-mandated active/alias split
-        # from this dashboard: STUDENT-FACING selection (qb.py) resolves
-        # each merged-alias row DELIBERATELY to its survivor and never
-        # selects/counts the alias row itself.
+        # Triple-split identity reconciliation (extended for NT14
+        # nt14-ingest-4-1-2026-07-23; originally rc-merge-auth-5-4-2026-07-23
+        # dual-denominator). Every OTHER aggregate above (total_registry_rows,
+        # dok totals, ws6 distribution, etc.) is computed over REQUIRED rows
+        # only (900 -- unchanged by either the alias marking or this
+        # ingestion). This is the authoritative place to read the full
+        # active/optional-catalog/merged-alias split from this dashboard:
+        # STUDENT-FACING selection (qb.py) resolves each merged-alias row
+        # DELIBERATELY to its survivor and never selects/counts the alias
+        # row itself; optional-catalog rows are never selected/scheduled at
+        # all pending a course-policy decision.
         "identity_reconciliation": {
             "raw_registry_identities": total_wave_rows,
             "merged_alias_identities": len(merged_alias_uids_all),
-            "active_canonical_items": total_wave_rows - len(merged_alias_uids_all),
+            "optional_catalog_identities": len(optional_catalog_uids_all),
+            "active_canonical_items": (
+                total_wave_rows - len(merged_alias_uids_all) - len(optional_catalog_uids_all)
+            ),
             "merged_alias_item_uids": sorted(merged_alias_uids_all),
+            "optional_catalog_item_uids": sorted(optional_catalog_uids_all),
             "authorization_record_id": "rc-merge-auth-5-4-2026-07-23",
+            "optional_catalog_authorization_record_id": "nt14-ingest-4-1-2026-07-23",
             "statement": (
-                "raw_registry_identities == active_canonical_items + merged_alias_identities "
-                "(900 == 878 + 22). None of the 22 merged_alias_item_uids ever appear in "
-                "aggregates.dok.review_state_uid_sets.verified (asserted at build time) or in "
-                "any other readiness/verified/actionable set published by this dashboard."
+                "raw_registry_identities == active_canonical_items + optional_catalog_identities + "
+                "merged_alias_identities (919 == 878 + 19 + 22). None of the 22 "
+                "merged_alias_item_uids ever appear in aggregates.dok.review_state_uid_sets.verified "
+                "(asserted at build time) or in any other readiness/verified/actionable set "
+                "published by this dashboard. The 19 optional_catalog_item_uids (lesson 4-1, "
+                "nt14-ingest-4-1-2026-07-23) are likewise excluded from every dok/readiness/ws6 "
+                "aggregate above -- they carry no wave assignment (lessons[].dok.waves for 4-1 is "
+                "empty) and never auto-schedule or count toward completion; see lessons[] '4-1' "
+                "entry (ws6_state OPTIONAL-CATALOG) for its own breakdown."
             ),
         },
     }
@@ -773,22 +852,33 @@ def main():
             "partial": base_readiness_dist["partial"],
             "blocked": base_readiness_dist["blocked"],
             "absent": base_readiness_dist["absent"],
+            "optional_catalog": base_readiness_dist.get("optional_catalog", 0),
         },
         "course_map_distribution": {
             "frontload_blocked": course_map_readiness_dist["frontload-blocked"],
             "calibrated": course_map_readiness_dist["calibrated"],
             "absent": course_map_readiness_dist["absent"],
             "partial": course_map_readiness_dist["partial"],
+            # NT14 (nt14-ingest-4-1-2026-07-23): course_map.json has been
+            # independently regenerated and now reads 4-1's own readiness as
+            # 'optional-catalog' too (previously 'absent') -- added as its
+            # own key rather than folded into 'absent'.
+            "optional_catalog": course_map_readiness_dist.get("optional-catalog", 0),
         },
         "note": (
             "Base inventory counts 3-5 as 'partial' (missing_answers/visuals/verified gates unmet) "
-            "and 4-1 as 'blocked' (staged material, 0 registry rows). Course-map counts 3-5 as "
-            "'calibrated' (real DOK anchors exist) and 4-1 as 'absent' (no items array populated). "
-            "WS6 reconciles both: 3-5 is promoted to its own CALIBRATED state (the only lesson with "
-            "real DOK-2/DOK-3 anchors, even though answer/visual gates remain open), and 4-1 keeps "
-            "its own BLOCKED state distinct from the 8 truly ABSENT (deprecated/skipped) lessons and "
-            "the 18 PROVISIONAL front-of-year lessons, because 4-1 uniquely has staged-but-uningested "
-            "material (calibration file, 61 screenshots, 15 skeleton stubs)."
+            "and 4-1 as 'optional-catalog' (NT14, nt14-ingest-4-1-2026-07-23: 19 rows ingested "
+            "2026-07-23, all carrying availability=='optional-catalog', excluded from every "
+            "completion/readiness denominator -- previously 'blocked', when 0 registry rows existed "
+            "and ingestion status was unknown). Course-map has independently been regenerated for "
+            "this same ingestion and now agrees: 4-1 reads 'optional-catalog' there too (previously "
+            "'absent'), and 3-5 reads 'calibrated' (real DOK anchors exist). WS6 reconciles all of "
+            "this: 3-5 is promoted to its own CALIBRATED state (the only lesson with real DOK-2/"
+            "DOK-3 anchors, even though answer/visual gates remain open); 4-1 now gets its own "
+            "OPTIONAL-CATALOG state -- distinct from BLOCKED (0 today), the 8 truly ABSENT "
+            "(deprecated/skipped) lessons, and the 18 PROVISIONAL front-of-year lessons -- because "
+            "it uniquely carries ingested-but-explicitly-non-required content pending a future "
+            "course-policy decision."
         ),
     }
 
@@ -817,11 +907,14 @@ def main():
     #
     # dangling_into_4_1 is filtered by TARGET touching 4-1 and reason in the
     # gap family (GAP_FAMILY_REASONS, i.e. NOT assessment-forward-ref) —
-    # not by a single hardcoded reason string. That is what keeps this
-    # correct regardless of whether the source labels these edges
-    # "frontload-gap" or "retirement-gap": today all 4 read "retirement-gap"
-    # (4-1 was built, then retired, so its dangling references are a
-    # retirement gap, not a front-of-year gap).
+    # not by a single hardcoded reason string. NT14 named update
+    # (nt14-ingest-4-1-2026-07-23): course_map.json has been independently
+    # regenerated (stats.edges_optional_catalog_resolved: 4) now that 4-1
+    # has real items to resolve against -- the 4 edges that used to read
+    # "retirement-gap" (dangling into 4-1) are RESOLVED, not dropped, so
+    # dangling_into_4_1 is correctly empty today. This filter is left
+    # exactly as before (by reason SET, not a hardcoded count) precisely so
+    # it tracks course_map.json's current truth automatically.
     #
     # dangling_into_3_1 stays narrowly "frontload-gap" targeting 3-1 — that
     # one edge (5-1's launch prereq) really is a front-of-year gap, not a
@@ -831,8 +924,10 @@ def main():
                           and e["reason"] in GAP_FAMILY_REASONS]
     dangling_into_3_1 = [e for e in dropped_edges if edge_touches(e["target"], "3-1")
                           and e["reason"] == "frontload-gap"]
-    assert len(dangling_into_4_1) == 4, (
-        f"expected 4 gap-family edges (frontload-gap/retirement-gap/retired-missing) into 4-1, "
+    # NT14 named update (nt14-ingest-4-1-2026-07-23): 4 -> 0 (see comment above).
+    assert len(dangling_into_4_1) == 0, (
+        f"expected 0 gap-family edges (frontload-gap/retirement-gap/retired-missing) into 4-1 "
+        "now that course_map.json resolves them against 4-1's real (optional-catalog) items, "
         f"got {len(dangling_into_4_1)}"
     )
     assert len(dangling_into_3_1) == 1, f"expected 1 frontload-gap edge into 3-1, got {len(dangling_into_3_1)}"
@@ -851,6 +946,23 @@ def main():
             "se_te": any(four_one["assets"]["se_te_source"][k] for k in
                          ("se_pdf", "se_tex", "te_pdf", "te_tex")),
         },
+        # NT14 named caveat (nt14-ingest-4-1-2026-07-23): the "staged" block
+        # above is read verbatim from inventory/topic-4-1/inventory-4-1-
+        # assets.json, a file outside this ingestion's authorized scope --
+        # it has NOT been regenerated and still reads registry_rows: 0 /
+        # overall_state: 'stranded_staged_not_ingested', both now stale. The
+        # authoritative current count (19 rows, all availability==
+        # 'optional-catalog', ingested 2026-07-23) is lessons[] '4-1'
+        # entry's own 'optional_catalog' block and aggregate.
+        # identity_reconciliation.optional_catalog_identities, both above.
+        "stale_source_note": (
+            "'state' and 'staged.registry_rows' above are read verbatim from "
+            "inventory/topic-4-1/inventory-4-1-assets.json, which has NOT been regenerated for "
+            "nt14-ingest-4-1-2026-07-23 and still reads as if 0 rows existed. The current, "
+            "authoritative fact (19 rows ingested 2026-07-23, availability=='optional-catalog') "
+            "is in this document's lessons[] '4-1' entry ('optional_catalog' block) and "
+            "aggregate.identity_reconciliation.optional_catalog_identities."
+        ),
         "dangling_edges_into_4_1": dangling_into_4_1,
         "fifth_frontload_gap_edge_into_3_1": dangling_into_3_1[0],
         "teacher_judgment_items": four_one["teacher_judgment_items"],
@@ -927,14 +1039,16 @@ def main():
             "lessons[].dok_status.verified); and course-map/course_map.json "
             "(topics[].lessons[].readiness). Not a hardcoded per-lesson lookup.",
         "four_one_stranded":
-            "topic-4-1/inventory-4-1-assets.json (assets{}, teacher_judgment_items[]) joined "
+            "topic-4-1/inventory-4-1-assets.json (assets{}, teacher_judgment_items[]; NOT "
+            "regenerated for nt14-ingest-4-1-2026-07-23 -- see stale_source_note above) joined "
             "against course-map/course_map.json (dropped_edges[], filtered by TARGET touching 4-1 "
             "and reason in the gap family {frontload-gap, retirement-gap, retired-missing} — "
-            "currently all 4 read reason=='retirement-gap', since 4-1 was built then retired, not "
-            "front-of-year-unbuilt; the 5th gap-family edge targets 3-1 instead, with "
-            "reason=='frontload-gap', and is reported separately as "
-            "fifth_frontload_gap_edge_into_3_1). Derived live from current dropped_edges, robust to "
-            "reason relabeling.",
+            "NT14 named update: course-map/course_map.json HAS been independently regenerated for "
+            "this ingestion, and the 4 edges that used to read reason=='retirement-gap' into 4-1 "
+            "are now resolved against 4-1's real (optional-catalog) items, so 0 remain dropped; "
+            "the 5th gap-family edge targets 3-1 instead, with reason=='frontload-gap', and is "
+            "reported separately as fifth_frontload_gap_edge_into_3_1). Derived live from current "
+            "dropped_edges, robust to reason relabeling.",
     }
 
     # -------------------------------------------------------------------
@@ -1106,7 +1220,11 @@ def main():
     check("wave2", wave_counts[2], 220)
     check("wave3", wave_counts[3], 7)
     check("wave4", wave_counts[4], 627)
-    check("wave_rows_total", total_wave_rows, 900)
+    # NT14 named update (nt14-ingest-4-1-2026-07-23): optional-catalog is a
+    # non-pacing bucket, not a numbered wave (checked separately below);
+    # wave_rows_total is the RAW total across every bucket (900 + 19 = 919).
+    check("wave_optional_catalog", optional_catalog_wave_count, 19)
+    check("wave_rows_total", total_wave_rows, 919)
     check("visuals.absent", total_visuals_absent, 137)
     check("visuals.broken_path", total_visuals_broken, 7)
     check("visuals.essential", importance_totals["essential"], 14)
@@ -1123,29 +1241,40 @@ def main():
     check("answers.missing_all", answers_missing_total, 371)
     check("ws6.CALIBRATED", ws6_dist["CALIBRATED"], 1)
     check("ws6.INCOMPLETE", ws6_dist["INCOMPLETE"], 9)
-    check("ws6.BLOCKED", ws6_dist["BLOCKED"], 1)
+    # NT14 named update (nt14-ingest-4-1-2026-07-23): BLOCKED 1 -> 0,
+    # OPTIONAL_CATALOG 0 -> 1 (4-1 moves out of BLOCKED into its own state).
+    check("ws6.BLOCKED", ws6_dist["BLOCKED"], 0)
     check("ws6.PROVISIONAL", ws6_dist["PROVISIONAL"], 18)
     check("ws6.ABSENT", ws6_dist["ABSENT"], 8)
+    check("ws6.OPTIONAL_CATALOG", ws6_dist["OPTIONAL-CATALOG"], 1)
     check("edges.resolved", aggregates["edges"]["resolved"], 193)
-    check("edges.dropped", aggregates["edges"]["dropped"], 18)
+    # NT14 named update (nt14-ingest-4-1-2026-07-23): edges.dropped 18 -> 14
+    # (course_map.json independently regenerated; the 4 retirement-gap edges
+    # into 4-1 are now resolved against 4-1's real items, not dropped).
+    check("edges.dropped", aggregates["edges"]["dropped"], 14)
     # Edge reason-count checks: pinned to the current course_map.json's
     # edges_dropped_by_reason (a sibling workstream re-cut the dropped-edge
     # taxonomy, splitting the old single frontload-gap==5 bucket into
-    # frontload-gap==1 (into 3-1, genuinely front-of-year) + the new
-    # retirement-gap==4 (into 4-1, built-then-retired)). aggregates["edges"]
-    # itself is derived generically from edges_dropped_by_reason (see
-    # aggregates assembly above), so these checks guard against the
-    # underlying course-map numbers silently drifting again, not against
-    # the derivation logic (which has no hardcoded reason list left to break).
+    # frontload-gap==1 (into 3-1, genuinely front-of-year) + retirement-gap
+    # (into 4-1, built-then-retired) -- NT14 (nt14-ingest-4-1-2026-07-23)
+    # regenerated course_map.json again and those 4 retirement-gap edges are
+    # now resolved (0 remain dropped) now that 4-1 has real items to resolve
+    # against. aggregates["edges"] itself is derived generically from
+    # edges_dropped_by_reason (see aggregates assembly above), so these
+    # checks guard against the underlying course-map numbers silently
+    # drifting again, not against the derivation logic (which has no
+    # hardcoded reason list left to break).
     check("edges.frontload_gap", aggregates["edges"].get("frontload_gap", 0), 1)
-    check("edges.retirement_gap", aggregates["edges"].get("retirement_gap", 0), 4)
+    check("edges.retirement_gap", aggregates["edges"].get("retirement_gap", 0), 0)
     check("edges.retired_missing", aggregates["edges"].get("retired_missing", 0), 1)
     check("edges.assessment_forward_ref", aggregates["edges"].get("assessment_forward_ref", 0), 12)
-    check("four_one.dangling_into_4-1_count", len(dangling_into_4_1), 4)
+    # NT14 named update: 4 -> 0 (see the four_one_stranded comment above).
+    check("four_one.dangling_into_4-1_count", len(dangling_into_4_1), 0)
     check("four_one.dangling_into_3-1_count", len(dangling_into_3_1), 1)
-    # rc-merge-auth-5-4-2026-07-23: dual-denominator identity.
-    check("identity_reconciliation.raw_registry_identities", aggregates["identity_reconciliation"]["raw_registry_identities"], 900)
+    # rc-merge-auth-5-4-2026-07-23 + NT14 nt14-ingest-4-1-2026-07-23: triple-split identity.
+    check("identity_reconciliation.raw_registry_identities", aggregates["identity_reconciliation"]["raw_registry_identities"], 919)
     check("identity_reconciliation.merged_alias_identities", aggregates["identity_reconciliation"]["merged_alias_identities"], 22)
+    check("identity_reconciliation.optional_catalog_identities", aggregates["identity_reconciliation"]["optional_catalog_identities"], 19)
     check("identity_reconciliation.active_canonical_items", aggregates["identity_reconciliation"]["active_canonical_items"], 878)
 
     print("=" * 78)

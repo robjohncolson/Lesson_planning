@@ -59,10 +59,11 @@ to current registry.jsonl/calibration/*.json). The actual guarantee is
 established by an explicit cross-check (see step 3 in main(), below):
 this script also reads inventory/dok-workflow/dok_wave_plan.json
 read-only, flattens its waves[wave][lesson][] lists keyed by item_uid,
-and asserts -- for all 900 rows -- that the frozen plan's
-registry_line/id/lesson/dok/dok_status/te_bucket/match_quality fields
-equal what this script independently recomputes from the current
-on-disk sources. A mismatch fails loudly (assertion error, nothing
+and asserts -- for all rows currently in the registry (919 as of
+nt14-ingest-4-1-2026-07-23; 900 at NT5 writing) -- that the frozen plan's
+registry_line/id/lesson/dok/dok_status/te_bucket/match_quality/status/
+alias_of/availability fields equal what this script independently
+recomputes from the current on-disk sources. A mismatch fails loudly (assertion error, nothing
 written) instead of silently reporting stale or drifted numbers. The
 only code this script adds is (a) the validation harness that
 recomputes wave-plan totals and per-lesson breakdowns and cross-checks
@@ -106,12 +107,23 @@ import dok_review as DR  # noqa: E402  (read-only import; canonical projection o
 # deliberately NOT pinned here -- they move with every recording batch,
 # and drift is caught state-neutrally by the row-level cross-check
 # against the frozen plan instead.
-EXPECTED_EXACT = 285
+# NT14 named re-pin (nt14-ingest-4-1-2026-07-23, 2026-07-23): 19 new rows
+# appended for lesson 4-1 (all availability=='optional-catalog'). This is a
+# full AUDIT surface (see module docstring / identity_reconciliation below)
+# -- it recomputes over EVERY row currently in registry.jsonl, so its totals
+# are the RAW figures (919), unlike content_readiness_inventory.json's
+# completion/readiness aggregates, which exclude these 19 rows by binding
+# course policy. All 19 rows are Savvas-declared (not 'Auto-assigned DOK')
+# and lesson 4-1 is not calibrated, so they land in base dok_status
+# 'unreviewed' (437 -> 456); their ids/item numbers (q8..q26) all match
+# 4-1's real, populated item_analysis, so match_quality 'exact' rises by
+# exactly 19 (285 -> 304); 'derived' and 'none' are untouched.
+EXPECTED_EXACT = 304
 EXPECTED_DERIVED = 4
 EXPECTED_NONE = 611
-EXPECTED_TOTAL = 900
+EXPECTED_TOTAL = 919
 EXPECTED_CONFLICT_PAIRS = 22
-EXPECTED_BASE_DOK_STATUS = {'known_auto': 421, 'unreviewed': 437, 'calibrated': 42}
+EXPECTED_BASE_DOK_STATUS = {'known_auto': 421, 'unreviewed': 456, 'calibrated': 42}
 TARGET_LESSON = '5-4'
 
 # NT11 addition (rc-merge-auth-5-4-2026-07-23): registry-derived, invariant
@@ -119,6 +131,10 @@ TARGET_LESSON = '5-4'
 # above. This is an AUDIT surface (per RC's dual-denominator semantics): it
 # carries and explicitly marks all 22 merged-alias rows, never drops them.
 EXPECTED_MERGED_ALIAS_ROWS = 22
+# NT14 addition (nt14-ingest-4-1-2026-07-23): same AUDIT-surface treatment
+# for the 19 optional-catalog rows (lesson 4-1) -- carried and explicitly
+# marked, never dropped, here alongside the merged-alias rows.
+EXPECTED_OPTIONAL_CATALOG_ROWS = 19
 EXPECTED_ACTIVE_CANONICAL_ITEMS = 878
 
 
@@ -143,9 +159,10 @@ def main():
             line2uid[u['registry_line']] = u['item_uid']
 
     # ------------------------------------------------------------------
-    # 1. Recompute match_quality / dok_status for all 900 rows using
-    #    gen_dok_wave_plan.py's own functions, and verify the frozen
-    #    totals (285 exact / 4 derived / 611 none) reproduce exactly.
+    # 1. Recompute match_quality / dok_status for all rows currently in the
+    #    registry (919, nt14-ingest-4-1-2026-07-23) using gen_dok_wave_plan.py's
+    #    own functions, and verify the frozen totals (304 exact / 4 derived /
+    #    611 none) reproduce exactly.
     #
     #    NT10 (step 3(f) pass): dok_status is now computed LIKE-WITH-LIKE
     #    against the frozen plan -- the registry-derived BASE status
@@ -168,6 +185,11 @@ def main():
     dok_status_totals = Counter()   # canonical (overlay applied)
     review_state_totals = Counter()
     merge_status_totals = Counter()  # rc-merge-auth-5-4-2026-07-23
+    # NT14 addition (nt14-ingest-4-1-2026-07-23): parallel AUDIT-surface
+    # tally for the new 'availability' marker, alongside merge_status_totals
+    # above -- same "carry and explicitly mark every row, never drop it"
+    # philosophy this audit already applies to merged-alias rows.
+    availability_totals = Counter()
 
     for line_no, row in enumerate(rows, start=1):
         lesson = row.get('lesson')
@@ -181,15 +203,26 @@ def main():
         # rc-merge-auth-5-4-2026-07-23 (additive): recomputed independently
         # from the registry row itself, mirroring gen_dok_wave_plan.py's
         # identical merge-status overlay -- never read from the frozen plan
-        # (that would make the cross-check below tautological).
+        # (that would make the cross-check below tautological). Left
+        # exactly as-is for NT14: 'status' tracks the merge/alias mechanism
+        # only -- optional-catalog rows carry status=='active' here (they
+        # are not merged-alias rows), matching the frozen plan's own
+        # per-item 'status' field for them, cross-checked below via
+        # CROSS_CHECK_FIELDS. 'availability' (new, orthogonal marker) is
+        # tracked separately just below.
         merge_status = row.get('status') if row.get('status') == 'merged-alias' else 'active'
         row_alias_of = row.get('alias_of') if merge_status == 'merged-alias' else None
+        # NT14 (nt14-ingest-4-1-2026-07-23, additive): recomputed
+        # independently from the registry row itself, same non-tautological
+        # discipline as merge_status above.
+        availability = row.get('availability')
         mq_totals[match_quality] += 1
         mq_by_lesson[(lesson, match_quality)] += 1
         base_dok_status_totals[dok_status_base] += 1
         dok_status_totals[dok_status] += 1
         review_state_totals[review_state] += 1
         merge_status_totals[merge_status] += 1
+        availability_totals[availability or 'none'] += 1
         per_row.append({
             'item_uid': item_uid,
             'registry_line': line_no,
@@ -204,6 +237,7 @@ def main():
             'match_quality': match_quality,
             'status': merge_status,
             'alias_of': row_alias_of,
+            'availability': availability,
         })
 
     assert len(rows) == EXPECTED_TOTAL, f'expected {EXPECTED_TOTAL} registry rows, got {len(rows)}'
@@ -231,8 +265,10 @@ def main():
     #     the actual proof that this script's independently recomputed
     #     numbers agree with the shipped plan, not just that it calls the
     #     same functions. Flatten waves[wave][lesson][] keyed by
-    #     item_uid, then diff every one of the 900 rows on
-    #     registry_line/id/lesson/dok/dok_status/te_bucket/match_quality.
+    #     item_uid (including the "optional-catalog" bucket, nt14-ingest-
+    #     4-1-2026-07-23), then diff every one of the 919 rows on
+    #     registry_line/id/lesson/dok/dok_status/te_bucket/match_quality/
+    #     status/alias_of/availability.
     # ------------------------------------------------------------------
     with open(DOK_WAVE_PLAN_PATH, 'r', encoding='utf-8') as f:
         frozen_plan = json.load(f)
@@ -261,9 +297,11 @@ def main():
     # audit surface too, not silently dropped -- recomputed independently
     # from the registry row itself (see the per_row loop above), never read
     # from the frozen plan, so this is a real cross-check.
+    # NT14 (nt14-ingest-4-1-2026-07-23): 'availability' added on the same
+    # principle, for the 19 optional-catalog rows.
     CROSS_CHECK_FIELDS = (
         'registry_line', 'id', 'lesson', 'dok', 'dok_status', 'review_state',
-        'te_bucket', 'match_quality', 'status', 'alias_of',
+        'te_bucket', 'match_quality', 'status', 'alias_of', 'availability',
     )
     cross_check_mismatches = []
     for rec in per_row:
@@ -288,23 +326,33 @@ def main():
     )
 
     # ------------------------------------------------------------------
-    # 1c. Dual-denominator identity (rc-merge-auth-5-4-2026-07-23).
-    # This is an AUDIT surface: it carries and explicitly marks all 900
-    # identities (22 merged-alias rows included), never drops them.
+    # 1c. Triple-split identity (rc-merge-auth-5-4-2026-07-23 + NT14
+    # nt14-ingest-4-1-2026-07-23). This is an AUDIT surface: it carries and
+    # explicitly marks all 919 identities (22 merged-alias rows + 19
+    # optional-catalog rows included), never drops them.
     # ------------------------------------------------------------------
     merged_alias_count = merge_status_totals.get('merged-alias', 0)
-    active_count = merge_status_totals.get('active', 0)
+    # NT14: merge_status_totals['active'] still includes the 19 optional-
+    # catalog rows (they carry status=='active', NOT 'merged-alias' -- an
+    # orthogonal marker; see the per_row loop above), so it must be reduced
+    # by optional_catalog_count to get the true active/required count.
+    optional_catalog_count = availability_totals.get('optional-catalog', 0)
+    active_count = merge_status_totals.get('active', 0) - optional_catalog_count
     assert merged_alias_count == EXPECTED_MERGED_ALIAS_ROWS, (
         f'merged-alias row count: expected {EXPECTED_MERGED_ALIAS_ROWS}, got {merged_alias_count}'
+    )
+    assert optional_catalog_count == EXPECTED_OPTIONAL_CATALOG_ROWS, (
+        f'optional-catalog row count: expected {EXPECTED_OPTIONAL_CATALOG_ROWS}, got {optional_catalog_count}'
     )
     assert active_count == EXPECTED_ACTIVE_CANONICAL_ITEMS, (
         f'active row count: expected {EXPECTED_ACTIVE_CANONICAL_ITEMS}, got {active_count}'
     )
-    assert active_count + merged_alias_count == EXPECTED_TOTAL, (
-        f'identity reconciliation failed: active ({active_count}) + merged_alias '
-        f'({merged_alias_count}) != total ({EXPECTED_TOTAL})'
+    assert active_count + optional_catalog_count + merged_alias_count == EXPECTED_TOTAL, (
+        f'identity reconciliation failed: active ({active_count}) + optional_catalog '
+        f'({optional_catalog_count}) + merged_alias ({merged_alias_count}) != total ({EXPECTED_TOTAL})'
     )
     merged_alias_item_uids = sorted(r['item_uid'] for r in per_row if r['status'] == 'merged-alias')
+    optional_catalog_item_uids = sorted(r['item_uid'] for r in per_row if r['availability'] == 'optional-catalog')
 
     # ------------------------------------------------------------------
     # 2. Per-lesson match_quality breakdown + whether the lesson's
@@ -584,7 +632,10 @@ def main():
     # 5. Write output (this directory only).
     # ------------------------------------------------------------------
     output = {
-        'generated_by': 'audit_match_quality.py (NT5 provenance audit; NT10 canonicalization pass, step 3(f))',
+        'generated_by': (
+            'audit_match_quality.py (NT5 provenance audit; NT10 canonicalization pass, step 3(f); '
+            'NT14 re-pin, nt14-ingest-4-1-2026-07-23)'
+        ),
         'source_note': (
             'Derived read-only from questionbank/registry.jsonl, '
             'questionbank/calibration/*.json, inventory/dedup/item_uid_alias_map.json, '
@@ -597,7 +648,7 @@ def main():
             "'verified' overlay wherever the canonical projection reads 'verified' -- "
             'the SAME like-with-like value the frozen plan carries. '
             'Cross-checked, where present, against inventory/dashboard/content_readiness.json, '
-            'and row-by-row (all 900 rows, via item_uid) against the frozen '
+            'and row-by-row (all 919 rows, via item_uid) against the frozen '
             'inventory/dok-workflow/dok_wave_plan.json. No source file modified.'
         ),
         'verified_totals': {
@@ -630,23 +681,34 @@ def main():
         'conflict_pairs_cross_check': cross_check_note,
         'conflict_pairs': conflict_pairs,
         'rows': evidence_rows,
-        # Dual-denominator identity (rc-merge-auth-5-4-2026-07-23, additive).
-        # This audit is an AUDIT surface: it carries ALL 900 identities,
-        # alias rows included and explicitly marked (per_row's 'status'/
-        # 'alias_of', cross-checked above against the frozen plan). It never
-        # itself resolves/excludes them -- STUDENT-FACING selection (qb.py)
-        # is what does that.
+        # Triple-split identity (rc-merge-auth-5-4-2026-07-23 + NT14
+        # nt14-ingest-4-1-2026-07-23, additive). This audit is an AUDIT
+        # surface: it carries ALL 919 identities, alias rows AND
+        # optional-catalog rows included and explicitly marked (per_row's
+        # 'status'/'alias_of' and 'availability', cross-checked above
+        # against the frozen plan). It never itself resolves/excludes/
+        # schedules them -- STUDENT-FACING selection (qb.py) is what
+        # resolves merged-alias rows to their survivor, and no consumer
+        # anywhere auto-schedules optional-catalog rows.
         'identity_reconciliation': {
             'raw_registry_identities': EXPECTED_TOTAL,
             'merged_alias_identities': merged_alias_count,
+            'optional_catalog_identities': optional_catalog_count,
             'active_canonical_items': active_count,
             'merged_alias_item_uids': merged_alias_item_uids,
+            'optional_catalog_item_uids': optional_catalog_item_uids,
             'authorization_record_id': 'rc-merge-auth-5-4-2026-07-23',
+            'optional_catalog_authorization_record_id': 'nt14-ingest-4-1-2026-07-23',
             'statement': (
-                'raw_registry_identities == active_canonical_items + merged_alias_identities '
-                '(900 == 878 + 22). Every other total in this audit (verified_totals, '
-                'dok_status_totals, etc.) is registry-row-count based (all 900 rows, alias rows '
-                'included, unchanged by this merge).'
+                'raw_registry_identities == active_canonical_items + optional_catalog_identities + '
+                'merged_alias_identities (919 == 878 + 19 + 22). Every other total in this audit '
+                '(verified_totals, dok_status_totals, etc.) is registry-row-count based (all 919 '
+                'rows, alias rows and optional-catalog rows included, unchanged by either the merge '
+                'or this ingestion). optional_catalog_identities (lesson 4-1, '
+                'nt14-ingest-4-1-2026-07-23) are, by binding course policy, never auto-scheduled, '
+                'never placed in pacing, and never described as required or ready-to-teach -- '
+                'distinct from merged_alias_identities (lesson 5-4), which resolve DELIBERATELY to a '
+                'survivor row.'
             ),
         },
     }
@@ -673,9 +735,10 @@ def main():
               f"branches[prefix_digit={bp['prefix_digit_rows']:3d} nonprefix={bp['nonprefix_rows']:3d}]")
     print('conflict pairs found:', len(conflict_pairs), '--', cross_check_note)
     print(
-        f'dual-denominator identity (rc-merge-auth-5-4-2026-07-23): '
-        f'raw={EXPECTED_TOTAL} merged_alias={merged_alias_count} active={active_count} '
-        f'(reconciles: {active_count} + {merged_alias_count} == {EXPECTED_TOTAL})'
+        f'triple-split identity (rc-merge-auth-5-4-2026-07-23 + nt14-ingest-4-1-2026-07-23): '
+        f'raw={EXPECTED_TOTAL} active={active_count} optional_catalog={optional_catalog_count} '
+        f'merged_alias={merged_alias_count} '
+        f'(reconciles: {active_count} + {optional_catalog_count} + {merged_alias_count} == {EXPECTED_TOTAL})'
     )
     print('ALL ASSERTIONS PASSED')
     print('Wrote:', OUT_JSON)

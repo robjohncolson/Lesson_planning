@@ -43,6 +43,19 @@ changing the tie-break behavior for the remaining 63 -- even to make it
 content decision, not a code-correctness fix, and would regress every
 existing caller (legacy packet/slide builders) that already depends on the
 old tie-break for those ids.
+
+Optional-catalog exclusion (nt14-ingest-4-1-2026-07-23): registry rows
+carrying a top-level "availability": "optional-catalog" field (Lesson 4-1,
+19 rows ingested under this record id) are OPTIONAL CATALOG CONTENT --
+deliberately never auto-scheduled, placed in pacing, counted toward
+completion, or emitted by any default selection path that could feed
+required sequencing. select() drops these rows by default; pass the
+explicit keyword-only `include_optional=True` to opt in. get() and
+get_for_packet() are UNCHANGED -- explicit by-id access is deliberate
+teacher access and still returns optional-catalog rows regardless of the
+flag (there is no flag on those two). stats() reports the triple
+denominators: raw registry rows == active/required-active rows +
+optional-catalog rows + merged-alias rows.
 """
 from __future__ import annotations
 
@@ -74,8 +87,13 @@ def load() -> list[dict]:
 
 
 def append(entry: dict) -> None:
+    # registry's dominant convention is LF; historical text-mode appends on
+    # Windows produced 4 stray CRLF lines; new appends are LF
+    # (nt14-ingest-4-1-2026-07-23) -- newline="\n" disables Windows' default
+    # text-mode "\n" -> "\r\n" translation so every appended line ends in a
+    # bare "\n", matching the rest of the file.
     REGISTRY.parent.mkdir(parents=True, exist_ok=True)
-    with REGISTRY.open("a", encoding="utf-8") as f:
+    with REGISTRY.open("a", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
 
@@ -163,6 +181,7 @@ def select(
     tags: Iterable[str] | None = None,
     has_visual: bool | None = None,
     limit: int | None = None,
+    include_optional: bool = False,
 ) -> list[dict]:
     items = load()
     # Merged-alias rows are never a selectable copy (rc-merge-auth-5-4-
@@ -170,6 +189,29 @@ def select(
     # their survivor row. Dropped first, before any other filter, so this
     # holds regardless of which other filters are applied.
     items = [q for q in items if q.get("status") != "merged-alias"]
+    # Optional-catalog exclusion (nt14-ingest-4-1-2026-07-23): select() is
+    # the surface that could feed required sequencing (pacing, auto-
+    # scheduling, completion counts) -- so any row explicitly marked
+    # "availability": "optional-catalog" (currently Lesson 4-1's 19 rows) is
+    # dropped here by default, same as the merged-alias drop above and for
+    # the same reason: no filter combination below should be able to
+    # resurface it. A caller performing a DELIBERATE, explicit lookup of
+    # optional-catalog content must opt in with include_optional=True --
+    # there is no other way in from this function. get() / get_for_packet()
+    # are untouched by this and always return optional-catalog rows by
+    # explicit id, since by-id access is deliberate teacher access, not
+    # default sequencing.
+    if not include_optional:
+        items = [q for q in items if q.get("availability") != "optional-catalog"]
+    # Source-gap exclusion (nt14-ingest-4-1-2026-07-23, RC acceptance rule):
+    # a row carrying a top-level "source_gap" marker (currently 4-1-savvas-
+    # q16 "given-illegible" and q18 "answer-truncated") is KNOWN-INCOMPLETE
+    # source material. Explicit optional inclusion must not mean "include
+    # broken items", so this drop is UNCONDITIONAL -- include_optional=True
+    # does not bypass it, and no filter below can resurface such a row.
+    # The repair workflow reaches these rows by explicit id via get()/
+    # get_for_packet(), which remain unchanged.
+    items = [q for q in items if not q.get("source_gap")]
     if lesson is not None:
         items = [q for q in items if q.get("lesson") == lesson]
     if dok is not None:
@@ -367,34 +409,61 @@ def write_visuals_checklist(qids: list[str], path: str | Path, *, title: str = "
 
 
 def stats() -> dict:
-    """Reports the dual denominators (rc-merge-auth-5-4-2026-07-23): this is
-    an AUDIT-style view (raw_total counts every registry row, alias rows
-    included) alongside active_total/merged_alias_total so the two never get
-    silently conflated. by_lesson stays a raw, per-row breakdown (audit-
-    style, alias rows included and marked via `merged_alias`) -- a lesson's
-    'total' here is its raw registry row count, NOT its active-item count;
-    student-facing selection (get/select/get_for_packet) is what actually
-    excludes/resolves merged-alias rows, not this reporting helper."""
+    """Reports the TRIPLE denominators: raw registry rows split three ways
+    -- raw == active(required) + optional_catalog + merged_alias.
+
+    The dual-denominator split (rc-merge-auth-5-4-2026-07-23) is now a triple
+    split (nt14-ingest-4-1-2026-07-23): this is an AUDIT-style view
+    (raw_total counts every registry row, alias rows AND optional-catalog
+    rows included) alongside active_total / optional_catalog_total /
+    merged_alias_total so none of the three ever get silently conflated.
+    active_total is now required-active only: len(items) -
+    merged_alias_total - optional_catalog_total. by_lesson stays a raw,
+    per-row breakdown (audit-style, alias rows and optional-catalog rows
+    included and marked via `merged_alias` / `optional_catalog`) -- a
+    lesson's 'total' here is its raw registry row count, NOT its
+    active-item count; student-facing selection (get/select/get_for_packet)
+    is what actually excludes/resolves merged-alias rows and excludes
+    optional-catalog rows by default, not this reporting helper."""
     items = load()
     by_lesson: dict[str, dict] = {}
     merged_alias_total = 0
+    optional_catalog_total = 0
+    source_gap_total = 0
     for q in items:
         L = q.get("lesson", "?")
         d = q.get("dok", 0)
         by_lesson.setdefault(
-            L, {"total": 0, "dok1": 0, "dok2": 0, "dok3": 0, "dok4": 0, "visual": 0, "merged_alias": 0}
+            L, {"total": 0, "dok1": 0, "dok2": 0, "dok3": 0, "dok4": 0, "visual": 0,
+                "merged_alias": 0, "optional_catalog": 0, "source_gap": 0}
         )
         by_lesson[L]["total"] += 1
         by_lesson[L][f"dok{d}"] = by_lesson[L].get(f"dok{d}", 0) + 1
+        if q.get("source_gap"):
+            by_lesson[L]["source_gap"] += 1
+            source_gap_total += 1
         if q.get("has_visual"):
             by_lesson[L]["visual"] += 1
         if q.get("status") == "merged-alias":
             by_lesson[L]["merged_alias"] += 1
             merged_alias_total += 1
+        if q.get("availability") == "optional-catalog":
+            by_lesson[L]["optional_catalog"] += 1
+            optional_catalog_total += 1
     return {
         "total": len(items),
         "raw_total": len(items),
-        "active_total": len(items) - merged_alias_total,
+        "active_total": len(items) - merged_alias_total - optional_catalog_total,
+        "optional_catalog_total": optional_catalog_total,
+        # Sub-split of optional_catalog_total (RC acceptance rule,
+        # nt14-ingest-4-1-2026-07-23): 19 = 17 selectable + 2 source-gap.
+        # source_gap rows are select()-excluded even with
+        # include_optional=True; reachable only by explicit id (repair path).
+        "optional_catalog_selectable_total": optional_catalog_total - sum(
+            1 for q in items
+            if q.get("availability") == "optional-catalog" and q.get("source_gap")
+        ),
+        "source_gap_total": source_gap_total,
         "merged_alias_total": merged_alias_total,
         "by_lesson": by_lesson,
     }

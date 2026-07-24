@@ -40,6 +40,13 @@ ROLES = {
     "dok3-driver", "exit-recap", "assessment-rehearsal", "assessment-shell",
 }
 V2_LIST_FIELDS = ("standards", "prereq_ids", "rehearses", "echoes", "skill_tokens")
+# nt14-ingest-4-1-2026-07-23: rows carrying this top-level field are OPTIONAL
+# CATALOG CONTENT (currently Lesson 4-1) -- never auto-scheduled, placed in
+# pacing, counted toward completion, or emitted by any default selection
+# path (see qb.select()'s include_optional parameter). Validated the same
+# way as visual_type/role: an unrecognized value is a hard error, not a
+# silent pass-through.
+AVAILABILITY_VALUES = {"optional-catalog"}
 
 
 def slugify(s: str, limit: int = 40) -> str:
@@ -89,6 +96,12 @@ def validate(entry: dict) -> None:
     role = entry.get("role")
     if role is not None and role not in ROLES:
         raise SystemExit(f"ERROR: role={role!r} not in {sorted(ROLES)}")
+    availability = entry.get("availability")
+    if availability is not None and availability not in AVAILABILITY_VALUES:
+        raise SystemExit(f"ERROR: availability={availability!r} not in {sorted(AVAILABILITY_VALUES)}")
+    source_gap = entry.get("source_gap")
+    if source_gap is not None and not (isinstance(source_gap, str) and source_gap.strip()):
+        raise SystemExit(f"ERROR: source_gap must be a non-empty string, got {source_gap!r}")
     for f in V2_LIST_FIELDS:
         v = entry.get(f)
         if v is not None and not isinstance(v, list):
@@ -129,6 +142,16 @@ def normalize(entry: dict, taken: set[str], existing_prompts: set[str], force: b
         "echoes": entry.get("echoes", []),
         "skill_tokens": entry.get("skill_tokens", []),
     }
+    # nt14-ingest-4-1-2026-07-23: only present when the source entry actually
+    # supplies it, so rows without it stay byte-shape-identical to today's
+    # output (no new key sprayed onto every existing/future non-optional row).
+    if entry.get("availability"):
+        out["availability"] = entry["availability"]
+    # RC acceptance rule (same record id): machine-readable known-incomplete
+    # marker; rows carrying it are select()-excluded even with
+    # include_optional=True (see qb.select). Carried only when supplied.
+    if entry.get("source_gap"):
+        out["source_gap"] = entry["source_gap"]
     taken.add(out["id"])
     existing_prompts.add(out["prompt"])
     return out

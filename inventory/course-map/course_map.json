@@ -1,8 +1,9 @@
 {
-  "generated_at": "2026-07-20T01:24:31Z",
+  "generated_at": "2026-07-24T02:52:14Z",
   "source_of_truth": "questionbank/registry.jsonl + questionbank/calibration + graph/ + inventory/dedup/item_uid_alias_map.json (all read-only)",
-  "node_identity": "Tree nodes are keyed by opaque item_uid (900 total, one per registry row/line, always unique). legacy_id (the human-readable registry `id`, e.g. '5-1-savvas-q18') is kept as a possibly-shared alias: 815 of 900 legacy ids are unique, but 85 are ambiguous — two different registry rows share the same legacy_id string, always within a single lesson (5-1, 5-4, or 5-5; never spanning lessons). 17 of the 193 resolved edges have a target whose legacy_id is ambiguous — these carry target_uid=null, target_ambiguous=true, and both candidate item_uids, rather than being silently pinned to one. See inventory/dedup/item_uid_alias_map.json and inventory/dedup/DUPLICATE_ID_REMEDIATION.md.",
-  "note": "Item tree = 900 registry rows (900 unique item_uids) across 10 lessons; other lessons are structural placeholders. Pacing is advisory. See COURSE_MAP.md.",
+  "node_identity": "Tree nodes are keyed by opaque item_uid (919 total, one per registry row/line, always unique; 919 = 878 required-active + 19 optional-catalog [nt14-ingest-4-1-2026-07-23] + 22 merged-alias). legacy_id (the human-readable registry `id`, e.g. '5-1-savvas-q18') is kept as a possibly-shared alias: 834 of 919 legacy ids are unique, but 85 are ambiguous — two different registry rows share the same legacy_id string, always within a single lesson (5-1, 5-4, or 5-5; never spanning lessons). 17 of the 193 resolved edges have a target whose legacy_id is ambiguous — these carry target_uid=null, target_ambiguous=true, and both candidate item_uids, rather than being silently pinned to one. See inventory/dedup/item_uid_alias_map.json and inventory/dedup/DUPLICATE_ID_REMEDIATION.md.",
+  "note": "Item tree = 919 registry rows (919 unique item_uids) across 10 required lessons + 1 optional-catalog lesson (4-1, nt14-ingest-4-1-2026-07-23 — audit/catalog presence only, never scheduled/paced/counted toward completion); other lessons are structural placeholders. Pacing is advisory. See COURSE_MAP.md.",
+  "optional_catalog_note": "Lesson 4-1's 19 rows carry availability='optional-catalog'. The 4 former retirement-gap dropped edges now resolve as optional-catalog REFERENCES in optional_catalog_edges — they are NOT required prereqs and never enter prereq_edges. A later course-policy decision governs student-facing appearance (nt14-ingest-4-1-2026-07-23).",
   "topics": [
     {
       "topic": 1,
@@ -1114,11 +1115,332 @@
           "title": "Inverse Variation and the Reciprocal Function",
           "objective": "Use inverse variation and graph translations of the reciprocal function.",
           "essential_question": "How are inverse variations related to the reciprocal function?",
-          "registry_rows": 0,
-          "has_items": false,
-          "placeholder": true,
-          "readiness": "absent",
-          "items": []
+          "registry_rows": 19,
+          "has_items": true,
+          "placeholder": false,
+          "readiness": "optional-catalog",
+          "items": [
+            {
+              "item_uid": "iu_bf941050b523",
+              "legacy_id": "4-1-savvas-q8",
+              "legacy_id_ambiguous": false,
+              "registry_line": 901,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "reciprocal-function",
+                "translation",
+                "asymptote"
+              ],
+              "source": "Savvas Practice #8 (lesson 4-1, anchors Example 5)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_afd34b461341",
+              "legacy_id": "4-1-savvas-q9",
+              "legacy_id_ambiguous": false,
+              "registry_line": 902,
+              "dok": 1,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "constant-of-variation"
+              ],
+              "source": "Savvas Practice #9 (lesson 4-1, anchors Example 1)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_01d98498bba0",
+              "legacy_id": "4-1-savvas-q10",
+              "legacy_id_ambiguous": false,
+              "registry_line": 903,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "constant-of-variation"
+              ],
+              "source": "Savvas Practice #10 (lesson 4-1, anchors Example 1)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_d2df726e7681",
+              "legacy_id": "4-1-savvas-q11",
+              "legacy_id_ambiguous": false,
+              "registry_line": 904,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "reciprocal-function",
+                "asymptote",
+                "domain",
+                "range"
+              ],
+              "source": "Savvas Practice #11 (lesson 4-1, anchors Example 4)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_6e909512e4cb",
+              "legacy_id": "4-1-savvas-q12",
+              "legacy_id_ambiguous": false,
+              "registry_line": 905,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "modeling",
+                "application"
+              ],
+              "source": "Savvas Practice #12 (lesson 4-1, anchors Example 3)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_64f93ba6a2c1",
+              "legacy_id": "4-1-savvas-q13",
+              "legacy_id_ambiguous": false,
+              "registry_line": 906,
+              "dok": 1,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "equation-writing"
+              ],
+              "source": "Savvas Practice #13 (lesson 4-1, anchors Example 2)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_77b53af6af82",
+              "legacy_id": "4-1-savvas-q14",
+              "legacy_id_ambiguous": false,
+              "registry_line": 907,
+              "dok": 1,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "constant-of-variation"
+              ],
+              "source": "Savvas Practice #14 (lesson 4-1, anchors Example 1)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_69d85ede35cc",
+              "legacy_id": "4-1-savvas-q15",
+              "legacy_id_ambiguous": false,
+              "registry_line": 908,
+              "dok": 1,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "constant-of-variation"
+              ],
+              "source": "Savvas Practice #15 (lesson 4-1, anchors Example 1)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_d211e4d45e2c",
+              "legacy_id": "4-1-savvas-q16",
+              "legacy_id_ambiguous": false,
+              "registry_line": 909,
+              "dok": 1,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "equation-writing"
+              ],
+              "source": "Savvas Practice #16 (lesson 4-1, anchors Example 2)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_02c306effb29",
+              "legacy_id": "4-1-savvas-q17",
+              "legacy_id_ambiguous": false,
+              "registry_line": 910,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "modeling",
+                "application"
+              ],
+              "source": "Savvas Practice #17 (lesson 4-1, anchors Example 3)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_549ca1f8a7a0",
+              "legacy_id": "4-1-savvas-q18",
+              "legacy_id_ambiguous": false,
+              "registry_line": 911,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "reciprocal-function",
+                "asymptote",
+                "domain",
+                "range"
+              ],
+              "source": "Savvas Practice #18 (lesson 4-1, anchors Example 4)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_c4d18a2bbd7a",
+              "legacy_id": "4-1-savvas-q19",
+              "legacy_id_ambiguous": false,
+              "registry_line": 912,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "reciprocal-function",
+                "translation",
+                "asymptote"
+              ],
+              "source": "Savvas Practice #19 (lesson 4-1, anchors Example 5)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_11751b2a9981",
+              "legacy_id": "4-1-savvas-q20",
+              "legacy_id_ambiguous": false,
+              "registry_line": 913,
+              "dok": 3,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "modeling",
+                "application"
+              ],
+              "source": "Savvas Practice #20 (lesson 4-1, anchors Example 3)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_f7eb4962bbc6",
+              "legacy_id": "4-1-savvas-q21",
+              "legacy_id_ambiguous": false,
+              "registry_line": 914,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "reciprocal-function",
+                "asymptote",
+                "domain",
+                "range"
+              ],
+              "source": "Savvas Practice #21 (lesson 4-1, anchors Example 4)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_57d15babe8c8",
+              "legacy_id": "4-1-savvas-q22",
+              "legacy_id_ambiguous": false,
+              "registry_line": 915,
+              "dok": 3,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "modeling",
+                "application"
+              ],
+              "source": "Savvas Practice #22 (lesson 4-1, anchors Example 3)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_f8ff405bd610",
+              "legacy_id": "4-1-savvas-q23",
+              "legacy_id_ambiguous": false,
+              "registry_line": 916,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "modeling",
+                "application"
+              ],
+              "source": "Savvas Practice #23 (lesson 4-1, anchors Example 3)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_3505e057cdd1",
+              "legacy_id": "4-1-savvas-q24",
+              "legacy_id_ambiguous": false,
+              "registry_line": 917,
+              "dok": 2,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "equation-writing"
+              ],
+              "source": "Savvas Practice #24 (lesson 4-1, anchors Example 2)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_d29881722adc",
+              "legacy_id": "4-1-savvas-q25",
+              "legacy_id_ambiguous": false,
+              "registry_line": 918,
+              "dok": 3,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "modeling",
+                "application"
+              ],
+              "source": "Savvas Practice #25 (lesson 4-1, anchors Example 3)",
+              "availability": "optional-catalog"
+            },
+            {
+              "item_uid": "iu_53af93aa4a0d",
+              "legacy_id": "4-1-savvas-q26",
+              "legacy_id_ambiguous": false,
+              "registry_line": 919,
+              "dok": 3,
+              "role": null,
+              "skill_tokens": [],
+              "standards": [],
+              "topics": [
+                "inverse-variation",
+                "modeling",
+                "application"
+              ],
+              "source": "Savvas Practice #26 (lesson 4-1, anchors Example 3)",
+              "availability": "optional-catalog"
+            }
+          ],
+          "availability": "optional-catalog"
         },
         {
           "lesson": "4-2",
@@ -16927,6 +17249,60 @@
       "target_ambiguous": false
     }
   ],
+  "optional_catalog_edges": [
+    {
+      "source_uid": "iu_31a6940d05ec",
+      "source_legacy": "4-3-tryit-1",
+      "target_uid": "iu_01d98498bba0",
+      "target_legacy": "4-1-savvas-q10",
+      "type": "prereq",
+      "source_lesson": "4-3",
+      "target_lesson": "4-1",
+      "cross_unit": false,
+      "target_ambiguous": false,
+      "resolution": "optional-catalog-reference",
+      "former_reason": "retirement-gap"
+    },
+    {
+      "source_uid": "iu_2ca6ec6026ce",
+      "source_legacy": "6-3-savvas-q54",
+      "target_uid": "iu_02c306effb29",
+      "target_legacy": "4-1-savvas-q17",
+      "type": "echoes",
+      "source_lesson": "6-3",
+      "target_lesson": "4-1",
+      "cross_unit": true,
+      "target_ambiguous": false,
+      "resolution": "optional-catalog-reference",
+      "former_reason": "retirement-gap"
+    },
+    {
+      "source_uid": "iu_cd24889b7168",
+      "source_legacy": "6-4-savvas-q13",
+      "target_uid": "iu_c4d18a2bbd7a",
+      "target_legacy": "4-1-savvas-q19",
+      "type": "echoes",
+      "source_lesson": "6-4",
+      "target_lesson": "4-1",
+      "cross_unit": true,
+      "target_ambiguous": false,
+      "resolution": "optional-catalog-reference",
+      "former_reason": "retirement-gap"
+    },
+    {
+      "source_uid": "iu_634d55d82bc5",
+      "source_legacy": "4-5-savvas-q25",
+      "target_uid": "iu_53af93aa4a0d",
+      "target_legacy": "4-1-savvas-q26",
+      "type": "echoes",
+      "source_lesson": "4-5",
+      "target_lesson": "4-1",
+      "cross_unit": false,
+      "target_ambiguous": false,
+      "resolution": "optional-catalog-reference",
+      "former_reason": "retirement-gap"
+    }
+  ],
   "dropped_edges": [
     {
       "source_uid": "iu_a2c6c4d33d83",
@@ -16971,13 +17347,6 @@
       "reason": "assessment-forward-ref"
     },
     {
-      "source_uid": "iu_31a6940d05ec",
-      "source": "4-3-tryit-1",
-      "target": "4-1-savvas-q10",
-      "type": "prereq",
-      "reason": "retirement-gap"
-    },
-    {
       "source_uid": "iu_05586ed3a6eb",
       "source": "5-1-savvas-model-discuss-lesson-5-1-launch",
       "target": "3-1-savvas-squares-recall",
@@ -16990,20 +17359,6 @@
       "target": "topic5-assess-q1a",
       "type": "rehearses",
       "reason": "assessment-forward-ref"
-    },
-    {
-      "source_uid": "iu_2ca6ec6026ce",
-      "source": "6-3-savvas-q54",
-      "target": "4-1-savvas-q17",
-      "type": "echoes",
-      "reason": "retirement-gap"
-    },
-    {
-      "source_uid": "iu_cd24889b7168",
-      "source": "6-4-savvas-q13",
-      "target": "4-1-savvas-q19",
-      "type": "echoes",
-      "reason": "retirement-gap"
     },
     {
       "source_uid": "iu_99f45b6c7c0a",
@@ -17046,21 +17401,18 @@
       "target": "topic6-formB-dok3",
       "type": "rehearses",
       "reason": "assessment-forward-ref"
-    },
-    {
-      "source_uid": "iu_634d55d82bc5",
-      "source": "4-5-savvas-q25",
-      "target": "4-1-savvas-q26",
-      "type": "echoes",
-      "reason": "retirement-gap"
     }
   ],
   "stats": {
     "topics": 6,
     "lessons_total": 37,
     "lessons_with_items": 10,
-    "lessons_placeholder": 27,
-    "items_total": 900,
+    "lessons_placeholder": 26,
+    "lessons_optional_catalog": 1,
+    "items_total": 919,
+    "items_required_active": 878,
+    "items_optional_catalog": 19,
+    "items_merged_alias": 22,
     "items_per_lesson": {
       "3-5": 42,
       "4-3": 74,
@@ -17073,8 +17425,11 @@
       "6-4": 69,
       "6-5": 83
     },
-    "distinct_item_uids": 900,
-    "unique_legacy_ids": 815,
+    "items_per_optional_catalog_lesson": {
+      "4-1": 19
+    },
+    "distinct_item_uids": 919,
+    "unique_legacy_ids": 834,
     "ambiguous_legacy_ids": 85,
     "edges_resolved_total": 193,
     "edges_resolved_by_type": {
@@ -17086,10 +17441,10 @@
     "edges_target_ambiguous": 17,
     "edges_cross_unit": 16,
     "edges_touching_duplicated_id": 43,
-    "edges_dropped_total": 18,
+    "edges_optional_catalog_resolved": 4,
+    "edges_dropped_total": 14,
     "edges_dropped_by_reason": {
       "assessment-forward-ref": 12,
-      "retirement-gap": 4,
       "frontload-gap": 1,
       "retired-missing": 1
     }

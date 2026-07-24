@@ -326,11 +326,35 @@ def build(review_log_path, approvals_manifest_path):
     # rewrite of the existing gates.
     g_merged_alias_rows = 0
     g_merged_alias_item_uids = []
+    # NT14 named addition (nt14-ingest-4-1-2026-07-23, additive): 19 new
+    # registry rows (lesson 4-1, lines 901-919) carry top-level
+    # "availability": "optional-catalog". Per the binding course-policy rule,
+    # these rows are historical-but-optional content that must NEVER be
+    # auto-scheduled, placed in pacing, or counted toward any required-
+    # content readiness/completion denominator. This builder's existing
+    # per-lesson/global metrics (registry_rows, dok_status, missing_answers,
+    # readiness gates, etc.) therefore compute over REQUIRED rows only
+    # (row['availability'] != 'optional-catalog') -- for every lesson except
+    # 4-1 this is identical to before (no other lesson carries this field),
+    # so no other lesson's numbers move. The 19 optional-catalog rows are
+    # carried, counted, and reported ONLY in the new, separately-labeled
+    # accumulators/fields below and in lesson 4-1's own 'optional_catalog'
+    # block -- never blended into the pre-existing totals.
+    g_optional_catalog_rows = 0
+    g_optional_catalog_item_uids = []
 
     THE_NINE = ['4-3', '4-4', '4-5', '5-1', '5-4', '5-5', '6-3', '6-4', '6-5']
 
     for les in SLOTS:
         rows = rows_by_lesson.get(les, [])
+        # NT14: split off optional-catalog rows (currently only lesson 4-1's
+        # 19 rows) so every existing computation below -- which all operate
+        # on `rows` were `rows` unfiltered before this change -- instead
+        # operates on `required_rows` only. This is a no-op for every lesson
+        # except 4-1 (optional_rows is empty everywhere else).
+        optional_rows = [r for r in rows if r.get('availability') == 'optional-catalog']
+        required_rows = [r for r in rows if r.get('availability') != 'optional-catalog']
+        rows = required_rows
         n = len(rows)
         cal_entry = calibration.get(les)
         has_cal = cal_entry is not None
@@ -490,6 +514,27 @@ def build(review_log_path, approvals_manifest_path):
                 readiness = 'partial'
                 reason = '; '.join(gates_failed)
 
+        # NT14 named override (nt14-ingest-4-1-2026-07-23): a lesson carrying
+        # ONLY optional-catalog rows (today: just 4-1) gets a fifth,
+        # explicit readiness value -- distinct from ready/partial/blocked/
+        # absent -- REGARDLESS of what the required-rows-only gate logic
+        # above computed (for 4-1 that logic still sees n==0 required rows,
+        # so without this override it would read 'blocked', which is no
+        # longer accurate now that ingestion is a known, deliberate fact).
+        if optional_rows:
+            readiness = 'optional-catalog'
+            reason = (
+                f"{len(optional_rows)} registry row(s) ingested 2026-07-23 "
+                "(nt14-ingest-4-1-2026-07-23) but carrying availability=='optional-catalog' -- "
+                "lesson 4-1 was deliberately cut from the department's prior-year course sequence; "
+                "that history is not reversed or reinterpreted by this ingestion, and no course-"
+                "policy decision has been made to revive it as required/ready-to-teach content. "
+                "This lesson is therefore held OUT of the ready/partial/blocked/absent distribution "
+                "entirely (reported separately), never auto-scheduled, never placed in pacing, and "
+                "never counted toward any completion percentage. See this lesson's "
+                "'optional_catalog' block for the 19-row breakdown."
+            )
+
         notes = []
         if les == '3-5':
             notes.append(
@@ -499,10 +544,19 @@ def build(review_log_path, approvals_manifest_path):
             )
         if les == '4-1':
             notes.append(
-                "As of this snapshot, 4-1's calibration file has a REAL item_analysis (5 examples "
-                "mapped to Savvas practice-item numbers) but empty dok2_anchors/dok3_anchors and 0 "
-                "registry rows. Whether ingestion was ever attempted, is pending, or was abandoned "
-                "is UNKNOWN from these files."
+                "NT14 NAMED UPDATE (nt14-ingest-4-1-2026-07-23, 2026-07-23): this snapshot's prior "
+                "claims -- '0 registry rows exist for lesson 4-1' and 'whether ingestion was "
+                "attempted is UNKNOWN' -- are now OUTDATED. 19 Savvas practice rows "
+                "(4-1-savvas-q8..q26; DOK split 5x DOK-1 / 10x DOK-2 / 4x DOK-3) were ingested into "
+                "registry.jsonl on 2026-07-23, every one carrying availability=='optional-catalog'. "
+                "4-1's calibration file still has empty dok2_anchors/dok3_anchors (not a calibrated "
+                "lesson) and no SE/TE pdf or tex exists on disk. The department's prior decision to "
+                "skip lesson 4-1 is unchanged historical context, not reversed by this ingestion; "
+                "whether/when 4-1 is revived for required, student-facing use is a SEPARATE, still-"
+                "open course-policy decision. These 19 rows are never auto-scheduled, never placed "
+                "in pacing, and never counted toward this lesson's (or any aggregate's) required-"
+                "content readiness/completion denominator -- see this lesson's 'optional_catalog' "
+                "block and aggregate.identity_reconciliation."
             )
 
         lesson_obj = {
@@ -549,6 +603,84 @@ def build(review_log_path, approvals_manifest_path):
             'merged_alias_rows': merged_alias_cnt,
             'active_registry_rows': n - merged_alias_cnt,
         }
+
+        # NT14 (nt14-ingest-4-1-2026-07-23): explicit availability/state
+        # field + a self-contained breakdown of this lesson's optional-
+        # catalog rows, ONLY added when the lesson actually has any (today:
+        # only 4-1). No other lesson's dict keys change at all. Computed
+        # with the SAME derivations used above for required rows, but kept
+        # entirely local -- these counts are never folded into the
+        # dok_status/review_state_totals/verified_item_uids globals (those
+        # stay computed over `rows` == required_rows only, unchanged).
+        if optional_rows:
+            opt_ans_ev = sum(1 for r in optional_rows if has_evidence_answer(r))
+            opt_missing_ans = len(optional_rows) - opt_ans_ev
+            opt_vis_items = sum(1 for r in optional_rows if r.get('has_visual'))
+            opt_vis_absent = sum(1 for r in optional_rows if r.get('has_visual') and image_asset_absent(r))
+            opt_broken_rows = [r for r in optional_rows if r.get('has_visual') and image_asset_broken_path(r)]
+            opt_vis_broken = len(opt_broken_rows)
+            opt_vis_missing = opt_vis_absent + opt_vis_broken
+            opt_topics_ne = sum(1 for r in optional_rows if (r.get('topics') or []))
+
+            opt_known_auto = opt_calibrated = opt_unreviewed = opt_verified = 0
+            opt_item_uids = []
+            for r in optional_rows:
+                rationale = r.get('dok_rationale') or ''
+                if 'Auto-assigned DOK' in rationale:
+                    opt_base_bucket = 'known_auto'
+                elif is_calibrated_lesson:
+                    opt_base_bucket = 'calibrated'
+                else:
+                    opt_base_bucket = 'unreviewed'
+                uid = line2uid.get(r['_registry_line'])
+                opt_item_uids.append(uid)
+                opt_review_state = dok_review.tool_state_for(
+                    uid, latest_by_uid, _approved_versions_override=approved_rubric_versions
+                )
+                if opt_review_state == 'verified':
+                    opt_verified += 1
+                elif opt_base_bucket == 'known_auto':
+                    opt_known_auto += 1
+                elif opt_base_bucket == 'calibrated':
+                    opt_calibrated += 1
+                else:
+                    opt_unreviewed += 1
+
+            assert opt_known_auto + opt_unreviewed + opt_calibrated + opt_verified == len(optional_rows), (
+                f"optional_catalog dok_status counts do not sum to optional row count for {les}"
+            )
+
+            lesson_obj['availability'] = 'optional-catalog'
+            lesson_obj['optional_catalog'] = {
+                'count': len(optional_rows),
+                'authorization_record_id': 'nt14-ingest-4-1-2026-07-23',
+                'answers_with_evidence': opt_ans_ev,
+                'missing_answers': opt_missing_ans,
+                'visual_items': opt_vis_items,
+                'visuals_absent': opt_vis_absent,
+                'visuals_broken_path': opt_vis_broken,
+                'visuals_missing_asset': opt_vis_missing,
+                'topics_nonempty': opt_topics_ne,
+                'dok_status': {
+                    'known_auto': opt_known_auto,
+                    'unreviewed': opt_unreviewed,
+                    'calibrated': opt_calibrated,
+                    'verified': opt_verified,
+                },
+                'item_uids': sorted(opt_item_uids),
+                'note': (
+                    "These rows are excluded from every field on this lesson's own block above "
+                    "(registry_rows, dok_status, missing_answers, visuals, topics_nonempty all "
+                    "compute over required rows only -- zero, for this lesson) and from every "
+                    "global aggregate in this report. Per the binding course-policy rule, optional-"
+                    "catalog content is never auto-scheduled, never placed in pacing, and never "
+                    "counted toward required-content readiness/completion. See "
+                    "aggregate.identity_reconciliation for the registry-wide triple split."
+                ),
+            }
+            g_optional_catalog_rows += len(optional_rows)
+            g_optional_catalog_item_uids.extend(opt_item_uids)
+
         if notes:
             lesson_obj['notes'] = notes
         lesson_objs.append(lesson_obj)
@@ -609,10 +741,22 @@ def build(review_log_path, approvals_manifest_path):
         return 'CONFIRMED' if claimed == computed else f'DISCREPANCY: computed={computed} claimed={claimed}'
 
     baseline = [
-        {'metric': 'total registry rows', 'claimed': 900, 'computed': g_total_rows,
-         'verdict': verdict(900, g_total_rows)},
-        {'metric': 'unique ids', 'claimed': 815, 'computed': unique_ids,
-         'verdict': verdict(815, unique_ids)},
+        # NT14 (nt14-ingest-4-1-2026-07-23): 'total registry rows' below stays
+        # pinned to 900 on purpose -- it is the REQUIRED-content row count
+        # (g_total_rows sums each lesson's `n`, which is required rows only;
+        # see the per-lesson loop above), not the raw registry.jsonl line
+        # count. The raw total (919 = 900 required + 19 optional-catalog) is
+        # reported in aggregate.identity_reconciliation.raw_registry_identities.
+        {'metric': 'total registry rows (required content only; see identity_reconciliation for raw)',
+         'claimed': 900, 'computed': g_total_rows, 'verdict': verdict(900, g_total_rows)},
+        # NT14 named update: 815 -> 834 (the 19 new lesson-4-1 ids
+        # 4-1-savvas-q8..q26 are all distinct from every existing id, so
+        # unique_ids -- computed over ALL 919 raw rows, unfiltered, since
+        # this is a registry-wide identity fact, not a completion metric --
+        # rises by exactly 19). Matches inventory/dedup/item_uid_alias_map.json's
+        # meta.unique_legacy_ids (834), regenerated independently for NT14.
+        {'metric': 'unique ids', 'claimed': 834, 'computed': unique_ids,
+         'verdict': verdict(834, unique_ids)},
         {'metric': 'duplicate id strings (ids appearing more than once)', 'claimed': 85, 'computed': dup_id_strings,
          'verdict': verdict(85, dup_id_strings)},
         {'metric': 'known-auto DOK rows', 'claimed': 421, 'computed': g_known_auto,
@@ -728,38 +872,54 @@ def build(review_log_path, approvals_manifest_path):
             'participating_rows': g_dup_id_participating_rows,
         },
         'calibrated_lessons_list': sorted(calibrated_lessons),
+        # NT14 (nt14-ingest-4-1-2026-07-23): 'optional_catalog' reports the
+        # one lesson (4-1) held out of this distribution entirely -- it is
+        # NEVER folded into ready/partial/blocked/absent (those four still
+        # sum to 37 required-content lesson slots minus... no: they summed
+        # to 37 before this ingestion and still sum to 36 now that 4-1 has
+        # moved to its own state; 4-1's single slot is reported here,
+        # separately, per the binding course-policy rule).
         'readiness_distribution': {
             'ready': readiness_dist.get('ready', 0),
             'partial': readiness_dist.get('partial', 0),
             'blocked': readiness_dist.get('blocked', 0),
             'absent': readiness_dist.get('absent', 0),
+            'optional_catalog': readiness_dist.get('optional-catalog', 0),
         },
-        # Dual-denominator identity (rc-merge-auth-5-4-2026-07-23, additive).
-        # This is the authoritative place to read the RC-mandated active/
-        # alias split from this artifact: every OTHER count above
-        # (registry_rows, dok_status_totals, etc.) stays registry-row-based
-        # (audit-style, alias rows included) -- unchanged by this merge,
-        # exactly like gen_dok_wave_plan.py's own untouched pins, since the
-        # merge added only marker fields and never touched dok/role/answer/
-        # visual/topic content.
+        # Triple-split identity reconciliation (extended for NT14
+        # nt14-ingest-4-1-2026-07-23; originally rc-merge-auth-5-4-2026-07-23
+        # dual-denominator). This is the authoritative place to read the
+        # full active/optional-catalog/merged-alias split from this
+        # artifact: every OTHER count above (registry_rows, dok_status_totals,
+        # etc.) stays computed over REQUIRED rows only (900 -- unaffected by
+        # either the rc-merge-auth alias marking or this ingestion), except
+        # 'unique ids' in baseline_reconciliation, which is a raw, registry-
+        # wide identity fact and legitimately includes the 19 new ids.
         'identity_reconciliation': {
-            'raw_registry_identities': g_total_rows,
+            'raw_registry_identities': len(all_rows),
             'merged_alias_identities': g_merged_alias_rows,
-            'active_canonical_items': g_total_rows - g_merged_alias_rows,
+            'optional_catalog_identities': g_optional_catalog_rows,
+            'active_canonical_items': len(all_rows) - g_merged_alias_rows - g_optional_catalog_rows,
             'merged_alias_item_uids': sorted(g_merged_alias_item_uids),
+            'optional_catalog_item_uids': sorted(g_optional_catalog_item_uids),
             'authorization_record_id': 'rc-merge-auth-5-4-2026-07-23',
+            'optional_catalog_authorization_record_id': 'nt14-ingest-4-1-2026-07-23',
             'statement': (
-                "This inventory's existing metrics above (registry_rows, "
-                "dok_status_totals, readiness gates, etc.) are registry-row-"
-                "count based (audit-style): they include all 900 rows, alias "
-                "rows among them, unchanged by this merge. STUDENT-FACING "
-                "selection (qb.py) instead resolves each merged-alias row "
-                "DELIBERATELY to its survivor (via alias_of) and never "
-                "selects or counts the alias row itself, leaving "
-                "active_canonical_items (878) as what a packet/quiz build "
-                "actually draws from. Reconciliation is exact: "
-                "raw_registry_identities == active_canonical_items + "
-                "merged_alias_identities (900 == 878 + 22)."
+                "raw_registry_identities (919, all rows currently in registry.jsonl) splits three "
+                "ways: merged_alias_identities (22, lesson 5-4, rc-merge-auth-5-4-2026-07-23) -- "
+                "STUDENT-FACING selection (qb.py) resolves each of these DELIBERATELY to its "
+                "survivor (via alias_of) and never selects or counts the alias row itself; "
+                "optional_catalog_identities (19, lesson 4-1, nt14-ingest-4-1-2026-07-23) -- these "
+                "rows exist in the registry but were deliberately excluded from every completion/"
+                "readiness metric in this report (registry_rows, dok_status_totals, missing_answers, "
+                "readiness gates, etc. above are all computed over required rows only and never see "
+                "them; see lessons[] '4-1' entry's own 'optional_catalog' block), never auto-"
+                "scheduled, never placed in pacing, and never described as required or ready-to-"
+                "teach -- a later, separate course-policy decision governs student-facing "
+                "appearance; and active_canonical_items (878) -- what a packet/quiz build actually "
+                "draws from. Reconciliation is exact: raw_registry_identities == "
+                "active_canonical_items + optional_catalog_identities + merged_alias_identities "
+                "(919 == 878 + 19 + 22)."
             ),
         },
     }
@@ -770,13 +930,23 @@ def build(review_log_path, approvals_manifest_path):
     # prove current on-disk state, not how it came to be.
     # ------------------------------------------------------------------
     anomalies.append({
-        'title': '4-1: staged assets present, 0 current registry rows',
+        'title': (
+            '4-1: NT14 named update -- 19 optional-catalog rows ingested 2026-07-23 '
+            '(supersedes: "0 registry rows / ingestion status UNKNOWN")'
+        ),
         'detail': (
-            "As of this snapshot, 4-1 has a calibration file with a REAL item_analysis (Savvas "
-            "practice items mapped to 5 examples) and 61 screenshots in questionbank/images/, but 0 "
-            "registry rows and no SE/TE pdf or tex anywhere on disk. Whether ingestion into "
-            "registry.jsonl was ever attempted, is pending, or was abandoned is UNKNOWN from these "
-            "files — only the current on-disk state is observable. readiness=blocked."
+            "NT14 (nt14-ingest-4-1-2026-07-23, 2026-07-23) ingested 19 Savvas practice rows for "
+            "lesson 4-1 (4-1-savvas-q8..q26; DOK split 5x DOK-1 / 10x DOK-2 / 4x DOK-3), every one "
+            "carrying top-level availability=='optional-catalog'. This supersedes the prior "
+            "snapshot's finding that 0 registry rows existed and that ingestion status was unknown. "
+            "4-1's calibration file still has empty dok2_anchors/dok3_anchors (not a calibrated "
+            "lesson) and no SE/TE pdf or tex exists on disk. The lesson's readiness now reads "
+            "'optional-catalog' -- distinct from ready/partial/blocked/absent -- and it is "
+            "explicitly EXCLUDED from every required-content readiness/completion denominator in "
+            "this report; see the lessons[] '4-1' entry's own 'optional_catalog' sub-block and "
+            "aggregate.identity_reconciliation for the full accounting. Department-skip history is "
+            "unchanged; a course-policy decision on reviving 4-1 for required, student-facing use "
+            "remains open and is NOT made by this ingestion."
         ),
     })
 
@@ -864,10 +1034,14 @@ def build(review_log_path, approvals_manifest_path):
         "Every SE/TE/tex/screenshot/registry/calibration column resolved to a concrete boolean or "
         "count from files actually present or absent on disk at generation time — no column value "
         "itself is UNKNOWN. The 26 'absent' lesson slots are a definite finding (confirmed zero "
-        "matching files of any kind), not an unknown. What IS unknown, and called out explicitly in "
-        "the anomalies above, is HISTORY and CAUSE: whether/when 4-1 ingestion was attempted, whether "
-        "topics were ever propagated from topic_vocabulary, and what produced the 5-1/5-4/5-5 "
-        "duplicate ids. These files only prove current state, not how that state came to be."
+        "matching files of any kind), not an unknown. NT14 NAMED UPDATE (nt14-ingest-4-1-2026-07-23, "
+        "2026-07-23): whether 4-1 ingestion was attempted is no longer unknown — 19 rows were "
+        "deliberately ingested as optional-catalog content (see the '4-1' anomaly above and this "
+        "lesson's own 'optional_catalog' block); that is a known, current fact, not a snapshot "
+        "inference. What remains unknown, and is called out explicitly in the anomalies above, is "
+        "HISTORY and CAUSE unrelated to this ingestion: whether topics were ever propagated from "
+        "topic_vocabulary, and what produced the 5-1/5-4/5-5 duplicate ids. These files only prove "
+        "current state, not how that state came to be."
     )
 
     result = {
@@ -920,7 +1094,13 @@ def build(review_log_path, approvals_manifest_path):
                 "'absent' = zero material of any kind (no se/te pdf/tex, no calibration, no screenshots, 0 registry rows). "
                 "'blocked' = some staged material exists but 0 registry rows (nothing to teach from yet). "
                 "'ready' = registry_rows>0 AND missing_answers==0 AND topics_nonempty==registry_rows AND lesson calibrated (real anchors) AND visuals_missing_asset==0 AND dok_status.verified==registry_rows. "
-                "'partial' = registry_rows>0 but any ready gate fails."
+                "'partial' = registry_rows>0 but any ready gate fails. "
+                "'optional-catalog' (NT14, nt14-ingest-4-1-2026-07-23) = the lesson's registry rows all "
+                "carry availability=='optional-catalog' -- ingested, but by binding course policy never "
+                "auto-scheduled, never placed in pacing, and never counted toward this or any other "
+                "readiness/completion denominator; a fifth value, disjoint from ready/partial/blocked/"
+                "absent, reported separately in aggregate.readiness_distribution.optional_catalog "
+                "(currently only lesson 4-1; see its own 'optional_catalog' block for the breakdown)."
             ),
             'readiness_reason': 'Human-readable list of the specific gates that failed (or the no-material explanation for absent, or the staged-material-but-zero-registry-rows explanation for blocked — worded as a snapshot observation, not a causal claim).',
         },
@@ -997,25 +1177,28 @@ def render_markdown(result):
         lines.append(f"| {b['metric']} | {b['claimed']} | {b['computed']} | {b['verdict']} |")
     lines.append('')
 
-    # Dual-denominator identity (rc-merge-auth-5-4-2026-07-23)
-    lines.append('## 1b. Dual-Denominator Identity (rc-merge-auth-5-4-2026-07-23)')
+    # Triple-split identity reconciliation (extended for NT14
+    # nt14-ingest-4-1-2026-07-23; originally rc-merge-auth-5-4-2026-07-23 dual-denominator)
+    lines.append('## 1b. Identity Reconciliation (raw / active / optional-catalog / merged-alias)')
     lines.append('')
     idn = result['aggregate']['identity_reconciliation']
     lines.append(
         f"raw_registry_identities={idn['raw_registry_identities']}, "
-        f"merged_alias_identities={idn['merged_alias_identities']}, "
-        f"active_canonical_items={idn['active_canonical_items']} "
-        f"(reconciles: {idn['active_canonical_items']} + {idn['merged_alias_identities']} == "
-        f"{idn['raw_registry_identities']})."
+        f"active_canonical_items={idn['active_canonical_items']}, "
+        f"optional_catalog_identities={idn['optional_catalog_identities']}, "
+        f"merged_alias_identities={idn['merged_alias_identities']} "
+        f"(reconciles: {idn['active_canonical_items']} + {idn['optional_catalog_identities']} + "
+        f"{idn['merged_alias_identities']} == {idn['raw_registry_identities']})."
     )
     lines.append('')
     lines.append(idn['statement'])
     lines.append('')
     lines.append(
-        'Every OTHER metric in this report (registry_rows, dok_status, readiness gates, etc.) '
-        'is registry-row-count based (audit-style: all 900 rows, alias rows included, unchanged '
-        'by this merge). Per-lesson breakdown (only lessons with a nonzero merged_alias_rows '
-        'shown):'
+        'Every OTHER metric in this report (registry_rows, dok_status, readiness gates, etc.) is '
+        'computed over REQUIRED rows only (900 total: 878 active_canonical_items + 22 merged-alias '
+        'rows carried audit-style, exactly as before this ingestion) -- the 19 optional-catalog rows '
+        '(lesson 4-1) are never blended into them. Per-lesson breakdown (lessons with a nonzero '
+        'merged_alias_rows, plus 4-1\'s optional-catalog rows shown separately below):'
     )
     lines.append('')
     lines.append('| lesson | registry_rows | merged_alias_rows | active_registry_rows |')
@@ -1026,6 +1209,14 @@ def render_markdown(result):
                 f"| {l['lesson']} | {l['registry_rows']} | {l['merged_alias_rows']} | "
                 f"{l['active_registry_rows']} |"
             )
+    lines.append('')
+    lines.append(
+        f"Optional-catalog rows (excluded from the table above -- not merged-alias, a distinct "
+        f"category): lesson 4-1 carries {idn['optional_catalog_identities']} rows "
+        f"({idn['optional_catalog_authorization_record_id']}), reported on its own lesson block "
+        "('optional_catalog') and never in its top-level registry_rows/dok_status/etc fields above "
+        "(which read 0 for 4-1, matching required-rows-only accounting)."
+    )
     lines.append('')
 
     # 37-row matrix
@@ -1079,12 +1270,22 @@ def render_markdown(result):
     lines.append('- **blocked**: some material exists (has_calibration OR screenshots>0 OR se_tex OR te_tex OR se_pdf OR te_pdf) BUT registry_rows==0 — nothing usable to teach from yet.')
     lines.append('- **ready**: registry_rows>0 AND missing_answers==0 AND topics_nonempty==registry_rows AND the lesson is calibrated (real dok2/dok3 anchors) AND visuals_missing_asset==0 AND dok_status.verified==registry_rows.')
     lines.append('- **partial**: registry_rows>0 but at least one ready-gate fails.')
+    lines.append(
+        '- **optional-catalog** (NT14, nt14-ingest-4-1-2026-07-23): registry rows exist for this '
+        'lesson but ALL of them carry availability==\'optional-catalog\' -- ingested, but by binding '
+        'course policy never auto-scheduled, never placed in pacing, and never counted toward the '
+        'ready/partial/blocked/absent distribution below (currently only lesson 4-1; see its own '
+        '\'optional_catalog\' block for the 19-row breakdown, and identity_reconciliation above for '
+        'the registry-wide split).'
+    )
     lines.append('')
     lines.append(
         f"Distribution across the 37 slots: ready={result['aggregate']['readiness_distribution']['ready']}, "
         f"partial={result['aggregate']['readiness_distribution']['partial']}, "
         f"blocked={result['aggregate']['readiness_distribution']['blocked']}, "
-        f"absent={result['aggregate']['readiness_distribution']['absent']}."
+        f"absent={result['aggregate']['readiness_distribution']['absent']}, "
+        f"optional-catalog={result['aggregate']['readiness_distribution']['optional_catalog']} "
+        "(4-1; reported separately, excluded from the ready/partial/blocked/absent counts above)."
     )
     lines.append('')
 
@@ -1231,7 +1432,12 @@ def main():
         errors.append(f"lesson slot order mismatch: {lesson_order} != {SLOTS}")
 
     dist = result['aggregate']['readiness_distribution']
-    expected_dist = {'ready': 0, 'partial': 10, 'blocked': 1, 'absent': 26}
+    # NT14 named update (nt14-ingest-4-1-2026-07-23): blocked 1 -> 0 (4-1
+    # moves OUT of 'blocked' into its own 'optional-catalog' state, since
+    # ingestion is now a known fact, not staged-but-unknown); a new
+    # optional_catalog:1 key is added, reported separately, never folded
+    # into ready/partial/blocked/absent (which now sum to 36, not 37).
+    expected_dist = {'ready': 0, 'partial': 10, 'blocked': 0, 'absent': 26, 'optional_catalog': 1}
     if dist != expected_dist:
         errors.append(f"unexpected readiness distribution: {dist} (expected {expected_dist})")
 
@@ -1291,23 +1497,39 @@ def main():
                 f'all-unreviewed: {review_state_tot}'
             )
 
-    # Dual-denominator reconciliation (rc-merge-auth-5-4-2026-07-23).
+    # Triple-split identity reconciliation (rc-merge-auth-5-4-2026-07-23 +
+    # NT14 nt14-ingest-4-1-2026-07-23).
     identity = result['aggregate']['identity_reconciliation']
     if identity['merged_alias_identities'] != 22:
         errors.append(
             f"merged_alias_identities: expected 22, got {identity['merged_alias_identities']}"
         )
-    if identity['raw_registry_identities'] != identity['active_canonical_items'] + identity['merged_alias_identities']:
+    if identity['optional_catalog_identities'] != 19:
+        errors.append(
+            f"optional_catalog_identities: expected 19, got {identity['optional_catalog_identities']}"
+        )
+    if (
+        identity['raw_registry_identities']
+        != identity['active_canonical_items']
+        + identity['optional_catalog_identities']
+        + identity['merged_alias_identities']
+    ):
         errors.append(
             'identity_reconciliation failed: raw_registry_identities '
             f"({identity['raw_registry_identities']}) != active_canonical_items "
-            f"({identity['active_canonical_items']}) + merged_alias_identities "
+            f"({identity['active_canonical_items']}) + optional_catalog_identities "
+            f"({identity['optional_catalog_identities']}) + merged_alias_identities "
             f"({identity['merged_alias_identities']})"
         )
     if len(identity['merged_alias_item_uids']) != identity['merged_alias_identities']:
         errors.append(
             f"len(merged_alias_item_uids)={len(identity['merged_alias_item_uids'])} != "
             f"merged_alias_identities={identity['merged_alias_identities']}"
+        )
+    if len(identity['optional_catalog_item_uids']) != identity['optional_catalog_identities']:
+        errors.append(
+            f"len(optional_catalog_item_uids)={len(identity['optional_catalog_item_uids'])} != "
+            f"optional_catalog_identities={identity['optional_catalog_identities']}"
         )
 
     if not all_confirmed:

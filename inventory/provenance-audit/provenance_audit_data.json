@@ -1,25 +1,25 @@
 {
-  "generated_by": "audit_match_quality.py (NT5 provenance audit; NT10 canonicalization pass, step 3(f))",
-  "source_note": "Derived read-only from questionbank/registry.jsonl, questionbank/calibration/*.json, inventory/dedup/item_uid_alias_map.json, inventory/dok-workflow/gen_dok_wave_plan.py (imported for its functions only -- main() never called, dok_wave_plan.json never written by this script), and tools/dok-review/dok_review.py (imported for the canonical review-state projection only, over tools/dok-review/review_log.jsonl + rubric_approvals.json -- nothing here ever writes the review log). dok_status is the canonical value: registry-derived BASE status plus the 'verified' overlay wherever the canonical projection reads 'verified' -- the SAME like-with-like value the frozen plan carries. Cross-checked, where present, against inventory/dashboard/content_readiness.json, and row-by-row (all 900 rows, via item_uid) against the frozen inventory/dok-workflow/dok_wave_plan.json. No source file modified.",
+  "generated_by": "audit_match_quality.py (NT5 provenance audit; NT10 canonicalization pass, step 3(f); NT14 re-pin, nt14-ingest-4-1-2026-07-23)",
+  "source_note": "Derived read-only from questionbank/registry.jsonl, questionbank/calibration/*.json, inventory/dedup/item_uid_alias_map.json, inventory/dok-workflow/gen_dok_wave_plan.py (imported for its functions only -- main() never called, dok_wave_plan.json never written by this script), and tools/dok-review/dok_review.py (imported for the canonical review-state projection only, over tools/dok-review/review_log.jsonl + rubric_approvals.json -- nothing here ever writes the review log). dok_status is the canonical value: registry-derived BASE status plus the 'verified' overlay wherever the canonical projection reads 'verified' -- the SAME like-with-like value the frozen plan carries. Cross-checked, where present, against inventory/dashboard/content_readiness.json, and row-by-row (all 919 rows, via item_uid) against the frozen inventory/dok-workflow/dok_wave_plan.json. No source file modified.",
   "verified_totals": {
-    "exact": 285,
+    "exact": 304,
     "derived": 4,
     "none": 611,
-    "total": 900
+    "total": 919
   },
   "dok_status_totals": {
     "calibrated": 42,
     "known_auto": 421,
-    "unreviewed": 398,
+    "unreviewed": 417,
     "verified": 39
   },
   "base_dok_status_totals": {
     "calibrated": 42,
     "known_auto": 421,
-    "unreviewed": 437
+    "unreviewed": 456
   },
   "review_state_totals": {
-    "unreviewed": 861,
+    "unreviewed": 880,
     "verified": 39
   },
   "per_lesson_match_quality": {
@@ -114,7 +114,7 @@
       "lesson_level_calibrated_dok_status": false
     }
   },
-  "frozen_plan_row_cross_check": "900/900 rows agree with frozen dok_wave_plan.json on registry_line, id, lesson, dok, dok_status, review_state, te_bucket, match_quality, status, alias_of (row-level cross-check via item_uid join)",
+  "frozen_plan_row_cross_check": "919/919 rows agree with frozen dok_wave_plan.json on registry_line, id, lesson, dok, dok_status, review_state, te_bucket, match_quality, status, alias_of, availability (row-level cross-check via item_uid join)",
   "branch_population_by_lesson": {
     "3-5": {
       "prefix_digit_rows": 19,
@@ -1561,8 +1561,9 @@
     }
   ],
   "identity_reconciliation": {
-    "raw_registry_identities": 900,
+    "raw_registry_identities": 919,
     "merged_alias_identities": 22,
+    "optional_catalog_identities": 19,
     "active_canonical_items": 878,
     "merged_alias_item_uids": [
       "iu_18cac1a8167a",
@@ -1588,7 +1589,29 @@
       "iu_e106ef5ef48e",
       "iu_e7638fcec56e"
     ],
+    "optional_catalog_item_uids": [
+      "iu_01d98498bba0",
+      "iu_02c306effb29",
+      "iu_11751b2a9981",
+      "iu_3505e057cdd1",
+      "iu_53af93aa4a0d",
+      "iu_549ca1f8a7a0",
+      "iu_57d15babe8c8",
+      "iu_64f93ba6a2c1",
+      "iu_69d85ede35cc",
+      "iu_6e909512e4cb",
+      "iu_77b53af6af82",
+      "iu_afd34b461341",
+      "iu_bf941050b523",
+      "iu_c4d18a2bbd7a",
+      "iu_d211e4d45e2c",
+      "iu_d29881722adc",
+      "iu_d2df726e7681",
+      "iu_f7eb4962bbc6",
+      "iu_f8ff405bd610"
+    ],
     "authorization_record_id": "rc-merge-auth-5-4-2026-07-23",
-    "statement": "raw_registry_identities == active_canonical_items + merged_alias_identities (900 == 878 + 22). Every other total in this audit (verified_totals, dok_status_totals, etc.) is registry-row-count based (all 900 rows, alias rows included, unchanged by this merge)."
+    "optional_catalog_authorization_record_id": "nt14-ingest-4-1-2026-07-23",
+    "statement": "raw_registry_identities == active_canonical_items + optional_catalog_identities + merged_alias_identities (919 == 878 + 19 + 22). Every other total in this audit (verified_totals, dok_status_totals, etc.) is registry-row-count based (all 919 rows, alias rows and optional-catalog rows included, unchanged by either the merge or this ingestion). optional_catalog_identities (lesson 4-1, nt14-ingest-4-1-2026-07-23) are, by binding course policy, never auto-scheduled, never placed in pacing, and never described as required or ready-to-teach -- distinct from merged_alias_identities (lesson 5-4), which resolve DELIBERATELY to a survivor row."
   }
 }

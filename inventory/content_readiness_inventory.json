@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T05:57:25.172720+00:00",
+  "generated_at": "2026-07-24T04:00:08.721581+00:00",
   "method": "Computed from disk, read-only, snapshot-only. No registry or source file was modified.",
   "definition_the_nine": "lessons with registry rows excluding calibrated 3-5 (858 rows): 4-3,4-4,4-5,5-1,5-4,5-5,6-3,6-4,6-5",
   "column_method_notes": {
@@ -26,20 +26,20 @@
     "duplicate_id_participating_rows": "Within the lesson, group rows by identical row['id']; for each group with size > 1, sum the FULL group size. Global=170.",
     "screenshots": "count of files in questionbank/images/ whose filename matches the regex ^{lesson}(?=[_.]) (i.e. a '3-5_...' or '3-5.png' style prefix).",
     "has_calibration": "os.path.exists('questionbank/calibration/{lesson}.json').",
-    "readiness": "'absent' = zero material of any kind (no se/te pdf/tex, no calibration, no screenshots, 0 registry rows). 'blocked' = some staged material exists but 0 registry rows (nothing to teach from yet). 'ready' = registry_rows>0 AND missing_answers==0 AND topics_nonempty==registry_rows AND lesson calibrated (real anchors) AND visuals_missing_asset==0 AND dok_status.verified==registry_rows. 'partial' = registry_rows>0 but any ready gate fails.",
+    "readiness": "'absent' = zero material of any kind (no se/te pdf/tex, no calibration, no screenshots, 0 registry rows). 'blocked' = some staged material exists but 0 registry rows (nothing to teach from yet). 'ready' = registry_rows>0 AND missing_answers==0 AND topics_nonempty==registry_rows AND lesson calibrated (real anchors) AND visuals_missing_asset==0 AND dok_status.verified==registry_rows. 'partial' = registry_rows>0 but any ready gate fails. 'optional-catalog' (NT14, nt14-ingest-4-1-2026-07-23) = the lesson's registry rows all carry availability=='optional-catalog' -- ingested, but by binding course policy never auto-scheduled, never placed in pacing, and never counted toward this or any other readiness/completion denominator; a fifth value, disjoint from ready/partial/blocked/absent, reported separately in aggregate.readiness_distribution.optional_catalog (currently only lesson 4-1; see its own 'optional_catalog' block for the breakdown).",
     "readiness_reason": "Human-readable list of the specific gates that failed (or the no-material explanation for absent, or the staged-material-but-zero-registry-rows explanation for blocked — worded as a snapshot observation, not a causal claim)."
   },
   "baseline_reconciliation": [
     {
-      "metric": "total registry rows",
+      "metric": "total registry rows (required content only; see identity_reconciliation for raw)",
       "claimed": 900,
       "computed": 900,
       "verdict": "CONFIRMED"
     },
     {
       "metric": "unique ids",
-      "claimed": 815,
-      "computed": 815,
+      "claimed": 834,
+      "computed": 834,
       "verdict": "CONFIRMED"
     },
     {
@@ -193,12 +193,14 @@
     "readiness_distribution": {
       "ready": 0,
       "partial": 10,
-      "blocked": 1,
-      "absent": 26
+      "blocked": 0,
+      "absent": 26,
+      "optional_catalog": 1
     },
     "identity_reconciliation": {
-      "raw_registry_identities": 900,
+      "raw_registry_identities": 919,
       "merged_alias_identities": 22,
+      "optional_catalog_identities": 19,
       "active_canonical_items": 878,
       "merged_alias_item_uids": [
         "iu_18cac1a8167a",
@@ -224,8 +226,30 @@
         "iu_e106ef5ef48e",
         "iu_e7638fcec56e"
       ],
+      "optional_catalog_item_uids": [
+        "iu_01d98498bba0",
+        "iu_02c306effb29",
+        "iu_11751b2a9981",
+        "iu_3505e057cdd1",
+        "iu_53af93aa4a0d",
+        "iu_549ca1f8a7a0",
+        "iu_57d15babe8c8",
+        "iu_64f93ba6a2c1",
+        "iu_69d85ede35cc",
+        "iu_6e909512e4cb",
+        "iu_77b53af6af82",
+        "iu_afd34b461341",
+        "iu_bf941050b523",
+        "iu_c4d18a2bbd7a",
+        "iu_d211e4d45e2c",
+        "iu_d29881722adc",
+        "iu_d2df726e7681",
+        "iu_f7eb4962bbc6",
+        "iu_f8ff405bd610"
+      ],
       "authorization_record_id": "rc-merge-auth-5-4-2026-07-23",
-      "statement": "This inventory's existing metrics above (registry_rows, dok_status_totals, readiness gates, etc.) are registry-row-count based (audit-style): they include all 900 rows, alias rows among them, unchanged by this merge. STUDENT-FACING selection (qb.py) instead resolves each merged-alias row DELIBERATELY to its survivor (via alias_of) and never selects or counts the alias row itself, leaving active_canonical_items (878) as what a packet/quiz build actually draws from. Reconciliation is exact: raw_registry_identities == active_canonical_items + merged_alias_identities (900 == 878 + 22)."
+      "optional_catalog_authorization_record_id": "nt14-ingest-4-1-2026-07-23",
+      "statement": "raw_registry_identities (919, all rows currently in registry.jsonl) splits three ways: merged_alias_identities (22, lesson 5-4, rc-merge-auth-5-4-2026-07-23) -- STUDENT-FACING selection (qb.py) resolves each of these DELIBERATELY to its survivor (via alias_of) and never selects or counts the alias row itself; optional_catalog_identities (19, lesson 4-1, nt14-ingest-4-1-2026-07-23) -- these rows exist in the registry but were deliberately excluded from every completion/readiness metric in this report (registry_rows, dok_status_totals, missing_answers, readiness gates, etc. above are all computed over required rows only and never see them; see lessons[] '4-1' entry's own 'optional_catalog' block), never auto-scheduled, never placed in pacing, and never described as required or ready-to-teach -- a later, separate course-policy decision governs student-facing appearance; and active_canonical_items (878) -- what a packet/quiz build actually draws from. Reconciliation is exact: raw_registry_identities == active_canonical_items + optional_catalog_identities + merged_alias_identities (919 == 878 + 19 + 22)."
     }
   },
   "lessons": [
@@ -941,12 +965,52 @@
       "duplicate_id_participating_rows": 0,
       "screenshots": 61,
       "has_calibration": true,
-      "readiness": "blocked",
-      "readiness_reason": "has staged material (calibration file, 61 screenshots) — 0 registry rows (ingestion status UNKNOWN from disk)",
+      "readiness": "optional-catalog",
+      "readiness_reason": "19 registry row(s) ingested 2026-07-23 (nt14-ingest-4-1-2026-07-23) but carrying availability=='optional-catalog' -- lesson 4-1 was deliberately cut from the department's prior-year course sequence; that history is not reversed or reinterpreted by this ingestion, and no course-policy decision has been made to revive it as required/ready-to-teach content. This lesson is therefore held OUT of the ready/partial/blocked/absent distribution entirely (reported separately), never auto-scheduled, never placed in pacing, and never counted toward any completion percentage. See this lesson's 'optional_catalog' block for the 19-row breakdown.",
       "merged_alias_rows": 0,
       "active_registry_rows": 0,
+      "availability": "optional-catalog",
+      "optional_catalog": {
+        "count": 19,
+        "authorization_record_id": "nt14-ingest-4-1-2026-07-23",
+        "answers_with_evidence": 0,
+        "missing_answers": 19,
+        "visual_items": 7,
+        "visuals_absent": 0,
+        "visuals_broken_path": 0,
+        "visuals_missing_asset": 0,
+        "topics_nonempty": 19,
+        "dok_status": {
+          "known_auto": 0,
+          "unreviewed": 19,
+          "calibrated": 0,
+          "verified": 0
+        },
+        "item_uids": [
+          "iu_01d98498bba0",
+          "iu_02c306effb29",
+          "iu_11751b2a9981",
+          "iu_3505e057cdd1",
+          "iu_53af93aa4a0d",
+          "iu_549ca1f8a7a0",
+          "iu_57d15babe8c8",
+          "iu_64f93ba6a2c1",
+          "iu_69d85ede35cc",
+          "iu_6e909512e4cb",
+          "iu_77b53af6af82",
+          "iu_afd34b461341",
+          "iu_bf941050b523",
+          "iu_c4d18a2bbd7a",
+          "iu_d211e4d45e2c",
+          "iu_d29881722adc",
+          "iu_d2df726e7681",
+          "iu_f7eb4962bbc6",
+          "iu_f8ff405bd610"
+        ],
+        "note": "These rows are excluded from every field on this lesson's own block above (registry_rows, dok_status, missing_answers, visuals, topics_nonempty all compute over required rows only -- zero, for this lesson) and from every global aggregate in this report. Per the binding course-policy rule, optional-catalog content is never auto-scheduled, never placed in pacing, and never counted toward required-content readiness/completion. See aggregate.identity_reconciliation for the registry-wide triple split."
+      },
       "notes": [
-        "As of this snapshot, 4-1's calibration file has a REAL item_analysis (5 examples mapped to Savvas practice-item numbers) but empty dok2_anchors/dok3_anchors and 0 registry rows. Whether ingestion was ever attempted, is pending, or was abandoned is UNKNOWN from these files."
+        "NT14 NAMED UPDATE (nt14-ingest-4-1-2026-07-23, 2026-07-23): this snapshot's prior claims -- '0 registry rows exist for lesson 4-1' and 'whether ingestion was attempted is UNKNOWN' -- are now OUTDATED. 19 Savvas practice rows (4-1-savvas-q8..q26; DOK split 5x DOK-1 / 10x DOK-2 / 4x DOK-3) were ingested into registry.jsonl on 2026-07-23, every one carrying availability=='optional-catalog'. 4-1's calibration file still has empty dok2_anchors/dok3_anchors (not a calibrated lesson) and no SE/TE pdf or tex exists on disk. The department's prior decision to skip lesson 4-1 is unchanged historical context, not reversed by this ingestion; whether/when 4-1 is revived for required, student-facing use is a SEPARATE, still-open course-policy decision. These 19 rows are never auto-scheduled, never placed in pacing, and never counted toward this lesson's (or any aggregate's) required-content readiness/completion denominator -- see this lesson's 'optional_catalog' block and aggregate.identity_reconciliation."
       ]
     },
     {
@@ -1551,8 +1615,8 @@
   },
   "anomalies": [
     {
-      "title": "4-1: staged assets present, 0 current registry rows",
-      "detail": "As of this snapshot, 4-1 has a calibration file with a REAL item_analysis (Savvas practice items mapped to 5 examples) and 61 screenshots in questionbank/images/, but 0 registry rows and no SE/TE pdf or tex anywhere on disk. Whether ingestion into registry.jsonl was ever attempted, is pending, or was abandoned is UNKNOWN from these files — only the current on-disk state is observable. readiness=blocked."
+      "title": "4-1: NT14 named update -- 19 optional-catalog rows ingested 2026-07-23 (supersedes: \"0 registry rows / ingestion status UNKNOWN\")",
+      "detail": "NT14 (nt14-ingest-4-1-2026-07-23, 2026-07-23) ingested 19 Savvas practice rows for lesson 4-1 (4-1-savvas-q8..q26; DOK split 5x DOK-1 / 10x DOK-2 / 4x DOK-3), every one carrying top-level availability=='optional-catalog'. This supersedes the prior snapshot's finding that 0 registry rows existed and that ingestion status was unknown. 4-1's calibration file still has empty dok2_anchors/dok3_anchors (not a calibrated lesson) and no SE/TE pdf or tex exists on disk. The lesson's readiness now reads 'optional-catalog' -- distinct from ready/partial/blocked/absent -- and it is explicitly EXCLUDED from every required-content readiness/completion denominator in this report; see the lessons[] '4-1' entry's own 'optional_catalog' sub-block and aggregate.identity_reconciliation for the full accounting. Department-skip history is unchanged; a course-policy decision on reviving 4-1 for required, student-facing use remains open and is NOT made by this ingestion."
     },
     {
       "title": "Visual-asset gap splits into two distinct issues: absent references vs. repairable broken paths",
@@ -1576,6 +1640,6 @@
     }
   ],
   "unknowns": [
-    "Every SE/TE/tex/screenshot/registry/calibration column resolved to a concrete boolean or count from files actually present or absent on disk at generation time — no column value itself is UNKNOWN. The 26 'absent' lesson slots are a definite finding (confirmed zero matching files of any kind), not an unknown. What IS unknown, and called out explicitly in the anomalies above, is HISTORY and CAUSE: whether/when 4-1 ingestion was attempted, whether topics were ever propagated from topic_vocabulary, and what produced the 5-1/5-4/5-5 duplicate ids. These files only prove current state, not how that state came to be."
+    "Every SE/TE/tex/screenshot/registry/calibration column resolved to a concrete boolean or count from files actually present or absent on disk at generation time — no column value itself is UNKNOWN. The 26 'absent' lesson slots are a definite finding (confirmed zero matching files of any kind), not an unknown. NT14 NAMED UPDATE (nt14-ingest-4-1-2026-07-23, 2026-07-23): whether 4-1 ingestion was attempted is no longer unknown — 19 rows were deliberately ingested as optional-catalog content (see the '4-1' anomaly above and this lesson's own 'optional_catalog' block); that is a known, current fact, not a snapshot inference. What remains unknown, and is called out explicitly in the anomalies above, is HISTORY and CAUSE unrelated to this ingestion: whether topics were ever propagated from topic_vocabulary, and what produced the 5-1/5-4/5-5 duplicate ids. These files only prove current state, not how that state came to be."
   ]
 }

@@ -50,6 +50,29 @@ DROPPED-EDGE RECLASSIFICATION (Finding 2, MEDIUM):
 registry), not a never-built front-of-year lesson like 3-1. Dropped edges
 targeting 4-1 are now reason "retirement-gap"; only the genuinely
 never-yet-built target (3-1) keeps "frontload-gap".
+
+--------------------------------------------------------------------------
+OPTIONAL-CATALOG OVERLAY (nt14-ingest-4-1-2026-07-23):
+--------------------------------------------------------------------------
+19 Lesson 4-1 rows (4-1-savvas-q8..q26, registry lines 901-919) were
+ingested as OPTIONAL CATALOG CONTENT — every row carries a top-level
+"availability": "optional-catalog". Binding rule: 4-1 is never
+auto-scheduled, placed in pacing, counted toward completion, or treated as
+a required prereq; the department's 2026-05-13 skip is historical evidence,
+and a later course-policy decision governs student-facing appearance.
+
+Course-map consequences, all reported DISTINCTLY from required content:
+  - The 4-1 lesson node gets readiness "optional-catalog" (a new state —
+    not "absent", not "partial", not counted in lessons_with_items) with
+    its 19 items carried, each marked availability=optional-catalog.
+  - The 4 former "retirement-gap" dropped edges (targets 4-1-savvas-q10/
+    q17/q19/q26) now RESOLVE — but as optional-catalog REFERENCES in a new
+    `optional_catalog_edges` list, never into `prereq_edges` (the required
+    chain). Each carries resolution="optional-catalog-reference" and its
+    former_reason for provenance. `prereq_edges` membership is unchanged
+    (193 edges, byte-identical to the pre-NT14 map).
+  - Denominators: 919 raw rows = 878 required-active + 19 optional-catalog
+    + 22 merged-alias; stats report the split, never a mixed total.
 """
 
 import json
@@ -104,8 +127,14 @@ CALIBRATION_LESSONS = {
 }
 
 # Lessons whose readiness == "absent" (calibration-but-0-rows retired, or
-# dept-skipped / assessment-shell placeholders).
-ABSENT_LESSONS = {"4-1", "3-6", "4-2", "4-6", "5-2", "5-3", "5-6", "6-1", "6-2"}
+# dept-skipped / assessment-shell placeholders). 4-1 left this set on
+# nt14-ingest-4-1-2026-07-23: it now has 19 optional-catalog rows and gets
+# the distinct "optional-catalog" readiness state below.
+ABSENT_LESSONS = {"3-6", "4-2", "4-6", "5-2", "5-3", "5-6", "6-1", "6-2"}
+
+# Lessons present ONLY as optional catalog content (nt14-ingest-4-1-2026-07-23):
+# never required, never in pacing/completion denominators.
+OPTIONAL_CATALOG_LESSONS = {"4-1"}
 
 # Grounded feeder-skill labels (NOT fabricated content — cross-unit dependency
 # facts named by the manager spec). Each gets an explicit " (inferred)" suffix.
@@ -162,6 +191,11 @@ def readiness_for(lesson_code: str) -> str:
         return "calibrated"
     if lesson_code in LESSONS_WITH_ITEMS:
         return "partial"
+    if lesson_code in OPTIONAL_CATALOG_LESSONS:
+        # nt14-ingest-4-1-2026-07-23: distinct state — has rows, but they are
+        # optional catalog content; NOT ready, NOT required, NOT counted
+        # toward completion.
+        return "optional-catalog"
     if lesson_code in ABSENT_LESSONS:
         return "absent"
     return "frontload-blocked"
@@ -237,7 +271,7 @@ def main():
 
     def build_item_object(registry_line, row):
         legacy_id = row["id"]
-        return {
+        obj = {
             "item_uid": line2uid[registry_line],
             "legacy_id": legacy_id,
             "legacy_id_ambiguous": legacy_ambiguous.get(legacy_id, False),
@@ -249,11 +283,23 @@ def main():
             "topics": row.get("topics") or [],
             "source": row.get("source"),
         }
+        # nt14-ingest-4-1-2026-07-23: carry the optional-catalog marker
+        # verbatim on the node (only present when the registry row has it).
+        if row.get("availability"):
+            obj["availability"] = row["availability"]
+        return obj
+
+    # nt14-ingest-4-1-2026-07-23: legacy ids whose registry row(s) are
+    # optional-catalog content. All 19 are unambiguous single-row ids
+    # (verified by the dedup map); an edge touching one of these on EITHER
+    # endpoint must never enter the required prereq_edges chain.
+    optional_legacy_ids = {r["id"] for r in rows if r.get("availability") == "optional-catalog"}
 
     # ---- edges --------------------------------------------------------------
     FIELD_TYPE = [("prereq_ids", "prereq"), ("rehearses", "rehearses"), ("echoes", "echoes")]
     resolved_edges = []
     dropped_edges = []
+    optional_catalog_edges = []  # nt14-ingest-4-1-2026-07-23 — see docstring
 
     for i, r in enumerate(rows, start=1):
         src_legacy = r["id"]
@@ -280,7 +326,19 @@ def main():
                     if tgt_ambiguous:
                         edge["target_uid_candidates"] = legacy_uid_candidates[tgt]
                         edge["review_ref"] = DUP_REMEDIATION_REF
-                    resolved_edges.append(edge)
+                    if tgt in optional_legacy_ids or src_legacy in optional_legacy_ids:
+                        # nt14-ingest-4-1-2026-07-23: the target (or source)
+                        # is optional-catalog content. This edge RESOLVES —
+                        # the row exists — but as an optional-catalog
+                        # REFERENCE, reported distinctly; it must never be
+                        # reclassified into the required prereq chain.
+                        edge["resolution"] = "optional-catalog-reference"
+                        edge["former_reason"] = (
+                            "retirement-gap" if tgt.startswith("4-1") else None
+                        )
+                        optional_catalog_edges.append(edge)
+                    else:
+                        resolved_edges.append(edge)
                 else:
                     reason = classify_dropped_reason(tgt, shell_ids, LESSONS_WITH_ITEMS)
                     dropped_edges.append({
@@ -318,6 +376,11 @@ def main():
             }
             if readiness == "frontload-blocked":
                 lesson_obj["frontload_blocked"] = True
+            if readiness == "optional-catalog":
+                # nt14-ingest-4-1-2026-07-23: machine-readable marker at the
+                # lesson level too — this lesson's rows exist ONLY as
+                # optional catalog content; never scheduled/paced/counted.
+                lesson_obj["availability"] = "optional-catalog"
             lessons_out.append(lesson_obj)
         topics_out.append({
             "topic": topic_num,
@@ -328,7 +391,12 @@ def main():
     # ---- stats ----------------------------------------------------------------
     lessons_total = sum(len(v) for v in TOPIC_LESSONS.values())
     lessons_with_items_count = len(LESSONS_WITH_ITEMS)
-    lessons_placeholder = lessons_total - lessons_with_items_count
+    # nt14-ingest-4-1-2026-07-23: an optional-catalog lesson has rows, so it
+    # is no longer a structural placeholder — but it is NOT counted in
+    # lessons_with_items either (that set is required content only).
+    lessons_placeholder = (
+        lessons_total - lessons_with_items_count - len(OPTIONAL_CATALOG_LESSONS)
+    )
     items_total = sum(items_per_lesson.values())
 
     edges_resolved_by_type = Counter(e["type"] for e in resolved_edges)
@@ -351,13 +419,27 @@ def main():
     unique_legacy_ids = len(registry_legacy_ids)
     ambiguous_legacy_ids = sum(1 for v in legacy_ambiguous.values() if v)
 
+    # nt14-ingest-4-1-2026-07-23: triple-denominator split. items_total is the
+    # RAW node count (all registry rows, matching the item tree); the split
+    # keeps required-active / optional-catalog / merged-alias distinct.
+    optional_rows_count = sum(
+        1 for r in rows if r.get("availability") == "optional-catalog")
+    merged_alias_rows_count = sum(
+        1 for r in rows if r.get("status") == "merged-alias")
+
     stats = {
         "topics": len(TOPIC_LESSONS),
         "lessons_total": lessons_total,
         "lessons_with_items": lessons_with_items_count,
         "lessons_placeholder": lessons_placeholder,
+        "lessons_optional_catalog": len(OPTIONAL_CATALOG_LESSONS),
         "items_total": items_total,
+        "items_required_active": items_total - optional_rows_count - merged_alias_rows_count,
+        "items_optional_catalog": optional_rows_count,
+        "items_merged_alias": merged_alias_rows_count,
         "items_per_lesson": {k: items_per_lesson.get(k, 0) for k in sorted(EXPECTED_ITEMS_PER_LESSON)},
+        "items_per_optional_catalog_lesson": {
+            k: items_per_lesson.get(k, 0) for k in sorted(OPTIONAL_CATALOG_LESSONS)},
         "distinct_item_uids": distinct_item_uids,
         "unique_legacy_ids": unique_legacy_ids,
         "ambiguous_legacy_ids": ambiguous_legacy_ids,
@@ -367,6 +449,7 @@ def main():
         "edges_target_ambiguous": edges_target_ambiguous,
         "edges_cross_unit": edges_cross_unit,
         "edges_touching_duplicated_id": edges_touching_duplicated_id,
+        "edges_optional_catalog_resolved": len(optional_catalog_edges),
         "edges_dropped_total": len(dropped_edges),
         "edges_dropped_by_reason": dict(edges_dropped_by_reason),
     }
@@ -378,9 +461,11 @@ def main():
             "+ inventory/dedup/item_uid_alias_map.json (all read-only)"
         ),
         "node_identity": (
-            "Tree nodes are keyed by opaque item_uid (900 total, one per registry "
-            "row/line, always unique). legacy_id (the human-readable registry `id`, "
-            "e.g. '5-1-savvas-q18') is kept as a possibly-shared alias: 815 of 900 "
+            "Tree nodes are keyed by opaque item_uid (919 total, one per registry "
+            "row/line, always unique; 919 = 878 required-active + 19 "
+            "optional-catalog [nt14-ingest-4-1-2026-07-23] + 22 merged-alias). "
+            "legacy_id (the human-readable registry `id`, "
+            "e.g. '5-1-savvas-q18') is kept as a possibly-shared alias: 834 of 919 "
             "legacy ids are unique, but 85 are ambiguous — two different registry "
             "rows share the same legacy_id string, always within a single lesson "
             "(5-1, 5-4, or 5-5; never spanning lessons). 17 of the 193 resolved "
@@ -390,9 +475,24 @@ def main():
             "inventory/dedup/item_uid_alias_map.json and "
             f"{DUP_REMEDIATION_REF}."
         ),
-        "note": "Item tree = 900 registry rows (900 unique item_uids) across 10 lessons; other lessons are structural placeholders. Pacing is advisory. See COURSE_MAP.md.",
+        "note": (
+            "Item tree = 919 registry rows (919 unique item_uids) across 10 "
+            "required lessons + 1 optional-catalog lesson (4-1, "
+            "nt14-ingest-4-1-2026-07-23 — audit/catalog presence only, never "
+            "scheduled/paced/counted toward completion); other lessons are "
+            "structural placeholders. Pacing is advisory. See COURSE_MAP.md."
+        ),
+        "optional_catalog_note": (
+            "Lesson 4-1's 19 rows carry availability='optional-catalog'. The 4 "
+            "former retirement-gap dropped edges now resolve as "
+            "optional-catalog REFERENCES in optional_catalog_edges — they are "
+            "NOT required prereqs and never enter prereq_edges. A later "
+            "course-policy decision governs student-facing appearance "
+            "(nt14-ingest-4-1-2026-07-23)."
+        ),
         "topics": topics_out,
         "prereq_edges": resolved_edges,
+        "optional_catalog_edges": optional_catalog_edges,
         "dropped_edges": dropped_edges,
         "stats": stats,
     }
@@ -401,25 +501,41 @@ def main():
     # SELF-CHECKS — manager-supplied / dedup-workstream-supplied ground truth.
     # STOP (raise) on mismatch; never silently adjust.
     # -----------------------------------------------------------------------
+    # Named pin updates (nt14-ingest-4-1-2026-07-23): 900->919 raw rows,
+    # 815->834 unique legacy ids, 27->26 placeholders, absent 9->8; the
+    # required-content pins (10 lessons_with_items, 193 required edges,
+    # 85 ambiguous) are UNCHANGED by design.
     assert stats["topics"] == 6, stats["topics"]
     assert stats["lessons_total"] == 37, stats["lessons_total"]
     assert stats["lessons_with_items"] == 10, stats["lessons_with_items"]
-    assert stats["lessons_placeholder"] == 27, stats["lessons_placeholder"]
-    assert stats["items_total"] == 900, stats["items_total"]
+    assert stats["lessons_placeholder"] == 26, stats["lessons_placeholder"]
+    assert stats["lessons_optional_catalog"] == 1, stats["lessons_optional_catalog"]
+    assert stats["items_total"] == 919, stats["items_total"]
+    # triple-denominator reconciliation: raw == required-active + optional + alias
+    assert stats["items_total"] == (
+        stats["items_required_active"]
+        + stats["items_optional_catalog"]
+        + stats["items_merged_alias"]
+    ), stats
+    assert stats["items_required_active"] == 878, stats["items_required_active"]
+    assert stats["items_optional_catalog"] == 19, stats["items_optional_catalog"]
+    assert stats["items_merged_alias"] == 22, stats["items_merged_alias"]
 
     for lesson, expected_count in EXPECTED_ITEMS_PER_LESSON.items():
         actual = items_per_lesson.get(lesson, 0)
         assert actual == expected_count, f"{lesson}: expected {expected_count}, got {actual}"
+    assert stats["items_per_optional_catalog_lesson"] == {"4-1": 19}, (
+        stats["items_per_optional_catalog_lesson"])
 
-    # -- node identity (Finding 1) --
-    assert stats["distinct_item_uids"] == 900, stats["distinct_item_uids"]
-    assert stats["unique_legacy_ids"] == 815, stats["unique_legacy_ids"]
+    # -- node identity (Finding 1; pins re-derived for nt14-ingest-4-1-2026-07-23) --
+    assert stats["distinct_item_uids"] == 919, stats["distinct_item_uids"]
+    assert stats["unique_legacy_ids"] == 834, stats["unique_legacy_ids"]
     assert stats["ambiguous_legacy_ids"] == 85, stats["ambiguous_legacy_ids"]
-    assert stats["unique_legacy_ids"] == len(registry_legacy_ids) == 815
+    assert stats["unique_legacy_ids"] == len(registry_legacy_ids) == 834
     total_nodes = sum(len(l["items"]) for t in topics_out for l in t["lessons"])
-    assert total_nodes == 900, total_nodes
+    assert total_nodes == 919, total_nodes
 
-    # -- edges (Finding 1) --
+    # -- edges (Finding 1) — REQUIRED chain unchanged --
     assert stats["edges_resolved_total"] == 193, stats["edges_resolved_total"]
     assert stats["edges_resolved_by_type"] == {"prereq": 129, "rehearses": 42, "echoes": 22}, stats["edges_resolved_by_type"]
     assert stats["edges_fully_resolved"] == 176, stats["edges_fully_resolved"]
@@ -428,23 +544,56 @@ def main():
     assert stats["edges_cross_unit"] == 16, stats["edges_cross_unit"]
     assert stats["edges_touching_duplicated_id"] == 43, stats["edges_touching_duplicated_id"]
 
-    # -- dropped edges (Finding 2) --
-    assert stats["edges_dropped_total"] == 18, stats["edges_dropped_total"]
+    # -- optional-catalog edges (nt14-ingest-4-1-2026-07-23) --
+    assert stats["edges_optional_catalog_resolved"] == 4, stats["edges_optional_catalog_resolved"]
+    assert {(e["source_legacy"], e["target_legacy"], e["type"]) for e in optional_catalog_edges} == {
+        ("4-3-tryit-1", "4-1-savvas-q10", "prereq"),
+        ("6-3-savvas-q54", "4-1-savvas-q17", "echoes"),
+        ("6-4-savvas-q13", "4-1-savvas-q19", "echoes"),
+        ("4-5-savvas-q25", "4-1-savvas-q26", "echoes"),
+    }, optional_catalog_edges
+    assert all(e["resolution"] == "optional-catalog-reference" for e in optional_catalog_edges)
+    assert all(e["former_reason"] == "retirement-gap" for e in optional_catalog_edges)
+    assert all(e["target_uid"] is not None for e in optional_catalog_edges)
+    # non-scheduling proof at the map level: no required edge touches an
+    # optional-catalog endpoint, and no 4-1 uid appears in prereq_edges.
+    optional_uids = {
+        line2uid[i] for i, r in enumerate(rows, start=1)
+        if r.get("availability") == "optional-catalog"
+    }
+    for e in resolved_edges:
+        assert e["source_uid"] not in optional_uids, e
+        assert e["target_uid"] not in optional_uids, e
+        assert not (e["target_legacy"] or "").startswith("4-1"), e
+
+    # -- dropped edges (Finding 2; the 4 retirement-gap edges now RESOLVE as
+    #    optional-catalog references above, so they leave the dropped set) --
+    assert stats["edges_dropped_total"] == 14, stats["edges_dropped_total"]
     assert stats["edges_dropped_by_reason"] == {
         "assessment-forward-ref": 12,
-        "retirement-gap": 4,
         "frontload-gap": 1,
         "retired-missing": 1,
     }, stats["edges_dropped_by_reason"]
 
-    # readiness distribution sanity (1 calibrated + 9 partial + 9 absent + 18 frontload-blocked == 37)
+    # readiness distribution sanity
+    # (1 calibrated + 9 partial + 1 optional-catalog + 8 absent + 18 frontload-blocked == 37)
     readiness_counts = Counter(
         lesson["readiness"] for topic in topics_out for lesson in topic["lessons"]
     )
     assert readiness_counts["calibrated"] == 1, readiness_counts
     assert readiness_counts["partial"] == 9, readiness_counts
-    assert readiness_counts["absent"] == 9, readiness_counts
+    assert readiness_counts["optional-catalog"] == 1, readiness_counts
+    assert readiness_counts["absent"] == 8, readiness_counts
     assert readiness_counts["frontload-blocked"] == 18, readiness_counts
+    # the optional-catalog lesson's items all carry the marker
+    for topic in topics_out:
+        for lesson in topic["lessons"]:
+            if lesson["lesson"] in OPTIONAL_CATALOG_LESSONS:
+                assert lesson["availability"] == "optional-catalog", lesson["lesson"]
+                assert len(lesson["items"]) == 19, len(lesson["items"])
+                assert all(
+                    it.get("availability") == "optional-catalog" for it in lesson["items"]
+                ), lesson["lesson"]
 
     OUT_PATH.write_text(json.dumps(course_map, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Wrote {OUT_PATH}")

@@ -101,7 +101,12 @@ def cal_topics_hint(example_num: int) -> list[str]:
 
 
 def load_existing_ids(lesson: str) -> set[str]:
-    return {q["id"] for q in qb.select(lesson=lesson)}
+    # nt14-ingest-4-1-2026-07-23: this is a dedup-correctness check (skip
+    # item numbers already ingested so a re-run doesn't emit duplicate
+    # stubs), not a sequencing surface -- it must see optional-catalog rows
+    # (e.g. Lesson 4-1's 19 rows) or a re-run after partial ingest would
+    # regenerate stubs for items already in the registry.
+    return {q["id"] for q in qb.select(lesson=lesson, include_optional=True)}
 
 
 def main() -> None:

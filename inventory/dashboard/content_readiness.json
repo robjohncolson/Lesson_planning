@@ -1,6 +1,6 @@
 {
   "generated_by": "WS6 Sonnet implementer (build_content_readiness.py)",
-  "generated_at": "2026-07-23T05:57:25.478946+00:00",
+  "generated_at": "2026-07-24T04:00:17.668332+00:00",
   "method": "Computed read-only from six signed-off WS inputs; no source modified.",
   "source_artifacts": [
     {
@@ -131,22 +131,23 @@
     },
     "edges": {
       "resolved": 193,
-      "dropped": 18,
+      "dropped": 14,
       "assessment_forward_ref": 12,
-      "retirement_gap": 4,
       "frontload_gap": 1,
       "retired_missing": 1
     },
     "readiness_ws6": {
       "CALIBRATED": 1,
       "INCOMPLETE": 9,
-      "BLOCKED": 1,
+      "BLOCKED": 0,
       "PROVISIONAL": 18,
-      "ABSENT": 8
+      "ABSENT": 8,
+      "OPTIONAL_CATALOG": 1
     },
     "identity_reconciliation": {
-      "raw_registry_identities": 900,
+      "raw_registry_identities": 919,
       "merged_alias_identities": 22,
+      "optional_catalog_identities": 19,
       "active_canonical_items": 878,
       "merged_alias_item_uids": [
         "iu_18cac1a8167a",
@@ -172,24 +173,48 @@
         "iu_e106ef5ef48e",
         "iu_e7638fcec56e"
       ],
+      "optional_catalog_item_uids": [
+        "iu_01d98498bba0",
+        "iu_02c306effb29",
+        "iu_11751b2a9981",
+        "iu_3505e057cdd1",
+        "iu_53af93aa4a0d",
+        "iu_549ca1f8a7a0",
+        "iu_57d15babe8c8",
+        "iu_64f93ba6a2c1",
+        "iu_69d85ede35cc",
+        "iu_6e909512e4cb",
+        "iu_77b53af6af82",
+        "iu_afd34b461341",
+        "iu_bf941050b523",
+        "iu_c4d18a2bbd7a",
+        "iu_d211e4d45e2c",
+        "iu_d29881722adc",
+        "iu_d2df726e7681",
+        "iu_f7eb4962bbc6",
+        "iu_f8ff405bd610"
+      ],
       "authorization_record_id": "rc-merge-auth-5-4-2026-07-23",
-      "statement": "raw_registry_identities == active_canonical_items + merged_alias_identities (900 == 878 + 22). None of the 22 merged_alias_item_uids ever appear in aggregates.dok.review_state_uid_sets.verified (asserted at build time) or in any other readiness/verified/actionable set published by this dashboard."
+      "optional_catalog_authorization_record_id": "nt14-ingest-4-1-2026-07-23",
+      "statement": "raw_registry_identities == active_canonical_items + optional_catalog_identities + merged_alias_identities (919 == 878 + 19 + 22). None of the 22 merged_alias_item_uids ever appear in aggregates.dok.review_state_uid_sets.verified (asserted at build time) or in any other readiness/verified/actionable set published by this dashboard. The 19 optional_catalog_item_uids (lesson 4-1, nt14-ingest-4-1-2026-07-23) are likewise excluded from every dok/readiness/ws6 aggregate above -- they carry no wave assignment (lessons[].dok.waves for 4-1 is empty) and never auto-schedule or count toward completion; see lessons[] '4-1' entry (ws6_state OPTIONAL-CATALOG) for its own breakdown."
     }
   },
   "readiness_reconciliation": {
     "base_inventory_distribution": {
       "ready": 0,
       "partial": 10,
-      "blocked": 1,
-      "absent": 26
+      "blocked": 0,
+      "absent": 26,
+      "optional_catalog": 1
     },
     "course_map_distribution": {
       "frontload_blocked": 18,
       "calibrated": 1,
-      "absent": 9,
-      "partial": 9
+      "absent": 8,
+      "partial": 9,
+      "optional_catalog": 1
     },
-    "note": "Base inventory counts 3-5 as 'partial' (missing_answers/visuals/verified gates unmet) and 4-1 as 'blocked' (staged material, 0 registry rows). Course-map counts 3-5 as 'calibrated' (real DOK anchors exist) and 4-1 as 'absent' (no items array populated). WS6 reconciles both: 3-5 is promoted to its own CALIBRATED state (the only lesson with real DOK-2/DOK-3 anchors, even though answer/visual gates remain open), and 4-1 keeps its own BLOCKED state distinct from the 8 truly ABSENT (deprecated/skipped) lessons and the 18 PROVISIONAL front-of-year lessons, because 4-1 uniquely has staged-but-uningested material (calibration file, 61 screenshots, 15 skeleton stubs)."
+    "note": "Base inventory counts 3-5 as 'partial' (missing_answers/visuals/verified gates unmet) and 4-1 as 'optional-catalog' (NT14, nt14-ingest-4-1-2026-07-23: 19 rows ingested 2026-07-23, all carrying availability=='optional-catalog', excluded from every completion/readiness denominator -- previously 'blocked', when 0 registry rows existed and ingestion status was unknown). Course-map has independently been regenerated for this same ingestion and now agrees: 4-1 reads 'optional-catalog' there too (previously 'absent'), and 3-5 reads 'calibrated' (real DOK anchors exist). WS6 reconciles all of this: 3-5 is promoted to its own CALIBRATED state (the only lesson with real DOK-2/DOK-3 anchors, even though answer/visual gates remain open); 4-1 now gets its own OPTIONAL-CATALOG state -- distinct from BLOCKED (0 today), the 8 truly ABSENT (deprecated/skipped) lessons, and the 18 PROVISIONAL front-of-year lessons -- because it uniquely carries ingested-but-explicitly-non-required content pending a future course-policy decision."
   },
   "lessons": [
     {
@@ -1493,50 +1518,20 @@
         "prompt_drift": 0
       },
       "prereqs": {
-        "upstream_dangling": [
-          {
-            "source_uid": "iu_31a6940d05ec",
-            "source": "4-3-tryit-1",
-            "target": "4-1-savvas-q10",
-            "type": "prereq",
-            "reason": "retirement-gap"
-          },
-          {
-            "source_uid": "iu_2ca6ec6026ce",
-            "source": "6-3-savvas-q54",
-            "target": "4-1-savvas-q17",
-            "type": "echoes",
-            "reason": "retirement-gap"
-          },
-          {
-            "source_uid": "iu_cd24889b7168",
-            "source": "6-4-savvas-q13",
-            "target": "4-1-savvas-q19",
-            "type": "echoes",
-            "reason": "retirement-gap"
-          },
-          {
-            "source_uid": "iu_634d55d82bc5",
-            "source": "4-5-savvas-q25",
-            "target": "4-1-savvas-q26",
-            "type": "echoes",
-            "reason": "retirement-gap"
-          }
-        ],
+        "upstream_dangling": [],
         "downstream_dangling": []
       },
-      "overall_readiness": "blocked",
-      "ws6_state": "BLOCKED",
+      "overall_readiness": "optional-catalog",
+      "ws6_state": "OPTIONAL-CATALOG",
       "dimension_status": {
-        "content": "red",
+        "content": "grey",
         "answers": "grey",
         "dok": "grey",
         "visuals": "grey",
-        "prereqs": "red"
+        "prereqs": "green"
       },
       "top_blockers": [
-        "has staged material (calibration file, 61 screenshots) — 0 registry rows (ingestion status UNKNOWN from disk)",
-        "4 upstream prereq/echo edge(s) dangling into this lesson (frontload-gap/retirement-gap/retired-missing)"
+        "19 registry row(s) ingested 2026-07-23 (nt14-ingest-4-1-2026-07-23) but carrying availability=='optional-catalog' -- lesson 4-1 was deliberately cut from the department's prior-year course sequence; that history is not reversed or reinterpreted by this ingestion, and no course-policy decision has been made to revive it as required/ready-to-teach content. This lesson is therefore held OUT of the ready/partial/blocked/absent distribution entirely (reported separately), never auto-scheduled, never placed in pacing, and never counted toward any completion percentage. See this lesson's 'optional_catalog' block for the 19-row breakdown."
       ]
     },
     {
@@ -1647,15 +1642,7 @@
       },
       "prereqs": {
         "upstream_dangling": [],
-        "downstream_dangling": [
-          {
-            "source_uid": "iu_31a6940d05ec",
-            "source": "4-3-tryit-1",
-            "target": "4-1-savvas-q10",
-            "type": "prereq",
-            "reason": "retirement-gap"
-          }
-        ]
+        "downstream_dangling": []
       },
       "overall_readiness": "partial",
       "ws6_state": "INCOMPLETE",
@@ -1664,15 +1651,14 @@
         "answers": "amber",
         "dok": "amber",
         "visuals": "red",
-        "prereqs": "amber"
+        "prereqs": "green"
       },
       "top_blockers": [
         "missing_answers=17>0",
         "topics_nonempty=0<74",
         "lesson not calibrated (no real dok2/dok3 anchors)",
         "visuals_missing_asset=8>0",
-        "dok_status.verified=0<74",
-        "1 downstream edge(s) dropped from this lesson (dangling reference)"
+        "dok_status.verified=0<74"
       ]
     },
     {
@@ -1790,15 +1776,7 @@
       },
       "prereqs": {
         "upstream_dangling": [],
-        "downstream_dangling": [
-          {
-            "source_uid": "iu_634d55d82bc5",
-            "source": "4-5-savvas-q25",
-            "target": "4-1-savvas-q26",
-            "type": "echoes",
-            "reason": "retirement-gap"
-          }
-        ]
+        "downstream_dangling": []
       },
       "overall_readiness": "partial",
       "ws6_state": "INCOMPLETE",
@@ -1807,15 +1785,14 @@
         "answers": "amber",
         "dok": "amber",
         "visuals": "amber",
-        "prereqs": "amber"
+        "prereqs": "green"
       },
       "top_blockers": [
         "missing_answers=21>0",
         "topics_nonempty=0<81",
         "lesson not calibrated (no real dok2/dok3 anchors)",
         "visuals_missing_asset=14>0",
-        "dok_status.verified=0<81",
-        "1 downstream edge(s) dropped from this lesson (dangling reference)"
+        "dok_status.verified=0<81"
       ]
     },
     {
@@ -2446,15 +2423,7 @@
       },
       "prereqs": {
         "upstream_dangling": [],
-        "downstream_dangling": [
-          {
-            "source_uid": "iu_2ca6ec6026ce",
-            "source": "6-3-savvas-q54",
-            "target": "4-1-savvas-q17",
-            "type": "echoes",
-            "reason": "retirement-gap"
-          }
-        ]
+        "downstream_dangling": []
       },
       "overall_readiness": "partial",
       "ws6_state": "INCOMPLETE",
@@ -2463,15 +2432,14 @@
         "answers": "amber",
         "dok": "amber",
         "visuals": "amber",
-        "prereqs": "amber"
+        "prereqs": "green"
       },
       "top_blockers": [
         "missing_answers=36>0",
         "topics_nonempty=0<100",
         "lesson not calibrated (no real dok2/dok3 anchors)",
         "visuals_missing_asset=17>0",
-        "dok_status.verified=0<100",
-        "1 downstream edge(s) dropped from this lesson (dangling reference)"
+        "dok_status.verified=0<100"
       ]
     },
     {
@@ -2530,15 +2498,7 @@
             "reason": "retired-missing"
           }
         ],
-        "downstream_dangling": [
-          {
-            "source_uid": "iu_cd24889b7168",
-            "source": "6-4-savvas-q13",
-            "target": "4-1-savvas-q19",
-            "type": "echoes",
-            "reason": "retirement-gap"
-          }
-        ]
+        "downstream_dangling": []
       },
       "overall_readiness": "partial",
       "ws6_state": "INCOMPLETE",
@@ -2555,8 +2515,7 @@
         "lesson not calibrated (no real dok2/dok3 anchors)",
         "visuals_missing_asset=23>0",
         "dok_status.verified=0<69",
-        "1 upstream prereq/echo edge(s) dangling into this lesson (frontload-gap/retirement-gap/retired-missing)",
-        "1 downstream edge(s) dropped from this lesson (dangling reference)"
+        "1 upstream prereq/echo edge(s) dangling into this lesson (frontload-gap/retirement-gap/retired-missing)"
       ]
     },
     {
@@ -2929,36 +2888,8 @@
       "registry_rows": 0,
       "se_te": false
     },
-    "dangling_edges_into_4_1": [
-      {
-        "source_uid": "iu_31a6940d05ec",
-        "source": "4-3-tryit-1",
-        "target": "4-1-savvas-q10",
-        "type": "prereq",
-        "reason": "retirement-gap"
-      },
-      {
-        "source_uid": "iu_2ca6ec6026ce",
-        "source": "6-3-savvas-q54",
-        "target": "4-1-savvas-q17",
-        "type": "echoes",
-        "reason": "retirement-gap"
-      },
-      {
-        "source_uid": "iu_cd24889b7168",
-        "source": "6-4-savvas-q13",
-        "target": "4-1-savvas-q19",
-        "type": "echoes",
-        "reason": "retirement-gap"
-      },
-      {
-        "source_uid": "iu_634d55d82bc5",
-        "source": "4-5-savvas-q25",
-        "target": "4-1-savvas-q26",
-        "type": "echoes",
-        "reason": "retirement-gap"
-      }
-    ],
+    "stale_source_note": "'state' and 'staged.registry_rows' above are read verbatim from inventory/topic-4-1/inventory-4-1-assets.json, which has NOT been regenerated for nt14-ingest-4-1-2026-07-23 and still reads as if 0 rows existed. The current, authoritative fact (19 rows ingested 2026-07-23, availability=='optional-catalog') is in this document's lessons[] '4-1' entry ('optional_catalog' block) and aggregate.identity_reconciliation.optional_catalog_identities.",
+    "dangling_edges_into_4_1": [],
     "fifth_frontload_gap_edge_into_3_1": {
       "source_uid": "iu_05586ed3a6eb",
       "source": "5-1-savvas-model-discuss-lesson-5-1-launch",
@@ -2984,6 +2915,6 @@
     "collisions.{groups,dok_conflict,prompt_drift}": "review-queue/collision_review_queue.json (groups[], meta{}) joined against dok-workflow/dok_wave_plan.json per-id dok values (queue has no dok field itself)",
     "prereqs.{upstream_dangling,downstream_dangling}": "course-map/course_map.json (dropped_edges[]); upstream_dangling = edges whose TARGET touches this lesson and whose reason is in the gap family {frontload-gap, retirement-gap, retired-missing} (i.e. not assessment-forward-ref); downstream_dangling = edges whose SOURCE touches this lesson, any reason. Filtered by reason SET, not a single hardcoded label, so relabeling within the gap family (e.g. the frontload-gap -> retirement-gap split for 4-1) does not require a code change.",
     "ws6_state, readiness_ws6 distribution": "Derived per lesson (this script's derive_ws6_state, per the WS6 precedence rule locked by the manager brief; see SPEC.md section 2) from four source signals: content_readiness_inventory.json (lessons[].readiness, lessons[].dok_status.calibrated, lessons[].registry_rows); this script's own wave-plan-derived per-lesson verified count (NT7 R3b -- single-sourced from dok-workflow/dok_wave_plan.json's review_state, NOT lessons[].dok_status.verified); and course-map/course_map.json (topics[].lessons[].readiness). Not a hardcoded per-lesson lookup.",
-    "four_one_stranded": "topic-4-1/inventory-4-1-assets.json (assets{}, teacher_judgment_items[]) joined against course-map/course_map.json (dropped_edges[], filtered by TARGET touching 4-1 and reason in the gap family {frontload-gap, retirement-gap, retired-missing} — currently all 4 read reason=='retirement-gap', since 4-1 was built then retired, not front-of-year-unbuilt; the 5th gap-family edge targets 3-1 instead, with reason=='frontload-gap', and is reported separately as fifth_frontload_gap_edge_into_3_1). Derived live from current dropped_edges, robust to reason relabeling."
+    "four_one_stranded": "topic-4-1/inventory-4-1-assets.json (assets{}, teacher_judgment_items[]; NOT regenerated for nt14-ingest-4-1-2026-07-23 -- see stale_source_note above) joined against course-map/course_map.json (dropped_edges[], filtered by TARGET touching 4-1 and reason in the gap family {frontload-gap, retirement-gap, retired-missing} — NT14 named update: course-map/course_map.json HAS been independently regenerated for this ingestion, and the 4 edges that used to read reason=='retirement-gap' into 4-1 are now resolved against 4-1's real (optional-catalog) items, so 0 remain dropped; the 5th gap-family edge targets 3-1 instead, with reason=='frontload-gap', and is reported separately as fifth_frontload_gap_edge_into_3_1). Derived live from current dropped_edges, robust to reason relabeling."
   }
 }
