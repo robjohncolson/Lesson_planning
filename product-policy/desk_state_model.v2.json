@@ -1,0 +1,878 @@
+{
+  "version": "2.0",
+  "date": "2026-07-24",
+  "source_of_authority": "RC final decisions 2026-07-24 (Grok preference interview + RC clarifications; NT16 rulings 2026-07-24 resolving OPEN-08/09/10/11/15/16/17/18/19)",
+  "policy_id": "desk_state_model",
+  "policy_title": "Desk Lesson-State Model",
+  "status": "DECIDED",
+  "decision_ids": [
+    "PREF-01",
+    "PREF-06",
+    "PREF-13",
+    "PREF-14"
+  ],
+  "sub_decisions": {
+    "PREF-01.1": "Canonical seven-state lesson vocabulary for the Desk navigation model",
+    "PREF-01.2": "Today's assignment is the Desk's primary front door",
+    "PREF-01.3": "\"What's next\" is a secondary view, not the front door",
+    "PREF-01.4": "Students may open any teacher-released (released) lesson",
+    "PREF-01.5": "Work-ahead permitted only within released material, never unreleased",
+    "PREF-01.6": "Primary view shows today plus nearby/recently released lessons first",
+    "PREF-01.7": "The broader released roadmap lives behind a secondary/expandable view",
+    "PREF-01.8": "Unreleased lessons are hidden/unavailable to students",
+    "PREF-01.9": "Skipped lessons render grey/inert, and appear only in the broader view",
+    "PREF-01.10": "Optional-catalog content is absent from the normal path until explicit teacher assignment",
+    "PREF-06.6": "Unknown/unavailable state must never render as zero",
+    "PREF-06.7": "Unknown/unavailable state must never render as erased work",
+    "PREF-06.8": "Unknown/unavailable state must never render as fabricated credit",
+    "PREF-06.9": "Unknown/unavailable state must never cause erroneous relocking",
+    "PREF-13.2": "Teacher designates today's/next lesson; there is no fixed calendar",
+    "PREF-14.1": "Lesson 4-1 stays optional-catalog",
+    "PREF-14.2": "Optional-catalog content is never auto-scheduled"
+  },
+  "open_item_ids": [],
+  "deferred_ids": [],
+  "unknown_sentinel_token": "UNKNOWN",
+  "state_set": [
+    "today",
+    "released",
+    "unreleased",
+    "skipped",
+    "optional-catalog",
+    "completed",
+    "temporarily-unavailable"
+  ],
+  "views": [
+    "primary_view",
+    "roadmap_view"
+  ],
+  "states": {
+    "today": {
+      "layer": "navigation",
+      "description": "The teacher-designated lesson for the current class day. The Desk's primary front door (PREF-01.2). A lesson must be released to be marked today; designating a not-yet-released lesson as today implicitly releases it in the same action.",
+      "set_by": "teacher_designation",
+      "sticky": false
+    },
+    "released": {
+      "layer": "navigation",
+      "description": "Teacher has made the lesson available. Openable and workable, including work-ahead (PREF-01.4/.5), whether or not it is today's designation.",
+      "set_by": "teacher_release",
+      "sticky": false
+    },
+    "unreleased": {
+      "layer": "navigation",
+      "description": "Default state for every lesson at creation, before any teacher release action. Hidden/unavailable to students (PREF-01.8) -- must not appear in either Desk view.",
+      "set_by": "initial_default",
+      "sticky": false
+    },
+    "skipped": {
+      "layer": "navigation",
+      "description": "Teacher has designated this lesson as not being pursued in the normal sequence. Renders grey and inert, and only in the broader roadmap view, never the primary view (PREF-01.9).",
+      "set_by": "teacher_designation",
+      "sticky": false
+    },
+    "optional-catalog": {
+      "layer": "navigation",
+      "description": "Content-ingestion-time classification (e.g. Lesson 4-1, record nt14-ingest-4-1-2026-07-23) that is absent from the normal student path -- both views -- until a teacher explicitly assigns it (PREF-01.10, PREF-14.1/.2). Not entered via an ordinary Desk transition; it is the resting classification a lesson's content already carries when ingested this way.",
+      "set_by": "content_ingestion_classification",
+      "sticky": false
+    },
+    "completed": {
+      "layer": "evidence",
+      "description": "The student has server-ledger-verified evidence that satisfies this lesson's teacher-designated completion criteria (feeds PREF-03's completion-percentage mechanic). Sticky and DECIDED terminal: this Desk tile has ZERO legal exit transitions -- once reached, no event (evidence-source outage, teacher action, or within-quarter retake) ever moves it back to released/today or any other state (dossier §15 item 2; PREF-06.9). RC's 2026-07-24 ruling (OPEN-17) settles this as DECIDED policy, not a conservative placeholder: a within-quarter retake (PREF-06.4) is an ORTHOGONAL activity/affordance attached to the completed lesson -- see the top-level retake_affordance object -- it never demotes, relocks, or erases this state, and never alters the grading engine via navigation state.",
+      "set_by": "evidence_verification",
+      "sticky": true,
+      "status": "DECIDED",
+      "resolved_open_item": "OPEN-17",
+      "provenance": "RESOLVED by RC 2026-07-24"
+    },
+    "temporarily-unavailable": {
+      "layer": "evidence",
+      "description": "The authoritative evidence source needed to determine this lesson's completion status is unreachable. Renders as UNKNOWN, never zero (dossier §15 item 1; PREF-06.6). Fail-open navigation is permitted (dossier §15 item 3) but no credit is awarded while in this state. Never applies to a lesson already known-completed (see 'completed'.sticky).",
+      "set_by": "evidence_source_unreachable",
+      "sticky": false
+    }
+  },
+  "state_derivation": {
+    "description": "For Desk rendering, each (lesson, student) pair resolves to exactly one of the seven states via this precedence order (first match wins). 'completed' and 'temporarily-unavailable' are per-student evidence-layer overlays; the other five are curriculum/release-layer facts set once per lesson (shared by every student in the section) -- mirrors RC_TEACHER_PREFERENCE_RECORD.md's note under PREF-01.1 that five states are directly-named navigation decisions and two are structural evidence-layer states.",
+    "precedence": [
+      "completed",
+      "temporarily-unavailable",
+      "today",
+      "skipped",
+      "optional-catalog",
+      "released",
+      "unreleased"
+    ],
+    "rule": "Evaluate top to bottom; the first matching condition is the rendered state. 'completed' is checked first so an evidence-source outage occurring after completion can never downgrade it. 'temporarily-unavailable' is checked next, before any curriculum-layer fact, so an outage overlays whichever curriculum state currently holds without altering that underlying curriculum classification -- recovery (see transitions T16/T17) restores rendering to that same underlying curriculum state."
+  },
+  "transitions": {
+    "legal": [
+      {
+        "id": "T1",
+        "from": "unreleased",
+        "to": "released",
+        "trigger": "teacher_release",
+        "decision_ids": [
+          "PREF-01.4",
+          "PREF-01.8",
+          "PREF-13.2"
+        ],
+        "note": "Teacher releases the lesson.",
+        "actor": "teacher"
+      },
+      {
+        "id": "T2",
+        "from": "unreleased",
+        "to": "today",
+        "trigger": "teacher_designate_today",
+        "decision_ids": [
+          "PREF-13.2"
+        ],
+        "note": "Teacher designates this lesson as today's lesson; implicitly releases it in the same action.",
+        "actor": "teacher"
+      },
+      {
+        "id": "T3",
+        "from": "unreleased",
+        "to": "skipped",
+        "trigger": "teacher_mark_skipped",
+        "decision_ids": [
+          "PREF-01.9",
+          "PREF-13.2"
+        ],
+        "note": "Teacher designates this lesson as skipped without ever releasing it. CONFIRMED by RC's 2026-07-24 ruling (OPEN-18) -- this transition was already legal and decided in v1.0; the ruling settles it as confirmed policy, not a new grant. No duplicate transition id was minted for this case.",
+        "actor": "teacher_only",
+        "student_may_initiate": false,
+        "status": "CONFIRMED",
+        "provenance": "RESOLVED by RC 2026-07-24"
+      },
+      {
+        "id": "T4",
+        "from": "released",
+        "to": "today",
+        "trigger": "teacher_designate_today",
+        "decision_ids": [
+          "PREF-13.2"
+        ],
+        "note": "Teacher promotes an already-released lesson to today's designation.",
+        "actor": "teacher"
+      },
+      {
+        "id": "T5",
+        "from": "released",
+        "to": "completed",
+        "trigger": "evidence_verified_complete",
+        "decision_ids": [
+          "PREF-03.4"
+        ],
+        "note": "Server-ledger evidence satisfies teacher-designated completion criteria.",
+        "actor": "system_evidence"
+      },
+      {
+        "id": "T6",
+        "from": "released",
+        "to": "temporarily-unavailable",
+        "trigger": "evidence_source_unreachable",
+        "decision_ids": [
+          "PREF-06.6",
+          "PREF-06.9"
+        ],
+        "note": "Authoritative evidence source for this lesson becomes unreachable.",
+        "actor": "system_evidence"
+      },
+      {
+        "id": "T7",
+        "from": "released",
+        "to": "skipped",
+        "trigger": "teacher_mark_skipped",
+        "decision_ids": [
+          "PREF-01.9",
+          "PREF-13.2"
+        ],
+        "actor": "teacher_only",
+        "student_may_initiate": false,
+        "status": "DECIDED",
+        "cross_ref": "U2",
+        "resolved_open_item": "OPEN-18",
+        "provenance": "RESOLVED by RC 2026-07-24",
+        "note": "RC's 2026-07-24 ruling (OPEN-18) decides that an already-released (not-yet-completed) lesson CAN be retroactively marked skipped. Promoted from transitions.provisional (v1.0) to transitions.legal -- no longer a provisional, non-normative allowance."
+      },
+      {
+        "id": "T8",
+        "from": "today",
+        "to": "released",
+        "trigger": "teacher_redesignate_today",
+        "decision_ids": [
+          "PREF-01.6",
+          "PREF-13.2"
+        ],
+        "note": "Teacher moves the today designation elsewhere; this lesson reverts to plain released (eligible for 'nearby/recent released' display).",
+        "actor": "teacher"
+      },
+      {
+        "id": "T9",
+        "from": "today",
+        "to": "completed",
+        "trigger": "evidence_verified_complete",
+        "decision_ids": [
+          "PREF-03.4"
+        ],
+        "note": "Same as T5, while still marked today.",
+        "actor": "system_evidence"
+      },
+      {
+        "id": "T10",
+        "from": "today",
+        "to": "temporarily-unavailable",
+        "trigger": "evidence_source_unreachable",
+        "decision_ids": [
+          "PREF-06.6",
+          "PREF-06.9"
+        ],
+        "note": "Same as T6, while still marked today.",
+        "actor": "system_evidence"
+      },
+      {
+        "id": "T11",
+        "from": "today",
+        "to": "skipped",
+        "trigger": "teacher_mark_skipped",
+        "decision_ids": [
+          "PREF-01.9",
+          "PREF-13.2"
+        ],
+        "actor": "teacher_only",
+        "student_may_initiate": false,
+        "status": "DECIDED",
+        "cross_ref": "U2",
+        "resolved_open_item": "OPEN-18",
+        "provenance": "RESOLVED by RC 2026-07-24",
+        "precondition": {
+          "condition": "lesson_not_yet_completed_for_this_student",
+          "field": "student_completion_state != 'completed'",
+          "note": "Legal ONLY before this lesson reaches 'completed' for this student. A completed lesson can never reach skipped -- see illegal transition X3, the guard enforcing this precondition."
+        },
+        "note": "RC's 2026-07-24 ruling (OPEN-18) decides that today -> skipped is allowed BEFORE COMPLETION. Promoted from transitions.provisional (v1.0) to transitions.legal, now carrying a machine-readable precondition guarding the completed boundary."
+      },
+      {
+        "id": "T12",
+        "from": "skipped",
+        "to": "released",
+        "trigger": "teacher_release",
+        "decision_ids": [
+          "PREF-13.2"
+        ],
+        "actor": "teacher_only",
+        "student_may_initiate": false,
+        "status": "DECIDED",
+        "cross_ref": "U3",
+        "resolved_open_item": "OPEN-18",
+        "provenance": "RESOLVED by RC 2026-07-24",
+        "note": "RC's 2026-07-24 ruling (OPEN-18) decides a skip designation IS reversible. Promoted from transitions.provisional (v1.0) to transitions.legal."
+      },
+      {
+        "id": "T13",
+        "from": "skipped",
+        "to": "today",
+        "trigger": "teacher_designate_today",
+        "decision_ids": [
+          "PREF-13.2"
+        ],
+        "actor": "teacher_only",
+        "student_may_initiate": false,
+        "status": "DECIDED",
+        "cross_ref": "U3",
+        "resolved_open_item": "OPEN-18",
+        "provenance": "RESOLVED by RC 2026-07-24",
+        "note": "Same as T12, direct to today. Promoted from transitions.provisional (v1.0) to transitions.legal."
+      },
+      {
+        "id": "T14",
+        "from": "optional-catalog",
+        "to": "released",
+        "trigger": "explicit_teacher_assignment",
+        "decision_ids": [
+          "PREF-01.10",
+          "PREF-14.1",
+          "PREF-14.2"
+        ],
+        "note": "Teacher explicitly assigns this optional-catalog lesson; the Desk-layer analogue of qb.select(include_optional=True).",
+        "actor": "teacher"
+      },
+      {
+        "id": "T15",
+        "from": "optional-catalog",
+        "to": "today",
+        "trigger": "explicit_teacher_assignment",
+        "decision_ids": [
+          "PREF-01.10",
+          "PREF-14.1",
+          "PREF-14.2"
+        ],
+        "note": "Same as T14, direct to today.",
+        "actor": "teacher"
+      },
+      {
+        "id": "T16",
+        "from": "temporarily-unavailable",
+        "to": "released",
+        "trigger": "evidence_source_recovered_incomplete",
+        "decision_ids": [
+          "PREF-06.6",
+          "PREF-06.9"
+        ],
+        "note": "Evidence source reachable again; reconciled evidence shows lesson not yet complete.",
+        "actor": "system_evidence"
+      },
+      {
+        "id": "T17",
+        "from": "temporarily-unavailable",
+        "to": "today",
+        "trigger": "evidence_source_recovered_incomplete",
+        "decision_ids": [
+          "PREF-06.6",
+          "PREF-06.9"
+        ],
+        "note": "Same as T16, if the lesson still held the today designation underneath the outage.",
+        "actor": "system_evidence"
+      },
+      {
+        "id": "T18",
+        "from": "temporarily-unavailable",
+        "to": "completed",
+        "trigger": "evidence_source_recovered_complete",
+        "decision_ids": [
+          "PREF-06.6",
+          "PREF-06.9"
+        ],
+        "note": "Evidence source reachable again; reconciled evidence shows the lesson was in fact already complete -- unknown resolves to its true value, never fabricated.",
+        "actor": "system_evidence"
+      }
+    ],
+    "provisional": [],
+    "illegal": [
+      {
+        "id": "X1",
+        "from": "completed",
+        "to": "temporarily-unavailable",
+        "reason": "Core reliability invariant: an evidence-source outage may never demote or erase known-completed work.",
+        "cites": [
+          "PROGRAM_DOSSIER.md §15 item 2",
+          "PREF-06.9"
+        ]
+      },
+      {
+        "id": "X2",
+        "from": "completed",
+        "to": "unreleased",
+        "reason": "No demotion path out of completed exists in RC's text.",
+        "cites": [
+          "PROGRAM_DOSSIER.md §15 item 2"
+        ]
+      },
+      {
+        "id": "X3",
+        "from": "completed",
+        "to": "skipped",
+        "reason": "No demotion path out of completed; skipping is a curriculum-pursuit designation, not an evidence-erasure action. CONFIRMED FORBIDDEN by RC's 2026-07-24 ruling (OPEN-18): completed -> skipped remains illegal, and this entry is the guard enforcing T11's pre-completion precondition -- once a lesson reaches completed for a student, T11 (today -> skipped) can never legally apply to it, and no other skip transition can either.",
+        "cites": [
+          "PROGRAM_DOSSIER.md §15 item 2",
+          "RC 2026-07-24 ruling (OPEN-18)"
+        ],
+        "status": "CONFIRMED",
+        "provenance": "RESOLVED by RC 2026-07-24"
+      },
+      {
+        "id": "X4",
+        "from": "completed",
+        "to": "optional-catalog",
+        "reason": "No demotion path out of completed; optional-catalog is a content-classification state, not reachable from a per-student completion fact.",
+        "cites": [
+          "PROGRAM_DOSSIER.md §15 item 2"
+        ]
+      },
+      {
+        "id": "X5",
+        "from": "unreleased",
+        "to": "completed",
+        "reason": "No evidence path exists before release -- a lesson cannot be completed before it is released.",
+        "cites": [
+          "PREF-01.8"
+        ]
+      },
+      {
+        "id": "X6",
+        "from": "unreleased",
+        "to": "temporarily-unavailable",
+        "reason": "No evidence determination is meaningful before release -- nothing is being made unreachable.",
+        "cites": [
+          "PREF-01.8"
+        ]
+      },
+      {
+        "id": "X7",
+        "from": "unreleased",
+        "to": "optional-catalog",
+        "reason": "Optional-catalog is a content-ingestion-time classification (NT14), not a runtime demotion target reachable from an ordinary unreleased curriculum lesson.",
+        "cites": [
+          "PREF-14.1"
+        ]
+      },
+      {
+        "id": "X8",
+        "from": "skipped",
+        "to": "completed",
+        "reason": "Skipped lessons are inert and not openable; no evidence can attach without first becoming released/today.",
+        "cites": [
+          "PREF-01.9"
+        ]
+      },
+      {
+        "id": "X9",
+        "from": "skipped",
+        "to": "temporarily-unavailable",
+        "reason": "Same as X8 -- no evidence determination applies to an inert, unopenable lesson.",
+        "cites": [
+          "PREF-01.9"
+        ]
+      },
+      {
+        "id": "X10",
+        "from": "skipped",
+        "to": "unreleased",
+        "reason": "No defined 'un-skip to hidden' path; reversing a skip goes through released/today (T12/T13), never back to unreleased.",
+        "cites": [
+          "PREF-01.9"
+        ]
+      },
+      {
+        "id": "X11",
+        "from": "skipped",
+        "to": "optional-catalog",
+        "reason": "Not meaningful: skipped applies to normal-path curriculum lessons the class walked past; optional-catalog content was never on the normal path to begin with.",
+        "cites": [
+          "PREF-01.9",
+          "PREF-01.10"
+        ]
+      },
+      {
+        "id": "X12",
+        "from": "optional-catalog",
+        "to": "unreleased",
+        "reason": "Optional-catalog does not fall back to ordinary unreleased status; its only forward path is explicit assignment (T14/T15).",
+        "cites": [
+          "PREF-01.10",
+          "PREF-14.1"
+        ]
+      },
+      {
+        "id": "X13",
+        "from": "optional-catalog",
+        "to": "skipped",
+        "reason": "Not meaningful: optional-catalog content was never on the normal curriculum path for the class to skip over.",
+        "cites": [
+          "PREF-01.10"
+        ]
+      },
+      {
+        "id": "X14",
+        "from": "optional-catalog",
+        "to": "completed",
+        "reason": "Must be explicitly assigned into released/today first (T14/T15) before any evidence/completion state can apply.",
+        "cites": [
+          "PREF-01.10"
+        ]
+      },
+      {
+        "id": "X15",
+        "from": "optional-catalog",
+        "to": "temporarily-unavailable",
+        "reason": "Same as X14 -- no evidence determination applies to unassigned catalog content.",
+        "cites": [
+          "PREF-01.10"
+        ]
+      },
+      {
+        "id": "X16",
+        "from": "optional-catalog",
+        "to": "released",
+        "reason": "Illegal ONLY via the ordinary teacher_release/teacher_designate_today triggers used for normal curriculum lessons -- optional-catalog content must never auto-schedule. The sole legal path out is T14/T15 via the explicit_teacher_assignment trigger specifically.",
+        "cites": [
+          "PREF-01.10",
+          "PREF-14.1",
+          "PREF-14.2"
+        ],
+        "trigger_forbidden": [
+          "teacher_release",
+          "teacher_designate_today"
+        ]
+      },
+      {
+        "id": "X17",
+        "from": "temporarily-unavailable",
+        "to": "unreleased",
+        "reason": "An availability failure must never reclassify a lesson's curriculum status.",
+        "cites": [
+          "PROGRAM_DOSSIER.md §15 item 2",
+          "PREF-06.9"
+        ]
+      },
+      {
+        "id": "X18",
+        "from": "temporarily-unavailable",
+        "to": "skipped",
+        "reason": "Same as X17.",
+        "cites": [
+          "PROGRAM_DOSSIER.md §15 item 2",
+          "PREF-06.9"
+        ]
+      },
+      {
+        "id": "X19",
+        "from": "temporarily-unavailable",
+        "to": "optional-catalog",
+        "reason": "Same as X17; optional-catalog is also a content-ingestion classification never reachable via an availability failure.",
+        "cites": [
+          "PROGRAM_DOSSIER.md §15 item 2",
+          "PREF-06.9",
+          "PREF-14.1"
+        ]
+      }
+    ],
+    "unresolved": [],
+    "provisional_retirement": {
+      "status": "RETIRED",
+      "retired_date": "2026-07-24",
+      "promoted_transitions": [
+        "T7",
+        "T11",
+        "T12",
+        "T13"
+      ],
+      "promoted_to": "transitions.legal",
+      "reason": "RC's 2026-07-24 ruling on OPEN-18 decided that released/today -> skipped and skipped -> released/today are legal (T11 conditioned pre-completion), teacher-only. These four transitions no longer belong in a non-normative provisional bucket -- they are decided policy.",
+      "superseded_bucket_history": "In v1.0, T7/T11/T12/T13 lived here as transitions.provisional entries tagged \"normative\": false, \"open_item\": \"OPEN-18\". This bucket is now permanently empty; see transitions.legal for the promoted entries (now carrying \"provenance\": \"RESOLVED by RC 2026-07-24\" instead) and the top-level changelog for the full history.",
+      "provenance": "RESOLVED by RC 2026-07-24"
+    },
+    "resolved": [
+      {
+        "id": "U1",
+        "from": "completed",
+        "to": null,
+        "topic": "Any legal exit from completed (e.g. for a within-quarter retake, PREF-06.4) reopening the Desk tile.",
+        "status": "RESOLVED by RC 2026-07-24",
+        "resolution": "completed remains TERMINAL for the Desk tile -- zero legal exit transitions, DECIDED not open. A retake is an ORTHOGONAL activity/affordance attached to the completed lesson (see top-level retake_affordance); it never demotes completion, never relocks, never erases history, and never alters the grading engine via navigation state. Implementation details of the retake affordance itself are deferred to later work packages (D8).",
+        "provenance": "RESOLVED by RC 2026-07-24",
+        "resolved_open_item": "OPEN-17"
+      },
+      {
+        "id": "U2",
+        "from": "released",
+        "to": "skipped",
+        "topic": "Whether an already-released (not-yet-completed) lesson can be retroactively marked skipped.",
+        "status": "RESOLVED by RC 2026-07-24",
+        "resolution": "released -> skipped is ALLOWED (T7). today -> skipped is ALLOWED BEFORE COMPLETION (T11; precondition: lesson not yet completed for this student -- a completed lesson can never reach skipped, see X3). Both are teacher-only; students cannot initiate a skip.",
+        "provenance": "RESOLVED by RC 2026-07-24",
+        "resolved_open_item": "OPEN-18",
+        "promoted_transitions": [
+          "T7",
+          "T11"
+        ]
+      },
+      {
+        "id": "U3",
+        "from": "skipped",
+        "to": "released",
+        "topic": "Whether a skip designation is reversible.",
+        "status": "RESOLVED by RC 2026-07-24",
+        "resolution": "Skip IS reversible: skipped -> released (T12) and skipped -> today (T13) are both ALLOWED, teacher-only. Students cannot initiate an unskip.",
+        "provenance": "RESOLVED by RC 2026-07-24",
+        "resolved_open_item": "OPEN-18",
+        "promoted_transitions": [
+          "T12",
+          "T13"
+        ]
+      }
+    ]
+  },
+  "visibility": {
+    "today": {
+      "primary_view": {
+        "visible": true,
+        "openable": true,
+        "grey_inert": false,
+        "scope": "always",
+        "notes": "The primary front door (PREF-01.2)."
+      },
+      "roadmap_view": {
+        "visible": true,
+        "openable": true,
+        "grey_inert": false,
+        "scope": "always",
+        "notes": "Also visible in the broader roadmap as the current position."
+      }
+    },
+    "released": {
+      "primary_view": {
+        "visible": true,
+        "openable": true,
+        "grey_inert": false,
+        "scope": "nearby_recent_window",
+        "notes": "Primary view shows today plus nearby/recent released lessons first (PREF-01.6); a released lesson far outside that window is not necessarily surfaced on the primary view."
+      },
+      "roadmap_view": {
+        "visible": true,
+        "openable": true,
+        "grey_inert": false,
+        "scope": "all",
+        "notes": "Every released lesson is visible in the broader roadmap view (PREF-01.7), work-ahead permitted (PREF-01.4/.5)."
+      }
+    },
+    "unreleased": {
+      "primary_view": {
+        "visible": false,
+        "openable": false,
+        "grey_inert": false,
+        "scope": "not_applicable",
+        "notes": "Hidden/unavailable -- must not appear (PREF-01.8)."
+      },
+      "roadmap_view": {
+        "visible": false,
+        "openable": false,
+        "grey_inert": false,
+        "scope": "not_applicable",
+        "notes": "Hidden/unavailable -- must not appear (PREF-01.8)."
+      }
+    },
+    "skipped": {
+      "primary_view": {
+        "visible": false,
+        "openable": false,
+        "grey_inert": false,
+        "scope": "not_applicable",
+        "notes": "Never on the primary view (PREF-01.9)."
+      },
+      "roadmap_view": {
+        "visible": true,
+        "openable": false,
+        "grey_inert": true,
+        "scope": "all",
+        "notes": "Grey and inert, roadmap-only (PREF-01.9)."
+      }
+    },
+    "optional-catalog": {
+      "primary_view": {
+        "visible": false,
+        "openable": false,
+        "grey_inert": false,
+        "scope": "not_applicable",
+        "notes": "Absent from the normal path until explicit teacher assignment (PREF-01.10)."
+      },
+      "roadmap_view": {
+        "visible": false,
+        "openable": false,
+        "grey_inert": false,
+        "scope": "not_applicable",
+        "notes": "Also absent from the broader roadmap view until explicit assignment -- the roadmap is still part of the normal student-facing path. Once assigned it is no longer in this state (it becomes released/today) and follows that state's visibility rules instead."
+      }
+    },
+    "completed": {
+      "primary_view": {
+        "visible": true,
+        "openable": true,
+        "grey_inert": false,
+        "scope": "always",
+        "notes": "Completion is additive information (a badge) on top of a lesson's prior release visibility, not a hiding state."
+      },
+      "roadmap_view": {
+        "visible": true,
+        "openable": true,
+        "grey_inert": false,
+        "scope": "all",
+        "notes": "Visible and reviewable in the roadmap."
+      }
+    },
+    "temporarily-unavailable": {
+      "primary_view": {
+        "visible": true,
+        "openable": true,
+        "grey_inert": false,
+        "scope": "always",
+        "notes": "Fail-open navigation permitted (dossier §15 item 3); completion status displays as UNKNOWN, never zero (dossier §15 item 1); no credit awarded while in this state."
+      },
+      "roadmap_view": {
+        "visible": true,
+        "openable": true,
+        "grey_inert": false,
+        "scope": "all",
+        "notes": "Same fail-open/no-credit rule applies in the roadmap view."
+      }
+    }
+  },
+  "optional_catalog_rule": {
+    "source_record": "nt14-ingest-4-1-2026-07-23",
+    "registry_marker": "top-level \"availability\": \"optional-catalog\" field on a registry row",
+    "qb_select_default_behavior": "qb.select() drops optional-catalog rows by default",
+    "qb_select_opt_in": "keyword-only include_optional=True",
+    "qb_explicit_access_unaffected": [
+      "qb.get",
+      "qb.get_for_packet"
+    ],
+    "desk_level_consequence": {
+      "never_auto_scheduled": true,
+      "never_enters_pacing": true,
+      "never_counts_toward_completion": true,
+      "never_surfaces_in_normal_path_absent_explicit_assignment": true
+    },
+    "required_transition_trigger_out_of_state": "explicit_teacher_assignment",
+    "forbidden_transition_triggers_out_of_state": [
+      "teacher_release",
+      "teacher_designate_today"
+    ],
+    "decision_ids": [
+      "PREF-01.10",
+      "PREF-14.1",
+      "PREF-14.2"
+    ],
+    "cites": [
+      "CLAUDE.md § Lesson 4-1 (OPTIONAL CATALOG -- not scheduled, not required)",
+      "qb.py module docstring",
+      "qb.py select()"
+    ]
+  },
+  "reliability_invariants": [
+    {
+      "id": "RI-1",
+      "statement": "Unknown is a first-class rendered value. When authoritative evidence for a lesson is unavailable, the Desk reports temporarily-unavailable / UNKNOWN -- never zero and never affirmatively 'incomplete'.",
+      "cites": [
+        "PROGRAM_DOSSIER.md §15 item 1 (Unknown ≠ zero)",
+        "PREF-06.6"
+      ],
+      "applies_to_state": "temporarily-unavailable"
+    },
+    {
+      "id": "RI-2",
+      "statement": "Evidence-source unavailability alone can never relock or revoke known-completed work. completed is sticky with respect to temporarily-unavailable -- see transition X1.",
+      "cites": [
+        "PROGRAM_DOSSIER.md §15 item 2 (Unavailability may not relock)",
+        "PREF-06.9"
+      ],
+      "applies_to_state": "completed",
+      "forbidden_transition": {
+        "from": "completed",
+        "to": "temporarily-unavailable"
+      }
+    },
+    {
+      "id": "RI-3",
+      "statement": "Fail-open navigation is permitted during uncertainty -- a lesson in temporarily-unavailable may still be opened -- but official credit is only ever awarded from verified authoritative evidence. No credit accrues while a lesson renders temporarily-unavailable.",
+      "cites": [
+        "PROGRAM_DOSSIER.md §15 item 3 (Fail-open navigation never awards credit)"
+      ],
+      "applies_to_state": "temporarily-unavailable"
+    }
+  ],
+  "work_ahead_rule": {
+    "permitted": true,
+    "eligible_states": [
+      "released",
+      "today"
+    ],
+    "refused_states": [
+      "unreleased",
+      "skipped",
+      "optional-catalog"
+    ],
+    "scope": "released material only",
+    "notes": "Work-ahead is never a path into unreleased or unassigned optional-catalog content (PREF-01.5). 'completed' and 'temporarily-unavailable' lessons remain independently openable (review / fail-open) but are not 'work-ahead' targets since a student is not getting ahead into new material there.",
+    "decision_ids": [
+      "PREF-01.4",
+      "PREF-01.5"
+    ]
+  },
+  "cross_references": {
+    "RC_TEACHER_PREFERENCE_RECORD.md": "Source of the PREF-NN / PREF-NN.M decision text cited throughout this file.",
+    "PROGRAM_DOSSIER.md": "§15 items 1-3 (reliability addendum).",
+    "qb.py": "select()/get()/get_for_packet() optional-catalog behavior (nt14-ingest-4-1-2026-07-23).",
+    "CLAUDE.md": "§ Lesson 4-1 (OPTIONAL CATALOG)."
+  },
+  "skip_authority": {
+    "actor": "teacher_only",
+    "student_may_initiate": false,
+    "applies_to_transitions": [
+      "T3",
+      "T7",
+      "T11",
+      "T12",
+      "T13"
+    ],
+    "forbidden_target_from_completed": true,
+    "rationale": "Skip and unskip are curriculum-pacing designations reserved to the teacher of record; no Desk affordance allows a student to initiate or reverse a skip. completed -> skipped remains forbidden (X3) regardless of skip authority -- a completed lesson can never be skipped.",
+    "provenance": "RESOLVED by RC 2026-07-24",
+    "decision_ids": [
+      "PREF-01.9",
+      "PREF-13.2"
+    ]
+  },
+  "retake_affordance": {
+    "description": "A within-quarter retake (PREF-06.4) is an activity/affordance attached to an already-completed lesson. It is ORTHOGONAL to Desk navigation state: it never touches the completed tile's state-machine position.",
+    "demotes_completion": false,
+    "relocks": false,
+    "erases_history": false,
+    "alters_grading_engine_via_navigation_state": false,
+    "completed_is_terminal": true,
+    "implementation_deferred_to": "D8 work packages",
+    "resolved_open_item": "OPEN-17",
+    "provenance": "RESOLVED by RC 2026-07-24",
+    "decision_ids": [
+      "PREF-06.4"
+    ]
+  },
+  "resolved_open_item_ids": [
+    "OPEN-17",
+    "OPEN-18"
+  ],
+  "resolved_open_items": {
+    "OPEN-17": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "completed remains TERMINAL for the lesson tile. A retake is an ORTHOGONAL activity/affordance attached to the completed lesson -- it never demotes completion, never relocks, never erases history, and never alters the grading engine via navigation state. completed keeps ZERO legal exit transitions -- this is now DECIDED, not open. The retake-affordance concept is documented as orthogonal; its implementation details are deferred to the work packages.",
+      "supersedes": "v1's provisional_implementation_choices.OPEN-17, which kept zero legal exits from completed as a conservative reading pending RC's decision, flagged unresolved-pending-RC and subject to change if RC decided otherwise."
+    },
+    "OPEN-18": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "unreleased -> skipped remains legal (T3, CONFIRMED). released -> skipped is ALLOWED (T7, promoted to legal). today -> skipped is ALLOWED BEFORE COMPLETION (T11, promoted to legal with a machine-readable precondition; a completed lesson can never reach skipped). skipped -> released is ALLOWED (T12, promoted to legal). skipped -> today is ALLOWED (T13, promoted to legal). completed -> skipped remains FORBIDDEN (X3, CONFIRMED). Students cannot initiate skip or unskip -- every skip transition carries a teacher-only actor and student_may_initiate: false.",
+      "supersedes": "v1's provisional_implementation_choices.OPEN-18, which recorded T7/T11/T12/T13 in transitions.provisional (normative: false) as a non-normative implementation placeholder pending RC's answer."
+    }
+  },
+  "resolved_items_affecting_this_policy": {
+    "OPEN-17": "RESOLVED: 'completed' is DECIDED terminal at the Desk-tile layer (zero legal exits); a within-quarter retake is an orthogonal affordance, not a Desk-state transition.",
+    "OPEN-18": "RESOLVED: 'skipped' is reachable after release (released/today -> skipped, T7/T11 promoted to legal; T11 conditioned pre-completion) and a skipped designation IS reversible (skipped -> released/today, T12/T13 promoted to legal). All skip/unskip transitions are teacher-only."
+  },
+  "changelog": [
+    {
+      "version": "2.0",
+      "date": "2026-07-24",
+      "summary": "NT16 work package B (D4): implements RC's 2026-07-24 rulings resolving OPEN-17 (retakes) and OPEN-18 (skip transitions). Supersedes desk_state_model.v1.json, which is deleted.",
+      "changes": [
+        "OPEN-17 RESOLVED: completed is DECIDED terminal (zero legal exits, confirmed not a placeholder); retake is an orthogonal affordance (new top-level retake_affordance object) that never touches Desk navigation state.",
+        "OPEN-18 RESOLVED: T7 (released->skipped), T12 (skipped->released), and T13 (skipped->today) promoted from transitions.provisional to transitions.legal; T11 (today->skipped) promoted to transitions.legal with a machine-readable pre-completion precondition (a completed lesson can never reach skipped).",
+        "T3 (unreleased->skipped) CONFIRMED by RC's ruling -- already legal in v1.0, no duplicate transition minted.",
+        "X3 (completed->skipped) CONFIRMED FORBIDDEN by RC's ruling, and its reason/cites updated to note it is the guard against T11's precondition being violated.",
+        "transitions.provisional is now permanently empty; new provisional_retirement object records the promotion history so it is not silently lost.",
+        "transitions.unresolved is now permanently empty; new transitions.resolved array carries U1/U2/U3 (identifiers preserved) with resolution text and provenance.",
+        "Added an actor field to every entry in transitions.legal (teacher | system_evidence | teacher_only); every skip transition additionally carries student_may_initiate: false.",
+        "Added top-level skip_authority object codifying teacher-only skip/unskip authority.",
+        "Added top-level retake_affordance object codifying the retake-as-orthogonal-activity concept (implementation deferred to D8).",
+        "open_item_ids is now empty; added resolved_open_item_ids: [OPEN-17, OPEN-18].",
+        "Replaced provisional_implementation_choices with resolved_open_items (OPEN-17, OPEN-18 mapped to RESOLVED status + ruling text + what they supersede).",
+        "Retitled open_items_affecting_this_policy to resolved_items_affecting_this_policy with resolved framing.",
+        "states.completed description rewritten as DECIDED terminal; open_item key removed, replaced by status/resolved_open_item/provenance metadata.",
+        "Deleted desk_state_model.v1.json; this file (v2.0) is now canonical."
+      ],
+      "provenance": "RESOLVED by RC 2026-07-24"
+    }
+  ]
+}

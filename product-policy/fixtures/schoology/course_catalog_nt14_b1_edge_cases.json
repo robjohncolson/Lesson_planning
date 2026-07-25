@@ -1,0 +1,101 @@
+{
+  "_comment": "SYNTHETIC FIXTURE -- Codex SOL review R-B, findings B1 (HIGH) and R2 (HIGH, residual). B1 entries (b1-*) target the original fail-open gap in `_should_project` (`entry.get('lesson_state', 'released')` defaulting permissively, and never consulting the REAL NT14 content-registry marker `availability == 'optional-catalog'`, qb.py / record nt14-ingest-4-1-2026-07-23). R2 entries (r2-*) target the TWO residual holes the B1 fix left open: (1) `bool(entry.get('explicitly_assigned', False))` treats any non-empty string -- including the string 'false' -- as truthy, and (2) a present-but-malformed `availability` value (a case variant or garbage) was simply ignored and fell through to a permissive `lesson_state`. See test_parity_check.py's B1 and R2 test groups, which assert the post-fix/correct answer for every entry here -- run against the pre-fix snapshot, most of those assertions fail, proving discrimination. Two entries (b1-garbage-state-plain, r2-explicitly-assigned-int-0) do NOT discriminate pre/post fix, for reasons documented on each entry and disclosed transparently in the corresponding test's docstring -- included anyway as legitimate regression coverage, never claimed as proof of either fix.",
+  "course_id": "SYNTHETIC-COURSE-0001",
+  "course_slug": "a2-synthetic-algebra2",
+  "section_id": "SYNTHETIC-SECTION-0001A",
+  "term": "SYNTHETIC-TERM-Q4",
+  "lessons": [
+    {
+      "_comment": "Raw NT14 registry-row shape: carries the REAL 'availability' marker (qb.py) and deliberately has NO 'lesson_state' field at all, matching an actual Lesson 4-1 registry row exactly. Not explicitly assigned. MUST NOT be projected. Pre-fix: entry.get('lesson_state','released') defaults to 'released' and old code never looks at `availability` at all -> incorrectly projects it.",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "lesson_packet_work", "artifact_id": "b1-raw-not-assigned",
+      "schoology_category": "WORK", "points_possible": 100.0, "extra_credit": false,
+      "availability": "optional-catalog"
+    },
+    {
+      "_comment": "Explicit teacher assignment overrides BOTH the real availability marker AND an explicit, restrictive lesson_state ('unreleased', which would independently block projection under the old NEVER_PROJECT_STATES branch, and would raise it to old-code's return-False path before old code ever even looks at explicitly_assigned). MUST be projected. Pre-fix: state='unreleased' -> in NEVER_PROJECT_STATES -> old code returns False without ever consulting explicitly_assigned or availability -- wrong.",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "lesson_quiz", "artifact_id": "b1-explicit-assignment-overrides-restrictive-state",
+      "lesson_state": "unreleased",
+      "schoology_category": "ASSESSMENT", "points_possible": 100.0, "extra_credit": false,
+      "availability": "optional-catalog", "explicitly_assigned": true
+    },
+    {
+      "_comment": "Ordinary-looking record (no availability marker at all) that is simply missing its lesson_state field -- e.g. a data/integration bug, not an optional-catalog record. MUST NOT be projected: unknown state is not permission. Pre-fix: defaults to 'released' -> incorrectly projects it.",
+      "lesson_id": "4-9-missing-state", "topic": "4-9",
+      "artifact_type": "lesson_packet_work", "artifact_id": "b1-missing-state-plain",
+      "schoology_category": "WORK", "points_possible": 100.0, "extra_credit": false
+    },
+    {
+      "_comment": "Present-but-unrecognized lesson_state, no availability marker. MUST NOT be projected. NOTE: this specific case does NOT discriminate pre/post fix -- old code's final `state in _ALWAYS_PROJECT_STATES` check already correctly returns False for any present, non-matching string. Included as correctness/regression coverage for the fixed code, not as a discriminating case (see top-level _comment).",
+      "lesson_id": "4-9-garbage-state", "topic": "4-9",
+      "artifact_type": "lesson_packet_work", "artifact_id": "b1-garbage-state-plain",
+      "lesson_state": "banana",
+      "schoology_category": "WORK", "points_possible": 100.0, "extra_credit": false
+    },
+    {
+      "_comment": "Conflicting signals: lesson_state says the permissive 'released', but the REAL availability marker says optional-catalog, and no explicit assignment has been given. The restrictive marker MUST win -- MUST NOT be projected despite the permissive lesson_state. Pre-fix: old code never looks at availability at all, sees state='released', and incorrectly projects it.",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "ti84_extra_credit", "artifact_id": "b1-conflict-not-assigned",
+      "lesson_state": "released",
+      "schoology_category": "WORK", "points_possible": 0.5, "extra_credit": true,
+      "availability": "optional-catalog", "explicitly_assigned": false
+    },
+    {
+      "_comment": "Bonus discriminating case: a garbage/unrecognized lesson_state combined with the real availability marker AND explicit assignment. MUST still be projected -- once availability flags optional-catalog, explicit assignment is the sole gate regardless of whatever (even nonsensical) lesson_state also says. Pre-fix: state='banana' present -> not equal to the literal string 'optional-catalog' -> not in NEVER_PROJECT_STATES -> 'banana' not in ALWAYS_PROJECT_STATES -> old code returns False without ever consulting availability or explicitly_assigned -- wrong.",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "equation_lab_extra_credit", "artifact_id": "b1-garbage-state-with-marker-assigned",
+      "lesson_state": "banana",
+      "schoology_category": "WORK", "points_possible": 0.5, "extra_credit": true,
+      "availability": "optional-catalog", "explicitly_assigned": true
+    },
+    {
+      "_comment": "R2: explicitly_assigned serialized as the STRING 'false' (not the Python bool False), with lesson_state EXPLICITLY 'optional-catalog' so old code's `state == _OPTIONAL_CATALOG_STATE` branch is entered and it actually reaches the `bool(entry.get('explicitly_assigned', False))` line under scrutiny (isolating this specific hole from the separate missing-lesson_state-defaults-to-released hole B1 already covers). MUST NOT be projected -- a non-bool value is a type/serialization anomaly, never coerced via truthiness. DISCRIMINATES: pre-fix `bool('false')` is True (any non-empty string is truthy) -> old code incorrectly projects it.",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "lesson_packet_work", "artifact_id": "r2-explicitly-assigned-string-false",
+      "lesson_state": "optional-catalog",
+      "schoology_category": "WORK", "points_possible": 100.0, "extra_credit": false,
+      "availability": "optional-catalog", "explicitly_assigned": "false"
+    },
+    {
+      "_comment": "R2: explicitly_assigned serialized as the STRING 'true' (not the Python bool True), lesson_state explicitly 'optional-catalog' (isolates the bool() coercion line specifically). MUST NOT be projected -- only the literal Python bool True counts as assigned; a stringified 'true' is a type/serialization anomaly and fails closed, never coerced via truthiness (the same coercion mechanism that would also wrongly accept a stringified 'false'). DISCRIMINATES: pre-fix `bool('true')` evaluates True, so old code projects it -- the wrong outcome under the strict identity convention, even though the string superficially reads as 'true'.",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "lesson_quiz", "artifact_id": "r2-explicitly-assigned-string-true",
+      "lesson_state": "optional-catalog",
+      "schoology_category": "ASSESSMENT", "points_possible": 100.0, "extra_credit": false,
+      "availability": "optional-catalog", "explicitly_assigned": "true"
+    },
+    {
+      "_comment": "R2: explicitly_assigned serialized as the int 1, lesson_state explicitly 'optional-catalog' (isolates the bool() coercion line specifically). MUST NOT be projected -- only the literal bool True counts (1 is True is False in Python; bool and int are distinct types). DISCRIMINATES: pre-fix `bool(1)` is True -> old code incorrectly projects it.",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "participation", "artifact_id": "r2-explicitly-assigned-int-1",
+      "lesson_state": "optional-catalog",
+      "schoology_category": "WORK", "points_possible": 1.0, "extra_credit": false,
+      "availability": "optional-catalog", "explicitly_assigned": 1
+    },
+    {
+      "_comment": "R2: explicitly_assigned serialized as the int 0, lesson_state explicitly 'optional-catalog' (isolates the bool() coercion line specifically). MUST NOT be projected -- only the literal bool False (or an absent key) counts as 'not assigned'; int 0 is still a non-bool type anomaly and must fail closed via the strict identity check, not via Python truthiness. NOTE: this specific case does NOT discriminate pre/post fix -- `bool(0)` is already False under the pre-fix code (0 is falsy), so old code happens to reject it too, for the wrong reason (blind truthiness, not a real type/identity check). Included as legitimate regression coverage for the new strict-identity convention, not claimed as proof of the fix (see test docstring).",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "ti84_extra_credit", "artifact_id": "r2-explicitly-assigned-int-0",
+      "lesson_state": "optional-catalog",
+      "schoology_category": "WORK", "points_possible": 0.5, "extra_credit": true,
+      "availability": "optional-catalog", "explicitly_assigned": 0
+    },
+    {
+      "_comment": "R2: availability is a CASE VARIANT of the real marker ('Optional-Catalog' vs 'optional-catalog'), paired with a permissive lesson_state ('released'). MUST NOT be projected -- a present-but-unrecognized availability value fails closed UNCONDITIONALLY, before lesson_state is ever consulted; it must never be ignored and never fall through to the permissive state. DISCRIMINATES: pre-fix code's case-sensitive exact-match check on availability fails silently, so the record falls through to lesson_state='released' and old code incorrectly projects it.",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "equation_lab_extra_credit", "artifact_id": "r2-availability-case-variant",
+      "lesson_state": "released",
+      "schoology_category": "WORK", "points_possible": 0.5, "extra_credit": true,
+      "availability": "Optional-Catalog"
+    },
+    {
+      "_comment": "R2: availability is plain garbage (not any recognizable variant), paired with a permissive lesson_state ('released'). MUST NOT be projected -- same reasoning as the case-variant entry: a malformed availability value fails closed unconditionally. DISCRIMINATES: pre-fix code falls through to lesson_state='released' and incorrectly projects it.",
+      "lesson_id": "4-1", "topic": "4-1",
+      "artifact_type": "lesson_packet_work", "artifact_id": "r2-availability-garbage",
+      "lesson_state": "released",
+      "schoology_category": "WORK", "points_possible": 100.0, "extra_credit": false,
+      "availability": "maybe-optional-catalog-ish"
+    }
+  ]
+}

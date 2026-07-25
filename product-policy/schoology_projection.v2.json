@@ -1,0 +1,397 @@
+{
+  "version": "2.0",
+  "date": "2026-07-24",
+  "source_of_authority": "RC final decisions 2026-07-24 (Grok preference interview + RC clarifications; NT16 rulings 2026-07-24 resolving OPEN-08/09/10/11/15/16/17/18/19)",
+  "contract_id": "schoology_projection",
+  "contract_title": "Schoology Projection & Reconciliation Contract",
+  "status": "DECIDED",
+  "decision_ids": ["PREF-05", "PREF-11", "PREF-03"],
+  "open_item_ids": ["OPEN-04"],
+  "resolved_open_item_ids": ["OPEN-08", "OPEN-09", "OPEN-10", "OPEN-11", "OPEN-15", "OPEN-16", "OPEN-19"],
+  "no_live_write": true,
+  "no_live_write_statement": "This contract and its reference implementation (parity_check.py) perform NO network call, NO Schoology REST/GraphQL/API call, NO OAuth handshake, NO CDP/browser automation, and NO write of any kind against a live Schoology tenant. Schoology course/section identifiers do not exist yet. All operations run over local synthetic fixtures only. See SCHOOLOGY_PROJECTION_CONTRACT.md section 9.",
+
+  "role_of_schoology": {
+    "not_a_passive_mirror": true,
+    "primary_surfaces": [
+      "school_facing_assignment_notification_surface",
+      "grade_alert_home",
+      "school_facing_gradebook_display",
+      "deep_link_surface_into_desk_activities",
+      "independent_calculator_where_category_model_can_faithfully_express_policy"
+    ],
+    "a2_retains": [
+      "durable_evidence",
+      "item_identity",
+      "teacher_designation",
+      "policy_versioning",
+      "receipts_and_audit",
+      "independent_expected_grade_computation"
+    ]
+  },
+
+  "required_principle": {
+    "statement": "one policy, two calculations, explicit reconciliation",
+    "obligations": [
+      "publish assignments/categories/points/grades granular enough for Schoology's native calculation to be a meaningful, reproducible INFORMATIVE view of the published per-category evidence -- NOT for Schoology to reproduce A2's completion-gated authoritative quarter grade, which remains A2-computed and is published as the sole authoritative value (see official_quarter_grade_projection, feasibility_verdict)",
+      "compare Schoology's computed result against A2's expected result every cycle, comparing UNDERLYING full-precision values consistently -- never mistaking ordinary display rounding for a substantive divergence (OPEN-09, RESOLVED; see rounding_awareness)",
+      "surface divergence to RC; never silently accept two conflicting official totals",
+      "never fabricate a synthetic zero-valued assignment to force a grade into being computable when no eligible designated evidence exists (OPEN-16, RESOLVED; see zero_denominator_rule)"
+    ],
+    "hard_constraint": "Schoology must not retroactively decide which raw evidence qualifies for credit -- qualification is A2's teacher-designation function (PREF-03.9, PREF-04.6), upstream of projection. Schoology only ever receives an already-decided point value."
+  },
+
+  "constants": {
+    "completion_threshold": 0.40,
+    "completion_threshold_inclusive": true,
+    "branch_at_or_above": "max(work_aggregate, assessment_aggregate)",
+    "branch_below": "average(work_aggregate, assessment_aggregate)",
+    "participation_point_per_class_day_present": 1.0,
+    "participation_point_per_class_day_absent": 0.0,
+    "ti84_extra_credit_points": 0.5,
+    "equation_lab_extra_credit_points": 0.5,
+    "extra_credit_aggregate": "WORK",
+    "final_grade_display_decimals": 1,
+    "unknown_sentinel_token": "UNKNOWN",
+    "note": "These mirror grading_policy.v2.json's constants block exactly (the sibling NT15 D2 deliverable, PREF-03/PREF-04, superseded to v2.0 by the 2026-07-24 NT16 rulings) -- this contract projects that policy's output, it does not re-decide it."
+  },
+
+  "categories": {
+    "WORK": {
+      "schoology_category_key": "a2_work",
+      "grading_mode": "points",
+      "components": ["teacher_designated_digital_packet_work", "daily_participation_evidence", "designated_extra_credit"],
+      "native_percentage_status": "informative_only_by_default -- but see category_native_reproducibility_preconditions: this category's own arithmetic is now (OPEN-15, RESOLVED) structurally the same points-earned/points-possible ratio Schoology's native category math already computes",
+      "aggregate_formula_reference": "grading_policy.v2.json -> work_aggregate_formula (OPEN-15, RESOLVED by RC 2026-07-24)"
+    },
+    "ASSESSMENT": {
+      "schoology_category_key": "a2_assessment",
+      "grading_mode": "points",
+      "components": ["lesson_quizzes", "topic_assessments"],
+      "native_percentage_status": "informative_only_by_default -- but see category_native_reproducibility_preconditions: this category's own arithmetic is now (OPEN-19, RESOLVED) structurally the same point-weighted ratio Schoology's native category math already computes",
+      "aggregate_formula_reference": "grading_policy.v2.json -> assessment_aggregate_formula (OPEN-19, RESOLVED by RC 2026-07-24)"
+    }
+  },
+
+  "assignment_mapping": [
+    {
+      "a2_entity": "lesson_packet_work",
+      "schoology_category": "WORK",
+      "granularity": "per_lesson",
+      "points_possible_source": "teacher_set",
+      "extra_credit": false,
+      "naming_status": "OPEN-04"
+    },
+    {
+      "a2_entity": "participation",
+      "schoology_category": "WORK",
+      "granularity": "per_class_day_per_lesson",
+      "points_possible_source": "fixed_1.0",
+      "extra_credit": false,
+      "naming_status": "OPEN-04",
+      "notes": "PREF-04.1/.2; OPEN-11 (RESOLVED) now governs non-class/partial/absent-day treatment upstream in grading_policy_ref.py -- published as a real point-bearing per-class-day assignment, one of category_native_reproducibility_preconditions"
+    },
+    {
+      "a2_entity": "ti84_extra_credit",
+      "schoology_category": "WORK",
+      "granularity": "per_assigned_exercise",
+      "points_possible_source": "fixed_0.5",
+      "extra_credit": true,
+      "naming_status": "OPEN-04",
+      "requires_stable_deep_link": true,
+      "notes": "PREF-04.3, PREF-08; OPEN-10 (RESOLVED) now governs the +1.0/day authorized-source cap upstream in grading_policy_ref.py -- published WITH Schoology's native Extra Credit flag, one of category_native_reproducibility_preconditions"
+    },
+    {
+      "a2_entity": "equation_lab_extra_credit",
+      "schoology_category": "WORK",
+      "granularity": "per_assigned_exercise",
+      "points_possible_source": "fixed_0.5",
+      "extra_credit": true,
+      "naming_status": "OPEN-04",
+      "requires_stable_deep_link": true,
+      "notes": "PREF-04.4; same OPEN-10 cap and Extra-Credit-flag note as ti84_extra_credit above"
+    },
+    {
+      "a2_entity": "lesson_quiz",
+      "schoology_category": "ASSESSMENT",
+      "granularity": "per_lesson",
+      "points_possible_source": "teacher_set",
+      "extra_credit": false,
+      "naming_status": "OPEN-04"
+    },
+    {
+      "a2_entity": "topic_assessment",
+      "schoology_category": "ASSESSMENT",
+      "granularity": "per_topic",
+      "points_possible_source": "teacher_set",
+      "extra_credit": false,
+      "naming_status": "OPEN-04"
+    },
+    {
+      "a2_entity": "Official quarter grade",
+      "schoology_category": null,
+      "granularity": "one manual/override column per grading period",
+      "points_possible_source": "N/A",
+      "extra_credit": false,
+      "naming_status": "OPEN-04",
+      "notes": "Authoritative; not a category total -- see official_quarter_grade_projection, feasibility_verdict"
+    }
+  ],
+
+  "release_gating": {
+    "always_project_lesson_states": ["today", "released", "completed", "temporarily-unavailable"],
+    "never_project_lesson_states": ["unreleased", "skipped"],
+    "conditional_lesson_states": {
+      "optional-catalog": "project only if explicitly_assigned is True (mirrors qb.select() include_optional opt-in; NT14 nt14-ingest-4-1-2026-07-23)"
+    },
+    "temporarily_unavailable_never_retracts": true,
+    "fail_closed_convention": {
+      "missing_or_unrecognized_lesson_state": "NEVER treated as permission to project -- no permissive default",
+      "real_nt14_availability_marker": "raw registry rows carry top-level availability (not lesson_state); availability == 'optional-catalog' is honored independently of and with equal force to lesson_state == 'optional-catalog' -- either signal requires explicit_assigned, restrictive wins on conflict",
+      "malformed_availability_value": "a PRESENT availability value that is not exactly 'optional-catalog' (case variant, garbage) fails closed UNCONDITIONALLY, before lesson_state is consulted -- never ignored, never falls through to a permissive lesson_state (R2 fix)",
+      "explicitly_assigned_strict_boolean": "explicitly_assigned is checked by IDENTITY (is True / is False), never by truthiness -- a stringified 'true'/'false', an int 1/0, or None is a type anomaly, fails closed, never coerced (R2 fix; closes the bool('false')==True hole)",
+      "malformed_records_surfaced_not_dropped": "a record failing closed for a malformed availability or explicitly_assigned value (not a routine non-projection reason) is surfaced via parity_check.detect_projection_anomalies() -- see divergence_handling"
+    },
+    "cites": ["PROGRAM_DOSSIER.md section 15 item 2", "PREF-01", "DESK_STATE_MODEL.md"]
+  },
+
+  "zero_denominator_rule": {
+    "rule": "no eligible designated work/participation/assessment evidence (denominator == 0) -> completion/WORK/ASSESSMENT/quarter grade all UNKNOWN on the A2 side (grading_policy.v2.json's own zero_denominator_rule, OPEN-16 RESOLVED by RC 2026-07-24) -- and, specific to this D3 projection layer, the Schoology projector MUST NOT fabricate a synthetic zero-valued assignment to force a grade into being computable.",
+    "no_fabricated_zero": {
+      "statement": "project_course() only ever emits assignment records that trace back to a REAL catalog entry (lesson_id/artifact_type/artifact_id) in course_catalog['lessons'] -- it never synthesizes an assignment out of nothing, and in particular never invents a placeholder zero-points assignment purely so some downstream ratio becomes computable.",
+      "reconciliation_consequence": "an all-UNKNOWN student (no eligible designated work/participation/assessment evidence posted at all) reconciles as UNKNOWN on BOTH sides -- A2's authoritative quarter grade AND Schoology's native flat-ratio figure both land on UNKNOWN (zero possible-points denominator), never a fabricated 0% or 100%. Per divergence_handling, UNKNOWN is still surfaced for RC review -- it is never treated as 'nothing to reconcile.'",
+      "display": "student-facing display of an UNKNOWN grade is a dash / 'not enough evidence' (grading_policy.v2.json's unknown_display_token/unknown_display_text) -- never zero, and never a fabricated zero-valued Schoology assignment used to manufacture a displayable number.",
+      "enforced_by": [
+        "parity_check.project_course (structural: every record traces to a real catalog entry, points_possible always > 0 for the fixed catalog)",
+        "parity_check.check_student_parity (an all-UNKNOWN student's a2_expected_quarter_grade and schoology_native_quarter_grade both remain UNKNOWN, never coerced to a number)"
+      ],
+      "test_coverage": "test_parity_check.py's zero-denominator / no-fabricated-zero test group, using fixtures/schoology/student_0005_zero_denominator_no_eligible_evidence.json",
+      "source": "OPEN-16, RESOLVED by RC 2026-07-24"
+    }
+  },
+
+  "official_quarter_grade_projection": {
+    "mechanism_requirement": "a value Schoology does not itself compute from category weights",
+    "candidate_mechanisms": ["schoology_override_grade_feature", "dedicated_manual_column_excluded_from_category_weighting"],
+    "mechanism_selection_status": "ASSUMPTION-2 (unverified offline -- see feasibility_verdict.assumptions_to_confirm)",
+    "schoology_column_key": "a2_official_quarter_grade",
+    "source": "grading_policy_ref.compute_quarter_grade output (D2 deliverable, PREF-03; v2.0 returns full precision, never rounded internally -- OPEN-09, RESOLVED)",
+    "authoritative": true,
+    "native_category_totals_authoritative": false
+  },
+
+  "feasibility_verdict": {
+    "subject": "40%-conditional max/average quarter-grade formula (PREF-03.4-.6)",
+    "verdict": "NOT_NATIVELY_REPRESENTABLE",
+    "verdict_sustained_independently_by": "the completion-gated max()/average() conditional switch across categories, alone -- this reasoning does not depend on, and survives unchanged under, how the WORK/ASSESSMENT aggregates' own components combine. This was true when OPEN-15/OPEN-19 were unresolved and remains true now that RC has resolved them (2026-07-24): resolving HOW an aggregate is computed says nothing about whether the CROSS-CATEGORY conditional switch that consumes it is natively expressible, and it is not. See secondary_illustration below, which is illustrative, not required to reach this verdict.",
+    "reasoning": [
+      "Schoology's documented gradebook model provides categories, fixed per-category weights, points/percentage grading, total-points-vs-weighted-category whole-course modes, an extra-credit flag, and some drop-lowest-style rules.",
+      "None of these primitives include a user-defined conditional expression that reads one category's aggregate (or an auxiliary completion percentage) and, based on a threshold, switches the whole-course arithmetic operation used to combine categories.",
+      "Category weights are fixed configuration set once, not a runtime-computed branch; there is no documented mechanism for a completion-gated max/average switch.",
+      "This reasoning alone is sufficient to establish NOT_NATIVELY_REPRESENTABLE; it does not rely on any assumption about how the WORK or ASSESSMENT aggregates' own components are combined (see secondary_illustration and category_native_reproducibility_preconditions, both illustrative/informational and non-normative to the verdict itself)."
+    ],
+    "explicit_refusal": "This contract does NOT construct a category-weight or point-ratio scheme crafted to mimic the conditional switch for a plausible subset of cases. Doing so would misrepresent Schoology's actual capability as native parity when it is not.",
+    "secondary_illustration": {
+      "status": "illustrative, NOT a normative reason for the verdict -- does not affect verdict",
+      "resolved_by": "OPEN-15, OPEN-19 (RESOLVED by RC 2026-07-24) -- this illustration is REFRESHED from v1.0's provisional plain-addition numbers, which are superseded",
+      "claim": "grading_policy_ref.compute_work_aggregate now combines WORK's three components (packet points, participation points, extra-credit points) via RC's DECIDED point-based ratio (OPEN-15): 100 * (packet_earned + participation_earned + extra_credit_earned) / (packet_possible + participation_possible). ASSESSMENT now reduces multiple quiz/topic-assessment items via RC's DECIDED point-weighted rule (OPEN-19): 100 * sum(earned) / sum(possible). Recomputed against fixtures/schoology/student_0002_above_gate_divergent.json: work_aggregate = 100*(190+2+1.0)/(200+2) = 95.5445544554... (up from the superseded placeholder's 98.0), assessment_aggregate = 100*193/300 = 64.3333... . Completion (0.90) is above the 40% gate, so a2_expected_quarter_grade = max(95.5445544554..., 64.3333...) = 95.5445544554... . Schoology's native flat-ratio figure over the SAME published evidence is UNCHANGED by these rulings (it was always a flat points ratio, never the placeholder-affected aggregate): 100*386/502 = 76.892430... . The gap (~18.65 points) remains large and remains a clear DIVERGENT case, but the exact numbers differ from v1.0's superseded 98.0-vs-76.9 pair because the WORK side is now computed by RC's real decided formula rather than a labeled placeholder.",
+      "caveat": "This illustration exists only to show the reconciliation harness produces sane, real numbers under the now-DECIDED arithmetic -- it is not, and never was, load-bearing for the verdict, which rests solely on the conditional cross-category switch having no native gradebook expression (see verdict_sustained_independently_by)."
+    },
+    "category_native_reproducibility_preconditions": {
+      "status": "Per-CATEGORY surfaces (WORK alone, ASSESSMENT alone) are now structurally CLOSER to exact native reproducibility than the superseded v1.0 placeholder ever was (OPEN-15, OPEN-19, RESOLVED by RC 2026-07-24). Under v1.0's placeholder, WORK combined a percentage-scale packet score with flat point bonuses by direct addition -- an operation with no native Schoology equivalent at all. Under v2.0's DECIDED formulas, WORK is a points-earned/points-possible ratio (extra credit raising the numerator only, matching Schoology's native per-assignment Extra Credit flag exactly) and ASSESSMENT is a plain point-weighted ratio -- BOTH are structurally the SAME arithmetic Schoology's native category math already performs (see section 4.2). This does NOT change the section 4.3 verdict, which concerns the WHOLE-COURSE cross-category conditional switch, not either category's own internal arithmetic.",
+      "preconditions_for_exact_per_category_reproduction": [
+        "Daily participation days must be published as REAL point-bearing Schoology assignments inside the WORK category (not merely tracked in A2 and summarized) -- one assignment per class day per lesson, matching aggregate_participation's own per-day accounting exactly.",
+        "Extra credit (TI-84, Equation Lab) must be published WITH Schoology's native per-assignment Extra Credit flag set -- so Schoology's own category math excludes it from the denominator exactly the way compute_work_aggregate does.",
+        "The WORK category must contain EXACTLY the designated evidence A2 counted for that student in that period -- no more (e.g. no pure-paper-practice assignment accidentally placed in WORK, PREF-02) and no less (every packet/participation/extra-credit item A2 designated must actually be published, not a partial subset).",
+        "The ASSESSMENT category, symmetrically, must contain exactly the lesson-quiz and topic-assessment items compute_assessment_aggregate summed -- no more, no less."
+      ],
+      "does_section_3_mapping_already_satisfy_these": true,
+      "section_3_mapping_note": "SCHOOLOGY_PROJECTION_CONTRACT.md section 3's assignment_mapping table (designed before OPEN-15/OPEN-19 were resolved) already satisfies all four preconditions as written, with NO change required by this ruling: it publishes participation as a real point-bearing per-class-day-per-lesson assignment inside WORK, it flags both TI-84 and Equation Lab extra credit with extra_credit: true, and WORK/ASSESSMENT category membership in assignment_mapping is already 1:1 with categories.WORK.components / categories.ASSESSMENT.components (which are themselves 1:1 with grading_policy.v2.json's own WORK/ASSESSMENT component lists). No new preconditions are unmet; nothing in section 3 needed to change for this section's honesty to hold.",
+      "caveat": "This describes per-CATEGORY (WORK-alone, ASSESSMENT-alone) native reproducibility ONLY -- it does NOT extend to the WHOLE-COURSE native computed grade, which still cannot express the completion-gated max()/average() cross-category switch (section 4.3's independently-sufficient primary reasoning, unaffected by OPEN-15/OPEN-19)."
+    },
+    "smallest_safe_projection": [
+      "Publish granular per-category assignments/points exactly as specified in assignment_mapping so Schoology's display and native category percentages remain meaningful and reproducible from the published data.",
+      "Carry A2's authoritative PREF-03 quarter grade as the published value of record via a manual/override mechanism (see official_quarter_grade_projection), not via Schoology's computed category-weight total.",
+      "Reconcile every cycle: compute Schoology's native result from what was published, compare against A2's expected result (comparing underlying full-precision values, never mistaking display rounding for divergence -- OPEN-09, RESOLVED), surface divergence to RC (see divergence_handling)."
+    ],
+    "informative_vs_authoritative": {
+      "work_category_native_percentage": "informative_only_by_default -- but structurally the SAME points-earned/points-possible ratio compute_work_aggregate now uses (OPEN-15, RESOLVED); see category_native_reproducibility_preconditions for when it could be exactly reproduced rather than merely informative",
+      "assessment_category_native_percentage": "informative_only_by_default -- but structurally the SAME point-weighted ratio compute_assessment_aggregate now uses (OPEN-19, RESOLVED); same preconditions as WORK",
+      "whole_course_native_computed_grade": "informative_only, and expected to diverge from the official grade in the general case -- UNCHANGED by OPEN-15/OPEN-19: the completion-gated max()/average() switch across WORK and ASSESSMENT still has no native gradebook expression regardless of either aggregate's own internal arithmetic",
+      "official_quarter_grade_manual_column": "authoritative"
+    },
+    "assumptions_to_confirm": [
+      {
+        "id": "ASSUMPTION-1",
+        "claim": "Schoology's gradebook capability model (categories, fixed weights, points/percentage modes, total-points-vs-weighted-category modes, extra-credit flag, drop-lowest-style rules, absence of conditional cross-category formulas) as generally documented and understood.",
+        "verified_offline": false,
+        "action_required": "Re-confirm against Schoology's then-current actual product documentation before any live implementation; re-run this verdict if conditional/rule-based grading features have since been added."
+      },
+      {
+        "id": "ASSUMPTION-2",
+        "claim": "The concrete Schoology mechanism for carrying a non-computed authoritative value is either a genuine per-student final-grade override feature, or a dedicated manual assignment/column excluded from category weighting.",
+        "verified_offline": false,
+        "action_required": "Confirm which mechanism the real Schoology tenant actually supports once tenant access exists; the requirement (a value Schoology does not itself recompute) is fixed regardless of which mechanism satisfies it."
+      },
+      {
+        "id": "ASSUMPTION-3",
+        "claim": "Schoology's per-assignment 'no score entered yet' state is, by default, excluded from a total-points ratio computation rather than counted as a zero.",
+        "verified_offline": false,
+        "action_required": "Confirm against the real tenant; parity_check.py's compute_schoology_native_grade() implements this exclusion as its simulated default and documents it as an assumption inline."
+      }
+    ]
+  },
+
+  "deep_link": {
+    "a2_activity_key_template": "a2://{course_slug}/{topic}/{lesson_id}/{artifact_type}/{artifact_id}",
+    "a2_activity_key_stability": "never changes while the underlying lesson identity (topic, lesson_id, artifact_type, artifact_id) is unchanged; a pure function of A2-known values only, no Schoology-assigned value feeds into it",
+    "schoology_url_template": "https://{schoology_domain}/course/{schoology_course_id}/assignment/{schoology_assignment_id}",
+    "schoology_url_placeholders": ["schoology_domain", "schoology_course_id", "schoology_section_id", "schoology_assignment_id"],
+    "schoology_url_placeholder_status": "Schoology-minted identifiers do not exist yet; never fabricated as concrete values",
+    "what_may_change": ["schoology_domain", "schoology_course_id", "schoology_section_id", "schoology_assignment_id"],
+    "what_must_never_change": ["a2_activity_key", "the mapping from a2_activity_key to whichever schoology_assignment_id currently represents it"],
+    "applies_to_entities": ["lesson_packet_work", "lesson_quiz", "ti84_extra_credit", "equation_lab_extra_credit"],
+    "cites": ["PREF-08"]
+  },
+
+  "notification_usage": {
+    "principle": "rely on Schoology's own native notification system; do not build a parallel one",
+    "triggers": ["assignment_created", "assignment_updated", "score_posted_or_changed"],
+    "idempotency_dependency": "a non-idempotent projector that deletes-and-recreates assignments would generate spurious notification storms; update-in-place semantics (see idempotency) keep native notifications meaningful",
+    "official_quarter_grade_republish_must_be_noop_if_unchanged": true,
+    "naming_content_status": "OPEN-04"
+  },
+
+  "idempotency": {
+    "external_key_template": "a2:{course_id}:{lesson_id}:{artifact_type}:{artifact_id}",
+    "external_key_inputs": ["course_id", "lesson_id", "artifact_type", "artifact_id"],
+    "external_key_excludes": ["timestamp", "random_id", "schoology_assigned_id"],
+    "rule": "lookup external_key; if found, UPDATE the existing assignment/score in place; if not found, CREATE it once and record the mapping",
+    "convergence_requirement": "two consecutive runs over identical input must produce byte-identical output records, not merely the same count",
+    "no_duplicate_assignments": true
+  },
+
+  "schoology_native_computation": {
+    "mode": "flat_total_points",
+    "mode_description": "A flat points-earned/points-possible ratio across every ACTUALLY-published assignment (see idempotency, required_principle), unweighted by category -- with extra-credit-flagged assignments contributing to the numerator only, and ungraded/unavailable assignments excluded entirely (ASSUMPTION-3). UNAFFECTED by OPEN-15/OPEN-19 -- this was always, and remains, a flat points ratio, never the placeholder-affected WORK/ASSESSMENT aggregate arithmetic.",
+    "only_mode_implemented": true,
+    "why_not_weighted_category": "A weighted-category mode is deliberately NOT implemented -- constructing category weights to more closely mimic the completion-gated conditional formula would misrepresent invented parity as native support (see feasibility_verdict.explicit_refusal). flat_total_points is chosen precisely because it requires no invented weight numbers.",
+    "future_mode_rule": "Any future Schoology-native computation mode (e.g. weighted-category) MUST be implemented as a separate, explicitly-named function -- NEVER silently blended into or swapped for the existing flat_total_points comparison, and never selected implicitly. Every reconciliation report names the mode it actually used via the schoology_computation_mode field (see divergence_handling.report_fields) so no run ever compares under an unstated assumption.",
+    "cites": "SCHOOLOGY_PROJECTION_CONTRACT.md section 4.4"
+  },
+
+  "rounding_awareness": {
+    "source": "OPEN-09, RESOLVED by RC 2026-07-24",
+    "principle": "Full precision internally; only the student-facing final-grade DISPLAY rounds to one decimal. Schoology keeps native (unrounded) earned/possible totals; A2 never publishes a rounded display value into Schoology. Reconciliation compares underlying values consistently and must not mistake display rounding for a substantive divergence.",
+    "c2_correction": "C2 (HIGH, Codex review, RESOLVED by RC 2026-07-24): v2.0's initial implementation of this section misread the principle above as PERMISSION TO FORGIVE a real difference whenever the Schoology-side figure was declared display-rounded -- it rounded BOTH figures and converted a raw divergence into divergent=False. That reading was wrong: the ruling bans FALSE ALARMS over cosmetic rounding; it never authorizes suppressing a genuine underlying difference. The forgiveness helper (_rounding_only_difference) and its forgiveness branch (divergent = raw_divergent and not rounding_only_difference) are DELETED from parity_check.py; the rounding_only_difference report field (a forgiveness signal) is likewise removed.",
+    "default_behavior": "check_student_parity's schoology_value_is_display_rounded parameter defaults to False and, as of the C2 fix, NEVER changes whether a difference is flagged divergent -- reconciliation is UNDERLYING-ONLY. The substantive comparison ALWAYS runs on full-precision values at plain numeric tolerance, on EITHER comparison basis, with no exception.",
+    "explicit_declaration_required": "A caller may still explicitly declare schoology_value_is_display_rounded=True to record that the Schoology-side figure being compared is itself already display-rounded rather than full precision -- the one legitimate case this parameter exists for: reconciling against a real, already-rounded external figure once a live Schoology tenant exists. That declaration degrades comparison_basis and forces underlying_convergence_established to False; it NEVER suppresses a real numeric difference, and a report on that degraded basis never claims CONVERGENT, even when the observed figures happen to match.",
+    "report_fields_added": ["schoology_value_is_display_rounded", "comparison_basis", "underlying_convergence_established"],
+    "report_field_semantics": "comparison_basis (str) names which basis this comparison actually ran on -- 'underlying-full-precision' for the ordinary, undeclared case, or a value naming the display-rounded degradation when schoology_value_is_display_rounded=True. underlying_convergence_established (bool) is True ONLY when the comparison ran on the full-precision basis AND found no difference beyond tolerance; it is False whenever the basis is degraded (declared display-rounded), regardless of how small the observed difference is, and False whenever divergent is True. Together these two fields make it impossible for a reader or downstream consumer to mistake 'consistent with the rounded display' for 'the underlying numbers agree' -- neither field is a forgiveness signal, and neither can suppress divergent.",
+    "test_coverage": "test_parity_check.py's rounding-only-difference test group, using fixtures/schoology/student_0006_display_rounding_only_difference.json -- proves the genuine 0.03 underlying gap in that fixture is reported divergent=True identically whether or not schoology_value_is_display_rounded is declared (the flag changes only comparison_basis/underlying_convergence_established, never divergent); that a genuinely large divergence (student_0002) is likewise never forgiven; that figures which genuinely agree (student_0001) reconcile convergent with underlying_convergence_established=True on the full-precision basis; that the SAME exact-match figures declared display-rounded still report underlying_convergence_established=False; and that _rounding_only_difference no longer exists on the module."
+  },
+
+  "divergence_handling": {
+    "surface_to_rc": true,
+    "never_silent": true,
+    "never_auto_resolve": true,
+    "unknown_never_renders_as_zero_or_erased": true,
+    "unknown_always_flagged_divergent_regardless_of_native_figure": true,
+    "report_fields": [
+      "student_id", "label", "completion_pct", "work_aggregate", "assessment_aggregate",
+      "a2_expected_quarter_grade", "schoology_native_quarter_grade", "schoology_computation_mode",
+      "schoology_value_is_display_rounded", "comparison_basis", "underlying_convergence_established",
+      "divergent", "delta", "note"
+    ],
+    "malformed_record_anomaly_detection": {
+      "function": "parity_check.detect_projection_anomalies(course_catalog)",
+      "surfaces": "records that fail closed for a MALFORMED reason (unrecognized availability value, or non-boolean explicitly_assigned) -- never routine non-projection",
+      "anomaly_fields": ["external_key", "field", "raw_value", "reason", "projected"],
+      "never_silently_dropped": true,
+      "cites": "SCHOOLOGY_PROJECTION_CONTRACT.md section 3 (fail-closed convention) and section 8"
+    },
+    "cites": ["PROGRAM_DOSSIER.md section 15 item 1", "PROGRAM_DOSSIER.md section 15 item 2", "PROGRAM_DOSSIER.md section 15 item 3"]
+  },
+
+  "fixtures": {
+    "directory": "fixtures/schoology/",
+    "synthetic_only": true,
+    "identifiers_are_fictitious": true,
+    "files": [
+      "course_section_synthetic.json",
+      "course_catalog_nt14_b1_edge_cases.json",
+      "student_0001_above_gate_convergent.json",
+      "student_0002_above_gate_divergent.json",
+      "student_0003_below_gate_divergent.json",
+      "student_0004_unknown_assessment_evidence.json",
+      "student_0005_zero_denominator_no_eligible_evidence.json",
+      "student_0006_display_rounding_only_difference.json"
+    ]
+  },
+
+  "resolved_open_items": {
+    "OPEN-08": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "Compare the EXACT completion ratio against the inclusive 0.40 threshold; no pre-rounding before branch selection.",
+      "d3_consequence": "None specific to this contract's own arithmetic -- this contract consumes grading_policy_ref.compute_quarter_grade's output unchanged (compute_a2_quarter_grade delegates directly). Full ruling text and rationale: grading_policy.v2.json / GRADING_POLICY_SPEC.md section 3."
+    },
+    "OPEN-09": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "Full precision internally; round ONLY the student-facing final-grade DISPLAY to one decimal. Schoology keeps native earned/possible totals. Reconciliation compares underlying values consistently and must not mistake display rounding for substantive divergence.",
+      "d3_consequence": "MAJOR -- this ruling is directly about D3's reconciliation logic. check_student_parity() takes an explicit schoology_value_is_display_rounded parameter; the comparison itself is UNDERLYING-ONLY and never forgives a difference on any basis (C2 fix, HIGH, RESOLVED 2026-07-24, corrected a mid-tranche defect where the first v2.0 implementation forgave a real difference under this parameter). The report carries comparison_basis and underlying_convergence_established fields instead of a forgiveness signal; see rounding_awareness above."
+    },
+    "OPEN-10": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "+1.0 point/student/class-day cap for currently-authorized extra credit (TI-84 +0.5, Equation Lab +0.5, stacking allowed); a future extra-credit source requires a new RC policy decision.",
+      "d3_consequence": "None specific to this contract's own arithmetic -- extra-credit evidence arrives at projection time as an already-decided point value (this contract's hard_constraint in required_principle). Full ruling text: grading_policy.v2.json / GRADING_POLICY_SPEC.md section 5."
+    },
+    "OPEN-11": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "Non-class days excluded from the participation requirement; partial/absent/uncertain attendance never auto-zeroes.",
+      "d3_consequence": "None specific to this contract's own arithmetic -- participation evidence arrives at projection time as an already-decided point value. Full ruling text: grading_policy.v2.json / GRADING_POLICY_SPEC.md section 4."
+    },
+    "OPEN-15": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "WORK = 100 * (packet_points_earned + participation_points_earned + extra_credit_points_earned) / (packet_points_possible + participation_points_possible). Extra credit raises the numerator only. WORK MAY EXCEED 100. Zero denominator falls to OPEN-16.",
+      "d3_consequence": "MAJOR -- supersedes the v1.0 plain-addition placeholder this contract's section 4.3 previously cited as a provisional, arithmetic-dependent illustration. parity_check.compute_work_aggregate's signature is replaced (three-scalar -> earned/possible), and section 4.3's secondary_illustration and category_native_reproducibility_preconditions are refreshed with real, recomputed numbers."
+    },
+    "OPEN-16": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "No eligible designated work/participation (zero denominator) => completion/WORK/quarter grade all UNKNOWN. Display = dash / 'not enough evidence', never zero.",
+      "d3_consequence": "NEW to this contract's D3 layer (v1.0 cited this only indirectly via the general UNKNOWN-never-zero dossier rule) -- explicitly encoded here as zero_denominator_rule / no_fabricated_zero: the Schoology projector must never fabricate a synthetic zero-scored/zero-points assignment to force a grade into being computable, and an all-UNKNOWN student reconciles as UNKNOWN on both sides, never forced to a number."
+    },
+    "OPEN-19": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "component_percentage = 100 * sum(points_earned) / sum(points_possible) for packet assignments, lesson quizzes, topic assessments, or any same-kind designated group. Equal-averaging per-item percentages when possible-points differ is FORBIDDEN.",
+      "d3_consequence": "MAJOR -- supersedes this contract's own v1.0 fixture-only 'simple unweighted average' simulation convention (`_average_percentage`), which was never asserted as decided upstream policy. Replaced by `_points_weighted_percentage` / `compute_assessment_aggregate`, delegating to the sibling module's now-decided point-weighted reduction."
+    }
+  },
+
+  "changelog": [
+    {
+      "version": "2.0",
+      "date": "2026-07-24",
+      "package": "NT16",
+      "summary": "Supersedes schoology_projection.v1.json (deleted). Consumes grading_policy.v2.json's OPEN-15/OPEN-19 point-based arithmetic; encodes OPEN-09's display-rounding-aware reconciliation and OPEN-16's zero-denominator/no-fabricated-zero rule; refreshes section 4.3's native-feasibility verdict reasoning for point-based aggregates (verdict unchanged: NOT_NATIVELY_REPRESENTABLE).",
+      "changes": [
+        "OPEN-15: parity_check.compute_work_aggregate's signature replaced (packet_score/participation_points/extra_credit_points -> packet_points_earned/packet_points_possible/participation_points_earned/participation_points_possible/extra_credit_points_earned=0.0), mirroring grading_policy_ref.py's new point-based formula exactly.",
+        "OPEN-19: parity_check._average_percentage (unweighted-average fixture convention) replaced by _points_weighted_percentage, delegating to the new compute_assessment_aggregate (point-weighted). parity_check._sum_points now returns an (earned, possible) pair instead of a single earned scalar.",
+        "OPEN-09: check_student_parity gains a schoology_value_is_display_rounded parameter (default False) and a rounding_only_difference report field; a difference is treated as non-substantive ONLY when explicitly declared display-rounded AND attributable purely to 1-decimal rounding -- never inferred silently.",
+        "OPEN-16: new zero_denominator_rule / no_fabricated_zero block; new fixture student_0005_zero_denominator_no_eligible_evidence.json and dedicated parity_check.py test coverage proving the projector never fabricates a synthetic zero-valued assignment and an all-UNKNOWN student reconciles as UNKNOWN.",
+        "New fixture student_0006_display_rounding_only_difference.json exercising the OPEN-09 rounding-awareness parameter in both directions.",
+        "Section 4.3 (native-feasibility verdict) refreshed: secondary_illustration recomputed with real point-based numbers (95.54 vs 76.89, superseding the placeholder 98.0-vs-76.9 pair); new category_native_reproducibility_preconditions block replacing the stale 'informative only, not the same computation' WORK/ASSESSMENT justification with an honest account of what changed, what preconditions must hold, and confirmation that section 3's mapping already satisfies them. Whole-course verdict (NOT_NATIVELY_REPRESENTABLE) is UNCHANGED and remains independently sustained by the completion-gated conditional switch alone.",
+        "open_item_ids reduced to ['OPEN-04'] (still open -- naming strings); resolved_open_item_ids added listing all seven NT16-resolved items with per-item d3_consequence notes.",
+        "Every grading_policy.v1.json reference updated to grading_policy.v2.json.",
+        "schoology_projection.v1.json deleted; this file (schoology_projection.v2.json) is the sole machine-readable source of truth going forward.",
+        "C2 fix (Codex review, HIGH, RESOLVED by RC 2026-07-24): corrected a mid-tranche defect in this same v2.0 package. parity_check.py's _rounding_only_difference() and its forgiveness branch (divergent = raw_divergent and not rounding_only_difference) are DELETED -- schoology_value_is_display_rounded=True no longer converts a raw divergence into divergent=False. Reconciliation is now UNDERLYING-ONLY: the substantive comparison always runs on full-precision values at plain tolerance, on either comparison basis. The rounding_only_difference report field (a forgiveness signal) is removed and replaced by comparison_basis (str) and underlying_convergence_established (bool) in rounding_awareness and divergence_handling.report_fields above; underlying_convergence_established is never True on a declared display-rounded basis, even when the observed figures happen to match."
+      ]
+    }
+  ]
+}

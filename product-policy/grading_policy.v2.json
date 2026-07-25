@@ -1,0 +1,400 @@
+{
+  "version": "2.0",
+  "date": "2026-07-24",
+  "source_of_authority": "RC final decisions 2026-07-24 (Grok preference interview + RC clarifications; NT16 rulings 2026-07-24 resolving OPEN-08/09/10/11/15/16/17/18/19)",
+  "policy_id": "grading_policy",
+  "policy_title": "Grade Composition & Quarter Rule / Participation & Extra Credit",
+  "status": "DECIDED",
+  "decision_ids": ["PREF-03", "PREF-04"],
+  "sub_decisions": {
+    "PREF-03.1": "Two principal aggregates: WORK and ASSESSMENT",
+    "PREF-03.2": "WORK aggregate composition (teacher-designated digital packet work + daily participation evidence + designated extra credit)",
+    "PREF-03.3": "ASSESSMENT aggregate composition (lesson quizzes + topic assessments)",
+    "PREF-03.4": "Completion percentage definition (teacher-designated digital work only) feeding the 40% gate (inclusive at exactly 40%)",
+    "PREF-03.5": "At/above-threshold branch: quarter grade = max(work_aggregate, assessment_aggregate)",
+    "PREF-03.6": "Below-threshold branch: quarter grade = average(work_aggregate, assessment_aggregate)",
+    "PREF-03.7": "Teacher override preserved and takes precedence over the computed value",
+    "PREF-03.8": "Policy is versioned (this document is v2.0, superseding v1.0 per NT16 2026-07-24)",
+    "PREF-03.9": "Clients never determine designation or official credit",
+    "PREF-04.1": "Not less than 1 valid digital packet response on a class day = 1.0 participation point",
+    "PREF-04.2": "No valid digital packet response on a class day = 0.0 participation point",
+    "PREF-04.3": "Assigned TI-84 exercise completed successfully = +0.5 participation as extra credit",
+    "PREF-04.4": "Assigned Equation Lab exercise completed successfully = +0.5 participation as extra credit",
+    "PREF-04.5": "Participation and extra credit belong to the WORK aggregate, never ASSESSMENT",
+    "PREF-04.6": "'Tracked' does not mean automatic main-grade credit; server policy + teacher designation are authoritative"
+  },
+  "open_item_ids": [],
+  "resolved_open_item_ids": ["OPEN-08", "OPEN-09", "OPEN-10", "OPEN-11", "OPEN-15", "OPEN-16", "OPEN-19"],
+  "deferred_ids": [],
+  "unknown_sentinel_token": "UNKNOWN",
+  "constants": {
+    "completion_threshold": 0.40,
+    "completion_threshold_inclusive": true,
+    "participation_point_per_class_day_present": 1.0,
+    "participation_point_per_class_day_absent": 0.0,
+    "ti84_extra_credit_points": 0.5,
+    "equation_lab_extra_credit_points": 0.5,
+    "extra_credit_daily_cap_points": 1.0,
+    "authorized_extra_credit_sources": ["ti84", "equation_lab"],
+    "final_grade_display_decimals": 1,
+    "unknown_display_token": "—",
+    "unknown_display_text": "not enough evidence"
+  },
+  "aggregates": {
+    "WORK": {
+      "label": "WORK",
+      "components": [
+        "teacher_designated_digital_packet_work",
+        "daily_participation_evidence",
+        "designated_extra_credit"
+      ],
+      "excludes": [
+        "pure_paper_practice",
+        "lesson_quizzes",
+        "topic_assessments"
+      ],
+      "note": "Pure paper practice is not graded or individually tracked (PREF-02) and never enters WORK or completion. As of NT16 (OPEN-15, RESOLVED), WORK is point-based -- see work_aggregate_formula -- not a plain sum of three scalars."
+    },
+    "ASSESSMENT": {
+      "label": "ASSESSMENT",
+      "components": [
+        "lesson_quizzes",
+        "topic_assessments"
+      ],
+      "excludes": [
+        "daily_participation_evidence",
+        "designated_extra_credit",
+        "teacher_designated_digital_packet_work"
+      ],
+      "note": "As of NT16 (OPEN-19, RESOLVED), multi-item ASSESSMENT groups reduce via the point-weighted component_reduction_rule -- see assessment_aggregate_formula."
+    }
+  },
+  "completion_percentage": {
+    "numerator": "count (or points) of teacher-designated digital work items completed",
+    "denominator": "count (or points) of teacher-designated digital work items assigned",
+    "scope": "teacher-designated digital work only",
+    "excludes": ["pure_paper_practice"],
+    "rounding": "the exact ratio is used; no pre-rounding is applied before the completion_threshold comparison (OPEN-08, RESOLVED)",
+    "zero_denominator": "assigned == 0 -> UNKNOWN, never 0 and never a fabricated ratio (OPEN-16, RESOLVED)"
+  },
+  "quarter_rule": {
+    "condition_at_or_above": "completion >= completion_threshold",
+    "formula_at_or_above": "max(work_aggregate, assessment_aggregate)",
+    "condition_below": "completion < completion_threshold",
+    "formula_below": "average(work_aggregate, assessment_aggregate) = (work_aggregate + assessment_aggregate) / 2",
+    "threshold_comparison_rounding": "the comparison uses the EXACT completion ratio; no rounding is introduced before it (OPEN-08, RESOLVED)",
+    "gate_decision_from_counts": "C1 (HIGH, Codex review 2026-07-24; hardened same day after a peer-review follow-up; V1 hardening, Codex re-check 2026-07-24): the completion gate is decided by an EXACT INTEGER CROSS-PRODUCT over completed_count/assigned_count, never by comparing the binary float `completion` ratio to completion_threshold -- for sufficiently large counts that float comparison can collapse to exactly the threshold even when the true rational value is strictly below it. Three ways reach the exact path, in precedence order: (1) compute_quarter_grade's keyword-only completed_count=/assigned_count= arguments, when both explicitly supplied, always win; (2) a `completion` argument that is a CompletionRatio (the float subclass compute_completion returns, carrying its own exact completed_count/assigned_count) is read automatically when no explicit kwargs are supplied, so the ORDINARY `compute_quarter_grade(w, a, compute_completion(c, n))` two-call sequence is exact by construction, not just the explicit-kwargs style -- PROVIDED the ratio reaches this function untouched: any arithmetic, coercion, rounding, copying, or serialization performed on a CompletionRatio (even `ratio + 0.0`, `float(ratio)`, `round(ratio, N)`, a JSON round-trip, or `copy.copy(ratio)`) destroys its provenance and degrades it to a bare float; (3) a bare float with no carried counts falls back to the float-vs-threshold comparison, documented as subject to representation error at the boundary -- reached whenever counts are ABSENT or PROVENANCE WAS LOST, not only when counts never existed anywhere in the call chain (V1 fix: an earlier version of this text implied the latter, which was false). Explicit kwargs that CONTRADICT a carrying completion's own counts raise PolicyDomainError (a caller defect, not a policy question); so does a completion whose OWN carried counts do not match its own float value -- V1's count-vs-float consistency check catches a crafted/corrupted CompletionRatio (float(fractions.Fraction(completed_count, assigned_count)) must equal the ratio's float value) before those counts are ever trusted for the gate. CompletionRatio.completed_count/.assigned_count are read-only (properties over private slots; assignment raises AttributeError) -- V1 fix, closing the tampering hole where a mutated ratio could lie about its own provenance. completion_threshold itself is read as an exact fractions.Fraction, derived from the JSON file's own decimal literal via a second parse with parse_float=Fraction (never from the lossy binary float, and never a hard-coded magic pair, and never a limit_denominator() heuristic) -- e.g. Fraction('0.40') == 2/5 exactly; an import-time assertion checks float(fraction) == completion_threshold. The gate is `completed_count * denominator >= assigned_count * numerator` (or `>` if completion_threshold_inclusive is false) using arbitrary-precision Python integers -- no floating-point arithmetic anywhere on this path. compute_completion_threshold_met(completed_count, assigned_count) is the public standalone form of this decision.",
+    "work_aggregate_upper_bound": "none -- WORK may exceed 100 (OPEN-15, RESOLVED), so the quarter grade and any teacher_override matching an above-100 WORK value may also exceed 100",
+    "assessment_aggregate_upper_bound": "100 -- extra credit never touches ASSESSMENT (PREF-04.5), so its scale is unchanged"
+  },
+  "authority": {
+    "client_determines_designation": false,
+    "client_determines_official_credit": false,
+    "teacher_override_takes_precedence": true,
+    "teacher_override_overrides_unknown": true,
+    "server_policy_and_teacher_designation_authoritative": true
+  },
+  "unknown_semantics": {
+    "rule": "Any required input that is UNKNOWN/unavailable yields UNKNOWN as the result -- never 0, never a silently-chosen branch, never fabricated credit. This includes the zero-eligible-denominator case (OPEN-16, RESOLVED): no eligible designated work/participation means completion, WORK, and quarter grade are all UNKNOWN.",
+    "display": "student-facing display of an UNKNOWN final grade is a dash (unknown_display_token) with \"not enough evidence\" (unknown_display_text) as the accessible long form -- never zero, never a fabricated zero-valued Schoology assignment (OPEN-16, RESOLVED)",
+    "source": "PROGRAM_DOSSIER.md §15 item 1 (\"Unknown ≠ zero\")"
+  },
+  "work_aggregate_formula": "WORK = 100 * (packet_points_earned + participation_points_earned + extra_credit_points_earned) / (packet_points_possible + participation_points_possible). Extra credit raises the numerator only, never the denominator. WORK may exceed 100. Zero denominator (packet_points_possible + participation_points_possible == 0) -> UNKNOWN (OPEN-16). This SUPERSEDES the v1.0 provisional plain-addition combination of the three WORK components (OPEN-15, RESOLVED by RC 2026-07-24).",
+  "assessment_aggregate_formula": "ASSESSMENT = 100 * total_assessment_points_earned / total_assessment_points_possible, point-weighted over lesson quizzes and topic assessments on their actual point scales -- the same point-weighted reduction as component_reduction_rule, applied to the combined quiz + topic-assessment group (OPEN-19, RESOLVED).",
+  "component_reduction_rule": {
+    "formula": "component_percentage = 100 * sum(current_official_points_earned) / sum(points_possible)",
+    "applies_to": "packet assignments, lesson quizzes, topic assessments, and any other same-kind designated group with more than one item",
+    "item_scope": "each item contributes its CURRENT OFFICIAL server-designated score; attempt-selection/overrides are governed by their own rules (out of scope for this policy)",
+    "forbidden": "equal-averaging per-item percentages when possible-points differ across items -- a percentage must never be added directly to raw flat points either",
+    "zero_denominator": "sum(points_possible) == 0 -> UNKNOWN (OPEN-16, RESOLVED)",
+    "per_item_ceiling": "C4 (HIGH, Codex review 2026-07-24): compute_component_percentage's default (allow_above_100=False, STRICT) requires every item to satisfy points_earned <= points_possible -- a violation raises PolicyDomainError (a DATA DEFECT, not a policy question, kept distinct from UNKNOWN). Because every item individually satisfies earned <= possible, the reduction's result is guaranteed to land in [0, 100] BY CONSTRUCTION. allow_above_100=True is an explicit, narrow opt-in for a WORK-side group where extra credit legitimately lifts an item's earned above its possible points -- it is NEVER legitimate for ASSESSMENT (PREF-04.5), and compute_assessment_aggregate always uses the strict default with no way to opt out.",
+    "source": "OPEN-19, RESOLVED by RC 2026-07-24; per_item_ceiling added by C4 remediation, Codex review 2026-07-24"
+  },
+  "rounding_rules": {
+    "internal_precision": "full precision (no rounding) in every computation and comparison performed by this policy: compute_completion, compute_component_percentage, compute_assessment_aggregate, compute_work_aggregate, compute_quarter_grade",
+    "completion_threshold_comparison": "the exact completion ratio is compared against completion_threshold; no pre-rounding is applied before this comparison, under any circumstance (OPEN-08, RESOLVED)",
+    "completion_threshold_gate_exactness": "C1 (HIGH, Codex review 2026-07-24): when raw completed_count/assigned_count are available, the gate is decided by an exact integer cross-product (see quarter_rule.gate_decision_from_counts), never by the binary float completion ratio -- the float ratio can collapse to exactly completion_threshold at extreme counts even when the true value is strictly below it.",
+    "display_only": "round_final_grade_for_display rounds ONLY the student-facing final-grade display, to final_grade_display_decimals (1); the rounded value must never be fed back into any computation or into Schoology (OPEN-09, RESOLVED)",
+    "display_rounding_mode": "half-up (decimal ROUND_HALF_UP) -- AMENDED by RC 2026-07-24 (NT16-B, a later same-day ruling). RC's verbatim ruling: 'Use conventional decimal ROUND_HALF_UP for the student-facing one-decimal display. Example: 89.25 -> 89.3. Do not use Python binary-float round() or half-even behavior for the display contract. Keep full precision internally. Do not round before the 40% branch decision. Schoology reconciliation compares underlying values; display rounding cannot conceal real divergence.' This SUPERSEDES the implementation reading previously recorded in this field: half-even (Python's builtin round) was stated here as an implementation choice pending RC confirmation (C5, MEDIUM, Codex review 2026-07-24), because RC's original OPEN-09 ruling fixed 'one decimal' but never specified the tie-breaking mode (e.g. round(0.25, 1) == 0.2 under half-even, but 0.3 under half-up). RC has now confirmed half-up. round_final_grade_for_display implements this via decimal.Decimal(value).quantize(exponent, rounding=ROUND_HALF_UP), with the exponent derived from final_grade_display_decimals rather than hard-coded. No new OPEN-NN id is minted for this amendment; OPEN-09 stays RESOLVED.",
+    "schoology_sync": "Schoology keeps native (unrounded) earned/possible totals; reconciliation must compare underlying values consistently and must never mistake display rounding for a substantive divergence (OPEN-09, RESOLVED)"
+  },
+  "extra_credit_cap_rule": {
+    "cap_points": 1.0,
+    "period": "per student per class day",
+    "authorized_sources": ["ti84", "equation_lab"],
+    "stacking_allowed": true,
+    "cap_is_unconditional": true,
+    "unauthorized_source_policy": "an extra-credit source outside authorized_extra_credit_sources raises PolicyDecisionRequiredError; a new RC policy decision is required before it may contribute -- it must never silently exceed the cap or be clipped into it",
+    "authorization_is_by_membership_not_channel": "C3 (HIGH, Codex review 2026-07-24): authorization is decided by MEMBERSHIP in authorized_extra_credit_sources, never by which parameter (the dedicated boolean flags vs. the generic additional_sources channel) the caller happened to use. A source named in additional_sources that IS in authorized_extra_credit_sources (e.g. additional_sources=['ti84']) contributes normally, exactly like the dedicated ti84_completed flag would. Every supplied additional_sources entry is validated and authorization-checked BEFORE any UNKNOWN short-circuit -- an unauthorized source always raises PolicyDecisionRequiredError, even when an unrelated flag (e.g. ti84_completed) is UNKNOWN.",
+    "deduplication_rule": "a source counts AT MOST ONCE per student per class day, regardless of which channel(s) signal it. If the same authorized source is supplied via both its dedicated boolean flag and via additional_sources (e.g. ti84_completed=True and additional_sources=['ti84']), the two are treated as the SAME evidence, not independent evidence -- it contributes its point value once, not twice.",
+    "malformed_source_id_policy": "a non-string or empty-string entry in additional_sources raises PolicyDomainError, not PolicyDecisionRequiredError -- malformed input is a caller-side data defect, distinct from a well-formed-but-unauthorized source name.",
+    "source": "OPEN-10, RESOLVED by RC 2026-07-24; authorization_is_by_membership_not_channel/deduplication_rule/malformed_source_id_policy added by C3 remediation, Codex review 2026-07-24"
+  },
+  "participation_day_rule": {
+    "non_class_day": {
+      "condition": "is_class_day is False",
+      "earned": 0.0,
+      "possible": 0.0,
+      "status": "excluded_non_class_day",
+      "note": "contributes nothing to earned or possible; excluded from the participation requirement entirely"
+    },
+    "class_day_present_known_response": {
+      "condition": "is_class_day is True, attendance == \"present\", has_valid_response known",
+      "possible": 1.0,
+      "earned": "participation_point_per_class_day_present if has_valid_response else participation_point_per_class_day_absent",
+      "status": "counted"
+    },
+    "class_day_present_unknown_response": {
+      "condition": "is_class_day is True, attendance == \"present\", has_valid_response is UNKNOWN/None",
+      "earned": "UNKNOWN",
+      "possible": 1.0,
+      "status": "unknown"
+    },
+    "class_day_partial_or_absent_not_eligible": {
+      "condition": "is_class_day is True, attendance in (\"partial\", \"absent\"), participation_eligible_designation is False",
+      "earned": 0.0,
+      "possible": 0.0,
+      "status": "excused_not_participation_eligible",
+      "note": "excluded from the requirement -- NOT an auto-zero, because possible is 0.0 too. This is the documented reading of RC's ruling: 'excused' honors both 'excluded from the participation requirement' and 'never auto-zero'."
+    },
+    "class_day_partial_or_absent_eligible_designation": {
+      "condition": "is_class_day is True, attendance in (\"partial\", \"absent\"), participation_eligible_designation is True",
+      "note": "RC explicitly designated the day participation-eligible -- treated exactly like class_day_present_known_response / class_day_present_unknown_response above"
+    },
+    "class_day_attendance_unknown": {
+      "condition": "is_class_day is True, attendance == \"unknown\"",
+      "earned": "UNKNOWN",
+      "possible": "UNKNOWN",
+      "status": "unknown",
+      "note": "genuinely-unknown attendance is never zero, regardless of participation_eligible_designation"
+    },
+    "source": "OPEN-11, RESOLVED by RC 2026-07-24"
+  },
+  "zero_denominator_rule": {
+    "rule": "no eligible designated work/participation (denominator == 0) -> completion UNKNOWN, WORK UNKNOWN, quarter grade UNKNOWN",
+    "display": "dash (unknown_display_token) / \"not enough evidence\" (unknown_display_text) -- never zero, never a fabricated zero-valued Schoology assignment",
+    "source": "OPEN-16, RESOLVED by RC 2026-07-24"
+  },
+  "domains": {
+    "counts": {
+      "applies_to": [
+        "compute_completion.completed_count",
+        "compute_completion.assigned_count",
+        "compute_completion_threshold_met.completed_count",
+        "compute_completion_threshold_met.assigned_count",
+        "compute_quarter_grade.completed_count",
+        "compute_quarter_grade.assigned_count"
+      ],
+      "type": "non_negative_integer",
+      "min": 0,
+      "reject_non_finite": true,
+      "reject_bool": true,
+      "cross_field_rule": "assigned_count >= completed_count (designated work cannot be exceeded by completed work)",
+      "note": "C1 (HIGH, Codex review 2026-07-24): compute_completion_threshold_met and compute_quarter_grade's completed_count/assigned_count kwargs share this exact domain with compute_completion, via the shared _validate_completion_counts helper."
+    },
+    "completion_ratio": {
+      "applies_to": ["compute_quarter_grade.completion"],
+      "type": "finite_number",
+      "min": 0,
+      "max": 1,
+      "reject_non_finite": true,
+      "reject_bool": true,
+      "note": "OPEN-08, RESOLVED by RC 2026-07-24: this exact ratio, never pre-rounded, is what compute_quarter_grade compares against completion_threshold."
+    },
+    "assessment_percentage_scale_value": {
+      "applies_to": ["compute_quarter_grade.assessment_aggregate"],
+      "type": "finite_number",
+      "min": 0,
+      "max": 100,
+      "reject_non_finite": true,
+      "reject_bool": true,
+      "note": "Extra credit never touches ASSESSMENT (PREF-04.5), so its [0, 100] bound is unchanged by the OPEN-15 WORK ruling."
+    },
+    "unbounded_non_negative_percentage_value": {
+      "applies_to": ["compute_quarter_grade.work_aggregate", "compute_quarter_grade.teacher_override"],
+      "type": "finite_number",
+      "min": 0,
+      "max": null,
+      "reject_non_finite": true,
+      "reject_bool": true,
+      "note": "OPEN-15, RESOLVED by RC 2026-07-24: WORK may exceed 100 because extra credit raises the numerator but not the denominator. RC's ruling does not state an explicit upper bound on the quarter grade or override; removing the [0, 100] ceiling for both follows directly from 'WORK may exceed 100'."
+    },
+    "work_component_points": {
+      "applies_to": [
+        "compute_work_aggregate.packet_points_earned",
+        "compute_work_aggregate.packet_points_possible",
+        "compute_work_aggregate.participation_points_earned",
+        "compute_work_aggregate.participation_points_possible",
+        "compute_work_aggregate.extra_credit_points_earned"
+      ],
+      "type": "non_negative_number",
+      "min": 0,
+      "max": null,
+      "reject_non_finite": true,
+      "reject_bool": true,
+      "note": "Extra-credit points raise the numerator only; packet/participation possible sum to the denominator (OPEN-15)."
+    },
+    "component_item_pairs": {
+      "applies_to": ["compute_component_percentage.items", "compute_assessment_aggregate.items"],
+      "type": "iterable_of_non_negative_number_pairs",
+      "pair_shape": ["points_earned", "points_possible"],
+      "min": 0,
+      "reject_non_finite": true,
+      "reject_bool": true,
+      "note": "OPEN-19, RESOLVED by RC 2026-07-24: each pair is one item's CURRENT OFFICIAL server-designated score; the reduction is point-weighted (sum(earned) / sum(possible)), never an equal average of per-item percentages."
+    },
+    "attendance_enum": {
+      "applies_to": ["compute_participation_day.attendance"],
+      "type": "enum",
+      "allowed_values": ["present", "partial", "absent", "unknown"],
+      "note": "OPEN-11, RESOLVED by RC 2026-07-24. Any other value raises PolicyDomainError."
+    },
+    "extra_credit_daily_cap_constant": {
+      "applies_to": ["EXTRA_CREDIT_DAILY_CAP_POINTS (loaded constant, not a caller parameter)"],
+      "type": "non_negative_number",
+      "min": 0,
+      "max": null,
+      "reject_non_finite": true,
+      "note": "OPEN-10, RESOLVED by RC 2026-07-24: the cap is now unconditional policy, applied inside compute_extra_credit; it is no longer an opt-in caller parameter."
+    }
+  },
+  "domain_violation_policy": {
+    "exception_type": "PolicyDomainError",
+    "rule": "An out-of-domain or malformed input (wrong type, NaN/inf, negative where non-negative is required, completed_count > assigned_count, completion outside [0,1], an over-scale assessment_aggregate, an invalid attendance value) raises PolicyDomainError. It is a DEFECT, not an UNKNOWN evidence state, and is never converted to UNKNOWN, 0, or a clamped/coerced value.",
+    "source": "Codex GPT-5.6 SOL review R-A, finding A1 (HIGH); manager ruling 2026-07-24",
+    "distinguishing_principle": "UNKNOWN means well-formed input whose authoritative evidence is unavailable (PROGRAM_DOSSIER.md §15 item 1). A domain violation means the input itself is malformed -- a caller-side defect, not a reliability/evidence condition."
+  },
+  "policy_decision_required_policy": {
+    "exception_type": "PolicyDecisionRequiredError",
+    "rule": "Raised when a caller supplies extra-credit evidence for a source outside authorized_extra_credit_sources. This is NOT a domain violation (the input may be perfectly well-formed) and NOT an UNKNOWN evidence state -- it means the request asks this policy to do something RC has not yet authorized. A new RC policy decision is required before any additional extra-credit source may contribute; the cap must never be silently exceeded or clipped to accommodate it.",
+    "source": "OPEN-10, RESOLVED by RC 2026-07-24"
+  },
+  "resolved_open_items": {
+    "OPEN-08": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "Compare the EXACT completion ratio against the inclusive 0.40 threshold. No pre-rounding before branch selection.",
+      "supersedes": "v1.0's compute_completion exposed an opt-in round_ndigits parameter (default None, no rounding) as an unresolved-pending-RC placeholder. v2.0 removes round_ndigits entirely -- pre-rounding is now forbidden policy, not merely undecided."
+    },
+    "OPEN-09": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "Full precision internally. Round ONLY the student-facing final-grade DISPLAY to one decimal. Schoology keeps native earned/possible totals. Reconciliation compares underlying values consistently and must not mistake display rounding for substantive divergence.",
+      "supersedes": "v1.0's compute_quarter_grade exposed an opt-in round_ndigits parameter (default None, no rounding), with no internal/display distinction, as an unresolved-pending-RC placeholder. v2.0 removes round_ndigits from compute_quarter_grade and adds dedicated display-only functions (round_final_grade_for_display, final_grade_display_string)."
+    },
+    "OPEN-10": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "+1.0 point per student per class day cap for currently-authorized extra credit (TI-84 +0.5, Equation Lab +0.5, stacking allowed). Any FUTURE extra-credit source requires a new policy decision -- it never silently exceeds the cap.",
+      "supersedes": "v1.0's compute_extra_credit applied no cap by default and exposed an opt-in daily_cap parameter as an unresolved-pending-RC placeholder. v2.0 makes the 1.0-point cap unconditional policy (EXTRA_CREDIT_DAILY_CAP_POINTS) and removes the daily_cap parameter; an additional_sources argument now raises PolicyDecisionRequiredError instead of silently extending the ledger."
+    },
+    "OPEN-11": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "Non-class days are EXCLUDED from the participation requirement. Partial/absent/uncertain attendance NEVER auto-zeroes -- such days are excused/unknown unless RC explicitly designates the day participation-eligible. UNKNOWN is distinct from zero.",
+      "supersedes": "v1.0's compute_participation_point returned UNKNOWN for any non-class or partial-attendance day as an unresolved-pending-RC placeholder. v2.0 replaces it with compute_participation_day, which distinguishes excluded/excused non-class and non-eligible-partial/absent days (0.0/0.0, contributes nothing) from genuinely-unknown attendance (UNKNOWN/UNKNOWN), and adds an explicit participation_eligible_designation override for partial/absent days RC designates as participation-eligible."
+    },
+    "OPEN-15": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "WORK = 100 * (packet_points_earned + participation_points_earned + extra_credit_points_earned) / (packet_points_possible + participation_points_possible). Only teacher-designated official evidence enters. Extra credit raises the numerator but NOT the denominator. WORK MAY EXCEED 100. Zero denominator falls to OPEN-16's rule. NEVER add a percentage directly to raw flat points.",
+      "supersedes": "v1.0's compute_work_aggregate combined three components (digital_packet_work_score + participation_points + extra_credit_points) by plain scalar addition, an unresolved-pending-RC placeholder that risked mixing a percentage-scale score with flat point bonuses without normalization. v2.0 replaces it with the point-based ratio formula above; the old three-scalar-addition signature is removed."
+    },
+    "OPEN-16": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "No eligible designated work/participation => completion UNKNOWN, WORK UNKNOWN, quarter grade UNKNOWN. Student-facing display = dash / \"not enough evidence\", never zero.",
+      "supersedes": "v1.0's compute_completion already returned UNKNOWN for assigned_count == 0, but the real-world consequence (an early-quarter UNKNOWN window for every student) was left unresolved-pending-RC, not confirmed policy. v2.0 confirms UNKNOWN propagation through WORK (compute_work_aggregate) and the quarter grade (compute_quarter_grade) as decided policy, and adds a defined display convention (round_final_grade_for_display / final_grade_display_string / unknown_display_token / unknown_display_text)."
+    },
+    "OPEN-19": {
+      "status": "RESOLVED",
+      "provenance": "RESOLVED by RC 2026-07-24",
+      "ruling": "component_percentage = 100 * sum(current_official_points_earned) / sum(points_possible) for packet assignments, lesson quizzes, topic assessments, any same-kind designated group. Each item contributes its CURRENT OFFICIAL server-designated score; attempt-selection/overrides are governed by their own rules (out of scope here). NEVER equal-average assignment percentages when possible-points differ. ASSESSMENT = 100 * total_assessment_points_earned / total_assessment_points_possible (quizzes + topic assessments on their actual point scales).",
+      "supersedes": "v1.0 had no multi-item reduction rule at all -- it assumed a single scalar packet-work/assessment score with no defined combination across multiple items of differing point value. v2.0 introduces compute_component_percentage and compute_assessment_aggregate as the point-weighted reduction, and forbids equal-averaging per-item percentages."
+    }
+  },
+  "changelog": [
+    {
+      "version": "2.0",
+      "date": "2026-07-24",
+      "package": "NT16",
+      "summary": "Supersedes grading_policy.v1.json (deleted). Resolves OPEN-08, OPEN-09, OPEN-10, OPEN-11, OPEN-15, OPEN-16, and OPEN-19's arithmetic per RC final rulings 2026-07-24.",
+      "changes": [
+        "OPEN-08: completion_threshold comparison uses the exact ratio; compute_completion's round_ndigits parameter removed.",
+        "OPEN-09: internal computations stay full precision; display-only rounding added via round_final_grade_for_display / final_grade_display_string; compute_quarter_grade's round_ndigits parameter removed.",
+        "OPEN-10: +1.0/student/class-day extra-credit cap is now mandatory (EXTRA_CREDIT_DAILY_CAP_POINTS); compute_extra_credit's opt-in daily_cap parameter removed; an additional_sources argument now raises PolicyDecisionRequiredError instead of silently extending the ledger.",
+        "OPEN-11: compute_participation_point (UNKNOWN-for-any-non-present-day placeholder) replaced by compute_participation_day / ParticipationDay / aggregate_participation, distinguishing excluded-non-class, excused-not-eligible, present/eligible-counted, and genuinely-unknown-attendance cases.",
+        "OPEN-15: compute_work_aggregate's plain three-scalar addition replaced by the point-based formula (packet + participation + extra-credit points earned, over packet + participation points possible); WORK may now exceed 100.",
+        "OPEN-16: zero-eligible-denominator consequence (completion/WORK/quarter grade all UNKNOWN) confirmed as decided policy, with a defined display convention (unknown_display_token, unknown_display_text).",
+        "OPEN-19: new point-weighted multi-item reduction added (compute_component_percentage, compute_assessment_aggregate); equal-averaging per-item percentages is forbidden.",
+        "New exception type PolicyDecisionRequiredError, distinct from PolicyDomainError, for unauthorized-extra-credit-source requests.",
+        "New constants: extra_credit_daily_cap_points, authorized_extra_credit_sources, final_grade_display_decimals, unknown_display_token, unknown_display_text.",
+        "domains updated for the new API surface: attendance_enum, component_item_pairs, work_component_points, unbounded_non_negative_percentage_value (work_aggregate/teacher_override lose their [0,100] ceiling), assessment_percentage_scale_value (assessment_aggregate keeps [0,100]).",
+        "provisional_implementation_choices block removed; replaced by resolved_open_items (all seven items now carry status RESOLVED, a provenance token, the RC ruling text, and what v1.0 provisional choice each supersedes).",
+        "open_item_ids is now empty; resolved_open_item_ids lists the seven resolved items.",
+        "grading_policy.v1.json deleted; this file (grading_policy.v2.json) is the sole machine-readable source of truth going forward."
+      ]
+    },
+    {
+      "version": "2.0",
+      "date": "2026-07-24",
+      "package": "NT16-codex-remediation",
+      "summary": "Codex review pass (C1, C3, C4, C5) found and fixed four defects in the IMPLEMENTATION of already-RESOLVED v2.0 rulings. No OPEN-NN ruling text is changed by this entry -- these are bug fixes to code that had not yet fully complied with its own documented ruling.",
+      "changes": [
+        "C1 (HIGH, OPEN-08 implementation defect): compute_quarter_grade's 0.40 gate compared a binary float completion ratio to completion_threshold, which can collapse to exactly the threshold for large completed_count/assigned_count pairs even when the true rational value is strictly below it, wrongly selecting the MAX branch. Fixed via a new exact-integer-cross-product gate: compute_completion_threshold_met(completed_count, assigned_count) and compute_quarter_grade's new keyword-only completed_count=/assigned_count= arguments, which take precedence over the float completion when both are supplied. The float completion path still works for callers with only a ratio; it is now documented as subject to representation error at the boundary. New quarter_rule.gate_decision_from_counts and rounding_rules.completion_threshold_gate_exactness entries; domains.counts.applies_to extended to the new entry points.",
+        "C3 (HIGH, OPEN-10 implementation defect): compute_extra_credit decided authorization by which parameter the caller used (dedicated boolean flags vs. additional_sources) instead of by membership in authorized_extra_credit_sources -- additional_sources=['ti84'] (an authorized source) wrongly raised PolicyDecisionRequiredError, and an unauthorized source in additional_sources was never checked when a flag was UNKNOWN (the UNKNOWN short-circuit ran first). Fixed: authorization is now checked by membership for every supplied source, unconditionally, before the UNKNOWN short-circuit; an authorized source arriving via additional_sources now contributes normally, deduplicated against the same source's dedicated flag (a source counts at most once per student per class day). A malformed (non-string/empty) source id raises PolicyDomainError, distinct from an unauthorized-but-well-formed one. New extra_credit_cap_rule.authorization_is_by_membership_not_channel / deduplication_rule / malformed_source_id_policy entries.",
+        "C4 (HIGH, OPEN-19 implementation defect): compute_assessment_aggregate (via compute_component_percentage) computed the point-weighted ratio with no per-item ceiling, so compute_assessment_aggregate([(120, 100)]) returned 120.0, an out-of-[0, 100] value nothing upstream ever caught. Fixed: compute_component_percentage gains allow_above_100 (keyword-only, default False, STRICT -- every item must satisfy points_earned <= points_possible, PolicyDomainError otherwise, a data defect distinct from UNKNOWN); compute_assessment_aggregate always uses the strict default with no way to opt out, so its result is guaranteed in [0, 100] by construction. allow_above_100=True is an explicit opt-in reserved for WORK-side groups where extra credit legitimately lifts earned above possible -- never legitimate for ASSESSMENT (PREF-04.5). New component_reduction_rule.per_item_ceiling entry.",
+        "C5 (MEDIUM, OPEN-09 implementation gap): round_final_grade_for_display used Python's round (half-even / 'banker's rounding': round(0.25, 1) == 0.2, round(0.35, 1) == 0.3) without ever stating that choice; RC's OPEN-09 ruling fixed 'one decimal' but said nothing about the tie-breaking mode. Now explicitly labeled, in the function's docstring and in rounding_rules.display_rounding_mode, as an implementation reading pending RC confirmation, not a ruling -- per the same discipline already used for OPEN-11's excused/unknown reading. No new OPEN-NN id is minted; the resolved-item register stays closed at OPEN-01..OPEN-19. AMENDMENT NOTE (NT16-B, RC 2026-07-24, later same date): RC has since directly confirmed the mode is half-up (decimal ROUND_HALF_UP), superseding the half-even reading recorded above -- see the NT16-B-rc-amendment-and-confirmation changelog entry below and rounding_rules.display_rounding_mode for RC's verbatim ruling; this entry is left otherwise unchanged as the historical record of the original C5 finding."
+      ]
+    },
+    {
+      "version": "2.0",
+      "date": "2026-07-24",
+      "package": "NT16-codex-remediation-c1-hardening",
+      "summary": "Same-day peer-review follow-up to the C1 entry above: the exact-count gate only closed the float-collapse defect when a caller passed completed_count=/assigned_count= to compute_quarter_grade a second time. The ORDINARY compute_completion(...) -> compute_quarter_grade(...) two-call sequence -- the calling pattern every real caller actually writes -- still collapsed, because the counts available at the first call were discarded the moment compute_completion returned a bare float. This entry closes that gap.",
+      "changes": [
+        "compute_completion now returns a CompletionRatio -- a float SUBCLASS that IS a float, not merely float-like, so ordinary float operations (arithmetic, comparison, round(), JSON serialization) run without raising -- and that additionally carries the exact completed_count/assigned_count it was computed from as .completed_count/.assigned_count attributes. (V1, Codex re-check 2026-07-24: this entry's original wording -- 'behaves as an ordinary float everywhere' -- was corrected; see the NT16-codex-recheck-v1 entry below for why that phrasing over-promised.)",
+        "compute_quarter_grade recognizes a `completion` argument that is a CompletionRatio and uses its carried counts for the exact-integer gate decision automatically when no explicit completed_count=/assigned_count= kwargs are supplied -- the ordinary two-call sequence is now exact by construction, with no change required at any call site, PROVIDED nothing between the two calls touches the ratio (see the V1 entry below).",
+        "Precedence is explicit: (1) explicit completed_count=/assigned_count= kwargs always win; (2) a carrying CompletionRatio is used when no explicit kwargs are supplied; (3) a bare float with no carried counts and no explicit kwargs falls back to the float-vs-threshold comparison, still documented as subject to representation error at the boundary -- this is the only remaining imprecise path. (V1, Codex re-check 2026-07-24: this entry originally said tier 3 is reached ONLY when the counts that would make it exact do not exist anywhere in the call chain to recover -- that was false; it is equally reached whenever a CompletionRatio's provenance was destroyed by arithmetic, coercion, rounding, copying, or serialization before reaching compute_quarter_grade. See the V1 entry below.)",
+        "Explicit completed_count=/assigned_count= kwargs that CONTRADICT a carrying completion's own counts now raise PolicyDomainError (a caller defect -- two different counts cannot both govern the same gate decision); kwargs that match the carried counts are accepted as redundant-but-consistent.",
+        "_COMPLETION_THRESHOLD_FRACTION is now derived from the JSON file's own decimal literal via a second parse with parse_float=fractions.Fraction (Fraction('0.40') == 2/5 exactly, no floating-point intermediate at all), replacing the previous Fraction(float).limit_denominator() heuristic; an import-time assertion checks float(_COMPLETION_THRESHOLD_FRACTION) == COMPLETION_THRESHOLD so a future divergence fails loudly at import rather than silently deciding the gate against the wrong fraction.",
+        "quarter_rule.gate_decision_from_counts rewritten to describe all three precedence tiers; no other JSON structure changed."
+      ]
+    },
+    {
+      "version": "2.0",
+      "date": "2026-07-24",
+      "package": "NT16-codex-recheck-v1",
+      "summary": "Codex re-check pass found V1 (HIGH): the C1-hardening entry above (and the matching prose in grading_policy_ref.py / GRADING_POLICY_SPEC.md) documented CompletionRatio as behaving 'as an ordinary float everywhere' without disclosing that every one of those ordinary-float operations -- arithmetic, coercion, rounding, copying, serialization -- silently discards the carried counts and degrades the ratio to a bare float, routing branch selection to the documented-imprecise tier-3 fallback. Reproduced live with completed=40000000000000000, assigned=100000000000000001 (exact ratio strictly below 2/5): ratio + 0.0, float(ratio), round(ratio, 12), abs(ratio), and a JSON round-trip all flip the branch from the correct AVERAGE (70.0) to the wrong MAX (80.0). Two further defects compounded this: completed_count/assigned_count were public and mutable (a tampering attempt could silently flip the gate), and nothing verified a CompletionRatio's carried counts actually matched its own float value (a crafted ratio could lie about its provenance). This entry does NOT change any OPEN-NN ruling text and does NOT attempt to make provenance survive arithmetic (impossible without overriding every float dunder, and still defeated by serialization) -- it corrects the documentation to match the honest fallback-tier design and closes the tampering/crafting holes the design cannot close on its own.",
+      "changes": [
+        "Documentation corrected everywhere it previously overstated the guarantee: CompletionRatio's docstring, compute_completion's docstring, compute_quarter_grade's docstring (grading_policy_ref.py), GRADING_POLICY_SPEC.md section 3 ('V1 hardening'), and this file's quarter_rule.gate_decision_from_counts and this changelog's own NT16-codex-remediation-c1-hardening entry now all state plainly that arithmetic/coercion/rounding/copying/serialization of a CompletionRatio produces a bare float, the provenance is lost, and the tier-3 fallback is reached whenever counts are absent OR provenance was lost -- not only when counts never existed.",
+        "test_c1_completion_ratio_behaves_as_an_ordinary_float_everywhere (test_grading_policy_ref.py) renamed to test_c1_completion_ratio_is_float_compatible_but_arithmetic_degrades_provenance and its docstring corrected to keep asserting the real float-compatibility substance while no longer implying exactness survives; new tests added asserting arithmetic/round()/float() no longer return a CompletionRatio.",
+        "CompletionRatio.completed_count/.assigned_count are now READ-ONLY -- properties over private __slots__ (_completed_count/_assigned_count), with no setter. Assigning either one now raises AttributeError instead of silently succeeding, closing the tampering hole where a mutated ratio could lie about its own provenance.",
+        "compute_quarter_grade gains a count-vs-float consistency check: whenever `completion` carries counts (a CompletionRatio), it verifies float(fractions.Fraction(completed_count, assigned_count)) equals the ratio's own float value BEFORE trusting those counts for the gate decision, and before override precedence is applied (same validate-first discipline as the existing R1/C1 ordering). A mismatch raises PolicyDomainError (never UNKNOWN -- a caller/data defect, not unavailable evidence), catching a hand-crafted CompletionRatio whose counts disagree with its float. Verified not to false-positive across the witness pair, the exact 2/5 boundary, 39/100, 0/1, and n/n.",
+        "CompletionRatio gains __reduce__ so copy.copy/copy.deepcopy/pickle degrade it honestly to a bare float instead of raising TypeError (the default float-subclass reduction cannot supply the two extra constructor arguments CompletionRatio.__new__ requires) -- picklable/copyable enough not to break a consumer, without pretending provenance survived the round trip.",
+        "New tests in test_grading_policy_ref.py: doc-advertised operations (ratio + 0.0, float(), round(), abs(), JSON round-trip) demonstrably land in the fallback tier; a guard test asserting the provenance-loss wording is actually present in CompletionRatio/compute_completion/compute_quarter_grade docstrings, GRADING_POLICY_SPEC.md, and this file's quarter_rule.gate_decision_from_counts; a tampering-raises test; a crafted-ratio-raises test; a pristine-ratios-unaffected test across the witness pair, 2/5, 39/100, 0/1, and n/n. test_rc_rulings_acceptance.py's proofs 01/02 updated to state the exactness guarantee accurately (holds for the pristine result and for explicit counts, not for a degraded float) and to assert the degraded path is the documented fallback rather than a silent wrong answer."
+      ]
+    },
+    {
+      "version": "2.0",
+      "date": "2026-07-24",
+      "package": "NT16-codex-recheck-v2-doc",
+      "summary": "Codex re-check pass found V2 (HIGH, document half): GRADING_POLICY_SPEC.md section 3.2's Schoology-reconciliation bullet still stated, as live normative text, the forgiveness rule the C2 remediation had already deleted from parity_check.py's code -- 'a difference that disappears once both sides are rounded to one decimal is display rounding... and must not be reported as one.' That is a reimplementation hazard sitting in an authoritative document. This entry covers only the document correction; the parity_check.py code fix and the package-wide stale-phrase guard against this formulation recurring are tracked by a separate, concurrently-running work package (parity_check.py / test_parity_check.py / test_policy_package.py are not owned by this package's changes).",
+      "changes": [
+        "GRADING_POLICY_SPEC.md section 3.2's Schoology-reconciliation bullet rewritten to match parity_check.py's corrected behavior: reconciliation compares underlying full-precision values only and rounding never forgives a difference; when only a display-rounded observation of the Schoology-side figure is available, comparison_basis is degraded to 'display-rounded-observation -- underlying convergence NOT established' and underlying_convergence_established is forced False rather than ever declaring underlying convergence from it; Schoology keeps native earned/possible totals and this policy never publishes a rounded display value into Schoology, which is precisely why the underlying comparison is the real one.",
+        "No other surviving statement of the deleted forgiveness rule was found elsewhere in this package's owned files (grading_policy_ref.py, grading_policy.v2.json, GRADING_POLICY_SPEC.md, test_grading_policy_ref.py, test_rc_rulings_acceptance.py) after a full-text sweep."
+      ]
+    },
+    {
+      "version": "2.0",
+      "date": "2026-07-24",
+      "package": "NT16-B-rc-amendment-and-confirmation",
+      "summary": "RC issued two further rulings, later the same date, on the two implementation readings the NT16 Codex-remediation pass had flagged as 'pending RC confirmation': OPEN-09's display rounding MODE (AMENDED to half-up) and OPEN-11's excused-vs-unknown reading (CONFIRMED as already implemented). Neither reopens its OPEN-NN id; no new OPEN-NN id is minted; OPEN-09 and OPEN-11 both remain RESOLVED.",
+      "changes": [
+        "OPEN-09 rounding MODE, AMENDED by RC 2026-07-24: 'Use conventional decimal ROUND_HALF_UP for the student-facing one-decimal display. Example: 89.25 -> 89.3. Do not use Python binary-float round() or half-even behavior for the display contract. Keep full precision internally. Do not round before the 40% branch decision. Schoology reconciliation compares underlying values; display rounding cannot conceal real divergence.' round_final_grade_for_display rewritten to use decimal.Decimal(value).quantize(Decimal(1).scaleb(-FINAL_GRADE_DISPLAY_DECIMALS), rounding=ROUND_HALF_UP) instead of Python's builtin round, constructing the Decimal directly from the binary float value (never str(value), which would introduce a hidden double-rounding step). rounding_rules.display_rounding_mode updated to name half-up explicitly, with the prior half-even reading preserved in place as superseded history.",
+        "OPEN-11 excused/unknown reading, CONFIRMED by RC 2026-07-24: 'A known absent, partial-attendance, or non-class day is excused and contributes 0 earned / 0 possible. A genuinely uncertain attendance state remains UNKNOWN. Neither case produces an automatic participation zero. RC may explicitly designate an otherwise excused day as participation-eligible.' compute_participation_day already conformed to all four points -- no code change accompanies this confirmation, only removal of the 'pending RC confirmation' / 'documented reading, not itself a ruling' labeling from the four corresponding cases.",
+        "No OPEN-NN id is reopened or minted by this entry; OPEN-09 and OPEN-11 both remain RESOLVED (resolved_open_items['OPEN-09'/'OPEN-11'].status/.provenance are unchanged -- still 'RESOLVED'/'RESOLVED by RC 2026-07-24' -- the amendment/confirmation is recorded in this changelog entry and in rounding_rules.display_rounding_mode, not by mutating those fields)."
+      ]
+    }
+  ]
+}
