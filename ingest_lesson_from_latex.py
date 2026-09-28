@@ -110,10 +110,34 @@ DROP_COMMANDS = [
 ]
 
 
+def balanced_command_blocks(body: str, command: str):
+    """Yield (start, end, content) for complete braced command arguments.
+
+    Count every brace, including escaped braces; incomplete blocks are left alone.
+    """
+    marker = "\\" + command + "{"
+    pos = 0
+    while (start := body.find(marker, pos)) != -1:
+        inner_start = start + len(marker)
+        depth = 1
+        for index in range(inner_start, len(body)):
+            if body[index] == "{":
+                depth += 1
+            elif body[index] == "}":
+                depth -= 1
+                if depth == 0:
+                    yield start, index + 1, body[inner_start:index]
+                    pos = index + 1
+                    break
+        else:
+            pos = inner_start
+
+
 def strip_answer_and_te(body: str) -> str:
     """Remove \\answer{} and \\te{} blocks — they're captured separately."""
-    body = re.sub(r"\\answer\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}", "", body, flags=re.DOTALL)
-    body = re.sub(r"\\te\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}", "", body, flags=re.DOTALL)
+    for command in ("answer", "te"):
+        for start, end, _ in reversed(list(balanced_command_blocks(body, command))):
+            body = body[:start] + body[end:]
     return body
 
 
@@ -240,11 +264,28 @@ def detect_visual_type(body: str) -> tuple[str, bool]:
 
 def extract_answer(body: str) -> Optional[str]:
     """Return the \\answer{...} content from a block, or None if absent."""
-    m = re.search(r"\\answer\{((?:[^{}]|\{[^{}]*\})*)\}", body, flags=re.DOTALL)
-    if not m:
+    block = next(balanced_command_blocks(body, "answer"), None)
+    if block is None:
         return None
-    inner = m.group(1).strip()
+    inner = block[2].strip()
     return latex_body_to_text(inner)
+
+
+def selftest() -> bool:
+    """Check extraction and both removals at increasing brace depths."""
+    cases = [
+        ("no nesting", "42"),
+        ("two-level", r"{\{x\mid x\}}"),
+        ("three-level", r"{outer {middle {inner}}}"),
+    ]
+    passed = True
+    for name, inner in cases:
+        body = "Q\\answer{" + inner + "}\\te{" + inner + "}Z"
+        ok = (extract_answer(body) == latex_body_to_text(inner)
+              and strip_answer_and_te(body) == "QZ")
+        print(f"{'PASS' if ok else 'FAIL'}: {name}")
+        passed = passed and ok
+    return passed
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -738,14 +779,19 @@ def main() -> None:
                     "Accepts multiple .tex files (e.g. SE + TE); they are "
                     "concatenated in argument order before parsing."
     )
-    ap.add_argument("tex_files", nargs="+",
+    ap.add_argument("tex_files", nargs="*",
                     help="One or more .tex files (SE, TE, assessment). "
                          "Order: SE first, then TE, then assessment.")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--selftest", action="store_true", help="Run inline brace scanner tests")
     ap.add_argument("--no-calibration", action="store_true",
                     help="Don't overwrite existing calibration file")
     ap.add_argument("--outdir", default=str(SKELETONS_DIR))
     args = ap.parse_args()
+    if args.selftest:
+        sys.exit(0 if selftest() else 1)
+    if not args.tex_files:
+        ap.error("at least one tex file is required unless --selftest is used")
 
     # Read and concatenate all input files
     tex_parts = []
