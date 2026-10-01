@@ -1,0 +1,901 @@
+\documentclass{article}
+% Source: Topic_12_Teacher_Edition.pdf, PDF pages 49-60 (printed pages 608A-615B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 49: 608A Lesson Overview
+\begin{lesson-meta}
+lesson: 12-4
+title: Probability Distributions
+standards: none printed
+practices: none printed
+objective: I can define probability distributions to represent experiments and solve problems.
+
+essential question: What does a probability distribution tell you about an experiment?
+
+\textbf{VOCABULARY}
+\item binomial experiment
+\item probability distribution
+\item uniform probability distribution
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 12-4 \\
+Title & Probability Distributions \\
+Standards & none printed \\
+I CAN Objective & I can define probability distributions to represent experiments and solve problems. \\
+Essential Question & What does a probability distribution tell you about an experiment? \\
+Lesson Vocabulary & binomial experiment; probability distribution; uniform probability distribution \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview. FOCUS}
+Objective. Students will be able to:
+\item Develop a probability distribution based on theoretical probabilities or empirical data.
+\item Graph probability distributions.
+\item Calculate probability in binomial experiments.
+Essential Understanding. You can define a theoretical probability distribution by calculating the probability of each outcome in an experiment or an experimental probability distribution by using the real-world relative frequency of each outcome.
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Determined the probability of combinations of events.
+\item Calculated the number of permutations and combinations of sets of items, and used them to calculate probability.
+In this lesson, students:
+\item Define and graph probability distributions.
+\item Recognize situations that are binomial experiments and calculate probabilities in those situations.
+Increasing Coherence. The content of this lesson is not necessarily expected to be addressed on high-stakes assessments.
+Later in this topic, students will:
+\item Use probability distributions to calculate expected value and make decisions.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students rely on conceptual understanding to choose appropriate methods for calculating probabilities.
+\item Students use calculations and graphing techniques to define and display probability distributions.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com. Program Resources.
+REVIEW VOCABULARY. English | Spanish
+\item combination | combinación
+\item relative frequency | frecuencia relativa
+NEW VOCABULARY
+\item binomial experiment | experimento binomial
+\item probability distribution | distribución de probabilidades
+\item uniform probability distribution | distribución probabilidad uniforme
+VOCABULARY ACTIVITY. Fill in the blank.
+a. A uniform distribution is a probability distribution that is equal for each outcome in the blank.
+\answer{sample space}
+b. A selection of r objects from a set of n objects in which the order of the r objects is not important is a blank
+\answer{combination}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 49 932 736 1085 917
+\placeholder{illustration}{Student Companion enVision Algebra 2 cover, purple and blue circular geometric artwork on dark background, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students define and develop different types of probability distributions, such as theoretical and experimental probabilities. They graph these types of probability distributions.
+Students learn to recognize situations that are binomial and calculate the probability.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively
+Students use both graphs and algebraic representations of probability distributions.
+Model with Mathematics
+Students use probability distributions to describe real-world data, such as smartphones per household.
+Attend to Precision
+Students evaluate complex formulas accurately.
+\end{te-addendum}
+% Source page 50: 608B Explore
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{STEP 1 Explore. MODEL \& DISCUSS}
+Model \& Discuss is available at SavvasRealize.com. Activity.
+INSTRUCTIONAL FOCUS Students use birth order to explore binomial experiments. Gender is an independent event, and the probability of each outcome is the same. This prepares students to understand how probabilities arise from binomial experiments.
+STUDENT COMPANION Students can complete the Model \& Discuss activity in their Student Companion.
+Before. WHOLE CLASS. Implement Tasks That Promote Reasoning and Problem Solving ETP
+Q: Suppose you flip a nickel and a penny at the same time. Is it more likely that both land heads up or that one is a head and one is a tail?
+\answer{One is a head and one is a tail. The coins can land head-tail or tail-head, but there is only one way to land with two heads.}
+\end{te-addendum}
+\begin{te-addendum}{0}{RtISupport}
+During. SMALL GROUP. Support Productive Struggle in Learning Mathematics ETP
+Q: What would Model B look like with only 2 children?
+\answer{It would not have the 8 branches on the right, and the outcomes would be 2 girls, 1 girl, 1 girl, and 0 girls.}
+Q: Is there a different way you can organize the information? How?
+\answer{Yes; put all possible birth orders in a table.}
+Q: Think about the coin-flip situation. Now suppose a family has 3 children. Is it more likely that all 3 are girls or that 2 are girls and 1 is a boy?
+\answer{2 are girls and 1 is a boy. There is only 1 way all are girls, but 3 ways that 1 child is a boy.}
+\end{te-addendum}
+\begin{te-addendum}{0}{RtIExtend}
+For Early Finishers
+Q: Suppose the probability of a girl was 0.6. How would that change your answers to B and C?
+\answer{The probability of 3 girls would increase (to 0.216). The probability of a boy and 2 girls would also increase (to 0.144).}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+After. WHOLE CLASS. Facilitate Meaningful Mathematical Discourse ETP
+Q: What did you notice about how the probabilities were distributed?
+\answer{Each individual probability of a girl was the same, and the distribution was symmetric. The probability of 1 or 2 girls was higher than that of 0 or 3.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with MODEL \& DISCUSS. Look for Relationships Which combinations of children are most common? Is one order of this combination more likely? Explain.
+\answer{Two of one gender and one of the other gender (2 girls and 1 boy, or 2 boys and 1 girl); No, each order is equally likely.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{MODEL \& DISCUSS}
+Mr. and Mrs. Mason have three children. Assume that the probability of having a baby girl is 0.5 and the probability of having a baby boy is also 0.5.
+% FIG 50 829 645 1110 807
+\placeholder{diagram}{Model A: single point branches right to 3 girls, 2 girls, 1 girl, 0 girls, each edge labeled 0.25. Model B: three-stage binary tree with G red above B blue at each fork, all edges 0.5; terminal outcomes top to bottom GGG 3 girls, GGB 2 girls, GBG 2 girls, GBB 1 girl, BGG 2 girls, BGB 1 girl, BBG 1 girl, BBB 0 girls.}
+A. Reason Which model represents the situation correctly, Model A or Model B? Explain.
+\answer{SAMPLE STUDENT WORK. A. Model B correctly shows that having a given number of girls is the outcome of 3 independent events (having a baby) and the probability of having a girl is 0.5 each time. Model A incorrectly indicates that having 2 girls and having 3 girls are equally likely.}
+B. What is the probability that Mr. and Mrs. Mason have 3 girls?
+\answer{B. 0.125, or 12.5\%, or (\frac18)}
+C. Compare the probability that the Masons' first child was a boy and they then had two girls to the probability that their first two children were girls and they then had a boy. Does the order affect the probabilities? Explain.
+\answer{C. The probabilities of BGG and of GGB are both 0.125. The order does not make a difference because each time you are computing (0.5)(0.5)(0.5).}
+% FIG 50 669 187 1183 532
+\placeholder{illustration}{Digital Model and Discuss preview with same Mason family prompt and three questions, Go back, collapsed MODEL A and MODEL B bars, Enter your answer boxes.}
+\end{model-discuss}
+% Source page 51: 608 Understand and Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Establish Learning ETP
+Students relate an experiment to its probability distribution to examine how probabilities are assigned to each outcome of a sample space and determine which outcomes are more or less likely.
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{EXAMPLE 1 Develop a Theoretical Probability Distribution}
+Elicit and Use Evidence of Student Thinking ETP
+Q: In Part A, suppose there were buttons for 5 students in the box. What is the sample space?
+\answer{\{0, 1\}; you can still only select 0 or 1 Teo button.}
+Q: What might change the probability in the experiment?
+\answer{If there are a different number of Teo and Henry buttons, the probability will be different than (\frac12).}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 3}
+Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.
+Keegan plays a game rolling a number cube 2 times, recording the result of each roll. He wins when the sum of the two rolls is even. Can this game be described as a binomial experiment? What if Keegan wins when the sum of the two rolls is 12?
+Consider that each roll in Keegan's game is a trial in an experiment. Then Keegan's game is an experiment with two trials.
+\answer{In order for the sum of two numbers to be even, either both numbers are even or both numbers are odd. No matter what number Keegan gets in the first roll, there will be 3 possible numbers he can get in the second roll that will result in an even sum. So, success on the first trial is rolling any number, with a probability of success of (\frac66=1). Success on the second trial is rolling any of the 3 numbers that will result in an even sum, with a probability of success of (\frac36=\frac12). Since the probability of success for each trial is not equal, this game cannot be described as a binomial experiment.}
+\te{No answer to the sum-of-12 follow-up is printed in the preview. Printed success changes definition between trials in the even-sum explanation.}
+% FIG 51 442 930 510 1003
+\placeholder{illustration}{Orange number cube, top face 4, left face 1, right face 2.}
+Example 3 Help students determine whether an experiment is a binomial experiment.
+Q: What are the three criteria for a binomial experiment?
+\answer{The experiment must have two possible outcomes, the outcomes of each trial must be independent, and the probability of success must be the same for every trial.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+Dana spins the spinner 6 times. Find the probability that she gets a vowel exactly 3 times, to the nearest percent.
+% FIG 51 971 936 1065 1033
+\placeholder{diagram}{Circular spinner with seven equal sectors clockwise from top: A blue, B orange, C light green, D purple, E yellow-orange, F cyan, G green. Black central arrow points upper-right into B.}
+The probability of success on each spin is 2 out of 7, or about 28.6\%.
+The probability of 3 successes is
+(P(3)={}_6C_3(0.286)^3(0.714)^{6-3})
+(\approx20(0.023)(0.364))
+(\approx0.17)
+\answer{The probability is about 17\%.}
+Example 4 Help students find a binomial probability.
+Q: Why is it important that the sum of the exponents is equal to the number of trials?
+\answer{In a binomial experiment, every trial is either a success or a non-success. The sum of the exponents represents every trial.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Develop a Theoretical Probability Distribution}
+\te{CONCEPTUAL UNDERSTANDING}
+A. Teo and Henry are running for President of the Student Council. You will select a campaign button at random from the box containing 3 Teo buttons and 3 Henry buttons. You will record the number of Teo buttons that you get. What is the theoretical probability distribution for the sample space \{0, 1\}?
+A probability distribution for an experiment is a function that assigns a probability to each outcome of a sample space for the experiment.
+Since you are selecting a button at random, you are equally likely to get 0 buttons or 1 button for Teo.
+\answer{The theoretical probability distribution for this experiment is the function P, defined on the set \{0, 1\}, such that (P(0)=\frac12) and (P(1)=\frac12).}
+\te{COMMUNICATE PRECISELY The sample space \{0, 1\} represents the number of Teo buttons you can select in one trial.}
+\te{A theoretical probability is based upon assumptions rather than on experimentation.}
+% Source page 52: 609 Example 1 continued
+B. Now you plan to select a button at random, put it back in the box, and then select another button at random. You will record the total number of times that you get a Teo button during the experiment. Define the theoretical probability distribution for the sample space \{0, 1, 2\}. How does this probability distribution differ from the distribution in Part A?
+Make a tree diagram for the experiment.
+% FIG 52 850 303 1097 417
+\placeholder{diagram}{Two-stage tree forks T above H, each edge 1/2, and each node forks T/H with 1/2 edges. Terminal labels top to bottom P(TT)=1/4, P(TH)=1/4, P(HT)=1/4, P(HH)=1/4. Callout: Multiply probabilities along each path.}
+Add the probabilities of TH and HT to find the probability of getting one Teo button.
+(P(1)=\frac14+\frac14=\frac12)
+The theoretical probability distribution is the function P, defined on the set \{0, 1, 2\}, such that (P(0)=\frac14), (P(1)=\frac12), and (P(2)=\frac14).
+Compare this probability distribution to the one in Part A.
+A uniform probability distribution assigns the same probability to each outcome.
+\textbf{Comparing Probability Distributions}
+\begin{tabular}{lll}
+Select one button & (P(0)=\frac12, P(1)=\frac12) & uniform \\
+Select two buttons & (P(0)=\frac14, P(1)=\frac12, P(2)=\frac14) & not uniform \\
+\end{tabular}
+\answer{The probability distribution in Part A is a uniform probability distribution. The probability distribution in Part B is not.}
+\te{STUDY TIP One way to check your work is to check that the sum of the probabilities of all the outcomes is 1.}
+\end{example}
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: Why does multiplying the probabilities along each path give the probability that both events along the path occur?
+\answer{The events are independent, and the probability that two independent events both occur is equal to the product of their probabilities.}
+Q: Why is P(1) equal to (P(TH)+P(HT))?
+\answer{(P(1)=P(TH\text{ or }HT)). Since TH and HT are mutually exclusive events, (P(TH\text{ or }HT)) is equal to the sum of their probabilities.}
+Q: How is the experiment in part B like flipping a coin?
+\answer{H and T can represent heads and tails for 2 tosses of a coin where you are finding the probability of 1 tail. A tail has a (\frac12) probability of occurring on each toss.}
+Q: Suppose you are only interested in the results of the second toss. Is the distribution uniform?
+\answer{Yes; there are only 2 outcomes, each with a (\frac12) probability of occurring.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{tryit}{1}
+\textbf{Try It!}
+You select two marbles at random from the bowl. For each situation, define the theoretical probability distribution for selecting a number of red marbles on the sample space \{0, 1, 2\}. Is it a uniform probability distribution?
+% FIG 52 1000 657 1171 734
+\placeholder{illustration}{Transparent bowl on pale wood surface containing five marbles, three green labeled G and two red labeled R.}
+a. You select one marble and put it back in the bowl. Then you select a second marble.
+\answer{a. Let P be the function defined on \{0, 1, 2\} such that (P(0)=0.36), (P(1)=0.48), and (P(2)=0.16); P is not a uniform probability distribution.}
+b. You select one marble and do not put it back in the bowl. Then you select a second marble.
+\answer{b. Let P be the function defined on \{0, 1, 2\} such that (P(0)=0.3), (P(1)=0.6), and (P(2)=0.1); P is not a uniform probability distribution.}
+\end{tryit}
+\begin{te-addendum}{1}{CommonError}
+\textbf{Common Error}
+Try It! 1b Students may incorrectly find (P(1)=0.3) because they only consider one way of getting 1 red marble. Remind them to consider all ways of getting each outcome in the sample space. Help them see that they can get 1 red marble either by choosing green then red or by choosing red then green. They need to calculate the probability for each of these possibilities and then find their sum.
+(P(1)=P(GR)+P(RG))
+(=\frac35\cdot\frac24+\frac25\cdot\frac34)
+(=\frac3{10}+\frac3{10}=0.6)
+Encourage students to check their answers by verifying that the sum of the probabilities for all outcomes in the sample space is equal to 1.
+\end{te-addendum}
+% Source page 53: 610 Example 2
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{EXAMPLE 2 Develop an Experimental Probability Distribution}
+Elicit and Use Evidence of Student Thinking ETP
+Q: Why is relative frequency used as the experimental probability? Would there be a reason to not use it?
+\answer{It is assumed that future smartphone use will occur with about the same frequencies as the data; If the survey was not random or if smartphone use is expected to change, then this would not be a reasonable assumption.}
+Q: Suppose the last three columns of the table were combined into a “4 or more” column. What would change? What would stay the same?
+\answer{The “4 or more” column would have a frequency of 160 and a relative frequency of 32\%, and it would be represented by the highest bar in the graph. The results and interpretation in Step 3 would be the same.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Develop an Experimental Probability Distribution}
+\te{APPLICATION}
+A cell phone company surveyed 500 households about the number of smartphones they have that are in use.
+\textbf{Number of Smartphones per Household}
+\begin{tabular}{llllllll}
+Number & 0 & 1 & 2 & 3 & 4 & 5 & 6 or more \\
+Frequency & 10 & 66 & 120 & 144 & 79 & 37 & 44 \\
+\end{tabular}
+Would you recommend that the company concentrate on selling data plans for individuals or plans for families with three or more smartphones? Explain.
+Step 1 Define an experimental probability distribution on the sample space \{0, 1, 2, 3, 4, 5, 6 or more\}.
+Divide each frequency by 500 to find each relative frequency. Round each relative frequency to the nearest whole percent.
+\textbf{Number of Smartphones per Household}
+\begin{tabular}{llllllll}
+Number & 0 & 1 & 2 & 3 & 4 & 5 & 6 or more \\
+Frequency & 10 & 66 & 120 & 144 & 79 & 37 & 44 \\
+Relative Frequency & 2\% & 13\% & 24\% & 29\% & 16\% & 7\% & 9\% \\
+\end{tabular}
+Each relative frequency represents the experimental probability that a household selected at random from the 500 households has a given number of smartphones.
+\te{An experimental probability is based upon collecting real-world data and finding relative frequencies.}
+An experimental probability distribution for the experiment is the function P such that if n is an outcome of the sample space, then P(n) is the probability of that outcome. For example, (P(0)=2\%).
+Step 2 Graph the probability distribution.
+% FIG 53 829 613 1030 762
+\placeholder{graph}{Orange separated bars on pale grid. Horizontal Number of Smartphones categories 0,1,2,3,4,5,6 or more; vertical Probability 0 to 35 percent in 5-percent increments. Bar heights 2,13,24,29,16,7,9 percent, respectively. No arrowheads.}
+\te{COMMON ERROR When graphing a probability distribution, the heights of the bars represent the probabilities of each outcome, not their frequencies.}
+Step 3 Interpret the results.
+\answer{The probability that a household has 3 or more cell phones is 61\%. Therefore, the company should focus on family plans rather than on individual plans.}
+\end{example}
+% Source page 54: 611 Example 2 continued and Example 3
+\begin{tryit}{2}
+\textbf{Try It!}
+Suppose that you selected a student at random from the Drama Club and recorded the student's age.
+\textbf{Ages of Students in Drama Club}
+\begin{tabular}{llllll}
+Age & 14 & 15 & 16 & 17 & 18 \\
+Students & 4 & 7 & 10 & 7 & 9 \\
+\end{tabular}
+a. Define an experimental probability distribution on the sample space \{14, 15, 16, 17, 18\}.
+\answer{a. Let P be the function defined on \{14, 15, 16, 17, 18\} such that (P(14)=\frac4{37}\approx11\%), (P(15)=\frac7{37}\approx19\%), (P(16)=\frac{10}{37}\approx27\%), (P(17)=\frac7{37}\approx19\%), and (P(18)=\frac9{37}\approx24\%).}
+b. Graph the probability distribution you defined.
+\answer{b. See graph.}
+% FIG 53 145 637 439 882
+\placeholder{graph}{Try It 2b answer: orange separated bars at Age 14,15,16,17,18, heights approximately 11,19,27,19,24 percent. Vertical Probability 0-30 percent by 5, horizontal Age. Pale background and horizontal dotted lines, no arrows.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: Suppose only 15- and 17-year-olds are eligible to be selected. What would change about the graph and distribution?
+\answer{The graph would have 2 bars the same height representing probabilities of 50\%. The distribution would be uniform.}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2. Look for Relationships Compare the graph of a uniform probability distribution with the graph of a non-uniform distribution.
+\answer{For a uniform distribution, all the bars in the graph are exactly the same height. For a non-uniform distribution, the bars have different heights.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{CONCEPT Binomial Experiments}
+A binomial experiment is an experiment that consists of a fixed number of trials, with the following features.
+\item Each trial has two possible outcomes, one of which is denoted as “success.”
+\item The results of the trials are independent events.
+\item The probability of “success” is the same for every trial.
+\end{concept-box}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{EXAMPLE 3 Binomial Experiments}
+Support Productive Struggle in Learning Mathematics ETP
+Q: Suppose success is defined as landing on either “Go Forward 2 Spaces” or “Go Backward 3 Spaces.” What changes about the experiment? Is it still a binomial experiment?
+\answer{The probability of success for each trial increases to 0.5; It is still a binomial experiment because there are still two possible outcomes for each trial, success and not success, and the probability is the same for every trial.}
+Q: Suppose “Lose a Turn” means that you do not get to spin again. Is the experiment binomial?
+\answer{No; the number of trials is not fixed or, stated another way, the probability of success for any trials after you spin “Lose a Turn” drops to 0.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Binomial Experiments}
+Is the experiment a binomial experiment?
+A. This spinner is spun 3 times. Assume that the spinner is equally likely to stop in any of the sections. Success is landing on a section marked “Go Forward 2 Spaces.”
+% FIG 54 1013 498 1156 643
+\placeholder{diagram}{Circular spinner, eight equal sectors, clockwise from top: Go Forward 2 Spaces brown; Lose a Turn olive; Spin Again magenta; Go Backward 3 Spaces orange; Go Forward 2 Spaces green; Lose a Turn blue; Spin Again red; Go Backward 3 Spaces teal. Central gray pivot, fixed black pointer at top rim pointing down, red dots at sector boundaries.}
+Compare the experiment to the requirements for a binomial experiment.
+\item There are two possible outcomes for each trial, landing on a section labeled “Go Forward 2 Spaces” (success) and not landing on one of those sections.
+\item The outcome of one spin does not affect the probability of success on any other spin.
+\item The probability of success is 0.25 for every trial.
+\answer{The experiment is a binomial experiment.}
+B. In a class of 23 students, 7 students completed the term project. Two students selected at random must give presentations. Success is that the student has completed the project.
+The probability that the first student has completed the project is (\frac7{23}).
+If the first student completed the project, the probability that the second student did is (\frac6{22}). If the first student is not, the probability is (\frac7{22}).
+\answer{Because the probabilities for each trial are different, the experiment is not a binomial experiment.}
+\te{GENERALIZE Would the experiment be a binomial experiment if there were 25 students in the class? Some other number?}
+\end{example}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 3)}
+READING. BEGINNING. Have students give their definitions of the word success. Success can be defined as a favorable or desired outcome or as a person who gains money or popularity or accomplishes something. Now read what is a success in Example 3A.
+Q: If you were interested in how often the spinner lands on “Go Backward 3 Spaces,” what would be a success?
+\answer{landing on “Go Backward 3 Spaces.” That is the outcome you are interested in.}
+Q: How might you change the definition of success in the experiment so that four sections of the spinner represent success?
+\answer{landing on Lose a Turn or Spin Again}
+WRITING. DEVELOPING. Binomial has the prefix bi-, meaning two. Have students find other words that begin with bi-, write them in their journals, and then list what each has two of. Have them share their words.
+Q: Why do you think an experiment like the one in Example 3A would be called binomial?
+\answer{The experiment has two possible outcomes.}
+Q: What does the prefix tri- mean?
+\answer{3}
+Q: How might you define a trinomial experiment?
+\answer{The experiment has three possible outcomes, the results of the trials are independent events, and the probability of any success is the same for every trial.}
+SPEAKING. EXPANDING. Have students read each bulleted item in Example 3A. Have them point to sections of the spinner representing a success. Then ask them to explain “the outcome of one spin does not affect the probability of success on any other spin.” Help them relate the description to independent events. Then, for Example 3B, have them state the same information as the bulleted items in Example 3A.
+Q: In Part B, suppose one trial is selecting both students. Is the experiment binomial? Why?
+\answer{Yes; success is one student completing the project, and each trial has the same probability of success and does not affect the probability of other trials.}
+\te{Printed repeated-pair independence without a replacement/reset condition; independence requires returning the students between such trials.}
+\end{te-addendum}
+% Source page 55: 612 Examples 3 continued and 4
+\begin{tryit}{3}
+\textbf{Try It!}
+Is the experiment a binomial experiment? If so, find the probability of success. Explain.
+a. You select one card at random from a set of 7 cards, 4 labeled A and 3 labeled B. Then you select another card at random from the cards that remain. For each selection, success is that the card is labeled A.
+\answer{a. No; the results of the two selections are not independent. Since the first card is not returned to the set, the probability of success changes because the number of cards to select from changes.}
+b. You roll a standard number cube 4 times. Assume that each time you roll the number cube, each number is equally likely to come up. For each roll, success is getting an even number.
+\answer{b. Yes; there are 4 trials; each trial has two possible outcomes, even or not even; the results of the trials are independent, and the probability of rolling even is the same for each trial. (P(\text{even})=0.5) or 50\%.}
+\end{tryit}
+\begin{concept-box}
+\textbf{CONCEPT Binomial Probability Formula}
+For a binomial experiment consisting of n trials with the probability of success p for each trial, the probability of exactly r successes out of the n trials is given by the following formula:
+(P(r)=(\text{ways to get }r\text{ successes in }n\text{ trials})\cdot P(r\text{ successes})\cdot P(n-r\text{ failures}))
+(P(r)={}_nC_r\cdot p^r(1-p)^{n-r})
+\end{concept-box}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{EXAMPLE 4 Probabilities in a Binomial Experiment}
+Pose Purposeful Questions ETP
+Q: In the binomial probability formula, what does r, the exponent of p, represent? What does ((n-r)), the exponent of (1-p), represent?
+\answer{the number of successes; the number of non-successes}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Probabilities in a Binomial Experiment}
+A grocery store gives away scratch-off cards with a purchase of more than \$100.
+Terrell has 5 scratch-off cards. What is the probability that he has exactly 3 winning cards if each card has a 30\% chance of being a winner?
+Step 1 Determine whether the situation is a binomial experiment.
+\item Terrell's 5 cards represent 5 trials.
+\item Each card is either a winning card (success) or not.
+\item Whether one card is a winning card does not affect the probability that another card is a winning card.
+\item The probability of success, 0.3, is the same for every trial.
+So this is a binomial experiment.
+Step 2 Find the probability of 3 successes.
+The formula (P(r)={}_nC_r\cdot p^r(1-p)^{n-r}) gives the probability of r successes out of n trials. Use (n=5), (r=3), and (p=0.3).
+({}_5C_3=\frac{5!}{3!(5-3)!})
+(=\frac{5\cdot4}{2\cdot1})
+(=10)
+(P(3)={}_5C_3\cdot(0.3)^3(1-0.3)^{5-3})
+(=10(0.3)^3(0.7)^2)
+(=10(0.027)(0.49))
+(=0.1323)
+\answer{The probability of having exactly 3 winning cards is about 13\%.}
+\te{REASON In the formula for binomial probability, what probability does (1-p) represent?}
+\end{example}
+\begin{tryit}{4}
+\textbf{Try It!}
+To the nearest tenth of a percent, what is the probability that Terrell has more than 3 winning cards? Explain.
+\answer{3.1\%; the way to have more than 3 winning cards is to have 4 or 5 winning cards. So the probability of having more than 3 winning cards is (P(4)+P(5)).
+(P(4)={}_5C_4(0.3)^4(0.7)^{5-4}=5(0.0081)(0.7)=0.02835)
+(P(5)={}_5C_5(0.3)^5(0.7)^{5-5}=1(0.00243)(1)=0.00243)
+(P(4)+P(5)=0.02835+0.00243=0.03078\approx3.1\%)}
+\end{tryit}
+\begin{te-addendum}{4}{HabitsOfMind}
+Use with EXAMPLES 3 \& 4. Use Structure Explain why ({}_nC_r) appears in the formula for the probability of a binomial experiment.
+\answer{A number of combinations is in the formula because it accounts for all the ways in which r successes can occur in n trials.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Introduce finding the probability in a binomial experiment by finding the probability of the complement of an event.
+\item Challenge students to explain several ways of finding the probability that Terrell has exactly 2 cards that are not winners.
+Q: What do you know about the non-winning cards?
+\answer{There are 2, and each has a probability of (1-0.3=0.7).}
+Q: Can you use a sum of probabilities from the binomial probability formula to find the answer? How?
+\answer{Yes; find the sum of the probabilities of 0, 1, 3, 4, and 5 winning cards, and then subtract the sum from 100\%.}
+\te{Printed excludes 2 winning cards; likely should exclude 3 winning cards when finding exactly 2 non-winning cards.}
+Q: Now consider the probability that Terrell has 1 or more winning cards. How can you find this probability in one step?
+\answer{Find the probability of 0 winning cards and subtract from 100\%.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 4 Have students break down the parts of the binomial probability formula.
+\item Write the binomial probability formula as (P(r)={}_nC_r\cdot p^r\cdot(1-p)^{n-r}).
+\item Have students box and describe each factor in the formula:
+(1) ({}_nC_r) \answer{the number of combinations of n trials taken r at a time}
+(2) (p^r) \answer{the probability of r successes}
+(3) ((1-p)^{n-r}) \answer{the probability of (n-r) failures}
+\item If students are familiar with denoting (1-p) as q, they may rewrite the formula using q.
+Q: Substitute into the formula to find the probability when there are 10 trials, 7 successes, and a probability of success of 0.8.
+\answer{(P(7)={}_{10}C_7(0.8)^7(1-0.8)^{10-7}=(120)(0.8)^7(0.2)^3)}
+\end{te-addendum}
+% Source page 56: 613 Concept Summary
+\begin{te-addendum}{ConceptSummary}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. CONCEPT SUMMARY Probability Distribution}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+Q: How is the number of possible outcomes related to probability for a uniform probability distribution?
+\answer{For n possible outcomes, each outcome has a probability of (\frac1n) of occurring or (\frac{n-1}{n}) of not occurring.}
+Q: What do p and (1-p) represent for a binomial experiment? Why must the sum of these two quantities be 1?
+\answer{p is the probability of success in each trial, and (1-p) is the probability of failure, or not-success. Their sum is 1 because the sum of the probabilities of all possible outcomes of an experiment is 1.}
+Q: What do you need to know to find the probability of a binomial experiment with 8 successes in 19 trials? Give an example of how to set up the formula for this probability, but do not simplify.
+\answer{The probability of success, p; for example, if (p=0.9), the formula would be (P(8)={}_{19}C_8(0.9)^8(1-0.9)^{19-8}).}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 9 Students may confuse the number of balls and the number of trials. Remind them that the probability of getting a yellow ball in each trial is based on the number of balls, 5, while the number of ways of getting a yellow ball twice is based on the number of trials, 4.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Probability Distributions}
+TYPES OF DISTRIBUTIONS
+A probability distribution for an experiment is a function that assigns a probability to each outcome of a sample space for the experiment.
+% FIG 56 715 306 926 385
+\placeholder{graph}{Uniform: orange separated bars at horizontal 1,2,3,4 each height .25. Vertical Probability labeled 0,.2,.4; pale plot background, no arrows. Callout: A uniform probability distribution assigns the same probability to each outcome.}
+% FIG 56 717 392 829 474
+\placeholder{graph}{Not Uniform: orange separated bars at horizontal 1,2,3,4, heights .2,.4,.3,.1. Vertical Probability labeled 0,.2,.4. Pale plot background, no arrows.}
+BINOMIAL EXPERIMENT
+A binomial experiment is an experiment that consists of a fixed number of trials, in which:
+\item each trial has two possible outcomes, one of which is denoted as “success”;
+\item the results of the trials are independent events; and
+\item the probability of “success” is the same for every trial.
+If the probability of success is p for each trial, then the probability of exactly r successes out of n trials is (P(r)={}_nC_r\cdot p^r(1-p)^{n-r}).
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION What does a probability distribution tell you about an experiment?
+\answer{A probability distribution for an experiment shows how probabilities are assigned to each outcome of a sample space for the experiment. It can show whether the probability distribution is a uniform probability distribution or not, and if not, which outcomes are more likely or less likely.}
+2. Vocabulary What are the characteristics of a binomial experiment?
+\answer{A binomial experiment has specific rules. It measures the number of successes of a single event over multiple independent trials, and the probability for success is the same for every trial.}
+3. Error Analysis A regular tetrahedron has four triangular sides, with one of the letters A, B, C, and D on each side. Assume that if you roll the tetrahedron, each of the letters is equally likely to end up on the bottom. \{A, B, C, D\} is a sample space for the experiment. Rochelle was asked to find the theoretical probability distribution for the experiment. Explain and correct the error.
+(P(A)=0.3)
+(P(B)=0.3)
+(P(C)=0.3)
+(P(D)=0.3)
+% FIG 56 734 706 866 791
+\placeholder{illustration}{Curled pale note with four probabilities .3 transcribed above and red X.}
+\answer{Rochelle rounded each probability to the nearest tenth. The sum of the probabilities should be 1, not 1.2. A correct distribution is P such that (P(A)=0.25), (P(B)=0.25), (P(C)=0.25), and (P(D)=0.25).}
+\textbf{Do You KNOW HOW?}
+Graph each probability distribution P.
+4. Theoretical probabilities from selecting a student at random from a group of 3 students: Jack, Alani, and Malik.
+\answer{See graph.}
+% FIG 56 154 1078 355 1291
+\placeholder{graph}{Summary 4 answer: horizontal Student categories Jack, Alani, Malik; orange separated bars each 1/3. Vertical Probability labeled 0.0 through 0.5 by .1, dotted horizontal grid, no arrows.}
+5. Probabilities from flipping a fair coin 3 times and counting the number of heads. The sample space is the set of numbers 0, 1, 2, 3. (P(0)=0.125), (P(1)=0.375), (P(2)=0.375), (P(3)=0.125).
+\answer{See graph.}
+% FIG 56 707 893 925 1107
+\placeholder{graph}{Summary 5 answer: horizontal Number of Heads at 0,1,2,3; orange separated bars .125,.375,.375,.125. Vertical Probability 0.0 through 0.5 by .1, dotted grid, no arrows.}
+A bag contains 5 balls: 3 green, 1 red, and 1 yellow. You select a ball at random 4 times, replacing the ball after each selection. Calculate the theoretical probability of each event to the nearest whole percent.
+6. getting a green ball exactly 3 times
+\answer{35\%}
+7. getting a green ball exactly 4 times
+\answer{13\%}
+8. getting a green ball at least 3 times
+\answer{48\%}
+9. getting a yellow ball twice
+\answer{15\%}
+10. getting only red and green balls
+\answer{41\%}
+\end{concept-summary}
+% Source page 57: 614 Practice and Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Practice.
+Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+11, 12, 14, 16--32 & 11--32 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items.
+You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 12, 16 & 1 \\
+1 & 11 & 2 \\
+2 & 17--19, 27 & 1 \\
+3 & 20--22 & 2 \\
+3 & 13, 15 & 3 \\
+4 & 23--25, 30, 31 & 1 \\
+4 & 26, 29 & 2 \\
+4 & 14, 28, 32 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{2}
+\textbf{UNDERSTAND. Communicate Precisely} Explain what it means for a coin to be a fair coin.
+\answer{When you flip a fair coin, the probability of H and the probability of T are each (\frac12).}
+\end{practice}
+\begin{practice}{12}{1}
+Reason You spin the spinner shown.
+% FIG 57 517 339 615 440
+\placeholder{diagram}{Circular spinner: top-left blue quadrant labeled 4 and 90 degrees, top-right green quadrant 6 and 90 degrees, bottom orange semicircle 5 and 180 degrees. Black center arrow points into green quadrant.}
+Describe a theoretical probability distribution for the experiment.
+\answer{The probability distribution is the function P, defined on \{4, 5, 6\}, with (P(4)=0.25), (P(5)=0.5) and (P(6)=0.25).}
+\end{practice}
+\begin{practice}{13}{3}
+Communicate Precisely Five students in a class of 27 students ate chicken lo mein for lunch. Suppose the teacher selects a student in the class at random and then selects another student at random. Success for each selection is selecting a student who ate chicken lo mein. Is this a binomial experiment? Explain.
+\answer{No; the results of the two selections are not independent. The teacher will not choose the same student twice, therefore the second selection is being made from fewer students, so the probability of success is different.}
+\end{practice}
+\begin{practice}{14}{3}
+Error Analysis A standard number cube is rolled 7 times. Success for each roll is defined as getting a number less than 3. Abby tried to calculate the probability of 5 successes. Describe and correct her error.
+(P(5)=(\frac13)^5(\frac23)^2\approx0.002)
+% FIG 57 516 685 719 756
+\placeholder{illustration}{Curled pale note showing Abby's incorrect probability expression transcribed above, with red X.}
+\answer{Abby forgot to multiply by ({}_7C_5).
+(P(5)={}_7C_5(\frac13)^5(\frac23)^2=21(\frac13)^5(\frac23)^2\approx0.0384).}
+\end{practice}
+\begin{practice}{15}{3}
+Mathematical Connections A marble is selected 4 times from the bowl shown. The marble is returned to the bowl after each selection.
+% FIG 57 517 824 760 929
+\placeholder{illustration}{Transparent bowl on wood surface with three green G marbles and two yellow Y marbles.}
+a. Show that there are exactly ({}_4C_2) ways to get exactly 2 green marbles.
+\answer{a. Sample: There are 6 ways to select 2 green marbles in 4 trials: GGRR, GRGR, GRRG, RGGR, RGRG, RRGG. That is, there are ({}_4C_2=6) ways to choose 2 things out of 4.}
+\te{Printed R in outcomes while the non-green marbles are yellow Y.}
+b. How are ({}_5C_3) and ({}_5C_2) related? Explain.
+\answer{b. ({}_5C_3={}_5C_2); choosing 3 out of 5 items is the same as not choosing those 3 items from the 5 items, or choosing 2 out of the remaining 5 items.}
+\te{Printed remaining 5 items; likely the original 5 items.}
+\end{practice}
+\begin{practice}{16}{1}
+\textbf{PRACTICE} A card is chosen at random from a box containing 10 cards: 3 yellow, 4 red, 2 green, and 1 blue. SEE EXAMPLES 1 AND 2
+Define a probability distribution for this experiment on the sample space \{Y, R, G, B\}.
+\answer{Let P be the function defined on the set \{Y, R, G, B\} such that (P(Y)=0.3), (P(R)=0.4), (P(G)=0.2), and (P(B)=0.1).}
+\end{practice}
+\begin{practice}{17}{1}
+A card is chosen at random from a box containing 10 cards: 3 yellow, 4 red, 2 green, and 1 blue. SEE EXAMPLES 1 AND 2
+Graph the probability distribution.
+\answer{See graph.}
+% FIG 58 160 167 381 359
+\placeholder{graph}{Practice 17 answer: adjacent orange black-bordered bars at Color Y,R,G,B with heights .3,.4,.2,.1. Vertical Probability 0.0-.5 by .1, pale background and dotted grid, no arrows.}
+\end{practice}
+\begin{practice}{18}{1}
+In a certain game, a player can score 0, 1, 2, 3, or 4 points during a turn. The table shows the number of times Alejandra scored each number of points the last time she played the game. SEE EXAMPLE 2
+\begin{tabular}{llllll}
+Score & 0 & 1 & 2 & 3 & 4 \\
+Frequency & 3 & 7 & 9 & 6 & 5 \\
+\end{tabular}
+Define an experimental probability distribution based on Alejandra's scores.
+\answer{Let P be the function defined on the set \{0, 1, 2, 3, 4\} such that (P(0)\ \frac1{10}), (P(1)=\frac7{30}), (P(2)=\frac3{10}), (P(3)=\frac15), and (P(4)=\frac16).}
+\te{Printed first equality sign omitted between P(0) and 1/10.}
+\end{practice}
+\begin{practice}{19}{1}
+Graph the probability distribution you defined in Exercise 18. SEE EXAMPLE 2
+\answer{See graph.}
+% FIG 58 157 460 422 650
+\placeholder{graph}{Practice 19 answer: adjacent orange black-bordered bars at Score 0,1,2,3,4, heights .1,7/30,.3,.2,1/6. Vertical Probability 0.0-.5 by .1. Pale background and dotted grid, no arrows.}
+\end{practice}
+\begin{practice}{20}{2}
+Is the experiment a binomial experiment? Explain. SEE EXAMPLE 3
+A quality control specialist tests 50 LED light bulbs produced in a factory. Success is that a tested light bulb burns for at least 2,000 hours without dimming. For each light bulb, the probability of success is 0.9.
+\answer{Yes; each of the 50 trials has two possible outcomes, success and not success; the performance of one bulb does not affect the performance of another, so the trials are independent; the probability of success, 0.9, is the same for each trial.}
+\end{practice}
+\begin{practice}{21}{2}
+Is the experiment a binomial experiment? Explain. SEE EXAMPLE 3
+There are 10 black and 10 red cards face down on the table. One card is selected at random. Then another card is selected at random. Success is getting a red card.
+\answer{No; the selection results are not independent. Since the first card is not returned, the sample space for the next selection differs, so the probability changes.}
+\end{practice}
+\begin{practice}{22}{2}
+Is the experiment a binomial experiment? Explain. SEE EXAMPLE 3
+A basketball player is shooting 2 free throws. The probability of her making the first free throw is 0.86. The probability of her making the second free throw is 0.92.
+\answer{No; the probability of making the free throws is not the same for each trial.}
+\end{practice}
+\begin{practice}{23}{1}
+Each time Joaquin is at bat, the probability that he gets a hit is 0.250. If he bats 10 times in the course of two games, what is the probability of each result? Round to the nearest tenth of a percent. SEE EXAMPLE 4
+He gets no hits.
+\answer{5.6\%}
+\end{practice}
+\begin{practice}{24}{1}
+Each time Joaquin is at bat, the probability that he gets a hit is 0.250. If he bats 10 times in the course of two games, what is the probability of each result? Round to the nearest tenth of a percent. SEE EXAMPLE 4
+He gets exactly 1 hit.
+\answer{18.8\%}
+\end{practice}
+\begin{practice}{25}{1}
+Each time Joaquin is at bat, the probability that he gets a hit is 0.250. If he bats 10 times in the course of two games, what is the probability of each result? Round to the nearest tenth of a percent. SEE EXAMPLE 4
+He gets exactly 2 hits.
+\answer{28.2\%}
+\end{practice}
+\begin{practice}{26}{2}
+Each time Joaquin is at bat, the probability that he gets a hit is 0.250. If he bats 10 times in the course of two games, what is the probability of each result? Round to the nearest tenth of a percent. SEE EXAMPLE 4
+He gets fewer than 3 hits.
+\answer{52.6\%}
+\end{practice}
+% Source page 58: 615 Practice continued
+\begin{practice}{27}{1}
+\textbf{APPLY. Model with Mathematics} The circle graph shows the result of a survey of the most popular types of music in the U.S., based on sales, downloads, and streaming.
+% FIG 58 549 347 786 513
+\placeholder{graph}{Most Popular Music Genres circle chart, clockwise from top: Rock pink 30 percent with guitar, Hip-Hop R and B peach 22 percent with keyboard, Pop pale green 19 percent with microphone, Country pale yellow 10 percent, Other lavender 19 percent with notes. White radial borders and orange banner behind.}
+a. Define a probability distribution for the sample space.
+\answer{a. Let P be the function, defined on the set \{Rock, Hip-Hop, Pop, Country, Other\} such that (P(Rock)=30\%), (P(Hip\text{-}Hop)=22\%), (P(Pop)=19\%), (P(Country)=10\%), (P(Other)=19\%).}
+b. Graph the probability distribution.
+\answer{b. See graph.}
+% FIG 58 180 1096 442 1334
+\placeholder{graph}{Most Popular Music Genres: adjacent orange bars at Genre Rock, Hip-Hop, Pop, Country, Other with heights .30,.22,.19,.10,.19. Labels slant up-right. Vertical Probability 0.0-.5 by .1, dotted horizontal grid, no arrows.}
+c. According to the survey, which is the most popular type of music in the United States?
+\answer{c. rock}
+\end{practice}
+\begin{practice}{28}{3}
+Higher Order Thinking A pharmaceutical company is testing a new version of a medication. In a clinical trial of the old version of the medication, 18\% of the subjects taking the old medication experienced headaches.
+a. Suppose that 18\% of the people taking the new medications will experience headaches. If 8 subjects are selected at random and given the new medication, what is the probability that less than two of them will experience headaches?
+\answer{a. approximately 56\%}
+b. Suppose that two of the eight subjects experience headaches after taking the new medication. Is that cause for concern? Explain your reasoning.
+\answer{b. Sample: No; a sample set of 8 people is too small. To make an informed decision, the pharmaceutical company should allow more people to test the new medication.}
+\end{practice}
+\begin{practice}{29}{2}
+Communicate Precisely In a quiz show, a contestant is asked 6 questions. Each question has 5 answer choices. Assume that the contestant picks an answer at random for each question and the probability of guessing the correct answer is 20\%. What is the probability of guessing correctly on at least 4 of the questions? Round your answer to the nearest tenth of a percent.
+\answer{1.7\%}
+\end{practice}
+\begin{practice}{30}{1}
+\textbf{ASSESSMENT PRACTICE}
+You are going to roll a game piece two times. The game piece has 10 sides of equal area, each with one of the numbers 0 through 9. Assume that it is equally likely to land with any of the sides on top. Success is defined as getting a 3 on top.
+% FIG 58 1027 311 1119 400
+\placeholder{illustration}{Red ten-sided game piece with white digits, visible faces 0 front upper, 4 upper right, 8 upper left, 3 lower left, 7 lower right.}
+Let P be the function defined on \{0, 1, 2\} such that P(n) is the probability of n successes. Select all that apply.
+A. This is a binomial experiment.
+B. P is a probability distribution for the sample space \{0, 1, 2\}.
+C. (P(0)=0.81)
+D. (P(1)=0.09)
+E. (P(2)=0.01)
+\answer{A, B, C, E}
+\end{practice}
+\begin{practice}{31}{1}
+SAT/ACT A standard number cube is rolled 6 times. Success is defined as getting a number greater than 4. Rounded to the nearest percent, what is the probability of exactly 2 successes?
+A. 2\%
+B. 8\%
+C. 2\%
+D. 33\%
+E. 50\%
+\answer{D}
+\te{Printed A and C both 2 percent.}
+\end{practice}
+\begin{practice}{32}{3}
+Performance Task Get 5 index cards. Draw a picture on one side and no picture on the other side of each card.
+Part A You are going to throw all 5 cards up in the air and count the number of cards that land face up. Assume that it is equally likely that each card will land face up and face down. Define a theoretical probability distribution for the sample space \{0, 1, 2, 3, 4, 5\}.
+\answer{Part A. The theoretical probability distribution is the function P defined on \{0, 1, 2, 3, 4, 5\} with (P(0)=0.03125), (P(1)=0.15625), (P(2)=0.3125), (P(3)=0.3125), (P(4)=0.15625), (P(5)=0.03125). (Accept fractions, decimals, or percents.)}
+Part B Perform the experiment 20 times. Each time you perform the experiment, record the number of cards that land face up. Find the experimental probability for each outcome in the sample space \{0, 1, 2, 3, 4, 5\} and define an experimental probability distribution the sample space.
+\te{Printed omits on before the sample space.}
+\answer{Part B. Answers may vary. Sample: The experimental probability distribution is the function P defined on the set \{0, 1, 2, 3, 4, 5\} such that (P(0)=0.05), (P(1)=0.1), (P(2)=0.3), (P(3)=0.35), (P(4)=0.2), (P(5)=0).}
+Part C Compare the results of Part A and B. If they are different, explain why you think they are different.
+\answer{Part C. The experimental probability distribution is like but not the same as the theoretical distribution. A theoretical probability distribution describes the results to expect from an experiment repeated many times, not only 20 times.}
+\end{practice}
+% Source page 59: 615A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Lesson Quiz is available at SavvasRealize.com. Assessment. ASSESSMENT RESOURCES.
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & DP01 \\
+2 & 2 & DP15 \\
+3 & 1 & DP01 \\
+4 & 1 & DP15 \\
+5 & 1 & DP04 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+I Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+O On-Level & 4 points & Enrichment \\
+A Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{12-4 Lesson Quiz. Probability Distributions}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. The probability that a machine part is defective is 0.1. Find the probability that no more than 2 out of 12 parts tested are defective.
+A. 0.23
+B. 0.66
+C. 0.89
+D. 0.61
+\answer{C}
+2. The probability that a newborn baby at a certain hospital is male is 50\%. Find the probability that 7 or 8 out of 10 babies born in the hospital on any day are male. Round to the nearest hundredth.
+\answer{0.16}
+3. Select all the statements that are conditions for a binomial experiment.
+A. There is a fixed number of trials.
+B. Each trial has two possible outcomes.
+C. The trials are dependent.
+D. The trials are independent.
+E. The probability is constant throughout the trials.
+F. The probability may vary throughout the trials.
+\answer{A, B, D, E}
+4. A tile is chosen at random from a bag containing the following tiles: 7 blue, 3 green, and 6 yellow. You select with replacement two tiles at random from the bag. Define the theoretical probability distribution for selecting a number of yellow marbles on the sample space \{0, 1, 2\}.
+Write each probability rounded to the nearest hundredth.
+(P(0)=\answer{0.32})
+(P(1)=\answer{0.49})
+(P(2)=\answer{0.19})
+\te{Printed yellow marbles although the objects are tiles. Printed keys correspond to probability 7/16 rather than yellow 6/16; likely .39, .47, .14.}
+5. In an experiment with 50 trials, the number 5 occurred 17 times, the number 6 occurred 8 times, the number 7 occurred 13 times and the number 8 occurred 12 times.
+Let p be defined on the set \{5, 6, 7, 8\}. Find each of the following. Write each probability rounded to the nearest hundredth.
+\begin{tabular}{lllll}
+P(5) & P(6) & P(7) & P(8) & P(6 or less) \\
+\answer{0.34} & \answer{0.16} & \answer{0.26} & \answer{0.24} & \answer{0.5} \\
+\end{tabular}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 60: 615B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+SavvasRealize.com. Practice. I = Intervention. O = On-Level. A = Advanced.
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-4 Reteach to Build Understanding. Probability Distributions}
+1. A spinner has three regions with equal area: a 1-point region, a 2-point region, and a 4-point region. The spinner is spun twice.
+a. Complete the table to show the points for each outcome.
+\textbf{Total Points}
+\begin{tabular}{llll}
+First Spin / Second Spin & 1 & 2 & 4 \\
+1 & 2 & 3 & 5 \\
+2 & \answer{3} & 4 & \answer{6} \\
+4 & 5 & \answer{6} & \answer{8} \\
+\end{tabular}
+b. What is each probability?
+(P(\text{first spin }4)) \answer{(\frac13)}
+(P(\text{second spin }1)) \answer{(\frac13)}
+(P(\text{total points}=4)) \answer{(\frac19)}
+(P(\text{total points}=6)) \answer{(\frac29)}
+c. Place checkmark(s) next to the true statements.
+The probability distribution for the outcome of the first spin is uniform because each outcome has the same probability.
+The probability distribution for the outcome of the second spin is not uniform because each outcome is dependent on the first spin.
+The probability distribution for the total point value is uniform because there are nine equally likely outcomes.
+The probability distribution for the total point value is not uniform because outcomes have different probabilities.
+\answer{First and fourth statements checked.}
+The art classroom has 5 boxes of colored tiles. In each box, 20\% of the tiles are triangular.
+2. Tarik selects tiles from 2 of the 5 boxes. How many different sets of 2 boxes can he choose from? Complete the solution.
+({}_5C_{\answer{2}}=\frac{5!}{\answer{2}!(5-\answer{2})!}=\frac{5\cdot4\cdot3\cdot2\cdot1}{\answer{2}\cdot\answer{1}\cdot(\answer{3}\cdot\answer{2}\cdot\answer{1})}=\answer{10})
+There are \answer{10} ways to choose from 2 of the 5 boxes.
+3. Maria calculated the probability that if she chooses a tile from each box, 2 of them will be triangular. Identify and correct the error(s).
+(P(r)={}_nC_r\cdot p^r(1-p)^{n-r})
+(P(2)={}_5C_2\cdot(0.2)^2(0.2)^3)
+(=20\cdot0.04\cdot0.008)
+(=0.0064,\text{ or }0.64\%)
+\answer{should be ({}_5C_2\cdot(0.2)^2(0.8)^3); should be (10\cdot0.04\cdot0.512); should be 0.2048, or about 20.5\%.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-4 Additional Practice. Probability Distributions}
+1. What is the difference between a probability experiment that is a binomial experiment and one that is not a binomial experiment?
+\answer{Sample answer: A binomial experiment has a fixed number of trials, there are two possible outcomes for each trial, the probability of each outcome is the same for every trial, and the results of the trials are independent. If any of these conditions are not met, it is not a binomial experiment.}
+2. A light fixture contains 6 light bulbs. With normal use, each bulb has a 0.85 chance of lasting for at least 4 months. What is the theoretical probability that all 6 bulbs will last for 4 months? Round to the nearest whole percent.
+\answer{38\%}
+3. A marble is chosen at random from a bag containing 8 marbles: 4 blue, 3 green, and 1 red. Define a probability distribution for this experiment on the sample space \{B, G, R\}.
+\answer{Sample answer: Let P be the function defined on the set \{B, G, R\} such that (P(B)=0.5), (P(G)=0.375), and (P(R)=0.125).}
+4. An online game has three possible outcomes: A, B, or C. After playing the game, Leo got A 12 times, B 9 times, and C 4 times. Define an experimental probability distribution based on Leo's results.
+\answer{Sample answer: Let P be the function defined on the set \{A, B, C\} such that (P(A)=0.48), (P(B)=0.36), and (P(C)=0.16).}
+Use this information for Items 5--7. There is a 60\% probability of rain each of the next 5 days. Find each probability. Round to the nearest whole percent.
+5. It will rain on at least 3 of the next 5 days.
+\answer{68\%}
+6. It will rain on at least 1 of the next 5 days.
+\answer{99\%}
+7. It will rain on at least 1 of the next 2 days.
+\answer{84\%}
+\te{Printed rain calculation assumes independent daily outcomes; independence is not stated in the prompt.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-4 Enrichment. Probability Distributions}
+Use the information in the table to calculate the relative frequencies for each type of search engine listed. The total frequency is 234 search engines. The frequency for each engine is given. Use the results for the relative frequencies to solve the riddle:
+What do the Internet and spiders have in common?
+\begin{tabular}{llll}
+Type of Engine & Frequency & Relative Frequency & Key \\
+All Purpose & 15 & \answer{(\frac{15}{234})} & A \\
+Bit Torrent & 8 & \answer{(\frac4{117})} & B \\
+Blog & 7 & \answer{(\frac7{234})} & C \\
+Books & 2 & \answer{(\frac1{117})} & D \\
+Business & 7 & \answer{(\frac7{234})} & E \\
+Email & 3 & \answer{(\frac1{78})} & F \\
+Enterprise & 18 & \answer{(\frac1{13})} & G \\
+Forum & 1 & \answer{(\frac1{234})} & H \\
+Games & 3 & \answer{(\frac1{78})} & I \\
+International & 20 & \answer{(\frac{10}{117})} & J \\
+Job & 19 & \answer{(\frac{19}{234})} & K \\
+Legal & 7 & \answer{(\frac7{234})} & L \\
+Maps & 6 & \answer{(\frac1{39})} & M \\
+Medical & 10 & \answer{(\frac5{117})} & N \\
+Meta Search & 18 & \answer{(\frac1{13})} & O \\
+Multi Media & 12 & \answer{(\frac2{39})} & P \\
+News & 6 & \answer{(\frac1{39})} & R \\
+Open Source & 20 & \answer{(\frac{10}{117})} & S \\
+People & 9 & \answer{(\frac1{26})} & T \\
+Question \& Answer & 12 & \answer{(\frac2{39})} & U \\
+Real Estate & 8 & \answer{(\frac4{117})} & V \\
+School & 3 & \answer{(\frac1{78})} & W \\
+Shopping & 12 & \answer{(\frac2{39})} & X \\
+Source Code & 6 & \answer{(\frac1{39})} & Y \\
+Visual Search & 2 & \answer{(\frac1{117})} & Z \\
+\end{tabular}
+Some frequencies are repeated in the table. Therefore, some spaces in the answer below may have more than one letter that matches its assigned value. You must determine which letters to use to make a word that answers the riddle.
+\begin{tabular}{llllllll}
+(\frac1{78}) & (\frac7{234}) & (\frac4{117}) & (\frac{10}{117}) & (\frac1{78}) & (\frac1{26}) & (\frac7{234}) & (\frac{10}{117}) \\
+\answer{W} & \answer{E} & \answer{B} & \answer{S} & \answer{I} & \answer{T} & \answer{E} & \answer{S} \\
+\end{tabular}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-4 Mathematical Literacy and Vocabulary. Probability Distributions}
+A quality control specialist tests 30 batteries produced in a factory. The probability that a battery lasts for at least 1,000 hours is 0.95. Is the experiment a binomial experiment? To the nearest tenth of a percent, what is the probability that 28 of the batteries last at least 1,000 hours?
+Chloe wrote these steps to solve the problem on note cards, but they got mixed up.
+\te{Note cards, in displayed order: The probability that 28 of the batteries last at least 1,000 hours is 25.9\%.; The probability that the battery lasts at least 1,000 hours is 0.95 for every trial. So the experiment is a binomial experiment.; ({}_{30}C_{28}=\frac{30!}{28!(30-28)!}=\frac{30\cdot29}{2\cdot1}=435); Use (P(r)={}_nC_r\cdot p^r(1-p)^{n-r}) to find the probability, with (n=30), (r=28), and (p=0.95).; (P(28)={}_{30}C_{28}\cdot(0.95)^{28}(1-0.95)^{30-28}=435(0.95)^{28}(0.05)^2\approx0.259); The experiment has a fixed number of trials, 30. Each trial has two outcomes: the battery lasts at least 1,000 hours or it fails. The results of the trials are independent events.}
+% FIG 60 216 1045 441 1171
+\placeholder{diagram}{Six overlapping rounded note cards with text transcribed above. Positions top center conclusion, left probability, upper right combinations, center formula, lower left calculation, lower right binomial trial criteria.}
+Put the note cards in order to complete the steps below.
+1. First, \answer{The experiment has a fixed number of trials, 30. Each trial has two outcomes: the battery lasts at least 1,000 hours or it fails. The results of the trials are independent events.}
+2. Second, \answer{The probability that the battery lasts at least 1,000 hours is 0.95 for every trial. So the experiment is a binomial experiment.}
+3. Next, \answer{Use (P(r)={}_nC_r\cdot p^r(1-p)^{n-r}) to find the probability, with (n=30), (r=28), and (p=0.95).}
+4. Then, \answer{({}_{30}C_{28}=\frac{30!}{28!(30-28)!}=\frac{30\cdot29}{2\cdot1}=435)}
+5. Finally, \answer{(P(28)={}_{30}C_{28}\cdot(0.95)^{28}(1-0.95)^{30-28}=435(0.95)^{28}(0.05)^2\approx0.259)}
+6. So, \answer{The probability that 28 of the batteries last at least 1,000 hours is 25.9\%.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital preview: A surveyor took some measurements of a piece of land. The owner needs to know the area of the land to determine the value. What is the area of the piece of land? Blank ft. Printed ft; likely square feet for area.}
+% FIG 60 615 977 1066 1298
+\placeholder{illustration}{Tablet with digital land-area problem; green irregular parcel, trees, road, dashed internal segments. Visible measurements 12 ft upper left, 21 ft lower left, 22 ft lower right, right-angle marker at bottom altitude and 54-degree lower-right angle. Help menu covers some right-hand labels. No answer printed.}
+\te{Exit. Question Help. Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Enter your answer in the answer box and then click Check Answer. 1 part remaining. Clear All. Check Answer. Review progress. Question 24 of 40. Go. Back. Next.}
+\end{te-addendum}
+
+\end{document}

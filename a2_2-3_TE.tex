@@ -1,0 +1,974 @@
+\documentclass{article}
+% Source: Topic_02_Teacher_Edition.pdf, PDF pages 35-45 (printed pages 76A-82B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+% Source page 35: 76A, Lesson Overview
+\begin{lesson-meta}
+lesson: 2-3
+title: Factored Form of a Quadratic Function
+standards: none printed
+practices: none printed
+objective: I can use the factored form of a quadratic function to find zeros.
+
+essential question: How is the factored form helpful in solving quadratic equations?
+
+\textbf{VOCABULARY}
+\item Zero Product Property
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 2-3 \\
+Title & Factored Form of a Quadratic Function \\
+Standards & none printed \\
+I CAN Objective & I can use the factored form of a quadratic function to find zeros. \\
+Essential Question & How is the factored form helpful in solving quadratic equations? \\
+Lesson Vocabulary & Zero Product Property \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Write a quadratic equation in factored form and use it to identify the zeros of the function it defines.
+\item Determine the intervals over which a quadratic function is positive or negative.
+Essential Understanding. The factored form of a quadratic function is used to find the zeros of the function by identifying the values that make one or both of the factors equal to zero.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Used the structure of a quadratic equation written in vertex form or standard form to identify ways to rewrite it.
+In this lesson, students:
+\item Factor a quadratic expression to find the zeros of a quadratic function.
+\item Use the Zero Product Property to solve quadratic equations by factoring.
+Later in this topic, students will:
+\item Use complex numbers to factor the sum of two squares.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that the values that make either factor of a quadratic expression equal to zero are the zeros of the function that the expression defines.
+\item Students use the Distributive Property and the Zero Product Property to solve quadratic equations by factoring.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+REVIEW VOCABULARY English & Spanish \\
+zero of a function & Cero de una función \\
+NEW VOCABULARY & \\
+Zero Product Property & Propiedad del cero del producto \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Review the term zero of a function and introduce the Zero Product Property.
+Show the following example to students to illustrate the Zero Product Property.
+((x-3)(2x-5)=0)
+(x-3=0) or (2x-5=0)
+Q: How does the Zero Product Property help you to identify the zero(s) of a function?
+Answers should demonstrate students' understanding that for a product to be 0, at least one of the factors must be equal to 0.
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion cover, dark background with blue and purple spherical artwork, labeled Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students understand that (y=ax^2+bx+c) can be written in factored form to identify the zeros of the function. They also relate the zeros of the function to the (x)-intercepts of the graph of the function.
+Students use the zeros of a quadratic function to find the intervals of the function for which the range is positive or negative.
+\textbf{Applying Math Practices}
+Make Sense of Problems and Persevere in Solving Them
+Students identify factoring, completing the square, and the Quadratic Formula as starting points and apply the Zero Product Property as a solution pathway for solving a quadratic equation.
+Look For and Make Use of Structure
+Students recognize the pattern that the sign of the (y)-value of a test point will be the same as the (y)-value of any other point within an interval defined by zeros.
+\end{te-addendum}
+% Source page 36: 76B, Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students will extend their understanding of quadratic equations by factoring them from standard form in order to identify, interpret, and use the zeros of the function.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+Critique \& Explain is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving
+Q: What key features from the graph relate to the students' equations?
+\answer{The (x)-intercepts of -8 and 2 can be easily identified from Martell's equation. The (y)-intercept, -16, can be easily identified from Kimberly's equation. The vertex of (-3,-25) can be easily identified from Takeisha's equation.}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics
+Q: What strategy could you use to compare all three equations?
+\answer{Write all equations in the same form. Change Martell's and Takeisha's equations to standard form by multiplying the binomial expressions.}
+Q: What method can you use to verify that the graphs of the students' equations are the same?
+\answer{graphing calculator, table}
+For Early Finishers
+Q: Write three different forms of a quadratic equation with (x)-intercepts of -6 and 4.
+\answer{(y=(x+6)(x-4)); (y=x^2+2x-24); (y=(x+1)^2-25)}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse
+Help students understand how working with quadratic functions in different forms can be useful in identifying key features of a graph, with specific focus on how the factored form relates factors to zeros of a function.
+Q: Why is it useful to write quadratic equations in different forms?
+\answer{Each form can be used to identify certain key features of the graph of a function.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with CRITIQUE \& EXPLAIN
+Q: Use Structure Whose form of the equation is most useful for finding the vertex? The (y)-intercept? The (x)-intercepts?
+\answer{Takeisha's; Kimberly's; Martel's}
+\te{Printed answer spells Martel with one final l; prompt names Martell.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Martell wrote an equation in factored form, (y=(x+8)(x-2)), to represent a quadratic function. Kimberly wrote the equation (y=x^2+6x-16), and Takeisha wrote the equation (y=(x+3)^2-25).
+\placeholder{graph}{Red upward parabola (y=x^2+6x-16), vertex (-3,-25), intercepts (-8,0),(2,0),(0,-16), arrows on upper ends. Black arrowed (x),(y) axes, O at origin. Grid spacing 2 horizontally and 10 vertically, window (x) [-12,8], (y) [-50,50], labeled (x) ticks -8,-4,4; (y) ticks -40,20,40.}
+A. Reason Do all three equations represent the same function? If not, whose is different? Explain algebraically.
+\answer{A. The three equations represent the same function. Both (y=(x+8)(x-2)) and (y=(x+3)^2-25) simplify to (y=x^2+6x-16).}
+B. How else could you determine if all three equations represent the same function?
+\answer{B. You could graph the 3 equations on the same plane.}
+C. What information can Martell's form help you find that is more difficult to find using Kimberly's or Takeisha's form?
+\answer{C. Martel's form helps you see where the graph of the function will cross the (x)-axis.}
+\te{Digital version repeats the prompt and graph with Enter your answer boxes. Sample Student Work spells Martel with one final l.}
+\end{model-discuss}
+% Source page 37: 76, Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning
+Introduce students to the process of factoring quadratic expressions. Remind them that the factored form of a quadratic expression can be a product of a monomial and a binomial or the product of two binomials. Explain that the factored form of a quadratic equation can help to identify key features of its graph, as well as its solutions.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Factor a Quadratic Expression. Pose Purposeful Questions}
+Part A
+Q: How is using the Distributive Property helpful when factoring a quadratic expression?
+\answer{Factoring a quadratic expression is using the Distributive Property in reverse, so you can use this property to check your work.}
+Part B
+Q: How can you verify that you have used the correct factors of the product of the leading coefficient and the constant to create the middle terms that will be used to factor by grouping?
+\answer{The factors of the product of the leading coefficient and the constant must also have a sum equal to the value of the middle term of the trinomial.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Factor a Quadratic Expression}
+Factor the expression.
+A. (x^2+7x+12)
+Recall that using the Distributive Property,
+((x+m)(x+n)=x^2+(m+n)x+mn).
+(x^2+7x+12)
+\te{Callouts identify 7 as (m+n) and 12 as (mn).}
+Two factors of 12 that add to 7 are 3 and 4. Therefore, the factored form of the expression (x^2+7x+12) is ((x+3)(x+4)).
+\answer{A. ((x+3)(x+4))}
+B. (2x^2-5x-3)
+For expressions of the form (ax^2+bx+c), find two numbers whose product is (ac) and whose sum is (b).
+(2x^2-5x-3)
+(2x^2+1x-6x-3)
+(x(2x+1)-3(2x+1))
+((2x+1)(x-3))
+\te{Callouts: Two factors of -6 whose sum is -5 are 1 and -6. Rewrite (-5x) as (x-6x). Then factor by grouping.}
+The factored form of the expression (2x^2-5x-3) is ((2x+1)(x-3)).
+\te{STUDY TIP You can check your work by multiplying the factors using the Distributive Property.}
+\answer{B. ((2x+1)(x-3))}
+\end{example}
+\begin{tryit}{1}
+Factor the expression.
+a. (x^2-9)
+b. (3x^2-7x+2)
+\answer{a. ((x+3)(x-3)) b. ((3x-1)(x-2))}
+\end{tryit}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 1}
+Additional Examples are available at SavvasRealize.com.
+Factor the expression (6x^2-2x-28).
+(2(3x^2-x-14))
+(2(3x-7)(x+2))
+\answer{(2(3x-7)(x+2))}
+Example 1 Provide students with more practice factoring quadratic functions when the leading coefficient is not 1 with this additional example.
+Q: How can you check the factors and verify they are in the correct order?
+\answer{Multiply the factors using the Distributive Property.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+The length of a rectangle is 5 in. longer than its width and the rectangle has an area of 50 in.^2. What are the dimensions of the rectangle?
+\placeholder{diagram}{Rectangle dimension diagram: left vertical side labeled (w), bottom horizontal side labeled (w+5), interior labeled (A=50) in.^2. Pale lines form the left and bottom sides; top and right not visible in the printed screenshot.}
+(w(w+5)=50)
+(w^2-5w=50)
+(w^2+5w-50=0)
+((w+10)(w-5)=0)
+(w+10=0) or (w-5=0)
+(w=-10) or (w=5)
+Since (w) represents the width of a rectangle, it cannot be negative. So, (w=5). The dimensions of the rectangle are 5 in. and 10 in.
+\answer{5 in. and 10 in.}
+\te{Printed second line uses (w^2-5w=50); likely (w^2+5w=50), consistent with adjacent lines.}
+Example 4 Allow students to experience a problem with a new context that requires them to evaluate the reasonableness of their solutions with this additional example.
+Q: Without graphing this quadratic function, how do you know which zero is a possible solution?
+\answer{The width cannot be a negative value, so you can disregard a negative zero.}
+\end{te-addendum}
+% Source page 38: 77, Step 2 Understand & Apply
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Relate Factors to Zeros of a Function}
+Examples are available at SavvasRealize.com.
+Use and Connect Mathematical Representations
+Q: How does the graph help you verify the values of the zeros of a function?
+\answer{The zeros of the function are the values of (x) when (y=0); therefore, they are the (x)-intercepts.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Relate Factors to Zeros of a Function. CONCEPTUAL UNDERSTANDING}
+The graph shows the function defined by (y=x^2+2x-8). How do the zeros of the function relate to the factors of the expression (x^2+2x-8)?
+\placeholder{graph}{Red upward parabola (y=x^2+2x-8), vertex (-1,-9), red closed labeled intercepts (-4,0),(2,0), both upper ends arrowed. Arrowed black (x),(y) axes, origin O, unit horizontal grid and vertical spacing 2; window (x) [-6,4], (y) [-10,10], labeled (x) ticks -4,-2,2; (y) ticks -8,-4,4,8.}
+The expression (x^2+2x-8) can be represented as a product of two factors. The factors of -8 that have a sum of 2 are 4 and -2.
+(y=x^2+2x-8\to y=(x+4)(x-2))
+The (x)-intercepts of the graph are -4 and 2, so the zeros of the function are (x=-4) and (x=2).
+Substitute (x=-4) and (x=2) into the factored form of the equation.
+(y=(-4+4)(-4-2)=0(-6)=0)
+(y=(2+4)(2-2)=6(0)=0)
+The factors, ((x+4)) and ((x-2)), are related to the zeros (x=-4) and (x=2) since each of the zeros makes one of the factors 0.
+\te{VOCABULARY Recall that a zero of a function is a number, (z), for which (f(z)=0). A zero of (f) is also called an (x)-intercept of the graph since the graph of (f) passes through the point (z,0).}
+\answer{The factors, ((x+4)) and ((x-2)), are related to the zeros (x=-4) and (x=2) since each of the zeros makes one of the factors 0.}
+\end{example}
+\begin{tryit}{2}
+The graph shows the function (y=x^2-9x+20). Identify the zeros of the function. How do the zeros relate to the factors of (x^2-9x+20)?
+\placeholder{graph}{Red upward parabola (y=x^2-9x+20), zeros 4 and 5, vertex (4.5,-0.25) just below axis, upper ends arrowed. Black arrowed (x),(y) axes, O at origin, unit grid, window (x) [-1,9], (y) [-1,7], (x) labels 2,4,6,8; (y) labels 2,4,6.}
+\answer{The factors, ((x-4)) and ((x-5)), are related to the zeros (x=4) and (x=5) since each value of (x) makes one of the factors 0.}
+\end{tryit}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error}
+Try It! 2 Students may think that the value of the (y)-intercept, 20, is also a zero of the function. Have them substitute the zeros of the function into the original function and the factored form of the function to check their answers.
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Concept Zero Product Property}
+The Zero Product Property states that if a product of real-number factors is 0, then at least one of the factors must be 0.
+In the case of two factors, if (ab=0), then either (a=0) or (b=0), or both.
+To use the Zero Product Property, rewrite the equation so that it is an expression equal to 0, then factor and solve.
+\end{concept-box}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Solve Quadratic Equations by Factoring. Pose Purposeful Questions}
+Q: Why is it important to write the equation in factored form to solve?
+\answer{The Zero Product Property states that if (ab=0), then (a=0) or (b=0). By writing the equation in factored form, you can find the value of the variable that makes each factor equal zero.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Solve Quadratic Equations by Factoring}
+Solve the equation.
+A. (x^2+x=42)
+(x^2+x-42=0)
+((x+7)(x-6)=0)
+(x+7=0) or (x-6=0)
+(x=-7) or (x=6)
+\te{MAKE SENSE AND PERSEVERE If you can write an expression in factored form, you can find the value of the variable that makes each factor 0. These values are the zeros of the function.}
+\answer{A. (x=-7) or (x=6)}
+\te{CONTINUED ON THE NEXT PAGE. Part B is transcribed in a continuation addendum at source page 39.}
+\end{example}
+\begin{te-addendum}{1}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 1 Some students may have difficulty factoring quadratic expressions that have a leading coefficient other than 1. Have students practice multiplying binomial expressions. This allows them to work through the process backward and see the connection to the factored form.
+3. ((2x-5)(3x+7))
+4. ((5x+3)(x-2))
+Q: After using the Distributive Property to expand the product, what do you notice about the two middle terms of the quadratic expression?
+\answer{The coefficients of the two middle terms have the same product as the leading coefficient and the constant.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 3 Have students solve more complex quadratic equations that require using the properties of equality to simplify before factoring.
+\item Solve the quadratic equations by factoring.
+5. (-2x^2-x+12=-3x^2+6x)
+6. (8x^2+3x-3=7x^2-5)
+Q: Can the equations be solved by factoring if you use the properties of equality to rewrite them with the 0 on the left side of the equation?
+\answer{Yes, the equations could still be solved by factoring if the equations had 0 on the left side, but it would be more difficult because the leading coefficient would be negative.}
+\end{te-addendum}
+% Source page 39: 78, Step 2 Understand & Apply
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{EXAMPLE 3 CONTINUED}
+Examples are available at SavvasRealize.com.
+B. (2x^2=-9x+5)
+(2x^2+9x-5=0)
+(2x^2-x+10x-5=0)
+(x(2x-1)+5(2x-1)=0)
+((x+5)(2x-1)=0)
+(x+5=0) or (2x-1=0)
+(x=-5) or (x=\frac{1}{2})
+\answer{B. (x=-5) or (x=\frac{1}{2})}
+\te{STUDY TIP Check your work algebraically, by substituting the solutions into the original equation. You can check your work graphically by graphing the two functions represented in the original equation and confirming that your solutions are the (x)-coordinates of the intersection points.}
+\end{te-addendum}
+\begin{tryit}{3}
+Solve the equation by factoring.
+a. (x^2+8x=20)
+b. (2x^2=3x+2)
+\answer{a. (x=-10), (x=2) b. (x=-\frac{1}{2}), (x=2)}
+\end{tryit}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 1, 2, \& 3
+Q: Error Analysis Anna solved the equation (x^2+8x-20=0) by factoring. She wrote ((x-10)(x+2)=0) and expected the (x)-intercepts of the function (y=x^2+8x-20) to be at -10 and 2. Was she right?
+\answer{No; the factored form of the equation is ((x+10)(x-2)=0). Although the (x)-intercepts are correct, Anna incorrectly applied the Zero Product Property. If she had factored the equation correctly, it is unlikely that she would have found the correct (x)-intercepts.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Find the Zeros of a Quadratic Function. Pose Purposeful Questions}
+Q: Why is it helpful to factor out the GCF as a step in finding the zeros?
+\answer{Factoring out the GCF first will simplify the factoring process.}
+Q: Why is one of the zeros of the function not a valid solution in the context of the situation
+\answer{The (x)-axis stands for time, and time cannot be negative.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Find the Zeros of a Quadratic Function. APPLICATION}
+A multilevel driving range has three levels. Marco hits golf balls from the second level, which is 32 ft high. The height of a ball at (x) seconds after Marco hits it is modeled by the function (h(x)). When does the ball hit the ground?
+\placeholder{illustration}{Three-level golf driving range, golfer in red on the middle level, golfer in blue below. Yellow ball in air with callout (h(x)=-16x^2+16x+32).}
+The ball hits the ground when the height, (h(x)), is 0.
+(0=-16x^2+16x+32)
+(0=-16(x^2-x-2))
+(0=-16(x+1)(x-2))
+(x+1=0) or (x-2=0)
+(x=-1) or (x=2)
+\te{Callout: Substitute 0 for (h(x)). Factor out GCF, -16. Be careful of the signs.}
+The zeros of the function are at (x=-1) and (x=2).
+Since time has to be positive, (x=2) is the only solution that makes sense.
+This means that after 2 seconds, the golf ball will hit the ground.
+\te{COMMUNICATE PRECISELY Zeros of the function (h(x)=-16x^2+16x+32) are solutions of the equation (0=-16x^2+16x+32).}
+\answer{2 seconds}
+\end{example}
+\begin{tryit}{4}
+A baseball is thrown from the upper deck of a stadium, 128 ft above the ground. The function (h(x)=-16x^2+32x+128) gives the height of the ball (x) seconds after it is thrown. How long will it take the ball to reach the ground?
+\answer{4 seconds}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: What information about the function is given in the first sentence, and why is it important?
+\answer{The (y)-intercept is given as 128 ft. This information is important because it implies that one of the zeros of the quadratic function is negative. Because time cannot be negative, that zero is not a possible solution in the context of the problem.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{English Language Learners} Use with EXAMPLE 5
+READING BEGINNING Students may have difficulty understanding the task in the example. Break down the word order and usage to help students understand what they are reading.
+Q: What other words mean the same thing as identify in the example?
+\answer{find, determine, tell}
+Q: Why is the s in interval(s) in parentheses?
+\answer{It is a way to show that there may only be one interval or there may be more than one interval.}
+Q: What other words in the example mean the same thing as on which?
+\answer{where, when}
+LISTENING DEVELOPING Give pairs of students a piece of ribbon, a ruler, and a pair of scissors. Have students listen as you direct them to model a parabola that crosses over the (x)-axis with the ribbon and the ruler. Challenge students to use the scissors to show that two zeros create three intervals.
+Q: How many cuts did you make?
+\answer{2}
+Q: How many pieces of ribbon resulted?
+\answer{3}
+Q: How does this demonstration relate to the example?
+\answer{It shows how two zeros create three intervals.}
+SPEAKING EXPANDING In small groups, have students discuss the meaning of the word turn.
+Q: Trace the graph from left to right, then explain what turn means.
+\answer{to change direction}
+Q: Where would you say this graph turns? Explain.
+\answer{at the vertex; The graph was going down, but at the vertex, it changes direction and starts going up.}
+Q: Is that how turn is used in the example?
+\answer{No; The example describes how the (y)-values of the graph turn from positive to negative, or from negative to positive, when the graph crosses over the (x)-axis.}
+\end{te-addendum}
+% Source page 40: 79, Step 2 Understand & Apply
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Determine Positive or Negative Intervals}
+Examples are available at SavvasRealize.com.
+Use and Connect Mathematical Representations
+Q: How can a function be both positive and negative? Explain algebraically and graphically.
+\answer{A function can be positive for some values and negative for others. Algebraically: A function is positive when an (x)-value gives a positive (y)-value and negative when an (x)-value gives a negative (y)-value. Graphically: When the graph is above the (x)-axis, it is positive, and when it is below the (x)-axis, it is negative.}
+Q: Why is it important to identify positive and negative intervals of a function?
+\answer{Understanding when a function is positive and when it is negative can help with interpreting solutions of real-world contexts.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Determine Positive or Negative Intervals}
+Identify the interval(s) on which the function (y=x^2-2x-3) is positive.
+The (y)-values of a quadratic function can only turn from positive to negative or from negative to positive when the graph crosses the (x)-axis. Find the zeros of the function to identify these points.
+(0=x^2-2x-3)
+(0=(x-3)(x+1))
+(x-3=0) or (x+1=0)
+(x=3) or (x=-1)
+Two zeros create three intervals. Choose an (x)-value to test in each interval. Substitute the (x)-value into the original expression to determine if the corresponding (y)-value is positive or negative.
+\begin{tabular}{lll}
+(x<-1) & (-1<x<3) & (x>3) \\
+Choose (x=-3). & Choose (x=1). & Choose (x=6). \\
+(y=(-3)^2-2(-3)-3) & (y=(1)^2-2(1)-3) & (y=(6)^2-2(6)-3) \\
+(=9+6-3) & (=1-2-3) & (=36-12-3) \\
+(=12) & (=-4) & (=21) \\
+Positive & Negative & Positive \\
+\end{tabular}
+Graph the function to verify where the function is positive or negative.
+The function is positive when the graph is above the (x)-axis, or on the intervals (-\infty,-1) and (3,\infty).
+\placeholder{graph}{Red upward parabola (y=x^2-2x-3), vertex (1,-4), closed labeled intercepts (-1,0),(3,0), (y)-intercept -3, arrows on upper ends. Black arrowed (x),(y) axes, O at origin, unit grid over [-5,5] on each axis; (x) labels -4,-2,2,4; (y) labels -4,2,4.}
+\te{LOOK FOR RELATIONSHIPS The sign of the (y)-value of the test point is the same as for the (y)-value of any other point over the entire interval you are testing when the interval is defined by zeros.}
+\answer{(-\infty,-1) and (3,\infty)}
+\end{example}
+\begin{tryit}{5}
+Identify the interval(s) on which the function (y=x^2-4x-21) is negative.
+\answer{(-3<x<7)}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 4 \& 5
+Q: Construct Arguments Is it always true that the (y)-values of a quadratic function have opposite signs on either side of a zero of the function? Explain why or give a counter-example.
+\answer{No; for the equation (y=x^2), all (y) values are nonnegative.}
+\end{te-addendum}
+\begin{te-addendum}{6}{PurposefulQuestions}
+\textbf{Write the Equation of a Parabola in Factored Form. Pose Purposeful Questions}
+Q: Why is it necessary to use a point other than the (x)-intercepts to write an equation for a parabola?
+\answer{The (x)-intercepts describe where the parabola intersects the (x)-axis, but do not completely describe the entire parabola's behavior. Therefore, you should consider all values of the variables in the vertex form (y=a(x-p)(x-q)).}
+\te{Printed answer calls (y=a(x-p)(x-q)) vertex form; likely factored form.}
+Q: Why are you given 3 points to determine the equation instead of 2?
+\answer{Because the equation is not linear, 3 points are needed to determine the equation.}
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Write the Equation of a Parabola in Factored Form}
+Write an equation of a parabola with (x)-intercepts at (-2,0) and (-1,0) and which passes through the point (-3,20).
+(y=a(x-p)(x-q))
+(y=a(x-(-2))(x-(-1)))
+(y=a(x+2)(x+1))
+(20=a(-3+2)(-3+1))
+(20=2a)
+(10=a)
+(y=10(x+2)(x+1))
+\te{GENERALIZE If (x=-2) is an (x)-intercept, then (x+2) is the factor, not (x-2). How can you verify this?}
+\answer{(y=10(x+2)(x+1))}
+\end{example}
+\begin{tryit}{6}
+Write an equation of a parabola with (x)-intercepts at (3,0) and (-3,0) and which passes through the point (1,2).
+\answer{(y=-(\frac{1}{4})(x+3)(x-3))}
+\end{tryit}
+\begin{te-addendum}{6}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 6
+Q: Model With Mathematics Is there any other parabola with (x)-intercepts at (-2,0) and (-1,0)? Give an equation or explain why there is no such parabola.
+\answer{Yes; any equation of the form (y=a(x+2)(x+1)), such as (y=5(x+2)(x+1))}
+\end{te-addendum}
+% Source page 41: 80, Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Factored Form of a Quadratic Function}
+Q: How is the factored form of a quadratic function useful?
+\answer{It can be used to find the zeros of the function, which are important when determining for what intervals the quadratic function is positive or negative.}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 6 Students may only look at the constant 2 when determining which factors have a sum of 3 and factor the expression as ((x+1)(x+2)). Remind students that they need to look for the factors of the product of the leading coefficient and the constant.
+\te{Printed constant 2; the exercise has constant -2.}
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Factored Form of a Quadratic Function}
+\textbf{FACTORED FORM}
+(y=ax^2+bx+c) can be written as (y=a(x-p)(x-q)), where (p) and (q) are the zeros of the function.
+The (x)-intercepts of the graph correspond to the zeros of the function. Two zeros denote 3 intervals of (x)-values.
+\textbf{GRAPH}
+For the function (y=2x^2+3x-14), write the equation (0=2x^2+3x-14) in factored form to identify the zeros.
+(0=2x^2+3x-14)
+(0=(2x+7)(x-2))
+The zeros of the function are (x=-\frac{7}{2}) and (x=2).
+intervals where function values are positive: (x<-\frac{7}{2}) and (x>2)
+interval where function values are negative: (-\frac{7}{2}<x<2)
+\placeholder{graph}{Red upward parabola (y=2x^2+3x-14), vertex (-0.75,-15.125), red closed labeled intercepts (-7/2,0),(2,0); black callout zeros points to both intercepts, red positive above both branches, red negative by lower part. Black arrowed (x),(y) axes, O at origin, grid spacing 1 horizontally and 2 vertically, window (x) [-6,4], (y) [-16,4]; (x) labeled -2; (y) labeled -4,-8,-12. Both upper curve ends arrowed.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How is the factored form helpful in solving quadratic equations?
+\answer{The factored form is helpful because you can use it and the Zero Product Property to find the zeros of quadratic equations.}
+2. Error Analysis Amir says the graph of (y=x^2+16) has -4 as a zero. Is Amir correct? Explain.
+\answer{Amir is not correct. There are no real solutions to the equation (0=x^2+16).}
+3. Vocabulary How does the factored form of a quadratic equation relate to the Zero Product Property?
+\answer{When a quadratic equation is written in factored form, each factor can be set equal to zero to find the zeros, because of the Zero Product Property.}
+4. Generalize How does knowing the zeros of a function help determine where a function is positive?
+\answer{The zeros of a function are the only points where a function can change from positive to negative or negative to positive, so you can separate a function into intervals separated by the zeros and any point within an interval will have the same sign.}
+\textbf{Do You KNOW HOW?}
+Factor each expression.
+5. (x^2-5x-24)
+\answer{((x-8)(x+3))}
+6. (5x^2+3x-2)
+\answer{((5x-2)(x+1))}
+Solve each equation.
+7. (x^2=12x-20)
+\answer{(x=2), (x=10)}
+8. (4x^2-5x=6)
+\answer{(x=2), (x=-\frac{3}{4})}
+9. The height, in feet, of a t-shirt launched from a t-shirt cannon high in the stands at a football stadium is given by (h(x)=-16x^2+64x+80), where (x) is the time in seconds after the t-shirt is launched. How long will it take before the t-shirt reaches the ground?
+\answer{5 seconds}
+\end{concept-summary}
+% Source page 42: 81, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+11, 12, 14, 17--45 & 10--17, 19, 21, 23, 25, 27, 29--31, 33, 35, 37--45 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Scan the QR code to access a video tutorial. See answers for 14--16, 28--29, 36--39 on next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 16--22 & 1 \\
+1 & 15 & 2 \\
+2 & 23 & 1 \\
+2 & 14 & 2 \\
+3 & 24--29, 43 & 1 \\
+3 & 11, 40, 42 & 2 \\
+4 & 30, 44 & 2 \\
+4 & 41 & 3 \\
+5 & 31--36 & 2 \\
+5 & 13 & 2 \\
+6 & 12, 37, 38 & 1 \\
+6 & 10, 39, 45 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{10}{3}
+UNDERSTAND. Generalize Can you write the equation of a quadratic function knowing its zeros and its non-zero (y)-intercept? If so, describe the process. If not, explain why.
+\answer{Yes; if (b) and (c) are the zeros, the equation is (y=a(x-b)(x-c)). To find the value of (a), substitute 0 for (x) and the value for the (y)-intercept for (y), and solve for (a). Then multiply the factors.}
+\end{practice}
+\begin{practice}{11}{2}
+Error Analysis Describe and correct the error a student made in solving a quadratic equation.
+(0=2x^2+7x+5)
+(0=2x^2+2x+5x+5)
+(0=2x(x+1)+5(x+1))
+(0=2x), (0=x+1), (0\neq5)
+(0=x), (-1=x)
+\te{A red X marks the student's work.}
+\answer{The student misapplied the Zero Product Property. The student should have factored (2x(x+1)+5(x+1)) as ((2x+5)(x+1)) first, and then applied the Zero Product Property. Then (2x+5=0) leads to (x=-\frac{5}{2}), and (x+1=0) leads to (x=-1).}
+\end{practice}
+\begin{practice}{12}{1}
+Model With Mathematics Use the graph of the function to write the equation in factored form.
+\placeholder{graph}{Red upward parabola (y=(x+1)(x+6)), vertex (-3.5,-6.25), closed labeled points (-6,0),(-1,0),(0,6); upper ends arrowed. Black arrowed (x),(y) axes, origin O, square grid spacing 2, window [-10,10] each axis, labeled ticks -8,-4,4,8.}
+\answer{(y=(x+1)(x+6))}
+\end{practice}
+\begin{practice}{13}{2}
+Generalize For what values of (x) is the expression ((x-4)^2>0)?
+\answer{for all values of (x) except 4}
+\end{practice}
+\begin{practice}{14}{2}
+Error Analysis A student says that the zeros of (y=(x-2)(x+7)) are -2 and 7. Is the student correct? If not, describe and correct the error the student made.
+\answer{The student is not correct; the zeros of a quadratic function in factored form are not simply the constants in the expression, but are found using the Zero Product Property, so (x-2=0) or (x=2), and (x+7=0) or (x=-7).}
+\end{practice}
+\begin{practice}{15}{2}
+Construct Arguments Explain why (x^2+25) is not equal to ((x+5)^2).
+\answer{the factored expression ((x+5)^2=(x+5)(x+5)=x^2+5x+5x+25=x^2+10x+25); The expression (x^2+25) does not factor over the real numbers.}
+\end{practice}
+\begin{practice}{16}{1}
+Mathematical Connections Describe how factoring can help you find the (x)-intercepts of the graph of the quadratic function (y=x^2-4x+3).
+\answer{When you factor an expression, the solution of each factor, when set equal to zero, yields the (x)-intercepts.}
+\end{practice}
+\begin{practice}{17}{1}
+Factor each quadratic expression. SEE EXAMPLE 1
+(x^2-3x-10)
+\answer{((x-5)(x+2))}
+\end{practice}
+\begin{practice}{18}{1}
+Factor each quadratic expression. SEE EXAMPLE 1
+(3x^2-5x-12)
+\answer{((3x+4)(x-3))}
+\end{practice}
+\begin{practice}{19}{1}
+Factor each quadratic expression. SEE EXAMPLE 1
+(x^2+15x+56)
+\answer{((x+8)(x+7))}
+\end{practice}
+\begin{practice}{20}{1}
+Factor each quadratic expression. SEE EXAMPLE 1
+(2x^2+7x-15)
+\answer{((2x-3)(x+5))}
+\end{practice}
+\begin{practice}{21}{1}
+Factor each quadratic expression. SEE EXAMPLE 1
+(3x^2-18x-48)
+\answer{(3(x+2)(x-8))}
+\end{practice}
+\begin{practice}{22}{1}
+Factor each quadratic expression. SEE EXAMPLE 1
+(4x^2-11x-3)
+\answer{((4x+1)(x-3))}
+\end{practice}
+\begin{practice}{23}{1}
+What are the zeros of the quadratic function (y=3(x-5)(x+4))? SEE EXAMPLE 2
+\answer{5, -4}
+\end{practice}
+\begin{practice}{24}{1}
+Solve each quadratic equation. SEE EXAMPLE 3
+(x^2-5x-14=0)
+\answer{(-2, 7)}
+\end{practice}
+\begin{practice}{25}{1}
+Solve each quadratic equation. SEE EXAMPLE 3
+(x^2=5x-6)
+\answer{(2, 3)}
+\end{practice}
+\begin{practice}{26}{1}
+Solve each quadratic equation. SEE EXAMPLE 3
+(3x^2-60=3x)
+\answer{(-4, 5)}
+\end{practice}
+\begin{practice}{27}{1}
+Solve each quadratic equation. SEE EXAMPLE 3
+(5x^2+12x=9)
+\answer{(-3, \frac{3}{5})}
+\end{practice}
+\begin{practice}{28}{1}
+Solve each quadratic equation. SEE EXAMPLE 3
+(4x^2+3x-7=0)
+\answer{(-\frac{7}{4}, 1)}
+\end{practice}
+\begin{practice}{29}{1}
+Solve each quadratic equation. SEE EXAMPLE 3
+(6x^2=5x+6)
+\answer{(-\frac{2}{3}, \frac{3}{2})}
+\end{practice}
+\begin{practice}{30}{2}
+A penny is dropped from the top of a new building. Its height in feet can be modeled by the equation (y=256-16x^2), where (x) is the time in seconds since the penny was dropped. How long does it take for the penny to reach the ground? SEE EXAMPLE 4
+\answer{4 seconds}
+\end{practice}
+\begin{practice}{31}{2}
+Identify the interval(s) on which each quadratic function is positive. SEE EXAMPLE 5
+(y=x^2+9x+18)
+\answer{(x<-6, x>-3)}
+\end{practice}
+\begin{practice}{32}{2}
+Identify the interval(s) on which each quadratic function is positive. SEE EXAMPLE 5
+(y=x^2+2x-8)
+\answer{(x<-4, x>2)}
+\end{practice}
+\begin{practice}{33}{2}
+Identify the interval(s) on which each quadratic function is positive. SEE EXAMPLE 5
+(y=x^2-5x-24)
+\answer{(x<-3, x>8)}
+\end{practice}
+\begin{practice}{34}{2}
+Identify the interval(s) on which each quadratic function is positive. SEE EXAMPLE 5
+(y=-x^2+4x+12)
+\answer{(-2<x<6)}
+\end{practice}
+\begin{practice}{35}{2}
+Identify the interval(s) on which each quadratic function is positive. SEE EXAMPLE 5
+(y=2x^2+12x+18)
+\answer{(x\neq-3)}
+\end{practice}
+\begin{practice}{36}{2}
+Identify the interval(s) on which each quadratic function is positive. SEE EXAMPLE 5
+(y=5x^2-3x-8)
+\answer{(x<-1, x>\frac{8}{5})}
+\end{practice}
+\begin{practice}{37}{1}
+Write an equation for each parabola. SEE EXAMPLE 6
+A parabola with (x)-intercepts at (-1,0) and (3,0) which passes through the point (1,-8)
+\answer{(y=2x^2-4x-6) or (y=2(x+1)(x-3))}
+\end{practice}
+\begin{practice}{38}{1}
+Write an equation for each parabola. SEE EXAMPLE 6
+A parabola with (x)-intercepts at 0 and 1 and which passes through the point (2,-2)
+\answer{(y=-x^2+x) or (y=-x(x-1))}
+\end{practice}
+\begin{practice}{39}{3}
+A snorkeler dives for a shell on a reef. After entering the water, the diver descends (\frac{11}{3}) ft in one second. Write an equation that models the diver's position with respect to time.
+\placeholder{illustration}{Underwater reef with snorkeler shown entering at left, reaching shell on bottom center, and returning to surface at right. Black (x)-axis along water surface, arrows left and right; (y)-axis vertical near left, downward arrow and upward arrow, 0 at origin. Left pose labeled 1 sec, 0 ft; right pose labeled 11 sec, 0 ft. Fish and coral below.}
+\answer{(y=(\frac{11}{27})(x-1)(x-11))}
+\end{practice}
+% Source page 43: 82, Practice & Problem Solving continued
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice \& Problem Solving is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{practice}{40}{2}
+APPLY. Make Sense and Persevere Rectangular apartments are 12 ft longer than they are wide. Each apartment has 1,053 ft^2 of floor space. What are the dimensions of an apartment? Explain.
+\answer{39 ft by 27 ft; (x(x+12)=1053); (x^2+12x=1053); (x^2+12x-1053=0); ((x+39)(x-27)=0); (x+39=0) or (x-27=0); (x=-39) or (x=27); A dimension cannot be negative, so (x=27) ft is the width, and (x+12=39) ft is the length of each apartment.}
+\end{practice}
+\begin{practice}{41}{3}
+Use Structure A drone leaves its launch pad, flies down over the edge of a cliff, and then it flies back up again. The ordered pairs are the drone's flight time and height.
+\placeholder{illustration}{Drone flight above cliff: initial drone atop wooden platform above left cliff edge labeled (0 s, 5 m); drone to right at cliff height labeled (5 s, 0 m); next drone at same height labeled (10 s, 0 m); last at original platform height labeled (15 s, 5 m). Mountains below, no coordinate axes.}
+a. What does each point represent for the drone and its height?
+\answer{a. (0,5) represents the height of the platform and the beginning of the drone's flight. At (5,0) and (10,0), the drone is even with the edge of the cliff. (15,5) represents the return of the drone to the height of the platform.}
+b. Write a function that represents the drone's height with respect to time. Factor your function if it is factorable.
+\answer{b. (h(x)=0.1(x-5)(x-10))}
+c. How far below the platform does the drone fly?
+\answer{c. 5.625 m}
+d. How could you validate this model?
+\answer{d. The given points fit the quadratic equation. The drone's lowest point is on the line of symmetry of the parabola.}
+\end{practice}
+\begin{practice}{42}{2}
+Higher Order Thinking LaTanya is working on a rectangular garden in front of the community center with a uniform walkway around its border. LaTanya has 140 m^2 of material to build the walkway.
+a. Write an equation that you could use to find the dimensions of the garden and the surrounding walkway.
+\answer{a. ((2x+9)(2x+14)=9\times14+140) or (4x^2+46x+126=266)}
+b. How wide is the walkway? Explain.
+\answer{b. 2.5 meters; (4x^2+46x+126=266); (4x^2+46x-140=0); (2(2x-5)(x+14)=0); (2x-5=0) or (x+14=0); (x=2.5) or (x=-14); The walkway must have a positive width, so it is 2.5 meters wide.}
+\placeholder{diagram}{Top view rectangular green garden bordered uniformly by tan square paving stones. Inner garden vertical dimension on left labeled 9 meters and horizontal dimension along bottom labeled 14 meters, both double-arrowed. Shrubs and flowers fill garden with a narrow rectangular planter in center. Outer walkway width unmarked.}
+\end{practice}
+\begin{practice}{43}{1}
+ASSESSMENT PRACTICE. Which of the following are solutions to the equation (-11x=2x^2+15)? Select all that apply.
+A. -5
+B. -3
+C. (-\frac{5}{2})
+D. (\frac{5}{2})
+E. 3
+F. 5
+\answer{B, C}
+\end{practice}
+\begin{practice}{44}{2}
+SAT/ACT What is the sum of the zeros of the function (y=x^2-9x-10)?
+A. -10
+B. -9
+C. 0
+D. 9
+E. 10
+\answer{D}
+\end{practice}
+\begin{practice}{45}{3}
+Performance Task At a state fair, a competition is held to launch pumpkins from catapults. A pumpkin is launched from the ground into the air and lands 4.5 s later.
+\placeholder{illustration}{Person operating a green catapult at a fair, pumpkin in air at upper right following an arcing trail. Callout to pumpkin: Max. height = 81 ft. Fields and hills in background.}
+Part A Write a function that models the height, in feet, of the pumpkin (x) seconds after it is launched. Explain how you found the function.
+\answer{Part A (y=-16x^2+72x); The zeros of the function are at 0 and 4.5, and the peak is halfway between, since it is a quadratic function, so the point (2.25,81) represents its peak; (y=ax(x-4.5)); (81=2.25a(2.25-4.5)); (81=-5.0625a); (-16=a); (y=-16x(x-4.5)); (y=-16x+72x)}
+\te{Printed final expanded equation lacks the exponent on the first (x); an isolated superscript 2 appears below the answer block. The initial answer and factored equation give (y=-16x^2+72x).}
+Part B A second pumpkin is launched from the ground. After 1 second, it is 64 feet high. The pumpkin lands after 5 seconds. What is the maximum height of the pumpkin? Explain.
+\answer{Part B The pumpkin will reach 100 feet at 2.5 seconds.}
+\end{practice}
+% Source page 44: 82A, Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & A24, A69 \\
+2 & 2 & A24 \\
+3 & 2 & A29 \\
+4 & 2 & A70 \\
+5 & 2 & F50, F58 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd Videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\te{Lesson Quiz is available at SavvasRealize.com. ASSESSMENT RESOURCES.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{2-3 Lesson Quiz: Factored Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+1. Factor the expression (3x^2-11x-4).
+((\underline{\hspace{.5cm}}x+\underline{\hspace{.5cm}})(x-\underline{\hspace{.5cm}}))
+\answer{1. 3, 1, 4; ((3x+1)(x-4))}
+2. Solve the equation (x^2+7x=30).
+A. (x=15) and (x=-2)
+B. (x=-6) and (x=5)
+C. (x=-10) and (x=3)
+D. (x=10) and (x=-3)
+\answer{2. C}
+3. A projectile is launched into the air. The function (h(t)=-16t^2+32t+128) gives the height, (h), in feet, of the projectile (t) seconds after it is launched. After how many seconds will the projectile land back on the ground?
+\answer{3. 4}
+4. Identify the intervals on which the function (f(x)=x^2+12x+27) is positive.
+(-\infty,\underline{\hspace{.5cm}}) and (\underline{\hspace{.5cm}},\infty)
+\answer{4. -9, -3; (-\infty,-9) and (-3,\infty)}
+5. A long-jumper lifts off 3 m after starting his run, and lands 6 m from where he lifted off. When he is 8 m from the start line, he is 5 cm above the ground. Write the equation of a parabola that models his path through the air, where (x) is his horizontal distance from the start line in m and (y) is his height, in cm.
+A. (y=-x^2+12x-27)
+B. (y=-3x^2+4x-9)
+C. (y=3x^2-4x+9)
+D. (y=x^2-12x+27)
+\answer{5. A}
+\te{enVision Algebra 2 • Assessment Sourcebook. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+% Source page 45: 82B, Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced.
+\textbf{Reteach to Build Understanding} I
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School.
+\textbf{Additional Practice} I O
+Provides extra practice for each lesson.
+MathXL for School.
+\textbf{Enrichment} O A
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{2-3 Reteach to Build Understanding: Factored Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+1. Write the quadratic equation (y=x^2-5x+6) in factored form.
+Step 1: Find the coefficients of each term.
+(a=1), (b=-5), (c=\underline{\hspace{.5cm}})
+\answer{(c=6)}
+Step 2: Find (ac) and (b).
+(ac=\underline{\hspace{.5cm}}) and (b=-5)
+\answer{(ac=6)}
+Step 3: Find factors of (ac) that have a sum equal to (b).
+\begin{tabular}{lrrrr}
+Factors of (ac) & 1, 6 & -1, -6 & 2, 3 & -2, -3 \\
+Sum of factors & 7 & -7 & 5 & -5 \\
+\end{tabular}
+The numbers -2 and -3 have product 6 and sum -5. Then rewrite (-5x) as \underline{\hspace{.5cm}} and \underline{\hspace{.5cm}}.
+\answer{(-2x) and (-3x)}
+Step 4: Rewrite the equation as
+(y=x^2-2x-3x+6)
+(=x(x-2)-3(x-2))
+(=(x-2)(x-3))
+The factored form of the equation is (y=(x-2)(x-3)).
+\answer{(y=(x-2)(x-3))}
+2. What are the zeros of the expression (j^2-4j-21)?
+The zeros of the expression (j^2-4j-21) are the solutions of the equation (0=j^2-4j-21).
+\begin{tabular}{ll}
+(j^2-4j-21=0) & Set the expression equal to 0. \\
+((j+-7)(j+3)=0) & Write the equation in factored form. \\
+(j+-7=0) or (j+3=0) & Use Zero Product Property. \\
+(j=7) or (j=-3) & Solve. \\
+\end{tabular}
+The zeros of the expression (j^2-4j-21) are \underline{\hspace{.5cm}} and \underline{\hspace{.5cm}}.
+\answer{7 and -3}
+3. A student says that the solutions of the quadratic equation (y=x^2-10x+21) are -3 and -7. What is the student's error? What are the actual solutions?
+\answer{The student rewrote the equation as ((x-3)(x-7)=0) and concluded that the solutions are the constants in each factor. To find the actual solutions, use the Zero Product Property: (x-3=0) or (x=3), and (x-7=0) or (x=7).}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{2-3 Additional Practice: Factored Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+Factor each quadratic expression.
+1. (x^2+4x-21)
+\answer{((x-3)(x+7))}
+2. (x^2-2x-15)
+\answer{((x+3)(x-5))}
+3. (2x^2-17x+30)
+\answer{((2x-5)(x-6))}
+Identify the zeros of each function.
+4. (y=5(x-3)(x+5))
+\answer{(x=3), (x=-5)}
+5. (y=(x-9)(x+4))
+\answer{(x=9), (x=-4)}
+6. (y=(x-7)^2)
+\answer{(x=7)}
+Solve each quadratic equation by factoring.
+7. (x^2=-5x)
+\answer{0, -5}
+8. (-2x^2+5x+12=0)
+\answer{(-\frac{3}{2}), 4}
+9. (7x^2+25x+12)
+\answer{(-\frac{4}{7}), -3}
+\te{Printed item 9 is an expression without an equals sign; answers are its zeros.}
+10. (5x^2=3x+2)
+\answer{(-\frac{2}{5}), 1}
+11. (-4x^2+15x+4=0)
+\answer{(-\frac{1}{4}), 4}
+12. (x^2-4x+3=0)
+\answer{1, 3}
+Identify the interval(s) on which each quadratic function is positive or negative as shown.
+13. (y=2x^2-17x+30) Positive
+\answer{(x<\frac{5}{2}) and (x>6)}
+14. (y=-7x^2+35x-28) Positive
+\answer{(1<x<4)}
+15. (y=-x^2-6x-8) Negative
+\answer{(x<-4) and (x>-2)}
+16. (y=2x^2-4x-16) Negative
+\answer{(-2<x<4)}
+17. A rock is thrown upward from the edge of a bridge and onto a road that is 10 feet below the bridge. The function (h(x)=-x^2+3x+10) gives the height, (h), in feet, the rock travels in (x) seconds from the time it was thrown. When will the rock hit the road?
+\answer{The rock will hit the ground after 5 seconds.}
+18. Write an equation of a parabola with (x)-intercepts at (\frac{1}{4},0) and (-7,0) which passes through the point (0,7).
+\answer{(y=-(4x-1)(x+7))}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{2-3 Enrichment: Factored Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+1. Find all the solutions of the quadratic equations and inequalities. The set of letters with each equation and inequality corresponds to a location in the puzzle below.
+Gb. (-x^2+9=0)
+\answer{(x=3), (x=-3)}
+\uncertain{Ac}{Ah; Ae}. (2x^2-4x<0)
+\answer{(0<x<2)}
+Be. (9x^2-36x+36=0)
+\answer{(x=2)}
+Eb. (-2x^2+18x=40)
+\answer{(x=4), (x=5)}
+Hg. (x^2+12=8x)
+\answer{(x=2), (x=6)}
+Kd. (x^3-6x^2=-9x)
+\answer{(x=0), (x=3)}
+Ci. (2x^2-7x=15)
+\answer{(x=5), (x=-\frac{3}{2})}
+Ge. (5x^2-25x=70)
+\answer{(x=7), (x=-2)}
+Ff. (x^3-2x^2-7x=4)
+\answer{(x=4), (x=-1)}
+Cg. (x^2-2x+1=0)
+\answer{(x=1)}
+Kc. (-2x^2+14x-24=0)
+\answer{(x=3), (x=4)}
+Da. (x^2-12x+36=0)
+\answer{(x=6)}
+Ga. (x^2-8x=9)
+\answer{(x=9), (x=-1)}
+Di. (-x^2+2x>-3)
+\answer{(-1<x<3)}
+\te{Printed directions say quadratic; Kd and Ff are cubic. The blurred label Ac would require 2 by the interval rule, but the completed grid has 1 in Ac; Ah contains 2.}
+2. Solve the puzzle using the solutions from above to fill in the empty squares for each location noted. For example, find Gb above. Then use the rules below to determine how to use the solution(s) to fill in the blank.
+1. If the solution has one positive number, use the number.
+2. If the solution has two positive numbers, use the sum of the two answers.
+3. If the solution has one positive and one negative, use the positive number.
+4. If the solution is an interval, use the sum of the endpoints of the interval.
+Complete the rest of the puzzle so that each number between 1 and 9 appears exactly once in each row, column and 3 x 3 box.
+\begin{tabular}{lrrrrrrrrr}
+ & A & B & C & D & E & F & G & H & K \\
+a. & 5 & 3 & 4 & 6 & 7 & 8 & 9 & 1 & 2 \\
+b. & 6 & 7 & 2 & 1 & 9 & 5 & 3 & 4 & 8 \\
+c. & 1 & 9 & 8 & 3 & 4 & 2 & 5 & 6 & 7 \\
+d. & 8 & 5 & 9 & 7 & 6 & 1 & 4 & 2 & 3 \\
+e. & 4 & 2 & 6 & 8 & 5 & 3 & 7 & 9 & 1 \\
+f. & 7 & 1 & 3 & 9 & 2 & 4 & 8 & 5 & 6 \\
+g. & 9 & 6 & 1 & 5 & 3 & 7 & 2 & 8 & 4 \\
+h. & 2 & 8 & 7 & 4 & 1 & 9 & 6 & 3 & 5 \\
+i. & 3 & 4 & 5 & 2 & 8 & 6 & 1 & 7 & 9 \\
+\end{tabular}
+\te{The completed entries printed in magenta are: Ca,Da,Ga; Bb,Cb,Eb,Gb,Hb; Ac,Dc,Ec,Fc,Kc; Bd,Cd,Dd,Fd,Gd,Hd,Kd; Be,Ee,Ge; Bf,Cf,Ff,Gf; Ag,Cg,Dg,Eg,Fg,Hg; Ah,Gh,Hh; Ai,Ci,Di,Fi. Heavy rules separate the 3-by-3 boxes.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I O
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{2-3 Mathematical Literacy and Vocabulary: Factored Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{Example}
+Identify the interval(s) on which the function (y=4x^2-15x-4) is positive. Fill in the blanks. Some of the steps have been done for you.
+The graph of a quadratic function can only turn from positive to negative or negative to positive when it crosses the (x)-axis. Find the zeros of the function to identify these points.
+\begin{tabular}{ll}
+(4x^2-15x-4=0) & Set equation equal to 0. \\
+((4x+1)(x-4)=0) & Factor. \\
+(4x+1=0) or (x-4=0) & Zero Product Property \\
+(x=-\frac{1}{4}) or (x=4) & Solve. \\
+\end{tabular}
+Two zeros create three intervals. Choose an (x)-value to test in each interval. Plug the (x)-value in to the original expression to determine if its value is positive or negative.
+\begin{tabular}{lll}
+(x<-\frac{1}{4}) & (-\frac{1}{4}<x<4) & (x>4) \\
+Choose (x=-1). & Choose (x=0). & Choose (x=5). \\
+(4(-1)^2-15(-1)-4) & (4(0)^2-15(0)-4) & (4(5)^2-15(5)-4) \\
+(=15) & (=-4) & (=21) \\
+Positive Negative & Positive Negative & Positive Negative \\
+\end{tabular}
+\answer{Positive; Negative; Positive}
+Graph the function to verify where it is positive. The function is positive when the graph is above the (x)-axis. It appears that the function is above the (x)-axis on the intervals \underline{\hspace{2cm}}.
+\answer{(x<-\frac{1}{4}) and (x>4)}
+\placeholder{graph}{Vocabulary: magenta upward parabola (y=4x^2-15x-4), zeros -0.25 and 4, vertex near (1.875,-18.063), (y)-intercept -4; arrowheads on upper ends. Black arrowed (x),(y) axes, O at origin, grid spacing 1 horizontally and 2 vertically, (x) labels 2,4, (y) labels -4,-8,-12,-16; window approximately (x) [-2,5], (y) [-20,6].}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{illustration}{Tablet digital practice screenshot. Solve the system of equations by graphing: (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Blank coordinate grid [-10,10] each axis, unit grid, ticks every 2, arrowed (x),(y) axes. Question Help menu: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Bottom instructions: Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining. Controls: Exit, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\te{Printed screenshot illustrates a linear system rather than the quadratic lesson.}
+\end{te-addendum}
+
+\end{document}

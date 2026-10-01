@@ -1,0 +1,1040 @@
+\documentclass{article}
+% Source: Topic_05_Teacher_Edition.pdf, PDF pages 24-35 (printed pages 235A-242B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 24: 235A Lesson Overview
+\begin{lesson-meta}
+lesson: 5-2
+title: Properties of Exponents and Radicals
+standards: none printed
+practices: none printed
+objective: I CAN use properties of exponents and radicals to simplify radical expressions.
+
+essential question: How can properties of exponents and radicals be used to rewrite radical expressions?
+
+\textbf{VOCABULARY}
+\item like radicals
+\item reduced radical form
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 5-2 \\
+Title & Properties of Exponents and Radicals \\
+Standards & none printed \\
+I CAN Objective & I CAN use properties of exponents and radicals to simplify radical expressions. \\
+Essential Question & How can properties of exponents and radicals be used to rewrite radical expressions? \\
+Lesson Vocabulary & like radicals; reduced radical form \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use the properties of exponents and radicals to identify ways to rewrite radical expressions.
+\item Interpret radical expressions that represent a quantity in terms of its context.
+Essential Understanding. The properties of integer exponents can be applied to terms with rational exponents, as well as to radicals. The properties of exponents and radicals can be used to rewrite radical expressions. When rewriting radical expressions, like radicals, which have the same index, can be added and subtracted.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Evaluated expressions with rational exponents.
+\item Related radical and exponential forms of expressions
+In this lesson, students:
+\item Use the properties of radicals and exponents to rewrite radical expressions.
+Later in this topic, students will:
+\item Graph radical functions.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand how the Product and Quotient Properties of exponents lead to understanding the Product and Quotient Properties for radicals.
+\item Students apply these properties to rewrite radicals and solve real-world problems.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+\te{Glossary is available at SavvasRealize.com. Program Resources.}
+\begin{tabular}{ll}
+REVIEW VOCABULARY English & Spanish \\
+radical expression & expresión radical \\
+rational exponent & exponente racional \\
+NEW VOCABULARY & \\
+like radicals & radicales semejantes \\
+reduced radical form & mínima expresión de una expresión radical \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Remind students about radical and rational expressions and how they are related. Introduce the concepts of like radicals and reduced radical form. Have students complete these sentences.
+1. The number under the radical sign is called the \underline{\hspace{1cm}}.
+\answer{radicand}
+2. \underline{\hspace{1cm}} are radical expressions that have the same index and the same radicand.
+\answer{like radicals}
+3. A radical expression with index (n) is in \underline{\hspace{1cm}} if there are no radicals in any denominator, no denominators in any radical, and no radicand has any nth power factors.
+\answer{reduced radical form}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 24 1000 787 1152 967
+\placeholder{illustration}{Student Companion cover: purple and blue glowing sphere over black background; enVision Algebra 2 and Savvas labels.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students write the reduced radical form of radical expressions using the properties of radicals and/or exponents. Then they use the reduced radical forms to add and subtract radical expressions and multiply binomial radical expressions.
+\textbf{Applying Math Practices: Reason Abstractly and Quantitatively}
+Students make sense of quantities when they determine the simplest factor that can be used to eliminate radicals in the denominator when rewriting a radical.
+\textbf{Look For and Make Use of Structure}
+Students look for the relationship between the Product of Powers and Quotient of Powers Properties and the Product and Quotient Properties of Radicals when rewriting radical expressions.
+\end{te-addendum}
+% Source page 25: 235B Critique & Explain
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. CRITIQUE \& EXPLAIN. INSTRUCTIONAL FOCUS}
+Students review how to use the properties of integer exponents to simplify expressions. This review prepares students to learn about rational exponents in the lesson because the properties of integer exponents also apply to rational exponents.
+\textbf{STUDENT COMPANION} Students can complete the Critique \& Explain activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving}
+Q: What do you notice about the expressions?
+\answer{Two have exponents, and one has a square root. They can all be simplified.}
+\textbf{During: SMALL GROUP. Support Productive Struggle in Learning Mathematics}
+Q: What are some ways you can rewrite (3^6) in order to make it easier to simplify?
+\answer{(3\cdot3\cdot3\cdot3\cdot3\cdot3), (3^2\cdot3^4), (3^3\cdot3^3)}
+Q: How can you find the factors of 625 to simplify the expression in the third example?
+\answer{Use a factor tree, use technology, or look to see if any common squares are factors of 625.}
+\textbf{For Early Finishers}
+Q: Are the following solutions correct? If not, provide the correct answer. (\sqrt{300}=\sqrt{400}-\sqrt{100}=20-10=10)
+(109^2=100^2+9^2=10,000+81=10,081)
+\answer{No; (\sqrt{300}=\sqrt{100\cdot3}=10\sqrt3) and (109^2=11,881)}
+\textbf{After: WHOLE CLASS. Facilitate Meaningful Mathematical Discourse}
+Q: What strategies did you use to decide if Amora was correct?
+\answer{looked for errors in her use of the properties of exponents and radicals; solved the problem in a different way and checked to see if the answer was the same}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Amora was practicing evaluating and simplifying expressions. Her work for three expressions is shown.
+1. (24^2=400+16=416)
+2. (3^6=9(27)=270-27=243)
+3. (\sqrt{625}=\sqrt{400}+\sqrt{225}=20+15=35)
+A. Is Amora's work in the first example correct? Explain your thinking.
+\answer{A. No, (24^2) does not equal (20^2+42); (24^2=576), not 416.}
+\te{Printed answer has 42; likely (4^2).}
+B. Is Amora's work in the second example correct? Explain your thinking.
+\answer{B. No; 9 is (3^2) and 27 is (3^3), which is equivalent to (3^5=243), not the original (3^6), which is 729.}
+C. Is Amora's work in the third example correct? Explain your thinking.
+\answer{C. No radicands cannot be added in this way; (\sqrt{625}=25), not 35.}
+D. Make Sense and Persevere What advice would you give Amora on simplifying expressions?
+\answer{D. I would tell Olivia to follow the mathematical rules or properties that she knows and to always check her answers to make sure they work.}
+\te{Printed Olivia; likely Amora. Critique \& Explain is available at SavvasRealize.com. Activity. Digital labels: Go back; Amora's Work; Enter your answer. STUDENT EDITION; SAMPLE STUDENT WORK.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with CRITIQUE \& EXPLAIN}
+Q: Construct Arguments You know that (3^2+4^2=5^2). Does (\sqrt{3^2}+\sqrt{4^2}=\sqrt{5^2})? If not, how could you rewrite the equation using radicals so that it is true?
+\answer{no; (\sqrt{3^2+4^2}=\sqrt{5^2})}
+\end{te-addendum}
+% Source page 26: 235 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION. Establish Mathematics Goals to Focus Learning}
+Introduce students to the properties of rational exponents and properties of radicals. Remind students how rational exponents and radicals are related. Explain that students can use these properties to rewrite radical expressions and solve problems.
+\end{te-addendum}
+\begin{te-addendum}{0}{PurposefulQuestions}
+\textbf{CONCEPT Properties of Rational Exponents}
+Q: What are some things that you notice about the properties of rational exponents?
+\answer{The Product of Powers and the Quotient of Powers can only be applied to terms that have the same base. The properties of rational exponents only apply to products and powers, but not to addition or subtraction.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{CONCEPT Properties of Rational Exponents}
+The properties of exponents apply not only to integer exponents, but to rational exponents as well. Now let (m) and (n) represent rational numbers, with (a), (b) positive real numbers.
+\begin{tabular}{lll}
+ & Property & Example \\
+Product of Powers & (a^m\cdot a^n=a^{m+n}) & (4^{\frac23}\cdot4^{-\frac13}=4^{\frac13}) \\
+Quotient of Powers & (\frac{a^m}{a^n}=a^{m-n}) & (\frac{3^4}{3^2}=3^{4-2}=3^2=9) \\
+Power of Power & ((a^m)^n=a^{mn}) & ((7^3)^{\frac23}=7^2) \\
+Power of Product & ((ab)^m=a^mb^m) & ((16x)^{\frac12}=(16^{\frac12}x^{\frac12})=4x^{\frac12}) \\
+Negative Exponent & (a^{-m}=\frac1{a^m}) & (5^{-\frac12}=\frac1{5^{\frac12}}) \\
+\end{tabular}
+\end{concept-box}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Use Properties of Exponents. Pose Purposeful Questions. PART A}
+Q: What property of rational exponents was used?
+\answer{Product of Powers Property; When you multiply two terms with the same base, you add the exponents.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Use Properties of Exponents}
+How can you rewrite each expression using the properties of exponents?
+A. (81^{\frac56}\cdot81^{-\frac13})
+(81^{\frac56}\cdot81^{-\frac13}=81^{\frac56-\frac13})
+(=81^{\frac12})
+(=9)
+You can rewrite (81^{\frac56}\cdot81^{-\frac13}) as 9.
+\answer{A. 9}
+\te{USE STRUCTURE When multiplying numbers with the same base, adding a negative exponent gives the same result as subtracting its opposite. CONTINUED ON THE NEXT PAGE.}
+% Source page 27: 236 Example 1 continued
+B. ((\frac{xy^3}{x^{\frac12}})^{\frac23})
+((\frac{xy^3}{x^{\frac12}})^{\frac23}=(x^{1-\frac12}y^3)^{\frac23})
+(=(x^{\frac12}y^3)^{\frac23})
+(=x^{\frac13}y^2)
+(=y^2\sqrt[3]{x})
+You can rewrite ((\frac{xy^3}{x^{\frac12}})^{\frac23}) as (y^2\sqrt[3]{x}).
+\answer{B. (y^2\sqrt[3]{x})}
+\te{COMMON ERROR Remember to subtract the exponents, not divide them. Be careful not to write (x^2). Callout: This last step may not be necessary. It will depend on the purpose of the work or on directions.}
+\end{example}
+\begin{tryit}{1}
+How can you rewrite each expression using the properties of exponents? Do not include any fractional exponents.
+a. ((\frac3{32^{\frac25}})^{\frac12})
+b. (2a^{\frac13}(ab^{\frac12})^{\frac23})
+\answer{a. (\frac{\sqrt3}2). b. (2a\sqrt[3]{b}).}
+\end{tryit}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Additional Examples: ADDITIONAL EXAMPLE 5A}
+Solve and write in simplified radical form.
+An artist wants to determine the area of her canvas. The height of the canvas is (\sqrt[3]{9x}) and the width is (\sqrt[3]{64x^2}+4). What is the area of the canvas?
+The expression (\sqrt[3]{9x}(\sqrt[3]{64x^2}+4)) represents the area of the canvas.
+(\sqrt[3]{9x}(\sqrt[3]{64x^2}+4)=\sqrt[3]{512x^3}+4\sqrt[3]{9x})
+(=9x+4\sqrt[3]{9x}) square units
+\answer{(9x+4\sqrt[3]{9x}) square units}
+\te{Printed (512x^3) and (9x); likely product radicand (576x^3), whose cube root is (4x\sqrt[3]{9}) for positive x. This additional example is on PDF page 26; Example 1 continuation is kept with its example.}
+Example 5A Help students understand multiplying monomial and binomial radical expressions with this application problem.
+Q: Which properties are used to solve this problem?
+\answer{Distributive Property, Product Property of Radicals}
+\te{Additional Examples are available at SavvasRealize.com. Digital labels: Go back; Essential Question; Solution.}
+\end{te-addendum}
+\begin{te-addendum}{6}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 6}
+Write (\frac{2\sqrt7}{6+\sqrt3}) in reduced radical form.
+(\frac{2\sqrt7}{6+\sqrt3}\cdot\frac{6-\sqrt3}{6-\sqrt3}=\frac{12\sqrt7-2\sqrt{21}}{36-3}=\frac{12\sqrt7-2\sqrt{21}}{33})
+\answer{(\frac{12\sqrt7-2\sqrt{21}}{33})}
+Example 6 Help students practice rationalizing a radical denominator with this additional example.
+Q: What strategy did you use to solve this problem?
+\answer{Use a conjugate pair to rationalize the denominator.}
+Q: In the denominator, which terms had a sum of 0?
+\answer{(6\sqrt3) and (-6\sqrt3)}
+\te{Printed on PDF page 26. Digital labels: Go back; Essential Question; Solution.}
+\end{te-addendum}
+% Source page 27: 236 teacher support and Example 2
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{EXAMPLE 1 CONTINUED. PART B}
+Q: What property of rational exponents was used?
+\answer{Quotient of Powers Property; If you divide two terms with the same base, the exponent in the denominator is subtracted from the exponent in the numerator.}
+Q: What would happen if you used the Power of Power Property first?
+\answer{The steps would be different, but the final answer would be the same.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: In part (a), could you simplify the 3 and the 32 before applying the properties of exponents?
+\answer{No; 3 and 32 are different bases, so they cannot be simplified.}
+\end{te-addendum}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Use Properties of Exponents to Rewrite Radicals. Build Procedural Fluency From Conceptual Understanding}
+Q: How do you rewrite a radical as a rational exponent?
+\answer{The numerator is the exponent of the radicand, and the denominator is the index of the radical.}
+Q: What is your first step when simplifying a radical?
+\answer{Look for any perfect nth roots that can be factored out of the radical.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Use Properties of Exponents to Rewrite Radicals}
+How can you extend the properties of exponents to derive the properties of radicals?
+A. How can you rewrite (\sqrt[n]{ab}) using the properties of exponents? Assume (a) and (b) are positive.
+(\sqrt[n]{ab}=(ab)^{\frac1n})
+(=a^{\frac1n}b^{\frac1n})
+(=\sqrt[n]{a}\sqrt[n]{b})
+So, (\sqrt[n]{ab}=\sqrt[n]{a}\sqrt[n]{b}).
+You can use a similar method to show that (\sqrt[n]{\frac ab}=\frac{\sqrt[n]{a}}{\sqrt[n]{b}}).
+\answer{A. (\sqrt[n]{a}\sqrt[n]{b})}
+\te{CONCEPTUAL UNDERSTANDING. COMMUNICATE PRECISELY Why do we assume a and b are positive? The exponent laws cannot be assumed for complex numbers. For example: (\sqrt{-1}\cdot\sqrt{-1}=(i)(i)=-1) while (\sqrt{-1\cdot-1}=\sqrt1=1).}
+B. How can you rewrite (\sqrt[3]{16x^5}) using the properties of exponents? Assume (x>0).
+(\sqrt[3]{16x^5}=\sqrt[3]{8x^3\cdot2x^2})
+(=\sqrt[3]{8x^3}\cdot\sqrt[3]{2x^2})
+(=2x\sqrt[3]{2x^2})
+So, (\sqrt[3]{16x^5}=2x\sqrt[3]{2x^2}).
+Writing the expression as (2x\sqrt[3]{2x^2}) may be referred to as the reduced radical form of the expression because all nth roots of perfect nth powers in the radicand have been simplified, and no radicals remain in the denominator.
+\answer{B. (2x\sqrt[3]{2x^2})}
+\te{Callouts: Factors of 16 and (x^5) that are perfect cubes; Remaining factors of 16 and (x^5) that are not perfect cubes.}
+\end{example}
+\begin{tryit}{2}
+How can you rewrite each expression? Assume all variables are positive.
+a. (\sqrt[4]{81a^8b^5})
+b. (\sqrt[3]{\frac{x^4y^2}{125x}})
+\answer{a. (3a^2b\sqrt[4]{b}). b. (\frac{x\sqrt[3]{y^2}}5).}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Which terms can be written as a base with a power of 4 and therefore can be factored out of the radical?
+\answer{81 is (3^4); (a^8) is ((a^2)^4); (b^5) is (b^4(b)).}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES 1 \& 2}
+Q: Make Sense and Persevere What do you have to check to be sure that an expression is in simplest radical form?
+\answer{For an expression to be in simplest radical form, all nth roots of perfect nth powers must be simplified, and no radicals can remain in the denominator.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 2}
+Some students may have trouble rewriting a radical expression in reduced radical form.
+\item Have students practice with these examples.
+1. (\sqrt[3]{54y^2}) \answer{(3\sqrt[3]{2y^2})}
+2. (\sqrt[5]{128x^6y^{10}}) \answer{(2xy^2\sqrt[5]{4x})}
+Q: What is the first step in rewriting (\sqrt[3]{54y^2})?
+\answer{Start by writing 54 as (2\times3^3).}
+Q: What is the first step in rewriting (\sqrt[5]{128x^6y^{10}})?
+\answer{Start by writing (128x^6y^{10}) as (2^5\times2^2\times x^5\times x\times(y^2)^5).}
+\end{te-addendum}
+% Source page 28: 237 Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Rewrite the Product or Quotient of a Radical. Pose Purposeful Questions}
+Q: Why is it necessary to rewrite the expression using rational exponents in Part B, but not in Part A?
+\answer{The radical expressions in Part B have different indices, but in Part A, they are the same, so you can just use the Product Property of Radicals.}
+Q: Why is the factor (\frac{\sqrt[3]{3m^2}}{\sqrt[3]{3m^2}}) used in Part C?
+\answer{When multiplied by the denominator, it forms a perfect cube under the radical with an index of 3, thereby eliminating the radical in the denominator.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{CONCEPT Properties of Radicals}
+\begin{tabular}{ll}
+Product Property of Radicals & Quotient Property of Radicals \\
+The nth root of a product of nonnegative real numbers is equal to the product of the nth roots of those numbers. & The nth root of a quotient of nonnegative real numbers is equal to the quotient of the nth roots of those numbers. \\
+(\sqrt[n]{ab}=\sqrt[n]{a}\sqrt[n]{b}); ((ab)^{\frac1n}=a^{\frac1n}b^{\frac1n}) & (\sqrt[n]{\frac ab}=\frac{\sqrt[n]{a}}{\sqrt[n]{b}}); ((\frac ab)^{\frac1n}=\frac{a^{\frac1n}}{b^{\frac1n}}) \\
+\end{tabular}
+\te{LOOK FOR RELATIONSHIPS The Product of Powers and Quotient of Powers Properties lead to the Product and Quotient Properties for Radicals.}
+\end{concept-box}
+\begin{example}{3}
+\textbf{Rewrite the Product or Quotient of a Radical}
+A. What is (\sqrt[5]{16}\cdot\sqrt[5]{8}) in reduced radical form?
+(\sqrt[5]{16}\cdot\sqrt[5]{8}=\sqrt[5]{16\cdot8})
+(=\sqrt[5]{128})
+(=\sqrt[5]{32}\cdot\sqrt[5]{4})
+(=2\sqrt[5]{4})
+In reduced radical form (\sqrt[5]{16}\cdot\sqrt[5]{8}) is (2\sqrt[5]{4}).
+\answer{A. (2\sqrt[5]{4})}
+\te{Callout: Use the Product Property of Radicals.}
+B. What is (\sqrt[6]{8x}\cdot\sqrt[3]{2x}) in reduced radical form? Assume (x>0).
+Use rational exponents.
+(\sqrt[6]{8x}\cdot\sqrt[3]{2x}=(8x)^{\frac16}\cdot(2x)^{\frac13})
+(=(8x)^{\frac16}\cdot(2x)^{\frac26})
+(=(8x\cdot(2x)^2)^{\frac16})
+(=\sqrt[6]{32x^3})
+In reduced radical form (\sqrt[6]{8x}\cdot\sqrt[3]{2x}) is (\sqrt[6]{32x^3}).
+\answer{B. (\sqrt[6]{32x^3})}
+\te{Callout: Use equivalent fractions to rewrite the exponents.}
+C. What is (\sqrt[3]{\frac{2n}{9m}}) in reduced radical form? Assume (m) and (n) are positive.
+To rationalize the denominator of an expression, rewrite it so there are no radicals in any denominator and no denominators in any radical.
+(\sqrt[3]{\frac{2n}{9m}}=\frac{\sqrt[3]{2n}}{\sqrt[3]{9m}})
+(=\frac{\sqrt[3]{2n}}{\sqrt[3]{9m}}\cdot\frac{\sqrt[3]{3m^2}}{\sqrt[3]{3m^2}})
+(=\frac{\sqrt[3]{6nm^2}}{\sqrt[3]{27m^3}})
+(=\frac{\sqrt[3]{6nm^2}}{3m})
+In reduced radical form (\sqrt[3]{\frac{2n}{9m}}) is (\frac{\sqrt[3]{6nm^2}}{3m}).
+\answer{C. (\frac{\sqrt[3]{6nm^2}}{3m})}
+\te{Callouts: To rationalize the denominator, think about multiplying by a form of one so that the denominator becomes a perfect cube. 9 is a factor of the perfect cube 27, and (m^1) is a factor of (m^3). Multiply the denominator and numerator by (\sqrt[3]{3m^2}) to create a perfect cube. REASON Think about the simplest factor by which you can multiply the denominator to eliminate the radical. There are many options, but it is more efficient to choose the simplest factor.}
+\end{example}
+\begin{tryit}{3}
+What is the reduced radical form of each expression? Assume (x) is positive.
+a. (\sqrt[5]{\frac7{16x^3}})
+b. (\sqrt[4]{27x^2}\cdot\sqrt{3x})
+\answer{a. (\frac{\sqrt[5]{14x^2}}{2x}). b. (3x\sqrt[4]{3}).}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What factor can you use to rationalize the denominator in Try It 3a?
+\answer{(\frac{\sqrt[5]{2x^2}}{\sqrt[5]{2x^2}}); (16=2^4), The index is 5, so in order to eliminate the radical, one more factor of 2 is needed and two more factors of (x) are needed.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 3 and 4)}
+\textbf{LISTENING BEGINNING} Read the definition of the term reduced to the students. Have students listen as you say statements using this word correctly and incorrectly. For example: ``He could not sell his car for \$8,000, so he reduced the price to \$5,000.'' ``The team was too small, so they reduced the number of players.'' Ask students to raise their hands each time they hear the word reduced used correctly.
+Q: Is the term reduced used as an action word or as a describing word in the example?
+\answer{describing word}
+Q: Is reduced more similar to the word simple or the word complex?
+\answer{simple; When you reduce something, you make it smaller and more simple, not bigger and more complex.}
+\textbf{WRITING DEVELOPING} Sometimes the plural form of a word is formed irregularly (not just by adding -s). Point out the words index and indices in the example. Ask students to tell what an index is in this context (exponent). Then have students practice forming irregular plural words of words such as mouse, leaf, tooth, appendix, nucleus, cactus, axis, etc.
+Q: How are plurals of words ending in -x usually formed?
+\answer{by adding -es}
+Q: What are some examples of plural words that are the same as the singular form?
+\answer{deer, fish, sheep, moose, etc.}
+Have students make a chart where they record their singular words in one column and the corresponding plural words in another column.
+\textbf{SPEAKING EXPANDING} The word rationalize has an everyday meaning that hints at its mathematical meaning. Have students discuss its everyday meaning and its mathematical meaning.
+Q: What does it mean to rationalize something?
+\answer{to explain something using logic or to try to make something sound logical}
+Q: How does the everyday meaning help you understand what rationalize the denominator means?
+\answer{The common meaning of rationalize, to make something sound rational, helps in understanding rationalizing the denominator because getting rid of all the irrational numbers in the denominator makes the denominator rational.}
+\end{te-addendum}
+% Source page 29: 238 Understand & Apply
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Add and Subtract Radical Expression. Pose Purposeful Questions}
+Q: Can radical terms be combined if they have the same index but different radicands?
+\answer{No; radical terms must have the same index and the same radicand in order to be like terms. Only like radicals can be combined with addition and subtraction.}
+Q: How are like radicals similar to like terms? Can they be combined in the same way?
+\answer{Like terms contain the same variable raised to the same power, and like radicals contain the same index and radicand. They can be combined in the same way because only like terms and like radicals can be added and subtracted.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Add and Subtract Radical Expressions}
+A. What is the sum of (\sqrt{20}-\sqrt[3]{16}+\sqrt[3]{250}-\sqrt5)?
+Like radicals have the same index and the same radicand. Only like radicals can be combined with addition and subtraction.
+(\sqrt{20}-\sqrt[3]{16}+\sqrt[3]{250}-\sqrt5)
+(\sqrt{20}-\sqrt5-\sqrt[3]{16}+\sqrt[3]{250})
+(2\sqrt5-\sqrt5-2\sqrt[3]{2}+5\sqrt[3]{2})
+((2-1)\sqrt5+(-2+5)\sqrt[3]{2})
+(\sqrt5+3\sqrt[3]{2})
+The expression (\sqrt{20}-\sqrt[3]{16}+\sqrt[3]{250}-\sqrt5) is equivalent to (\sqrt5+3\sqrt[3]{2}).
+\answer{A. (\sqrt5+3\sqrt[3]{2})}
+\te{Callout: Factor out the radicals with the Distributive Property. STUDY TIP Use the inverse of the Distributive Property to combine like radicals in the same way that you would combine like terms.}
+B. The design shows the boards needed for bracing the back of some set scenery. Will 75 ft of wood be enough for all of the bracing?
+% FIG 29 791 418 1113 562
+\placeholder{illustration}{People building stage scenery with a ship behind them. Two adjacent square wooden panels are shown in perspective, smaller on left and larger on right. Smaller panel bottom is labeled 4 ft and larger panel bottom 7 ft. Each has both diagonals drawn as white braces. The lower 4 ft of their common vertical edge is shared.}
+Let (a) represent the length of the diagonal for the smaller square and (b) represent the length of the diagonal for the larger square. Determine the lengths of the diagonals:
+\begin{tabular}{ll}
+(4^2+4^2=a^2) & (7^2+7^2=b^2) \\
+(32=a^2) & (98=b^2) \\
+(4\sqrt2=a) & (7\sqrt2=b) \\
+\end{tabular}
+\te{Callout: Take the square root of both sides of the equation and simplify the radical. Since the context is length, the negative solution may be disregarded. APPLICATION.}
+There are 3 edges that are 4 ft, 4 edges that are 7 ft, and 2 diagonals each of (4\sqrt2) ft and (7\sqrt2) ft in length. Determine the total length of the boards:
+(3(4)+4(7)+2(4\sqrt2)+2(7\sqrt2)=40+22\sqrt2)
+Evaluating the expression, (40+22\sqrt2\approx71.1).
+So 75 ft of wood is enough to make the bracing for the set scenery.
+\answer{B. Yes; (40+22\sqrt2\approx71.1) ft.}
+\end{example}
+\begin{tryit}{4}
+How can you rewrite each expression in a simpler form?
+a. (\sqrt[3]{2,000}+\sqrt2-\sqrt[3]{128})
+b. (\sqrt{20}-\sqrt{600}-\sqrt{125})
+\answer{a. (\sqrt2+6\sqrt[3]{2}). b. (-3\sqrt5-10\sqrt6).}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What strategy could you use to simplify each radical term?
+\answer{You could use a factor tree. A factor tree could help you determine whether there are any perfect cube roots that could be factored out of the radical.}
+\end{te-addendum}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error. Try It! 4}
+Some students may think that the answer for Try It 4a can be simplified further because both terms have the same radicand. Have students rewrite the radical expressions with rational exponents in order to determine whether they are like terms that can be combined.
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES 3 \& 4}
+Q: Critique Reasoning Divit says that you can simplify the product of any two radical expressions, but not necessarily the sum. Is he correct? Give an example.
+\answer{No; Answers may vary. Sample: (\sqrt[3]{17}\cdot\sqrt7); (\sqrt[3]{7}-\sqrt[3]{7})}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 4}
+Have students work through another example of adding and subtracting radicals.
+Sherri needs two triangles cut out of cardboard to complete a collage. One triangle has a base of (2\sqrt3) in. and a height of (\sqrt6) in. The second triangle has a base of (4\sqrt5) in. and a height of (\sqrt{10}) in. She has 25 (\text{in.}^2) of cardboard. Does she have enough to complete her collage?
+Q: How can you determine if Sherri has enough cardboard?
+\answer{Find the area of each triangle and add them together. Triangle 1: (A=\frac{bh}2=\frac{2\sqrt3\cdot\sqrt6}2=\frac{2\sqrt{18}}2=\sqrt{18}=3\sqrt2\text{ in.}^2). Triangle 2: (A=\frac{4\sqrt5\cdot\sqrt{10}}2=\frac{4\sqrt{50}}2=2\cdot5\sqrt2=10\sqrt2\text{ in.}^2). Total area: (3\sqrt2+10\sqrt2=13\sqrt2\text{ in.}^2). (13\sqrt2\text{ in.}^2) is less than 25 (\text{in.}^2), so Sherri will have enough cardboard.}
+\end{te-addendum}
+% Source page 30: 239 Understand & Apply
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Multiply Binomial Radical Expressions. Pose Purposeful Questions}
+PART A
+Q: Why is (\sqrt[3]{7}) times (\sqrt[3]{49}) equal to (\sqrt[3]{343}) and not (\sqrt[9]{343})?
+\answer{You use the cube root because of the Product Property of Radicals.}
+PART B
+Q: How could you expand the product of binomial factors with radicals?
+\answer{Use the Distributive Property.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Multiply Binomial Radical Expressions}
+What is the reduced radical form of each product?
+A. (\sqrt[3]{7}(2-\sqrt[3]{49}))
+(\sqrt[3]{7}(2)-\sqrt[3]{7}\sqrt[3]{49})
+(\sqrt[3]{7}(2)-\sqrt[3]{343})
+(2\sqrt[3]{7}-7)
+The product is (2\sqrt[3]{7}-7).
+\answer{A. (2\sqrt[3]{7}-7)}
+\te{USE APPROPRIATE TOOLS You could also notice that (\sqrt[3]{49}=\sqrt[3]{7^2}). How does this help you use mental math?}
+B. ((2x-\sqrt3)(2x-\sqrt3))
+(4x^2-2x\sqrt3-2x\sqrt3+\sqrt9)
+(4x^2-4x\sqrt3+3)
+The product is (4x^2-4x\sqrt3+3).
+\answer{B. (4x^2-4x\sqrt3+3)}
+\end{example}
+\begin{tryit}{5}
+Multiply.
+a. ((x-\sqrt{10})(x+\sqrt{10}))
+b. (\sqrt6(5+\sqrt3))
+\answer{a. (x^2-10). b. (5\sqrt6+3\sqrt2).}
+\end{tryit}
+\begin{te-addendum}{6}{PurposefulQuestions}
+\textbf{Rationalize a Binomial Denominator. Pose Purposeful Questions}
+Q: Why is it necessary to multiply a denominator that includes a binomial with a radical by its conjugate in order to rationalize, rather than simply multiplying by a single radical?
+\answer{A conjugate pair eliminates the radical term in the denominator. If a denominator were multiplied by a single radical, one radical term would be eliminated, but another would be created.}
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Rationalize a Binomial Denominator}
+How can you rewrite (\frac1{2+\sqrt5}) without a radical in the denominator?
+To rationalize a denominator that has a binomial denominator, multiply by the conjugate of the denominator.
+(\frac1{2+\sqrt5}\cdot\frac{2-\sqrt5}{2-\sqrt5})
+(\frac{2-\sqrt5}{4-5})
+(\frac{2-\sqrt5}{-1})
+(\sqrt5-2)
+(\frac1{2+\sqrt5}) can be rewritten as (\sqrt5-2).
+\answer{(\sqrt5-2)}
+\te{MAKE SENSE AND PERSEVERE Why multiply by the conjugate of the denominator?}
+\end{example}
+\begin{tryit}{6}
+What is the reduced radical form of each expression?
+a. (\frac{5-\sqrt2}{2-\sqrt3})
+b. (\frac{-4x}{1-\sqrt x})
+\answer{a. (10+5\sqrt3-2\sqrt2-\sqrt6). b. (\frac{-4x-4x\sqrt x}{1-x}).}
+\end{tryit}
+\begin{te-addendum}{6}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES 5 \& 6}
+Q: Reason Is the product of two irrational binomials always irrational? Explain.
+\answer{No; if you multiply an irrational binomial by its conjugate, the answer will be a rational number.}
+\end{te-addendum}
+% Source page 31: 240 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Properties of Radicals}
+Q: How are the properties of radicals similar to the properties of exponents?
+\answer{The Product Property of Radicals and the Product Property of Exponents both allow you to distribute the radical or exponent to both factors in a product. The Quotient Property of Radicals and the Quotient Product of Exponents both allow you to distribute the exponent or radical to both the dividend and the divisor in a quotient.}
+\te{Printed Quotient Product; likely Quotient Property.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error. Exercise 8}
+When rationalizing the denominator, students may multiply only the denominator by (\sqrt[3]{3m}). Remind them that in order to not change the value of the expression, they need to multiply both the numerator and the denominator by (\sqrt[3]{3m}). Have students write the intermediate step: (\frac{\sqrt[3]{4}}{\sqrt[3]{9m^2}}\cdot1).
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Properties of Radicals}
+\begin{tabular}{llll}
+ & Product Property of Radicals & Quotient Property of Radicals & Rationalize the Denominator \\
+WORDS & The nth root of a product is equal to the product of the nth roots of the factors. & The nth root of a quotient is equal to the quotient of the nth roots of the factors. & To rationalize the denominator of an expression, multiply by a form of 1 that will eliminate the radical. \\
+ALGEBRA & (\sqrt[n]{ab}=\sqrt[n]{a}\cdot\sqrt[n]{b}) & (\sqrt[n]{\frac ab}=\frac{\sqrt[n]{a}}{\sqrt[n]{b}}) & (\frac3{\sqrt x}\cdot\frac{\sqrt x}{\sqrt x}=\frac{3\sqrt x}{x}) \\
+NUMBERS & (\sqrt[3]{2}\cdot\sqrt[3]{20}=\sqrt[3]{40}); (\sqrt[3]{40}=\sqrt[3]{8}\cdot\sqrt[3]{5}=2\sqrt[3]{5}) & (\sqrt{\frac89}=\frac{\sqrt8}{\sqrt9}=\frac{2\sqrt2}3) & (\frac2{\sqrt5}\cdot\frac{\sqrt5}{\sqrt5}=\frac{2\sqrt5}5) \\
+\end{tabular}
+Using Properties of Radicals
+REDUCE
+(\sqrt[4]{32x^9}=\sqrt[4]{16x^8}\cdot\sqrt[4]{2x})
+(=2x^2\sqrt[4]{2x})
+(\frac5{x-\sqrt8}\cdot\frac{x+\sqrt8}{x+\sqrt8}=\frac{5(x+\sqrt8)}{x^2+x\sqrt8-x\sqrt8-8}=\frac{5x+5\sqrt8}{x^2-8})
+\te{Callouts: Find factors that have a perfect 4th root. Since the denominator is a binomial, multiply the numerator and the denominator by the conjugate of the denominator.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can properties of exponents and radicals be used to rewrite radical expressions?
+\answer{Radicals can be rewritten in fractional form, and the laws of exponents can be used to simplify the resulting expressions.}
+2. Vocabulary How can you determine if a radical expression is in reduced form?
+\answer{Check for perfect squares, cubes, etc., under the radical symbol, and make sure all radicals are removed from the denominator.}
+3. Use Structure Explain why ((-64)^{\frac13}) equals (-64^{\frac13}) but ((-64)^{\frac12}) does not equal (-64^{\frac12}).
+\answer{Sample: You can take the cube root of a negative number, but not the square root.}
+\te{Printed answer is limited to real-number roots.}
+4. Error Analysis Explain the error in Reann's work in rewriting the radical expression.
+(\sqrt{-3}\cdot\sqrt{-12}=\sqrt{-3(-12)})
+(=\sqrt{36})
+(=6)
+\te{A red X marks the work.}
+\answer{The square root of a negative is an imaginary number, not a real number.}
+\textbf{Do You KNOW HOW?}
+What is the reduced radical form of each expression? Assume all variables are positive.
+5. (49^{\frac34}\cdot49^{-\frac14})
+\answer{7}
+6. ((\frac{a^2b^8}{a^{\frac13}})^{\frac34})
+\answer{(ab^6\sqrt[4]{a})}
+7. (\sqrt[4]{1,024x^9y^{12}})
+\answer{(4x^2y^3\sqrt[4]{4x})}
+8. (\sqrt[3]{\frac4{9m^2}})
+\answer{(\frac{\sqrt[3]{12m}}{3m})}
+9. (\sqrt{63}-\sqrt{700}-\sqrt{112})
+\answer{(-11\sqrt7)}
+10. (\sqrt5(6+\sqrt2))
+\answer{(6\sqrt5+\sqrt{10})}
+11. (\frac3{\sqrt6})
+\answer{(\frac{\sqrt6}2)}
+12. (\frac{\sqrt7}{\sqrt5+3})
+\answer{(\frac{3\sqrt7-\sqrt{35}}4)}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation; Practice.}
+\end{concept-summary}
+% Source page 32: 241 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving. PRACTICE \& PROBLEM SOLVING}
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & 13, 15, 18--55 \\
+Advanced & 13--22, 23--35 odd, 37--55 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial. Practice.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 13, 15, 19--22, 50 & 1 \\
+2 & 14, 23--28, 54 & 1 \\
+3 & 17, 18 & 2 \\
+3 & 29--36 & 1 \\
+4 & 37--40, 49, 51, 52 & 1 \\
+5 & 16, 41--44 & 2 \\
+6 & 45--48, 53 & 1 \\
+6 & 55 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{13}{1}
+UNDERSTAND. Model With Mathematics In the expression (PV^{\frac43}), (P) represents the pressure and (V) represents the volume of a sample of a gas. Evaluate the expression for (P=7) and (V=8).
+\answer{112}
+\end{practice}
+\begin{practice}{14}{1}
+Reason Describe the possible values of (k) such that (\sqrt{32}+\sqrt k) can be rewritten as a single term.
+\answer{(k) must be the product of a perfect square times 2.}
+\end{practice}
+\begin{practice}{15}{1}
+Error Analysis Explain why the following work is incorrect. Find the correct answer.
+(5(4-5^{\frac12})=5(4)-5(5^{\frac12}))
+(=20-25^{\frac12})
+(=15)
+\te{A red X marks the work.}
+\answer{The exponent (\frac12) applies only to the 5 inside the parentheses; the fractional exponent must be applied before multiplying; correct answer: (20-5\sqrt5)}
+\end{practice}
+\begin{practice}{16}{2}
+Communicate Precisely Discuss the advantages and disadvantages of first rewriting (\sqrt{27}+\sqrt{48}+\sqrt{147}) in order to estimate its decimal value.
+\answer{Without simplifying first, you must estimate three separate square roots and then add those estimates. If they are simplified first, then they can be combined as (14\sqrt3). Then only one square root would need to be estimated.}
+\end{practice}
+\begin{practice}{17}{2}
+Higher Order Thinking Write (\sqrt{\frac45}) in two different ways, one where the numerator is simplified and another where the denominator is rationalized.
+\answer{Sample: (\frac2{\sqrt5}=\frac{2\sqrt5}5)}
+\end{practice}
+\begin{practice}{18}{2}
+Construct Arguments Justify each step used in simplifying the expression below.
+((\frac{a^2}{a^{\frac34}})^{\frac15}=(a^{2-\frac34})^{\frac15})
+(=(a^{\frac54})^{\frac15})
+(=a^{\frac14})
+(=\sqrt[4]{a})
+\answer{Quotient of Powers Property; Simplify; Power of a Power Property; Write in radical form.}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 1.
+(3x^{\frac12}4x^{\frac23})
+\answer{(12x\sqrt[6]{x})}
+\end{practice}
+\begin{practice}{20}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 1.
+(2b^{\frac12}(3b^{\frac12}c^{\frac13})^2)
+\answer{(18b\sqrt b\sqrt[3]{c^2})}
+\end{practice}
+\begin{practice}{21}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 1.
+((x^{\frac12}\cdot x^{\frac5{12}})^4\div x^{\frac23})
+\answer{(x^3)}
+\end{practice}
+\begin{practice}{22}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 1.
+((\frac{16c^{14}}{81d^{18}})^{\frac12})
+\answer{(\frac{4c^7}{9d^9})}
+\end{practice}
+\begin{practice}{23}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 2.
+(\sqrt[3]{250y^2z^4})
+\answer{(5z\sqrt[3]{2y^2z})}
+\end{practice}
+\begin{practice}{24}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 2.
+(\sqrt[4]{256v^7w^{12}})
+\answer{(4vw^3\sqrt[4]{v^3})}
+\end{practice}
+\begin{practice}{25}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 2.
+(\sqrt{\frac{48x^3}{3xy^2}})
+\answer{(\frac{4x}y)}
+\end{practice}
+\begin{practice}{26}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 2.
+(\sqrt{\frac{56x^5y^5}{7xy}})
+\answer{(2x^2y^2\sqrt2)}
+\end{practice}
+\begin{practice}{27}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 2.
+(\sqrt[3]{216m})
+\answer{(6\sqrt[3]{m})}
+\end{practice}
+\begin{practice}{28}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 2.
+(\sqrt[3]{\frac{250f^7g^3}{2f^2g}})
+\answer{(5f\sqrt[3]{f^2g^2})}
+\end{practice}
+\begin{practice}{29}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 3.
+(\sqrt{x^5y^5}\cdot3\sqrt{2x^7y^6})
+\answer{(3x^6y^5\sqrt{2y})}
+\end{practice}
+\begin{practice}{30}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 3.
+(\sqrt[3]{\frac{18n^2}{24n}})
+\answer{(\frac{\sqrt[3]{6n}}2)}
+\end{practice}
+\begin{practice}{31}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 3.
+(\sqrt[3]{3x^2}\cdot\sqrt[3]{x^2}\cdot\sqrt[3]{9x^3})
+\answer{(3x^2\sqrt[3]{x})}
+\end{practice}
+\begin{practice}{32}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 3.
+(\sqrt{\frac{162a}{6a^3}})
+\answer{(\frac{3\sqrt3}a)}
+\end{practice}
+\begin{practice}{33}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 3.
+(\sqrt[5]{2pq^6}\cdot2\sqrt{2p^3q})
+\answer{(2pq\sqrt[10]{128p^7q^7})}
+\end{practice}
+\begin{practice}{34}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 3.
+(\sqrt[3]{\frac{x^2}{9y}})
+\answer{(\frac{\sqrt[3]{3x^2y^2}}{3y})}
+\end{practice}
+\begin{practice}{35}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 3.
+(\sqrt[3]{6}\cdot\sqrt[3]{16})
+\answer{(2\sqrt[3]{12})}
+\end{practice}
+\begin{practice}{36}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 3.
+(\sqrt[4]{\frac2{5x}})
+\answer{(\frac{\sqrt[4]{250x^3}}{5x})}
+\end{practice}
+\begin{practice}{37}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 4.
+(4\sqrt[3]{81}-2\sqrt[3]{72}-\sqrt[3]{24})
+\answer{(10\sqrt[3]{3}-4\sqrt[3]{9})}
+\end{practice}
+\begin{practice}{38}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 4.
+(\sqrt{45y^2}-4\sqrt{20y^2})
+\answer{(10y\sqrt5)}
+\te{Printed answer is (10y\sqrt5); likely (-5y\sqrt5) for the printed subtraction expression.}
+\end{practice}
+\begin{practice}{39}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 4.
+(3\sqrt{12}-\sqrt{54}+7\sqrt{75})
+\answer{(41\sqrt3-3\sqrt6)}
+\end{practice}
+\begin{practice}{40}{1}
+What is the reduced radical form of each expression? Assume all variables are positive. SEE EXAMPLE 4.
+(\sqrt{32h}+4\sqrt{98h}-3\sqrt{50h})
+\answer{(17\sqrt{2h})}
+\end{practice}
+\begin{practice}{41}{2}
+Multiply. SEE EXAMPLE 5.
+((3\sqrt p-\sqrt5)(\sqrt p+5\sqrt5))
+\answer{(3p+14\sqrt{5p}-25)}
+\end{practice}
+\begin{practice}{42}{2}
+Multiply. SEE EXAMPLE 5.
+((4m-\sqrt3)(4m-\sqrt3))
+\answer{(16m^2-8m\sqrt3+3)}
+\end{practice}
+\begin{practice}{43}{2}
+Multiply. SEE EXAMPLE 5.
+((3\sqrt2+8)(3\sqrt2-8))
+\answer{(-46)}
+\end{practice}
+\begin{practice}{44}{2}
+Multiply. SEE EXAMPLE 5.
+(\sqrt[3]{3}(5\sqrt[3]{9}-4))
+\answer{(15-4\sqrt[3]{3})}
+\end{practice}
+\begin{practice}{45}{1}
+What is the reduced radical form of each expression? SEE EXAMPLE 6.
+(\frac4{1-\sqrt3})
+\answer{(-2-2\sqrt3)}
+\end{practice}
+\begin{practice}{46}{1}
+What is the reduced radical form of each expression? SEE EXAMPLE 6.
+(\frac{20}{3+\sqrt2})
+\answer{(\frac{60-20\sqrt2}7)}
+\end{practice}
+\begin{practice}{47}{1}
+What is the reduced radical form of each expression? SEE EXAMPLE 6.
+(\frac{3+\sqrt8}{2-2\sqrt8})
+\answer{(\frac{-11-8\sqrt2}{14})}
+\end{practice}
+\begin{practice}{48}{1}
+What is the reduced radical form of each expression? SEE EXAMPLE 6.
+(\frac{-2x}{3+\sqrt x})
+\answer{(\frac{-6x+2x\sqrt x}{9-x})}
+\end{practice}
+% Source page 33: 242 Apply and Assessment Practice
+\begin{practice}{49}{1}
+APPLY. Model With Mathematics A triangular swimming area is marked off by a rope.
+a. If a woman swims around the perimeter of the swimming area, how far will she swim?
+\answer{a. (600+200\sqrt3+200\sqrt6) m}
+b. What is the area of the roped off section?
+\answer{b. (20,000\sqrt3+60,000\text{ m}^2)}
+% FIG 33 517 378 777 573
+\placeholder{illustration}{Triangular area in blue water bounded by a rope with red and white floats. Left sloping side is labeled 400 m. A white vertical altitude joins the upper vertex to the horizontal lower side, splitting it into lengths 200 m on the left and (200\sqrt3) m on the right. A swimmer is beside the altitude's foot and a boat is at upper right.}
+\end{practice}
+\begin{practice}{50}{1}
+Use Structure The interest rate (r) required to increase your investment (p) to the amount (a) in (m) months is found by (r=(\frac ap)^{\frac1m}-1). What interest rate would be required to increase your investment of \$3,600 to \$6,400 over 7 months? Round your answer to the nearest tenth of a percent.
+\answer{8.6\%}
+\end{practice}
+\begin{practice}{51}{1}
+Use Structure The dimensions of a foosball table are shown in inches. What is the area of table top?
+% FIG 33 519 765 723 954
+\placeholder{illustration}{Two people playing at a foosball table. Dimension callouts: Width: ((4+3\sqrt5)z); Length: ((2+\sqrt5)y). White arrows mark the width and length of the rectangular table top.}
+\answer{((23+10\sqrt5)yz)}
+\end{practice}
+\begin{practice}{52}{1}
+Model With Mathematics A rectangular boardroom table is (\sqrt{120}) ft by (\sqrt{20}) ft. Find its area.
+\answer{(20\sqrt6\text{ ft}^2)}
+\end{practice}
+\begin{practice}{53}{1}
+ASSESSMENT PRACTICE. Carlos is rewriting (\frac{1+\sqrt3}{5-\sqrt3}) into reduced radical form. Determine if Carlos would have written the steps below to show his work. Select Yes or No.
+\begin{tabular}{lll}
+ & Yes & No \\
+A. (\frac{6+4\sqrt3-3}{25+9}) & & \\
+B. (\frac{5+\sqrt3+5\sqrt3+\sqrt9}{25+5\sqrt3-5\sqrt3-\sqrt9}) & & \\
+C. (\frac{4+3\sqrt3}{11}) & & \\
+D. (\frac{8+6\sqrt3}{28}) & & \\
+E. (\frac{5+6\sqrt3+3}{25-3}) & & \\
+\end{tabular}
+\answer{A. No; B. Yes; C. Yes; D. No; E. Yes.}
+\end{practice}
+\begin{practice}{54}{1}
+SAT/ACT Which expression cannot be rewritten as (-10)?
+A. (\sqrt{25}\cdot\sqrt[3]{-8})
+B. (\sqrt[3]{-125}\cdot\sqrt[4]{16})
+C. (-\sqrt[3]{1,000})
+D. (-\sqrt{25}\cdot\sqrt[5]{-32})
+E. (\sqrt4\cdot-\sqrt[3]{125})
+\answer{D}
+\end{practice}
+\begin{practice}{55}{3}
+Performance Task The volume of a sphere of radius (r) is (V=\frac43\pi r^3).
+Part A Use the formula to find (r) in terms of (V). Rationalize the denominator.
+\answer{(r=\sqrt[3]{\frac{3V}{4\pi}}); (r=\frac{\sqrt[3]{6\pi^2V}}{2\pi})}
+Part B A snowman is made using three spherical snowballs. What is the diameter of the top snowball?
+\answer{about 9.8 in.}
+% FIG 33 829 775 1030 976
+\placeholder{illustration}{Snowman made of three stacked snowballs, with sunglasses, yellow scarf, carrot nose, twig arms, mug, and pointed brown hair. Volume callouts: top (V=500\text{ in.}^3), middle (V=750\text{ in.}^3), bottom (V=1,000\text{ in.}^3). Snowy background.}
+Part C How tall is the snowman?
+\answer{about 33.5 in. tall}
+\end{practice}
+% Source page 34: 242A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & A82 \\
+2 & 1 & A82 \\
+3 & 2 & A82 \\
+4 & 2 & A82 \\
+5 & 2 & A82 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{5-2 Lesson Quiz: Properties of Exponents and Radicals}
+\te{Lesson Quiz is available at SavvasRealize.com. Assessment. Name blank; enVision Algebra 2; Assessment Sourcebook.}
+1. Rewrite the expression (\sqrt[3]{81y^7}) using the properties of exponents.
+A. (9y^3\sqrt y)
+B. (3y^2)
+C. (3y^2\sqrt[3]{3y})
+D. The expression cannot be simplified.
+\answer{1. C.}
+2. What is (\sqrt[4]{\frac{3a^2}{8b^7}}) in reduced radical form?
+A. (\frac{\sqrt[4]{6a^2b}}{2b^2})
+B. (\frac{\sqrt[4]{24a^2b^7}}{8b^7})
+C. (\frac{a\sqrt[4]{24ab^7}}{8b^7})
+D. (\frac{a\sqrt[4]{9b}}{2b^2\sqrt[4]4})
+\answer{2. A.}
+3. What is the reduced radical form of (\sqrt[3]{250}+\sqrt[3]{54}+\sqrt{72})?
+A. (\sqrt[3]{250}+\sqrt[3]{54}+\sqrt{72})
+B. (8\sqrt[3]2+6\sqrt2)
+C. (14\sqrt[3]2)
+D. (5\sqrt{10}+3\sqrt6+6\sqrt2)
+\answer{3. B.}
+4. Multiply ((2\sqrt x+3)(2\sqrt x-3)).
+(\underline{\hspace{0.5cm}}x+\underline{\hspace{0.5cm}})
+\answer{4. (4x+(-9)).}
+5. What is (\frac{7-\sqrt{98}}{3-\sqrt2}) in reduced radical form?
+A. (-\sqrt2)
+B. (7\sqrt2)
+C. (1-2\sqrt2)
+D. (9\frac13)
+\answer{5. C.}
+\end{te-addendum}
+% Source page 35: 242B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\te{SavvasRealize.com. Practice. MathXL for School. Worksheet previews have a Name blank and enVision Algebra 2, SavvasRealize.com, and enVision Algebra 2 Teaching Resources labels.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Reteach to Build Understanding. I}
+Provides scaffolded teaching for the key lesson concepts.
+\textbf{5-2 Reteach to Build Understanding: Properties of Exponents and Radicals}
+1. Complete the table.
+\begin{tabular}{llll}
+ & Meaning (assuming bases are equal) & Algebra & Numbers \\
+Product of Powers & Add the exponents & (a^m\cdot a^n=a^{m+n}) & (2^3\cdot2^2=\underline{\hspace{0.3cm}}^{3+2}=2^{\underline{\hspace{0.3cm}}}) \\
+Quotient of Powers & Subtract the exponents & (\frac{a^m}{a^n}=a^{m-n}) & (\frac{2^3}{2^2}=2^{\underline{\hspace{0.3cm}}-2}=\underline{\hspace{0.3cm}}^1) \\
+Power of a Power & Multiply the exponents & ((a^m)^n=a^{mn}) & ((2^3)^2=2^{\underline{\hspace{0.3cm}}\cdot\underline{\hspace{0.3cm}}}=\underline{\hspace{0.3cm}}^6) \\
+Power of a Product & Distribute each exponent to each term & ((ab)^m=a^mb^m) & ((2\cdot4)^3=\underline{\hspace{0.3cm}}^3\underline{\hspace{0.3cm}}^3=\underline{\hspace{0.3cm}}\cdot64) \\
+Negative Exponent & Change the sign of the exponent and write the reciprocal & (a^{-m}=\frac1{a^m}) & (2^{-\underline{\hspace{0.3cm}}}=\frac1{2^3}) \\
+\end{tabular}
+\answer{Product: 2, 5; Quotient: 3, 2; Power of a Power: 3, 2, 2; Power of a Product: 2, 4, 8; Negative Exponent: 3.}
+2. Drew was asked to simplify the expression (\sqrt[4]{6x}\cdot\sqrt[3]{4x}). His final solution was (55,296x). Look at his work and circle where he made his mistake. Then write the correct answer.
+(\sqrt[4]{6x}\cdot\sqrt[3]{4x})
+((6x)^{\frac14}\cdot(4x)^{\frac13})
+((6x)^{\frac3{12}}\cdot(4x)^{\frac4{12}})
+(((6x)^3\cdot(4x)^4)^{\frac1{12}})
+((216x^3\cdot256x^4)^{\frac1{12}})
+(\sqrt[12]{55,296x^{12}}=55,296x)
+\answer{Sample: Drew multiplied the exponents on the last line. He should have added the 3 and 4 based on the Product of Powers. The correct answer is (\sqrt[12]{55,296x^7}).}
+\te{The last line is circled in the printed answer. Printed incorrect work also treats the twelfth root of 55,296 as 55,296.}
+3. What is the sum of (\sqrt{12}+\sqrt[3]{54}-\sqrt3-\sqrt[3]{128})? Fill in the blanks.
+\begin{tabular}{ll}
+(\sqrt{12}-\sqrt3+\sqrt[3]{54}-\sqrt[3]{128}) & Group radical terms with like indices. \\
+(2\sqrt{\underline{\hspace{0.3cm}}}-\sqrt3+\underline{\hspace{0.3cm}}\sqrt[3]2-4\sqrt[3]2) & Simplify each radical term. \\
+((2-\underline{\hspace{0.3cm}})\sqrt{\underline{\hspace{0.3cm}}}+(\underline{\hspace{0.3cm}}-4)\sqrt[3]2) & Factor out the radicals using the Distributive Property. \\
+(\sqrt3-\sqrt[3]{\underline{\hspace{0.3cm}}}) & Combine like radical terms. \\
+\end{tabular}
+\answer{3, 3; 1, 3, 3; 2.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice. I O}
+Provides extra practice for each lesson.
+\textbf{5-2 Additional Practice: Properties of Exponents and Radicals}
+Rewrite each expression using the properties of exponents. Assume all variables are positive.
+1. ((\frac{128}{64^{\uncertain{\frac12}{\frac13}}})^{\uncertain{\frac14}{\frac12}})
+\answer{2}
+2. (3m^{\uncertain{\frac12}{\frac13}}(mn^{\uncertain{\frac12}{\frac13}})^{\uncertain{\frac23}{\frac12}})
+\answer{(3m^{\frac76}n^{\frac13})}
+3. (2a^{\uncertain{\frac23}{\frac12}}(5a^{\uncertain{\frac13}{\frac12}}b^{\uncertain{\frac14}{\frac12}})^2)
+\answer{(50a^{\uncertain{\frac43}{\frac83}}b^{\frac12})}
+4. ((x^{\uncertain{\frac12}{\frac13}}\cdot x^{\uncertain{\frac13}{\frac12}})^6\div x^{\uncertain{\frac32}{\frac12}})
+\answer{(x^{\uncertain{\frac72}{\frac76}})}
+\te{Very small fractional exponents in the Additional Practice preview remain ambiguous at 1200 dpi; uncertain marks retain the visible readings.}
+What is the reduced radical form of each expression? Assume all variables are positive.
+5. (\sqrt[3]{125x^9y^7})
+\answer{(5x^3y^2\sqrt[3]y)}
+6. (\sqrt[4]{\frac{a^5b^3}{625a}})
+\answer{(\frac{a\sqrt[4]{b^3}}5)}
+7. (\sqrt[5]{288x^3y^7})
+\answer{(2y\sqrt[5]{9x^3y^2})}
+8. (\sqrt[3]{\frac{297m^4n^5}{3m^2n}})
+\answer{(n\sqrt[3]{99m^2n})}
+9. ((\sqrt[4]{32})^2)
+\answer{(4\sqrt2)}
+10. ((\sqrt[3]{4^{\uncertain{5}{6}}})(\sqrt[3]{5^{\uncertain{5}{4}}}))
+\answer{(40\sqrt[3]{50})}
+11. (\sqrt{a^3b^{\uncertain{\frac32}{2}}}\cdot5\sqrt{4ab})
+\answer{(10a^2b\sqrt[4]b)}
+12. (\sqrt[3]{\frac{24x^3}{36x}})
+\answer{(\sqrt[3]{\frac{2x^2}3})}
+\te{Printed answer retains a fraction in the radicand; the lesson's reduced-form convention would give (\frac{\sqrt[3]{18x^2}}3).}
+What is the reduced radical form of each expression?
+13. (\sqrt[3]{3000}+\sqrt[3]3-\sqrt[3]{1029})
+\answer{(4\sqrt[3]3)}
+14. (\sqrt{45}-\sqrt{180}-\sqrt{720})
+\answer{(-15\sqrt5)}
+Multiply.
+15. ((x-\sqrt8)(x+\sqrt8))
+\answer{(x^2-8)}
+16. (\sqrt{12}(\sqrt3+\sqrt6))
+\answer{(6+6\sqrt2)}
+What is the reduced radical form of each expression?
+17. (\frac{3-\sqrt7}{3-\sqrt5})
+\answer{(\frac{9-3\sqrt5-3\sqrt7-\sqrt{35}}4)}
+\te{Printed numerator has (-3\sqrt5); likely (+3\sqrt5) after multiplying by the conjugate.}
+18. (\frac{-5x}{3-\sqrt x})
+\answer{(\frac{-15x-5x\sqrt x}{9-x})}
+19. Discuss the possible values of (k) such that (\sqrt{50}+\sqrt k) can be written as a single term.
+\answer{(k) must be a product of 2 and a perfect square.}
+20. Write (\sqrt{\frac{16}7}) in two different ways, one where the numerator is simplified and another where the denominator is rationalized.
+\answer{(\frac{4\sqrt7}7); (\frac4{\sqrt7})}
+21. The length of a rectangle is ((3+\sqrt7)m) and its width is ((1+2\sqrt7)n). What is the area of the rectangle?
+\answer{(17mn+7mn\sqrt7)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment. O A}
+Presents engaging problems and activities that extend the lesson concepts.
+\textbf{5-2 Enrichment: Properties of Exponents and Radicals}
+Pythagorean numbers or triples are a set of three natural numbers (a), (b), and (c) such that (c^2=a^2+b^2).
+The smallest set of Pythagorean numbers is (a=3), (b=4), and (c=5).
+1. Which of the following equations generate sets of Pythagorean numbers? Select all that apply.
+A. (2\cdot(5^2=3^2+4^2))
+B. (3\cdot(5^2=3^2+4^2))
+C. (4\cdot(5^2=3^2+4^2))
+D. (8\cdot(5^2=3^2+4^2))
+E. (9\cdot(5^2=3^2+4^2))
+F. (16\cdot(5^2=3^2+4^2))
+G. (22\cdot(5^2=3^2+4^2))
+H. (25\cdot(5^2=3^2+4^2))
+I. (27\cdot(5^2=3^2+4^2))
+\answer{C, E, F, H.}
+2. Let (a) be a positive integer. Which of the following values of (a) generate Pythagorean triples from the expression (a\cdot(5^2=3^2+4^2))? Select all that apply.
+A. (a) is a positive even integer.
+B. (a) is a positive odd integer.
+C. (a) is a square number.
+D. (a) is a cubic number.
+E. (a) is a quartic number (equivalent of another number with exponent 4).
+F. (a) is a number whose fifth root is a positive integer.
+G. (a) is a number whose sixth root is a positive integer.
+\answer{C, E, G.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary. I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{5-2 Mathematical Literacy and Vocabulary: Properties of Exponents and Radicals}
+To write the fraction (\frac{3-\sqrt{m^3}}{4-\sqrt m}) without a radical in the denominator, you perform the following operations:
+\begin{tabular}{ll}
+(\frac{12+3\sqrt m-4\sqrt{m^3}-\sqrt{m^4}}{16-\sqrt{m^2}}) & (\frac{3\times4+3\sqrt m-4(\sqrt{m^3})-(\sqrt{m^3})(\sqrt m)}{4\times4+4\sqrt m-4\sqrt m-(\sqrt{m^2})}) \\
+(\frac{(3-\sqrt{m^3})(4+\sqrt m)}{(4-\sqrt m)(4+\sqrt m)}) & (\frac{12+3\sqrt m-4m\sqrt m-\sqrt{(m^2)^2}}{16-m}) \\
+(\frac{12+3\sqrt m-4\sqrt{m^3}-\sqrt{m^3\times m}}{16+4\sqrt m-4\sqrt m-\sqrt{m^2}}) & (\frac{12+3\sqrt m-4m\sqrt m-m^2}{16-m}) \\
+\end{tabular}
+Use the note cards to write the solution steps in order.
+1. First:
+\answer{(\frac{(3-\sqrt{m^3})(4+\sqrt m)}{(4-\sqrt m)(4+\sqrt m)})}
+2. Second:
+\answer{(\frac{3\times4+3\sqrt m-4(\sqrt{m^3})-(\sqrt{m^3})(\sqrt m)}{4\times4+4\sqrt m-4\sqrt m-(\sqrt{m^2})})}
+3. Next:
+\answer{(\frac{12+3\sqrt m-4\sqrt{m^3}-\sqrt{m^3\times m}}{16+4\sqrt m-4\sqrt m-\sqrt{m^2}})}
+4. Then:
+\answer{(\frac{12+3\sqrt m-4\sqrt{m^3}-\sqrt{m^4}}{16-\sqrt{m^2}})}
+5. Then:
+\answer{(\frac{12+3\sqrt m-4m\sqrt m-\sqrt{(m^2)^2}}{16-m})}
+6. Finally:
+\answer{(\frac{12+3\sqrt m-4m\sqrt m-m^2}{16-m})}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 35 586 979 1033 1298
+\placeholder{illustration}{Tablet displaying online graphing exercise: Solve the system of equations by graphing, (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Empty coordinate grid labeled x and y, both axes from -10 to 10 with unit grid spacing and labels every 2; arrow on positive y; part of upper right grid hidden by Question Help menu. Menu: Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Click to enlarge graph. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Controls: Exit, 1 part remaining, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\end{te-addendum}
+
+\end{document}

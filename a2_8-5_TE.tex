@@ -1,0 +1,946 @@
+\documentclass{article}
+% Source: Topic_08_Teacher_Edition.pdf, PDF pages 64-75 (printed pages 429A-436B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 64: 429A Lesson Overview
+\begin{lesson-meta}
+lesson: 8-5
+title: Polar Form of Complex Numbers
+standards: none printed
+practices: none printed
+objective: I can use the polar form of complex numbers to calculate products and powers.
+
+essential question: How can you use trigonometry to represent and multiply complex numbers?
+
+\textbf{VOCABULARY}
+\item argument
+\item polar form of a complex number
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 8-5 \\
+Title & Polar Form of Complex Numbers \\
+Standards & none printed \\
+I CAN Objective & I can use the polar form of complex numbers to calculate products and powers. \\
+Essential Question & How can you use trigonometry to represent and multiply complex numbers? \\
+Lesson Vocabulary & argument; polar form of a complex number \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Represent a complex number in polar form and convert between rectangular and polar forms.
+\item Verify and use the sum and difference formulas.
+\item Use polar form to calculate products and powers.
+Essential Understanding. For the complex number z in the form (a+bi), the length of the segment r is the modulus of z. Using the angle theta and trigonometry, you can locate z in the complex plane. The resulting value for z, (r\operatorname{cis}\theta), is the polar form of the complex number z. Polar form is used to calculate powers and products of complex numbers.
+\textbf{COHERENCE}
+Previously in this topic students:
+\item Represented complex numbers on the complex plane.
+In this lesson, students:
+\item Represent complex numbers in rectangular and polar forms.
+\item Use the polar form of a complex number to calculate products and powers.
+Increasing Coherence This lesson is not necessarily expected to be addressed on high stakes assessments.
+In later courses, students will:
+\item Use the polar form of a complex number to verify Euler's Identity.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that the same complex number can be represented in both polar and rectangular form and that polar form is useful for multiplying and finding powers of complex numbers.
+\item Students multiply complex numbers in polar form by multiplying the moduli and adding the arguments of the two numbers.
+\textbf{Mathematics Overview}
+Students learn to write complex numbers in polar form. They use polar form to multiply complex numbers, understanding that cis stands for (\cos\theta+i\sin\theta), and then extend multiplication to find powers of complex numbers written in polar form.
+\textbf{Applying Math Practices}
+Use Appropriate Tools Strategically
+Students recognize that they can use formulas, to simplify calculations.
+Look For and Make Use of Structure
+Students recognize that just as the sign of a real number on the number line tells its direction from 0, the argument of a complex number in the complex plane tells you its direction from the origin.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+REVIEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+modulus & módulo \\
+rectangular form & forma rectangular \\
+\end{tabular}
+NEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+argument & argumento \\
+polar form of a complex number & forma polar de un número complejo \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Review the terms modulus and rectangular form. Explain that the argument is the angle theta measured counterclockwise between the positive real axis and the segment that represents the modulus.
+Where is the argument of a complex number located with respect to the modulus?
+a. clockwise from the positive real axis
+b. clockwise from the positive imaginary axis
+c. counterclockwise from the positive real axis
+d. counterclockwise from the positive imaginary axis
+\answer{c}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 64 961 767 1118 953
+\placeholder{illustration}{Student Companion cover, colored glowing loops on dark background, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+% Source page 65: 429B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students explore how the total distance traveled when making a delivery compares to the distance from the pizzeria to the delivery spot. Students use their understanding of the Distance Formula to find the modulus of a complex number. This prepares students to use modulus and direction to locate a number in the complex plane and multiply complex numbers.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\te{Explore \& Reason is Powered by Desmos. Critique \& Explain is available at SavvasRealize.com. Printed Critique \& Explain in the availability banner; likely Explore \& Reason.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: What do you notice about the points on the map?
+\answer{The points are located at different distances away from P with two points at a diagonal from P.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: What is the difference between limiting the delivery person to riding five blocks total versus riding within a five-block radius?
+\answer{Delivering five blocks in total only allows the delivery person to count each block ridden. Delivering within a five-block radius enables the shortest distance, the hypotenuse of the triangles, to be calculated from the pizza place to the delivery spot.}
+For Early Finishers
+Q: Create a new map with five points rotating around one point, M. Each block on the map is 250 ft. Describe the locations of the five points in terms of how far they are from M in a straight line.
+\answer{Check students' work.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Facilitate a discussion about the characteristics of types of numbers and how they impact the game.
+Q: How does the distance of a point from P relate to the modulus of a complex number?
+\answer{Since a right triangle is created with point P and the other point as vertices, then the Distance Formula can be used to find the distance of the straight line from the origin, or the modulus.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Paxton's Pizza delivers via scooter. Orders are delivered only within a few blocks from the pizzeria. One afternoon, Paxton's receives orders from the places marked on the map. Paxton's is located at point P.
+% FIG 65 903 263 1109 449
+\placeholder{map}{Pizza delivery rider in teal helmet/shirt on yellow scooter with red DELIVERY box, gray road and green lawn. Circular inset street map, white square grid, no axes or numerical ticks. Orange P central, purple location 1 three blocks right, blue location 2 three blocks left and three up, cyan location 3 three blocks left and four down. Labels P,1,2,3.}
+A. Paxton's limits its delivery persons to riding five blocks total to get to the delivery spot. Will the riders be able to ride to each location on the map? Explain.
+\answer{A. No. Location 1, 3 blocks one-way is within limits. Location 2, 6 blocks one-way, is not within limits. Location 3, 7 blocks one-way, is not within limits.}
+B. Suppose instead that Paxton's limits its riders to delivering only within a five-block radius of the pizzeria. Will the riders be able to deliver to each location on the map? Explain.
+\answer{B. Yes. Location 1, 3 blocks away, is within limits. Location 2, (3\sqrt2\approx4.24) blocks away, is within limits. Location 3, 5 blocks away, is within limits.}
+C. Communicate Precisely Each block on the map is 400 ft long. How can you describe the locations of points 1, 2, and 3 in terms of how far they are from P in a straight line?
+\answer{C. Describe each point based on its distance and direction from P to identify the points precisely. Location 1 is 1200 feet east of P. Location 2 is (1200\sqrt2\approx1,697) feet and 45° north of west of P. Location 3 is 2,000 feet and about 53° south of west of P.}
+\te{Digital version: Go back; Enter your answer. Student Edition. SAMPLE STUDENT WORK.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with EXPLORE \& REASON
+Model with Mathematics Rebecca calls into Paxton's to place an order. She says that she is located (800\sqrt5) feet away at an angle of (\frac\pi3) radians south of east. Is Rebecca within the delivery area? If so, what is one possible route to her house?
+\answer{Yes; Answers may vary. Sample: 2 blocks east and 4 blocks south}
+\te{Printed route has direction arctan 2, approximately 63.4°, rather than the stated pi/3, or 60°; likely the angle or sample route needs adjustment.}
+\end{te-addendum}
+% Source page 66: 429 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Students learn to represent complex numbers in polar form and convert between the rectangular and polar forms of a complex number. Students use the sum and difference formulas to multiply complex numbers and use the polar form of complex numbers to calculate powers.
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Represent a Complex Number in Polar Form}
+Use and Connect Mathematical Reasoning ETP
+Q: How does the argument of a complex number relate to the sign of a real number?
+\answer{The argument of a complex number tells you its direction from the origin, and the sign of a real number tells you its direction from 0.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Represent a Complex Number in Polar Form}
+How can you use modulus and direction to locate a number in the complex plane?
+Consider the segment connecting the complex number (z=a+bi) to the origin. The length of the segment r is the modulus of z. The angle theta measured counterclockwise from the positive real axis to the segment is called the argument of z. You can use r and theta to correspond to z in the complex plane.
+% FIG 66 1021 272 1154 356
+\placeholder{diagram}{Black double-arrowed R horizontal and i vertical axes, O origin, no grid or ticks. Blue sloping segment from red origin to red first-quadrant point z=a+bi, labeled r=|z|; blue vertical leg b=r sin theta and red horizontal leg a=r cos theta form right triangle, red right-angle square at lower right. Angle theta between positive real axis and hypotenuse.}
+(z=a+bi)
+(=r\cos\theta+(r\sin\theta)i)
+(=r(\cos\theta+i\sin\theta))
+(=r\operatorname{cis}\theta)
+\te{Callout: cis is shorthand for cos theta + i sin theta.}
+So (z=r\operatorname{cis}\theta). This is the polar form of a complex number for z. It corresponds to a point on the complex plane that is r units from the origin at an angle theta.
+\te{LOOK FOR RELATIONSHIPS Just as the sign (positive or negative) of a real number on the number line tells you its direction from 0, the argument of a complex number in the complex plane tells you its direction from the origin.}
+\answer{Use (z=r\operatorname{cis}\theta), r units from the origin at angle theta.}
+\end{example}
+\begin{tryit}{1}
+Graph the complex numbers.
+a. (\operatorname{cis}\frac\pi4)
+b. (2\operatorname{cis}\pi)
+\answer{See graph.}
+% FIG 66 158 601 337 784
+\placeholder{graph}{Unlabeled black double-arrowed perpendicular axes, no grid/ticks. Black origin. Blue horizontal segment left to filled (-2,0), labeled 2 cis pi; red segment northeast 45° to filled point at radius1, labeled 1 cis pi/4.}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How can you graph complex numbers?
+\answer{Graph the terminal side of the angle positioned in standard form. The complex number is located on the terminal side with distance r from the origin.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 1}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+A balloon gets blown up into the air by the wind. The graph shows the distance and height the balloon travels from its origin. Find the current location of the balloon in polar form.
+The complex number (z=a+bi) represents the current location of the balloon.
+% FIG 66 463 978 560 1111
+\placeholder{graph}{Grid spacing 0.5, x horizontal/y vertical black double-arrowed axes, O origin, ticks 1,2 each axis, window [-0.5,3] by [-0.5,2.5]. Green hypotenuse from O to z=(1,sqrt3); cyan vertical leg b=2 sin(pi/3), orange horizontal leg a=2 cos(pi/3), orange right-angle square, small angle arc at O.}
+(z=a+bi)
+(z=2\cos\frac\pi3+(2\sin\frac\pi3)i)
+(z=2(\cos\frac\pi3+i\sin\frac\pi3))
+\answer{The polar form is (2\operatorname{cis}\frac\pi3).}
+Example 1 Students transition to using modulus and direction to locate a number in the complex plane in a real-world situation.
+Q: What does the hypotenuse of the triangle represent?
+\answer{The length of the segment r, the hypotenuse, is the modulus of z.}
+Q: What is the value of r?
+\answer{(r=2)}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION. TRY ANOTHER ONE.}
+If (z_1z_2=49\operatorname{cis}(3\pi)), then find (z_1) and (z_2). Explain.
+\answer{Answers may vary. Two numbers multiplied together to equal 49 are 7 and 7.
+(\pi+2\pi=3\pi)
+((7\operatorname{cis}(\pi))(7\operatorname{cis}(2\pi))=49\operatorname{cis}(3\pi))
+So (z_1=7\operatorname{cis}(\pi)) and (z_2=7\operatorname{cis}(2\pi)).}
+Example 4 Students explore the multiplication patterns of two complex numbers to find the polar forms.
+Q: Is it possible to have different values for (z_1) and (z_2) that represent the same product?
+\answer{Yes; there are infinitely many ways to multiply the moduli to get 18 and to add the arguments to get 3pi.}
+\te{Printed answer says 18; likely 49 as in the additional example.}
+\end{te-addendum}
+% Source page 67: 430 Convert Between Forms
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Convert Between Rectangular Form and Polar Form}
+Pose Purposeful Questions ETP
+PART A
+Q: Why is a negative and b positive in these rectangular coordinates?
+\answer{The sine is positive in Quadrant II, whereas the cosine is negative.}
+Q: How do you know what the modulus is?
+\answer{The modulus of a complex number is the length of the segment from the complex number to the origin, or r, which is 5 in this example.}
+PART B
+Q: Why does pi need to be added to the inverse tangent?
+\answer{The inverse tangent function has angles in Quadrant I and Quadrant IV. Since the terminal side of theta is in Quadrant III, adding pi places the angle in Quadrant I.}
+\te{Printed last quadrant is I; likely III is intended after adding pi to the first-quadrant reference angle. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Convert Between Rectangular Form and Polar Form}
+How are the polar form and the rectangular form of a complex number related?
+A. How do you express (z=5\operatorname{cis}\frac{3\pi}4) in rectangular form?
+Rewrite (z=5\operatorname{cis}\frac{3\pi}4) as (z=5\cos\frac{3\pi}4+i(5\sin\frac{3\pi}4)). This expression is in rectangular form (z=a+bi), where (a=5\cos\frac{3\pi}4) and (b=5\sin\frac{3\pi}4).
+(a=5\cos\frac{3\pi}4)
+(=5(-\frac{\sqrt2}2))
+(=-\frac{5\sqrt2}2)
+(b=5\sin\frac{3\pi}4)
+(=5(\frac{\sqrt2}2))
+(=\frac{5\sqrt2}2)
+% FIG 67 813 378 924 461
+\placeholder{graph}{Unit grid, real window [-6,5], imaginary [-3,5], black double-arrowed R and i axes, O origin, real labels -4,2,4, imaginary -2,2,4. Black hypotenuse from O to red point plotted near (-4,4), labeled length5; dashed vertical to (-4,0), red leg labels 5sqrt2/2. Red arc theta=3pi/4 counterclockwise from positive real axis, smaller pi/4 reference arc from negative real axis to hypotenuse.}
+\te{Printed point is plotted near (-4,4); likely it should be (-5sqrt2/2,5sqrt2/2), approximately (-3.54,3.54).}
+So, expressed in rectangular form, (z=-\frac{5\sqrt2}2+\frac{5\sqrt2}2i).
+\answer{A. (z=-\frac{5\sqrt2}2+\frac{5\sqrt2}2i)}
+B. How do you express (z=-7-4i) in polar form?
+Graph z on the complex plane to help you find the polar form. Then find the modulus.
+% FIG 67 813 530 924 621
+\placeholder{graph}{Unit grid real [-8,3], imaginary [-6,3], black double-arrowed R horizontal and i vertical axes, O origin. Real labels -5,2, imaginary 2,-2,-4. Red right triangle with filled vertices O,(-7,0),(-7,-4), labeled (-7,-4). Red reference arc alpha between negative real axis and hypotenuse, blue counterclockwise angle arc theta from positive real axis through upper half-plane to third-quadrant hypotenuse.}
+(r=|z|)
+(=\sqrt{(-7)^2+(-4)^2})
+(=\sqrt{65})
+(\approx8.06)
+To find theta, use the reference angle alpha, where (\tan\alpha=\frac{-4}{-7}), or (\frac47).
+So (\alpha=\tan^{-1}\frac47\approx0.52) radian. Since the terminal side of theta is in Quadrant III, (\pi<\theta<\frac{3\pi}2), so (\theta=\pi+\alpha\approx3.66) radians.
+So the polar form of (z=-7-4i) is about (8.06\operatorname{cis}3.66).
+\te{REASON The inverse tangent function has a restricted range (-pi/2,pi/2). Evaluating the inverse tangent functions, you will always get an angle in the first or fourth quadrant. Since the angle theta you are looking for is in Quadrant III, you have to add pi to 0.52 to get theta.}
+\answer{B. (8.06\operatorname{cis}3.66)}
+\end{example}
+\begin{tryit}{2}
+a. Express (4\operatorname{cis}\frac\pi3) in rectangular form.
+b. Express (5-5i) in polar form.
+\answer{a. (2+2i\sqrt3) b. Answers may vary. Sample: (5\sqrt2\operatorname{cis}\frac{7\pi}4).}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2
+Communicate Precisely What is the difference between naming a point using rectangular coordinates and naming a point using polar coordinates? Explain.
+\answer{Rectangular coordinates use a horizontal component and a vertical component in relation to the origin, whereas polar coordinates use an angle from the positive real axis and a distance from the origin.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 2 Some students need additional practice converting polar forms to rectangular forms.
+\item Help students walk through each step of this process for (z=2\operatorname{cis}\frac{5\pi}6).
+Q: What equations do you need to use when expressing (z=2\operatorname{cis}\frac{5\pi}6) in rectangular form?
+\answer{(z=a+bi), (a=r\cos\theta), (b=r\sin\theta)}
+Q: What are the values of r and theta when (z=2\operatorname{cis}\frac{5\pi}6)?
+\answer{(r=2) and (\theta=\frac{5\pi}6)}
+Q: How do you solve for a and b?
+\answer{Substitute 2 for r and (\frac{5\pi}6) for theta into the equations (a=r\cos\theta) and (b=r\sin\theta); (a=2\cos\frac{5\pi}6) and (b=2\sin\frac{5\pi}6).}
+Q: What is (\cos\frac{5\pi}6) and (\sin\frac{5\pi}6)?
+\answer{(\cos\frac{5\pi}6=-\frac{\sqrt3}2) and (\sin\frac{5\pi}6=\frac12)}
+Q: Finish solving for a and b.
+\answer{(a=2(-\frac{\sqrt3}2)=-\sqrt3) and (b=2(\frac12)=1)}
+Q: What is the rectangular form?
+\answer{(z=-\sqrt3+i)}
+\end{te-addendum}
+% Source page 68: 431 Sum and Difference Formulas
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Use the Sum and Difference Formulas}
+Pose Purposeful Questions ETP
+PART A
+Q: When is the angle measure of the product of two complex numbers equal to zero?
+\answer{When the product equals a number on the real axis, then the measure of the angle equals 0.}
+\te{Printed answer includes the entire real axis; likely positive real axis is intended.}
+Q: What is another strategy to use to get the same result as multiplying two complex numbers in polar form?
+\answer{Multiply the moduli and add the arguments of the two numbers, which gives the same result as multiplying the two numbers themselves.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Use the Sum and Difference Formulas}
+\te{CONCEPTUAL UNDERSTANDING}
+A. What patterns do you notice when multiplying complex numbers in polar form?
+Multiply a few example numbers to find a pattern.
+Suppose (z_1=2\operatorname{cis}\frac\pi4), (z_2=2\operatorname{cis}(-\frac\pi4)), and (z_3=3\operatorname{cis}\frac\pi2).
+First, multiply (z_1z_2).
+(z_1z_2=(2\operatorname{cis}\frac\pi4)(2\operatorname{cis}(-\frac\pi4)))
+(=(2)(2)(\cos\frac\pi4+i\sin\frac\pi4)(\cos(-\frac\pi4)+i\sin(-\frac\pi4)))
+(=4(\frac{\sqrt2}2+i\frac{\sqrt2}2)(\frac{\sqrt2}2-i\frac{\sqrt2}2))
+(=4(\frac12+\frac12))
+(=4)
+On the complex plane, 4 is on the positive real axis, so (\theta=0). So, (z_1z_2=4\operatorname{cis}0).
+Next, multiply (z_2z_3).
+(z_2z_3=6(\cos(-\frac\pi4)+i\sin(-\frac\pi4))(\cos\frac\pi2+i\sin\frac\pi2))
+(=6(\frac{\sqrt2}2-i\frac{\sqrt2}2)(0+i))
+(=6(\frac{\sqrt2}2i+\frac{\sqrt2}2))
+(=6(\frac{\sqrt2}2+\frac{\sqrt2}2i))
+(=6(\cos\frac\pi4+i\sin\frac\pi4))
+(=6\operatorname{cis}\frac\pi4)
+So (z_2z_3=6\operatorname{cis}\frac\pi4).
+Notice for (z_2=2\operatorname{cis}(-\frac\pi4)) and (z_3=3\operatorname{cis}\frac\pi2), (z_2z_3=6\operatorname{cis}\frac\pi4).
+% FIG 68 853 627 1123 698
+\placeholder{diagram}{Expressions z2=2 cis(-pi/4) and z3=3 cis(pi/2) above result 6 cis(pi/4). Red arrows from moduli 2 and3 to6, blue arrows from arguments -pi/4 and pi/2 to pi/4. Callout: The product of the moduli is 6, and the sum of the arguments is pi/4.}
+Similarly, (z_1z_2=(2\operatorname{cis}\frac\pi4)(2\operatorname{cis}(-\frac\pi4))=2\cdot2\operatorname{cis}(\frac\pi4+(-\frac\pi4))), or (4\operatorname{cis}0).
+In each case, the resulting modulus was equal to the product of the moduli, and the argument was the sum of the arguments.
+\te{COMMON ERROR Since (z=a+bi); (a=r\cos\theta), (b=r\sin\theta) and (z=r\operatorname{cis}\theta), this should help you remember that i is part of the imaginary term. CONTINUED ON THE NEXT PAGE.}
+\answer{A. Multiply the moduli and add the arguments.}
+% Source page 69: 432 Example 3 continued
+B. How can you prove that for any pair of complex numbers, ((r\operatorname{cis}\alpha)(s\operatorname{cis}\beta)=rs\operatorname{cis}(\alpha+\beta))?
+((r\operatorname{cis}\alpha)(s\operatorname{cis}\beta)=[r(\cos\alpha+i\sin\alpha)]\cdot[s(\cos\beta+i\sin\beta)])
+(=rs\cdot(\cos\alpha+i\sin\alpha)(\cos\beta+i\sin\beta))
+(=rs\cdot(\cos\alpha\cos\beta+i\cos\alpha\sin\beta+i\sin\alpha\cos\beta+i^2\sin\alpha\sin\beta))
+(=rs\cdot[(\cos\alpha\cos\beta-\sin\alpha\sin\beta)+i(\cos\alpha\sin\beta+\sin\alpha\cos\beta)])
+(=rs\cdot[\cos(\alpha+\beta)+i\sin(\alpha+\beta)])
+(=rs\operatorname{cis}(\alpha+\beta))
+So ((r\operatorname{cis}\alpha)(s\operatorname{cis}\beta)=rs\operatorname{cis}(\alpha+\beta)).
+\answer{B. ((r\operatorname{cis}\alpha)(s\operatorname{cis}\beta)=rs\operatorname{cis}(\alpha+\beta))}
+\end{example}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 3)
+WRITING BEGINNING Have students write the definition of acronym in their journals: a word formed by taking the first letter of each word in a phrase. Acronyms have become more commonplace with the use of text messaging. There are also many acronyms used in math. In this lesson the acronym cis is used to represent "cosine plus i times sine."
+Q: What is the acronym TTYL short for?
+\answer{talk to you later}
+Q: Create a two-column table with the headings Acronym and Phrase. Under Acronym, list common math acronyms such as PEMDAS, GCF, LCM. Fill in the proper phrases for each acronym.
+\answer{Parentheses, Exponents, Multiplication, Division, Addition, Subtraction; Greatest Common Factor; Least Common Multiple}
+SPEAKING DEVELOPING Discuss with students the most common use of the word argument---a disagreement. Have them discuss in a group recent arguments they may have had with a family member or friend. Then, have the groups come together and discuss the mathematical usage of the word argument.
+Q: What is the mathematical meaning of argument in this example?
+\answer{It is the angle theta, measured from the positive real axis to the segment that connects the origin to a complex number.}
+Q: What does adding arguments mean?
+\answer{adding the angles of the polar coordinates for complex numbers}
+LISTENING EXPANDING Display various definitions of the word holds: (A) have in one's possession, (B) to remain valid or consistent, (C) embraces, and (D) contains. Read aloud the question for Part B of the example as students listen.
+Q: Which of the definitions of holds best fits the question?
+\answer{B; the question is asking about how it can be proven that the pattern remains valid for any two pairs of complex numbers.}
+Have the students determine which definition of holds is used.
+Q: The father holds his daughter tightly.
+\answer{C}
+Q: The bucket holds four gallons of water.
+\answer{D}
+Q: The director holds forty shares in the company.
+\answer{A}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+PART B
+Q: Why is the Distributive Property used to help prove that the pattern holds for every pair of complex numbers?
+\answer{The Distributive Property can be used to find the product of the sums in the parenthesis by multiplying each addend separately and then adding the resulting products together.}
+Q: Why do you need to combine like terms?
+\answer{The terms are combined in order to use the sum formulas to simplify the multiplied complex numbers.}
+Q: Why do you apply the definition of cis at the beginning and end when proving that the pattern holds for all complex numbers?
+\answer{Answers may vary. Sample: First, the cis form is expanded into cos and sin in order to start proving the pattern. At the end, the cos and sin are combined to apply the meaning of cis.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{tryit}{3}
+Find the product of (7\operatorname{cis}\frac\pi3) and (2\operatorname{cis}(-\frac{5\pi}6)) in polar form.
+\answer{(14\operatorname{cis}(-\frac\pi2))}
+\end{tryit}
+\begin{te-addendum}{3}{CommonError}
+Try It! 3 Some students may forget they are only multiplying the moduli and not multiplying the arguments as well. Encourage students to apply what they know about ((r\operatorname{cis}\alpha)(s\operatorname{cis}\beta)=rs\operatorname{cis}(\alpha+\beta)) to ensure they multiply the moduli and add the arguments.
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+Use with EXAMPLE 3
+Construct Arguments River multiplied two complex numbers in polar form: (7\operatorname{cis}\frac\pi3) and (2\operatorname{cis}(-\frac{5\pi}6)). He determined that the product is (9\operatorname{cis}(-\frac\pi2)). Is River correct? Explain.
+\answer{No; River added the moduli 7 and 2 instead of multiplying them.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Use Polar Form to Multiply Complex Numbers}
+Pose Purposeful Questions ETP
+Q: Why is it important to find the measure of the angle?
+\answer{You need to know the measure of the angle in order to convert the complex number into polar form.}
+Q: How can you use the equations (x=r\cos\theta) and (y=r\sin\theta) to find the measure of the angle?
+\answer{Replace x and y with the coordinates of the complex number. Replace r with the length of the segment. Then solve the resulting system of equations for the angle theta.}
+Q: How do you determine in which quadrant the complex number (a+bi) is located?
+\answer{Graph the coordinates (a,b) on the complex plane.}
+Q: Why might you want to find the rectangular form of the product of the two complex numbers?
+\answer{to graph the product on a coordinate plane}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use Polar Form to Multiply Complex Numbers}
+What is the product of (z_1=-1+i\sqrt3) and (z_2=\frac{5\sqrt3}2-\frac52i)?
+% FIG 69 971 440 1080 530
+\placeholder{graph}{Unit grid window x[-4,7],y[-5,4], black double-arrowed x,y axes, O origin; x labels2,4,6,y labels-2,-4. Red segments from O to red filled (-1,sqrt3) and (5sqrt3/2,-5/2). First point red label -1+sqrt3i, second blue label 5sqrt3/2-5i/2.}
+Step 1 Express each complex number in polar form.
+Find the moduli and arguments for (z_1=-1+i\sqrt3) and (z_2=\frac{5\sqrt3}2-\frac52i).
+(|z_1|=\sqrt{(-1)^2+(\sqrt3)^2}=2)
+(\tan\theta_1=\frac{\sqrt3}{-1}=-\sqrt3)
+Since (z_1=-1+i\sqrt3) is in Quadrant II, (\theta_1=\frac{2\pi}3). So (z_1=2\operatorname{cis}\frac{2\pi}3).
+(|z_2|=\sqrt{(\frac{5\sqrt3}2)^2+(-\frac52)^2}=5)
+(\tan\theta_2=\frac{(-\frac52)}{\frac{5\sqrt3}2}=-\frac1{\sqrt3}=-\frac{\sqrt3}3)
+Since (z_2=\frac{5\sqrt3}2-\frac52i) is in Quadrant IV, (\theta_2=-\frac\pi6). So (z_2=5\operatorname{cis}(-\frac\pi6)).
+\te{USE STRUCTURE The equations (x=r\cos\theta) and (y=r\sin\theta) can also be used to find the measure of the angle.}
+Step 2 Multiply using the formula
+((r\operatorname{cis}\alpha)(s\operatorname{cis}\beta)=rs\operatorname{cis}(\alpha+\beta)).
+(z_1z_2=(2\operatorname{cis}\frac{2\pi}3)(5\operatorname{cis}(-\frac\pi6)))
+(=(2)(5)\operatorname{cis}(\frac{2\pi}3-\frac\pi6))
+(=10\operatorname{cis}\frac\pi2)
+% FIG 69 968 697 1100 787
+\placeholder{graph}{Grid spacing2, window x[-14,12],y[-4,12], black double-arrowed x,y axes, O origin; printed x labels -10,-8,-4,4,8, y4,8. Red segment to filled z1=(-1,sqrt3), label z1=2 cis(2pi/3); blue segment to z2=(5sqrt3/2,-5/2), label z2=5 cis(-pi/6); green vertical segment to filled (0,10), label z1z2=10 cis(pi/2).}
+\te{Printed x-axis label -10 is positioned at -12 on the two-unit grid; likely -12.}
+\te{STUDY TIP You can verify your answer by multiplying the rectangular forms of z1 and z2. CONTINUED ON THE NEXT PAGE.}
+% Source page 70: 433 Example 4 continued and Powers
+Step 3 Look at the graphical representation for (z_1z_2). In rectangular coordinates, it is on the imaginary axis, so (10\operatorname{cis}\frac\pi2=10i).
+In rectangular form, (z_1z_2=10i).
+\answer{(10\operatorname{cis}\frac\pi2=10i)}
+\end{example}
+\begin{tryit}{4}
+Use the complex numbers (z_1=i\sqrt2) and (z_2=-1+i).
+a. Express each number in polar form.
+b. Find the product (z_1z_2) in both polar form and rectangular form.
+\answer{a. (z_1=\sqrt2\operatorname{cis}\frac\pi2); (z_2=\sqrt2\operatorname{cis}\frac{3\pi}4). b. (z_1z_2=2\operatorname{cis}\frac{5\pi}4) or (-\sqrt2-i\sqrt2).}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How can you use the product in polar form to find the rectangular form?
+\answer{Since (z=a+bi), write (a=r\cos\theta), (b=r\sin\theta) to solve for the rectangular form.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Use Polar Form to Raise a Number to a Power}
+Pose Purposeful Questions ETP
+Q: How does using rectangular coordinates compare to using polar coordinates when calculating the power of a complex number?
+\answer{Both types of coordinates can be used to calculate the power, but you can identify a pattern with polar coordinates to calculate the power more efficiently.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Use Polar Form to Raise a Number to a Power}
+What is an efficient way to calculate a power of a complex number?
+Calculating powers using rectangular coordinates can take many steps.
+((a+bi)^n=(a+bi)(a+bi)\ldots(a+bi)).
+\te{Callout: Multiply (a+bi) together n times.}
+Look at the following pattern when calculating powers of a complex number in polar form.
+(z=r\operatorname{cis}\theta)
+(z^2=(r\operatorname{cis}\theta)(r\operatorname{cis}\theta)=r^2\operatorname{cis}2\theta)
+(z^3=(r^2\operatorname{cis}2\theta)(r\operatorname{cis}\theta)=r^3\operatorname{cis}3\theta)
+(\vdots)
+(z^n=r^n\operatorname{cis}n\theta)
+\te{Callout: To find the product, multiply the moduli and add the arguments.}
+For example, find (z^4) where (z=4-4i).
+(z^4=(4-4i)^4)
+(=(4\sqrt2\operatorname{cis}(-\frac\pi4))^4)
+(=(4\sqrt2)^4\operatorname{cis}4(-\frac\pi4))
+(=1,024\operatorname{cis}(-\pi))
+In rectangular form, (z^4=-1,024).
+Using polar coordinates can be the most efficient way to calculate the power of a complex number.
+\te{USE APPROPRIATE TOOLS Changing the way a quantity is expressed can simplify calculations. The formula (z^n=r^n\operatorname{cis}n\theta) where n is an integer, known as DeMoivre's Theorem, is an example of this.}
+\answer{Use (z^n=r^n\operatorname{cis}n\theta); example result (-1,024).}
+\end{example}
+\begin{tryit}{5}
+Use the polar form to find ((\sqrt3-i)^8).
+a. Write the power in polar form.
+b. Write the power in rectangular form.
+\answer{a. (z=2\operatorname{cis}(-\frac\pi6)), so (z^8=256\operatorname{cis}(-\frac{4\pi}3)). b. (-128+128i\sqrt3).}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+Use with EXAMPLES 4 \& 5
+Use Appropriate Tools Shannon used the Binomial Theorem to expand ((\sqrt3-i)^8). Is this the most efficient method for raising a complex number to a power? Explain.
+\answer{No, a more efficient method is to rewrite ((\sqrt3-i)^8) as ([2\operatorname{cis}(-\frac\pi6)^8]) and use the rules for multiplying complex numbers in polar form.}
+\te{Printed exponent 8 is inside the closing square bracket after cis(-pi/6); likely the intended grouping is [2 cis(-pi/6)]^8.}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 5 Help students explore comparing two methods in order to find the error when calculating a power of a complex number.
+\item Julie uses rectangular coordinates to calculate ((7\sqrt3+7i)^6=-7,529,536).
+Fred uses polar coordinates to calculate ((7\sqrt3+7i)^6\approx7,529,536\operatorname{cis}(\frac\pi6)).
+Compare the two calculations.
+Q: Who is correct?
+\answer{Julie is correct. Fred did not multiply the argument by 6. The correct answer is (7,529,536\operatorname{cis}\pi), which is equal to Julie's answer.}
+\end{te-addendum}
+% Source page 71: 434 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Using the Polar Form of Complex Numbers}
+Q: How is the graph helpful when converting from rectangular form to polar form?
+\answer{Answers may vary. Sample: The graph shows which quadrant z is located in, which helps you determine whether z is within the domain of (\tan^{-1}\theta) or you need to add pi to your angle.}
+\te{Printed domain of inverse tangent; likely the intended comparison concerns its principal range. Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercise 8 Some students may incorrectly identify both the (\cos(\frac{2\pi}3)) and (\sin(\frac{2\pi}3)) as (-\frac12). Encourage students to review the sine and cosine of different angles and points in varying quadrants and positions on a complex plane to help them determine (\sin(\frac{2\pi}3)).
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Using The Polar Form of Complex Numbers}
+\begin{tabular}{lll}
+EQUATIONS & Rectangular Form: (z=a+bi) & Polar Form: (z=r\operatorname{cis}\theta) \\
+ & Convert to polar: (r=|z|=\sqrt{a^2+b^2}); (\tan\theta=\frac ba) so (\theta=\tan^{-1}(\frac ba)) & Convert to rectangular: (a=r\cos\theta); (b=r\sin\theta) \\
+FORMULAS & Product Formula: ((r\operatorname{cis}\alpha)(s\operatorname{cis}\beta)=rs\operatorname{cis}(\alpha+\beta)) & Power Formula: (z^n=r^n\operatorname{cis}n\theta) \\
+\end{tabular}
+\te{Printed conversion formula omits quadrant adjustment and the case a=0; likely those qualifications are intended from Example 2.}
+GRAPH
+% FIG 71 734 383 834 484
+\placeholder{graph}{Unit square grid window x[-5,5],y[-3,7], black double-arrowed x,y axes, O origin, x labels -4,-2,4,y -2,2,4,6. Red filled z at(4,6), green sloping segment O to z labeled r, blue vertical leg b to(4,0), red horizontal leg a, purple theta arc above positive x axis.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you use trigonometry to represent and multiply complex numbers?
+\answer{You can use trigonometric functions to convert the complex numbers to both rectangular and polar form. Then you can represent and operate with the numbers in these forms.}
+2. Error Analysis Luis said that ((2\operatorname{cis}\frac{7\pi}4)(3\operatorname{cis}\frac{3\pi}4)=6\operatorname{cis}\pi). Explain an error Luis may have made.
+\answer{Luis subtracted (\frac{7\pi}4) and (\frac{3\pi}4) instead of adding them. The correct answer is (6\operatorname{cis}\frac{5\pi}2).}
+3. Vocabulary Explain how to find the argument of a complex number.
+\answer{If (z=a+bi) is a complex number given in rectangular coordinates, then the argument theta is the inverse tangent of (\frac ba) measured counterclockwise from the positive real axis to the segment joining the origin and (a,b).}
+\te{Printed answer omits quadrant adjustment; likely the same qualifications as Example 2 are intended.}
+4. Communicate Precisely What information about the graph of a number in the complex plane does the argument of a complex number give you?
+\answer{Answers may vary. Sample: The argument of a complex number tells you its direction from the origin in the complex plane.}
+\textbf{Do You KNOW HOW?}
+Express each complex number in polar form.
+5. (2\sqrt3+2i) \answer{(4\operatorname{cis}\frac\pi6)}
+6. (-10+10i) \answer{(10\sqrt2\operatorname{cis}\frac{3\pi}4)}
+Express each complex number in rectangular form.
+7. (5\operatorname{cis}\pi) \answer{-5}
+8. (6\operatorname{cis}\frac{2\pi}3) \answer{(-3+3\sqrt3i)}
+Find the product of each set of complex numbers in polar form.
+9. (2\operatorname{cis}\frac\pi4) and (6\operatorname{cis}\frac{3\pi}4) \answer{(12\operatorname{cis}\pi)}
+10. (7\operatorname{cis}\frac\pi2) and (3\operatorname{cis}\frac\pi4) \answer{(21\operatorname{cis}\frac{3\pi}4)}
+11. (2\operatorname{cis}(-\frac\pi3)) and (3\operatorname{cis}\frac{5\pi}6) \answer{(6\operatorname{cis}\frac\pi2)}
+12. (3\operatorname{cis}\frac{4\pi}3) and (7\operatorname{cis}\frac\pi3) \answer{(21\operatorname{cis}\frac{5\pi}3)}
+Use the polar form to find each power. Write the power in rectangular form.
+13. ((\sqrt2+i\sqrt2)^4) \answer{-16}
+14. ((\sqrt3-i)^3) \answer{(-8i)}
+\end{concept-summary}
+% Source page 72: 435 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+15--30,33--44 & 15--23,26--44 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Scan the QR code to access a video tutorial. 15--21. Answers on previous page. See answers for 24,35--36 on the next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 21--24 & 1 \\
+1 & 18,20,41 & 2 \\
+2 & 25--32,42,43 & 1 \\
+2 & 17,44 & 2 \\
+3 & 33,34 & 1 \\
+4 & 35,36 & 1 \\
+4 & 19,39,40 & 2 \\
+5 & 16,37,38 & 1 \\
+5 & 15 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{15}{2}
+UNDERSTAND. Mathematical Connections Evaluate the expression ((2+i)(2+i)(2+i)(2+i)) using traditional multiplication. Compare the results with the results using polar coordinates and ((2+i)^4). Which method do you prefer and why?
+\answer{(-7+24i); the results are the same; student preferences will vary}
+\end{practice}
+\begin{practice}{16}{1}
+Look for Relationships Explain how to apply an exponent as a power of an expression with a complex number.
+\answer{Use the formula (z^n=r^n\operatorname{cis}n\theta).}
+\end{practice}
+\begin{practice}{17}{2}
+Error Analysis Describe and correct the error a student made in writing the complex number (z=\sqrt3-i) in polar form.
+(r=\sqrt{x^2+y^2}=\sqrt{(\sqrt3)^2+(-1)^2}=\sqrt4=2)
+So, (\sin\theta=\frac yr=\frac{-1}2) and (\cos\theta=\frac x1=\frac{\sqrt3}2),
+for (0\leq\theta\leq2\pi).
+(\theta=\frac{5\pi}6) and (r=2)
+So (\sqrt3-i=2\operatorname{cis}(\frac{5\pi}6)).
+\te{Student work on gray curled note with red X. Printed cosine denominator appears as 1; likely r is intended.}
+\answer{The student found the argument theta to be (\frac{5\pi}6), when it should have been (\frac{11\pi}6), so the answer should be (2\operatorname{cis}(\frac{11\pi}6)).}
+\end{practice}
+\begin{practice}{18}{2}
+Communicate Precisely Explain how to graph the complex number (3\operatorname{cis}\frac{5\pi}6) in the complex plane.
+\answer{Draw a segment 3 units long from the origin at an angle of (\frac{5\pi}6) with the real axis.}
+\end{practice}
+\begin{practice}{19}{2}
+Use Structure Similar to the product formula, there is a quotient formula for two complex numbers in polar form. This formula is given by (\frac{(r\operatorname{cis}\alpha)}{(s\operatorname{cis}\beta)}=\frac rs\operatorname{cis}(\alpha-\beta)). Use this formula to find (\frac{24\operatorname{cis}\frac{5\pi}3}{8\operatorname{cis}\frac{5\pi}{12}}). Find the quotient in rectangular form.
+\answer{(-\frac{3\sqrt2}2-\frac{3\sqrt2}2i)}
+\end{practice}
+\begin{practice}{20}{2}
+Higher Order Thinking Explain why the polar coordinates ((4,-\frac\pi6)) and ((4,\frac{11\pi}6)) correspond to each other on the complex plane.
+\answer{Both points are 4 units from the origin and since (-\frac\pi6) and (\frac{11\pi}6) differ by a multiple of (2\pi), the points are at the same location.}
+\end{practice}
+\begin{practice}{21}{1}
+PRACTICE. Graph each complex number on the complex plane. SEE EXAMPLE 1
+(4\operatorname{cis}(\frac\pi3))
+\answer{See graph.}
+% FIG 71 655 920 851 1116
+\placeholder{graph}{Unit grid window x,y[-5,5], black double-arrowed x,y axes, O origin, labels -4,-2,2,4 each axis. Red segment from O to filled (2,2sqrt3), labeled (2,2sqrt3).}
+\end{practice}
+\begin{practice}{22}{1}
+Graph each complex number on the complex plane. SEE EXAMPLE 1
+(2\operatorname{cis}(\frac{5\pi}6))
+\answer{See graph.}
+% FIG 72 508 1188 702 1384
+\placeholder{graph}{Unit grid window x,y[-5,5], black double-arrowed x,y axes, O origin, labels -4,-2,2,4 each axis. Orange segment from O to filled (-sqrt3,1), labeled (-sqrt3,1).}
+\end{practice}
+\begin{practice}{23}{1}
+Graph each complex number on the complex plane. SEE EXAMPLE 1
+(3\operatorname{cis}(-\pi))
+\answer{See graph.}
+% FIG 72 857 1130 1052 1326
+\placeholder{graph}{Unit grid window x,y[-5,5], black double-arrowed x,y axes, O origin, labels -4,-2,2,4 each axis. Red segment on negative x axis from O to filled (-3,0), labeled (-3,0).}
+\end{practice}
+\begin{practice}{24}{1}
+Graph each complex number on the complex plane. SEE EXAMPLE 1
+(1\operatorname{cis}(\frac{2\pi}3))
+\answer{See graph.}
+% FIG 73 128 167 323 363
+\placeholder{graph}{Unit grid window x,y[-5,5], black double-arrowed x,y axes, O origin, labels -4,-2,2,4 each axis. Orange segment from O to filled (-1/2,sqrt3/2), labeled (-1/2,sqrt3/2).}
+\end{practice}
+\begin{practice}{25}{1}
+Express each complex number in rectangular form. SEE EXAMPLE 2
+(2\operatorname{cis}(\frac\pi2))
+\answer{(2i)}
+\end{practice}
+\begin{practice}{26}{1}
+Express each complex number in rectangular form. SEE EXAMPLE 2
+(1\operatorname{cis}(-\frac\pi3))
+\answer{(\frac12-\frac{\sqrt3}2i)}
+\end{practice}
+\begin{practice}{27}{1}
+Express each complex number in rectangular form. SEE EXAMPLE 2
+(4\operatorname{cis}(\frac{11\pi}6))
+\answer{(2\sqrt3-2i)}
+\end{practice}
+\begin{practice}{28}{1}
+Express each complex number in rectangular form. SEE EXAMPLE 2
+(3\operatorname{cis}(\frac\pi4))
+\answer{(\frac{3\sqrt2}2+\frac{3\sqrt2}2i)}
+\end{practice}
+\begin{practice}{29}{1}
+Express each complex number in polar form. SEE EXAMPLE 2
+(-\sqrt3+i)
+\answer{(2\operatorname{cis}\frac{5\pi}6)}
+\end{practice}
+\begin{practice}{30}{1}
+Express each complex number in polar form. SEE EXAMPLE 2
+(2-3i)
+\answer{(3.61\operatorname{cis}5.30)}
+\end{practice}
+\begin{practice}{31}{1}
+Express each complex number in polar form. SEE EXAMPLE 2
+(4+5i)
+\answer{(6.4\operatorname{cis}0.9)}
+\end{practice}
+\begin{practice}{32}{1}
+Express each complex number in polar form. SEE EXAMPLE 2
+(-3-3i)
+\answer{(4.24\operatorname{cis}\frac{5\pi}4)}
+\end{practice}
+\begin{practice}{33}{1}
+Find the product of each set of complex numbers in polar and rectangular form. SEE EXAMPLE 3
+(3\operatorname{cis}(\frac{7\pi}6)) and (2\operatorname{cis}(\frac{2\pi}3))
+\answer{(6\operatorname{cis}\frac{11\pi}6); (3\sqrt3-3i)}
+\end{practice}
+\begin{practice}{34}{1}
+Find the product of each set of complex numbers in polar and rectangular form. SEE EXAMPLE 3
+(6\operatorname{cis}(\frac\pi3)) and (4\operatorname{cis}(\frac{2\pi}3))
+\answer{(24\operatorname{cis}\pi); -24}
+\end{practice}
+\begin{practice}{35}{1}
+Express each number in polar form. Then find the product (z_1z_2) in both polar and rectangular form. SEE EXAMPLE 4
+(z_1=2-2i); (z_2=-3+3i)
+\answer{(z_1=2\sqrt2\operatorname{cis}\frac{7\pi}4); (z_2=3\sqrt2\operatorname{cis}\frac{3\pi}4); (z_1z_2=12\operatorname{cis}\frac{5\pi}2); (12i)}
+\end{practice}
+\begin{practice}{36}{1}
+Express each number in polar form. Then find the product (z_1z_2) in both polar and rectangular form. SEE EXAMPLE 4
+(z_1=\sqrt3+i); (z_2=2-2i\sqrt3)
+\answer{(z_1=2\operatorname{cis}\frac\pi6); (z_2=4\operatorname{cis}\frac{5\pi}3); (z_1z_2=8\operatorname{cis}\frac{11\pi}6); (4\sqrt3-4i)}
+\end{practice}
+\begin{practice}{37}{1}
+Use the polar form to find each power. Write the power in both polar and rectangular form. SEE EXAMPLE 5
+((-2+2i)^3)
+\answer{(16\sqrt2\operatorname{cis}\frac{9\pi}4); (16+16i)}
+\end{practice}
+\begin{practice}{38}{1}
+Use the polar form to find each power. Write the power in both polar and rectangular form. SEE EXAMPLE 5
+((1+i\sqrt3)^5)
+\answer{(32\operatorname{cis}\frac{5\pi}3); (16-16\sqrt3i)}
+\end{practice}
+% Source page 73: 436 Apply and Assessment Practice
+\begin{practice}{39}{2}
+APPLY. Use Structure (E=I\cdot Z), where E is voltage, I is current, and Z is impedance. Determine the voltage in this circuit.
+% FIG 73 516 331 752 483
+\placeholder{diagram}{Black rectangular circuit on light-blue background, AC source circle on left with sine-wave symbol, plus above and minus below, zigzag resistor right. White callouts I=2 cis(pi/3) amps above left, Z=3 cis(11pi/6) ohms above right.}
+\answer{(6\operatorname{cis}\frac{13\pi}6=3\sqrt3+3i) volts}
+\end{practice}
+\begin{practice}{40}{2}
+Use Structure Determine the current in a circuit when there is a voltage of (8\operatorname{cis}\frac{7\pi}6) volts and an impedance of (4\operatorname{cis}\frac\pi3) ohms.
+\answer{(2\operatorname{cis}\frac{5\pi}6=-\sqrt3+i) amps}
+\end{practice}
+\begin{practice}{41}{2}
+Use Appropriate Tools A coding class is using the polar form of complex numbers to develop a program to draw a flower. Based on the graphs below, what is an equation a coder could use to draw a flower with nine petals? Explain your answer. (Hint: You may want to use graphing technology to check your answer.)
+% FIG 73 516 677 641 793
+\placeholder{graph}{Black monitor frame with pale-green square grid and unlabeled perpendicular axes with uniform ticks, no arrowheads/numbers; red four-petal rose r=5 cos(2theta), petals along positive and negative axes, each radius5. Printed caption r=5 cos(2theta). Window approximately x[-15,15],y[-10,10], inferred grid spacing2.}
+% FIG 73 648 677 774 793
+\placeholder{graph}{Matching monitor/grid, unlabeled axes, uniform ticks and no arrowheads/numbers, window approximately x[-15,15],y[-10,10], inferred spacing2. Red three-petal rose r=5 cos(3theta), petal tips at angles0,120,240 degrees, radius5. Caption r=5 cos(3theta).}
+% FIG 73 516 800 641 916
+\placeholder{graph}{Matching monitor/grid, unlabeled axes, uniform ticks and no arrowheads/numbers, window approximately x[-15,15],y[-10,10], inferred spacing2. Red eight-petal rose r=5 cos(4theta), tips every45 degrees radius5. Caption r=5 cos(4theta).}
+% FIG 73 648 800 774 916
+\placeholder{graph}{Matching monitor/grid, unlabeled axes, uniform ticks and no arrowheads/numbers, window approximately x[-15,15],y[-10,10], inferred spacing2. Red five-petal rose r=5 cos(5theta), tips every72 degrees starting positive x-axis, radius5. Caption r=5 cos(5theta).}
+\answer{Answers may vary. Sample: (r=5\cos(9\theta)). It appears as through when n is even, the number of petals is 2n and when n is odd, the number of petals is n.}
+\te{Printed wording is "as through"; likely "as though."}
+\end{practice}
+\begin{practice}{42}{1}
+ASSESSMENT PRACTICE. The rectangular form of the complex number (4\operatorname{cis}(\frac{7\pi}4)) is blank blank blank i.
+\answer{(2\sqrt2); -; (2\sqrt2)}
+\end{practice}
+\begin{practice}{43}{1}
+SAT/ACT Find the polar form of the complex number (4-4i).
+A. (4\sqrt2\operatorname{cis}(\frac{7\pi}4))
+B. (2\sqrt2\operatorname{cis}(\frac{7\pi}4))
+C. (4\sqrt2\operatorname{cis}(\frac{5\pi}4))
+D. (4\operatorname{cis}(\frac{5\pi}4))
+\answer{A}
+\end{practice}
+\begin{practice}{44}{2}
+Performance Task Either the Distance Formula or the Law of Cosines can be used to generate a formula to find the distance between two points in the complex plane.
+Part A Use the Distance Formula to find the distance between two points (r_1\operatorname{cis}\theta_1) and (r_2\operatorname{cis}\theta_2) in the complex plane. (Hint: Remember that for (z=r\operatorname{cis}\theta=a+bi), (a=r\cos\theta) and (b=r\sin\theta).)
+\answer{Part A (d=\sqrt{(r_1)^2+(r_2)^2-2r_1r_2\cos(\theta_2-\theta_1)})}
+Part B Use the Law of Cosines to calculate the same distance. Compare the result to the result for part (a).
+% FIG 73 825 685 981 840
+\placeholder{diagram}{Unlabeled black double-arrowed perpendicular axes, no grid/ticks. Blue ray segment r1 from O northeast; longer red segment r2 from O northwest. Dashed green segment c joins tips. Blue angle arc theta1 from positive horizontal axis to r1, larger red theta2 arc from positive horizontal axis to r2, green included angle C between r1 and r2 with leader from lower-left label C.}
+\answer{Part B Yes, you get the same formula: (d=\sqrt{(r_1)^2+(r_2)^2-2r_1r_2\cos(\theta_2-\theta_1)})}
+Part C Use your formula to find the distance between (3\operatorname{cis}\frac\pi6) and (5\operatorname{cis}\pi). Round to the nearest hundredth.
+\answer{Part C 7.74}
+\end{practice}
+% Source page 74: 436A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & A89 \\
+2 & 2 & A89 \\
+3 & 1 & A89 \\
+4 & 2 & A89 \\
+5 & 2 & A89 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\te{Assessment. Lesson Quiz is available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{8-5 Lesson Quiz: Polar Form of Complex Numbers}
+\te{ASSESSMENT RESOURCES. Name blank. enVision Algebra 2. SavvasRealize.com. Copyright© Savvas Learning Company LLC. All Rights Reserved. enVision Algebra 2 Assessment Sourcebook.}
+1. Graph the complex number (2\operatorname{cis}\frac{2\pi}3).
+\answer{1. See graph.}
+% FIG 74 758 325 858 424
+\placeholder{graph}{Black double-arrowed real and imaginary axes, O origin, half-unit grid window [-2.5,2.5] on both axes, labels -2,-1,1,2. Magenta segment from O to filled point (-1,sqrt(3)), length label 2, counterclockwise angle arc labeled theta=2pi/3.}
+2. Express (4\operatorname{cis}\frac{7\pi}6) in rectangular form.
+A. (-2\sqrt3-2i)
+B. (-\sqrt3-i)
+C. (-\frac{\sqrt3}2-\frac12i)
+D. (2\operatorname{cis}\frac{14\pi}3)
+\answer{2. A}
+3. Part A What is the product of (2\operatorname{cis}\frac\pi3) and (5\operatorname{cis}\frac\pi6) in polar form?
+A. (7\operatorname{cis}(\frac\pi6))
+B. (10\operatorname{cis}(\frac\pi6))
+C. (10\operatorname{cis}(\frac\pi2))
+D. (36\operatorname{cis}(\frac\pi2))
+\answer{3. Part A C}
+Part B What is the product of (2\operatorname{cis}\frac\pi3) and (5\operatorname{cis}\frac\pi6) in rectangular form?
+product = blank
+\answer{3. Part B (10i)}
+4. Part A What is (-2\sqrt3+2i) in polar form?
+A. (4\operatorname{cis}\frac\pi3)
+B. (-4\operatorname{cis}\frac\pi3)
+C. (-4\operatorname{cis}\frac{5\pi}6)
+D. (4\operatorname{cis}\frac{5\pi}6)
+\answer{4. Part A D}
+Part B What is (\sqrt3+i) in polar form?
+A. (2\operatorname{cis}\frac\pi6)
+B. (2\operatorname{cis}\frac\pi3)
+C. (2\operatorname{cis}\frac\pi2)
+D. (2\operatorname{cis}\pi)
+\answer{4. Part B A}
+Part C What is the product of (-2\sqrt3+2i) and (\sqrt3+i)?
+A. (4\operatorname{cis}\pi)
+B. (-8\operatorname{cis}\pi)
+C. (8\operatorname{cis}\pi)
+D. (-4\operatorname{cis}\pi)
+\answer{4. Part C C}
+5. Write the power ((1-i\sqrt3)^6) in rectangular form.
+A. (64+64i)
+B. (64i)
+C. (64)
+D. (0)
+\answer{5. C}
+\end{te-addendum}
+% Source page 75: 436B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I=Intervention; O=On-Level; A=Advanced.
+Reteach to Build Understanding I. Provides scaffolded reteaching for the lesson concepts. MathXL for School.
+Additional Practice I O. Provides extra practice for each lesson. MathXL for School.
+Enrichment O A. Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Mathematical Literacy and Vocabulary I O. Helps students develop and reinforce understanding of key terms and concepts.
+\te{Resource sheets each print Name blank, enVision Algebra 2, SavvasRealize.com, lesson title Polar Form of Complex Numbers, Copyright© Savvas Learning Company LLC. All Rights Reserved., and enVision Algebra 2 Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{8-5 Reteach to Build Understanding}
+1. The polar form of a complex number is represented as (z=r\operatorname{cis}\theta), where r is the radius or distance from the origin, and (\theta) is the measure of the angle formed by the x-axis and the radius. Complete the table.
+\begin{tabular}{lll}
+Polar Form & r & (\theta) \\
+(z=r\operatorname{cis}\theta) & r & (\theta) \\
+(z=\answer{3}\operatorname{cis}\pi) & 3 & \answer{(\pi)} \\
+(z=\frac12\operatorname{cis}2\pi) & \answer{(\frac12)} & \answer{(2\pi)} \\
+(z=2\operatorname{cis}\answer{\frac\pi4}) & \answer{2} & (\frac\pi4) \\
+(z=\operatorname{cis}\frac\pi2) & 1 & \answer{(\frac\pi2)} \\
+\end{tabular}
+% FIG 75 328 415 381 469
+\placeholder{diagram}{Black positive x and y axes without grid/ticks, right triangle with vertex at origin, filled upper-right point, vertical leg down to x-axis, diagonal hypotenuse labeled r and angle theta at origin.}
+2. Reese expressed (z=4\operatorname{cis}\frac\pi3) in rectangular form as shown. What mistake did she make? What is the expression in rectangular form?
+\te{Student note: (a=4\cos\frac\pi3=4(\frac{\sqrt3}2)); (b=4\sin\frac\pi3=4(\frac12)); (z=2\sqrt3+2i).}
+\answer{Reese mixed up the values of sine and cosine of (\frac\pi3). The correct answer is (z=2+2i\sqrt3).}
+3. What is the polar form of (z=-6+4i)? Round your answer to the nearest tenth.
+\begin{tabular}{lll}
+To find (r=|z|) & To find (\theta), use reference angle (\alpha) & Polar Form \\
+(r=\sqrt{(-6)^2+\answer{4}^2}) & (\tan\alpha=\frac4{-6}=\frac2{-3}) & (z=r\operatorname{cis}\theta) \\
+(r=\sqrt{\answer{36}+16}) & (\alpha=\tan^{-1}\answer{\frac2{-3}}\approx-33.69^\circ) & (|z|=r\approx7.2) \\
+(r=\sqrt{\answer{52}}) & Since (z=-6+4i) is in the second quadrant, add (180^\circ): & (\theta=\frac{73\pi}{90}) \\
+(r\approx\answer{7.2}) & (-33.69^\circ+180^\circ=\answer{146.31}^\circ\approx\answer{146}^\circ) & (z=\answer{7.2}\operatorname{cis}\answer{\frac{73\pi}{90}}) \\
+ & Convert to radians: (\answer{146}^\circ\times\frac\pi{180^\circ}=\answer{\frac{73\pi}{90}}) & \\
+\end{tabular}
+\te{Printed solution rounds the angle to 146 degrees before converting to radians despite the instruction to round to the nearest tenth; likely 146.3 degrees.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{8-5 Additional Practice}
+1. Graph the complex number (7\operatorname{cis}(\frac\pi6)).
+\answer{See graph.}
+% FIG 75 533 425 609 508
+\placeholder{graph}{Magenta R horizontal and i vertical positive axes, O origin, half-unit gray grid, vertical labels 1,2,3,4,5. Horizontal labels 1,2,3,4,6 at equally spaced major ticks (last label printed 6 instead of 5). Window extends half a unit below/left of origin and half a unit beyond last major ticks. Magenta filled endpoint A at the last horizontal major tick and height 3.5, joined to O by segment labeled 7, angle arc labeled pi/6.}
+\te{Printed graph has inconsistent horizontal tick labeling and places A at the fifth major interval; likely intended x-coordinate (7\sqrt3/2).}
+2. Express (\sqrt3\operatorname{cis}(\frac{5\pi}6)) in rectangular form.
+\answer{(\frac32+\frac{\sqrt3}2i)}
+\te{Printed real part is positive (3/2); likely (-3/2).}
+3. Express (-\frac12+\frac{\sqrt3}2i) in polar form.
+\answer{(\operatorname{cis}\frac{2\pi}3)}
+4. Find the product of (z_1=\sqrt5\operatorname{cis}120^\circ) and (z_2=7\operatorname{cis}80^\circ) in polar form.
+\answer{(-7\sqrt5\operatorname{cis}200)}
+\te{Printed answer has a negative coefficient and omits the degree sign; likely (7\sqrt5\operatorname{cis}200^\circ).}
+5. What is the product of (z_1=3+4i) and (z_2=\sqrt3-i)?
+\answer{(10\operatorname{cis}23)}
+\te{Printed angle omits its degree sign and is rounded to an integer; likely approximately (23.13^\circ).}
+6. Use polar form to find (z^5), if (z=-2+2i).
+\answer{(128\sqrt2\operatorname{cis}\frac{7\pi}4)}
+7. What is (z^5) in rectangular form, if (z=-2+2i)?
+\answer{(128-128i)}
+8. A student made some mistakes when he was writing (z=1+\sqrt3i) in polar form. Correct the mistake next to the row, where the mistake occurred.
+(r=\sqrt{x^2+y^2}=\sqrt{1^2+(\sqrt3)^2}=2)
+(\tan\theta=\sqrt3,\theta=\frac\pi6\text{ for }0\leq\theta\leq2\pi)
+\answer{(\theta=\frac\pi3)}
+Therefore, (1+\sqrt3i=2\operatorname{cis}\frac\pi6)
+\answer{(2\operatorname{cis}\frac\pi3)}
+9. The current in an electric circuit is defined by (\sqrt2\operatorname{cis}\frac\pi4) and the impedance is (2\operatorname{cis}\frac{11\pi}6) ohm. Determine the voltage in the circuit. Hint: Use (E=I\cdot Z), where E is voltage, I is electric current, and Z is impedance.
+\answer{(2\sqrt2\operatorname{cis}\frac{25\pi}{12})}
+10. Explain why the coordinates ((-3,\frac{\uncertain{39\pi}{19\pi}}{20})) and ((-3,-\frac\pi{20})) represent the same point in the coordinate plane.
+\answer{The endpoints of the terminal side of both angles coincide.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{8-5 Enrichment}
+When two resistors with impedances, (P_1=a_1+b_1i) and (P_2=a_2+b_2i) in a circuit are placed in series, the total impedance is defined by (P=P_1+P_2).
+When two resistors with impedances, (P_1=a_1+b_1i) and (P_2=a_2+b_2i) in a circuit are placed in parallel, the total impedance is defined by (\frac1P=\frac1{P_1}+\frac1{P_2}).
+% FIG 75 912 469 979 508
+\placeholder{diagram}{Parallel Resistors. Black rectangular circuit with battery in left vertical side labeled V; three parallel vertical resistor branches, two internal branches labeled R1 and R2, far-right branch unlabeled.}
+% FIG 75 992 469 1047 511
+\placeholder{diagram}{Series resistors. Black rectangular circuit, battery in left side, zigzag resistor R1 in top side, zigzag resistor R2 in right side.}
+1. Find the polar form of P when the resistors are placed in series.
+\answer{(P=r_1\operatorname{cis}\theta_1+r_2\operatorname{cis}\theta_2)}
+2. Find the polar form of P when the resistors are placed in parallel.
+\answer{(P=r_1r_2\operatorname{cis}(\theta_1+\theta_2))}
+\te{Printed parallel answer gives only the product; likely the product divided by (r_1\operatorname{cis}\theta_1+r_2\operatorname{cis}\theta_2).}
+3. If the number of parallel resistors is 3, how do you develop a total impedance formula?
+\answer{First, combine two resistors and find their total impedance. Then, combine the resulting equation with the third resistor to give the total impedance.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{8-5 Mathematical Literacy and Vocabulary}
+1. Review the process and justifications for finding (z^3) in rectangular form, if (z=3-3i).
+\begin{tabular}{lll}
+Step 1: & (z^3=(3-3i)^3) & Substitute the value of z. \\
+Step 2: & (=[3\sqrt2\operatorname{cis}(-\frac\pi4)]^3) & Convert to polar form. \\
+Step 3: & (=(3\sqrt2)^3\operatorname{cis}3(-\frac\pi4)) & Apply the Power Formula. \\
+Step 4: & (=54\sqrt2\operatorname{cis}(-\frac{3\pi}4)) & Simplify the coefficient of cis. \\
+Step 5: & (=-54-54i) & Convert to rectangular form. \\
+\end{tabular}
+2. Complete the steps of the solution to find (z^{10}) in rectangular form, if (z=\sqrt3-i). Write the justification for each step of the solution.
+\begin{tabular}{lll}
+Step 1: & (z^{10}=\answer{(\sqrt3-i)^{10}}) & \answer{Substitute the value of z.} \\
+Step 2: & (=\answer{[2\operatorname{cis}(\frac{11\pi}6)]^{10}}) & \answer{Convert to polar form.} \\
+Step 3: & (=\answer{(2^{10})[\operatorname{cis}10(\frac{11\pi}6)]}) & \answer{Apply the power formula.} \\
+Step 4: & (=\answer{1024\operatorname{cis}(\frac{110\pi}6)}) & \answer{Simplify the coefficient of cis.} \\
+Step 5: & (=\answer{512+512\sqrt3i}) & \answer{Convert to rectangular form.} \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+Solve the system of equations by graphing.
+(y=3x+4)
+(y=-2x+4)
+Use the graphing tool to graph the system.
+Click to enlarge graph.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+% FIG 75 584 978 1035 1300
+\placeholder{illustration}{Black landscape tablet with home button left, white MathXL screen. System equations left, empty coordinate grid upper right, arrowed x,y axes, unit grid and labels -10,-8,...,10. Question Help menu Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Footer Review progress, Question 5 of 14, Go, Back, Next, Check Answer, Clear All; 1 part remaining.}
+\end{te-addendum}
+
+\end{document}

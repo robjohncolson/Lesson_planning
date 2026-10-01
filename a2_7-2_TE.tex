@@ -1,0 +1,979 @@
+\documentclass{article}
+% Source: Topic_07_Teacher_Edition.pdf, PDF pages25-37 (printed pages354A-362B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 25: 354A Lesson Overview
+\begin{lesson-meta}
+lesson: 7-2
+title: Evaluating Trigonometric Functions
+standards: none printed
+practices: none printed
+objective: I can use special triangles to find values of trigonometric functions in any quadrant.
+
+essential question: How can you use the unit circle to find values of trigonometric functions?
+
+\textbf{VOCABULARY}
+\item cosecant
+\item cotangent
+\item reciprocal trigonometric functions
+\item reference angle
+\item secant
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 7-2 \\
+Title & Evaluating Trigonometric Functions \\
+Standards & none printed \\
+I CAN Objective & I can use special triangles to find values of trigonometric functions in any quadrant. \\
+Essential Question & How can you use the unit circle to find values of trigonometric functions? \\
+Lesson Vocabulary & cosecant; cotangent; reciprocal trigonometric functions; reference angle; secant \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Understand reference angles in the unit circle.
+\item Use reference angles to evaluate trigonometric functions and their reciprocal functions.
+\item Use the Pythagorean Identity to find the sine, cosine, and quadrant of an angle.
+Essential Understanding. Reference angles triangles are used to evaluate the six trigonometric functions on the unit circle.
+\te{Printed ``Reference angles triangles''; likely ``Reference triangles''.}
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Extended the definition of angles to all real numbers.
+\item Defined the sine, cosine, and tangent of angles based on coordinates on the unit circle.
+In this lesson, students:
+\item Use reference angles on the unit circle to extend trigonometric functions to all real numbers.
+Increasing Coherence. Examples 3 and 4 are not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Graph trigonometric functions.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that a unit circle can be used to extend the trigonometric functions to all real numbers.
+\item Students solve real-world problems, such as finding the position of a rescue team given the radius of the circle and reference angle.
+\textbf{Mathematics Overview}
+Students use reference triangles on the unit circle to investigate trigonometric ratios and the Pythagorean Identity. They then extend that understanding to any circle centered at the origin.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively. Students use what they know about the relationships between angle measures in specific types of triangles, such as the 45°-45°-90° and 30°-60°-90° triangles, to help them find the sine and cosine of the acute angles.
+Look for and Make Use of Structure. Students use the symmetry of the unit circle to relate trigonometric function values of angles with the same reference angle.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com. Program Resources.
+\textbf{NEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+cosecant & cosecante \\
+cotangent & cotangente \\
+reciprocal trigonometric functions & funciones trigonométricas recíprocas \\
+reference angle & ángulo de referencia \\
+secant & secante \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Discuss the meaning of sine, cosine, and tangent, and the reciprocal trigonometric functions secant, cosecant, and cotangent.
+The reciprocal of the sine function is the blank function. \answer{cosecant}
+The reciprocal of the cosine function is the blank function. \answer{secant}
+The reciprocal of the tangent function is the blank function. \answer{cotangent}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 25 933 755 1088 938
+\placeholder{illustration}{Student Companion cover: dark background with a glowing purple, blue, and orange sphere of rings; Student Companion at top, enVision Algebra 2 and SAVVAS below.}
+\end{te-addendum}
+% Source page 26: 354B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students explore the relationship between the sine and cosine of an angle and the intersection of the terminal side of an angle and the unit circle. This activity prepares students for using the unit circle and reference angles to evaluate the trigonometric functions of any angle.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in Student Companion.
+Explore \& Reason is Powered by Desmos. Activities are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+The graph shows the terminal sides of an angle with measure (\theta) and its supplement, (180-\theta), on the unit circle.
+% FIG 26 1020 638 1180 760
+\placeholder{graph}{Black unit circle centered at O on arrowed x and y axes, ticks -1 and 1 on each axis. Red terminal points in Quadrants I and II labeled (x,y) and (?,?). Blue radii from O; red counterclockwise arcs from positive x-axis labeled theta and 180-theta.}
+A. How are the coordinates of the intersection of the terminal side of an angle with measure (\theta) and the unit circle related to the sine and cosine of the angle?
+\answer{The x-coordinates are equal to the cosine of angle, and the y-coordinates are equal to the sine of the angle.}
+B. What do you notice about (\theta) and the measure of the acute angle formed by the terminal side of (180-\theta) and the x-axis?
+\answer{The acute angles have the same measure.}
+C. Draw the terminal sides of angles in Quadrants III and IV that form the same acute angle with the x-axis as the angles in Quadrants I and II. How are these angles related to (\theta)?
+\answer{(180°+\theta) and (360-\theta).}
+% FIG 26 923 1075 1110 1244
+\placeholder{graph}{Sample student work C: black unit circle centered at red O, arrowed x/y axes, ticks -1 and 1 and light blue half-unit grid. Four red terminal points symmetric across both axes; upper-right (x,y) and angle theta. Blue radius to upper-right, red to upper-left, green to both lower points.}
+D. Communicate Precisely How are all four terminal sides related geometrically on the coordinate plane?
+\answer{They are reflections over the coordinate axes.}
+\te{Digital screen repeats the introductory sentence and parts A and B, with Enter your answer boxes, Go back, ESSENTIAL QUESTION, and SOLUTION. In digital part A, the phrase ``measure theta'' is printed.}
+% FIG 26 907 253 1105 473
+\placeholder{graph}{Digital Desmos graph of the same unit circle: orange circle and terminal points (?,?) and (x,y), blue upper-right radius, orange upper-left radius, angle arcs theta and 180-theta, faint square grid; orange circle centered at plotted 0, viewport extends roughly two radii each way with zoom controls.}
+\end{model-discuss}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving.
+Q: What do you notice about the terminal sides of the angles (\theta) and (180-\theta)?
+\answer{They are symmetric about the y-axis.}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics.
+Q: What do the values of (x) and (y) represent when determining the sine and cosine of (\theta)?
+\answer{the side lengths of a right triangle formed by the x-axis, the line drawn from the point (x,y) to the origin, and the vertical line drawn from the point (x,y) to the x-axis}
+Q: How are the coordinates of the intersection of the unit circle with the terminal sides of the angles (\theta) and (180-\theta) related?
+\answer{The x-coordinates are the same number with the opposite sign, while the y-coordinates are identical.}
+For Early Finishers.
+Q: If (\theta=30°), what are the coordinates of the intersection of the unit circle with the terminal sides in each quadrant?
+\answer{Quadrant I: (\frac{\sqrt3}{2},\frac12), Quadrant II: (-\frac{\sqrt3}{2},\frac12), Quadrant III: (-\frac{\sqrt3}{2},-\frac12), Quadrant IV: (\frac{\sqrt3}{2},-\frac12)}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse.
+Q: How does the unit circle help to find the values of the sine and cosine of any angle (\theta)?
+\answer{The unit circle defines the length of the hypotenuse of a right triangle containing angle (\theta). Since the hypotenuse always equals 1 unit, the sine and cosine are the lengths of the other two sides of the reference triangle.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with EXPLORE \& REASON. Reason When you connect the four points on the unit circle, the figure is a rectangle. For what angle (\theta) is that rectangle a square?
+\answer{(\frac\pi4), 45°}
+\end{te-addendum}
+% Source page 27: 354 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Students learn to use the unit circle and reference angles in evaluating trigonometric functions. Students also learn to evaluate trigonometric functions of any angle when solving real-world problems.
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Find Reference Angles}
+CONCEPTUAL UNDERSTANDING.
+What is a reference angle?
+A reference angle is the acute angle formed between the terminal side of an angle and the x-axis.
+% FIG 27 798 295 919 438
+\placeholder{graph}{Unit circle centered O, arrowed x/y axes labeled -1,1. Red terminal radius in Quadrant II with angle 130°; blue acute reference angle between terminal radius and negative x-axis labeled 50°. Callout: The reference angle for 130° is 180°-130°=50°.}
+% FIG 27 908 295 1037 438
+\placeholder{graph}{Unit circle centered O, x/y axes ticks -1,1. Red terminal radius in Quadrant III and counterclockwise angle 7pi/6; blue acute reference angle pi/6 above terminal radius and below negative x-axis. Callout: The reference angle for 7pi/6 is 7pi/6-pi=pi/6.}
+% FIG 27 1010 295 1155 438
+\placeholder{graph}{Unit circle centered O, x/y axes ticks -1,1. Red terminal radius in Quadrant IV and counterclockwise angle 7pi/4; blue acute reference angle pi/4 below positive x-axis. Callout: The reference angle for 7pi/4 is 2pi-7pi/4=pi/4.}
+Reference angles given with the location of the terminal side of an angle are helpful for finding trigonometric values of angles, especially special angles.
+\te{HAVE A GROWTH MINDSET What other strategies can you try when you get stuck?}
+\answer{The reference angle for 130° is (180°-130°=50°). The reference angle for (\frac{7\pi}6) is (\frac{7\pi}6-\pi=\frac\pi6). The reference angle for (\frac{7\pi}4) is (2\pi-\frac{7\pi}4=\frac\pi4).}
+\end{example}
+\begin{tryit}{1}
+Find the reference angles.
+a. 350°
+b. (\frac{2\pi}3)
+c. (\frac{5\pi}4)
+\answer{a. 10° b. (\frac\pi3) c. (\frac\pi4)}
+\end{tryit}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions}
+Q: How can you use information in the diagram about the different quadrants to help you sketch the angle?
+\answer{The diagram can help you identify the quadrant that the terminal side of the angle lies in.}
+Q: Is the terminal side of an angle always in a quadrant? Explain.
+\answer{No; the terminal side of an angle could be on the x- or y-axis, whenever the measure of the angle is a multiple of 90°.}
+Q: Can two different angles have the same reference angle?
+\answer{Yes; the reference angle is the angle formed between the terminal side of the angle and the x-axis. A 110° angle and 250° angle both have a 70° reference angle.}
+Q: Do angles in Quadrant I have reference angles?
+\answer{Yes; the measure of the reference angle is the same as the measure of the acute angle formed by the x-axis and the terminal side.}
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Have a Growth Mindset: Try a Different Strategy When You're Stuck}
+There are often many ways to solve a problem. You don't have to give up when you're stuck. Ask: What can you tell yourself when you are stuck? How can you use what you know to find other ways to solve a problem?
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Additional Example 5}
+Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.
+Corryn has hidden a geocache at some point along a 1-mile radius around the meeting point of her group. The only clue she has provided is that (\cot\theta=1) where (\theta) is the angle she traveled from the meeting point. Indicate on the unit circle where you would look for the geocache.
+If (\cot\theta=1), then (\cos\theta=\sin\theta) and the two side lengths are the same. The angles where this occurs are when the reference angle is 45° AND both coordinates of the terminal side are either positive or negative.
+\answer{The points where the group should look are 45° north of east (Quadrant I) and 45° south of west (Quadrant III).}
+% FIG 27 362 935 523 1068
+\placeholder{graph}{Unit circle centered at orange O on square quarter-unit grid. Arrowed x-axis East/West and y-axis North/South, -1 and 1 ticks. Blue diameter southwest to northeast, orange theta=45° in Quadrant I.}
+Example 5 Students transition to using reciprocal functions to solve a real-world problem.
+Q: How far would you need to travel to the hiding place if you traveled only along north-south or east-west paths?
+\answer{The sine and cosine of 45° is (\frac{\sqrt2}{2}), so the total distance traveled would be (2(\frac{\sqrt2}{2})) or (\sqrt2), or approximately 1.4 mi.}
+\end{te-addendum}
+\begin{te-addendum}{6}{PurposefulQuestions}
+\textbf{Additional Example 6}
+Go back. ESSENTIAL QUESTION. SOLUTION. TRY ANOTHER ONE.
+What is (\sin\theta) if (\cos\theta=-0.8) and (\theta) is in Quadrant III?
+(\sin^2\theta+\cos^2\theta=1)
+(\sin^2\theta+(-0.8)^2=1)
+(\sin^2\theta+0.64=1)
+(\sin^2\theta=0.36)
+(\sin\theta=\pm0.6)
+Since (\theta) is in Quadrant III, (\sin\theta) is negative. Therefore, (\sin\theta=-0.6).
+\answer{(\sin\theta=-0.6)}
+Example 6 Students increase their understanding of relationships between the sine and cosine functions by applying the Pythagorean identity.
+Q: How would your answer change if you did not know that (\theta) was in Quadrant III?
+\answer{Since (\cos\theta) is negative, (\theta) must be in either in Quadrant II or III. But the sign of the sine changes between the two quadrants, so you would not know the complete answer.}
+\end{te-addendum}
+% Source page 28: 355 Understand & Apply
+\begin{te-addendum}{1}{PurposefulQuestions}
+EXAMPLE 1 CONTINUED.
+Q: Suppose an angle has measure (x), with (-90<x<90). What do you notice about the measures of the reference angles in Quadrant I or Quadrant IV?
+\answer{If the angle is in Quadrant I, the measure of the reference angle is equal to the positive angle measure. If the angle is in Quadrant IV, the measure of the reference angle is equal to the absolute value of the negative angle measure.}
+\end{te-addendum}
+\begin{te-addendum}{1}{HabitsOfMind}
+Use Structure When finding a reference angle, why find the difference using multiples of 180° or (\pi) radians?
+\answer{The reference angle is the acute angle formed with the x-axis. Angles where the terminal side lies on the x-axis will always have measures that are multiples of 180° or (\pi) radians.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Trigonometric Functions and Reference Angles}
+A. How are trigonometric functions related to reference angles?
+These 4 angles all have equivalent reference angles.
+The point (x,y) on the unit circle is equivalent to (\cos\theta,\sin\theta).
+The quadrant of the terminal side determines the sign of the trigonometric function.
+% FIG 28 1014 271 1154 366
+\placeholder{graph}{Unit circle O, arrowed x/y axes, +/-1 intercepts. Four radii colored red QI, blue QII, green QIII, purple QIV. Points (x,y), (-x,y), (-x,-y), (x,-y). Angles theta, 180°-theta, 180°+theta, 360°-theta; matching acute reference angles theta between each terminal ray and nearest x-axis.}
+\begin{tabular}{lll}
+(\cos\theta=x) & (\sin\theta=y) & (\tan\theta=\frac yx) \\
+(\cos(\pi-\theta)=-x) & (\sin(\pi-\theta)=y) & (\tan(\pi-\theta)=-\frac yx) \\
+(\cos(\pi+\theta)=-x) & (\sin(\pi+\theta)=-y) & (\tan(\pi+\theta)=\frac yx) \\
+(\cos(2\pi-\theta)=x) & (\sin(2\pi-\theta)=-y) & (\tan(2\pi-\theta)=-\frac yx) \\
+\end{tabular}
+\answer{The quadrant of the terminal side determines the sign of the trigonometric function.}
+B. Given that (\cos75°\approx0.26) and (\sin75°\approx0.97), what are the cosine, sine and tangent of 105° and 285°?
+The reference angle for 105° is (180°-105°=75°). Its terminal side is in Quadrant II, so (x) is negative and (y), is positive.
+(\cos105°\approx-0.26)
+(\sin105°\approx0.97)
+(\tan105°\approx\frac{0.97}{-0.26}\approx-3.73)
+The reference angle for 285° is (360°-285°=75°). Its terminal side is in Quadrant IV, so (x) is positive and (y), is negative.
+(\cos285°\approx0.26)
+(\sin285°\approx-0.97)
+(\tan285°\approx\frac{-0.97}{0.26}\approx-3.73)
+% FIG 28 1003 530 1160 653
+\placeholder{graph}{Unit circle O on arrowed x/y axes +/-1. Red radius to (0.26,0.97), blue radius to (-0.26,0.97), green radius to (0.26,-0.97). Arcs from positive x-axis labeled red 75°, blue 105°, green 285°.}
+\te{USE APPROPRIATE TOOLS The point of intersection of the terminal side of an angle and the unit circle is (\cos\theta,\sin\theta). If your diagram is labeled correctly, you may read these values directly.}
+\answer{(\cos105°\approx-0.26), (\sin105°\approx0.97), (\tan105°\approx-3.73); (\cos285°\approx0.26), (\sin285°\approx-0.97), (\tan285°\approx-3.73).}
+\end{example}
+\begin{tryit}{2}
+Given that the terminal side of an angle of (\frac\pi5) intersects the unit circle at about (0.81,0.59), what are the sine, cosine, and tangent of (\frac{6\pi}5)?
+\answer{(\sin\frac{6\pi}5=-0.59), (\cos\frac{6\pi}5=-0.81), (\tan\frac{6\pi}5=0.73)}
+\end{tryit}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Connect and Use Mathematical Representations}
+Q: How does using the unit circle simplify the application of the Pythagorean Theorem?
+\answer{The length of the hypotenuse of the reference triangle is always 1, so the square of the hypotenuse is also 1.}
+Q: How do you determine whether the positive or negative value of the square root is correct when calculating the sine or cosine of (\theta)?
+\answer{Since the sine is the y-coordinate of the terminal point, it is positive when the terminal point is in Quadrant I or II and negative when it is in Quadrant III or IV. Since the cosine is the x-coordinate of the terminal point, it is positive when the terminal point is in Quadrant I or IV and negative when it is in Quadrant II or III.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How can you find the cosine when the value of the sine is known?
+\answer{Find the numeric value for (x) by using the Pythagorean Theorem with the hypotenuse equaling 1 and the value of the sine as one of the legs. Then apply the sign based on the quadrant of the terminal side.}
+\end{te-addendum}
+% Source page 29: 356 Understand & Apply
+\begin{example}{3}
+\textbf{Use Special Right Triangles in the Unit Circle to Evaluate Trigonometric Functions}
+A. Find the Sine and the Cosine of (\frac\pi4).
+The terminal side of (\theta=\frac\pi4) intersects the unit circle at (\frac{\sqrt2}{2},\frac{\sqrt2}{2}). You can draw a 45°-45°-90° right triangle in the circle.
+(\sin\frac\pi4=\frac{\sqrt2}{2})
+(\cos\frac\pi4=\frac{\sqrt2}{2})
+% FIG 29 980 250 1136 356
+\placeholder{graph}{Unit circle O on arrowed x/y axes +/-1, red radius 1 to (sqrt2/2,sqrt2/2), vertical red leg to positive x-axis and square right-angle mark. Red pi/4 arc from positive x-axis.}
+\te{LOOK FOR RELATIONSHIPS What are the leg lengths of a 45°-45°-90° triangle that has a hypotenuse length of 1?}
+\answer{(\sin\frac\pi4=\frac{\sqrt2}{2}), (\cos\frac\pi4=\frac{\sqrt2}{2})}
+B. Find the Sine and the Cosine of (\frac\pi6) and (\frac\pi3).
+The terminal side of (\theta=\frac\pi6) intersects the unit circle at (\frac{\sqrt3}{2},\frac12) and the terminal side of (\theta=\frac\pi3) intersects the unit circle at (\frac12,\frac{\sqrt3}{2}). You can draw 30°-60°-90° triangles as needed.
+(\sin\frac\pi6=\frac12)
+(\cos\frac\pi6=\frac{\sqrt3}{2})
+(\sin\frac\pi3=\frac{\sqrt3}{2})
+(\cos\frac\pi3=\frac12)
+% FIG 29 842 442 993 542
+\placeholder{graph}{Unit circle O on arrowed x/y axes +/-1. Red radius 1 at pi/6 to (sqrt3/2,1/2), perpendicular vertical leg to x-axis with right-angle square and pi/6 arc.}
+% FIG 29 1005 438 1141 541
+\placeholder{graph}{Unit circle O on arrowed x/y axes +/-1. Red radius 1 at pi/3 to (1/2,sqrt3/2), perpendicular vertical leg to x-axis with right-angle square and pi/3 arc.}
+\answer{(\sin\frac\pi6=\frac12), (\cos\frac\pi6=\frac{\sqrt3}{2}); (\sin\frac\pi3=\frac{\sqrt3}{2}), (\cos\frac\pi3=\frac12)}
+\end{example}
+\begin{tryit}{3}
+Find the tangents of (\frac\pi6), (\frac\pi4), and (\frac\pi3).
+\answer{(\tan\frac\pi6=\frac{\sqrt3}{3}), (\tan\frac\pi4=1), (\tan\frac\pi3=\sqrt3)}
+\end{tryit}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Use Special Right Triangles in the Unit Circle to Find Trigonometric Functions}
+Connect and Use Mathematical Representations.
+PART A.
+Q: How can the coordinates of the terminal point be used to calculate the tangent of an angle?
+\answer{Tangent is equal to sine divided by cosine. So using the coordinates of the terminal point, it would be the y-coordinate divided by the x-coordinate.}
+PART B.
+Q: Why is a reference triangle not helpful in this case?
+\answer{The terminal point lies on the x-axis, so the coordinates of the terminal point are known.}
+\te{Printed Part B teacher question and answer describe a terminal point on the x-axis; likely misplaced, since student Part B uses pi/6 and pi/3.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: Why do you need to know in which quadrant the terminal point lies in order to evaluate the tangent of an angle?
+\answer{The quadrant location determines the sign of the sine and cosine values, which affects the calculation of the tangent.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+Use with EXAMPLES 2, 3, \& 4. Make Sense and Persevere If (\sin\theta=\frac5{13}) and (\tan\theta<0), what is the value of (\cos\theta)? Explain.
+\answer{(-\frac{12}{13}); Answers may vary. Sample: If (\sin\theta>0) and (\tan\theta<0), then (\cos\theta<0). Using the Pythagorean Theorem, (\cos\theta=-\frac{12}{13}).}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Find Trigonometric Functions with Special Angles as Reference Angles}
+Pose Purposeful Questions. PART A.
+Q: How would you draw a reference triangle in the case where (\theta) is greater than 180°?
+\answer{The reference triangle would be drawn for the reference angle of (\theta) below the x-axis.}
+Q: Are the signs of the sine and cosine of the reference angle for (\theta) always the same as (\theta)?
+\answer{No, the signs for the sine and cosine of the reference angle for (\theta) are always positive, but the signs of the sine and cosine of (\theta) depend on the quadrant that the reference angle is in.}
+\te{Printed ``quadrant that the reference angle is in''; likely the quadrant of theta.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 Help students understand how to calculate the tangent using sine and cosine, and the importance of the quadrant of the terminal point in the calculation.
+\item The angle 150° has a reference angle of 30°.
+\item (\tan\theta=\frac{\sin\theta}{\cos\theta})
+\item The terminal point coordinates are (\cos\theta,\sin\theta).
+Q: Use the coordinates of the terminal point to evaluate the tangent for 30° and 150°.
+\answer{(\tan30°=\frac{\sqrt3}{3}), (\tan150°=-\frac{\sqrt3}{3})}
+Q: What is different about the evaluation of the tangent for the two angles?
+\answer{Since the cosine for 150° is negative but the sine is positive, the tangent is negative.}
+% FIG 29 764 1090 1138 1328
+\placeholder{graph}{Black unit circle centered O on x/y axes with arrows, quarter-unit grid and labels -1,-0.5,0.5,1. Blue radii to (-sqrt3/2,1/2) and (sqrt3/2,1/2), coordinates printed blue; theta=30° above right radius.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Evaluate Trigonometric Functions with Special Angles as Reference Angles}
+A. What are the sine, cosine, and tangent of (\frac{5\pi}4)?
+The terminal side of the angle is in Quadrant III. The reference angle is (\frac\pi4), or 45°.
+(\sin\frac{5\pi}4=-\frac{\sqrt2}{2})
+(\cos\frac{5\pi}4=-\frac{\sqrt2}{2})
+(\tan\frac{5\pi}4=\frac{-\frac{\sqrt2}{2}}{-\frac{\sqrt2}{2}}=1)
+% FIG 29 976 659 1135 752
+\placeholder{graph}{Unit circle O with arrowed x/y axes +/-1. Red radius in Quadrant III to (-sqrt2/2,-sqrt2/2) and counterclockwise 5pi/4 arc from positive x-axis; blue pi/4 reference arc below negative x-axis.}
+\answer{(\sin\frac{5\pi}4=-\frac{\sqrt2}{2}), (\cos\frac{5\pi}4=-\frac{\sqrt2}{2}), (\tan\frac{5\pi}4=1)}
+% Source page 30: 357 Example 4 continued
+B. What are the sine, cosine, and tangent of 330°?
+The terminal side of the angle is in Quadrant IV. The reference angle is 30°, or (\frac\pi6).
+(\sin330°=-\frac12)
+(\cos330°=\frac{\sqrt3}{2})
+(\tan330°=\frac{-\frac12}{\frac{\sqrt3}{2}}=-\frac1{\sqrt3}=-\frac{\sqrt3}{3})
+% FIG 30 997 241 1152 350
+\placeholder{graph}{Unit circle O, arrowed x/y axes +/-1. Red terminal radius in Quadrant IV to (sqrt3/2,-1/2), red 330° counterclockwise arc and blue reference angle 30° below positive x-axis.}
+\te{STUDY TIP Recall that in a 30°-60°-90° right triangle, if the shorter leg has length x, the hypotenuse has length 2x, and the longer leg has length (x\sqrt3).}
+\answer{(\sin330°=-\frac12), (\cos330°=\frac{\sqrt3}{2}), (\tan330°=-\frac{\sqrt3}{3})}
+C. What are the sine, cosine, and tangent of (\frac{2\pi}3)?
+The terminal side of the angle is in Quadrant II. The reference angle is (\frac\pi3), or 60°.
+(\sin\frac{2\pi}3=\frac{\sqrt3}{2})
+(\cos\frac{2\pi}3=-\frac12)
+(\tan\frac{2\pi}3=\frac{\frac{\sqrt3}{2}}{-\frac12}=-\sqrt3)
+% FIG 30 977 386 1138 495
+\placeholder{graph}{Unit circle O, arrowed x/y axes +/-1. Red terminal radius to (-1/2,sqrt3/2), counterclockwise red angle 2pi/3, blue pi/3 reference angle above negative x-axis.}
+\answer{(\sin\frac{2\pi}3=\frac{\sqrt3}{2}), (\cos\frac{2\pi}3=-\frac12), (\tan\frac{2\pi}3=-\sqrt3)}
+\end{example}
+\begin{tryit}{4}
+Find the sine, cosine, and tangent of angles (\frac{4\pi}3) and -210°.
+\answer{(\sin\frac{4\pi}3=-\frac{\sqrt3}{2}), (\cos\frac{4\pi}3=-\frac12), (\tan\frac{4\pi}3=\frac{\sqrt3}{3}); (\sin(-210°)=\frac12), (\cos(-210°)=-\frac{\sqrt3}{2}), (\tan(-210°)=-\frac{\sqrt3}{3})}
+\te{Printed (\tan\frac{4\pi}3=\frac{\sqrt3}{3}); likely (\sqrt3).}
+\end{tryit}
+\begin{te-addendum}{4}{PurposefulQuestions}
+EXAMPLE 4 CONTINUED. PART B.
+Q: Why is the sine negative when the terminal point is in Quadrant IV?
+\answer{Quadrant IV is below the x-axis, where all y-values are negative.}
+Q: Can more than one angle have the same reference angle?
+\answer{Yes, since the reference angle is the acute angle formed with the x-axis, all angles that have the same angle measure above or below the x-axis would have the same reference angle.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+Use Structure In which quadrants do the coordinates of the terminal point of an angle (\theta) result in a negative value for (\tan\theta)? Explain.
+\answer{Quadrants II and IV; In Quadrants II and IV, the x- and y-coordinates of the point on the unit circle have opposite signs.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Use Reciprocal Trigonometric Identities}
+What are the six basic trigonometric functions for angle (\theta)?
+In addition to sine, cosine, and tangent, there are three more ratios that are defined as reciprocal trigonometric functions.
+Cosecant: (\csc\theta=\frac1{\sin\theta})
+Secant: (\sec\theta=\frac1{\cos\theta})
+Cotangent: (\cot\theta=\frac1{\tan\theta}), also (\cot\theta=\frac{\cos\theta}{\sin\theta})
+% FIG 30 997 627 1151 734
+\placeholder{graph}{Unit circle O, arrowed x/y axes +/-1. Red radius in Quadrant I to (sqrt3/2,1/2), red positive-x initial side and red angle theta.}
+\begin{tabular}{ll}
+(\sin\theta=\frac12) & (\csc\theta=\frac21=2) \\
+(\cos\theta=\frac{\sqrt3}{2}) & (\sec\theta=\frac2{\sqrt3}(\frac{\sqrt3}{\sqrt3})=\frac{2\sqrt3}{3}) \\
+(\tan\theta=\frac{\sqrt3}{3}) & (\cot\theta=\frac3{\sqrt3}=\frac{\sqrt3\sqrt3}{\sqrt3}=\sqrt3) \\
+\end{tabular}
+\answer{(\sin\theta=\frac12), (\cos\theta=\frac{\sqrt3}{2}), (\tan\theta=\frac{\sqrt3}{3}), (\csc\theta=2), (\sec\theta=\frac{2\sqrt3}{3}), (\cot\theta=\sqrt3)}
+\end{example}
+\begin{te-addendum}{5}{GeneralizeETP}
+Connect and Use Mathematical Representations.
+Q: How do you determine the denominator for the secant and cosecant functions?
+\answer{The denominator of the secant function is the x-coordinate of the terminal point, while the denominator of the cosecant function is the y-coordinate of the terminal point, since they are reciprocals of the cosine and sine functions.}
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLES 4 and 7)
+SPEAKING BEGINNING Display the words reference and refer. Discuss the difference in pronunciation: REF-er-ence versus re-FER. The emphasis is placed on the first syllable for the noun reference but is placed on the second syllable for the verb refer. Display the following word pairs that follow the same pattern and help students to pronounce the words.
+Q: conference/confer \answer{CON-fer-ence/con-FER}
+Q: excellence/excel \answer{EX-cel-lence/ex-CEL}
+Q: preference/prefer \answer{PRE-fer-ence/pre-FER}
+Q: inference/infer \answer{IN-fer-ence/in-FER}
+READING DEVELOPING There are many key words in trigonometry that are vital to solving problems correctly.
+Q: What does it mean if a side is opposite (\theta)? \answer{The side is across from the angle (\theta).}
+Q: What does it mean to say a side is adjacent to (\theta)? \answer{The side is next to the angle (\theta) and helps form the angle (\theta).}
+Q: Is the hypotenuse opposite or adjacent to (\theta)? \answer{Adjacent, it is next to the angle (\theta) and is one of the lines that helps form the angle (\theta).}
+Q: True or False: The hypotenuse is adjacent to the right angle of the reference triangle. \answer{False}
+WRITING EXPANDING Display the following definitions of the word radius: (1) a straight line from the center of a circle to the edge, (2) a specified distance from a point in all directions, and (3) a bone in the human forearm.
+Q: Write a sentence for each of the three definitions of the word radius.
+\answer{The radius of the circle is 10 centimeters. The students at the school live within a twenty-mile radius of the building. DeSanto broke his radius while skateboarding.}
+Q: Which definition is used in the example? \answer{the first}
+\end{te-addendum}
+% Source page 31: 358 Understand & Apply
+\begin{tryit}{5}
+Write the six trigonometric functions for the given angle (\theta).
+a.
+% FIG 31 826 256 992 369
+\placeholder{graph}{Unit circle O with arrowed x/y axes +/-1. Red counterclockwise angle theta terminating in Quadrant IV at (5/13,-12/13), red radius to this point.}
+b.
+% FIG 31 965 256 1152 365
+\placeholder{graph}{Unit circle O with arrowed x/y axes +/-1. Red counterclockwise angle theta terminating in Quadrant III at (-35/37,-12/37), red radius to this point.}
+\answer{a. (\sin\theta=-\frac{12}{13}), (\cos\theta=\frac5{13}), (\tan\theta=-\frac{12}{5}), (\csc\theta=-\frac{13}{12}), (\sec\theta=\frac{13}{5}), (\cot\theta=-\frac5{12}); b. (\sin\theta=-\frac{12}{37}), (\cos\theta=-\frac{35}{37}), (\tan\theta=\frac{12}{35}), (\csc\theta=-\frac{37}{12}), (\sec\theta=-\frac{37}{35}), (\cot\theta=\frac{35}{12})}
+\end{tryit}
+\begin{te-addendum}{5}{GeneralizeETP}
+EXAMPLE 5 CONTINUED. Connect and Use Mathematical Representations.
+Q: How can you use the terminal point on the unit circle to find the cotangent?
+\answer{Use the x-coordinate of the terminal point divided by the y-coordinate of the terminal point.}
+\end{te-addendum}
+\begin{te-addendum}{5}{CommonError}
+Try It! 5 Some students may incorrectly use the x-coordinate of the terminal point of the angle for the denominator of the cosecant. Have students use the standard ratio of (\csc\theta=\frac1{\frac{opposite}{hypotenuse}}), where (\frac{opposite}{hypotenuse}=\frac y1=y), to see that it is the y-coordinate that should be used.
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Use the Pythagorean Identity (\sin^2\theta+\cos^2\theta=1)}
+A. Prove the Pythagorean Identity (\sin^2\theta+\cos^2\theta=1).
+In the unit circle, for any angle (\theta) you can construct a right triangle with legs (x) and (y).
+By the Pythagorean Theorem,
+(y^2+x^2=1)
+((\sin\theta)^2+(\cos\theta)^2=1)
+(\sin^2\theta+\cos^2\theta=1)
+\te{Substitute (y=\sin\theta) and (x=\cos\theta).}
+% FIG 31 960 435 1156 556
+\placeholder{graph}{Unit circle centered O on x/y axes with arrowheads. Green labeled red intercept points (0,1), (1,0), (0,-1), (-1,0). Red terminal radius labeled 1 in Quadrant III at (cos theta,sin theta); vertical leg |sin theta| and horizontal leg |cos theta|, right-angle square. Red counterclockwise theta arc from positive x-axis.}
+\te{COMMON ERROR Be careful not to interpret the notation (\sin^2\theta) as (\sin(\theta^2)) or (\sin(\theta\cdot\theta)). The notation (\sin^2\theta) means ((\sin\theta)(\sin\theta)).}
+\answer{(y^2+x^2=1), so ((\sin\theta)^2+(\cos\theta)^2=1), or (\sin^2\theta+\cos^2\theta=1).}
+B. What are (\sin\theta) and (\tan\theta) if (\cos\theta=-\frac35) and the terminal side of (\theta) is in Quadrant III?
+Using the Pythagorean Identity,
+(\sin^2\theta+\cos^2\theta=1)
+(\sin^2\theta+(-\frac35)^2=1)
+(\sin^2\theta+\frac9{25}=1)
+(\sin^2\theta=\frac{16}{25})
+(\sin\theta=\pm\frac45)
+(\tan\theta=\frac{\sin\theta}{\cos\theta})
+(\tan\theta=\frac{-\frac45}{-\frac35}=\frac43)
+Since the angle is in Quadrant III, the y-coordinate (\sin\theta) must be negative. Therefore, (\sin\theta=-\frac45), and (\tan\theta=\frac43).
+% FIG 31 969 614 1153 723
+\placeholder{graph}{Unit circle O with arrowed x/y axes +/-1. Red counterclockwise angle theta, radius to lower-left terminal point labeled (-3/5,sin theta).}
+\answer{(\sin\theta=-\frac45), (\tan\theta=\frac43)}
+\end{example}
+\begin{tryit}{6}
+a. For (\theta) in Quadrant IV, find (\tan\theta) if (\sin\theta=-\frac8{17}).
+b. For (\theta) in Quadrant II, find (\cos\theta) if (\tan\theta=-\frac{12}{5}).
+\answer{a. (\tan\theta=-\frac8{15}) b. (\cos\theta=-\frac5{13})}
+\end{tryit}
+\begin{te-addendum}{6}{GeneralizeETP}
+Connect and Use Mathematical Representations.
+Q: How does using the unit circle simplify the application of the Pythagorean Identity?
+\answer{The length of the hypotenuse of the reference triangle is always 1, so the square of the hypotenuse is also 1.}
+Q: How do you determine whether the positive or negative value of the square root is correct when calculating the sine or cosine of (\theta)?
+\answer{Since the sine is the y-coordinate of the terminal point, it is positive when the terminal point is in Quadrant I or II and negative when it is in Quadrant III or IV. Since the cosine is the x-coordinate of the terminal point, it is positive when the terminal point is in Quadrant I or IV and negative when it is in Quadrant II or III.}
+\end{te-addendum}
+\begin{te-addendum}{6}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: How can you find the cosine when the value of the sine is known?
+\answer{Substitute the value of the sine in the Pythagorean Identity and solve for the cosine. Determine the sign of the cosine by the quadrant in which (\theta) is found.}
+\end{te-addendum}
+\begin{te-addendum}{6}{HabitsOfMind}
+Use with EXAMPLES 5 and 6. Make Sense and Persevere If (\sin\theta=\frac5{13}) and (\tan\theta<0), what is the value of (\sec\theta)? Explain.
+\answer{(-\frac{13}{12}); Answers may vary. Sample: If (\sin\theta>0) and (\tan\theta<0), then (\cos\theta<0). Using the Pythagorean Identity, (\cos\theta=-\frac{12}{13}), and (\sec\theta) is its reciprocal, so (\sec\theta=-\frac{13}{12}).}
+\end{te-addendum}
+% Source page 32: 359 Understand & Apply
+\begin{example}{7}
+\textbf{Use Any Circle Centered at the Origin}
+APPLICATION.
+A rescue team is searching a circular area in a 4-mi radius around their camp. The team travels on a path 30° east of south from the camp. What is their final position relative to their camp?
+Formulate. Draw a circle with radius 4 to represent the search perimeter with the camp as the origin. Show the path of the team by drawing a radius at 30° east of south. This corresponds to an angle of 300°.
+% FIG 32 1015 240 1180 372
+\placeholder{map}{Green terrain map overlaid with unit-spaced grid and radius-4 black circle centered O. Compass axes W/E and S/N, numeric ticks -4,-2,2,4. Black southeast radius forms 30° with south axis, ending on circle.}
+Compute. Draw a perpendicular line from the team's final position to the x-axis, creating a right triangle with hypotenuse 4.
+This triangle is similar to a triangle on the unit circle. The scale factor between the triangles is 4, since your triangle has hypotenuse 4 and the unit circle triangle has hypotenuse 1.
+The team's final position will have coordinates 4 times those of the terminal point of 300° on the unit circle. On the unit circle, the terminal point of 300° is (\frac12,-\frac{\sqrt3}{2}). So the team's final position on the search perimeter circle will be at (4(\frac12,-\frac{\sqrt3}{2})), or (2,-2\sqrt3).
+% FIG 32 1031 380 1158 502
+\placeholder{graph}{Blue radius-4 circle centered O on compass axes E/W and N/S, integer grid, ticks -4,-2,2,4. Red radius labeled 4 ends at (2,-2sqrt3); blue dashed vertical leg from x=2 to point and red origin dot.}
+Interpret. The point (2,-2\sqrt3) represents a position that is 2 mi east and about 3.5 mi south of the camp.
+\answer{The point (2,-2\sqrt3) represents a position that is 2 mi east and about 3.5 mi south of the camp.}
+\end{example}
+\begin{tryit}{7}
+What is the final position of a search team relative to the camp if they walk 30° north of due west for 5 mi from their base camp?
+\answer{(\frac{5\sqrt3}{2}\approx4.3) miles west and 2.5 miles north of the camp}
+\end{tryit}
+\begin{te-addendum}{7}{PurposefulQuestions}
+Pose Purposeful Questions.
+Q: How can the coordinates of terminal points on a unit circle be applied to a circle of any radius?
+\answer{All circles have the same 360° rotation, so the ratios of the sides of the reference triangles can be scaled by the relative length of the radius.}
+Q: How can you use a similar process for microscopic distances?
+\answer{The scaling factor would be a number smaller than 1.}
+\end{te-addendum}
+\begin{te-addendum}{7}{HabitsOfMind}
+Look for Relationships How does the length of the radius of the circle affect the cosine and sine values of 150°?
+\answer{The sine and cosine are the same, but the distances are changed.}
+\end{te-addendum}
+\begin{te-addendum}{7}{RtIExtend}
+\textbf{Advanced Students}
+USE WITH EXAMPLE 7 Have students explore the use of a scaling factor to extend evaluations with the unit circle to a real-world example.
+\item A Ferris wheel has a radius of 104 ft. You board the Ferris wheel at the bottom, 14 ft above the ground. The Ferris wheel rotates 240° counterclockwise before stopping to let on other passengers.
+Q: How far from the ground are you when the Ferris wheel stops? \answer{170 ft}
+Q: How can you determine the reference angle for the height above the x-axis?
+\answer{starts at 270° and stops at 150°, so reference angle is (180°-150°=30°)}
+Q: How is the height above the x-axis calculated?
+\answer{(\sin30°=0.5); multiplied by the circle's radius, 104 ft, it equals 52 ft.}
+\end{te-addendum}
+% Source page 33: 360 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Evaluating Trigonometric Functions}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+Q: How does the unit circle help evaluate trigonometric functions?
+\answer{When the length of the hypotenuse of the triangle is set equal to one, the ratios for the trigonometric functions are all based on the coordinates of the terminal point.}
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Evaluating Trigonometric Functions}
+A reference angle is the acute angle formed between the terminal side of an angle and the x-axis. This can help you find the coordinates of the terminal point on the unit circle.
+\textbf{Trigonometric Functions on the Unit Circle}
+GRAPHS.
+% FIG 33 860 303 980 425
+\placeholder{graph}{Unit circle O on arrowed x/y axes with quarter-unit grid and labels -1,-0.5,0.5,1. Blue hypotenuse labeled 1 from O to red (x,y) in Quadrant I, red horizontal leg x and vertical leg y, with red dots at O, (x,0), and (x,y).}
+WORDS For an angle with measure (\theta) in standard position with terminal point (x,y) on the unit circle:
+\begin{tabular}{ll}
+(\sin\theta=y) & (\csc\theta=\frac1y) \\
+(\cos\theta=x) & (\sec\theta=\frac1x) \\
+(\tan\theta=\frac yx) & (\cot\theta=\frac xy) \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you use the unit circle to find values of trigonometric functions?
+\answer{Find the point where the terminal side of the angle intersects the unit circle. The x-coordinate of this point is the cosine value of the angle and the y-coordinate is the sine value. The tangent value is equal to (\frac yx).}
+2. Error Analysis Hugo said (\sin\frac{5\pi}2=-1). Explain an error Hugo could have made.
+\answer{Hugo may have found the angle with measure (\frac{5\pi}2) by turning clockwise from the positive x-axis instead of counterclockwise.}
+3. Vocabulary What is a reference angle and how does it help you work with angles on the unit circle?
+\answer{If an angle (\theta) is in standard position, the reference triangle for (\theta) includes the acute angle formed by the x-axis and the terminal side of (\theta) which is called the reference angle. A reference angle helps you relate all angles to an angle in Quadrant I.}
+4. Reason Why is (\cos30°=\cos(-30°))?
+\answer{They have the same reference angle and are both in quadrants (I and IV respectively) where cosine is positive.}
+\textbf{Do You KNOW HOW?}
+Find the sine and cosine of each angle.
+5. (\frac{5\pi}4)
+\answer{(\sin\frac{5\pi}4=-\frac{\sqrt2}{2}); (\cos\frac{5\pi}4=-\frac{\sqrt2}{2})}
+6. 120°
+\answer{(\sin120°=\frac{\sqrt3}{2}); (\cos120°=-\frac12)}
+7. What is (\sin\theta) if (\cos\theta=\frac45) and (\theta) is in Quadrant II?
+\answer{(\sin\theta=\frac35)}
+\te{Printed positive cosine (4/5) with Quadrant II; likely cosine should be (-4/5).}
+8. What is (\cos\theta) if (\sin\theta=-\frac12) and (\theta) is in Quadrant III?
+\answer{(\cos\theta=-\frac{\sqrt3}{2})}
+Find the tangent of each angle.
+9. (\frac\pi6)
+\answer{(\tan\frac\pi6=\frac{\sqrt3}{3})}
+10. -45°
+\answer{(\tan(-45°)=-1)}
+11. Find the secant, cosecant, and cotangent of a 135° angle.
+\answer{(\sec135°=-\sqrt2); (\csc135°=\sqrt2); (\tan135°=-1)}
+\te{Printed answer labels the last function tan; likely cot, as requested. Both values are -1 here.}
+\end{concept-summary}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercise 7 Some students may incorrectly use the x-coordinate of the terminal point for the sine of the angle. Have students use the standard ratio of (\sin\theta=\frac{OPP}{HYP}) to see that it is the y-coordinate that represents the sine.
+\end{te-addendum}
+% Source page 34: 361 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+12--27, 30--40 & 12--19, 22--40 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points each \\
+\end{tabular}
+Scan the QR code to access a video tutorial.
+\te{See answers for Exercises 22--24, 28--33 on next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 21--24 & 1 \\
+1 & 13, 16--18 & 2 \\
+2 & 20, 39 & 2 \\
+3 & 12, 25, 26 & 1 \\
+4 & 19, 35 & 2 \\
+5 & 14, 15, 27--30 & 1 \\
+6 & 32, 33, 38 & 2 \\
+7 & 31, 34, 36, 40 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{12}{1}
+UNDERSTAND. Reason Nadeem said the tangent of 270° is 0. Is he correct? Explain your reasoning.
+\answer{No, the tangent of 270° is undefined because zero is in the denominator.}
+\end{practice}
+\begin{practice}{13}{2}
+Make Sense and Persevere In your own words explain how you can convert an angle measured in radians to an angle measured in degrees.
+\answer{Multiply the number of radians by (\frac{180°}{\pi}).}
+\end{practice}
+\begin{practice}{14}{1}
+Error Analysis Describe and correct the error a student made in evaluating the secant of a 135° angle.
+\te{Student work with red X: The coordinates of the terminal point on the unit circle are (-\frac{\sqrt2}{2},\frac{\sqrt2}{2}). (\sec135°=\frac{-\frac{\sqrt2}{2}}1=-\frac{\sqrt2}{2}).}
+\answer{The student found the cosine of 135° rather than its reciprocal function, secant. The secant of 135° is (\sqrt2).}
+\te{Printed positive (\sqrt2); likely (-\sqrt2).}
+\end{practice}
+\begin{practice}{15}{1}
+Generalize In which quadrant(s) are all six trigonometric functions positive? Explain.
+\answer{in Quadrant I, because that is the only quadrant in which the x-coordinate and the y-coordinate of the terminal point are both positive}
+\end{practice}
+\begin{practice}{16}{2}
+Construct Arguments Can a reference angle have a negative measure? Justify your reasoning.
+\answer{No, a reference angle must be an acute angle, which by definition must measure between 0° and 90°}
+\end{practice}
+\begin{practice}{17}{2}
+Communicate Precisely How many coterminal angles does a given angle have? Explain.
+\answer{Infinitely many since any given angle can have an infinite number of coterminal angles. If the angle is measured in degrees, you can keep adding multiples of 360° or -360°; if the angle is measured in radians, you can keep adding multiples of (2\pi) or (-2\pi) to it.}
+\end{practice}
+\begin{practice}{18}{2}
+Model With Mathematics Through how many radians does the minute hand of an analog clock rotate in 50 min?
+\answer{(\frac53\pi) radians}
+\end{practice}
+\begin{practice}{19}{2}
+Error Analysis If the coordinates of the terminal point of an angle (\theta) on the unit circle are (-\frac35,\frac45), describe and correct the error a student made in finding (\tan\theta).
+\te{Student work with red X: (\tan\theta=\frac{-\frac35}{\frac45}=-\frac34).}
+\answer{The (\tan\theta) is (\frac{\sin\theta}{\cos\theta}). The student wrote the reciprocal of the tangent. (\tan\theta=-\frac43)}
+\end{practice}
+\begin{practice}{20}{2}
+PRACTICE. Find the sine, cosine, and tangent of 165° if 15° intersects the unit circle at (0.966,0.259). SEE EXAMPLE 2
+\answer{(\sin165°=0.259), (\cos165°=-0.966), (\tan165°=-0.268)}
+\end{practice}
+\begin{practice}{21}{1}
+Identify the quadrant and reference angle for each angle. Then find the sine, cosine, and tangent for each. SEE EXAMPLES 1, 2, AND 3
+(\frac{5\pi}6)
+\answer{Quadrant II; (\sin\frac{5\pi}6=\frac12); (\cos=\frac{5\pi}6=-\frac{\sqrt3}{2}); (\tan\frac{5\pi}6=-\frac1{\sqrt3}=-\frac{\sqrt3}{3})}
+\te{Printed extra equals sign after cos; likely (\cos\frac{5\pi}6). Printed answer omits the requested reference angle.}
+\end{practice}
+\begin{practice}{22}{1}
+Identify the quadrant and reference angle for each angle. Then find the sine, cosine, and tangent for each. SEE EXAMPLES 1, 2, AND 3
+225°
+\answer{Quadrant III; (\sin225°=-\frac{\sqrt2}{2}); (\cos225°=-\frac{\sqrt2}{2}); (\tan225°=1)}
+\te{Printed answer omits the requested reference angle.}
+\end{practice}
+\begin{practice}{23}{1}
+Identify the quadrant and reference angle for each angle. Then find the sine, cosine, and tangent for each. SEE EXAMPLES 1, 2, AND 3
+270°
+\answer{y-axis; (\sin270°=-1); (\cos270°=0); coordinates of terminal point are (0,-1); (\tan270°) is undefined}
+\end{practice}
+\begin{practice}{24}{1}
+Identify the quadrant and reference angle for each angle. Then find the sine, cosine, and tangent for each. SEE EXAMPLES 1, 2, AND 3
+(\frac{29\pi}4)
+\answer{Quadrant III; (\sin\frac{29\pi}4=-\frac{\sqrt2}{2}); (\cos\frac{29\pi}4=-\frac{\sqrt2}{2}); (\tan\frac{29\pi}4=1)}
+\te{Printed answer omits the requested reference angle.}
+\end{practice}
+\begin{practice}{25}{1}
+Find the tangent of each angle. SEE EXAMPLE 3
+(\frac{7\pi}3)
+\answer{(\tan\frac{7\pi}3=\sqrt3)}
+\end{practice}
+\begin{practice}{26}{1}
+Find the tangent of each angle. SEE EXAMPLE 3
+405°
+\answer{(\tan405°=1)}
+\end{practice}
+\begin{practice}{27}{1}
+Find the six trigonometric ratios for each angle. SEE EXAMPLES 4 AND 5
+-315°
+\answer{(\sin(-315°)=\frac{\sqrt2}{2}); (\cos(-315°)=\frac{\sqrt2}{2}); (\tan(-315°)=1); (\sec(-315°)=\sqrt2); (\csc(-315°)=\sqrt2); (\cot(-315°)=1)}
+\end{practice}
+\begin{practice}{28}{1}
+Find the six trigonometric ratios for each angle. SEE EXAMPLES 4 AND 5
+(\frac{13\pi}4)
+\answer{(\sin\frac{13\pi}4=-\frac{\sqrt2}{2}); (\cos\frac{13\pi}4=-\frac{\sqrt2}{2}); (\tan\frac{13\pi}4=1); (\sec\frac{13\pi}4=-\sqrt2); (\csc\frac{13\pi}4=-\sqrt2); (\cot\frac{13\pi}4=1)}
+\end{practice}
+\begin{practice}{29}{1}
+Find the six trigonometric ratios for each angle. SEE EXAMPLES 4 AND 5
+750°
+\answer{(\sin750°=\frac12); (\cos750°=\frac{\sqrt3}{2}); (\tan750°=\frac{\sqrt3}{3}); (\sec750°=\frac{2\sqrt3}{3}); (\csc750°=2); (\cot750°=\sqrt3)}
+\end{practice}
+\begin{practice}{30}{1}
+Find the six trigonometric ratios for each angle. SEE EXAMPLES 4 AND 5
+(-\frac{2\pi}3)
+\answer{(\sin(-\frac{2\pi}3)=-\frac{\sqrt3}{2}); (\cos(-\frac{2\pi}3)=-\frac12); (\tan(-\frac{2\pi}3)=\sqrt3); (\sec(-\frac{2\pi}3)=-2); (\csc(-\frac{2\pi}3)=-\frac{2\sqrt3}{3}); (\cot(-\frac{2\pi}3)=\frac{\sqrt3}{3})}
+\end{practice}
+\begin{practice}{31}{2}
+Scientists are making an aerial study of a volcano. Their helicopter is circling at an 8 km radius around the volcano's crater, and one of the scientists notices a new vent that is 45° east of due north from the crater. What is the position of the new vent relative to the crater? SEE EXAMPLE 7
+% FIG 34 870 689 1128 885
+\placeholder{illustration}{Overhead volcano crater with smoke; black circular helicopter path centered at crater, radius westward labeled 8 km. Yellow helicopter at east side, small glowing vent near northeast circumference.}
+\answer{Sample: The point (4\sqrt2,4\sqrt2) represents a position that is about 5.7 km east and about 5.7 km north of the valley.}
+\te{Printed ``valley''; likely ``crater''.}
+\end{practice}
+\begin{practice}{32}{2}
+What is (\sin\theta) if (\cos\theta=\frac8{17}) and (\theta) is in Quadrant I? SEE EXAMPLE 6
+\answer{(\sin\theta=\frac{15}{17})}
+\end{practice}
+\begin{practice}{33}{2}
+What is (\cos\theta) if (\sin\theta=-\frac{24}{25}) and (\theta) is in Quadrant IV? SEE EXAMPLE 6
+\answer{(\cos\theta=\frac7{25})}
+\end{practice}
+% Source page 35: 362 Practice & Problem Solving
+\begin{practice}{34}{2}
+APPLY. Model With Mathematics The horizontal distance (d) (in feet) traveled by a projectile launched at an angle (\theta) and with an initial speed (v) (in feet per second) is given by the formula: (d=\frac{v^2}{32}\sin2\theta). Suppose you kick a soccer ball with an initial speed of 35 ft/sec projected at an angle of 45°. How many feet will the soccer ball travel horizontally before hitting the ground? Round to the nearest foot.
+\answer{about 38 ft}
+\end{practice}
+\begin{practice}{35}{2}
+Make Sense and Persevere A circular carnival ride has a diameter of 120 ft. Suppose you board a gondola at the bottom of the circular ride, which is 6 ft above the ground, and the ride temporarily stops. How many feet above ground are you when the ride stops?
+% FIG 35 530 534 786 764
+\placeholder{illustration}{Circular carnival ride with x/y axes through wheel center, arrowheads both ends. Starting position (0,0) printed below bottom gondola, stopping position at upper-left rim. Red counterclockwise arc from downward radius through right side to upper-left radius labeled 240°.}
+\answer{96 ft}
+\te{Printed starting position (0,0) below the bottom gondola conflicts with the diagram's axes intersecting at the wheel center.}
+\end{practice}
+\begin{practice}{36}{2}
+Make Sense and Persevere Twelve people sit at a round table. Alani, in the five o'clock seat, passes a piece of paper clockwise to Carley, at nine o'clock. What are the degree and radian measures of the angle through which the piece of paper passes?
+\answer{120°; (\frac{2\pi}3) radians}
+\end{practice}
+\begin{practice}{37}{2}
+Model With Mathematics Karmina boards one of the outer horses of a carousel that has a 32 ft diameter. She represents her starting position at the point (16,0) on a coordinate plane. The carousel rotates 300° and stops.
+a. Find the coordinates (x,y) of Karmina's horse when the ride stopped.
+b. How far from her starting position was she when the ride stopped?
+\answer{a. (8,-13.9) b. (\approx16) ft}
+\te{DOK \uncertain{2}{not listed in Item Analysis and no DOK printed next to this item; 2 inferred from adjacent applications}.}
+\end{practice}
+\begin{practice}{38}{2}
+ASSESSMENT PRACTICE. What is (\sin\theta) if (\cos\theta=-\frac5{13}) and (\theta) is in Quadrant II?
+A. (-\frac{12}{13})
+B. (-\frac8{13})
+C. (\frac8{13})
+D. (\frac{12}{13})
+\answer{D}
+\end{practice}
+\begin{practice}{39}{2}
+SAT/ACT Which of the following is (\tan(\frac{4\pi}6))?
+A. (-\sqrt3)
+B. (-\frac{\sqrt3}{2})
+C. (-\frac{\sqrt3}{3})
+D. (-\frac12)
+\answer{A}
+\end{practice}
+\begin{practice}{40}{2}
+Performance Task In navigation, the term bearing is used to describe the location of an object, or the clockwise-directed measure of the angle from due north. Suppose a ship's bearing is 30° from a lighthouse, as shown.
+% FIG 35 838 620 1098 831
+\placeholder{illustration}{Lighthouse at shore with compass N/E/S/W at base; ship offshore to right. Ray from lighthouse toward north and ray toward ship enclose 30°, clockwise from north.}
+Part A Sketch the diagram on a coordinate plane, placing the lighthouse at the origin.
+\answer{Part A See graph.}
+% FIG 35 158 825 416 1062
+\placeholder{graph}{Black radius-20 circle centered lighthouse O on compass x/East-West and y/North-South axes with arrows, square grid every 5, labels x=-20,-10,10,20 and y=-20,10,20. Blue vertical segment from O to north intercept and blue radius to ship location in Quadrant I, angle 30° from north.}
+Part B What is the measure of the angle in standard position that describes the ship's location?
+\answer{60°}
+Part C If the distance from the lighthouse to the ship is 20 mi, find the coordinates of the point that represents its position on the coordinate plane.
+\answer{The coordinates are (10,10\sqrt3).}
+\end{practice}
+% Source page 36: 362A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+Lesson Quiz is available at SavvasRealize.com. Assessment.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F84 \\
+2 & 1 & F84, F92 \\
+3 & 1 & F84 \\
+4 & 1 & F84 \\
+5 & 2 & F84 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{7-2 Lesson Quiz: Evaluating Trigonometric Functions}
+ASSESSMENT RESOURCES. Name. enVision Algebra 2. SavvasRealize.com.
+1. What are the sine and cosine of (\frac{2\pi}3)?
+\te{Choice tiles: (\frac{\sqrt3}{2}), (-\frac12), (\frac12), (-\frac{\sqrt3}{2}), (\sqrt3), 4.}
+(\sin\frac{2\pi}3=\text{blank}) (\cos\frac{2\pi}3=\text{blank})
+\answer{(\sin\frac{2\pi}3=\frac{\sqrt3}{2}), (\cos\frac{2\pi}3=-\frac12)}
+2. What is (\sin\theta) if (\cos\theta=\frac{12}{13}) and (\theta) is in Quadrant IV?
+A. (\sin\theta=\frac{12}{13})
+B. (\sin\theta=-\frac5{13})
+C. (\sin\theta=\frac5{13})
+D. (\sin\theta=-\frac{12}{13})
+\answer{B}
+3. Select all the correct statements.
+A. (\tan(-\frac{4\pi}3)=-\sqrt3)
+B. (\cos(-\frac{7\pi}4)=-\frac{\sqrt2}{2})
+C. (\cot(-\frac{11\pi}3)=-\frac{\sqrt3}{3})
+D. (\sec(\frac{7\pi}6)=-\frac{2\sqrt3}{3})
+E. (\sin(\frac{13\pi}6)=\frac12)
+\answer{A, D, E}
+4. Which of the following are true? Select all that apply.
+A. (\csc225°=-\sqrt2)
+B. (\cot225°=\sqrt2)
+C. (\cot225°=1)
+D. (\sec225°=1)
+E. (\sec225°=-\sqrt2)
+F. (\csc225°=\sqrt2)
+\answer{A, C, E}
+5. Using a two-way radio, Melissa can talk to anyone within an 8-mile radius of her location. Oscar is 30° west of south of Melissa's location. What is Oscar's exact location, relative to Melissa's location, at the greatest distance where they can talk using two-way radios?
+\te{Choice tiles: -4, (-4\sqrt3), (2\sqrt3), (-3\sqrt4), 3, -2. Coordinate blanks (blank,blank).}
+% FIG 36 992 700 1115 821
+\placeholder{graph}{Black radius-8 circle centered O at Melissa, compass East/West and North/South arrowed axes, grid spacing 2 and +/-8 labels. Black radius southwest, angle 30° between radius and south axis.}
+\answer{(-4,-4\sqrt3)}
+enVision Algebra 2 • Assessment Sourcebook. Copyright © Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+% Source page 37: 362B Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding} I.
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{7-2 Reteach to Build Understanding: Evaluating Trigonometric Functions}
+A unit circle is a circle with a radius (r) of 1 unit. For every point (P(x,y)) on the unit circle, the value of (r) is 1. Therefore, for an angle (\theta) with terminal point (x,y), (x) is the value of cosine, and (y) is the value of sine in the standard position.
+1. Draw a line from the terms in the left column to the correct answer in the right-hand column.
+\begin{tabular}{ll}
+Left column & Right-hand column \\
+(\sin\theta) & (\frac xy) \\
+(\cos\theta) & (\frac1y) \\
+(\tan\theta) & (\frac1x) \\
+(\csc\theta) & (y) \\
+(\sec\theta) & (\frac yx) \\
+(\cot\theta) & (x) \\
+\end{tabular}
+\answer{(\sin\theta) to (y); (\cos\theta) to (x); (\tan\theta) to (\frac yx); (\csc\theta) to (\frac1y); (\sec\theta) to (\frac1x); (\cot\theta) to (\frac xy).}
+% FIG 37 305 466 370 529
+\placeholder{graph}{Black unit circle centered O on arrowed x/y axes, quarter-unit grid with -0.5 and 0.5 labels. First-quadrant terminal point P(x,y), radius r=1, horizontal leg x, vertical leg y, reference angle theta at O.}
+2. Amaya says that (\sin\theta) is the x-value of the terminal point. Is she correct or incorrect? Explain.
+\answer{Incorrect; y is the value of (\sin\theta); the terminal point is labeled (\cos\theta,\sin\theta) or (x,y).}
+3. Find the values of each trigonometric ratio when coordinates of the terminal point are (6,8).
+a. (\sin\theta=y=\text{blank}) \answer{8}
+b. (\cos\theta=\text{blank}=6) \answer{x}
+c. (\tan\theta=\frac yx=\text{blank}) \answer{(\frac86)}
+d. (\csc\theta=\frac1y=\text{blank}) \answer{(\frac18)}
+e. (\sec\theta=\frac1x=\text{blank}) \answer{(\frac16)}
+f. (\cot\theta=\frac xy=\text{blank}) \answer{(\frac68)}
+\te{Printed (6,8) is not on the unit circle; likely the radius-10 normalization was omitted from the sine, cosine, cosecant, and secant answers. Printed answers retained.}
+enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice} I, O.
+Provides extra practice for each lesson. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{7-2 Additional Practice: Evaluating Trigonometric Functions}
+Find the sine and cosine of each angle.
+1. 90° \answer{1; 0}
+2. 135° \answer{(\frac{\sqrt2}{2}); (-\frac{\sqrt2}{2})}
+3. 270° \answer{-1; 0}
+4. (\frac\pi6) \answer{(\frac12); (\frac{\sqrt3}{2})}
+5. (\frac{3\pi}4) \answer{(\frac{\sqrt2}{2}); (-\frac{\sqrt2}{2})}
+6. (\frac{5\pi}6) \answer{(\frac12); (-\frac{\sqrt3}{2})}
+Find the coordinates of the point where the terminal side of each angle intersects the unit circle.
+7. (\frac{2\pi}3) \answer{(-\frac12,\frac{\sqrt3}{2})}
+8. (\frac\pi2) \answer{(0,1)}
+9. (\frac{5\pi}3) \answer{(\frac12,-\frac{\sqrt3}{2})}
+10. 315° \answer{(\frac{\sqrt2}{2},-\frac{\sqrt2}{2})}
+11. 210° \answer{(-\frac{\sqrt3}{2},-\frac12)}
+12. 240° \answer{(-\frac12,-\frac{\sqrt3}{2})}
+Solve.
+13. What is (\sin\theta) if (\cos\theta=-\frac6{10}) and the terminal side of (\theta) is in Quadrant II?
+\answer{(\frac8{10})}
+14. What is (\cos\theta) if (\sin\theta=-\frac{16}{20}) and the terminal side of (\theta) is in Quadrant III?
+\answer{(-\frac{12}{20})}
+What is the tangent of each angle?
+15. (\frac{11\pi}6) \answer{(-\frac{\sqrt3}{3})}
+16. (\frac\pi4) \answer{1}
+17. (\frac{5\pi}3) \answer{(-\sqrt3)}
+18. -750° \answer{(-\frac{\sqrt3}{3})}
+19. 30° \answer{(\frac{\sqrt3}{3})}
+20. 135° \answer{-1}
+Find the secant, cosecant, and cotangent for each angle.
+21. (\frac\pi4) \answer{(\sqrt2); (\sqrt2); 1}
+22. (\frac\pi6) \answer{(\frac{2\sqrt3}{3}); 2; (\sqrt3)}
+23. (\frac{3\pi}4) \answer{(-\sqrt2); (\sqrt2); -1}
+24. 330° \answer{(\frac{2\sqrt3}{3}); -2; (-\sqrt3)}
+25. 120° \answer{-2; (\frac{2\sqrt3}{3}); (-\frac{\sqrt3}{3})}
+26. 240° \answer{-2; (-\frac{2\sqrt3}{3}); (\frac{\sqrt3}{3})}
+27. Alejandro said the cotangent of 180° is 0. Is he correct? Explain.
+\answer{Alejandro is incorrect. Sample answer: The cotangent of 180° is undefined. (\cot180°=\frac{\cos180°}{\sin180°}=-\frac10).}
+28. Alex is standing at the 2 o'clock position on a circle in the center of a soccer field. He passes the ball to a player who is located at the 10 o'clock position. The radii to the positions of the two players forms a central angle of the circle. What are the degree and radian measures of the angle?
+\answer{120°; (\frac{2\pi}3)}
+enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment} O, A.
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{7-2 Enrichment: Evaluating Trigonometric Functions}
+A clockmaker views the face of a clock as a unit circle. In order to determine the placement of each number, he uses the graph of a unit circle to determine the terminal point of each number on the face of the clock. Fill out the table to express the terminal point of the number.
+% FIG 37 948 458 1011 522
+\placeholder{diagram}{Circular clock face with central dot, no hands, numbers 1 through 12 clockwise in usual positions, 12 top, 3 right, 6 bottom, 9 left.}
+\begin{tabular}{llll}
+Time on Clock & Terminal Point & Time on Clock & Terminal Point \\
+1 o'clock & \answer{(\frac12,\frac{\sqrt3}{2})} & 7 o'clock & \answer{(-\frac12,-\frac{\sqrt3}{2})} \\
+2 o'clock & \answer{(\frac{\sqrt3}{2},\frac12)} & 8 o'clock & \answer{(-\frac{\sqrt3}{2},-\frac12)} \\
+3 o'clock & \answer{(1,0)} & 9 o'clock & \answer{(-1,0)} \\
+4 o'clock & \answer{(\frac{\sqrt3}{2},-\frac12)} & 10 o'clock & \answer{(-\frac{\sqrt3}{2},\frac12)} \\
+5 o'clock & \answer{(\frac12,-\frac{\sqrt3}{2})} & 11 o'clock & \answer{(-\frac12,\frac{\sqrt3}{2})} \\
+6 o'clock & \answer{(0,-1)} & 12 o'clock & \answer{(0,1)} \\
+\end{tabular}
+enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I, O.
+Helps students develop and reinforce understanding of key terms and concepts.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{7-2 Mathematical Literacy and Vocabulary: Evaluating Trigonometric Functions}
+The two sets of note cards show how to find (\tan(-\frac\pi6)). The set on the left explains the thinking. The set on the right shows the steps. Write each set in the correct order.
+Think.
+\item Use the reciprocal identity for tangent to set up the ratio.
+\item Simplify the complex fraction to solve.
+\item Find the terminal point of (-\frac\pi6).
+\item Sketch the angle and its reference triangle on the unit circle.
+Write.
+% FIG 37 288 1044 357 1114
+\placeholder{graph}{Black unit circle centered O on x/y axes with arrowheads and no numeric ticks; dashed terminal radius in Quadrant IV at -pi/6.}
+\item (\text{Tangent}(-\frac\pi6)=\frac{-\frac12}{\frac{\sqrt3}{2}}=\frac{-1}{\sqrt3})
+\item The terminal point of (-\frac\pi6) is (\frac{\sqrt3}{2},-\frac12).
+\item (\frac{-1}{\sqrt3}=\frac{-\sqrt3}{3})
+\answer{Think. First, sketch the angle and its reference triangle on the unit circle. Second, find the terminal point of (-\frac\pi6). Third, use the reciprocal identity for tangent to set up the ratio. Finally, simplify the complex fraction to solve.}
+\answer{Write. 1. See graph. 2. The terminal point of (-\frac\pi6) is (\frac{\sqrt3}{2},-\frac12). 3. (\text{Tangent}(-\frac\pi6)=\frac{-\frac12}{\frac{\sqrt3}{2}}=\frac{-1}{\sqrt3}). 4. (\frac{-1}{\sqrt3}=\frac{-\sqrt3}{3}).}
+% FIG 37 298 1170 370 1238
+\placeholder{graph}{Answer 1: magenta unit circle centered O, arrowed x/y axes and no numeric ticks, magenta dashed radius into Quadrant IV at -pi/6.}
+\te{Printed ``reciprocal identity for tangent''; likely ``quotient identity for tangent''.}
+enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital screen: Exit. Solve the system of equations by graphing. (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining. Clear All. Check Answer. Review progress. Question 5 of 14. Go. Back. Next. Question Help: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print.}
+% FIG 37 814 1034 930 1157
+\placeholder{graph}{Digital graphing tool: blank x/y coordinate grid with arrowed axes, unit grid spacing and numeric labels every 2 from -10 to 10 in both directions. Question Help menu partially covers right side.}
+\end{te-addendum}
+
+\end{document}

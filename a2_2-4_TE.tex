@@ -1,0 +1,1034 @@
+\documentclass{article}
+% Source: Topic_02_Teacher_Edition.pdf, PDF pages 46-56 (printed pages 83A-89B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+% Source page 46: 83A, Lesson Overview
+\begin{lesson-meta}
+lesson: 2-4
+title: Complex Numbers and Operations
+standards: none printed
+practices: none printed
+objective: I can solve problems with complex numbers.
+
+essential question: How can you represent and operate on numbers that are not on the real number line?
+
+\textbf{VOCABULARY}
+\item complex conjugates
+\item complex number
+\item imaginary number
+\item imaginary unit (i)
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 2-4 \\
+Title & Complex Numbers and Operations \\
+Standards & none printed \\
+I CAN Objective & I can solve problems with complex numbers. \\
+Essential Question & How can you represent and operate on numbers that are not on the real number line? \\
+Lesson Vocabulary & complex conjugates; complex number; imaginary number; imaginary unit (i) \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Add, subtract, and multiply complex numbers using the properties of operations and the relation (i^2=-1).
+\item Use complex numbers to represent numbers that are not on the real number line.
+Essential Understanding. A complex number contains both real and imaginary parts. The four operations can be applied to complex numbers.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Wrote and solved quadratic equations with real solutions.
+In this lesson, students:
+\item Solve quadratic equations with complex solutions and understand that a complex number includes both real and imaginary parts.
+\item Use properties of operations to add, subtract, and multiply complex numbers.
+Increasing Coherence. Examples 4 and 5 are not necessarily expected to be addressed on high-stakes assessments.
+Later in this topic, students will:
+\item Solve quadratic equations with real and complex solutions by completing the square.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that complex numbers include the real and imaginary numbers and that the properties of operations can be used to add, subtract, and multiply complex numbers.
+\item Students apply their understanding of complex number to solve quadratic equations with complex solutions, including problems involving electrical circuits.
+\te{SavvasRealize.com. Program Resources.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+NEW VOCABULARY. English | Spanish
+\begin{tabular}{ll}
+complex conjugates & conjugados complejos \\
+complex number & número complejo \\
+imaginary number & número imaginario \\
+imaginary unit (i) & unidad imaginaria \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Discuss the use of the terms complex and imaginary in everyday life and how that relates to the way the terms are used in mathematics. Tell students that imaginary numbers include the imaginary unit (i), and a complex number is a combination of both real and imaginary numbers. Have students sort the numbers shown into the categories real, imaginary, and complex.
+(3i,14,\sqrt{2},-i,4+2i,2\sqrt{3},\sqrt{7}-i)
+\answer{Real: [14, (\sqrt{2}), (2\sqrt{3})]. Imaginary: [(3i), (-i)]. Complex: [(4+2i), (\sqrt{7}-i)].}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion cover: blue and purple spherical artwork on dark background, labeled Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students understand that the imaginary unit (i) is the number whose square is equal to (-1), so (i^2=-1). They recognize that complex numbers are written in the form (a+bi), composed of real numbers (a) and (b) and the imaginary unit (i).
+Students understand that the four basic operations can be applied to complex numbers. They use the properties of operations and the relation (i^2=-1) to perform operations on complex numbers.
+\textbf{Applying Math Practices}
+Model with Mathematics. Students use complex numbers to represent and solve problems involving voltage sources in an electrical current.
+Look For and Express Regularity in Repeated Reasoning. Students make generalizations when they use their understanding of complex numbers and the relationship between multiplication and division to write an explicit formula that can be used to find the quotient of two complex numbers.
+\end{te-addendum}
+% Source page 47: 83B, Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students identify the possible types of solutions to quadratic equations so that they can recognize when there is no real solution.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\te{SavvasRealize.com. Activity. Explore \& Reason is available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: How can you tell whether someone should be eliminated from the game?
+\answer{His or her card will contain a solution to the equation.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: Explain how you can identify the number of solutions to the equation (x^2=a) when (a>0) without calculating.
+\answer{For any positive nonzero number, there are two square roots: a positive and a negative one. So, when (a) is positive, the equation has 2 solutions.}
+For Early Finishers
+Q: What equations of the form (x^2=a) are needed to eliminate Steve, Aubrey, and Elijah?
+\answer{The equation (x^2=0) would eliminate Steve, (x^2=1) would eliminate Aubrey, and (x^2=4) would eliminate Elijah.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Encourage students to discuss all of the possible solutions to the equation in the form (x^2=a).
+Q: Are there any values for (a) for which nobody would be eliminated from the game?
+\answer{Yes; when (a) is not equal to 0, 1, 4, 9, 16, or 25.}
+Q: What values of (a) will eliminate only one person?
+\answer{Considering the entire deck of Solve It! cards, the only value of (a) that would eliminate only one person is 0.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND: Reason} Use with EXPLORE \& REASON
+Steve thought that he was a sure winner because he could not be eliminated. Is he correct? Explain. If not, write an equation of the form (x^2=a) that would eliminate Steve.
+\answer{No; Steve is incorrect because the equation (x^2=0) would eliminate him.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+A math class played a game called ``Solve It, You're Out.'' At the start of each round, students chose a card from a deck marked with integers from -5 to 5. When an equation is shown, any student whose card states the solution to the equation is eliminated. Five students remain.
+\placeholder{illustration}{Five green Solve It! cards, student names attached: Mercedes -3, Steve 0, Aubrey 1, Fatima 3, Elijah -2. Student page arranges Mercedes, Steve, Aubrey across upper row and Fatima, Elijah below. Digital version arranges Aubrey and Elijah above, Steve center, Mercedes and Fatima below.}
+A. The next equation presented was (x^2=9). Which student(s) was eliminated? Explain.
+\answer{Mercedes and Fatima should both be eliminated because ((-3)^2=9) and (3^2=9).}
+B. Construct Arguments In the next round, the equation presented was (x^2=-4). Is Elijah eliminated? Why or why not?
+\answer{Elijah is not eliminated because ((-2)^2\neq-4), ((-2)^2=4).}
+C. What is true about solutions to (x^2=a) when (a) is a positive number? When (a) is a negative number? What about when (a=0)?
+\answer{When (a>0), there will be two solutions to (x^2=a): (x=\sqrt{a}) and (-\sqrt{a}). When (a=0), there will be one solution to (x^2=a): (x^2=0), so (x=0). When (a<0), there are no real-number solutions to (x^2=a).}
+\te{SAMPLE STUDENT WORK. Digital screen repeats the stem and Part A, with Go back and Enter your answer controls. STUDENT EDITION. I CAN... solve problems with complex numbers. VOCABULARY: complex conjugates; complex number; imaginary number; imaginary unit (i). ESSENTIAL QUESTION: How can you represent and operate on numbers that are not on the real number line?}
+\end{model-discuss}
+% Source page 48: 83, Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Introduce students to quadratic equations that are solved by finding the square root of a negative number. Students will learn that there is a solution to these equations using complex numbers.
+\te{SavvasRealize.com. Activity. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Build Procedural Fluency From Conceptual Understanding ETP}
+Q: How are the equations in Part A and Part B alike? How are they different?
+\answer{They both show a variable squared set equal to a number. In Part A that number is positive, but in Part B, that number is negative.}
+Q: Why is the (\sqrt{-9}) not equal to (-3)?
+\answer{Since ((-3)(-3)=9), (-3) cannot be the square root of (-9).}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Solve a Quadratic Equation Using Square Roots}
+\te{CONCEPTUAL UNDERSTANDING. ESSENTIAL QUESTION: How can you represent and operate on numbers that are not on the real number line?}
+How can you use square roots to solve each equation?
+A. (x^2=16)
+Notice that each side of the equation involves a perfect square.
+(x^2=16)
+(x=\pm\sqrt{16})
+(=\pm4)
+\te{Callout: What numbers can you square that result in 16?}
+The solutions of the equation (x^2=16) are 4 and (-4).
+\answer{4 and (-4)}
+B. (x^2=-9)
+There are no real numbers that you can square that result in (-9). However, you can simplify the expression by extending the properties of radicals.
+(x^2=-9)
+(x=\pm\sqrt{-9})
+(x=\pm\sqrt{9}\sqrt{-1})
+(x=\pm3\sqrt{-1})
+The solutions of the equation (x^2=-9) are not real numbers but are part of a number system called the complex numbers. The number (\sqrt{-1}) is called the imaginary unit (i). Replacing (\sqrt{-1}) with (i) allows you to write the solutions to the equation (x^2=-9) as (3i) and (-3i).
+\answer{(3i) and (-3i)}
+\te{USE APPROPRIATE TOOLS: How else can you solve Part A?}
+\end{example}
+\begin{tryit}{1}
+Use square roots to solve each equation. Write your solutions using the imaginary unit, (i).
+a. (x^2=-5)
+b. (x^2=-72)
+\answer{a. (\pm i\sqrt{5}) b. (\pm6i\sqrt{2})}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: If (n<0), why must (\sqrt{n}) be an imaginary number?
+\answer{There is no real number that, when multiplied by itself, equals a negative number. So the square root of a negative number must be imaginary.}
+\end{te-addendum}
+\begin{te-addendum}{1}{HabitsOfMind}
+\textbf{HABITS OF MIND: Communicate Precisely} Use with EXAMPLE 1
+How do you know that the solution to the equation (x^2=-5) must be an imaginary number?
+\answer{You need to take the square root of both sides of the equation in order to solve it. Taking the square root of a negative number results in an imaginary number.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples: ADDITIONAL EXAMPLE 2}
+Add the complex numbers.
+((a+2bi)+(3a+4bi))
+(a+3a+2bi+4bi)
+(4a+6bi)
+\answer{(4a+6bi)}
+Example 2 Give students practice combining complex numbers that contain variable parts with this additional example.
+Q: Why can you not combine the real and imaginary parts to form one number?
+\answer{They are not like terms.}
+\te{Additional Examples are available at SavvasRealize.com. Screen controls: Go back; ESSENTIAL QUESTION; TRY ANOTHER ONE; SOLUTION.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+Divide.
+a. (\frac{a+bi}{c+di})
+b. (\frac{a+bi}{c-di})
+a. Use the complex conjugate of ((c+di)) to multiply the expression by 1:
+(\frac{a+bi}{c+di}\times\frac{c-di}{c-di})
+Use the Distributive Property:
+(\frac{(a+bi)(c-di)}{c^2-cdi+cdi+d^2})
+Simplify:
+(\frac{(a+bi)(c-di)}{c^2+d^2})
+\answer{(\frac{(a+bi)(c-di)}{c^2+d^2})}
+b. Use the complex conjugate of ((c-di)) to multiply the expression by 1:
+(\frac{a+bi}{c-di}\times\frac{c+di}{c+di})
+Use the Distributive Property:
+(\frac{(a+bi)(c+di)}{c^2+cdi-cdi+d^2})
+\answer{(\frac{(a+bi)(c+di)}{c^2+cdi-cdi+d^2})}
+Example 4 Have students simplify quotients that contain complex numbers with variable parts with this additional example.
+Q: Do you actually divide to find this quotient?
+\answer{No, you multiply the numerator and denominator by the complex conjugate of the denominator.}
+\te{Screen controls: Go back; ESSENTIAL QUESTION; SOLUTION.}
+\end{te-addendum}
+% Source page 49: 84, Step 2 Understand & Apply
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: In Part B, why is the difference written as an addition problem?
+\answer{Rewriting the problem as an addition problem applies the subtraction to all of the terms being taken away, reducing the opportunity to make errors in the subtraction.}
+\te{SavvasRealize.com. Activity. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Complex Numbers}
+The imaginary unit, (i), is the principal square root of (-1). Then (i^2=-1).
+An imaginary number is any number, (bi), where (b) is a non-zero real number and (i) is the square root of (-1).
+Complex numbers are numbers that can be written in the form (a+bi), where (a) and (b) are real numbers and (i) is the square root of (-1). They include all real and imaginary numbers, as well as the sum of real and imaginary numbers.
+For example:
+(-6+4i) ((a=-6,b=4))
+(7-i\sqrt{2}) ((a=7,b=-\sqrt{2}))
+(0.5i) ((a=0,b=0.5))
+\end{concept-box}
+\begin{example}{2}
+\textbf{Add and Subtract Complex Numbers}
+How can you add and subtract complex numbers?
+A. What is the sum of ((4-7i)) and ((-11+9i))?
+When adding (or subtracting) two numbers in the form (a+bi), combine the real parts and then combine the imaginary parts. The sum (or difference) may include both a real and imaginary part and can be written in the form (a+bi).
+((4-7i)+(-11+9i)=(4+-11)+(-7i+9i))
+(=-7+2i)
+\answer{(-7+2i)}
+\te{STUDY TIP: Combine real parts and imaginary parts of complex numbers as you would combine like terms.}
+B. What is the difference of ((6+8i)) and ((2-5i))?
+((6+8i)-(2-5i)=(6+8i)+(-2+5i))
+(=(6+-2)+(8i+5i))
+(=4+13i)
+\te{Callout: Remember to distribute the negative over the complex number.}
+\answer{(4+13i)}
+\end{example}
+\begin{tryit}{2}
+Find the sum or difference.
+a. ((-4+6i)+(-2-9i))
+b. ((3-2i)-(-4+i))
+\answer{a. (-6-3i) b. (7-3i)}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How could the sum of two complex numbers be a real number?
+\answer{If the imaginary parts of each complex number are opposites}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND: Generalize} Use with EXAMPLE 2
+How is adding and subtracting complex numbers similar to adding and subtracting binomials?
+\answer{Adding and subtracting both complex numbers and binomials involves combining like terms.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error}
+Try It! 2b Students may treat the coefficient of (i) as 0 instead of 1. Have them rewrite the expression as ((3-2i)-(-4+1i)) before finding the difference.
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students} USE WITH EXAMPLE 3
+Students may struggle with recognizing (i) as a number rather than as a variable.
+1. (x=\sqrt{25})
+2. (x=-\sqrt{25})
+3. (x=\sqrt{25}i)
+4. (x=-\sqrt{25}i)
+Q: How are these equations alike? How are they different?
+\answer{They all have a single isolated variable on the left side and a number on the right. Some numbers are imaginary and some are real.}
+Q: How do you know if the value of (x) is positive and real, negative and real, or imaginary?
+\answer{If there is a negative sign outside the square root, (x) will be a negative real number. If the sign is inside the square root, it will be imaginary. If there is no negative sign in either place, (x) will be a positive real number.}
+\te{Printed answer discusses a negative sign inside the radical, while items 3 and 4 display (i) outside (\sqrt{25}).}
+Have students use the Distributive Property to find these products.
+1. (2i(3-2i))
+2. (-4i(1+2i))
+3. (2x(3-2x))
+4. (-4x(1+2x))
+Q: What is the product of each expression?
+\answer{(6i+4); (-4i+8); (6x-4x^2); (-4x-8x^2)}
+Q: How are the expressions for 1 and 3 alike? How are they different?
+\answer{They are each a monomial multiplied by a binomial. They use the same coefficients. One uses a variable, while the other uses (i).}
+Q: How are the results different?
+\answer{The products of the expressions with (i) have a constant term, but the products of expressions with (x) do not because (i^2) simplifies to (-1).}
+\end{te-addendum}
+% Source page 50: 85, Step 2 Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How is the problem in Part B like multiplying binomials?
+\answer{Each of the two terms in the first expression must be multiplied by each of the two terms in the second expression.}
+\te{SavvasRealize.com. Activity. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Multiply Complex Numbers}
+How can you write each product in the form (a+bi)?
+A. (-2.5i(8-9i))
+(-2.5i(8-9i)=-2.5i(8)-2.5i(-9i))
+(=-20i+22.5i^2)
+(=-20i+22.5(-1))
+(=-22.5-20i)
+The product is (-22.5-20i).
+\answer{(-22.5-20i)}
+\te{Callout: (i^2) is always replaced by negative one. COMMON ERROR: Recall that (i^2=-1), so the product of 22.5 and (i^2) is -22.5, not 22.5.}
+B. ((3-2i)(3+2i))
+((3-2i)(3+2i)=3(3+2i)-2i(3+2i))
+(=9+6i-6i-4i^2)
+(=9+6i-6i-4(-1))
+(=13)
+The product is 13.
+\answer{13}
+\end{example}
+\begin{tryit}{3}
+Write each product in the form (a+bi).
+a. (\frac{2i}{5}(10-\frac{5i}{2}))
+b. ((\frac{1}{2}+2i)(\frac{1}{2}-2i))
+\answer{a. (1+4i) b. (\frac{17}{4})}
+\end{tryit}
+\begin{concept-box}
+\textbf{Complex Conjugates}
+Complex conjugates are complex numbers with equivalent real parts and opposite imaginary parts. Their product is a real number.
+For example:
+(7-8i,7+8i)\qquad(-2+i,-2-i)
+((a+bi)(a-bi))
+(a^2-abi+abi-b^2i^2)
+(a^2-b^2(-1))
+(a^2+b^2)
+\end{concept-box}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How does multiplying the denominator by its complex conjugate result in a real number?
+\answer{The products of the inner terms and outer terms sum to zero, eliminating the imaginary terms. The product of the imaginary terms result in (i^2), which equals (-1).}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Simplify a Quotient Expression With Complex Numbers}
+How can you write the quotient expression (\frac{10}{2-i}) in the form (a+bi)?
+When the denominator has an imaginary component, you can create an equivalent fraction with a real denominator by multiplying by its complex conjugate.
+(\frac{10}{2-i}=\frac{10}{2-i}\times\frac{2+i}{2+i})
+\te{Callout: Multiplying the expression by a fraction that is equivalent to 1.}
+(=\frac{10(2+i)}{4+2i-2i-i^2})
+(=\frac{10(2+i)}{4+2i-2i-(-1)})
+(=\frac{10(2+i)}{5})
+\te{Callout: The product of complex conjugates is always a real number.}
+(=2(2+i))
+(=4+2i)
+\answer{(4+2i)}
+\te{CONTINUED ON THE NEXT PAGE}
+\end{example}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND: Use Structure} Use with EXAMPLE 4
+Why do you multiply the numerator and denominator of a complex fraction by the conjugate of the denominator?
+\answer{You multiply both the numerator and the denominator by the complex conjugate so that the new expression is equivalent to the original one. Multiplying by the complex conjugate of the denominator transforms the denominator into a real value, allowing you to simplify the complex fraction.}
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 4)
+LISTENING BEGINNING Recall that complex conjugates are complex numbers with equivalent real parts and opposite imaginary parts.
+Q: Which number does not belong as part of a complex conjugate: (2+3i), (3-2i), or (2-3i)?
+\answer{(3-2i)}
+Q: Explain how the product of the complex conjugates from the previous question has a real product.
+\answer{The first two terms have a product of 4; the two middle terms, (6i) and (-6i) add to 0; and the last two terms have a product of 9. The sum of 4 and 9 is 13, a real number.}
+READING DEVELOPING In groups of three, have students read the example together. Then ask them to rephrase the first paragraph using simpler language.
+Q: Which part of the fraction is the denominator?
+\answer{the bottom part of the fraction}
+Q: What is another word for component?
+\answer{part}
+Q: How could you describe an equivalent fraction?
+\answer{a fraction that has the same value as the original fraction}
+SPEAKING EXPANDING Challenge students to identify the prefix in the word conjugate. Discuss the meaning of the prefix con-, which means ``to join'' or ``to bring together.'' In some languages, such as Spanish, the word con means ``with.'' Talk about the meanings of other words that begin with con-.
+Q: What are some other words that begin with the prefix con- that have to do with things coming together?
+\answer{connect, congregate, convene, consensus, converge}
+Q: Why do complex conjugates belong together?
+\answer{When they are multiplied together, the result is a real number.}
+\end{te-addendum}
+% Source page 51: 86, Step 2 Understand & Apply
+\begin{tryit}{4}
+\te{EXAMPLE 4 CONTINUED. SavvasRealize.com. Activity. Examples are available at SavvasRealize.com.}
+Write each quotient in the form (a+bi).
+a. (\frac{80}{2-6i})
+b. (\frac{4-3i}{-1+2i})
+\answer{a. (4+12i) b. (-2-i)}
+\end{tryit}
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Build Procedural Fluency From Conceptual Understanding ETP}
+Q: How is factoring the sum of squares different than factoring the difference of squares?
+\answer{The difference of squares can be rewritten as the product of two binomials composed of real number terms, but the sum of squares is rewritten as the product of two complex numbers.}
+Q: Why is the first step in factoring the expression in Part B to factor out a 3?
+\answer{Neither 12 nor 3 is a perfect square, but when you factor out a 3, the coefficients of the new terms are 4 and 1, both of which are perfect squares.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Factor a Sum of Squares}
+\te{CONCEPTUAL UNDERSTANDING}
+How can you use complex numbers to factor the sum of two squares?
+A. How can you factor the expression (x^2+y^2)?
+Rewrite (x^2+y^2) as a difference of two squares: (x^2-(-y^2)).
+You can think of ((-y^2)) as ((-1)(y^2)).
+Since (-1=i^2), ((-1)(y^2)=(i^2)(y^2)=(yi)^2).
+So (x^2+y^2=x^2-(yi)^2)
+(=(x+yi)(x-yi))
+The factors of (x^2+y^2) are ((x+yi)) and ((x-yi)).
+\answer{((x+yi)) and ((x-yi))}
+\te{Callouts: How can ((-y^2)) be a perfect square? Factor as the difference of two squares. STUDY TIP: The product of complex conjugates ((a+bi)) and ((a-bi)) will always be equal to (a^2+b^2), which is the sum of two squares. With complex numbers both the difference of two squares and the sum of two squares may be factored.}
+B. How can you factor the expression (12x^2+3)?
+(12x^2+3=3(4x^2+1))
+(=3(4x^2-i^2))
+(=3(2x+i)(2x-i))
+The factors of (12x^2+3) are 3, ((2x+i)), and ((2x-i)).
+\answer{3, ((2x+i)), and ((2x-i))}
+\end{example}
+\begin{tryit}{5}
+Factor each expression.
+a. (4x^2+25)
+b. (8y^2+18)
+\answer{a. ((2x+5i)(2x-5i)) b. (2(2y+3i)(2y-3i))}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How do you know whether each term is a perfect square?
+\answer{A term is a perfect square if there is a constant or a monomial that, when squared, equals the term. You can check your square roots on a calculator if needed.}
+\end{te-addendum}
+\begin{te-addendum}{6}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations ETP}
+Q: Graph (y=x^2+4). How does the graph show that there are no real solutions to the equation?
+\answer{The parabola never intersects the (x)-axis.}
+Q: Does the Zero Product Property hold for imaginary numbers?
+\answer{Yes. The Zero Product Property can be used to solve equations that involve complex factors.}
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Solve a Quadratic Equation With Complex Solutions}
+How can you solve (x^2+4=0) using factoring?
+(x^2+4=0)
+(x^2-(2i)^2=0)
+((x+2i)(x-2i)=0)
+(x+2i=0)\qquad(x-2i=0)
+(x=-2i)\qquad(x=2i)
+The solutions are (x=-2i) and (x=2i).
+\answer{(x=-2i) and (x=2i)}
+\te{LOOK FOR RELATIONSHIPS: You solved a similar problem by taking the square root of both sides. This example provides an alternative method that utilizes factoring.}
+\end{example}
+\begin{tryit}{6}
+Solve each equation.
+a. (x^2+49=0)
+b. (9x^2+25=0)
+\answer{a. (x=-7i), (x=7i) b. (x=-\frac{5}{3}i), (x=\frac{5}{3}i)}
+\end{tryit}
+\begin{te-addendum}{6}{HabitsOfMind}
+\textbf{HABITS OF MIND: Construct Arguments} Use with EXAMPLES 6
+For what values of (a) will the solutions to the equation (x^2-a=0) be complex numbers? Explain.
+\answer{(a<0); (x^2) must be equal to (a), so if (a) is negative, (x^2) must be negative, meaning (x) must be complex.}
+\te{Printed question and answer use complex where nonreal complex would distinguish these solutions from real numbers, which also belong to the complex numbers.}
+\end{te-addendum}
+\begin{te-addendum}{6}{RtIExtend}
+\textbf{Extend Student Thinking} USE WITH EXAMPLE 6
+Have students solve the following equations.
+1. (3x^2+108=0)
+2. (-0.25x^2-25=0)
+Q: Compare these equations to other equations you have solved.
+\answer{Each equation requires an additional step; however, the final step involves finding the square root of a negative number.}
+Q: What are the solutions to each equation?
+\answer{1. (x=6i) and (x=-6i); 2. (x=10i) and (x=-10i)}
+\end{te-addendum}
+% Source page 52: 87, Concept Summary
+\begin{te-addendum}{ConceptSummary}{GeneralizeETP}
+\textbf{CONCEPT SUMMARY: Complex Numbers and Operations}
+Q: What is unusual about division with complex numbers?
+\answer{Quotients are found by multiplying both the numerator and the denominator by the denominator's complex conjugate.}
+\te{SavvasRealize.com. Presentation. Practice. Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error}
+Exercise 8 Students may give the answer as (5i^2). They know (i^2=-1), so they factor that out before taking the square root. Have students write (-25=(-1)(25)). Then have them put the square root over each factor.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Complex Numbers and Operations}
+The imaginary unit (i) is the number whose square is equal to (-1): (\sqrt{-1}=i), so (i^2=-1).
+Complex numbers are written in the form (a+bi).
+\te{Callouts identify (a) and (b) as real numbers and (i) as imaginary unit.}
+The four basic operations can be applied to complex numbers, such as (2+3i) and (5-i).
+\textbf{ADDITION}
+Add as you would with binomials with like terms.
+((2+3i)+(5-i)=7+2i)
+\textbf{SUBTRACTION}
+Subtract as you would with binomials with like terms.
+((2+3i)-(5-i)=-3+4i)
+\textbf{MULTIPLICATION}
+Distribute as you would with binomials.
+((2+3i)(5-i)=10-2i+15i-3i^2=13+13i)
+\textbf{DIVISION}
+Simplify so that the denominator is a real number. Multiply the numerator and denominator by the conjugate of the denominator.
+(\frac{2+3i}{5-i}=\frac{(2+3i)(5+i)}{(5-i)(5+i)}=\frac{7+17i}{26}=\frac{7}{26}+\frac{17}{26}i)
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you represent and operate on numbers that are not on the real number line?
+\answer{Numbers that are not on the real number line are not real numbers. However, by defining the imaginary unit (i=\sqrt{-1}), we can work with a larger set of numbers. We call these complex numbers. They are written in the form (a+bi), where (a) and (b) are real numbers and (i) is the imaginary unit. Complex numbers represented in this way can be added, subtracted, multiplied, divided, and otherwise operated on even though they are not necessarily real numbers on the real number line.}
+2. Vocabulary How do you form the complex conjugate of a complex number (a+bi)?
+\answer{The complex conjugate of (a+bi) is (a-bi). Their product is (a^2+b^2), a real number.}
+3. Error Analysis Helena was asked to write the quotient (\frac{4}{3-i}) in the form (a+bi). She began this way: (\frac{4}{3-i}\times\frac{3-i}{3-i}=\frac{4(3-i)}{3^2+1^2}=\frac{12-4i}{10}). Explain the errors Helena made.
+\answer{She correctly multiplied the quotient by one, but she used (\frac{3-i}{3-i}) where she should have used (\frac{3+i}{3+i}). The idea is to use the complex conjugate of the denominator. Helena also multiplied what she wrote incorrectly.}
+4. Look for Relationships The quadratic equation (x^2+9=0) has solutions (x=3i) and (x=-3i). How many times will the graph of (f(x)=x^2+9) cross or touch the (x)-axis? Explain.
+\answer{The function will never cross the (x)-axis. The function's intersections with the (x)-axis represent solutions to the equation, because (y=0) anywhere along the (x)-axis. Since this equation has no real solutions ((3i) and (-3i) are both imaginary), the function will not cross the (x)-axis.}
+\textbf{Do You KNOW HOW?}
+Write each of the following in the form (a+bi).
+5. ((2+5i)-(-6+i))
+\answer{(8+4i)}
+6. ((2i)(6+3i))
+\answer{(-6+12i)}
+Solve each equation.
+7. (x^2+16=0)
+\answer{(4i), (-4i)}
+8. (y^2=-25)
+\answer{(5i), (-5i)}
+9. Model With Mathematics The total source voltage in the circuit is ((6-3i)) V. What is the voltage at the middle source?
+\placeholder{diagram}{Rectangular electrical circuit, right vertical side a zigzag resistor, left side three stacked circular AC voltage sources labeled E_1, E_2, E_3 with plus above minus beside each. Left labels top (2+6i)V, middle (a+bi)V, bottom (2-5i)V. Gray background.}
+\answer{((2-4i))V}
+\end{concept-summary}
+% Source page 53: 88, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+10, 11, 13--50 & 10--17, 19, 21, 23, 25, 27, 29--33, 35, 37, 39, 41, 43, 45--50 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{SavvasRealize.com. Practice. Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial. See answers for 11--13 on next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 14--17, 48 & 1 \\
+1 & 10 & 2 \\
+1 & 12 & 3 \\
+2 & 18--23 & 1 \\
+3 & 24--29 & 1 \\
+3 & 47 & 3 \\
+4 & 30--33 & 1 \\
+4 & 11 & 2 \\
+4 & 13, 46 & 3 \\
+4 & 50 & 4 \\
+5 & 34--39 & 1 \\
+6 & 40--45, 49 & 1 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{10}{2}
+\textbf{UNDERSTAND: Construct Arguments}
+Tamara says that raising the number (i) to any integer power results in either (-1) or 1 as the result, since (i^2=-1). Do you agree with Tamara? Explain.
+\answer{Tamara is not correct. Raising the number (i) to even integer powers will always result in 1 or (-1). (i^2=-1), (i^4=(i^2)^2=(-1)^2=1), (i^6=-1), (i^8=1), and so on. But raising (i) to odd integer powers gives a different pattern: (i=\sqrt{-1}), (i^3=(i^2)(i)=-i), (i^5=i), (i^7=-i), (i^9=i), and so on.}
+\end{practice}
+\begin{practice}{11}{2}
+\textbf{Error Analysis} Describe and correct the error a student made when dividing complex numbers.
+(\frac{1+i}{3-i}=)
+(\frac{1+i}{3-i}\cdot\frac{1-i}{3+i}=)
+(\frac{1-i^2}{9-i^2}=)
+(\frac{2}{10})
+\te{Student work marked with a red X.}
+\answer{The student has multiplied both the numerator and denominator by their complex conjugates, which is an invalid operation. It changes the quotient rather than just reducing it to a different form. He or she should have multiplied the quotient by the complex conjugate of the denominator over itself. Since this is equivalent to multiplying the quotient by one, it is a valid operation: (\frac{1+i}{3-i}=\frac{1+i}{3-i}(\frac{3+i}{3+i})=\frac{3+4i+i^2}{9-i^2}=\frac{1}{5}+\frac{2}{5}i)}
+\end{practice}
+\begin{practice}{12}{3}
+\textbf{Higher Order Thinking} Label the diagram with the following sets of numbers:
+1. complex numbers
+2. real numbers
+3. imaginary numbers
+4. integers
+5. rational numbers
+\placeholder{diagram}{Blank number-set diagram: large horizontal oval bisected vertically; left half orange, right half green. Within left half a cyan circle containing a smaller dark teal circle. Black outlines, no labels.}
+Include an example of each type of number in the diagram.
+\answer{Complex Numbers (5-3i); Rational Numbers (\frac{5}{3}); Integers (-4); Real Numbers (\sqrt{6}); Imaginary Numbers (8i).}
+\placeholder{diagram}{Printed answer diagram, same bisected oval as prompt. Above entire oval: Complex Numbers 5-3i. Orange left semicircle labeled Rational Numbers near top, Real Numbers sqrt(6) at bottom. Cyan nested circle contains 5/3 above smaller dark teal circle labeled Integers -4. Right green semicircle labeled Imaginary Numbers 8i.}
+\te{The printed Rational Numbers label is above the cyan circle in the orange region; the placement is retained.}
+\end{practice}
+\begin{practice}{13}{3}
+\textbf{Generalize} Write an explicit formula, in standard form, to find the quotient of two complex numbers. Use the numbers (a+bi) and (c+di).
+\answer{((a+bi)\div(c+di)=\frac{a+bi}{c+di})
+(=\frac{a+bi}{c+di}(\frac{c-di}{c-di}))
+(=\frac{ac-adi+cbi+bd}{c^2+d^2})
+(=\frac{(ac+bd)+(cb-ad)i}{c^2+d^2})}
+\end{practice}
+\begin{practice}{14}{1}
+Use square roots to solve each equation over the complex numbers. SEE EXAMPLE 1
+(x^2=-5)
+\answer{(\pm i\sqrt{5})}
+\end{practice}
+\begin{practice}{15}{1}
+Use square roots to solve each equation over the complex numbers. SEE EXAMPLE 1
+(x^2=-0.01)
+\answer{(\pm0.1i)}
+\end{practice}
+\begin{practice}{16}{1}
+Use square roots to solve each equation over the complex numbers. SEE EXAMPLE 1
+(x^2=-18)
+\answer{(\pm3i\sqrt{2})}
+\end{practice}
+\begin{practice}{17}{1}
+Use square roots to solve each equation over the complex numbers. SEE EXAMPLE 1
+(x^2=(-1)^2)
+\answer{(1 or -1)}
+\end{practice}
+\begin{practice}{18}{1}
+Add or subtract. Write the answer in the form (a+bi). SEE EXAMPLE 2
+((3-2i)-(-9+i))
+\answer{(12-3i)}
+\end{practice}
+\begin{practice}{19}{1}
+Add or subtract. Write the answer in the form (a+bi). SEE EXAMPLE 2
+((5+1.2i)+(-6+0.8i))
+\answer{(-1+2i)}
+\end{practice}
+\begin{practice}{20}{1}
+Add or subtract. Write the answer in the form (a+bi). SEE EXAMPLE 2
+((2i)-(2i-11))
+\answer{(11)}
+\end{practice}
+\begin{practice}{21}{1}
+Add or subtract. Write the answer in the form (a+bi). SEE EXAMPLE 2
+(13+2i-4-8i)
+\answer{(9-6i)}
+\end{practice}
+\begin{practice}{22}{1}
+Add or subtract. Write the answer in the form (a+bi). SEE EXAMPLE 2
+(\frac{3-i}{4}-\frac{2+i}{3})
+\answer{(\frac{1}{12}+\frac{7}{12}i)}
+\te{Printed answer has a plus before the imaginary term; the given subtraction yields (\frac{1}{12}-\frac{7}{12}i).}
+\end{practice}
+\begin{practice}{23}{1}
+Add or subtract. Write the answer in the form (a+bi). SEE EXAMPLE 2
+(4.5i-4.5+3.5i+2.5)
+\answer{(-2+8i)}
+\end{practice}
+\begin{practice}{24}{1}
+Write each product in the form (a+bi). SEE EXAMPLE 3
+((11i)(3i))
+\answer{(-33)}
+\end{practice}
+\begin{practice}{25}{1}
+Write each product in the form (a+bi). SEE EXAMPLE 3
+((3i)(5-4i))
+\answer{(12+15i)}
+\end{practice}
+\begin{practice}{26}{1}
+Write each product in the form (a+bi). SEE EXAMPLE 3
+((5-2i)(5+2i))
+\answer{(29)}
+\end{practice}
+\begin{practice}{27}{1}
+Write each product in the form (a+bi). SEE EXAMPLE 3
+((8+3i)(8+3i))
+\answer{(55+48i)}
+\end{practice}
+\begin{practice}{28}{1}
+Write each product in the form (a+bi). SEE EXAMPLE 3
+(\frac{1}{3}i(3+6i))
+\answer{(-2+i)}
+\end{practice}
+\begin{practice}{29}{1}
+Write each product in the form (a+bi). SEE EXAMPLE 3
+((-2i+7)(7+2i))
+\answer{(53)}
+\end{practice}
+\begin{practice}{30}{1}
+Write each quotient in the form (a+bi). SEE EXAMPLE 4
+(\frac{12}{1-i})
+\answer{(6+6i)}
+\end{practice}
+\begin{practice}{31}{1}
+Write each quotient in the form (a+bi). SEE EXAMPLE 4
+(\frac{5}{6+2i})
+\answer{(\frac{3}{4}-\frac{1}{4}i)}
+\end{practice}
+\begin{practice}{32}{1}
+Write each quotient in the form (a+bi). SEE EXAMPLE 4
+(\frac{6+12i}{3i})
+\answer{(4-2i)}
+\end{practice}
+\begin{practice}{33}{1}
+Write each quotient in the form (a+bi). SEE EXAMPLE 4
+(\frac{4-4i}{1+3i})
+\answer{(-\frac{4}{5}-\frac{8}{5}i)}
+\end{practice}
+\begin{practice}{34}{1}
+Factor the sums of two squares. SEE EXAMPLE 5
+(4x^2+49)
+\answer{((2x+7i)(2x-7i))}
+\end{practice}
+\begin{practice}{35}{1}
+Factor the sums of two squares. SEE EXAMPLE 5
+(x^2+1)
+\answer{((x+i)(x-i))}
+\end{practice}
+\begin{practice}{36}{1}
+Factor the sums of two squares. SEE EXAMPLE 5
+(36+100a^2)
+\answer{(4(5a-3i)(5a+3i))}
+\end{practice}
+\begin{practice}{37}{1}
+Factor the sums of two squares. SEE EXAMPLE 5
+(18y^2+8)
+\answer{(2(3y-2i)(3y+2i))}
+\end{practice}
+\begin{practice}{38}{1}
+Factor the sums of two squares. SEE EXAMPLE 5
+(\frac{1}{4}b^2+25)
+\answer{((\frac{1}{2}b-5i)(\frac{1}{2}b+5i))}
+\end{practice}
+\begin{practice}{39}{1}
+Factor the sums of two squares. SEE EXAMPLE 5
+(x^2+y^2)
+\answer{((x+yi)(x-yi))}
+\end{practice}
+\begin{practice}{40}{1}
+Solve each equation. SEE EXAMPLE 6
+(x^2+81=0)
+\answer{(9i,-9i)}
+\end{practice}
+\begin{practice}{41}{1}
+Solve each equation. SEE EXAMPLE 6
+(25x^2+9=0)
+\answer{(\frac{3}{5}i,-\frac{3}{5}i)}
+\end{practice}
+\begin{practice}{42}{1}
+Solve each equation. SEE EXAMPLE 6
+(x^2=-16)
+\answer{(4i,-4i)}
+\end{practice}
+\begin{practice}{43}{1}
+Solve each equation. SEE EXAMPLE 6
+(4+49y^2=0)
+\answer{(\frac{2}{7}i,-\frac{2}{7}i)}
+\end{practice}
+\begin{practice}{44}{1}
+Solve each equation. SEE EXAMPLE 6
+(y^2+1=0)
+\answer{(i,-i)}
+\end{practice}
+\begin{practice}{45}{1}
+Solve each equation. SEE EXAMPLE 6
+(x^2+\frac{1}{4}=0)
+\answer{(\frac{1}{2}i,-\frac{1}{2}i)}
+\end{practice}
+% Source page 54: 89, Practice & Problem Solving continued
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\te{SavvasRealize.com. Practice. Practice \& Problem Solving is available at SavvasRealize.com. Answers for 11--13 are incorporated with those items.}
+\end{te-addendum}
+\begin{practice}{46}{3}
+\textbf{APPLY: Model With Mathematics}
+The two resistors shown in the circuit are referred to as in parallel. The total resistance of the resistors is given by the formula (\frac{1}{R_T}=\frac{1}{R_1}+\frac{1}{R_2}).
+\placeholder{diagram}{Parallel circuit on gray background. Rectangular loop with battery symbol on left vertical side, zigzag resistor R_2 on right, and vertical zigzag resistor R_1 on middle branch joining top and bottom wires. Below: R_1=4+2i ohms; R_2=1+i ohms.}
+a. Find the total resistance. Write your answer in the form (a+bi).
+\answer{(\frac{14}{17}+\frac{12}{17}i)}
+b. Show that the total resistance is equivalent to the expression (\frac{R_1R_2}{R_1+R_2}).
+\answer{(R_T=\frac{1}{\frac{1}{R_1}+\frac{1}{R_2}}=\frac{1}{\frac{R_1R_2}{R_1+R_2}}=\frac{R_1+R_2}{R_1R_2})}
+c. Change the value of (R_2) so that the total resistance is a real number. Explain how you chose the value.
+\answer{If you simply choose (R_2) to be the complex conjugate of (R_1), the total resistance will be a real number: (\frac{R_1+R_2}{R_1R_2}=\frac{(4+2i)+(4-2i)}{(4+2i)(4-2i)}=\frac{20}{8}=\frac{5}{2})}
+\te{Printed parts b and c reverse the resistance fraction in intermediate expressions. The prompt's (\frac{R_1R_2}{R_1+R_2}) agrees with part a and the final (\frac{5}{2}) in part c.}
+\end{practice}
+\begin{practice}{47}{3}
+\textbf{Use Structure} The complex number (a+bi) can be represented on a coordinate plane as the point ((a,b)). You can use multiplication by (i) to rotate a point about the origin in the coordinate plane.
+\placeholder{graph}{Black arrowed (x),(y) axes, O at origin, unit square grid, window [-5,5] on both axes, labeled ticks -4,-2,2,4. Single red closed point at (3,2), unlabeled.}
+a. Write the point ((x,y)) on the graph as the complex number (x+yi).
+\answer{(3+2i)}
+b. Multiply the complex number by (i). Interpret the new value as a new point in the plane.
+\answer{(i(3+2i)=3i+2i^2=3i-2=-2+3i). (-2+3i) can be interpreted as the point ((-2,3)).}
+c. Repeat the steps above for two other points. How does multiplication by (i) rotate a point?
+\answer{Multiplication by (i) reverses the coordinates of the original point and then multiplies the (x)-coordinate by (-1). In other words, the point ((a,b)) always becomes ((-b,a)). This is a rotation of (90^\circ) counterclockwise.}
+\end{practice}
+\begin{practice}{48}{1}
+\textbf{ASSESSMENT PRACTICE}
+Complete the table by classifying each number as real, imaginary, or complex. Use the most specific classification. For example, all real numbers are also complex numbers, so it is more specific to classify a number as real.
+\begin{tabular}{ll}
+Number & R, I, C \\
+(2+i) & C \\
+(5-0i) & R \\
+(2i) & I \\
+((3-i)^2) & \answer{C} \\
+(i^2+1) & \answer{R} \\
+(3i) & \answer{I} \\
+((3-i)(3+i)) & \answer{R} \\
+((3+i)-(2+i)) & \answer{R} \\
+(\sqrt{-14}) & \answer{I} \\
+(i(4+i)-3i) & \answer{C} \\
+\end{tabular}
+\end{practice}
+\begin{practice}{49}{1}
+\textbf{SAT/ACT} Which of the following is a solution to the equation (3x^2=-12)?
+A. (-4i)
+B. (-2i)
+C. (-2)
+D. 2
+E. (4i)
+\answer{B}
+\end{practice}
+\begin{practice}{50}{4}
+\textbf{Performance Task} B'onca wants to write the square root of (i) in the form (a+bi). She begins by writing the equation (\sqrt{i}=a+bi).
+Part A Square both sides of the equation. Then use the fact that the real part and imaginary part on each side of the equation are equal to write a system of equations involving the variables (a) and (b).
+\answer{((\sqrt{i})^2=(a+bi)^2), (i=a^2+2abi-b^2), (0+1i=(a^2-b^2)+(2ab)i)
+(a^2-b^2=0)
+(2ab=1)}
+Part B Solve the system to find (b). Then find (a).
+\answer{(a^2-b^2=0), (a^2=b^2), (\sqrt{a^2}=\sqrt{b^2}), (a=b). Since (2ab=1) and (a=b), (2b^2=1).}
+Part C List the possible solutions for (a) and (b).
+\answer{(2b^2=1), (b^2=\frac{1}{2}), (b=\pm\frac{\sqrt{2}}{2}). Since (a=b), we see that (a=\pm\frac{\sqrt{2}}{2}) also.}
+Part D Square each of the possible solutions. What are the two square roots of (i)?
+\answer{(\sqrt{i}=\pm(\frac{\sqrt{2}}{2}+\frac{\sqrt{2}}{2}i))}
+\te{Printed Part B passes directly from equal squares to (a=b); the second equation forces the same sign. Part D uses the radical symbol for both square roots.}
+\end{practice}
+% Source page 55: 89A, Assess & Differentiate
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & NS11 \\
+2 & 1 & NS11 \\
+3 & 1 & NS11 \\
+4 & 2 & NS11 \\
+5 & 2 & NS11 \\
+\end{tabular}
+RtI Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+I Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd Videos \\
+O On-Level & 4 points & Enrichment \\
+A Advanced & 5 points & Enrichment \\
+\end{tabular}
+\te{SavvasRealize.com. Assessment. Lesson Quiz is available at SavvasRealize.com. ASSESSMENT RESOURCES.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{2-4 Lesson Quiz: Complex Numbers and Operations}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+1. Use square roots to solve the equation (x^2=-64) over the complex numbers. Select all solutions that apply.
+A. (8i)
+B. (-8)
+C. (-8i^2)
+D. (-8i)
+E. (8i^2)
+\answer{A, D}
+2. What is the difference of ((5+3i)) and ((2+9i))?
+A. (7+12i)
+B. (3+6i)
+C. (3-6i)
+D. (7+6i)
+\answer{C}
+3. Write the product ((2+7i)(2-7i)) in the form (a+bi).
+A. (4-49i)
+B. 53
+C. (4-14i^2)
+D. (53+14i)
+\answer{B}
+4. Write the expression (3i(2-5i)(4+i)) in the form (a+bi).
+(\underline{\hspace{1cm}}+\underline{\hspace{1cm}}i)
+\answer{54; 39}
+5. Match each product with its factors.
+\begin{tabular}{lllll}
+ & (9x^2+1) & (18x^2+2) & (3x^2+12) & (36x^2+25) \\
+2, ((3x-i)), and ((3x+i)) & (\square) & \answer{(\blacksquare)} & (\square) & (\square) \\
+3, ((x-2i)), and ((x+2i)) & (\square) & (\square) & \answer{(\blacksquare)} & (\square) \\
+((6x-5i)) and ((6x+5i)) & (\square) & (\square) & (\square) & \answer{(\blacksquare)} \\
+((3x-i)) and ((3x+i)) & \answer{(\blacksquare)} & (\square) & (\square) & (\square) \\
+\end{tabular}
+\te{Copyright © Savvas Learning Company LLC. All Rights Reserved. enVision Algebra 2 • Assessment Sourcebook.}
+\end{te-addendum}
+% Source page 56: 89B, Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding} I
+Provides scaffolded reteaching for the key lesson concepts.
+\textbf{Additional Practice} I O
+Provides extra practice for each lesson.
+\textbf{Enrichment} O A
+Presents engaging problems and activities that extend the lesson concepts.
+\te{SavvasRealize.com. Practice. MathXL for School labels appear above Reteach, Additional Practice, and Enrichment.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{2-4 Reteach to Build Understanding: Complex Numbers and Operations}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+A complex number consists of a real part and an imaginary part. It is written in the form of (a+bi), where (a) and (b) are real numbers. When you multiply (b) and (i), the whole term becomes imaginary.
+(i=\sqrt{-1}) and (i^2=(\sqrt{-1})(\sqrt{-1})=-1)
+1. Circle the real number (a) and underline the imaginary term, (bi). Then solve the problem and match it to the correct answer.
+a. ((7-3i)+(-4+9i))
+b. ((7-3i)-(-4+9i))
+c. ((7-3i)(-4+9i))
+d. (\frac{4+5i}{2-i})
+1. (11-12i)
+2. (\frac{3}{5}+\frac{14i}{5})
+3. (3+6i)
+4. (-1+75i)
+\answer{a--3; b--1; c--4; d--2. Circled real parts: a--c: 7 and -4; d: 4 and 2. Underlined imaginary terms: a--c: -3i and 9i; d: 5i and -i.}
+2. Abdul solved the following problems and he made some mistakes. Can you find his errors and fix them?
+a. ((12-5i)+(10+6i)=23i)
+\answer{Abdul added all the numbers together and did not separate out the complex number from the constant. The correct answer is (22+i).}
+b. Write the quotient as (a+bi). (\frac{4+6i}{2-3i})
+(\frac{4+6i}{2-3i}\times\frac{2-3i}{2-3i})
+(\frac{26}{-5}-\uncertain{\frac{1}{12i}}{\frac{1}{12}i})
+\answer{Abdul did not multiply by the correct conjugate. He should have used (\frac{2+3i}{2+3i}). The correct answer is (-\frac{10}{13}+\frac{24i}{13}).}
+3. Write the product or quotient as (a+bi). Justify each step.
+((-6-3i)(-5-2i))
+\begin{tabular}{ll}
+((-6)(-5)-(-6)(2i)-(5)(-3i)-(3i)(-2i)) & Distribute -6 and -3i. \\
+(30+12i+15i+6i^2) & Simplify each term. \\
+(30+12i+15i+6(-1)) & (i^2=-1) \\
+(24+27i) & Combine like terms. \\
+\end{tabular}
+\answer{(24+27i)}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{2-4 Additional Practice: Complex Numbers and Operations}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+Use square roots to solve each equation. Write your solutions using the imaginary unit, (i).
+1. (x^2=-81)
+\answer{(x=\pm9i)}
+2. (x^2=-625)
+\answer{(x=\pm25i)}
+3. (x^2=-144)
+\answer{(x=\pm12i)}
+Simplify each expression.
+4. ((-2+3i)+(5-2i))
+\answer{(3+i)}
+5. ((-6+7i)+(6-7i))
+\answer{0}
+6. ((8+5i)+(6-7i))
+\answer{(14-2i)}
+Write each product in the form (a+bi).
+7. ((4-3i)(-5+4i))
+\answer{(-8+31i)}
+8. ((2-i)(-3+6i))
+\answer{(15i)}
+9. ((5-3i)(5+3i))
+\answer{34}
+Write the quotient in the form (a+bi).
+10. (\frac{5+2i}{4i})
+\answer{(\frac{1}{2}-\frac{5i}{4})}
+11. (\frac{3-2i}{4-3i})
+\answer{(\frac{18}{25}+\frac{i}{25})}
+12. (\frac{3i}{-2+i})
+\answer{(\frac{3}{5}-\frac{6i}{5})}
+13. Why does multiplying (a+bi) by the complex conjugate (a-bi) eliminate (i) from the expression?
+\answer{(a+bi) and (a-bi) are factors of a difference of two perfect squares. (bi-bi=0), removing the (i) from the middle term. (bi) times (bi) is (b^2i^2) which is the same as (-b) because (i^2=-1).}
+\te{Printed explanation omits the factor (a) in the middle terms and prints (-b) instead of (-b^2).}
+Solve the equations below using factoring.
+14. (x^2+360=0)
+\answer{(x=6i), (x=-6i)}
+15. (x^2+40=0)
+\answer{(x=2i), (x=-2i)}
+16. (x^2+10=0)
+\answer{(x=-i), (x=i)}
+\te{Printed constants are 360, 40, and 10; the printed answers correspond to 36, 4, and 1.}
+17. The total resistance of a circuit is given by the formula (R_T=\frac{1}{R_1}+\frac{1}{R_2}). (R_1=4+6i) ohms and (R_2=2-4i) ohms. What is (R_T)?
+\answer{(R_T=\frac{23}{130}+\frac{11i}{130}) ohms.}
+\te{The printed formula uses (R_T) where a parallel-resistance formula uses (1/R_T); the answer matches the printed sum of reciprocals.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{2-4 Enrichment: Complex Numbers and Operations}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+The complex number (a+bi) can be represented on a coordinate plane as the point ((a,b)). Fill in the table with the solution to each problem, and then write the point as ((x,y)). Plot each ordered pair on the plane as the complex number ((x+yi)). Label each ordered pair based on the question in the chart, from the letters in alphabetical order, connecting J and A to finish the shape. Record the shape of the graph drawn.
+\placeholder{graph}{Enrichment answer graph: magenta closed polygon joining A(-3,4), B(1,6), C(4,4), D(5,0), E(5,-5), F(0,-5), G(-5,-4), H(-7,1), I(-5,2), J(-3,2), then A. Each vertex marked by magenta dot and letter. Black coordinate axes, O at origin, unit grid, x labels -6,-4,-2,2,4 and y labels -4,-2,2,4. Window approximately x [-8,6], y [-6,6]. Printed answer calls the shape a Heart.}
+\begin{tabular}{lll}
+ & Solution & (x,y) \\
+A. (\uncertain{\frac{i+6i}{1-2i}}{\frac{1+6i}{1-2i}; \frac{i+6i}{i-2i}}+(5-8i)-0.25(24+32i)) & \answer{(-3+4i)} & \answer{(-3,4)} \\
+B. ((-2+3i)+(3+3i)) & \answer{(1+6i)} & \answer{(1,6)} \\
+C. ((2+6i)-i(2+2i)-(3+6i)+0.5(6+12i)) & \answer{(4+4i)} & \answer{(4,4)} \\
+D. (-i(10i-i)+(5i^2-6i)) & \answer{(5+0i)} & \answer{(5,0)} \\
+E. (0.5(16+20i)-(10+15i)-(3+2i)+(10+2i)) & \answer{(5-5i)} & \answer{(5,-5)} \\
+F. ((-2-10i)-(0-5i)+i(i-2)-i(i)+(2+2i)) & \answer{(0-5i)} & \answer{(0,-5)} \\
+G. (0.5[(6i+6)+(3i-8)-(8+i)]) & \answer{(-5-4i)} & \answer{(-5,-4)} \\
+H. (2(-4+5i)-(-1+6i)-3i) & \answer{(-7+i)} & \answer{(-7,1)} \\
+I. (3(-6-2i)+6(2+3i)+(1-10i)) & \answer{(-5+2i)} & \answer{(-5,2)} \\
+J. (-5(0.5-0.5i)+2(-1.5i-1)+(1.5+2.5i)) & \answer{(-3+2i)} & \answer{(-3,2)} \\
+\end{tabular}
+Shape is a \underline{\hspace{2cm}}.
+\answer{(Heart)}
+\te{The fraction in A is blurred. The printed expressions in D and G do not give their printed solutions: D as printed gives (4-6i), and G gives (-5+4i). Both keys and plotted points are retained.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I O
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{2-4 Mathematical Literacy and Vocabulary: Complex Numbers and Operations}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+Complete the chart by filling in the missing information.
+\begin{tabular}{lll}
+Word or Phrase & Definition & Picture or Example \\
+imaginary unit (i) & \answer{Sample answer: The imaginary unit (i) is a complex number whose square is (-1).} & (i=\sqrt{-1}) \\
+imaginary number & \answer{Sample answer: An imaginary number is the product of any real number (b) and the imaginary unit (i).} & \answer{Sample answer: (4i)} \\
+\answer{complex number} & Complex numbers include both real and imaginary numbers. Complex numbers are written in the form (a+bi) & \answer{Sample answer: (-9+5i)} \\
+complex conjugates & Complex conjugates are number pairs in the form (a+bi) and (a-bi). & \answer{Sample answer: The complex conjugate of (3-7i) is (3+7i).} \\
+\end{tabular}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{illustration}{Tablet digital practice screenshot. Solve the system of equations by graphing: (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Blank coordinate grid [-10,10] each axis, unit grid, ticks every 2, arrowed (x),(y) axes. Question Help menu: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Bottom instructions: Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining. Controls: Exit, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\te{Printed screenshot illustrates a linear system rather than complex-number operations.}
+\end{te-addendum}
+
+\end{document}

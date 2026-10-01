@@ -1,0 +1,888 @@
+\documentclass{article}
+% Source: Topic_06_Teacher_Edition.pdf, PDF pages 12-23 (printed pages 285A-292B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 12: 285A Lesson Overview
+\begin{lesson-meta}
+lesson: 6-1
+title: Key Features of Exponential Functions
+standards: none printed
+practices: none printed
+objective: I can recognize the key features of exponential functions.
+
+essential question: How do graphs and equations communicate key features of exponential growth and decay functions?
+
+\textbf{VOCABULARY}
+\item decay factor
+\item exponential decay function
+\item exponential function
+\item exponential growth function
+\item growth factor
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 6-1 \\
+Title & Key Features of Exponential Functions \\
+Standards & none printed \\
+I CAN Objective & I can recognize the key features of exponential functions. \\
+Essential Question & How do graphs and equations communicate key features of exponential growth and decay functions? \\
+Lesson Vocabulary & decay factor; exponential decay function; exponential function; exponential growth function; growth factor \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Interpret key features of exponential functions represented by graphs, tables, and equations.
+\item Graph transformations of exponential functions showing intercepts and end behavior.
+\item Model quantities that increase or decrease by a fixed percent each time period using exponential functions.
+Essential Understanding. The rate of exponential growth or decay is the ratio between two consecutive output values in an exponential function.
+\te{Printed rate is described as the ratio; likely growth or decay factor is intended.}
+\textbf{COHERENCE}
+Previously in earlier courses, students:
+\item Identified key features of linear and quadratic functions by examining the equations (y=mx+b), (y=ax^2+bx+c), and (y=a(x-h)^2+k).
+In this lesson, students:
+\item Graph exponential functions and interpret the key features of exponential functions by examining tables and graphs.
+Later in this topic, students will:
+\item Compare the key features of exponential and logarithmic graphs of functions.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students use key features of exponential functions to differentiate between exponential growth and decay.
+\item Students interpret and compare exponential functions to model populations and the value of a car (x) years after it was purchased.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+NEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+decay factor & factor de decremento \\
+exponential decay function & funciÃ³n decaimiento exponencial \\
+exponential function & funciÃ³n exponencial \\
+exponential growth function & funciÃ³n crecimiento exponencial \\
+growth factor & factor de incremento \\
+\end{tabular}
+VOCABULARY ACTIVITY. Discuss the key features of an exponential function and the difference between exponential decay and exponential growth. As needed, have students complete the matching activity by applying their understanding of the structure of an exponential function.
+\begin{tabular}{ll}
+exponential growth function & \answer{(A(t)=a(1+r)^t)} \\
+exponential decay function & \answer{(A(t)=a(1-r)^t)} \\
+growth factor & \answer{(1+r)} \\
+decay factor & \answer{(1-r)} \\
+\end{tabular}
+\te{Printed right-hand choices appear in this order: (A(t)=a(1+r)^t), (1+r), (A(t)=a(1-r)^t), (1-r); magenta arrows show the matches.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 12 963 758 1115 936
+\placeholder{photo}{Student Companion cover: black background with luminous purple, blue, pink, and orange circular rings; titles Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students identify domain, range, intercepts, asymptotes, and end behavior of exponential functions represented by tables, graphs, and equations. They graph transformations of exponential functions and compare the key features of the given graph to the parent function.
+Students model with exponential functions showing a relationship between quantities that increase or decrease by a fixed percent each period.
+\textbf{Applying Math Practices}
+Model with Mathematics. Students construct tables, graphs, and equations to analyze relationships, draw conclusions, and solve problems that involve quantities that increase or decrease by a fixed percent each time period.
+Look For and Make Use of Structure. Students look for repeated multiplication in their calculations and recognize that these problems can be represented by exponential functions.
+\end{te-addendum}
+% Source page 13: 285B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS. Students will investigate relationships between consecutive (y)-values for linear, cubic, and exponential functions to discover the main characteristics of exponential functions.
+STUDENT COMPANION. Students can complete the Explore \& Reason activity in their Student Companion.
+\te{Activity. Critique \& Explain is available at SavvasRealize.com. Printed resource label says Critique \& Explain although the activity is Explore \& Reason.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving}
+Q: Why might Margaret be interested in the ratio between (y)-values?
+\answer{Sample: She is looking for any pattern she could use to describe the functions.}
+\textbf{During: SMALL GROUP. Support Productive Struggle in Learning Mathematics}
+Q: How can a table help you find constant differences and ratios?
+\answer{A table organizes the values of a function sequentially, which can help you quickly and easily find differences and ratios in order to compare them.}
+Q: What similarities and differences do you notice among the three tables?
+\answer{Each function has an (x) and a 3 in it; Two tables have differences that are increasing and two tables have ratios that are decreasing; Only one table has constant differences and only one table has constant ratios.}
+\textbf{For Early Finishers}
+Q: What effect would changing the 3's in the equations to 2's have on the tables?
+\answer{The values in the table would be smaller, but one table would still show constant differences and one will still show constant ratios.}
+\textbf{After: WHOLE CLASS. Facilitate Meaningful Mathematical Discourse}
+Facilitate a discussion with students about sharing their answers to Parts B and C.
+Q: Is there anything you recognize about the equations of the functions which will help to indicate that a function has a constant ratio between consecutive (y)-values?
+\answer{(3^x) indicates that 3 is multiplied repeatedly.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Generalize. Use with EXPLORE \& REASON}
+Let (b) represent a whole number. For (b>1), which function do you think will increase at a faster rate as (x) increases, (f(x)=b^x) or (g(x)=x^b)? Explain.
+\answer{The exponential function increases faster than the power function as (x) approaches infinity.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Margaret investigates three functions: (y=3x), (y=x^3), and (y=3^x). She is interested in the differences and ratios between consecutive (y)-values. Here is the table she started for (y=3x).
+\begin{tabular}{llll}
+\multicolumn{4}{c}{Investigating (y=3x)} \\
+(x) & (y) & Difference between (y)-values & Ratio between (y)-values \\
+1 & 3 & & \\
+2 & 6 & (6-3=3) & (\frac63=2) \\
+3 & 9 & (9-6=3) & (\frac96=1.5) \\
+4 & 12 & (12-9=3) & (\frac{12}9\approx1.33) \\
+\end{tabular}
+A. Create tables like Margaret's for all three functions and fill in more rows.
+B. Which functions have a constant difference between consecutive (y)-values? Constant ratio?
+\answer{A and B. I noticed for consecutive (y) values in the tables for each function that (y=3x) always has a common difference of 3 and (y=3^x) always has a common ratio of 3.}
+C. Use Structure Which of these three functions will have (y)-values that increase the fastest as (x) increases? Why?
+\answer{C. The difference between consecutive (y)-values is greater for (y=3^x) than for the other two functions, so it is increasing the fastest. Also, the other two functions have decreasing ratios, so they are increasing at a slower rate.}
+\te{SAMPLE STUDENT WORK. Digital version: Margaret investigates three functions: (y=3x), (y=x^3), and (y=3^x). She is interested in the differences and ratios between consecutive (y)-values. Here is the table she created to compare the three functions. A. Complete the following table for all three functions. The first set of columns is the same four-row table above; two additional sets, Investigating (y=x^3) and Investigating (y=3^x), have blank (y), Difference between (y)-values, and Ratio between (y)-values columns. Controls: Go back, Add Row.}
+\end{model-discuss}
+% Source page 14: 285 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION. Establish Mathematics Goals to Focus Learning}
+Introduce to students that the equations of exponential growth and exponential decay are of the same form, (y=a\cdot b^x). Explain to students that the values of (a) and (b) will help them to identify key features of the graphs of exponential functions.
+\te{Example 1 is Powered by Desmos. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+Q: Consider the functions (f(x)=2^x) and (g(x)=5(\frac12)^x). What information tells you whether the functions are increasing or decreasing?
+\answer{the value of (b); If (b>1), the function is increasing and if (b<1), the function is decreasing.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 2}
+Graph the function (g(x)=-4^x+1). Describe the graph in terms of transformations of the parent function (f(x)=4^x).
+\answer{Since the sign of (a) changed, the function is reflected across the (x)-axis. By adding a constant (k=1), the function shifts vertically by 1 unit. The (y)-intercept changes from 1 to (-1) due to the reflection, then is translated vertically 1 unit to ((0,0)) due to the value of (k). The horizontal asymptote changes from (y=0) to (y=1).}
+% FIG 14 447 945 542 1131
+\placeholder{graph}{Axes x and y, x window -5 to 5 with labels -4,-2,2,4, y window -10 to 10 with labels every 2 excluding 0; unit grid. Red f=4^x rises through (0,1), approaches y=0 on left; blue g=-4^x+1 falls through (0,0), approaches y=1 on left. Curves have arrows at left and at top/bottom respectively; f and g labeled by right ends. Positive-axis arrows, O at origin.}
+Example 2 Help students transition to graphing transformations of exponential functions with this additional example.
+Q: How do the asymptote and the (y)-intercept of (g(x)) compare to the asymptote and the (y)-intercept of (f(x))?
+\answer{The asymptote is the same for both functions, the (x)-axis. The (y)-intercept of (f(x)) is 1. The (y)-intercept of (g(x)) is 0.}
+\te{Printed teacher answer says both asymptotes are the (x)-axis; likely (g) has asymptote (y=1), as stated in the worked solution. Additional Examples are available at SavvasRealize.com. Digital controls: Go back, ESSENTIAL QUESTION, SOLUTION.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4A}
+Consider the function (f(x)=35(1.5)^x). What is the rate of growth or the rate of decay for the function?
+\answer{Since (1.5>1), this is a rate of growth. The rate of growth is (1.5-1=0.5), so (r=0.5).}
+Example 4 Help students transition to modeling exponential functions with this additional example.
+Q: Give a scenario that could be modeled by this function.
+\answer{Sample: A stock is purchased for \$35. Its value increases by 50\% each year.}
+\te{Digital controls: Go back, ESSENTIAL QUESTION, SOLUTION.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Identify Key Features of Exponential Functions}
+What are the key features of each function? Include domain, range, intercepts, asymptotes, and end behavior.
+An exponential function is any function of the form (f(x)=a\cdot b^x) where (a) and (b) are constants with (a\neq0), and (b>0), (b\neq1).
+A. (f(x)=2^x)
+\begin{tabular}{ll}
+\multicolumn{2}{c}{Graphing (f(x)=a\cdot b^x)} \\
+(x) & (f(x)=2^x) \\
+-2 & (\frac14) \\
+-1 & (\frac12) \\
+0 & 1 \\
+1 & 2 \\
+2 & 4 \\
+\end{tabular}
+% FIG 14 953 347 1144 449
+\placeholder{graph}{Red f=2^x on square unit grid, x from -5 to 5 with labels -4,-2,2,4, y from -1 to 9 with labels 2,4,6,8. Axes x,y, O at origin, arrows on positive axes. Red curve approaches x-axis on left, passes (0,1), rises through (2,4), arrowheads left and top. Callouts: For f, b=2. Since b>1, the y-values of the function increase. For any f(x)=a times b^x, the y-intercept is a because b^0=1.}
+\answer{Domain: all real numbers. Range: (\{y\mid y>0\}). (y)-intercept: 1. Asymptote: (x)-axis. End Behavior: As (x\to-\infty), (y\to0). As (x\to\infty), (y\to\infty).}
+\te{STUDY TIP. For an exponential function, the ratio between (y)-values for consecutive integer values of (x) is equal to the value of (b) in the equation (f(x)=a\cdot b^x).}
+% Source page 15: 286 Example 1 continued; Example 2
+B. (g(x)=5(\frac12)^x)
+\begin{tabular}{ll}
+\multicolumn{2}{c}{Graphing (g(x)=a\cdot b^x)} \\
+(x) & (g(x)=5(\frac12)^x) \\
+-2 & 20 \\
+-1 & 10 \\
+0 & 5 \\
+1 & (\frac52) \\
+2 & (\frac54) \\
+\end{tabular}
+% FIG 15 913 250 1114 346
+\placeholder{graph}{Blue g=5(1/2)^x on unit grid x=-5 to 5, y=-1 to 9, x labels -4,-2,2,4 and y labels 2,4,6,8; axes x,y, O at origin. Curve decreases through (0,5), has arrows at top near x=-1 and right near y=0; asymptote x-axis. Callout: For g, b=1/2. Since b<1, the y-values of the function decrease.}
+\answer{Domain: all real numbers. Range: (\{y\mid y>0\}). (y)-intercept: 5. Asymptote: (x)-axis. End Behavior: As (x\to-\infty), (y\to\infty). As (x\to\infty), (y\to0).}
+\te{REASON. As (x) increases, the fraction gets smaller and smaller. Will it ever reach zero?}
+\end{example}
+\begin{tryit}{1}
+1. Graph (f(x)=4(0.5)^x). What are the domain, range, intercepts, asymptote, and the end behavior for this function?
+\answer{domain: all real numbers; range: (\{y\mid y>0\}); intercept: (y)-intercept 4; asymptotes: (x)-axis; end behavior: As (x\to-\infty), (y\to\infty). As (x\to\infty), (y\to0).}
+% FIG 15 126 201 280 378
+\placeholder{graph}{Red f=4(0.5)^x, x window -8 to 8, y window -8 to 10, grid spacing 2; x labels -4,4; y labels -4,4,8; O at origin, x and y axes with arrows at both ends. Curve decreases through (0,4), approaches y=0 to right; arrows at top near x=-1.3 and right near y=0.}
+\end{tryit}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+Q: The point ((1,3)) is on (f(x)). How does a reflection tell you what point will be on (g(x))?
+\answer{Because (g(x)) is a reflection of (f(x)) across the (x)-axis, the point ((1,-3)) will be on the graph of (g(x)).}
+Q: How does a translation of (f(x)-4) tell you the new point on (h(x))?
+\answer{All points on the graph will be shifted down 4 units.}
+\te{Example 2 is Powered by Desmos. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Graph Transformations of Exponential Functions}
+Graph each function. Describe the graph in terms of transformations of the parent function (f(x)=3^x). How do the asymptote and (y)-intercept of the given function compare to the asymptote and (y)-intercept of the parent function?
+A. (g(x)=-3^x)
+When multiplying by negative one, the function is reflected across the (x)-axis.
+% FIG 15 816 609 913 707
+\placeholder{graph}{Unit grid x=-5 to 5 and y=-5 to 5, both axes labeled x,y with positive arrows, labels -4,-2,2,4 and O. Blue f=3^x through labeled (0,1), red g=-3^x through labeled (0,-1). Curves have left arrows approaching y=0; blue top and red bottom arrows. Labels f,g near right ends.}
+(g(x)=-3^x=-f(x))
+The (y)-intercept moves from (a) to (-a).
+The asymptote of the function does not change. It is still the (x)-axis.
+\answer{A. Reflection across the (x)-axis; (y)-intercept (-1); asymptote (x)-axis.}
+\te{COMMON ERROR. You may confuse reflection across the axes. Recall that if the (y)-value is multiplied by (-1), as in this case, with (g(x)=-3^x), the reflection is across the (x)-axis. Each (y)-value is replaced by its opposite.}
+B. (h(x)=3^x-4)
+When adding a constant (k), the function shifts vertically by (k) units.
+% FIG 15 976 609 1074 707
+\placeholder{graph}{Unit grid x=-5 to 5,y=-5 to 5, labels -4,-2,2,4, O at origin, x/y axes with positive arrows. Blue f=3^x through labeled (0,1), red h=3^x-4 through labeled (0,-3). Left arrows approach y=0 for f, y=-4 for h; top arrows on both increasing curves; labels f,h.}
+(h(x)=3^x-4=f(x)-4)
+The (y)-intercept moves from 1 to (1+k).
+The asymptote of the function also moves. It is (y=k) or (y=-4).
+\answer{B. Vertical shift down 4 units; (y)-intercept (-3); asymptote (y=-4).}
+\end{example}
+\begin{tryit}{2}
+2. How do the asymptote and (y)-intercept of the given function compare to the asymptote and (y)-intercept of the function (f(x)=5^x)?
+a. (g(x)=5^{x+3})
+b. (h(x)=5^{-x}+6)
+\answer{a. The asymptote is the (x)-axis for both functions. The (y)-intercept is translated from 1 up to 125. b. (h(x)) is shifted up 6 units and reflected across the (y)-axis. The intercept is at ((0,7)) and the horizontal asymptote is (y=6).}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{Reason. Use with EXAMPLE 2}
+What kinds of transformations will affect the asymptote or the intercept(s) of an exponential function? Explain.
+\answer{vertical shifts, horizontal shifts and reflections through the (x)-axis; vertical shifts affect the intercepts and asymptote whereas horizontal shifts and reflections through the (x)-axis only affect the intercepts.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners. Use with EXAMPLE 2}
+WRITING BEGINNING. Direct students to consider the relationship between the parent function and the transformed function in each graph. Have students use a Venn diagram to compare and contrast the everyday use of the term parent with the mathematical use of the term.
+Q: What word related to parent could be used to describe a transformed function?
+\answer{child}
+SPEAKING DEVELOPING. Have students use a Think-Aloud strategy to come up with the meaning and usage of the phrase parent function. Guide student discussion to consider the parent/child analogy when describing the functions; i.e. similarities between the functions and similarities between the graphs.
+Q: Why is (f) considered the parent of (g)?
+\answer{(g) is a reflection of (f), as children are often a reflection of their parents.}
+READING EXPANDING. Have students use a glossary or dictionary to read the definitions of transformation, reflection, translation, and shift.
+Q: How are the words related?
+\answer{Reflections, translations, and shifts are all types of transformations. Translation and shift are synonymous.}
+\end{te-addendum}
+% Source page 16: 287 Example 3
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions}
+Q: What is the relationship between the numbers on the left side of the graphic and the expressions on the right side of the graphic?
+\answer{On the left side of the graphic, the number of years since 2010 increases by 1 each row. On the right side of the graphic, those increases become the exponent of 1.013 in the numerical expression that models the population.}
+\te{Printed teacher answer says 2010; likely 2020, as in the student example.}
+Q: Why is the growth factor 1.013 rather than 0.013?
+\answer{The growth rate is 1.3\%. But the 1 in the ones place of the growth factor accounts for the size of the original population.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Model with Exponential Functions}
+\te{CONCEPTUAL UNDERSTANDING}
+The population of a large city was about 4.6 million in the year 2020 and grew at a rate of 1.3\% for the next four years.
+A. What exponential function models the population of the city over that 4-year period?
+Compute the population for the first few years to look for a pattern.
+% FIG 16 851 315 1162 487
+\placeholder{diagram}{Pyramid of green person icons, with five red dashed horizontal levels and headers t (years since 2020), p (population in millions). Rows from top: 0 and 4.6; 1 and 4.6+4.6(0.013)=4.6(1.013); 2 and 4.6(1.013)(1.013)=4.6(1.013)^2; 3 and 4.6(1.013)^3; 4 and 4.6(1.013)^4. Left callouts: In 2021, there are 4.6 million people, and another 1.3 percent of 4.6 million are added. The process repeats each year. The 1 in 1.013 represents the current population and the 0.013 represents the yearly increase. Right callout: The exponent, 4, is the number of years since 2020.}
+The population can be modeled by the exponential function:
+(P=4.6(1.013)^t)
+\answer{A. (P=4.6(1.013)^t).}
+\te{Color callouts label (P) population after (t) years, 4.6 population in 2020, 1.013 growth factor, (t) years since 2020. HAVE A GROWTH MINDSET. How can you use mistakes as opportunities to learn and grow?}
+B. If the population continues to grow at the same rate, what will the population be in 2050?
+To find the population in 2050, solve the equation for (t=30):
+(P=4.6(1.013)^{30}\approx6.78)
+\answer{B. In 2050, the population will be about 6.78 million.}
+\end{example}
+\begin{tryit}{3}
+3. A factory purchased a 3D printer in 2022 for \$35,750. The value of the printer depreciates every year by 22\% meaning that it retains 78\% of its purchase price for each year that passes.
+a. Write the function that represents the value of the printer in terms of (x), the number of years since 2022.
+b. What is the value of the printer after 3 years to the nearest dollar?
+c. Does the printer lose more of its value in the first 3 years or in the second 3 years after it was purchased?
+\answer{a. (f(x)=35,750(0.78)^x) b. \$16,965 c. in the first 3 years}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How can you tell by the description of the value of the printer whether (0<b<1) or (b>1)?
+\answer{(0<b<1) because the value of the printer is decreasing.}
+Q: Does your answer make sense? Explain.
+\answer{Sample: The original value of the printer was \$35,750 and the value decreases at a rate of 22\% per year. That is a decrease of \$7,865 the first year. If the value decreased at a constant rate, it would be less than \$13,000 after three years. But each year, the value of the printer is less than it was the previous year. This means that 22\% of the value is less in any given year than it was the previous year. So each year, the value decreases by a smaller amount than it did the previous year, making \$16,965 a reasonable answer.}
+\end{te-addendum}
+\begin{te-addendum}{3}{CommonError}
+\textbf{Common Error}
+Try It! 3c Some students may subtract the value after 6 years from the original value. Emphasize that the amount of decrease in the second 3 years is found by subtracting the value after 6 years from the value after 3 years.
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 3}
+Have students explore writing exponential growth and decay models, given the initial value and the rate of growth or the rate of decay.
+1. initial value: 45; rate of growth: 4.5\%
+2. initial value: 240; rate of decay: 7\%
+3. initial value: 13; rate of decay: 25\%
+Q: What is an exponential function that models the situation?
+\answer{1. (y=45(1.045)^x) 2. (y=240(0.93)^x) 3. (y=13(0.75)^x)}
+Q: For Exercise 1, write a real-world context for this function.
+\answer{Sample: The population of a herd of cattle is 45 in 2010. The population grows at a rate of 4.5\% every year. Write a function to model the population of the herd of cattle.}
+\end{te-addendum}
+% Source page 17: 288 Concept; Example 4
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Connect Representations}
+Q: Why is (0<x<12) a reasonable domain?
+\answer{After 12 years, vehicles are not worth much because of their mileage.}
+Q: The value of another car can be modeled by (y=31\cdot0.77^x). How does the value of this car compare to that of the value of the car given in the example?
+\answer{Originally the second car is worth more because (\$31,000>\$24,000). But the value of the second decreases at a higher rate of 23\% per year.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Exponential Growth and Decay Models}
+Exponential growth and exponential decay functions model quantities that increase or decrease by a fixed percent during each time period. Given an initial amount (a) and the rate of increase or decrease (r), the amount (A(t)) after (t) time periods is given by:
+\begin{tabular}{ll}
+Exponential Growth Model & Exponential Decay Model \\
+(A(t)=a(1+r)^t) & (A(t)=a(1-r)^t) \\
+(a>0), (b>1), (b=1+r) & (a>0), (0<b<1), (b=1-r) \\
+\end{tabular}
+The growth or decay factor is equal to (b), and is the ratio between two (y)-values for consecutive integer values of (x).
+\end{concept-box}
+\begin{example}{4}
+\textbf{Interpret an Exponential Function}
+The function (y=24\cdot0.8^x) can be used to model the value of the car (in thousands of dollars) (x) years after it was purchased.
+A. Does the function represent exponential growth or decay?
+(y=24\cdot0.8^x)
+\answer{A. (b=0.8), so (b<1) and the function represents exponential decay.}
+B. What is the rate of decay for this function? What does it mean?
+(b=1-r)
+(0.8=1-r)
+(r=0.2)
+\answer{B. The rate of decay is 0.2, or 20\%. This means that the value of the car decreases by 20\% each year.}
+C. Graph the function on a reasonable domain. What do the (y)-intercept and asymptote represent? When will the value of the car be about \$5,000?
+% FIG 17 814 620 1111 706
+\placeholder{graph}{Calculator screen with red decreasing exponential Y1=24*.8^(X), first-quadrant grid without numerical tick labels, trace point near (7,5). Left callout: The intercept of 24 shows the car was bought for 24,000 dollars. Right callout: The asymptote of y=0 means the value will approach 0 after many years. A reasonable domain would be [0,12] as most cars are sold within 12 years. Screen trace coordinates reproduced in the accompanying teacher note.}
+\te{Calculator trace: (X=7.0212766), (Y=5.0093253). GENERALIZE. For financial problems, exponential growth is often replaced with appreciation, and exponential decay is replaced with depreciation.}
+Find the value of (x) when (y=5).
+The graph (approximately) passes through the point ((7,5)).
+\answer{C. This means that the value of the car will be about \$5,000 after 7 years.}
+\end{example}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How would the function change if 250 hawks were released and their population increased by 5.5\% each year?
+\answer{(f(x)=250(1.055)^x)}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Use Structure. Use with EXAMPLE 4}
+How can you determine the growth or decay factor by looking at an exponential function? The growth or decay rate?
+\answer{The growth or decay factor is the base of the exponential term; the growth rate (when (b>1)) is equal to (b-1) and the decay rate (when (0<b<1)) is equal to (1-b).}
+\end{te-addendum}
+% Source page 18: 289 Example 4 continued; Example 5
+\begin{tryit}{4}
+4. Red-shouldered hawks were released into a region on January 2, 2023. The function (f(x)=220(1.05)^x) can be used to model the number of hawks in the region (x) years after 2023.
+a. Is the population increasing or decreasing? Explain.
+b. How many hawks were released? In what year will the number of hawks reach 280?
+\answer{a. increasing; The base is greater than 1, so the function increases as (x) increases. b. 220 hawks were released initially. In the year 2028, the population will reach 280 hawks.}
+\end{tryit}
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Implement Tasks That Promote Reasoning and Problem Solving}
+Q: What part of an exponential function (f(x)=a\cdot b^x) determines how rapidly the function will grow?
+\answer{The value of (b) determines how rapidly an exponential function grows. For (b>1), the larger (b) is, the more rapidly the function will grow.}
+Q: How else could you compare the two functions besides comparing their growth factors?
+\answer{You could graph the two functions on the same coordinate grid to compare.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Compare Two Exponential Functions}
+\te{APPLICATION}
+A museum purchased a painting and a sculpture in the same year. Their values are changing exponentially as shown. Which art work's value is increasing more quickly?
+% FIG 18 828 398 1167 621
+\placeholder{illustration}{Museum display with abstract orange, green, and blue ribbon sculpture on pedestal marked Sculpture Value; pedestal formula f(x)=50(1.075)^x, thousands of dollars in x years. Gold-framed Painting Value graph: horizontal Years 0 to 5 by 1, vertical Value (thousands of dollars) 0 to 80 by 20; rising red curve, black points with red callouts (0,40), (1,44), (2,48.4), (5,64.4). No arrowheads on graph. Teal backdrop and brown floor.}
+Identify key features for the sculpture.
+(f(x)=50(1.075)^x)
+The initial purchase price is \$50,000. The growth factor is 1.075.
+Find the growth factor, (b), for the painting.
+(b=\frac{44}{40}=1.1\text{ and }b=\frac{48.4}{44}=1.1)
+(g(x)=40(1.1)^x)
+Verify for (x=5).
+(g(5)=40(1.1)^5\approx64.4)
+The growth factor for the painting is 1.10.
+\answer{The painting's growth factor is greater than the sculpture's, so its value is increasing more rapidly.}
+\te{LOOK FOR RELATIONSHIPS. The growth factor, (b), is the ratio between two (y)-values (\frac{y_2}{y_1}) when the (x_2-x_1=1). When the data are available it is good to check multiple places.}
+\end{example}
+\begin{tryit}{5}
+5. In Example 5, in what year will the value of the painting become greater than the value of the sculpture?
+\answer{In the tenth year.}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Is it possible to determine when the value of the painting will surpass the value of the sculpture?
+\answer{Yes; You could graph the sculpture value function on the same coordinate grid as the graph of the Painting's value, and locate the point of intersection of the graphs. The value of the painting will be larger than the value of the sculpture for all (x)-values to the right of the intersection point.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{Reason. Use with EXAMPLE 5}
+For two functions (f(x)=b^x) and (g(x)=b^{x+n}), where (n>0), is it possible that the two graphs will intersect? Explain.
+\answer{No; For the two functions to intersect, (x) would have to be equal to (x+n), which cannot happen when (n>0).}
+\te{Printed answer uses the exponential-function restriction (b>0), (b\neq1) from Example 1.}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 5}
+Some students may have difficulty finding the growth or decay factor for an exponential function given points on the graph.
+\item Have students practice finding the growth or decay factor for the function (f(x)=235(b)^x) given the points ((0,235)), ((1,212.7)) and ((2,192.5)).
+Q: Is the exponential function a growth or decay function? How do you know?
+\answer{(f(x)) is a decay function because the (y)-coordinates are decreasing.}
+Q: Would you expect the growth or decay factor to be greater than 1?
+\answer{No; since the function is a decay function, (b) is a decay factor, with (0<b<1).}
+Q: Describe (b) in terms of a ratio.
+\answer{The growth or decay factor of an exponential function is the ratio of successive (y)-coordinates. So, (b=\frac{f(1)}{f(0)}) or (b=\frac{f(2)}{f(1)}).}
+Q: What is (b) and how does it relate to the exponential function?
+\answer{(b\approx0.905), so the function is (f(x)=235(0.905)^x). The function decreases by almost 10\% for each increase in (x).}
+\end{te-addendum}
+% Source page 19: 290 Concept Summary
+\begin{te-addendum}{ConceptSummary}{GeneralizeETP}
+\textbf{CONCEPT SUMMARY Key Features of Exponential Functions}
+Q: Consider the function (y=500(0.86)^x). How can you find the rate of decay?
+\answer{Find the rate of decay by subtracting 0.86 from 1.}
+\te{Presentation; Practice. Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 6 Students may incorrectly state that the rate of decay is 0.4. Explain that the decay factor, not the rate of decay, is the value (b) in the equation. The decay factor is (1-r), where (r) is the rate of decay.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Key Features of Exponential Functions}
+\begin{tabular}{lll}
+ & Exponential Growth & Exponential Decay \\
+GRAPHS & Growth factor: (1+r), where (r) is the rate of increase & Decay factor: (1-r), where (r) is the rate of decrease \\
+EQUATIONS & (y=a\cdot b^x), for (b>1) & (y=a\cdot b^x), for (0<b<1) \\
+KEY FEATURES & Domain: All real numbers & Domain: All real numbers \\
+ & Range: (\{y\mid y\geq0\}) & Range: (\{y\mid y\geq0\}) \\
+ & (y)-intercept: ((0,a)) & (y)-intercept: ((0,a)) \\
+ & Asymptote: (x)-axis & Asymptote: (x)-axis \\
+ & End behavior: As (x\to-\infty), (y\to0). As (x\to\infty), (y\to\infty). & End behavior: As (x\to-\infty), (y\to\infty). As (x\to\infty), (y\to0). \\
+MODELS & Growth: (A(t)=a(1+r)^t) & Decay: (A(t)=a(1-r)^t) \\
+\end{tabular}
+\te{Printed ranges include zero; likely (y>0) is intended for these positive exponential functions.}
+% FIG 19 743 269 840 366
+\placeholder{graph}{Exponential Growth: blue increasing curve through (0,2), approaching y=0 to left, arrows at left and top; label b>1. Axes x,y; unit grid window -5 to 5 both axes, labels -4,-2,2,4, origin O, positive-axis arrows.}
+% FIG 19 917 269 1015 366
+\placeholder{graph}{Exponential Decay: red decreasing curve through (0,2), approaching y=0 to right, arrows at top and right; label 0<b<1. Axes x,y; unit grid window -5 to 5 both axes, labels -4,-2,2,4, origin O, positive-axis arrows.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How do graphs and equations communicate key features of exponential growth and decay functions?
+\answer{The values of equations determine what the key features will be. Graphs illustrate these features.}
+2. Vocabulary How do exponential functions differ from polynomial and rational functions?
+\answer{In exponential functions, constants are raised to powers that are variables. In polynomial and rational functions, variables are raised to powers that are constants.}
+3. Error Analysis Charles claimed the function (f(x)=(\frac32)^x) represents exponential decay. Explain the error Charles made.
+\answer{(\frac32) is greater than 1, so the graph represents exponential growth.}
+4. Communicate Precisely How are exponential growth functions similar to exponential decay functions? How are they different?
+\answer{Sample: Growth and decay functions have the same domain, range, and asymptotes but different end behaviors.}
+\textbf{Do You KNOW HOW?}
+5. Graph the function (f(x)=4(3^x)). Identify the domain, range, (y)-intercept, and asymptote, and describe the end behavior.
+\answer{domain: all real numbers; range: (\{y\mid y>0\}); (y)-intercept: 4; asymptote: (x)-axis; end behavior: As (x\to-\infty), (y\to0). As (x\to\infty), (y\to\infty).}
+% FIG 19 126 750 318 943
+\placeholder{graph}{Answer 5: red increasing exponential through (0,4), left arrow approaching y=0, top arrow near x=0.8; x window -7 to 3, y window -1 to 9, unit grid, x labels -6,-4,-2,2, y labels 2,4,6,8, O at origin; x and y axes with arrows both ends.}
+6. The exponential function (f(x)=2500(0.4)^x) models the amount of money in Zachary's savings account over the last 10 years. Is Zachary's account balance increasing or decreasing? Write the base in terms of the rate of growth or decay.
+\answer{decreasing; (1-0.6)}
+7. Describe how the graph of (g(x)=-4(0.5)^{x-3}-6) compares to the graph of (f(x)=4(0.5)^x).
+\answer{The graph of (g(x)) is shifted 3 units to the right, down 6 units and reflected across the (x)-axis.}
+8. Two trucks were purchased by a landscaping company in 2016. Their values, in thousands of dollars, are modeled by the functions (f(x)=35(0.85)^x) and (g(x)=46(0.75)^x) where (x) is the number of years since 2016. Which function models the value of the truck that is worth the most after 5 years? Explain.
+\answer{The truck whose value is modeled by (f(x)) will be worth more after 5 years; (f(5)=15.53) and (g(5)=10.92), which means that after 5 years the truck whose value is modeled by (f(x)) is worth approximately \$4,610 more than the truck whose value is modeled by (g(x)).}
+\end{concept-summary}
+% Source page 20: 291 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+or you may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+9--23, 25--30 & 9--13, 15--30 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Scan the QR code to access a video tutorial. See answers for 16--20, 25--26 on the next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 14--17 & 1 \\
+1 & 9 & 2 \\
+2 & 23, 28, 29 & 2 \\
+3 & 10, 25 & 2 \\
+4 & 11, 12, 18--21, 24, 30 & 2 \\
+4 & 26 & 3 \\
+5 & 13, 22 & 2 \\
+5 & 27 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{9}{2}
+UNDERSTAND. Use Structure What value of (a) completes the equation (y=a\cdot2^x) for the exponential growth function shown below?
+% FIG 20 567 333 695 463
+\placeholder{graph}{Red exponential growth curve through (0,4), approaching x-axis on left, arrows left and top. x,y axes with positive arrows, O at origin; x/y window -10 to 10, grid spacing 2, labels -8,-4,4,8.}
+\answer{4}
+\end{practice}
+\begin{practice}{10}{2}
+UNDERSTAND. Make Sense and Persevere Jia Li found a collection of baseball cards in her attic worth \$8,000. The collection is estimated to increase in value by 1.5\% per year. Write the function and find the value of the collection after 7 years.
+\answer{(f(x)=8,000(1.015)^x); \$8,878.76}
+\end{practice}
+\begin{practice}{11}{2}
+UNDERSTAND. Error Analysis Describe and correct the error a student made in identifying the growth or decay factor for the function (y=2.55(0.7)^x).
+\te{Student work, marked with red X: Step 1 The base of the function is 0.7, so it represents exponential decay. Step 2 The function in the form (y=a(1-r)^x) is (y=2.55(1-0.7)^x). Step 3 The decay factor is 0.3.}
+\answer{The rate is 0.3, so the decay factor is 0.7.}
+\end{practice}
+\begin{practice}{12}{2}
+UNDERSTAND. Reason In 2010, the population of St. Louis was 319,294, and it decreased to 301,578 in 2020. If this population decrease were modeled by an exponential decay function, what value would represent the (y)-intercept? Explain your reasoning.
+\answer{319,294; This is the population for the first known year of data. The year 2010 acts as 0.}
+\end{practice}
+\begin{practice}{13}{2}
+UNDERSTAND. Mathematical Connections Describe how the graph of (g(x)=6\cdot2^{x+1}-4) compares to the graph of (f(x)=6\cdot2^x).
+\answer{The graph of (g(x)) is shifted 4 units down and 1 unit to the left.}
+\end{practice}
+\begin{practice}{14}{1}
+PRACTICE. Identify the domain, range, intercept, and asymptote of each exponential function. Then describe the end behavior. SEE EXAMPLE 1
+(f(x)=5\cdot3^x)
+\answer{domain: all real numbers; range: (\{y\mid y>0\}); (y)-intercept 5; asymptote: (x)-axis; end behavior: As (x\to-\infty), (y\to0). As (x\to\infty), (y\to\infty).}
+\end{practice}
+\begin{practice}{15}{1}
+PRACTICE. Identify the domain, range, intercept, and asymptote of each exponential function. Then describe the end behavior. SEE EXAMPLE 1
+(f(x)=0.75(\frac23)^x)
+\answer{domain: all real numbers; range: (\{y\mid y>0\}); (y)-intercept 0.75; asymptote: (x)-axis; end behavior: As (x\to-\infty), (y\to\infty). As (x\to\infty), (y\to0).}
+\end{practice}
+\begin{practice}{16}{1}
+PRACTICE. Identify the domain, range, intercept, and asymptote of each exponential function. Then describe the end behavior. SEE EXAMPLE 1
+(f(x)=4(\frac12)^x)
+\answer{domain: all real numbers; range: (\{y\mid y>0\}); (y)-intercept 4; asymptote: (x)-axis; end behavior: As (x\to-\infty), (y\to\infty). As (x\to\infty), (y\to0).}
+\end{practice}
+\begin{practice}{17}{1}
+PRACTICE. Identify the domain, range, intercept, and asymptote of each exponential function. Then describe the end behavior. SEE EXAMPLE 1
+(f(x)=7\cdot2^x)
+\answer{domain: all real numbers; range: (\{y\mid y>0\}); (y)-intercept 7; asymptote: (x)-axis; end behavior: As (x\to-\infty), (y\to0). As (x\to\infty), (y\to\infty).}
+\end{practice}
+\begin{practice}{18}{2}
+PRACTICE. Identify the transformation from the parent function (f(x)=0.25^x). Then graph the function. SEE EXAMPLE 2
+(g(x)=-6(0.25)^{x+4})
+\answer{reflected across (x)-axis, stretched by a factor of 6, shifted 4 units left.}
+% FIG 21 126 385 317 599
+\placeholder{graph}{Printed answer 18 on page 292: red curve rises from bottom left toward y=0 below the x-axis, arrowheads bottom near x=-4.7 and right near y=0. x window -5 to 5, y window -16 to 6; grid x step 1, y step 2; x labels -4,-2,2,4, y labels -12,-8,-4,4; O at origin, x/y axes arrows both ends.}
+\end{practice}
+\begin{practice}{19}{2}
+PRACTICE. Identify the transformation from the parent function (f(x)=0.25^x). Then graph the function. SEE EXAMPLE 2
+(h(x)=0.7(0.25)^{-x}-5)
+\answer{reflected across the (y)-axis, shifted down 5 units, vertically compressed by a factor of 0.7.}
+% FIG 21 126 674 317 810
+\placeholder{graph}{Printed answer 19 on page 292: red increasing curve with horizontal asymptote y=-5, y-intercept about -4.3, x-intercept about 1.4; arrows left near (-5,-5), top near (2,6). x window -5 to 5 step 1, y -8 to 6 step 2; labels x -4,-2,2,4, y -4,4; axes x,y arrows both ends, O at origin.}
+\end{practice}
+\begin{practice}{20}{2}
+PRACTICE. Write a function (g(x)) that represents the exponential function (f(x)=2^x) after a vertical stretch of 6 and a reflection across the (x)-axis. Graph both functions. SEE EXAMPLE 2
+\answer{(g(x)=-6(2^x))}
+% FIG 21 126 843 319 1036
+\placeholder{graph}{Printed answer 20 on page 292: grid x=-8 to 10,y=-10 to 10, spacing 2, labels -8,-4,4,8 on y and -4,4,8 on x; axes x,y arrows both ends, O at origin. Red increasing curve crosses y-axis near 1 and top near x=3; blue decreasing curve crosses near -1 and bottom near x=1, both approach y=0 to left with arrows; top/bottom arrows on right branches.}
+\te{Printed graph does not appear to plot the requested (f(x)=2^x) and (g(x)=-6(2^x)) accurately; its visible intercepts are preserved in the description.}
+\end{practice}
+\begin{practice}{21}{2}
+PRACTICE. Determine whether each function represents exponential growth or decay. Write the base in terms of the rate of growth or decay, identify (r), and interpret the rate of growth or decay. SEE EXAMPLES 3 AND 4
+(y=100\cdot2.5^x)
+\answer{growth; (1+1.5); 1.5; 150\%}
+\end{practice}
+\begin{practice}{22}{2}
+PRACTICE. Determine whether each function represents exponential growth or decay. Write the base in terms of the rate of growth or decay, identify (r), and interpret the rate of growth or decay. SEE EXAMPLES 3 AND 4
+(f(x)=10,200(\frac35)^x)
+\answer{decay; (1-\frac25); (\frac25); 40\%}
+\end{practice}
+\begin{practice}{23}{2}
+PRACTICE. Determine whether each function represents exponential growth or decay. Write the base in terms of the rate of growth or decay, identify (r), and interpret the rate of growth or decay. SEE EXAMPLES 3 AND 4
+(f(x)=12,000(\frac7{10})^x)
+\answer{decay; (1-\frac3{10}); (\frac3{10}); 30\%}
+\end{practice}
+\begin{practice}{24}{2}
+PRACTICE. Determine whether each function represents exponential growth or decay. Write the base in terms of the rate of growth or decay, identify (r), and interpret the rate of growth or decay. SEE EXAMPLES 3 AND 4
+(y=450\cdot2^x)
+\answer{growth; (1+1); 1; 100\%}
+\end{practice}
+\begin{practice}{25}{2}
+PRACTICE. The population of Medway, Ohio, was 4,007 in 2000. It is expected to decrease by about 0.36\% per year. Write an exponential decay function and use it to approximate the population in 2020. SEE EXAMPLE 4
+\answer{(f(x)=4,007(0.9964)^x); 3,728}
+\end{practice}
+\begin{practice}{26}{3}
+PRACTICE. The function (f(x)), shown in the graph, represents an exponential growth function. Compare the average rate of change of (f(x)) to the average rate of change of the exponential growth function (g(x)=25(1.4)^x). Use the interval [0,4]. SEE EXAMPLE 5
+% FIG 20 875 851 989 997
+\placeholder{graph}{Blue increasing curve with marked/labeled (0,30), (3,58.6), (4,73.2); arrow at upper right near (5.5,100). Horizontal axis x from 0 to 7, grid step 1, labels 0,2,4,6; vertical f(x) from 0 to 100, grid step 10, labels 0,20,40,60,80,100. Positive axis arrows.}
+\answer{The average rate of change of (g(x)), 17.8, is greater than the average rate of change of (f(x)), 10.8.}
+\end{practice}
+% Source page 21: 292 Practice & Problem Solving continued
+\begin{practice}{27}{3}
+APPLY. Model With Mathematics A colony of bacteria starts with 50 organisms and quadruples each day. Write a function, (P(t)), that represents the population of the bacteria after (t) days. Then find the number of bacteria that will be in the colony after 5 days.
+% FIG 21 517 375 738 458
+\placeholder{illustration}{Two circular petri dishes containing green rod-shaped bacteria. Left sparse dish callout DAY 0: 50. Orange arrow points right to densely filled dish labeled DAY 5: ?.}
+\answer{(P(t)=50(4)^x); 51,200 bacteria}
+\te{Printed formula uses (x) although the function and prompt use (t); likely (P(t)=50(4)^t).}
+\end{practice}
+\begin{practice}{28}{2}
+APPLY. Higher Order Thinking The number of teams (y) remaining in a single elimination tournament can be found using the exponential function (y=128(\frac12)^x), where (x) is the number of rounds played in the tournament.
+a. Determine whether the function represents exponential growth or decay. Explain.
+b. What does 128 represent in the function?
+c. What percent of the teams are eliminated after each round? Explain how you know.
+d. Graph the function. What is a reasonable domain and range for the function? Explain.
+\answer{a. decay; The base is less than 1. b. the initial number of teams in the tournament c. 50\%; the rate of decay is (\frac12). d. domain: (\{1,2,3,4,5,6,7\}); range: (\{1,2,4,8,16,32,64\}); the function only makes sense for 7 rounds. After the seventh round, there is only one team remaining.}
+% FIG 21 522 1123 754 1337
+\placeholder{graph}{Answer 28d: seven isolated red filled points (1,64),(2,32),(3,16),(4,8),(5,4),(6,2),(7,1). No connecting segments. x window -2 to 10, grid step 1, labels 2,4,6,8; y window about -7.5 to 75, grid step 7.5, labels 15,30,45,60. Axes x,y arrows both ends, O at origin.}
+\end{practice}
+\begin{practice}{29}{2}
+APPLY. Construct Arguments The function shown in the graph represents the number of lions in a region after (x) years, where the rate of decay is 20\%. The number of zebras in that same region after (x) years can be modeled by the function (f(x)=300(0.95)^x). A representative for a conservationist group claims there will be fewer lions than zebras within 2 years. Is the representative correct? Justify your answer.
+% FIG 21 515 869 692 1039
+\placeholder{graph}{Lion Population: blue decreasing curve with marked/labeled points (0,400),(4,164),(5,131), arrow at right near (9,55). Horizontal Years, x, from 0 to 10, grid step 1 and labels 0,2,4,6,8,10. Vertical Lions, f(x), from 0 to 1000, grid step 100 and labels 0,200,400,600,800,1000. Positive-axis arrows; curve approaches y=0.}
+\answer{Yes; After 2 years, there will be about 271 zebras left and about 256 lions left.}
+\end{practice}
+\begin{practice}{30}{2}
+ASSESSMENT PRACTICE. The exponential function (g(x)=3^{x-1}+6) is a transformation of the function (f(x)=3^x). Does each statement accurately describe how the graph of (g(x)) compares to the graph of (f(x))? Select yes or no.
+\begin{tabular}{lll}
+ & Yes & No \\
+a. (g(x)) is translated 6 units up. & \answer{Yes} & \\
+b. (g(x)) is translated 6 units down. & & \answer{No} \\
+c. (g(x)) is translated 6 units to the right. & & \answer{No} \\
+d. (g(x)) is translated 1 unit to the right. & \answer{Yes} & \\
+e. (g(x)) is translated 1 unit to the left. & & \answer{No} \\
+f. The horizontal asymptote shifts 1 unit down. & & \answer{No} \\
+\end{tabular}
+\end{practice}
+\begin{practice}{31}{2}
+ASSESSMENT PRACTICE. SAT/ACT Which of the functions defined below could be the one shown in this graph?
+% FIG 21 826 588 954 717
+\placeholder{graph}{Blue increasing exponential approaching y=-3 on left, crossing y-axis at -1 and x-axis near 0.6. x,y axes with positive arrows, O at origin; unit grid -5 to 5 both axes, x labels -4,-2,2,4 and y labels 2,4. Curve arrows left near (-5,-3) and top near (2,6).}
+A. (f(x)=4(2)^{x-1}+3)
+B. (f(x)=4(2)^{x+1}+3)
+C. (f(x)=4(2)^{x-1}-3)
+D. (f(x)=4(2)^{x+1}-3)
+\answer{C}
+\te{DOK: \uncertain{2}{not included in the printed Item Analysis; no item-level DOK printed}.}
+\end{practice}
+\begin{practice}{32}{3}
+ASSESSMENT PRACTICE. Performance Task A radioactive isotope of the element osmium Os-182 has a half-life of 21.5 hours. This means that if there are 100 grams of Os-182 in a sample, after 21.5 hours there will only be 50 grams of that isotope remaining.
+Part A Write a function to model the amount of Os-182 in a sample over time. Use (A_0) for the initial amount and (A) for the amount after time (t) in hours.
+\answer{Part A (A=A_0(\frac12)^{\frac{t}{21.5}})}
+Part B Use your model to predict how long it would take a sample containing 500 g of Os-182 to decay to the point where it contained only 5 g of Os-182.
+\answer{Part B about 143 hours}
+\te{DOK: \uncertain{3}{not included in the printed Item Analysis; no item-level DOK printed}.}
+\end{practice}
+% Source page 22: 292A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Resources book.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & F28 \\
+2 & 2 & F14 \\
+3 & 2 & F13 \\
+4 & 2 & F13, F14 \\
+5 & 2 & F14 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\te{Lesson Quiz is available at SavvasRealize.com. ASSESSMENT RESOURCES.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{6-1 Lesson Quiz: Key Features of Exponential Functions}
+Name \underline{\hspace{2cm}}
+1. Which function represents the exponential function (f(x)=3^x) after a vertical stretch by a factor of 8 and a reflection across the (x)-axis?
+A. (g(x)=3^{-8x})
+B. (g(x)=-3^{8x})
+C. (g(x)=8\cdot3^{-x})
+D. (g(x)=-8\cdot3^x)
+\answer{1. D}
+2. 15,000 blue trout were released into the Meherrin River for a scientific study. The function (f(x)=15,000(\frac98)^x) represents the number of blue trout after (x) years. After 5 years, what happens to the population?
+A. It decreases by about 2,000.
+B. It decreases by about 12,000.
+C. It increases by about 2,000.
+D. It increases by about 12,000.
+\answer{2. D}
+3. For the function (f(x)=(\frac12)\cdot6^x), identify the domain, range, (y)-intercept, and asymptote. Write one of the given phrases or values in each blank.
+Choices: linear; quadratic; exponential; all real numbers; 0.5; 0; 0.
+Domain: \answer{all real numbers}
+Range: (\{y\mid y>\answer{0}\})
+(y)-intercept: \answer{0.5}
+Asymptote: (y=\answer{0})
+Function type: \answer{exponential}
+4. The rabbit population of Springfield, Ohio, was 144,000 in 2016. It is expected to decrease by about 7.2\% per year. Write and graph the exponential decay function of the rabbit population, (P(t)).
+(P(t)=\answer{144,000}(\answer{0.928})^t)
+% FIG 22 1027 668 1145 763
+\placeholder{graph}{Quiz 4 printed answer: magenta decay curve begins filled point (0,144000), approaches t-axis to right, ends in filled point near (90,0). Horizontal t window -10 to 90, grid step 10, labels 20,40,60,80; vertical P window -20000 to 180000, grid step 20000, labels 40000,80000,120000,160000; O at origin; black axes with arrowheads.}
+5. Which of the following functions has a greater growth factor than the function shown in the graph?
+% FIG 22 877 771 947 851
+\placeholder{graph}{Quiz 5: black increasing curve with filled labeled points (0,16),(2,36),(3,54), arrows at left near (-1,10) and top near (3,60). Horizontal x window -1 to 6, grid step 1, labels 2,4; vertical y window -20 to 60, grid step 10, labels 20,40; axes x,y with arrows both ends, O at origin.}
+A. (f(x)=(\frac32)\cdot3^x)
+B. (f(x)=8(\frac32)^x)
+C. (f(x)=20(1.4)^x)
+D. (f(x)=12(0.8)^x)
+\answer{5. A}
+\te{enVision Algebra 2. Assessment Sourcebook. SavvasRealize.com. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+% Source page 23: 292B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding. I}
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School.
+\textbf{6-1 Reteach to Build Understanding: Key Features of Exponential Functions}
+Name \underline{\hspace{2cm}}
+1. Fill in the blank for each graph using the terms in the word bank below. Terms can be used multiple times.
+% FIG 23 158 435 216 490
+\placeholder{graph}{Reteach 1 left: black decreasing f(x)=0.5(0.5)^x, label over curve, through (0,0.5), approaches y=0 to right with arrow, top-left arrow near (-4,7). x window -4 to 5,y=-2 to 7, unit grid; x labels -2,2,4 and y 2,4,6; axes x,y arrows both ends, O.}
+% FIG 23 274 435 345 490
+\placeholder{graph}{Reteach 1 right: black increasing g(x)=0.5(1.25)^x, labeled above, through (0,0.5); arrows left approaching y=0 and right near (5,1.5). Unit grid x=-4 to 5,y=-2 to 7, x labels -2,2,4, y 2,4,6; axes x,y arrows both ends, O.}
+Word Bank:
+\begin{tabular}{llll}
+(f(x)=0.5(0.5)x) & (x)-axis & As (x\to-\infty), (y\to\infty) & 1.25 \\
+As (x\to\infty), (y\to0) & (y\geq0) & 0.5 & (y)-axis \\
+\end{tabular}
+\begin{tabular}{ll}
+Exponential Decay & Exponential Growth \\
+(y=ab^x) and (0<b<1) & (y=ab^x) and \answer{(b>1)} \\
+Exponential function: \answer{(f(x)=0.5(0.5)x)} & Exponential function: (g(x)=0.5(1.25)^x) \\
+(a=0.5), (b=\answer{0.5}) & (a=0.5), (b=\answer{1.25}) \\
+Range: (y\geq0) & Range: \answer{(y\geq0)} \\
+Asymptote: \answer{(x)-axis} & Asymptote: (x)-axis \\
+End Behavior: \answer{As (x\to-\infty), (y\to\infty). As (x\to\infty), (y\to0).} & End Behavior: As (x\to-\infty), (y\to0). As (x\to\infty), (y\to\infty). \\
+The initial amount: 0.5 & The initial amount: \answer{0.5} \\
+Decay factor: \answer{0.5} & Growth factor: 1.25 \\
+(y)-intercept: \answer{0.5} & (y)-intercept: \answer{0.5} \\
+\end{tabular}
+\te{Printed decay formula in word bank and answer has a baseline (x); likely exponent (x), as on the graph. Printed ranges include zero; likely (y>0). The answer (b>1) does not appear in the word bank.}
+2. Emma says that for (f(x)=8,000(0.95)^x), the exponential growth factor is 0.95 and the (y)-intercept is 8,000. What is her error?
+\answer{Sample Answer: For (f(x)) to be an exponential growth model, (a>0) and (b>1). Since (b=0.95) and (0<b<1), 0.95 is a decay factor, not a growth factor.}
+\te{enVision Algebra 2. Teaching Resources. SavvasRealize.com. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice. I O}
+Provides extra practice for each lesson.
+MathXL for School.
+\textbf{6-1 Additional Practice: Key Features of Exponential Functions}
+Name \underline{\hspace{2cm}}
+Graph each function. What are the key features of each graph (include domain, range, intercepts, asymptotes, and end behavior)?
+1. (y=(0.3)^x)
+\answer{Domain: all real numbers. Range: (y>0). (y)-intercept: 1. Asymptotes: (x)-axis. End behavior: As (x\to\infty), (y\to0). As (x\to-\infty), (y\to\infty).}
+% FIG 23 533 451 571 489
+\placeholder{graph}{Additional Practice 1: black exponential decay curve through (0,1), arrows top near x=-1.3 and right near y=0. Unit grid x=-3 to 3,y=-1 to 5; axes x,y with arrows, O; x labels -2,2, y label 4.}
+2. (y=3^x)
+\answer{Domain: all real numbers. Range: (y>0). (y)-intercept: 1. Asymptotes: (x)-axis. End behavior: As (x\to\infty), (y\to\infty). As (x\to-\infty), (y\to0).}
+% FIG 23 654 451 692 489
+\placeholder{graph}{Additional Practice 2: black exponential growth curve through (0,1), left arrow approaching y=0, top arrow near x=1.5. Unit grid x=-4 to 2,y=-1 to 5; x label -2, y labels 2,4; axes x,y with arrows, O.}
+Graph each function. Describe the graph in terms of transformations of the parent function (f(x)=2^x). How do the asymptote and (y)-intercept of the given function compare to the asymptote and intercept of the parent function?
+3. (g(x)=(0.5)^x)
+\answer{The graph of (f(x)) is reflected across the (y)-axis. The (y)-intercept does not change. The asymptote is still the (x)-axis.}
+% FIG 23 533 558 571 595
+\placeholder{graph}{Additional Practice 3: magenta decay curve labeled f on upper left and magenta growth curve labeled g on upper right, both cross (0,1), both approach x-axis on respective far ends, arrows at top and horizontal ends. Unit grid x=-3 to 3,y=-1 to 5, x labels -2,2, y 2,4; black axes x,y with arrows, O.}
+\te{Printed graph labels the decreasing curve (f) and increasing curve (g); likely those labels are interchanged.}
+4. (g(x)=-2^x)
+\answer{When the sign of (a) changes, the function is reflected across the (x)-axis. The (y)-intercept changes from 1 to (-1). The asymptote is still the (x)-axis.}
+% FIG 23 662 558 700 595
+\placeholder{graph}{Additional Practice 4: magenta increasing curve labeled g above x-axis and decreasing curve labeled f below, intercepts (0,1) and (0,-1), arrows at top/bottom right and left near y=0. Grid x=-6 to 6,y=-6 to 6 with spacing 2; labels -4,4 on axes x,y; arrows both ends, O.}
+\te{Printed graph labels the positive curve (g) and negative curve (f); likely those labels are interchanged.}
+Without graphing, determine whether the function represents exponential growth or exponential decay. What is the (y)-intercept?
+5. (y=0.99(\frac13)^x)
+\answer{decay; 0.99}
+6. (y=20(1.75)^x)
+\answer{growth; 20}
+Write an exponential function to model each situation. Find each amount after the specified time.
+7. A population of 1,236,000 grows 1.3\% per year for 10 years.
+\answer{(y=1,236,000(1.013)^x); 1,406,413}
+8. A population of 752,000 decreases 1.4\% per year for 18 years.
+\answer{(y=752,000(0.986)^x); 583,448}
+\te{enVision Algebra 2. Teaching Resources. SavvasRealize.com. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment. O A}
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School.
+\textbf{6-1 Enrichment: Key Features of Exponential Functions}
+Name \underline{\hspace{2cm}}
+1. Graph the following four functions on the same graph.
+a. (f(x)=4(0.5)^x)
+b. (g(x)=-4(0.5)^x)
+c. (h(x)=4(1.9)^x)
+d. (\uncertain{k(x)}{i(x); j(x)}=-4(1.9)^x)
+\answer{See graph.}
+% FIG 23 1009 426 1105 503
+\placeholder{graph}{Enrichment 1 answer: magenta graph, x window -8 to 8,y=-6 to 6, unit grid, x labels -6,-4,-2,2,4,6; y -4,-2,2,4. Axes x,y arrows both ends, O. Four exponential branches: positive decreasing f(x), negative increasing g(x), positive increasing h(x), negative decreasing k(x), intercepts 4 and -4; all approach y=0 on one end and have arrows continuing at top/bottom or left/right.}
+2. From Exercise 1, how can you limit the domain of each function so you can see the enclosed shape with vertices only?
+\answer{Sample answer: a: domain (0\leq x\leq6); b. domain (0\leq x\leq6); c. domain: (-6\leq x\leq0); d. domain: (-6\leq x\leq0)}
+3. The four functions (with limiting domains) of the closed shape around the origin are (f(x)=-4(\frac12)^x), (g(x)=-4(2)^x), (h(x)=4(2)^x), and (\uncertain{j(x)}{i(x); l(x)}=4(\frac12)^x). Find the missing functions to fill in the four shapes in each quadrant. Write the domains used for each function.
+% FIG 23 864 591 984 688
+\placeholder{graph}{Enrichment 3: black unit grid x=-10 to 10,y=-8 to 8; x labels -8,-6,-4,-2,2,4,6,8 and y -6,-4,-2,2,4,6; axes x,y arrows both ends, O. Center four curved sides form a diamond with top near (0,4), bottom near (0,-2.5), left near (-3,0.5), right near (3,0.5); upper-left h(x), upper-right j(x), lower-left g(x), lower-right f(x). Four incomplete outer shapes are centered near (-6,4),(6,4),(-6,-4),(6,-4), with tips near (-6,7),(6,7),(-6,-7),(6,-7), inward points near (-3,3.5),(3,3.5) and outward points near (-9,-3.5),(9,-3.5). Missing sides face the central gap. No endpoint circles or curve arrowheads.}
+\te{Printed center graph is visibly offset/asymmetric relative to the stated functions; the description follows its plotted geometry.}
+a. Quadrant I: (y=\underline{\hspace{1cm}})
+\answer{(-4(\frac12)^{x-6}+4); domain: (6\leq x\leq9)}
+b. Quadrant II: (y=\underline{\hspace{1cm}})
+\answer{(-4(2)^{x+6}+4); domain: (-9\leq x\leq-6)}
+c. Quadrant III: (y=\underline{\hspace{1cm}})
+\answer{(4(\frac12)^{x+6}-4); domain: (-6\leq x\leq-3)}
+d. Quadrant IV: (y=\underline{\hspace{1cm}})
+\answer{(4(2)^{x-6}-4); domain: (3\leq x\leq6)}
+\te{enVision Algebra 2. Teaching Resources. SavvasRealize.com. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary. I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{6-1 Mathematical Literacy and Vocabulary: Key Features of Exponential Functions}
+Name \underline{\hspace{2cm}}
+Complete the vocabulary chart using the list below.
+\begin{tabular}{lll}
+Word or Word Phrase & Definition & Picture or Example \\
+Asymptote & A line on a coordinate plane where a function gets very close to, but never crosses or touches. & See graph. \\
+Decay Factor & the value of (b) if (y=a(b)^x) and (b) is greater than zero but less than 1 & \answer{j} \\
+Domain & \answer{a} & All real numbers \\
+End Behavior & The behavior of a graph as it approaches positive infinity or negative infinity. & \answer{i} \\
+Exponential Function & Any function of the form, (y=a(b)^x), where (a) and (b) are constants with (a\neq0), and (b>0), (b\neq1). & \answer{Sample answer: c} \\
+Exponential Decay Function & (a>0), (0<b<1); (b=1-r) & \answer{e} \\
+Exponential Growth Function & (a>0), (b>1); (b=1+r) & \answer{Sample answer: h} \\
+Growth Factor & the value of (b) if (y=a(b)^x) and (b) is greater than 1 & \answer{d} \\
+Range & \answer{b} & All real numbers \\
+\end{tabular}
+% FIG 23 356 1035 408 1088
+\placeholder{graph}{Vocabulary asymptote example: black decreasing exponential, through about (0,1), arrows top-left and right approaching x-axis. Unit grid x=-3 to 5,y=-2 to 6; x labels -2,2,4, y label 4; black x,y axes with arrows, O at origin.}
+\te{Printed asymptote definition says never crosses or touches; likely intended for the displayed exponential graph, since functions can cross horizontal asymptotes in general. Printed range example is All real numbers, retained as printed.}
+a. The (x)-axis values of the function
+b. The (y)-axis values of the function
+c. (y=4(6.2)^x)
+d. the number 4 for the function (f(x)=0.75(4)^x)
+e. (f(x)=6(0.2)^x)
+f. ((4,0))
+g. ((0,1))
+h. (f(x)=6(1.2)^x)
+i. (x\to\infty), (y\to0) As (x\to-\infty), (y\to\infty)
+j. the number 0.5 for the function (f(x)=(0.63)(0.5)^x)
+\te{enVision Algebra 2. Teaching Resources. SavvasRealize.com. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 23 585 980 1033 1297
+\placeholder{illustration}{Black tablet displays Solve the system of equations by graphing: y=3x+4, y=-2x+4. Use the graphing tool to graph the system. Empty coordinate grid x,y from -10 to 10 with unit spacing and labels every 2, positive y arrow. Question Help menu covers upper-right grid: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Button: Click to enlarge graph. Instruction: Click the graph, choose a tool in the palette and follow the instructions to create your graph. Controls: Exit, 1 part remaining, Clear All, Check Answer, Review progress, Question 3 of 14, Go, Back, Next.}
+\end{te-addendum}
+
+\end{document}

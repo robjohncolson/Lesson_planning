@@ -1,0 +1,751 @@
+\documentclass{article}
+% Source: Topic_10_Teacher_Edition.pdf, PDF pages 24-34 (printed pages 491A-497B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 24: 491A Lesson Overview
+\begin{lesson-meta}
+lesson: 10-2
+title: Matrix Multiplication
+standards: none printed
+practices: none printed
+objective: I CAN... find the product of matrices or explain why the product does not exist.
+
+essential question: What does it mean to multiply a matrix by another matrix?
+
+\textbf{VOCABULARY}
+\item identity matrix
+\item square matrix
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 10-2 \\
+Title & Matrix Multiplication \\
+Standards & none printed \\
+I CAN Objective & I CAN... find the product of matrices or explain why the product does not exist. \\
+Essential Question & What does it mean to multiply a matrix by another matrix? \\
+Lesson Vocabulary & identity matrix; square matrix \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Multiply two matrices when the number of columns in the first matrix is equal to the number of rows in the second matrix.
+\item Understand the identity matrix and recognize that it is similar to the role of 1 in multiplication of real numbers.
+Essential Understanding. The product of two matrices is a new matrix that has elements that are the sums of the products of the corresponding row and column elements. Square matrices have the same number of rows and columns. The identity matrix is used to multiply a matrix by 1.
+\textbf{COHERENCE}
+Previously in this courses, students:
+\item Added and subtracted matrices.
+In this lesson, students:
+\item Find the product of matrices.
+\item Understand the identity matrix I as (A=AI=IA) for a matrix A.
+Increasing Coherence. This lesson is not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Multiply matrices when finding the inverse of a matrix.
+\te{Printed "in this courses"; likely "in this course".}
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that the Commutative Property does not hold for matrix multiplication but that the Distributive Property does.
+\item Apply matrix multiplication to solve real-world problems, such as finding the final grades for students as the sum of weighted averages.
+\textbf{Mathematics Overview}
+Students find the product of two matrices with the same dimensions, finding that the new matrix is the sum of the products of the corresponding row and column elements. They also investigate identity matrices and matrices that result in reflections or rotations of figures.
+\te{Printed overview restricts the matrices to "the same dimensions"; the lesson also multiplies rectangular matrices with different dimensions.}
+\textbf{Applying Math Practices}
+Construct Viable Arguments. Students construct an argument to explain the number of elements that should be in a product based on the dimensions of the matrices being multiplied.
+Look For and Make Use of Structure. Students look for overall structure and patterns when multiplying square matrices to explain why the Commutative Property does not hold for all square matrices.
+SavvasRealize.com. Program Resources.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+Glossary is available at SavvasRealize.com.
+\textbf{Vocabulary Builder}
+\begin{tabular}{ll}
+English & Spanish \\
+REVIEW VOCABULARY & \\
+scalar multiplication & multiplicación escalar \\
+NEW VOCABULARY & \\
+identity matrix & matriz identidad \\
+square matrix & matriz cuadrada \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Students may confuse scalar multiplication with matrix multiplication. Review the term scalar multiplication. Then have students identify the scalar in each of the products shown.
+(1.2\cdot\begin{bmatrix}3&4\\2&1\end{bmatrix}) \answer{1.2}
+(\frac23\cdot\begin{bmatrix}3&4\\2&1\end{bmatrix}) \answer{(\frac23)}
+Introduce the term square matrix as a matrix with the same number of rows and columns. Have students identify which of the matrices shown is a square matrix.
+a. (\begin{bmatrix}1.2&2.3\end{bmatrix})
+b. (\begin{bmatrix}20&15&30\\25&10&35\end{bmatrix})
+c. (\begin{bmatrix}2&4\\1&7\\2&0\end{bmatrix})
+d. (\begin{bmatrix}3&1\\3&9\end{bmatrix})
+\answer{Not square matrices: a, b, and c; Square matrix: d}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 24 964 752 1114 930
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS; purple and blue circular abstract artwork on black.}
+\end{te-addendum}
+% Source page 25: 491B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. EPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students explore how to use information in the matrices to predict the total purchase and repair costs for two companies. This prepares students to understand and apply matrix multiplication.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+Explore \& Reason is available at SavvasRealize.com. Activity.
+\te{Printed teacher heading "EPLORE"; likely "EXPLORE".}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS: Implement Tasks that Promote Reasoning and Problem Solving}
+Q: What do you notice about the matrices?
+\answer{Samples: The costs for TechRite are generally higher than the costs for Quick Repair. The costs for computers are much higher than the costs for phones and tablets.}
+\textbf{During SMALL GROUP: Support Productive Struggle in Learning Mathematics}
+Q: Is it possible to find the average profit for each item? Explain.
+\answer{Yes; add the purchase costs and repair expenses matrices, and then subtract that matrix from the revenue matrix. The resulting matrix shows the average profit for each item.}
+For Early Finishers
+Q: Add the average revenue, costs, and repair expenses for a third company to the matrices. How does adding the third company change your answers to the questions?
+\answer{Since a third company is added, the dimensions of the matrices change from (2\times3) to (3\times3). You now have an additional row of purchase costs, repair expenses, and revenues, so you need to estimate the total purchase and repair costs for this company as well. The values in the first two rows of the matrices do not change.}
+\textbf{After WHOLE CLASS: Facilitate Meaningful Mathematical Discourse}
+Q: How is finding the cost to repair the phones, tablets, and computers different from finding the cost to purchase them?
+\answer{It is estimated that 50\% of the 100 phones, 100 tablets, and 100 computers will need repairs, so instead of multiplying each repair cost by 100 to find the total, you multiply each repair cost by 50.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXPLORE \& REASON. Reason}
+Which store makes a greater profit from the sale of a repaired phone? Explain.
+\answer{TechRite; Quick Repair buys the phone for \$100, spends \$25 to repair it, and sells it for \$150, yielding a profit of \$25. TechRite buys the phone for \$125, spends \$10 to repair it, and sells it for \$200, yielding a profit of \$65.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Two stores, Quick Repair and TechRite, buy and sell pre-owned phones, tablets, and computers. The matrices represent their average revenue, purchase costs, and repair expenses for each item:
+% FIG 25 998 646 1119 695
+\placeholder{illustration}{Phone, tablet, and desktop computer pictured from left to right above the three matrix columns, on pale blue background.}
+\begin{tabular}{lrrr}
+Average revenue & & & \\
+Quick Repair & \$150 & \$100 & \$400 \\
+TechRite & \$200 & \$250 & \$500 \\
+Purchase costs & & & \\
+Quick Repair & \$100 & \$50 & \$200 \\
+TechRite & \$125 & \$75 & \$300 \\
+Repair expenses & & & \\
+Quick Repair & \$25 & \$20 & \$50 \\
+TechRite & \$10 & \$50 & \$50 \\
+\end{tabular}
+A. Would it make sense to find the sum and/or difference of any two of the three matrices? Explain.
+\answer{Yes; the sum of the purchase costs and repair expenses matrices would find the total cost of purchasing and repairing a device.}
+B. Make Sense and Persevere Quick Repair and TechRite both need to estimate their total purchase and repair costs. They each predict that they will need to purchase 100 phones, 100 tablets, and 100 computers, and that they will need to repair 50\% of them. Explain what you would do to find the total costs.
+\answer{Multiply the purchase costs matrix by a scalar of 100 since each store is buying 100 of each item. This would give the total purchase costs. Then multiply the repair expenses matrix by a scalar of 50 since they predict they will need to repair 50 of each item, which would give the total repair costs. Finally, I would add the two resulting matrices to find the total costs}
+\te{Digital preview repeats the same prompt and data, with two boxes labeled "Enter your answer." and a Go back control.}
+% FIG 25 638 187 1151 531
+\placeholder{illustration}{Digital Explore and Reason preview: identical Quick Repair and TechRite revenue, purchase, and repair matrices; phone/tablet/computer illustration; prompts A and B at left with empty Enter your answer boxes, Go back at top.}
+\end{model-discuss}
+% Source page 26: 491 Understand and Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Students are introduced to matrix multiplication. Students learn when it is possible to multiply two matrices and when a product does not exist. Students also learn how to multiply square matrices and use the identity matrix.
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{EXAMPLE 1 Understand Matrix Multiplication. Build Procedural Fluency From Conceptual Understanding}
+Q: Without the labels, how do you know whether a row or a column of the grades matrix corresponds to a student?
+\answer{The weight matrix has 3 columns, each representing the weight of different grades. In the grades matrix, there are 3 rows and 2 columns. The 3 rows in the grades matrix correspond to the 3 columns in the weights matrix. The 2 columns in the grades matrix represent the 2 students.}
+Q: What do you notice about the weights in the weights matrix? How is this important in the context of the problem?
+\answer{The sum of the weights is 1; this means that the sum of the weighted grades is equal to 100\% of the total grade.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 1}
+Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.
+A teacher assigns final grades based on a weighted system. Students are graded on unit assessments, a semester project, and the final exam, each with a different weight. Matrix W represents what percentage of the final grade each assignment is. Matrix G represents the grades Natasha, Jenn, and Michael received on each assignment. What are the final grades for each student?
+(W=\begin{bmatrix}0.6&0.2&0.2\end{bmatrix},G=\begin{bmatrix}88&92&78\\86&96&80\\92&88&86\end{bmatrix})
+The final grade of each student is the sum of the weight of each assignment multiplied by the grade for each assignment. Multiplying WG will result in a matrix where each number represents each student's final grade.
+(\begin{bmatrix}0.6&0.2&0.2\end{bmatrix}\begin{bmatrix}88&92&78\\86&96&80\\92&88&86\end{bmatrix}=\begin{bmatrix}88.4&92&80\end{bmatrix})
+\answer{Therefore, Natasha's final grade is 88.4\%, Jenn's final grade is 92\%, and Michael's is 80\%.}
+Example 1 Students transition to finding weighted grades for three students in this additional example.
+Q: Describe the dimensions of a new matrix G that could be used to calculate 6 students' grades.
+\answer{The matrix would have 3 rows and 6 columns.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 3}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+Figure ABCD is given on the graph. The coordinates of its vertices are represented in a matrix.
+(\begin{bmatrix}3&6&3&1\\3&-1&-1&1\end{bmatrix})
+% FIG 26 1005 869 1102 966
+\placeholder{graph}{Black quadrilateral ABCD with closed labeled vertices A(3,3), B(6,-1), C(3,-1), D(1,1), connected A-B-C-D-A. Coordinate grid unit spacing, x horizontal and y vertical, window x approximately -3 to 7 and y -5 to 5; x labels -2,2,4, y labels -4,-2,2,4, O at origin; arrowheads on axes.}
+What matrix represents the coordinates of the vertices of the image of ABCD after a reflection over the y-axis?
+Reflect the coordinates over the y-axis by multiplying by (\begin{bmatrix}-1&0\\0&1\end{bmatrix}).
+(\begin{bmatrix}-1&0\\0&1\end{bmatrix}\begin{bmatrix}3&6&3&1\\3&-1&-1&1\end{bmatrix}=\begin{bmatrix}-3&-6&-3&-1\\3&-1&-1&1\end{bmatrix})
+\answer{(\begin{bmatrix}-3&-6&-3&-1\\3&-1&-1&1\end{bmatrix})}
+Example 3 Students transition to reflecting a line segment in this additional example.
+\te{Printed teacher note says "line segment"; the example reflects a quadrilateral.}
+Q: What transformation would multiplying the coordinate matrix by the matrix (\begin{bmatrix}-1&0\\0&-1\end{bmatrix}) represent?
+\answer{a reflection across the x-axis and then the y-axis}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Understand Matrix Multiplication. CONCEPTUAL UNDERSTANDING}
+A teacher assigns final grades based on a weighted system. Students are graded on unit assessments, a semester project, and the final exam, each with a different weight. The matrices given below represent the weights for each kind of work and the grades for two students Oscar and Reagan.
+Weighting: (W=\begin{bmatrix}0.50&0.30&0.20\end{bmatrix}), columns unit, project, final.
+Grades: (G=\begin{bmatrix}90&80\\95&70\\75&85\end{bmatrix}), rows unit, project, final; columns O, R.
+What are the final grades for each student?
+The final grade is the sum of the weighted averages.
+Final grade (=0.5(\text{unit grade})+0.3(\text{project grade})+0.2(\text{final exam grade}))
+This equation shows that computing the final grade for each student is like multiplying the elements of row 1 of W (weights) by the corresponding elements of each student's column and finding the sum of the products. This method is similar to multiplying two matrices.
+\te{COMMUNICATE PRECISELY. Grades that are weighted aren't simply averaged but, instead, are multiplied by their weight, then added.}
+\te{CONTINUED ON THE NEXT PAGE.}
+% Source page 27: 492 Example 1 continued
+To find each student's final grade, multiply the elements of the (1\times3) matrix with the elements of the (3\times1) matrix, then add.
+Oscar's Final Grade. Weight Matrix (\cdot) Grade Matrix
+(=\begin{bmatrix}0.50&0.30&0.20\end{bmatrix}\begin{bmatrix}90\\95\\75\end{bmatrix})
+(=0.50(90)+0.30(95)+0.20(75))
+(=88.5)
+Reagan's Final Grade. Weight Matrix (\cdot) Grade Matrix
+(=\begin{bmatrix}0.50&0.30&0.20\end{bmatrix}\begin{bmatrix}80\\70\\85\end{bmatrix})
+(=0.50(80)+0.30(70)+0.20(85))
+(=78)
+So, Oscar's final grade is 88.5, and Reagan's final grade is 78.
+These can be represented in a matrix F. Each element in matrix F is the sum of the products of the corresponding row elements in W, multiplied by the corresponding column elements in G.
+(F=WG=\begin{bmatrix}0.50&0.30&0.20\end{bmatrix}\begin{bmatrix}90&80\\95&70\\75&85\end{bmatrix}=\begin{bmatrix}88.5&78\end{bmatrix})
+Since you are multiplying elements of the rows of W by elements of the columns of G, it is important that the number of elements in each row of W is equal to the number of elements in each column of G.
+In general, the product matrix QR has the same number of rows, (r_Q), as Q, and the same number of columns, (c_R), as R.
+\begin{tabular}{ccccc}
+Q & (\cdot) & R & = & QR \\
+(r_Q\times c_Q) & & (r_R\times c_R) & & (r_Q\times c_R) \\
+\end{tabular}
+\te{Callout: If the number of columns in the first matrix does not match the number of rows in the second matrix ((c_Q\neq r_R)), then the product matrix does not exist.}
+Since 88.5 results from row 1 of W by the element in column 1 of G, it is element (a_{11}) of F. Similarly, 78 results from multiplying the element in multiplying the element in row 1 of W by the element in column 2 of G, so it is an element (a_{12}) of F. Then F will be a (1\times2) matrix.
+The matrix that shows the final average for each student is (F=\begin{bmatrix}88.5&78\end{bmatrix}), with columns O, R.
+\answer{Oscar's final grade is 88.5, and Reagan's final grade is 78; (F=\begin{bmatrix}88.5&78\end{bmatrix}).}
+\te{Printed text repeats "multiplying the element in" and uses a single "element" where sums of products are intended.}
+\te{COMMON ERROR. Scalar multiplication is often confused with matrix multiplication. Remember that matrix multiplication considers the product of two matrices while scalar multiplication considers the product of a matrix and a number.}
+\end{example}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 1 CONTINUED. Build Procedural Fluency From Conceptual Understanding}
+Examples are available at SavvasRealize.com. Activity.
+Q: How can you determine that two matrices cannot be multiplied before trying to multiply them?
+\answer{Two matrices can be multiplied only if the number of columns in the first matrix is equal to the number of rows in the second matrix. If these numbers are not equal, the matrices cannot be multiplied.}
+Q: Does the order in which you multiply the matrices matter?
+\answer{Yes; you can multiply two matrices only if the number of columns in the first matrix equals the number of rows in the second matrix. If you switch the order of the matrices, this may not be true now. Even if they are still equal, the product matrix, in most cases, is different.}
+Q: How is an average different from a weighted average?
+\answer{An average is found by adding all of the values and dividing by the number of values. A weighted average is found by multiplying each value by a decimal and then adding the values. The sum of the decimals should be 1.}
+\end{te-addendum}
+\begin{tryit}{1}
+How could you organize the weighting and grade information differently so that Oscar's and Reagan's final grades are given by GW?
+\answer{Write G as a three-column, two-row matrix; write W as a one-column, three-row matrix.}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Why would you need to change the matrices to determine GW? Explain.
+\answer{The number of columns in G is not equal to the number of rows in W, so GW cannot be determined as it is.}
+\end{te-addendum}
+\begin{te-addendum}{1}{CommonError}
+\textbf{Common Error. Try It! 1}
+Some students may switch the matrix that is assigned to each variable. Have students write the matrix for G as it is and then rewrite it as a (2\times3) matrix. Have students write the matrix for W as it is and then rewrite it as a (3\times1) matrix. Explain that because they are now (2\times3) and (3\times1) matrices, they can be multiplied.
+\end{te-addendum}
+% Source page 28: 493 Examine Multiplication of Square Matrices
+\begin{example}{2}
+\textbf{Examine Multiplication of Square Matrices}
+Below are square matrices A and B. Determine if the given equations are true for A and B. What conclusions can we make about the Commutative and Distributive Properties for multiplying square matrices?
+(A=\begin{bmatrix}-2&1\\-1&0\end{bmatrix}), (B=\begin{bmatrix}-1&-5\\0&4\end{bmatrix}).
+\textbf{A. Is AB=BA?}
+Find the product on each side of the equation.
+(AB=\begin{bmatrix}-2&1\\-1&0\end{bmatrix}\begin{bmatrix}-1&-5\\0&4\end{bmatrix}=\begin{bmatrix}-2(-1)+1(0)&-2(-5)+1(4)\\-1(-1)+0(0)&-1(-5)+0(4)\end{bmatrix}=\begin{bmatrix}2&14\\1&5\end{bmatrix})
+(BA=\begin{bmatrix}-1&-5\\0&4\end{bmatrix}\begin{bmatrix}-2&1\\-1&0\end{bmatrix}=\begin{bmatrix}-1(-2)+(-5)(-1)&-1(1)+(-5)(0)\\0(-2)+4(-1)&0(1)+4(0)\end{bmatrix}=\begin{bmatrix}7&-1\\-4&0\end{bmatrix})
+(\begin{bmatrix}2&14\\1&5\end{bmatrix}\ne\begin{bmatrix}7&-1\\-4&0\end{bmatrix}).
+The element (AB_{12}=14) is found by multiplying the elements in the first row of A by the elements of the second column of B.
+\textbf{Construct Arguments} Explain why the Commutative Property does not hold for matrix multiplication.
+A \textbf{square matrix} is a matrix that has the same number of rows as columns. Since (AB\ne BA), the Commutative Property does NOT hold for all square matrices.
+\textbf{B. Is A(A+B)=AA+AB?}
+What is the product on each side of the equation?
+(A(A+B)=\begin{bmatrix}-2&1\\-1&0\end{bmatrix}(\begin{bmatrix}-2&1\\-1&0\end{bmatrix}+\begin{bmatrix}-1&-5\\0&4\end{bmatrix})=\begin{bmatrix}-2&1\\-1&0\end{bmatrix}\begin{bmatrix}-3&-4\\-1&4\end{bmatrix})
+(=\begin{bmatrix}-2(-3)+1(-1)&-2(-4)+1(4)\\-1(-3)+0(-1)&-1(-4)+0(4)\end{bmatrix}=\begin{bmatrix}5&12\\3&4\end{bmatrix}).
+The product of two square matrices with the same dimensions will always exist, because the number of rows in the first equals the number of columns in the second.
+(AA+AB=\begin{bmatrix}-2&1\\-1&0\end{bmatrix}\begin{bmatrix}-2&1\\-1&0\end{bmatrix}+\begin{bmatrix}-2&1\\-1&0\end{bmatrix}\begin{bmatrix}-1&-5\\0&4\end{bmatrix})
+(=\begin{bmatrix}-2(-2)+1(-1)&-2(1)+1(0)\\-1(-2)+0(-1)&-1(1)+0(0)\end{bmatrix}+\begin{bmatrix}-2(-1)+1(0)&-2(-5)+1(4)\\-1(-1)+0(0)&-1(-5)+0(4)\end{bmatrix})
+(=\begin{bmatrix}3&-2\\2&-1\end{bmatrix}+\begin{bmatrix}2&14\\1&5\end{bmatrix}=\begin{bmatrix}5&12\\3&4\end{bmatrix}).
+Since (A(A+B)=AA+AB), the Distributive Property is true for this case.
+Proving the equation for a specific example is not sufficient to prove that the equation is true for all matrices.
+\answer{A. (AB\ne BA); the Commutative Property does NOT hold for all square matrices. B. (A(A+B)=AA+AB); the Distributive Property is true for this case.}
+\end{example}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{STEP 2 Understand \& Apply. Pose Purposeful Questions}
+Examples are available at SavvasRealize.com. Activity.
+Q: How do you know that you can always multiply square matrices with the same dimensions?
+\answer{Because the matrices are square, the number of rows and the number of columns of the matrices are the same. So, the number of rows in the first matrix will always be the same as the number of columns in the second matrix.}
+Q: What would you have to do to prove that the Distributive Property is not true for all matrices?
+\answer{You would have to find one problem where the Distributive Property did not produce the same matrix on each side of the equation.}
+\end{te-addendum}
+\begin{tryit}{2}
+Determine whether each equation may be true for the following matrices.
+(A=\begin{bmatrix}3&0\\-1&-2\end{bmatrix}), (B=\begin{bmatrix}-2&1\\3&-4\end{bmatrix}), (C=\begin{bmatrix}6&2\\4&8\end{bmatrix}).
+a. ((AB)C=A(BC))
+\answer{Yes; (\begin{bmatrix}-24&12\\4&48\end{bmatrix}=\begin{bmatrix}-24&12\\4&48\end{bmatrix}).}
+b. ((A+B)C=AC+BC)
+\answer{Yes; (\begin{bmatrix}10&10\\-12&-44\end{bmatrix}=\begin{bmatrix}10&10\\-12&-44\end{bmatrix}).}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How would you determine whether each equation may be true?
+\answer{Evaluate each side of the equation. Check to see whether they are equal. If they are, then the equations are true for the given matrices.}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{Use with EXAMPLES 1 \& 2. Construct Arguments}
+Let (M=\begin{bmatrix}1&2\\3&4\end{bmatrix}) and (N=\begin{bmatrix}-2&1\\1.5&-0.5\end{bmatrix}). Is (MN=NM)? If so, can you conclude that matrix multiplication is commutative?
+\answer{Yes; (MN=NM). While this instance of matrix multiplication is commutative, it is not enough to conclude that all matrix multiplication is commutative (Example 1 shows a counterexample).}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 2}
+Have students determine whether each equation is true when multiplying square matrices with decimal elements.
+Give the students these matrices.
+(A=\begin{bmatrix}2.5&3.2\\1.6&0.4\end{bmatrix}), (B=\begin{bmatrix}-2.1&3\\6.2&1.1\end{bmatrix}), (C=\begin{bmatrix}-1.5&-2.3\\-0.1&7.2\end{bmatrix}).
+Q: Determine if (A(BC)=(AB)C) is true for these matrices. \answer{true}
+Q: Determine if (A(B+C)=AB+AC) is true for these matrices. \answer{true}
+\end{te-addendum}
+% Source page 29: 494 Understand Identity Matrices
+\begin{example}{3}
+\textbf{Understand Identity Matrices}
+What is the product of the 3-by-3 matrices (I=\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}) and (A=\begin{bmatrix}1&-3&2\\-4&5&-6\\9&-7&8\end{bmatrix})?
+Multiply the matrices, and compare IA and AI.
+(IA=\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}\begin{bmatrix}1&-3&2\\-4&5&-6\\9&-7&8\end{bmatrix})
+(IA=\begin{bmatrix}1(1)+0(-4)+0(9)&1(-3)+0(5)+0(-7)&1(2)+0(-6)+0(8)\\0(1)+1(-4)+0(9)&0(-3)+1(5)+0(-7)&0(2)+1(-6)+0(8)\\0(1)+0(-4)+1(9)&0(-3)+0(5)+1(-7)&0(2)+0(-6)+1(8)\end{bmatrix})
+When you multiply (3\times3) matrices, use the same process as with (2\times2) matrices.
+(IA=\begin{bmatrix}1&-3&2\\-4&5&-6\\9&-7&8\end{bmatrix})
+(AI=\begin{bmatrix}1&-3&2\\-4&5&-6\\9&-7&8\end{bmatrix}\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix})
+(AI=\begin{bmatrix}1(1)+(-3)(0)+2(0)&1(0)+(-3)(1)+2(0)&1(0)+(-3)(0)+2(1)\\(-4)(1)+5(0)+(-6)(0)&(-4)(0)+5(1)+(-6)(0)&(-4)(0)+5(0)+(-6)(1)\\9(1)+(-7)(0)+8(0)&9(0)+(-7)(1)+8(0)&9(0)+(-7)(0)+8(1)\end{bmatrix})
+(AI=\begin{bmatrix}1&-3&2\\-4&5&-6\\9&-7&8\end{bmatrix}).
+So the product matrices IA and AI are both equal to A.
+(A=AI=IA=\begin{bmatrix}1&-3&2\\-4&5&-6\\9&-7&8\end{bmatrix}).
+\textbf{Study Tip} When multiplying a matrix by 1, as in (1A=A), you are using scalar multiplication. The identity for multiplication of matrices must be a matrix where (AI=A) and (IA=A).
+Although the identity matrix commutes with any matrix, matrix multiplication is not commutative in general.
+The matrix I is an \textbf{identity matrix}, because (M=MI=IM) for every (3\times3) matrix M. Identity matrices are always square matrices with a 1 as each element of the main diagonal and zeros for all other elements.
+\answer{(IA=AI=A=\begin{bmatrix}1&-3&2\\-4&5&-6\\9&-7&8\end{bmatrix})}
+\end{example}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{STEP 2 Understand \& Apply. Pose Purposeful Questions}
+Examples are available at SavvasRealize.com. Activity.
+Q: Why is matrix I called an identity matrix?
+\answer{If you multiply a matrix of the same dimension by I, the result is the original matrix.}
+Q: Are there identity matrices that are not square matrices?
+\answer{No; in order for a matrix to be multiplied by another matrix and the result to be the original matrix, the matrices must have the same dimensions. The only way that two matrices with the same dimension can be multiplied is if the matrices are square matrices.}
+\te{Printed explanation overstates the requirement: a rectangular matrix can also be multiplied by a compatible square identity matrix to return the original matrix.}
+\end{te-addendum}
+\begin{tryit}{3}
+a. What is the product (\begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}1&0\\0&1\end{bmatrix})?
+\answer{(\begin{bmatrix}a&b\\c&d\end{bmatrix})}
+b. What is the product (\begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}-1&0\\0&-1\end{bmatrix})?
+\answer{(\begin{bmatrix}-a&-b\\-c&-d\end{bmatrix})}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Can you determine the answer to these matrix multiplication problems without calculating? Explain.
+\answer{Yes; each problem contains a matrix multiplied by an identity matrix. So the result of each multiplication is the matrix that is not the identity matrix.}
+\te{Printed explanation does not apply to part b, which uses the negative of the identity matrix and produces the negative of the original matrix.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{Use with EXAMPLE 3. Use Structure}
+Let (A=\begin{bmatrix}-1&0\\3&5\end{bmatrix}) and (B=\begin{bmatrix}j&k\\l&m\end{bmatrix}). (AB=\begin{bmatrix}-1&0\\3&5\end{bmatrix}). What are the values of j, k, l and m?
+\answer{(j=1), (k=0), (l=0), (m=1)}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 3}
+Some students may struggle with multiplying (3\times3) matrices by the identity matrix.
+Have students multiply (2\times2) matrices by the identity matrix.
+Q: Find the product of (\begin{bmatrix}4&-1\\3&-2\end{bmatrix}\begin{bmatrix}1&0\\0&1\end{bmatrix}). \answer{(\begin{bmatrix}4&-1\\3&-2\end{bmatrix})}
+Q: Find the product of (\begin{bmatrix}1&0\\0&1\end{bmatrix}\begin{bmatrix}6&2\\-3&8\end{bmatrix}). \answer{(\begin{bmatrix}6&2\\-3&8\end{bmatrix})}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 3)}
+\textbf{SPEAKING BEGINNING} Discuss with students how the term diagonal originated from the Greek words dia, meaning ``through,'' and gonia, meaning ``angle or corner.'' With a partner, have students discuss how they have used the word diagonal in their daily life, in previous math classes, and in this topic.
+Q: When have you used the word diagonal in your daily life?
+\answer{Sample: I walk diagonally across the cafeteria to get in the lunch line.}
+Q: Can a triangle have a diagonal?
+\answer{No; because a triangle has only three corners, each corner is adjacent to the other two.}
+Q: Can a matrix have more than one diagonal?
+\answer{Yes; the main diagonals go through the elements from top left to bottom right or from top right to bottom left.}
+\te{Printed ``main diagonals'' includes the top-right-to-bottom-left diagonal; likely the latter should be called the secondary diagonal.}
+\textbf{READING DEVELOPING} Ask students to read different definitions for the term commute: 1) to travel some distance between one's home and one's place of work; 2) to substitute or exchange; 3) to reduce a sentence to one less severe. Have students identify the meaning of commute in each sentence.
+Q: The judge commutes the prisoner's sentence from 20 years to 15 years. \answer{3}
+Q: Mariah usually listens to the news during her commute. \answer{1}
+Q: Which definition most closely relates to the mathematical definition of commute?
+\answer{2; mathematically, when you can commute addends or factors, you can exchange the order of them and still get the same result.}
+\textbf{WRITING EXPANDING} Have students write the definition of identity in their math journals: a number that, when operating on any other number, leaves the other number unchanged. Then have students answer the following questions in their journals.
+Q: What is the additive identity? \answer{0}
+Q: What is the multiplicative identity? \answer{1}
+Q: How is an identity matrix different from and similar to an identity?
+\answer{An identity matrix is different from an identity because it is a matrix made up of rows and columns rather than a single number. It is similar to an identity in that when you operate with it on any other matrices, it leaves the matrices unchanged.}
+\end{te-addendum}
+% Source page 30: 495 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Products of Matrices}
+Q: How can you verify the equation (AI=IA=A)?
+\answer{Perform each multiplication and verify that the results are equal.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+\textbf{Exercise 6} Some students may complete all of the calculations because they do not realize that the second matrix is an identity matrix, leading to more opportunity to make errors. Have students create a notecard with the (2\times2) and (3\times3) identity matrices and a sentence below them that states that multiplying any matrix by an identity matrix of the same dimensions does not change the value of the matrix.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Products of Matrices}
+\textbf{MATRIX MULTIPLICATION} The product of two matrices is a new matrix. The elements of the new matrix are the sums of the products of the corresponding row and column elements.
+(\begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}aw+by&ax+bz\\cw+dy&cx+dz\end{bmatrix}).
+\textbf{THE IDENTITY MATRIX} For the (n\times n) matrix A, the multiplicative identity matrix I is an (n\times n) square matrix with 1s on the main diagonal and 0s for all other elements:
+(AI=IA=A)
+(\begin{bmatrix}a&b&c\\d&e&f\\g&h&i\end{bmatrix}\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}=\begin{bmatrix}a&b&c\\d&e&f\\g&h&i\end{bmatrix}).
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION What does it mean to multiply a matrix by another matrix?
+\answer{To multiply two matrices means to multiply all of their corresponding columns and rows.}
+\te{Printed answer omits summing the products of corresponding row and column elements.}
+2. Use Structure Would it be possible to multiply (A_{3\times5}) and (B_{4\times5})? Explain your reasoning.
+\answer{No; because the number of columns in the first matrix, 5, is not equal to the number of rows in the second matrix, 4}
+3. Vocabulary Explain why a matrix with ones on the main diagonal and zeros for all the other elements is called the identity matrix.
+\answer{Because it is similar to the Identity Property of Multiplication; when you multiply by 1 (or in this case the identity matrix), the product is itself.}
+4. Construct Arguments A student thought that the product of (A_{1\times5}) and (B_{5\times1}) should have five elements in the answer. Is the student correct? If not, how many elements will there be?
+\answer{The student is not correct. There is only one element.}
+\textbf{Do You KNOW HOW?}
+Let (A=\begin{bmatrix}3&0\\-1&-2\end{bmatrix}) and (B=\begin{bmatrix}-2&1\\3&-4\end{bmatrix}).
+5. Find AB and BA to demonstrate that matrix multiplication is not commutative. Show your work.
+\answer{(AB=\begin{bmatrix}3&0\\-1&-2\end{bmatrix}\begin{bmatrix}-2&1\\3&-4\end{bmatrix}=\begin{bmatrix}3(-2)+0(3)&3(1)+0(-4)\\-1(-2)+(-2)(3)&-1(1)+(-2)(-4)\end{bmatrix}=\begin{bmatrix}-6&3\\-4&7\end{bmatrix}). (BA=\begin{bmatrix}-2&1\\3&-4\end{bmatrix}\begin{bmatrix}3&0\\-1&-2\end{bmatrix}=\begin{bmatrix}-2(3)+1(-1)&-2(0)+1(-2)\\3(3)+(-4)(-1)&3(0)+(-4)(-2)\end{bmatrix}=\begin{bmatrix}-7&-2\\13&8\end{bmatrix}). (AB\ne BA)}
+Find each product.
+6. (\begin{bmatrix}4&7\\1&-2\end{bmatrix}\begin{bmatrix}1&0\\0&1\end{bmatrix})
+\answer{(\begin{bmatrix}4&7\\1&-2\end{bmatrix})}
+7. (\begin{bmatrix}1&0\\0&1\end{bmatrix}\begin{bmatrix}5&0\\8&2\end{bmatrix})
+\answer{(\begin{bmatrix}5&0\\8&2\end{bmatrix})}
+8. The coordinates of the vertices of a triangle are A(-2,3), B(1,1), and C(2,-1). The coordinate are multiplied by the matrix (\begin{bmatrix}1&0\\0&-1\end{bmatrix}). Find the coordinates of the image of the triangle after the transformation.
+\answer{(\begin{bmatrix}1&0\\0&-1\end{bmatrix}\begin{bmatrix}-2&1&2\\3&1&-1\end{bmatrix}=\begin{bmatrix}-2&1&2\\-3&-1&1\end{bmatrix}); The coordinates of the image of the triangle are (-2,-3), (1,-1), and (2,1).}
+\te{Printed ``The coordinate are'' is preserved; likely ``The coordinates are.''}
+\end{concept-summary}
+% Source page 31: 496 Practice and Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving. PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Practice. Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+9--23 & 9--23 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 21, 22 & 1 \\
+1 & 10--13, 17--20 & 2 \\
+1 & 23 & 3 \\
+2 & 14, 15 & 1 \\
+2 & 9 & 2 \\
+3 & 16 & 1 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{9}{2}
+\textbf{UNDERSTAND. Generalize} Suppose square matrices A and B have dimensions (n\times n), where n is a positive integer greater than or equal to 2. What are the dimensions of their product (A\times B)
+\answer{The product also has dimensions (n\times n).}
+\end{practice}
+\begin{practice}{10}{2}
+\textbf{Use Structure} If you wanted to find a product of the two matrices shown below, explain why it is necessary to write them in this order.
+(\begin{bmatrix}10&15&12\\7&11&20\end{bmatrix}\begin{bmatrix}50\\14\\38\end{bmatrix})
+\answer{If the matrices were not written in the given order, the number of columns in the first matrix would not equal the number of rows in the second matrix.}
+\end{practice}
+\begin{practice}{11}{2}
+\textbf{Error Analysis} Describe and correct the error a student made in multiplying matrix A by matrix B.
+(A=\begin{bmatrix}6&2\\-3&5\end{bmatrix}), (B=\begin{bmatrix}-1&0\\4&-2\end{bmatrix}).
+Student work, marked with a red X:
+(\begin{bmatrix}6&2\\-3&5\end{bmatrix}\begin{bmatrix}-1&0\\4&-2\end{bmatrix}=\begin{bmatrix}-6&0\\-12&-10\end{bmatrix})
+\answer{The student multiplied each pair of corresponding values instead of multiplying the first row times the first column, and so on. The correct product is (\begin{bmatrix}2&-4\\23&-10\end{bmatrix}).}
+\end{practice}
+\begin{practice}{12}{2}
+\textbf{Higher Order Thinking} The triangle shown is transformed using two matrices, (A=\begin{bmatrix}1&0\\0&-1\end{bmatrix}) and (B=\begin{bmatrix}0&1\\-1&0\end{bmatrix}), in that order.
+% FIG 31 511 770 618 889
+\placeholder{graph}{First-quadrant coordinate grid with unit spacing and numbered ticks 2, 4, 6. Triangle vertices A(1,3), B(3,6), and C(2,1), joined with black segments and blue shading.}
+a. What transformation occurs as a result of multiplication by matrix A?
+\answer{a reflection across the x-axis}
+b. What transformation occurs as a result of multiplication by matrix B?
+\answer{a (90^\circ) clockwise rotation about the origin}
+\end{practice}
+\begin{practice}{13}{2}
+\textbf{PRACTICE} A math teacher assigns final grades based on a weighted system. Matrix W represents the weights of each type of assignment, and matrix G represents the grades for two students, Jacob and Lucy. Use matrix multiplication to find matrix F that represents the final class grades for these two students. SEE EXAMPLE 1
+(W=\begin{bmatrix}0.20&0.50&0.30\end{bmatrix}); columns hw, tests, exam.
+(G=\begin{bmatrix}95&85\\80&90\\75&85\end{bmatrix}); columns Jacob, Lucy; rows hw, tests, exam.
+\answer{(F=\begin{bmatrix}81.5&87.5\end{bmatrix})}
+\end{practice}
+\begin{practice}{14}{1}
+Determine whether each equation is true for the following matrices. SEE EXAMPLE 2
+(A=\begin{bmatrix}1&2\\0&-2\end{bmatrix}), (B=\begin{bmatrix}-4&0\\-1&8\end{bmatrix}), (C=\begin{bmatrix}5&1\\7&-2\end{bmatrix}).
+((A+B)C=AC+BC)
+\answer{Yes; they both equal (\begin{bmatrix}-1&-7\\37&-13\end{bmatrix}).}
+\end{practice}
+\begin{practice}{15}{1}
+Determine whether each equation is true for the following matrices. SEE EXAMPLE 2
+(A=\begin{bmatrix}1&2\\0&-2\end{bmatrix}), (B=\begin{bmatrix}-4&0\\-1&8\end{bmatrix}), (C=\begin{bmatrix}5&1\\7&-2\end{bmatrix}).
+(A(BC)=(AB)C)
+\answer{Yes; they both equal (\begin{bmatrix}82&-38\\-102&34\end{bmatrix}).}
+\end{practice}
+\begin{practice}{16}{1}
+Find IQ, if (I=\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}) and (Q=\begin{bmatrix}1&-3&2\\-4&5&-6\\9&-7&8\end{bmatrix}). SEE EXAMPLE 3
+\answer{(IQ=\begin{bmatrix}1&-3&2\\-4&5&-6\\9&-7&8\end{bmatrix})}
+\end{practice}
+\begin{practice}{17}{2}
+Create matrix A to represent the coordinates of quadrilateral EFGH.
+% FIG 31 819 724 923 867
+\placeholder{graph}{Unit coordinate grid with x ticks labeled 4 and y ticks -4, -2, 2, 4. Blue quadrilateral with black segments and labeled vertices E(2,4), F(5,1), G(4,-3), and H(2,-1).}
+a. Multiply matrix A by (\begin{bmatrix}0&-1\\-1&0\end{bmatrix}).
+\answer{(\begin{bmatrix}-4&-1&3&1\\-2&-5&-4&-2\end{bmatrix})}
+b. Graph the quadrilateral represented by the resulting matrix, and describe the movement of the quadrilateral in the coordinate plane.
+\answer{The graph is reflected across the x-axis and then rotated (90^\circ) clockwise.}
+% FIG 32 176 285 371 479
+\placeholder{graph}{Printed answer: red quadrilateral vertices (-4,-2), (-1,-5), (3,-4), (1,-2), in that order. Unit grid; x ticks -4, -2, 2, 4 and y ticks -6, -4, -2, 2.}
+\end{practice}
+% Source page 32: 497 Practice and Problem Solving continued
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving. Answers}
+Practice \& Problem Solving is available at SavvasRealize.com. Practice.
+\te{The preceding page directs ``See answers for 16--17 on next page.'' Those answers are attached to their items above.}
+\end{te-addendum}
+\begin{practice}{18}{2}
+\textbf{APPLY. Reason} The following matrix represents the inventory of the three snack bars at a state park.
+(\begin{bmatrix}20&15&7&11\\22&18&6&8\\15&19&10&5\end{bmatrix}); rows Snack Bar A, Snack Bar B, Snack Bar C; columns fish taco, veggie burger, burger, chicken teriyaki.
+MENU
+\begin{tabular}{ll}
+Fish taco & \$10 \\
+Veggie burger & \$5 \\
+Burger & \$4 \\
+Chicken teriyaki & \$12 \\
+\end{tabular}
+% FIG 32 565 407 742 610
+\placeholder{illustration}{Blue menu panel with drawings of a fish taco, veggie burger, burger, and chicken teriyaki bowl beside the printed prices 10, 5, 4, and 12 dollars.}
+Use matrix multiplication to find the total value of the inventory for each snack bar.
+\answer{(\begin{bmatrix}435\\430\\345\end{bmatrix}); rows Snack Bar A, Snack Bar B, Snack Bar C.}
+\end{practice}
+\begin{practice}{19}{2}
+\textbf{Model With Mathematics} Raul owns and operates two souvenir stands. At his baseball park stand, sweatshirts cost \$45 and T-shirts cost \$20. At his football stadium stand, sweatshirts cost \$50 and T-shirts cost \$15. Today Raul sold 20 sweatshirts and 25 T-shirts at each stand. Use matrix multiplication to find the total amount in daily sales at each souvenir stand.
+\answer{(\begin{bmatrix}45&20\\50&15\end{bmatrix}\cdot\begin{bmatrix}20\\25\end{bmatrix}=\begin{bmatrix}1400\\1375\end{bmatrix}). The baseball park stand made \$1,400 in sales, and the football stadium stand made \$1,375 in sales.}
+\end{practice}
+\begin{practice}{20}{2}
+\textbf{Reason} A drama teacher assigns final grades in her class based on the weighted system shown below. The matrix G represents the grades for Kiyo and his two friends, Ranee and Leo.
+(G=\begin{bmatrix}90&83&78\\94&88&96\\98&94&89\end{bmatrix}); columns Kiyo, Ranee, Leo; rows tests, proj, part.
+Drama Syllabus: Tests 45\%; Projects 30\%; Participation 25\%.
+a. Write matrix W as a (1\times3) matrix to represent the weighted grading system.
+\answer{(W=\begin{bmatrix}0.45&0.30&0.25\end{bmatrix})}
+b. Perform matrix multiplication to find the final grades for each of the three students.
+\answer{(WG=\begin{bmatrix}93.2&87.25&86.15\end{bmatrix})}
+\end{practice}
+\begin{practice}{21}{1}
+\textbf{ASSESSMENT PRACTICE} Find the product of the two matrices.
+(\begin{bmatrix}1&0\\2&-3\end{bmatrix}\begin{bmatrix}-3&4\\5&2\end{bmatrix}=\begin{bmatrix}\square&\square\\\square&\square\end{bmatrix})
+\answer{(\begin{bmatrix}-3&4\\-21&2\end{bmatrix})}
+\end{practice}
+\begin{practice}{22}{1}
+\textbf{SAT/ACT} Select the undefined matrix product.
+A. (\begin{bmatrix}1&2\\3&6\end{bmatrix}\begin{bmatrix}5&0\\0&2\end{bmatrix})
+B. (\begin{bmatrix}1&4\\2&-1\end{bmatrix}\begin{bmatrix}2\\5\end{bmatrix})
+C. (\begin{bmatrix}2&-1\\2&4\end{bmatrix}\begin{bmatrix}1&1&-1\\-2&0&-4\end{bmatrix})
+D. (\begin{bmatrix}1&-2&-1\\-2&3&0\end{bmatrix}\begin{bmatrix}1&-1\\1&0\end{bmatrix})
+\answer{D}
+\end{practice}
+\begin{practice}{23}{3}
+\textbf{Performance Task} Kailani has a candle-making business. The candles come in four different types. The cost of making each type of candle is \$0.50, \$1, \$5, and \$7, in order of size. Kailani's candle sales for her first three years of business are shown in the table below.
+\begin{tabular}{lllll}
+ & Tea \$1 & Floating \$2 & Jar \$12 & Pillar \$15 \\
+Year 1 & 20 & 15 & 40 & 30 \\
+Year 2 & 25 & 20 & 50 & 35 \\
+Year 3 & 15 & 20 & 60 & 45 \\
+\end{tabular}
+% FIG 32 886 535 1127 605
+\placeholder{illustration}{Four lit candles increasing in size: small tea candle, floating candle in a blue bowl, jar candle, and tall pillar candle, aligned above their table columns.}
+\textbf{Part A} Write matrix C as a (4\times1) matrix to represent the cost of making each type of candle, write matrix P as a (4\times1) matrix to represent the selling price of each candle, and write matrix S as a (3\times4) matrix to represent Kailani's candle sales for the first three years.
+\answer{(C=\begin{bmatrix}0.50\\1\\5\\7\end{bmatrix}); (P=\begin{bmatrix}1\\2\\12\\15\end{bmatrix}); (S=\begin{bmatrix}20&15&40&30\\25&20&50&35\\15&20&60&45\end{bmatrix}).}
+\textbf{Part B} Use a matrix operation to find a matrix, X, that represents the amount of profit that Kailani makes per candle.
+\answer{(X=P-C); (X=\begin{bmatrix}0.50\\1\\7\\8\end{bmatrix})}
+\textbf{Part C} Use matrix multiplication to find the product of matrices S and X. Explain what the elements of this product represent.
+\answer{(SX=\begin{bmatrix}545\\662.5\\807.5\end{bmatrix}). Each element represents Paula's business profits for each of the three years.}
+\te{Printed answer names Paula; likely Kailani, as in the prompt.}
+\end{practice}
+% Source page 33: 497A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & A60 \\
+2 & 1 & A63 \\
+3 & 1 & A66 \\
+4 & 2 & A67 \\
+5 & 2 & A64 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{ASSESSMENT RESOURCES. 10-2 Lesson Quiz. Matrix Multiplication}
+Lesson Quiz is available at SavvasRealize.com. Assessment. Name. enVision Algebra 2. SavvasRealize.com.
+1. In a weighted grading system, students are graded on quizzes, tests, and a project, each with a different weight. Matrix W represents the weights for each kind of work, and matrix G represents the grades for two students, Felipe and Helena.
+(W=\begin{bmatrix}0.40&0.50&0.10\end{bmatrix}); columns Q, T, P.
+(G=\begin{bmatrix}80&70\\60&80\\90&60\end{bmatrix}); columns Felipe, Helena; rows Q, T, P.
+Final grades are represented in a matrix F. If (F=WG), what is F?
+A. (\begin{bmatrix}71\\74\end{bmatrix})
+B. (\begin{bmatrix}71&74\end{bmatrix})
+C. (\begin{bmatrix}74&71\end{bmatrix})
+D. (\begin{bmatrix}74\\71\end{bmatrix})
+\answer{B}
+2. Given matrices (X=\begin{bmatrix}-2&2\\1&-3\end{bmatrix}) and (Y=\begin{bmatrix}4&-1\\-3&2\end{bmatrix}), find the product XY.
+(XY=\begin{bmatrix}\square&\square\\\square&\square\end{bmatrix})
+\answer{(XY=\begin{bmatrix}-14&6\\12&-7\end{bmatrix})}
+3. For a (4\times4) matrix, what is the multiplicative identity matrix I?
+A. (\begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix})
+B. (\begin{bmatrix}0&0&0&1\\0&0&1&0\\0&1&0&0\\1&0&0&0\end{bmatrix})
+C. (\begin{bmatrix}1&1&1&1\\1&1&1&1\\1&1&1&1\\1&1&1&1\end{bmatrix})
+D. (\begin{bmatrix}1\\1\\1\\1\end{bmatrix})
+\answer{A}
+4. Matrices A, B, and C are all (2\times2) matrices. Which statements about A, B, and C are true? Select all that apply.
+A. (AB=BA)
+B. ((AB)C=A(BC))
+C. ((AB)C=(BA)C)
+D. (AA+AB=A(A+B))
+E. (C(A+B)=CA+CB)
+F. ((A+B)B=AB+BA)
+\answer{B, D, E}
+5. Complete the matrix that represents a reflection over the x-axis in the coordinate plane.
+(\begin{bmatrix}1&\square\\\square&\square\end{bmatrix})
+\answer{(\begin{bmatrix}1&0\\0&-1\end{bmatrix})}
+\te{enVision Algebra 2 • Assessment Sourcebook. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+% Source page 34: 497B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced. Practice. SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Reteach to Build Understanding. I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{10-2 Reteach to Build Understanding. Matrix Multiplication}
+Name. enVision Algebra 2. SavvasRealize.com.
+The product of two matrices is a new matrix. The new matrix is the sums of the products of the corresponding row and column elements.
+(\begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}e&f\\g&h\end{bmatrix}=\begin{bmatrix}ae+bg&af+bh\\ce+dg&cf+dh\end{bmatrix})
+1. Multiply the two matrices.
+(\begin{bmatrix}4&1\\2&6\end{bmatrix}\begin{bmatrix}2&3\\1&4\end{bmatrix}=\begin{bmatrix}4(2)+1(1)&4(3)+1(4)\\2(2)+6(1)&2(3)+6(4)\end{bmatrix}=\begin{bmatrix}8+1&12+4\\4+6&6+24\end{bmatrix}=\begin{bmatrix}\square&\square\\\square&\square\end{bmatrix})
+\answer{(\begin{bmatrix}9&16\\10&30\end{bmatrix})}
+2. Juan multiplied the following matrices. Find and fix his error.
+(\begin{bmatrix}4&1\\2&1\end{bmatrix}\begin{bmatrix}1&3\\2&4\end{bmatrix}=\begin{bmatrix}6&16\\3&10\end{bmatrix})
+\answer{Juan should have put a 4 in the bottom left corner instead of a 3. He multiplied and added incorrectly. The correct answer is (\begin{bmatrix}6&16\\4&10\end{bmatrix}).}
+3. Multiply the two matrices and find the solution.
+a. (\begin{bmatrix}1&1\\1&1\end{bmatrix}\begin{bmatrix}0&3\\4&4\end{bmatrix}=\begin{bmatrix}1(0)+1(4)&\square\\\square&1(0)+1(4)\end{bmatrix}=\begin{bmatrix}\square&3+4\\0+4&\square\end{bmatrix}=\begin{bmatrix}4&7\\\square&\square\end{bmatrix})
+\answer{(\begin{bmatrix}1(0)+1(4)&1(3)+1(4)\\1(0)+1(4)&1(0)+1(4)\end{bmatrix}=\begin{bmatrix}0+4&3+4\\0+4&3+4\end{bmatrix}=\begin{bmatrix}4&7\\4&7\end{bmatrix})}
+\te{Printed bottom-right expression in the first expansion of 3a is (1(0)+1(4)); likely (1(3)+1(4)), as indicated by the next line and final answer.}
+b. (\begin{bmatrix}4&3\\9&7\end{bmatrix}\begin{bmatrix}6&3\\9&4\end{bmatrix}=\begin{bmatrix}4(6)+3(9)&\square\\9(6)+7(9)&\square\end{bmatrix}=\begin{bmatrix}\square&24\\117&\square\end{bmatrix})
+\answer{(\begin{bmatrix}4(6)+3(9)&4(3)+3(4)\\9(6)+7(9)&9(3)+7(4)\end{bmatrix}=\begin{bmatrix}51&24\\117&55\end{bmatrix})}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice. I O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{10-2 Additional Practice. Matrix Multiplication}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. A carpenter builds three boxes. One box uses 12 nails. The second box uses 6 nails and 6 screws. The third box uses 8 screws and 2 hinges. Nails cost \$0.04 each, screws cost \$0.06 each, and hinges cost \$0.12 each.
+a. Write a (3\times3) matrix that represents the number of each type of hardware in each box.
+\answer{Sample: (\begin{bmatrix}12&0&0\\6&6&0\\0&8&2\end{bmatrix})}
+b. Write a (3\times1) matrix that represents the cost of each type of hardware.
+\answer{Sample: (\begin{bmatrix}0.04\\0.06\\0.12\end{bmatrix})}
+c. Find the (3\times1) matrix that represents the cost of hardware for each box.
+\answer{Sample: (\begin{bmatrix}0.48\\0.60\\0.72\end{bmatrix})}
+For Items 2 and 3, determine whether each equation is true for the square matrices A, B, and C. Show your work.
+(A=\begin{bmatrix}3&3\\2&0\end{bmatrix}), (B=\begin{bmatrix}-2&4\\-3&1\end{bmatrix}), (C=\begin{bmatrix}8&-4\\5&2\end{bmatrix}).
+2. ((A+B)C=AC+BC)
+\answer{yes; (\begin{bmatrix}43&10\\-3&6\end{bmatrix}=\begin{bmatrix}43&10\\-3&6\end{bmatrix})}
+3. (A(BC)=(AB)C)
+\answer{yes; (\begin{bmatrix}-45&90\\8&32\end{bmatrix}=\begin{bmatrix}-45&90\\8&32\end{bmatrix})}
+4. Find IQ.
+Let (I=\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}) and (Q=\begin{bmatrix}4&-4&3\\3&4&-2\\-2&8&2\end{bmatrix}).
+\answer{(IQ=\begin{bmatrix}4&-4&3\\3&4&-2\\-2&8&2\end{bmatrix})}
+5. Write a matrix that represents the coordinates of the triangle ABC after a reflection across the y-axis. Then show A'B'C' on the graph.
+\answer{(A'B'C'=\begin{bmatrix}2&3&1\\3&-3&-2\end{bmatrix})}
+% FIG 34 741 697 808 747
+\placeholder{graph}{Unit grid, horizontal ticks labeled -4, -2, 2, 4 and vertical tick 2. Black triangle A(-2,3), B(-3,-3), C(-1,-2), and magenta reflected triangle A'(2,3), B'(3,-3), C'(1,-2).}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment. O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{10-2 Enrichment. Matrix Multiplication}
+Name. enVision Algebra 2. SavvasRealize.com.
+A scientist studies the amount of bacteria on common household objects and their growth rate. She determined the amount of bacteria on mobile phones, door handles, and keyboards. The different types of bacteria were labeled as Bacteria A, B, C, D, and E in Colony Forming Units, or CFU.
+A mobile phone harbored 400 CFU of A, 200 CFU of B, 300 CFU of C, 500 CFU of D, and 150 CFU of E.
+A door handle harbored 216 CFU of A, 75 CFU of B, 156 CFU of C, 336 CFU of D, and 58 CFU of E.
+A keyboard harbored 378 CFU of A, 210 CFU of B, 425 CFU of C, 428 CFU of D, and 126 CFU of E.
+The growth rates of the bacteria over one week are:
+\begin{tabular}{ll}
+Bacteria A & 2.5 \\
+Bacteria B & 1.8 \\
+Bacteria C & 1.98 \\
+Bacteria D & 2.1 \\
+Bacteria E & 1.2 \\
+\end{tabular}
+1. Write a (3\times5) matrix A where the columns represent the five types of bacteria and the rows represent the household objects.
+\answer{(A=\begin{bmatrix}400&200&300&500&300\\216&75&156&336&58\\378&210&425&428&126\end{bmatrix})}
+\te{Printed first-row last entry is 300; likely 150, as in the prompt and the matrix in item 3.}
+2. Complete matrix B that represents the growth rate for a week.
+\answer{(B=\begin{bmatrix}2.5\\1.8\\1.98\\2.1\\1.2\end{bmatrix})}
+3. Find AB to determine the amount of bacteria harbored on each object after one week.
+\answer{(AB=\begin{bmatrix}400&200&300&500&150\\216&75&156&336&58\\378&210&425&428&126\end{bmatrix}\begin{bmatrix}2.5\\1.8\\1.98\\2.1\\1.2\end{bmatrix}=\begin{bmatrix}3184\\1759.08\\3214.5\end{bmatrix})}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary. I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{10-2 Mathematical Literacy and Vocabulary. Matrix Multiplication}
+Name. enVision Algebra 2. SavvasRealize.com.
+Kerri is learning how to multiply matrices. She wrote the steps to multiply (A=\begin{bmatrix}3&7\\1&-2\end{bmatrix}) by (B=\begin{bmatrix}0&2\\3&4\end{bmatrix}) on note cards, but the cards got mixed up.
+Card: Multiply the elements in the second row of A by the elements in the first column of B. Add the products and place the sum in the second row, first column of AB.
+Card: Multiply the elements in the first row of A by the elements in the first column of B. Add the products and place the sum in the first row, first column of AB.
+Card: Multiply the elements in the first row of A by the elements in the second column of B. Add the products and place the sum in the first row, second column of AB.
+Card: Multiply the elements in the second row of A by the elements in the second column of B. Add the products and place the sum in the second row, second column of AB.
+Use the note cards to write the steps in the order that you would use.
+1. First, \answer{multiply the elements in the first row of A by the elements in the first column of B. Add the products and place the sum in the first row, first column of AB.}
+2. Second, \answer{multiply the elements in the first row of A by the elements in the second column of B. Add the products and place the sum in the first row, second column of AB.}
+3. Then, \answer{multiply the elements in the second row of A by the elements in the first column of B. Add the products and place the sum in the second row, first column of AB.}
+4. Finally, \answer{multiply the elements in the second row of A by the elements in the second column of B. Add the products and place the sum in the second row, second column of AB.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital preview: Exit. Solve the system of equations by graphing. (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Question Help. Help Me Solve This. View an Example. Video. Textbook. Glossary. Math Tools. Print. Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining. Clear All. Check Answer. Review progress. Question 5 of 14. Go. Back. Next.}
+% FIG 34 617 980 1065 1297
+\placeholder{illustration}{Black tablet showing digital graphing exercise y=3x+4 and y=-2x+4. Blank coordinate grid x and y -10 to 10 with unit grid and numeric labels every 2, arrowheads on positive axes, origin at center. Question Help dropdown overlays upper right; menu Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Bottom controls include 1 part remaining, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\end{te-addendum}
+
+
+\end{document}

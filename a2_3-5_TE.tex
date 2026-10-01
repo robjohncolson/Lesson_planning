@@ -1,0 +1,907 @@
+\documentclass{article}
+% Source: Topic_03_Teacher_Edition.pdf, PDF pages 59-70 (printed pages 150A-157B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 59: 150A
+\begin{lesson-meta}
+lesson: 3-5
+title: Zeros of Polynomial Functions
+standards: none printed
+practices: none printed
+objective: I can model and solve problems using the zeros of a polynomial function.
+
+essential question: How are the zeros of a polynomial function related to an equation and graph of the function?
+
+\textbf{VOCABULARY}
+\item multiplicity of a zero
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 3-5 \\
+Title & Zeros of Polynomial Functions \\
+Standards & none printed \\
+I CAN Objective & I can model and solve problems using the zeros of a polynomial function. \\
+Essential Question & How are the zeros of a polynomial function related to an equation and graph of the function? \\
+Lesson Vocabulary & multiplicity of a zero \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+Identify the zeros of a function by factoring or using synthetic division.
+Use the zeros of a polynomial function to sketch its graph.
+\textbf{Essential Understanding}
+The zeros of a polynomial function can be determined using factoring or synthetic division. The zeros of a function can be used to sketch its graph.
+\textbf{COHERENCE}
+Previously in this course, students:
+Factored polynomials using polynomial identities.
+Divided polynomials using synthetic division.
+In this lesson, students:
+Use factoring or synthetic division to identify the zeros of a polynomial function.
+Use the zeros of a polynomial to sketch a graph of a function defined by the polynomial.
+Later in this topic, students will:
+Find the possible roots of a polynomial equation using graphing, substitution, or synthetic division.
+Use the Rational Root Theorem and the Conjugates Theorem to determine which of the possible roots are zeros.
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+Students use factoring or synthetic division to find the zeros of a polynomial function.
+Students interpret the key features of the graph of a polynomial function in the context of problems about profit models.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+extraneous solution & solucion extraña \\
+zero of a function & cero de una función \\
+Zero Product Property & propiedad del product de cero \\
+\end{tabular}
+\textbf{NEW VOCABULARY}
+multiplicity of a zero | multiplicidad de cero
+\textbf{VOCABULARY ACTIVITY}
+Review the term zero of a function by asking students to describe what it means in the context of a quadratic equation and its graph. Explain that a polynomial function can have a factor that occurs twice. Introduce the term multiplicity of a zero and explain what it means. Have students match each factor to the zero.
+\begin{tabular}{ll}
+((x-2)) & 4 \\
+((x+4)) & (-4) \\
+((x+2)) & (-2) \\
+((x-4)) & 2 \\
+\end{tabular}
+\te{The two columns are a matching exercise, not matched answer pairs. Spanish product is printed without a final o.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion cover with reflective spheres and colored light rings; enVision Algebra 2; SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students use factoring and synthetic division to find the zeros of a polynomial function and determine how the multiplicity of a zero affects the graph of the function.
+Students use the zeros of a function, including the multiplicity of each zero and whether the zero is real or complex, to sketch the graph of the polynomial function.
+\textbf{Applying Math Practices}
+\textbf{Look For and Make Use of Structure}
+Students make connections between mathematical concepts when they recognize that statements about zeros, factors, and (x)-intercepts are all ways of describing the same relationship.
+\textbf{Look For and Express Regularity in Repeated Reasoning}
+Students generalize the relationship between the multiplicity of zeros and the appearance of the graph of the function it defines.
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+% Source page 60: 150B
+\textbf{MODEL \& DISCUSS}
+\textbf{INSTRUCTIONAL FOCUS} Students consider the height of a rocket relative to time, building their understanding of how the zeros of a function can be interpreted within the context of real-world problems.
+\textbf{STUDENT COMPANION} Students can complete the Model \& Discuss activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+\textbf{Implement Tasks that Promote Reasoning and Problem Solving}
+Q: How would you describe the function that models the height of the rocket?
+\answer{It is a quadratic function written in standard form. The variable (t) represents the time in seconds after the rocket was launched. The value of the function represents the height of the rocket (t) seconds after it was launched.}
+\textbf{During: SMALL GROUP}
+\textbf{Support Productive Struggle in Learning Mathematics}
+Q: Why do you need additional information to construct an accurate model for the height of the rocket?
+\answer{You need to know three points to write the equation of a parabola. You are only given two points in the problem, the launch point and the landing point.}
+\textbf{For Early Finishers}
+Q: Another rocket was launched that fell to the ground 10 seconds after it was launched. How does the maximum height of this rocket compare to the first rocket?
+\answer{The maximum height of this rocket is four times as high as that of the first rocket.}
+\textbf{After: WHOLE CLASS}
+\textbf{Facilitate Meaningful Mathematical Discourse}
+Discuss the accuracy of Charlie's model.
+Q: What information in the problem statement helps you determine the value of (c) in the model?
+\answer{The rocket is launched from the ground. So when (t=0), (h(0)=0).}
+Q: How can you determine the maximum height of the rocket in Charlie's model?
+\answer{The maximum height occurs at (t=2.5), halfway between 0 and 5. Evaluate the function when (t=2.5) to find the maximum height.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Reason} In Charlie's function, what is the value of (c)? Why is this the correct value?
+\answer{0; Because the rocket is launched from the ground, or a height of 0 ft, the value of (c) is zero.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+Critique \& Explain is available at SavvasRealize.com.
+\te{Printed resource label says Critique \& Explain above Model \& Discuss.}
+Digital Model \& Discuss. Charlie's and Aisha's STEM club built a small rocket and launched it from a field. The rocket fell to the ground 5 s after it launched.
+The height (h), in feet, of the rocket relative to the ground at time (t) seconds can be modeled by the function shown.
+(h(t)=at^2+bt+c)
+\placeholder{illustration}{Digital launch illustration: red and white rocket above a park, with two students below; callout h(t) = at squared + bt + c.}
+A. How are the launch and landing times related to the modeling function?
+B. What additional information about the rocket launch could you use to construct an accurate model for the rocket's height relative to the ground?
+\te{Go back. Enter your answer.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{MODEL \& DISCUSS}
+Charlie's and Aisha's STEM club built a small rocket and launched it from a field. The rocket fell to the ground 5 s after it launched.
+The height (h), in feet, of the rocket relative to the ground at time (t) seconds can be modeled by the function shown.
+(h(t)=at^2+bt+c)
+\placeholder{illustration}{Student edition rocket illustration with red and white rocket above park and two students, labeled h(t) = at squared + bt + c.}
+A. How are the launch and landing times related to the modeling function?
+\answer{The height of the rocket is 0 at both the launch and landing. So 0 seconds and 5 seconds are the values of (t) that solve the equation (0=at^2+bt+c).}
+B. What additional information about the rocket launch could you use to construct an accurate model for the rocket's height relative to the ground?
+\answer{You need information about the height of the rocket at another time, knowledge about the rocket's initial speed and about gravitational acceleration.}
+C. Construct Arguments Charlie believes that the function (h(t)=-16t^2+80t) models the height of the rocket with respect to time. Do you agree? Explain your reasoning and indicate the domain of this function.
+\answer{Yes. Charlie's model is 0 at both 0 seconds and 5 seconds. The domain is all (x)-values from 0 to 5.}
+\te{The printed answer uses x-values for the time variable t. SAMPLE STUDENT WORK.}
+\end{model-discuss}
+\begin{te-addendum}{0}{LearnTogether}
+% Source page 61: 150
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+\textbf{Establish Mathematics Goals to Focus Learning}
+Remind students that they have previously found the zeros of linear and quadratic functions. Explain that they can use factoring, synthetic division, and the Quadratic Formula to find the zeros of polynomial functions.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Use Zeros to Graph a Polynomial Function}
+\textbf{Pose Purposeful Questions}
+Q: How is the Zero Product Property helpful when graphing a polynomial function?
+\answer{It helps you identify ordered pairs that are on the graph and determine endpoints of intervals.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Example 1}
+Sketch the graph of the function by finding the zeros.
+(f(x)=x^3-3x^2+16x-48)
+(f(x)=x^3-3x^2+16x-48)
+(=(x-3)(x^2+16))
+Zero at (x=3).
+\placeholder{graph}{Orange increasing cubic with one real x-intercept at 3 marked by a dot; x labels -2 and 4, y labels 50 and -50, origin O; graph of x cubed minus 3x squared plus 16x minus 48.}
+\textbf{Example 1} Students sketch the graph of a cubic function with only one real zero.
+Q: How does the number of real zeros affect the shape of the graph?
+\answer{The graph of the function only crosses the (x)-axis one time.}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Additional Example 4}
+A company manufactures and sells Adirondack chairs. The company's profit (P), in thousands of dollars earned, is a function of the number of chairs sold, (x), measured in thousands. The profit is modeled by the function:
+(P(x)=-x^3+2x^2+29x-30)
+What do the zeros of the function tell you about the number of chairs that the company should produce?
+Based on the graph of the function, the zeros are at (-5), 1, and 6.
+When (P(x)) is positive, the company earns a profit. The function is positive on (x<-5), and (1<x<6).
+Since the company cannot produce a negative amount of chairs, disregard values for (x) less than (-5).
+So the company should make between 1,000 and 6,000 chairs to make a profit.
+\placeholder{graph}{Orange cubic with negative leading coefficient crossing x-axis at -5, 1, 6; x labels -6, -4, -2, O, 2, 4, 6; y labels 100, 50, -100; local minimum left of y-axis and local maximum near x=4.}
+\textbf{Example 4} Students interpret the positive zeros of a polynomial function.
+Q: What do the values of the positive (x)-intercepts represent in this context?
+\answer{The values represent the break-even points where the company would neither lose money nor make a profit.}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Use Zeros to Graph a Polynomial Function}
+What are the zeros of (f(x)=x(x-4)(x+3))? Graph the function.
+A zero of a polynomial function is a value for which the function is equal to 0. By the Zero-Product Property, the zeros of the function are (-3), 0, and 4.
+The zeros divide a number line into four intervals.
+\placeholder{diagram}{Number line with arrows at both ends and marked values -3, 0, 4, dividing it into four intervals.}
+To see how the graph of the function behaves on each interval, look at the sign of each factor on each interval, and the sign of the product.
+\begin{tabular}{lllll}
+Interval & Sign: (x) & (x-4) & (x+3) & Product \\
+(x<-3) & (-) & (-) & (-) & (-) \\
+(-3<x<0) & (-) & (-) & (+) & (+) \\
+(0<x<4) & (+) & (-) & (+) & (-) \\
+(x>4) & (+) & (+) & (+) & (+) \\
+\end{tabular}
+\te{Callout: The last column shows the sign of the product of the three factors. GENERALIZE Recall using the Zero-Product Property to find the zeros of quadratic polynomials. The zeros of a quadratic function relate to the factors: when x = a is a zero of the function, then (x-a) is a factor of the polynomial. The Zero-Product Property applies to polynomials of any degree. CONTINUED ON THE NEXT PAGE.}
+% Source page 62: 151
+Sketch the graph. Draw a continuous curve that passes through each zero on the (x)-axis, and is below the (x)-axis when the function is negative, and above the (x)-axis when the function is positive.
+\placeholder{graph}{Gray cubic crossing x-axis at -3, 0, 4, local maximum near (-1.7,13) and minimum near (2.3,-21); x labels -6,-4,-2,O,2,4,6; y labels 20,10,-10,-20.}
+\te{STUDY TIP The zeros do not tell you how a function behaves on an interval, just that a function may change between positive or negative at a zero.}
+\answer{Zeros: (-3), 0, 4. See graph.}
+\end{example}
+\begin{tryit}{1}
+Factor each function. Then use the zeros to sketch its graph.
+a. (f(x)=4x^3+4x^2-24x)
+\answer{Zeros are (-3), 0, and 2.}
+\placeholder{graph}{Red cubic crossing at -3,0,2 with left end down and right end up; x grid step 1 and labeled -2; y grid step 10 and labeled -20; origin O.}
+b. (g(x)=x^4-81)
+\answer{Zeros are (-3) and 3.}
+\placeholder{graph}{Red quartic symmetric about y-axis with zeros -3 and 3, flat minimum at (0,-81); x labels -2,2, origin O; y labels 40,-40, grid step 20.}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What step is important before sketching the graph of each function?
+\answer{Factor each function to find the zeros of the function.}
+\end{te-addendum}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Understand How a Multiple Zero Can Affect a Graph}
+\textbf{Use and Connect Mathematical Representations}
+Q: What do you notice about each graph in relation to the polynomial function it represents?
+\answer{The number of unique factors of the polynomial function is the same as the number of times that its graph crosses or is tangent to the (x)-axis.}
+Q: How does the term multiplicity of a zero relate to multiplication?
+\answer{The multiplicity of a zero is the number of times that the factor is multiplied in the polynomial function.}
+\te{Example 2 is Powered by Desmos. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Understand How a Multiple Zero Can Affect a Graph}
+How does a multiple zero affect the graph of a polynomial function?
+The multiplicity of a zero of a polynomial function is the number of times its related factor appears in the factored form of the polynomial. Notice the behavior of each graph as it approaches the (x)-axis. What can you conclude about the multiplicity of a zero and its effect on the graph of the function?
+(f(x)=(x-1)(x+2))
+\placeholder{graph}{Red upward parabola, zeros -2 and 1 marked red; x labels -4,-2,O,2; y labels 20,10,-10.}
+(f(x)=(x-1)^2(x+2))
+\placeholder{graph}{Red cubic crossing at -2 (red point) and touching at 1 (blue point); left end down, right end up; x labels -2,O,2,4; y labels 20,10,-10.}
+(f(x)=(x-1)^3(x+2))
+\placeholder{graph}{Red quartic with both ends up, crossing at -2 and flattening while crossing at 1, both marked red; x labels -2,O,2,4; y labels 20,10,-10.}
+(f(x)=-(x-1)^4(x+2))
+\placeholder{graph}{Red quintic with left end up and right end down, crossing at -2 marked red, touching at 1 marked blue; x labels -2,O,2,4; y labels 10,-10,-20.}
+When the multiplicity of a zero is odd, the function crosses the (x)-axis. When the multiplicity of a zero is even, the graph has a turning point at the (x)-axis.
+\te{STUDY TIP Close to a zero, the graph looks like a polynomial function with degree equal to the multiplicity of the zero.}
+\answer{Odd multiplicity: crosses the (x)-axis. Even multiplicity: has a turning point at the (x)-axis.}
+\end{example}
+\begin{tryit}{2}
+Describe the behavior of the graph of the function at each of its zeros.
+a. (f(x)=x(x+4)(x-1)^4)
+\answer{The graph crosses the (x)-axis at the zeros (-4) and 0 and has a turning point at the zero 1.}
+b. (f(x)=(x^2+9)(x-1)^5(x+2)^2)
+\answer{The graph crosses the (x)-axis at the zero 1, and has a turning point at the zero (-2).}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What do you know about the signs of the (y)-values of the points in the intervals on each side of a zero whose multiplicity is even?
+\answer{The signs are the same.}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2.
+\textbf{Reason} Do the values of a function always change from positive to negative or negative to positive on either side of a zero? Explain.
+\answer{No; the zero could be a turning point, meaning the function is positive or negative on both sides of the zero.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners} Use with EXAMPLE 2.
+\textbf{SPEAKING: BEGINNING} Have students discuss the meanings of odd and even. Then discuss ways to remember how the number of times a zero is repeated affects the graph of a polynomial function.
+Q: What does it mean for a number to be even? Odd?
+\answer{divisible by 2; not divisible by 2}
+Q: Name one way to remember that when a zero is repeated an odd number of times, the graph crosses over the (x)-axis.
+\answer{Odd and over both start with o.}
+Q: Name one way to remember that when a zero is repeated an even number of times, the graph does not cross the (x)-axis.
+\answer{Even ends with an n for not cross.}
+\textbf{READING: DEVELOPING} Ask students to read the example and answer the questions to demonstrate their understanding.
+Q: In each function, what is the multiplicity of (-2)? \answer{1}
+Q: What happens to each graph at (x=-2)? \answer{It crosses the (x)-axis.}
+Q: In which functions is the multiplicity of 1 odd? \answer{the two functions on the left}
+Q: What happens to the graphs at (x=1) when the multiplicity of 1 is odd? \answer{It crosses the (x)-axis.}
+Q: In which functions is the multiplicity of 1 even? \answer{the two functions on the right}
+Q: What happens to the graphs at (x=1) when the multiplicity of 1 is even? \answer{It is tangent to the (x)-axis.}
+\textbf{LISTENING: EXPANDING} Multiplicity is not commonly used in everyday conversation. But it is related to multiple and multiply, which are more commonly used.
+Q: In your journals, write definitions for multiple, multiply, and multiplicity in your own words and use each term in a sentence.
+\answer{Check students' work.}
+Q: Write a paragraph using ((x+4)), ((x-1)), multiple, and multiply to explain the meaning of multiplicity.
+\answer{In the function (f(x)=(x+4)^2(x-1)^3), the factors ((x+4)) and ((x-1)) occur multiple times. The factor ((x+4)) is multiplied by itself, so the multiplicity of (-4) is two. The factor ((x-1)) occurs three times, so the multiplicity of 1 is three.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+% Source page 63: 152
+\textbf{Find Real and Complex Zeros}
+\textbf{Pose Purposeful Questions}
+Q: What do you notice about the graph that helps in determining the zeros of the function?
+\answer{The graph only crosses the (x)-axis once and does not have a turning point on the (x)-axis, so there is only one real zero, and the multiplicity of that zero is odd.}
+Q: Why is it helpful to use synthetic division to find a zero of a function?
+\answer{If you use synthetic division, and there is no remainder, then the number you divided by is a zero of the function.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Find Real and Complex Zeros}
+What are all the real and complex zeros of the polynomial function shown in the graph?
+(f(x)=x^3+x^2-3x-6)
+\placeholder{graph}{Red cubic crossing x-axis at 2, left end down and right end up, two turning points below the x-axis; x labels -4,-2,O,2,4; y labels 20,10,-20.}
+\textbf{Step 1} Use the graph to determine one of the zeros of the polynomial. The function appears to cross the (x)-axis at (x=2).
+Confirm that 2 is a zero of the function.
+(f(2)=(2)^3+(2)^2-3(2)-6)
+(=0)
+So 2 is a zero of the function. By the Factor Theorem, (x-2) is a factor of the related polynomial.
+\textbf{Step 2} Use synthetic division to factor the polynomial.
+\begin{tabular}{r|rrrr}
+2 & 1 & 1 & (-3) & (-6) \\
+ & & 2 & 6 & 6 \\
+\hline
+ & 1 & 3 & 3 & 0 \\
+\end{tabular}
+So (f(x)=(x-2)(x^2+3x+3)).
+\textbf{Step 3} Use the Quadratic Formula to find the remaining zeros.
+(x=\frac{-3\pm\sqrt{3^2-4(1)(3)}}{2(1)})
+(=-\frac{3}{2}\pm\frac{\sqrt{3}}{2}i)
+The zeros of the polynomial function (f) are 2, (-\frac{3}{2}+\frac{\sqrt{3}}{2}i), and (-\frac{3}{2}-\frac{\sqrt{3}}{2}i).
+\te{LOOK FOR RELATIONSHIPS These statements are equivalent: The function's graph crosses the x-axis at 2. The x-intercept of the graph is 2. (f(2)=0). 2 is a zero of the function. (x-2) is a factor of the polynomial.}
+\answer{2, (-\frac{3}{2}+\frac{\sqrt{3}}{2}i), (-\frac{3}{2}-\frac{\sqrt{3}}{2}i)}
+\end{example}
+\begin{tryit}{3}
+What are all the real and complex zeros of the polynomial function shown in the graph?
+a. (f(x)=2x^3-8x^2+9x-9)
+\placeholder{graph}{Red cubic with single real zero 3; local maximum and minimum below x-axis; x labels -4,-2,O,2,4; y labels 5,-5,-10,-15.}
+\answer{(x=3) and (x=\frac{1\pm i\sqrt{5}}{2})}
+b. (f(x)=x^4-3x^2-4)
+\placeholder{graph}{Red W-shaped quartic symmetric about y-axis, crossing at -2 and 2, local maximum (0,-4), two minima near y=-6; x labels -4,-2,O,2,4; y labels 2,-2,-4,-6.}
+\answer{(x=-2), (x=2), (x=i), (x=-i)}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What do you notice about the graph of the function in part (a)?
+\answer{The function crosses the (x)-axis once. It appears to have a zero at (x=3).}
+Q: Are there any types of functions where the function values change signs without intersecting the (x)-axis?
+\answer{Yes, a function that is not continuous, such as a piecewise step function, can change signs without having a zero on the (x)-axis.}
+\end{te-addendum}
+\begin{te-addendum}{3}{CommonError}
+\textbf{Try It! 3a} Students may state that (x=3) is the only zero of the function. Remind students that the graph only shows real zeros, so they also need to find the complex zeros of the function using the Quadratic Formula.
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 3 Have students find all the real and complex zeros of fourth-degree polynomials.
+1. Find all the real and complex zeros of (f(x)=x^4-x^3-2x-4).
+\answer{(-1), 2, (\pm i\sqrt{2})}
+\placeholder{graph}{Red quartic with zeros -1 and 2, y-intercept -4, minimum near (1.2,-6); x labels -4,-2,O,4; y labels 2,-2,-4,-6.}
+2. Find all the real and complex zeros of (f(x)=x^4+x^3-5x^2+x-6).
+\answer{(-3), 2, (\pm i)}
+\placeholder{graph}{Red quartic crossing at -3 and 2, three turning points with deepest minimum near (-2,-20); x labels -4,-2,O,4; y labels -5,-10,-15,-20.}
+\end{te-addendum}
+\begin{te-addendum}{4}{GeneralizeETP}
+% Source page 64: 153
+\textbf{Find the Polynomial Model}
+\textbf{Implement Tasks that Promote Reasoning and Problem Solving}
+Q: Why is it important to think about the domain of the function before starting?
+\answer{Because this is a real-life example, there may be values that mathematically satisfy the equation, but do not make sense in the context of the problem.}
+Q: Why would only discrete values greater than 0 be in the domain of this function?
+\answer{The context of this function is selling lamps. You cannot sell partial lamps or negative lamps, so only values greater than 0 that represent a whole number of lamps make sense in this problem.}
+Q: What do the zeros represent in the context of the problem?
+\answer{The zeros (x=3) and (x=10) are points where the company's profit is 0. The zero (x=-2) has no meaning in this context because the company cannot sell a negative number of lamps.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Find the Polynomial Model}
+Acme Innovations makes and sells lamps. Their profit (P), in hundreds of dollars earned, is a function of the number of lamps sold (x), in thousands.
+From historical data, they know that their company's profit is modeled by the function shown.
+The function has zeros at (-2), 3, and 10. When Acme Innovations sells 2,000 lamps, they lose \$3,200. Find (P) in standard form and interpret the key features for this situation.
+\placeholder{illustration}{Lava lamp with SALE tag beside tablet labeled ACME Innovation Profits showing a red cubic crossing the horizontal axis three times, with negative leading coefficient.}
+\textbf{Formulate}
+A profit for the company corresponds to the portions of the graph that lie in the first quadrant. Use the zeros of the function to determine the factors of (P).
+By the Factor Theorem you can determine the factors of the related polynomial.
+\begin{tabular}{ll}
+Zero of (P) & Factor of (P(x)) \\
+(-2) & (x+2) \\
+3 & (x-3) \\
+10 & (x-10) \\
+\end{tabular}
+By the end behavior, the polynomial's leading coefficient is negative, and the function's degree is odd. Since there are three distinct zeros, the least degree the polynomial could have is 3.
+\textbf{Compute}
+Multiply these factors and (-1) to find the standard form of the polynomial.
+(-(x+2)(x-3)(x-10)=(-x-2)(x^2-13x+30))
+(=-x^3+13x^2-30x-2x^2+26x-60)
+(=-x^3+11x^2-4x-60)
+Find (P(2)) to see if polynomial goes through ((2,-32)).
+(P(2)=-(2)^3+11(2)^2-4(2)-60)
+(=-8+44-8-60)
+(=-32)
+So (P(x)=-x^3+11x^2-4x-60).
+\textbf{Interpret}
+From the (y)-intercept, Acme Innovations spends \$6,000 to set up production before they make the first lamp. When they make and sell 3,000 or 10,000 lamps, they break even. They make a profit when they make and sell between those values. Using technology, you can find they earn the most when they make and sell 7,147 lamps for a profit of \$10,822.
+\te{REASON Before multiplying to find the standard form of the function, what could you do to determine the multiplicity of the factors or a stretch factor?}
+\answer{(P(x)=-x^3+11x^2-4x-60); setup cost \$6,000; break-even at 3,000 or 10,000 lamps; profit between those values; greatest profit \$10,822 at 7,147 lamps.}
+\end{example}
+\begin{tryit}{4}
+Due to a decrease in the cost of materials, the profit function for Acme Innovations has changed to (Q(x)=-x^3+10x^2+13x-22). How many lamps should they make in order to make a profit?
+\answer{between 1,000 and 11,000}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How do you think the new maximum profit will compare to the maximum profit in the example?
+\answer{Because the cost of the materials is decreasing, the maximum profit will be greater.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+Use with EXAMPLES 3 \& 4.
+\textbf{Make Sense and Persevere} On a graph, how do complex roots differ from real roots?
+\answer{Real roots lie on the (x)-axis, while complex roots do not.}
+\te{The printed distinction uses complex roots to mean nonreal complex roots.}
+\end{te-addendum}
+\begin{te-addendum}{5}{GeneralizeETP}
+% Source page 65: 154
+\textbf{Solve Polynomial Equations}
+\textbf{Build Procedural Fluency from Conceptual Understanding}
+Q: How could you find the roots of (P(x)) if you didn't recognize the identity (x^3+3x^2y+3xy^2+y^3=(x+y)^3)?
+\answer{Use a calculator to graph the function (P(x)) and see where the graph appears to cross the (x)-axis. Then use synthetic division to test whether that value is a root and find another factor in order to simplify (P(x)).}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Solve Polynomial Equations}
+What are the solutions of (2x^3+5x^2-3x=3x^3+8x^2+1)?
+Rewrite the equation in the form (P(x)=0).
+(2x^3+5x^2-3x=3x^3+8x^2+1)
+(x^3+3x^2+3x+1=0)
+The roots are the zeros of the function (P(x)=x^3+3x^2+3x+1).
+((x+1)^3=0)
+(x+1=0)
+(x=-1)
+To check, write each side of the equation as a separate polynomial and graph. Use the INTERSECT feature to confirm that the graphs intersect at (x=-1).
+\placeholder{graph}{Calculator graph of blue and red cubics intersecting at x=-1; x scale 1 and y scale 2; both curves have a local maximum left of the y-axis and local minimum close to it.}
+\te{Callout: Combine like terms on one side of the equation. VOCABULARY A polynomial equation is an equation that can be written in the form (P(x)=0), where P(x) is a polynomial.}
+\answer{(x=-1)}
+\end{example}
+\begin{tryit}{5}
+What is the solution of the equation?
+a. (x^3-7x+6=x^3+5x^2-2x-24)
+\answer{(x=-3), (x=2)}
+b. (x^4+2x^2=-x^3-2x)
+\answer{(x=-1), (x=0), (x=\sqrt{2}i), (x=-\sqrt{2}i)}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: In part a, what do you notice about both sides of the equation?
+\answer{Both sides of the equation have an (x^3)-term, which you can subtract from both sides before solving.}
+\end{te-addendum}
+\begin{te-addendum}{6}{GeneralizeETP}
+\textbf{Solve a Polynomial Inequality by Graphing}
+\textbf{Use and Connect Mathematical Representations}
+Q: Why is the solution of the inequality the same as the intervals where the graph of (P(x)) is below the (x)-axis?
+\answer{The inequality is (x^3-16x<0). You are trying to find the values of (x^3-16x) that are less than zero. The graph of (P(x)) shows all values of (x^3-16x). The intervals where the graph is below the (x)-axis are the same as the solutions of (x^3-16x<0) because the (y)-value of any point below the (x)-axis is less than 0.}
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Solve a Polynomial Inequality by Graphing}
+What are the solutions of (x^3-16x<0)?
+The solutions are all values of (x) that make the inequality true. The polynomial (x^3-16x) defines a polynomial function (P(x)=x^3-16x).
+Factor to find the zeros of the function.
+(x^3-16x=0)
+(x(x^2-16)=0)
+(x(x-4)(x+4)=0)
+By the Zero-Product Property, the zeros of (P) are (-4), 0, and 4.
+Sketch the function, and use the graph to determine where (P(x)<0).
+\placeholder{graph}{Cubic with zeros -4,0,4; blue portions above x-axis and red portions below; x labels -2,O,2; y labels 20,10,-10,-20; arrows down at left and up at right.}
+\te{Callouts: The blue portions show where (P(x)>0). The red portions show where (P(x)<0). HAVE A GROWTH MINDSET How can you take on challenges with positivity?}
+The solutions of the inequality (x^3-16x<0) are all real numbers such that (x<-4) or (0<x<4).
+\answer{(x<-4) or (0<x<4)}
+\end{example}
+\begin{tryit}{6}
+What are the solutions of the inequality?
+a. (2x^3+12x^2+12x<0)
+\answer{(x<-3-\sqrt{3}) or (-3+\sqrt{3}<x<0)}
+b. ((x^2-1)(x^2-x-6)>0)
+\answer{(x<-2) or (-1<x<1) or (x>3)}
+\end{tryit}
+\begin{te-addendum}{6}{GeneralizeETP}
+\textbf{Have a Growth Mindset: Take on Challenges with Positivity}
+When you struggle with a challenge, you build connections in your brain. Ask: What can you tell yourself so you keep a positive attitude and don't give up when you struggle? What can you do when something seems hard?
+\end{te-addendum}
+\begin{te-addendum}{6}{HabitsOfMind}
+Use with EXAMPLES 5 \& 6.
+\textbf{Use Structure} How does solving (2x^3+12x^2+12x=0) help you to solve the inequality (2x^3+12x^2+12x<0)?
+\answer{The solutions of the equation help you sketch the related function so you can see where the values of the function are negative.}
+\end{te-addendum}
+\begin{te-addendum}{6}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 6 Students may struggle with solving cubic inequalities.
+Have students practice solving quadratic inequalities.
+1. What values of (x) are solutions to the inequality (x^2-12x+35<0)? \answer{(5<x<7)}
+2. What values of (x) are solutions to the inequality (2x^2-5x-3>0)? \answer{(x<-\frac{1}{2}) or (x>3)}
+3. What values of (x) are solutions to the inequality (9x^2-9x-4<0)? \answer{(-\frac{1}{3}<x<\frac{4}{3})}
+4. What values of (x) are solutions to the inequality (x^2+9x+18>0)? \answer{(x<-6) or (x>-3)}
+\end{te-addendum}
+% Source page 66: 155
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Zeros of Polynomials}
+Q: How does the graph shown verify that (a), (b), and (c) are zeros of the function?
+\answer{When (x) is equal to (a), (b), or (c), the graph of the function intersects the (x)-axis.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Exercise 5} Students may state that the domain is all real numbers. Encourage students to consider whether this result makes sense in the context of this problem. Remind them that even though the function (P(x)) is greater than zero when (x<-1), values of (x) that are less than zero do not make sense in the context of this problem.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Polynomial Identities}
+\te{The student summary heading is printed as Polynomial Identities; the teacher heading is Zeros of Polynomials.}
+\textbf{FUNCTION} (f(x)=(x-a)^2(x-b)^3(x-c))
+\textbf{GRAPH}
+\placeholder{graph}{Red polynomial graph with both ends up, touching at (a,0) with a=-2, flattening and crossing at (b,0) with b=1, crossing at (c,0) with c=3; a red, b blue, c green. x labels -3,-2,-1,O,1,2,3 and y labels 2,1,-1,-2.}
+The zeros are (a), (b), and (c).
+(a) has multiplicity 2.
+(b) has multiplicity 3.
+(c) has multiplicity 1.
+\te{Callouts: Multiplicity 2, has a turning point at the x-axis. Multiplicity 3, crosses the x-axis. Multiplicity 1, crosses the x-axis.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How are the zeros of a polynomial function related to the equation and graph of a function?
+\answer{The zeros of polynomial functions show where the polynomial either crosses or touches the (x)-axis. The sign of the values of the function between the intervals created by the zeros determines whether the function is above or below the (x)-axis. Additionally, the signs of the values of the function to the left and right of the least and greatest zeros determine the end behavior of the graph.}
+2. Error Analysis In order to identify the zeros of the function, a student factored the cubic function (f(x)=x^3-3x^2-10x) as follows:
+(f(x)=x^3-3x^2-10x)
+(=x(x^2-3x-10))
+(=x(x-5)(x+5))
+(x=0,x=-5,x=5)
+Describe and correct the error the student made.
+\answer{The student factored incorrectly. The zeros are 0, 5, and (-2).}
+3. Make Sense and Persevere Explain how you can determine that the function (f(x)=x^3+3x^2+4x+2) has both real and complex zeros.
+\answer{Graph the function using a graphing calculator or graphing program. Use the graph to estimate one of the zeros of the function. Use synthetic division to confirm that value is a zero and to factor the polynomial. Use the Quadratic Formula to find the remaining zeros.}
+\textbf{Do You KNOW HOW?}
+4. If the graph of the function (f) has a multiple zero at (x=2), what is a possible exponent of the factor (x-2)? Justify your reasoning.
+\placeholder{graph}{Red cubic touching x-axis at (2,0), crossing near x=-1, local maximum near (0,4); x labels -4,-2,O,2,4; y labels 2,-2,-4.}
+\answer{The graph touches, but does not cross, the (x)-axis at (x=2), the exponent is an even number (multiple of 2).}
+5. Energy Solutions manufactures LED light bulbs. The profit (p), in thousands of dollars earned, is a function of the number of bulbs sold, (x), in ten thousands. Profit is modeled by the function (-x^3+9x^2-11x-21).
+For what number of bulbs manufactured does the company make a profit?
+\answer{(P(x)>0) for (3<x<7), so the company should make between 30,000 and 70,000 LED light bulbs.}
+\end{concept-summary}
+\begin{te-addendum}{Practice}{GeneralizeETP}
+% Source page 67: 156
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+6, 7, 9, 12--30 & 6--30 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 12--13, 29 & 1 \\
+1 & 6 & 2 \\
+2 & 14--16 & 1 \\
+2 & 7, 8, 10 & 2 \\
+3 & 9, 17, 28 & 1 \\
+4 & 18, 26 & 2 \\
+4 & 25, 27, 30 & 3 \\
+5 & 11, 19--21 & 1 \\
+6 & 22--24 & 1 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{6}{2}
+\textbf{Reason} If you use zeros to sketch the graph of a polynomial function, how can you verify that your graph is correct?
+\answer{You can use a graphing calculator to check the sketch.}
+\end{practice}
+\begin{practice}{7}{2}
+\textbf{Error Analysis} Describe and resolve two errors that Tonya may have made in finding all the roots of the polynomial function, (f(x)=x^3+3x^2+7x+5).
+\placeholder{graph}{Tonya's red increasing cubic crossing x-axis at -1; x labels -4,-2,O,2,4 and y labels 8,4,-4,-8; a red X marks the work as incorrect.}
+This function has only one real root at (x=-1).
+\answer{Tonya neglected to use synthetic division to factor the polynomial in order to find its complex roots, (-1+2i) and (-1-2i).}
+\te{The printed statement about one real root is true; the prompt asks for two errors while the key identifies the omitted complex roots.}
+\end{practice}
+\begin{practice}{8}{2}
+\textbf{Higher Order Thinking} How could you use your graphing calculator to determine that (f(x)=(x+2)(x+6)(x-1)) is not the correct factorization of (f(x)=x^3+7x^2+16x+12)? Explain.
+\answer{Graph them simultaneously on the graphing calculator to see if they coincide.}
+\end{practice}
+\begin{practice}{9}{1}
+\textbf{Generalize} How can you determine that the polynomial function shown does not have any zeros with even multiplicity? Explain.
+\placeholder{graph}{Red quartic with both ends up, crossing near x=-1 and flattening while crossing at x=2; minimum near (0,-8); x labels -4,-2,O,2,4; y labels 8,4,-4,-8.}
+\answer{When a graph has a multiplicity of a zero that is even, the graph only touches the (x)-axis, and turns back without crossing. That never occurs in the graph of this polynomial function.}
+\end{practice}
+\begin{practice}{10}{2}
+\textbf{Use Structure} Factor the polynomial (x^4-16). How many real zeros does the function (g(x)=x^4-16) have?
+\answer{two real zeros at 2 and (-2)}
+\end{practice}
+\begin{practice}{11}{1}
+At what points do the graphs of (f(x)=x^3-2x^2-16x+20) and (g(x)=-12) intersect?
+\answer{((-4,-12)), ((2,-12)), ((4,-12))}
+\end{practice}
+\begin{practice}{12}{1}
+Sketch the graph of the function by finding the zeros. SEE EXAMPLE 1
+(f(x)=3x^3-9x^2-12x)
+\placeholder{graph}{Printed answer 12: red cubic crossing x-axis near -3,1,4, local maximum near (-1.4,20) and minimum near (2.6,-12); x labels -4,-2,O,2,4; y labels 40,-20,-40.}
+\answer{See graph.}
+\te{The printed graph has the zeros of item 13, not item 12; retained under its printed number.}
+\end{practice}
+\begin{practice}{13}{1}
+Sketch the graph of the function by finding the zeros. SEE EXAMPLE 1
+(g(x)=(x+3)(x-1)(x-4))
+\placeholder{graph}{Printed answer 13: red cubic crossing near -1,0,4, local maximum slightly above x-axis and minimum near (2.5,-40); x labels -4,-2,O,2; y labels 40,20,-20,-40.}
+\answer{See graph.}
+\te{The printed graph has the zeros of item 12, not item 13; retained under its printed number.}
+\end{practice}
+\begin{practice}{14}{1}
+Find the zeros of the function, and describe the behavior of the graph at each zero. SEE EXAMPLE 2
+(f(x)=x^3-8x^2+16x)
+\answer{0, 4; The graph crosses the (x)-axis at 0, and it touches the (x)-axis at 4.}
+\end{practice}
+\begin{practice}{15}{1}
+Find the zeros of the function, and describe the behavior of the graph at each zero. SEE EXAMPLE 2
+(g(x)=x^3-x^2-25x+25)
+\answer{(-5), 1, 5; The graph crosses the (x)-axis at (-5), 1, and 5.}
+\end{practice}
+\begin{practice}{16}{1}
+Find the zeros of the function, and describe the behavior of the graph at each zero. SEE EXAMPLE 2
+(f(x)=9x^4-40x^2+16)
+\answer{(\pm\frac{2}{3}), (\pm4); The graph crosses the (x)-axis at each zero.}
+\te{The printed key gives plus/minus 4; the corresponding roots of the given polynomial are plus/minus 2.}
+\end{practice}
+\begin{practice}{17}{1}
+What are all the real and complex zeros of the polynomial function shown in the graph? SEE EXAMPLE 3
+(f(x)=x^3-x^2-4x-6)
+\placeholder{graph}{Red cubic crossing x-axis at 3; local maximum near (-1,-4) and minimum near (1.5,-11); x labels -4,-2,O,2,4; y labels 8,4,-8.}
+\answer{The zeros of the polynomial function are 3, (-1+i), and (-1-i).}
+\end{practice}
+\begin{practice}{18}{2}
+Waterworks is a company that manufactures and sells paddleboards. Their profit (P), in hundreds of dollars earned, is a function of the number of paddleboards sold (x), measured in thousands. Profit is modeled by the function (P(x)=-3x^3+48x^2-144x). What do the zeros of the function tell you about the number of paddleboards that Waterworks should produce? SEE EXAMPLE 4
+\answer{When (P(x)) is positive, the company earns a profit. (P(x)>0) for (4<x<12), so the company should make between 4,000 and 12,000 paddleboards.}
+\end{practice}
+\begin{practice}{19}{1}
+What are the solution(s) of the equation? SEE EXAMPLE 5
+(-3x^3-x^2+54x-40=2x^2+6x+20)
+\answer{(x=-5), (x=2)}
+\end{practice}
+\begin{practice}{20}{1}
+What are the solution(s) of the equation? SEE EXAMPLE 5
+(2x^3+3x^2-36=x^3-x^2+9x)
+\answer{(x=-4), (x=-3), (x=3)}
+\end{practice}
+\begin{practice}{21}{1}
+What are the solution(s) of the equation? SEE EXAMPLE 5
+(-5x^4+4x^2-12x=-6x^4+3x^3)
+\answer{(x=0), (x=3), (x=2i), (x=-2i)}
+\end{practice}
+\begin{practice}{22}{1}
+What are the solutions of the inequality? SEE EXAMPLE 6
+(x^3-9x>0)
+\answer{(-3<x<0) or (x>3)}
+\end{practice}
+\begin{practice}{23}{1}
+What are the solutions of the inequality? SEE EXAMPLE 6
+(0>4x^3+8x^2-x-2)
+\answer{(x<-2) or (-\frac{1}{2}<x<\frac{1}{2})}
+\end{practice}
+\begin{practice}{24}{1}
+What are the solutions of the inequality? SEE EXAMPLE 6
+(64x^2>-4x^3-x-16)
+\answer{(x>-16)}
+\end{practice}
+% Source page 68: 157
+\begin{practice}{25}{3}
+\textbf{Make Sense and Persevere} A firework is launched vertically into the air. Its height in meters is given by the function shown, where (t) is measured in seconds.
+(h=-4.9t^2+49t)
+\placeholder{illustration}{Firework launched above a city and river, labeled h = -4.9t squared + 49t.}
+a. What is a reasonable domain of the function?
+\answer{The domain is (0<t\leq10).}
+b. What are the zeros of the function? Explain what they represent in this situation.
+\answer{The zeros are 0 and 10. They represent the times when the projectile is on the ground.}
+c. Use technology to find the vertex. What does it represent in this situation?
+\answer{The vertex is ((5,122.5)), which means at (t=5) seconds, the height of the projectile was 122.5 meters.}
+\te{The printed domain excludes launch time 0 while part b includes it as a zero.}
+\end{practice}
+\begin{practice}{26}{2}
+The height of a baseball thrown in the air can be modeled by the function (h(t)=-16t^2+32t+6.5), where (h(t)) represents the height in feet of the baseball after (t) seconds. Explain why the graph of this function only shows one zero.
+\placeholder{graph}{Red downward parabola restricted to nonnegative time, starting near (0,6.5), vertex near (1,22.5), crossing horizontal axis a little after 2; horizontal Time (seconds), vertical Height (feet); x labels 0,2 and y labels 0,8,16,24.}
+\answer{Answers may vary. Sample: The baseball hits the ground a little past 2 seconds after being thrown. However, it is not being thrown from ground level, but from a height of 6.5 feet.}
+\end{practice}
+\begin{practice}{27}{3}
+\textbf{Model With Mathematics} The height of a rectangular storage box is less than both its length and width. The function (f(x)=x^3+2x^2-3x) represents the volume of the rectangular box, where (x) represents the width of the box, in feet.
+\placeholder{illustration}{Rectangular metal storage box in a pickup truck bed; horizontal arrow across its front labeled x.}
+a. Find the factored form of (f(x)).
+\answer{(x(x^2+2x-3)=x(x+3)(x-1))}
+b. Find the zeros of the function.
+\answer{The zeros are (x=0), (x=-3), and (x=1).}
+c. You know (x) represents the width of the box. What do the other two factors represent?
+\answer{((x-1)) represents the height, and ((x+3)) represents the length.}
+d. Find the dimensions of the box when the volume is 10 (\text{ft}^3).
+\answer{width = 2 ft, height = 1 ft, and length = 5 ft.}
+\end{practice}
+\begin{practice}{28}{1}
+Complete each statement so it means the same as 4 is a zero of the function.
+The graph of the function crosses the \underline{\hspace{1cm}} at 4. \underline{\hspace{1cm}} is a factor of the polynomial.
+\answer{(x)-axis; ((x-4))}
+\te{The printed statement says crosses; a zero of even multiplicity may only touch the axis.}
+\end{practice}
+\begin{practice}{29}{1}
+\textbf{SAT/ACT} Without the use of a graphing calculator, determine which of the following functions is the graph of (f(x)=x^3+x^2-4x).
+A. \placeholder{graph}{Upward red parabola, minimum near (-0.5,-2.3); x labels -2,O,2; y labels 4,2,-2.}
+B. \placeholder{graph}{Downward red parabola, vertex near (2.5,0.3); x labels -2,O,2,4; y labels 2,-2,-4.}
+C. \placeholder{graph}{Red cubic, left end down and right end up; crosses at roughly -2.56,0,1.56; x labels -2,O,2,4; y labels 4,2,-2.}
+D. \placeholder{graph}{Red cubic, left end up and right end down; minimum near (-1.5,-5) and maximum near (0.5,2); x labels -2,O,2; y labels 2,-2,-4.}
+\answer{C}
+\end{practice}
+\begin{practice}{30}{3}
+\textbf{Performance Task} Venetta opened several deli sandwich franchises in 2000. The profit (P) (in hundreds of dollars) of the franchises in (t) years (since the franchises opened) can be modeled by the function (P(t)=t^3+t^2-6t).
+\textbf{Part A} Sketch a graph of the function.
+\placeholder{graph}{Printed answer: red increasing cubic for nonnegative time, nearly flat near the origin and rising steeply; x labels O,6,12,18,24, y labels 4000,8000,12000,16000.}
+\answer{See graph.}
+\textbf{Part B} Based on the model, during what years did Venetta not make a profit?
+\answer{Venetta did not make a profit during the first two years.}
+\textbf{Part C} If the model is appropriate, predict the amount of profit Venetta will receive from her franchises in 2020.
+\answer{The predicted amount of profit for 2020 is \$828,000.}
+\end{practice}
+% Source page 69: 157A
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1A & 2 & F62 \\
+1B & 2 & A73 \\
+2 & 2 & F62 \\
+3 & 2 & F62 \\
+4 & 1 & F62 \\
+5 & 2 & F62 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd Videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{3-5 Lesson Quiz: Zeros of Polynomial Functions}
+1. Part A What are all the zeros of (f(x)=x^3+2x^2-3x)?
+\answer{Zeros: (-3), 0, 1}
+Part B Use the zeros to sketch the graph of (f).
+\placeholder{graph}{Magenta cubic crossing at -3,0,1; local maximum near (-2,6) and minimum near (0.5,-1); x labels -4,-2,O,2; y labels 6,4,2,-2.}
+2. What (x)-values are solutions of (x^3+5x^2-x-7=x^2+6x+3)? Simplify the polynomial and find the zeros. Complete the sentence.
+\answer{The zeros are at (x=-5), (x=-1), and (x=2).}
+3. What values of (x) are solutions of the inequality (x^3-4x>0)?
+The inequality is true for [ (0<x<2), (-2<x<0), (x<-2), (x<2) ] and [ (0<x<2), (x>0), (x>2), (x>4) ].
+\answer{(-2<x<0) and (x>2)}
+\te{The quiz joins the two intervals with the printed word and.}
+4. What are the zeros and their multiplicities for the function (y=x^3+3x^2+x+3), shown in the graph?
+\placeholder{graph}{Black cubic crossing at -3, two turning points above x-axis, y-intercept 3; x labels -4,-2,O,2,4; y labels 6,4,2,-2.}
+\begin{enumerate}
+\item[A.] (-3), (-1), and 1, each multiplicity 1
+\item[B.] (-3), multiplicity 1
+\item[C.] 3, multiplicity 2
+\item[D.] (-3), multiplicity 3
+\end{enumerate}
+\answer{B}
+5. Find the zeros of (f(x)=-x^3-2x^2+7x-4). Then describe the behavior of the graph of (f) at each zero.
+\begin{enumerate}
+\item[A.] 4, (-1); As (x\to-\infty), (f\to-\infty). When (-1<x<4), (f<0). At (x=4), (f) is tangent to the (x)-axis, so when (x>1), (f\to\infty).
+\item[B.] (-4), 1; As (x\to-\infty), (f\to-\infty). When (-4<x<1), (f>0). At (x=1), (f) is tangent to the (x)-axis, so when (x>1), (f\to-\infty).
+\item[C.] 4, (-1); As (x\to-\infty), (f\to\infty). When (-1<x<4), (f>0). At (x=4), (f) is tangent to the (x)-axis, so when (x>1), (f\to-\infty).
+\item[D.] (-4), 1; As (x\to-\infty), (f\to\infty). When (-4<x<1), (f<0). At (x=1), (f) is tangent to the (x)-axis, so when (x>1), (f\to-\infty).
+\end{enumerate}
+\answer{D}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+% Source page 70: 157B
+\textbf{DIFFERENTIATED RESOURCES} I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding (I)}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{3-5 Reteach to Build Understanding: Zeros of Polynomial Functions}
+1. For the polynomial (x^3-36x<0), find:
+a. Degree of the polynomial: \answer{3}
+b. End behavior: (x\to\infty,y\to\infty) and (x\to\underline{\hspace{1cm}},y\to\underline{\hspace{1cm}}).
+\answer{(-\infty); (-\infty)}
+c. Factor:
+(f(x)=x^3-36x)
+(0=x(x^2-36))
+\answer{(0=x(x+6)(x-6))}
+d. The zeros are: \answer{0, 6, and (-6)}
+e. Test values of (x) between the zeros to determine whether the function is positive or negative.
+(f(x)=x^3-36x), (x=7)
+\answer{(f(7)=(7)^3-36(7)); (f(7)=91)}
+2. Tavon found the solutions of (f(x)=x^3-3x^2-54x). Find and correct his errors.
+a. The degree of the polynomial is 2. \answer{The degree of the polynomial is 3.}
+b. End behavior: (x\to\infty,y\to\infty) and (x\to-\infty,y\to-\infty).
+c. Zeros are at 0, 9 and (-6).
+3. Solve the inequality x4 - 25x2 < 0.
+\te{The worksheet's prompt prints the exponents on the baseline as x4 and 25x2.}
+a. Degree of the polynomial: \answer{4}
+b. End behavior: (x\to\infty,y\to\underline{\hspace{1cm}}) and (x\to-\infty,y\to\underline{\hspace{1cm}}).
+\answer{(\infty); (-\infty)}
+\te{The printed second end-behavior answer is negative infinity despite the positive leading quartic.}
+c. Find the zeros using factoring or synthetic division:
+(f(x)=x^4-25x^2)
+\answer{(0=x^2(x^2-25)); (0=x^2(x+5)(x-5))}
+The zeros are: \answer{0, 5, and (-5)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice (I, O)}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{3-5 Additional Practice: Zeros of Polynomial Functions}
+Sketch the graph of the function by finding the zeros. List the zeros.
+1. (f(x)=2x^3-12x^2-6x)
+\placeholder{graph}{Magenta cubic with local maximum near origin and minimum near x=4,y=-80; x labels -4,O,4,8; y labels -40,-80.}
+\answer{(x=0), (x=3\pm2\sqrt{3})}
+2. (f(x)=x^3-2x^2-4x-6)
+\placeholder{graph}{Magenta cubic crossing near x=3.6; two turning points below horizontal axis; x labels -2,O,2,4; y labels 10,-10.}
+\answer{(x=3.6), (x=-0.8\pm1.02i)}
+Find the zeros of each function and describe the behavior of the graph of the function at each zero.
+3. (x^3-9x^2+18x)
+\answer{(x=0,3,6); the graph crosses the (x)-axis at 0}
+\te{The key describes only the crossing at 0 although it lists three zeros.}
+4. (x^3+x^2-3x+1)
+\answer{(x=1,-1+\sqrt{2},-1-\sqrt{2}); the graph crosses the (x)-axis at 1, 0.4, (-2.4)}
+Determine all the real and complex zeros of each polynomial function.
+5. (f(x)=x^3-7x^2+4x-28)
+\answer{(x=7,2i,-2i)}
+6. (f(x)=x^3-x^2-2x+8)
+\answer{(x=-2,\frac{3\pm i\sqrt{7}}{2})}
+7. A company that sells toys models their profit with the function (P(x)=-4x^3+32x^2-64). Their profit (P), in thousands of dollars, is a function of the number of toys sold (x) measured in hundreds. What do the key features of the graph reveal about the profit? What is the maximum profit the company can make?
+\answer{The domain (>0); zeros: 1.58, 7.73; To earn a profit, the company should make between 1,580 and 7,730 toys. The maximum profit the company can make is \$239,407.}
+\te{The printed key converts the horizontal values as thousands of toys, but the prompt specifies hundreds.}
+Solve each inequality.
+8. (x^3-27<0) \answer{(x<3)}
+9. (x^3+9x^2-10x>0) \answer{(-10<x<0); (x>1)}
+10. Use your graphing calculator to determine if (f(x)=(x-1)(x-6)(x+2)) is the correct factorization of (f(x)=x^3+7x^2+4x-12). Explain.
+\answer{The zeroes for (f(x)=x^3+7x^2+4x-12) are (x=-6,-2,1), so the correct factorization of the equation is ((x+6)(x+2)(x+1)).}
+\te{The printed factorization ends in (x+1), inconsistent with the listed zero 1.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment (O, A)}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{3-5 Enrichment: Zeros of Polynomial Functions}
+Alani is a software engineer who is designing a new level of a video game. She uses an equation to design the path that the game's characters take to collect coins, avoid certain areas, earn the next level, and to finally win the level.
+Graph the function (f(x)=\frac{(x^2-16)(x+4)(x^2-1)}{x^2+3x-4}) to show the path of the game's characters.
+\placeholder{graph}{Magenta curve with x-intercepts -4,-1,4, local maximum near (-2.7,14), minimum near (2,-36); three x-intercepts labeled Collection point, y-intercept labeled Collection point y-intercept. x labels -8,-6,-2,O,2,6,8; y labels 20,10,-10,-20,-30,-40,-50,-60.}
+1. The collection points are the zeros of the polynomials. Where are the collection points?
+\answer{(x=-4,-1), and 4}
+2. The (y)-intercept is also a collection point. Where is the other collection point?
+\answer{(y=16)}
+3. The entrance and exit at this level lie on the character's path. At what coordinates would you place the entrance and exit to the level?
+\answer{Sample answer: entrance ((-5,-35)), exit ((4.2,20)).}
+4. Obstacles or hazards make it so your character has to maneuver along the path skillfully so the character can go to the next level. Where would you place these obstacles or hazards along the path? Explain.
+\answer{Sample answer: A water hazard could be placed above the (y)-axis under the parabola between ((-1.1,0)) to ((-3.999,0)). The hazard would be just left/right of the parabola graph. If you land in this hazard you will lose a life and have to start the level again.}
+\te{Printed enrichment key includes x=-4 despite the original denominator being zero there; y-intercept key 16 conflicts with the plotted negative intercept. The key calls the cubic a parabola and says above the y-axis. Retained as printed.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary (I, O)}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{3-5 Mathematical Literacy and Vocabulary: Zeros of Polynomial Functions}
+Nicky wrote the steps of how to find the zeros of a polynomial function to solve the problem (f(x)=x^3-4x^2-12x). She dropped her notecards on the floor and they all got mixed up. Can you help her put them in the correct order?
+Use the Zero Product Property to calculate the values of (x) for which the function will equal 0. These values are the zeros of the function.
+(x(x-6)(x+2)=0)
+(x=0), ((x-6)=0), ((x+2)=0)
+(x=0), (x=6), (x=-2)
+Factor the polynomial.
+(f(x)=x(x^2-4x-12))
+(=x(x-6)(x+2))
+\placeholder{graph}{Black cubic with zeros -2,0,6, local maximum near (-1,7), minimum near (3.8,-50); x labels -2,O,2,4,6; y labels 20,-20,-40.}
+Factor out the Greatest Common Factor (x).
+(f(x)=x^3-4x^2-12x)
+(=x(x^2-4x-12))
+Use the note cards to complete the steps below.
+1. First, \answer{Factor out the Greatest Common Factor (x). (f(x)=x^3-4x^2-12x=x(x^2-4x-12))}
+2. Second, \answer{Factor the polynomial. (f(x)=x(x^2-4x-12)=x(x-6)(x+2))}
+3. Then, \answer{Use the Zero Product Property to calculate the values of (x) for which the function will equal 0. These values are the zeros of the function.
+(x(x-6)(x+2)=0)
+(x=0), ((x-6)=0), ((x+2)=0)
+(x=0), (x=6), (x=-2)}
+4. Last,
+\placeholder{graph}{Magenta copy of the cubic with zeros -2,0,6; local maximum near (-1,7), minimum near (3.8,-50); x labels -2,O,2,4; y labels 20,-20,-40.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{illustration}{Tablet screenshot of digital assignment with system of equations and empty coordinate grid; x and y axes from -10 to 10.}
+Solve the system of equations by graphing. (y=3x+4); (y=-2x+4).
+Use the graphing tool to graph the system. Click to enlarge graph.
+Question Help: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.
+\end{te-addendum}
+
+\end{document}

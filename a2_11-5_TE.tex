@@ -1,0 +1,838 @@
+\documentclass{article}
+% Source: Topic_11_Teacher_Edition.pdf, PDF pages 58-69 (printed pages 561A-568B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 58: 561A Lesson Overview
+\begin{lesson-meta}
+lesson: 11-5
+title: Margin of Error
+standards: none printed
+practices: none printed
+objective: I can use margin of error to estimate a population parameter accurately.
+
+essential question: How can you determine how far a statistic is likely to be from a parameter?
+
+\textbf{VOCABULARY}
+\item margin of error
+\item sampling distribution
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 11-5 \\
+Title & Margin of Error \\
+Standards & none printed \\
+I CAN Objective & I can use margin of error to estimate a population parameter accurately. \\
+Essential Question & How can you determine how far a statistic is likely to be from a parameter? \\
+Lesson Vocabulary & margin of error; sampling distribution \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Evaluate reports by estimating population parameters.
+\item Use multiple samples to make an inference about a population.
+\item Calculate the margin of error for quantitative or categorical data.
+Essential Understanding. Sample statistics tend to be normally distributed and therefore can be used to estimate population parameters. The margin of error gives the maximum expected difference between the sample result and the population parameter.
+\textbf{COHERENCE}
+Previously in this courses, students:
+\item Fitted a normal distribution to data and used it to understand where a data value falls in relation to other data values.
+In this lesson, students:
+\item Use sample statistics, which tend to be normally distributed, to estimate population parameters.
+Later in this topic, students will:
+\item Use statistical measures, such as mean and standard deviation, to decide whether the data support a hypothesis.
+\te{Printed this courses; likely this course.}
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that the accuracy of a population parameter estimate depends on how well a sample represents the population.
+\item Students approximate a margin of error by using the formula (\frac{2\sigma}{\sqrt{n}}) for quantitative data and (\frac{1}{\sqrt{n}}) for categorical data, where (\sigma) is the population standard deviation and (n) is the sample size.
+SavvasRealize.com. Program Resources.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{REVIEW VOCABULARY — English | Spanish}
+\begin{tabular}{ll}
+categorical data & datos categóricos \\
+quantitative data & datos cuantitativos \\
+\end{tabular}
+\textbf{NEW VOCABULARY}
+\begin{tabular}{ll}
+margin of error & margen de error \\
+sampling distribution & distribución de muestreo \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Review the terms categorical data and quantitative data. Have students sort the given data to show the differences between the two kinds. Data: eye color, homeroom teacher, age (in years), weight (in pounds)
+\begin{tabular}{ll}
+Categorical Data & Quantitative Data \\
+\answer{eye color} & \answer{age (in years)} \\
+\answer{homeroom teacher} & \answer{weight (in pounds)} \\
+\end{tabular}
+Explain that it is important for students to be able to distinguish between categorical data and quantitative data because the margin of error is calculated differently for these two types of data.
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 58 963 806 1114 987
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS, multicolored circular abstract design on a black background.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students learn to understand sampling distributions and to calculate a margin of error. They then learn to use the margin of error to predict a range of reasonable values.
+\textbf{Applying Math Practices}
+Use Appropriate Tools Strategically. Students use a random number generator tool on a calculator or spreadsheet to generate many samples based on a possible population parameter.
+Look For and Express Regularity in Repeated Reasoning. Students generalize that normal distributions can be used to predict the range of data centered on the mean that is 95\% of the sample.
+\end{te-addendum}
+% Source page 59: 561B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore — MODEL & DISCUSS}
+INSTRUCTIONAL FOCUS Students perform an experiment tossing a number cube and record the results. The results from the class are grouped into three sets of data, which are modeled and compared. Students see the differences in the data distribution as the number of tosses increases. This introduces students to making inferences using multiple samples.
+STUDENT COMPANION Students can complete the Model & Discuss activity in their Student Companion.
+Model & Discuss is available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before — WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving.
+Q: What strategy can you use to organize the results of your experiment?
+\answer{You can organize the results using a frequency table.}
+\textbf{During — SMALL GROUP}
+Support Productive Struggle in Learning Mathematics.
+Q: What value would you expect the mean to be?
+\answer{The mean should be between 3 and 4. Each number from 1 to 6 is equally likely to be rolled. You would expect half of the results to be above the mean and half to be below the mean. So the mean should be near the center of the range from 1 to 6, or between 3 and 4.}
+For Early Finishers. Have students make cards similar to those shown. They can make additional rules and play the game.
+\te{Printed instruction refers to cards and a game; the displayed activity uses number-cube tosses.}
+Q: Have the partners or group toss the number cube an additional 30 times and record the results. How does the mean of 60 tosses compare to the mean of 30 tosses?
+\answer{The mean of 60 tosses is closer to 3.5 than the mean of 30 tosses.}
+\te{Printed closer as a certainty; a larger sample generally has less variability, but a particular sample need not be closer.}
+\textbf{After — WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse.
+Q: What do you notice about the means of 10 tosses compared to the means of 30 tosses?
+\answer{The means of 10 tosses are more varied than the means of 30 tosses. The values that determine the means of 30 tosses are closer together.}
+Q: What can you conclude about the mean of 30 tosses compared to the mean of 10 tosses?
+\answer{The mean of 30 tosses is a more accurate representation of the actual mean than the mean of 10 tosses.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with MODEL & DISCUSS}
+Generalize One group, on the first set of ten trials, got the same number five times. What does their distribution look like? How do you think their results will affect the overall distribution of the class's results?
+\answer{Their distribution would likely be uniform, but with the bar for one value extending higher than the rest.}
+\te{Printed uniform with one higher bar; such a distribution is not uniform.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{MODEL & DISCUSS}
+With a partner or a group, toss a number cube 30 times and record the number showing on each toss.
+A. Compute the means of the numbers in the first five tosses, the first ten tosses, and all thirty tosses.
+\answer{SAMPLE STUDENT WORK: 5 tosses: 2.4; 10 tosses: 2.9; 30 tosses: 3.7}
+B. Use Appropriate Tools Compile the results for your entire class in three sets of data: the means of the first five tosses, the means of the first ten tosses, and the means of all thirty tosses. Create a histogram for each data set.
+\answer{See sample histograms.}
+% FIG 59 667 1023 816 1175
+\placeholder{graph}{Means of 5 Tosses: red histogram, horizontal Mean 0 to 6 at unit intervals; vertical Frequency 0 to 10 every 2. Bars over 1–2,2–3,3–4,4–5 have heights 2,7,10,1. No arrows.}
+% FIG 59 819 1023 968 1175
+\placeholder{graph}{Means of 10 Tosses: red histogram, horizontal Mean 0 to 6 at unit intervals; vertical Frequency 0 to 10 every 2. Bars over 2–3,3–4,4–5 have heights 7,10,3. No arrows.}
+% FIG 59 971 993 1125 1175
+\placeholder{graph}{Means of 30 Tosses: red histogram, horizontal Mean 0 to 6 at unit intervals; vertical Frequency 0 to 20 every 5. Bars over 2–3 and 3–4 have heights 3 and 17. No arrows.}
+C. Compare the histograms. Describe how the distribution of the mean changes as the number of tosses increases.
+\answer{As the number of tosses increase, the distribution of data more closely represents a normal curve, with an approximate mean of 3.5.}
+% FIG 59 637 187 1153 533
+\placeholder{illustration}{Digital Model & Discuss preview with Go back, number-cube activity, a blank Results of the Tosses table with rows Trial 1–10, Trial 11–20, Trial 21–30, question A and an answer-entry box.}
+\end{model-discuss}
+% Source page 60: 561 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand & Apply — INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Students learn to use margin of error to estimate a population parameter, such as the mean. Students also learn to use simulations to find a margin of error. Students recognize that there are different margin of error formulas for quantitative and categorical data.
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{EXAMPLE 1 Estimate a Population Parameter — Pose Purposeful Questions}
+Q: Why do larger samples usually provide more accurate estimates of the population?
+\answer{The larger a sample is, the closer it is in size to the population. A larger sample is more likely to represent the entire population than a smaller sample.}
+Q: How could you determine whether Seth's sample is representative of the population?
+\answer{Find the enrollment data for the college and see how Seth's estimate compares to the actual values of the population.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Estimate a Population Parameter}
+\te{APPLICATION}
+Seth selects a random sample of students from a local college. He asks students their year in college and how far the college is from their home in miles. How can Seth's sample estimate the proportion of freshmen in the population? How accurate is the estimate likely to be?
+\textbf{Seth's Data}
+\begin{tabular}{lrlr}
+Sophomore & 5 & Senior & 60 \\
+Junior & 50 & Senior & 20 \\
+Freshman & 65 & Junior & 10 \\
+Sophomore & 200 & Sophomore & 110 \\
+Junior & 120 & Sophomore & 75 \\
+Junior & 2 & Junior & 30 \\
+Sophomore & 180 & Senior & 15 \\
+Freshman & 800 & Freshman & 45 \\
+Junior & 100 & Sophomore & 15 \\
+Freshman & 90 & Sophomore & 25 \\
+\end{tabular}
+You can use sample statistics, such as proportion and mean, to estimate the corresponding population parameters. The proportion of freshmen in a sample can be used to estimate the proportion of freshmen in the population.
+(\text{Ratio of freshmen to students in the population}=\frac{\text{number of freshmen in sample}}{\text{number of participants in sample}})
+(=\frac{4}{20})
+(=\frac{1}{5}\text{ or }0.20)
+0.20 of the sample, or 20\%, are freshmen.
+The accuracy of this estimate depends on the number of participants in the sample and how well the sample represents the population.
+\te{COMMUNICATE PRECISELY Different samples include different individuals with different characteristics. Results should be reported clearly, explaining how measures were obtained.}
+\te{Callout: If by chance the sample clusters away from the true mean, estimates will not be very accurate.}
+\te{Callout: Larger samples usually provide more accurate estimates than smaller samples.}
+\answer{20\%; accuracy depends on the number of participants and how well the sample represents the population.}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples — ADDITIONAL EXAMPLE 1}
+Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION. TRY ANOTHER ONE.
+Gene selects a random sample of students from a local high school. He asks them what their last name is. How can Gene estimate the number of students whose last name starts with M?
+\begin{tabular}{ll}
+Smith & Ramirez \\
+Jones & Davis \\
+Maddon & Smith \\
+Hernandez & Rawlings \\
+Jackson & Reynolds \\
+Kennedy & Anderson \\
+Nelson & Carlson \\
+Sampson & Henderson \\
+Sutton & Ruiz \\
+Mays & Carson \\
+\end{tabular}
+The ratio of the number of last names starting with M to the number of students sampled is (\frac{2}{20}=10\%).
+\answer{Gene estimates that 10\% of students' last names start with M.}
+Example 1 Have students practice making an estimate for proportions of a sample.
+Q: Do you think that Gene's sample is representative of the population?
+\answer{No, Gene's sample represents a very small portion of the students in the school. Gene should use a larger sample.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+Find the margin of error for a sample with a standard deviation of 54 and a sample size of 450.
+(\text{Margin of Error}=\frac{2\sigma}{\sqrt{n}})
+(=\frac{2(54)}{\sqrt{450}})
+(\approx5.09)
+\answer{The margin of error is (\pm5.09).}
+Example 4 Have students practice finding the margin of error for a sample.
+Q: Suppose that the sample size was decreased. How would that affect the margin of error?
+\answer{Decreasing the sample size increases the margin of error.}
+\end{te-addendum}
+% Source page 61: 562 Example 1 continued
+\begin{tryit}{1}
+Use the sample data to estimate the mean distance from home. Estimate the proportion of seniors to the total population at the college.
+\answer{Mean distance: 100.85 miles. Proportion of seniors: (\frac{3}{20}=0.15), or 15\%.}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What method would you use to estimate the proportion of seniors to the total population at the college?
+\answer{Divide the number of seniors in the sample by the total number of people in the sample.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{EXAMPLE 2 Make an Inference Using Multiple Samples — Pose Purposeful Questions}
+Q: If the distribution of sample results is approximately normal, what do you know about the sample results?
+\answer{The mean of the sample results is a good approximation for the population.}
+Q: What does natural variability mean?
+\answer{Natural variability explains the slight differences that occur when taking different samples from the same population.}
+Q: What is a possible bias that could cause the results to fall outside of the range of most results?
+\answer{taking the survey outside an upperclassmen's apartment building}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Make an Inference Using Multiple Samples}
+\te{APPLICATION}
+Tia is contributing to the same project as Seth and has sampled a different group of students. The proportion of freshmen in her sample is 0.40 or 40\%. How can Seth and Tia determine whose result is a better representation of the population?
+\textbf{Tia's Data}
+\begin{tabular}{lrlr}
+Junior & 120 & Freshman & 60 \\
+Sophomore & 320 & Freshman & 200 \\
+Senior & 240 & Sophomore & 130 \\
+Freshman & 150 & Freshman & 120 \\
+Freshman & 20 & Junior & 15 \\
+Sophomore & 25 & Freshman & 30 \\
+Senior & 5 & Junior & 70 \\
+Freshman & 30 & Sophomore & 60 \\
+Sophomore & 20 & Freshman & 10 \\
+Senior & 100 & Junior & 15 \\
+\end{tabular}
+Tia and Seth decide to examine more samples. Everyone in their class completed the same survey. They compared the 50 total samples of 20 college students. Seth and Tia create a histogram of the proportion of freshmen in each sample.
+% FIG 61 797 540 1040 690
+\placeholder{graph}{Results of 50 Samples: blue histogram. Horizontal Proportion of Freshmen labels 0,0.1,0.15,0.2,0.25,0.3,0.35,0.4, equally spaced as printed; vertical Number of Samples 0 to 16 every 2. Seven bars have heights 2,7,9,14,11,6,1. No arrows.}
+\te{Printed first interval 0 to 0.1 is drawn the same width as later intervals of 0.05.}
+\te{Callout: In 6 samples out of 50, between 30\% and 35\% of the sample participants are freshmen.}
+\te{Callout: In 47 samples out of 50, the sample proportion falls between 0.1 and 0.35.}
+\te{GENERALIZE Most samples provide a reasonable estimate of the parameter. The average value of a set of sample statistics will approximate the population parameter with high precision.}
+The distribution of sample results is approximately normal. There is natural variability among the samples, but most of the samples return statistics between 0.1 and 0.35. It is reasonable to predict that the actual proportion of freshmen at the college is between 0.1 and 0.35.
+Seth's result of 0.20 is in the middle of the range and is likely a good representation of the population proportion. Tia's result of 0.40 falls outside the range of most of the results, so it is more likely that her estimate is further away from the true mean.
+\answer{Compare more samples; Seth's result of 0.20 is likely a good representation of the population proportion.}
+\end{example}
+\begin{te-addendum}{2}{RtISupport}
+\textbf{Support Struggling Students — USE WITH EXAMPLE 2}
+Some students may struggle with reading histograms when making inferences using multiple samples.
+\item Have students practice by reading the following histogram.
+% FIG 61 100 1050 365 1292
+\placeholder{graph}{Result of 50 Samples: orange histogram. Horizontal Mean Distance From Home (mi), bins 0–25,26–50,51–75,76–100,101–125,126–150 with labels rotated vertically. Vertical Number of Samples 0 to 20 every 4. Bar heights 3,7,14,16,6,4. No arrows.}
+Q: What percent of samples had a mean from 76–100?
+\answer{32\%}
+Q: How many samples had a mean of 50 or less?
+\answer{10}
+\end{te-addendum}
+% Source page 62: 563 Example 2 continued
+\begin{tryit}{2}
+Each classmate calculates the mean distance from home in miles reported by participants. Seth and Tia create this histogram to investigate the sample statistics. How many samples reported an average distance from home between 101 and 125 mi? Use the histogram to suggest a reasonable interval to estimate the population parameter.
+% FIG 62 1020 237 1155 365
+\placeholder{graph}{Results of 50 Samples: blue histogram. Horizontal Mean Distance From Home (mi), bins 0–25,26–50,51–75,76–100,101–125,126–150 with labels rotated vertically. Vertical Number of Samples 0 to 20 every 4. Bar heights 3,7,14,16,6,4. No arrows.}
+\answer{6 samples have an average distance from home between 101 and 125 miles. The parameter, the average distance from home, is likely to fall between 26 and 125 miles.}
+\end{tryit}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error — Try It! 2}
+Some students may state that 101–125 is a reasonable interval for the mean distance from home. Have students circle the two intervals that have bars that are much higher than the other bars. Have students also circle the bars on each side of the two highest bars. Point out that 43 out of the 50 samples are in the range of the circled bars.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with EXAMPLES 1 & 2}
+Look for Relationships As the number of samples increases, what is the relationship between the statistic you calculate and the population parameter?
+\answer{The greater the number of samples, the closer the statistic should be to the population parameter.}
+\end{te-addendum}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{EXAMPLE 3 Use a Simulation to Evaluate a Claim — Build Procedural Fluency From Conceptual Understanding}
+PART A
+Q: What is a random number generator and what does a random number generator allow you to do?
+\answer{A random number generator is a program that randomly creates a number in a given range of values. You can use a random number generator to simulate many different samples.}
+Q: Do the random numbers in the simulation need to be from 1–100? Explain.
+\answer{No, the random numbers do not have to be from 1–100. For example, you could use 1–200, with 1–150 representing successes and 151–200 representing misses. Choose numbers that make the calculations easy.}
+Q: How can you increase the accuracy of your simulation?
+\answer{Increase the number of shots in each sample, or increase the number of samples you take.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Use a Simulation to Evaluate a Claim}
+\te{CONCEPTUAL UNDERSTANDING}
+Gabriela wants proof of Alex's claim that he is a 75\% free-throw shooter. She observes Alex shoot 50 free throws, of which he makes 30. Gabriela notes his 60\% success rate, but Alex points out that this is a reasonable result due to the natural variability that happens from sample to sample. Is he correct?
+A. How can you use random numbers to investigate Alex's claim?
+Assume Alex does make 75\% of his free throws. Use a random number generator on a calculator or spreadsheet to simulate the outcome of a random sample of shots.
+Create a list of 50 random numbers ranging from 1–100. Numbers 1–75 represent successful free throws, and numbers 76–100 represent missed shots.
+\te{USE APPROPRIATE TOOLS A random number generator allows you to generate many samples based on a possible population parameter. These samples will provide a collection of statistics with natural variability. You can evaluate a statistic by comparing it to this collection.}
+(\text{fx}=\text{RANDBETWEEN}(1,100))
+\begin{tabular}{rrrrrr}
+D & E & F & G & H & I \\
+50 & 10 & 66 & 61 & 15 & \\
+9 & 82 & 50 & 22 & 78 & \\
+49 & 13 & 26 & 76 & 48 & \\
+19 & 12 & 11 & 35 & 4 & \\
+95 & 18 & 15 & 16 & 17 & \\
+61 & 55 & 86 & 58 & 22 & \\
+74 & 78 & 100 & 40 & 58 & \\
+65 & 25 & 89 & 82 & 84 & \\
+35 & 22 & 57 & 66 & 22 & \\
+1 & 64 & 88 & 65 & 30 & \\
+\end{tabular}
+\te{Numbers 1–75 are red and 76–100 blue in the spreadsheet. Callout: A formula like this generates a random number between 1 and 100.}
+\te{Callout: In this sample, 39 out of 50 shots, or 0.78, are successful.}
+While the simulated proportion 0.78 is much higher than 0.60 or 60\%, this one simulation does not refute Alex's reasoning about natural variability. Gabriela needs more evidence.
+\answer{A. Simulate 50 shots with random numbers 1–100, using 1–75 for successes; the shown sample has 39 successes, or 0.78, and more evidence is needed.}
+% Source page 63: 564 Example 3 continued
+Continue the simulation, analyzing 100 samples of 50 shots each. The distribution of sample statistics, such as means or proportions from different samples of the same population, is called the sampling distribution.
+This sampling distribution of the number of successes in 50 shots for 100 simulated samples is approximately normal.
+% FIG 63 814 300 1045 415
+\placeholder{graph}{Successes out of 50 Trials: pale blue histogram. Horizontal Number of Successes labels 30 through 44 every 2 with unit-width bars centered at integers 30 through 44. Vertical Number of Samples 0 to 20 every 4. Approximate heights 3,2,3,5,10,11,9,9,16,12,8,3,5,3,1. Red downward arrow at 37.5 labeled 0.75.}
+\te{Callout: Most sample proportions are clustered near the 75\% success rate, but many random samples have different proportions of successes.}
+As the number of samples increases, the distribution will more accurately reflect the population parameter.
+B. How can you interpret the sampling distribution?
+This simulated sampling distribution is based on the assumption that Alex makes 75\% of his free throws.
+% FIG 63 875 493 1110 618
+\placeholder{graph}{Successes out of 50 Trials repeats the pale blue histogram, horizontal Number of Successes labels 30–44 every 2, vertical Number of Samples 0–20 every 4, unit-width bars with approximate heights 3,2,3,5,10,11,9,9,16,12,8,3,5,3,1. Red rectangle includes bars 31–44; downward red arrow at 37.5 labeled 0.75. Blue arrow near 31 labeled 31/50=0.62; green arrow near 44 labeled 44/50=0.88.}
+\te{Callout: Only 3 out of 100 samples in this example matched Alex's 30 successes in 50 trials.}
+Most samples (47 of 50, or 0.94) have a proportion of success between 0.62 and 0.88. This is as much as 0.13 above or below the central value of 0.75.
+\te{Printed 47 of 50 after describing 100 simulated samples; the histogram's approximate bar counts also do not total 100.}
+\te{Callout: Select a range of data that is centered on the mean and includes about 95\% of the samples.}
+You can say that 0.13 or 13\% represents a reasonable difference from the target that could appear through natural variability.
+Based on the simulation, a basketball player who actually shoots free throws with 75\% accuracy can reliably be expected to make 62\%–88\% of free throws in a 50-shot trial.
+It would be very unusual for a real 75\%-shooter to make only 30 shots out of 50. It is likely that Alex's low performance shows that he does not make 75\% of his free throws overall.
+\te{COMMON ERROR Do not assume that Alex's “true” free-throw percentage must be less than 75\%. It is unlikely, but it is still possible that his lower actual success rate of 60\% is due to chance, or other adverse factors.}
+\answer{B. A reasonable range is 62\%–88\%; it is likely that Alex does not make 75\% of his free throws overall.}
+\end{example}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{EXAMPLE 3 CONTINUED — Build Procedural Fluency From Conceptual Understanding}
+PART B
+Q: Using this simulation, what process would you use to make a statement about a player who makes more than 45 out of 50 shots?
+\answer{Look at the sampling distribution. Making 45 out of 50 shots is at the very high end of the distribution. It is not within the range that includes 95\% of the samples. So it would be very unusual for a 75\% shooter to make 45 out of 50 shots.}
+Q: How would the sampling distribution change if the number of samples taken increased?
+\answer{As the number of samples increases, the shape of the sampling distribution looks more like a normal distribution.}
+Q: How would you use a sampling distribution to determine a reasonable range of values for a population proportion?
+\answer{Answers may vary. Sample: Find the range of values that 95\% of the sample proportions fall between.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners — Use with EXAMPLE 3}
+LISTENING — BEGINNING Have students listen as you read the different uses of the word proportion. In middle grades, a ratio is a relationship showing the comparison of two values, sometimes in fractional form, and a proportion is an equation stating that two ratios are equal. In statistics, a proportion is the number of successes in a sample divided by the sample size.
+Q: Give an example of a statistical proportion.
+\answer{Sample: 86\% of students are at least 5 ft tall.}
+READING — DEVELOPING In small groups, have students take turns reading the two paragraphs in Part B, starting with “You can say that 0.13 or 13\% . . .” Help students paraphrase the two paragraphs by having them complete the following sentences and then read them aloud.
+Q: In statistics, the mean is the \underline{\hspace{1cm}}. Some results are \underline{\hspace{1cm}} the mean, and some are \underline{\hspace{1cm}} the mean.
+\answer{average, below, above}
+Q: The \underline{\hspace{1cm}} that includes 95\% of the samples indicates how far above or below the \underline{\hspace{1cm}} the data can realistically be expected to \underline{\hspace{1cm}}.
+\answer{range, mean, fall}
+SPEAKING — EXPANDING Review the definitions of sample and sampling distribution with students. In small groups, have students discuss the following question.
+Q: Use information from the example to explain why using a sampling distribution is important for a large study.
+\answer{If only one sample is taken, it could be the one where Alex makes only 31 out of 50 shots, or it could be the one where he makes 44 out of 50 shots. Both results are possible, but neither is very likely. If only one of those samples is used, it could make Alex's ability look much worse or much better than it actually is. By using many samples, it more realistically portrays Alex's ability.}
+\end{te-addendum}
+% Source page 64: 565 Example 3 continued
+\begin{tryit}{3}
+How would your conclusion in Example 3 differ if you did 100 simulations of 10 shots each? How would it differ if you did 100 simulations of 1,000 shots each?
+\answer{Answers may vary. Sample: 100 simulations with 10 shots each would give a less accurate conclusion, whereas 100 simulations with 1,000 shots each would result in a more accurate conclusion.}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Why might your results be different from what is shown in the example?
+\answer{The simulations are done by selecting random numbers. The random numbers are different each time, so the result is different each time.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{CONCEPT Margin of Error}
+The sampling distributions of means and proportions tend to be normal. The mean of such a sampling distribution is the population parameter, and the standard deviation decreases as the sample size increases.
+According to the Empirical Rule, 95\% of values in a normal distribution fall within two standard deviations of the mean.
+So, 95\% of all sample results fall within two standard deviations of the population parameter being evaluated.
+The margin of error gives the maximum expected difference between the sample result and the population parameter.
+\begin{tabular}{ll}
+Quantitative Data & Categorical Data \\
+(\text{Margin of Error}\approx\frac{2\sigma}{\sqrt{n}}) & (\text{Margin of Error}\approx\frac{1}{\sqrt{n}}) \\
+(\sigma=\text{population standard deviation}) & for samples of size (n). \\
+(n=\text{sample size}). & \\
+\end{tabular}
+\te{Callout: These formulas give the maximum difference between the parameter and the statistic for 95\% of samples.}
+\end{concept-box}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{EXAMPLE 4 Use a Margin of Error for a Mean — Pose Purposeful Questions}
+Q: How does increasing the sample size affect the margin of error?
+\answer{As the sample size increases, the margin of error decreases.}
+Q: What is meant by the term reasonable mean?
+\answer{A reasonable mean is a mean that is within the range of the margin of error from the mean. It could be the mean of the sample.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use a Margin of Error for a Mean}
+The College Board recently reported that the mean score on the SAT mathematics exam is 508, with standard deviation 121. Washington High believes that its seniors score considerably higher than the national average, so the school randomly sampled scores from 200 seniors, finding a mean score of 550. Is Washington High correct in its belief?
+Since the data in this example is quantitative, the margin of error for SAT data is (\frac{2\sigma}{\sqrt{n}}=\frac{2(121)}{\sqrt{200}}\approx17).
+So, about 95\% of random samples with 200 participants will have mean values within 17 points of the population parameter, (\mu=508). Find the range of reasonable means.
+(508\pm17)
+(491\qquad525)
+\te{Red arrow from 508 minus 17 to 491; blue arrow from 508 plus 17 to 525. Callouts: It is reasonable to expect a mean value as low as 491. It is reasonable to expect a mean value as high as 525.}
+\te{STUDY TIP Before calculating margin of error, identify the type of data being analyzed. Formulas are different for categorical and quantitative values.}
+Washington High's sample mean score of 550 is above the range of reasonable means, so they can conclude that their seniors perform better than the national average.
+\answer{Yes; the sample mean 550 exceeds the range 491–525.}
+\end{example}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with EXAMPLES 3 & 4}
+Reason As the number of samples increases, what happens to the margin of error? Explain.
+\answer{The margin of error decreases. As (n) increases, the square root of (n) also increases, so (\frac{1}{\sqrt{n}}) decreases.}
+\te{Printed number of samples; the formula uses sample size.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking — USE WITH EXAMPLE 4}
+Have students explore finding the range of reasonable means for samples with the given mean, standard deviation, and sample size.
+\item Give students these samples.
+1. (\mu=45;\ \sigma=4.5;\ n=400)
+2. (\mu=372;\ \sigma=21.2;\ n=200)
+3. (\mu=86.5;\ \sigma=8.1;\ n=500)
+Q: What is the range of reasonable means for the samples given in Examples 1–3?
+\answer{1. mean between 44.55 and 45.45; 2. mean between 369 and 375; 3. mean between 85.78 and 87.22}
+\end{te-addendum}
+% Source page 65: 566 Example 4 continued and Concept Summary
+\begin{tryit}{4}
+A random sample of 100 Washington High seniors reveals that 40\% plan to take the SAT this year. Use the margin of error to predict the actual proportion of seniors planning to take the exam.
+\answer{margin of error (=\frac{1}{\sqrt{n}}=10\%); The actual proportion of seniors planning to take the exam is likely to fall between 30\% and 50\%.}
+\end{tryit}
+\begin{te-addendum}{ConceptSummary}{LearnTogether}
+\textbf{CONCEPT SUMMARY Understanding Sampling Distributions}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+Q: How are sampling distributions used?
+\answer{Sampling distributions are used to estimate a population parameter accurately using margin of error.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? — Common Error}
+Exercise 7 Some students may forget to multiply the standard deviation by 2 when finding the margin of error. Have students write the formula for the margin of error of quantitative data. Have them highlight the numerator in the formula and point out that you multiply the standard deviation by 2 in the numerator before dividing by the square root of the sample size.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Understanding Sampling Distributions}
+SAMPLING DISTRIBUTION Sample statistics tend to be normally distributed (for samples of the same size).
+% FIG 65 881 331 1114 479
+\placeholder{graph}{Successes out of 50 Trials: green histogram, horizontal Number of Successes bins 31–32,33–34,35–36,37–38,39–40,41–42,43–44. Vertical Number of Samples 0–30 every 5. Bar heights 8,15,20,25,20,8,4. No arrows.}
+MARGIN OF ERROR
+\begin{tabular}{ll}
+Quantitative Data & Categorical Data \\
+(\text{Margin of Error}\approx\frac{2\sigma}{\sqrt{n}}) & (\text{Margin of Error}\approx\frac{1}{\sqrt{n}}) \\
+(\sigma=\text{population standard deviation}) & (n=\text{sample size}) \\
+(n=\text{sample size}) & \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you determine how far a statistic is likely to be from a parameter?
+\answer{Calculate the margin of error, which creates a range of reasonable values used to estimate the population parameter based on a sample statistic.}
+2. Error Analysis In a sample of 16 students from a teacher's physical education classes, students attempted to do as many sit-ups as possible in one minute. The mean was 10 with a standard deviation of 2. The teacher said that the margin of error was (\frac{1}{4}). What is the teacher's error?
+\answer{The teacher used the margin of error for categorical data, not for quantitative data. The margin of error should have been 1.}
+3. Vocabulary Explain what a sampling distribution is in your own words.
+\answer{A sampling distribution is the distribution of sample statistics such as means or proportions from different samples of the same population.}
+4. Communicate Precisely Suppose you want to find the margin of error for a certain sample. Explain when to use the formula (\text{Margin of Error}=\frac{2\sigma}{\sqrt{n}}) and when to use the formula (\text{Margin of Error}=\frac{1}{\sqrt{n}}).
+\answer{Use the formula (\text{Margin of Error}=\frac{2\sigma}{\sqrt{n}}) when given quantitative data. Use the formula (\text{Margin of Error}=\frac{1}{\sqrt{n}}) when given categorical data.}
+\textbf{Do You KNOW HOW?}
+Suppose an event occurs (x) times in a sample size of (n). Find the sample proportion and the margin of error to the nearest percent.
+5. (x=80) and (n=700)
+\answer{11\%; (\pm4\%)}
+6. (x=45) and (n=1,200)
+\answer{4\%; (\pm3\%)}
+Suppose a sample has a standard deviation of (\sigma) and a sample size of (n). Find the margin of error to the nearest tenth.
+7. (\sigma=21.26) and (n=500)
+\answer{(\pm1.9)}
+8. (\sigma=122.18) and (n=850)
+\answer{(\pm8.4)}
+9. Model With Mathematics In a sample of 400 adults, 348 have never been to Australia. Find the sample proportion for those who have never been to Australia. Write the answer as a percent.
+\answer{87\%}
+\end{concept-summary}
+% Source page 66: 567 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice & Problem Solving}
+Practice & Problem Solving and video tutorials are available at SavvasRealize.com. Practice. Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+10–23 & 10–23 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 14 & 1 \\
+2 & 13, 15 & 2 \\
+3 & 16, 19, 23 & 2 \\
+4 & 21 & 1 \\
+4 & 10--12, 17, 18, 20, 22 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{10}{2}
+\textbf{UNDERSTAND — Reason} Etta found the margin of error of a certain random sample. Suppose she triples the sample size. How is the margin of error affected?
+\answer{Tripling a sample size means that the margin of error is multiplied by (\frac{1}{\sqrt{3}}), or about 0.58. This means the margin of error is about 58\% of its original value.}
+\end{practice}
+\begin{practice}{11}{2}
+\textbf{Make Sense and Persevere} A poll reports that 48\% of voters are going to vote for Candidate A. The poll reports a margin of error of (\pm4\%). Estimate the number of voters in the poll. Explain how you found your answer.
+\answer{625; Substitute 0.04 for margin of error in the formula (\text{Margin of Error}=\frac{1}{\sqrt{n}}): (0.04=\frac{1}{\sqrt{n}}). Multiply both sides by (\sqrt{n}): (0.04\sqrt{n}=1). Divide both sides by 0.04: (\sqrt{n}=25). Square both sides: (n=625).}
+\end{practice}
+\begin{practice}{12}{2}
+\textbf{Error Analysis} Describe and correct the error a student made in finding the range of reasonable means.
+The nationwide mean height of players on a high school basketball team is 71 in., with standard deviation of 5 in. A random sample of 150 players was used to determine the range of reasonable means.
+\te{Student work with red X:}
+(\text{Margin of Error}=\frac{1}{\sqrt{150}}\approx0.08)
+Range of Means:
+between (71-0.08=70.92\text{ in.})
+and (71+0.08=71.08\text{ in.})
+\answer{The student should have used the formula (\text{Margin of Error}=\frac{2\sigma}{\sqrt{n}}) because the standard deviation is given. The range of reasonable means is between 70.2 and 71.8 inches.}
+\end{practice}
+\begin{practice}{13}{2}
+\textbf{Higher Order Thinking} The students in Mr. Morrison's science class measured the heights of flowers in the school's playground area. The class took six random samples by measuring a group of flowers. The table shows the standard deviation of each sample. Use the information in the table to determine which was likely the smallest sample. Explain your reasoning.
+\begin{tabular}{lr}
+Sample & Standard Deviation \\
+A & 1.45 \\
+B & 2.03 \\
+C & 1.12 \\
+D & 1.35 \\
+E & 2.78 \\
+F & 1.8 \\
+\end{tabular}
+\answer{Sample E; A smaller sample size has more variability and a greater standard deviation.}
+\te{Printed key treats a sample's standard deviation as the standard deviation of a sampling distribution; these are different quantities, and the individual sample sizes cannot be inferred this way.}
+\end{practice}
+\begin{practice}{14}{1}
+\textbf{PRACTICE} Ryan selects a random sample of students from a high school. Students were asked how long it takes them to get ready for school. Use the sample data in the table to estimate the mean time to get ready for school. Estimate the proportion of juniors at the school. SEE EXAMPLE 1
+\begin{tabular}{ll}
+Junior & 45 min \\
+Sophomore & 30 min \\
+Junior & 15 min \\
+Senior & 25 min \\
+Sophomore & 60 min \\
+Freshman & 10 min \\
+Sophomore & 35 min \\
+Junior & 40 min \\
+Senior & 10 min \\
+Freshman & 30 min \\
+\end{tabular}
+\answer{30 min; 30\%}
+\end{practice}
+\begin{practice}{15}{2}
+Ryan's classmates each calculated the mean time it takes to get ready for school reported by a sample of 100 participants. Ryan created this histogram of the sample means. How many samples reported an average time to get ready between 11 and 20 min? Suggest a reasonable interval to estimate the population parameter. SEE EXAMPLE 2
+% FIG 66 861 591 1121 770
+\placeholder{graph}{Means of 50 Samples: green histogram. Horizontal Time to Get Ready for School (min), bins 0–10,11–20,21–30,31–40,41–50,51–60. Vertical Number of Samples 0 to 16 every 2. Bar heights 1,10,15,14,8,2. No arrows.}
+\answer{10 samples had an average time to get ready for school between 11 and 20 minutes. The parameter, average time to get ready for school, is likely to fall between 11 and 50 minutes.}
+\end{practice}
+\begin{practice}{16}{2}
+Jaime makes 80\% of the field goals he attempts. Suppose Jaime attempts 100 field goals. Use technology to simulate 50 trials with 100 field goals each. Identify the range that contains the middle 95\% of results. SEE EXAMPLE 3
+\answer{95\% of the mean number of successes from 50 trials fell between 75\% and 85.9\%. (Answers may vary slightly. Accept all reasonable responses.)}
+\end{practice}
+\begin{practice}{17}{2}
+The mean score on a statewide science test is 72, with standard deviation 12. Hailey believes that the scores in her school are considerably higher than the state average. A random sample of 100 students from Hailey's school showed a mean score of 76. Is Hailey correct in her belief? Explain. SEE EXAMPLE 4
+\answer{About 95\% of random samples with 100 test scores will have mean values within (\frac{2(12)}{\sqrt{100}}=2.4) points of the population parameter, 72. The range of reasonable means is between 69.6 and 74.4. Since Hailey's sample mean is above the range of the reasonable means, she can conclude that students from her school scored better than the state average.}
+\end{practice}
+% Source page 67: 568 Practice & Problem Solving continued
+\begin{practice}{18}{2}
+\textbf{APPLY — Reason} A survey of 2,390 employees found that 7\% are left-handed.
+a. Find the margin of error for the sample. Round to the nearest percent.
+\answer{a. (\pm2\%)}
+b. Use the margin of error to find an interval that will likely include the population proportion of the employees that are left-handed.
+\answer{b. 5\% to 9\%}
+\end{practice}
+\begin{practice}{19}{2}
+\textbf{Model With Mathematics} Lydia wants proof of Miguel's claim that he is a 40\% three-point shooter in basketball. She observes him make 17 out of 50 three-point shots. Lydia used a random number generator to simulate the outcome of a random sample of shots.
+\begin{tabular}{rrrrrrrrrr}
+16 & 22 & 53 & 51 & 62 & 81 & 69 & 68 & 59 & 29 \\
+69 & 71 & 29 & 83 & 79 & 34 & 67 & 82 & 64 & 50 \\
+30 & 79 & 68 & 94 & 33 & 24 & 6 & 28 & 91 & 59 \\
+33 & 59 & 42 & 89 & 13 & 56 & 15 & 6 & 75 & 97 \\
+83 & 6 & 89 & 55 & 39 & 61 & 69 & 17 & 20 & 89 \\
+\end{tabular}
+a. What numbers could you use to represent successful three-point shots?
+\answer{a. Sample: 1–40}
+b. What numbers could you use to represent missed three-point shots?
+\answer{b. Sample: 41–100}
+c. What proportion of the random numbers generated were successful? Explain what this means regarding Miguel's claim.
+\answer{c. 36\%; This one simulation does not refute Mike's claim, as 36\% is relatively close to the observed percentage of 34\%.}
+\te{Printed Mike in the key; the prompt names Miguel.}
+\end{practice}
+\begin{practice}{20}{2}
+\textbf{Make Sense and Persevere} An app estimates phone usage by counting the number of times a phone screen is unlocked during the course of a day. A sample of 25 users is shown.
+\begin{tabular}{rrrrr}
+123 & 65 & 119 & 145 & 114 \\
+125 & 114 & 91 & 113 & 125 \\
+88 & 141 & 105 & 116 & 121 \\
+186 & 136 & 65 & 128 & 107 \\
+97 & 126 & 101 & 90 & 10 \\
+\end{tabular}
+a. What is the mean and standard deviation?
+\answer{a. mean: 110.04; standard deviation: 32.72}
+b. Assuming the sample standard deviation matches the population standard deviation, what is the margin of error?
+\answer{b. (\pm13.09)}
+c. When Isabel says, “I check my phone at least 100 times a day,” is she exaggerating, or could her claim be reasonable? Explain.
+\answer{c. Isabel's claim is reasonable. According to the data, the range of reasonable means is from 96.95 to 123.13, so if Isabel is an average user, she is not exaggerating.}
+\end{practice}
+\begin{practice}{21}{1}
+\textbf{ASSESSMENT PRACTICE} In a random survey of 60 customers, 46 prefer Cracker A. Fill in the blank with the correct value.
+a. The sample proportion is about \underline{\hspace{1cm}}.
+\answer{a. 77\%}
+b. The margin of error is about \underline{\hspace{1cm}}.
+\answer{b. (\pm13\%)}
+c. The interval likely to contain the true population proportion is between \underline{\hspace{1cm}} and \underline{\hspace{1cm}}.
+\answer{c. 64\% and 90\%}
+\end{practice}
+\begin{practice}{22}{2}
+\textbf{SAT/ACT} A manufacturing company wants to randomly sample customers about their satisfaction rating on products. The company will give a gift certificate worth \$25 to every customer who completes the survey. How much will it cost the company to obtain a margin of error of (\pm5\%)?
+A. \$400
+B. \$1,000
+C. \$4,000
+D. \$10,000
+\answer{D}
+\end{practice}
+\begin{practice}{23}{2}
+\textbf{Performance Task} The population of songbirds is often calculated using a capture-tag-recapture technique. This means birds are captured and then tagged. After being tagged, the birds are released. A group of researchers is investigating a ranger's claim about the percentage of songbirds that are tagged. They recapture 10 birds, and only 3 have tags.
+% FIG 67 931 579 1090 737
+\placeholder{illustration}{Orange-breasted songbird with gray wings, perched on a brown branch against a turquoise square. A small identification band is shown on a leg. Callout: In one forest, a ranger claims that 50 percent of songbirds are tagged.}
+Part A Use a calculator or spreadsheet to simulate 25 samples with 10 birds recaptured by selecting 10 random numbers.
+\answer{Part A Check students' work.}
+Part B After simulating 25 trials, analyze the proportion of successes in each trial and create a histogram to display the sampling distribution.
+\answer{Part B Check students' work.}
+Part C Identify the range of values that contains the middle 95\% of results. Does the ranger's claim seem reasonable?
+\answer{Part C Check students' work.}
+\end{practice}
+% Source page 68: 568A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate — LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Resources book.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & DP27 \\
+2 & 2 & DP27 \\
+3 & 2 & DP27 \\
+4 & 1 & DP27 \\
+5 & 2 & DP27 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0–3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd Video \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{ASSESSMENT RESOURCES — 11-5 Lesson Quiz — Margin of Error}
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+1. A poll reports that 23\% of students have at least one pet at home. The margin of error is 5\%. Estimate the number of students polled.
+A. 500
+B. 400
+C. 40
+D. 25
+\answer{B}
+2. Malia found the margin of error for the percent of lengths of 100 willow leaves greater than 5 cm. If she increases her sample to 400, how will this affect her margin of error?
+A. It will not change the margin of error.
+B. It will double the margin of error.
+C. It will reduce the margin of error by one-half.
+D. It will reduce the margin of error by one-fourth.
+\answer{C}
+3. A random sample of 2,000 driver's license applications found that 17\% reported their eye color as blue. What is the margin of error for the sample? Round to the nearest tenth of a percent.
+margin of error = \answer{2.2}\%
+4. A brand of light bulbs has a mean lifetime of 1,500 hours and a standard deviation of 150 hours. A sample of 100 light bulbs gave a mean lifetime of 1,400 hours. What is the margin of error for the sample?
+A. 30
+B. 15
+C. 3
+D. 1
+\answer{A}
+5. A survey of 120 twelfth-graders finds that 36\% were carrying more than \$15 on the day of the survey. Use the margin of error to complete the following. Round to the nearest whole percent.
+An interval that will likely include the proportion of students in the population of twelfth-graders who carry more than \$15 is \answer{27}\% to \answer{45}\%.
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 69: 568B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate — DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced. SavvasRealize.com. Practice.
+\textbf{Reteach to Build Understanding — I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL® for School.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-5 Reteach to Build Understanding — Margin of Error}
+1. Taylor surveys her class to determine their favorite school lunch and how often students bought lunch. Complete the table to show the ratio of students who prefer each lunch in order to estimate the population parameters.
+\begin{tabular}{lll}
+Food & Ratio in words & Ratio \\
+Chicken & (\frac{\text{number who like chicken}}{60}) & (\frac{\answer{15}}{60}=\frac{1}{4}) \\
+Vegetable Soup & (\frac{\text{number who like vegetable soup}}{60}) & (\frac{6}{\answer{60}}=\frac{1}{10}) \\
+Pork Loin & (\frac{\text{number who like pork loin}}{60}) & (\frac{13}{\answer{60}}) \\
+Turkey & (\frac{\text{number who like turkey}}{60}) & (\frac{7}{60}) \\
+Tuna & (\frac{\text{number who like tuna}}{60}) & (\frac{19}{60}) \\
+\end{tabular}
+\begin{tabular}{llll}
+Tuna & 4 & Vegetable Soup & 4 \\
+Pork Loin & 5 & Turkey & 4 \\
+Turkey & 2 & Tuna & 5 \\
+Vegetable Soup & 1 & Chicken & 1 \\
+Pork Loin & 3 & Tuna & 3 \\
+Tuna & 2 & Chicken & \uncertain{2}{3; 5} \\
+Tuna & 5 & Turkey & 1 \\
+Pork Loin & 3 & Chicken & 3 \\
+Chicken & 1 & Vegetable Soup & 1 \\
+Pork Loin & 2 & Chicken & \uncertain{5}{8} \\
+\end{tabular}
+\te{Two tiny Chicken counts remain unclear at 1800 dpi. The best readings sum to 12 Chicken lunches, whereas the printed ratio is 15/60.}
+2. William wants to find the margin of error for a sample of 64 people with a mean height of 68 inches, given that the population standard deviation is 3 inches. He concluded that the margin of error is (\frac{1}{8}) or 0.125. What error did he make? What is the correct margin of error?
+\answer{Answers may vary. Sample: William calculated the margin of error for categorical data. Since the information is quantitative, the correct formula is (\frac{2\sigma}{\sqrt{n}}). So, (\frac{2(3)}{\sqrt{64}}=\frac{6}{8}=\frac{3}{4}) inch.}
+3. What is the range of reasonable means for a random sample of 100 people with a mean of 50 and a standard deviation of 10?
+\begin{tabular}{llll}
+Step 1 & Find the margin of error. & (\frac{2\sigma}{\sqrt{n}}) & (\frac{2(\answer{10})}{10}=2) \\
+Step 2 & Find the minimum of the range by subtracting the margin of error from the mean. & (\mu-\sigma) & (\answer{50}-2=\answer{48}) \\
+Step 3 & Find the maximum of the range by adding the margin of error to the mean. & (\mu+\sigma) & (50+\answer{2}=\answer{52}) \\
+\end{tabular}
+\te{Printed (\mu\pm\sigma) in Steps 2 and 3; the numeric work correctly uses the margin of error, (2\sigma/\sqrt{n}), instead of the population standard deviation.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice — I O}
+Provides extra practice for each lesson. MathXL® for School.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-5 Additional Practice — Margin of Error}
+Kenji surveys 10 student athletes. He asks them what sport they play, and how many hours per week they spend practicing.
+\begin{tabular}{ll}
+Baseball & 4 h \\
+Soccer & 3 h \\
+Tennis & 5.5 h \\
+Football & 7 h \\
+Lacrosse & 6 h \\
+Football & 5 h \\
+Baseball & 4 h \\
+Baseball & 6.5 h \\
+Soccer & 6 h \\
+Baseball & 7 h \\
+\end{tabular}
+1. What proportion of students play baseball? \answer{40\%}
+2. What is the mean number of hours the students spend practicing sports? \answer{5.4 h}
+3. Murphy claims that he makes 90\% of his field goal attempts. Suppose he attempts 100 field goals. Use technology to simulate 50 trials with 100 field goals each. Identify the range that contains the middle 95\% of results. Is his claim reasonable? \answer{Answers will vary.}
+Students at a school are conducting a music study. Each of the 50 students survey 15 musicians to determine the average time, in hours, musicians practice each week. They created a histogram of the results.
+% FIG 69 649 506 781 610
+\placeholder{graph}{Results of 50 Samples. Horizontal Hours Spent Practicing bins 3.3–3.9, 4.0–4.6, 4.7–5.3, 5.4–6.0, 6.1–6.7, 6.8–7.3. Vertical Number of Samples ticks 0 to 16 by 2. Gray bars have heights 4, 6, 13, 15, 8, 4. Final bin endpoint appears 7.3, though regular bin widths would give 7.4.}
+4. How many students reported an average practice time of 4.7 to 6.0 hours? \answer{28}
+5. Based on the histogram, what is a reasonable range to suspect for the population parameters? \answer{4 to 6.7 h}
+6. The mean score on a national exam is 1,200 with a standard deviation of 230. A college states that their incoming freshmen have higher scores than the national average. In order to confirm this statement, a reporter collects a random sample of scores from 300 incoming students. He finds that their mean score is 1,300. Is the college correct?
+\answer{Yes. The margin of error is 26.6, so 95\% of random samples of 300 students would have means between 1,173.4 and 1,226.6.}
+7. Timothy says he pitches baseballs at an average speed of 60 mph, but his 50 pitches in one game averaged 53 mph. Tamira creates 100 samples of 50 pitches for a pitcher throwing at an average of 60 mph. In 95\% of the samples, pitch speeds were between 52 mph and 68 mph. Based on Tamira's data, is Timothy's claim reasonable? Explain.
+\answer{Yes, since the average from his game falls within the range of 52 to 68 mph, it is likely that Timothy's pitches average 60 mph.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment — O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL® for School.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-5 Enrichment — Margin of Error}
+Prior to major elections, media sources often take polls to predict how well candidates are supported by voters. The table shows a number of polls prior to an election. Fill in the missing information. Round to the nearest tenth of a percent or the nearest whole number sample size, if needed.
+\begin{tabular}{llllll}
+Poll & Candidate A & Candidate B & Unsure or Other & Margin of Error & Sample Size \\
+City News & \uncertain{47\%}{45\%; 43\%} & 42\% & \uncertain{13\%}{15\%} & (\pm3.1\%) & \answer{1,041} \\
+President Report & 48\% & 47\% & 5\% & \answer{(\pm4.5\%)} & 494 \\
+Candidate Watch & 49\% & 46\% & 5\% & \answer{(\pm2.5\%)} & 1,600 \\
+Who's Best? & 49\% & 45\% & 6\% & (\pm0.5\%) & \answer{40,000} \\
+People's News & 40\% & 49\% & 11\% & \answer{(\pm3.5\%)} & 816 \\
+News for America & 48\% & 44\% & 8\% & (\pm2.1\%) & \answer{\uncertain{2,268}{2,269}} \\
+US First & 47\% & 43\% & 10\% & \answer{(\pm3\%)} & 1,110 \\
+Everyday News & 51\% & 44\% & 5\% & (\pm1\%) & \answer{10,000} \\
+American News & 44\% & 47\% & 9\% & (\pm2.7\%) & \answer{1,372} \\
+Election News & 46\% & 44\% & 10\% & \answer{(\pm3.2\%)} & 977 \\
+\end{tabular}
+\te{Tiny table remains pixelated at 1800 dpi; two first-row percentages and one answer's last digit are uncertain.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary — I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-5 Mathematical Literacy and Vocabulary — Margin of Error}
+Terrell believes that he has a chance to win the regional sprinting competition. At the regional level, the mean winning 100-yard dash time is 12.2 s with a standard deviation of 0.2 s. Terrell's average time, based on 16 meets, is 12.4 s. Does he have a chance of winning the race?
+There are two sets of note cards that Terrell used to find the solution to this problem. The set on the left explains the thinking. The set on the right shows the steps. Write the thinking and the steps in the correct order.
+\textbf{Think Cards}
+Compare the numbers to determine if Terrell's speed falls within the range.
+Find the maximum by adding the margin of error to the mean.
+Find the minimum by subtracting the margin of error from the mean.
+Terrell wants to find the margin of error based on his meets in order to determine the range of reasonable means.
+\textbf{Step Cards}
+(12.2+0.1=12.3)
+(12.2-0.1=12.1)
+Terrell's mean time is slower than the range of reasonable means of 12.1–12.3. Therefore, it is unlikely he will win.
+(\frac{2\sigma}{\sqrt{n}}=\frac{2(0.2)}{\sqrt{16}}=\frac{0.4}{4}=0.1)
+\answer{Think Cards, in order: Terrell wants to find the margin of error based on his meets in order to determine the range of reasonable means. Find the maximum by adding the margin of error to the mean. Find the minimum by subtracting the margin of error from the mean. Compare the numbers to determine if Terrell's speed falls within the range.}
+\answer{Step Cards, in order: (\frac{2\sigma}{\sqrt{n}}=\frac{2(0.2)}{\sqrt{16}}=\frac{0.4}{4}=0.1); (12.2+0.1=12.3); (12.2-0.1=12.1); Terrell's mean time is slower than the range of reasonable means of 12.1–12.3. Therefore, it is unlikely he will win.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 69 584 977 1035 1298
+\placeholder{illustration}{Black tablet showing a digital exercise: Solve the system of equations by graphing, y=3x+4 and y=-2x+4. Use the graphing tool to graph the system. Blank coordinate grid from -10 to 10 on both axes, labeled every 2; menu Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Buttons Clear All, Check Answer, Review progress, Back, Next.}
+\end{te-addendum}
+
+\end{document}

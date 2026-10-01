@@ -1,0 +1,858 @@
+\documentclass{article}
+% Source: Topic_01_Teacher_Edition.pdf, PDF pages 63-73 (printed pages 40A-46B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+% Source page 63: 40A Lesson Overview
+\begin{lesson-meta}
+lesson: 1-5
+title: Solving Equations and Inequalities by Graphing
+standards: none printed
+practices: none printed
+objective: I can use graphs and tables to approximate solutions to algebraic equations and inequalities.
+
+essential question: How can you solve an equation or inequality by graphing?
+
+\textbf{VOCABULARY}
+\item interval
+\item intercept
+\item point of intersection
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list or numbered standard/practice codes is printed. Listed vocabulary is review vocabulary. Objective and Essential Question are from PDF pages 64-65.}
+\begin{tabular}{ll}
+Lesson Code & 1-5 \\
+Title & Solving Equations and Inequalities by Graphing \\
+Standards & none printed \\
+I CAN Objective & I can use graphs and tables to approximate solutions to algebraic equations and inequalities. \\
+Essential Question & How can you solve an equation or inequality by graphing? \\
+Lesson Vocabulary & interval; intercept; point of intersection \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use graphs, tables, and graphing technology to find or approximate solutions to equations and inequalities.
+\item Find approximate solutions to equations and inequalities by setting each expression equal to (y) and graphing.
+Essential Understanding. To solve an equation or inequality by graphing, set each expression equal to (y) and graph the two equations on the same grid. The intersection represents the solution.
+\te{Printed intersection represents the solution for both equations and inequalities; for an inequality the intersections usually mark boundaries of solution intervals.}
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Graphed linear, quadratic, and absolute value equations.
+In this lesson, students:
+\item Solve an inequality by setting each expression equal to (y), graphing the equations, and interpreting the intersection of the graphs.
+Later in this topic students will:
+\item Graph systems of linear equations, identifying the point of intersection as the solution.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that when both sides of an equation or inequality are set equal to (y), the intersection of their graphs is the solution of the equation or inequality.
+\item Students set each side of an equation or inequality equal to (y) and then graph both equations on the same grid to find the point of intersection.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+interval & intervalo \\
+intercept & intercepto \\
+point of intersection & punto de intersección \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+The words interval, intercept, and intersection all have the same prefix. Their similarity could cause students to confuse their meanings. Have students complete the sentences using the words interval, intercept, and intersect.
+1. The point at which a line crosses either axis is an blank.
+\answer{intercept}
+2. A set of numbers consisting of all the numbers between a pair of given numbers is an blank.
+\answer{interval}
+3. A point at which two lines cross is an blank.
+\answer{intersection}
+\te{Printed word bank says intersect; answer 3 uses intersection.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG: 63 931 684 1084 864
+\placeholder{illustration}{Student Companion enVision Algebra 2 cover with purple and blue circular artwork on black background.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students use a graph, a table, or a graphing calculator to find exact or approximate solutions of an equation or inequality by considering the expressions on either side of the equality symbol as functions.
+\textbf{Applying Math Practices}
+Use Appropriate Tools Strategically. Students use tools strategically when they use a spreadsheet to do repeated calculations or use a graphing calculator to find the intersection of two graphs.
+Look For and Make Use of Structure. Students make use of structure by employing the same techniques to find a solution to a system of linear equations as to find solutions to a quadratic and linear system.
+\end{te-addendum}
+% Source page 64: 40B Critique & Explain
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students are introduced to using tables and graphs to find solutions to problems. During this lesson, students will continue finding solutions using tables and graphs.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving.
+Q: What are the formulas for the perimeter and area of a rectangle?
+\answer{Perimeter (=2w+2\ell); Area (=\ell w)}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics.
+Q: How does the perimeter of the chicken run assist you in discovering the area?
+\answer{The fencing is used on 3 sides of the chicken run, so the perimeter of this rectangle is (w+2\ell=32) and (\ell=\frac{32-w}2). The area equals (w\cdot\frac{32-w}2).}
+For Early Finishers
+Q: Write and graph a function for the area of the rectangular chicken run in terms of the width, if the perimeter is 44 ft. List 3 possible values for the length, width, and area of the run.
+\answer{(f(x)=\frac{44-x}2). Check students' graphs and values.}
+\te{Printed area function lacks the width factor; likely (f(x)=x\frac{44-x}2). The source uses perimeter for the three fenced sides.}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse.
+Q: How can the graph help you solve (A(x)=0)?
+\answer{The points where the graph intersects the (x)-axis are the points where (A(x)=0). So, the (x)-intercepts represent the solutions to the equation (A(x)=0).}
+Q: How can you use the graph to calculate the length?
+\answer{The (x)-coordinate of a point tells you the width of the rectangle. The length of the rectangle is 16 minus half the width.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Use with CRITIQUE \& EXPLAIN}
+Q: Make Sense and Persevere For what widths will the area of the chicken run be at least (110\text{ ft}^2)?
+\answer{(10\leq x\leq22)}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+\te{Critique \& Explain is Powered by Desmos. Activities are available at SavvasRealize.com.}
+A homeowner has 32 feet of fencing to build three sides of a rectangular chicken run.
+% FIG: 64 884 665 1110 798
+\placeholder{illustration}{Brown chicken house with dark roof at left and rectangular orange-framed wire enclosure extending right, on green ground. Two white chickens inside; callout Perimeter = 32 feet.}
+A. Make a table of values for the length, width, and area of different rectangular chicken runs that will utilize 32 feet of fencing. Then write a function for the area, in terms of width, of a rectangular run using this much fencing.
+\answer{A. (A(x)=x\frac{32-x}2)}
+\te{No completed table is printed in Sample Student Work.}
+B. Graph your function.
+\answer{B. See graph.}
+% FIG: 64 728 1033 951 1198
+\placeholder{graph}{Sample Student Work: gray downward parabola A(x)=x(32-x)/2 restricted to 0<=x<=32, filled dots at (0,0), (16,128), and (32,0), vertex labeled (16,128). Horizontal axis x labeled 0,8,16,24,32 with grid spacing 4; vertical axis y labeled 0,40,80,120 with grid spacing 20. Positive arrowheads on axes; curve ends at filled intercepts without arrows; plotted window about [0,36] by [0,140].}
+C. Reason Explain what happens where the graph intersects the (x)-axis.
+\answer{C. At the (x)-intercepts, one of the dimensions of the rectangle is 0, so the area is 0.}
+\te{Digital variant introduction: A homeowner has 32 feet of fencing for a rectangular chicken run. A. Fill in the table of values in the tool for the length, width, and area of different rectangular chicken runs with perimeter 32 ft. Then write a function for the area, in terms of width, of rectangles with this perimeter. B. Use the tool to graph your function. C. Communicate Precisely Explain what happens where the graph intersects the x-axis. Controls: Go back; ESSENTIAL QUESTION; Enter your answer.; SOLUTION.}
+% FIG: 64 716 283 823 340
+\placeholder{illustration}{Digital variant repeats brown chicken house and orange rectangular wire chicken run with Perimeter = 32 feet callout.}
+% FIG: 64 865 261 1035 445
+\placeholder{graph}{Digital Desmos blank grid: x and y axes unlabeled by letters, both numeric scales -10,-5,0,5,10; square grid spacing 1 and window approximately [-10,10] by [-10,10]. No curves or points. Menu upper left, wrench upper right, chevron bottom right.}
+\end{model-discuss}
+
+% Source page 65: 40 Example 1
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Introduce students to the idea of solving an equation by graphing. Explain that the solution of the equation occurs at the (x)-value of the coordinate where the graphs intersect. Additionally, you can identify the solution of an inequality greater or less than zero by identifying the portions of the graph above or below the (x)-axis.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Use a Graph to Solve an Equation}
+Pose Purposeful Questions. PART A
+Q: Why does the solution to the equation correspond to finding the (x)-coordinate of the intersection of the graphs?
+\answer{The intersection of the two graphs is where the outputs of (-3x+20) and (0.2x+4) are equal for the same (x)-value. For (x)-coordinates where the graphs do not intersect, the outputs of (-3x+20) and (0.2x+4) are not equal.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples: ADDITIONAL EXAMPLE 2}
+Use the graph to solve the inequality (x^2-6x-7>2x-7).
+% FIG: 65 404 930 535 1138
+\placeholder{graph}{Gray unit grid, x-axis labels -10,-5,0,5,10 and y-axis labels -15,-10,-5,0,5,10,15; window approximately [-11,13] by [-19,20]. Red upward parabola y=x^2-6x-7 with vertex (3,-16), intercepts (-1,0),(7,0),(0,-7); blue ascending line y=2x-7. Black filled intersection dots labeled (0,-7) and (8,9). Curves leave the frame without visible arrowheads; axes have no letter labels.}
+\answer{See back of book.}
+\te{The digital screenshot shows a SOLUTION button but no textual solution.}
+Example 2 Students use a graph to solve an inequality.
+Q: How does using the graph to solve the inequality compare to solving the equation algebraically?
+\answer{The graph shows the solution where the graph of (y=x^2-6x-7) has larger (y)-coordinates than the graph of (y=-2x-7). An algebraic solution shows the values of (x) that make the expression (x^2-6x-7) greater than (-2x-7).}
+\te{Printed teacher answer says (-2x-7); digital prompt and plotted ascending line use (2x-7). Digital controls: Go back, ESSENTIAL QUESTION, SOLUTION.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+Additional Examples are available at SavvasRealize.com.
+\textbf{ADDITIONAL EXAMPLE 4}
+Using the INTERSECT feature on your graphing calculator, approximate the solution of the equation to the nearest thousandth.
+(-|x-6|+1=-5|x+3|+2)
+The graphs of (y=-|x-6|+1) and (y=-5|x+3|+2) intersect at approximately the points ((-1.333,-6.333)) and ((-5.5,-10.5)).
+\answer{Therefore, the solutions of the equation are (x=-1.333) and (x=-5.5).}
+% FIG: 65 926 979 1038 1092
+\placeholder{graph}{Gray square grid, axes x,y; unit grid with labeled x values -8,4,8 and labeled y values -4,4,8, zero unlabeled. Window [-12,12] by [-12,12]. Orange inverted V y=-|x-6|+1 has vertex (6,1), x-intercepts 5,7, y-intercept -5, arrows at lower left and right. Blue inverted V y=-5|x+3|+2 has vertex (-3,2), y-intercept -13 below the frame; arrows at lower branches. No dots at intersections.}
+Example 4 Students approximate the solution of an inequality involving a negative absolute value expression and a negative quadratic expression.
+\te{Printed teacher description says inequality and negative quadratic; digital example is an equation between two absolute value expressions. Controls: Go back, ESSENTIAL QUESTION, TRY ANOTHER ONE, SOLUTION.}
+Q: How can you check your solution using your graphing calculator?
+\answer{Create a table including the approximate intersection points. When the (y)-values are approaching the same number, the approximate solution is (x).}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Use a Graph to Solve an Equation}
+\te{CONCEPTUAL UNDERSTANDING. Examples are available at SavvasRealize.com.}
+How can you use a graph to solve an equation?
+A. Solve (-3x+20=0.2x+4) by graphing.
+To solve an equation by graphing, write two new equations by setting (y) equal to each expression in the original equation.
+(-3x+20=0.2x+4)
+(y=-3x+20) (y=0.2x+4)
+Graph the two equations and identify the points of intersection.
+% FIG: 65 814 394 965 459
+\placeholder{graph}{Blue descending line y=-3x+20 and red shallow ascending line y=0.2x+4 intersect at (5,5), without a point marker. Axes x and y with arrowheads; x labels -4,-2,O,2,4,6,8, unit grid; y labels 10,20, grid spacing 5. Window approximately [-5,10] by [-5,25]. Blue line exits top at x near -1.67 and bottom near 8.33; red line has arrowheads both ends.}
+\te{Callout: When (x=5), the expressions (-3x+20) and (0.2x+4) are both equal to 5. By substituting (x=5) into the original equation, you can verify the result.}
+The (y)-values of (y=-3x+20) and (y=0.2x+4) are equal at the point of intersection. For all other (x)-values, the (y)-values are not equal.
+\answer{So (-3x+20=0.2x+4) when (x=5).}
+% Source page 66: 41 Example 1 continued; Example 2
+B. Solve (|x-4|=\frac12x+1) by graphing.
+To solve (|x-4|=\frac12x+1), write two equations (y=|x-4|) and (y=\frac12x+1), and graph.
+% FIG: 66 846 242 947 344
+\placeholder{graph}{Blue V y=|x-4| with vertex (4,0), y-intercept (0,4), rising left/right rays with arrows; red line y=x/2+1 with arrows, intercepts (-2,0),(0,1). Curves cross at (2,2) and (10,6), unmarked. Axes x,y; grid spacing 2; labeled positive ticks 4,8,12 on both axes, O at origin. Window [-4,16] by [-4,16].}
+\te{Callout: (y=|x-4|) and (y=\frac12x+1) intersect at (x=2) and (x=10).}
+\answer{The solutions to the equation (|x-4|=\frac12x+1) are (x=2) and (x=10). You can verify these values by substituting them back into the original equation.}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+Q: In Part B, how is it beneficial to use the graph from the two new equations to solve for (y)?
+\answer{In this case, solving the equation algebraically would be more difficult than using the graph. The intersection point of the two equations gives the (x)-value that is the solution of the equation. Check your solutions for (x) by substituting them back into the original equation.}
+\te{Printed solve for y; likely solve for x.}
+\end{te-addendum}
+\begin{tryit}{1}
+Use a graph to solve the equation.
+a. (5x-12=3)
+b. (-|x-2|=-\frac12x-2)
+\answer{a. (x=3). b. (x=0) and (x=8).}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: In Try It 1b, in which direction does (y=-|x-2|) open?
+\answer{The graph opens downward due to the negative sign on the outside of the absolute value symbols.}
+\end{te-addendum}
+\begin{te-addendum}{1}{RtIExtend}
+\textbf{Extend Student Thinking USE WITH EXAMPLE 1}
+Students discover the equation from the graph in order to solve for (x).
+% FIG: 66 124 1037 359 1272
+\placeholder{graph}{Blue V y=|x+3| vertex (-3,0), y-intercept (0,3); red line y=-3x-9 intersects at vertex (-3,0) and runs through (-6,9). Arrowheads on both ends of each curve. Axes x,y arrowed both ends, unit grid, x labels -8,-6,-4,-2,O; y labels 2,4,6,8. Window [-10,2] by [-2,10]. No intersection dot.}
+Q: Write an equation for the graph. Solve for (x).
+\answer{The equation is (|x+3|=-3x-9), and (x=-3).}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Solve a One-Variable Inequality by Graphing}
+Pose Purposeful Questions. PART A
+Q: Why are you looking for values that make (y>0) and not (x>0)?
+\answer{The value of (y) represents the value of the whole expression, which is the value that is greater than 0. Negative values for (x) can still result in a positive value for the function.}
+PART B
+Q: Why is (60x) greater than (40x+40)?
+\answer{Since you are trying to discover when the car will pass the motorcycle, the distance the car travels needs to be greater than the distance traveled by the motorcycle.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtISupport}
+\textbf{Support Struggling Students USE WITH EXAMPLE 2}
+Work with students to help them recognize and use the graph of an absolute value function to find the solutions of an inequality.
+% FIG: 66 899 991 1209 1303
+\placeholder{graph}{Blue inverted V labeled y=-|x-5| with vertex (5,0), y-intercept (0,-5); red horizontal line labeled y=-4. Intersections (1,-4),(9,-4) unmarked. All curve ends have arrows. Axes x,y arrowed both ends, O at origin; unit grid; x labels -2,2,4,6,8,10; y labels -6,-4,-2,2,4,6. Window [-4,12] by [-8,8].}
+Q: Where on the graph of (y=-|x-5|) are the (y)-coordinates less than or equal to (-4)?
+\answer{Over the intervals ((-\infty,1]) and ([9,\infty))}
+Q: What are the solutions to (-|x-5|\leq-4)?
+\answer{Since the graph of the function (y=-|x-4|) is below (-4) over the intervals ((-\infty,1]) and ([9,\infty)), (-|x-5|\leq-4) when (1\geq x) or (x\geq9).}
+\te{Printed function in explanation uses x-4; likely x-5, as in the graph and question. Printed below includes equality endpoints.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Solve a One-Variable Inequality by Graphing}
+\te{APPLICATION}
+How can you use a graph to solve an inequality?
+A. Solve (x^2-4>0).
+To solve the inequality, identify the values of (x) that make the value of the expression (x^2-4) greater than 0. Graph the equation (y=x^2-4) by translating the parent function (y=x^2) down 4 units.
+% FIG: 66 851 549 953 631
+\placeholder{graph}{Upward parabola y=x^2-4 with vertex (0,-4), x-intercepts (-2,0),(2,0). Curve below x-axis red, portions above x-axis blue; equation label red. Axes x,y arrowed, O at origin. Unit grid; x labels -4,-2,2,4; y labels -4,-2,2. Window [-5,5] by [-5,3]. Curve clipped at upper edge, no endpoint dots.}
+\te{Callouts: Look for the points on the graph where the value of the function is positive. The intercepts are at (x=2) and (x=-2). COMMON ERROR You may think that you need to find interval(s) where (x>0). However, you need to find where (x^2-4>0), so you are looking for interval(s) where (y>0).}
+The graph of the function is positive over the intervals ((-\infty,-2)) and ((2,\infty)).
+\answer{So (x^2-4>0) when (x<-2) or (x>2).}
+B. A motorcycle is 40 mi ahead of a car. When will the car be ahead of the motorcycle?
+Let (x) represent the number of hours since the car started traveling. The expression (60x) represents the distance the car travels in (x) hours. The expression (40x) represents the distance the motorcycle travels in (x) hours.
+% FIG: 66 986 657 1179 803
+\placeholder{illustration}{Motorcyclist on green sport motorcycle in foreground of curving road, labeled 40 mph; small orange car in distance labeled 60 mph.}
+
+% Source page 67: 42 Example 2 continued; Example 3
+To solve, we need to determine when the number of miles the car travels exceeds the number of miles the motorcycle travels.
+Solve (60x>40x+40).
+Set (y=60x) and (y=40x+40), and then graph both equations.
+% FIG: 67 808 284 935 395
+\placeholder{graph}{Blue line labeled 60x through (0,0) and (2,120); red line labeled 40x+40 through (0,40) and (2,120); both have upper arrowheads. Horizontal Time (h) axis labels 0,2,4, grid spacing 1 and window 0 to 6; vertical Distance (mi) labels 0,50,100,150,200,250 with grid spacing 50. Intersections unmarked.}
+\te{Callouts: When (x>2), (60x) is greater than (40x+40). The lines intersect at (2,120). At this point, the car has caught up to the motorcycle. When (x<2), (60x) is less than (40x+40). COMMON ERROR Recall that the motorcycle started out 40 miles ahead of the car. Remember to add this distance to the expression that represents the total distance the motorcycle has traveled.}
+\answer{The car will be ahead of the motorcycle any time after 2 hours. You can verify the solution by selecting any number greater than 2 and substituting it into the original inequality.}
+\end{example}
+\begin{tryit}{2}
+Use a graph to solve each inequality.
+a. (x^2+6x+5\geq0)
+b. (x+3>7-3x)
+\answer{a. (x\leq-5) or (x\geq-1). b. (x>1).}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{Use with EXAMPLES 1 \& 2}
+Q: Use Structure How does a graph show the solution of an equation?
+\answer{If you graph the left side of the equation as one function and the right side as another, the (x)-value(s) of the intersection point(s) of the two graphs are solution(s) of the equation.}
+\end{te-addendum}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Use a Table to Solve an Equation}
+Use and Connect Mathematical Representations.
+Q: What is the purpose of creating a graph when you also need to create a table to find the solution?
+\answer{The graph helps to narrow down the possible solutions, so you can create a table that includes the solution.}
+Q: When looking at a table, how do you know when graphs will cross?
+\answer{when both expressions equal the same value}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 3)}
+SPEAKING BEGINNING Discuss the different meanings of the word table. It can be a piece of furniture with a flat top that you put things on. A table is also a written set of facts and figures arranged in columns and rows.
+Q: How do you use the word table in everyday conversation?
+\answer{We sit down at a table to eat our meals.}
+Q: What does the word table mean in math?
+\answer{A rectangular arrangement of numbers and equations used to create graphs and solve problems.}
+LISTENING DEVELOPING Students may have heard the term zoom in reference to driving a car faster. Have them listen as you read aloud the callout pointing to the second table.
+Q: Does zoom mean to drive fast or to speed up in this example?
+\answer{No; zoom in means to get closer to a more precise answer, or to magnify the picture as if using a zoom lens on a camera or microscope.}
+Q: How does zooming in on the table help you get a better approximation?
+\answer{It narrows down the center of attention. Instead of comparing numbers that are 1 unit apart, you can compare numbers that are one tenth of a unit apart.}
+READING EXPANDING Display two pictures, the first of which shows a crowd cheering with a caption that says, ``The initial response was favorable.'' The second picture should show a document with spaces for a person to sign and date it, with a caption that says, ``You may initial the document rather than signing it.'' Ask students to read the captions.
+Q: Use context clues to explain what the word initial means.
+\answer{first; first letter in each name}
+Q: Read the paragraph after the bold problem statement. What does initial estimate mean?
+\answer{the first approximation of the answer}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Use a Table to Solve an Equation}
+Use a graph and tables to solve the equation (x^2-4x+1=x-2).
+Sketch the graphs of (y=x^2-4x+1) and (y=x-2). Identify the points of intersection to find initial estimate(s) of the solution value(s).
+% FIG: 67 799 616 904 720
+\placeholder{graph}{Red upward parabola labeled y=x^2-4x+1 has vertex (2,-3), y-intercept (0,1); blue ascending line labeled y=x-2 has intercepts (0,-2),(2,0). Curves intersect between x=0 and 1 and between x=4 and 5, no point markers. Arrowheads at all visible curve ends. Axes x,y arrowed; unit grid; x labels -2,O,2,4,6 and y labels -4,-2,2. Window [-3,7] by [-5,5].}
+\te{Callouts: One solution lies between 4 and 5. One solution lies between 0 and 1.}
+Neither solution is easily read from the graph. You can use a table to get more accurate estimates for the solutions.
+% Source page 68: 43 Example 3 continued; Example 4
+\begin{tabular}{rrr}
+(X) & (X-2) & (X^2-4X+1) \\
+0.5 & -1.5 & -0.75 \\
+0.6 & -1.4 & -1.04 \\
+0.7 & -1.3 & -1.31 \\
+0.8 & -1.2 & -1.56 \\
+0.9 & -1.1 & -1.79 \\
+1 & -1 & -2 \\
+\end{tabular}
+\te{Rows 0.6 and 0.7 are red. Callout: The solution lies between 0.6 and 0.7. So lets check the hundredths place. USE APPROPRIATE TOOLS Create tables using a calculator or spreadsheet. When you let technology perform the calculations, you can concentrate on what the numbers mean.}
+\begin{tabular}{rrr}
+(X) & (X-2) & (X^2-4X+1) \\
+0.65 & -1.35 & -1.1775 \\
+0.66 & -1.34 & -1.2044 \\
+0.67 & -1.33 & -1.2311 \\
+0.68 & -1.32 & -1.2576 \\
+0.69 & -1.31 & -1.2839 \\
+0.7 & -1.3 & -1.31 \\
+\end{tabular}
+\te{Rows 0.69 and 0.7 are red. Callout: Look for values where graphs will cross. Use these values to find better approximations.}
+\begin{tabular}{rrr}
+(X) & (X-2) & (X^2-4X+1) \\
+0.69 & -1.31 & -1.2839 \\
+0.691 & -1.309 & -1.28652 \\
+0.692 & -1.308 & -1.28914 \\
+0.693 & -1.307 & -1.29175 \\
+0.694 & -1.306 & -1.29436 \\
+0.695 & -1.305 & -1.29698 \\
+0.696 & -1.304 & -1.29958 \\
+0.697 & -1.303 & -1.30219 \\
+0.698 & -1.302 & -1.30480 \\
+\end{tabular}
+\te{Rows 0.697 and 0.698 are red. Callout: Choose the x-value with the smallest difference in the function values.}
+\answer{One solution is approximately (x\approx0.697).}
+You can use a similar method to approximate the second solution.
+\end{example}
+\begin{tryit}{3}
+The equation (x^2-4x+1=x-2) has a second solution in the interval (4<x<5). Use a spreadsheet to approximate this solution to the nearest thousandth.
+\answer{(x\approx4.303)}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: Why do you not want to start searching for the solution using the thousandths interval?
+\answer{It is much more efficient to narrow down your focus before you look at the thousandths place, so you are not looking through the spreadsheet for a long period of time.}
+\end{te-addendum}
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Use Graphing Technology to Solve Equations}
+Use and Connect Mathematical Representations.
+Q: What is the purpose of the INTERSECT feature when using graphing technology?
+\answer{The INTERSECT feature provides you with the values of (x) where the graphs intersect.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use Graphing Technology to Solve Equations}
+A. Use graphing technology to approximate the solutions of the equation (-x^2+8x-13=|x-4|) to the nearest tenth.
+Graph (y=-x^2+8x-13) and (y=|x-4|).
+Use the INTERSECT feature to find the approximate solutions.
+% FIG: 68 853 648 962 743
+\placeholder{graph}{Left calculator screenshot: gray unit grid, axes crossing near lower left with ticks but no numeric labels or axis letters. Blue V y=|x-4| vertex (4,0), orange downward parabola y=-x^2+8x-13 vertex (4,3). Black cursor dot at left intersection near (2.697,1.303). Display x=2.6972244 y=1.3027756. Window inferred from unit tick count approximately [-1,10] by [-2,6]; no arrowheads on clipped curves.}
+% FIG: 68 969 648 1080 743
+\placeholder{graph}{Right calculator screenshot repeats the gray unit-grid axes, blue V y=|x-4| vertex (4,0), orange downward parabola y=-x^2+8x-13 vertex (4,3), no numeric axis labels or letters. Black cursor dot at right intersection near (5.303,1.303). Display x=5.3027756 y=1.3027756. Window inferred from unit ticks approximately [-1,10] by [-2,6]; curves clipped without arrows.}
+\te{Callout: Remember that you are looking for the values of x where the graphs intersect. STUDY TIP Test your approximate solutions in the original equation. The value of the expression on the left side should be very close to the value of the expression on the right.}
+\answer{The INTERSECT feature shows that the equation has solutions (x\approx2.7) and (x\approx5.3).}
+\end{example}
+\begin{tryit}{4}
+Use graphing technology to approximate the solutions of the equation (x^2+2x-1=|x+2|+2) to the nearest tenth.
+\answer{(x\approx-3.3) and (x\approx1.8)}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: Why do you use technology to find approximate solutions to an equation?
+\answer{It is more efficient in solving for the missing values.}
+\end{te-addendum}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error Try It! 4}
+Students may forget to include the absolute value bars around (x+2). If they forget the absolute value bars, they will graph (y=x+4) instead of (y=|x+2|+2). Have students substitute their solutions back into the original equation to check their accuracy.
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Use with EXAMPLES 3 \& 4}
+Q: Use Appropriate Tools What are the advantages and disadvantages of using spreadsheets and graphing technology?
+\answer{Both methods are fast and give you several decimal places of accuracy in your estimate, but if an exact solution is required, you need to use algebraic methods. Many fractions and radical expressions do not have exact decimal equivalents.}
+\end{te-addendum}
+
+% Source page 69: 44 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Solving Equations and Inequalities by Graphing}
+Q: How does solving an equation or inequality with a graph compare to solving an equation with a table?
+\answer{The graph provides a quick approximate solution and also can narrow down your focus for your table. Sometimes if the graph you created by hand does not correspond to a grid point, creating a table may provide a more accurate approximate solution. However, using the INTERSECT feature with graphing technology also allows you to create an accurate approximate solution from your graph.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Exercise 3 Students may confuse which way the inequality signs should face when finding the solution. Have students check their solutions by graphing the inequality and testing points in the shaded region.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Solving Equations and Inequalities by Graphing}
+Solve (|3x+5|=\frac13x+5).
+Let (f(x)=|3x+5|) and (g(x)=\frac13x+5).
+\textbf{WORDS} Graph each function, and identify the (x)-coordinates of the points of intersection.
+% FIG: 69 734 306 831 396
+\placeholder{graph}{Calculator graph: orange V f(x)=|3x+5|, vertex (-5/3,0), and blue line g(x)=x/3+5. Black cursor at (0,5); readout x=0 y=5. Unit grid, unlabeled axes and tick marks; clipped curves have no arrowheads. Other intersection (-3,4).}
+One solution is 0. The second solution is (-3).
+In general, graphing can be used to solve equations by finding intersection points. Graphing can also be used to solve inequalities by finding the intersection points, and then comparing the graphs.
+\textbf{TABLE} Graphs may not always yield integer results. Tables may be used to find solutions.
+\begin{tabular}{lll}
+(x) & (f(x)) & (g(x)) \\
+(-3.3) & 4.9 & 3.9 \\
+(-3.2) & 4.6 & 3.9333 \\
+(-3.1) & 4.3 & 3.9667 \\
+(-3.0) & 4 & 4 \\
+(-2.9) & 3.7 & 4.0333 \\
+\end{tabular}
+\te{The row for x=-3.0 is highlighted red.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you solve an equation or inequality by graphing?
+\answer{To solve an equation by graphing, write two new equations by setting y equal to the expression on either side of the equals sign. Then graph the two equations and identify the points of intersection. For an inequality, determine whether values of x to the left of or to the right of the point of intersection satisfy the inequality.}
+2. Communicate Precisely What is an advantage of solving an equation graphically by finding points of intersection?
+\answer{Solving an equation graphically by finding points of intersection can be helpful when the equations are complicated or impossible to solve algebraically. Also it can be useful when estimating solutions.}
+3. Error Analysis Ben said the graph of the inequality (-x^2+9>0) shows the solution is (x<-3) or (x>3). Is Ben correct? Explain.
+\answer{No; Ben found the solution of the inequality (-x^2+9<0). The correct solution is (-3<x<3).}
+\textbf{Do You KNOW HOW?}
+4. Using the graph below, what is the solution to (-2x+4=-2)? How can you tell?
+% FIG: 69 917 666 1017 768
+\placeholder{graph}{Square unit grid with x and y axes, arrowheads, and labels -4,-2,O,2,4. Red line y=-2x+4 and blue horizontal line y=-2, both with arrows at both ends, intersect at (3,-2). Window approximately [-5,5] on each axis.}
+\answer{(x=3); The x-coordinate of the intersection point is 3.}
+\end{concept-summary}
+% Source page 70: 45 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+On-Level: 5, 6, 8--35. Advanced: 5--9, 11, 13, 15, 17, 19, 21--35.
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each. Practice: 1 point each. Assessment Practice: 1 point each. Performance Task: 3 points.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Exercises & DOK \\
+1 & 9--14, 33 & 1 \\
+1 & 5, 34 & 2 \\
+1 & 7 & 3 \\
+2 & 15--20 & 1 \\
+2 & 21, 30 & 2 \\
+2 & 32, 35 & 3 \\
+3 & 22--25 & 1 \\
+3 & 8 & 2 \\
+4 & 26--29 & 1 \\
+4 & 6, 31 & 2 \\
+\end{tabular}
+\end{item-analysis}
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.
+% FIG: 70 1061 211 1118 270
+\placeholder{illustration}{Square QR code in the upper-right Practice and Problem Solving header beside Scan for Multimedia.}
+\end{te-addendum}
+\begin{practice}{5}{2}
+\textbf{Understand} Construct Arguments Use a graph to solve the equation (3x-5=2+3x). How can you use algebra to confirm that your graph shows the correct solution?
+\answer{no solution; Subtracting (3x) from both sides of the original equation gives (-5=2), which is false, so there is no solution.}
+\end{practice}
+\begin{practice}{6}{2}
+Error Analysis Victor graphed the equation (x^2+2x-5=-0.6x+1). He used the INTERSECT feature on his graphing calculator to find the solution. Victor said one of the solutions is (x\approx0.116). Describe and correct the error Victor made.
+% FIG: 70 550 446 730 626
+\placeholder{graph}{Unit grid with x,y axes and arrows; labels -4,-2,O,2,4. Red upward parabola y=x^2+2x-5 vertex (-1,-6), blue line y=-0.6x+1. Red marked right intersection near (1.47,0.116), another intersection near (-4.07,3.44). Curves have endpoint arrows; large red X at lower right marks the erroneous answer. Window approximately x [-6,6], y [-7,5].}
+\answer{Victor incorrectly said the solution is the y-value of one of the points of intersection instead of the x-value. One solution is (x\approx1.47).}
+\end{practice}
+\begin{practice}{7}{3}
+Higher Order Thinking Sadie used a graph to solve an equation. What equation did Sadie solve? Explain how to verify your equation is correct.
+% FIG: 70 550 706 680 836
+\placeholder{graph}{Unit square grid, x,y axes with arrows and labels -4,-2,O,2,4. Blue line y=2x+3 and red inverted V y=-|x+1|-1, vertex (-1,-1); intersection (-3,-3). Both curves have arrows on both ends. Window [-5,5] on both axes.}
+\answer{(2x+3=-|x+1|-1); The graph shows the solution is at (x=-3). Substitute (-3) for x in the equation: (2(-3)+3=-|(-3)+1|-1). Simplify the equation to see if it results in a true statement: (-3=-3).}
+\end{practice}
+\begin{practice}{8}{2}
+Communicate Precisely Explain how to use the table to find the approximate solution to the equation (f(x)=g(x)).
+\begin{tabular}{lll}
+(x) & (f(x)) & (g(x)) \\
+1.1426 & 1.8556 & 1.857175 \\
+1.1427 & 1.8562 & 1.8571625 \\
+1.1428 & 1.8568 & 1.85718 \\
+1.1429 & 1.8574 & 1.8571375 \\
+1.1430 & 1.858 & 1.857125 \\
+\end{tabular}
+\answer{For (x=1.1426), (x=1.1427), and (x=1.1428), (f(x)<g(x)). For (x=1.1429) and (x=1.1430), (g(x)<f(x)). So, the solution of (f(x)=g(x)) is between (x=1.1428) and (x=1.1429).}
+\end{practice}
+\begin{practice}{9}{1}
+\textbf{Practice} Use a graph to solve the equation. SEE EXAMPLE 1.
+(-x+4=2)
+\answer{(x=2)}
+\end{practice}
+\begin{practice}{10}{1}
+Use a graph to solve the equation. SEE EXAMPLE 1.
+(|x-4|-4=\frac12x)
+\answer{(x=0) or (x=16)}
+\end{practice}
+\begin{practice}{11}{1}
+Use a graph to solve the equation. SEE EXAMPLE 1.
+(3x+2=x+4)
+\answer{(x=1)}
+\end{practice}
+\begin{practice}{12}{1}
+Use a graph to solve the equation. SEE EXAMPLE 1.
+(-\frac14x+6=\frac12x+3)
+\answer{(x=4)}
+\end{practice}
+\begin{practice}{13}{1}
+Use a graph to solve the equation. SEE EXAMPLE 1.
+(\frac34x=2x-10)
+\answer{(x=8)}
+\end{practice}
+\begin{practice}{14}{1}
+Use a graph to solve the equation. SEE EXAMPLE 1.
+(|x+8|=|x-2|)
+\answer{(x=-3)}
+\end{practice}
+\begin{practice}{15}{1}
+Use a graph to solve the inequality. SEE EXAMPLE 2.
+(x^2-7x-8>0)
+\answer{(x<-1) or (x>8)}
+\end{practice}
+\begin{practice}{16}{1}
+Use a graph to solve the inequality. SEE EXAMPLE 2.
+(x-5>-2x+4)
+\answer{(x>3)}
+\end{practice}
+\begin{practice}{17}{1}
+Use a graph to solve the inequality. SEE EXAMPLE 2.
+(x^2+x-6<0)
+\answer{(-3<x<2)}
+\end{practice}
+\begin{practice}{18}{1}
+Use a graph to solve the inequality. SEE EXAMPLE 2.
+(x^2+2x-8\leq0)
+\answer{(-4\leq x\leq2)}
+\end{practice}
+\begin{practice}{19}{1}
+Use a graph to solve the inequality. SEE EXAMPLE 2.
+(-x^2-2x+15\leq0)
+\answer{(x\leq-5) or (x\geq3)}
+\end{practice}
+\begin{practice}{20}{1}
+Use a graph to solve the inequality. SEE EXAMPLE 2.
+(-x+5<\frac12x-1)
+\answer{(x>4)}
+\end{practice}
+\begin{practice}{21}{2}
+Cindy is longboarding 6 mi ahead of Tamira. Cindy is traveling at an average rate of 2 mph. Tamira is traveling at a rate of 4 mph. Let (x) represent the number of hours since Tamira started longboarding. When will Tamira be ahead of Cindy? Write an inequality to represent this situation.
+% FIG: 70 860 572 1117 717
+\placeholder{illustration}{Longboarding illustration. Foreground rider's feet on a longboard labeled Tamira, 4 mi/h; distant rider on road labeled Cindy, 2 mi/h. Road and landscape provide context.}
+\answer{(4x>2x+6); Tamira will pass Cindy after 3 hours.}
+\end{practice}
+\begin{practice}{22}{1}
+Use a graph and a table to solve the equation. SEE EXAMPLE 3.
+(x^2-8x+5=x+3)
+\answer{(x\approx0.228) and (x\approx8.772)}
+\end{practice}
+\begin{practice}{23}{1}
+Use a graph and a table to solve the equation. SEE EXAMPLE 3.
+(\frac14x+3=x^2-x+2)
+\answer{(x\approx-0.554) and (x\approx1.804)}
+\end{practice}
+\begin{practice}{24}{1}
+Use a graph and a table to solve the equation. SEE EXAMPLE 3.
+(2x^2-5=-x^2+2x-1)
+\answer{(x\approx-0.869) and (x\approx1.535)}
+\end{practice}
+\begin{practice}{25}{1}
+Use a graph and a table to solve the equation. SEE EXAMPLE 3.
+(3x-4=\frac12|x-5|)
+\answer{(x\approx1.857)}
+\end{practice}
+\begin{practice}{26}{1}
+Use graphing technology to approximate the solutions of the equation to the nearest tenth. SEE EXAMPLE 4.
+(x^2+6x-8=|x-1|+3)
+\answer{(x\approx-8.4) and (x\approx1.5)}
+\end{practice}
+\begin{practice}{27}{1}
+Use graphing technology to approximate the solutions of the equation to the nearest tenth. SEE EXAMPLE 4.
+(|x+2|-6=x^2-7x-2)
+\answer{(x\approx0.3) and (x\approx7.7)}
+\end{practice}
+\begin{practice}{28}{1}
+Use graphing technology to approximate the solutions of the equation to the nearest tenth. SEE EXAMPLE 4.
+(\frac15|x+2|-3=-|x-1|+5)
+\answer{(x\approx-6.2) and (x\approx7.2)}
+\end{practice}
+\begin{practice}{29}{1}
+Use graphing technology to approximate the solutions of the equation to the nearest tenth. SEE EXAMPLE 4.
+(x^2+3x-7=-2x^2-6x+9)
+\answer{(x\approx-4.3) and (x\approx1.3)}
+\end{practice}
+% Source page 71: 46 Practice & Problem Solving continued
+\begin{practice}{30}{2}
+\textbf{Apply} Reason Jack is running 2.45 mi ahead of Zhang. Jack is running at an average rate of 5.5 mph. Zhang is running at a rate of 7.75 mph. Let (x) represent the number of hours since Zhang started jogging.
+a. Write an inequality to represent when Zhang is ahead of Jack.
+\answer{(7.75x>5.5x+2.45)}
+b. Use graphing technology to find when Zhang will be ahead of Jack. Round to the nearest hundredth.
+\answer{Zhang will be ahead of Jack after about 1.09 h.}
+\end{practice}
+\begin{practice}{31}{2}
+Use Structure In a kickball game, a ball is kicked and travels along a parabolic path. The height (h), in feet, of the kickball (t) seconds after the kick can be modeled by the equation (h(t)=-16t^2+24t).
+% FIG: 71 516 539 779 678
+\placeholder{illustration}{Kickball illustration: player in teal and black kicking an orange ball, trajectory above player labeled h(t)=-16t^2+24t.}
+a. A fielder runs a route that will allow him to catch the kickball at about 3 ft above the ground. Write an equation that can be used to find when the fielder will catch the ball.
+\answer{(-16t^2+24t=3)}
+b. Use graphing technology to find out how long the kickball has been in the air when the fielder catches it on its descent. Round to the nearest hundredth.
+\answer{about 1.36 s}
+\end{practice}
+\begin{practice}{32}{3}
+Make Sense and Persevere The amount, in millions of dollars, that a company earns in revenue for selling (x) items, in thousands, is (R=-2x^2+18x-2). The expenses, in millions of dollars, for selling (x) items, in thousands, is (E=-0.25x+6).
+a. The profit (P), in millions of dollars, for selling (x) items, in thousands, is the difference between the revenues and the expenses. Write an inequality that models the company earning a profit.
+\answer{(0<(-2x^2+18x-2)-(-0.25x+6)) or (0<-2x^2+18.25x-8)}
+b. Use graphing technology to find how many items the company must sell to earn a profit. Round to the nearest item.
+\answer{Between 462 and 8663 items}
+\end{practice}
+\begin{practice}{33}{1}
+\textbf{Assessment Practice} Graph the equation (x^2-3=x+3). What are the solutions to the equation?
+% FIG: 71 128 364 324 561
+\placeholder{graph}{Teacher answer graph: unit grid, x and y axes with arrows, labels -2,O,2,4. Red upward parabola y=x^2-3 vertex (0,-3); blue line y=x+3. Intersections (-2,1) and (3,6). Window approximately [-4,6] on each axis. Curves have arrows at both ends.}
+\answer{(x=-2) and (x=3)}
+\end{practice}
+\begin{practice}{34}{2}
+SAT/ACT A graph shows the solution to the equation (-\frac12x+\frac72=-x+a) is (x=-1). What is the value of (a)?
+A. (-3)
+B. (-2)
+C. 1
+D. 2
+E. 3
+\answer{E}
+\end{practice}
+\begin{practice}{35}{3}
+\textbf{PERFORMANCE TASK} Deondra is using a coordinate grid to model her backyard. She wants to mark an area in her backyard to plant a garden. She decides the center of her garden will be located at the origin on her coordinate grid. She models the outline of her garden on the coordinate grid with the inequalities (-\frac12|x|+5\geq y) and (y\leq\frac12|x|-5).
+% FIG: 71 824 599 1083 747
+\placeholder{illustration}{Backyard illustration with shed at rear, planted garden beds, and coordinate grid across the center. Horizontal x and vertical y axes, origin O, labels -10,-5,5,10, extending roughly -12 to 12; no solution curves on this student grid.}
+Part A Graph the inequalities that model the area of Deondra's garden on the coordinate grid.
+% FIG: 71 127 629 361 864
+\placeholder{graph}{Teacher answer graph on grid with spacing 2, x,y axes and arrows, labels -8,-4,O,4,8, approximately [-12,12] on both axes. Solid blue inverted V y=-|x|/2+5 vertex (0,5), shaded blue below, and solid blue upright V y=|x|/2-5 vertex (0,-5), shaded yellow above. Green overlapping diamond has vertices (-10,0),(0,5),(10,0),(0,-5). Boundary rays have arrows.}
+\answer{See graph.}
+\te{Printed second inequality y\leq\frac12|x|-5; likely y\geq\frac12|x|-5 to match the printed graph and bounded garden.}
+Part B What shape is Deondra's garden?
+\answer{Parallelogram}
+Part C Deondra wants to cover her garden with garden soil. She wants the soil to be (\frac12) ft deep. If each unit on the coordinate grid represents 1 (ft^2), how much garden soil will Deondra need?
+\answer{50 (ft^3)}
+\end{practice}
+% Source page 72: 46A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & A12 \\
+2 & 1 & A12 \\
+3 & 2 & A06 \\
+4 & 2 & A09 \\
+5 & 2 & A12 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{1-5 Lesson Quiz: Solving Equations and Inequalities by Graphing}
+\te{ASSESSMENT RESOURCES. Name blank; enVision Algebra 2; SavvasRealize.com; enVision Algebra 2 Assessment Sourcebook. Lesson Quiz is available at SavvasRealize.com.}
+1. Sketch a graph that you could use to solve the equation.
+(-2|x-1|+3=\frac25x-\frac{11}{5})
+% FIG: 72 1047 305 1147 407
+\placeholder{graph}{Magenta teacher answer graph, unit grid, x,y axes with arrows and labels -4,-2,O,2,4, window [-5,5] on both axes. Inverted V y=-2|x-1|+3 vertex (1,3), rising line y=2x/5-11/5. Intersections (-2,-3) and (3,-1). Curves have arrows at both ends.}
+\answer{See graph.}
+2. What is the solution to the equation in Item 1?
+A. (x=1)
+B. (x=-2)
+C. (x=-2), (x=3)
+D. (x=-2), (x=1), (x=3)
+\answer{C}
+3. Each time Henry visits the art museum, he pays \$15 for parking and \$25 for admission. If he buys a membership for \$110, parking will cost \$10 and admission will be free. Graph two equations that represent the situation.
+% FIG: 72 998 449 1148 585
+\placeholder{graph}{Magenta lines y=40x and y=110+10x, with arrows at upper/right ends, on gray grid with x step 0.5 and y step 25. Axes x Number of visits, y Cost (dollars), origin O, x labels 1 through 5 and y labels 50 through 250. Window roughly x [-1,6], y [-25,275]. Intersection near (3.67,146.67).}
+\answer{See graph.}
+4. Use the equations you graphed in Item 3 to write an inequality that represents the numbers of museum visits for which the total member cost is less than the nonmember cost. What is the fewest number of visits that satisfies the inequality?
+Inequality: (\square+\square x<\square x). Solution: (\square) visits.
+\answer{(110+10x<40x); 4 visits}
+5. Two functions (f) and (g) represent the profit of two companies, in millions of dollars, about 13 years after they went into business. Their observed profits for a small time period (x) are shown in the table. Which is the closest approximation of the time where the two companies have equal profit or loss?
+\begin{tabular}{lll}
+(x) & (f(x)) & (g(x)) \\
+13.252 & 0.9406 & (-0.6205) \\
+13.253 & 0.1203 & 0.1212 \\
+13.254 & (-0.7000) & 0.8629 \\
+13.255 & (-1.5203) & 1.6046 \\
+13.256 & (-2.3406) & 2.3463 \\
+13.257 & (-3.1609) & 3.0880 \\
+\end{tabular}
+A. 0.1207 years
+B. 2.3435 years
+C. 13.253 years
+D. 13.256 years
+\answer{C}
+\end{te-addendum}
+
+% Source page 73: 46B Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate: DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{1-5 Reteach to Build Understanding: Solving Equations and Inequalities by Graphing}
+\te{Resource sheets show a Name blank, enVision Algebra 2, SavvasRealize.com, and enVision Algebra 2 Teaching Resources footer.}
+1. How can you solve the inequality (x^2-9x+8>0)?
+Graph the equation (y=x^2-9x+8). Find the values of (x) that result in the values of (y) being greater than 0.
+a. Highlight the points on the graph where (y>0) (or above the x-axis). All of these points are solutions.
+b. Circle the points where the graph crosses the x-axis. These points are where the expression is equal to zero. These are not solutions.
+c. Draw an arrow pointing left or right from each point showing where the graph crosses the x-axis. The arrows show the direction, positive or negative, where (y>0).
+d. Solve for (x) by choosing (<) or (>) for when (y>0).
+\answer{(x<1), (x>8)}
+% FIG: 73 340 416 402 478
+\placeholder{graph}{Reteach 1 graph: black upward parabola y=x^2-9x+8, vertex (4.5,-12.25), zeros 1 and 8; magenta horizontal arrows along x-axis point left from 1 and right from 8. Grid x step 2, y step 5; x labels -4,O,4,12, y label -10, axes x,y and arrows. Curves clipped near top.}
+2. Kennedy graphed the equation (y=x^2-4x+3) to solve for the inequality (x^2-4x+3<0). Based on the graph she concluded that (x<1) or (x>3). What mistake did she make? What is the correct solution?
+\answer{Kennedy solved for the x-values in which y would be greater than 0, not less than. The correct answer is (1<x<3).}
+% FIG: 73 340 557 402 619
+\placeholder{graph}{Reteach 2 graph on unit grid: black parabola y=x^2-4x+3 vertex (2,-1), zeros 1,3 and y-intercept 3. Axes x,y with arrows, labels -2,O,2,4 on x and 2,4,6 on y. Window roughly x [-4,6], y [-2,8].}
+3. Solve (|x+2|-3=x^2-6x+5) by graphing.
+a. Circle the points of intersection.
+b. Find the solutions.
+\answer{(x=1) and (x=6)}
+% FIG: 73 340 638 402 700
+\placeholder{graph}{Reteach 3 graph: magenta V y=|x+2|-3 vertex (-2,-3) and parabola y=x^2-6x+5 vertex (3,-4). Labeled intersections (1,0),(6,5). Gray grid spacing 2 with x labels -8,-4,O,4,8 and y labels -8,-4,4,8; x,y axes and arrowheads. Window [-10,10] on both axes; curves have arrows at visible ends.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{1-5 Additional Practice: Solving Equations and Inequalities by Graphing}
+Use a graph to solve each equation.
+1. (4x+6=8x-10)
+\answer{(x=4)}
+2. (-\frac34x-2=-\frac12x+1)
+\answer{(x=-12)}
+3. (|4-2x|+5=9)
+\answer{(x=0) or 4}
+Use a graph to solve each inequality.
+4. (x^2+4x-5<0)
+\answer{(-5<x<1)}
+5. (x^2-x-12\geq0)
+\answer{(x\leq-3) or (x\geq4)}
+6. (-2x+5<-7-3x)
+\answer{(x<-12)}
+Use a graph and a table to solve the equation. Round to the nearest thousandth if necessary.
+7. (x^2+3x-5=4x+3)
+\answer{(x\approx-2.372) and 3.372}
+8. (x^2-7x-5=\frac12x-4)
+\answer{(x\approx-0.131) and 7.631}
+9. (x^2-4x-1=x^2+2x+4)
+\answer{(x\approx-0.833)}
+Use graphing technology to approximate the solutions of the equation to the nearest tenth.
+10. (\frac13x^2+2x-9=6+|x-2|)
+\answer{(x\approx-12.9) and 4.9}
+11. (x^2+5x-2=6+|3x+1|)
+\answer{(x\approx-8.8) and 2.2}
+12. (3+|x-3|=\frac13|x+2|+5)
+\answer{(x\approx0.3) and 8.5}
+13. David begins the summer with a savings of \$54.00 more than Fatima. David's job pays \$8.25 per hour. Fatima's job pays \$9.75. If they both work the same amount of time each day, how many hours of work will it take David to have as much money as Fatima? Write an inequality and then solve.
+\answer{(54+8.25x\leq9.75x); (x\geq36); David will need to work at least 36 hours to have as much money as Fatima.}
+\te{Printed question and conclusion name David; the inequality instead models Fatima having at least as much money as David.}
+14. If you use a graph and a table to solve an equation that shows two expressions equal to one another, how can you use algebra to check your answer?
+\answer{Input the approximate answer into each expression. Check to see if the result, which is an estimate, is close to the correct answer. If the answer is too far from the correct answer, then you may need to reexamine the table and graph.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{1-5 Enrichment: Solving Equations and Inequalities by Graphing}
+\textbf{Expression List}
+(x^2-4x+3) \qquad (x-1) \qquad (|x-3|)
+1. Choose two expressions shown and set them equal to each other to create an equation. Write the equation next to the corresponding solutions shown. The expressions are used more than once.
+\begin{tabular}{ll}
+Equation & Solution \\
+(\underline{\qquad}=\underline{\qquad}) & (x=0) \\
+(\underline{\qquad}=\underline{\qquad}) & (x=1) \\
+(\underline{\qquad}=\underline{\qquad}) & (x=2) \\
+(\underline{\qquad}=\underline{\qquad}) & (x=3) \\
+(\underline{\qquad}=\underline{\qquad}) & (x=4) \\
+\end{tabular}
+\answer{For (x=0): (|x-3|=x^2-4x+3). For (x=1): (x-1=x^2-4x+3). For (x=2): (|x-3|=x-1). For (x=3): (|x-3|=x^2-4x+3). For (x=4): (x-1=x^2-4x+3).}
+2. Write another expression and set it equal to any of the expressions in the list. The goal is to make an equation with a solution (x=5). If the solution is not equal to 5, then write a new expression until the equation is true when (x=5).
+\answer{Answers may vary. Sample answer: (x-1=2x-6); (x^2-4x+3=3x-7); (|x-3|=2x-8)}
+3. Set each expression from the list above equal to (y) and graph each equation. Is there a point where all three graphs intersect? Identify all the points of intersection.
+\answer{There is no point where all three graphs intersect. Two graphs intersect at point (0,3) and (3,0). Another two intersect at points (1,0) and (4,3). The final two graphs only intersect at point (2,1).}
+% FIG: 73 1041 588 1104 650
+\placeholder{graph}{Enrichment graph: magenta upward parabola y=x^2-4x+3 vertex (2,-1), line y=x-1, V y=|x-3| vertex (3,0). Unit grid with axes x,y and arrows, labels O and 4 on y. Window roughly x [-1,4], y [-1,4], intersections (0,3),(3,0),(1,0),(4,3),(2,1). Visible curve ends have arrows.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{1-5 Mathematical Literacy and Vocabulary: Solving Equations and Inequalities by Graphing}
+Draw a line from the algebraic equation or inequality in the left column to the graph that may be used to represent it in the right column.
+1. (a+bx=c)
+2. (|x+a|=bx+c)
+3. (ax^2+bx+c<0)
+4. (ax^2+bx+c>0)
+5. (ax^2+bx+c=|x+d|)
+% FIG: 73 333 1022 405 1075
+\placeholder{graph}{Vocabulary first schematic graph, no tick labels or scale: upward parabola with vertex left of vertical axis below horizontal axis, crossing horizontal axis twice. Portion below horizontal axis is darker; axes have arrows. Matches item 3.}
+% FIG: 73 333 1081 405 1135
+\placeholder{graph}{Vocabulary second schematic graph, no tick labels or scale: upward parabola vertex below horizontal axis left of vertical axis, and V with vertex on horizontal axis farther left. Two intersections, axes and curve arrows. Matches item 5.}
+% FIG: 73 333 1140 405 1199
+\placeholder{graph}{Vocabulary third schematic graph, no tick labels or scale: V with vertex on horizontal axis left of vertical axis and positively sloped line crossing both arms. Axes and curves have arrows. Matches item 2.}
+% FIG: 73 333 1202 405 1260
+\placeholder{graph}{Vocabulary fourth schematic graph, no tick labels or scale: upward parabola with vertex below horizontal axis left of vertical axis. Parts above horizontal axis emphasized darker. Axes have arrows. Matches item 4.}
+% FIG: 73 333 1263 405 1316
+\placeholder{graph}{Vocabulary fifth schematic graph, no tick labels or scale: positive-slope line intersects positive horizontal line; coordinate axes, line arrows. Sloped line crosses vertical axis below origin and horizontal axis to the right. Matches item 1.}
+\answer{Magenta matching lines connect item 1 to graph 5, item 2 to graph 3, item 3 to graph 1, item 4 to graph 4, and item 5 to graph 2, counting graphs from top to bottom.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital screenshot: Solve the system of equations by graphing. y=3x+4; y=-2x+4. Use the graphing tool to graph the system. Click to enlarge graph. Question Help: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Exit; 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next. Printed digital example concerns a system rather than this lesson's equation comparison.}
+% FIG: 73 825 1044 929 1156
+\placeholder{graph}{Digital practice screenshot blank square grid, unit spacing, x and y axes with arrows and labels every 2 from -10 to 10, O at origin. Window [-10,10] on each axis. Question Help menu obscures upper-right part. No solution lines drawn.}
+\end{te-addendum}
+
+\end{document}

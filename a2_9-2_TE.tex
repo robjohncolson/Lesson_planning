@@ -1,0 +1,934 @@
+\documentclass{article}
+% Source: Topic_09_Teacher_Edition.pdf, PDF pages 25-35 (printed pages 452A-458B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 25: 452A, Lesson Overview
+\begin{lesson-meta}
+lesson: 9-2
+title: Circles
+standards: none printed
+practices: none printed
+objective: I can write, graph, and apply the equation of a circle.
+
+essential question: What are the geometric properties of a circle, and how do they relate to algebraic representations of a circle?
+
+\textbf{VOCABULARY}
+\item standard form of the equation of a circle
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 9-2 \\
+Title & Circles \\
+Standards & none printed \\
+I CAN Objective & I can write, graph, and apply the equation of a circle. \\
+Essential Question & What are the geometric properties of a circle, and how do they relate to algebraic representations of a circle? \\
+Lesson Vocabulary & standard form of the equation of a circle \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use the center, the radius, and the Pythagorean Theorem to derive the equation of a circle.
+\item Write and graph the equation of a circle and use it to model a real-world situation.
+\item Find the center and radius of a circle by completing the square.
+\item Solve a linear-quadratic system algebraically and verify by graphing.
+Essential Understanding. A circle is a set of points at a fixed distance from the center. The standard form of the equation of a circle with center ((h,k)) and radius (r) is ((x-h)^2+(y-k)^2=r^2). This definition is used to derive the equation of a circle and apply the geometric properties.
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Wrote, graphed, and applied the equation of a conic section in the shape of a parabola.
+In this lesson, students:
+\item Write, graph, and apply the equation of a circle.
+Later in this topic, students will:
+\item Write, graph, and apply the equations of other conic sections in the shapes of ellipses and hyperbolas.
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+\item Students write the equation of a circle by identifying the values of (h), (k), and (r) and then substituting them in the standard form of the equation of a circle, ((x-h)^2+(y-k)^2=r^2).
+\item Students apply the equation of a circle to solve real-world problems, such as writing the equation of a circular fence.
+\textbf{Mathematics Overview}
+Students continue their investigation of conic sections with circles. They derive the equation of a circle using the center and the radius, and factor equations, completing the square where necessary, to determine the equation of a circle. Students then graph circles given the equation or the center and radius.
+\textbf{Applying Math Practices}
+Model with Mathematics
+Students represent a real-world situation, such as the center, radius, and circumference of a circular stone patio, by writing an equation of a circle.
+Look For and Make Use of Structure
+Students look for the relationship between the equations of a line and a circle and their graphs to determine what the solution(s) of the system would look like.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+REVIEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+center of a circle & centro de un círculo \\
+radius & radio \\
+\end{tabular}
+NEW VOCABULARY
+\begin{tabular}{ll}
+standard form of the equation of a circle & forma estándar de la ecuación de un círculo \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Review the terms center of a circle and radius. Then introduce to students the standard form of the equation of a circle, ((x-h)^2+(y-k)^2=r^2), where (r) is the radius and the center is ((h,k)). Have students draw a line to match each constant in the standard form of the equation of a circle to the part of the circle it represents.
+\begin{tabular}{ll}
+(r) & y-coordinate of the center of a circle \\
+(h) & radius \\
+(k) & x-coordinate of the center of a circle \\
+\end{tabular}
+\answer{(r): radius; (h): x-coordinate of the center of a circle; (k): y-coordinate of the center of a circle.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 25 969 738 1121 919
+\placeholder{illustration}{Student Companion cover: glowing blue, purple, and orange loops on black, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+
+% Source page 26: 452B, Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students calculate the distance between two different tossed balls and the target ball. This prepares students for finding all of the points that are equidistant from a given point and understanding that, geometrically, this is a circle.
+STUDENT COMPANION Students can complete the Critique \& Explain activity on their Student Companion.
+\te{Critique \& Explain is available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: How can you determine which ball is closer to the target?
+\answer{Compare the distances from the balls to the target to see which one is less, and therefore closer.}
+Q: How are the methods for finding the distance alike? How are they different?
+\answer{They both subtract to find the distance between the coordinates. They also both use squares and square roots. Latoya calculated (d^2) first and took the square root at the end, while Jason calculated square roots in a middle step.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: How does Jason's work compare to the Distance Formula?
+\answer{Jason's work looks very similar to the Distance Formula, except the formula only contains one radical symbol over the differences in both the x- and y-coordinates and Jason used separate radicals over the differences.}
+Q: How could Jason use Latoya's method for calculating distance to see that his method is not correct?
+\answer{He could set up the same equation using his coordinates, and then he could take the square root of both sides.}
+For Early Finishers
+Q: How could you find several points that are the same distance from the target ball as Latoya's ball? As Jason's ball?
+\answer{To find other points that are the same distance from the target ball as Latoya's, you could count spaces on the graph 3 units in one direction, vertical or horizontal, and then 1 unit in the other direction. To find other points that are the same distance from the target ball as Jason's, you could count spaces on the graph 2 units in both the vertical and horizontal directions.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Facilitate a discussion about the location of the balls on the lawn with respect to the target ball.
+Q: Which ball was closer?
+\answer{Jason's ball is closer because (\sqrt{8}<\sqrt{10}).}
+Q: Is there more than one location that is the same distance from the target ball?
+\answer{Yes; these points will form a circle around the ball.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Latoya and Jason are lawn bowling. Each player tries to toss his or her ball closer to the target ball than his or her opponent's ball.
+The graph shows the locations of their first attempts.
+% FIG 26 999 261 1085 321
+\placeholder{graph}{Unit grid with black x/y axes, O at origin; approximate window x [-2,6], y [-1,5]; x labels -2,2,4 and y labels 2,4. Filled orange Jason point (-1,0), orange Latoya point (4,3), blue target point (1,2), each named beside point.}
+Latoya calculates the distance her ball is from the target ball:
+(d^2=(4-1)^2+(3-2)^2=10), so (d\approx3.2) ft.
+Jason calculates the distance his ball is from the target ball:
+(\sqrt{(1-(-1))^2}+\sqrt{(2-0)^2}=2+2=4).
+A. Did both players calculate the distances correctly? If not, who is in error and what is the correct distance?
+\answer{A. No; Jason's calculation is incorrect. The correct distance is (\sqrt{(1-(-1))^2+(2-0)^2}=\sqrt{2^2+2^2}=\sqrt{8}\approx2.8) ft.}
+B. Make Sense and Persevere Latoya's next ball stops at a position described by ((-2,1)). Is she now ahead? Explain.
+\answer{B. No; this ball is also (\sqrt{10}\approx3.2) ft from the target ball. So, she is still not ahead of Jason.}
+\te{Digital version: Go back. Enter your answer. Student Edition. SAMPLE STUDENT WORK.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with CRITIQUE \& EXPLAIN
+Use Structure How might the grid help you to determine distances?
+\answer{The grid lines form right angles, and the grid lines show horizontal and vertical distances. So, diagonal distances can be calculated.}
+\end{te-addendum}
+
+% Source page 27: 452, Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Students learn the algebraic representation of a circle and understand that a circle is the set of points that are equidistant from the center. Students learn to write, graph, and apply the equation of a circle.
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Derive the Equation of a Circle}
+Build Procedural Fluency From Conceptual Understanding ETP
+Q: Why can the Pythagorean Theorem be applied when finding the equation of a circle?
+\answer{The distance between the center of the circle and a point on the circle can be represented by the hypotenuse of a right triangle.}
+Q: How does the formula work for all points on the circle?
+\answer{The (x) represents the x-coordinate of any point, and the (y) represents the y-coordinate of any point.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Derive the Equation of a Circle}
+\te{CONCEPTUAL UNDERSTANDING}
+How can you write an equation in standard form that describes the circle with center ((2,-1)) and radius 3?
+Recall that a circle is a set of points that are a fixed distance, called the radius, from a fixed point, called the center. It is the cross section of a cone cut by a plane perpendicular to the cone's axis.
+% FIG 27 1045 282 1119 376
+\placeholder{diagram}{Pale-blue double right cone with common vertex and dashed vertical axis. Horizontal blue plane perpendicular to axis cuts lower cone, circular intersection shown as ellipse in perspective, hidden edges dashed.}
+This circle is the set of all points that lie 3 units from the point ((2,-1)).
+% FIG 27 800 371 921 441
+\placeholder{graph}{Blue circle centered at black filled (2,-1), radius 3; black x/y double-arrow axes without grid, unit ticks, y labels 2 and -4, O at origin. Approximate window x [-2,8], y [-5,3]. Black point (x,y) in upper-right quadrant near (4,1.2), green radius labeled 3 from center to point, horizontal red leg labeled |x-2| to black point (x,-1), vertical blue leg labeled |y-(-1)| from there to (x,y).}
+\te{Callout: Use absolute value to find the lengths of the legs, since length is positive.}
+By the Pythagorean Theorem, (|x-2|^2+|y-(-1)|^2=3^2), or ((x-2)^2+(y+1)^2=9).
+\te{Callout: Squaring each term eliminates the need for absolute value.}
+The standard form of the equation of a circle with center ((h,k)) and radius (r) is ((x-h)^2+(y-k)^2=r^2).
+Notice that the equation that was given as the solution was expressed in standard form.
+\te{REASON The four points on the circle directly above, below, left, and right of the center cannot form a right triangle with the center. You can, however, verify that these points satisfy the equation of the circle as well.}
+\answer{((x-2)^2+(y+1)^2=9)}
+\end{example}
+\begin{tryit}{1}
+a. Write the equation of a circle with radius 1.8 and center at the origin.
+b. What would be the equation if the center was at ((-4,5))?
+\answer{a. (x^2+y^2=1.8^2); b. Replace (x^2) with ((x+4)^2) and replace (y^2) with ((y-5)^2), so ((x+4)^2+(y-5)^2=1.8^2).}
+\te{Try It 1 answer printed on source page 28.}
+\end{tryit}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples: ADDITIONAL EXAMPLE 1}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+How can you write an equation in standard form that describes the circle with center ((1.4,-5.1)) and radius 2.7?
+((x-h)^2+(y-k)^2=r^2)
+((x-1.4)^2+(y+5.1)^2=7.29)
+\answer{((x-1.4)^2+(y+5.1)^2=7.29)}
+Example 1 Help students transition to finding the equation for circles when the coordinates of the center are not integers.
+Q: How do you show the center of the circle in the equation?
+\answer{Subtract the x-coordinate from (x) and the y-coordinate from (y).}
+Q: How do you show the radius of the circle in the equation?
+\answer{Set the equation equal to the square of the radius.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 2}
+Arthur is making a template for the dart boards he is going to sell. He graphs the outline of the board on grid paper. The points ((9,9)) and ((9,-27)) are the endpoints of a diameter of the circle. The points ((-9,-9)) and ((27,-9)) also form a diameter. Write and graph the equation of this circle.
+Graph the 4 points on the coordinate plane.
+Connecting points across from each other results in two diameters. The center is where the diameters intersect.
+That gives the center of ((9,-9)).
+Each diameter measures 36 units, so the radius is 18 units.
+The equation for the circle is
+((x-9)^2+(y-(-9))^2=18^2)
+((x-9)^2+(y+9)^2=324)
+% FIG 27 921 887 1016 985
+\placeholder{graph}{Gray grid spacing 5, black x/y double-arrow axes, O at origin; window [-30,30] both axes, x labels -20,-10,10,20, y -20,-10,10,20. Orange circle center (9,-9), radius18, extrema (-9,-9),(27,-9),(9,9),(9,-27); no marked center or endpoints.}
+\answer{((x-9)^2+(y+9)^2=324)}
+Example 2 Help students transition to writing the equation and graphing the circle for a real-world situation with this additional example.
+Q: How do you find the center of the circle?
+\answer{Connecting points across from each other results in two diameters. The center is where the diameters intersect.}
+Q: How do you find the radius of the circle?
+\answer{Find the distance from one of the points to the center of the circle.}
+\end{te-addendum}
+
+% Source page 28: 453, Example 2
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How does the equation change when the center of the circle is the origin?
+\answer{Because ((h,k)) is ((0,0)) when the center of the circle is the origin, you substitute 0 for (h) and 0 for (k) into the standard form of the equation of a circle. When simplified, the equation has just (x^2) and (y^2) as terms, and a constant term.}
+\end{te-addendum}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Write and Graph an Equation of a Circle}
+Use and Connect Mathematical Representations ETP
+PART A
+Q: Why is 0 subtracted from both (x) and (y) in the equation?
+\answer{Zero is subtracted from both variables because the circle is centered at the origin and ((h,k)=(0,0)).}
+Q: Why is (r^2) not a perfect square?
+\answer{The value of (r) is an irrational number.}
+Q: Can you graph the exact circle?
+\answer{No; because you approximate the length of the radius, the graph is not exact.}
+PART B
+Q: How do you know that the graph of a circle is not a function?
+\answer{For several values of (x), there are two values of (y).}
+Q: How do you determine the range for the graph?
+\answer{Find the minimum and maximum values of (y) in the circle.}
+Q: How do you determine the domain for the graph?
+\answer{Find the minimum and maximum values of (x) in the circle.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Write and Graph an Equation of a Circle}
+Write an equation of each circle, and sketch its graph. What are the domain and range of the relation?
+A. The circle centered at the origin with radius (\sqrt{3})
+((x-h)^2+(y-k)^2=r^2)
+((x-0)^2+(y-0)^2=(\sqrt{3})^2)
+(x^2+y^2=3)
+\te{Callout: Substitute the coordinates of the center ((0,0)) for (h) and (k).}
+The equation of the circle is (x^2+y^2=3).
+To sketch the circle, first plot points on the axes that are (\sqrt{3}) units, or about 1.7 units, away from the origin.
+You can determine from the graph that both the domain and range are ([-\sqrt{3},\sqrt{3}]).
+% FIG 28 1053 334 1152 434
+\placeholder{graph}{Gray half-unit grid with window [-2.5,2.5] on both axes; black double-arrow x/y axes, O at origin, labels +/-2. Red circle center (0,0), radius sqrt3, red filled center and four extrema (+/-sqrt3,0),(0,+/-sqrt3).}
+\te{USE APPROPRIATE TOOLS To create a sketch of the circle, the easiest points to plot are those that lie on the horizontal and vertical lines of symmetry for the circle.}
+\answer{A. (x^2+y^2=3); domain and range ([-\sqrt{3},\sqrt{3}]).}
+B. The circle centered at ((-3,5)) with radius (\frac{5}{2})
+((x-h)^2+(y-k)^2=r^2)
+((x-(-3))^2+(y-5)^2=(\frac{5}{2})^2)
+((x+3)^2+(y-5)^2=\frac{25}{4})
+\te{Callout: Substitute the coordinates of the center ((-3,5)) for (h) and (k).}
+The equation of the circle is ((x+3)^2+(y-5)^2=\frac{25}{4}).
+To sketch the circle, plot the center. Then plot points that are (\frac{5}{2}) units away horizontally and vertically. You can determine from the graph that the domain is ([-\frac{11}{2},-\frac{1}{2}]) and the range is ([\frac{5}{2},\frac{15}{2}]).
+% FIG 28 1053 541 1152 640
+\placeholder{graph}{Gray unit grid, window x [-8,2], y [-1,9], black double-arrow x/y axes, O at origin, x label -5, y labels 2,4,6,8. Red circle with center (-3,5) and radius2.5; filled red center and extrema (-5.5,5),(-0.5,5),(-3,2.5),(-3,7.5).}
+\answer{B. ((x+3)^2+(y-5)^2=\frac{25}{4}); domain ([-\frac{11}{2},-\frac{1}{2}]); range ([\frac{5}{2},\frac{15}{2}]).}
+\end{example}
+\begin{tryit}{2}
+Find an equation of each circle described. Sketch the graph.
+a. center ((0,0)) and radius 4
+\answer{a. (x^2+y^2=16)}
+% FIG 28 178 993 371 1188
+\placeholder{graph}{Try It2a: red circle center(0,0), radius4, extrema (+/-4,0),(0,+/-4); unit gray grid, window [-5,5] both axes, black double-arrow x/y axes, O at origin, labels -4,-2,2,4.}
+b. center ((8,-3)) and radius 1
+\answer{b. ((x-8)^2+(y+3)^2=1), or (x^2+y^2-16x+6y+72=0)}
+% FIG 28 425 993 617 1186
+\placeholder{graph}{Try It2b: red circle center(8,-3), radius1, extrema (7,-3),(9,-3),(8,-2),(8,-4). Unit gray grid window x[-1,9], y[-7,3], black double-arrow x/y axes, O at origin; x labels2,4,6,8 and y labels2,-2,-4,-6.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How does the equation of a circle with the center at the origin look different than the equation of a circle with the center not at the origin?
+\answer{The equation of a circle with the center at the origin does not have values subtracted from (x) and (y) in the equation, but a circle with the center not at the origin does have values subtracted from (x) and (y).}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error}
+Try It! 2b Students sometimes use the signs of the coordinates as the signs in each binomial of the equation. Have them identify the values of (h) and (k) from the given center and then write the standard form of the equation of the circle by substituting the value of (h) and the value of (k) into the standard form of the equation.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2
+Construct Arguments Sadie wrote the equation of a circle with center ((3,-5)) and radius 4 as ((x+3)^2+(y-5)^2=16). Is Sadie correct? Explain.
+\answer{Sadie is not correct. The formula requires that the coordinates of the center be subtracted from (x) and (y). Sadie added the coordinates. The correct equation is ((x-3)^2+(y+5)^2=16).}
+\end{te-addendum}
+
+% Source page 29: 454, Example 3
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Use a Circle to Model a Real-World Situation}
+Pose Purposeful Questions ETP
+Q: Before you begin, what do you need to find in order to write the equation of a circle?
+\answer{The center of the circle and radius are needed to write the equation of the circle.}
+Q: How do you find the midpoint of the diameter? Explain how the midpoint of the diameter is related to ((h,k)).
+\answer{Use the Midpoint Formula to find the midpoint of the diameter. By definition, the midpoint of the diameter is the center of the circle, ((h,k)).}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Use a Circle to Model a Real-World Situation}
+\te{APPLICATION}
+The National Native American Veterans Memorial in Washington, D.C. consists of a sculpture at its center. A circular seating area surrounds the sculpture. Lances are set in the wall for visitors to tie cloths.
+% FIG 29 799 278 979 448
+\placeholder{photo}{Large vertical circular metal ring sculpture on a low circular dark stone base with reflective water, outdoors with trees and building behind, flags at left.}
+% FIG 29 978 333 1123 449
+\placeholder{graph}{Black double-arrow x/y axes, O at origin, no grid; ticks every5, labels10,20,30,40, approximate window x[-10,45], y[-10,45]. Red circle center(23,23), radius sqrt274, callout Circular wall. Blue filled endpoints labeled Lance:(8,30) and Lance:(38,16) connected by dashed blue diameter through blue filled center, callout Center of sculpture; small gray circle concentric around center.}
+After visiting the memorial, Dyani uses a model of the memorial on a coordinate grid to help with an artistic brochure. What equation represents the edge of the circular seating area?
+Step 1: Find the center.
+To find the equation of the circle, first find the center of the memorial. Since opposite lances define a diameter of the circle, find the midpoint of the diameter.
+(Center=(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}))
+(=(\frac{38+8}{2},\frac{16+30}{2}))
+(=(23,23))
+\te{Callout: Use the Midpoint Formula with the given points ((8,30)) and ((38,16)).}
+Step 2: Find the radius.
+To find the radius, find the distance from the center to one of the lances.
+(Radius=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2})
+(=\sqrt{(23-8)^2+(23-30)^2})
+(=\sqrt{274})
+(\approx16.6)
+\te{Callout: Use the Distance Formula with center ((23,23)) and point ((8,30)). STUDY TIP When multiple points can be used to find a radius, think about which points may be easier to use in calculations.}
+The equation of the circle with center ((23,23)) and radius (\sqrt{274}) is ((x-23)^2+(y-23)^2=274).
+\answer{((x-23)^2+(y-23)^2=274)}
+\end{example}
+\begin{tryit}{3}
+A second concentric circular wall surrounds the seating area of the National Native American Veterans Memorial, creating a walking path around the memorial. When drawn on the coordinate plane, the circle is tangent to both the x- and y-axes. What equation represents the outer wall?
+\answer{((x-23)^2+(y-23)^2=23^2=529)}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: What is the shortest distance between a lance and the outer wall?
+\answer{6.4 feet}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 3)
+LISTENING BEGINNING Ask students to listen as you read the following sentences involving veterans aloud.
+\item The veteran teacher of 35 years was a mentor for the student teacher.
+\item The World War II veteran served in The Battle of Normandy.
+\item Ted Kennedy was a veteran senator, serving more than 40 years in Congress.
+Q: What do you think veteran means?
+\answer{A veteran is someone with several years of experience in an occupation or in the military.}
+Q: What type of veterans are most likely honored with a memorial statue?
+\answer{veterans of the military, especially those who have served during a war}
+WRITING DEVELOPING A grid is a pattern of straight lines that intersect to form squares. On maps, grids are used to help pinpoint specific locations.
+Q: Find your hometown on a map of your state. Write directions that would help someone locate your hometown on the map.
+\answer{Check students' work.}
+Q: Place a piece of clear plastic with a grid drawn on it over the map of your state. Then write directions that would help someone locate your hometown on the map.
+\answer{Check students' work.}
+Q: Which directions were easier to write?
+\answer{Using the grid made the second set easier.}
+READING EXPANDING Ask students to read the example.
+Q: From what you have read, can you tell what a lance is?
+\answer{It is a place to tie cloths.}
+Display various definitions of lance for students to read: 1) to puncture 2) a spear carried by mounted warriors used for jabbing 3) a sharpened stick thrown at animals or fish.
+Q: Does lance, as used in this example, seem to match any of these definitions?
+\answer{These are representations of a spear carried by mounted warriors used for jabbing.}
+\end{te-addendum}
+
+% Source page 30: 455, Examples 4 and 5
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Complete the Square to Find the Center and Radius of a Circle}
+Pose Purposeful Questions ETP
+Q: How does completing the square help express the equation of the circle in standard form and make it easier to identify the center ((h,k)) and the radius (r)?
+\answer{Completing the square results in an equation of the form ((x-h)^2+(y-k)^2=r^2), and the center ((h,k)) and radius (r) can easily be identified from this form.}
+Q: When you take the square root of 16, why do you consider only the positive square root?
+\answer{The square root represents the radius, which is a length. Distances are always positive.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Complete the Square to Find the Center and Radius of a Circle}
+How can you rewrite the equation (x^2+y^2+4x-8y+4=0) to show that it is the equation of a circle and to identify its center and radius?
+(x^2+y^2+4x-8y+4=0)
+((x^2+4x)+(y^2-8y)=-4)
+((x^2+4x+4)+(y^2-8y+16)=-4+4+16)
+((x+2)^2+(y-4)^2=16)
+\te{Callout: Complete the square two times when there are two different squared variables. LEARN TOGETHER Do you seek help when needed? Do you offer help and support others?}
+The equation ((x+2)^2+(y-4)^2=16) is of the form ((x-h)^2+(y-k)^2=r^2), so its graph is a circle with radius 4 and center ((-2,4)).
+\answer{((x+2)^2+(y-4)^2=16); radius 4 and center ((-2,4)).}
+\end{example}
+\begin{tryit}{4}
+Verify that (x^2+y^2+10x-6y-2=0) is an equation of a circle. Identify its center and radius.
+\answer{The circle has center ((-5,3)) and radius 6.}
+\end{tryit}
+\begin{te-addendum}{4}{HabitsOfMind}
+Use with EXAMPLES 3 \& 4
+Make Sense and Persevere For the circle that has equation (x^2+y^2+10x-6y+k=0), what has to be true about (k)? Explain.
+\answer{The radius must be positive, and since 34 must be added to complete the squares, (k) cannot be greater than or equal to 34.}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Solve a Linear-Quadratic System}
+Pose Purposeful Questions ETP
+Q: Which method is used to solve the system?
+\answer{Substitution, the linear equation is solved for (y), and the expression equal to (y) is substituted into the equation of the circle.}
+Q: Why are there two possible answers algebraically? Graphically?
+\answer{Algebraically, the Zero Product Property implies that there are two values of (x) that satisfy the equation. Graphically, the line intersects the circle in two points.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Solve a Linear-Quadratic System}
+What is the solution of the system of equations?
+(y=3x-5)
+(x^2+y^2-25=0)
+Step 1 Use substitution to solve for (x).
+(x^2+y^2-25=0)
+(x^2+(3x-5)^2-25=0)
+(x^2+9x^2-30x+25-25=0)
+(10x^2-30x=0)
+(10x(x-3)=0)
+(x=0) or (x=3)
+\te{LOOK FOR RELATIONSHIPS It is possible that a line and a circle do not intersect or intersect in just one point. If there is no intersection, what might the solutions look like?}
+Step 2 Substitute the two x-values in (y=3x-5) to find the solutions to the system.
+\begin{tabular}{ll}
+(y=3x-5) & (y=3x-5) \\
+(y=3(0)-5) & (y=3(3)-5) \\
+(y=-5) & (y=4) \\
+\end{tabular}
+The solutions to the system are ((0,-5)) and ((3,4)).
+Verify the solutions ((0,-5)) and ((3,4)) by graphing the system.
+% FIG 30 1031 658 1147 777
+\placeholder{graph}{Unit gray grid window [-6,6] both axes, black double-arrow x/y axes, O origin, labels +/-2,+/-4. Black circle x^2+y^2=25 center(0,0), radius5. Red line y=3x-5 with arrowheads at both ends. Green filled intersection labeled (0,-5), blue filled intersection labeled (3,4).}
+\answer{((0,-5)) and ((3,4))}
+\end{example}
+\begin{tryit}{5}
+Solve the linear-quadratic system of equations.
+(2x+y=3)
+(x^2+y^2=9)
+\answer{((0,3)), ((\frac{12}{5},-\frac{9}{5}))}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+Use with EXAMPLE 5
+Reason Of the three methods for solving a system of equations---substitution, elimination, and graphing---which would you be least likely to use to solve the system? Explain.
+\answer{Elimination, since both the x- and y-terms have different degrees, the elimination of one variable by addition or subtraction is not possible. Solve either by graphing or by substitution.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 4 Some students may struggle with completing the square. Use these problems to provide extra practice.
+Complete the square.
+1. (x^2+10x=-13)
+2. (y^2-12y=4)
+Q: What is the number you added to each side of the equation to complete the square?
+\answer{25; 36}
+Q: After completing the square, write each equation so that one side is a binomial squared.
+\answer{((x+5)^2=12); ((y-6)^2=40)}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 5 Have students explore finding the equation of a circle that intersects a line at given points.
+Write the equation of a circle with center ((0,0)) that intersects the line (x-y=2) at ((-6,-8)) and ((8,6)).
+Q: How do you find the radius of the circle?
+\answer{Since the radius is the distance from ((-6,-8)) or ((8,6)) to the origin, the distance can be found using the Pythagorean Theorem. Either point can be used to show that (r^2=(-6)^2+(-8)^2) or (6^2+8^2); therefore, the radius is 10.}
+\end{te-addendum}
+
+% Source page 31: 456, Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions}
+Q: What are the key features of a circle?
+\answer{the center and the radius}
+Q: How can you identify the radius and center of a circle in the standard form of an equation of a circle, ((x-h)^2+(y-k)^2=r^2)?
+\answer{The radius is (r) and the center is ((h,k)).}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error: Exercise 10}
+Some students may incorrectly set the equation equal to 2 by taking the square root of 4. Encourage students to write the equation for a circle in standard form before substituting values. This helps them see that when substituting 4 for (r), they need to square 4.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Circles}
+DEFINITION A circle is a set of points that are a fixed distance, called the radius, from a fixed point, called the center.
+The standard form of an equation of a circle with center ((h,k)) and radius (r) is:
+((x-h)^2+(y-k)^2=r^2).
+GRAPH Graph of ((x+1)^2+(y-5)^2=4^2)
+% FIG 31 902 312 1028 429
+\placeholder{graph}{Unit grid with black double-arrow x and y axes, O at origin, x labels -5 and 5, y label 5, window x [-7,6], y [-2,10]. Red circle centered at the filled labeled point (-1,5), radius 4, extrema (-5,5), (3,5), (-1,1), (-1,9).}
+EQUATION Complete the square to express the equation of a circle in standard form.
+(x^2+y^2+2x-10y+10=0)
+((x^2+2x+1)+(y^2-10y+25)=-10+1+25)
+((x+1)^2+(y-5)^2=4^2)
+Center: ((-1,5)), radius: 4
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION What are the geometric properties of a circle, and how do they relate to algebraic representations of a circle?
+\answer{A circle is a round plane figure that has a circumference with points equidistant from the center. The formula ((x-h)^2+(y-k)^2=r^2) gives the center ((h,k)) and the radius (r).}
+2. Vocabulary Explain how to find the standard form of the equation of a circle if you know the circle's center and radius.
+\answer{Given the center ((h,k)) and the radius (r), substitute the values into the standard form of the equation of a circle, ((x-h)^2+(y-k)^2=r^2).}
+3. Error Analysis Chiang said that a circle with the equation ((x+2)^2+(y-5)^2=6) has a radius of 36. Explain and correct Chiang's error.
+\answer{In the equation (r^2=6), Cole squared 6 to find the radius instead of taking the square root of 6 to find the radius. The length of the radius is (\sqrt{6}).}
+\te{Printed Cole in the answer; likely Chiang, as named in the prompt.}
+4. Look for Relationships If the coordinates of a diameter of a circle are known, how can you determine the center of the circle?
+\answer{Use the Midpoint Formula to find the midpoint of the diameter. This point is the center of the circle.}
+\textbf{Do You KNOW HOW?}
+Find the center and the radius of each circle.
+5. (x^2+y^2=25)
+\answer{((0,0)); 5}
+6. ((x+3)^2+(y+7)^2=49)
+\answer{((-3,-7)); 7}
+7. ((x-1)^2+(y+6)^2=5)
+\answer{((1,-6)); (\sqrt{5})}
+8. ((x-9)^2+(y-4)^2=11)
+\answer{((9,4)); (\sqrt{11})}
+Find an equation of each circle described.
+9. center ((0,0)) and radius 8
+\answer{(x^2+y^2=64)}
+10. center ((-3,9)) and radius 4
+\answer{((x+3)^2+(y-9)^2=16)}
+\end{concept-summary}
+
+% Source page 32: 457, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice & Problem Solving}
+Practice & Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assessment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+11, 13, 15, 18--28, 31--39 & 11--18, 21--39 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+Scan the QR code to access a video tutorial.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 18 & 1 \\
+1 & 12, 13, 38 & 2 \\
+1 & 17 & 3 \\
+2 & 19--24 & 2 \\
+2 & 11, 14, 15 & 2 \\
+2 & 16, 39 & 3 \\
+3 & 25, 34--36 & 2 \\
+4 & 26--29, 37 & 1 \\
+5 & 30--33 & 1 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{2}
+UNDERSTAND. Use Structure Write an equation of the circle shown in the graph.
+% FIG 32 572 326 725 480
+\placeholder{graph}{Unit grid, black double-arrow x and y axes, O at origin; x labels -2,2,4,6, y labels 2,-2,-4,-6,-8, window x [-4,8], y [-9,3]. Red circle with filled center (2,-3), radius 5, extrema (-3,-3), (7,-3), (2,2), (2,-8).}
+\answer{((x-2)^2+(y+3)^2=25)}
+\end{practice}
+\begin{practice}{12}{2}
+Look for Relationships The equation of a circle is ((x+9)^2+(y-4)^2=17). What is the area of the circle, in terms of (\pi)?
+\answer{(17\pi)}
+\end{practice}
+\begin{practice}{13}{2}
+Error Analysis Describe and correct the error a student made in describing the translation of the circle.
+original equation: (x^2+y^2=3)
+translated equation: ((x+2)^2+(y-2)^2=3)
+translations: 2 units right; 2 units down
+\te{The student's work is marked with a red X.}
+\answer{The circle is translated 2 units left and 2 units up, not 2 units right and 2 units down.}
+\end{practice}
+\begin{practice}{14}{2}
+Use Structure Write an equation of a circle with center ((-4,5)) and diameter of length (4\sqrt{3}).
+\answer{((x+4)^2+(y-5)^2=12)}
+\end{practice}
+\begin{practice}{15}{2}
+Reason The equation of a circle is (x^2+y^2=36).
+a. What are the x-intercepts of the circle?
+\answer{((6,0)) and ((-6,0))}
+b. What are the y-intercepts of the circle?
+\answer{((0,6)) and ((0,-6))}
+\end{practice}
+\begin{practice}{16}{3}
+Higher Order Thinking Write an equation of a circle that is tangent to the x-axis at ((4,0)) and the y-axis at ((0,4)).
+\answer{((x-4)^2+(y-4)^2=16)}
+\end{practice}
+\begin{practice}{17}{3}
+Look for Relationships Does the equation (x^2+y^2=0) represent a circle? Why or why not?
+\answer{No; a circle cannot have a radius of 0.}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Write the equation of a circle with radius 2.2 and center at the origin. SEE EXAMPLE 1
+\answer{(x^2+y^2=2.2^2)}
+\end{practice}
+\begin{practice}{19}{2}
+Find an equation of each circle described. Sketch the graph. SEE EXAMPLE 2
+center ((0,0)) and radius 2
+\answer{(x^2+y^2=4); see graph.}
+% FIG 31 126 1082 319 1275
+\placeholder{graph}{Answer 19: Unit grid with black double-arrow axes x and y, O at origin, window [-5,5] on both axes, labels -4,-2,2,4. Red circle centered at origin, radius 2, intercepts (+/-2,0) and (0,+/-2).}
+\end{practice}
+\begin{practice}{20}{2}
+Find an equation of each circle described. Sketch the graph. SEE EXAMPLE 2
+center ((2,4)) and radius 3
+\answer{((x-2)^2+(y-4)^2=9); see graph.}
+% FIG 31 671 913 865 1108
+\placeholder{graph}{Answer 20: Unit grid with black double-arrow x and y axes, O at origin, window x [-3,7], y [-2,8], x labels -2,2,4,6, y labels 2,4,6. Red circle centered at (2,4), radius 3, extrema (-1,4), (5,4), (2,1), (2,7).}
+\end{practice}
+\begin{practice}{21}{2}
+Find an equation of each circle described. Sketch the graph. SEE EXAMPLE 2
+center ((-1,3)) and radius 5
+\answer{((x+1)^2+(y-3)^2=25); see graph.}
+% FIG 32 509 1151 704 1349
+\placeholder{graph}{Answer 21: Grid spaced by 2 with black double-arrow x and y axes, O at origin, x window [-10,10], y [-6,14], x labels -8,-4,4,8, y labels -4,4,8,12. Red circle centered at (-1,3), radius 5, extrema (-6,3), (4,3), (-1,-2), (-1,8).}
+\end{practice}
+\begin{practice}{22}{2}
+Find an equation of each circle described. Sketch the graph. SEE EXAMPLE 2
+center ((-5,-3)) and radius 4
+\answer{((x+5)^2+(y+3)^2=16); see graph.}
+% FIG 32 857 1150 1051 1348
+\placeholder{graph}{Answer 22: Unit grid with black double-arrow x and y axes, O at origin, window x [-9,1], y [-8,2], x labels -8,-6,-4,-2, y labels -2,-4,-6. Red circle centered at (-5,-3), radius 4, extrema (-9,-3), (-1,-3), (-5,1), (-5,-7).}
+\end{practice}
+\begin{practice}{23}{2}
+Find an equation of each circle described. Sketch the graph. SEE EXAMPLE 2
+center ((0,-3)) and radius (\sqrt{7})
+\answer{(x^2+(y+3)^2=7); see graph.}
+% FIG 33 126 189 320 383
+\placeholder{graph}{Answer 23: Unit grid with black double-arrow x and y axes, O at origin, window x [-5,5], y [-7,3], x labels -4,-2,2,4, y labels 2,-2,-4,-6. Red circle centered at (0,-3), radius sqrt(7).}
+\end{practice}
+\begin{practice}{24}{2}
+Find an equation of each circle described. Sketch the graph. SEE EXAMPLE 2
+center ((-4,1)) and radius (\frac{3}{2})
+\answer{((x+4)^2+(y-1)^2=\frac{9}{4}); see graph.}
+% FIG 33 126 419 320 613
+\placeholder{graph}{Answer 24: Unit grid with black double-arrow x and y axes, O at origin, window x [-7,3], y [-5,5], x labels -6,-4,-2,2, y labels -4,-2,2,4. Red circle centered at (-4,1), radius 1.5.}
+\end{practice}
+\begin{practice}{25}{2}
+Diego wants to place a circular pool in his backyard. He has already decided the pool wall will include the endpoints of a diameter indicated on the grid of his backyard. What equation describes the location of the swimming pool wall? SEE EXAMPLE 3
+% FIG 32 882 574 1131 763
+\placeholder{diagram}{Backyard illustration with green lawn, stone patio, orange chair, and purple umbrella under a coordinate grid spaced by 2. Black double-arrow x and y axes have no numerical labels. Red circular pool wall has blue center at (3,5) and a blue diameter joining labeled filled endpoints (-3,13) and (9,-3). Radius 10.}
+\answer{((x-3)^2+(y-5)^2=100)}
+\end{practice}
+\begin{practice}{26}{1}
+Verify that the equation is an equation of a circle. Identify its center and radius. SEE EXAMPLE 4
+(x^2+y^2+6x+4y+9=0)
+\answer{The equation of this circle in standard form is ((x+3)^2+(y+2)^2=4). The circle has center ((-3,-2)) and radius 2.}
+\end{practice}
+\begin{practice}{27}{1}
+Verify that the equation is an equation of a circle. Identify its center and radius. SEE EXAMPLE 4
+(x^2+y^2+10x-2y+1=0)
+\answer{The equation of this circle in standard form is ((x+5)^2+(y-1)^2=25). The circle has center ((-5,1)) and radius 5.}
+\end{practice}
+\begin{practice}{28}{1}
+Verify that the equation is an equation of a circle. Identify its center and radius. SEE EXAMPLE 4
+(x^2+y^2-12x+8y+3=0)
+\answer{The equation of this circle in standard form is ((x-6)^2+(y+4)^2=49). The circle has center ((6,-4)) and radius 7.}
+\end{practice}
+\begin{practice}{29}{1}
+Verify that the equation is an equation of a circle. Identify its center and radius. SEE EXAMPLE 4
+(x^2+y^2-4x-8y-5=0)
+\answer{The equation of this circle in standard form is ((x-2)^2+(y-4)^2=25). The circle has center ((2,4)) and radius 5.}
+\end{practice}
+\begin{practice}{30}{1}
+Solve the linear-quadratic system of equations. SEE EXAMPLE 5
+(y=x); (x^2+y^2=8)
+\answer{((2,2)) and ((-2,-2))}
+\end{practice}
+\begin{practice}{31}{1}
+Solve the linear-quadratic system of equations. SEE EXAMPLE 5
+(y=\frac{3}{2}x); (x^2+y^2=13)
+\answer{((2,3)) and ((-2,-3))}
+\end{practice}
+\begin{practice}{32}{1}
+Solve the linear-quadratic system of equations. SEE EXAMPLE 5
+(7y+x=-25); (x^2+y^2=25)
+\answer{((3,-4)) and ((-4,-3))}
+\end{practice}
+\begin{practice}{33}{1}
+Solve the linear-quadratic system of equations. SEE EXAMPLE 5
+(x+2y=0); (x^2+y^2=20)
+\answer{((4,-2)) and ((-4,2))}
+\end{practice}
+
+% Source page 33: 458, Practice & Problem Solving continued
+\begin{practice}{34}{2}
+APPLY. Model With Mathematics Keenan sketches a circular meditation path in a zen garden on grid paper. Write an equation to model the outer edge of the path.
+% FIG 33 517 352 744 533
+\placeholder{diagram}{Zen garden illustration on an unlabeled unit coordinate grid. Black double-arrow x and y axes; red filled center labeled (5,-3). A black circle of radius 5 surrounds a gray disk; a horizontal black double-arrow radius from center to left edge is labeled 5 ft. An orange annulus extends outside the black circle to radius about 6.5; green lawn and plants surround it.}
+\answer{((x-5)^2+(y+3)^2=25)}
+\te{Printed key models the black circle with radius 5; likely the intended edge is that boundary, although the orange path extends outside it in the illustration.}
+\end{practice}
+\begin{practice}{35}{2}
+Reason A driving instructor showed students where they should place their hands on the steering wheel while driving a car.
+% FIG 33 622 554 778 663
+\placeholder{diagram}{Brown steering wheel with gray central hub, labeled center (0,0), black vertical radius down labeled 6. Hands are placed at lower left and lower right intersections with a horizontal black double-arrow line labeled y=-3.}
+a. Write an equation that represents the steering wheel.
+\answer{(x^2+y^2=36)}
+b. At what coordinates should a driver place the center of their hands on a steering wheel?
+\answer{((-3\sqrt{3},-3)) and ((3\sqrt{3},-3))}
+\end{practice}
+\begin{practice}{36}{2}
+Model With Mathematics A cell phone tower is 32 mi east and 20 mi north of Talisha's house, represented by the point ((0,0)) on a coordinate plane. A typical cell phone can be reached by the signal from a cell phone tower that has a 40 mi radius.
+a. What point represents the cell phone tower?
+\answer{((32,20))}
+b. Write an equation that represents the farthest points the signal from the tower can reach.
+\answer{((x-32)^2+(y-20)^2=1600)}
+c. Graph the location of Talisha's house, the cell phone tower, and the range of the cell phone tower.
+\answer{See graph.}
+% FIG 33 148 898 339 1093
+\placeholder{graph}{Answer 36c: Grid spaced by 10, black double-arrow x and y axes, O at origin, window x [-20,80], y [-30,70], x labels 20,40,60, y labels -20,20,40,60. Red circle with radius 40 centered at filled point (32,20) labeled Cell Tower. Filled red point at origin labeled Talisha's House.}
+d. Does Talisha live within the range to receive the signal from the cell phone tower? Explain.
+\answer{Yes; the graph of the circle, which represents the range of the cell phone tower, includes Talisha's house.}
+\end{practice}
+\begin{practice}{37}{1}
+ASSESSMENT PRACTICE. Write the equation of the circle given by the equation (x^2+y^2+2x-14y-6=8) in standard form. Identify the center and the radius. Then sketch the graph.
+\answer{Standard form: ((x-(-1))^2+(y-7)^2=64), center: ((-1,7)), radius: 8; see graph.}
+% FIG 33 129 1177 323 1374
+\placeholder{graph}{Answer 37: Grid spaced by 2 with black double-arrow x and y axes, O at origin, x window [-10,10], y [-4,16], x labels -8,-4,4,8, y labels 4,8,12. Red circle centered at (-1,7), radius 8, extrema (-9,7), (7,7), (-1,-1), (-1,15).}
+\end{practice}
+\begin{practice}{38}{2}
+ASSESSMENT PRACTICE. SAT/ACT The equation of a circle is ((x+2)^2+(y-8)^2=81). What is the circumference of the circle?
+A. (3\pi)
+B. (6\pi)
+C. (9\pi)
+D. (18\pi)
+E. (81\pi)
+\answer{D}
+\end{practice}
+\begin{practice}{39}{3}
+Performance Task Venetta wants to write the standard form of the equation of a circle given the circle's diameter (d). The table shows the center and diameter of four different circles.
+\begin{tabular}{lll}
+Circle & Center ((h,k)) & Diameter (d) \\
+1 & ((0,0)) & 8 \\
+2 & ((1,-2)) & 10 \\
+3 & ((-3,6)) & 12 \\
+4 & ((-4,-7)) & 32 \\
+\end{tabular}
+Part A Write an equation of each of the four circles.
+\answer{Circle 1: (x^2+y^2=16); Circle 2: ((x-1)^2+(y+2)^2=25); Circle 3: ((x+3)^2+(y-6)^2=36); Circle 4: ((x+4)^2+(y+7)^2=256)}
+Part B Write the standard form of the equation of a circle with center ((h,k)) and diameter (d).
+\answer{((x-h)^2+(y-k)^2=(\frac{d}{2})^2)}
+\end{practice}
+
+% Source page 34: 458A, Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate: LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & G66 \\
+2 & 1 & G66 \\
+3 & 1 & G66, G91 \\
+4 & 2 & G91 \\
+5 & 2 & G66, A12 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{9-2 Lesson Quiz: Circles}
+Name: \underline{\hspace{3cm}}
+1. Write the equation of a circle with radius 9 and center ((6,-4)) in standard form.
+A. ((x+6)^2+(y-4)^2=9)
+B. ((x-6)^2+(y+4)^2=9)
+C. ((x+6)^2+(y-4)^2=81)
+D. ((x-6)^2+(y+4)^2=81)
+\answer{1. D}
+2. Write the equation of a circle with radius 10 and center ((-7,9)) in standard form.
+((x-\underline{\hspace{1cm}})^2+(y-\underline{\hspace{1cm}})^2=\underline{\hspace{1cm}})
+\answer{2. (-7); 9; 100}
+3. Which of these could be the graph of the equation ((x-3)^2+(y-1)^2=4)?
+% FIG 34 727 454 863 573
+\placeholder{graph}{Quiz 3 choice A: Black double-arrow x and y axes labeled x, y, O; no ticks or grid. Black circle left of y-axis, center below x-axis, crossing x-axis twice, wholly in quadrants II and III.}
+% FIG 34 727 578 863 697
+\placeholder{graph}{Quiz 3 choice B: Black double-arrow x and y axes labeled x, y, O; no ticks or grid. Black circle wholly in quadrant III, separated from both axes.}
+% FIG 34 895 454 1034 573
+\placeholder{graph}{Quiz 3 choice C: Black double-arrow x and y axes labeled x, y, O; no ticks or grid. Black circle wholly in quadrant I, separated from both axes.}
+% FIG 34 895 578 1034 697
+\placeholder{graph}{Quiz 3 choice D: Black double-arrow x and y axes labeled x, y, O; no ticks or grid. Black circle right of y-axis, center above x-axis, crossing x-axis twice, in quadrants I and IV.}
+\answer{3. D}
+4. Identify the center and radius of the circle with equation (x^2+y^2-8x-4y-5=0).
+center: ((\underline{\hspace{1cm}},\underline{\hspace{1cm}})), radius: \underline{\hspace{1cm}}
+\answer{4. Center ((4,2)); radius 5}
+5. Solve the system of equations.
+(x^2+y^2=26)
+(y=5x)
+A. ((-1,5)) and ((1,-5))
+B. ((1,5)) and ((-1,5))
+C. ((1,-5)) and ((1,5))
+D. ((1,5)) and ((-1,-5))
+\answer{5. D}
+\end{te-addendum}
+
+% Source page 35: 458B, Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding: Intervention}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{9-2 Reteach to Build Understanding: Circles}
+Name: \underline{\hspace{3cm}}
+A circle is a set of points that are a fixed distance from a fixed point, called the center. A segment connecting the center of the circle to any point on the circle is called a radius.
+The standard form of the equation of a circle with center ((h,k)) and radius (r) is ((x-h)^2+(y-k)^2=r^2).
+1. Write an equation for a circle with center ((4,2)) and radius 3.
+(h) is the x-value of the ordered pair, so (h=\underline{\hspace{1cm}}).
+(k) is the y-value of the ordered pair, so (k=\underline{\hspace{1cm}}).
+(r) is 3, so (r^2=\underline{\hspace{1cm}}).
+The equation of the circle is \underline{\hspace{3cm}}.
+\answer{1. 4; 2; 9; ((x-4)^2+(y-2)^2=9)}
+2. Identify the center and radius for the circle represented by the equation ((x-3)^2+(y-1)^2=4).
+The center is ((h,k)) where ((x-h)^2+(y-k)^2=r^2), so the center is \underline{\hspace{1cm}}.
+(r^2) is 4, so (r=\underline{\hspace{1cm}}).
+\answer{2. ((3,1)); 2}
+3. The center of a circle is at ((3,3)) with a diameter of 8. Jeff wrote the equation as ((x-3)^2+(y-3)^2=8). Find and fix Jeff's mistake.
+\answer{3. Sample: Jeff used the diameter 8 for (r^2). He should have used the radius 4 for (r), which makes (r^2=16). The correct equation is ((x-3)^2+(y-3)^2=16).}
+4. Write an equation of a circle given the center ((4,-4)) and diameter of 10.
+(h=4); (k=\underline{\hspace{1cm}})
+The radius is 5, so (r^2=\underline{\hspace{1cm}}).
+The equation for the circle is ((x-\underline{\hspace{1cm}})^2+(y+\underline{\hspace{1cm}})^2=\underline{\hspace{1cm}}).
+\answer{4. (-4); 25; 4; 4; 25}
+5. Identify the center and the diameter of a circle represented by the equation ((x+9)^2+(y-9)^2=16).
+(h=\underline{\hspace{1cm}}); (k=\underline{\hspace{1cm}})
+The center of the circle is at ((\underline{\hspace{1cm}},\underline{\hspace{1cm}})).
+(r^2=\underline{\hspace{1cm}}), so (r=4).
+The diameter of the circle is \underline{\hspace{1cm}}.
+\answer{5. (-9); 9; ((-9,9)); 16; 8}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice: Intervention; On-Level}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{9-2 Additional Practice: Circles}
+Name: \underline{\hspace{3cm}}
+Write an equation for a circle with the following radii and centered at the origin.
+1. Radius 3
+\answer{1. (x^2+y^2=9)}
+2. Radius 6
+\answer{2. (x^2+y^2=36)}
+3. Radius 4
+\answer{3. (x^2+y^2=16)}
+Write an equation for each circle. Sketch the graph.
+4. Center ((1,-5)) and radius 2.5
+\answer{4. ((x-1)^2+(y+5)^2=6.25); see graph.}
+% FIG 35 534 483 595 544
+\placeholder{graph}{Additional Practice 4: Unit grid with black double-arrow x and y axes, O at origin, x window [-5,5], y [-8,2], x labels -4,-2,2,4, y labels -2,-4,-6. Magenta circle centered at (1,-5), radius 2.5.}
+5. Center ((2,3)) and diameter 1
+\answer{5. ((x-2)^2+(y-3)^2=\frac{1}{4}); see graph.}
+% FIG 35 663 483 724 544
+\placeholder{graph}{Additional Practice 5: Unit grid with black double-arrow x and y axes, O at origin, window [-5,5] on both axes, labels -4,-2,2,4. Magenta circle centered at (2,3), radius 0.5.}
+6. The town of Mercedes wants to build a circular pond in the park. They are planning on putting steps at the points ((0,-1)) and ((8,5)), which correspond to the endpoints of a diameter of the pond. Find the equation of the circle they are creating so they can sketch out their plans.
+\answer{6. ((x-4)^2+(y-2)^2=25)}
+Rewrite the equation in standard form. Identify the center and radius.
+7. (x^2+y^2-10x-10y+25=0)
+\answer{7. ((x-5)^2+(y-5)^2=25); Center: ((5,5)); Radius: 5}
+8. (x^2+y^2-6x+4y+4=0)
+\answer{8. ((x-3)^2+(y-2)^2=9); Center: ((3,-2)); Radius: 3}
+\te{Printed ((y-2)^2) in the key; likely ((y+2)^2), consistent with the given equation and printed center ((3,-2)).}
+Solve the linear-quadratic system of equations.
+9. (x^2+y^2-16=0); (x-y+4=0)
+\answer{9. ((0,4)) and ((-4,0))}
+10. (x^2+y^2-18=0); (x-y=0)
+\answer{10. ((-3,-3)) and ((3,3))}
+11. A student writes the equation of a circle with the center at ((8.5,0)) and diameter 25 as (x^2+(y-8.5)^2=156.25). Is she correct? Explain.
+\answer{11. She is incorrect. The values for (h) and (k) are reversed. The correct answer is ((x-8.5)^2+y^2=156.25).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment: On-Level; Advanced}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{9-2 Enrichment: Circles}
+Name: \underline{\hspace{3cm}}
+Write the equations needed to create the pattern below. Then write the equations for the circles when the image is dilated by a factor of (\frac{1}{2}) centered at the origin.
+Hint: The center of each circle is also affected by the dilation. The new circles will have centers that are half as far from the origin as in the original image.
+% FIG 35 919 455 1040 577
+\placeholder{graph}{Unit grid, black x and y axes with arrows and labels, O at origin, visible numerical labels x=-5,5 and y=5; window [-10,10] on both axes. Seven overlapping black circles labeled A through G: A center (-4,3), radius 6; B center (-2,4), radius 5; C center (2,3), radius 4; D center (4,-4), radius 6; E center (4,-4), radius 2; F center (-5,-3), radius 5; G center (-2,-6), radius 3.}
+\begin{tabular}{lll}
+Circle & Equations & Dilated by (\frac{1}{2}) \\
+A & \answer{((x+4)^2+(y-3)^2=36)} & \answer{((x+2)^2+(y-1.5)^2=9)} \\
+B & \answer{((x+2)^2+(y-4)^2=25)} & \answer{((x+1)^2+(y-2)^2=6.25)} \\
+C & \answer{((x-2)^2+(y-3)^2=16)} & \answer{((x-1)^2+(y-1.5)^2=4)} \\
+D & \answer{((x-4)^2+(y+4)^2=36)} & \answer{((x-2)^2+(y+2)^2=9)} \\
+E & \answer{((x-4)^2+(y+4)^2=4)} & \answer{((x-2)^2+(y+2)^2=1)} \\
+F & \answer{((x+5)^2+(y+3)^2=25)} & \answer{((x+2.5)^2+(y+1.5)^2=6.25)} \\
+G & \answer{((x+2)^2+(y+6)^2=9)} & \answer{((x+1)^2+(y+3)^2=2.25)} \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary: Intervention; On-Level}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{9-2 Mathematical Literacy and Vocabulary: Circles}
+Name: \underline{\hspace{3cm}}
+Choose the concept from the list that best represents the item in each box.
+center; circle; completing the square; Distance Formula; parameters; equation for the parent graph of a circle; radius; standard form of the equation of a circle; translation.
+1. (x^2+y^2=r^2)
+\answer{1. equation for the parent graph of a circle}
+2. the set of all points in a plane that are equidistant from a given point
+\answer{2. circle}
+3. the method used to change an equation for a circle into standard form
+\answer{3. completing the square}
+4. (h), (k), and (r) in the equation of a circle
+\answer{4. parameters}
+5. (d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2})
+\answer{5. Distance Formula}
+6. the distance (r) from the center of a circle to a point on the circle
+\answer{6. radius}
+7. All points on a circle are equidistant from this point.
+\answer{7. center}
+8. ((x-h)^2+(y-k)^2=r^2)
+\answer{8. standard form of the equation a circle}
+\te{Printed equation a circle; likely equation of a circle.}
+9. movement of the parent graph horizontally or vertically
+\answer{9. translation}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 35 584 976 1035 1298
+\placeholder{illustration}{Tablet screenshot of a digital assignment: Solve the system of equations by graphing, y=x+4 and y=-2x+4. Blank coordinate grid at right; graphing tool button at left. Text says Use the graphing tool to graph the system; Click to enlarge graph; Click the graph, choose a tool in the palette and follow the instructions to create your graph. Controls include Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print, Check Answer, Review progress, Back, Next; Question 5 of 14 and 1 part remaining.}
+\end{te-addendum}
+
+\end{document}

@@ -1,0 +1,838 @@
+\documentclass{article}
+% Source: Topic_12_Teacher_Edition.pdf, PDF pages 38-48 (printed pages 601A-607B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 38: 601A Lesson Overview
+\begin{lesson-meta}
+lesson: 12-3
+title: Permutations and Combinations
+standards: none printed
+practices: none printed
+objective: I can use permutations and combinations to find the number of outcomes in a probability experiment.
+
+essential question: How are permutations and combinations useful when finding probabilities?
+
+\textbf{VOCABULARY}
+\item combination
+\item factorial
+\item Fundamental Counting Principle
+\item permutation
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 12-3 \\
+Title & Permutations and Combinations \\
+Standards & none printed \\
+I CAN Objective & I can use permutations and combinations to find the number of outcomes in a probability experiment. \\
+Essential Question & How are permutations and combinations useful when finding probabilities? \\
+Lesson Vocabulary & combination; factorial; Fundamental Counting Principle; permutation \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview. FOCUS}
+Objective. Students will be able to:
+\item Calculate the number of permutations and combinations in mathematical and real-world contexts.
+\item Use permutations and combinations to compute probabilities of compound events and solve problems.
+Essential Understanding. A permutation is an arrangement of items in which the order of the items matters, while a combination is an arrangement in which order does not matter.
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Calculated probabilities as the number of favorable outcomes divided by the total number of possible outcomes.
+In this lesson students:
+\item Use the Fundamental Counting Principle to determine the number of permutations of a set of items.
+\item Develop and apply formulas for the number of permutations and the number of combinations of a set of items.
+\item Use permutations and combinations to determine the number of outcomes in a situation in order to calculate probability.
+Increasing Coherence. The content of this lesson is not necessarily expected to be addressed on high-stakes assessments.
+Later in this topic, students will:
+\item Use combinations to calculate binomial probabilities.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students use a conceptual understanding of systematic counting to develop general formulas for the numbers of permutations and combinations of a set of items.
+\item Students apply the formulas to calculate numbers of permutations and combinations in a variety of situations.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com. Program Resources.
+REVIEW VOCABULARY. English | Spanish
+\item outcome | resultado
+\item probability | probabilidad
+NEW VOCABULARY
+\item combination | combinación
+\item factorial | factorial
+\item Fundamental Counting Principle | Principio Fundamental de Conteo
+\item permutation | permutación
+VOCABULARY ACTIVITY
+To review the meaning of the words outcome and probability, have students work in teams to describe an experiment, describe two different possible sample spaces for the experiment, and assign a probability to each outcome of each sample space.
+\answer{Sample: The experiment is rolling a standard number cube and two possible sample spaces are \{1, 2, 3, 4, 5, 6\} and \{even, odd\}. The probability of each outcome in \{1, 2, 3, 4, 5, 6\} is (\frac16). The probability of each outcome in \{even, odd\} is (\frac12).}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 38 963 777 1115 957
+\placeholder{illustration}{Student Companion enVision Algebra 2 cover with purple and blue circular geometric artwork on dark background, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students determine the number of permutations using the Fundamental Counting Principle. They also apply formulas to determine both the number of permutations and combinations of a set of items. Students use permutations and the number of combinations to calculate probabilities of compound events.
+Students also use permutations and combinations to mopute probabilities in real-world situations and mathematical contexts.
+\te{Printed mopute; likely compute.}
+\textbf{Applying Math Practices}
+Construct Viable Arguments and Critique Reasoning
+Students justify the methods used when calculating probabilities.
+Look For and Make Use of Structure
+Students use diagrams and lists to count possibilities systematically.
+\end{te-addendum}
+% Source page 39: 601B Explore
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{STEP 1 Explore. EXPLORE \& REASON}
+SavvasRealize.com. Activity. Explore \& Reason is available at SavvasRealize.com.
+INSTRUCTIONAL FOCUS Students explore combinatorial problems. This prepares students to understand the concepts of permutations and combinations.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+Before. WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: In the table, what is the difference between HT and TH?
+\answer{HT represents Holly is president and Tia is vice-president. TH represents Tia is president and Holly is vice-president.}
+\end{te-addendum}
+\begin{te-addendum}{0}{RtISupport}
+During. SMALL GROUP. Support Productive Struggle in Learning Mathematics ETP
+Q: What are the outcomes in the event “Holly and Tia are officers”?
+\answer{TH and HT}
+\end{te-addendum}
+\begin{te-addendum}{0}{RtIExtend}
+For Early Finishers
+Q: Suppose 5 students, including Holly and Tia, are eligible to be officers. If two of the 5 students are chosen at random to be president and vice-president, how many outcomes have either Holly or Tia as an officer but not both of them?
+\answer{12}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+After. WHOLE CLASS. Facilitate Meaningful Mathematical Discourse ETP
+Q: If no one has been chosen yet, how many choices are there for president?
+\answer{4}
+Q: If a president has been chosen, how many choices are there for vice-president?
+\answer{3}
+Q: How many choices are there for president and vice-president pairs? Is there any relationship between that answer and the answers to the previous two questions?
+\answer{12; It is their product, (4\times3).}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with EXPLORE \& REASON. Make Sense and Persevere How could you use the table to calculate the probability that both Holly and Tia will be officers? Explain.
+\answer{There are 2 outcomes for which both are officers. The total number of possible outcomes is 12. So the probability that they are both officers is (\frac2{12}), which is equal to (\frac16).}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Holly, Tia, Kenji, and Nate are eligible to be officers of the Honor Society. Two of the four students will be chosen at random as president and vice-president. The table summarizes the possible outcomes.
+\textbf{Honor Society Officers}
+\begin{tabular}{lllll}
+President / Vice-President & Holly & Tia & Kenji & Nate \\
+Holly & -- & HT & HK & HN \\
+Tia & TH & -- & TK & TN \\
+Kenji & KH & KT & -- & KN \\
+Nate & NH & NT & NK & -- \\
+\end{tabular}
+A. Holly wants to be an officer with her best friend Tia. How many outcomes make up this event?
+\answer{SAMPLE STUDENT WORK. A. 2}
+B. How many outcomes show Holly as president and Tia as vice-president?
+\answer{B. 1}
+C. Generalize How many outcomes have only one of them as an officer? Explain.
+\answer{C. 8; I looked at the possible outcomes in the table. 8 of those outcomes have Holly or Tia but not both: HK, HN, TK, TN, KH, KT, NH, NT.}
+% FIG 39 637 185 1154 533
+\placeholder{illustration}{Digital Explore and Reason preview. Go back. Same Honor Society problem and table as transcribed. Part C says only one of Holly and Tia as an officer. Three Enter your answer boxes.}
+\end{model-discuss}
+% Source page 40: 601 Understand and Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Establish Learning ETP
+Students learn about permutations and combinations, the number of ways to select a number of items from a set of items, and how to use them to find probabilities.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{EXAMPLE 1 Use the Fundamental Counting Principle}
+Pose Purposeful Questions ETP
+Q: Before the toppings are applied, how many different pizzas are possible? Why can you multiply this number by 3 to get the answer?
+\answer{4; each of the 4 types of pizza can get one of 3 toppings.}
+Q: If the Pizzeria served only medium pizzas, how could you use the tree diagram to find the number of different pizzas?
+\answer{Follow the right side of the tree diagram from the M to the bottom row with 6 variations.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Use the Fundamental Counting Principle}
+Manuel wants to advertise the number of one-topping pizzas he offers to his customers. How many different one-topping pizzas are available at Manuel's Pizzeria?
+% FIG 40 966 250 1157 361
+\placeholder{illustration}{Two pizzas below wall-mounted yellow menu MANUEL'S PIZZERIA. Choose a Size: large, medium. Choose a Crust: deep dish or thin. Choose One Topping: sausage, pepperoni, cheese.}
+Make a tree diagram to find the number of pizzas.
+% FIG 40 837 353 1129 451
+\placeholder{diagram}{Tree begins at top and splits L/M, labeled sizes in red. Each splits D/T, labeled crusts in blue. Each D/T splits S/P/C, twelve bottom nodes total, labeled toppings in green. Callout: Each path represents a pizza. There are 12 different pizzas.}
+(sizes\times crusts\times toppings=\text{number of pizzas})
+(2\times2\times3=12)
+This example illustrates the Fundamental Counting Principle. If there are m ways to make the first selection and n ways to make the second selection, then there are (m\times n) ways to make the two selections. If there are p ways to make a third selection, then there are (m\times n\times p) ways to make all three selections, and so on.
+\answer{12 different pizzas.}
+\te{COMMON ERROR When you compare a tree diagram to the Fundamental Counting Principle, remember to count the total number of paths from the beginning to the end of the tree diagram, not the number of branches in each section.}
+\end{example}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples}
+Additional Examples are available at SavvasRealize.com.
+\textbf{ADDITIONAL EXAMPLE 2B}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+In geometry, polygons are labelled by placing letters at their vertices. How many ways are there to label a triangle with letters of the alphabet? Show your calculation. (Remember: There are 26 letters in the alphabet.)
+(26\times25\times24=15,600)
+\answer{There are 15,600 ways to label a triangle.}
+% FIG 40 438 937 569 1039
+\placeholder{diagram}{Triangle vertices S at top, N lower left, A lower right. Bottom edge nearly horizontal and slightly rising to A.}
+Example 2B Help students practice using permutations.
+Q: How many choices are there for the first letter? After the first letter has been chosen, how many choices are there for the second letter? How can you find the number of choices for the first two letters?
+\answer{26, 25; Compute (26\times25).}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 3}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+A. What is ({}_9C_2)?
+\answer{A. ({}_9C_2=\frac{9!}{2!(9-2)!}=36)}
+B. What is ({}_9C_7)?
+\answer{B. ({}_9C_2=\frac{9!}{7!(9-7)!}=36)}
+\te{Printed B solution subscript 2; likely 7.}
+C. What is the relationship between the answers to A and B? Why is this true?
+\answer{C. The answers to A and B are the same because ({}_9C_2=\frac{9!}{(2!)(7!)}), ({}_9C_7=\frac{9!}{(7!)(2!)}), and the denominators are equal by the Commutative Property of Multiplication.}
+Example 3 Help students explore why ({}_nC_r={}_nC_{n-r}) for whole numbers n and r such that (r\leq n).
+Q: Why is the number of combinations of 10 things chosen 3 at a time equal to the number of combinations of 10 things chosen 7 at a time?
+\answer{Each combination of 10 things chosen 7 at a time corresponds to a combination of the 3 things that are left out. So ({}_{10}C_7={}_{10}C_3)}
+\end{te-addendum}
+% Source page 41: 602 Example 1 continued and Example 2
+\begin{tryit}{1}
+\textbf{Try It!}
+The car that Ms. Garcia is buying comes with a choice of 3 trim lines (standard, sport, or luxury), 2 types of transmission (automatic or manual), and 8 colors. How many different option packages does Ms. Garcia have to choose from? Explain.
+\answer{48; by the Fundamental Counting Principle, multiply the number of choices at each stage: (3\times2\times8=48).}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{EXAMPLE 2 Find the Number of Permutations}
+Pose Purposeful Questions ETP
+Q: What is another expression that is equal to (\frac{8\cdot7\cdot6\cdot5\cdot4\cdot3\cdot2\cdot1}{3\cdot2\cdot1}) and why?
+\answer{(\frac{8!}{3!}) or (8\cdot7\cdot6\cdot5\cdot4); The 3s, the 2s, and the 1s reduce to factors of 1. So (\frac{8!}{3!}=\frac{8\cdot7\cdot6\cdot5\cdot4\cdot3\cdot2\cdot1}{3\cdot2\cdot1}=8\cdot7\cdot6\cdot5\cdot4).}
+Q: In Part B Method 2, why is (\frac{8!}{3!}) the answer?
+\answer{There are 8! possible arrangements of all 8 songs, but that total includes arrangements that are the same except for the order of the last 3 songs, which are not included in the playlist. To avoid duplication, divide by 3!, which is the number of possible arrangements of the last 3 songs.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Find the Number of Permutations}
+\te{CONCEPTUAL UNDERSTANDING}
+A. Gabriela is making a playlist with her 3 favorite songs. How many possible orders are there for the songs?
+Method 1 Use an organized list.
+Let A, B, and C represent the 3 songs. There are 6 different possible orders for the songs.
+\begin{tabular}{ll}
+ABC & ACB \\
+BAC & BCA \\
+CAB & CBA \\
+\end{tabular}
+Method 2 Use the Fundamental Counting Principle.
+(3\cdot2\cdot1)
+\te{There are 3 choices for the first song, 2 choices for the second song, and 1 choice for the third song.}
+The factorial of a positive integer n is the product of all positive integers less than or equal to n. It is written n! and is read as n factorial. By definition, 0! equals 1.
+(n!=n\cdot(n-1)\cdot(n-2)\cdot\ldots\cdot2\cdot1)
+The number of different possible orders for the songs is 3!
+(3!=3\cdot2\cdot1=6)
+\answer{There are 6 different possible orders for the 3 songs.}
+\te{REASON How many ways are there to make a playlist with 0 songs?}
+B. Gabriela wants to make another playlist using 5 of the 8 songs from her favorite artist's latest album. How many playlists are possible?
+Method 1 Use the Fundamental Counting Principle.
+There are 8 choices for the first song, 7 choices for the second song, and so on.
+(8\cdot7\cdot6\cdot5\cdot4=6,720)
+There are 6,720 possible playlists with 5 of the 8 songs.
+Method 2 Use factorials.
+To count the number of ways to order 5 songs from A, B, C, D, E, F, G, and H, consider the list ABCDE. The diagram shows all the possible ways that sequence appears among the 8! ways to list all songs.
+\begin{tabular}{ll}
+ABCDEFGH & ABCDEFHG \\
+ABCDEGFH & ABCDEGHF \\
+ABCDEHFG & ABCDEHGF \\
+\end{tabular}
+\te{ABCDE blue in each entry; remaining three letters red.}
+For any sequence of 5 songs, there are ((8-5)!=3!) ways that sequence appears as the first 5 songs when listing all 8! lists. So divide 8! by 3! to find the number of 5-song playlists.
+(\frac{8!}{3!}=\frac{8\cdot7\cdot6\cdot5\cdot4\cdot3\cdot2\cdot1}{3\cdot2\cdot1}=6,720)
+\answer{There are 6,720 possible playlists with 5 of the 8 songs.}
+\end{example}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2. Communicate Precisely Explain how the Fundamental Counting principle can be used to find the number of ways to arrange 5 different-colored beads on a string.
+\answer{There are 5 ways to make the first choice, 4 ways to make the second choice, 3 ways to make the third choice, 2 ways to make the fourth choice, and 1 way to make the final choice. So there are (5\times4\times3\times2\times1) ways to arrange the beads. That is 5! ways.}
+\end{te-addendum}
+% Source page 42: 603 Example 2 continued and Example 3
+\begin{tryit}{2}
+\textbf{Try It!}
+How many possibilities are there for each playlist?
+a. Gabriela's 4 favorite songs
+\answer{a. 24}
+b. 5 of the 10 most popular songs
+\answer{b. 30,240}
+\end{tryit}
+\begin{concept-box}
+\textbf{Permutations}
+A permutation is an arrangement of objects in a specific order.
+The number of permutations of r objects taken from a set of n objects is
+({}_nP_r=\frac{n!}{(n-r)!}) for (0\leq r\leq n).
+\end{concept-box}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{EXAMPLE 3 Find the Number of Combinations}
+Use and Connect Mathematical Representations ETP
+Q: Explain why the answer is not ({}_{10}P_3), which is 720.
+\answer{Aaliyah is selecting a group of activities, so the order in which she chooses the activities does not matter.}
+Q: Why do you need to divide ({}_{10}P_3) by 3!?
+\answer{There are 720 arrangements of 10 things taken 3 at a time. Each group of 3 items can be arranged in 3! ways, so to eliminate the duplicate combinations, you need to divide by 3!.}
+Q: Why is (\frac{{}_{10}P_3}{3!}=\frac{10!}{3!(10-3)!})?
+\answer{(\frac{{}_{10}P_3}{3!}=\frac{\frac{10!}{(10-3)!}}{3!}=\frac{10!}{3!(10-3)!})}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Find the Number of Combinations}
+\te{CONCEPTUAL UNDERSTANDING}
+Aaliyah is planning to be a counselor at a summer day camp. She will be supervising 3 activities during the first week of camp. How many different combinations of 3 activities are possible?
+% FIG 42 1004 413 1153 522
+\placeholder{illustration}{Monitor headed SUMMER CAMP ACTIVITIES. Ten yellow/green buttons: Pottery, Fabric Arts, Canoeing; Swimming, Cooking, Hiking; Rock-climbing, Volleyball; Painting, Robotics. Tree silhouette above, blue water background below.}
+Use the formula to write an expression for the number of permutations of 3 objects chosen from a group of 10.
+({}_{10}P_3=\frac{10!}{(10-3)!}=720)
+In this situation, the order of the 3 chosen activities does not matter, so you must adjust the formula.
+A combination is a set of objects with no specific order.
+% FIG 42 836 588 994 651
+\placeholder{diagram}{Heading 3! Permutations above box with rows ABC/ACB, BAC/BCA, CAB/CBA; blue right arrow points to box containing (A, B, C), headed 1 Combination.}
+A group of 3 items can be arranged in 3! ways, so you must divide the the number of permutations, ({}_{10}P_3), by the number of arrangements of each group of 3 items, 3!.
+\te{Printed the the; likely one the.}
+({}_{10}C_3=\frac{{}_{10}P_3}{3!}=\frac{10!}{3!(10-3)!})
+(=\frac{720}{6})
+(=120)
+\te{The notation ({}_nC_r) indicates the number of combinations of r items from a set of n items.}
+\te{({}_{10}C_3) denotes the number of combinations of 3 items from a set of 10 items.}
+\answer{There are 120 different combinations of activities that Aaliyah could be supervising.}
+\te{USE APPROPRIATE TOOLS Most scientific and graphing calculators can calculate permutations ({}_nP_r) and combinations ({}_nC_r). They often use the notation P(n, r) and C(n, r).}
+\end{example}
+\begin{tryit}{3}
+\textbf{Try It!}
+How many ways can a camper choose 5 activities from the 10 available activities at the summer camp?
+\answer{252}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: What strategy could you use to solve this problem?
+\answer{Find ({}_{10}P_5) and divide that by 5!.}
+\end{te-addendum}
+\begin{te-addendum}{3}{CommonError}
+Try It! 3 If students got the answer 30,240, they probably found ({}_{10}P_5) and did not divide that by 5!. Remind students always to ask themselves whether order makes a difference. If it does not, they need to divide the number of permutations by an expression to get rid of duplicates—in this case the number of permutations of 5 things.
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 3)}
+LISTENING. BEGINNING. Students may have trouble with the concept that order matters when you introduce and differentiate permutations and combinations. Show or describe selections of a set of items and ask them whether “order matters” or “order does not matter.” Have them state whether each set is a permutation or combination.
+Q: You want to select 3 pencils from this box of 12. Would you say order matters or order does not matter?
+\answer{Order does not matter; each set of pencils is a combination.}
+Q: You want to find all the possibilities for the first 3 of 6 classes in your schedule. Would you say order matters or order does not matter?
+\answer{Order matters; each possibility is a permutation.}
+WRITING. DEVELOPING. Help students draw a concept map of permutations and combinations on a sheet of paper. Guide them to include meanings, formulas, and the Fundamental Counting Principle. Have students answer the following questions using their concept maps as needed.
+Q: How did you organize your concept map?
+\answer{Begin with a box for the Fundamental Counting Principle, add branches for permutations and combinations and their definitions, and then add a formula for each.}
+Q: How would you include and describe factorial notation?
+\answer{Add a branch from the Fundamental Counting Principle to a box defining n!.}
+SPEAKING. EXPANDING. Have students state the expanded formula ({}_{10}C_3=\frac{10!}{3!(10-3)!}) in words. Listen for how they describe the denominator as a grouping, and emphasize that they are dividing by the product or quantity, not dividing and then multiplying. Then have them read aloud the information in the Concept Box following Example 3.
+Q: How would you state the formula with (n=5) and (r=0)?
+\answer{The number of combinations of 5 things taken 0 at a time is 5 factorial divided by the product of 0 factorial and 5 factorial.}
+Q: What does this equal?
+\answer{1; because 0 factorial equals 1, and 5 factorial divided by 5 factorial is 1.}
+\end{te-addendum}
+% Source page 43: 604 Example 4
+\begin{concept-box}
+\textbf{Combinations}
+A combination is a set of objects with no specific order.
+The number of combinations of r objects taken from a set of n objects is
+({}_nC_r=\frac{n!}{r!(n-r)!}) for (0\leq r\leq n).
+\end{concept-box}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{EXAMPLE 4 Use Permutations and Combinations to Find Probabilities}
+Pose Purposeful Questions ETP
+Q: Why is the number of outcomes in which all the names begin with a consonant and none with a vowel 1,287?
+\answer{There are ({}_{13}C_5) ways, which is 1,287 ways, to choose 5 out of 13 names. There is 1 way to choose 0 out of 5 names. Since (1,287\times1=1,287), the number of outcomes with all names beginning with consonants is 1,287.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use Permutations and Combinations to Find Probabilities}
+\te{APPLICATION}
+A teacher chooses 5 students at random from the names shown to work together on a group project. What is the probability that the 5 students' names begin with a consonant?
+% FIG 43 933 352 1113 455
+\placeholder{illustration}{Eighteen name slips on wood background: Mohamed, Monisha, Alicia; Carla, Ella, Joshua; Jacinta, Leo, Olivia; Juan, Simon; Adam, Marta, Felix; Renaldo; Terrence, LaTanya, Arthur. Names printed in varied colors and tilted.}
+Formulate. Determine if the problem is about permutations or combinations.
+Since the order in which the students are chosen does not matter, use combinations to find the numbers of possible outcomes and desirable outcomes to calculate the probability.
+Compute. Step 1 Find the total number of possible outcomes.
+({}_{18}C_5=\frac{18!}{5!(18-5)!}=8,568)
+There are 8,568 ways the teacher could choose 5 students.
+Step 2 Find the number of possible outcomes in which all the names begin with a consonant and none of the names begin with a vowel.
+({}_{13}C_5=\frac{13!}{5!(13-5)!}=1,287)
+\te{Choose 5 out of 13 names.}
+({}_5C_0=\frac{5!}{0!(5-0)!}=1)
+\te{Choose 0 out of 5 names.}
+Use the Fundamental Counting Principle. Multiply the number of possible outcomes for the two subsets to find the total number of outcomes.
+({}_{13}C_5\cdot{}_5C_0=1,287\cdot1=1,287)
+There are 1,287 outcomes with all the names beginning with consonants.
+Step 3 Find the probability.
+(P(\text{all consonants})=\frac{\text{number of outcomes with all consonants}}{\text{total number of possible outcomes}})
+(=\frac{1,287}{8,568}\approx0.15)
+Interpret. \answer{The probability that all 5 names begin with a consonant is about 0.15, or 15\%.}
+\end{example}
+\begin{tryit}{4}
+\textbf{Try It!}
+Using the data from Example 4, what is the probability that the 5 students' names end with a vowel?
+\answer{(\frac{{}_{12}C_5}{{}_{18}C_5}=\frac{792}{8,568}\approx9.24\%)}
+\end{tryit}
+\begin{te-addendum}{4}{HabitsOfMind}
+Use with EXAMPLES 3 \& 4. Look for Relationships What is the relationship between ({}_{10}P_5) and ({}_{10}C_5)? Is the number of permutations always greater than the number of combinations?
+\answer{({}_{10}P_5=\frac{10!}{(10-5)!}) and ({}_{10}C_5=\frac{10!}{5!(10-5)!}) so the formulas are similar with the only difference that ({}_{10}C_5) contains the factor 5! to account for the duplicate combinations. The number of permutations is generally greater than the number of combinations, but the formulas can be the same in situations such as selecting only 1 item out of 10: ({}_{10}P_1={}_{10}C_1).}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 4 Show students how to use conditional probability with this problem. Students can check their work using this familiar method until they are sure they are using the correct formulas.
+Q: How many names is the teacher choosing from? How many start with a consonant?
+\answer{18 names; 13 start with a consonant.}
+Q: What is the probability that the first name chosen starts with a consonant?
+\answer{(\frac{13}{18})}
+Q: If the first name chosen starts with a consonant, what is the probability that the second name chosen starts with a consonant?
+\answer{(\frac{12}{17})}
+Q: What is the probability that the five names chosen all start with consonants?
+\answer{(\frac{13}{18}\cdot\frac{12}{17}\cdot\frac{11}{16}\cdot\frac{10}{15}\cdot\frac9{14}\approx0.15=15\%)}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Have students find a probability in two ways.
+\item Pose this problem: Ten students are each assigned a different number from 1 to 10. Three students are chosen at random. What is the probability all of the chosen students have numbers greater than 4?
+Q: How could you solve the problem using conditional probability?
+\answer{Six students have numbers greater than 4: 5, 6, 7, 8, 9, 10. The probability that the first student chosen has a number greater than 4 is (\frac6{10}), the second student, (\frac59), the third student, (\frac48). Since (\frac6{10}\cdot\frac59\cdot\frac48=\frac16), the probability is (\frac16).}
+Q: How could you solve the problem using permutations or combinations?
+\answer{There are ({}_{10}C_3) ways to choose 3 students from a set of 10 students. So the total number of possible outcomes is ({}_{10}C_3=120). The number of outcomes for which all students have a number greater than 4 is ({}_6C_3=20). So the probability is (\frac{20}{120}=\frac16).}
+\end{te-addendum}
+% Source page 44: 605 Concept Summary
+\begin{te-addendum}{ConceptSummary}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. CONCEPT SUMMARY Permutations and Combinations}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+Q: What is the difference between a permutation formed from a set of objects and a combination formed from a set of objects?
+\answer{A permutation is an arrangement of some or all of the objects of the set in a specific order. A combination is a selection of some or all of the objects of the set in no specific order.}
+Q: What are the restrictions on the variable r for the formulas in both columns?
+\answer{r must be a whole number that is less than or equal to n.}
+Q: Can you give an example that shows why r has to be less than or equal to n?
+\answer{You cannot make a permutation of 6 objects arranged 8 at a time. You cannot make a combination of 5 things chosen 9 at a time}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Exercise 5 If students have difficulty identifying the error, remind them that in order to simplify a complex fraction, they must multiply the numerator of the complex fraction by the reciprocal of the denominator of the complex fraction. In this case, the numerator is 3! and the denominator is (\frac{5!}{(5-3)!}). Since ((5-3)!=2!), the reciprocal of (\frac{5!}{(5-3)!}) is (\frac{2!}{5!}). So they must multiply 3! and (\frac{2!}{5!}) which produces (\frac{3!2!}{5!}), not (\frac{3!}{5!2!}).
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Permutations and Combinations}
+\begin{tabular}{lll}
+ & Permutation & Combination \\
+WORDS & A selection of items in which the order of the items is important & A selection of items in which the order of the items is not important \\
+ & ({}_nP_r) represents the number of permutations of r objects taken from a set of n objects. & ({}_nC_r) represents the number of combinations of r objects taken from a set of n objects. \\
+ALGEBRA & ({}_nP_r=\frac{n!}{(n-r)!}) for (0\leq r\leq n) & ({}_nC_r=\frac{n!}{r!(n-r)!}) for (0\leq r\leq n) \\
+NUMBERS & The number of permutations of 3 objects taken from a set of 6 objects is & The number of combinations of 4 objects taken from a set of 6 objects is \\
+ & ({}_6P_3=\frac{6!}{3!}=\frac{6\cdot5\cdot4\cdot3\cdot2\cdot1}{3\cdot2\cdot1}=120) & ({}_6C_4=\frac{6!}{4!2!}=\frac{6\cdot5\cdot4\cdot3\cdot2\cdot1}{(4\cdot3\cdot2\cdot1)(2\cdot1)}=15) \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How are permutations and combinations useful when finding probabilities?
+\answer{They provide formulas for finding the total number of outcomes needed to compute probabilities.}
+2. Use Structure How is the formula for combinations related to the formula for permutations?
+\answer{The number of combinations of r objects taken from a set of n objects is found by dividing the number of permutations, nPr, by r!.}
+3. Vocabulary Why is it important to distinguish between a permutation and a combination when counting possible outcomes?
+\answer{There are more permutations of r objects taken from a set of n objects than there are combinations because the order of the objects distinguishes between multiple permutations that contain the same objects.}
+\te{Printed more permutations without restriction on r; equality occurs for r=0 or r=1.}
+4. Look for Relationships How is ({}_9C_2) related to ({}_9C_7)? Explain. How can you generalize this observation for any values of n and r?
+\answer{({}_9C_2) and ({}_9C_7) are equivalent; ({}_9C_2=\frac{9!}{2!7!}) and ({}_9C_7=\frac{9!}{7!2!}), so ({}_9C_2={}_9C_7). In general, ({}_nC_r=\frac{n!}{r!(n-r)!}) and ({}_nC_{n-r}=\frac{n!}{(n-r)!r!}), so ({}_nC_r={}_nC_{n-r}).}
+5. Error Analysis Explain Beth's error.
+(\frac{{}_3P_3}{{}_5P_3}=\frac{3!}{\frac{5!}{(5-3)!}}=\frac{3!}{5!2!}=\frac1{40})
+% FIG 44 737 669 896 744
+\placeholder{illustration}{Pale curled note with Beth's incorrect fraction simplification, transcribed above, marked with red X.}
+\answer{The compound fraction is simplified incorrectly. 2! should appear in the numerator instead of the denominator, and the correct answer is (\frac1{10}).}
+6. Construct Arguments A company wants to form a committee of 4 people from its 12 employees. How can you use combinations to find the probability that the 4 people newest to the company will be selected?
+\answer{There are ({}_{12}C_4=495) ways to select a committee of 4 people from a group of 12. Only one of these possible committees includes the 4 people newest to the company. (P(4\text{ newest})=\frac{\text{choose 4 of 4 newest}\cdot\text{choose 0 of 8 older}}{\text{choose 4 of 12 total employees}}=\frac{{}_4C_4\cdot{}_8C_0}{{}_{12}C_4}=\frac1{495})}
+\textbf{Do You KNOW HOW?}
+Do the possible outcomes represent permutations or combinations?
+7. Tamisha will invite 3 of her 10 friends to a concert.
+\answer{combinations}
+8. Tamisha must decide how she and her 3 friends will sit at the concert.
+\answer{permutations}
+9. Find the number of permutations: How many ways can 12 runners in a race finish first, second, and third?
+\answer{1,320}
+Find the number of combinations.
+10. In how many ways can 11 contestants for an award be narrowed down to 3 finalists?
+\answer{165}
+11. How many different ways can a 4-person team be chosen from a group of 8 people?
+\answer{70}
+Students will be chosen at random for school spirit awards. There are 6 athletes and 8 non-athletes who are eligible for 2 prizes. What is each probability?
+12. (P(\text{both prizes are awarded to athletes}))
+\answer{(\frac{15}{91})}
+13. (P(\text{both prizes are awarded to non-athletes}))
+\answer{(\frac4{13})}
+14. (P(\text{no prize is awarded to an athlete}))
+\answer{(\frac4{13})}
+15. (P(\text{no prize is awarded to a non-athlete}))
+\answer{(\frac{15}{91})}
+16. Explain how Exercises 12 and 13 are like Exercises 14 and 15.
+\answer{Exercise 12 is the same as Exercise 15 and Exercise 13 is the same as Exercise 14. If no prize is awarded to an athlete, then both prizes are awarded to non-athletes. If no prize is awarded to a non-athlete, then both prizes are awarded to athletes.}
+\end{concept-summary}
+% Source page 45: 606 Practice and Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Practice.
+Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+17, 19, 20, 22--32, 34--36 & 17--36 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items.
+You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1--3 & 22--27, 34, 35 & 1 \\
+1--3 & 17, 20 & 2 \\
+1--3 & 21 & 3 \\
+4 & 28, 29, 31--33 & 2 \\
+4 & 18, 19, 30, 36 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{17}{2}
+\textbf{UNDERSTAND. Use Structure} Dwayne bought a new bike lock, and the lock came with instructions to choose 3 out of 30 numbers on a circular dial to keep his bike secure. The numbers cannot be repeated. How many possible arrangements can Dwayne choose for his lock? Do the arrangements represent permutations or combinations? Explain.
+\answer{24,360; the arrangements are permutations because locks are specific, and if you enter the numbers in the wrong order, locks will not open.}
+\end{practice}
+\begin{practice}{18}{3}
+Construct Arguments Sofia volunteers to read and play with sick children in a hospital. She selects some erasers from a bag at random to use as prizes. There are 8 alien erasers and 10 flying-saucer erasers.
+a. How many groups of 6 erasers can be formed from the 18 erasers? Explain.
+\answer{a. 18,564; the order does not matter, so there are ({}_{18}C_6=18,564) groups of 6 erasers.}
+b. In how many ways can 3 aliens be selected? Explain.
+\answer{b. 56; there are 8 aliens, so there are ({}_8C_3=56) ways to choose 3 aliens.}
+c. In how many ways can 3 aliens and 3 flying saucers be selected? Explain.
+\answer{c. 6,720; there are 10 flying saucers, so there are ({}_{10}C_3=120) ways to choose 3 flying saucers. Then multiply by the answer to part b.}
+d. What is the probability that 3 aliens and 3 flying saucers will be selected? Explain.
+\answer{d. 0.36; the probability is the ratio of the number of favorable outcomes (the answer to part c) to the total number of possible outcomes (the answer to part a). (\frac{6,720}{18,564}\approx0.36)}
+\end{practice}
+\begin{practice}{19}{3}
+Error Analysis There are 6 tiles numbered 1 to 6 in a box. Two tiles are selected at random without replacement to form a 2-digit number. Jeffrey found the probability that the number selected is 16. Explain his error.
+The number of ways to select 1 and 6 is given by ({}_6C_2=15)
+(P(16)=\frac1{{}_6C_2}=\frac1{15})
+% FIG 45 518 728 763 823
+\placeholder{illustration}{Pale curled note with Jeffrey's incorrect combination calculation transcribed above and red X.}
+\answer{The order is important in this problem. The number of ways to select 1 and 6 to form 16 is given by ({}_6P_2), not ({}_6C_2); (P(16)=\frac1{{}_6P_2}=\frac1{30}).}
+\end{practice}
+\begin{practice}{20}{2}
+Mathematical Connections How many lines are determined by the points, P, Q, R, and S? Explain.
+% FIG 45 518 894 627 930
+\placeholder{diagram}{Four black points, none collinear, no axes or connecting lines: P lower left, Q slightly higher to its right, R lower and further right, S highest and furthest right. Labels above left of each point.}
+\answer{6; any two points form a line and the order is not important. Because ({}_4C_2=6), 6 lines can be determined by the four points.}
+\end{practice}
+\begin{practice}{21}{3}
+Higher Order Thinking There are 11! different ways for a group of people to sit around a circular table. How many people are in the group? Explain.
+\answer{12; because the people are sitting around a circular table, the first position is determined and the order of the remaining 11 people is 11!.}
+\te{Answer printed on next page.}
+\end{practice}
+\begin{practice}{22}{1}
+\textbf{PRACTICE} For Exercises 22--27, determine whether the possible outcomes represent permutations or combinations, then state the number of possible outcomes. SEE EXAMPLES 1, 2, AND 3
+A student chooses 4 books at random from a reading list of 11 books.
+\answer{combination; 330}
+\end{practice}
+\begin{practice}{23}{1}
+For Exercises 22--27, determine whether the possible outcomes represent permutations or combinations, then state the number of possible outcomes. SEE EXAMPLES 1, 2, AND 3
+At the end of a season, 10 soccer teams are ranked by the state.
+\answer{permutation; 3,628,800}
+\end{practice}
+\begin{practice}{24}{1}
+For Exercises 22--27, determine whether the possible outcomes represent permutations or combinations, then state the number of possible outcomes. SEE EXAMPLES 1, 2, AND 3
+A committee of 5 people is being selected from a group of 9 to choose the food for a sport's banquet.
+\answer{combination; 126}
+\end{practice}
+\begin{practice}{25}{1}
+For Exercises 22--27, determine whether the possible outcomes represent permutations or combinations, then state the number of possible outcomes. SEE EXAMPLES 1, 2, AND 3
+Hugo displays his 8 model planes in a single row.
+\answer{permutation; 40,320}
+\end{practice}
+\begin{practice}{26}{1}
+For Exercises 22--27, determine whether the possible outcomes represent permutations or combinations, then state the number of possible outcomes. SEE EXAMPLES 1, 2, AND 3
+A class president, secretary, and treasurer are chosen from 12 students running for office.
+\answer{permutation; 1,320}
+\end{practice}
+\begin{practice}{27}{1}
+For Exercises 22--27, determine whether the possible outcomes represent permutations or combinations, then state the number of possible outcomes. SEE EXAMPLES 1, 2, AND 3
+A food truck has a lunch special on tacos. Customers choose a shell, three toppings, and two sides for one price.
+% FIG 45 827 595 1090 718
+\placeholder{illustration}{Orange and green taco truck with yellow Menu. Shell: Hard, Soft, Wheat. Toppings: Ground Beef, Pollo, Steak, Cheese, Lettuce, Tomato, Sour Cream. Sides: Fountain Drink, Rice, Beans, Fruit.}
+\answer{combination(s); 630}
+\end{practice}
+\begin{practice}{28}{2}
+There are 4 comedians and 5 musicians performing in a variety show. The order in which the performers are chosen is random. SEE EXAMPLE 4
+a. What is the probability that the first 3 performers are comedians?
+\answer{a. (\frac{{}_4P_3\cdot{}_5P_0}{{}_9P_3}=\frac{24}{504}=\frac1{21})}
+b. What is the probability that the first two performers are comedians followed by a musician?
+\answer{b. (\frac{{}_4P_2\cdot{}_5P_1}{{}_9P_3}=\frac{60}{504}=\frac5{42})}
+\te{Answers printed on next page.}
+\end{practice}
+\begin{practice}{29}{2}
+A jewelry maker chooses three beads at random from a bag with 10 beads labeled A, B, C, D, E, F, G, H, I, and J. SEE EXAMPLES 2, 3, AND 4
+a. How can you use permutations or combinations to find (P(\text{selected beads spell the initials DEB}))? What is the probability?
+\answer{a. Use a permutation because order matters. (P(DEB)=\frac1{{}_{10}P_3}=\frac1{720})}
+b. How can you use permutations or combinations to find (P(\text{selected beads are all vowels}))? What is the probability?
+\answer{b. Use combinations because order does not matter. (P(\text{all vowels})=\frac{{}_3C_3}{{}_{10}C_3}=\frac1{120})}
+\te{Answers printed on next page.}
+\end{practice}
+% Source page 46: 607 Practice continued
+\begin{practice}{30}{3}
+\textbf{APPLY. Make Sense and Persevere} Imani's wallet contains three \$1 bills, two \$5 bills, and three \$10 bills. If she pulls two bills without looking, what is the probability that she draws a \$1 bill and a \$10 bill? Explain.
+\answer{(\frac9{28}); use combinations because which \$1 bill and which \$10 bill do not matter, and the order in which they are pulled out does not matter. (\frac{{}_3C_1\cdot{}_3C_1}{{}_8C_2}=\frac9{28})}
+\end{practice}
+\begin{practice}{31}{2}
+Model with Mathematics Raul's favorite restaurant is running a prize game. Five of each of the winning tickets shown are available, and a customer must collect three winning tickets to receive the prize. What is the probability Raul will receive the prize for the baseball cap with his first 3 tickets?
+% FIG 46 552 478 775 621
+\placeholder{illustration}{Four tickets each headed WIN A...: green with baseball cap, orange with yellow bottle, pink with music player and earbuds, pale blue with key ring.}
+\answer{(\frac1{114}); there are ({}_5C_3) ways to select the tickets he wants and ({}_{20}C_3) ways to select 3 tickets. So (P(3\text{ winning baseball cap tickets})=\frac{{}_5C_3}{{}_{20}C_3}=\frac{10}{1,140}=\frac1{114}).}
+\end{practice}
+\begin{practice}{32}{2}
+Look for Relationships Smart Phones, Inc. chooses a 5-digit security code at random from the digits 0--9.
+a. Suppose the digits cannot be repeated. What is the probability that the security code is 30429? Explain.
+\answer{a. (\frac1{30,240}); order matters, so there are ({}_{10}P_5) possible codes, only one of which is 30429. So (P(30429)=\frac1{{}_{10}P_5}=\frac1{30,240}).}
+b. Suppose the digits can be repeated. What is the probability that the security code is 30429? Explain.
+\answer{b. (\frac1{100,000}); there are (10^5) possible codes, only one of which is 30429. So (P(30429)=\frac1{10^5}=\frac1{100,000}).}
+\end{practice}
+\begin{practice}{33}{2}
+Make Sense and Persevere Edwin randomly plays 6 different songs from his playlist.
+% FIG 46 552 837 793 955
+\placeholder{illustration}{Music player screen Edwin's Playlist, Total Songs: 20, music-note icons, blue playback controls, time 4:39, rows Track - 01 and partially visible Track - 02.}
+a. What is the probability that Edwin hears his 6 favorite songs?
+\answer{a. (\frac{{}_6P_6}{{}_{20}P_6}=\frac1{38,760})}
+b. What is the probability that he hears the songs in order from his most favorite to his sixth-most favorite?
+\answer{b. (\frac1{{}_{20}P_6}=\frac1{27,907,200})}
+\end{practice}
+\begin{practice}{34}{1}
+\textbf{ASSESSMENT PRACTICE}
+Consider an arrangement of 8 items taken 3 at a time in which order is not important. Does each expression give the correct number of arrangements? Select Yes or No.
+\begin{tabular}{lll}
+ & Yes & No \\
+({}_8P_3) & & \answer{No} \\
+({}_8C_3) & \answer{Yes} & \\
+(\frac{{}_8P_3}{3!}) & \answer{Yes} & \\
+(8!\cdot3!) & & \answer{No} \\
+(\frac{8!}{3!}) & & \answer{No} \\
+(\frac{8!}{5!}) & & \answer{No} \\
+(\frac{8!}{3!5!}) & \answer{Yes} & \\
+(8\cdot7) & \answer{Yes} & \\
+\end{tabular}
+\end{practice}
+\begin{practice}{35}{1}
+SAT/ACT Fifteen students enter a Safety Week poster contest in which prizes will be awarded for first through fourth place. In how many ways could the prizes be given out?
+A. 4
+B. 60
+C. 1,365
+D. 32,760
+E. 50,625
+\answer{D}
+\end{practice}
+\begin{practice}{36}{3}
+Performance Task Use the word shown on the tiles below to find each probability.
+% FIG 46 848 798 1122 829
+\placeholder{diagram}{Nine equal red rectangular tiles with black outlines, white letters S U R F B O A R D in a horizontal row.}
+Part A Two tiles are chosen at random without replacement. Use conditional probability to find the probability that both letters are vowels. Then find the probability using permutations or combinations. Explain.
+\answer{Part A (P(V1\text{ and }V2)=P(V1)\cdot P(V2\mid V1)=\frac39\cdot\frac28=\frac1{12}); (P(V1\text{ and }V2)=\frac{{}_3C_2}{{}_9C_2}=\frac1{12})}
+Part B Four of the tiles are chosen at random and placed in the order in which they are drawn. Use conditional probability to find the probability the tiles spell the word SURF. Then find the probability using permutations or combinations. Explain.
+\answer{Part B (P(SURF)=\frac19\cdot\frac18\cdot\frac27\cdot\frac16=\frac1{1,512}); (P(SURF)=\frac{{}_1P_1\cdot{}_1P_1\cdot{}_2P_1\cdot{}_1P_1}{{}_9P_4}=\frac2{3,024}=\frac1{1,512})}
+\end{practice}
+% Source page 47: 607A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Lesson Quiz is available at SavvasRealize.com. Assessment. ASSESSMENT RESOURCES.
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & DP15 \\
+2 & 2 & DP15 \\
+3 & 1 & DP15 \\
+4 & 2 & A78 \\
+5 & 2 & DP15 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+I Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+O On-Level & 4 points & Enrichment \\
+A Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{12-3 Lesson Quiz. Permutations and Combinations}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. A chef randomly chooses 5 apples from a case of 24 apples. In how many ways can the chef make the selection?
+A. 11,628
+B. 42,504
+C. 5,100,480
+D. 1,395,360
+\answer{B}
+2. A game at the fair involves balls numbered 1 to 18. You can win a prize if you correctly choose the 5 numbers that are randomly drawn. What are your approximate chances of winning?
+A. 0.0001
+B. 0.056
+C. 0.078
+D. 0.278
+\answer{A}
+3. Identify each situation as a permutation or a combination. Then find the number of possible arrangements.
+6 books are placed from left to right on a bookshelf.
+This is a (permutation, combination). There are blank possible arrangements.
+\answer{permutation; 720}
+4 goldfish are selected from a tank containing 8 goldfish.
+This is a (permutation, combination). There are blank possible arrangements.
+\answer{combination; 70}
+3 class representatives are chosen from 25 students.
+This is a (permutation, combination). There are blank possible arrangements.
+\answer{combination; 2300}
+4. A bag contains 7 marbles; one each of red, orange, yellow, green, blue, violet and white. A child randomly pulls 4 marbles from the bag. What is the probability that the marbles chosen are green, blue, red, and yellow? Round your answer to the nearest hundredth?
+\answer{0.03}
+5. Serena has a playlist of 10 songs. She plays 2 songs. What is the approximate probability in each case?
+\begin{tabular}{lllll}
+ & 45\% & 2.2\% & 1.1\% & 90\% \\
+She hears her 2 favorite songs. & & \answer{2.2\%} & & \\
+She hears her favorite song first and her next-favorite song second. & & & \answer{1.1\%} & \\
+\end{tabular}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 48: 607B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+SavvasRealize.com. Practice. I = Intervention. O = On-Level. A = Advanced.
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-3 Reteach to Build Understanding. Permutations and Combinations}
+1. For each situation in Column A, draw a line segment to the matching expression in Column B, then another line segment to the name of the principle or formula in Column C that justifies the expression. Some items may be used more than once.
+\begin{tabular}{lll}
+Column A & Column B & Column C \\
+number of ways that a store can select 3 sweaters to display out of 10 designs & (\frac{8!}{2!}) & Fundamental Counting Principle \\
+number of ways that 10 students can walk onto the stage to receive awards & (\frac{10!}{3!7!}) & Formula for Permutations \\
+number of ways that 6 \$100 bonuses can be given out to employees in an office of 10 people & (10!) & Formula for Combinations \\
+number of ways that 6 honorees can sit in 8 seats at the front table of a banquet in their honor & (\frac{10!}{6!4!}) & \\
+\end{tabular}
+\answer{Sweaters to (\frac{10!}{3!7!}) to Formula for Combinations; awards to (10!) to Fundamental Counting Principle; bonuses to (\frac{10!}{6!4!}) to Formula for Combinations; honorees to (\frac{8!}{2!}) to Formula for Permutations.}
+% FIG 48 177 449 435 604
+\placeholder{diagram}{Matching boxes in three columns with all text transcribed above. Given black line connects awards to 10! to Fundamental Counting Principle. Pink lines connect other three situations to the expressions and formulas specified in the answer.}
+2. Identify the student's error and show what the student should do instead.
+How many ways can 6 volleyball players be positioned at the start of a game if there are 8 team members in all?
+({}_8P_6=\frac{8!}{6!(8-6)!})
+(=\frac{8\cdot7\cdot6\cdot5\cdot4\cdot3\cdot2\cdot1}{(6\cdot5\cdot4\cdot3\cdot2\cdot1)(2\cdot1)})
+(=\frac{8\cdot7}{2}=28)
+\answer{Used the formula for combinations instead of permutations. The correct formula is ({}_8P_6=\frac{8!}{(8-6)!}=20,160)}
+3. A runner has 8 pairs of running shoes. She will take 4 pairs to a meet. This is a (combination, permutation). There are blank ways to choose the pairs.
+\answer{combination; 70}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-3 Additional Practice. Permutations and Combinations}
+1. When randomly choosing two coins from a cup of coins that contains a penny, a nickel, a dime, and a quarter, what is the probability of choosing a penny and a nickel?
+\answer{(\frac16), 0.167, or 16.7\%}
+2. There are 5 runners in a race. If each runner has the same chance of winning, and they wear shirts with the letters P, Q, R, S, and T, what is the probability that the runners finish the race in the order P, Q, R, S, T?
+\answer{(\frac1{120})}
+3. A basketball coach will choose 5 players from a group of 8 players to start the next game. How many different groups of starting players are possible?
+\answer{56}
+4. A group of 9 business leaders meets each week. Members take turns being the note-taker, the facilitator, and the speaker. In how many different ways can these positions be chosen from the members?
+\answer{504 ways}
+5. Three cards are randomly chosen at the same time from a set numbered from 1 to 7. What is the probability that the chosen cards are numbered 1, 2, and 3? Round to the hundredths place.
+\answer{about 0.03}
+6. A hiker has 2 pairs of hiking shoes, 3 shirts, and 2 pairs of shorts to choose from. How does the number of combinations of shoes, shirts, and shorts change as the hiker adds a new shirt to his collection? Explain.
+\answer{Sample answer: Each time the hiker adds a shirt to the collection, 4 additional combinations are possible. The initial number of combinations is (2\cdot3\cdot2=12). When another shirt is added, the number of combinations becomes (2\cdot4\cdot2=16).}
+7. You have a \$1 bill, a \$5 bill, a \$10 bill, a \$20 bill, a quarter, a dime, a nickel, and a penny. How many different total amounts of money can you make by choosing a combination of 6 of them? Explain.
+\answer{28; Number of ways is ({}_8C_6=28).}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-3 Enrichment. Permutations and Combinations}
+Maya claims that in a class of 30 students there is a greater than 50\% chance that at least 2 students have the same birthdate. Can this claim be true?
+If (P(n)=P(n\text{ students have the same birthday})), then (P(n)=P(1)+P(2)+P(3)+\ldots P(n)). That would be a tedious calculation indeed! So, let (P(1)=P(\text{each student's birthdate is unique})) and (P(n\geq2)=P(2\text{ or more students have the same birthday})) and find P(1).
+\te{Printed P(n) equals a sum including itself, then redefines P(1); likely intended a complement calculation for at least two sharing a birthday.}
+Complete Items 1--6 to see if you agree with Maya's claim.
+1. How are (P(n\geq2)) and P(1) are related? Complete the equation with the appropriate symbols.
+(P(n\geq2)\ \answer{=}\ 100\%\ \answer{-}\ P(1))
+\te{Printed are twice in the question.}
+For Items 2--5, complete each expression. Then evaluate the expressions for Exercises 4--5, using a calculator. (You may need to rewrite the expression for your calculator.) Assume 365 days in the year.
+\begin{tabular}{llll}
+ & Question & Expression & Answer \\
+2. & How many ways are there for 30 people to all have different birthdays? & ({}_{365}P_{30}=\answer{\frac{365!}{335!}}) & \\
+3. & How many possible sets of birthdates are there for 30 people? & \answer{(365^{30})} & \\
+4. & What is P(1), the approximate probability that each of the 30 birthdays is unique, to the nearest whole percent? & \answer{(\frac{\frac{365!}{335!}}{365^{30}})} & \answer{29\%} \\
+5. & What is (P(n\geq2)), the approximate probability that 2 or more of the 30 students have the same birthdate, to the nearest whole percent? Refer to Item 1. & \answer{(100\%-\frac{\frac{365!}{335!}}{365^{30}})} & \answer{71\%} \\
+\end{tabular}
+6. Do you agree with Maya? Explain.
+\answer{Sample answer: Yes; the probability that 2 or more students have the same birthday is about 71\%; (71\%>50\%)}
+7. Jesse asked 30 random people for their birthdate. He found that no 2 people in that group had the same birthday. Does this mean that Maya's claim is false? Explain.
+\answer{Sample answer: No; Maya found the theoretical probability for many trials and Jesse only did one trial.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-3 Mathematical Literacy and Vocabulary. Permutations and Combinations}
+For Items 1--6, match the term in Column A with its description in Column B. The first one is done for you.
+\begin{tabular}{ll}
+Column A & Column B \\
+1. arrangement & an arrangement of some or all objects of a set in a specific order \\
+2. combination & If there are m ways to make the first selection and n ways to make the second selection then there are (m\times n) ways to make the two selections. \\
+3. n factorial & a selection of some or all objects of a set with no specific order \\
+4. Fundamental Counting Principle & a way of grouping a number of objects \\
+5. permutation & a picture with a starting point that branches to show possible outcomes \\
+6. tree diagram & the product of all positive integers less than or equal to n \\
+\end{tabular}
+\answer{1. a way of grouping a number of objects; 2. a selection of some or all objects of a set with no specific order; 3. the product of all positive integers less than or equal to n; 4. If there are m ways to make the first selection and n ways to make the second selection then there are (m\times n) ways to make the two selections.; 5. an arrangement of some or all objects of a set in a specific order; 6. a picture with a starting point that branches to show possible outcomes.}
+For Items 7--9, match the example in Column A with its corresponding formula in Column B.
+\begin{tabular}{ll}
+Column A & Column B \\
+7. (n!) & (\frac{n!}{r!(n-r)!}) for (0\leq r\leq n) \\
+8. ({}_nP_r) & (n\cdot(n-1)\cdot(n-2)\ldots\cdot2\cdot1) \\
+9. ({}_nC_r) & (\frac{n!}{(n-r)!}) for (0\leq r\leq n) \\
+\end{tabular}
+\answer{7. (n\cdot(n-1)\cdot(n-2)\ldots\cdot2\cdot1); 8. (\frac{n!}{(n-r)!}) for (0\leq r\leq n); 9. (\frac{n!}{r!(n-r)!}) for (0\leq r\leq n).}
+% FIG 48 199 1016 456 1323
+\placeholder{diagram}{Matching exercise with both sets of columns transcribed above. First black given line connects arrangement to a way of grouping a number of objects. Remaining matches are pink line segments, endpoints specified in answers.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital preview: A surveyor took some measurements of a piece of land. The owner needs to know the area of the land to determine the value. What is the area of the piece of land? Blank ft. Printed ft; likely square feet for area.}
+% FIG 48 615 977 1066 1298
+\placeholder{illustration}{Tablet with digital land-area problem; green irregular parcel, trees, road, dashed internal segments. Visible measurements 12 ft upper left, 21 ft lower left, 22 ft lower right, right-angle marker at bottom altitude and 54-degree lower-right angle. Help menu covers some right-hand labels. No answer printed.}
+\te{Exit. Question Help. Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Enter your answer in the answer box and then click Check Answer. 1 part remaining. Clear All. Check Answer. Review progress. Question 24 of 40. Go. Back. Next.}
+\end{te-addendum}
+
+\end{document}

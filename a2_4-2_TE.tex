@@ -1,0 +1,963 @@
+\documentclass{article}
+% Source: Topic_04_Teacher_Edition.pdf, PDF pages 24-36 (printed pages 189A-197B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 24: 189A Lesson Overview
+\begin{lesson-meta}
+lesson: 4-2
+title: Graphing Rational Functions
+standards: none printed
+practices: none printed
+objective: I can graph rational functions.
+
+essential question: How can you graph a rational function?
+
+\textbf{VOCABULARY}
+\item rational expression
+\item rational function
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 4-2 \\
+Title & Graphing Rational Functions \\
+Standards & none printed \\
+I CAN Objective & I can graph rational functions. \\
+Essential Question & How can you graph a rational function? \\
+Lesson Vocabulary & rational expression; rational function \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Graph rational functions by identifying asymptotes and end behavior.
+\item Rewrite simple rational expressions in different forms using long division.
+Essential Understanding. A rational function is any function (R(x)=\frac{P(x)}{Q(x)}) where (P(x)) and (Q(x)) are polynomial functions. The domain of a rational function is all real numbers except any (x)-values for which (Q(x)) equals to zero. The graph of a rational function has one or more asymptotes, which guide the end behavior of the graph.
+\te{Printed generalization about one or more asymptotes does not cover all rational functions.}
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Graphed linear functions and identified key features of the graphs of linear functions.
+In this lesson, students:
+\item Focus on graphing rational functions.
+\item Identify the key features of the graphs of rational functions, such as asymptotes.
+Increasing Coherence. Examples 2, 3, 4, and 6 are not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Solve rational equations.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students recognize rational functions and understand how to use asymptotes to illustrate the end behavior of the function.
+\item Students apply a rational function model to solve real-world application problems, including cost-benefit analysis.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+English & Spanish \\
+REVIEW VOCABULARY: rational number & número racional \\
+NEW VOCABULARY: rational expression & expresión racional \\
+rational function & función racional \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Start by asking students to define rational numbers and rational expressions and provide some examples. Explain the relationship between a rational expression and a rational function.
+1. A function (R(x)=\frac{P(x)}{Q(x)}) where (P(x)) and (Q(x)) are polynomial functions, and (Q(x)\neq0) is a:
+rational expression. rational function. rational number.
+\answer{rational function.}
+2. The quotient of two polynomials is a:
+rational expression. rational function. rational number.
+\answer{rational expression.}
+3. A number that can be written as a ratio is a:
+rational expression. rational function. rational number.
+\answer{rational number.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 24 964 752 1114 933
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, Savvas, multicolored concentric light rings on black.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students graph rational functions by finding the function's asymptotes. A vertical asymptote exists where the value of (x) causes the denominator of the function to be 0. Horizontal asymptotes are determined by the relationship between the degrees of the numerator and denominator.
+\te{Printed vertical-asymptote claim requires checking for canceled factors; a denominator zero can instead give a hole.}
+In some cases, students use long division to rewrite rational expressions as transformations of the reciprocal function and then find the asymptotes by identifying the transformation.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively. Students represent problem situations abstractly with rational functions in order to compute a solution, then interpret the results in terms of the real-world context.
+Look for and Make Use of Structure. Students look for patterns when rewriting a rational function and identify asymptotes in order to graph the function, relating a shift of asymptotes to a transformation of the function.
+\end{te-addendum}
+% Source page 25: 189B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Explore \& Reason: INSTRUCTIONAL FOCUS}
+Students explore the graphs of different functions and see how a variable in the denominator of a function can change the shape of that function. This leads to rewriting and graphing rational functions to identify vertical and horizontal asymptotes.
+STUDENT COMPANION. Students can complete the Explore \& Reason activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving}
+Q: How are (f(x)), (g(x)), and (h(x)) similar? How are they different?
+\answer{Samples: All three functions contain the term (x-1). The functions (g(x)) and (h(x)) are fractions or rational expressions.}
+\textbf{During: SMALL GROUP. Support Productive Struggle in Learning Mathematics}
+Q: What are some strategies you can use to find the slope of the functions that are linear?
+\answer{Graph the functions and calculate the change in (y) over the change in (x) for two points on the graph. Rewrite each function in slope-intercept form.}
+Q: What are some strategies you can use to find the (y)-intercept?
+\answer{Graph the functions and observe where the graph crosses the (y)-axis. Evaluate the functions for (f(0)).}
+\textbf{For Early Finishers}
+Q: What do you notice about the end behavior of each function?
+\answer{Both (f) and (g) have the same end behavior. They both approach infinity as (x) approaches infinity. Similarly, they both approach negative infinity as (x) approaches negative infinity. The function (h) approaches 1 as (x) approaches positive or negative infinity. Also, the function (h) approaches positive and negative infinity when (x) approaches 2.}
+\textbf{After: WHOLE CLASS. Facilitate Meaningful Mathematical Discourse}
+Q: What do you notice about the graphs of functions that have a variable in the denominator?
+\answer{They are not linear; they have asymptotes; their domain and range do not contain all real numbers.}
+\te{Printed response generalizes the launch example; these properties do not hold for every expression with a variable denominator.}
+Explore \& Reason is powered by Desmos. Activities are available at SavvasRealize.com.
+\te{Digital activity repeats launch parts A--C, with Enter your answer fields, Go back, and a blank graphing grid.}
+% FIG 25 878 257 1067 468
+\placeholder{graph}{Blank digital coordinate grid, x and y window approximately -10 to10, unit grid and labels -10,-5,0,5,10; menu and wrench controls, no plotted curves.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Look for Relationships. Use with EXPLORE \& REASON}
+Q: What similarities do you notice between the graph of (h(x)=\frac{x-1}{x-2}) and the graph of a reciprocal function?
+\answer{Both graphs have vertical and horizontal asymptotes. Both graphs approach their horizontal asymptotes as (x) approaches positive and negative infinity.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Look at the three functions shown.
+(f(x)=x-1), (g(x)=\frac{x-1}{2}), (h(x)=\frac{x-1}{x-2}).
+% FIG 25 1020 642 1122 777
+\placeholder{illustration}{Black tablet displaying f(x)=x-1, g(x)=(x-1)/2, h(x)=(x-1)/(x-2) on a white note.}
+A. Look for Relationships Graph each function. Determine which of the functions are linear. Find the (y)-intercept of each function and the slope, if appropriate.
+\answer{Sample Student Work:}
+\begin{tabular}{llll}
+ & Linear? & Slope & y-intercept \\
+f(x) & Yes & 1 & -1 \\
+g(x) & Yes & (\frac12) & (-\frac12) \\
+h(x) & No & & (\frac12) \\
+\end{tabular}
+B. What is the effect on the graph of (f) when dividing (x-1) by 2?
+\answer{Each (y)-value is half the previous (y)-value.}
+C. What happens to the graph of (h) as (x) approaches 2?
+\answer{As (x) approaches 2 from the left, the (y)-value approaches (-\infty); as (x) approaches 2 from the right, the (y)-value approaches (+\infty).}
+D. Communicate Precisely What is the effect on the graph of (f(x)) when dividing (x-1) by (x-2)? (Hint: Compare it to what you found in part (B).)
+\answer{The graph is no longer linear}
+\end{model-discuss}
+% Source page 26: 189 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION: Establish Mathematics Goals to Focus Learning}
+Introduce students to graphing rational functions. Remind students that the denominator of a rational function cannot equal zero. Understanding this helps them to find the vertical asymptotes. Students use vertical and horizontal asymptotes to graph a rational function.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+Q: Why is the vertical asymptote of the graph of (g) three units to the right of the vertical asymptote of (f)? Why is the horizontal asymptote 2 units up from the horizontal asymptote of (f)?
+\answer{Since (g(x)=12f(x-3)+4), the graph of (g) is three units to the right of (f). So where the graph of (f) approaches (x=0), the graph of (g) approaches (x=3). Similarly, the graph of (g) is 4 units up from the graph of (f), so where (f) approaches (y=0), (g) approaches (y=4).}
+\te{Printed question says 2 units up; the equation, graph and response indicate 4 units up.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Rewrite a Rational Function to Identify Asymptotes}
+How is the quotient (g(x)=\frac{4x}{x-3}) related to the reciprocal function, (f(x)=\frac1x)? Sketch the graph.
+Use long division to write the rational expression in the form (\frac{a}{x-h}+k).
+\begin{tabular}{rl}
+ & 4 \\
+x-3 & (4x) \\
+ & (-(4x-12)) \\
+ & 12 \\
+\end{tabular}
+\te{USE STRUCTURE: Rewriting in this way is similar to rewriting an improper fraction as a mixed number.}
+Therefore, (g(x)=4+\frac{12}{x-3}).
+In terms of (f(x)), (g(x)=12\cdot f(x-3)+4).
+So, the graph of (g) will be the graph of (f) translated and stretched vertically.
+\te{The vertical asymptote (x=3) is 3 units to the right of the asymptote of (f). The horizontal asymptote of (g), (y=4) is 4 units up from the asymptote of (f).}
+% FIG 26 870 380 1151 555
+\placeholder{graph}{Red g(x)=4x/(x-3), axes x,y and g label; window x -14 to14,y -14 to22, grid2, labels every4, origin0. Blue dashed vertical x=3; green dashed horizontal y=4 with arrowheads. Red branches have arrows at four ends, cross origin, approach y=4 from below left and above right. Left callouts describe vertical asymptote x3 shifted right3 and horizontal asymptote y4 shifted up4.}
+\answer{The graph of the parent function (f) has been stretched vertically by a factor of 12, shifted up 4 units and then right 3 units.}
+\end{example}
+\begin{tryit}{1}
+Use long division to rewrite each rational function. Find the asymptotes of (f) and sketch the graph.
+a. (f(x)=\frac{6x}{2x+1})
+b. (f(x)=\frac{x}{x-6})
+\answer{a. (f(x)=3-\frac3{2x+1}); vertical asymptote: (x=-\frac12); horizontal asymptote: (y=3). b. (f(x)=1+\frac6{x-6}); vertical asymptote: (x=6); horizontal asymptote: (y=1).}
+% FIG 27 394 200 588 394
+\placeholder{graph}{Try It 1a red curve 3-3/(2x+1), axes x,y,O, window -5 to5 both, unit grid, labels -4,-2,2,4. Left branch above y3 and right below, four end arrows, crosses origin, vertical asymptote x=-0.5 not drawn.}
+% FIG 27 394 422 588 616
+\placeholder{graph}{Try It 1b red 1+6/(x-6), window -10 to10 both, grid2, labels -8,-4,4,8; axes x,y,O. Dashed blue x6,y1 with arrowheads; red branches cross origin and have four end arrows.}
+\end{tryit}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+Additional Example is Powered by Desmos. Activities are available at SavvasRealize.com. Go back; ESSENTIAL QUESTION; SOLUTION.
+Describe the effect of the ratio of the leading coefficients on the graph of (f(x)=\frac{ax+1}{2x+1}) as the value of (a) changes.
+\answer{As (a) increases, the horizontal asymptote is translated upwards. The value of the horizontal asymptote is equal to the ratio of the leading coefficients in the numerator and the denominator.}
+% FIG 26 430 943 528 1042
+\placeholder{graph}{Digital family of rational curves (ax+1)/(2x+1), x,y axes, window approximately -5 to5 both, unit grid; labels x -4,-2,0,2,4 and y2,4. Orange, purple, green and blue curves approach horizontal levels1,2,3,4 respectively and vertical x=-0.5; upper left and lower right branches, arrows at bounds. No marked points.}
+Help students understand how increasing the ratio of leading coefficients in a rational function affects the location of the horizontal asymptote.
+Q: What do you notice about the asymptotes of the graph of (f) as (a) changes?
+\answer{As (a) increases, the vertical location of the horizontal asymptote increases. The location of the vertical asymptote does not change.}
+\te{Printed generalization omits the cancellation case a=2.}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 5}
+The average cost per unit (c(x)) to produce (x) pairs of earrings is given by (c(x)=\frac{325}{x+12}). Last month, the average cost per unit was \$14.77. How many earrings were produced last month?
+Graph (y=\frac{325}{x+12}) and (y=14.77).
+\answer{The graphs intersect at approximately (x=10). The company produced 10 earrings last month.}
+\te{Printed prompt defines x as pairs of earrings, while the solution says 10 earrings.}
+% FIG 26 916 983 1051 1121
+\placeholder{graph}{Blue decreasing y=325/(x+12) and orange horizontal y14.77; axes x,y, grid spacing2.5, labels x0,5,10,15,20,25,30 and y5,10,15,20,25,30. Window approximately x -5 to35,y -5 to35; crossing near(10,14.77), not marked; curve and line end arrows.}
+TRY ANOTHER ONE; SOLUTION.
+Help students understand how to use rational functions to solve real-world applications.
+Q: What functions should you graph to solve this problem?
+\answer{(c(x)=\frac{325}{x+12}) and (f(x)=14.77)}
+Q: What is a reasonable domain for this situation? Explain.
+\answer{The set of all nonnegative numbers because (x) cannot be a negative number of units}
+\end{te-addendum}
+% Source page 27: 190 Example 1 continued; Example 2
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: In Try It 1(a), why is there a vertical asymptote at (x=-\frac12)?
+\answer{That is the location where the denominator of the function (2x+1), is equal to zero.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{CONCEPT Rational Function}
+Just as a rational number is a number that can be expressed as the ratio of two integers, a rational expression is an expression that can be expressed as the ratio of two polynomials, such as (\frac{P(x)}{Q(x)}).
+A rational function is any function defined by a rational expression, such as (R(x)=\frac{P(x)}{Q(x)}). The domain of (R(x)) is all values of (x) for which (Q(x)\neq0).
+The function (g(x)=\frac{4x}{x-3}) is a rational function.
+\end{concept-box}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representation}
+Q: How do you find the factors of (x^2+7x+12)?
+\answer{Sample: You can use the Quadratic Formula or recognize that the factors of the polynomial are (x+4) and (x+3) because 4 and 3 are the factors of 12 that have a sum of 7.}
+Students are not expected to graph rational functions with removable discontinuities at this level. However, you may want to ask the following questions to help them recognize that not all factors of the denominator will result in vertical asymptotes.
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions}
+Q: Are there any rational functions that do not have vertical asymptotes?
+\answer{A function whose denominator never equals zero, or a function where the factors of the denominator are also in the numerator, allowing them to be rewritten as a factor of 1}
+Q: How would the graph of a rational function look if one of the factors were a factor of both the numerator and the denominator?
+\answer{Instead of having an asymptote at the value where the repeated factor equals zero, there would be a discontinuity.}
+\te{The printed statement presumes the common factor cancels completely from the denominator.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Find Multiple Vertical Asymptotes of a Rational Function}
+CONCEPTUAL UNDERSTANDING.
+What are the vertical asymptotes for the graph of (f(x)=\frac{3x-2}{x^2+7x+12})?
+Vertical asymptotes can occur at the (x)-values where the function is undefined. Determine where the denominator of the rational function is equal to 0.
+(x^2+7x+12=0)
+((x+3)(x+4)=0)
+(x+3=0\text{ or }x+4=0)
+(x=-3\text{ or }x=-4)
+\te{Set the denominator equal to zero and solve.}
+The possible vertical asymptotes are (x=-3) and (x=-4).
+Graph the function to determine if there are asymptotes at (x=-3) or (x=-4).
+% FIG 27 813 564 894 675
+\placeholder{graph}{Red (3x-2)/(x^2+7x+12) with three branches and arrows, x,y axes,O, x window approximately -7 to1 with unit grid, y -30 to80 with grid10 and label50; dashed blue vertical asymptotes x=-4,-3, arrows at ends. Middle positive U-shaped branch has minimum about y50; outside branches below x-axis near vertical asymptotes.}
+\te{Use the TRACE feature on the graphing calculator to confirm that the graph is not defined at (x=-3) or (x=-4). You will see the cursor jump from one piece of the graph to the next at these points.}
+\te{COMMUNICATE PRECISELY: When creating a graph with asymptotes, it is important to clarify if the lines indicated are vertical or horizontal asymptotes.}
+\answer{The graph is not defined at (x=-3) or (x=-4). These lines are vertical asymptotes.}
+\end{example}
+\begin{tryit}{2}
+Find the vertical asymptotes for each function. Graph the function to check your work.
+a. (g(x)=\frac{5x}{x^2-x-6})
+b. (h(x)=\frac{7-x}{(x-5)(x+1)(x+3)})
+\answer{a. (x=-2) and (x=3). b. (x=-3), (x=-1), and (x=5).}
+\end{tryit}
+% Source page 28: 191 Example 3
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions}
+Q: What happens to a fraction as the denominator approaches infinity?
+\answer{The value of the fraction approaches zero.}
+\te{Printed response assumes the numerator is fixed or grows more slowly.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Find Types of Horizontal Asymptotes}
+CONCEPTUAL UNDERSTANDING.
+What are the horizontal asymptotes for the graph (f(x)=\frac{3x-2}{x^2+7x+12})?
+Horizontal asymptotes describe end behavior. To identify horizontal asymptotes, we have to consider three cases.
+\te{STUDY TIP: The vertical asymptote(s) are found by setting the denominator of the function equal to zero. The horizontal asymptote(s) are found using the relationship between the degree of the numerator and the degree of the denominator.}
+Case 1: When the degree of the numerator is less than the degree of the denominator, there exists a horizontal asymptote at (y=0).
+Consider (g(x)=\frac{x+4}{x^2+1}).
+\te{As (|x|\to\infty) the value of the denominator gets very large in relation to the numerator. The value of the function gets closer and closer to 0.}
+% FIG 28 1038 316 1135 397
+\placeholder{graph}{Red g(x)=(x+4)/(x^2+1), x,y axes,O, window approximately x -60 to60,y -2 to6; grid12 horizontally and1 vertically, labels x -48,-24,24,48,y2,4. Narrow peak near x0,y4, tails approach x-axis, both ends arrowed; no marked points or dashed lines.}
+Case 2: When the degree of the numerator is greater than the degree of the denominator, there is no horizontal asymptote.
+Consider (h(x)=\frac{x^2+1}{x+2}).
+\te{As (|x|\to\infty), the value of the numerator gets very large in relation to the denominator, so (y\to\pm\infty).}
+% FIG 28 1038 433 1135 505
+\placeholder{graph}{Red h(x)=(x^2+1)/(x+2), x,y axes,O, window approximately x -25 to25,y -20 to15; grid5; labels x -20,-10,10,20,y -10,10. Negative left branch turns near(-4,-8) and falls at x=-2; right branch rises from a low point near(0,0.5) toward upper right. Four end arrows; no dashed asymptotes.}
+Case 3: When the degree of the numerator is equal to the degree of the denominator, there is a horizontal asymptote at (y=\frac pq) where (\frac pq) is the ratio of the leading coefficients.
+Consider (k(x)=\frac{2x^2+x+1}{x^2-1}).
+Using long division, you can rewrite this as
+(k(x)=2+\frac{x+3}{x^2-1}).
+\te{As (|x|\to\infty), the value of the rational expression approaches 0, so the value of the function approaches 2.}
+% FIG 28 1038 558 1136 657
+\placeholder{graph}{Red k(x)=(2x^2+x+1)/(x^2-1), axes x,y,O; window x -20 to20,y -15 to15, grid x4,y3; labels x -16,-8,8,16,y -12,-6,6,12. Three branches: outer positive branches approach y2, negative middle branch between x=-1 and1. End arrows; no dashed asymptotes or marked points.}
+(k(x)) has a horizontal asymptote at (y=\frac21).
+\te{MAKE SENSE AND PERSEVERE: To show that the horizontal asymptote is accurate, try substituting different values for (x) and see if the values for (y) approach the asymptote(s).}
+For the function (k(x)=\frac{3x-2}{x^2+7x+12}), the degree of the numerator is less than the degree of the denominator.
+\te{Printed concluding sentence calls the original function k(x), although the prompt calls it f(x).}
+\answer{It has a horizontal asymptote at (y=0).}
+\end{example}
+\begin{tryit}{3}
+What are the horizontal asymptotes of the graph of each function?
+a. (g(x)=\frac{2x^2+x-9}{2x-8})
+b. (h(x)=\frac{x^2+5x+4}{3x^2-12})
+c. (k(x)=\frac{x}{(2x-1)(x+6)})
+\answer{a. no horizontal asymptote. b. (y=\frac13). c. (y=0).}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What does the relationship between the degrees of the numerator and the denominator tell you about the horizontal asymptotes of these functions?
+\answer{In part (a), the numerator has a greater degree than the denominator, so there is no horizontal asymptote. In part (b), the degree of the numerator is equal to the degree of the denominator, so the horizontal asymptote is equal to the ratio of the leading coefficients. In part (c), the denominator has a greater degree, so the horizontal asymptote is at (y=0).}
+\end{te-addendum}
+\begin{te-addendum}{3}{CommonError}
+\textbf{Common Error: Try It! 3b}
+Students may think that because the coefficient of (x^2) in the denominator is greater than in the numerator, the horizontal asymptote is (y=0). Have students consider the function (f(x)=\frac{x^2}{3x^2}), and ask them to graph the function. Ask students how the end behavior of function (f) relates to the end behavior of function (h).
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{Model With Mathematics. Use with EXAMPLES 1, 2, \& 3}
+Q: Under what conditions could there be a horizontal asymptote at (y=-2)? Give an example.
+\answer{Sample: A horizontal asymptote exists at (y=-2) when the function is a vertical translation by (-2) of a rational function, where the degree of the denominator is greater than the degree of the numerator; (y=\frac1x-2)}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 3}
+Students may have trouble understanding why you can estimate the horizontal asymptotes by looking at the ratio of leading coefficients.
+\item Have students use technology to evaluate the rational functions below for larger and larger values of (x) so that they can see that the horizontal asymptote is based on the leading coefficients.
+1. (f(x)=\frac{5x-1}{2x+3})
+2. (g(x)=\frac{17x-1}{3x+3})
+Q: What happens to (f(x)) and (g(x)) for larger values of (x)?
+\answer{The values for (f(x)) and (g(x)) stabilize---the function (f) approaches (\frac52), and the function (g) approaches (\frac{17}{3}).}
+\end{te-addendum}
+% Source page 29: 192 Example 4
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+Q: How can you determine which technique to use to find the horizontal asymptotes in this function?
+\answer{The degrees of the numerator and the denominator are the same, so you can use the ratio of the leading coefficients.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Graph a Function of the Form (\frac{ax+b}{cx+d})}
+What is the graph of the function (f(x)=\frac{2x+1}{3x-4})?
+Step 1 Determine if there is a vertical asymptote.
+(3x-4=0)
+(3x=4)
+(x=\frac43)
+\te{By setting the denominator equal to zero, you can find the values of (x) for which the function is undefined.}
+At (x=\frac43), the value of the denominator is 0.
+There is a vertical asymptote at (x=\frac43).
+Step 2 Determine if there is a horizontal asymptote.
+(y=\frac23)
+\te{Since the degrees of the numerator and denominator are the same, use the ratio of the leading coefficients to find the horizontal asymptote.}
+As (x\to\pm\infty), (y\to\frac23).
+There is a horizontal asymptote at (y=\frac23).
+\te{REASON: Consider (\text{time}=\frac{\text{distance}}{\text{rate}}). Fix a distance and let the rate vary. This represents a reciprocal function. As you travel faster and faster, it takes less time to reach the set distance. But because you have a fixed distance to travel, it will always take some small amount of time to travel it. This represents the horizontal asymptote. Now consider going slower and slower. What does this represent?}
+Step 3 Graph the function.
+\item Indicate the asymptotes.
+\item Choose (x)-values on either side of the vertical asymptote, and evaluate the function for those (x)-values to create coordinate points to determine the shape near the asymptotes. For example, (f(2)=2.5), (f(4)=1.125), (f(0)=-0.25), (f(-0.5)=0), and (f(-2)=0.3).
+\item Plot the points and sketch the graph through the points.
+% FIG 29 833 582 1048 767
+\placeholder{graph}{Red (2x+1)/(3x-4), axes x,y, origin0, unit grid window -5 to5 both, labels -4,-2,2,4. Dashed green vertical x4/3 and blue horizontal y2/3, end arrows. Red filled points (2,2.5),(4,1.125),(0,-0.25),(-0.5,0),(-2,0.3); four red branch arrows. Light blue grid on curled paper.}
+\answer{See graph; vertical asymptote (x=\frac43), horizontal asymptote (y=\frac23).}
+\end{example}
+\begin{tryit}{4}
+Graph each function.
+a. (f(x)=\frac{4x-3}{x+8})
+b. (g(x)=\frac{3x+2}{x-1})
+\answer{a. See graph. b. See graph.}
+% FIG 29 145 353 302 510
+\placeholder{graph}{Try It4a red (4x-3)/(x+8), x,y,O axes; window x -20 to20,y -40 to40, grid x5,y10; labels x -10,10,y -20,20. Four arrowed branch ends, asymptotes x=-8,y4 implicit, no marked points.}
+% FIG 29 145 538 303 696
+\placeholder{graph}{Try It4b red (3x+2)/(x-1), axes x,y,O; window x -4 to4,y -6 to10, grid x1,y2, labels x -2,2,y -4,4,8. Four arrowed ends, asymptotes x1,y3 implicit, curve crosses y=-2 and x=-2/3, no marked points.}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What strategies did you use to graph this function?
+\answer{Sample: Set the denominator equal to zero to find the vertical asymptote. Compute the ratio of the leading coefficients to find the horizontal asymptote. Sketch the asymptotes on the graph. Select some test points to graph the function.}
+\end{te-addendum}
+% Source page 30: 193 Example 5
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+Q: Why does the intersection at (a=11.1) mean that the solution is (a\geq11.1)?
+\answer{For (a\geq11.1), the (y)-coordinates of the graph of (D(a)) are greater than or equal to 60. When (a<11.1), the (y)-coordinates of (D(a)) are less than 60.}
+Q: How would the solution change if the doctor had a larger dosage?
+\answer{A larger dosage would correspond to a horizontal line at a larger (y)-coordinate, which would intersect the graph of (D(a)) at a larger (x)-coordinate. So the child would have to be older in order to receive the dosage.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Use a Rational Function Model}
+APPLICATION.
+A pediatric doctor may need to administer medication without knowing a child's weight. Young's Rule can be used to calculate a child's dosage (D(a)) given their age (a) and the adult dosage.
+A doctor has 60 mcg of a medication. What is the youngest a child can be to receive this dose of medication if the adult dosage is 125 mcg?
+% FIG 30 838 316 1072 501
+\placeholder{photo}{Adult wearing glasses and stethoscope with child holding a heart card, brick background. Overlaid circles show cups and dosing syringe labeled Adult Dosage and Child's Dosage. Center callout: Young's Rule D(a)=a/(a+12) times adult dosage.}
+Young's Rule: (D(a)=\frac{a}{a+12}\times\text{adult dosage}).
+Formulate. The adult dosage is 125 mcg, so the dosage for a child (a) years old is (D(a)=\frac{125a}{a+12}). A child can receive the medication if (D(a)\geq60).
+Compute. Graph the function using technology. Then graph the line (y=60). You can solve the inequality (D(a)\geq60) by finding the intersection point of the two graphs.
+% FIG 30 899 580 1080 674
+\placeholder{graph}{Calculator graph with horizontal Age and vertical Dosage; red increasing concave-down D(a)=125a/(a+12), blue horizontal dosage60. First quadrant square grid, x scale3,y scale10, no numeric axis labels, red curve starts origin. Callout: The graphs intersect at approximately (11.1,60).}
+The solution to the inequality (D(a)\geq60) is approximately (a\geq11.1).
+Interpret. \answer{A child 11.1 years old or older will be able to receive the medication.}
+\end{example}
+\begin{tryit}{5}
+Use Young's Rule to calculate the minimum age a child can be if a doctor has 85 mcg of a medication, and the adult dosage is 200 mcg.
+\answer{A child 8.9 years old can take an 85 mcg dose.}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{Make Sense and Persevere. Use with EXAMPLES 4 \& 5}
+Q: What are the asymptotes for the function (D(a)=\frac{200a}{a+12})?
+\answer{vertical asymptote at (x=-12), which is outside the domain and horizontal asymptote at (y=200)}
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{English Language Learners. Use with EXAMPLE 5}
+WRITING: BEGINNING. The problem is about medicine. Have students write the word medicine in the center of a page and create a web of examples and ideas about medication.
+Q: What is a dosage for a medication?
+\answer{the amount of medicine a person takes to treat an injury, or illness}
+Q: What are some factors that impact a person's dosage for a medication?
+\answer{age, weight, a person's allergies, etc.}
+LISTENING: DEVELOPING. Have students listen as you read the example. Ask them to listen for words that they do not understand and raise their hand when they hear these words.
+Q: What does intersection mean?
+\answer{the point or points that two graphs share}
+Q: What is the meaning of administer in this context?
+\answer{to give or provide}
+READING: EXPANDING. Have students read the problem at the top of the example. Then ask them to identify words and phrases in the problem that can help them understand what dosage is.
+Q: Why might an adult's dosage be used to find a child's dosage?
+\answer{adults are fully grown, so dosages may be standard, while children have not fully grown yet, so they may be more sensitive to medication}
+Q: What other factor or factors can determine a child's dosage for a medication?
+\answer{a child's weight, if known, may be used to determine their dosage for a medication}
+\end{te-addendum}
+% Source page 31: 194 Example 6
+\begin{te-addendum}{6}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+Q: Why do you check to see if the numerator of a rational function is equal to zero after finding the potential vertical asymptotes?
+\answer{You need to determine if the rational function can be simplified by common factors between the numerator and denominator. This may cause the removal of a factor in the denominator, which means there is not an asymptote there.}
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Graph a Rational Function that Crosses a Horizontal Asymptote}
+What is the graph of (f(x)=\frac{4x^2-9}{x^2+2x-15})?
+Step 1 Determine if there are any vertical asymptotes.
+(x^2+2x-15=0)
+((x+5)(x-3)=0)
+(x+5=0\text{ or }x-3=0)
+(x=-5\text{ or }x=3)
+Neither of these values makes the numerator equal to 0, but they each make the denominator equal to 0.
+There are vertical asymptotes at (x=-5) and (x=3).
+Step 2 Determine if there is a horizontal asymptote.
+The degree of the numerator equals the degree of the denominator. Using long division you can write (f(x)) as (f(x)=4-\frac{8x-51}{x^2+2x-15}). As (x\to\infty) or (x\to-\infty), the rational expression goes to 0, and (f(x)\to4).
+There is a horizontal asymptote at (y=4).
+Step 3 Sketch the graph by first graphing the asymptotes.
+% FIG 31 826 518 1124 745
+\placeholder{graph}{Red f(x)=(4x^2-9)/(x^2+2x-15), axes x,y,O; window -28 to28 both, grid4, labels every8 from-24 to24. Dashed green vertical x=-5 and3, blue horizontal y4. Three red branches, end arrows, center inverted arch crosses x=+-1.5 and y0.6; right branch crosses horizontal y4 at x6.375, dips slightly then approaches4 below. No marked points. Right callout explains crossing at(6.375,4); lower callout describes approach from below as x tends to positive infinity and from above as x tends to negative infinity.}
+\te{COMMUNICATE PRECISELY: When graphing, it is important to include both horizontal and vertical asymptotes to clearly identify the graph's behavior near them.}
+\te{Unlike a vertical asymptote, which indicates a domain restriction, horizontal asymptotes may be crossed. The graph crosses the asymptote at (6.375,4).}
+\te{When (x>6.375), the graph drops below the horizontal asymptote (y=4), and then, as (x\to\infty), approaches (y=4) from below. As (x\to-\infty), the graph approaches (y=4), from above.}
+\answer{See graph; vertical asymptotes (x=-5) and (x=3); horizontal asymptote (y=4).}
+\end{example}
+\begin{tryit}{6}
+Identify the asymptotes and sketch the graph of (g(x)=\frac{x^2-5x+6}{2x^2-10}).
+\answer{horizontal asymptote at (y=\frac12) and vertical asymptotes at (x=\pm\sqrt5)}
+% FIG 31 125 473 320 669
+\placeholder{graph}{Printed answer graph: red two-branch reciprocal-type curve, axes x,y,O, window -5 to5 both, unit grid and labels -4,-2,2,4. Left branch approaches about y0.5 from above and rises near x=-0.5; right branch rises from negative infinity near x=-0.5 through y about-1 and x about1, toward y0.5. Four end arrows, no marked points, no dashed asymptotes.}
+\te{Printed graph appears repeated from summary item6 and does not show the two vertical asymptotes of the given g(x); the printed asymptote answer is preserved.}
+\end{tryit}
+\begin{te-addendum}{6}{HabitsOfMind}
+\textbf{Reason. Use with EXAMPLE 6}
+Q: When will the graph of a rational function have two vertical asymptotes?
+\answer{When the denominator of a function has two distinct zeros that are both distinct from the zeros of the numerator, the graph of the function will have two vertical asymptotes.}
+\end{te-addendum}
+\begin{te-addendum}{6}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 6}
+Have students graph a rational function where the degree of the denominator is higher than the degree of the numerator.
+Q: What do you notice about the horizontal asymptotes of this function compared to a function with the same degree in the numerator and denominator?
+\answer{If the degree of the denominator is higher than the degree of the numerator, the asymptote is (y=0). If the degree of the numerator and the denominator are the same, then the horizontal asymptote is equal to the ratio of the leading coefficients.}
+Q: What strategies could you use to graph this function?
+\answer{Sample: Determine the vertical asymptotes; sketch them on a coordinate plane; and choose some test points from different parts of the graph to determine the shape of the function.}
+\end{te-addendum}
+% Source page 32: 195 Concept Summary
+\begin{te-addendum}{ConceptSummary}{LearnTogether}
+\textbf{CONCEPT SUMMARY Graphing Rational Functions}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+Q: What are the key features of graphs of rational functions?
+\answer{vertical and horizontal asymptotes, end behavior, intercepts}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error: Exercise 4}
+Students may think that every rational function has a vertical asymptote, because any denominator with a variable can equal zero for some value of (x). Have students consider the function (f(x)=\frac{x+1}{x^2+6}). Ask students if this function has any vertical asymptotes, pointing out that there are no values for which the denominator equals zero.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Graphing Rational Functions}
+RATIONAL FUNCTION. A function that is expressible as a fraction with polynomials in the numerator and the denominator
+ASYMPTOTES: Vertical. Vertical asymptotes are guides for the behavior of a graph as it approaches a vertical line.
+\item The line (x=a) is a vertical asymptote of (\frac{P(x)}{Q(x)}), if (Q(a)=0) and (P(a)\neq0).
+\item The up or down behavior of the function as it approaches the asymptote can be determined by substituting values close to (a) on either side of the asymptote.
+Horizontal. Horizontal asymptotes are guides for the end behavior of a graph as it approaches a horizontal line.
+If the degree of the numerator is
+\item less than the degree of the denominator, the horizontal asymptote is at (y=0).
+\item greater than the denominator, there is no horizontal asymptote.
+\item equal to the degree of the denominator, set (y) equal to the ratio of the leading coefficients. The graph of this line is the horizontal asymptote.
+ALGEBRA. (f(x)=\frac{8x-3}{4x+1})
+Vertical Asymptote: Let (4x+1=0) and solve.
+(x=-\frac14)
+Horizontal Asymptote: Find the ratio of the leading coefficients (\frac84).
+(y=2)
+% FIG 32 1048 494 1147 593
+\placeholder{graph}{Summary red (8x-3)/(4x+1), axes x,y,O, window -5 to5 both, unit grid, labels -4,-2,2,4; dashed green x=-1/4 and dashed blue y2, end arrows. Two red branches, four arrows, left above2 and right below2, y-intercept-3 and x-intercept3/8 unmarked.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you graph a rational function?
+\answer{Vertical asymptotes may occur when the denominator equals 0. Use long division to rewrite the function. Use the quotient to identify the horizontal asymptotes. Sketch the asymptotes. Then make a table of values to determine behavior near the asymptotes.}
+2. Vocabulary Why does it make sense to call the expressions in this lesson rational functions?
+\answer{They are expressed as fractions, or ratios.}
+3. Error Analysis Mahlik said the graph of (f(x)=\frac{x+2}{2x^2+4x-6}) has a horizontal asymptote at (y=\frac12). Describe and correct Mahlik's error.
+\answer{Mahlik found the ratio of the leading terms. But the degree of the numerator and denominator are not the same, so the horizontal asymptote is not the ratio of the leading terms. The horizontal asymptote is at (y=0).}
+4. Reason When will the graph of a rational function have no vertical asymptotes? Give an example of such a function.
+\answer{A rational function will have no vertical asymptotes when no value of (x) makes the denominator equal to 0; (f(x)=\frac{4x}{x^2+1})}
+\textbf{Do You KNOW HOW?}
+For 5--7, find the vertical asymptote(s) and horizontal asymptote(s) of the rational function. Then graph the function.
+5. (f(x)=\frac{x+2}{x-3})
+\answer{vertical asymptote: (x=3); horizontal asymptote: (y=1)}
+% FIG 32 155 860 349 1054
+\placeholder{graph}{Summary5 red (x+2)/(x-3), axes x,y,O; window x -3 to7,y -5 to5, unit grid, labels x -2,2,4,6,y -4,-2,2,4. Four end arrows; implicit asymptotes x3,y1, no marked points.}
+6. (f(x)=\frac{x-1}{2x+1})
+\answer{vertical asymptote: (x=-\frac12); horizontal asymptote: (y=\frac12)}
+% FIG 32 155 1096 349 1290
+\placeholder{graph}{Summary6 red (x-1)/(2x+1), axes x,y,O; window -5 to5 both, unit grid, labels -4,-2,2,4. Four end arrows; implicit asymptotes x=-0.5,y0.5; intercepts x1,y-1 unmarked.}
+7. (f(x)=\frac{5x^2+3x+4}{x^2-2x-35})
+\answer{vertical asymptotes (x=7) and (x=-5); horizontal asymptote: (y=5)}
+% FIG 32 688 924 864 1099
+\placeholder{graph}{Summary7 red (5x^2+3x+4)/(x^2-2x-35), axes x,y,O; window -20 to20 both, grid4, labels -16,-8,8,16. Three arrowed branches, outside above y5 and middle below x-axis; vertical asymptotes x=-5,7 implicit; no marked points.}
+8. Find the domain, range, and asymptotes. Sketch the function.
+(g(x)=\frac{x-2}{2x^2-3x-9})
+\answer{domain: all real numbers except (-\frac32) and 3; range: all real numbers; vertical asymptotes: (x=-\frac32), (x=3); horizontal asymptote: (y=0)}
+% FIG 32 686 1184 862 1359
+\placeholder{graph}{Summary8 red (x-2)/(2x^2-3x-9), axes x,y,O; window -5 to5 both, unit grid, labels -4,-2,2,4. Three arrowed branches; implicit vertical asymptotes x=-1.5,3 and horizontal y0, middle curve decreases through x2; no marked points.}
+\end{concept-summary}
+% Source page 33: 196 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.
+\textbf{Lesson Practice}
+You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+9--23, 26, 29--36 & 9--36 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points each \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 14--17, 34 & 1 \\
+2 & 18--19 & 1 \\
+3 & 20--21, 35 & 1 \\
+3 & 10, 13, 36 & 3 \\
+4 & 22--25 & 1 \\
+5 & 26, 31--33 & 2 \\
+6 & 12, 27--30 & 2 \\
+\bottomrule
+\end{tabular}
+\te{Items 9 and 11 are absent from the printed Item Analysis; their DOK is marked uncertain in their practice blocks.}
+\end{item-analysis}
+\begin{practice}{9}{2}
+UNDERSTAND. Communicate Precisely What is the horizontal asymptote of the rational function (f(x)=\frac{ax^2+bx+c}{dx^2+ex+f})? Explain how you know.
+\te{DOK \uncertain{2}{1 or 3; no DOK printed for item 9}.}
+\answer{(y=\frac ad); The rational function has a numerator and denominator of the same degree, so the horizontal asymptote is the ratio of the leading terms.}
+\end{practice}
+\begin{practice}{10}{3}
+UNDERSTAND. Error Analysis Juanita is trying to determine the vertical and horizontal asymptotes for the graph of the function (f(x)=\frac{x^2+3x-4}{x^2-x-12}).
+Describe and correct the error Juanita made in determining the vertical and horizontal asymptotes.
+(f(x)=\frac{x^2+3x-4}{x^2-x-12}=\frac{(x+4)(x-1)}{(x+3)(x-4)})
+vertical asymptote: (x=-3), (x=4)
+horizontal asymptote: (y=-4), (y=1)
+\te{Printed worked note is marked with a red X.}
+\answer{Juanita incorrectly used the zeros of the numerator to find the horizontal asymptote. Because the numerator and denominator have the same degree, the horizontal asymptote is (y=1).}
+\end{practice}
+\begin{practice}{11}{3}
+UNDERSTAND. Higher Order Thinking Suppose the numerator and denominator of a rational function are factored, and the numerator and denominator have a common factor of (x+a). What happens on the graph of the function at (x=-a)? Explain your reasoning.
+\te{DOK \uncertain{3}{2; no DOK printed for item 11}.}
+\answer{At (x=-a), there is a hole in the graph. When simplifying the function, the common factors cancel each other out and appear to not be part of the graph. But (-a) is excluded from the domain. You can clearly see the hole using ZDecimal on a calculator if (a) is rational.}
+\te{Printed answer presumes no remaining denominator factor vanishes at -a.}
+\end{practice}
+\begin{practice}{12}{2}
+UNDERSTAND. Reason The graph of a rational function has vertical asymptotes at (x=-3) and (x=1) and a horizontal asymptote at (y=3).
+a. Write a function that has these attributes.
+b. Graph your function to verify it is correct.
+c. Is it possible to have a different graph with the same attributes? Explain.
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{13}{3}
+UNDERSTAND. Communicate Precisely Explain how to use the end behavior of the function (f(x)=\frac{x^2+6}{4x^2-3x-1}) to determine the horizontal asymptote of the graph. Then explain why using end behavior for finding the horizontal asymptote works the same as using the ratio of the leading terms.
+\answer{Substitute large (|x|) values; the (y)-values approach (\frac14). (x^2) dominates (x) and unit terms for large (|x|) values, so only the ratio is needed to determine the horizontal asymptote.}
+\end{practice}
+\begin{practice}{14}{1}
+PRACTICE. Rewrite each rational function to show the translation to (h,k). What are the asymptotes of (f)? Sketch the graph. SEE EXAMPLE 1
+(f(x)=\frac{2x}{x+4})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{15}{1}
+PRACTICE. Rewrite each rational function to show the translation to (h,k). What are the asymptotes of (f)? Sketch the graph. SEE EXAMPLE 1
+(f(x)=\frac{5x}{x-2})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{16}{1}
+PRACTICE. Rewrite each rational function to show the translation to (h,k). What are the asymptotes of (f)? Sketch the graph. SEE EXAMPLE 1
+(f(x)=\frac{6x^2}{3x^2+1})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{17}{1}
+PRACTICE. Rewrite each rational function to show the translation to (h,k). What are the asymptotes of (f)? Sketch the graph. SEE EXAMPLE 1
+(f(x)=\frac{x^2}{2x^2-2})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Identify the vertical and horizontal asymptotes of each rational function. SEE EXAMPLES 2 and 3
+(f(x)=\frac{3x^2}{4x^2-1})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. Identify the vertical and horizontal asymptotes of each rational function. SEE EXAMPLES 2 and 3
+(f(x)=\frac{5x+6}{x^2-9x+18})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{20}{1}
+PRACTICE. Identify the vertical and horizontal asymptotes of each rational function. SEE EXAMPLES 2 and 3
+(f(x)=\frac{4x+3}{x^2-4})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{21}{1}
+PRACTICE. Identify the vertical and horizontal asymptotes of each rational function. SEE EXAMPLES 2 and 3
+(f(x)=\frac{5x^2-19x-4}{2x^2-2})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{22}{1}
+PRACTICE. Graph each function. SEE EXAMPLE 4
+(f(x)=\frac{-1}{x+3})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{23}{1}
+PRACTICE. Graph each function. SEE EXAMPLE 4
+(f(x)=\frac{3x}{x-1})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{24}{1}
+PRACTICE. Graph each function. SEE EXAMPLE 4
+(f(x)=\frac{x+2}{-x+1})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{25}{1}
+PRACTICE. Graph each function. SEE EXAMPLE 4
+(f(x)=\frac{2x-3}{3x+4})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{26}{2}
+PRACTICE. An owner tracks her sales each day since opening her marketing company. The daily sales, in dollars, after day (x) is given by the function (f(x)=\frac{200,000x}{x^2+150}). On approximately which day(s) will the daily sales be \$3,000? SEE EXAMPLE 5
+\textbf{DAILY SALES TRACKER}
+\begin{tabular}{rr}
+DAYS & SALES \\
+1 & \$1,324.50 \\
+2 & \$2,597.40 \\
+3 & \$3,773.58 \\
+4 & \$4,819.28 \\
+\end{tabular}
+\answer{day 2 and day 64}
+\end{practice}
+\begin{practice}{27}{2}
+PRACTICE. Graph each function, labeling all horizontal or vertical asymptotes of the form (x=a) or (y=b). SEE EXAMPLE 6
+(f(x)=\frac{x+4}{2x^2-13x-7})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{28}{2}
+PRACTICE. Graph each function, labeling all horizontal or vertical asymptotes of the form (x=a) or (y=b). SEE EXAMPLE 6
+(f(x)=\frac{2x-1}{x^2-3x-10})
+\answer{See graph.}
+% FIG 34 159 167 354 362
+\placeholder{graph}{Practice28 red (2x-1)/(x^2-3x-10), axes x,y,O, window -10 to10 both, grid2, labels -8,-4,4,8. Dashed blue x=-2,x5,y0 with arrows. Three red branches, six end arrows; middle decreases through x0.5, no marked points.}
+\end{practice}
+\begin{practice}{29}{2}
+PRACTICE. Graph each function, labeling all horizontal or vertical asymptotes of the form (x=a) or (y=b). SEE EXAMPLE 6
+(f(x)=\frac{x^2+x-2}{2x^2-9x-18})
+\answer{See graph.}
+% FIG 34 159 391 354 586
+\placeholder{graph}{Printed practice29 red graph, axes x,y,O; window -10 to10 both, grid2, labels -8,-4,4,8. Dashed blue y0.5 and x6, red vertical behavior at x about-1.5 and6; three branches and six arrows. Middle branch decreases through x1. The displayed right asymptote is at6.}
+\end{practice}
+\begin{practice}{30}{2}
+PRACTICE. Graph each function, labeling all horizontal or vertical asymptotes of the form (x=a) or (y=b). SEE EXAMPLE 6
+(f(x)=\frac{6x^2-12x}{x^2+5x-24})
+\answer{See graph.}
+% FIG 34 160 602 356 797
+\placeholder{graph}{Practice30 red (6x^2-12x)/(x^2+5x-24), axes x,y,O; window x -25 to25,y -100 to100, grid x5,y20; labels x -20,-10,10,20,y -80,-40,40,80. Dashed blue x=-8,x3,y6, arrows; three red branches, six end arrows, middle near origin and below y6. No marked points.}
+\end{practice}
+% Source page 34: 197 Apply and Assessment Practice
+\begin{practice}{31}{2}
+APPLY. Make Sense and Persevere A trainer mixed water with an electrolyte solution. The concentration of electrolytes can be modeled by (f(x)=\frac3{x+12}). Graph the function. How much water must she add so that the concentration of electrolytes will be 15\%?
+% FIG 34 565 385 790 558
+\placeholder{illustration}{Trainer pours jug of water into orange cooler; jug callout x gal of water; cooler callout 12 gal of 25 percent electrolyte solution.}
+\answer{8 gallons of water:}
+% FIG 34 165 849 361 1045
+\placeholder{graph}{Printed practice31 red reciprocal graph, axes x,y,O, window x -25 to25,y -2.5 to2.5, grid x5,y0.5, labels x -20,-10,10,20,y -2,-1,1,2. Two arrowed branches, implicit vertical asymptote near x=-12 and horizontal y0; y-intercept about0.25, no marked points.}
+\end{practice}
+\begin{practice}{32}{2}
+APPLY. Model With Mathematics The cost to distribute a software application is \$0.10 per download. The development cost to create the software is \$500,000. The first 200 downloads were used by testers to test the functionality of the software and were not sold.
+a. Write a function for the average cost to create and distribute the purchased software in dollars application where (x) is the number of downloads.
+\te{Printed wording says in dollars application.}
+\answer{a. (f(x)=\frac{0.1x+500,000}{x-200})}
+b. Graph the function.
+\answer{b. See graph.}
+% FIG 34 182 1099 378 1294
+\placeholder{graph}{Practice32 red (0.1x+500000)/(x-200), axes x,y,O; window x -150 to350,y -50000 to50000, grid x50,y10000; labels x -100,100,200,300,y -40000,-20000,20000,40000. Four branch arrows, implicit asymptotes x200,y0.1; no marked points; negative branch also shown.}
+c. What are the vertical asymptotes of the graph and what do they mean?
+\answer{c. vertical asymptote: (x=200); to the left of the vertical asymptote is not a valid rational function, because there can never be negative sales and there were no sales on (0,200].}
+\te{Printed not a valid rational function refers to the contextual domain, not the algebraic definition.}
+d. What are the horizontal asymptotes of the graph and what do they mean?
+\answer{d. horizontal asymptote: (y=0.1); The horizontal asymptote means that the average cost will never be less than \$0.10, the cost to download the software.}
+\end{practice}
+\begin{practice}{33}{2}
+APPLY. Reason After diluting salt water, the concentration of salt in the water is given by the function (f(x)=\frac{0.5x}{x^2-1}), where (x) is the time in hours since the dilution.
+a. What is the concentration of salt in the water after 4 hours?
+\answer{a. (0.1\overline{33})}
+b. After how many hours will the concentration of salt in the water be 0.2? Round to the nearest hundredth.
+\answer{b. 2.85 hours}
+\end{practice}
+\begin{practice}{34}{1}
+ASSESSMENT PRACTICE. Which function has a graph with a vertical asymptote at (x=3)? Select all that apply.
+\te{Printed choices are unlabeled checkboxes; letters below identify them in printed order.}
+A. (f(x)=\frac{x-2}{x^2+2x-15})
+B. (f(x)=\frac{x-3}{x^2+7x+12})
+C. (f(x)=\frac{x^2-9}{x+9})
+D. (f(x)=\frac{x^2+6x+5}{x^2-9})
+\answer{A, D}
+\end{practice}
+\begin{practice}{35}{1}
+ASSESSMENT PRACTICE. SAT/ACT Which function has a graph with a horizontal asymptote at (y=-1)?
+A. (f(x)=\frac{x+5}{x-3})
+B. (f(x)=\frac{-x+9}{x-8})
+C. (f(x)=\frac{x^2+4}{x^2-1})
+D. (f(x)=\frac{2x^2}{x^2-x-2})
+\answer{B}
+\end{practice}
+\begin{practice}{36}{3}
+ASSESSMENT PRACTICE. Performance Task There is a relationship between the degree of the numerator and denominator of a rational function and the function's horizontal asymptote.
+\begin{tabular}{ll}
+Function & Horizontal Asymptote \\
+(f(x)=\frac{2x}{x^2}) & \answer{(y=0)} \\
+(f(x)=\frac{5x^2}{2x^3}) & \answer{(y=0)} \\
+(f(x)=\frac{9x^6}{7x}) & \answer{none} \\
+(f(x)=\frac{-3x^7}{4x^4}) & \answer{none} \\
+\end{tabular}
+Part A Complete the right column of the table.
+\answer{Part A: (y=0); (y=0); none; none.}
+Part B What is the relationship between the degree of the numerator and denominator when the horizontal asymptote is (y=0)?
+\answer{Part B When the degree of the numerator is less than the degree of the denominator, there is a horizontal asymptote at (y=0).}
+Part C What is the relationship between the degree of the numerator and denominator when there is no horizontal asymptote?
+\answer{Part C When the degree of the numerator is greater than the degree of the denominator, there is no horizontal asymptote.}
+\end{practice}
+% Source page 35: 197A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F20 \\
+2 & 2 & F76 \\
+3 & 1 & F76 \\
+4 & 2 & F74 \\
+5 & 2 & F76 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{4-2 Lesson Quiz: Graphing Rational Functions}
+Lesson Quiz is available at SavvasRealize.com. ASSESSMENT RESOURCES. Name.
+1. Which equation is shown in the graph?
+% FIG 35 695 328 794 427
+\placeholder{graph}{Quiz1 black reciprocal-type two-branch curve, axes x,y,O, window -5 to5 both, unit grid, labels -4,-2,2,4. Vertical asymptote x=-2 implicit, horizontal y2 implicit, four end arrows; left branch above2,right below2, no marked points.}
+A. (p(x)=2-\frac1{2x-4})
+B. (p(x)=2+\frac1{2x+4})
+C. (p(x)=2-\frac1{2x+4})
+D. (p(x)=2+\frac1{2x-4})
+\answer{1. C}
+2. Identify any vertical asymptotes of the graph of (y=\frac{(x+1)^2}{x^2-3x-4}).
+A. (x=-4) and (x=-1)
+B. (x=-1)
+C. (x=-1) and (x=4)
+D. (x=4)
+\answer{2. D}
+3. What are the vertical and horizontal asymptotes of the graph of (f(x)=\frac{3-2x}{4-3x})?
+A. (x=\frac43) and (y=\frac23)
+B. (x=\frac23) and (y=\frac43)
+C. (x=\frac34) and (y=\frac23)
+D. (x=\frac32) and (y=\frac43)
+\answer{3. A}
+4. A scientist mixes (x) liters of water into a container that has 10 liters of a mixture that is 12\% salt and 88\% water. The function (f(x)=\frac{1.2}{x+10}) represents the percent of salt in the new mixture. How many liters of water must be added to make a 1\% salt mixture?
+Water = blank liters
+\answer{4. 110 liters}
+\te{Printed function gives a fraction of the mixture; the wording calls it percent.}
+5. The graph of which equation below has a horizontal asymptote at (y=-3)?
+A. (y=\frac{x-3}{x+1})
+B. (y=\frac{x}{2-3x})
+C. (y=\frac{1-3x}{2+x})
+D. (y=\frac{1+3x}{2-3x})
+\answer{5. C}
+enVision Algebra 2 Assessment Sourcebook.
+\end{te-addendum}
+% Source page 36: 197B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Reteach to Build Understanding (I)} Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{4-2 Reteach to Build Understanding: Graphing Rational Functions}
+The horizontal asymptote is determined by looking at the degrees of the numerator (n) and denominator (m).
+If (n<m), then (y=0).
+If (n=m), then (y=\frac{a_n}{b_m}), where (a_n) is the leading coefficient of the numerator and (b_m) is the leading coefficient of the denominator.
+If (n>m), there is no horizontal asymptote.
+To find the vertical asymptote, set the denominator equal to 0 and solve for (x).
+1. Circle the horizontal asymptote of the graph of the function (f(x)=\frac{5x+5}{x+2}).
+Use (y=\frac{a_n}{b_m}), where (a_n=5) and (b_m=1).
+A. (-\frac51=-5)
+B. (\frac{-2}{1}=-2)
+C. (\frac21=2)
+D. (\frac51=5)
+\answer{1. D}
+2. Circle the correct vertical asymptote of the graph of the function (f(x)=\frac{3x+6}{x+4}).
+If (x+4=0), then (x=?)
+A. -4
+B. -3
+C. 3
+D. 4
+\answer{2. A}
+3. A student described the asymptotes of the graph of the function (y=\frac{9x+6}{3x+3}). The student states there were no horizontal asymptotes and the vertical asymptote is (x=0). Find the student's error(s) and fix them.
+\answer{Sample answer: The horizontal asymptote should be (y=3), since (\frac93=3) and the degree of the numerator is equal to the degree of the denominator. The vertical asymptote is (x=-1).}
+4. Use the function (f(x)=\frac{2x+8}{2x+2}).
+a. What is the horizontal asymptote(s) of the graph of the function?
+(y=\frac{a_n}{b_m}), where (a_n=2) and (b_m=\text{blank}), so then (y=\text{blank}).
+\answer{a. 2; 1}
+b. What is the vertical asymptote(s) of the graph of the function?
+(2x+2=0), so then (x=\text{blank}).
+\answer{b. -1}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice (I, O)} Provides extra practice for each lesson. MathXL for School.
+\textbf{4-2 Additional Practice: Graphing Rational Functions}
+Use long division to rewrite each rational function. Sketch the graph and identify the asymptotes.
+1. (f(x)=\frac{2x}{x+1})
+\answer{(f(x)=-\frac2{x+1}+2); (x=-1); (y=2)}
+% FIG 36 565 451 627 515
+\placeholder{graph}{Additional1 magenta 2x/(x+1), axes x,y,O and magenta unit labels x -8,-4,4,8; grid2, window -10 to10 both. Dashed x=-1,y2, two arrowed branches; crosses origin; no marked points.}
+2. (f(x)=\frac{2x^2}{x^2-1})
+\answer{(f(x)=\frac2{x^2-1}+2); (x=\pm1); (y=2)}
+% FIG 36 696 451 758 515
+\placeholder{graph}{Additional2 magenta 2x^2/(x^2-1), axes x,y,O, window -10 to10 both, grid2; x labels -8,-4,4,8, y labels partly obscured by branches. Dashed x=-1,1 and y2; two outer branches above2, middle inverted arch touches origin, six branch arrows.}
+Identify the vertical and horizontal asymptotes of each rational function.
+3. (f(x)=\frac{2x^2}{4x^2-1})
+\answer{(x=\pm0.5); (y=0.5)}
+4. (f(x)=\frac{2x^2+10x+12}{x^2-9})
+\answer{(x=\pm3); (y=2)}
+\te{Printed answer includes x=-3 although (x+3) cancels; x=-3 is a hole, while x=3 is the vertical asymptote.}
+Graph each function. Label all the horizontal and vertical asymptotes.
+5. (f(x)=\frac{10x+20}{10x^2-49x-33})
+\answer{See graph; labels (x=5.5), (y=0), (x=-0.6).}
+% FIG 36 565 578 632 643
+\placeholder{graph}{Additional5 printed magenta three-branch graph, axes x,y,O; grid2, window approximately x -8 to12,y -10 to10; labels x -4,8 and y -8,-4,4,8. Vertical asymptotes labeled x5.5 and x=-0.6, horizontal y0 labeled; arrows. Middle curve as printed lies well below x-axis, descends toward x5.5; outer branches approach y0.}
+6. (f(x)=\frac{x^2-4x-6}{2x^2-10x-12})
+\answer{See graph; labels (x=-1), (y=0.5), (x=6).}
+% FIG 36 686 580 758 641
+\placeholder{graph}{Additional6 magenta rational curve, axes x,y,O; grid2, window x -6 to14,y -10 to10; labels x -4,4,8,12. Dashed asymptotes with callouts x=-1,y0.5,x6. Three arrowed branches, middle rises from negative infinity at -1 to positive infinity at6, outer tails near0.5.}
+7. You start a business typing papers for students and spend \$3,500 on a computer and office furniture. You estimate additional costs at \$0.02 per page. Write a rational function to model the total average cost per page for the first year.
+\answer{(f(x)=\frac{0.02x+3500}{x})}
+8. The graph of a rational function has vertical asymptotes at (x=-3) and (x=3) and a horizontal asymptote at (y=1). Write a function that has those attributes. Then graph the function to verify that it is correct.
+\answer{Sample answer: (f(x)=\frac{x^2-1}{x^2-9})}
+% FIG 36 749 690 811 751
+\placeholder{graph}{Additional8 magenta (x^2-1)/(x^2-9), axes x,y,O; grid2, window -10 to10 both; labels x -8,-4,4,8 and y -8,-4,4,8. Dashed x=-3,3,y1; outside U-like positive branches, middle inverted arch crossing x=-1,1, six end arrows. No marked points.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment (O, A)} Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{4-2 Enrichment: Graphing Rational Functions}
+1. The vertical asymptote of which function is equidistant from the vertical asymptotes of the other two functions?
+A. (f(x)=\frac{11}{3x-33}-11)
+B. (g(x)=\frac7{2x-10}-6)
+C. (h(x)=\frac1{x+1}-1)
+\answer{1. B}
+2. The horizontal asymptote of which function is equidistant from the horizontal asymptotes of the other two functions?
+A. (f(x)=\frac{12}{5x-16}-12)
+B. (g(x)=\frac9{2x-10}+4)
+C. (h(x)=\frac5{5x-11}-4)
+\answer{2. C}
+Use the functions below to answer the question.
+(f(x)=\frac{11}{x^2-9}-9)
+(g(x)=\frac{22}{x^2-4x+3}-3)
+(h(x)=\frac8{x^2-x-6})
+(k(x)=\frac9{x^2+2x-15})
+3. Which line is a common asymptote among the graphs of all the functions?
+A. (x=-3)
+B. (x=3)
+C. (x=-4)
+D. (x=-5)
+E. (x=5)
+\answer{3. B}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary (I, O)} Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{4-2 Mathematical Literacy and Vocabulary: Graphing Rational Functions}
+Choose the concept from the list that best represents the item in each box. Use each concept only once.
+Word bank: horizontal asymptote; rational function; rational expression; transformation; vertical asymptote; Zero Product Property.
+1. a line that a graph approaches as (y) becomes infinitely positive or negative
+\answer{vertical asymptote}
+2. If ((x-a)(x-b)=0), then ((x-a)=0) or ((x-b)=0), so (x=a) or (x=b).
+\answer{Zero Product Property}
+3. (\frac{P(x)}{Q(x)}) where (Q(x)\neq0)
+\answer{rational expression}
+4. moves a function up or down, left or right
+\answer{transformation}
+5. (\frac{P(x)}{Q(x)}) where (P(x)) and (Q(x)) are polynomial functions
+\answer{rational function}
+6. a line that a graph approaches as (x) becomes infinitely positive or negative
+\answer{horizontal asymptote}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 36 616 978 1066 1298
+\placeholder{illustration}{Black tablet showing graphing exercise for system y=3x+4,y=-2x+4. Blank x,y grid -10 to10 with tick labels every2, Help menu on right, graph tool controls below.}
+Solve the system of equations by graphing. (y=3x+4); (y=-2x+4).
+Use the graphing tool to graph the system. Click to enlarge graph.
+Question Help: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.
+\end{te-addendum}
+
+\end{document}

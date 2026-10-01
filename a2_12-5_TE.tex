@@ -1,0 +1,815 @@
+\documentclass{article}
+% Source: Topic_12_Teacher_Edition.pdf, PDF pages 61-71 (printed pages 616A-622B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 61: 616A Lesson Overview
+\begin{lesson-meta}
+lesson: 12-5
+title: Expected Value
+standards: none printed
+practices: none printed
+objective: I can calculate, interpret, and apply expected value.
+
+essential question: What does expected value tell you about situations involving probability?
+
+\textbf{VOCABULARY}
+\item binomial distribution
+\item expected value
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 12-5 \\
+Title & Expected Value \\
+Standards & none printed \\
+I CAN Objective & I can calculate, interpret, and apply expected value. \\
+Essential Question & What does expected value tell you about situations involving probability? \\
+Lesson Vocabulary & binomial distribution; expected value \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+Calculate the expected value in situations involving chance.
+Weigh the possible outcomes of a decision by comparing expected values and finding expected payoffs.
+Essential Understanding. Expected value is the probability-weighted average of all possible values of a variable. It can be interpreted as the average outcome for many trials of an experiment. Use expected value to find expected payoffs in a situation involving chance or to compare options with differing costs and benefits.
+\textbf{COHERENCE}
+Previously in this topic, students: Found the probability of simple and compound events. Calculated probabilities in binomial experiments.
+In this lesson, students: Evaluate expected value and expected payoffs in real-world situations, including situations that can be modeled by a binomial distribution. Use expected values to compare options and make decisions.
+Increasing Coherence. The content of this lesson is not necessarily expected to be addressed on high-stakes assessments.
+Later in this topic, students will: Apply knowledge of probability to make decisions.
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+Students build on their skill in calculating probability to calculate expected values based on probabilities.
+Students apply their understanding of probability distributions and expected value to describe situations in which outcomes have differing values as well as unequal probabilities.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+REVIEW VOCABULARY. English | Spanish
+binomial probability | probabilidad binomial
+mean | media
+probability distribution | distribución de probabilidades
+NEW VOCABULARY. expected value | valor esperado
+VOCABULARY ACTIVITY. Which of the following is the probability distribution that would be expected when a fair coin is tossed 3 times? What term describes the probabilities in this situation?
+\begin{tabular}{lllll}
+ & 0 heads & 1 head & 2 heads & 3 heads \\
+A & (\frac14) & (\frac14) & (\frac14) & (\frac14) \\
+B & (\frac18) & (\frac38) & (\frac38) & (\frac18) \\
+C & (\frac16) & (\frac13) & (\frac13) & (\frac16) \\
+D & (\frac13) & (\frac12) & (\frac12) & (\frac13) \\
+\end{tabular}
+\answer{B; binomial probability}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 61 933 737 1083 916
+\placeholder{illustration}{Student Companion cover with colored orbital lines on a dark background, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students calculate, evaluate, and apply expected value in situations involving chance. They evaluate and compare strategies based on expected values in order to make decisions and find expected payoffs.
+Students use what they know about binomial probability to find expected value.
+Students calculate expected value in real-world situations and mathematical contexts and interpret the results.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively. Students describe real-world situations in mathematical terms to calculate expected value and then interpret their results.
+Construct Viable Arguments and Critique Reasoning. Students justify decisions based on expected value.
+Model with Mathematics. Students model a variety of real-world situations by calculating expected value and payoff.
+\end{te-addendum}
+% Source page 62: 616B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS. Students find a weighted average to explore how a mean value is affected by variation in the frequency of individual values. This prepares them for using probabilities to find expected value.
+STUDENT COMPANION. Students can complete the Explore \& Reason activity in their Student Companion.
+Explore \& Reason is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+Before. WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving. ETP
+Q: Why are the probabilities of the three hourly wages not all the same?
+\answer{There is a different number of employees making each hourly wage.}
+During. SMALL GROUP. Support Productive Struggle in Learning Mathematics. ETP
+Q: Why would you not just find the mean of the three wages to find the mean hourly wage?
+\answer{Because the hourly wage values occur with different frequencies, the values with greater frequency affect the mean more.}
+Q: Do you expect the mean hourly wage to be \$25, more than \$25, or less than \$25?
+\answer{Less than \$25/hour because most employees make less and the one \$50/hour wage does not make up for that.}
+Q: What is the total amount of money made by the employees if they each work for one hour?
+\answer{\$343; (12(14)+25(5)+50(1)=343)}
+For Early Finishers
+Q: Is there another method you could have used to find the mean hourly wage?
+\answer{Yes; multiply the proportion of employees making each wage by the hourly wage and find the sum of the products: (12(0.7)+25(0.25)+50(0.05)=\$17.15)}
+After. WHOLE CLASS. Facilitate Meaningful Mathematical Discourse. ETP
+Q: If an employee is selected at random an unlimited number of times, what would you expect the average hourly wage to be from those selections?
+\answer{About \$17.15 as the relative frequency of each wage would be about the same as shown in the graph.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+A company has 20 employees whose hourly wages are shown in the bar graph.
+% FIG 62 996 641 1147 740
+\placeholder{graph}{Employee Hourly Wages. Vertical Number of Employees axis 0,5,10,15; horizontal categories \$12, \$25, \$50. Cyan bars at heights 14,5,1 respectively; horizontal grid lines at multiples of 5.}
+A. An employee is chosen at random. What is the probability that his or her hourly wage is \$12? \$25? \$50?
+\answer{(P(\$12)=0.7); (P(\$25)=0.25); (P(\$50)=0.05)}
+B. What is the mean hourly wage? Explain your method.
+\answer{\$17.15; Multiply each hourly wage by the number of employees who earn that wage and then divide by the number of employees; (\frac{12(14)+25(5)+50(1)}{20}=\$17.15).}
+C. Construct Arguments Is the mean a good description of the typical hourly wage at this company? Explain.
+\answer{Yes; the mean is between \$12 and \$25 and closer to \$12.}
+\te{Digital and student-edition previews show the same activity. Digital controls: Go back; Enter your answer. Sample Student Work is transcribed in the answers.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND}. Use with EXPLORE \& REASON
+Reasoning. Compare the mean hourly wage to the median hourly wage. Which would be the more useful value if you want to estimate the total amount the company pays its employees? Explain.
+\answer{The mean hourly wage is greater than the median hourly wage, \$12; The mean is more useful, because if all employees work the same number of hours, you can multiply the mean hourly wage by the number of hours worked to find the total paid.}
+\te{Printed multiply by the number of hours worked; likely total employee-hours is intended.}
+\end{te-addendum}
+% Source page 63: 616 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Establish Learning. ETP
+Students use a formula to determine expected value and apply it to real-world situations, including finding payoffs from games and evaluating strategies. Students also find expected values from data that follows a binomial distribution.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{EXAMPLE 1 Evaluate and Apply Expected Value}
+Elicit and Use Evidence of Student Thinking. ETP
+Q: In the formula for expected value, what do (x_1), (x_2), (x_3), and so on, represent? What do (P(x_1)), (P(x_2)), (P(x_3)), and so on, represent?
+\answer{the values of outcomes 1, 2, 3, and so on; the probabilities of those outcomes}
+Q: Which items have the greatest and least effect on expected profit?
+\answer{greatest: lasagna; least: soup; They represent the greatest and least percent of items sold.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Evaluate and Apply Expected Value}
+CONCEPTUAL UNDERSTANDING
+The table shows data on sales in one month for each item on a restaurant menu. To estimate future profits, the owner evaluates the average profit from each meal.
+\begin{tabular}{lll}
+Meal & Profit per Serving & Percent Sold \\
+Stew & \$0.34 & 12\% \\
+Soup & \$0.41 & 7\% \\
+Lasagna & \$0.64 & 45\% \\
+Chili & \$0.73 & 36\% \\
+\end{tabular}
+A. Based on the data, what is the average profit that the owner can expect to make from each meal?
+Expected value is the sum of the value of each outcome multiplied by the probability of the outcome.
+(E=x_1P(x_1)+x_2P(x_2)+x_3P(x_3)+\cdots+x_nP(x_n))
+The outcomes are the profits for each meal. The percent-sold column shows the probability distribution. Multiply each outcome by its probability. Then add.
+(E=0.34(0.12)+0.41(0.07)+0.64(0.45)+0.73(0.36)=0.6203)
+\te{Callout: Use the expected value formula when the probability of at least one outcome differs from any of the others.}
+If this expected value continues, the owner can expect to earn about \$0.62 per meal.
+\answer{A. About \$0.62 per meal.}
+B. What is the expected profit for the next 200 meals ordered?
+(\$0.6203\times200=\$124.06)
+The owner can expect to net about \$124.06 for the next 200 meals.
+\answer{B. About \$124.06.}
+\te{COMMON ERROR. Note that average profit from each meal is not simply the average of the cost of 1 serving of each of the 4 meals because the number of each kind of meal varies. Printed cost; likely profit.}
+CONTINUED ON THE NEXT PAGE
+\end{example}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples}. Additional Examples are available at SavvasRealize.com.
+ADDITIONAL EXAMPLE 2. ESSENTIAL QUESTION. Go back. SOLUTION.
+Margaret has \$10 to spend on game tickets for a charity fundraiser. Which game should she play to create a greater expected payoff for the charity?
+Games at Charity Fundraiser
+\begin{tabular}{llll}
+ & Ticket cost & Prize & Chance of winning \\
+Game A & \$5 & \$2,000 & 0.001 \\
+Game B & \$10 & \$50,000 & 0.0001 \\
+\end{tabular}
+Find the expected value for one ticket for each game.
+Game A: (\$5+(-\$2,000)(0.001)=\$3)
+Game B: (\$10+(-\$50,000)(0.0001)=\$5)
+\$10 buys two tickets for Game A, so the expected value if Margaret plays game A is (2(\$3)=\$6).
+\answer{Playing game A will give the charity a greater payoff.}
+Example 2. Help students explore comparisons of expected payoffs.
+Q: What value prize for game B would give it the same expected payoff as game A?
+\answer{\$40,000}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+ADDITIONAL EXAMPLE 3. ESSENTIAL QUESTION. Go back. SOLUTION.
+Zachary has two choices for dental insurance.
+Dental Insurance Policies
+\begin{tabular}{lll}
+ & Annual Premium & Annual Deductible \\
+DentaFix & \$475 & \$2,000 \\
+Enamelle & \$750 & \$500 \\
+\end{tabular}
+Both cover routine expenses. He estimates there is a 25\% chance he will need a crown costing \$1,500, and that he will have no other non-routine expenses during the year. Which insurer has the lesser expected total cost per year?
+The total cost is the annual premium plus the cost of the crown or the deductible, whichever is less.
+DentaFix: (\$475+\$1,500(0.25)=\$850)
+Enamelle: (\$750+\$500(0.25)=\$875)
+\answer{DentaFix has the lesser expected cost.}
+Example 3. Help students explore using expected values to evaluate options.
+Q: How is the expected value calculation different for the two plans?
+\answer{For DentaFix, the deductible is more than the cost of a crown, so expected cost is the annual premium plus the cost of a crown times 0.25. For Enamelle, the deductible is less than the cost of a crown, so expected cost is the annual premium plus the deductible times 0.25.}
+\end{te-addendum}
+% Source page 64: 617 Step 2 Understand & Apply
+\begin{tryit}{1}
+EXAMPLE 1 CONTINUED. Try It!
+a. What would happen to the expected value if fewer people ordered chili and more people ordered stew? Explain.
+b. Suppose the restaurant's profit on an order of stew increased by \$0.05 and the profit on an order of chili decreased by \$0.05. How would these changes affect the expected profit per meal?
+\answer{a. The expected value would decrease because 0.73 would be multiplied by a lesser number and 0.34 would be multiplied by a greater number. b. The average value would decrease. There are more orders of chili so an increase of \$0.05 for an order of stew would not offset a decrease of \$0.05 for an order of chili.}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{EXAMPLE 2 Find Expected Payoffs}. Pose Purposeful Questions. ETP
+Q: What is the sum of the expected payoffs for the charity and the donor?
+\answer{\$0; the payout for a prize won, which is a loss for the charity, is a gain for the donor. The \$1 paid for playing, which is a gain for the charity, is a loss for the donor.}
+Q: How could you change the prize amount to create a situation where the expected value is \$0?
+\answer{Increase the prize to \$8. Since the probability of losing is 8 times the probability of winning, the value of a win must be 8 times the value of a loss to have an expected value of \$0.}
+\te{Printed losing is 8 times winning and win value 8 times loss; likely 7 times for each, with an \$8 prize giving \$7 net gain.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Find Expected Payoffs}
+A charity is considering a fundraising event in which donors will pay \$1 to spin the wheel 3 times. What is the expected payoff for the charity for each game?
+EVEN THREES. Spin 3 times. Get 3 even numbers. Win an item worth \$4.
+% FIG 64 949 391 1020 469
+\placeholder{diagram}{Circular spinner with six equal sectors, numbered clockwise from upper right 1 cyan, 2 orange, 3 green, 4 purple, 5 blue, 6 ocher; fixed black triangular pointer at top.}
+\te{Callout: There are 6 possible outcomes. 3 of the possible outcomes are even numbers.}
+Step 1. Find the probability distribution for the donor.
+There are (6^3), or 216 outcomes for spinning the wheel 3 times.
+There are (3^3), or 27, ways to spin 3 even numbers in a row, so the probability of a donor winning a \$4 prize is (\frac{27}{216}), or (\frac18).
+So, the probability of a donor not winning is (1-\frac18), or (\frac78).
+Step 2. Find the probability distribution for the charity.
+The probability that the charity gains \$1 is (P(1)=\frac78).
+The probability that the charity loses \$3 is (P(-3)=\frac18).
+Step 3. Find the expected value of each game for the charity.
+(E(x)=1(\frac78)+(-3)(\frac18))
+(=\frac48)
+(=\frac12)
+The charity can expect to earn \$0.50 each game.
+\answer{\$0.50 each game.}
+\te{MAKE SENSE AND PERSEVERE. Think about methods used to find probabilities. What do you need to identify to find the probabilities for each situation?}
+\te{Student preview footer prints 535, while the teacher-page footer is 617.}
+\end{example}
+\begin{tryit}{2}
+What is the expected payoff for the person making the donation?
+\answer{(-\$0.50)}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND}. Use with EXAMPLES 1 \& 2
+Construct Arguments. What happens to expected value when the value of an outcome increases while its probability decreases?
+\answer{Sample: The expected value could increase, decrease, or stay the same. Increasing the value of an outcome increases expected value, and decreasing its probability decreases expected value, but their product cannot be predicted without knowing the amount of each change.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners}. Use with EXAMPLE 2
+LISTENING. BEGINNING. Have students name real events that are expected but not certain. Give them rules to play rock-paper-scissors. Before having them play 10 games with a partner, ask what percent of the time they expect to win.
+Q: If you get 1 point when you win and lose 1 point when you lose, what do you expect your point total to be after playing 10 times?
+\answer{0}
+Q: If you get 1 point when you win and lose 2 points when you lose, what would you expect to happen to your point total after playing 10 times?
+\answer{It would be negative. About half the time you win a point and half you lose two points. So you would lose more points than you would win.}
+\te{Printed half the time; likely ties are excluded.}
+READING. DEVELOPING. Draw students' attention to the question in the text What is the expected payoff for the charity for each game? and then to the description of the game. Ask them to think about whose expected value would be positive, the charity or the donor.
+Q: When the person who spins wins a prize, the charity has to do what? When the person who spins does not win a prize, the charity does what?
+\answer{give away a prize; keep the donation}
+Q: When the charity gives away a prize, why do they lose \$3, not \$4?
+\answer{The donor has paid \$1 to play, so the charity loses only \$3 instead of \$4.}
+SPEAKING. EXPANDING. Divide students into groups and give 3 pennies to each group. Have one student in each group act as the charity and the others take turns acting as the donor. Each donor tosses the 3, coins and getting 3 heads is a win.
+\te{Printed 3, coins; likely stray comma.}
+Q: How does the probability of winning with the coin tosses compare to the probability of winning with the spinner?
+\answer{It is the same, 1 in 8.}
+Q: Do you expect the charity to gain or lose money most of the time?
+\answer{gain}
+Have the students play 10 games and record how much the charity makes.
+Q: On average, how much did your charity win or lose per game?
+\answer{won \$0.50}
+\end{te-addendum}
+% Source page 65: 618 Step 2 Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{EXAMPLE 3 Use Expected Values to Evaluate Strategies}. Pose Purposeful Questions. ETP
+Q: How is the deductible related to the expected value of the unknown cost in Part A?
+\answer{The deductible times the probability of replacement equals the expected value of the unknown cost.}
+Q: How are the total expected costs of Options A and B in Part A related to the car owners decision to purchase or not purchase replacement insurance in Part B?
+\answer{You can compare total expected cost of either option with the expected cost of replacing a new car with no insurance, to determine whether having replacement insurance is a good decision.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Use Expected Values to Evaluate Strategies}
+APPLICATION
+You are considering options for an auto insurance policy. The insurance company offers new car replacement insurance, in the case your car is totaled. There is a 1\% annual chance of the car being totaled.
+\begin{tabular}{lll}
+Plan & Premium (\$) & Deductible (\$) \\
+A & 50 & 500 \\
+B & 60 & 0 \\
+\end{tabular}
+\te{Callout: The deductible is the portion of the cost that the car owner pays.}
+A. Which of the two plans has the lower expected cost?
+The total expected cost is the sum of the known costs and the expected value of the unknown cost. The cost of a new car is higher than the deductible, so you would pay the full deductible if the car needs to be replaced.
+Known cost: Premium. Expected value of unknown cost: Deductible (\cdot) Probability of replacement.
+(Premium+Deductible\cdot Probability\ of\ replacement=Expected\ cost\ of\ insurance)
+Plan A: (\$50+\$500\cdot0.01=\$55)
+Plan B: (\$60+\$0\cdot0.01=\$60)
+\answer{Plan A has the lower expected cost.}
+\te{CONSTRUCT ARGUMENTS. If the expected costs were the same, what other criteria could the car owner use to decide? Why might the insurance company offer two different plans with the same expected cost?}
+B. How can you decide whether or not to purchase replacement insurance?
+The cost of a new car is very high, so purchasing replacement insurance can be a good idea. Solve an inequality to determine when having no insurance is more costly than having insurance.
+Known cost: Premium. Expected value of unknown cost: Cost of a new car (\cdot) Probability of replacement.
+(Premium+Cost\ of\ a\ new\ car\cdot Probability\ of\ replacement>Expected\ cost\ of\ insurance)
+(\$50+x\cdot0.01>\$55)
+(0.01x>\$55)
+(x>\$5,500)
+\te{Printed \$50 premium on the uninsured side in the first line, then omitted; likely no premium should be included for no insurance.}
+\te{Callout: With or without insurance, you have the same chance of needing a new car.}
+\answer{You should buy replacement insurance if the cost of a new car is greater than \$5,500.}
+\end{example}
+\begin{tryit}{3}
+The insurance company also offers safety glass coverage. There is a 50\% chance of no repairs (\$0), a 30\% chance of minor repairs (\$50), and a 20\% chance of full replacement (\$300). Which plan, C or D, has the lower expected cost?
+\begin{tabular}{lll}
+Plan & Premium (\$) & Deductible (\$) \\
+C & 50 & 200 \\
+D & 100 & 0 \\
+\end{tabular}
+\answer{Plan D}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking. ETP
+Q: What strategy will you use to solve this problem?
+\answer{For each option, add the known cost to the expected value of the unknown cost. Compare the expected values.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND}. Use with EXAMPLES 3 \& 4
+Generalize. When do you add expected values and when do you compare individual expected values? Explain.
+\answer{Compare expected values when you are looking for the best or worst expected value. Add expected values when you are trying to find a single value for all possibilities.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking}. USE WITH EXAMPLE 3
+Have students explore how the expected values change if the assumptions change.
+Q: If the deductible were \$800 instead of \$500, how would this affect which option had the lower total expected cost?
+\answer{Option A would still have the lower expected cost since (\$50+(\$800)(0.01)=\$58).}
+Q: If the new car replacement options stayed the same but there were a 0.2\% annual chance of the car being totaled, how would this affect the car owner's decision whether or not to purchase replacement insurance?
+\answer{If the cost of the new car is more than \$27,500, then the insurance is good idea.}
+\te{Printed \$27,500 retains the earlier \$55 expected insurance cost; likely recomputing that cost at 0.2\% gives \$51 and threshold \$25,500.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}. USE WITH EXAMPLE 3
+In Part A, students may find it easier to ignore the cost of the policy and just focus on the expected costs of replacement, and then add the annual premium at the end.
+Remind students of the meaning of deductible.
+Q: If the car is not totaled, how do you know the cost of each policy?
+\answer{It is the annual premium only.}
+Q: For each policy, if the car is totaled, how much do you pay on top of the premium?
+\answer{Option A: \$500; Option B: 0}
+Q: For each policy, what is the expected cost of the replacement alone? How do you find these amounts?
+\answer{Option A: \$5; Option B: \$0; Multiply the probability of replacement by the deductible.}
+\end{te-addendum}
+% Source page 66: 619 Step 2 Understand & Apply
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{EXAMPLE 4 Use Binomial Probability to Find Expected Value}
+Elicit and Use Evidence of Student Thinking. ETP
+Q: Why is binomial probability appropriate in this situation?
+\answer{There are two possible outcomes each day (rain or no rain), rain each day is independent of rain on any other day, and the probability of rain is the same each day.}
+\te{Printed independence of rain on successive days; this is an assumption of the model.}
+Q: What is the sum of all the probabilities in the table? Why does this result make sense?
+\answer{1; there is a 100\% chance that there will be either 0, 1, 2, 3, 4, or 5 days of rain in a 5-day period.}
+Q: For what daily probability of rain would the probability of 0 days of rain be equal to the probability of 5 days of rain? What would those probabilities be?
+\answer{50\%; 0.03125; ({}_5C_0(0.5)^0(0.5)^5={}_5C_5(0.5)^5(0.5)^0=0.5^5=0.03125)}
+Q: Is the probability of having fewer than the expected two days of rain equal to the probability of having more than the expected two days of rain?
+\answer{No; (P(0\ or\ 1)\approx0.3370), while (P(3,4,\ or\ 5)\approx0.3174).}
+Q: On average, what fraction of the outcomes in a binomial experiment with probability of success (p) would you expect to be successes? How does this help explain the formula (E=np)?
+\answer{(p); Since the fraction of successes is the number of successes divided by the number of trials, (p=\frac En), so (E=np).}
+\textbf{Have a Growth Mindset. Try a Different Strategy When You're Stuck}
+There are often many ways to solve a problem. You don't have to give up when you're stuck. Ask: What can you tell yourself when you are stuck? How can you use what you know to find other ways to solve a problem?
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use Binomial Probability to Find Expected Value}
+According to the weather app on Talisha's smartphone, there is a 40\% chance of rain for each of the 5 days of her vacation. How many rainy days should Talisha expect during her vacation?
+\begin{tabular}{ll}
+Days of Rain & Probability \\
+0 & ({}_5C_0(0.4)^0(0.6)^5\approx0.0778) \\
+1 & ({}_5C_1(0.4)^1(0.6)^4=0.2592) \\
+2 & ({}_5C_2(0.4)^2(0.6)^3=0.3456) \\
+3 & ({}_5C_3(0.4)^3(0.6)^2=0.2304) \\
+4 & ({}_5C_4(0.4)^4(0.6)^1=0.0768) \\
+5 & ({}_5C_5(0.4)^5(0.6)^0\approx0.0102) \\
+\end{tabular}
+\te{Callout: Apply the binomial probability formula with (n=5), (p=0.4), and (1-p=0.6) to find the probability of rain for each number of days of Talisha's vacation.}
+To find the expected number of rainy days, multiply each probability by the number of rainy days it corresponds to, and add those values together.
+Expected number of rainy days
+(=0\cdot P(0)+1\cdot P(1)+2\cdot P(2)+3\cdot P(3)+4\cdot P(4)+5\cdot P(5))
+(=0(0.0776)+1(0.2592)+2(0.3456)+3(0.2304)+4(0.0768)+5(0.0102))
+(\approx2)
+\te{Printed 0.0776 in the sum; table prints approximately 0.0778. This zero-multiplied term does not change the result.}
+\answer{Talisha should expect 2 rainy days during her vacation.}
+The table shows the probability of every outcome of a binomial experiment. This probability distribution is called a binomial distribution. A special relationship exists for the expected value for any binomial distribution.
+(E=np)
+(2=5(0.4))
+\te{Callouts: (E) expected value; (n) trials; (p) probability. STUDY TIP. Organize your work in a table that clearly shows each outcome and its probability. HAVE A GROWTH MINDSET. What other strategies can you try when you get stuck? Student preview footer prints 537, teacher footer 619.}
+\end{example}
+\begin{tryit}{4}
+A carnival game has 4 orange lights and 1 green light that flash rapidly one at a time in a random order. When a player pushes a button, the game stops, leaving one light on. If the light is green, the player wins a prize. Copy and complete the table, then determine the number of prizes that a player can expect to win if the game is played 4 times.
+\begin{tabular}{ll}
+Number of Green Lights & Probability \\
+0 & ({}_4C_0(0.2)^0(0.8)^4=\text{blank}) \\
+1 & ({}_4C_{\text{blank}}(0.2)^{\text{blank}}(0.8)^{\text{blank}}=\text{blank}) \\
+2 & ({}_{\text{blank}}C_{\text{blank}}(0.2)^{\text{blank}}(0.8)^{\text{blank}}=\text{blank}) \\
+3 & ({}_{\text{blank}}C_{\text{blank}}(0.2)^{\text{blank}}(0.8)^{\text{blank}}=\text{blank}) \\
+4 & ({}_{\text{blank}}C_{\text{blank}}(0.2)^{\text{blank}}(0.8)^{\text{blank}}=\text{blank}) \\
+\end{tabular}
+\answer{0.8 prizes}
+\begin{tabular}{ll}
+Number of Green Lights & Probability \\
+0 & \answer{({}_4C_0(0.2)^0(0.8)^4=0.4096)} \\
+1 & \answer{({}_4C_1(0.2)^1(0.8)^3=0.4096)} \\
+2 & \answer{({}_4C_2(0.2)^2(0.8)^2=0.1536)} \\
+3 & \answer{({}_4C_3(0.2)^3(0.8)^1=0.0256)} \\
+4 & \answer{({}_4C_4(0.2)^4(0.8)^0=0.0016)} \\
+\end{tabular}
+\end{tryit}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error. Try It! 4}
+After completing the table, students may try to solve by simply adding all the probabilities. Point out that this is an expected value calculation, so each probability must by multiplied by the corresponding number of wins. Students can also check their result by using the formula (E=np).
+\te{Printed must by multiplied; likely must be multiplied.}
+\end{te-addendum}
+% Source page 67: 620 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Expected Value}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+Q: What information do you need to know to find expected value?
+\answer{the probability of each outcome and the value of each outcome}
+Q: How is expected value a weighted average?
+\answer{The value of each outcome is weighted by its probability in determining the expected value.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 10. Students may multiply the numbers in the three-part ratio by the rate per child instead of first converting them to probabilities, finding an expected charge of \$169 instead of \$16.90. Encourage them to keep the formula for expected value in mind: Since the value of each outcome must be multiplied by its probability, the first step in solving the problem is finding the probabilities of the outcomes.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Expected Value}
+WORDS. Expected value is the average outcome that will occur with many trials of an experiment. It is the sum of the value of each outcome times the probability of the outcome.
+ALGEBRA. Let (x_1,x_2,x_3,\ldots,x_n) represent the values of the outcomes of a set of trials.
+You can find the expected value, (E), with this formula.
+(E=x_1P(x_1)+x_2P(x_2)+\cdots+x_nP(x_n))
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION. What does expected value tell you about situations involving probability?
+\answer{Expected value tells you the average outcome that will occur given many trials of an experiment.}
+2. Error Analysis Benjamin is finding the expected value of the number of heads when tossing a fair coin 10 times. What is Benjamin's error?
+\te{Student work: Toss a coin 10 times. (E=50\%). Red X.}
+\answer{He found the probability of heads, not the expected number of heads. The expected number of heads is (50\%\cdot10), or 5.}
+3. Construct Arguments A carnival game costs \$1 to play. The expected payout for each play of this game is \$1.12. Should the carnival operators modify the game in any way? Explain.
+\answer{Yes; the carnival will lose an average of (\$1.12-\$1=\$0.12) each time the game is played. The expected payout must be less than \$1 for the carnival to earn money.}
+4. Reason The students in Ms. Kwan's class are raising money to help earthquake victims. They expect to raise \$0.52 for each raffle ticket they sell. If each raffle ticket is sold for \$2, what can you conclude?
+\answer{The class pays an average of \$1.48 in winnings for every raffle ticket sold.}
+5. Reason A spinner is divided into 6 equal-sized sectors, numbered 1, 1, 1, 4, 7, and 10. Is the expected value of a spin the same as the mean of the numbers? Explain.
+\answer{Yes; because there is a equal chance of the spinner landing in any sector. (E=1(\frac16)+1(\frac16)+1(\frac16)+4(\frac16)+7(\frac16)+10(\frac16)), which is equivalent to the mean, (E=(\frac16)(1+1+1+4+7+10)).}
+\textbf{Do You KNOW HOW?}
+6. What is the expected value when rolling a standard number cube?
+\answer{3.5}
+7. What is the expected value of the sum when rolling two standard number cubes?
+\answer{7}
+8. A travel website reports that in a particular South American city, the probability of rain on any day in April is 40\%. What is the expected number of rainy days in this city during the month of April?
+\answer{12}
+9. You buy an airplane ticket for \$900. You discover that if you cancel or rebook your vacation flight to Europe, you will be charged an extra \$300. There is a 20\% chance that you will have to rebook your flight.
+a. What is the expected value of the cost of the ticket?
+\answer{a. \$960}
+b. Is the expected value the amount you will pay to book the ticket whether or not you have to rebook? Explain.
+\answer{b. No; 80\% of the time you would expect to pay \$900, and 20\% of the time you would expect to pay (\$900+\$300=\$1,200). The expected value tells you the average cost if you were booking many such flights.}
+10. A child-care service charges families an hourly rate based upon the age of the child. Their hourly rate per child is \$20 per hour for infants less than 1 year old, \$18 for toddlers 1 to 3 years old, \$15 per hour for children 3 or more years old. The ratios of infants : toddlers : 3+ years is 2 : 3 : 5. What is the expected charge per child per hour?
+\answer{\$16.90}
+\te{Printed age groups overlap at 3 years; likely toddlers are younger than 3. Student preview footer prints 538, teacher footer 620.}
+\end{concept-summary}
+% Source page 68: 621 Step 3 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+Lesson Practice. You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+11--13, 15--22, 24--27 & 11--27 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items.
+You may structure this choice in many ways.
+For example: Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each
+Practice: 1 point each
+Assessment Practice: 1 point each
+Performance Task: 3 points
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 15, 16, 26 & 1 \\
+1 & 11, 25 & 2 \\
+1 & 14, 27 & 3 \\
+2 & 12, 17, 24 & 2 \\
+2 & 21, 23 & 3 \\
+3 & 18 & 2 \\
+3 & 13 & 3 \\
+4 & 19, 20 & 1 \\
+4 & 22 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{2}
+UNDERSTAND. Error Analysis For the dartboard shown, Kyrone calculated the expected number of points per dart. Explain Kyrone's error. What is the correct expected value?
+% FIG 68 553 348 799 536
+\placeholder{diagram}{Dartboard hung against brick wall: concentric circles, outer blue circle radius 7 labeled 1 POINT, inner white circle radius 2 with yellow border labeled 4 POINTS in red. Common red center; left-pointing radius to outer left edge labeled r=7 and right-pointing radius to inner right edge labeled r=2. Darts on rack lower right.}
+\te{Student work with red X: Expected value ( =\frac27(4)+\frac57(1)=\frac87+\frac57=\frac{13}{7}\approx1.86).}
+\answer{Kyrone incorrectly calculated the probabilities for each outcome. The area of the entire dartboard is (49\pi) and the area of the inner circle is (4\pi). So, the area of the outer region is (49\pi-4\pi=45\pi). Therefore, the probability that a dart lands in the inner circle is (\frac{4\pi}{49\pi}=\frac4{49}), the probability that it lands in the outer region is (\frac{45\pi}{49\pi}=\frac{45}{49}), and the expected value is (\frac4{49}(4)+\frac{45}{49}(1)=\frac{61}{49}\approx1.24).}
+\end{practice}
+\begin{practice}{12}{2}
+UNDERSTAND. Reason A nonrefundable plane ticket costs \$600, while a refundable ticket costs \$900. A traveler estimates there is a 20\% chance he will have to cancel his upcoming trip. Should the traveler purchase a refundable or nonrefundable ticket? Explain.
+\answer{Nonrefundable; there is a 20\% chance the man will not fly, so there is an 80\% chance he will fly. If he purchases the nonrefundable ticket, his cost is \$600 whether he flies or not. If he purchases the refundable ticket, his expected cost is ((0.8)(900)+0.2(0)=\$720). Based on expected value, he should purchase the nonrefundable ticket.}
+\end{practice}
+\begin{practice}{13}{3}
+UNDERSTAND. Construct Arguments A person choosing a health-insurance plan determines that the expected cost for Option B is \$528 per year.
+\begin{tabular}{lll}
+Option & Annual Premium & Deductible \\
+A & \$600 & \$0 \\
+B & \$500 & \$1,000 \\
+\end{tabular}
+a. Why might this consumer select the policy with the \$1000 deductible?
+\answer{a. The cost of the policy with no deductible is \$600, so the policy with the \$1,000 deductible costs less.}
+b. Why might this consumer select the policy with no deductible?
+\answer{b. Despite the fact that the policy with a deductible is less expensive, the consumer might choose the policy with no deductible to avoid an unexpected expense of \$1,000 sometime during the year.}
+\end{practice}
+\begin{practice}{14}{3}
+UNDERSTAND. Mathematical Connections How is expected value related to mean?
+\answer{Sample: A mean is an average of known values. Expected value is the mean of values that are unknown but that follow a known or estimated probability distribution.}
+\te{Answer printed on next teacher page, PDF page 69.}
+\end{practice}
+\begin{practice}{15}{1}
+PRACTICE. A farmer estimates her hens will produce 3,000 dozen more eggs this year than last year. She estimates the probability of her net profit or loss on each dozen eggs based on her costs. SEE EXAMPLE 1
+Egg production last year: 12,000 dozen
+Estimated Net Profit per Dozen Eggs
+\begin{tabular}{lllllll}
+Net profit (\textcent\ per doz.) & 8 & 6 & 4 & 2 & 0 & -2 \\
+Probability & 0.1 & 0.4 & 0.2 & 0.1 & 0.1 & 0.1 \\
+\end{tabular}
+% FIG 68 840 364 1089 529
+\placeholder{illustration}{Wood-framed hanging chalkboard against barn wall and outdoor background. Egg production and net profit table transcribed above.}
+What is her expected profit per dozen eggs?
+\answer{\$0.04 per dozen}
+\end{practice}
+\begin{practice}{16}{1}
+PRACTICE. What is her expected profit on the total egg production?
+\te{Uses farmer data in item 15. SEE EXAMPLE 1.}
+\answer{\$600}
+\end{practice}
+\begin{practice}{17}{2}
+PRACTICE. A baseball team sponsors 50-50 raffles at home games. They sell tickets for \$5, and the winning ticket holder gets half the money taken in that day. Last week, the team sold 15 tickets. What was the expected payoff for ticket purchasers? SEE EXAMPLE 2
+\answer{(-\$2.50)}
+\end{practice}
+\begin{practice}{18}{2}
+PRACTICE. An insurance company offers three policy options. The probability a car will be damaged in a given year is 5\%, and if a car is damaged, the cost of the repairs will be \$1000. Which option has the least expected annual cost for the car owner? Explain. SEE EXAMPLE 3
+Insurance Policy Options
+\begin{tabular}{lll}
+Option & Annual Premium (\$) & Deductible (\$) \\
+A & 900 & 0 \\
+B & 800 & 400 \\
+C & 700 & 1000 \\
+\end{tabular}
+\answer{Option C; the cost for the car owner for Option A is \$900: for Option B, \$820; for Option C, \$750.}
+\te{Answer printed on next teacher page, PDF page 69.}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. On a tropical island, the probability of sunny weather is 90\% each day. SEE EXAMPLE 4
+What is the expected number of sunny days in a non-leap year?
+\answer{328.5 days}
+\end{practice}
+\begin{practice}{20}{1}
+PRACTICE. What is the expected number of sunny days during the month of June?
+\te{Uses tropical island data in item 19. SEE EXAMPLE 4.}
+\answer{27 days}
+\end{practice}
+% Source page 69: 622 Practice & Problem Solving continued
+\begin{practice}{21}{3}
+APPLY. Model With Mathematics A solar panel company has found that about 1\% of its panels are defective. The company's cost to replace each defective panel is \$600. A consultant recommends changes to the manufacturing process that will cost \$200,000 and reduce the defective rate to 0.2\%. The company estimates that it will sell 30,000 panels next year and that sales will increase by 5,000 panels per year for the next 10 years. Should the company follow the consultant's recommendation? Explain.
+\answer{In the next year, if the company makes no changes, about (0.01\cdot30,000=300) panels will be defective, incurring a cost of (300\cdot\$600=\$180,000). If they make the changes, the expected total cost is (\$200,000+0.002\cdot30,000\cdot\$600=\$236,000). For the next year, it makes sense not to improve the process. But the company also predicts that sales will increase by 5,000 per year. Yearly costs of defective panels:}
+\begin{tabular}{llll}
+Year & Sales & Cost (in \$1000s): With No Change & With Improved Process \\
+1 & 30,000 & \$180 & \$236 \\
+2 & 35,000 & \$210 & \$242 \\
+3 & 40,000 & \$240 & \$248 \\
+4 & 45,000 & \$270 & \$254 \\
+5 & 50,000 & \$300 & \$260 \\
+6 & 55,000 & \$330 & \$266 \\
+7 & 60,000 & \$360 & \$272 \\
+8 & 65,000 & \$390 & \$278 \\
+9 & 70,000 & \$420 & \$284 \\
+10 & 75,000 & \$450 & \$290 \\
+\end{tabular}
+\answer{For 3 years it is less costly to make no change. After 3 years, improving the process becomes a better option.}
+\te{Printed yearly improved costs include \$200,000 every year; likely the stated process-change cost is a one-time cost, which would change the comparison. Table and conclusion preserved.}
+\end{practice}
+\begin{practice}{22}{3}
+APPLY. Reason A student tosses a coin 4 times and the results are heads, tails, heads, and heads. The student concludes that the expected number of heads for 100 tosses is 75. How did the student find this number? Do you agree with the student's reasoning? Explain.
+\answer{Since 3 of the 4 tosses were Heads, the student concludes that (P(heads)) is 3 out of 4, or 75\%. This is not good reasoning because the sample size is so small. Since a fair coin would have a probability of 50\% for Heads, the student should draw a much larger sample before concluding that the probability is not 50\%.}
+\end{practice}
+\begin{practice}{23}{3}
+APPLY. Higher Order Thinking Your family wants to buy a new TV set for \$599. You find out that the probability that the TV set will need to be serviced in the second year is 0.05 and the probability that the TV set will need to be serviced in the third year is 0.08. A 2-year warranty costs \$55, and a 3-year warranty costs \$80. The average cost of repairing the TV set is \$278. What would you advise your family to do, get a 2-year extended warranty, a 3-year extended warranty or not to get any extended warranty? Explain your reasoning.
+\answer{No warranty, because the expected cost for 3 years is less with no extended warranty than with a 2-year or 3-year warranty. Expected costs for 3 years: No extended warranty: (\$599+\$278(0.05)+\$278(0.08)=\$635.14). 2-year extended warranty: (\$599+\$55+\$278(0.08)=\$676.24). 3-year extended warranty: (\$599+\$80=\$679.00).}
+\end{practice}
+\begin{practice}{24}{2}
+APPLY. Make Sense and Persevere A company makes tablets that are guaranteed for one year. On average, one out of every 200 tablets needs to be repaired or replaced within the first year. If a tablet needs to be repaired, the company loses an average of \$140. If the company sells 2,600,000 of the tablets in a year, what is their net profit on the sale of the tablets in that year?
+\te{Callout: If no repairs or replacement is needed for a tablet, the company makes a \$24 profit on that tablet.}
+% FIG 69 520 899 761 1024
+\placeholder{illustration}{Tablet angled in perspective with blue screen and colored app icons against teal background; speech bubble to right gives the \$24 profit condition transcribed above.}
+\answer{\$60,268,000}
+\end{practice}
+\begin{practice}{25}{2}
+ASSESSMENT PRACTICE. A commuter recorded data on the arrival time of his morning train each weekday for 5 weeks. According to the data, he should expect the train to be 1.16 minutes late on any given day. What are the missing values in the commuter's table?
+Arrival Time for Train
+\begin{tabular}{lllllll}
+Minutes Late & 0 & 1 & 2 & 3 & 4 & 5 \\
+Number of Days & blank & 5 & 1 & blank & 1 & 3 \\
+\end{tabular}
+\answer{14; 1}
+\end{practice}
+\begin{practice}{26}{1}
+ASSESSMENT PRACTICE. SAT/ACT What is the expected total for 20 spins?
+% FIG 69 952 475 1045 568
+\placeholder{diagram}{Circular spinner divided into ten equal sectors numbered clockwise starting upper right: 1 blue,2 orange,3 green,4 purple,5 ocher,6 cyan,7 dark green,8 orange,9 purple,10 ocher. Black central arrow points up-right toward 2.}
+A. 100
+B. 105
+C. 110
+D. 115
+E. 120
+\answer{C}
+\end{practice}
+\begin{practice}{27}{3}
+ASSESSMENT PRACTICE. Performance Task A toy company is designing a children's game in which players toss chips onto a board. The square board will contain a smaller square at its center.
+% FIG 69 825 655 944 774
+\placeholder{diagram}{Orange square board with centered darker orange smaller square rotated 45 degrees, labeled 20 points. No dimensions printed.}
+Part A. Write design instructions for the board so that a chip tossed randomly onto the board is 8 times more likely to land in the outer region than in the inner square. Explain your reasoning.
+\answer{Part A. Each side of the center square should be (\frac13) the side length of the large square. The ratio of the areas of the squares is 1 : 9, so the two regions have areas in the ratio 1 : 8.}
+Part B. Assign a whole number of points to the outer region so that the expected score on a single toss is as close as possible to 5. Explain your reasoning.
+\answer{Part B. 3 points; Let (x) be the point value in the outer region. The probability of a chip landing in the center square is (\frac19) while the probability of landing in the outer region is (\frac89). Since a chip in the center square is worth 20 points, the expected value is (\frac19(20)+\frac89(x)). For an expected value close to 5, solve this equation: (\frac19(20)+\frac89(x)=5), or (x=3.125). So, making the outer region worth 3 points solves the problem.}
+Part C. If the area of the inner square is doubled and the overall size of the board remains the same, how does the expected score change? Is it also doubled? Explain.
+\answer{Part C. The expected score is increased but not necessarily doubled. The amount of increase in the expected score depends on the point value of landing in each area.}
+\te{Printed answer number 24; likely 27, the Performance Task. Student preview footer prints 540, teacher footer 622.}
+\end{practice}
+% Source page 70: 622A Step 4 Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & DP19 \\
+2 & 1 & DP19 \\
+3 & 2 & DP19 \\
+4 & 2 & DP19 \\
+5 & 2 & DP19 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{12-5 Lesson Quiz: Expected Value}
+ASSESSMENT RESOURCES. Name. enVision Algebra 2. SavvasRealize.com.
+1. What is the expected value when rolling a fair die in each of the following cases?
+A 6-sided die with the numbers 2 twice, 4 twice, and 6 twice on its six faces.
+\answer{4}
+An 8-sided die with the numbers 1 twice, 5 twice, 7 three times, and 8 once on its eight faces.
+\answer{5.125}
+2. The chance of rain is forecast to be 20\% each day over the next 7 days. How many rainy days should be expected?
+A. 0.7
+B. 1.4
+C. 2
+D. 2.7
+\answer{B}
+3. A bag has 8 red tiles and 2 green tiles. In a charity carnival game, you pay \$5 to randomly pull a tile from the bag. The payout for pulling a red tile is \$1 and the payout for pulling a green tile is \$10. Find each of the following.
+The expected payoff per game for the charity is \$ blank.
+In 20 games, the charity can expect to make \$ blank.
+\answer{2.20; 44}
+4. A spinner with 20 equal-sized sections has 5 red, 10 blue, 3 green, and 2 yellow sections. Ann pays \$10 to spin the spinner. If she spins a yellow, she wins \$20; if she spins green, she wins \$15; otherwise, she loses.
+She plays the game twice. The expected payoff for her games is \$ blank.
+\answer{-5.75}
+\te{Printed -5.75 is the expected payoff for one game; likely -11.50 for two games.}
+5. An insurance company offers two accident policies. Policy A has a premium of \$2,000 with a deductible of \$800. Policy B has a premium of \$2,400 with a deductible of \$200. The probability of an accident costing more than \$800 in a given year is 15\%. Assume a person has at most one accident a year and no accidents costing less than \$800. Complete each statement.
+The annual expected cost to the owner for Policy A is \$ blank.
+The annual expected cost to the owner for Policy B is \$ blank.
+Policy blank has the lesser annual expected total cost to the owner.
+\answer{2,120; 2,430; A}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 71: 622B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}. I = Intervention. O = On-Level. A = Advanced.
+\textbf{Reteach to Build Understanding}. I. MathXL for School.
+Provides scaffolded reteaching for the key lesson concepts.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-5 Reteach to Build Understanding: Expected Value}
+1. Answer each question.
+a. What is the expected value of an experiment that is repeated many times? Place a check next to each correct description.
+The average outcome over many trials.
+The sum of all possible outcomes.
+The sum of the value of each outcome multiplied by the probability of the outcome.
+\answer{First and third descriptions checked.}
+b. A fair spinner has four equal sectors, each worth a different integer number of points from 1 to 4. What is the expected value per spin for many spins? Complete the calculation.
+(E=1(\text{blank})+2(\text{blank})+3(\text{blank})+4(\text{blank})=\text{blank})
+\answer{(E=1(0.25)+2(0.25)+3(0.25)+4(0.25)=2.5)}
+c. You flip a coin and get 2 points for heads and 1 point for tails. After many trials, what is likely to be the average point value of all your trials? On the number line, place an X at the locations of the two point values. Then place an arrow to show the likely average value and label that point.
+\answer{Xs at 1 and 2; arrow at 1.5.}
+% FIG 71 169 567 294 594
+\placeholder{graph}{Horizontal number line with arrowheads at both ends, ticks 0,1,2,3. Magenta X above 1 and above 2; upward magenta arrow halfway between 1 and 2 labeled 1.5.}
+2. In a game, a spinner is divided into two sections. The larger area covers 70\% of the spinner. What is the expected value per spin if you spin the spinner many times? Identify and correct the student's error(s).
+% FIG 71 355 591 400 636
+\placeholder{diagram}{Circular spinner with 30 percent upper-left sector labeled 2 points and larger 70 percent sector labeled -1 point. Dividing rays toward top and lower left; black center arrow points slightly up-right.}
+\te{Student work: Expected value of each section = probability (\times) point value. Expected value of larger section (=(0.7)\times(-1)=-0.7). Expected value of smaller section (=(0.7)\times(2)=1.4). Expected value (=-0.7+1.4=0.7) point.}
+\answer{(E(smaller\ section)=0.3\times2=0.6). (E=-0.7+0.6=-0.1) point.}
+3. In each move of a board game, there is a 65\% probability of losing 2 points and a 35\% probability of winning 6 points. What is the expected value for each move? Complete the solution.
+(P(-2)=0.65)
+(P(6)=\text{blank})
+(E=(0.65)(-2)+(\text{blank})(6))
+(E=\text{blank}) points
+\answer{0.35; 0.35; 0.8 points}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice}. I, O. MathXL for School.
+Provides extra practice for each lesson.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-5 Additional Practice: Expected Value}
+1. The expected payout for each play of a carnival game is \$0.15. If each game costs \$0.50 to play, what is the carnival's expected gain per play? Explain.
+\answer{\$0.35; The carnival will make an average of (\$0.50-\$0.15=\$0.35) each time the game is played.}
+2. A tile is drawn from a bag at random and then replaced. The probability of drawing a blue tile is 80\% and the probability of drawing a red tile is 20\%. What is the expected number of blue tiles in 25 draws?
+\answer{20}
+3. A ten-sided die has the numbers 0 through 9 on its ten faces. What is the expected value when rolling a ten-sided die? Is the expected value a possible outcome? Explain.
+\answer{4.5; No; Sample answer: It is not a possible outcome since as a non-integer value, it is not actually one of the outcomes.}
+4. A bag has 6 red marbles, 3 blue marbles, and 1 orange marble. In a game to raise money for a class trip, parents pay \$5 and pull a marble randomly from the bag. The payout is \$10 for pulling an orange marble, \$4 for a blue marble, and \$1 for a red marble. How much can the class expect to earn per game?
+\answer{\$2.20}
+5. An insurance company offers two policy options. A motorcycle owner can choose an annual premium of \$500 with a \$600 deductible or an annual premium of \$900 with a \$100 deductible. Suppose that the probability that a motorcycle will be damaged in a given year is 20\% and that if the motorcycle is damaged, the cost of repairs will be about \$800. Which option has the least expected cost for the motorcycle owner? What is the expected cost?
+\answer{premium of \$500 with \$600 deductible; \$620}
+6. At a ski resort, there is a 30\% chance of snow for each of the next four days. What is the probability that it snows 0 days? 1 day? 2 days? 3 days? 4 days? How many snowy days should a skier expect during this time period?
+\answer{0.2401; 0.4116; 0.2646; 0.0756; 0.0081; 1.2 days}
+7. The probability that a plane will arrive on time from Airport A to Airport B is 0.625. The probability that the plane is 1 hour late is 0.25. The probability that the plane is 2 hours late is 0.125. What is the expected number of minutes the plane will be late? Explain.
+\answer{30 minutes; (E=0(0.625)+1(0.25)+2(0.125)=0.5) and 0.5 hour = 30 minutes}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment}. O, A.
+Presents engaging problems and activities that extend the lesson concepts.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-5 Enrichment: Expected Value}
+In a quiz game, players can choose between two levels, Laid Back and Super Nerd. On Laid Back questions, players earn 10 points for each question they answer correctly and lose 5 points for each wrong answer. On Super Nerd questions, players earn 20 points for correct answers but lose 15 points for wrong answers.
+1. Player 1 usually answers 75\% of Laid Back questions and 70\% of Super Nerd questions correctly. Which level should he choose to have a greater expected point value? Explain.
+\answer{Super Nerd; (E(LB)=(0.75)(10)+(0.25)(-5)=6.25) and (E(SN)=(0.7)(20)+(0.3)(-15)=9.5), so (E(SN)>E(LB)).}
+2. a. Player 2 answers 70\% of Laid Back Science questions and 80\% of Laid Back Arts questions correctly, but only 60\% of Super Nerd Science questions and 55\% of Super Nerd Arts questions correctly. Which level and subject should she choose? Explain.
+\answer{Laid Back Arts; for each level, the subject with the greater probability will earn more points, so compare Laid Back Arts to Super Nerd Science. (E(LBA)=(0.8)(10)+(0.2)(-5)=7) and (E(SNS)=(0.6)(20)+(0.4)(-15)=6), so (E(LBA)>E(SNS)).}
+b. In the Challenge round, all questions are Super Nerd level. Should Player 2's strategy change in the Challenge round? Explain.
+\answer{Yes; she should switch to Super Nerd Science because (E(SNA)=(0.55)(20)+(0.45)(-15)=4.25), which is less than (E(SNS)=6).}
+3. Suppose a new player knows she can get (\frac23) of Laid Back questions right but isn't sure how well she can do on Super Nerd questions. What percent of Super Nerd questions would she have to get right to earn more points on average than on Laid Back questions?
+\answer{about 58\% or more}
+4. Before the final round, Player 1 has 200 points and Player 2 has 180 points. The final round has 5 questions. What strategy would you recommend to Player 1? Explain.
+\answer{Answers may vary. Sample: Choose only Laid Back questions, because even though your expected gain is less with those questions, you have less chance of losing a lot of points and falling behind Player 2.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary}. I.
+Helps students develop and reinforce understanding of key terms and concepts.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-5 Mathematical Literacy and Vocabulary: Expected Value}
+Rosa is considering two insurance options for her art collection. Option A has an annual cost of \$800 and a deductible of \$100. Option B has an annual cost of \$600 and a deductible of \$300. Suppose the probability of theft or damage is 15\%. Assume that any theft or damage will cost more than \$300. Which option has the least expected cost? The set on the left explains the thinking. The set on the right shows the steps. Write the thinking and the steps in the correct order.
+\te{Think Cards, in displayed order: Compare the expected costs.; Find the expected cost for Option B.; Formulate how to solve the problem.; Interpret the comparison.; Find the expected cost for Option A. Write Cards, in displayed order: (800+100(0.15)=\$815); Option B has the least expected cost.; (600+300(0.15)=\$645); Find and compare expected costs.; (\$815>\$645), (Option\ A>Option\ B).}
+% FIG 71 194 1051 386 1165
+\placeholder{diagram}{Two staggered sets of five rounded rectangular note cards. Left Think Cards and right Write Cards, all text transcribed above.}
+\begin{tabular}{ll}
+Think & Write \\
+First, she should \answer{formulate how to solve the problem.} & Step 1. \answer{Find and compare expected costs.} \\
+Second, she should \answer{find the expected cost for Option A.} & Step 2. \answer{(800+100(0.15)=\$815)} \\
+Next, she should \answer{find the expected cost for Option B.} & Step 3. \answer{(600+300(0.15)=\$645)} \\
+Then, she should \answer{compare the expected costs.} & Step 4. \answer{(\$815>\$645); (Option\ A>Option\ B)} \\
+Finally, she should \answer{interpret the comparison.} & Step 5. \answer{Option B has the least expected cost.} \\
+\end{tabular}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital preview: A surveyor took some measurements of a piece of land. The owner needs to know the area of the land to determine the value. What is the area of the piece of land? Blank ft. Printed ft; likely square feet for area.}
+% FIG 71 582 977 1036 1298
+\placeholder{illustration}{Tablet with digital land-area problem; green irregular parcel, trees, road, dashed internal segments. Visible measurements 12 ft upper left, 21 ft lower left, 22 ft lower right, right-angle marker at bottom altitude and 54-degree lower-right angle. Help menu covers some right-hand labels. No answer printed.}
+\te{Exit. Question Help. Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Enter your answer in the answer box and then click Check Answer. 1 part remaining. Clear All. Check Answer. Review progress. Question 24 of 40. Go. Back. Next.}
+\end{te-addendum}
+
+\end{document}

@@ -1,0 +1,1051 @@
+\documentclass{article}
+% Source: Topic_05_Teacher_Edition.pdf, PDF pages 76-88 (printed pages 269A-277B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 76: 269A Lesson Overview
+\begin{lesson-meta}
+lesson: 5-6
+title: Inverse Relations and Functions
+standards: none printed
+practices: none printed
+objective: I CAN represent the inverse of a relation using tables, graphs, and equations.
+
+essential question: How can you find the inverse of a function and verify the two functions are inverses?
+
+\textbf{VOCABULARY}
+\item inverse function
+\item inverse relation
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 5-6 \\
+Title & Inverse Relations and Functions \\
+Standards & none printed \\
+I CAN Objective & I CAN represent the inverse of a relation using tables, graphs, and equations. \\
+Essential Question & How can you find the inverse of a function and verify the two functions are inverses? \\
+Lesson Vocabulary & inverse function; inverse relation \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use tables, graphs, and equations to represent the inverse of a relation.
+\item Write an equation for the inverse of a function by restricting the domain.
+\item Verify that one function is the inverse of another, using composition.
+Essential Understanding. The inverse of a function is found by exchanging the roles of the independent and dependent variables. Composition can be used to verify that two functions are inverses.
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Created and graphed radical functions.
+In this lesson, students:
+\item Represent the inverse of a relation using tables, graphs, and equations.
+\item Write an equation for the inverse of a function and use composition to verify that the functions are inverses.
+Increasing Coherence. Examples 3, 4, and 5 are not necessarily expected to be addressed on high-stakes assessments.
+Later in this course, students will:
+\item Create and graph exponential and logarithmic functions.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that an inverse relation is a relation in which the independent and dependent variables are reversed.
+\item Students use their understanding of inverse relations and inverse functions to rewrite formulas in the context of real-world problems such as using the formula for the volume of a sphere to find the length of the radius.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+\te{Glossary is available at SavvasRealize.com. Program Resources.}
+\begin{tabular}{ll}
+REVIEW VOCABULARY English & Spanish \\
+dependent variable & variable dependiente \\
+independent variable & variable independiente \\
+inverse operationss & operaciones inversas \\
+inverse variation & variación \\
+relation & relación \\
+NEW VOCABULARY & \\
+inverse function & function inversa \\
+inverse relation & relación inversa \\
+\end{tabular}
+\te{Printed operationss and function inversa retained; likely operations and función inversa.}
+\textbf{VOCABULARY ACTIVITY}
+Have students think about their prior experience with the term inverse as it relates to inverse operations. Use this understanding to introduce the terms inverse relation and inverse function. Match each pair of inverses to the term that describes them.
+addition (+); subtraction (-) \answer{inverse operations}
+(f(x)=x+8); (f(x)=x-8) \answer{inverse functions}
+((4,6)); ((6,4)) \answer{inverse relations}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 76 964 788 1114 967
+\placeholder{illustration}{Student Companion cover, purple and blue glowing sphere on black, enVision Algebra 2 and Savvas labels.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students understand that to find the inverse of a function they exchange the roles of the independent and dependent variables. They represent the inverse of a relation using tables, graphs, and equations, restricting the domain when necessary.
+Students recognize that the graphs of inverse functions are reflections across the line (y=x), with a restricted domain when needed. They confirm that one function is the inverse of another by using function composition.
+\textbf{Applying Math Practices: Reason Abstractly and Quantitatively}
+Students understand the meaning of symbols and quantities when they explain how to use a given radical function to find the range of the inverse of the function.
+\textbf{Look For and Make Use of Structure}
+Students look for the overall structure and patterns in mathematics when they recognize that if a function f has two x-values for the same y-value, then the inverse of f is not a function.
+\end{te-addendum}
+% Source page 77: 269B Explore & Reason
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. EXPLORE \& REASON. INSTRUCTIONAL FOCUS}
+Students perform a list of operations on numbers and explore whether they can produce the original number by performing the operations in reverse order. This prepares students to find inverse functions.
+\textbf{STUDENT COMPANION} Students can complete the Explore \& Reason activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving}
+Q: How are the domain and range related to the number path?
+\answer{You apply the operations listed in the number path on the values in the domain, which then result in the values in the range.}
+\textbf{During: SMALL GROUP. Support Productive Struggle in Learning Mathematics}
+Q: What differences do you notice between the number paths for f and g?
+\answer{In g, a value is squared. In f, all values are basic operations on a given number.}
+Q: Why is it possible for two values of x to result in (g(x)=7)?
+\answer{When you square a value, both the value and its opposite have the same result.}
+\textbf{For Early Finishers}
+Q: Create a new number path h, using the number path g, but replace square the value with cube the value. Follow the new number path to find (h(1)). Are you able to follow the path back to a unique value in the domain?
+\answer{(h(1)=6); Yes; you can follow the path back to a unique value. Any value that you cube has a unique result.}
+\textbf{After: WHOLE CLASS. Facilitate Meaningful Mathematical Discourse}
+Q: Would adding, subtracting, or multiplying a different number change the conditions you found in Part C?
+\answer{No; adding, subtracting, or multiplying a different number would not change the conditions. Each of these operations produce a unique result.}
+Q: Suppose that after the first step in each number path you have a value of -2. How is multiplying the value by -2 in f different than squaring the value in g?
+\answer{In f, the result of multiplying -2 by -2 is 4. The only value that produces 4 is -2. In g, two values can produce 4, -2, and 2.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Each number path will lead you from a number in the domain, the set of all real numbers, to a number in the range.
+\begin{tabular}{ll}
+Number Path (f:x\to f(x)) & Number Path (g:x\to g(x)) \\
+Start with x. & Start with x. \\
+Subtract 3. & Add 1. \\
+Multiply by -2. & Square the value. \\
+Add 5. & Subtract 2. \\
+\end{tabular}
+A. Follow the number paths to find (f(1)) and (g(1)).
+\answer{A. (f(1)=9); (g(1)=2)}
+B. Identify all possible values of x that lead to (f(x)=7) and all values that lead to (g(x)=7).
+\answer{B. If (f(x)=7), then (x=2); if (g(x)=7), then (x=-4) or (x=2).}
+C. Communicate Precisely Based on the two Number Paths, under what conditions can you follow a path back to a unique value in the domain?
+\answer{C. Each value in the domain must map to a unique value in the range; if two different domain values map to the same range value, then you will not be able to follow a path to a unique domain value.}
+\te{Critique \& Explain is available at SavvasRealize.com. Digital screen repeats the activity; Go back; Enter your answer. STUDENT EDITION; SAMPLE STUDENT WORK.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXPLORE \& REASON}
+Q: Model with Mathematics Write a rule for Number Path f. Write a rule for the process of following the number path backward. How do the two rules compare?
+\answer{(f(x)=-2(x-3)+5); (n(x)=\frac{x-5}{(-2)}+3); The paths involve inverse operations, which lead to unique paths that are the inverse of each other.}
+\end{te-addendum}
+% Source page 78: 269 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION. Establish Mathematics Goals to Focus Learning}
+Introduce students to inverse relations and functions. Remind them that they have previously studied functions that have restrictions on the domain and range. Explain that they will learn to restrict the domain of a function to find an inverse of the function.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Represent the Inverse of a Relation. Build Procedural Fluency From Conceptual Understanding}
+Q: How does switching the values in the table help you determine the inverse relation?
+\answer{In the original relation, the values in the x-column are the elements of the domain and those in the y-column are the elements of the range. Switching the values changes the domain to the range and the range to the domain of the new relation.}
+Q: How can the inverse of a relation that is not a function be a function?
+\answer{The inverse of the relation can be a function if each value in the domain appears only once in the relation.}
+\te{Printed domain; likely range of the original relation, or domain of its inverse.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Represent the Inverse of a Relation. CONCEPTUAL UNDERSTANDING}
+What is the inverse of the relation represented in the table?
+\begin{tabular}{ll}
+x & y \\
+-2 & 1 \\
+-1 & 4 \\
+0 & 3 \\
+1 & 1 \\
+\end{tabular}
+\te{Callouts: x column domain; y column range.}
+Recall that a relation is any set of ordered pairs ((x,y)), where x is an element of the domain and y is an element of the range. An inverse relation is formed when the roles of the domain and range are reversed.
+\begin{tabular}{llll}
+Relation x & y & Inverse Relation x & y \\
+-2 & 1 & 1 & -2 \\
+-1 & 4 & 4 & -1 \\
+0 & 3 & 3 & 0 \\
+1 & 1 & 1 & 1 \\
+\end{tabular}
+\te{Callouts: This relation is a function. Switch the values in the columns for x and y. This relation is not a function. LOOK FOR RELATIONSHIPS If two distinct values in the domain of f have the same element of the range, then the inverse of f is not a function.}
+If an inverse relation of a function, f, is itself a function, it is called the inverse function of f, which is written (f^{-1}(x)).
+\answer{Inverse relation: ((1,-2),(4,-1),(3,0),(1,1)); not a function.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples: ADDITIONAL EXAMPLE 1}
+Identify the inverse relation. Is it a function?
+\begin{tabular}{llllll}
+x & -1 & 1 & 1 & 4 & 6 \\
+y & 2 & -1 & 5 & 0 & 2 \\
+\end{tabular}
+Inverse Relation:
+\begin{tabular}{llllll}
+x & 2 & 1 & 5 & 0 & 2 \\
+y & -1 & 1 & 1 & 4 & 6 \\
+\end{tabular}
+The x-value 2 is in the domain of the inverse relation twice, so the inverse is not a function.
+\answer{The inverse is not a function.}
+\te{Printed inverse table has 1 instead of -1 as the second x-value.}
+Example 1 HHelp students understand finding the inverse of a relation that is not a function.
+Q: What is the first step when solving this problem?
+\answer{Swap the values between the x and y columns.}
+\te{Printed HHelp retained. Digital labels: Go back; ESSENTIAL QUESTION; SOLUTION.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+The profits for a company can be modeled by the inverse function of (f(x)=2x^3+5).
+Find the equation of the inverse function.
+(f(x)=2x^3+5)
+(y=2x^3+5)
+(x=2y^3+5)
+(x-5=2y^3)
+(\frac{x-5}{2}=y^3)
+(y=\sqrt[3]{\frac{x-5}{2}})
+(f^{-1}(x)=\sqrt[3]{\frac{x-5}{2}})
+\answer{(f^{-1}(x)=\sqrt[3]{\frac{x-5}{2}})}
+Example 4 Help students transition to finding the inverse of a cubic function.
+Q: Are there any restrictions on the domain of a cubic function when finding its inverse function?
+\answer{No; the inverse of the cubic function is a function over the entire domain.}
+\te{Additional Examples are available at SavvasRealize.com. Go back; ESSENTIAL QUESTION; SOLUTION.}
+\end{te-addendum}
+% Source page 79: 270 Example 1 continued
+\begin{tryit}{1}
+Identify the inverse relation. Is it a function?
+\begin{tabular}{lllllll}
+x & -1 & 0 & 1 & 2 & 3 & 4 \\
+y & 9 & 7 & 5 & 3 & 1 & -1 \\
+\end{tabular}
+\answer{The inverse relation is shown in the table. It is a function.}
+\begin{tabular}{lllllll}
+x & 9 & 7 & 5 & 3 & 1 & -1 \\
+y^{-1} & -1 & 0 & 1 & 2 & 3 & 4 \\
+\end{tabular}
+\te{Printed inverse table labels its second row y inverse.}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Find an Equation of an Inverse Relation. Pose Purposeful Questions}
+Q: Why is the inverse of (f(x)=x^2) written with (\pm)?
+\answer{The domain of f contains both positive and negative values of x. If the (\pm) were missing, then only the positive values would appear in the inverse.}
+Q: How can you tell that the inverse of f is not a function from the graph?
+\answer{The graph shows that in the inverse, there are multiple values of y for a single value of x. Therefore, it is not a function.}
+Q: If a point ((x,y)) is on the graph of the function, what do you know about the graph of the inverse?
+\answer{The point ((y,x)) is on the graph of the inverse.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Find an Equation of an Inverse Relation}
+Let (f(x)=x^2).
+A. How can you represent the inverse relation of f algebraically?
+(f(x)=x^2\to y=x^2)
+(x=y^2)
+(y=\pm\sqrt{x})
+\te{Switch the roles of x and y. Solve for y.}
+The inverse of f can be represented algebraically by the equation (y=\pm\sqrt{x}).
+\answer{A. (y=\pm\sqrt{x})}
+B. How are the graphs of (y=x^2) and (y=\pm\sqrt{x}) related?
+% FIG 79 876 463 1035 622
+\placeholder{graph}{Square coordinate grid x and y from -4 to 4, minor grid 0.5, labels every 1 from -3 to 3, origin O. Blue upward parabola y=x squared, vertex (0,0). Red sideways parabola y=plus or minus square root of x, vertex (0,0), arrows toward right. Green diagonal y=x through origin, arrows at both ends. Curves reflect across the green line.}
+The graph of the inverse of f is the reflection of the graph of (y=x^2) across the line (y=x).
+\answer{B. The graphs are reflections across (y=x).}
+\te{LOOK FOR RELATIONSHIPS The domain of a relation becomes the range of its inverse, and the range of a relation becomes the domain of its inverse. Callouts: The range of f is (y\geq0), so the domain of the inverse relation is (x\geq0). The inverse of f is not a function. Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{2}
+Let (f(x)=2x+1).
+a. Write an equation to represent the inverse of f.
+\answer{a. (y=\frac{x-1}{2})}
+b. How can you use the graph of f to determine if the inverse of f is a function? Explain your answer.
+\answer{b. The graph of f is a line with a slope of 2 and a y-intercept of 1. Reflecting the graph of f through the line (y=x) results in a line with slope of (\frac12) and a y-intercept of (-\frac12). Since the line is not vertical, it represents a linear function.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How is the graph of (f(x)=2x+1) related to the graph of the inverse of f, (y=\frac{x-1}{2})?
+\answer{The graph of the inverse is a reflection of the graph of f about the line (y=x).}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES 1 \& 2}
+Q: Communicate Precisely Think of (f(x)=2x+1) as a number path: start with x, multiply by 2, and add 1. How would you describe the path from the result back to x?
+\answer{Start with (f(x)), subtract 1, and divide by 2.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 2}
+Have students explore finding the inverse relation for functions with higher degrees.
+Write an equation to represent the inverse of each function. Is the inverse a function?
+1. (f(x)=x^4-2) \answer{(y=\pm\sqrt[4]{x+2}); no}
+2. (g(x)=x^5+5) \answer{(y=\sqrt[5]{x-5}); yes}
+3. (h(x)=x^6) \answer{(y=\pm\sqrt[6]{x}); no}
+\end{te-addendum}
+% Source page 80: 271 Restrict a Domain
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Restrict a Domain to Produce an Inverse Function. Pose Purposeful Questions}
+Q: Do you have to restrict the domain of every function to find an inverse function?
+\answer{No; you only have to restrict the domain if the function has more than one x-value for the same y-value.}
+Q: How could you restrict the domain of (f(x)=x^2) to produce a different inverse function?
+\answer{By restricting the domain to (x\leq0), the inverse function becomes (f^{-1}(x)=-\sqrt{x}).}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Restrict a Domain to Produce an Inverse Function}
+Consider again the function (f(x)=x^2). Under what domain will the inverse relation be a function?
+% FIG 80 922 270 1022 387
+\placeholder{graph}{Blue parabola y=x squared with vertex at origin. Grid x from -5 to 5 in units, labels -4,-2,2,4; y from -2 to 10 in units, labels 2,4,6,8. Red dots at (-2,4) and (2,4), horizontal red segment joining dots, red arrows from dots down to x-axis. Both parabola ends have upward arrows.}
+\te{Callout: The inverse relation is not a function since it would contain the inverse of both these points, (4,-2) and (4,2). Printed coordinates already describe inverse points; likely original points (-2,4) and (2,4). CONSTRUCT ARGUMENTS If any horizontal line crosses a function in more than one place, the inverse will not be a function. Explain why?}
+% FIG 80 877 399 976 517
+\placeholder{graph}{Same unit grid and blue parabola with red dots (-2,4),(2,4), horizontal joining segment and downward red arrows; negative-x branch dashed, positive-x branch solid. x labels -4,-2,2,4, y labels 2,4,6,8, origin O.}
+\te{For the inverse to be a function, all of the duplicate y-values would have to be eliminated from the original function.}
+% FIG 80 1011 399 1112 517
+\placeholder{graph}{Same unit grid, x labels -4,-2,2,4, y labels 2,4,6,8. Only right branch of blue parabola y=x squared for x at least 0, begins at origin and continues upward with arrow. Red point (2,4), horizontal red segment to y-axis and downward red arrow to (2,0).}
+\te{Restrict the domain of f to be (x\geq0).}
+If a function has two x-values for the same y-value, its inverse will not be a function. You can restrict the domain in many different ways to create a function that will have an inverse that is a function.
+% FIG 80 836 630 957 718
+\placeholder{graph}{Unit grid x and y from -3 to 5, labels -2,2,4. Blue y=f(x), right branch y=x squared beginning (0,0); red y=f inverse(x), y=square root of x beginning (0,0), and green diagonal y=x. Blue and red curves reflected across green line, arrows at outer ends.}
+\te{The graph of the inverse function of f is the reflection of the graph of f(x) across the line (y=x). STUDY TIP There is more than one way to restrict the domain of a function. The context of a situation often influences the choice of domain.}
+The inverse relation of (f(x)=x^2) is (y=\pm\sqrt{x}). If the domain of (f(x)=x^2) is restricted to (x\geq0), then the inverse is the function defined as (f^{-1}(x)=\sqrt{x}).
+\answer{Restrict the domain to (x\geq0); (f^{-1}(x)=\sqrt{x}).}
+\te{Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{3}
+Find the inverse of each function by identifying an appropriate restriction of its domain.
+a. (f(x)=x^2+8x+16)
+\answer{a. (f(x)=x^2+8x+16=(x+4)^2), so the graph of the parabola has its vertex at ((-4,0)). Restrict the domain of f to (x\geq-4). Then (f^{-1}(x)=\sqrt{x}-4), (x\geq0).}
+b. (f(x)=x^2-9)
+\answer{b. (f(x)=x^2-9), so the graph of the parabola has its vertex at ((0,-9)). Restrict the domain of f to (x\geq0). Then (f^{-1}(x)=\sqrt{x+9}), (x\geq-9).}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What value of x can you use to restrict the domain of any quadratic function to find an inverse function?
+\answer{You can use the value of x at the vertex or at the axis of symmetry.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners. Use with EXAMPLE 3}
+SPEAKING. BEGINNING. Draw a table of (\frac xy)-values on the board. Then draw a table that shows the inverse of the first table. Without explaining what you have done, ask students to describe what they see.
+Q: What happens to each (\frac xy) pair in the two tables?
+\answer{Their positions are reversed.}
+Q: The two tables are inverses of each other. What does it mean for one relation to be the inverse of another?
+\answer{The x- and y-values are reversed.}
+READING. DEVELOPING. Ask students to read the callout pointing to the second graph. Ask students to point to the words duplicate and eliminated in the callout when reading. Then have students read the definitions of the words duplicate and eliminate from the dictionary.
+Q: What does duplicate mean?
+\answer{the same as}
+Q: What does eliminate mean?
+\answer{to get rid of}
+Q: Why do duplicate y-values need to be eliminated?
+\answer{so that the inverse of the given function still meets the definition of a function}
+WRITING. EXPANDING. In the example, the domain must be restricted so that the inverse of (f(x)=x^2) is still a function. Have students copy: "The university is raising the admission requirements to restrict the number of students on campus." Then have them write answers to the following questions.
+Q: How does the sentence help you understand the meaning of restrict?
+\answer{The university wants to restrict, or set limits on, the number of students on campus.}
+Q: How is the term restrict similarly used in reference to the domain of an inverse function?
+\answer{Limits are needed on the domain values of a function so that its inverse still meets the requirements of being a function.}
+\end{te-addendum}
+% Source page 81: 272 Find an Equation of an Inverse Function
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Find an Equation of an Inverse Function. Use and Connect Mathematical Representations}
+PART A
+Q: If the graph of a function can be intersected by a horizontal line in more than one place, what do you know about the inverse of the function?
+\answer{You know that the inverse is not a function because the graph of the inverse will not pass the vertical line test.}
+Q: Does the domain of a square root function need to be restricted to have an inverse function?
+\answer{No; no horizontal line intersects the graph of a square root function in more than one place. However, the domain of the inverse function needs to be restricted to the values of the range of the original square root function.}
+PART B
+Q: Why does the domain of the function not need to be restricted?
+\answer{The graph of the function cannot be intersected by a horizontal line in more than one place, so the function has an inverse without needing to restrict the domain.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Find an Equation of an Inverse Function}
+A. Find an equation of the inverse function of (f(x)=\sqrt{x-2}).
+The graph shows that no horizontal line intersects the graph in more than one point. When the graph is reflected over the line (y=x) to produce an inverse, there will be no vertical line that will intersect the graph more than once. Since the inverse has exactly one element in the range for each element in the domain, the inverse relation is a function.
+% FIG 81 814 318 932 389
+\placeholder{graph}{Unit grid with x labels 0,2,4,6,8 and right edge 10; y labels 2,4 with lower edge -2. Red f(x)=square root of (x-2), starts (2,0), rises to right with arrow near (10,2.8).}
+\begin{tabular}{lll}
+ & domain & range \\
+f & (x\geq2) & (y\geq0) \\
+f^{-1} & (x\geq0) & (y\geq2) \\
+\end{tabular}
+\te{Use the graph to identify the domain and range of f and f inverse. Colored arrows exchange domain and range between rows.}
+(y=\sqrt{x-2})
+(x=\sqrt{y-2})
+(x^2=y-2)
+(x^2+2=y)
+\te{Switch the roles of x and y and solve for y. COMMON ERROR Don't apply f inverse notation too quickly. This notation is only used when the inverse of f is a function. Check to see if the domain needs to be restricted for the relation to be a function.}
+So the inverse of (f(x)=\sqrt{x-2}) is a function, (f^{-1}(x)=x^2+2), (x\geq0). You can verify this on a graph.
+% FIG 81 814 501 894 572
+\placeholder{graph}{Unit grid x from -2 to 6, y from -1 to 6, labels 2,4 on both axes, origin O. Red f is square root of (x-2), endpoint (2,0); blue f inverse is right half parabola x squared +2, endpoint (0,2); green y=x diagonal. Arrows on outward ends.}
+\te{The graphs of f and f inverse are both functions and are reflections over the line (y=x).}
+\answer{A. (f^{-1}(x)=x^2+2), (x\geq0).}
+B. Find an equation of the inverse function of (f(x)=-\sqrt[3]{4x}).
+The graph shows that no horizontal line intersects the graph in more than one point, so the inverse relation will be a function.
+% FIG 81 1047 597 1110 660
+\placeholder{graph}{Unit grid x and y from -3 to 3, labels -2,2 and origin O. Red decreasing cube-root curve y=-cube root of (4x), through origin, with arrows upper left and lower right.}
+(y=-\sqrt[3]{4x})
+(x=-\sqrt[3]{4y})
+(x^3=-4y)
+(\frac{-x^3}{4}=y)
+Since the inverse is a function, (f^{-1}(x)=\frac{-x^3}{4}) for all real x. You can verify this on a graph.
+% FIG 81 997 665 1130 743
+\placeholder{graph}{Unit square grid x and y from -3 to 3, labels -2,2 and origin O. Red f(x)=-cube root of (4x), blue f inverse(x)=-x cubed/4, green diagonal y=x. Both decreasing curves pass through origin, reflected across green line, arrows at all outer ends.}
+\answer{B. (f^{-1}(x)=-\frac{x^3}{4}) for all real x.}
+\te{Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{4}
+Let (f(x)=2-\sqrt[3]{x+1}).
+a. Sketch the graph of f.
+% FIG 81 147 686 343 883
+\placeholder{graph}{Printed answer: square unit grid x and y from -5 to 5, labels -4,-2,2,4 and origin O. Orange decreasing cube-root curve y=2-cube root of (x+1), central bend (-1,2), through (0,1), arrows at both ends.}
+\answer{a. Graph shown.}
+b. Verify that the inverse will be a function and write an equation for (f^{-1}(x)).
+\answer{b. No horizontal line intersects the graph of f in more than one point, so the inverse of f is a function. The equation is (f^{-1}(x)=(2-x)^3-1).}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What can you tell about the inverse function by looking at the equation of the function?
+\answer{The function contains a cube root of the variable x. The inverse function will then have the cube of x.}
+\end{te-addendum}
+% Source page 82: 273 Use Composition to Verify Inverse Functions
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Use Composition to Verify Inverse Functions. Pose Purposeful Questions}
+Q: Does the order of the function composition matter when verifying that two functions are inverses of each other?
+\answer{No; you need to simplify both (f(g(x))) and (g(f(x))), but the order in which you perform the compositions does not matter.}
+Q: How is the composition of a function and its inverse related to the graph of a function and its inverse?
+\answer{The composition of a function and its inverse is equal to x. The graph of the inverse of a function is a reflection of the graph of the function across the line (y=x).}
+Q: How are inverse functions similar to inverse operations?
+\answer{When you add a number and its inverse, the result is 0, which is the additive identity. When you multiply a number and its inverse, the result is 1, which is the multiplicative identity. When you perform the composition of a function and its inverse, the result is x, which is the identity function.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Use Composition to Verify Inverse Functions}
+A. What is the inverse of (f(x)=2x+5), and how can you verify this?
+(y=2x+5\to x=2y+5)
+(2y=x-5)
+(y=\frac12x-\frac52)
+\te{Switch x and y and solve for y.}
+So the inverse of f is (g(x)=\frac12x-\frac52). You can verify this with function composition: To be inverse functions, ((f\circ g)(x)=x) and ((g\circ f)(x)=x).
+\begin{tabular}{ll}
+((f\circ g)(x)=f(g(x))) & ((g\circ f)(x)=g(f(x))) \\
+(=2(g(x))+5) & (=\frac12(f(x))-\frac52) \\
+(=2(\frac12x-\frac52)+5) & (=\frac12(2x+5)-\frac52) \\
+(=x-5+5) & (=x+\frac52-\frac52) \\
+(=x) & (=x) \\
+\end{tabular}
+Since ((f\circ g)(x)=x) and ((g\circ f)(x)=x), the functions (f(x)=2x+5) and (g(x)=\frac12x-\frac52) are inverses.
+You can also verify (g(x)) is the inverse of (f(x)) by graphing.
+% FIG 82 854 466 971 583
+\placeholder{graph}{Unit grid x and y from -6 to 6, labels -4,-2,2,4 and O. Red line y=2x+5, blue line y=one-half x minus five-halves, green y=x. All lines have arrows at both ends. Red and blue intersect at (-5,-5) and are reflections across green.}
+The graph of (y=\frac12x-\frac52) is a reflection of the graph of (y=2x+5) across the line (y=x).
+\answer{A. (g(x)=\frac12x-\frac52); both compositions simplify to x.}
+\te{LOOK FOR RELATIONSHIPS Because a function's inverse reverses the action of the original function, the composition of the two (in either order) simplifies to the identity function.}
+B. Are the two functions (f(x)=x^2+5) and (g(x)=\sqrt{x}-5) inverses of each other?
+To be inverse functions, ((f\circ g)(x)=x) and ((g\circ f)(x)=x).
+\begin{tabular}{ll}
+((f\circ g)(x)=f(g(x))) & ((g\circ f)(x)=g(f(x))) \\
+(=(g(x))^2+5) & (=\sqrt{f(x)}-5) \\
+(=(\sqrt{x}-5)^2+5) & (=\sqrt{x^2+5}-5) \\
+(=x-10\sqrt{x}+25+5) & \\
+(=x-10\sqrt{x}+30) & \\
+\end{tabular}
+Since neither ((f\circ g)(x)) nor ((g\circ f)(x)) simplify to the identity function, the functions are not inverses.
+\answer{B. The functions are not inverses.}
+\te{LEARN TOGETHER How can you respectfully disagree and manage your emotions? Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{5}
+Use composition to determine whether f and g are inverse functions.
+a. (f(x)=\frac14x+7), (g(x)=4x-7)
+\answer{a. ((f\circ g)(x)=f(g(x))=f(4x-7)=\frac14(4x-7)+7=x-\frac74+7=x+\frac{21}{4}), so f and g are not inverses.}
+b. (f(x)=\sqrt[3]{x-1}), (g(x)=x^3+1)
+\answer{b. ((f\circ g)(x)=f(g(x))=f(x^3+1)=\sqrt[3]{(x^3+1)-1}=\sqrt[3]{x^3}=x), and ((g\circ f)(x)=g(f(x))=g(\sqrt[3]{x-1})=(\sqrt[3]{x-1})^3+1=x-1+1=x), so f and g are inverses.}
+\end{tryit}
+\begin{te-addendum}{5}{LearnTogether}
+\textbf{Learn Together: Disagree Respectfully}
+People can have different ideas and talk about them in a respectful way. Ask: How might you feel if someone didn't agree with your answer? What can you say and do to be kind when you disagree with someone else's answer or idea?
+\end{te-addendum}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How is composition used to determine whether two functions are inverses of each other?
+\answer{Find ((f\circ g)(x)) and ((g\circ f)(x)). If both compositions are equal to x, then the functions f and g are inverses.}
+\end{te-addendum}
+\begin{te-addendum}{5}{CommonError}
+\textbf{Common Error. Try It! 5a}
+Some students may not distribute the (\frac14) to the constant term, causing them to incorrectly determine that f and g are inverse functions. Have students graph both functions on the same coordinate grid to verify whether they are reflections of each other across the line (y=x).
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES 3--5}
+Q: Construct Arguments Dana says that the functions (f(x)=(x-2)^2+5) and (g(x)=\sqrt{x-5}+2) are inverses. Keegan says that the functions are inverses only if the domain is restricted. Is either person correct? Explain.
+\answer{Keegan is correct. The functions are inverses if you restrict the domain of f to (x\geq2).}
+\end{te-addendum}
+% Source page 83: 274 Rewrite a Formula
+\begin{te-addendum}{6}{PurposefulQuestions}
+\textbf{Rewrite a Formula. Pose Purposeful Questions}
+Q: How can you verify that you have rewritten the formula for r correctly?
+\answer{Substitute the rewritten formula for r into the original formula and simplify. The formula will simplify to V.}
+Q: How is the relationship between the original and rewritten formulas similar to the relationship between a function and its inverse?
+\answer{If you substitute the rewritten formula into the original formula and simplify, the result is the identity (V=V). This is similar to the composition of a function and its inverse function.}
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Rewrite a Formula. APPLICATION}
+A sculpture artist is making an ice sculpture of Earth for a display. He created a mold that can hold 4.5 L of ice. What will the radius of the ice sculpture be if he fills the mold all of the way?
+% FIG 83 953 241 1117 369
+\placeholder{illustration}{Earth ice sculpture in an open gray spherical mold, left hemisphere lid removed, blue background, label 4.5 liters of ice.}
+The volume of a sphere is calculated using the formula (V=\frac43\pi r^3).
+Rewrite the formula to find the length of the radius.
+(\frac43\pi r^3=V)
+(\pi r^3=\frac34V)
+(r^3=\frac3{4\pi}V)
+(r=\sqrt[3]{\frac3{4\pi}V})
+Since a liter is a measure of capacity, or volume, it can be expressed using cubic units of length. When you take the cube root of an expression involving volume in cubic units of length, the units of the result will be in the correct units to describe length. One liter is equivalent to 1,000 (\text{cm}^3), so 4.5 L is equivalent to 4,500 (\text{cm}^3).
+(r=\sqrt[3]{\frac3{4\pi}V})
+(=\sqrt[3]{\frac3{4\pi}\cdot4,500\text{ cm}^3})
+(\approx10.2\text{ cm})
+\te{Substitute 4,500 cubic centimeters for V. MAKE SENSE AND PERSEVERE If this seems smaller than expected, remember that this is the radius---the diameter of the ice sculpture mold is about 20.4 cm.}
+Rewriting the equation to show r in terms of V is similar to finding the inverse. In effect, you are exchanging the roles of the dependent and independent variables.
+(V=\frac43\pi r^3)
+(r=\sqrt[3]{\frac{3V}{4\pi}})
+\te{In the original equation, you can see how the value of V depends on the value of r. In this form of the equation, you can see how the value of r can be determined by, and depends on, a given value of V.}
+The ice sculpture mold will have a radius of about 10 cm.
+\answer{About 10 cm.}
+\te{Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{6}
+The manufacturer of a gift box designs a box with length and width each twice as long as its height. Find a formula that gives the height h of the box in terms of its volume V. Then give the length of the box if the volume is 640 (\text{cm}^3).
+\answer{(h=\sqrt[3]{\frac V4}); When the volume is 640 cubic centimeters, the height is about 5.43 cm, so the length is about 10.86 cm.}
+\end{tryit}
+\begin{te-addendum}{6}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What is the first step in solving this problem?
+\answer{Write the formula for the volume of a rectangular prism, (V=lwh).}
+\end{te-addendum}
+\begin{te-addendum}{6}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLE 6}
+Q: Make Sense and Persevere In the formula (V=\frac43\pi r^3), which variable is the dependent variable? In the formula (r=\sqrt[3]{\frac3{4\pi}V}), which variable is the dependent variable?
+\answer{V; r}
+\end{te-addendum}
+\begin{te-addendum}{6}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 6}
+Some students may have difficulty rewriting formulas. Have students practice rewriting linear equations for a given variable.
+1. Rewrite (a+2b=6) for b. \answer{(b=\frac{6-a}{2})}
+2. Rewrite (3x-y=-5) for y. \answer{(y=3x+5)}
+3. Rewrite (m=4n-7) for n. \answer{(n=\frac{m+7}{4})}
+\end{te-addendum}
+% Source page 84: 275 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Inverse Functions}
+Q: Why would you need to restrict the domain of the original function when finding its inverse?
+\answer{If you consider the function over the entire domain, the inverse may not be a function.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error. Exercise 4}
+Some students may forget to distribute the -2 and may therefore write the equation for the inverse as (f^{-1}(x)=-2x-5). Ask students to check their answer either by graphing or by calculating (f\circ g) and (g\circ f) to confirm that they have found the correct equation for the inverse.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Inverse Functions}
+To find the inverse of a function, exchange the roles of the domain and range.
+TABLES. Switch the columns.
+\begin{tabular}{llll}
+f: x & y & f^{-1}: x & y \\
+0 & 2 & 2 & 0 \\
+1 & 4 & 4 & 1 \\
+2 & 6 & 6 & 2 \\
+3 & 8 & 8 & 3 \\
+4 & 10 & 10 & 4 \\
+\end{tabular}
+\te{Red and blue arrows exchange x and y columns.}
+ALGEBRA. Exchange the roles of the domain and range. Solve for y.
+(y=x+9)
+(x=y+9)
+(x-9=y)
+(y=x-9)
+GRAPHS. Reflect the graph across the line (y=x).
+% FIG 84 718 462 840 551
+\placeholder{graph}{Unit grid x and y from -3 to 5, labels -2,2,4, O. Blue y=f(x) right branch of parabola y=x squared, red y=f inverse(x) square-root curve, both start (0,0) and have arrows outward; green y=x reflection line through origin with arrows.}
+If needed, restrict the domain of the original function to find an appropriate inverse for the function.
+% FIG 84 939 483 1018 545
+\placeholder{graph}{Unit grid x from -3 to 5, y from -1 to 5, labels -2,2,4 on x and 2,4 on y, origin O. Blue y=x fourth power, negative branch dashed and positive branch solid; red y=fourth root of x begins (0,0) and rises right. Arrows at outer ends.}
+Restrict the domain of (y=x^4) to (x\geq0).
+Composition verifies inverses: (f(f^{-1}(x))=x) and (f^{-1}(f(x))=x).
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you find the inverse of a function and verify the two functions are inverses?
+\answer{In a table, switch the columns x and y. Similarly, in an equation, exchange x and y and solve for y. Graphically, the inverse of a function is its reflection over the line (y=x). To verify that an inverse function has been found, use composition: (f(f^{-1}(x))=x) and (f^{-1}(f(x))=x).}
+2. Error Analysis Abi said the inverse of (f(x)=3x+1) is (f^{-1}(x)=\frac13x-1). Is she correct? Explain.
+\answer{No; the inverse is (f^{-1}(x)=\frac{x-1}{3}).}
+3. Construct Arguments Is the inverse of a function always a function? Explain.
+\answer{No; the inverse of a function is only a function if each independent value is paired with only one dependent value.}
+\textbf{Do You KNOW HOW?}
+Consider the function (f(x)=-\frac12x+5).
+4. Write an equation for the inverse of f.
+\answer{(f^{-1}(x)=-2x+10)}
+5. Use composition to show that f and the equation you wrote are inverses.
+\answer{(f(f^{-1}(x))=-\frac12(-2x+10)+5=x-5+5=x), (f^{-1}(f(x))=-2(-\frac12x+5)+10=x-10+10=x)}
+6. Sketch a graph of f and its inverse.
+% FIG 84 156 820 384 1041
+\placeholder{graph}{Printed answer: first quadrant unit grid x,y from 0 to 10, numbered every 2. Blue line f through (0,5) and (10,0); orange inverse through (0,10) and (5,0). Curves intersect near (3.33,3.33), arrows visible at blue lower right and orange upper left.}
+\answer{Graph shown.}
+7. How can you verify by the graph of f and its inverse that they are indeed inverses?
+\answer{(f(x)) and (f^{-1}(x)) are reflections of each other over the line (y=x). Therefore, (f(x)) and (f^{-1}(x)) are inverses.}
+8. Is the inverse of f a function? Explain.
+\answer{Yes; each independent value is paired with only one dependent value.}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation; Practice. Answers for practice 9--13 on this page are transcribed with their items.}
+\end{concept-summary}
+% Source page 85: 276 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving. Lesson Practice}
+You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+12, 14, 16--21, 32, 33, 35, 36 & 9--38 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 16, 17 & 1 \\
+1 & 12, 14 & 2 \\
+2 & 18--21, 36 & 1 \\
+3 & 22--25 & 1 \\
+3 & 9 & 2 \\
+3 & 38 & 3 \\
+4 & 26--29, 37 & 1 \\
+4 & 10, 15, 34 & 2 \\
+4 & 11 & 3 \\
+5 & 30, 31 & 1 \\
+5 & 13 & 2 \\
+6 & 32, 33, 35 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{9}{2}
+UNDERSTAND. Reason Explain how to find the range of the inverse of (f(x)=\sqrt{2x-3}) without finding (f^{-1}(x)).
+\answer{The range of (f^{-1}(x)) is the same as the domain of (f(x)). The domain of (f(x)=\sqrt{2x-3}) is (2x-3\geq0) or (x\geq\frac32). So, the range of (f^{-1}(x)) is (x\geq\frac32).}
+\te{Answer printed on PDF page 84. Printed range expressed with x rather than y.}
+\end{practice}
+\begin{practice}{10}{2}
+Error Analysis Describe and correct the error a student made in finding the inverse of the function (f(x)=x^2-4).
+(f(x)=x^2-4)
+(x=y^2-4)
+(\sqrt{x}=\sqrt{y^2-4})
+(\sqrt{x}=y-2)
+(\sqrt{x}+2=y)
+(f^{-1}(x)=\sqrt{x}+2) cross
+\answer{The student took the square root of both sides before adding 4 to both sides. The inverse is (f^{-1}(x)=\sqrt{x+4}).}
+\te{Answer printed on PDF page 84. Printed answer selects the positive branch without stating a restriction; for the unrestricted original relation, (y=\pm\sqrt{x+4}).}
+\end{practice}
+\begin{practice}{11}{3}
+Higher Order Thinking What is the inverse operation of raising a number to the 4th power? How can you use the inverse operation of a number raised to the 4th power to find the inverse of the function (f(x)=x^4-1)? Is the inverse of f a function? Explain.
+\answer{The inverse of a number raised to the 4th power is the 4th root of a number. To find the inverse of (f(x)), add 1 to both sides. To undo x raised to the 4th power, take the 4th root of both sides. The inverse is (f^{-1}(x)=\sqrt[4]{x+1}). The inverse is not a function because each independent value is not paired with only one dependent value.}
+\te{Answer printed on PDF page 84. Printed formula omits the negative branch although the explanation refers to both branches; likely (y=\pm\sqrt[4]{x+1}).}
+\end{practice}
+\begin{practice}{12}{2}
+Communicate Precisely A function has the ordered pairs ((1,3)), ((7,4)), ((8,6)), and ((9,y)). What restrictions are there on the value of y so that the inverse of the function is also a function? Explain.
+\answer{(y\neq3,4,\text{ or }6) because after the x- and y-coordinates are switched, if the value of y is 3, 4, or 6, each independent value would not be paired with only one dependent value.}
+\te{Answer printed on PDF page 84.}
+\end{practice}
+\begin{practice}{13}{2}
+Construct Arguments What is the inverse of the function (A(b)=\frac18b^3)? Show how to use composition of functions to prove you found the correct inverse.
+\answer{(a^{-1}(b)=2\sqrt[3]{b}); (a(a^{-1}(b))=\frac18(2\sqrt[3]{b})^3=\frac18(8b)=b); (a^{-1}(a(b))=2\sqrt[3]{\frac18b^3}=2(\frac12b)=b)}
+\te{Answer printed on PDF page 84 uses lowercase a for the function named A in the prompt.}
+\end{practice}
+\begin{practice}{14}{2}
+Construct Arguments A relation has one element in its domain and two elements in its range. Is the relation a function? Is the inverse of the relation a function? Explain.
+\answer{The relation is not a function because each independent value is not paired with only one dependent value. The inverse of the relation is a function because each independent value is paired with only one dependent value.}
+\end{practice}
+\begin{practice}{15}{2}
+Mathematical Connections Find the x- and y-intercepts of the function (y=2x+1). What are the intercepts of the inverse function? How are the intercepts related?
+\answer{x-intercept: ((-\frac12,0)), y-intercept: ((0,1)); x-intercept of the inverse: ((1,0)), y-intercept of the inverse: ((0,-\frac12)); Sample: the x-intercept of the original function becomes the y-intercept of the inverse by reversing the coordinates, and the y-intercept of the original function becomes the x-intercept of the inverse by reversing the coordinates.}
+\te{Answer printed on PDF page 86.}
+\end{practice}
+\begin{practice}{16}{1}
+PRACTICE. Identify the inverse relation. Is it a function? SEE EXAMPLE 1
+\begin{tabular}{lllllll}
+x & -2 & -1 & 0 & 1 & 2 & 3 \\
+y & 9 & 3 & -4 & 8 & -6 & 3 \\
+\end{tabular}
+\answer{The inverse is not a function.}
+\begin{tabular}{lllllll}
+x & 9 & 3 & -4 & 8 & -6 & 3 \\
+y & -2 & -1 & 0 & 1 & 2 & 3 \\
+\end{tabular}
+\te{Answer printed on PDF page 86.}
+\end{practice}
+\begin{practice}{17}{1}
+Identify the inverse relation. Is it a function? SEE EXAMPLE 1
+\begin{tabular}{lllllll}
+x & -2 & 1 & 0 & 1 & 2 & 3 \\
+y & -7 & 6 & 8 & -1 & 3 & 7 \\
+\end{tabular}
+\answer{The inverse is a function.}
+\begin{tabular}{lllllll}
+x & -7 & 6 & 8 & -1 & 3 & 7 \\
+y & -2 & 1 & 0 & 1 & 2 & 3 \\
+\end{tabular}
+\te{Answer printed on PDF page 86.}
+\end{practice}
+\begin{practice}{18}{1}
+Write an equation to represent the inverse of f. Sketch the graphs of f, (y=x), and the inverse of f on the same coordinate axes. Is the inverse of f a function? SEE EXAMPLE 2
+Let (f(x)=x+3).
+\answer{(f^{-1}(x)=x-3); The inverse of f is a function.}
+% FIG 86 157 613 353 808
+\placeholder{graph}{Printed answer: unit grid x,y from -5 to 5, labels -4,-2,2,4, origin O. Parallel lines blue f(x)=x+3, green y=x, orange f inverse(x)=x-3. Arrows at both ends of all lines.}
+\te{Answer printed on PDF page 86.}
+\end{practice}
+\begin{practice}{19}{1}
+Write an equation to represent the inverse of f. Sketch the graphs of f, (y=x), and the inverse of f on the same coordinate axes. Is the inverse of f a function? SEE EXAMPLE 2
+Let (f(x)=4x-1).
+\answer{(f^{-1}(x)=\frac{x+1}{4}); The inverse of f is a function.}
+% FIG 86 157 875 353 1070
+\placeholder{graph}{Printed answer: unit grid x,y from -5 to 5, labels -4,-2,2,4, origin O. Steep blue f(x)=4x-1 with y-intercept -1, shallow orange f inverse(x)=(x+1)/4 with y-intercept 0.25, green diagonal y=x. Arrows at both ends of all lines.}
+\te{Answer printed on PDF page 86.}
+\end{practice}
+\begin{practice}{20}{1}
+Write an equation to represent the inverse of f. Sketch the graphs of f, (y=x), and the inverse of f on the same coordinate axes. Is the inverse of f a function? SEE EXAMPLE 2
+Let (f(x)=x^2+1).
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{21}{1}
+Write an equation to represent the inverse of f. Sketch the graphs of f, (y=x), and the inverse of f on the same coordinate axes. Is the inverse of f a function? SEE EXAMPLE 2
+Let (f(x)=\sqrt{x+5}).
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{22}{1}
+Find the inverse of the function by identifying an appropriate restriction of its domain. SEE EXAMPLE 3
+(f(x)=x^2+4x+4)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{23}{1}
+Find the inverse of the function by identifying an appropriate restriction of its domain. SEE EXAMPLE 3
+(f(x)=x^2-6x+9)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{24}{1}
+Find the inverse of the function by identifying an appropriate restriction of its domain. SEE EXAMPLE 3
+(f(x)=x^2-2)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{25}{1}
+Find the inverse of the function by identifying an appropriate restriction of its domain. SEE EXAMPLE 3
+(f(x)=x^2+5)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{26}{1}
+Find an equation of the inverse function, and state the domain of the inverse. SEE EXAMPLE 4
+(f(x)=2x^2-5)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{27}{1}
+Find an equation of the inverse function, and state the domain of the inverse. SEE EXAMPLE 4
+(f(x)=\sqrt{x+6})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{28}{1}
+Find an equation of the inverse function, and state the domain of the inverse. SEE EXAMPLE 4
+(f(x)=3x+10)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{29}{1}
+Find an equation of the inverse function, and state the domain of the inverse. SEE EXAMPLE 4
+(f(x)=\sqrt{x-9})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{30}{1}
+Use composition to determine whether f and g are inverse functions. SEE EXAMPLE 5
+(f(x)=2x-9), (g(x)=\frac12x+9)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{31}{1}
+Use composition to determine whether f and g are inverse functions. SEE EXAMPLE 5
+(f(x)=\sqrt{\frac{x+4}{3}}), (g(x)=3x^2-4)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{32}{2}
+A manager purchased cones for ice cream. Find a formula for the length of the radius, r, of a cone in terms of its volume, V. Then find the length of the radius of a cone for the specified volume and the height of 15 cm. SEE EXAMPLE 6
+% FIG 85 914 830 1066 1001
+\placeholder{illustration}{Ice cream stand at beach with red ICE CREAM sign, striped awning, cone pictures, surfboards and cone logo. Callout: V of cone = 290 pi cubic centimeters.}
+\answer{See back of book.}
+\end{practice}
+% Source page 86: 277 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\te{Practice \& Problem Solving is available at SavvasRealize.com. Answers for 15--19 and 33 appear on this page and are transcribed with their items.}
+\end{te-addendum}
+\begin{practice}{33}{2}
+APPLY. Model With Mathematics The formula for converting Celsius to Fahrenheit is (F=\frac95C+32). Find the inverse formula, and use it to find the Celsius temperature when the Fahrenheit temperature is 59 degrees F.
+\answer{(C=\frac59(F-32)); 15 degrees C}
+\end{practice}
+\begin{practice}{34}{2}
+Reason A DJ charges an hourly fee and an equipment setup fee.
+% FIG 86 558 401 815 585
+\placeholder{illustration}{DJ FOR HIRE advertisement: woman wearing headphones at turntables, crowd silhouettes, purple/pink background. RATES 75 dollars an hour, 100 dollars set up. CONTACT US.}
+a. Write a function for the cost, C, of hiring a DJ for n hours.
+\answer{a. (C=75n+100)}
+b. Find the inverse of the cost function. What does the function represent?
+\answer{b. (n=\frac{C-100}{75}); The inverse represents the number of hours the DJ is hired in terms of the cost.}
+c. If the DJ charged \$550, for how many hours was she hired? Use the inverse function.
+\answer{c. 6 h}
+\end{practice}
+\begin{practice}{35}{2}
+Reason A coffee can is in the shape of a cylinder.
+% FIG 86 556 745 826 886
+\placeholder{diagram}{Cylindrical can labeled Coffee with coffee-bean illustration. Vertical red dimension arrow on left: 7.5 in. Callout on right: Volume: V=67.5 pi cubic inches.}
+a. Find the formula that gives the radius of the coffee can r in terms of the volume V and height h.
+\answer{a. (r=\sqrt{\frac V{\pi h}})}
+b. Describe any restrictions on the formula.
+\answer{b. (h>0) and (V>0) because division by 0 is not possible and the height and volume of a coffee can cannot be negative.}
+c. What is the radius of a coffee can with the specified volume and a height of 7.5 in.?
+\answer{c. 3 in.}
+\end{practice}
+\begin{practice}{36}{1}
+ASSESSMENT PRACTICE. Choose Yes or No to tell whether each function has an inverse that is a function.
+\begin{tabular}{lll}
+Function & Yes & No \\
+a. (f(x)=2x-9) & \answer{Yes} & \\
+b. (f(x)=x^2+4) & & \answer{No} \\
+c. (f(x)=x^3-6) & \answer{Yes} & \\
+d. (f(x)=\sqrt{2x+7}) & \answer{Yes} & \\
+e. (f(x)=x^2-10x+25) & & \answer{No} \\
+\end{tabular}
+\end{practice}
+\begin{practice}{37}{1}
+SAT/ACT What is the range of the inverse of (f(x)=\sqrt{-ax+b}-c), where a, b, and c are real numbers?
+A. (y\geq\frac ab)
+B. (y\leq\frac ba)
+C. (y\geq-\frac ab)
+D. (y\geq-\frac{\uncertain{b_0}{b_o; b with a stray printed mark}}a)
+E. (y\geq c)
+\answer{B}
+\te{Printed answer assumes a is positive; the prompt only specifies that a is real.}
+\end{practice}
+\begin{practice}{38}{3}
+Performance Task The table shows several functions and some of the inverses of those functions. The table also shows whether some of the inverses are functions.
+\begin{tabular}{lll}
+Function & Inverse & Is the inverse a function? \\
+(f(x)=x) & (f^{-1}(x)=x) & yes \\
+(g(x)=x^2) & (g^{-1}(x)=\pm\sqrt{x}) & no \\
+(h(x)=x^3) & (h^{-1}(x)=\sqrt[3]{x}) & yes \\
+(k(x)=x^4) & & \\
+(m(x)=x^5) & & \\
+(n(x)=x^6) & & \\
+\end{tabular}
+Part A Determine the inverses of the remaining functions in the table.
+\answer{Part A (k^{-1}(x)\ \pm\sqrt[4]{x}); (m^{-1}(x)=\sqrt[5]{x}); (n^{-1}(x)=\pm\sqrt[6]{x})}
+\te{Printed first answer omits an equals sign. Printed inverse-function notation is also used for inverse relations that are not functions.}
+Part B Determine if the inverses of the remaining functions in the table are functions.
+\answer{Part B (k^{-1}(x)) is not a function; (m^{-1}(x)) is a function; (n^{-1}(x)) is not a function.}
+Part C Make a conjecture about the power of a function if the inverse of that function is a function.
+\answer{Part C Answers may vary. Sample: Functions that have an odd power have inverses that are functions. Functions that have an even power have inverses that are not functions.}
+\end{practice}
+% Source page 87: 277A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F65 \\
+2 & 2 & F65 \\
+3 & 2 & F65 \\
+4 & 2 & F65 \\
+5 & 2 & F65 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{ASSESSMENT RESOURCES. Lesson Quiz is available at SavvasRealize.com.}
+\textbf{5-6 Lesson Quiz: Inverse Relations and Functions}
+1. The bottom table of values represents the inverse of the top table of values. Find the missing numbers represented by letters in the bottom table.
+\begin{tabular}{lllllll}
+x & -2 & -1 & 0 & 1 & 2 & 3 \\
+y & 5 & 3 & 1 & -1 & -3 & -5 \\
+\end{tabular}
+\begin{tabular}{lllllll}
+x & -5 & -3 & a & b & c & 5 \\
+y & c & 2 & 1 & 0 & a & d \\
+\end{tabular}
+\answer{1. (a=-1); (b=1); (c=3); (d=-2).}
+2. Sketch the graph of f and the inverse of f, if (f(x)=\frac12x+3).
+% FIG 87 693 446 792 546
+\placeholder{graph}{Printed magenta answer: unit grid x,y from -1 to 9, labels 2,4,6,8 and origin O. Two magenta lines, shallow f with y-intercept 3 and steep inverse with x-intercept 3; intersect at (6,6); arrows at both ends.}
+\answer{2. Graph shown.}
+3. Let (f(x)=x^2-2x+1). Find the inverse function of f by identifying an appropriate restriction of its domain.
+A. The inverse is (f^{-1}(x)=\sqrt{x+1}) if the domain of f is restricted to (x\geq-1).
+B. The inverse is (f^{-1}(x)=\sqrt{x}+1) if the domain of f is restricted to (x\geq1).
+C. The inverse is (f^{-1}(x)=\sqrt{x}-1) if the domain of f is restricted to (x\geq0).
+D. The function does not have an inverse.
+\answer{3. B}
+4. Write an equation of the inverse function of (f(x)=\frac12\sqrt[3]{x-3}+5).
+(f^{-1}(x)=\underline{\hspace{0.5cm}}+\underline{\hspace{0.5cm}}(x-\underline{\hspace{0.5cm}})^3)
+\answer{4. 3; 8; 5.}
+5. Let (f(x)=2x+4) and (g(x)=\frac12x-2). Complete the sentence.
+The function (g(x)=\frac12x-2) [is the inverse of; is equivalent to; is the opposite of; has the same intercepts as] (f(x)=2x+4).
+\answer{5. is the inverse of}
+\end{te-addendum}
+% Source page 88: 277B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced. SavvasRealize.com. Practice.
+\textbf{Reteach to Build Understanding. I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{5-6 Reteach to Build Understanding: Inverse Relations and Functions}
+The inverse function gives the input value that produced a particular output value in the original function. The independent variable becomes the dependent variable, and vice versa.
+1. Match each lettered function with the numbered function that represents its inverse.
+\begin{tabular}{ll}
+Column A & Column B \\
+a. ((1,2)) & 1. (r=\sqrt[3]{\frac{3V}{4\pi}}) \\
+b. (y=t^2) & 2. (t=\pm\sqrt{y}) \\
+c. (V=\frac43\pi r^3) & 3. (f^{-1}(x)=\sqrt{x-1}) \\
+d. (f(x)=1+x^2) & 4. ((2,1)) \\
+\end{tabular}
+\answer{a--4; b--2; c--1; d--3.}
+\te{Printed d--3 uses only the positive inverse branch without specifying a restriction on the original domain.}
+2. Denzil said the inverse of (y=x^2+16) is (f^{-1}(x)=(x-4)).
+(f(x)=x^2+16)
+(y=x^2+16)
+(x=y^2+16)
+(x-16=y^2+16-16)
+(y^2=x-16)
+(\sqrt{y^2}=\sqrt{x-16})
+(\sqrt{y^2}=(x-4))
+(y=\pm(x-4))
+What was his error?
+a. (x=y^2+16); He should not have switched x and y.
+b. (x-16=y^2+16-16); He should have added 16 to both sides.
+c. (y^2=x-16); He should have added 16, (y^2=x+16).
+d. (\sqrt{y^2}=\sqrt{x-16}); (x-4) is not the square root of (x-16).
+\answer{d}
+What would be the correct answer?
+a. (y=x+4)
+b. (y=\pm\sqrt{x-16})
+c. (x=y^2+16)
+d. (y=\pm\sqrt{x+16})
+\answer{b}
+3. Fill in the blanks to find the inverse of the function (f(x)=\sqrt{x+2}).
+\begin{tabular}{ll}
+Step 1: (x=\sqrt{y+\answer{2}}) & Exchange x and y. \\
+Step 2: (x^2=(\sqrt{y+\answer{2}})^2) & Square both sides. \\
+Step 3: (x^2=y+\answer{2}) & Remove the radical. \\
+Step 4: (x^2-\answer{2}=y) & Subtract 2 from both sides, and simplify. \\
+Step 5: (f^{-1}(x)=x^2-\answer{2}), (x\geq0) & Use inverse function notation and identify the appropriate domain. \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice. I O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{5-6 Additional Practice: Inverse Relations and Functions}
+1. Identify the inverse relation. Is it a function?
+\begin{tabular}{lllllll}
+x & 4 & 3 & 9 & 2 & 8 & 1 \\
+y & 5 & -1 & 6 & 3 & 5 & 7 \\
+\end{tabular}
+\answer{No}
+\begin{tabular}{lllllll}
+x & 5 & -1 & 6 & 3 & 5 & 7 \\
+y & 4 & 3 & 9 & 2 & 8 & 1 \\
+\end{tabular}
+2. Let (f(x)=5x-1). Write an equation for (f^{-1}). Sketch the graphs of f and (f^{-1}) on the same coordinate plane. Is (f^{-1}) a function?
+\answer{(f^{-1}(x)=\frac{x+1}{5}); yes}
+% FIG 88 756 451 810 497
+\placeholder{graph}{Printed magenta answer: coordinate grid with spacing 5 on both axes, x approximately -20 to 20, y -15 to 20; 10 labeled on positive axes and origin O. Steep magenta y=5x-1 and shallow magenta y=(x+1)/5, arrows on both ends.}
+3. Find the inverse of the function (f(x)=x^2+10x+25). Identify an appropriate restriction of its domain.
+\answer{(f^{-1}(x)=\sqrt{x}-5); (x\geq0)}
+\te{Printed restriction is the inverse domain; original function requires a restriction such as (x\geq-5).}
+4. Sketch the graph of (f(x)=3-\sqrt[3]{x+2}) and verify that the inverse is a function. Then write an equation for (f^{-1}).
+\answer{(f^{-1}(x)=-(x-3)^3-2)}
+% FIG 88 762 516 810 550
+\placeholder{graph}{Printed magenta answer: decreasing cube-root curve f(x)=3-cube root of (x+2). Grid x spacing 5 with labels -10,10; y spacing 2 with label 4, origin O. Curve bends near (-2,3), slopes gently right toward x-axis, arrows on outer ends.}
+5. Use composition to determine whether f and g are inverse functions.
+(f(x)=\frac15x-3), (g(x)=5x+15)
+\answer{((f\circ g)(x)=(g\circ f)(x)=x); They are inverse functions.}
+6. Describe and correct the error a student made in finding the inverse of the function (f(x)=x^2-25).
+(y=x^2-25)
+(x=y^2-25)
+(\sqrt{x}=\sqrt{y^2-25})
+(\sqrt{x}=y-5)
+(\sqrt{x}+5=y)
+(f^{-1}(x)=\sqrt{x}+5)
+\answer{The student took the square root before isolating the squared term. (x+25=y^2); (\sqrt{y^2}=\sqrt{x+25}); (y=\pm\sqrt{x+25}); (f^{-1}=\sqrt{x+25}). In order for the inverse to be a function, you must consider only the positive (or only the negative) values of (\sqrt{x+25}).}
+\te{Printed last explanation uses negative values of the square root; likely the negative square-root branch.}
+7. A coffee can is in the shape of a cylinder, with a radius r and height h.
+a. Find the formula that gives the radius of the paint can in terms of the volume, V.
+\answer{(r=\sqrt{\frac V{\pi h}})}
+\te{Printed paint can in part a although stem says coffee can.}
+b. Describe any restrictions on the formula.
+\answer{(h>0); (V>0); (r>0)}
+c. What is the radius of a coffee can with volume (46.25\pi\text{ in.}^3) and height is 7.4 in.?
+\answer{2.5 in.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment. O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{5-6 Enrichment: Inverse Relations and Functions}
+A nineteenth-century physician named Poiseuille developed the following model for measuring the velocity of blood flowing from the central axis of the artery:
+(V(r)=k(R^2-r^2)),
+where k is a constant, and R is the radius of the artery. (V(r)) represents the velocity of the blood, in cm/sec, at a point that is r centimeters from the central axis of the artery.
+Applying the Poiseuille Formula to three different age-groups of patients resulted in the following functions:
+Group I: (V_1(r_1)=900(0.2^2-r_1^2))
+Group II: (V_2(r_2)=800(0.3^2-r_2^2))
+Group III: (V_3(r_3)=1100(0.4^2-r_3^2))
+1. At what distance from the central axis of an artery ((r_1)) in Group I is the velocity of the blood (V_1(r_1))?
+\answer{(r_1=\sqrt{\frac{36-V_1}{900}})}
+2. At what distance from the central axis of an artery ((r_2)) in Group II is the velocity of the blood (V_2(r_2))?
+\answer{(r_2=\sqrt{\frac{72-V_2}{800}})}
+3. At what distance from the central axis of an artery ((r_3)) in Group III is the velocity of the blood (V_3(r_3))?
+\answer{(r_3=\sqrt{\frac{176-V_3}{1100}})}
+4. If the distances from the central axis of the arteries in all three groups are the same, how can you find the relationship between the velocities of their blood? Explain your approach step by step.
+\answer{Equate (r_1), (r_2), and (r_3), setting each pair of expressions equal to each other and simplify: (8(36-V_1)=9(72-V_2)); (11(72-V_2)=8(176-V_3)); (9(176-V_3)=11(36-V_1)). This system has infinitely many solutions. For each distance from the central axis of an artery, the velocity can be determined for each of the three groups.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary. I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{5-6 Mathematical Literacy and Vocabulary: Inverse Relations and Functions}
+There are two sets of note cards below that show Anastasia how to find the inverse of the function (f(x)=-6x^3+2). The set on the left explains the thinking. The set on the right shows the steps. Write the thinking and the steps in the correct order.
+% FIG 88 199 1035 441 1179
+\placeholder{diagram}{Two staggered stacks of seven note cards. Think Cards top to bottom: Subtract 2 from both sides; Replace f(x) with x and x with y; Replace y with f inverse(x); Given function; Simplify numbers on the right; Divide both sides by -6; Take cubic root of both sides. Write Cards top to bottom: x=-6y cubed+2; x-2=-6y cubed+2-2; cube root of ((x-2)/(-6))=y; f(x)=-6x cubed+2; x-2=-6y cubed; f inverse(x)=cube root of ((x-2)/(-6)); (x-2)/(-6)=y cubed.}
+\begin{tabular}{ll}
+Think & Write \\
+\answer{Given function} & \answer{(f(x)=-6x^3+2)} \\
+\answer{Replace f(x) with x and x with y.} & \answer{(x=-6y^3+2)} \\
+\answer{Subtract 2 from both sides.} & \answer{(x-2=-6y^3+2-2)} \\
+\answer{Simplify numbers on the right.} & \answer{(x-2=-6y^3)} \\
+\answer{Divide both sides by -6.} & \answer{(\frac{x-2}{-6}=y^3)} \\
+\answer{Take cubic root of both sides.} & \answer{(\sqrt[3]{\frac{x-2}{-6}}=y)} \\
+\answer{Replace y with f inverse(x).} & \answer{(f^{-1}(x)=\sqrt[3]{\frac{x-2}{-6}})} \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 88 616 979 1065 1298
+\placeholder{illustration}{Tablet displaying online graphing exercise: Solve the system of equations by graphing, (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Empty coordinate grid labeled x and y, both axes from -10 to 10 with unit grid spacing and labels every 2; arrow on positive y; part of upper right grid hidden by Question Help menu. Menu: Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Click to enlarge graph. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Controls: Exit, 1 part remaining, Clear All, Check Answer, Review progress, Question 3 of 14, Go, Back, Next.}
+\end{te-addendum}
+
+\end{document}

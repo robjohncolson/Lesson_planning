@@ -1,0 +1,933 @@
+\documentclass{article}
+% Source: Topic_03_Teacher_Edition.pdf, PDF pages 74-85 (printed pages 159A-166B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 74: 159A Lesson Overview
+\begin{lesson-meta}
+lesson: 3-6
+title: Theorems About Roots of Polynomial Equations
+standards: none printed
+practices: none printed
+objective: I can use tools and theorems to find roots of a polynomial equation.
+
+essential question: How are the roots of a polynomial equation related to the coefficients and degree of the polynomial?
+
+\textbf{VOCABULARY}
+\item Fundamental Theorem of Algebra
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 3-6 \\
+Title & Theorems About Roots of Polynomial Equations \\
+Standards & none printed \\
+I CAN Objective & I can use tools and theorems to find roots of a polynomial equation. \\
+Essential Question & How are the roots of a polynomial equation related to the coefficients and degree of the polynomial? \\
+Lesson Vocabulary & Fundamental Theorem of Algebra \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+Extend polynomial theorems and identities to find the real and complex solutions of a polynomial equation.
+Write polynomial functions using conjugates.
+\textbf{Essential Understanding}
+Theorems such as the Rational Root Theorem, the Fundamental Theorem of Algebra, and the Conjugate Root Theorems are helpful tools for determining the roots of a polynomial function.
+\textbf{COHERENCE}
+Previously in this course, students:
+Used polynomial identities to factor polynomial expressions with rational roots.
+In this lesson, students:
+Extend polynomial identities and theorems to include finding all real and complex solutions of a polynomial equation.
+Use tools to understand the relationship between the coefficients and degree of a function and its roots.
+\textbf{Increasing Coherence} Examples 3, 4, and 5 are not necessarily expected to be addressed on high-stakes assessments.
+Later in this topic, students will:
+Use the key features of the graph of a function to identify the transformation of a polynomial function.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+Students extend their understanding of the polynomial identities to include complex numbers.
+Students identify which of the possible roots are valid solutions to polynomial equations in real-world problems.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+complex conjugates & conjugados complejos \\
+irrational conjugate & conjugados irracionales \\
+rational root & raíz \\
+theorem & teorema \\
+\end{tabular}
+\textbf{NEW VOCABULARY}
+Fundamental Theorem of Algebra | Teorema fundamental de álgebra
+\textbf{VOCABULARY ACTIVITY}
+Review the term theorem with students. To prepare students for understanding the theorems that they will learn in this lesson, have students use their prior knowledge of the terms complex conjugate, irrational conjugate, and rational root to complete the matching activity shown below.
+\begin{tabular}{ll}
+complex conjugates & (\pm\frac{1}{2}) \\
+irrational conjugates & (4-7i) and (4+7i) \\
+rational roots & (4-\sqrt{7}) and (4+\sqrt{7}) \\
+\end{tabular}
+\te{Columns are a matching exercise, not matched answers.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion cover with colored light rings and reflective spheres; enVision Algebra 2; SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students use the Fundamental Theorem of Algebra to determine the number of solutions of a polynomial in the complex number system. They apply the Rational Root Theorem to identify the possible rational roots of a polynomial equation.
+Students apply the Conjugate Root Theorems to find the conjugates of a polynomial expression and use them to rewrite polynomial functions.
+\textbf{Applying Math Practices}
+\textbf{Use Appropriate Tools Strategically}
+Students understand the advantages and limitations of tools such as formulas or a graphing calculator for testing all real and complex solutions of a polynomial equation.
+\textbf{Look For and Express Regularity in Repeated Reasoning}
+Students demonstrate an understanding of the structure of polynomial equations when they use appropriate theorems as a means for identifying the roots of polynomial equations.
+\end{te-addendum}
+% Source page 75: 159B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+\textbf{INSTRUCTIONAL FOCUS} Students use their knowledge of zeros of polynomial functions to make conjectures about the relationship between the zeros of a function and the coefficients of the terms of the function.
+\textbf{STUDENT COMPANION} Students can complete the Critique \& Explain activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+\textbf{Implement Tasks that Promote Reasoning and Problem Solving}
+Q: How are the two polynomial functions similar? How are they different?
+\answer{Both functions are quadratic functions. The coefficient of the (x^2)-term of (g) is 1, and the coefficient of the (x^2)-term of (h) is 5.}
+\textbf{During: SMALL GROUP}
+\textbf{Support Productive Struggle in Learning Mathematics}
+Q: How can you test Elijah's conjecture in Part A?
+\answer{First factor (g(x)) to find the zeros of the function. Then make a list of all the possible factors of (-18). Check that each zero is one of the possible factors.}
+\textbf{For Early Finishers}
+Q: Factor (i(x)=8x^2+2x-1). Test your revised conjecture. Does the revised conjecture work with (i(x))?
+\answer{Yes, each of the roots of (i(x)) is a factor of the last coefficient divided by a factor of the first coefficient.}
+\textbf{After: WHOLE CLASS}
+\textbf{Facilitate Meaningful Mathematical Discourse}
+Q: What relationships between the zeros of (h(x)) did you use to revise Elijah's conjecture?
+\answer{The zeros of (h(x)) are (-\frac{4}{5}) and (-4). The numerator of (-\frac{4}{5}) is a factor of 16. The denominator is a factor of 5. If you rewrite (-4) as (-\frac{4}{1}), the same is true.}
+Q: Does your revised conjecture apply to (g(x))? Explain.
+\answer{Yes; you can rewrite both zeros of (g(x)) as fractions with a denominator of 1. The coefficient of the (x^2)-term is 1, so the zeros satisfy the conjecture.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Use Structure} For the factored function (k(x)=(ax+b)(cx+d)), what are the coefficients in the expanded expression?
+\answer{(ac), (ad+bc), (bd)}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+Critique \& Explain is available at SavvasRealize.com.
+\textbf{Digital CRITIQUE \& EXPLAIN}
+Look at the polynomial functions shown.
+(g(x)=x^2-7x-18)
+(h(x)=5x^2+24x+16)
+A. Elijah has a conjecture that the zeros of a polynomial function have to be positive or negative factors of its constant term. Factor (g(x)) completely. Are the zeros of (g) factors of (-18)?
+B. Look for Relationships Now test Elijah's conjecture by factoring (h(x)). Does Elijah's conjecture hold? If so, explain why. If not, make a new conjecture.
+\te{Go back. Enter your answer.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Look at the polynomial functions shown.
+(g(x)=x^2-7x-18)
+(h(x)=5x^2+24x+16)
+A. Elijah has a conjecture that the zeros of a polynomial function have to be positive or negative factors of its constant term. Factor (g(x)) completely. Are the zeros of (g) factors of (-18)?
+\answer{(g(x)=(x-9)(x+2)); 9 and (-2) are both factors of (-18).}
+B. Look for Relationships Now test Elijah's conjecture by factoring (h(x)). Does Elijah's conjecture hold? If so, explain why. If not, make a new conjecture.
+\answer{(h(x)=(x+4)(5x+4)); No, the zeros of a polynomial function are a factor of the last coefficient divided by a factor of the first coefficient.}
+\te{SAMPLE STUDENT WORK. The printed conjecture describes rational zeros; it does not cover irrational or nonreal zeros.}
+\end{model-discuss}
+% Source page 76: 159 Understand and Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+\textbf{Establish Mathematics Goals to Focus Learning}
+Introduce students to the process of finding the roots of a polynomial function using the coefficients and degree of the function. Remind them that they have previously found the roots of polynomial functions by graphing and factoring. Explain that they will now learn theorems to find all possible rational roots of polynomial functions and all real and complex solutions.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Identify Possible Rational Solutions}
+\textbf{Pose Purposeful Questions}
+Q: Why does it appear that 4 is a zero of the function?
+\answer{The graph appears to cross the (x)-axis at (x=4).}
+Q: How could you eliminate some of the possible roots that you need to test?
+\answer{Identify roots that are equivalent. Roots equivalent to those already on the list can be eliminated.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{The Rational Root Theorem}
+Let (P(x)=a_nx^n+a_{n-1}x^n+\cdots+a_1x+a_0) be a polynomial with integer coefficients.
+\te{Printed second exponent n; likely n-1.}
+If the polynomial equation (P(x)=0) has any rational roots, then each rational root is of the form (\frac{p}{q}), where (p) is a factor of the constant term, (a_0), and (q) is a factor of the leading coefficient, (a_n).
+\end{concept-box}
+\begin{example}{1}
+\textbf{Identify Possible Rational Solutions}
+From the graph it appears that 4 is a zero of the function (P(x)=8x^5-32x^4+x^2-4). What are the possible rational solutions?
+\placeholder{graph}{Red quintic with x-axis labels -4,-2,O,2,4 and y labels -200,-400,-600; nearly level around origin, minimum near (3.2,-670), crosses near 4 and rises; arrows at lower left and upper right.}
+List all the factors of the leading coefficient and the constant term of (P(x)).
+constant term = (-4) factors: (\pm1,\pm2,\pm4)
+leading coefficient = 8 factors: (\pm1,\pm2,\pm4,\pm8)
+The Rational Root Theorem states that the possible rational roots of (P(x)=0) are
+\answer{(\pm\frac{1}{1},\pm\frac{1}{2},\pm\frac{1}{4},\pm\frac{1}{8},\pm\frac{2}{1},\pm\frac{2}{2},\pm\frac{2}{4},\pm\frac{2}{8},\pm\frac{4}{1},\pm\frac{4}{2},\pm\frac{4}{4},\pm\frac{4}{8})}
+By comparing the list with the graph, it looks like (\pm\frac{1}{8}), (\pm\frac{1}{4}), and 4 may be roots and 0 is not a root. Further investigation is necessary to actually find the solutions.
+\te{Callouts: Values in the numerator are factors of the constant term. Values in the denominator are factors of the leading coefficient. COMMON ERROR These are possible roots of the equation. You still need to test them to determine whether they are actual roots. Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{1}
+List all the possible rational solutions for each equation.
+a. (4x^4+13x^3-124x^2+212x-8=0)
+\answer{(\pm\frac{1}{1},\pm\frac{1}{2},\pm\frac{1}{4},\pm\frac{2}{1},\pm\frac{2}{2},\pm\frac{2}{4},\pm\frac{4}{1},\pm\frac{4}{2},\pm\frac{4}{4},\pm\frac{8}{1},\pm\frac{8}{2},\pm\frac{8}{4})}
+b. (7x^4+13x^3-124x^2+212x-45=0)
+\answer{(\pm\frac{1}{1},\pm\frac{1}{7},\pm\frac{3}{1},\pm\frac{3}{7},\pm\frac{5}{1},\pm\frac{5}{7},\pm\frac{9}{1},\pm\frac{9}{7},\pm\frac{15}{1},\pm\frac{15}{7},\pm\frac{45}{1},\pm\frac{45}{7})}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Why is it helpful to first identify the values of (p) and (q) in each function?
+\answer{You must identify (p) and (q) to create the list of possible roots.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Example 2}
+A company is selling decorative tissue box covers. The covers are (2x+1) in. long, (x+1) in. wide, and (x) in. tall. The volume of a tissue box cover is 180 (\text{in.}^3). What are the dimensions of the tissue box cover?
+\placeholder{diagram}{Pale green rectangular prism, dashed hidden edges; height x in., width x+1 in., front length 2x+1 in.}
+(x(x+1)(2x+1)=180)
+(2x^3+3x^2+x=180)
+(2x^3+3x^2+x-180=0)
+((x-4)(2x^2+11x+45)=0)
+(x=4)
+\answer{height = 4 in., width = 5 in., length = 9 in.}
+\textbf{Example 2} Students find all dimensions of the tissue box cover.
+Q: Are there other possible sets of dimensions for the tissue box? Explain.
+\answer{No; there is only one real solution to the equation, so there is only one set of dimensions.}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Example 3}
+What are the real and complex solutions of the following equation?
+(x^4-5x^3+5x^2-3x+18=0)
+(x^4-5x^3+5x^2-3x+18=0)
+((x-3)(x^3-2x^2-x-6)=0)
+((x-3)(x-3)(x^2+x+2)=0)
+Real solutions: (x=3)
+Complex Solutions: (x^2+x+2=0)
+(x=\frac{-1-\sqrt{7}i}{2})
+\answer{(x=3), (x=\frac{-1-\sqrt{7}i}{2})}
+\te{Printed answer omits the conjugate root (-1+\sqrt{7}i)/2.}
+\textbf{Example 3} Students solve an equation with a repeated real zero.
+Q: How is the number of times a solution is repeated related to the multiplicity of that factor?
+\answer{It is the same number.}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION.}
+\end{te-addendum}
+% Source page 77: 160
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Use the Rational Root Theorem}
+\textbf{Pose Purposeful Questions}
+Q: How do you know from the context that you do not need to test for negative roots?
+\answer{One length of the storage container is (x). A length cannot be negative, so (x) cannot be negative.}
+Q: How can you test a possible rational root to determine if it is a root of the polynomial function?
+\answer{Evaluate the function by setting (x) equal to the possible rational root. If the result is 0, then that value is a root of the function.}
+Q: How might the solution process differ if there were multiple real solutions?
+\answer{You would have to verify that each solution made sense in the context of the problem.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Use the Rational Root Theorem}
+A storage company is designing a new shed. Based on the dimensions shown, the volume of a container is modeled by the polynomial (v(x)=2x^3-7x^2+6x), where (x) is the width in feet. What are the dimensions of the container in feet if the volume of the unit is 154 (\text{ft}^3)?
+\placeholder{illustration}{Wooden garden shed with lawn mower and tools, dimension arrows labeled height 2x-3, horizontal width x, depth x-2.}
+\textbf{Formulate} The volume is 154 (\text{ft}^3), so find solutions to the equation
+(2x^3-7x^2+6x=154).
+If any of the zeros of the polynomial are rational, they can be found by applying the Rational Root Theorem. (2x^3-7x^2+6x-154=0).
+\textbf{Compute} List the factors of the constant term and the leading coefficient.
+constant term = (-154)
+factors: (\pm1,\pm2,\pm7,\pm11,\pm14,\pm22,\pm77,\pm154)
+leading coefficient = 2
+factors: (\pm1,\pm2)
+List all possible rational roots, eliminating repeated values.
+(\pm\frac{1}{1},\pm\frac{2}{1},\pm\frac{7}{1},\pm\frac{11}{1},\pm\frac{14}{1},\pm\frac{22}{1},\pm\frac{77}{1},\pm\frac{154}{1},\pm\frac{1}{2},\pm\frac{7}{2},\pm\frac{11}{2},\pm\frac{77}{2})
+\te{Callout: Use a spreadsheet or a programmable calculator to test the possible roots.}
+Testing shows that (\frac{11}{2}) is a solution to the equation. Once you find one root, you can use synthetic division to find the other roots.
+\begin{tabular}{r|rrrr}
+(\frac{11}{2}) & 2 & (-7) & 6 & (-154) \\
+ & & 11 & 22 & 154 \\
+\hline
+ & 2 & 4 & 28 & 0 \\
+\end{tabular}
+The factored form of the equation is ((x-\frac{11}{2})(2x^2+4x+28)=0).
+The discriminant of the quadratic factor is (-208), so there are no other real zeros. Therefore (\frac{11}{2}) is the only real solution to the original equation.
+\textbf{Interpret}
+\answer{The width of the container is (\frac{11}{2}), or 5.5 ft; its length is (\frac{11}{2}-2), or 3.5 ft; and its height is (2(\frac{11}{2})-3), or 8 ft.}
+\te{Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{2}
+A jewelry box measures (2x+1) in. long, (2x-6) in. wide, and (x) in. tall. The volume of the box is given by the function (v(x)=4x^3-10x^2-6x). What is the height of the box, in inches, if its volume is 28 (\text{in.}^3)?
+\answer{(\frac{7}{2}) in.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How could you reduce the number of possible rational roots that you need to list?
+\answer{Each term of the function has a common factor of 2, so you can factor 2 out before determining the possible rational roots. Also, negative roots are not used in this context, so you can eliminate those roots from the list.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error} Try It! 2 Students may set the expression (4x^3-10x^2-6x) equal to 0 instead of 28. Ask students what the expression represents and have them interpret that value in terms of the context. Remind students that (v(x)) represents the volume of the box with a height of (x), and since the volume is given as 28 cubic inches, they should replace (v(x)) with 28.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2.
+\textbf{Critique Arguments} For the jewelry box, a student thought that the rational roots could be (\pm6,\pm3,\pm2,\pm1,\pm\frac{3}{2},\pm\frac{3}{4},\pm\frac{1}{2}), and (\pm\frac{1}{4}), using factors of (-6) for the numerator and factors of 4 for the denominator of the possible rational roots. Is the student correct? Explain.
+\answer{No; the student seems to have been thinking of the equation (4x^3-10x^2-6x=0) instead of the equation (4x^3-10x^2-6x-28=0), and then used factors of the coefficient of (x) instead of factors of the constant term as the numerator of possible roots. The possible roots should be of the form (\pm\frac{p}{q}) where (p) is a factor of (-28) and (q) is a factor of 4.}
+\end{te-addendum}
+% Source page 78: 161
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{CONCEPT Fundamental Theorem of Algebra}
+\textbf{Facilitate Meaningful Mathematical Discourse}
+Q: How might the Fundamental Theorem of Algebra be helpful when finding solutions to polynomial functions?
+\answer{If you are finding the solutions of a fourth-degree equation, and you have found one solution, you know that you still need to find three more solutions.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Find All Complex Roots}
+\textbf{Pose Purposeful Questions}
+Q: Does the order in which you test the possible rational roots matter?
+\answer{No; you should use a method that helps you keep track of the roots you have tested.}
+Q: How are synthetic division and the Quadratic Formula useful when finding all complex roots?
+\answer{You use synthetic division to identify rational roots. You use the Quadratic Formula to find any other roots, real or complex.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Fundamental Theorem of Algebra}
+If (P(x)) is a polynomial of degree (n\geq1), then (P(x)=0) has exactly (n) solutions in the set of complex numbers.
+If (P(x)) has any factor of multiplicity (m), count the solution associated with that factor (m) times. For example, the equation ((x-3)^4=0) has four solutions, each equal to 3.
+\end{concept-box}
+\begin{example}{3}
+\textbf{Find All Complex Roots}
+What are all the complex roots of the polynomial equation?
+(3x^4+4x^3+2x^2-x-2=0)
+Step 1 List the factors of the constant term and leading coefficient.
+constant term = (-2) factors: (\pm1,\pm2)
+leading coefficient = 3 factors: (\pm1,\pm3)
+Step 2 List the possible rational roots.
+(\pm\frac{1}{3},\pm\frac{2}{3},\pm1,\pm2)
+Step 3 Testing shows that (\frac{2}{3}) and (-1) are roots.
+Divide (3x^4+4x^3+2x^2-x-2) by (x-\frac{2}{3}).
+\begin{tabular}{r|rrrrr}
+(\frac{2}{3}) & 3 & 4 & 2 & (-1) & (-2) \\
+ & & 2 & 4 & 4 & 2 \\
+\hline
+ & 3 & 6 & 6 & 3 & 0 \\
+\end{tabular}
+So (3x^4+4x^3+2x^2-x-2=(x-\frac{2}{3})(3x^3+6x^2+6x+3)).
+Now divide the cubic factor by (x-(-1)).
+\begin{tabular}{r|rrrr}
+(-1) & 3 & 6 & 6 & 3 \\
+ & & (-3) & (-3) & (-3) \\
+\hline
+ & 3 & 3 & 3 & 0 \\
+\end{tabular}
+\te{Callout: You can write (3x^3+6x^2+6x+3) as ((x+1)(3x^2+3x+3)=3(x+1)(x^2+x+1)). STUDY TIP Remember that if you use synthetic division to test for factors, the result also tells you the quotient after division by the factor.}
+The original polynomial equation can be written as
+(3(x-\frac{2}{3})(x+1)(x^2+x+1)=0).
+Step 4 Use the Quadratic Formula to find the roots of the quadratic factor.
+If (x^2+x+1=0), then (x=\frac{-1\pm\sqrt{1^2-4(1)(1)}}{2(1)})
+(=\frac{-1\pm i\sqrt{3}}{2})
+\answer{The complex numbers (\frac{2}{3}), (-1), (\frac{-1-i\sqrt{3}}{2}), and (\frac{-1+i\sqrt{3}}{2}) are all roots of the equation. Since the polynomial has degree 4, the Fundamental Theorem of Algebra states that these are the only four roots of the equation.}
+\te{Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{3}
+What are all the complex roots of the equation (x^3-2x^2+5x-10=0)?
+\answer{2, (-i\sqrt{5}), (i\sqrt{5})}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What do you know about the solutions by looking at the equation?
+\answer{By applying the Fundamental Theorem of Algebra, you know that there are 3 solutions in the set of complex numbers. The coefficient of the (x^3)-term is 1, so you know that all possible rational roots are integers.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 Students may need additional practice with determining all of the possible zeros of a function.
+Have students practice listing all possible rational roots of a function, when the coefficient of the first term is 1.
+Q: (f(x)=x^4+4x^3-7x^2-16)
+\answer{(\pm1,\pm2,\pm4,\pm8,\pm16)}
+Q: (f(x)=x^5-11x^3-20x^2-16x+30)
+\answer{(\pm1,\pm2,\pm3,\pm5,\pm6,\pm10,\pm15,\pm30)}
+Q: (f(x)=x^3-27x^2-2x-42)
+\answer{(\pm1,\pm2,\pm3,\pm6,\pm7,\pm14,\pm21,\pm42)}
+\end{te-addendum}
+% Source page 79: 162
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Irrational Roots and the Coefficients of a Polynomial}
+\textbf{Pose Purposeful Questions}
+PART A
+Q: What do you know about the product of a rational and an irrational number that is helpful when determining whether the coefficient is rational or irrational?
+\answer{The product of a rational and irrational number is irrational, so there will be at least 1 irrational coefficient.}
+PART B
+Q: How is the difference of two squares helpful in obtaining a rational coefficient?
+\answer{When you rewrite the expression as a difference of two squares, the positive and negative values of the irrational terms are eliminated.}
+\te{The printed product statement needs a nonzero rational factor.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Irrational Roots and the Coefficients of a Polynomial}
+How are the types of zeros of a polynomial function related to the coefficients of the polynomial?
+A. Suppose a quadratic polynomial function (P) has one rational zero (c) and one irrational zero (a+\sqrt{b}) where (a) and (b) are rational numbers. Are all the coefficients of (P) rational?
+Write (P(x)) in terms of its factors.
+(P(x)=(x-c)(x-(a+\sqrt{b})))
+(=x^2-(a+\sqrt{b}+c)x+(a+\sqrt{b})c)
+\te{Multiply and collect like terms. LOOK FOR RELATIONSHIPS Remember that if r is a zero of a polynomial, then x-r is a factor of the polynomial.}
+\answer{No, the function (P) has two irrational coefficients.}
+\te{Printed two irrational coefficients assumes c is nonzero and the displayed monic normalization.}
+B. Suppose a quadratic polynomial function (R) has two irrational zeros: a conjugate pair, (a+\sqrt{b}) and (a-\sqrt{b}) (where (a) and (b) are rational numbers). Are all the coefficients of (R) rational?
+(R(x)=(x-(a+\sqrt{b}))(x-(a-\sqrt{b})))
+(=(x-a-\sqrt{b})(x-a+\sqrt{b}))
+(=((x-a)-\sqrt{b})((x-a)+\sqrt{b}))
+(=(x-a)^2-(\sqrt{b})^2)
+(=x^2-2ax+(a^2-b))
+\te{Callouts: Write R(x) in terms of its factors. Rewrite as the difference of squares. Rational numbers: -2a and a squared minus b.}
+\answer{Yes, (R) has only rational coefficients.}
+\te{The displayed construction assumes leading coefficient 1. Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{4}
+Suppose a quadratic polynomial function (f) has two complex zeros which are a conjugate pair, (a-bi) and (a+bi) (where (a) and (b) are real numbers). Are all the coefficients of (f) real? Explain.
+\answer{yes; (f(x)=[x-(a-bi)][x-(a+bi)])
+(=[(x-a)+bi][(x-a)-bi])
+(=(x-a)^2-(bi)^2)
+(=x^2-2ax+a^2+b^2)}
+\end{tryit}
+\begin{concept-box}
+\textbf{Conjugate Root Theorems}
+Let (P) be a polynomial function with rational coefficients and let (a) and (b) be real numbers. If (a+\sqrt{b}) is a root of (P(x)=0), then (a-\sqrt{b}) is also a root of (P(x)=0).
+Let (P) be a polynomial function with real coefficients and let (a) and (b) be real numbers. If (a+bi) is a root of (P(x)=0), then (a-bi) is also a root of (P(x)=0).
+\te{The printed first theorem says real numbers for a and b; the usual irrational conjugate statement requires rational a and b with an irrational square root.}
+\end{concept-box}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What do you notice about the conjugate pair (a-bi) and (a+bi)?
+\answer{They are factors of a difference of two squares. Multiplying them will eliminate (i).}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+Use with EXAMPLES 3 \& 4.
+\textbf{Construct Arguments} Could a polynomial function with real coefficients have two complex roots that are not conjugates as its only roots? Explain.
+\answer{No; if the roots of a function are complex and not conjugates, then at least one of the coefficients must not be real.}
+\te{Complex is used here to mean nonreal complex.}
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners} Use with EXAMPLE 4.
+\textbf{WRITING: BEGINNING} Have students write the definition of root in their journals: ``the fundamental part (such as the roots of a plant).'' The roots, or solutions, of polynomial functions are their fundamental parts. Have students complete the following sentences in their journals to better understand the mathematical usage of the term.
+Q: he root of a polynomial function is also called a \underline{\hspace{1cm}} of the function. \answer{zero}
+\te{The printed sentence begins he.}
+Q: When the roots of a polynomial function are \underline{\hspace{1cm}} numbers, they can be seen as the \underline{\hspace{1cm}} on a graph of the function. \answer{real; (x)-intercepts}
+Q: Complex roots \underline{\hspace{1cm}} represented by (x)-intercepts. \answer{are not}
+\textbf{SPEAKING: DEVELOPING} The example leads directly to the Conjugates Theorem. Discuss the meaning of conjugate and how conjugate pairs are useful.
+Q: Have you heard the word conjugate in other classes? Explain.
+\answer{Yes; in language classes we have to conjugate verbs.}
+Q: One meaning for conjugate is to join. How and why are conjugate pairs joined in math?
+\answer{They are joined by multiplying them together, usually in order to eliminate radicals or imaginary numbers.}
+Q: Give some examples of conjugate pairs.
+\answer{Answers may vary. Sample: (3+\sqrt{7}) and (3-\sqrt{7}); (5-2i) and (5+2i)}
+\textbf{READING: EXPANDING} Ask students to read the example. Have them point to each occurrence of the terms rational and irrational while reading. Help students summarize the meanings of these words by asking the following questions.
+Q: What is true about a quadratic function that has one rational zero and one irrational zero coefficient?
+\answer{It will have at least one irrational coefficient.}
+Q: What is true about a quadratic function that has two irrational zeros that form a conjugate pair?
+\answer{All the coefficients will be rational numbers.}
+\te{The first reading question prints zero coefficient.}
+\end{te-addendum}
+% Source page 80: 163
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Write Polynomial Functions Using Conjugates}
+\textbf{Pose Purposeful Questions}
+PART A
+Q: What do you need to find to be able to write the equation with the given root?
+\answer{You need to find the complex conjugate of the given root.}
+PART B
+Q: What is another way to determine that the function (Q) must have a degree of at least 4?
+\answer{The problem states that (Q) has rational coefficients. Because of the Conjugate Root Theorems, there are two more zeros in addition to the two that are given.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Write Polynomial Functions Using Conjugates}
+A. Write a quadratic function (P) with rational coefficients such that (P(x)=0) has (2+5i) as a root.
+By the Fundamental Theorem of Algebra, you know that a quadratic equation has two complex roots. By the Conjugate Theorem, (2-5i) must be the other root since (P) has rational coefficients.
+Use the Factor Theorem to write the quadratic function using the two roots.
+(P(x)=(x-(2+5i))(x-(2-5i)))
+(=(x-2-5i)(x-2+5i))
+(=((x-2)-5i)((x-2)+5i))
+(=(x-2)^2-(5i)^2)
+(=x^2-4x+4-(-25))
+(=x^2-4x+29)
+\answer{So the function (P(x)=x^2-4x+29) is a quadratic function with (2+5i) as a root.}
+\te{STUDY TIP There are many functions that meet these criteria. All functions of the form cP(x), where c is not 0, have the same roots.}
+B. Write a polynomial function (Q) of degree 4 with rational coefficients such that (Q(x)=0) has roots (3-\sqrt{7}) and (4i).
+By the Conjugate Root Theorem, since one root is (3-\sqrt{7}), another must be (3+\sqrt{7}). So two factors of (Q(x)) are (x-(3-\sqrt{7})) and (x-(3+\sqrt{7})).
+By the same theorem, if (4i) is a root, then (-4i) is another one. So the other two factors are (x-4i) and (x+4i).
+Multiply the four factors of (Q(x)).
+(Q(x)=[x-(3-\sqrt{7})][x-(3+\sqrt{7})](x-4i)(x-(-4i)))
+(=[(x-3)+\sqrt{7}][(x-3)-\sqrt{7}](x-4i)(x+4i))
+(=[(x-3)^2-(\sqrt{7})^2][x^2-(4i)^2])
+(=(x^2-6x+2)(x^2+16))
+(=x^4-6x^3+18x^2-96x+32)
+\te{Callout: Rewrite as the difference of squares.}
+\answer{The polynomial function (Q(x)=x^4-6x^3+18x^2-96x+32) is a function with roots (3-\sqrt{7}) and (4i).}
+\te{Examples are available at SavvasRealize.com.}
+\end{example}
+\begin{tryit}{5}
+a. Write a quadratic function with rational coefficients such that (P(x)=0) has a root of (5+4i).
+\answer{(P(x)=x^2-10x+41)}
+b. Write a polynomial function (Q) of degree 4 with rational coefficients such that (Q(x)=0) has roots (2-\sqrt{3}) and (5i).
+\answer{(Q(x)=x^4-4x^3+26x^2-100x+25)}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Why is it helpful to use the Conjugate Root Theorem when writing these equations?
+\answer{It allows you to determine the other zeros of the equation.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{Reason} Is it possible to write a polynomial function of degree 3 that has rational coefficients and zeros (2-\sqrt{3}) and (5i)? Explain.
+\answer{No; even if the third zero is the conjugate of either (2-\sqrt{3}) or (5i), the function will still expand to have irrational coefficients.}
+\te{The printed answer uses irrational to include a possible nonreal coefficient.}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 5 Have students write a polynomial function with rational, irrational, and complex zeros.
+Q: Write a polynomial function (P) of degree 5 that has rational coefficients and zeros of (-2), (3-\sqrt{2}), and (1+2i).
+\answer{(P(x)=x^5-6x^4+8x^3+4x^2-53x+70)}
+Q: Write a polynomial function (Q) of degree 5 that has rational coefficients and zeros of 5, (-\sqrt{7}), and (3+4i).
+\answer{(Q(x)=x^5-11x^4+48x^3-48x^2-385x+875)}
+Q: Write a polynomial function (R) of degree 6 that has rational coefficients, double zero (-3), and zeros (2-3i) and (\sqrt{5}).
+\answer{(R(x)=x^6+2x^5-7x^4+32x^3+127x^2-210x-585)}
+Q: Write a polynomial function (A) of degree 6 that has rational coefficients, double zero 2, and zeros (2i) and (\sqrt{3}).
+\answer{(A(x)=x^6-4x^5+5x^4-4x^3-8x^2+48x-48)}
+\end{te-addendum}
+% Source page 81: 164
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Theorems about Roots of Polynomial Equations}
+Q: The Fundamental Theorem of Algebra states that a polynomial of degree 3 has exactly 3 solutions in the set of complex numbers. The function (f(x)=x^3-6x^2+12x-8) has only one zero, at (x=2). How can this be true?
+\answer{The zero at (x=2) is repeated three times; (x^3-6x^2+12x-8=(x-2)(x-2)(x-2))}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error} Exercise 11 Students may write the conjugates of the given roots as (-12+5i) and (-6-\sqrt{13}). Emphasize that the conjugate is not the same as the opposite. Students only need to change the sign between the rational and irrational terms or the real and imaginary terms when writing the other solutions.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Theorems About Roots of Polynomial Equations}
+\begin{tabular}{lll}
+ & Words & Example \\
+RATIONAL ROOT THEOREM & For a polynomial equation with integer coefficients, (0=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x^1+a_0), there are only a few possible rational roots. Rational roots have the form (\frac{p}{q}) where (p) is a factor of (a_0) and (q) is a factor of (a_n). Use substitution or synthetic division to check roots. & (2x^3+3x^2-10x-15=0). (p=-15); Factors of (p): (\pm1,\pm3,\pm5,\pm15). (q=2); Factors of (q): (\pm1,\pm2). Possible rational roots: (\pm1,\pm3,\pm5,\pm15,\pm\frac{1}{2},\pm\frac{3}{2},\pm\frac{5}{2},\pm\frac{15}{2}). (-\frac{3}{2}) is a root of the equation. \\
+FUNDAMENTAL THEOREM OF ALGEBRA & If (P(x)) is a polynomial of degree (n\geq1), then (P(x)=0) has exactly (n) solutions in the set of complex numbers. & \\
+CONJUGATE ROOT THEOREMS & Irrational Conjugates: Let (P) be a polynomial function with rational coefficients and let (a) and (b) be real numbers. Then irrational roots of (P(x)=0) exist in conjugate pairs. & Complex Conjugates: Let (P) be a polynomial function with real coefficients and let (a) and (b) be real numbers. Then complex roots of (P(x)=0) exist in conjugate pairs. \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How are the roots of a polynomial equation related to the coefficients and degree of the polynomial?
+\answer{The possible rational roots, or zeros, of a polynomial equation with integer coefficients must come from the list of all numbers of the form (\pm\frac{\text{factor of constant term}}{\text{factor of leading coefficient}}). The degree of a polynomial gives the number of roots, but that might include irrational or complex roots in addition to rational roots.}
+2. Error Analysis Renaldo said that a polynomial equation with rational coefficients that has zeros (-1+2i) and (3+\sqrt{5}) has a degree of 4. Is Renaldo correct? Explain.
+\answer{No; By the Conjugate Root Theorems, (-1-2i) and (3-\sqrt{5}) are also roots. There are 4 known roots: (-1+2i), (-1-2i), (3+\sqrt{5}), and (3-\sqrt{5}). There could be other roots. So the polynomial function has a degree of 4 or greater.}
+3. Use Structure A fifth degree polynomial (P(x)) with rational coefficients has zeros (2i) and (\sqrt{7}). What other zeros does (P(x)) have? Explain.
+\answer{By the Conjugate Root Theorems, (-2i) and (-\sqrt{7}) are also roots. A quintic function has 5 roots. Because 4 roots have been accounted for, there is 1 more root.}
+4. Construct Arguments If one root of a polynomial equation with real coefficients is (4+2i), is it certain that (4-2i) is also a root of the equation? Explain.
+\answer{Yes; By the Conjugate Root Theorems, if a complex number is the root of a polynomial equation with real coefficients, then its complex conjugate is also a root.}
+\textbf{Do You KNOW HOW?}
+List all the possible rational solutions for each equation according to the Rational Roots Theorem. Then find all of the rational roots.
+5. (0=x^3+4x^2-9x-36)
+\answer{possible roots: (\pm\frac{1}{1},\pm\frac{2}{1},\pm\frac{3}{1},\pm\frac{4}{1},\pm\frac{6}{1},\pm\frac{9}{1},\pm\frac{12}{1},\pm\frac{18}{1},\pm\frac{36}{1}); rational roots: (-4,-3,3)}
+6. (0=x^4-2x^3-7x^2+8x+12)
+\answer{possible roots: (\pm\frac{1}{1},\pm\frac{2}{1},\pm\frac{3}{1},\pm\frac{4}{1},\pm\frac{6}{1},\pm\frac{12}{1}); rational roots: (-2,-1,2,3)}
+7. (0=4x^3+8x^2-x-2)
+\answer{possible roots: (\pm\frac{1}{1},\pm\frac{1}{2},\pm\frac{1}{4},\pm\frac{2}{1},\pm\frac{2}{2},\pm\frac{2}{4}); rational roots: (-2,-\frac{1}{2},\frac{1}{2})}
+8. (0=9x^4-40x^2+16)
+\answer{possible roots: (\pm\frac{1}{1},\pm\frac{1}{3},\pm\frac{1}{9},\pm\frac{2}{1},\pm\frac{2}{3},\pm\frac{2}{9},\pm\frac{4}{1},\pm\frac{4}{3},\pm\frac{4}{9},\pm\frac{8}{1},\pm\frac{8}{3},\pm\frac{8}{9},\pm\frac{16}{1},\pm\frac{16}{3},\pm\frac{16}{9}); rational roots: (-2,-\frac{2}{3},\frac{2}{3},2)}
+A polynomial equation with rational coefficients has the given roots. List two more roots of each equation.
+9. (1+\sqrt{11}) and (-3+\sqrt{17})
+\answer{(1-\sqrt{11}) and (-3-\sqrt{17})}
+10. (5+12i) and (-9-7i)
+\answer{(5-12i) and (-9+7i)}
+11. (12+5i) and (6-\sqrt{13})
+\answer{(12-5i) and (6+\sqrt{13})}
+12. (5-15i) and (17+\sqrt{23})
+\answer{(5+15i) and (17-\sqrt{23})}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\end{concept-summary}
+% Source page 82: 165
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+13, 15, 17, 20--24, 33--35 & 13--38 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each
+Practice: 1 point each
+Assessment Practice: 1 point each
+Performance Task: 3 points
+Answers 13--17. See answers on previous page.
+\te{Scan the QR code to access a video tutorial.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 20--23 & 1 \\
+1 & 13, 16 & 2 \\
+2 & 24, 33--35 & 2 \\
+3 & 25--28 & 1 \\
+3 & 17, 19 & 2 \\
+4 & 29 & 2 \\
+5 & 30--32, 36, 37 & 1 \\
+5 & 14, 15, 38 & 2 \\
+5 & 18 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{13}{2}
+\textbf{Construct Arguments} Consider the polynomial (P(x)=5x^3+ms^2+nx+6), where (m) and (n) are rational coefficients. Is 3 sometimes, always, or never a root? Explain.
+\answer{sometimes; The factors of (a_0), or 6, are 1, 2, 3, and 6. The factors of (a_n), or 5, are 1 and 5. So, one possible factor is (\frac{3}{1}), or 3.}
+\te{Printed ms squared; likely mx squared. The answer calls a possible root a factor.}
+\end{practice}
+\begin{practice}{14}{2}
+\textbf{Use Structure} Write a fourth-degree polynomial function (Q) with zeros (-1), 0, and (2i).
+\answer{(Q(x)=x^4+x^3+4x^2+4x)}
+\end{practice}
+\begin{practice}{15}{2}
+\textbf{Error Analysis} A student says that a fifth-degree polynomial equation with rational coefficients has roots (-5), (-3), 1, 2, and (\sqrt{3}). Describe possible errors the student may have made.
+\answer{Irrational roots come in pairs. Either the student incorrectly calculated (\sqrt{3}) to be a root, or one of the real roots should be (-\sqrt{3}).}
+\end{practice}
+\begin{practice}{16}{2}
+\textbf{Reason} Write a third-degree polynomial with rational coefficients that has the following possible roots. Explain your reasoning.
+(\pm\frac{1}{1},\pm\frac{1}{2},\pm\frac{2}{1},\pm\frac{2}{2},\pm\frac{5}{1},\pm\frac{5}{2},\pm\frac{10}{1},\pm\frac{10}{2})
+\answer{Answers may vary. Sample: (2x^3+7x^2+x-10); Assume that the coefficients of the polynomial have no common integer factors other than 1 and (-1). The denominators of the possible roots are 1 and 2. A number that has factors of 1 and 2 is 2. So, the leading coefficient must be 2 or (-2). The numerators of the possible roots are 1, 2, 5, and 10. A number that has factors of 1, 2, 5, and 10 is 10. So the constant term must be 10 or (-10). The leading term must have degree 3 since the equation is a third-degree polynomial.}
+\end{practice}
+\begin{practice}{17}{2}
+\textbf{Error Analysis} Describe and correct the error a student made in finding the roots of the polynomial equation (2x^3-x^2-10x+5=0).
+List of possible rational roots
+(\pm1,\pm\frac{1}{2},\pm5,\pm\frac{5}{2})
+Testing reveals that (\frac{1}{2}) is a root.
+Dividing the polynomial by the binomial (x-\frac{1}{2}) results in the factored form
+(f(x)=(x-\frac{1}{2})(2x^2-10))
+The equation (2x^2-10=0) has two irrational roots, (\sqrt{10}) and (-\sqrt{10})
+The complete set of roots is (\{\frac{1}{2},\sqrt{10},-\sqrt{10}\})
+\te{The printed student work is marked incorrect.}
+\answer{The equation (2x^2-10=0) can be written as (2(x^2-5)=0), which has two irrational roots, (\sqrt{5}) and (-\sqrt{5}), not (\sqrt{10}) and (-\sqrt{10}).}
+\end{practice}
+\begin{practice}{18}{3}
+\textbf{Higher Order Thinking} What is the least number of terms a fifth-degree polynomial with real coefficients and root (3i) can have? Give an example of such a polynomial equation. Explain.
+\answer{2; Answers may vary. Sample: (P(x)=x^5+9x^3); Because (3i) is a root, (-3i) is also a root. The factors are ((x+3i)) and ((x-3i)). Use the FOIL method to get (x^2+9). In order for the equation to be a fifth-degree polynomial, multiply each term by (x^3) to get (x^5+9x^3).}
+\end{practice}
+\begin{practice}{19}{2}
+\textbf{Use Structure} Show that the Fundamental Theorem of Algebra is true for all quadratic equations with real coefficients. (Hint: Use the Quadratic Formula and examine the possibilities for the value of the discriminant.)
+\answer{When (b^2-4ac>0), there are two distinct real roots. When (b^2-4ac=0), there is one real root with multiplicity 2. When (b^2-4ac<0), there are two distinct complex roots.}
+\end{practice}
+\begin{practice}{20}{1}
+List all the possible rational solutions for each equation. SEE EXAMPLE 1
+(0=x^3-3x^2+4x-12)
+\answer{(\pm\frac{1}{1},\pm\frac{2}{1},\pm\frac{3}{1},\pm\frac{4}{1},\pm\frac{6}{1},\pm\frac{12}{1})}
+\end{practice}
+\begin{practice}{21}{1}
+List all the possible rational solutions for each equation. SEE EXAMPLE 1
+(0=2x^4+13x^3-47x^2-13x+45)
+\answer{(\pm\frac{1}{1},\pm\frac{1}{2},\pm\frac{3}{1},\pm\frac{3}{2},\pm\frac{5}{1},\pm\frac{5}{2},\pm\frac{9}{1},\pm\frac{9}{2},\pm\frac{15}{1},\pm\frac{15}{2},\pm\frac{45}{1},\pm\frac{45}{2})}
+\end{practice}
+\begin{practice}{22}{1}
+List all the possible rational solutions for each equation. SEE EXAMPLE 1
+(0=4x^3+64x^2-x-16)
+\answer{(\pm\frac{1}{1},\pm\frac{1}{2},\pm\frac{1}{4},\pm\frac{2}{1},\pm\frac{2}{2},\pm\frac{2}{4},\pm\frac{4}{1},\pm\frac{4}{2},\pm\frac{4}{4},\pm\frac{8}{1},\pm\frac{8}{2},\pm\frac{8}{4},\pm\frac{16}{1},\pm\frac{16}{2},\pm\frac{16}{4})}
+\end{practice}
+\begin{practice}{23}{1}
+List all the possible rational solutions for each equation. SEE EXAMPLE 1
+(0=8x^3+11x^2-13x-6)
+\answer{(\frac{1}{1},\pm\frac{1}{2},\pm\frac{1}{4},\pm\frac{1}{8},\pm\frac{2}{1},\pm\frac{2}{2},\pm\frac{2}{4},\pm\frac{2}{8},\pm\frac{3}{1},\pm\frac{3}{2},\pm\frac{3}{4},\pm\frac{3}{8},\pm\frac{6}{1},\pm\frac{6}{2},\pm\frac{6}{4},\pm\frac{6}{8})}
+\te{The first printed fraction has no plus/minus sign.}
+\end{practice}
+\begin{practice}{24}{2}
+A closet in the shape of a rectangular prism has the measurements shown. What is the height of the closet, in feet, if its volume is 220 (\text{ft}^3)? SEE EXAMPLE 2
+\placeholder{illustration}{Closet with clothes, shoes and shelving; height x, front width x+3, depth x-5.5. Black dimension arrows.}
+\answer{8 feet}
+\end{practice}
+\begin{practice}{25}{1}
+What are all real and complex roots of the following functions? SEE EXAMPLE 3
+(0=x^3-3x-52)
+\answer{(\{4,-2+3i,-2-3i\})}
+\end{practice}
+\begin{practice}{26}{1}
+What are all real and complex roots of the following functions? SEE EXAMPLE 3
+(0=x^3+9x^2-7x-63)
+\answer{(\{-9,\sqrt{7},-\sqrt{7}\})}
+\end{practice}
+\begin{practice}{27}{1}
+What are all real and complex roots of the following functions? SEE EXAMPLE 3
+(0=x^4+34x^2-72)
+\answer{(\{6i,-6i,\sqrt{2},-\sqrt{2}\})}
+\end{practice}
+\begin{practice}{28}{1}
+What are all real and complex roots of the following functions? SEE EXAMPLE 3
+(0=x^6+4x^4-41x^2+36)
+\answer{(\{-1,1,3i,-3i,2,-2\})}
+\end{practice}
+\begin{practice}{29}{2}
+Suppose a cubic polynomial (f) has one rational zero (c) and two irrational zeros which are a conjugate pair (a+\sqrt{b}) and (a-\sqrt{b}), where (a) and (b) are rational numbers. Does (f) have rational coefficients? SEE EXAMPLE 4
+\answer{yes}
+\te{The printed affirmative answer assumes a rational leading coefficient.}
+\end{practice}
+\begin{practice}{30}{1}
+Find a polynomial function with rational coefficients (P(x)) that has the given degree and zero(s). SEE EXAMPLE 5
+degree of (P=2); zero: (1+6i)
+\answer{(P(x)=x^2-2x+37)}
+\end{practice}
+\begin{practice}{31}{1}
+Find a polynomial function with rational coefficients (P(x)) that has the given degree and zero(s). SEE EXAMPLE 5
+degree of (P=4); zeros: (3-\sqrt{11}) and (-9i)
+\answer{(P(x)=x^4-6x^3+79x^2-486x-162)}
+\end{practice}
+\begin{practice}{32}{1}
+Find a polynomial function with rational coefficients (P(x)) that has the given degree and zero(s). SEE EXAMPLE 5
+degree of (P=3); zeros: (-5) and (4-8i)
+\answer{(P(x)=x^3-3x^2+40x+400)}
+\end{practice}
+% Source page 83: 166
+\begin{practice}{33}{2}
+\textbf{Make Sense and Persevere} A fireproof safe has the measurements shown.
+\placeholder{illustration}{Gray open safe with front horizontal dimension 2x+1, vertical dimension x+8, depth x+1, black dimension arrows.}
+a. Write an equation to represent the situation when the volume of the fireproof safe is 540 (\text{in.}^3). Rewrite the equation in the form (P(x)=0).
+\answer{(0=2x^3+19x^2+25x-532)}
+b. List all of the possible rational zeros of the polynomial expression.
+\answer{(\pm\frac{1}{1},\pm\frac{1}{2},\pm\frac{2}{1},\pm\frac{4}{1},\pm\frac{7}{1},\pm\frac{7}{2},\pm\frac{14}{1},\pm\frac{19}{1},\pm\frac{19}{2},\pm\frac{28}{1},\pm\frac{38}{1},\pm\frac{76}{1},\pm\frac{133}{1},\pm\frac{133}{2},\pm\frac{266}{1},\pm\frac{532}{1})}
+c. What are the real roots of the equation? Explain how you know these are the only real roots.
+\answer{4; By using synthetic division, another factor can be found after dividing the polynomial by (x-4). There are no real zeros for the factor, which is a quadratic factor, because the discriminant is negative.}
+d. What are the length, width, and height of the fireproof safe?
+\answer{length: 9 in.; width: 12 in.; height: 5 in.}
+\te{The printed dimension names differ from the diagram, which shows a vertical height of x+8.}
+\end{practice}
+\begin{practice}{34}{2}
+\textbf{Reason} What are the dimensions of the fish tank, in feet, if its volume is 176 (\text{ft}^3)?
+\placeholder{illustration}{Aquarium with fish and plants; vertical height x-3, front length x+square root of 5, depth x-square root of 5.}
+\answer{length: (7+\sqrt{5}), or about 9.24 ft; width: (7-\sqrt{5}), or about 4.76 ft; height: 4 ft}
+\end{practice}
+\begin{practice}{35}{2}
+\textbf{Reason} The cost of producing (x), in thousands, board games is modeled by the function (C(x)=x^4-5x^3-12x^2-22x-40). If a company spent \$1,706 to produce the games, how many games were made?
+\answer{9,000 games}
+\end{practice}
+\begin{practice}{36}{1}
+A fifth-degree polynomial equation with rational coefficients has the roots 3, (8i), and (7-\sqrt{5}). Which are other roots of the polynomial equation? Select all that apply.
+A. (-3)
+B. (-8i)
+C. (1-8i)
+D. (-7-\sqrt{5})
+E. (7+\sqrt{5})
+\answer{B, E}
+\end{practice}
+\begin{practice}{37}{1}
+\textbf{SAT/ACT} Which is a third-degree polynomial equation with rational coefficients that has roots (-2) and (6i)?
+A. (x^3+2x^2+36x+72)
+B. (x^3-2x^2+36x-72)
+C. (x^3+2x^2-36x-72)
+D. (x^2+(6i-2)x-12)
+E. (x^2-(6i-2)x-12)
+\answer{A}
+\te{The choices are printed as expressions although the question says equation.}
+\end{practice}
+\begin{practice}{38}{2}
+\textbf{Performance Task} The table shows the number of possible real and imaginary roots for an (n)th degree polynomial equation with rational coefficients.
+\begin{tabular}{lll}
+Degree & Real Roots & Imaginary Roots \\
+3 & 3 & 0 \\
+3 & 1 & 2 \\
+5 & 5 & 0 \\
+5 & 3 & 2 \\
+5 & 1 & 4 \\
+\end{tabular}
+Part A List all of the possible combinations of real and imaginary roots for a seventh-degree polynomial equation.
+\answer{7 real and 0 complex, 5 real and 2 complex, 3 real and 4 complex, 1 real and 6 complex}
+Part B What do you notice about the number of real roots of a polynomial equation with an odd degree?
+\answer{A polynomial equation with an odd degree has an odd number of real roots.}
+Part C Analyze possible real and imaginary roots for even degree polynomial equations with rational coefficients. What conclusions can you make?
+\answer{All imaginary roots appear in even numbers because of conjugate pairs. Therefore, all the zeros may be imaginary, so there are even degree functions that do not cross the (x)-axis. If there are real roots, because of multiplicity, there may be any number of real roots such that (0\leq\text{number of real roots}\leq n), the degree.}
+\te{The printed answer parts appear directly below answer 35 without a 38 label. Part C changes how multiplicities are counted.}
+\end{practice}
+% Source page 84: 166A Assess
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & A77 \\
+2 & 1 & A77 \\
+3 & 2 & F63 \\
+4 & 2 & F63 \\
+5 & 2 & F63 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{3-6 Lesson Quiz: Theorems About Roots of Polynomial Equations}
+1. Using the Rational Root Theorem, select all the possible rational solutions of (x^4-x^3-3x^2-8x+20=0).
+A. (\pm\frac{1}{2})
+B. (\pm\frac{1}{4})
+C. (\pm\frac{1}{5})
+D. (\pm\frac{1}{10})
+E. (\pm\frac{1}{20})
+F. (\pm1)
+G. (\pm2)
+H. (\pm4)
+I. (\pm5)
+J. (\pm10)
+K. (\pm20)
+\answer{F, G, H, I, J, K}
+2. A rectangular box has the dimensions shown in the diagram. The volume of the box is given by the function (V(x)=x^3-4x), where (x) is the height in inches. What is the height of the box if the volume is 15 (\text{in.}^3)?
+\placeholder{diagram}{Outline rectangular prism with height x in., front width x+2 in., depth x-2 in.}
+Part A Select the equation for the volume:
+A. (x^2-4=15)
+B. (x^3-4=15)
+C. (x^3-4x=15)
+D. (x^3+4x=15)
+\answer{C}
+Part B Complete each sentence.
+\answer{The solution to the equation is (x=3). The height of the box is 3 inches.}
+3. What are all the real and complex solutions of (x^3+2x^2+3x+6=0)? If necessary, round to the nearest tenth.
+A. (-1.5,0.3+1.9i,0.3-1.9i)
+B. (-2,\sqrt{3},-\sqrt{3},i\sqrt{3})
+C. (-2,i\sqrt{3},-i\sqrt{3})
+D. (-1.5,0.3+i\sqrt{1.9},0.3-\sqrt{1.9})
+\answer{C}
+4. Select all real and complex solutions of (x^3-x^2-x-15=0).
+A. (-3)
+B. 3
+C. (-1+2i)
+D. (1-2i)
+E. (-1-2i)
+F. (1+2i)
+\answer{B, C, E}
+5. Select all real and complex solutions of (x^4-2x^2-24=0).
+A. (\sqrt{6})
+B. (2\sqrt{2})
+C. (-i\sqrt{3})
+D. (-2i)
+E. (i\sqrt{3})
+F. (2i)
+G. (-\sqrt{6})
+H. (-2\sqrt{2})
+\answer{A, D, F, G}
+\end{te-addendum}
+% Source page 85: 166B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES} I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding (I)} Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{3-6 Reteach to Build Understanding: Theorems About Roots of Polynomial Equations}
+1. Use the graph of (P(x)=x^3-2x^2-11x+12).
+a. Circle the points where the graph intersects the (x)-axis.
+\placeholder{graph}{Black cubic crossing x-axis at -3,1,4, each circled magenta; x ticks at integers from -5 to 6, y labels 20,15,10,5,-5,-10 with spacing 5; peak near (-1.4,20), trough near (2.7,-12).}
+b. What are the points that intersect the (x)-axis?
+\answer{((-3,0)), ((1,0)), ((4,0))}
+Use the Rational Root Theorem to check your answers.
+The Rational Root = (\frac{p}{q})
+\begin{tabular}{llll}
+Part of the Equation & Definition & Number to Be Factored & Factors \\
+(p) & (a_0) = the value of (P(0)) = the constant & 12 & (\pm1,2,3,4,6,12) \\
+(q) & (a_n) = the leading coefficient & 1 & (\pm1) \\
+\end{tabular}
+c. List all of the possible roots as (\frac{p}{q}): \answer{(\pm1,2,3,4,6,12)}
+d. Input all of the roots into the equation. Which factors make (P(x)=0)?
+\answer{(x=-3,1,4)}
+2. Isabel believes that (P(x)=x^3-9x^2+27x-27) has 3 complex roots. Nicky told her that it has 4 complex roots. Who is correct? What error was made?
+\answer{Answers may vary. Sample: Isabel is correct. There are 3 terms. Nicky counted the number of terms instead of using the Fundamental Theorem of Algebra.}
+\te{The printed answer says 3 terms although four terms are shown; the degree is 3.}
+3. What is the equation of a quadratic function (P) with rational coefficients that has a zero of (3+2i)?
+(P(x)=[x-(3+2i)][x-(3-2i)])
+(=[(x-3)-2i][(x-3)+2i])
+(=(x-3)^2-(2i)^2)
+(=x^2-6x+9-(-4))
+\answer{(=x^2-6x+13)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice (I, O)} Provides extra practice for each lesson. MathXL for School.
+\textbf{3-6 Additional Practice: Theorems About Roots of Polynomial Equations}
+List all the possible rational solutions for each equation.
+1. (2x^2+5x+3=0)
+\answer{(\pm1,\pm3,\pm\frac{1}{2},\pm\frac{3}{2})}
+2. (2x^4-18x^2+5=0)
+\answer{(\pm1,\pm5,\pm\frac{1}{2},\pm\frac{5}{2})}
+3. (4x^3-12x+9=0)
+\answer{(\pm1,\pm3,\pm9,\pm\frac{1}{2},\pm\frac{3}{2},\pm\frac{9}{2},\pm\frac{1}{4},\pm\frac{3}{4},\pm9)}
+\te{The final printed possible root is plus/minus 9 again, not plus/minus 9/4.}
+List all the real and complex roots of each function.
+4. (x^3+x^2-x+2=0)
+\answer{(-2,\frac{1+i\sqrt{3}}{2},\frac{1-i\sqrt{3}}{2})}
+5. (x^3-2x^2+4x-8=0)
+\answer{(-2,2i,-2i)}
+\te{The printed real root is -2; the equation has real root 2.}
+6. (x^5-3x^4-8x^3-8x^2-9x-5=0)
+\answer{(5,-1,i,-i)}
+7. What is the equation of a quadratic function (P) with rational coefficients that has a zero of (3+7i)?
+\answer{(x^2-6x-40)}
+\te{The printed constant -40 conflicts with the stated complex zero; the monic polynomial would have constant 58.}
+8. What is the equation of a polynomial function (R) with rational coefficients that has a zero of (4+\sqrt{5}) and (3i)?
+\answer{(x^4-8x^3+20x^2-72x+99)}
+9. A section of roller coaster can be modeled by the function (P(x)=x^5-5x^4-31x^3+113x^2+282x-360). A walkway bridge will be placed at one of the zeros. What are the possible locations for the walkway bridge?
+\answer{(-4,-3,1,5,6)}
+10. A shed in the shape of a rectangular prism measures (x) ft high, (x+6.5) ft wide, and is (x-4) ft deep. The volume of the shed is given by the function (V(x)=x^3+2.5x^2+26x). What is the height, width, and depth of the shed, in ft, if the volume is 990 (\text{ft}^3)?
+\answer{height--10 feet; width--16.5 feet; depth--6 feet}
+\te{Printed volume formula has +26x; the dimensions and answer instead correspond to -26x.}
+11. Suppose a cubic polynomial (f) has two rational roots (c) and (d) and one irrational root which is a conjugate pair (a+\sqrt{b}), where (a) and (b) are rational numbers. Does (f) have rational coefficients? Explain.
+\answer{No, the function has two irrational coefficients.}
+\te{The prompt calls one root a conjugate pair; the stated number of irrational coefficients is not guaranteed for all c and d.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment (O, A)} Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{3-6 Enrichment: Theorems About Roots of Polynomial Equations}
+Write an equation in each rectangle that has the rational roots in the adjacent circles. Each equation should:
+have whole number coefficients
+have a positive leading coefficient
+have exactly the roots in the adjacent circles
+the terms should not be evenly divisible by a common factor
+\placeholder{diagram}{Large circle divided into four quadrants by spokes from a central diamond. Small root circles: top -1/2, left 3, right plus/minus 1/3 and 2/1, bottom -1 and 3/2. Four answer rectangles on arcs between adjacent circles.}
+\answer{Answers may vary. Sample: upper left (y=2x^2-5x-3); upper right (y=6x^3-11x^2-3x+2); lower left (y=2x^3-x^2-12x-9); lower right (y=6x^4+x^3-23x^2-10x+6).}
+What do you notice about the relationship between the roots and the equations?
+\answer{Answers may vary. Sample: The constants of the equation as well as the coefficient of the highest degree share factors, so they are often the same number or share common factors.}
+\te{The worksheet says whole number coefficients but its sample equations include negative coefficients. Several sample equations do not have all of the printed adjacent roots.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary (I, O)} Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{3-6 Mathematical Literacy and Vocabulary: Theorems About Roots of Polynomial Equations}
+Solve for the rational roots of each equation. Write the complex root for each equation in its circle. If the equations share a root, which means that they both intersect the (x)-axis at the same point, write them in the area that overlaps.
+(P(x)=5x^4-2x^2+12)
+(P(x)=4x^4-11x^2-3)
+\placeholder{diagram}{Two overlapping circles, left labeled P(x)=5x to the fourth minus 2x squared plus 12, right labeled P(x)=4x to the fourth minus 11x squared minus 3. Magenta left-only entries -2,2; overlap -square root of 3 and square root of 3; right-only entries -0.5i and 0.5i.}
+\answer{Left only: (-2), 2; overlap: (-\sqrt{3}), (\sqrt{3}); right only: (-0.5i), (0.5i).}
+(P(x)=5x^4+10x^3-15x^2-20x+60)
+(P(x)=2x^4+6x^3-2x^2-12)
+\placeholder{diagram}{Two overlapping circles; left polynomial 5x to the fourth +10x cubed -15x squared -20x +60; right polynomial 2x to the fourth +6x cubed -2x squared -12. Magenta left-only -3,2; overlap fractions (-1-square root of 7)/2 and (-1+square root of 7)/2; right-only -2,1.}
+\answer{Left only: (-3), 2; overlap: (\frac{-1-\sqrt{7}}{2}), (\frac{-1+\sqrt{7}}{2}); right only: (-2), 1.}
+\te{The printed polynomial labels and listed roots are inconsistent. The instructions also conflate complex roots with x-axis intersections.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{illustration}{Tablet screenshot of graphing activity, blank x-y coordinate grid from -10 to 10 in steps of 2; system y=3x+4, y=-2x+4.}
+Solve the system of equations by graphing. (y=3x+4); (y=-2x+4).
+Use the graphing tool to graph the system. Click to enlarge graph.
+Question Help: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.
+\end{te-addendum}
+
+\end{document}

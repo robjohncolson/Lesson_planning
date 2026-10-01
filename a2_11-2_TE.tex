@@ -1,0 +1,763 @@
+\documentclass{article}
+% Source: Topic_11_Teacher_Edition.pdf, PDF pages 23-33 (printed pages 538A-544B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 23: 538A Lesson Overview
+\begin{lesson-meta}
+lesson: 11-2
+title: Statistical Studies and Sampling Methods
+standards: none printed
+practices: none printed
+objective: I can design a statistical study.
+
+essential question: How can you choose the best type of study to answer a given statistical question and choose a reasonable sample?
+
+\textbf{VOCABULARY}
+\item bias
+\item control group
+\item experiment
+\item experimental group
+\item observational study
+\item sample survey
+\item simple random sample
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 11-2 \\
+Title & Statistical Studies and Sampling Methods \\
+Standards & none printed \\
+I CAN Objective & I can design a statistical study. \\
+Essential Question & How can you choose the best type of study to answer a given statistical question and choose a reasonable sample? \\
+Lesson Vocabulary & bias; control group; experiment; experimental group; observational study; sample survey; simple random sample \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Identify experiments, sample surveys, and observational studies.
+\item Recognize bias in sampling methods.
+\item Identify a sampling method that provides a random sample from a population.
+Essential Understanding. There are three types of statistical studies: experiments, sample surveys, and observational studies. The way in which samples are chosen for a study affects how well they represent the population. To avoid bias, samples should be random.
+\textbf{COHERENCE}
+Previously in this courses, students:
+\item Identified statistical questions and used vocabulary related to statistical questions such as sample, population, statistic, and parameter.
+\te{Printed this courses; likely this course.}
+In this lesson, students:
+\item Choose the best type of study to answer a given statistical question.
+\item Choose a reasonable sample for a statistical study.
+Later in this topic, students will:
+\item Use samples from statistical studies to estimate parameters.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that random sampling methods result in data that better represents the population.
+\item Students apply their understanding of study types and sampling methods to design a study for a real-world situation, such as testing a new pharmaceutical drug.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+NEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+bias & sesgo \\
+control group & grupo de control \\
+experiment & experimento \\
+experimental group & grupo experimental \\
+observational study & studio de observación \\
+sample survey & encuesta muestral \\
+simple random sample & muestra aleatoria simple \\
+\end{tabular}
+\te{Printed studio de observación; likely estudio de observación.}
+VOCABULARY ACTIVITY
+Have students write each of the vocabulary terms on an index card. As you work through the lesson, have students write the definition of the term on the back of the card. Students can then use the cards for reference throughout the topic.
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 23 932 643 1083 824
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS; purple glowing sphere on black.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students continue their study of statistics by identifying experiments, sample surveys, and observational studies. They learn to recognize sampling methods that may be biased, and they learn how to provide a random sample from a population.
+\textbf{Applying Math Practices}
+Make Sense of Problems and Persevere in Solving Them. Students interpret the meaning of a problem when determining how they could design a controlled experiment to test the effect of a medication without participants knowing whether they are in the treatment group.
+Construct Viable Arguments. Students use mathematical terms and definitions to explain how they could redesign a biased study so that the samples are not biased.
+\end{te-addendum}
+% Source page 24: 538B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students analyze and critique study methods to determine whether they were designed in a way that produces valid results. This leads them into understanding how to build and plan a study by applying appropriate methods and selecting a sample in the most efficient and nonbiased way.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+Critique \& Explain is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving
+Q: How can you get the best data from a population of students in a school?
+\answer{Pick a random sample of students at all grade levels and ages that represents the total population of the school.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics
+Q: How do the two samples differ from one another?
+\answer{One sample is a survey of 7 students; the other is a survey of 100 students in the library.}
+For Early Finishers
+Q: How could you conduct a better study of the population? Create a survey plan and detail your study.
+\answer{Sample: A better study would be to ask more students who were randomly selected. In the lunchroom, every third student receives a slip of paper that asks, ``Do you listen to music when you are studying?'' The responses are collected throughout all the lunch periods.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse
+Q: When performing a statistical study, can you just ask a question?
+\answer{No; you need to ensure that the question is a statistical question with a variety of possible answers.}
+Q: What are suggestions or ideas that can be used to design a good study yielding valid results?
+\answer{Sample: The study needs to be conducted in a way that does not cause participants to change their views or ideas.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Communicate Precisely: Use with EXPLORE \& REASON}
+Did either Jacinta or Felix use randomness? Explain.
+\answer{Answers may vary. Sample: Jacinta's method did not use randomness because she chose 7 friends. Felix may have chosen a random period of the day for his data collection.}
+\te{Printed EXPLORE \& REASON above this teacher block; the launch is titled CRITIQUE \& EXPLAIN.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Jacinta and Felix were each asked to design a study to answer the question: ``What proportion of students at this school listen to music while studying?''
+\begin{tabular}{lll}
+\multicolumn{3}{c}{Jacinta} \\
+Friends in Gym Class & yes & no \\
+Cameron & X & \\
+Dana & X & \\
+Emma & & X \\
+Henry & & X \\
+Jung & X & \\
+Keisha & & X \\
+Marisol & & X \\
+\end{tabular}
+% FIG 24 991 755 1105 901
+\placeholder{diagram}{Felix's lined paper: Students listening to music in the library. Red tally marks arranged in rows of four groups of five, three groups of five, and one group of five plus three single strokes, totaling 43. Total students = 100; 43\% circled in red.}
+A. What group did Jacinta select from to conduct her study? What group did Felix select from?
+\answer{Jacinta selected students from her gym class. Felix selected students in the library.}
+B. How did Jacinta choose which members of her group to question? How did Felix choose which members from his group to observe?
+\answer{Jacinta questioned only her friends. Felix questioned all students in the library.}
+C. Look for Relationships Who designed a better study, Jacinta or Felix? Explain.
+\answer{Felix; He chose to observe a group of students that come from several different classrooms and he did not distinguish between his friends and other students Sample: Felix is more thorough because he collects data from 100 students. Jacinta's study is too small to draw valid conclusions.}
+\te{Printed questioned in answer B; the prompt and answer C describe Felix observing students.}
+% FIG 24 669 185 1183 534
+\placeholder{illustration}{Digital Critique \& Explain preview repeats the question and parts A--C with response boxes and buttons Jacinta's Study and Felix's Study. Additional instruction: Select a study to view the results.}
+\end{model-discuss}
+% Source page 25: 538 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning
+Students learn the different types of statistical studies. Students understand that in order to create a valid study, a sample of participants must be selected in a way that does not favor a particular outcome or have any effect on the outcome. Students learn that a study is valid only when it truly reflects natural variability.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Choose a Type of Study: Pose Purposeful Questions, PART A}
+Q: What is the difference between a sample survey and an observational study?
+\answer{A sample survey asks every participant the same questions, whereas an observational survey is an observation involving no interaction with the participants.}
+Q: Which type of study requires more time for the results to be collected?
+\answer{An experimental study requires something to be done that causes change. It takes time to observe the effect of the treatment.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Example 2}
+Additional Examples are available at SavvasRealize.com.
+Determine if the following studies have any bias or variability. If they contain bias, explain what causes it.
+\begin{tabular}{ll}
+Study & Bias or Variability \\
+The student council surveys every fifth student walking down the hallway with the following question: ``Do you agree that school would be more enjoyable if we had the opportunity to eat lunch outside?'' & \answer{Very biased; The way the question is asked causes the participant to lean toward the answer ``yes.''} \\
+Staci sat in a parking lot between a fast food restaurant and a local diner to determine which type of food most people in her town preferred. & \answer{Variability, but due to the different turnaround times in each restaurant, there could be bias based on time.} \\
+A research company calls 1,000,000 residents of the United States, who are randomly selected from rural and urban areas of each state, to collect their opinion of two new federal laws that are being proposed by Congress. & \answer{Variability, although the caller could hang up.} \\
+\end{tabular}
+\te{Printed caller could hang up; likely respondent.}
+Example 2 Students consider causes of bias given a group of different situations to analyze.
+Q: When trying to determine bias, what do you consider?
+\answer{You must check to see whether the questions, the selected participants, or any other factors of the study could influence the results.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Example 3}
+A new t-shirt company is trying to figure out what their first design should be.
+The company did an online survey. People could go online and vote for their favorite design.
+What sampling method is used in this study? Is the method likely to be biased?
+\answer{This is a self-selected sample, which only includes people who decided to respond to the survey. This method is not random and likely biased.}
+Example 3 Students consider examples that include all sampling methods in context.
+Q: What is the major difference between cluster sampling and stratified sampling?
+\answer{Cluster sampling uses an entire group, or cluster, of participants as a sample, while stratified sampling randomly selects participants from all groups as a sample.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Choose a Type of Study}
+A. Which of the three main types of study is shown in each example below?
+\begin{tabular}{ll}
+A newspaper polls randomly selected residents in a town about which mayoral candidate they prefer. & This is a sample survey. A sample survey asks every member of a sample the same set of questions and records the answers. \\
+A doctor conducts a clinical trial of a new blood pressure medicine by prescribing it to half the patients in the study and measuring the effect it has on their blood pressure. & This is an experiment. An experiment involves applying a treatment to some group or groups and measuring the effects of the treatments. \\
+A grocery store wonders how many customers bring reusable grocery bags to the store. They have an employee stand at the checkout and count the number of people using reusable bags. & This is an observational study. In an observational study, you measure or observe members of a sample in such a way that they are not affected by the study. \\
+\end{tabular}
+% FIG 25 1023 310 1121 379
+\placeholder{photo}{Woman wearing a telephone headset in an office, illustrating a sample survey.}
+% FIG 25 1023 384 1121 450
+\placeholder{photo}{Doctor measuring a seated patient's blood pressure, illustrating an experiment.}
+% FIG 25 1023 451 1121 519
+\placeholder{photo}{Grocery checkout with green reusable bags, illustrating an observational study.}
+\answer{A. sample survey; experiment; observational study.}
+\te{LOOK FOR RELATIONSHIPS In which type of study might a person be unaware that he or she is a participant?}
+% Source page 26: 539 Example 1 continued
+B. What type of study could you use to answer the following questions?
+\begin{tabular}{ll}
+Question & Study \\
+Does urban pollution have an effect on rates of asthma? & Observational study: observe residents of urban and non-urban areas, and compare the rates of asthma over a long period of time. \\
+How many students in a school would like the cafeteria to serve breakfast? & Sample survey: ask randomly chosen students in the school their opinion and record the results. \\
+A group of plants is not growing well compared to the rest. What should you change to improve their growth? & Experiment: split the plants into groups randomly, and give each group different conditions such as more light, more water, or different fertilizer. Leave one group under the current conditions to see if the new treatments show improvement. \\
+\end{tabular}
+\answer{B. Observational study; Sample survey; Experiment.}
+\te{COMMON ERROR Conducting an experiment might be the most efficient way to answer a question, but it may be unethical to do so. For example, you would not intentionally expose people to pollution to test its affect on asthma rates. In these cases, an observational study is more appropriate.}
+\te{Printed affect; likely effect.}
+\end{example}
+\begin{tryit}{1}
+What type of study is described?
+a. A gym asks its customers if they would prefer the gym to open earlier in the morning.
+b. A gym tries out a new weightlifting method to see if it will build muscle for their customers faster than their current method.
+c. A gym counts the customers who come before 8 A.M.
+\answer{a. sample survey; b. experiment; c. observational study}
+\end{tryit}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions, PART B}
+Q: What indicates the type of study that should be used?
+\answer{With a sample survey, you look for words suggesting that a question is being asked of individuals about their likes, habits, or preferences. When studying behaviors of people or animals, you use an observational study. When determining causes and effect or results of changing conditions, you use an experimental study.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Which study can be carried out without participants' knowledge?
+\answer{Observational studies are done by simply observing or collecting data of behaviors without any interference; therefore, this type of study could be carried out without participants' knowledge.}
+\end{te-addendum}
+\begin{te-addendum}{1}{HabitsOfMind}
+\textbf{Model With Mathematics}
+The gym wants to know whether or not they should buy more elliptical machines. What kind of statistical study could they use to answer their question? Describe the study you propose.
+\answer{Sample: The gym could do an observational study in which an employee could record the number of unused elliptical machines once during each hour of operation.}
+\end{te-addendum}
+\begin{te-addendum}{1}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 1 Some students may struggle with understanding that the type of study is determined by the method of data collection. Use more examples to clarify how to determine the study type.
+\item Distinguish between the study types by identifying how the data are collected for each example.
+1. Gardening club members want to know on what side of the school their spring plants produce the best yield.
+Q: What type of study does this represent?
+\answer{experimental study}
+Q: How are the data collected in this study?
+\answer{Plants are placed on different sides of the school and data are collected as they grow.}
+2. What time of day are birds more active around the bird feeders and the bird bath?
+Q: What type of study does this represent?
+\answer{observational study}
+Q: How are the data collected in this study?
+\answer{The birds are watched throughout the day, and the times that the birds are using the bird bath and eating from the feeder are recorded.}
+Q: Write a question that would result in a sample survey study.
+\answer{Sample: Ask each student who walks into the cafeteria, ``What is your favorite meal at school: nuggets, spaghetti, baked chicken, tacos, or sandwiches?''}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Determine Sources of Bias}
+CONCEPTUAL UNDERSTANDING
+In the following situations, are the differences between groups potentially due to bias?
+A. A psychologist is conducting surveys to study the happiness levels of people who live in a neighborhood. She asks the same questions to the two samples below chosen from the population of the neighborhood.
+% FIG 26 857 620 996 771
+\placeholder{photo}{Family playing outdoors on lined paper with red handwritten caption: 100 people surveyed, Sunny Saturday afternoon, 65\% people happy.}
+% FIG 26 1006 620 1142 771
+\placeholder{photo}{Crowded transit car on lined paper with red handwritten caption: 100 people surveyed, Monday morning, 35\% people happy.}
+The difference between the results of these surveys is due to bias, because the circumstances when the two samples were surveyed may influence their responses. A study has bias if it systematically produces results that misrepresent a population.
+\answer{A. The difference between the results of these surveys is due to bias.}
+\te{STUDY TIP Personal bias, or a personal inclination for or against something, and statistical bias are different. While personal bias can lead to statistical bias, statistical bias has many other possible causes.}
+% Source page 27: 540 Example 2 continued
+Bias might also arise if a sample is more likely to include a certain category of the population than another. For example, a poll on a website is more likely to select frequent Internet users than those who do not go online often.
+\te{Callout: Bias can be introduced in other ways. For example, a survey might have questions that influence the answers in some way.}
+B. A school wants to know the average height of its students. The school randomly chooses some students and measures their height. Some students are under 5 feet tall and some are over 6 feet, 5 inches tall.
+The fact that some of the data collected are either very high or very low is not necessarily the result of bias. A population like students in a high school will naturally have people with a wide variety of heights. A true random sample may have members from both extremes.
+\answer{B. The fact that some of the data collected are either very high or very low is not necessarily the result of bias.}
+\te{MAKE SENSE AND PERSEVERE Why should you determine whether any differences in the collected data are due to a biased study or from natural variability in a population?}
+\end{example}
+\begin{tryit}{2}
+A soft drink company calls 500 people at random and asks, ``Is our product or our rival's product the best soft drink on the market?'' Why is this question a potential source of bias?
+\answer{This is bias, because the way the question is asked may lead respondents to give the answer the company wants.}
+\end{tryit}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Determine Sources of Bias: Build Procedural Fluency From Conceptual Understanding}
+PART A
+Q: What could affect the outcome of a study when asking participants an opinion?
+\answer{the location of the people, the time of day, the day of the week, and the way the question is asked}
+Q: What is bias and why is it important to check for it when conducting a study?
+\answer{Bias will affect the way people react to the study. If bias is present, the results of the study are not accurate.}
+PART B
+Q: What is an example of something that could have caused the study on height to become biased?
+\answer{Sample: If the selected students were all from the basketball team, the study would be biased.}
+Q: When selecting a sample, what does it mean to have natural variability?
+\answer{Natural variability encompasses differences among the participants that have occurred with no outside influence and result in an unbiased study.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Try It! 2}
+Some students may believe that since the question is based on opinion, it is not biased. Explain how a question can direct a participant's opinion. Show students more examples of how this directive questioning works.
+\end{te-addendum}
+\begin{concept-box}
+\textbf{CONCEPT Sampling Methods}
+In order to select a sample that is likely to be representative of the population, you need to choose members of the sample using randomness. The simplest way to use randomness is with a simple random sample. In a simple random sample, each member of the population is equally likely to chosen, and each possible sample of the size you want is equally likely to be chosen.
+\te{Printed equally likely to chosen; likely equally likely to be chosen.}
+\te{Callout: Some sampling methods can involve randomness in other ways to select a sample. Some sampling methods do not use enough randomness to give reliable results.}
+\begin{tabular}{lllll}
+\multicolumn{3}{c}{Care must be taken to avoid bias.} & \multicolumn{2}{c}{High risk of bias} \\
+Stratified sampling & Cluster sampling & Systematic sampling & Convenience sampling & Self-selected sampling \\
+Population divided into groups based on similar characteristics; sample randomly chosen from each & Population divided into clusters; entire clusters chosen at random as the sample & First individual chosen at random; then use rule like ``every 3rd person'' to select sample & Only individuals that are in close proximity or easily accessible chosen for sample & Sample composed entirely of volunteers \\
+\end{tabular}
+% FIG 27 801 719 1111 818
+\placeholder{diagram}{Five sampling diagrams with colored person icons. Stratified: three separate 2-by-3 groups, purple, blue, red; two outlined persons per group (purple middle column, blue top right and bottom middle, red top left and bottom middle). Cluster: same groups, whole six-person blue group outlined. Systematic: six rows of three mixed-color persons, right column outlined. Convenience: mixed persons in six rows of three, bottom two rows outlined nearest a black Researcher icon below. Self-selected: mixed colored persons, scattered raised-hand persons outlined.}
+\end{concept-box}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners}
+SPEAKING BEGINNING Discuss the meaning of the word conscious with the students: to be aware of or realize that something is happening. Then discuss the meanings of the prefix un- (not) and the suffix -ly (indicative of an adverb). Have students answer the following questions.
+Q: What might be a good definition for unconsciously?
+\answer{not aware of something}
+Q: What are some actions you perform unconsciously? Consciously?
+\answer{breathing, blinking; eating, riding a bike}
+WRITING DEVELOPING When something is done systematically, it is done with a fixed plan. So when a systematic error occurs, it cannot be attributed to chance. Display the definition of systematic error, and have students write it in their journals. Then have students complete the sentence demonstrating a systematic error.
+\item To determine what students prefer to do in their free time, Andrea prepares a survey.
+Q: She randomly polls students from blank during blank.
+\answer{Sample: 12th grade, the basketball game}
+READING EXPANDING Have students read Part A regarding bias. Bias can be personal or statistical in nature; both influence the outcome of a sampling. Have students read the following statements and determine whether they portray personal or statistical bias.
+Q: Citizens at a town hall meeting claimed that all crimes in their community are committed by people of low socio-economic status.
+\answer{personal}
+Q: The sophomore girls overwhelmingly voted to sell candy bars to raise money for their class.
+\answer{statistical}
+\end{te-addendum}
+% Source page 28: 541 Examples 3 and 4
+\begin{example}{3}
+\textbf{Identify a Sampling Method}
+What sampling method is used in the following examples? Is the method likely to be biased?
+\begin{tabular}{ll}
+Study & Sampling Method \\
+A. Starting with a randomly chosen ID number, every fifth student ID number was chosen and that student was asked to fill out a survey. & This is systematic sampling. The rule is that every fifth number was chosen. This method unlikely to be biased. \\
+B. A retailer put feedback cards at the front of its store. They got responses from 22\% of their customers. & This is a self-selected sample, which only includes people who decided to respond to the survey. This method is not random and likely biased. \\
+C. A city wants to know what percent of people in the city own a dog or a cat. A city worker goes door to door in the neighborhood around city hall to ask people about their pets. & This is convenience sampling because only the neighborhood around city hall was sampled. The process is likely to be biased because pets may be more or less common in other parts of the city. \\
+\end{tabular}
+\answer{A. systematic sampling, unlikely to be biased; B. self-selected sample, likely biased; C. convenience sampling, likely to be biased.}
+\te{Printed This method unlikely; likely This method is unlikely.}
+\te{CONSTRUCT ARGUMENTS How could you redesign the biased studies here so that the samples are not biased?}
+\end{example}
+\begin{tryit}{3}
+What sampling method is used in the following examples? Is the method likely to be biased or not?
+a. The population is grouped according to age and a random sample is chosen from each group.
+b. A number of hospitals around the country were randomly chosen. Within each hospital, all of the nurses were chosen.
+\answer{a. This is a stratified sample. It is unbiased as long as the samples chosen from each group reflect the age group's percentage of the population and are otherwise random. b. This is cluster sampling. Each hospital in the country is a cluster, and some hospitals/clusters were chosen to be a part of the sample. It is unbiased, as long as the hospitals were truly chosen at random.}
+\end{tryit}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Identify a Sampling Method: Pose Purposeful Questions}
+Q: How do convenience sampling and self-selected sampling differ?
+\answer{Convenience sampling involves only questioning people who are near you when you decide to conduct your study. In self-selected sampling, you may give a large number of people the opportunity to respond to your survey, but the results will only be made up of those who wish to respond.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{Make Sense and Persevere: Use with EXAMPLES 2, \& 3}
+Of the five sampling methods, which two are most likely to introduce bias? Explain.
+\answer{Convenience sampling and self-selected sampling; they rely on samples that are not chosen randomly.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Randomize Experiments}
+APPLICATION
+Describe a design for a controlled experiment to test a new drug for treating the flu on mice. How does randomization apply to your design?
+In a simple controlled experiment, randomly assign mice to one of two groups. One group, the experimental group, receives the treatment. The other group, the control group, does not. Then use statistics to compare the effect of the treatment to the effect of no treatment.
+Mice are assigned randomly to either group, and all mice are infected with the flu. The control group does not receive the drug. The experimental group receives the new drug. The results are analyzed to see whether the new drug affects the progression of flu in a way that is significantly different from receiving no treatment. The random assignment to experimental and control groups should ensure that the difference between the two groups is due to the drug rather than some other cause.
+\answer{Randomly assign mice to two groups, with the experimental group receiving the new drug and the control group receiving no drug; compare the results.}
+\te{STUDY TIP Some experiments can have more than two groups, especially if you are testing multiple variables. Some experiments do not have a control group and just compare different treatments.}
+\end{example}
+\begin{tryit}{4}
+Design an experiment to test whether drinking coffee improves memory. How will you choose the experimental and control groups?
+\answer{Control group: no coffee; Experimental group: coffee; Give everyone a memory test and compare the results.}
+\end{tryit}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Randomize Experiments: Pose Purposeful Questions}
+Q: What distinguishes the two groups from each other?
+\answer{The experimental group receives the treatment. The control group does not receive treatment.}
+Q: What is the purpose of using random sampling?
+\answer{to ensure that the difference between the two groups is due to the treatment rather than to natural variability}
+\te{Printed random sampling; the example concerns random assignment to treatment groups.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Transition students into creating their own study by giving them a topic that would require randomized sampling.
+\item Create a study for an experiment that tests the effects of using electrolyte water, a sports drink, and plain water with athletes in your school. Your school has a baseball team; a football team; a softball team; and two soccer teams, one male and one female.]
+Q: Describe how you will select participants to avoid bias.
+\answer{Sample: There will be three groups. The rosters of each team will be numbered 1, 2, and 3 and repeated randomly to assign players to each group.}
+Q: Describe how you will choose the experimental and control groups. Explain how to keep the experimental group unknown.
+\answer{Tables will be set up to distribute the drinks by number. They will be labeled 1, 2, and 3. Players will choose their drink by number without knowing what the drinks are.}
+Q: How can you be certain that there is little to no bias within your methods?
+\answer{At every selection, designation, and decision being made, test it and analyze it to search for any aspect that could cause bias.}
+\end{te-addendum}
+% Source page 29: 542 Concept Summary
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Construct Arguments}
+Q: Why is it important to have the memory test administered by someone who was not aware of which subjects were in the experimental group?
+\answer{A researcher who knew which subjects were in the experimental group might score subjects differently in order to prove his or her hypothesis.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{Statistical Studies and Sampling Methods}
+Q: How do you begin conducting a study?
+\answer{First, you must decide what type of study—experiment, sample survey, or observational study—gives the most useable data. Then a sampling selection method must be used in a way that is not biased.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Exercise 5 Some students may incorrectly identify the sampling method as a cluster sampling since only people watching the program were asked to give their opinions. Have students make a chart of the definitions of the different sampling methods. Have students compare the definition of a cluster sample with the definition of a self-selected sample and note the differences. Point out that when participants are expected to participate of their own will, they are self-selecting themselves as participants or volunteering.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Statistical Studies and Sampling Methods}
+\textbf{TYPES OF STUDIES}
+\item An experiment involves randomly dividing a population into two groups, applying a different treatment to each group, and measuring the difference between the treatments.
+\item A sample survey asks every member of a randomly selected sample the same set of questions and records the answers to try to draw a conclusion about the population.
+\item In an observational study, you do not assign treatments to the subjects being studied. The subjects are already affected by the treatments under investigation.
+\textbf{TYPES OF SAMPLING}
+\begin{tabular}{lllll}
+\multicolumn{3}{c}{Care must be taken to avoid bias.} & \multicolumn{2}{c}{High risk of bias} \\
+Stratified sampling & Cluster sampling & Systematic sampling & Convenience sampling & Self-selected sampling \\
+Population divided into groups based on similar characteristics; sample randomly chosen from each & Population divided into clusters; entire clusters chosen at random as the sample & First individual chosen at random; then use rule like ``every 3rd person'' to select sample & Only individuals that are in close proximity or easily accessible chosen for sample & Sample composed entirely of volunteers \\
+\end{tabular}
+% FIG 29 683 476 993 573
+\placeholder{diagram}{Five sampling diagrams of red, blue, and purple people with selected people boxed: stratified selects two from each color group; cluster selects the whole blue group; systematic selects every third person, the right column; convenience selects six people closest to a black Researcher below the group; self-selected selects scattered volunteers with raised arms.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you choose the best type of study to answer given statistical question and choose a reasonable sample?
+\answer{Try to conduct a study where objects are selected randomly, and without bias.}
+2. Vocabulary A city is weighing whether to increase fares for public transit, or to provide more funding to public transit through the city's general fund, which is primarily funded by local property taxes. A survey of public transit riders was conducted to determine popular opinion. What is this sampling method an example of?
+\answer{bias}
+3. Error Analysis When Lila conducted an experiment on citywide pond water, all of her samples came from the pond in her uncle's backyard. Explain her error.
+\answer{Water sampled from only one pond cannot possibly reflect all pond water in the city. This was an example of convenience sampling.}
+\textbf{Do You KNOW HOW?}
+4. An ice cream shop asks its customers if they would like the shop to offer containers of ice cream to take home. What type of study does this describe?
+\answer{sample survey}
+5. A television news program asks its viewers to call in to give their opinions on an upcoming ballot question. What type of sampling method does this represent?
+\answer{a self-selected sample}
+6. A doctor assigns people to treatment groups based on data from their medical records. Is this method of selecting treatment groups biased or unbiased? Explain.
+\answer{The method is biased because the doctor is using patients' medical records to assign them to a group rather than assigning them randomly.}
+\end{concept-summary}
+% Source page 30: 543 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice & Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+7–22 & 7–22 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each
+Practice: 1 point each
+Assessment Practice: 1 point each
+Performance Task: 3 points
+\te{Scan the QR code to access a video tutorial.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 11, 21 & 1 \\
+1 & 17, 18 & 2 \\
+2 & 12, 15 & 2 \\
+3 & 7, 9, 13, 19, 20 & 2 \\
+3 & 10, 22 & 3 \\
+4 & 16 & 2 \\
+4 & 8, 14 & 3 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{7}{2}
+\textbf{UNDERSTAND — Reason} Suppose a civil engineer wants to conduct a survey to find out if residents of a city would be in favor of widening one of the city's roadways for increased traffic flow.
+a. Would a sample consisting of residents who utilize that roadway to travel to work each morning be representative? Explain.
+\answer{a. No; it would be biased because they will ultimately benefit from the increased traffic flow.}
+b. Would a sample consisting of residents who live along that roadway be representative? Explain.
+\answer{b. No; it would be biased because they will welcome neither the disruption caused by the construction nor the increased traffic flow.}
+c. Would a random sample of homeowners in the city be representative? Explain.
+\answer{c. This is unbiased, and each homeowner within the city has an equal chance of being selected for the sample.}
+\end{practice}
+\begin{practice}{8}{3}
+\textbf{Make Sense and Persevere} A pharmaceutical company is developing a new oral medication for the treatment of psoriasis, a skin disease marked by red, itchy, scaly patches. Describe how you could design a controlled experiment to test the effect of the medication. How could you keep participants from knowing whether or not they were in the treatment group?
+\answer{Control group—people with psoriasis given a placebo; Experimental group—people with psoriasis given the new medication; Everyone's medication looks and feels the same, so no one knows if he or she is getting a placebo or medication.}
+\end{practice}
+\begin{practice}{9}{2}
+\textbf{Error Analysis} Describe and correct the error a student made when responding to the following question.
+A website wants to post a blog about the most popular type of pet in the Seattle area. Would a sample consisting of every tenth ticket holder to the local dog show be representative? Explain.
+\te{Student work marked incorrect: Yes; since the sample is a systematic random sample, it would be representative of the population.}
+\answer{While it is a systematic sampling method, it is biased towards dogs because all the members of the sample are ticket holders to a dog show.}
+\end{practice}
+\begin{practice}{10}{3}
+\textbf{Higher Order Thinking} Suppose a grocery store manager wishes to survey the store's employees in order to determine whether they prefer expanding the existing break room or building an outdoor patio for the employees.
+a. How could the manager conduct an unbiased stratified sampling?
+\answer{a. The manager could randomly ask several employees within each department.}
+b. How could the manager conduct an unbiased systematic sampling?
+\answer{b. The manager could conduct a survey of every 10th employee in the alphabetized employee list.}
+\end{practice}
+\begin{practice}{11}{1}
+\textbf{PRACTICE} What type of study is described? SEE EXAMPLE 1
+a. Managers of a forest preserve want to know what percent of the visitors with dogs keep their dogs on a leash. The park assigns an employee to count the numbers of visitors that do and do not use a leash.
+\answer{a. observational}
+b. A local newspaper polls citizens of a city about whether they support a local tax levy.
+\answer{b. sample survey}
+\end{practice}
+\begin{practice}{12}{2}
+A researcher wants to know the average growth of a certain plant one week after germination. The greenhouse where he grows the plants has 12 trays with 26 plants on each tray. He picks one tray from the greenhouse and measures the heights of each plant. The results are shown in the dot plot.
+% FIG 30 856 530 1083 657
+\placeholder{graph}{Dot plot titled Plant Height. Horizontal axis Height (in.), labeled 1.5 through 4.5 in increments of 0.5; vertical label Frequency, no numerical frequency ticks. Red dots have height:frequency pairs 1.9:1, 2.0:6, 2.1:3, 2.2:3, 2.4:2, 2.5:1, 2.8:1, 3.0:1, 3.2:2, 3.3:1, 3.4:1, 3.5:1, 3.7:1, 4.0:1, 4.2:1. Total 26 dots; no arrows.}
+When analyzing the data, he sees that the heights of the plants are clustered around 2 in. Could this be the result of bias in his sampling method? Explain. SEE EXAMPLE 2
+\answer{Yes; he sampled plants from only one tray, so the sample is not random.}
+\end{practice}
+\begin{practice}{13}{2}
+What sampling method is used in the following examples? Is the method biased or not? SEE EXAMPLE 3
+a. A clothing manufacturing company divided its employees up by units, and then they randomly selected three employees from each unit to represent the company at a convention in Las Vegas.
+\answer{a. This is a stratified random sample. It is unbiased as long as the samples chosen within each unit are chosen randomly.}
+b. Mr. Yotsey put names of all students at his school on identical slips of paper in a box and distributed surveys to the students whose names he pulled.
+\answer{b. This is a simple random sample. It is unbiased as long as the slips of paper were selected at random.}
+\end{practice}
+\begin{practice}{14}{3}
+Researchers want to find out if warm water therapy increases muscle strength in people 65 years of age and older. Describe a design for a controlled study of this question. What are some potential sources of bias in your study? SEE EXAMPLE 4
+\answer{Randomly assign people age 65 and older to either the control group or the experimental group. The experimental group will participate in warm water therapy and the control group will not. Bias may result because the control group could be aware that they are not receiving a treatment. There is no placebo for warm water therapy.}
+\end{practice}
+% Source page 31: 544 Practice & Problem Solving
+\begin{practice}{15}{2}
+\textbf{APPLY — Make Sense and Persevere} Suppose a major oil company hired a survey organization to conduct a study of citizens living within 5 mi of the coast.
+The survey question is, ``Do you want to save money at the gas pump? Well then you would be in favor of off shore drilling, right?''
+Explain the bias that exists in this scenario.
+\answer{The bias is in the question. The experimenters only provided those surveyed with a benefit of offshore drilling; however, they failed to inform the participants of the cons.}
+\end{practice}
+\begin{practice}{16}{2}
+\textbf{Communicate Precisely} A group of farmers wants to test a new fertilizer being produced for soybean crops. Explain how the farmers could set up the control group and the experimental group for this study.
+\answer{Control group—use the same growing techniques as before; Experimental group—use the new fertilizer}
+\end{practice}
+\begin{practice}{17}{2}
+\textbf{Make Sense and Persevere} At Miami University in Oxford, OH, there is a university seal located in the heart of campus. There is a long-standing tradition that claims if you step on the seal you will fail your next exam.
+Natalie spends several hours over several different days, at varying times, counting the number of students who pass along the walkway and the number of students who step on the seal. Which of the three main types of study does Natalie use in her project?
+\answer{observational study}
+\end{practice}
+\begin{practice}{18}{2}
+\textbf{Model With Mathematics} A commercial developer hires a market research company to determine the mean household income of those who live within a 10 mi radius of the site of a proposed upscale shopping center.
+a. Explain why the commercial developer would do this.
+\answer{a. Since it says the proposed site of an ``upscale'' shopping center, the developer wants to be sure the people in the surrounding area will have enough money to spend at this type of venue.}
+b. How might the market research company get the information?
+\answer{b. The market research company will have to use demographic data provided by the federal government.}
+\end{practice}
+\begin{practice}{19}{2}
+A newspaper hires a polling company to determine the level of support in the county for raising property taxes in order to increase funding for local schools. The polling company calls phone numbers chosen at random from a phone number registry between the hours of 5:00 P.M. and 7:00 P.M. What are some potential sources of bias in this sampling method?
+\answer{Calling between the hours of 5:00 and 7:00 may exclude households with people who work during that time. Calling numbers from a phone registry will exclude households that are not listed.}
+\end{practice}
+\begin{practice}{20}{2}
+\textbf{ASSESSMENT PRACTICE} Choose Yes or No to tell whether each of the following describes a convenience sampling method.
+\begin{tabular}{lll}
+ & Yes & No \\
+A manager surveys every fourth customer about their level of satisfaction with their shopping experience. & (\square) & (\square) \\
+When a school district wishes to get feedback on the district's new webpage, they survey the entire population of randomly selected schools. & (\square) & (\square) \\
+When Sheila wanted to find out what type of music was most popular among the students in her history class, she asked the two students who sat on either side of her. & (\square) & (\square) \\
+The quality control officer of a ladder manufacturer walked into the shop, pulled the five closest ladders, and gave them several stress tests checking for potential defects. & (\square) & (\square) \\
+\end{tabular}
+\answer{No; No; Yes; Yes.}
+\end{practice}
+\begin{practice}{21}{1}
+\textbf{SAT/ACT} A researcher studies differences in career goals between boys and girls in middle school. All of the students in the seventh grade schools in a particular county answer a list of questions. What type of study is this?
+A. experiment
+B. sample survey
+C. observational study
+D. random trial
+\answer{B}
+\end{practice}
+\begin{practice}{22}{3}
+\textbf{Performance Task} A grocery store surveys every fifth customer to determine whether it should consider expanding its organic foods department. The results of the 500 customers surveyed are shown in the table.
+\begin{tabular}{lr}
+\multicolumn{2}{c}{In favor of expanded organic dept.?} \\
+Yes & 378 \\
+No & 97 \\
+Indifferent & 25 \\
+\end{tabular}
+Part A What type of sampling method was used? Does it seem valid?
+\answer{Part A: The method was systematic sampling. Yes; it does seem valid.}
+Part B Based upon the results of this survey, about what percent of the store's customers would favor the expansion?
+\answer{Part B: Based upon the results of the survey, it can be predicted that about 76\% of the store's customers would favor the expansion.}
+Part C What is the statistical variable in this study? Is this a quantitative or categorical variable?
+\answer{Part C: preference about expanding the organic foods department; categorical}
+\end{practice}
+% Source page 32: 544A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate — LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Resources book.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & DP25 \\
+2 & 2 & DP25 \\
+3 & 2 & DP25 \\
+4 & 2 & DP25 \\
+5 & 2 & DP25 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0–3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerds videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{11-2 Lesson Quiz — Statistical Studies and Sampling Methods}
+Name \underline{\hspace{2cm}}
+1. Which of the following is an example of a statistical experiment?
+A. Twenty people in a neighborhood are asked if they want more streetlights on the street.
+B. More streetlights are installed on one street and people are then asked if they like the change.
+C. The number of accidents on the street is compared to last year's rate.
+D. People are asked to call a number to say if they want more streetlights.
+\answer{B}
+2. Choose the sampling method that best describes each example.
+\begin{tabular}{llll}
+ & Convenience & Systematic & Self-selected \\
+The first ten people who show up for class are asked to fill out a form. & (\square) & (\square) & (\square) \\
+All students whose ID numbers are divisible by 5 are asked about what music they like. & (\square) & (\square) & (\square) \\
+Students participate in a voluntary on-line survey conducted by your school cafeteria. & (\square) & (\square) & (\square) \\
+\end{tabular}
+\answer{Convenience; Systematic; Self-selected.}
+3. A lawyer reviews a sample of his past cases to find his success rate. What type of study is this?
+A. experiment
+B. survey
+C. observational study
+D. biased study
+\answer{C}
+4. A student wants to study the effect of meditation on the time a person is able to balance on one leg. She finds 40 volunteers who have never meditated, and records their balance times. She selects 20 of them at random, and instructs them to practice meditation daily for two weeks. In two weeks, she records the balance times for all 40 volunteers again.
+The 40 volunteers are the [control; sample; experimental; study] group.
+The 20 mediators are the [sample; experimental; control; study] group.
+\answer{study; experimental.}
+\te{Printed mediators; likely meditators.}
+5. Select all the sampling methods that would bias the set of responses.
+A. asking people to return a mail-in card
+B. tossing a chipped number cube
+C. calling people between 3:00 P.M. and 4:00 P.M.
+D. interviewing pet owners about their pet's health
+E. asking the first 50 people who enter a food store about their shopping habits
+\answer{A, B, C, E}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 33: 544B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES} I = Intervention; O = On-Level; A = Advanced
+\textbf{Reteach to Build Understanding — I}
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School
+\textbf{11-2 Reteach to Build Understanding — Statistical Studies and Sampling Methods}
+Five different sampling methods can be used when creating an experiment or sample.
+\item Convenience – only choosing subjects that are close in proximity
+\item Self-selected – only choosing volunteers
+\item Stratified – The population is divided into groups with similar characteristics and a sample is randomly chosen from all groups.
+\item Cluster – The population is divided into clusters and entire clusters are sampled.
+\item Systematic – a specific rule is used to select members of a sample
+1. Explain why the type of sampling listed is correct.
+a. A television station invites viewers to call in and name their favorite news anchor. This is a self-selected type of sampling.
+\answer{The viewers are self-selected because they volunteered to call in.}
+b. A librarian wants to determine how much time students spend reading. He asks students as they enter the library. This is convenience sampling.
+\answer{It is convenient to the librarian to select only the students entering the library.}
+2. A principal wants to determine what electives students want added next year. He surveys every 10th student listed in the school database. Gregory said this was a perfect example of cluster sampling. Is he correct? Explain.
+\answer{Gregory is incorrect. The principal is using systematic sampling because the principal uses a rule when determining which students he asks.}
+3. Fill in the blank with the sampling method used.
+a. \underline{\hspace{1cm}}: A toll booth operator asks the driver of every 10th car that goes through his booth what location they are traveling to.
+\answer{systematic sampling}
+b. \underline{\hspace{1cm}}: A radio station is taking a poll on favorite songs by asking listeners to call in.
+\answer{self-selected sampling}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice — I, O}
+Provides extra practice for each lesson.
+MathXL for School
+\textbf{11-2 Additional Practice — Statistical Studies and Sampling Methods}
+What type of study is described?
+1. A company that manufactures light bulbs selects 3 bulbs at random. These bulbs are then tested to see how many hours they last.
+\answer{observational}
+2. A video game store wants to discontinue one of the gaming consoles they sell, but want to ensure they keep the most popular. For two weeks, the sales clerk asks every third customer which console is their favorite.
+\answer{sample survey}
+For items 3 and 4, what sampling method is used in the following examples? Is the method biased or not? Explain.
+3. Students who are preparing for the junior class party want to determine what kinds of pizza to buy. They ask all the owners of the closest pizza restaurants what kinds of pizza they sell the most.
+\answer{convenience; Biased; the restaurant sells to people other than students.}
+4. The county road department wants to know which roads cause the most concern among the residents of the county. They ask local pet stores to hand out survey forms for customers who volunteer their opinions.
+\answer{self-selected; Biased; the patrons are not representative of the entire county.}
+5. Describe a design for a controlled experiment to determine whether an acne-reducing medication is effective for people who are 13–22 years old. What are some potential sources of bias in your study?
+\answer{Sample: For 100 people who are 13–22 years old, create two groups. One group gets the medication, and one gets a placebo. Over time, assess the degree of acne reduction. Possible biases include false reporting of results or errors in using the medication.}
+6. Explain why the results of a survey could have statistical bias, even if the questions used in the survey are not biased.
+\answer{Sample: The sample might be too small to accurately reflect the population or the sampling method could be biased.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment — O, A}
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School
+\textbf{11-2 Enrichment — Statistical Studies and Sampling Methods}
+An urban planner wants to develop plans for a new dog park in town. She wants to gather information from the townspeople. For each sampling method, explain who she might sample using that method, and any potential bias that might result.
+1. Convenience sampling:
+\answer{Answers may vary. Sample: She surveys people as they enter the local pet store. This sample would be biased, since people entering a pet store are more likely to own a pet, which may be a dog. This sampling method is less likely to determine the needs of people who do not own dogs.}
+2. Self-selected sampling:
+\answer{Answers may vary. Sample: She posts ads asking people to come share their opinions at the next town meeting. The potential bias is that only people who are concerned about the park will attend the meeting.}
+3. Stratified sampling:
+\answer{Answers may vary. Sample: She groups people into two categories: dog owners and non-dog owners. Then she randomly selects 100 people from each group to answer a questionnaire. Since the selection is random and includes people from both groups, it is likely to be unbiased sampling.}
+4. Cluster sampling:
+\answer{Answers may vary. Sample: She divides the town into groups by neighborhood. Then she randomly chooses six neighborhoods and surveys all the residents in each neighborhood. Since the selection of neighborhoods is random, the results should be unbiased if the sample is large enough to represent the population.}
+5. Systematic sampling:
+\answer{Answers may vary. Sample: She selects every fourth house on a block to survey. Since the selection is random, the results should be unbiased, assuming the sample is large enough to represent the population.}
+If you were the urban developer, which sampling method would you choose and why? Consider bias, convenience, cost, time, etc.
+\answer{Answers may vary. Sample: Systematic sampling; the results are likely to be unbiased and it would require little time or money to determine who to include sample.}
+\te{Printed who to include sample; likely who to include in the sample.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary — I, O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{11-2 Mathematical Literacy and Vocabulary — Statistical Studies and Sampling Methods}
+Fill in the letter that matches the term with its definition.
+\begin{tabular}{ll}
+Term & Answer \\
+bias & \answer{E} \\
+cluster sampling & \answer{I} \\
+control group & \answer{D} \\
+convenience sampling & \answer{J} \\
+experiment & \answer{H} \\
+experimental group & \answer{C} \\
+observational study & \answer{K} \\
+sample survey & \answer{B} \\
+self-selected sampling & \answer{G} \\
+stratified sampling & \answer{F} \\
+systematic sampling & \answer{A} \\
+\end{tabular}
+Definition
+A. A rule is used to select members of a sample.
+B. asks every member the same set of questions and records the answers
+C. a group of subjects who are exposed to the variable under study
+D. a group of subjects who are not exposed to the variable under study
+E. a systematic error in a study caused by the sampling method
+F. A population is divided into groups with similar characteristics and a sample is randomly chosen from all groups.
+G. A sample is made up of only volunteers.
+H. involves applying a treatment to some group or groups and measuring the effects of treatment
+I. A population is divided into clusters and entire clusters are chosen as the sample.
+J. Only subjects that are nearby or easy to get to are chosen.
+K. involves observing members of a sample without affecting them
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 33 585 978 1035 1298
+\placeholder{illustration}{Tablet screenshot of digital practice. Prompt: Solve the system of equations by graphing, y=3x+4 and y=-2x+4. Use the graphing tool to graph the system. Click to enlarge graph. Empty square coordinate grid with x and y axes from -10 to 10 and tick marks every unit, labels every two units, arrowheads on both ends of both axes. Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print; Clear All; Check Answer; Review progress; Back; Next.}
+\end{te-addendum}
+
+\end{document}

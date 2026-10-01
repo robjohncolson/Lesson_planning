@@ -1,0 +1,891 @@
+\documentclass{article}
+% Source: Topic_05_Teacher_Edition.pdf, PDF pages 36-47 (printed pages 243A-250B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 36: 243A Lesson Overview
+\begin{lesson-meta}
+lesson: 5-3
+title: Graphing Radical Functions
+standards: none printed
+practices: none printed
+objective: I CAN graph and transform radical functions.
+
+essential question: How can you use what you know about transformations of functions to graph radical functions?
+
+\textbf{VOCABULARY}
+\item radical function
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 5-3 \\
+Title & Graphing Radical Functions \\
+Standards & none printed \\
+I CAN Objective & I CAN graph and transform radical functions. \\
+Essential Question & How can you use what you know about transformations of functions to graph radical functions? \\
+Lesson Vocabulary & radical function \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Graph radical functions, including square root and cube root functions.
+\item Identify the effect of transformations on the key features of the graphs of radical functions.
+Essential Understanding. The function (g(x)=a\sqrt[n]{x-h}+k) represents the transformation of the parent radical function (f(x)=\sqrt[n]x), where (a) stretches or compresses the graph vertically, (h) translates the graph horizontally, and (k) translates the graph vertically.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Graphed and transformed linear, quadratic, polynomial, and rational functions.
+In this lesson, students:
+\item Graph and transform radical functions.
+Later in this topic, students will:
+\item Use graphing to check the solutions to radical equations.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand why the parameters of a radical function transform the graph of the parent function.
+\item Students interpret radical function models in the context of real-world problems, such as finding minimum and maximum distances for visibility from a specified spot on a cliff.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+\te{Glossary is available at SavvasRealize.com. Program Resources.}
+\begin{tabular}{ll}
+REVIEW VOCABULARY English & Spanish \\
+function & función \\
+radical & radical \\
+NEW VOCABULARY & \\
+radical function & función radical \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Review the term function. Ask students to give some examples of different kinds of functions that they have used in this course and previous courses.
+Explain that a radical function is a function that contains a radical expression. Have students indicate which of the functions shown to the right are radical functions and which are not.
+\begin{tabular}{lll}
+Function & Yes & No \\
+(f(x)=\sqrt[3]x) & & \\
+(f(x)=x^4) & & \\
+(f(x)=\sqrt[3]{4x+2}) & & \\
+\end{tabular}
+\te{No answers are marked in the printed table.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 36 1000 713 1153 894
+\placeholder{illustration}{Student Companion cover with purple and blue glowing sphere on black; enVision Algebra 2 and Savvas labels.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students graph square root and cube root functions. They understand the relationship between the graph of a radical function and the graph of its parents function, using (f(x)=a\sqrt[n]{x-h}+k). The value of (a) determines the vertical stretch or compression, the value of (h) determines a horizontal translation, and the value of (k) determines a vertical translation.
+\textbf{Applying Math Practices: Reason Abstractly and Quantitatively}
+Students make sense of quantities and their relationships when they identify the effect that the parameters (a), (h) and (k) have on the graph of the parent square root function.
+\textbf{Look For and Make Use of Structure}
+Students observe the graphs of transformations of radical functions and relate the graphs to the graph of the parent function.
+\end{te-addendum}
+% Source page 37: 243B Explore & Reason
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. EXPLORE \& REASON. INSTRUCTIONAL FOCUS}
+Students will explore graphs of quadratic and square root functions that describe the area of a square.
+\textbf{STUDENT COMPANION} Students can complete the Explore \& Reason activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving}
+Q: What function (f(s)) represents the area of a square?
+\answer{(f(s)=s^2)}
+Q: Why is this function important to know?
+\answer{The formula (A=s^2) can be expressed as the parent function of a parabola.}
+\textbf{During: SMALL GROUP. Support Productive Struggle in Learning Mathematics}
+Q: What function (f(A)) represents the side of the square, given the area?
+\answer{(f(A)=\sqrt A)}
+Q: How can you use the ordered pairs from your first graph to help graph (f(A)=\sqrt A)?
+\answer{You can take the ordered pairs from the first graph, swap the x- and y-values, and use the resulting ordered pairs to graph (f(A)=\sqrt A).}
+\textbf{For Early Finishers}
+Q: Graph the function (g(V)=\sqrt[3]V) on the same coordinate plane as (f(s)=s^3). Do these functions have the same relationship as the function of area has with the function of side length?
+\answer{Yes; the domain of (f) is the range of (g), and the range of (f) is the domain of (g).}
+\textbf{After: WHOLE CLASS. Facilitate Meaningful Mathematical Discourse}
+Q: Consider the table of values for each function. How are the tables related?
+\answer{The table for one function is the same as for the other but with the x- and y-values swapped.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Consider the formula for the area of a square: (A=s^2)
+A. Graph the function that represents area as a function of side length.
+B. On the same set of axes, graph the function that represents side length as a function of area.
+\answer{A. and B. See graph.}
+% FIG 37 783 989 989 1231
+\placeholder{graph}{Sample student work: axes x and y with arrowheads both ends, unit grid, x labels -4,-2,2,4 and y labels 2,4,6,8, origin O. Window approximately x=-5 to 5,y=-2 to 10. Red right branch of y=x^2 and blue y=sqrt(x) both begin at (0,0), cross at (1,1), and have arrows upward near (3.2,10) and rightward near (5,2.2). No negative branches or plotted point dots.}
+C. Look for Relationships How are the two graphs related?
+\answer{C. The domain of the first is the range of the second, and the range of the first is the domain of the second.}
+\te{Explore \& Reason is available at SavvasRealize.com. Activity. STUDENT EDITION; SAMPLE STUDENT WORK. Digital version: A. Use the tool to graph the function that represents area, y, as a function of side length, x. B. On the same set of axes, graph the function that represents side length, y, as a function of area, x. Digital labels: Go back; desmos; Clear; Enter your answer; Powered by desmos.}
+% FIG 37 823 277 1076 490
+\placeholder{graph}{Empty Desmos launch grid: horizontal axis labels -10,-5,0,5,10; vertical labels -6,6; unit grid, window x=-10 to 10 and y about -10 to 10. No curves or points.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXPLORE \& REASON}
+Q: Communicate Precisely What are the domain and range of each function?
+\answer{(A=s^2): domain: (x\geq0), range: (y\geq0); (s=\sqrt A): domain: (x\geq0); range: (y\geq0)}
+\end{te-addendum}
+% Source page 38: 243 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION. Establish Mathematics Goals to Focus Learning}
+Discuss with students the familiar transformations that can occur for various types of parent functions. Explain that key features of the graph can be uncovered by rewriting and factoring the function.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Graph Square Root and Cube Root Functions. Use and Connect Mathematical Representations}
+PART A
+Q: How do you find x-values that make the radicand of (\sqrt{ax}) a perfect square?
+\answer{Choose a perfect square (1, 4, 9,...) and then multiply it by an odd power of (a) or divide it by (a).}
+Q: Why is it important to be sure that the radicand of a square root function remains positive?
+\answer{The square root of a negative number is not a real number; therefore, the radicand must remain positive.}
+\te{Printed positive; nonnegative also includes the permitted zero radicand.}
+PART B
+Q: Why is the cube root function allowed to have negative values in the radicand?
+\answer{A negative number raised to the 3rd power is negative; therefore, the cube root of a negative number is a real number.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Graph Square Root and Cube Root Functions}
+Graph the following functions. What are the domain and range of each function? Is the function increasing or decreasing?
+A. (f(x)=\sqrt{3x})
+Make a table of values and graph.
+\begin{tabular}{lllll}
+x & 0 & 3 & 12 & 27 \\
+y & 0 & 3 & 6 & 9 \\
+\end{tabular}
+\te{For ease, choose x-values that make the radicand a perfect square.}
+For a square root function, the radicand cannot be negative, so the domain of the function is (\{x\mid x\geq0\}).
+% FIG 38 838 398 944 494
+\placeholder{graph}{Red increasing curve f(x)=sqrt(3x), starting at filled (0,0), with filled points (3,3) and (12,6), and arrow up and right. Axes x,y; horizontal grid every 3, labels 0,6,12,18,24, window 0 to 30; vertical unit grid, labels 0,2,4,6, window 0 to 8. Positive axis arrows; no asymptote.}
+\te{Callout: Radical functions do not have a horizontal asymptote; they grow without limit. LOOK FOR RELATIONSHIPS How does the graph of the function shown compare to the graph of its parent function? Powered by desmos.}
+Key features of a square root function include the range is (\{y\mid y\geq0\}), and as (x) increases, (y) increases, so the function is always increasing.
+\answer{A. Domain: (x\geq0); range: (y\geq0); increasing.}
+B. (g(x)=\sqrt[3]{2x})
+Make a table of values, and graph.
+\begin{tabular}{llllll}
+x & -135 & -4 & 0 & 4 & 135 \\
+y & -3 & -2 & 0 & 2 & 3 \\
+\end{tabular}
+\te{Printed table shows -135 and 135; likely -13.5 and 13.5, consistent with (g(x)=\sqrt[3]{2x}) and the graph. Callout: The radicand in a cube root function can be positive or negative. CONTINUED ON THE NEXT PAGE.}
+% Source page 39: 244 Example 1 continued
+There are no restrictions on the radicand of a cube root function, so the domain and range of the function is all real numbers.
+The function is increasing over the entire domain.
+% FIG 39 950 221 1115 326
+\placeholder{graph}{Red g(x)=cube root(2x) through filled points (-13.5,-3),(-4,-2),(0,0),(4,2),(13.5,3), arrowheads both ends. Axes x,y with arrows both ends, x window -16 to 16, grid every 2, labels -12,-8,-4,4,8,12; y window -5 to 5, unit grid, labels -4,-2,2,4, origin O. Increasing curve with vertical tangent at origin.}
+\answer{B. Domain and range: all real numbers; increasing over the entire domain.}
+\te{LOOK FOR RELATIONSHIPS Odd functions are symmetric about the origin. Even functions are symmetric about the y-axis. Which terms describe the parent functions for square root functions and cube root functions?}
+\end{example}
+\begin{tryit}{1}
+Graph the following functions. What are the domain and range of each function? Is the function increasing or decreasing?
+a. (f(x)=\sqrt{x-5})
+b. (g(x)=\sqrt[3]{x+1})
+\answer{a. domain: (x\geq5), range: (y\geq0); increasing. b. domain: all real numbers, range: all real numbers; increasing.}
+% FIG 39 149 196 348 392
+\placeholder{graph}{Try It 1a answer: red sqrt(x-5) curve begins at (5,0), passes near (6,1), arrow right near (9,2). Axes x,y with arrowheads both ends; unit grid x=-1 to 9,y=-5 to 5; labels x2,4,6,8 and y-4,-2,2,4; origin O. No separately marked point dots.}
+% FIG 39 388 196 581 392
+\placeholder{graph}{Try It 1b answer: red cube root(x+1), increasing through (-1,0),(0,1), arrows both ends. Axes x,y with arrows both ends, unit grid window[-5,5] by[-5,5], labels every 2 excluding 0, origin O. No plotted dots.}
+\end{tryit}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Examples: ADDITIONAL EXAMPLE 3}
+How can you rewrite the following radical function to identify the transformations from the parent graph (f(x)=\sqrt[3]x)?
+(p(x)=\sqrt[3]{9x+28}+7)
+(p(x)=\sqrt[3]9\times\sqrt[3]{x+\frac{28}9}+7)
+\answer{The graph of (p(x)) is a vertical stretch of the parent function by a factor of (\sqrt[3]9), a translation of (\frac{28}9) units to the left, and a translation of 7 units up.}
+Example 3 Students are accustomed to factoring out the GCF of binomials and to searching for perfect square or perfect cube factors in order to simplify radicals. Students must use the Product Property of Radicals to rewrite radical functions.
+Q: When you apply the Product Property of Radicals to rewrite one radical as a product of two, which number will be factored out and written under a separate radical sign?
+\answer{the coefficient of (x)}
+\te{Printed on PDF page 38; Example 1 continuation is kept with its example. Additional Examples are available at SavvasRealize.com. Go back; Essential Question; Solution.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+What radical function is represented in the graph?
+The parent function of this radical function is (y=\sqrt[3]x).
+The point of symmetry is at ((-8,4)) so the function has been translated 8 to the left and 4 up.
+The graph contains the points ((-7,8)) and ((-9,0)). This represents a vertical stretch of the parent graph by a factor of 4.
+The function that represents the graph is:
+(f(x)=4\sqrt[3]{x+8}+4)
+% FIG 38 944 919 1066 1043
+\placeholder{graph}{Additional Example 4: red f(x)=4 cube root(x+8)+4, with symmetry center(-8,4), x-intercept(-9,0), y-intercept(0,12), no marked points. Axes x,y, arrows both ends, grid spacing 2, labels every 4 from -12 to 12, window[-14,14] by[-14,14]. Curve rises steeply near x=-8 and has arrowheads at both visible ends.}
+\answer{(f(x)=4\sqrt[3]{x+8}+4)}
+Example 4 Students can have extra practice with cube root functions that have values other than (a=1), (h=0), and (k=0).
+Q: What can you determine from the vertical and horizontal translation?
+\answer{the values of (h) and (k)}
+\te{Printed on PDF page 38. Go back; Essential Question; Solution.}
+\end{te-addendum}
+% Source page 39: 244 Concept and Example 2
+\begin{concept-box}
+\textbf{CONCEPT Radical Function}
+A radical function is a function of the form (f(x)=a\sqrt[n]{x-h}+k), where
+\item (a) determines a vertical stretch or compression.
+\item (h) determines a horizontal translation.
+\item (k) determines a vertical translation.
+\end{concept-box}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Graph a Transformation of a Radical Function. Use and Connect Mathematical Representations}
+Q: How can you describe the effects of the coefficient of the radical, (a), to the result of the radical expression and the graph?
+\answer{The coefficient is directly multiplied by the result of the radical expression; therefore, it will cause the graph of the radical expression to be stretched or compressed vertically.}
+Q: What key features can be determined from (h) and (k) of a square root function before graphing?
+\answer{The values (h) and (k) can be written as a coordinate point that will be the initial starting point of the graph, and this point defines the amount of translation.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Graph a Transformation of a Radical Function}
+Graph (g(x)=2\sqrt{x+3}+5). What transformations map the graph of (f(x)=\sqrt x) to the graph of (g)? How do the domain and range of (g) differ from those of (f)?
+Step 1 Identify (a), (h), and (k) in (g(x)=2\sqrt{x+3}+5) and how they transform (f).
+(g(x)=2\sqrt{x-(-3)}+5)
+\te{Callouts: (a=2), so the function is stretched vertically by a factor of 2. (h=-3), so the graph is translated left 3 units. (k=5), so the graph is translated up 5 units. STUDY TIP The radicand (x+3) can be written as (x-(-3)), which relates more directly to the general form of a radical function. The horizontal translation, (h), is -3, so the graph of the function will shift (or translate) left 3 units.}
+Step 2 Graph the parent function (f), and use it as a guide to graph (g).
+% FIG 39 887 666 1002 766
+\placeholder{graph}{Axes x,y; x grid every 2 and labels-4,4,8,12, window-6 to 16; y grid every 2, labels 4,8,12, window-4 to 16. Black f(x)=sqrt(x) from(0,0), red dashed 2sqrt(x) from(0,0), purple g(x)=2sqrt(x+3)+5 from(-3,5); arrows right on curves. Green upward arrow from(0,0) to(0,5) and blue leftward arrow from(0,5) to(-3,5). Origin O; axis arrows both ends.}
+\te{Callouts: The graph of (f) is stretched vertically by a factor of 2, so each y-value is twice as far from the x-axis. This stretched graph is then translated 3 units left and 5 units up to show the graph of (g).}
+The domain of (f) is (\{x\mid x\geq0\}), while the domain of (g) is (\{x\mid x\geq-3\}).
+The range of (f) is (\{y\mid y\geq0\}), while the range of (g) is (\{y\mid y\geq5\}).
+\answer{Vertical stretch by 2, left 3, up 5; domain (g): (x\geq-3); range (g): (y\geq5).}
+\te{CONTINUED ON THE NEXT PAGE.}
+\end{example}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 2}
+Students can investigate how a positive and a negative coefficient of the radical will affect the graph of a radical function.
+\item Graph each radical function.
+1. (f(x)=\sqrt[3]x) and (g(x)=-\sqrt[3]x)
+2. (g(x)=2\sqrt{x-1}) and (g(x)=-2\sqrt{x-1})
+Q: If the value of the coefficient is negative, will the graph be reflected over the x- or y-axis?
+\answer{It will be reflected over the x-axis, because the negative causes the signs of (f(x)) and (g(x)) to change.}
+\end{te-addendum}
+% Source page 40: 245 Example 2 continued and Example 3
+\begin{tryit}{2}
+Graph (g(x)=\frac12\sqrt{x-1}-3). What transformations of the graph of (f(x)=\sqrt x) produce the graph of (g)? What is the effect of the transformations on the domain and range of (g)?
+\answer{The graph of (f) is compressed vertically by a factor of (\frac12) and translated 1 unit to the right, and 3 units down to create the graph of (g). The domain has been changed from (x\geq0) to (x\geq1), and the range has been changed from (y\geq0) to (y\geq-3).}
+% FIG 40 159 165 358 362
+\placeholder{graph}{Try It 2 answer: red f(x)=sqrt(x) starts(0,0); blue g(x)=0.5sqrt(x-1)-3 starts(1,-3); both increase rightward with arrows. Axes x,y with arrows both ends, unit grid window x=-1 to 9,y=-5 to 5; labels x2,4,6,8 and y-4,-2,2,4; origin O. Curves labeled f(x) and g(x), no point dots.}
+\end{tryit}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error. Try It! 2}
+Students may struggle with drawing the graph accurately after it has been translated. Have them sketch the parent function from the coordinate point ((h,k)) and then apply the stretch factor.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES1 \&2}
+Q: Use Structure How does the graph of (y=\sqrt{x-a}+b) compare to the graph of (y=\sqrt x)?
+\answer{The graph of (y=\sqrt{x-a}+b) is shifted (a) units to the right and (b) units up.}
+\end{te-addendum}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Rewrite Radical Functions to Identify Transformations. Build Procedural Fluency From Conceptual Understanding}
+Q: What does it mean to rewrite the radical function to identify the transformation?
+\answer{Rewrite the radical function in the form of (f(x)=a\sqrt{x-h}+k), where (h) is the horizontal shift, (k) is the vertical shift, and (a) is the factor by which the graph of the function is compressed or stretched. This form identifies the key features of the graph.}
+Q: What must be done to the radicand to rewrite the radical function in the correct form?
+\answer{The coefficient of (x) must be factored out so that the coefficient of (x) in the remaining radicand is 1.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Rewrite Radical Functions to Identify Transformations}
+Rewrite the following radical functions to identify their transformations from the parent graph of (f(x)=\sqrt x).
+A. (g(x)=\sqrt{9x})
+Use the properties of radicals to rewrite the function and to identify a vertical stretch.
+(g(x)=\sqrt{9x})
+(=\sqrt9\cdot\sqrt x)
+(=3\sqrt x)
+The horizontal compression has a been rewritten as a vertical stretch.
+(g(x)=3\sqrt x). (a=3), so the graph of (g) is stretched vertically by a factor of 3 from the parent graph. Both (h) and (k) are 0, so there is no translation of the graph.
+% FIG 40 988 308 1155 439
+\placeholder{graph}{Example 3A: blue f(x)=sqrt(x) and red g(x)=3sqrt(x), starting(0,0), arrows at upper right. Filled labeled red points on f:(1,1),(9,3) and on g:(1,3),(9,9). Blue dashed vertical arrow from(9,3) to(9,9). Axes x,y; unit grid, x window 0 to 15 with labels every 2 through 14, y window 0 to 12 with labels every 2 through 10. Curves labeled f,g.}
+\answer{A. (g(x)=3\sqrt x); vertical stretch by 3, no translation.}
+\te{Callout: (g) is vertically stretched by a factor of 3. STUDY TIP You may recall that the parameter (k) in (f(kx)) determines horizontal stretch or compression. In this example, (g(x)) can be described as either a horizontal compression or a vertical stretch. Both transformations of the parent function result in the same graph. CONCEPTUAL UNDERSTANDING.}
+B. (h(x)=\sqrt{4x+16}+7)
+Rewrite the function in the form (h(x)=a\sqrt{x-h}+k).
+(h(x)=\sqrt{4x+16}+7)
+(=\sqrt{4(x+4)}+7)
+(=\sqrt4\cdot\sqrt{x+4}+7)
+(=2\sqrt{x+4}+7)
+% FIG 40 1014 579 1123 700
+\placeholder{graph}{Example 3B: blue f(x)=sqrt(x) from(0,0), dashed green 2sqrt(x) from(0,0), red h(x)=2sqrt(x+4)+7 from(-4,7), arrows at right. Axes x,y arrows both ends; grid 2 units; x window-6 to 16 with labels-4,4,8,12, y window-4 to 20 with labels 4,8,12,16; origin O. No point dots.}
+\te{Callout: The graph of (h(x)) is a vertical stretch of the parent function by a factor of 2, and translated 4 units left, and 7 units up. HAVE A GROWTH MINDSET After receiving constructive feedback, how do you use it as an opportunity to improve?}
+(h(x)=2\sqrt{x+4}+7). So (a=2) for its vertical stretch. (h=-4) and (k=7) for its translation.
+\answer{B. (h(x)=2\sqrt{x+4}+7); vertical stretch by 2; left 4 and up 7.}
+\end{example}
+\begin{tryit}{3}
+What transformations of the parent graph of (f(x)=\sqrt x) produce the graphs of the following functions?
+a. (m(x)=\sqrt{7x-3.5}-10)
+b. (j(x)=-2\sqrt{12x}+4)
+\answer{a. (m(x)) is a vertical stretch of (\sqrt7) and a translation (\frac12) unit to the right and 10 units down of (f(x)). b. (j(x)) is a reflection across the x-axis, is vertically stretched by a factor of (4\sqrt3), and is a vertical translation 4 units up.}
+\end{tryit}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Have a Growth Mindset: Accept Constructive Feedback}
+Constructive feedback can include things you do well or things you might want to improve. Ask: How can constructive feedback help you improve? How can feedback about something you're doing well help you learn?
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 3}
+Students practice rewriting radical functions in the form (f(x)=a\sqrt{x-h}+k) to identify the transformation that the graph will show.
+\item Write each function in (f(x)=a\sqrt{x-h}+k) form, and then describe the transformation.
+1. (f(x)=\sqrt{16x})
+\answer{(f(x)=4\sqrt x); The function is stretched vertically by a factor of 4.}
+2. (f(x)=\sqrt[3]{-8x-16}-2)
+\answer{(f(x)=-2\sqrt[3]{x+2}-2); the function is stretched vertically by a factor of 2, reflected over the line (x=0), shifted downward by 2 units, and shifted leftward by 2 units.}
+\te{The printed general form uses a square root although item 2 uses a cube root.}
+\end{te-addendum}
+% Source page 41: 246 Understand & Apply
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Write an Equation of a Transformation. Use and Connect Mathematical Representations}
+Q: How can you tell that there might have been a vertical stretch by a factor of 2?
+\answer{Calculate the factor of change in corresponding y-values from the parent function to the graphed function.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Write an Equation of a Transformation}
+What radical function is represented in the graph by (g)?
+Compare the graph to the parent graph of (f(x)=\sqrt[3]x).
+% FIG 41 1008 240 1109 341
+\placeholder{graph}{Blue f(x)=cube root(x) and red g(x)=2 cube root(x), both odd through origin, arrows both ends. Filled labeled points blue(1,1),(8,2), red(1,2),(8,4). Axes x,y arrows both ends, horizontal grid 2 units labels-8,-4,4,8 window-10 to 10; vertical unit grid labels-4,-2,2,4 window-5 to 5; origin O.}
+Step 1 Check for a vertical and horizontal stretch.
+Step 2 Check to see if any vertical or horizontal translations have been performed.
+Since (g(-x)=-g(x)), you know that the function is still odd like the graph of the parent function. So, no translation has been performed.
+% FIG 41 910 387 1011 487
+\placeholder{graph}{Red g(x)=2 cube root(x), filled labeled points(-1,-2),(0,0),(1,2), arrows both curve ends. Axes x,y arrows both ends, x grid 2, labels-8,-4,4,8, window-10 to 10; y grid 1 labels-4,-2,2,4, window-5 to 5; origin O.}
+\te{Callout: The function has either been vertically stretched by a factor of 2 or horizontally compressed by a factor of 8. STUDY TIP Vertical stretch is written as (f(x)=k\sqrt[3]x), and horizontal compression is written as (f(x)=\sqrt[3]{kx}).}
+Step 3 Identify the function.
+The function (g) can be written as (g(x)=2\sqrt[3]x) or (g(x)=\sqrt[3]{8x}).
+\answer{(g(x)=2\sqrt[3]x) or (g(x)=\sqrt[3]{8x})}
+\end{example}
+\begin{tryit}{4}
+What radical function is represented in each graph below?
+a.
+% FIG 41 859 560 977 662
+\placeholder{graph}{Red square root curve with filled labeled points(-5,-4),(-1,-2),(4,-1), begins at(-5,-4) and has arrow right near(14,0.4). Axes x,y with arrows both ends, x grid 2 window-6 to 14 labels-4,4,8,12 (4 partly obscured), y unit grid window-5 to 5 labels-4,-2,2,4; origin O. Represents sqrt(x+5)-4.}
+b.
+% FIG 41 860 670 1019 781
+\placeholder{graph}{Red g(x)=cube root(4x)-2, increasing with arrows both ends; labeled filled(0,-2); other filled points near(-6,-4.9),(-4,-4.5),(-2,-4),(-1,-3.6),(1,-0.4),(2,0),(4,0.5),(6,0.9). Axes x,y arrows both ends, unit grid x=-8 to 8,y=-6 to 5; labels x-6,-4,-2,2,4,6 and y-4,-2,2,4; origin O.}
+\answer{a. (g(x)=\sqrt{x+5}-4). b. (g(x)=\sqrt[3]{4x}-2).}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What feature of the graph of a square root or cube root function can you use to identify ((h,k))?
+\answer{In a square root function, the point ((h,k)) is where the graph begins. In a cube root function, the point ((h,k)) is where the graph begins to reflect itself.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES3 \&4}
+Q: Model With Mathematics What is an example of a radical function whose domain is (x\geq-3) and whose range is (y\geq2)?
+\answer{Answers may vary. Sample: (y=\sqrt{x+3}+2)}
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 4)}
+\textbf{WRITING BEGINNING} Use sentence frames to help students cement their understanding of the positional terms vertical and horizontal. Write sentences such as ``When I stand up, I am in a \underline{\hspace{0.5cm}} position.''
+Q: How could you stretch your arms vertically? horizontally?
+\answer{Students should stretch their arms above their heads and then out to the sides.}
+Q: How could you transform something from a vertical to a horizontal position?
+\answer{rotate it or lay it on its side}
+\textbf{SPEAKING DEVELOPING} Call students' attention to the phrase no translation has been performed. This uses a passive verb tense. Challenge students to perform an action and describe it using passive tense; for example, ``The pencil was placed on the desk.''
+Q: What does it mean to perform an action?
+\answer{to do something}
+Q: What part is missing from a sentence that uses a passive verb?
+\answer{a subject}
+\textbf{READING EXPANDING} Help students identify several words that are used in a different way than they might normally use those words (parent, odd, etc.). Have students work in pairs or small groups to define one of the words used, based on the context clues in the example.
+Q: What is another word that could be used for odd in this context?
+\answer{symmetric about the origin}
+Q: How does the use of the word parent in this context relate to other ways it is used?
+\answer{A parent function is the original function that other functions of the same type come from, similar to the way children come from and share characteristics with their parents.}
+\end{te-addendum}
+% Source page 42: 247 Understand & Apply
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Interpret a Radical Function Model. Pose Purposeful Questions}
+Q: Explain why the domain is restricted in the radical function problem.
+\answer{The domain must be relevant to the context of the problem. Only elevations between 5 ft and 40 ft make sense in this situation.}
+Q: Could you find the exact values represented by the radical function?
+\answer{No; the function (f(x)=\sqrt{1.5x}) is a square root function, you can only find exact values when the radicand is the square of a rational number. The answers to the problem will be approximations of the square roots of non-perfect squares.}
+\te{Printed explanation concerns rational decimal values; radical expressions can also represent exact irrational values. Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Interpret a Radical Function Model}
+When Sasha looks out to the sea, the visibility in miles from a certain spot on a cliff can be calculated using the function (d(x)=\sqrt{1.5(x+5)}), where (x) is the elevation in feet above sea level of the path. Sasha walks along through elevations ranging from 5 ft to 40 ft above sea level. Describe how Sasha's visibility changes as her elevation increases.
+% FIG 42 838 300 1180 508
+\placeholder{illustration}{Sasha walks uphill on a winding path on green coastal cliffs. Vertical double arrows from sea level to the lower and upper path elevations are labeled 5 ft and 40 ft.}
+Formulate
+Graph the function (d(x)=\sqrt{1.5(x+5)}) over the interval [5,40]. Since the square root function is increasing, the minimum distance that Sasha can see occurs at (x=5), and the maximum distance she can see occurs at (x=40).
+% FIG 42 1043 517 1152 636
+\placeholder{graph}{Restricted red curve d(x)=sqrt(1.5(x+5)), with filled endpoints (5,about 3.9),(40,about 8.2), no curve arrows. Horizontal axis x, elevation(ft), grid 5, labels 0,10,20,30,40, window 0 to 45. Vertical axis y, distance(miles), unit grid, labels 0,2,4,6,8, window 0 to 10. Positive axis arrows.}
+Compute
+Find (d(5)) to find the minimum distance, and (d(40)) to find the maximum distance Sasha can see out to sea.
+\begin{tabular}{ll}
+(d(5)=\sqrt{1.5(10)}) & (d(40)=\sqrt{1.5(45)}) \\
+(=\sqrt{15}) & (=\sqrt{67.5}) \\
+(\approx3.9) & (\approx8.2) \\
+\end{tabular}
+The average rate of change between the minimum and maximum points describes how Sasha's visibility changes as her elevation changes.
+(Average rate of change=\frac{8.2-3.9}{40-5})
+(\approx0.12)
+Interpret
+As Sasha walks along the path, for every foot increase in elevation, Sasha can see approximately 0.12 mile further out to sea.
+\answer{Approximately 0.12 mile further out to sea for every foot increase in elevation.}
+\te{APPLICATION. The printed interpretation describes the average rate over the interval; the instantaneous rate is not constant.}
+\end{example}
+\begin{tryit}{5}
+Sasha's brother walks along a separate path ranging from 8 ft to 46 ft in elevation. His visibility can be calculated by the function (d(x)=\sqrt{1.5(x+5.7)}). Describe how Sasha's brother's visibility changes as he descends from 46 ft to 8 ft in elevation.
+\answer{His visibility decreases approximately 0.11 mile for every foot of decreased elevation.}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What is the domain of the function representing Sasha's brother's visibility? Explain.
+\answer{Only elevations between 8 ft and 46 ft make sense, so the domain is (8\leq x\leq46).}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLE 5}
+Q: Generalize What transformations result in a cube root function being an odd function?
+\answer{If a cube root function undergoes a vertical stretch, compression, or reflection, the resulting function is odd. However, if a cube root function undergoes a translation, the resulting function is not odd.}
+\end{te-addendum}
+% Source page 43: 248 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Use Transformations to Graph Radical Functions}
+Q: How do transformations define the equation and the graph of a radical function?
+\answer{Transformations are defined by the values of (a), (h), and (k). By writing the equation in (f(x)=a\sqrt{x-h}+k) form, the graph can be drawn by interpreting the effects of the values.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error. Exercise 10a}
+Students may set up the function incorrectly. Ask them to identify the independent and the dependent variables. What depends on the other? If side length is a function of volume, then side length depends on what the volume is; therefore, (s(V)=\sqrt[3]V).
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Use Transformations to Graph Radical Functions}
+ALGEBRA Understand how the values of a radical function transform the graph of the parent function.
+(f(x)=a\sqrt[n]{x-h}+k)
+\te{Callouts: (a) determines a vertical stretch or compression. (h) determines a horizontal translation. (k) determines a vertical translation.}
+GRAPHS Understand the relationship between the graph of the parent function and the graph of the radical function.
+% FIG 43 742 369 842 470
+\placeholder{graph}{Blue f(x)=sqrt(x) from(0,0), dashed green 2sqrt(x) from(0,0), red g(x)=2sqrt(x+1)-3 from(-1,-3). Curves have rightward arrows. Axes x,y arrows both ends, unit grid x=-2 to 8,y=-5 to 5; x labels 2,4,6, y labels-4,-2,2,4; origin O. No point dots.}
+(f(x)=\sqrt x) is the parent square root function.
+(g(x)=2\sqrt{x+1}-3) is the result of a vertical stretch by a factor of 2, a translation 1 unit left, and a translation 3 units down from the parent function.
+% FIG 43 963 370 1062 470
+\placeholder{graph}{Blue f(x)=cube root(x), dashed green one third cube root(x), both through(0,0), and red h(x)=one third cube root(x-2)+3 with center(2,3). Arrowheads both ends on all curves. Axes x,y with arrows both ends; x grid 2 labels-8,-4,4,8, window-10 to 10; y unit grid labels-2,2,4,6, window-3 to 7. Origin O.}
+(f(x)=\sqrt[3]x) is the parent cube root function.
+(h(x)=\frac13\sqrt[3]{x-2}+3) is the result of a vertical compression by a factor of (\frac13), a translation 2 units right, and a translation 3 units up from the parent function.
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you use what you know about transformations of functions to graph radical functions?
+\answer{Vertical stretches and horizontal and vertical translations have the same effect on square root and cube root functions as they have on other types of functions, so you can use what you know about transforming those functions to graph radical functions.}
+2. Error Analysis Coshaun said the graph of the radical function (g(x)=-\sqrt{x+2}-1) is a translation 2 units left and 1 unit down from the parent function (f(x)=\sqrt x). Describe and correct the error.
+\answer{The graph of (g(x)=-\sqrt{x+2}-1) is a translation 2 units left and 1 unit down from the parent function (f(x)=\sqrt x), after a reflection over the x-axis. Coshaun didn't notice the negative symbol.}
+3. Reason What effect does (a) have on the graph of (f(x)=a\sqrt x)?
+\answer{When (a) is positive, the graph of (f(x)=a\sqrt x) is stretched or compressed vertically by a factor of (a). When (a) is negative, the graph of (f(x)=a\sqrt x) is reflected over the x-axis and then stretched or compressed vertically by a factor of (|a|).}
+\textbf{Do You KNOW HOW?}
+Graph each function. Then identify its domain and range.
+4. (f(x)=\sqrt{x-2})
+\answer{domain: (x\geq2); range: (y\geq0)}
+% FIG 43 124 874 317 1070
+\placeholder{graph}{Summary 4 answer: red sqrt(x-2) begins(2,0), increases with right arrow near(8,2.45). Axes x,y arrows both ends, unit grid x=-2 to 8,y=-5 to 5; x labels 2,4,6, y labels-4,-2,2,4; origin O; no dots.}
+5. (f(x)=\sqrt[3]{x+2})
+\answer{domain: all real numbers; range: all real numbers}
+% FIG 43 369 874 565 1070
+\placeholder{graph}{Summary 5 answer: red cube root(x+2), center(-2,0), arrows both ends. Axes x,y arrows both ends, unit grid[-5,5] by[-5,5], labels every 2 excluding 0, origin O; no dots.}
+6. (f(x)=\sqrt{x+1}-2)
+\answer{domain: (x\geq-1); range: (y\geq-2)}
+% FIG 43 125 1135 320 1331
+\placeholder{graph}{Summary 6 answer: red sqrt(x+1)-2 begins(-1,-2), passes(3,0), arrow right near(7,0.83). Axes x,y arrows both ends, unit grid x=-3 to 7,y=-5 to 5; x labels-2,2,4,6; y labels-4,-2,2,4; origin O. No dots.}
+7. (f(x)=\sqrt[3]{x-3}+2)
+\answer{domain: all real numbers; range: all real numbers}
+% FIG 43 370 1135 567 1331
+\placeholder{graph}{Summary 7 answer: red cube root(x-3)+2, center(3,2), arrows both ends. Axes x,y arrows both ends, unit grid x=-3 to 7,y=-5 to 5; labels x-2,2,4,6, y-4,-2,2,4; origin O; no dots.}
+8. (f(x)=3\sqrt{x-5})
+\answer{domain: (x\geq5); range: (y\geq0)}
+% FIG 43 650 905 883 1135
+\placeholder{graph}{Summary 8 answer: red 3sqrt(x-5), begins(5,0), arrow right near(10,6.7). Axes x,y with positive arrows, unit grid window[0,10] by[0,10], labels every 2; no point dots.}
+9. (f(x)=\frac12\sqrt[3]x+1)
+\answer{domain: all real numbers; range: all real numbers}
+% FIG 43 942 909 1137 1105
+\placeholder{graph}{Summary 9 answer: red 0.5 cube root(x)+1, center(0,1), arrows both ends. Axes x,y with arrows both ends, unit grid[-5,5] by[-5,5], labels every 2 excluding 0, origin O; no dots.}
+10. The volume of a cube is a function of the cube's side length. The function can be written as (V(s)=s^3), where (s) is the length of the cube's edge and (V) is the volume.
+a. Express a cube's edge length as a function of its volume, (s(V)).
+\answer{a. (s(V)=\sqrt[3]V)}
+b. Graph (V(s)) and (s(V)). What are the domain and range of the functions? Explain.
+\answer{b. The graph of (s(V)) is a reflection across the line (V=s) of (V(s)). This means the functions are inverses. The domains and ranges of both (s(V)) and (V(s)) are all real numbers.}
+% FIG 43 920 1175 1117 1371
+\placeholder{graph}{Summary 10b answer: red V(s)=s^3 and blue s(V)=cube root(V) plotted together, both through origin, arrows on all four ends. Axes horizontal s, vertical V, arrows both ends; unit grid[-5,5] by[-5,5]; labels every 2 excluding 0; origin O; curves labeled V(s) and s(V). No dots.}
+\te{Printed answer and graph include negative values; the physical cube context would restrict both quantities to nonnegative values. Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation; Practice.}
+\end{concept-summary}
+% Source page 44: 249 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving. PRACTICE \& PROBLEM SOLVING}
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & 13, 15, 16--33 \\
+Advanced & 11--33 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial. Practice.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 11, 16--19, 30, 31 & 1 \\
+1 & 32 & 3 \\
+2 & 13, 20 & 2 \\
+2 & 12, 15 & 3 \\
+3 & 22--25, 14 & 2 \\
+4 & 26, 27 & 2 \\
+5 & 28, 29 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{1}
+UNDERSTAND. Communicate Precisely What is the domain and range of the radical function (h(x)=\sqrt{x+a}+b)? Is the function increasing or decreasing? Explain.
+\answer{The graph of the radical function (h(x)=\sqrt{x+a}+b) is a shift (a) units left and (b) units up of the parent function (f(x)=\sqrt x), so the domain of (h(x)=\sqrt{x+a}+b) is (x\geq-a) and the range is (y\geq b). The function is increasing over the entire domain.}
+\end{practice}
+\begin{practice}{12}{3}
+Use Structure The graph of a cube root function has a horizontal translation that is three times the vertical translation. The vertical translation is negative.
+a. Write a function, (g), that has these attributes.
+\answer{a. Answers may vary: (g(x)=\sqrt[3]{x+3}-1)}
+b. Graph your function and the parent function, (f), to verify it is correct.
+\answer{b. Check students' graphs.}
+\end{practice}
+\begin{practice}{13}{2}
+Error Analysis Helena is trying to write a radical function that is represented by the graph below. Describe and correct the error Helena made in writing the radical function.
+% FIG 44 550 561 680 668
+\placeholder{graph}{Red 2sqrt(x-1), begins(1,0), increasing through approximately(2,2),(5,4), arrow up-right near(7,4.9). Axes x,y arrows both ends; unit grid x=-3 to 7,y=-3 to 5; labels x-2,2,4,6 and y-2,2,4; origin O. No dots.}
+(f(x)=\sqrt{x-1})
+\te{A red X marks the expression.}
+\answer{Helena did not consider the vertical stretch by a (\frac fg) factor of 2. The correct radical function is (f(x)=2\sqrt{x-1}).}
+\te{Printed answer contains an anomalous stacked f/g before factor.}
+\end{practice}
+\begin{practice}{14}{2}
+Higher Order Thinking Rewrite the radical function (g(x)=\sqrt[3]{8x+64}-3) to identify the transformations from the parent graph of (f(x)=\sqrt[3]x). Explain how you rewrote the radical function.
+\answer{Factor the radicand: (g(x)=\sqrt[3]{8(x+8)}-3). Use the Product Property of Radicals: (g(x)=\sqrt[3]8\sqrt[3]{x+8}-3). Simplify: (h(x)=2\sqrt[3]{x+8}-3). The graph of (g(x)) is the vertical stretch of the parent function by a factor of 2 and a translation of 8 units to the left and 3 units down.}
+\te{Printed h(x) in the simplify step; likely g(x).}
+\end{practice}
+\begin{practice}{15}{3}
+Reason The parent function (f(x)=\sqrt x) and a transformation of the parent function, (g(x)), are reflections of each other over the x-axis. Write the function (g(x)).
+\answer{(g(x)=-\sqrt x)}
+\end{practice}
+\begin{practice}{16}{1}
+Mathematical Connections How do the transformations of a radical function compare to the transformations of an absolute value function?
+\answer{For a radical function the transformations from a parent function (f(x)=\sqrt[n]x) can be represented by (g(x)=a\sqrt[n]{x-h}+k). In like manner, transformations of an absolute value function (f(x)=|x|) can be represented by (h(x)=a|x-h|+k). In both situations (a) represents the vertical stretch or compression, while (h) and (k) represent the vertical and horizontal shifts.}
+\te{Printed vertical and horizontal for h and k respectively; likely horizontal and vertical.}
+\end{practice}
+\begin{practice}{17}{1}
+PRACTICE. Graph the following functions. State the domain and range. Is the function increasing or decreasing? SEE EXAMPLE 1.
+(f(x)=\sqrt x+2)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{18}{1}
+Graph the following functions. State the domain and range. Is the function increasing or decreasing? SEE EXAMPLE 1.
+(f(x)=\sqrt[3]x-4)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{19}{1}
+Graph the following functions. State the domain and range. Is the function increasing or decreasing? SEE EXAMPLE 1.
+(f(x)=\sqrt[3]{x-8})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{20}{2}
+Graph the following functions. State the domain and range. Is the function increasing or decreasing? SEE EXAMPLE 1.
+(f(x)=-\sqrt{x+6})
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{21}{3}
+Graph (f(x)=\sqrt[3]x) and (g(x)=3\sqrt[3]{x+9}-8). What transformations of the graph of (f) produce the graph of (g)? What effect do the transformations have on the domain and range of (g)? SEE EXAMPLE 2.
+\answer{See back of book.}
+\te{Item 21 is absent from Item Analysis; provisional DOK \uncertain{3}{2; no DOK printed}.}
+\end{practice}
+\begin{practice}{22}{2}
+Rewrite the following radical functions to identify their transformations from the parent graph (f(x)=\sqrt x). SEE EXAMPLE 3.
+(f(x)=\sqrt{16x})
+\answer{(f(x)=4\sqrt x); vertical stretch by a factor of 4}
+\end{practice}
+\begin{practice}{23}{2}
+Rewrite the following radical functions to identify their transformations from the parent graph (f(x)=\sqrt x). SEE EXAMPLE 3.
+(f(x)=-\sqrt{25x+75})
+\answer{(f(x)=-5\sqrt{x+3}); reflection about the x-axis, vertical stretch by a factor of 5 and translation 3 units left}
+\end{practice}
+\begin{practice}{24}{2}
+Rewrite the following radical functions to identify their transformations from the parent graph (f(x)=\sqrt x). SEE EXAMPLE 3.
+(f(x)=\sqrt{9x-45})
+\answer{(f(x)=3\sqrt{x-5}); vertical stretch by a factor of 3 and translation 5 units right}
+\end{practice}
+\begin{practice}{25}{2}
+Rewrite the following radical functions to identify their transformations from the parent graph (f(x)=\sqrt x). SEE EXAMPLE 3.
+(f(x)=\sqrt{4x-24}-6)
+\answer{(f(x)=2\sqrt{x-6}-6); vertical stretch by a factor of 2, translation 6 units right, and translation 6 units down}
+\end{practice}
+\begin{practice}{26}{2}
+What radical function is represented in each graph? SEE EXAMPLE 4.
+% FIG 44 858 598 973 718
+\placeholder{graph}{Red increasing square root curve, filled labeled endpoint(1,1) and point(5,3), arrow right. Axes x,y, positive arrows, unit grid x=0 to 8,y=0 to 8, labels 0,2,4,6 on both. Represents sqrt(x-1)+1.}
+\answer{(f(x)=\sqrt{x-1}+1)}
+\end{practice}
+\begin{practice}{27}{2}
+What radical function is represented in each graph? SEE EXAMPLE 4.
+% FIG 44 1000 599 1108 718
+\placeholder{graph}{Red increasing cube root curve centered at filled labeled(-2,3), additional filled labeled(-1,4); arrows both ends. Axes x,y arrows both ends, unit grid x=-5 to 3,y=-1 to 8; labels x-4,-2,2 and y2,4,6; origin O. Represents cube root(x+2)+3.}
+\answer{(g(x)=\sqrt[3]{x+2}+3)}
+\end{practice}
+\begin{practice}{28}{3}
+The hull speed, (y), measured in knots, of a sailboat can be estimated by the function (y=1.34\sqrt x), where (x) is the waterline length of the sailboat, in feet. Luis works at a sailboat rental business with boats that have a waterline length between 25 ft and 64 ft. SEE EXAMPLE 5.
+% FIG 44 977 835 1123 1043
+\placeholder{photo}{White sailboat at sea with triangular sails. Horizontal dimension line beneath the boat marks its waterline length as 25 ft.}
+a. Graph the relationship between the hull speed of a sailboat and its waterline length.
+\answer{a. See graph.}
+% FIG 45 144 431 419 686
+\placeholder{graph}{Answer 28a, printed on PDF45: red y=1.34sqrt(x) begins(0,0), continues to arrow near(64,10.7). Axes x,y with positive arrows, x grid 5 labels 0,10,20,30,40,50,60 and window 0 to 65; y grid 1 labels 0,2,4,6,8,10,12, window 0 to 12. No endpoint restriction or dots.}
+b. What are the minimum and maximum hull speeds of the sailboats at the rental business?
+\answer{b. The minimum hull speed of the sailboat Chair wants to purchase is 6.7 knots and the maximum hull speed is 10.72 knots.}
+\te{Printed Chair wants to purchase; prompt names Luis and a rental business. Answers for 22--28 are printed on the next page.}
+\end{practice}
+% Source page 45: 250 Apply and Assessment Practice
+\begin{practice}{29}{3}
+APPLY. Make Sense and Persevere The radius of a sphere can be found using the function (r=\sqrt[3]{\frac{3V}{4\pi}}), where (V) is the volume of the sphere.
+% FIG 45 516 346 725 527
+\placeholder{illustration}{Person in purple shirt inflates a basketball with a hand pump; callout to the ball: (V=448.92\text{ in.}^3).}
+a. Graph the function.
+\answer{a. See graph.}
+% FIG 45 147 777 343 974
+\placeholder{graph}{Red cube root curve r=cube root(3V/(4pi)), through origin, arrows both ends, values near(-5,-1.06),(5,1.06). Printed axes labeled x and y, arrows both ends, unit grid[-5,5] by[-5,5], labels every 2 excluding 0, origin O. No point dots.}
+b. Identify the domain and range of the graph.
+\answer{b. The domain of the function is all real numbers. The range of the function is all real numbers.}
+c. Do the domain and range make sense in this context? Explain.
+\answer{c. In this situation, neither the radius nor the volume can be negative, so the domain of this function should be restricted to (r\geq0) and the range should be restricted to (V\geq0).}
+\te{Printed domain r and range V; likely domain V and range r.}
+d. What is the length of the radius of the basketball?
+\answer{d. about 4.75 in.}
+\end{practice}
+\begin{practice}{30}{1}
+A formula for calculating the distance to the horizon is (d=\sqrt{\frac h{0.57}}), where (d) is the distance to the horizon, in miles, and (h) is the height above the surface, in feet.
+% FIG 45 516 725 751 926
+\placeholder{illustration}{Two hikers with backpacks on rocky overlook, one seated and one standing looking toward distant hills. Callout pointing to the horizon: Horizon:5 mi.}
+a. Graph the function.
+\answer{a. See graph.}
+% FIG 45 142 1180 370 1400
+\placeholder{graph}{Red d=sqrt(h/0.57) starts(0,0), increasing to arrow near(10,4.2). Horizontal axis h and vertical axis d, positive arrows, unit grid[0,10] by[0,10], labels every 2. No point dots.}
+b. Reason What is your height above the surface if you can see a distance of 5 mi to the horizon?
+\answer{b. 14.25 ft}
+\end{practice}
+\begin{practice}{31}{1}
+ASSESSMENT PRACTICE. Choose yes or no to tell whether the function is an odd function.
+\begin{tabular}{lll}
+ & Yes & No \\
+A. (f(x)=5\sqrt{x-10}-12) & & \\
+B. (f(x)=\frac14\sqrt[3]x) & & \\
+C. (f(x)=\frac12\sqrt{x+8}-1) & & \\
+D. (f(x)=6\sqrt[3]x) & & \\
+E. (f(x)=9\sqrt[3]{x-7}+8) & & \\
+\end{tabular}
+\answer{A. No; B. Yes; C. No; D. Yes; E. No.}
+\end{practice}
+\begin{practice}{32}{3}
+SAT/ACT Which function has a graph with domain (x\geq-1) and range (y\geq-2)?
+A. (f(x)=\sqrt{x-1}+2)
+B. (f(x)=\sqrt[3]{x+1}-2)
+C. (f(x)=\sqrt[3]{x-1}+2)
+D. (f(x)=\sqrt{x+1}-2)
+\answer{D}
+\end{practice}
+\begin{practice}{33}{3}
+Performance Task The table shows the domain and range of the function (f(x)=\sqrt[n]x) for different values of (n), where (x) is a positive real number.
+\begin{tabular}{lll}
+n & Domain of (f(x)=\sqrt[n]x) & Range of (f(x)=\sqrt[n]x) \\
+1 & All real numbers & All real numbers \\
+2 & (x\geq0) & (y\geq0) \\
+3 & All real numbers & All real numbers \\
+4 & & \\
+5 & & \\
+6 & & \\
+7 & & \\
+8 & & \\
+\end{tabular}
+Part A Identify the domain and range of the function (f(x)=\sqrt[n]x) when (n=4,5,6,7,\text{ and }8).
+\answer{Part A When (n=4), the domain is (x\geq0) and the range is (y\geq0). When (n=5), the domain is all real numbers and the range is all real numbers. When (n=6), the domain is (x\geq0) and the range is (y\geq0). When (n=7), the domain is all real numbers and the range is all real numbers. When (n=8), the domain is (x\geq0) and the range is (y\geq0).}
+Part B Make a conjecture about the values of (n) that gives a domain and range of all real numbers.
+\answer{Part B The domain and range are all real numbers when (n) is a positive, odd integer.}
+Part C Make a conjecture about the values of (n) that gives a domain of (x\geq0) and a range of (y\geq0).
+\answer{Part C The domain is (x\geq0) and the range is (y\geq0) when (n) is a positive, even integer.}
+\te{Printed prompt says x is positive, but the table and answers give unrestricted natural domains. Item 33 is absent from Item Analysis; provisional DOK \uncertain{3}{2; no DOK printed}.}
+\end{practice}
+% Source page 46: 250A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 3 & A35 \\
+2 & 3 & A35 \\
+3 & 2 & A35 \\
+4 & 3 & A35 \\
+5 & 3 & A35 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{ASSESSMENT RESOURCES. Lesson Quiz is available at SavvasRealize.com.}
+\textbf{5-3 Lesson Quiz: Graphing Radical Functions}
+1. Complete the sentence to describe the function (f(x)=\sqrt{x+2}). Consider graphing the function first.
+The domain of (f(x)=\sqrt{x+2}) is [({x\mid x\geq-2}); ({x\mid x\geq0}); ({x\mid x\geq\sqrt2}); ({x\mid x\geq2})] and the range is [({y\mid y\geq-2}); ({y\mid y\geq0}); ({y\mid y\geq\sqrt2}); ({y\mid y\geq2})].
+\answer{({x\mid x\geq-2}); ({y\mid y\geq0}).}
+2. The function (g(x)=\sqrt{x-5}) is a transformation of the parent function (f(x)=\sqrt x). Which of the following is true?
+A. The graph of (g) is a translation of the graph of (f) left 5 units.
+B. The graph of (g) is a translation of the graph of (f) down 5 units.
+C. The domain of (f) is ({x\mid x\geq0}), and the domain of (g) is ({x\mid x\geq5}).
+D. The range of (f) is ({x\mid x\geq0}), and the range of (g) is ({x\mid x\geq5}).
+\answer{C}
+3. Select all the statements that describe the relationship between the graph of (k(x)=\sqrt{4x+12}-1) and the graph of the parent function (f(x)=\sqrt x).
+A. Adding 12 to (4x) translates the graph left 12 units.
+B. Adding 12 to (4x) translates the graph left 3 units.
+C. Multiplying (x) by 4 stretches the graph vertically by a factor of 4.
+D. Multiplying (x) by 4 stretches the graph vertically by a factor of 2.
+E. Multiplying (x) by 4 compresses the graph horizontally by a factor of 2.
+\answer{B, D}
+4. What radical function is represented by the graph?
+% FIG 46 1045 667 1148 766
+\placeholder{graph}{Black cube-root curve (f(x)=\sqrt[3]{x-1}+3), with filled labeled points (0,2), (1,3), (2,4). Axes x,y, origin O, unit grid, window -3 to 7 on both axes, labels -2,2,4,6, arrowheads on both ends of axes and curve.}
+A. (f(x)=\sqrt[3]{x-1}+3)
+B. (f(x)=\sqrt[3]{x+1}+3)
+C. (f(x)=\sqrt{x+1}+3)
+D. (f(x)=\sqrt[3]{3x})
+\answer{A}
+5. The length of one side, (s), of a shipping box is (s(x)=\sqrt[3]{2x}), where (x) is the volume of the box in cubic inches. A manufacturer needs the volume of the box to be between (108\text{ in.}^3) and (256\text{ in.}^3). What are the minimum and maximum possible lengths of (s)?
+minimum: blank in.; maximum: blank in.
+\answer{minimum: 6 in.; maximum: 8 in.}
+\end{te-addendum}
+% Source page 47: 250B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced. SavvasRealize.com. Practice.
+\textbf{Reteach to Build Understanding. I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{5-3 Reteach to Build Understanding: Graphing Radical Functions}
+1. Match each graph with a radical function.
+a. (h(x)=\sqrt{x-3}) \answer{(1)}
+b. (h(x)=\sqrt{x-3}+4) \answer{(3)}
+c. (h(x)=\sqrt{x-3}-4) \answer{(2)}
+% FIG 47 151 437 397 500
+\placeholder{graph}{Three black square-root graphs (1),(2),(3), respectively (\sqrt{x-3}), (\sqrt{x-3}-4), (\sqrt{x-3}+4). Axes x,y with origin O and unit grid. First two windows x=-2 to 8,y=-5 to 5, labeled x=2,4,6 and y=-4,-2,2,4. Third window x=-2 to 8,y=-2 to 8, labeled x=2,4,6 and y=2,4,6. Curves begin at (3,0),(3,-4),(3,4), respectively, and have right arrowheads.}
+2. Damian wrote a radical function that is represented by the graph. Describe the error he made. Then, write the correct function.
+Damian's function: (f(x)=\sqrt{x+2})
+\answer{Damian's function gives the x-intercept as -2, while in the graph it is 2. (f(x)=\sqrt{x-2})}
+% FIG 47 323 515 384 574
+\placeholder{graph}{Black (f(x)=\sqrt{x-2}) begins at (2,0) and rises right with arrow. Axes x,y, origin O, unit grid, x approximately -1 to 9, y=-1 to 9; labeled x=2,4,6,8 and y=2,4,6,8.}
+3. Fill in the blanks to find the transformations of the parent function for (g(x)=\sqrt{25(x-5)}+11).
+\begin{tabular}{ll}
+Step 1. (g(x)=\sqrt{25(x-5)}+11) & Factor out 25 among the terms of radicand. \\
+Step 2. blank & Write the radicand as the product of its factors. \\
+Step 3. blank & Take the square root of 25. \\
+Step 4. The parent function is blank & The graph of the parent function (f) is stretched vertically by a factor of 5. Then the stretched graph is translated 5 units to the right and 11 units up. \\
+\end{tabular}
+\answer{Step 2. (g(x)=(\sqrt{25})(\sqrt{x-5})+11). Step 3. (g(x)=5\sqrt{x-5}+11). Step 4. (f(x)=\sqrt x).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice. I O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{5-3 Additional Practice: Graphing Radical Functions}
+Graph the following functions, then state the domain and range. Is the function increasing or decreasing?
+1. (f(x)=\sqrt{x-3})
+\answer{domain: (x\geq3); range: (y\geq0); increasing}
+% FIG 47 546 450 601 489
+\placeholder{graph}{Magenta square-root curve starts at (3,0), increases to right with arrow. Axes x,y, origin O, x grid spacing 2, y grid spacing 1, x window -8 to 10,y=-3 to 3, labels x=-4,4,8 and y=-2,2.}
+2. (f(x)=\sqrt[3]{x+2})
+\answer{domain: all real numbers; range: all real numbers; increasing}
+% FIG 47 661 450 717 505
+\placeholder{graph}{Magenta cube-root curve (\sqrt[3]{x+2}), centered at (-2,0), arrows at both ends. Axes x,y, origin O, grid spacing 2, window -8 to 10 on x, -8 to 10 on y, labels x=4,8 and y=-4,4,8.}
+3. Graph (f(x)=\sqrt x) and (g(x)=\frac13\sqrt{x-2}-4). What transformations of the graph of (f) produce the graph of (g)? What is the effect of the transformations on the domain and range of (g)?
+\answer{The graph of (f) is translated 2 units right and 4 units downward, and compressed vertically by a factor of 3. The domain of (f) is (x\geq0) while the domain of (g) is (x\geq2). The range of (f) is (y\geq0) while the range of (g) is (y\geq-4).}
+\te{Printed compression factor is 3; the multiplier is (\frac13).}
+% FIG 47 724 509 773 559
+\placeholder{graph}{Magenta curves f=\sqrt x from (0,0) and g=\frac13\sqrt{x-2}-4 from (2,-4), labeled f,g and with right arrows. Axes x,y, origin O, grid spacing 2, window x=-6 to 10,y=-8 to 8, labels x=-4,4,8 and y=-4,4.}
+4. What transformations of the parent graph (f(x)=\sqrt x) produce the graph of (h(x)=\sqrt{9x-4.5}-12)?
+\answer{The graph of (f) is translated 0.5 to the right and 12 units downward, and stretched vertically by a factor of 3.}
+% FIG 47 719 593 774 623
+\placeholder{graph}{Black f=\sqrt x and h=\sqrt{9x-4.5}-12 labeled f,h, starting at (0,0) and (0.5,-12), increasing right with arrows. Axes x,y, origin O, x grid 2 and labels -4,4,8; y grid 5 with label -10; window approximately x=-8 to 10,y=-15 to 10.}
+5. What radical function is represented in the graph?
+\answer{(f(x)=\sqrt{x+2}-6)}
+% FIG 47 719 635 774 671
+\placeholder{graph}{Black square-root curve begins at (-2,-6), rises right with arrow. Axes x,y, origin O, x grid 2 with labels -4,4,8, y grid 5 with labels -10,10; window x=-8 to 10,y=-15 to 15.}
+6. The visibility, in miles, from a certain spot on a hillside can be calculated using the function (d=\sqrt{1.5x}), where (x) is the height in feet above the valley floor. Faron walks through elevations ranging from 9 feet to 36 feet above the valley. What are the minimum and maximum distances that he can see?
+\answer{minimum: 3.67 mi; maximum: 7.35 mi}
+7. The surface area of a paper cup is defined by the function (S(h)=4\pi\sqrt{16+h^2}), where (h) is the height of the cup. What are domain and range of (f(x))?
+\answer{(h>0) and (s(h)>16\pi)}
+\te{Printed question uses f(x) after defining S(h); printed answer uses lowercase s(h).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment. O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{5-3 Enrichment: Graphing Radical Functions}
+An architect uses the following pattern to design the edges of a spiral tower.
+% FIG 47 866 454 929 516
+\placeholder{graph}{Four black increasing square-root arcs beginning near the origin and stacked vertically, all with right arrowheads. Axes x,y, origin O, x grid 20 with labels -80,-40,40,80, y grid 2 with labels -8,-4,4,8; window x=-100 to 100,y=-10 to 10.}
+% FIG 47 964 430 1105 539
+\placeholder{illustration}{Gray curved spiral tower facade with eight curved horizontal edge lines, narrowing toward its rounded top; no numerical labels.}
+1. The designer modeled the lowest graph using the function: (f(x)=\frac{\sqrt{6x-3}}5). Which function models the second graph from the bottom?
+A. (f(x)=\frac{\sqrt{6x-29}}5+1)
+B. (f(x)=\frac{\sqrt{6x+29}}5-1)
+C. (f(x)=\frac{\sqrt{6x-29}}5+5)
+\answer{A}
+2. Which function models the second graph from the top?
+A. (f(x)=\frac{\sqrt{6x-55}}5+2)
+B. (f(x)=\frac{\sqrt{6x-55}}5-2)
+C. (f(x)=\frac{\sqrt{6x+55}}5+2)
+\answer{A}
+3. What function models the graph at the top?
+\answer{(f(x)=\frac{\sqrt{6x-\uncertain{8}{81}}}5+3)}
+\te{The very small printed constant reads 8; likely 81 to follow the sequence 3,29,55,81,107,133,159.}
+4. Which of the following functions can be used to generate models for the next three lines of the pattern?
+A. (f(x)=\frac{\sqrt{6x-107}}5+4)
+B. (f(x)=\frac{\sqrt{6x+159}}5+6)
+C. (f(x)=\frac{\sqrt{6x+133}}5-5)
+D. (f(x)=\frac{\sqrt{6x-159}}5+6)
+E. (f(x)=\frac{\sqrt{6x-133}}5+5)
+F. (f(x)=\frac{\sqrt{6x+107}}5+4)
+\answer{A, D, E}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary. I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{5-3 Mathematical Literacy and Vocabulary: Graphing Radical Functions}
+Match each function with its graph. Write the function's number on the line next to each graph.
+1. (f(x)=\sqrt{5x}-5)
+2. (f(x)=\sqrt{5x}+5)
+3. (f(x)=\sqrt{5x})
+4. (f(x)=-\sqrt{5x})
+5. (f(x)=\sqrt{-5x})
+Graphs:
+% FIG 47 177 1102 363 1300
+\placeholder{graph}{Five black square-root graphs labeled a,b,c,d,e, arranged a,c on first row, b,d second row, e bottom left. Axes x,y and origin O on each, grid spacing 2 on both axes. a: sqrt(5x), endpoint (0,0), right arrow; b: sqrt(-5x), endpoint (0,0), left arrow; c: -sqrt(5x), endpoint (0,0), right downward arrow; d: sqrt(5x)-5, endpoint (0,-5), right upward arrow. These four have windows -10 to 10 on both axes, labels -8,-4,4,8. e: sqrt(5x)+5, endpoint (0,5), right upward arrow, x window -10 to 10 with labels -8,-4,4,8, y window -2 to 18 with labels 4,8,12,16. No separately marked points.}
+\answer{a. 3, b. 5, c. 4, d. 1, e. 2}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 47 586 979 1033 1298
+\placeholder{illustration}{Tablet displaying online graphing exercise: Solve the system of equations by graphing, (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Empty coordinate grid labeled x and y, both axes from -10 to 10 with unit grid spacing and labels every 2; arrow on positive y; part of upper right grid hidden by Question Help menu. Menu: Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Click to enlarge graph. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Controls: Exit, 1 part remaining, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\end{te-addendum}
+
+\end{document}

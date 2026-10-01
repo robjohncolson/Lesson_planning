@@ -1,0 +1,929 @@
+\documentclass{article}
+% Source: Topic_03_Teacher_Edition.pdf, PDF pages 24-34 (printed pages 127A-133B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+% Source page 24: 127A Lesson Overview
+\begin{lesson-meta}
+lesson: 3-2
+title: Adding, Subtracting, and Multiplying Polynomials
+standards: none printed
+practices: none printed
+objective: I can add, subtract, and multiply polynomials.
+
+essential question: How do you add, subtract, and multiply polynomials?
+
+\textbf{VOCABULARY}
+\item Commutative Property
+\item Associative Property
+\item Distributive Property
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 3-2 \\
+Title & Adding, Subtracting, and Multiplying Polynomials \\
+Standards & none printed \\
+I CAN Objective & I can add, subtract, and multiply polynomials. \\
+Essential Question & How do you add, subtract, and multiply polynomials? \\
+Lesson Vocabulary & Commutative Property; Associative Property; Distributive Property \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Add, subtract, and multiply polynomials and understand that polynomials are closed under these operations.
+\item Compare a polynomial function represented algebraically with one represented graphically.
+Essential Understanding. Just as with real numbers, the properties of operations can be used to add, subtract, and multiply polynomials. Polynomial functions can be used to represent and compare real-world situations.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Classified, graphed, and interpreted the key features of a polynomial function.
+In this lesson, students:
+\item Add, subtract, and multiply polynomials.
+\item Compare properties of polynomial functions represented in different ways.
+Later in this topic, students will:
+\item Divide and factor polynomials.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that polynomials are closed under the operations of addition, subtraction, and multiplication.
+\item Students use efficient strategies and the properties of operations to add, subtract, and multiply polynomials.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+REVIEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+Commutative Property & Propiedad Conmutativa \\
+Associative Property & Propiedad Asociativa \\
+Distributive Property & Propiedad Distributiva \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Review the properties of operations. Although students have used these properties before, they will now be applying them within the context of adding, subtracting, and multiplying polynomials. Have students label each step shown with the name of the property that was used.
+(3x(2x^2+4x)+9x^3)
+((6x^3+12x^2)+9x^3) \underline{\hspace{1cm}}.
+\answer{Distributive Property}
+(6x^3+(12x^2+9x^3)) \underline{\hspace{1cm}}.
+\answer{Associative Property}
+(6x^3+(9x^3+12x^2)) \underline{\hspace{1cm}}.
+\answer{Commutative Property}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion book cover: dark background, multicolored concentric light rings surrounding reflective spheres; labels Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students apply what they know about the Commutative Property, the Associative Property, and combining like terms to add and subtract polynomials. They apply the Distributive Property to multiply polynomials.
+Students consider whether the set of polynomials is closed under addition and subtraction, and use this to connect properties of the set of real numbers to the set of polynomials.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively
+Students decontextualize real-world problems, such as those about changes made to the specifications of manufactured products, by writing equations to represent the problems. Then, after manipulating the symbols, they contextualise the answers.
+Construct Viable Arguments
+Students develop logical arguments to show whether the set of polynomials is closed under the operations of addition, subtraction, multiplication, and division.
+\end{te-addendum}
+% Source page 25: 127B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students will use the Distributive, Associative, and Commutative Properties to support their understanding of equivalent polynomial functions.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\te{Critique \& Explain is available at SavvasRealize.com. Printed digital-resource heading says Critique \& Explain, while the activity is titled Explore \& Reason.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving ETP}
+Q: When have you used the Associative, Commutative, and Distributive Properties before?
+\answer{to simplify numerical expressions and make mental math easier}
+\textbf{During SMALL GROUP. Support Productive Struggle in Learning Mathematics ETP}
+Q: How does using the Distributive Property help you to simplify the expression?
+\answer{After using the Associative and Commutative Properties to rearrange the terms, the Distributive Property allows you to rewrite (3x+7x) as ((3+7)x).}
+For Early Finishers
+Use the Associative and Commutative Properties to simplify the following expressions.
+\item ((4x-7)-5x+2x-9)
+\item ((2x+4-4x)+(-9x+2-7+10x))
+Q: What do you notice about each of the expressions after they have been simplified?
+\answer{They all are in the form (ax+b).}
+Q: What generalization can you make about the effects of using addition and subtraction to simplify expressions?
+\answer{Simplifying expressions by combining like terms only affects the coefficients. The variables and exponents do not change.}
+\textbf{After WHOLE CLASS. Facilitate Meaningful Mathematical Discourse ETP}
+Help students to elaborate on the usefulness of the properties of equality in simplifying polynomials.
+Q: What have you learned about the Associative, Commutative, and Distributive Properties?
+\answer{The properties can be used to simplify algebraic expressions.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXPLORE \& REASON
+Construct Arguments Is the quotient of two expressions in S also a member of S? Explain why or produce a counterexample.
+\answer{No; if the coefficients of the terms have no common factors, then the expression will be in the form (\frac{ax}{cx+d}+\frac{b}{cx+d}), which would not be a member of S.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{EXPLORE \& REASON: Digital activity}
+Let S be the set of expressions that can be written as (ax+b) where a and b are real numbers.
+A. Describe the Associative Property, Commutative Property, and the Distributive Property. Then, explain the role of each in simplifying the sum ((3x-2)+(7x-4)). Identify the leading coefficient and the constant term in the result.
+B. Is the sum you found in part A a member of S? Explain.
+C. Construct Arguments Is the product of two expressions in S also a member of S? Explain why or produce a counterexample.
+\te{Go back. Enter your answer fields after each part. Digital A prints 3x-2; the student-page version prints 3x+2.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Let S be the set of expressions that can be written as (ax+b) where a and b are real numbers.
+A. Describe the Associative Property, Commutative Property, and the Distributive Property. Then, explain the role of each in simplifying the sum ((3x+2)+(7x-4)). Identify the leading coefficient and the constant term in the result.
+\answer{The Associative Property is used to regroup the terms, and the Commutative Property is used to move like terms next to each other. The Distributive Property is used to combine like terms. Use the Associative Property and the Commutative Property to rearrange the terms. Then use the Distributive Property to combine 3x and 7x. The leading coefficient is 10, and the constant term is -2.}
+B. Is the sum you found in part A a member of S? Explain.
+\answer{yes. The sum is an expression written as (ax+b).}
+C. Construct Arguments Is the product of two expressions in S also a member of S? Explain why or produce a counterexample.
+\answer{No; if you multiply two members of set S where (a\neq0), you get a quadratic polynomial that is not in the set.}
+\te{SAMPLE STUDENT WORK.}
+\end{model-discuss}
+% Source page 26: 127 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Introduce students to addition, subtraction, and multiplication of polynomials. Remind them that the Associative, Commutative, and Distributive Properties can be used to perform these operations on polynomials.
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Add and Subtract Polynomials. Pose Purposeful Questions ETP}
+PART A
+Q: Why can the Commutative and Associative Properties be applied in the same step?
+\answer{One deals with grouping like terms and the other deals with ordering. It makes sense to group the like terms that you order next to each other.}
+PART B
+Q: If two polynomials are being subtracted, what property must be used?
+\answer{Applying the subtraction sign is the same as multiplying the second polynomial by -1 and then adding both polynomials. You must use the Distributive Property to apply subtraction to the entire polynomial.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Add and Subtract Polynomials}
+How do you add or subtract the polynomials?
+To add and subtract polynomials, use the Commutative and Associative Properties to group like terms. Then combine like terms.
+A. ((6x^3+4x+x^2-7)+(2x^3-8x^2+3))
+(=(6x^3+2x^3)+4x+(x^2-8x^2)+(-7+3))
+(=8x^3+4x-7x^2-4)
+(=8x^3-7x^2+4x-4)
+\te{Callout: Apply the Commutative and Associative Properties.}
+\answer{A. (8x^3-7x^2+4x-4)}
+B. ((3x^2y^2+2xy^2+6x^2)-(2x^2y^2+3xy^2-2x^2))
+(=3x^2y^2+2xy^2+6x^2-2x^2y^2-3xy^2+2x^2)
+(=(3x^2y^2-2x^2y^2)+(2xy^2-3xy^2)+(6x^2+2x^2))
+(=x^2y^2-xy^2+8x^2)
+\answer{B. (x^2y^2-xy^2+8x^2)}
+\te{Callouts: Distribute the factor of -1. The degree of a multi-variable polynomial is the greatest sum of powers in any term.}
+\te{USE STRUCTURE In order for terms to be like terms, the variables and their corresponding exponents must be identical.}
+\end{example}
+\begin{tryit}{1}
+Add or subtract the polynomials as indicated.
+a. ((4a^4-6a^3-3a^2+a+1)+(5a^3+7a^2+2a-2))
+b. ((2a^2b^2+3ab^2-5a^2b)-(3a^2b^2-9a^2b+7ab^2))
+c. ((3.4m^3n^2+5.6m^2n)-(0.7m^3n^2-4.1m^2n-n)+(\frac65m^3n^2-\frac94m^2n+\frac38m))
+\answer{a. (4a^4-a^3+4a^2+3a-1)
+b. (-a^2b^2+4a^2b-4ab^2)
+c. (3.9m^3n^2+7.45m^2n+0.375m+n)}
+\end{tryit}
+\begin{te-addendum}{1}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 1
+Generalize When can you combine two terms using addition or subtraction?
+\answer{When the terms have the same variables with the same exponents, they can be combined using addition or subtraction.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 2}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+Use the Distributive, Commutative, and Associative Properties to simplify the polynomial.
+\uncertain{(3x(2x-6)-(-4x^2+7x)(5x+2))}{Operation signs and closing parenthesis in the first displayed expression are damaged; the repeated expression below is legible.}
+(3x(2x-6)-(-4x^2+7x)(5x+2))
+(=6x^2-18x-(-20x^3-8x^2+35x^2+14x))
+(=6x^2-18x+20x^3-27x^2-14x)
+(=20x^3-21x^2-32x)
+\answer{(20x^3-21x^2-32x)}
+Example 2 When simplifying polynomial functions, more than one operation must often be performed. Have students simplify polynomial expressions that require them to add, subtract, and multiply with this additional example.
+Q: Which property should be applied first in order to simplify the expression?
+\answer{the Distributive Property; The order of operations requires multiplication before addition and subtraction.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+John has to write a function that models the possible areas of a rectangle that started as a square with an area of ((x+2)^2).
+\placeholder{diagram}{Area model of a rectangle divided into four regions: blue upper-left square with side x+2, green right strip of width 4 and height x+2, green bottom strip height x-6 and width x+2, yellow bottom-right rectangle width 4 and height x-6. Top labels x+2 and 4; left labels x+2 and x-6.}
+A. Use the area model to write a polynomial function that represents the possible values of x.
+B. For what domain is this rectangle possible?
+\answer{A. (A(x)=(x+6)(2x-4))
+B. (x>2)}
+\te{Printed x>2 makes the combined height positive, but the pictured x-6 strip has positive height only for x>6.}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION.}
+Example 4 Polynomial functions can be used to model a variety of situations. Have students write a polynomial function that models the area of a rectangle with this additional example.
+Q: Show two different ways to write the area of the rectangle.
+\answer{(A(x)=(x+2+x-6)(x+2+4)); (A(x)=(x+2)^2+4(x+2)+(x-6)(x+2)+4(x-6))}
+\end{te-addendum}
+% Source page 27: 128 Understand & Apply
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Multiply Polynomials. Pose Purposeful Questions ETP}
+PART A
+Q: When you multiply a binomial (2 terms) and a trinomial (3 terms), what is the maximum number of terms in the product?
+\answer{A binomial multiplied by a trinomial can result in a polynomial with six terms, because each of the 2 terms in the binomial will be distributed to each of the 3 terms in the trinomial.}
+PART B
+Q: Does it matter which two binomials you multiply first?
+\answer{No; multiplication is commutative, so the binomials can be multiplied in any order.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Multiply Polynomials}
+How do you multiply the polynomials?
+To multiply polynomials, use the Distributive Property, then group like terms and combine.
+A. ((2m+5)(3m^2-4m+2))
+(=2m(3m^2-4m+2)+5(3m^2-4m+2))
+(=6m^3-8m^2+4m+15m^2-20m+10)
+(=6m^3+(-8m^2+15m^2)+(4m-20m)+10)
+(=6m^3+7m^2-16m+10)
+\te{Callout: Use the Distributive Property.}
+\answer{A. (6m^3+7m^2-16m+10)}
+B. ((mn+1)(mn-2)(mn+4))
+(=[(mn+1)(mn-2)](mn+4))
+(=(m^2n^2-2mn+mn-2)(mn+4))
+(=(m^2n^2-mn-2)(mn+4))
+(=m^2n^2(mn+4)+(-mn)(mn+4)+(-2)(mn+4))
+(=m^3n^3+4m^2n^2-m^2n^2-4mn-2mn-8)
+(=m^3n^3+(4m^2n^2-m^2n^2)+(-4mn-2mn)-8)
+(=m^3n^3+3m^2n^2-6mn-8)
+\te{Callout: Multiply two binomials first.}
+\answer{B. (m^3n^3+3m^2n^2-6mn-8)}
+\te{LEARN TOGETHER How do you value other perspectives and points of view respectfully?}
+\end{example}
+\begin{tryit}{2}
+Multiply the polynomials.
+a. ((6n^2-\frac12)(n^2+n+\frac35))
+b. ((mn+1)(m^2n-1)(mn^2+2))
+\answer{a. (6n^4+6n^3+\frac{31}{10}n^2-\frac12n-\frac3{10})
+b. (m^4n^4+m^3n^3+2m^3n^2-m^2n^3+2m^2n-mn^2-2mn-2)}
+\end{tryit}
+\begin{te-addendum}{2}{LearnTogether}
+\textbf{Learn Together: Respect Others' Perspectives}
+You can learn from hearing others' perspectives and points of view. Ask:
+Q: When might it help to hear ideas from others? How can you encourage others to share their ideas?
+\te{No answer printed.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Understand Closure. Pose Purposeful Questions ETP}
+Q: What does it mean to say that the set of polynomials is closed under addition?
+\answer{It means that when you add two or more polynomials together, the sum will be a polynomial.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Understand Closure}
+\textbf{CONCEPTUAL UNDERSTANDING}
+Is the set of polynomials closed under addition and subtraction? Explain.
+Add two polynomials:
+(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_2x^2+a_1x+a_0)
+(+(b_nx^n+b_{n-1}x^{n-1}+\cdots+b_2x^2+b_1x+b_0))
+((a_n+b_n)x^n+(a_{n-1}+b_{n-1})x^{n-1}+\cdots+(a_2+b_2)x^2+(a_1+b_1)x+(a_0+b_0))
+\te{The polynomials are vertically aligned above a horizontal sum bar. Callout: Adding like terms does not change the variable factor(s) of the terms, only the coefficient: (-3x^2y^2+9x^2y^2=6x^2y^2).}
+Since the coefficients are real and the exponents are unchanged, the sum is still a polynomial. So the set of polynomials is closed under addition.
+Likewise for subtraction, each coefficient is in the form (a_i-b_i) and the exponents are unchanged, so the set of polynomials is closed under subtraction.
+\answer{The set of polynomials is closed under addition and subtraction.}
+\te{COMMUNICATE PRECISELY The set of real numbers is closed under addition: If a and b are real and (a+b=c), then c is also real.}
+\end{example}
+\begin{tryit}{3}
+Show that the set of monomials is closed under multiplication.
+\answer{The product of two monomials will always be a monomial. If the coefficients of two monomials, a and b, are real numbers, then ab is a real number. If the exponents of two monomials, m and n, are real numbers, then (m+n) is a real number. The product of two monomials, such as (ax^m) and (bx^my^p), will always be a monomial, such as ((ab)x^{(m+n)}y^p), so the set of monomials is closed under multiplication. Multiplication of monomials is the foundation for multiplication of polynomials.}
+\te{Printed exponents described as real numbers; polynomial exponents must be nonnegative integers. Printed second monomial bx^my^p uses m, while the product exponent is m+n.}
+\end{tryit}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 2 \& 3
+Construct Arguments Is the set of polynomials closed under multiplication? Explain.
+\answer{Yes; the product of two polynomials is a sum of products of monomials, and a product of monomials is a monomial. Therefore, the product of polynomials is a polynomial.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 2 Students often struggle with using the Distributive Property. Have students practice the process of using this property with simpler expressions.
+\item Distribute and combine like terms.
+1. (2x(3x-6))
+2. (4x(2x^2+3x-7))
+3. ((x-5)(2x-9))
+Q: What property is used to multiply terms that contain variables? How is the property applied?
+\answer{Product Property of Exponents; When multiplying terms that have the same base, add their exponents.}
+\end{te-addendum}
+% Source page 28: 129 Understand & Apply
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Write a Polynomial Function. Pose Purposeful Questions ETP}
+Q: What is the difference between revenue and profit in this example?
+\answer{Revenue is the amount of money Hachi gets for selling the Seminole Indian dolls. Profit is the amount of money left after subtracting her costs.}
+Q: Why does the price function need to be multiplied by the number of items sold whereas the cost function does not?
+\answer{The price function represents the price per item, and so you multiply by the number of items to get the revenue (income). The cost function already represents the total cost.}
+Q: How is the maximum point on the graph related to the nine Seminole Indian dolls?
+\answer{The maximum is at (9.25,107.125), but Hachi cannot sell part of a doll, which means the most profit Hachi can make is \$107.00 when she sells 9 Seminole Indian dolls.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Write a Polynomial Function}
+\textbf{APPLICATION}
+Hachi makes Seminole Indian dolls to sell at the local street market.
+As Hachi produces a greater number of dolls, she can lower the cost per unit. The cost c of making x dolls can be represented with the function (c(x)=12x+64). The function (v(x)) relates the price v to the number of dolls produced, x.
+\placeholder{illustration}{Two Seminole Indian dolls wearing colorful patterned dresses on a purple mat. Text between dolls: Price (v(x)=49-2x).}
+How many Seminole Indian dolls should Hachi sell each week to maximize her profit P? Recall that profit equals revenue minus cost.
+Formulate
+Write a function for revenue R by multiplying the price (v(x)=49-2x) of each item by the number sold x.
+(R(x)=(49-2x)x)
+Then write the function for profit P.
+(P(x)=R(x)-c(x))
+(=(49-2x)x-(12x+64))
+Compute
+Simplify the function.
+(P(x)=(49-2x)x-(12x+64))
+(=(49x-2x^2)-(12x+64))
+(=49x-2x^2-12x-64)
+(=-2x^2+37x-64)
+Hachi's profit function is
+(P(x)=-2x^2+37x-64).
+Interpret
+Hachi's profit is modeled by a quadratic function. The domain of the function is the set of whole numbers. Her maximum profit cannot correspond to the vertex of the graph because she cannot sell a part of a doll. Consider (P(9)=107) and (P(10)=106) and choose the maximum profit of the two.
+Hachi's best business plan is to produce and sell 9 Seminole Indian dolls per week, for a weekly profit of \$107.
+\placeholder{graph}{Red downward parabola P(x)=-2x^2+37x-64; filled vertex labeled (9.25,107.125). Horizontal axis x labeled Number of Dolls Sold, ticks labeled 4,8,12,16,20 with grid every 2; vertical y axis Profit (\$), labels 20,40,60,80,100 with grid every 10; O at origin. Window approximately x[-4,22], y[-20,120]. Curve exits bottom with arrows near x=1.5 and 17, crosses x-axis near 1.9 and 16.6.}
+\answer{9 Seminole Indian dolls per week; weekly profit \$107.}
+\end{example}
+\begin{tryit}{4}
+The cost of Hachi's materials changes so that her new cost function is (c(x)=4x+42).
+Find the new profit function. Then find the quantity that maximizes profit and calculate the profit.
+\answer{(P(x)=-2x^2+45x-42); The quantity that maximizes the profit is 11 Seminole Indian dolls, and the profit is \$211.}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How does the change in the cost of materials affect the maximum of the profit function?
+\answer{With the decreased costs, Hachi will now make a maximum profit of \$211 when she sells 11 Seminole Indian dolls.}
+\end{te-addendum}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error}
+Try It! 4 Students may think that profit is maximized when the greatest number of Seminole Indian dolls are sold. Have students think about what factors impact the profit, and whether selling more always results in a greater profit.
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Give students new contexts in which to practice writing polynomial functions.
+\item Rachel is installing a triangular garden bed from one corner of the patio to the half-way point of the opposite side. Write a polynomial function that represents the area of the part of her patio that is not taken up by the garden.
+\placeholder{diagram}{Black rectangular patio outline, horizontal bottom side labeled x+4 in red and right vertical side labeled x-1 in red. Diagonal black line runs from lower-left corner to midpoint of top edge, cutting off the triangular garden on the left.}
+Q: How can you determine the function that models the area of the patio not taken up by the garden?
+\answer{Answers may vary. Sample: Find the area of the rectangle by multiplying the length by the width. Then subtract from that the area of the triangle.}
+Q: What is a function that models this area?
+\answer{(f(x)=\frac34x^2+\frac94x-3)}
+\end{te-addendum}
+% Source page 29: 130 Understand & Apply
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Compare Two Polynomial Functions. Pose Purposeful Questions ETP}
+PART A
+Q: What do the y-intercepts represent for each function?
+\answer{the profit for selling zero products}
+PART B
+Q: What restrictions are on the domains of these functions?
+\answer{The domains represent the number of items sold, so they must be the set of whole numbers.}
+Q: How can you determine a realistic number of items that Hachi and Kiyo can each produce and sell?
+\answer{The numbers of items they can produce and sell are the positive domain values that result in a positive value for each function.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Compare Two Polynomial Functions}
+\textbf{APPLICATION}
+Hachi's profit function, (y=P(x)), is represented by the graph. Kiyo's profit from selling x flowerpots can be modeled by the function shown.
+\placeholder{illustration}{Two market stalls, Hachi's Dolls at left and Kiyo's Flower Pots at right. Left stall contains a blue downward parabola graph, a doll on a pedestal, and two small shelf dolls. Right stall displays flowerpots on a table and the equation r(x)=x(x-3)(10-x) on its backdrop.}
+\placeholder{graph}{Hachi's Dolls stall graph: blue downward parabola with red filled y-intercept labeled (0,-64), peak near (9,100). Axes x,y; horizontal label Number of Items, ticks 4,8,12,16,20, grid spacing 2; vertical label Profit (\$), labels -60,-40,-20,0,20,40,60,80,100, grid spacing 10. Window approximately x[0,22], y[-70,110]. Curve crosses x-axis near 2 and 16 and descends beyond lower edge at right.}
+A. Find the y-intercept of each function. Who would lose more money if neither person sold any items?
+The y-intercept of (P(x)) is -64.
+If Hachi does not sell any dolls this week, she will lose \$64.
+\te{Callout: Hachi has startup costs, which she pays whether she sells any dolls or not.}
+Substitute 0 for x in r to find the y-intercept.
+(r(0)=0(0-3)(10-0))
+(=0)
+\te{Callout: Kiyo has no startup costs.}
+The y-intercept of r is 0. If Kiyo does not sell any flowerpots, he will not lose any money. So, Hachi loses more money by not making any sales.
+\answer{A. P: -64; r: 0; Hachi loses more money by not making any sales.}
+B. Interpret the end behavior of the functions.
+The domain of each function includes only non-negative values.
+The graph of (P(x)) shows that the end behavior, as (x\to\infty), is (y\to-\infty).
+Rewrite the function r in standard form to identify end behavior.
+(r(x)=x(x-3)(10-x))
+(=(x^2-3x)(10-x))
+(=-x^3+13x^2-30x)
+Because the leading coefficient is negative, we know that as (x\to\infty), (y\to-\infty).
+Kiyo and Hachi each have a finite number of items they should sell to maximize profits. They will both lose money if they sell too many items.
+\answer{B. Both functions have (y\to-\infty) as (x\to\infty); both sellers lose money if they sell too many items.}
+\te{USE STRUCTURE As x approaches positive infinity or negative infinity, the leading term of the polynomial determines the end behavior of the graph of the function.}
+\end{example}
+\begin{tryit}{5}
+Compare the profit functions of two additional market sellers modeled by the graph of f and the equation (g(x)=(x+1)(5-x)). Compare and interpret the y-intercepts of these functions and their end behavior.
+\placeholder{graph}{Small red cubic f, labeled f at upper-right branch. Arrowed x,y axes; O at origin, x labels 4 and 8, grid spacing 2; y label 20, grid spacing 10; window approximately x[-2,10],y[-20,40]. Curve touches x-axis at a local maximum (0,0), descends to a minimum near (3.3,-20), crosses x-axis near x=5, and rises with an arrow. Left end descends with arrow.}
+\answer{The y-intercept of f is 0. The y-intercept of g is 5. So, the seller using g earns \$5 while producing no products, but the seller using f earns \$0. The end behavior of f is (x\to\infty), (y\to\infty). The end behavior of (g(x)) is (x\to\infty), (y\to-\infty). This means that for the seller using f, after 5 products, the more products he makes, the more money he makes. The seller using g only makes money for (0\leq x<5).}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Without graphing (g(x)), how can you compare the two functions?
+\answer{By inspecting the equation, (g(x)) will be a parabola that opens downward. It has x-intercepts at -1 and 5, so the function will be positive over that interval. When (x>5), (g(x)) will be negative, while (f(x)) will be positive.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 4 \& 5
+Make Sense and Persevere Find the quantity that maximizes profit for (g(x)=(x+1)(5-x)). Calculate the profit.
+\answer{2; \$9}
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 5)}
+WRITING BEGINNING Have students write in their journals what they think the word startup means. Explain that the word startup is a compound word. Challenge students to list other compound words.
+Q: Does a compound word always have to be one word?
+\answer{No; a compound word can be one word, a hyphenated word, or two words (an open compound).}
+Q: What other compound words can you find in the example?
+\answer{flowerpot}
+SPEAKING DEVELOPING Have students discuss terminology related to business, such as the French word entrepreneur. Have students think about other foreign words that have become part of the English language and how the meaning can sometimes be guessed by thinking of another word that sounds like it.
+Q: What does entrepreneur mean?
+\answer{a person who starts his or her own business}
+READING EXPANDING Have students read the example and underline phrases with negatives, such as not, no, and neither. Have students explain those phrases in positive terms.
+Q: How could you rephrase the question in Part A without the words neither and anything?
+\answer{``Who would lose more money if each person produced zero items to sell?''}
+Q: How does rephrasing the question help you understand how to solve the problem?
+\answer{By changing ``neither... produced anything'' to ``each produced zero items,'' you can see that you need to find the y-value when the x-value is 0.}
+\end{te-addendum}
+% Source page 30: 131 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Adding, Subtracting, and Multiplying Polynomials}
+Q: How can you generalize the processes used to add, subtract, and multiply polynomials?
+\answer{When performing operations on polynomials, use the Associative and Commutative Properties to rearrange and regroup terms. Use the Distributive Property to combine like terms when adding or subtracting, or to distribute a factor to all terms of a polynomial when multiplying.}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 8 Students may try to distribute the first factor to both other factors. Have students show how a product of three factors is different from using the Distributive Property for a product of two factors.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Adding, Subtracting, and Multiplying Polynomials}
+ADD To add polynomials, use the Associative and Commutative Properties to group like terms. Then combine like terms.
+((2x^2+5x-7)+(3x^2-9x+12))
+(=(2x^2+3x^2)+(5x-9x)+(-7+12))
+(=5x^2-4x+5)
+SUBTRACT To subtract polynomials, group and combine like terms.
+((6x^3+2x^2+14)-(4x^3+4x^2-8))
+(=6x^3+2x^2+14-4x^3-4x^2+8)
+(=(6x^3-4x^3)+(2x^2-4x^2)+(14+8))
+(=2x^3-2x^2+22)
+\te{Callout: Distribute the factor of -1 to each term.}
+MULTIPLY To multiply polynomials, use the Distributive Property. Then, group and combine like terms.
+((x+5)(3x^2-2x+4))
+(=x(3x^2-2x+4)+5(3x^2-2x+4))
+(=3x^3-2x^2+4x+15x^2-10x+20)
+(=3x^3+(-2x^2+15x^2)+(4x-10x)+20)
+(=3x^3+13x^2-6x+20)
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How do you add, subtract, and multiply polynomials?
+\answer{To add polynomials, group like terms and combine like terms. To subtract polynomials, distribute the factor of -1 and combine like terms. To multiply polynomials, apply the Distributive Property and then combine like terms.}
+2. Error Analysis Chen subtracted two polynomials as shown. Explain Chen's error.
+(p^2+7mp+4-(-2p^2-mp+1))
+(p^2+2p^2+7mp-mp+4+1)
+(3p^2+6mp+5)
+\te{The displayed work is marked with a red X.}
+\answer{Chen did not distribute the factor of -1 over the terms -mp and 1.}
+3. Communicate Precisely Why do we often write the results of polynomial calculations in standard form?
+\answer{Polynomials are written in standard form to make it easier to identify their properties, like end behavior.}
+4. Construct Arguments Is the set of whole numbers closed under subtraction? Explain why you think so, or provide a counterexample.
+\answer{No, for example, (4-6) is not a whole number.}
+\textbf{Do You KNOW HOW?}
+Add or subtract the polynomials.
+5. ((-3a^3+2a^2-4)+(a^3-3a^2-5a+7))
+\answer{(-2a^3-a^2-5a+3)}
+6. ((7x^2y^2-6x^3+xy)-(5x^2y^2-x^3+xy+x))
+\answer{(2x^2y^2-5x^3-x)}
+Multiply the polynomials.
+7. ((7a+2)(2a^2-5a+3))
+\answer{(14a^3-31a^2+11a+6)}
+8. ((xy-1)(xy+6)(xy-8))
+\answer{(x^3y^3-3x^2y^2-46xy+48)}
+9. The length of a rectangular speaker is three times its width, and the height is four more than the width. Write an expression for the volume V of the rectangular prism in terms of its width w.
+\placeholder{illustration}{Orange rectangular speaker in perspective, black perforated front labeled Soundz, gray left end. Black dimension arrow under left end marks width w.}
+\answer{(V=3w^3+12w^2)}
+\end{concept-summary}
+% Source page 31: 132 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by Math XL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+11, 14, 17--32 & 10--32 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+Scan the QR code to access a video tutorial.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 18--20 & 1 \\
+1 & 11, 13 & 3 \\
+2 & 21--23 & 1 \\
+2 & 10, 12, 14 & 2 \\
+3 & 16, 30, 31 & 2 \\
+3 & 15, 24 & 3 \\
+4 & 25, 27--29 & 2 \\
+5 & 17, 26 & 2 \\
+5 & 32 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{10}{2}
+UNDERSTAND. Generalize Explain two methods by which ((2m^3+4n^2)^2) can be simplified. Which method do you prefer and why?
+\answer{Use the algorithm for squaring a binomial or the FOIL method.}
+\end{practice}
+\begin{practice}{11}{3}
+Use Structure Polynomial function P is the sum of two polynomial functions, one with degree 2 and a positive leading coefficient and one with degree 3 and a negative leading coefficient. Describe the end behavior of P. Write an example of two polynomial functions and their sum, P, to justify your description.
+\answer{As (x\to\infty), (y\to-\infty), and as (x\to-\infty), (y\to\infty); Answers may vary. Sample: For example, if (f(x)=3x^2+2) and (g(x)=-4x^3+2x^2-8), then (P(x)=-4x^3+5x^2-6).}
+\end{practice}
+\begin{practice}{12}{2}
+Generalize Multiply the polynomials ((a+b)(a+b)(a+b)) to develop a general formula for cubing a binomial, ((a+b)^3).
+\answer{((a+b)^3=a^3+3a^2b+3ab^2+b^3)}
+\end{practice}
+\begin{practice}{13}{3}
+Reason Polynomial function R is the difference of two degree-two polynomial functions. What are the possible degrees for R? Explain.
+\answer{2, 1, or 0; If the second-degree terms have the same coefficient, the degree of the difference depends on the remaining first- or zero-degree terms.}
+\end{practice}
+\begin{practice}{14}{2}
+Error Analysis Describe and correct the error a student made in multiplying the polynomials.
+((y-2)3y^2-y-7))
+(=y(3y^2-y-7)-2(3y^2-y-7))
+(=3y^3-y^2-7y+(-6y^2)+(-2y)-14)
+(=3y^3-7y^2-9y-14)
+\te{Printed first line omits the opening parenthesis before 3y^2. The work is marked with a red X.}
+\answer{On the third line, the -2y term should be positive, and the constant should be 14. The answer should be (3y^3-7y^2-5y+14).}
+\end{practice}
+\begin{practice}{15}{3}
+Higher Order Thinking Do you think polynomials are closed under division? Explain why you think so, or provide a counterexample.
+\answer{Sample: no; ((6y^4-8y^3+24y)\div4y^2=\frac32y^2-2y+6y^{-1}). The quotient is not a polynomial by definition, because the exponent of the variable in the last term is not a whole number.}
+\end{practice}
+\begin{practice}{16}{2}
+Construct Arguments Explain why the expression (9x^3+\frac12x^2+3x^{-1}) is not a polynomial.
+\answer{The exponent of (3x^{-1}) is not a whole number.}
+\end{practice}
+\begin{practice}{17}{2}
+Communicate Precisely Explain the difference between the graphs of polynomial functions with a degree of 3 that have a positive leading coefficient and the graphs of those with a negative leading coefficient.
+\answer{If the leading coefficient is positive, then as (x\to\infty), (y\to\infty), and as (x\to-\infty), (y\to-\infty). If the leading coefficient is negative, then as (x\to\infty), (y\to-\infty), and as (x\to-\infty), (y\to\infty).}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Add or subtract the polynomials. SEE EXAMPLE 1
+((2x^3+3x^2+4)+(6x^3-x^2-5x))
+\answer{(8x^3+2x^2-5x+4)}
+\end{practice}
+\begin{practice}{19}{1}
+Add or subtract the polynomials. SEE EXAMPLE 1
+((5y^4+3y^3-6y^2+14)-(-y^4+y^2-7y-1))
+\answer{(6y^4+3y^3-7y^2+7y+15)}
+\end{practice}
+\begin{practice}{20}{1}
+Add or subtract the polynomials. SEE EXAMPLE 1
+((4p^2q^2+2p^2q-7pq)-(9p^2q^2+5pq^2-11pq))
+\answer{(-5p^2q^2+2p^2q-5pq^2+4pq)}
+\end{practice}
+\begin{practice}{21}{1}
+Multiply the polynomials. SEE EXAMPLE 2
+(-4xy(5x^2-9xy-y^2))
+\answer{(-20x^3y+36x^2y^2+4xy^3)}
+\end{practice}
+\begin{practice}{22}{1}
+Multiply the polynomials. SEE EXAMPLE 2
+((3c-4)(2c^2-5c+7))
+\answer{(6c^3-23c^2+41c-28)}
+\end{practice}
+\begin{practice}{23}{1}
+Multiply the polynomials. SEE EXAMPLE 2
+((z+5)(z-9)(1-z))
+\answer{(-z^3+5z^2+41z-45)}
+\end{practice}
+\begin{practice}{24}{3}
+Is the set of monomials closed under addition? Explain why you think so, or provide a counterexample. SEE EXAMPLE 3
+\answer{No; x and 3 are both monomials, but (x+3) is not.}
+\end{practice}
+\begin{practice}{25}{2}
+An online shopping club has 13,500 members when it charges \$8 per month for membership. For each \$1 monthly increase in membership fee, the club loses approximately 500 of its existing members.
+\placeholder{illustration}{Black tablet displaying Online Shopping Club; Exclusive Edition T-Shirts on Sale! Blue shirt with white pi symbol at left, orange shirt with white square-root-x symbol at right. Size/count text left S 23, M 53, L 21, XL 32; right S 11, M 45, L 25, XL 28; tiny details links below.}
+Write and simplify a function R to represent the monthly revenue received by the club when x represents the price increase.
+Hint: Monthly revenue = \# members (\cdot) monthly fee. SEE EXAMPLE 4
+\answer{(R(x)=(13,500-500x)(8+x)=-500x^2+9,500x+108,000)}
+\end{practice}
+\begin{practice}{26}{2}
+The graph shows a polynomial function f. Polynomial function g is defined by (g(x)=x^2(6-x)). Compare the maximum values and the end behavior of the functions f and g when (x>0). SEE EXAMPLE 5
+\placeholder{graph}{Blue downward parabola f with peak near (10,90), x-intercepts 0 and 20, labeled f on descending branch. Axes x,y with arrows and O at origin; x labels -8,8,16, grid every 4; y labels 20,40,60,80, grid every 10. Window approximately x[-16,24],y[-20,100]. Both ends downward with arrows at lower edge.}
+\answer{The maximum value of f is 90; the maximum value of g is 32; end behavior of f: when (x\to-\infty), (y\to-\infty), and when (x\to\infty), (y\to-\infty); end behavior of g: when (x\to-\infty), (y\to\infty), and when (x\to\infty), (y\to-\infty)}
+\te{Printed answer also describes negative-x end behavior although the prompt specifies x>0.}
+\end{practice}
+% Source page 32: 133 Practice & Problem Solving
+\begin{practice}{27}{2}
+APPLY. Use this information for 27 and 28. A foundry manufactures aluminum trays from pieces of sheet metal as shown.
+\placeholder{diagram}{Rectangular gray sheet metal, width 20 in. and height 14 in., with a small square outlined at each corner. The lower right square has horizontal and vertical side labels x in red.}
+\textbf{Model With Mathematics} Let (x) represent the side length of each square.
+a. Write expressions for the length, width, and height of the metal tray.
+\answer{a. (L=20-2x), (W=14-2x), (H=x)}
+b. Write and simplify a polynomial function (V) to represent the volume of the tray.
+\answer{b. (V=4x^2-68x^2+280x)}
+\te{Printed first term is (4x^2); likely (4x^3).}
+c. Using the graph of the function (V), explain what the marked relative maximum represents.
+\placeholder{graph}{Red volume curve in a first-quadrant x-y grid, x window 0 to 10 with grid spacing 1 and labels 0, 2, 4, 6, 8; y window 0 to 400 with grid spacing 40 and labels 0, 80, 160, 240, 320, 400. Filled point at the left near (0,0), filled maximum labeled (2.7,339), and filled right endpoint (7,0). A downward arrow appears on the curve near the left endpoint. Positive axes have arrowheads.}
+\answer{c. The y-coordinate of the relative maximum represents the maximum volume that can result from cutting four squares from the corners of the sheet metal, and the x-coordinate of the relative maximum represents the measure of the side of the squares that could be cut from the sheet metal in order to produce the maximum volume.}
+\end{practice}
+\begin{practice}{28}{2}
+\textbf{Reason} Suppose the foundry manufacturer has a new design where the squares cut from the corners have sides that are half the length of the squares in the previous design.
+a. Write expressions for the length, width, and height of this tray.
+\answer{a. length (=20-x); width (=14-x); height (=\frac{1}{2}x)}
+b. Write and simplify the polynomial function (v(x)), to represent the volume of the new tray.
+\answer{b. (v(x)=(14-x)(20-x)(\frac{1}{2}x)=\frac{1}{2}x^3-17x^2+140x)}
+c. Write the function (D(x)) that represents the difference, (V(x)-v(x)).
+\answer{c. (D(x)=\frac{7}{2}x^3-51x^2+140x)}
+\end{practice}
+\begin{practice}{29}{2}
+\textbf{Make Sense and Persevere} Enzo has \$1,000 to invest in a fund that pays approximately 4.6\% per year or in a savings account with an annual interest rate of 1.8\%. Write a polynomial function (S(x)) to represent the interest Enzo will earn in 1 year by investing (x) dollars in the fund and the remainder in the savings account.
+\answer{(S(x)=0.028x+18)}
+\end{practice}
+\begin{practice}{30}{2}
+ASSESSMENT PRACTICE. Are polynomials open or closed under each operation? Classify each operation as open or closed.
+a. addition
+b. subtraction
+c. multiplication
+d. division
+\answer{a. closed; b. closed; c. closed; d. open}
+\end{practice}
+\begin{practice}{31}{2}
+\textbf{SAT/ACT} Which of the following functions is NOT a polynomial function?
+A. (2y^2+9y-8)
+B. (-\frac{1}{2}x^3+8)
+C. ((x-1)(5-x)(x+4))
+D. (9z^4+2z+\frac{1}{z})
+\answer{D}
+\end{practice}
+\begin{practice}{32}{3}
+\textbf{Performance Task} Consider the polynomial functions (P(x)=x^2-4) and (R(x)=-x^2-2x).
+Part A Write and simplify a polynomial function (T(x)) that is the product of (P) and (R).
+\answer{Part A (T(x)=-x^4-2x^3+4x^2+8x)}
+Part B Copy and complete the table of values for all three functions.
+\begin{tabular}{llll}
+(x) & (P(x)) & (R(x)) & (T(x)) \\
+(-3) & & & \\
+(-2) & & & \\
+(-1) & & & \\
+0 & & & \\
+1 & & & \\
+2 & & & \\
+3 & & & \\
+\end{tabular}
+\answer{Part B
+\begin{tabular}{llll}
+(x) & (P(x)) & (R(x)) & (T(x)) \\
+(-3) & 5 & (-3) & (-15) \\
+(-2) & 0 & 0 & 0 \\
+(-1) & (-3) & 1 & (-3) \\
+0 & (-4) & 0 & 0 \\
+1 & (-3) & (-3) & 9 \\
+2 & 0 & (-8) & 0 \\
+3 & 5 & (-15) & (-75) \\
+\end{tabular}}
+Part C Graph the functions on the same coordinate grid.
+\answer{Part C See graph.}
+\placeholder{graph}{Answer Part C: x-y square grid from -5 to 5 on both axes, unit grid, labels -4, -2, O, 2, 4 and arrowheads on both ends of axes. Red upward parabola P has vertex (0,-4), zeros (-2,0) and (2,0), arrows on both upper branches. Blue downward parabola R has vertex (-1,1), zeros (-2,0) and (0,0), arrows on both lower branches. Green quartic T touches the axis at (-2,0), dips to approximately (-0.8,-3.3), crosses (0,0), rises beyond the upper window and returns to cross (2,0); both outer branches have downward arrows.}
+Part D How do the zeros of (T) relate to the zeros of (P) and (R)?
+\answer{Part D The zeros of (T) include all the zeros of both (P) and (R).}
+Part E Explain how you can identify the intervals in which (T) is positive by analyzing the (R) and (P).
+\answer{Part E Because (T) is the product of (R) and (S), (T) is positive when (R) and (S) are both positive or both negative.}
+\te{Printed answer uses (S); likely (P).}
+\end{practice}
+% Source page 33: 133A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & A18 \\
+2 & 1 & A20 \\
+3 & 2 & A20 \\
+4 & 3 & A20 \\
+5 & 2 & F61 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+Lesson Quiz is available at SavvasRealize.com.
+ASSESSMENT RESOURCES. Name \underline{\hspace{3cm}}
+\textbf{3-2 Lesson Quiz: Adding, Subtracting, and Multiplying Polynomials}
+1. Add ((4a^2b-3ab^2+2ab+5)) and ((2a^2b+3ab^2-7ab)). Complete the expression in standard form.
+\te{Choice tiles: (a^2b), (6a^2b), (6ab^2), ((-9ab^2)), ((-5ab)), (9ab), (5ab), 5. Three answer boxes separated by plus signs.}
+\answer{1. (6a^2b+(-5ab)+5)}
+2. Multiply ((x+2y)(x^2-xy+3y)).
+A. (x^3+x^2y+3xy-2xy^2+6y^2)
+B. (x^3-3x^2y+3xy-2xy^2+6y^2)
+C. (x^3+3xy-xy^2+3y^2)
+D. (x^3-xy+6y^2)
+\answer{2. A}
+3. Is the set of monomials closed under multiplication? Which of the following gives a correct answer and an explanation?
+A. Yes; the sum of any two monomials is a monomial.
+B. No; the product of two monomials could be a polynomial.
+C. Yes; the product of any two monomials is a monomial.
+D. No; the product of two monomials could be a rational number.
+\answer{3. C}
+4. Jae is constructing an open box from a piece of cardboard that is 9 in. wide and 12 in. long. Jae cuts squares of equal size from each corner of the cardboard, and then folds up the sides of the box. Write and simplify a polynomial function (V) in standard form for the volume of the box in terms of (x).
+\placeholder{diagram}{Rectangle representing cardboard, with dashed square cutouts at all four corners. The upper right square has horizontal and vertical side labels x.}
+(V(x)=\underline{\hspace{1cm}}x^3-\underline{\hspace{1cm}}x^2+\underline{\hspace{1cm}}x)
+\answer{4. (V(x)=4x^3-42x^2+108x)}
+5. The volume of a hemisphere with radius (x) is (V(x)=\frac{2}{3}\pi x^3). The volume of a cube with height (x) is shown in the graph. Over the interval [2, 3], which volume is increasing faster? Complete the sentence.
+\placeholder{graph}{First-quadrant x-y grid, x window 0 to 5, grid spacing 0.5, labeled 0, 1, 2, 3, 4; y window 0 to 100, grid spacing 10, labeled 0, 20, 40, 60, 80. Black cubic curve for cube volume rises from (0,0), passes approximately (2,8), (3,27), (4,64), and has an upward arrow near (4.6,100). Positive axes have arrowheads.}
+The volume of the [hemisphere / cube] is increasing faster.
+\answer{5. hemisphere}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 34: 133B Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding (I)}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+Name \underline{\hspace{3cm}}
+\textbf{3-2 Reteach to Build Understanding: Adding, Subtracting, and Multiplying Polynomials}
+1. Add, subtract or multiply each of the following polynomials.
+a. ((4x^2-6x+9)+(3x^2+8x-10))
+\begin{tabular}{lll}
+Step 1 & Write the polynomials. & ((4x^2-6x+9)+(3x^2+8x-10)) \\
+Step 2 & Rearrange so like terms are together. & ((4x^2+3x^2)+(-6x+8x)+(-10+9)) \\
+Step 3 & Add the like terms together to get the answer. & (7x^2+2x-1) \\
+\end{tabular}
+\answer{a. (7x^2+2x-1)}
+b. ((x+2)(3x^2+2x-4))
+\begin{tabular}{lll}
+Step 1 & Write the polynomials. & ((x+2)(3x^2+2x-4)) \\
+Step 2 & Multiply the 2nd equation by (x) and then multiply the same equation by (+2). & ((x)(3x^2+2x-4)+2(3x^2+2x-4)) \\
+Step 3 & Multiply each equation. & ((3x^3+2x^2-4x)+6x^2+4x-8) \\
+Step 4 & Rearrange the like terms. & (3x^3+(2x^2+6x^2)+(-4x+4x)-8) \\
+Step 5 & Simplify to get the answer. & (3x^3+8x^2-8) \\
+\end{tabular}
+\answer{b. (3x^3+8x^2-8)}
+2. Adam incorrectly found the product of ((a-3)(5a^3-a^2+2a-7)). Find and correct his error.
+((a-3)(5a^3-a^2+2a-7))
+(=(a)(5a^3-a^2+2a-7)-(3)(5a^3-a^2+2a-7))
+(=5a^4-a^3+2a^2-7a-15a^3+3a^2+6a-21)
+(=5a^4-16a^3+5a^2-a-21)
+\answer{Adam did not distribute the (-3) correctly. The correct answer is (5a^4-16a^3+5a^2-13a+21).}
+3. Solve.
+a. ((2x^2-9x+3)+(3x^2+3x-2))
+(=(2x^2+3x^2)+(-9x+3x)+(3-2))
+(=5x^2-6x+1)
+\answer{a. (5x^2-6x+1)}
+b. ((4x^3-2x-2)-(6x^3+3x-8))
+(=4x^3-2x-2-6x^3-3x+8)
+(=(4x^3-6x^3)+(-2x-3x)+(-2+8))
+(=-2x^3-5x+6)
+\answer{b. (-2x^3-5x+6)}
+c. ((x+4)(2x^2-4x-8))
+(=(x)(2x^2-4x-8)+4(2x^2-4x-8))
+(=2x^3-4x^2-8x+8x^2-16x-32)
+(=2x^3+(-4x^2+8x^2)+(-8x-16x)-32)
+(=2x^3+4x^2-24x-32)
+\answer{c. (2x^3+4x^2-24x-32)}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice (I, O)}
+Provides extra practice for each lesson. MathXL for School.
+Name \underline{\hspace{3cm}}
+\textbf{3-2 Additional Practice: Adding, Subtracting, and Multiplying Polynomials}
+Add or subtract the polynomials.
+1. ((4x^3+2x+2x^2-8)+(2x^3+x^2+9))
+\answer{1. (6x^3+3x^2+2x+1)}
+2. ((9a^3b+6ab-4)-(10a^3b-6a^2b^2-6))
+\answer{2. (-a^3b+6a^2b^2+6ab+2)}
+Multiply the polynomials.
+3. (-2cd(5c^2-5cd-d^2))
+\answer{3. (-10c^3d+10c^2d^2+2cd^3)}
+4. ((-2b+4)(5b^2-4b+2))
+\answer{4. (-10b^3+28b^2-20b+8)}
+5. Is the set of polynomials with odd number coefficients open or closed under addition and subtraction? Under multiplication?
+\answer{5. Open; Closed}
+\te{Printed multiplication answer is Closed; multiplying polynomials with odd coefficients can produce even coefficients.}
+Write a Polynomial Function.
+6. Write and simplify a polynomial expression to find the area of 4 circles. Each circle has a radius of (4a-6).
+\answer{6. ((64a^2-192a+144)\pi)}
+7. If the length of a rectangle in terms of (x) centimeters is (5x^2+4x-4) and its width is (3x^2+2x+6) centimeters, what is the perimeter of the rectangle? Simplify.
+\answer{7. (16x^2+12x+4)}
+Compare the end behavior of the graphs of the functions (f) and (g).
+8.
+\placeholder{graph}{Additional Practice 8: x-y coordinate grid, x grid spacing 2 with labels -8, -4, O, 4, 8; y grid spacing 4, labels 8 and 16. Window approximately x=-10 to 10 and y=-12 to 20. Curve f is an increasing cubic with left downward and right upward arrows, crossing the x-axis near 2. Curve g is a downward parabola with maximum approximately (1,16) and x-intercepts near -3 and 5; both branches have downward arrows.}
+End behavior:
+For (f(x)): As (x\to\underline{\hspace{1cm}}), (y\to\underline{\hspace{1cm}}). As (x\to\underline{\hspace{1cm}}), (y\to\underline{\hspace{1cm}}).
+For (g(x)): As (x\to\underline{\hspace{1cm}}), (y\to\underline{\hspace{1cm}}). As (x\to\underline{\hspace{1cm}}), (y\to\underline{\hspace{1cm}}).
+\answer{8. For (f(x)): As (x\to+\infty), (y\to+\infty); as (x\to-\infty), (y\to-\infty). For (g(x)): As (x\to+\infty), (y\to-\infty); as (x\to-\infty), (y\to-\infty).}
+9.
+\placeholder{graph}{Additional Practice 9: x-y grid, x grid spacing 2 with labels -8, -4, O, 4, 8; y grid spacing 4 with labels -8, 8, 16. Window approximately x=-10 to 10 and y=-12 to 20. Curve f is an increasing cubic with a flattened section near (0,4), x-intercept near -2, left downward and right upward arrows. Curve g is an upward parabola with vertex near (3,0), y-intercept near 6, and upward arrows on both branches. Axes have arrowheads and curves are labeled f and g.}
+End behavior:
+For (f(x)): As (x\to\underline{\hspace{1cm}}), (y\to\underline{\hspace{1cm}}). As (x\to\underline{\hspace{1cm}}), (y\to\underline{\hspace{1cm}}).
+For (g(x)): As (x\to\underline{\hspace{1cm}}), (y\to\underline{\hspace{1cm}}). As (x\to\underline{\hspace{1cm}}), (y\to\underline{\hspace{1cm}}).
+\answer{9. For (f(x)): As (x\to+\infty), (y\to+\infty); as (x\to-\infty), (y\to-\infty). For (g(x)): As (x\to+\infty), (y\to+\infty); as (x\to-\infty), (y\to+\infty).}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment (O, A)}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Name \underline{\hspace{3cm}}
+\textbf{3-2 Enrichment: Adding, Subtracting, and Multiplying Polynomials}
+Find the ordered pair that satisfies each equation. Graph the ordered pair and label the point with the corresponding letter given. Connect the points to form a figure. The first one has been done for you.
+A. ((4x^3+6x^2-3x-18)-(4x^3-6x^2-12x-9.5)=12x^2+9x-8.5)
+When (x=-1.5), solve for (y). The ordered pair is ((-1.5,5)). Plot A at ((-1.5,5)).
+\placeholder{graph}{Enrichment answer: magenta closed ten-segment star outline joining A(-1.5,5), B(4,8), C(2.5,2), D(6.5,-2), E(1,-3), F(-1,-8), G(-4,-2.5), H(-11,-1), I(-5.5,2.5), J(-6,8), then A. Each vertex is filled and labeled with its letter. Black x-y axes with arrowheads, unit grid, window approximately x=-12 to 12 and y=-9 to 9. Even tick labels, origin O.}
+B. ((2x^4-4x^3+x^2-7)+(-2x^4+4x^3-0.5x^2+7)=\underline{\hspace{1cm}})
+Find the ordered pair ((4,\underline{\hspace{1cm}})).
+\answer{B. (0.5x^2); (4,8)}
+C. (\uncertain{[2x^2(x-6.4)]+(10x^3+0.32x^2)}{Small expression is blurred; powers and coefficient in the bracketed factor are not fully legible}=\underline{\hspace{1cm}})
+Find the ordered pair ((2.5,\underline{\hspace{1cm}})).
+\answer{C. (0.32x^2); (2.5,2)}
+\te{The printed expression and answer in C are inconsistent.}
+D. ((2x^2)(3x^2+5)-(6x^4+10x^2-x+8.5)=\underline{\hspace{1cm}})
+Find the ordered pair ((6.5,\underline{\hspace{1cm}})).
+\answer{D. (x-8.5); (6.5,-2)}
+E. ((7x^5-11x^4+9x^2-26x+19)+(3x^5+7x^4-22x^2-15x+18)=\underline{\hspace{1cm}})
+Find the ordered pair ((1,\underline{\hspace{1cm}})).
+\answer{E. (10x^5\uncertain{+}{The sign before 4x^4 is blurred; possibly -}4x^4-13x^2-41x+37); (1,-3)}
+\te{The answer E requires (-4x^4) algebraically; the printed sign is unclear.}
+F. ((x+3)(x-3)=\underline{\hspace{1cm}})
+Find the ordered pair ((-1,\underline{\hspace{1cm}})).
+\answer{F. (x^2-9); (-1,-8)}
+G. ((2x^3+3x^2-35)-(4x^3+9x^2-3x-12.5)=\underline{\hspace{1cm}})
+Find the ordered pair ((-4,\underline{\hspace{1cm}})).
+\answer{G. (-2x^3-6x^2+3x-22.5); (-4,-2.5)}
+H. ((6x^5+2x^4+5x^3-4x^2+4x+11)-(6x^5+2x^4+5x^3-4x^2+3x+1)=\underline{\hspace{1cm}})
+Find the ordered pair ((-11,\underline{\hspace{1cm}})).
+\answer{H. (x+10); (-11,-1)}
+I. ((-12x^3+5x^2+2x-110)+(12x^3+3x^2+3x-102)=\underline{\hspace{1cm}})
+Find the ordered pair ((-5.5,\underline{\hspace{1cm}})).
+\answer{I. (8x^2+5x-212); (-5.5,2.5)}
+J. ((6x^4+3x^3+x^2+4x-78)-(6x^4+3x^3-2x^2+9x+52)=\underline{\hspace{1cm}})
+Find the ordered pair ((-6,\underline{\hspace{1cm}})).
+\answer{J. (3x^2-5x-130); (-6,8)}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary (I, O)}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name \underline{\hspace{3cm}}
+\textbf{3-2 Mathematical Literacy and Vocabulary: Adding, Subtracting, and Multiplying Polynomials}
+Solve the problem ((c-d)(3c-3d-6)). Justify and explain your work.
+\begin{tabular}{lll}
+Explain & Work & Justify \\
+First, write the equation. & ((c-d)(3c-3d-6)) & Original equation. \\
+Second, break up the problem. & (c(3c-3d-6)-d(3c-3d-6)) & Break up the problem. \\
+Then, distribute (c) to the first part of the problem and (d) to the second half of the problem. & ((3c^2-3cd-6c)-(3cd-3d^2-6d)) & Use the Distributive Property. \\
+Next, distribute (-1). & (3c^2-3cd-6c-3cd-3d^2-6d) & Use the Distributive Property. \\
+Next, combine like terms. & (3c^2-6cd-6c-3d^2-6d) & Add or Subtract. \\
+Then, group the terms. & (3c^2+3d^2-6cd-6c+6d) & Solution. \\
+\end{tabular}
+\te{Printed intermediate rows after distributing (-1) retain negative signs on (3d^2) and (6d); the final row changes those signs to positive.}
+Solve the problem ((2c-4d)(2c+6d-3)). Justify and explain your work.
+\begin{tabular}{lll}
+Explain & Work & Justify \\
+First, write the equation. & ((2c-4d)(2c+6d-3)) & Original equation. \\
+Second, break up the problem. & (2c(2c+6d-3)-4d(2c+6d-3)) & Break up the problem. \\
+Then, distribute (c) to the first part of the problem and (d) to the second half of the problem. & ((4c^2+12cd-6c)-(8cd+24d^2-12d)) & Use the Distributive Property. \\
+Next, distribute (-1). & (4c^2+12cd-6c-8cd-24d^2+12d) & Use the Distributive Property. \\
+Next, combine like terms. & (4c^2+4cd-6c-24d^2+12d) & Add or Subtract. \\
+Then, group the terms. & (4c^2-24d^2+4cd-6c+6d) & Solution. \\
+\end{tabular}
+\te{Printed last term is (+6d); likely (+12d). Printed explanation says distribute (c) and (d), while the factors are (2c) and (4d).}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{illustration}{Black tablet showing an online graphing assignment. Left: Solve the system of equations by graphing, y=3x+4 and y=-2x+4; Use the graphing tool to graph the system; Click to enlarge graph. Right: blank x-y coordinate grid from -10 to 10 on both axes, unit spacing, labels every 2, positive-axis arrowheads; a Question Help menu overlays the upper right of the grid. Menu entries: Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Bottom: Click the graph, choose a tool in the palette and follow the instructions to create your graph; 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next. Exit at top left.}
+\end{te-addendum}
+
+\end{document}

@@ -1,0 +1,810 @@
+\documentclass{article}
+% Source: Topic_07_Teacher_Edition.pdf, PDF pages 66-76 (printed pages 381A-387B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 66: 381A Lesson Overview
+\begin{lesson-meta}
+lesson: 7-5
+title: Graphing Other Trigonometric Functions
+standards: none printed
+practices: none printed
+objective: I can sketch the graphs of the ratio and reciprocal trigonometric functions.
+
+essential question: How do key features of one trigonometric function relate to key features of other trigonometric functions?
+
+\textbf{REVIEW VOCABULARY}
+\item asymptote
+\item period
+\item radian
+\item reciprocal function
+\item transformation
+\item unit circle
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 7-5 \\
+Title & Graphing Other Trigonometric Functions \\
+Standards & none printed \\
+I CAN Objective & I can sketch the graphs of the ratio and reciprocal trigonometric functions. \\
+Essential Question & How do key features of one trigonometric function relate to key features of other trigonometric functions? \\
+Lesson Vocabulary & asymptote; period; radian; reciprocal function; transformation; unit circle \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Describe and compare key features of the graphs of trigonometric functions.
+\item Graph functions of the form (f(x)=a\tan bx) and relate the graph of a function to the graph of the parent function
+Essential Understanding. The tangent, cotangent, secant, and cosecant functions can be defined using reciprocals of the sine and cosine functions. The graphs of these functions are periodic, have no amplitude, and have vertical asymptotes.
+\textbf{COHERENCE}
+Previously in this topic students:
+\item Used graphs to represent features of sine and cosine functions.
+\item Identified the effects of transformations on the graphs of the parent sine and cosine functions
+In this lesson, students:
+\item Use graphs to represent features of tangent, cotangent, secant, and cosecant functions.
+\item Explore the effects of transformations on the graph of the tangent function.
+Later in this course, students will:
+\item Solve equations using sine and cosine functions and trigonometric identities.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students describe key features of graphs of tangent functions.
+\item Students use transformations to sketch the graph of the function (y=a\tan bx).
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder. REVIEW VOCABULARY. English | Spanish}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+asymptote & asymptota \\
+period & periodo \\
+radian & radian \\
+reciprocal function & function reciproca \\
+transformation & transformacion \\
+unit circle & circulo unitario \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Review reciprocal functions and asymptotes.
+For the following functions, (a) and (b) represent expressions in the variable (x). Identify one or more of the functions as answers to each question.
+(f(x)=a) (g(x)=\frac1a) (h(x)=\frac ab) (k(x)=\frac ba)
+1. Which pairs of functions are reciprocal functions?
+\answer{1. f and g, h and k}
+2. Which function(s), when graphed, has/have an asymptote at (a=0)?
+\answer{2. g and k}
+3. Which function(s), when graphed, has/have an asymptote at (b=0)?
+\answer{3. h}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 66 961 787 1115 967
+\placeholder{illustration}{Student Companion book cover: black background, glowing purple, blue and orange circular soccer-ball pattern, enVision Algebra2, Savvas.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students understand and graph the tangent function, the cotangent function, the secant function, and the cosecant function. They identify key features, such as vertical asymptotes and the period.
+\textbf{Applying Math Practices}
+Look for and Make Use of Structure
+Students use structure when they consider how the parameters (a) and (b) in (y=a\tan bx) transform the graph of the parent function.
+Look for and Express Regularity in Repeated Reasoning
+Students use periodicity to generalize key features of the graphs of trigonometric functions.
+\end{te-addendum}
+% Source page 67: 381B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON. INSTRUCTIONAL FOCUS}
+Students explore key features of the graphs of two reciprocal functions, such as vertical and horizontal asymptotes and zeros of each function. This prepares students to use these features when sketching the graphs of the ratio and reciprocal trigonometric functions.
+STUDENT COMPANION. Students can complete the Explore \& Reason activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before. WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving}
+Q: What are reciprocal functions?
+\answer{For (y=f(x)), the reciprocal function is (y=\frac1{f(x)}).}
+Q: What does "zero of a function" represent algebraically? Graphically?
+\answer{Algebraically, it represents an x-value associated with a y-value of0. Graphically, it represents a point where the graph of the function crosses the x-axis.}
+\te{Printed crosses; a zero can also be a point where the graph touches the x-axis.}
+\textbf{During. SMALL GROUP. Support Productive Struggle in Learning Mathematics}
+Q: What do you notice about the graphs in relation to the equations of the functions?
+\answer{The function f is represented by a linear equation, so its graph is a line. The function g is not represented by a linear function, so its graph corresponds to the two curves.}
+\textbf{For Early Finishers}
+Given that (f) and (g) are reciprocal functions, ask students to find equations for (f) and (g) under each set of conditions. Have them list any restrictions on the domain of each function.
+1. (f) represents a line containing the points (0,0) and (5,5).
+\answer{1. (f(x)=x); (g(x)=\frac1x), where (x\neq0)}
+2. (f) is a quadratic function with leading coefficient1; (g) has vertical asymptotes at (x=2) and (x=-5).
+\answer{2. (f(x)=(x-2)(x+5)); (g(x)=\frac1{(x-2)(x+5)}), where (x\neq2) or (-5)}
+\textbf{After. WHOLE CLASS. Facilitate Meaningful Mathematical Discourse}
+Q: How do you identify a vertical asymptote of a function? A horizontal asymptote?
+\answer{A function has a vertical asymptote at values of the variable that would result in a denominator of0. A function has a horizontal asymptote where the degree of the numerator is less than or equal to the degree of the denominator.}
+\te{Printed denominator-zero rule omits removable discontinuities.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXPLORE \& REASON}
+Reason What is causing the vertical asymptote at (x=-3) in (g)? Explain.
+\answer{At (x=-3), the denominator would be zero, which is undefined.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Use the graphs of (f(x)=x+3) and (g(x)=\frac1{x+3}) to compare these reciprocal functions.
+% FIG 67 992 665 1119 794
+\placeholder{graph}{Red f=x+3 and blue g=1/(x+3), arrowed x,y axes,O and unit square grid; x labels-6,-4,-2,2,4; y labels-4,-2,2,4,6; window-8..5,-6..7. Red line through(-3,0),(0,3), blue reciprocal branches with asymptotes x=-3,y=0; all ends arrowed, curves labeled f,g.}
+A. Identify the zeros of each function.
+\answer{A. (f(x)=x+3) has a zero at (x=-3). (g(x)=\frac1{x+3}) has no zeros.}
+B. Identify the asymptotes of (y=g(x)). Describe how the rule for (g) can be used to predict the horizontal and vertical asymptotes of its graph.
+\answer{B. (g(x)=\frac1{x+3}) has a vertical asymptote, (x=-3), and a horizontal asymptote, (y=0). The rational function will have a vertical asymptote when its denominator is equal to zero. Because the numerator is constant, (g(x)\to0) as (x\to\infty) or (x\to-\infty), resulting in the horizontal asymptote.}
+C. Look for Relationships How can you use the graph of (f) to predict a vertical asymptote in the graph of (g)?
+\answer{C. The vertical asymptote of the reciprocal function g occurs at the zero of function f.}
+\end{model-discuss}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Explore \& Reason is Powered by Desmos. Activities are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+The tool shows reciprocal functions.
+A. Identify the zeros of each function. Enter your answer.
+B. Identify the asymptotes of (y=g(x)). Describe how the rule for (g) can be used to predict the horizontal and vertical asymptotes of its graph. Enter your answer.
+C. Look for Relationships How can you use the graph of (f) to predict a vertical asymptote in the graph of (g)? You can drag the slider to see graphs for different values of (c).
+% FIG 67 816 258 1053 476
+\placeholder{graph}{Desmos panel c=3 slider-10..10, red f(x)=x+c,green g(x)=1/(x+c). Grid x,y centered origin0, labels-10,10 on each axis, spacing2, windowx-10..10,y-18..18. Red line through(-3,0),(0,3); green reciprocal with asymptotes x=-3,y=0. Plus,undo,settings,zoom controls.}
+\end{te-addendum}
+% Source page 68: 381 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION. Establish Mathematics Goals to Focus Learning}
+Students sketch and analyze graphs of the tangent, cotangent, secant, and cosecant functions. Students identify asymptotes in graphs and explain relationships between the graphs of reciprocal and ratio trigonometric functions.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Graph (y=\tan x). Use and Connect Mathematical Representations}
+Q: How can you use the unit circle to find the signs of points on the graph of the tangent function?
+\answer{Use the signs of the x- and y-values on the unit circle to see whether the value of the tangent ratio is positive or negative.}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE3. ESSENTIAL QUESTION. Go back. SOLUTION.}
+How can you use transformations to describe the graph of (y=-3\tan5x)?
+\answer{-3 means the graph is reflected over the x-axis and stretched vertically by a factor of3. 5 means the graph is compressed horizontally. The new graph has period(2\pi/5) and amplitude3.}
+\te{Printed period2pi/5 and amplitude3; likely period pi/5 and no amplitude.}
+Example3 Help students explore both positive and negative values of (a) and (b) when using transformations to describe the graph of the tangent function (y=a\tan bx).
+Q: Which variable would describe the vertical stretch of a trigonometric function?
+\answer{a}
+Q: As (|b|) increases, what happens to the number of cycles of the graph in the domain (0\leq x\leq2\pi)?
+\answer{It increases.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Additional Examples are available at SavvasRealize.com. ADDITIONAL EXAMPLE4. ESSENTIAL QUESTION. Go back. SOLUTION.}
+A jet is flying at a steady altitude of30,000 feet. As it passes over an observer it forms an angle of elevation(theta).
+a. What function describes the distance (d) between the observer and the jet?
+\answer{a. Since theta also represents the angle of depression from the jet to the observer, (\sin\theta=\frac{30,000}d) or (d=\frac{30,000}{\sin\theta}).}
+b. After the jet passes overhead, what are the domain and range for(theta) and (d)?
+\answer{b. After the jet passes overhead, the domain is(0<\theta<\frac\pi2) and the range is(d>30,000).}
+% FIG 68 991 917 1116 981
+\placeholder{diagram}{Jet labeled at black point on horizontal upper altitude line; lower horizontal ground line, vertical segment labeled30,000ft left, diagonal from ground observer to jet labeled d, angle theta at lowerleft between ground and diagonal.}
+Example4 Help students transition to using a trigonometric function to represent a real-world situation.
+Q: How is the angle labeled(theta) related to the given information?
+\answer{It has the same measure as the angle of depression from the jet to the observer.}
+Q: Is(theta) increasing or decreasing after the jet goes overhead?
+\answer{Decreasing, at the moment the jet is overhead, the value of(theta) is(pi/2).(theta) gets closer to0 as the jet travels away from the observer.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Graph (y=\tan x)}
+How can the unit circle help you sketch the graph of (f(x)=\tan x)?
+Use what you know about the unit circle to create a table of values.
+Recall that (\tan\theta=\frac{\sin\theta}{\cos\theta})
+(\tan\theta=\frac{\sin\theta}{\cos\theta})
+(=\frac{\frac{opposite}{hypotenuse}}{\frac{adjacent}{hypotenuse}})
+(=\frac{opposite}{hypotenuse}\cdot\frac{hypotenuse}{adjacent})
+(=\frac{opposite}{adjacent})
+(=\frac yx)
+For example, (\tan45°=\frac{\frac{\sqrt2}2}{\frac{\sqrt2}2}=1).
+% FIG 68 1010 277 1152 489
+\placeholder{diagram}{Right semicircle of unit circle centered at black origin on arrowed x,y axes; radius1. Black endpoints(0,1),90degrees,pi/2 and(0,-1),-90degrees,-pi/2. Blue point(1,0) at right; blue points(sqrt3/2,1/2),30degrees,pi/6 and(1/2,sqrt3/2),60degrees,pi/3; red(sqrt2/2,sqrt2/2),45degrees,pi/4. Below x-axis blue(sqrt3/2,-1/2),-30degrees,-pi/6 and(1/2,-sqrt3/2),-60degrees,-pi/3; red(sqrt2/2,-sqrt2/2),-45degrees,-pi/4. Each coordinate and angle printed beside corresponding point.}
+\te{LOOK FOR RELATIONSHIPS. How does the unit circle relate to the graph of the function (y=\tan x)? A semicircle on the unit circle corresponds to one period of the function's graph.}
+\begin{tabular}{llllllllll}
+x & (-\pi/2) & (-\pi/3) & (-\pi/4) & (-\pi/6) & 0 & (\pi/6) & (\pi/4) & (\pi/3) & (\pi/2) \\
+(tan x) & undefined & (-\sqrt3) & -1 & (-\sqrt3/3) & 0 & (\sqrt3/3) & 1 & (\sqrt3) & undefined \\
+\end{tabular}
+The graph of (f(x)=\tan x) goes through one complete cycle from (-\frac\pi2<x<\frac\pi2). Over this interval the range is all real numbers.
+% Source page 69: 382 Example1 continued
+Notice that at the boundaries of this interval, (f(x)=\tan x) is undefined: these are the values where (\cos x=0). Since (\tan x=\frac{\sin x}{\cos x}), the graph of (f(x)=\tan x) will have vertical asymptotes at these values.
+% FIG 69 973 227 1111 309
+\placeholder{graph}{Blue tangent one branch on square grid with arrowed x,y axes,O; x ticks pi/12, labels-pi/3,pi/6,pi/3; y ticks1 labeled-2,2; window-7pi/12..7pi/12,-4..4. Dashed black vertical double arrows x=+-pi/2. Filled blue points(+-pi/3,+-sqrt3),(+-pi/6,+-sqrt3/3),(0,0), red points(+-pi/4,+-1); curve end arrows.}
+\answer{Graph shown; one cycle(-pi/2,pi/2), range all real numbers; vertical asymptotes at the interval boundaries.}
+\end{example}
+\begin{tryit}{1}
+Create a table of values, and use the unit circle to help you sketch the graph of (g(x)=\cot x). Plot the function's zeros and asymptotes in your sketch.
+\answer{Table and graph shown.}
+\begin{tabular}{llllll}
+x & 0 & (\pi/4) & (\pi/2) & (3\pi/4) & (\pi) \\
+(cot x) & undefined & 1 & 0 & -1 & undefined \\
+\end{tabular}
+% FIG 69 125 183 318 379
+\placeholder{graph}{Blue cotangent branches, arrowed x,y axes,O, x gridpi/2 labels-2pi,-pi,pi,2pi; y grid1 labels-4,-2,2,4,window-5pi/2..5pi/2,-5..5. Red dashed vertical asymptotes x=-pi,0,pi, blue branches approach +-2pi too; zeros at odd pi/2, decreasing branches with end arrows.}
+\end{tryit}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Describe Key Features of Tangent Functions. Build Procedural Fluency from Conceptual Understanding}
+Q: What do you notice about the graph of the tangent function?
+\answer{The points on the graph repeat every(pi) units.}
+Q: When is the function positive? Negative?
+\answer{The function is positive for values of x for which sin x and cos x have the same sign, and the function is negative for values of x for which sin x and cos x have opposite signs.}
+Q: How is a variable used to represent all values not in the domain of (y=\tan x)?
+\answer{The function is undefined for(x=\pm\frac\pi2,\frac\pi2+\pi,\frac\pi2+2\pi), and so on. All those values can be represented by(\frac\pi2+n\pi), where n is an integer.}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Describe Key Features of Tangent Functions}
+CONCEPTUAL UNDERSTANDING. What are the key features (domain, range, period, zeros, and asymptotes) of the graph of (f(x)=\tan x)?
+Refer back to the table of values and sketch you made in Example1.
+% FIG 69 790 449 1114 562
+\placeholder{graph}{Blue tangent with three increasing branches,arrowed x,y axes,O; xgridpi/4 labels-3pi/2,-pi,-pi/2,pi/2,pi,3pi/2;ygrid1 labels-4,-2,2,4;window-7pi/4..7pi/4,-5..5. Red dashed vertical asymptotes at oddpi/2. Green shaded upper rectangles on(-pi,-pi/2),(0,pi/2),(pi,3pi/2),purple lower rectangles on(-3pi/2,-pi),(-pi/2,0),(pi/2,pi). Blue filled zeros(-pi,0),(0,0),(pi,0),green points y1,purple y-1. Callouts: Increasing on every interval in its domain; Function is positive; Function is negative. Horizontal domain bracket below and vertical Range:(-infinity,infinity) at right.}
+\te{GENERALIZE. What do you notice about the key features of the graph? Points and characteristics repeat every(pi) units. If you understand the graph for(-\frac\pi2<x<\frac\pi2), then you understand the graph everywhere.}
+Domain: (\{x\mid x\neq\frac\pi2+n\pi,\text{ where x is a real number and n is an integer}\});
+Range: (-\infty,\infty)
+Period:(\pi)
+(f(x)=\tan x=\frac{\sin x}{\cos x})
+Function has zeros whenever (sin x=0).
+Function has vertical asymptotes whenever (cos x=0).
+The function is increasing everywhere.
+The function is positive for every interval(0+n\pi,\frac\pi2+n\pi) where n is an integer: these correspond to the green shaded regions on the graph.
+The function is negative for every interval(-\frac\pi2+n\pi,n\pi) where n is an integer: these correspond to the purple shaded regions on the graph.
+\answer{Domain excludes(pi/2+n pi), n integer; range(-infinity,infinity); period pi; zeros where sin x=0; vertical asymptotes where cos x=0.}
+\te{Printed increasing everywhere; increasing on each interval of its domain, as the graph callout specifies.}
+\end{example}
+\begin{tryit}{2}
+Describe the key features of the graph of the function (g(x)=\cot x). Refer to your graph from Example1, Try It!
+\answer{domain:(\{x:x\neq n\pi\text{ where n is an integer}\}); range:(-\infty,\infty); zeros:...,-3pi/2,-pi/2,pi/2,3pi/2,...; vertical asymptotes:x=...,-pi,0,pi,...; positive:(n\pi,n\pi+\frac\pi2) for integers n; negative:(\frac\pi2+n\pi,n\pi) for integers n; decreasing:(-\infty,\infty)}
+\te{Printed negative interval has reversed endpoints; likely(pi/2+n pi,(n+1)pi). Printed decreasing(-infinity,infinity); decreases on each interval of its domain.}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES1\&2}
+Make Sense and Persevere Why is there no discussion of amplitude as a key feature of the graphs of tangent and cotangent?
+\answer{Tangent and cotangent do not have maximum and minimum values.}
+\end{te-addendum}
+\begin{te-addendum}{1}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE1}
+Have students explore relating the sign of x and y in each quadrant to the sign of the tangent function in each quadrant.
+Q: Graph the tangent function over the domain (0\leq x\leq2\pi).
+\answer{Graph shown.}
+% FIG 69 343 1188 537 1382
+\placeholder{graph}{Red tangent on arrowed x,y axes,O, x gridpi/4 labelspi/2,pi,3pi/2; y grid1 labels-4,-2,2,4;window-pi/2..2pi,-5..5. Three visible rising branches,zeros0,pi,2pi,end arrows; no drawn dashed asymptotes.}
+Q: How can you relate the sign of x and y in each quadrant to the graph of the tangent function?
+\answer{In Quadrant I,(\frac yx=\frac++=+); in Quadrant II,(\frac yx=\frac+-=-); in Quadrant III,(\frac yx=\frac--=+); and in Quadrant IV,(\frac yx=\frac-+=-). Those results agree with the sign of the tangent ratio in each quadrant.}
+\end{te-addendum}
+% Source page 70: 383 Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Graph (y=a\tan bx). Pose Purposeful Questions}
+Q: How does the value of a in (y=a\tan bx) affect the graph of the parent function?
+\answer{It stretches or compresses the graph vertically.}
+Q: How does the value of b in (y=a\tan bx) affect the graph of the parent function?
+\answer{It stretches or compresses the graph horizontally.}
+Example is Powered by Desmos. Activities are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Graph (g(x)=a\tan bx)}
+How can you use transformations to sketch the graph of the function (g(x)=a\tan bx)?
+To sketch a graph using transformations, first consider how the parameters a and b change the graph of the parent function.
+(g(x)=2\tan4x)
+\te{Callout: a=2; the coefficient of the tangent function stretches the graph of the function vertically.}
+\te{Callout: b=4; a larger coefficient of x corresponds to a smaller period, so the graph appears to be the parent graph compressed horizontally.}
+The vertical stretch makes the graph of (g(x)=2\tan4x) rise more steeply than the graph of (y=\tan x).
+The horizontal compression changes the period of the function:
+The period of the graph of (f(x)=\tan x) is(pi), and the period of the graph of (g(x)=2\tan4x) is(pi/4).
+% FIG 70 851 516 992 643
+\placeholder{graph}{Blue y=tan x and red y=2tan4x on arrowed x,y axes,O; xgridpi/16 labels-pi/4,pi/4; ygrid1/2 labels-2,-1,1,2;window-7pi/16..7pi/16,-3..3. Blue single increasing branch throughorigin,red repeated steep branches with zeros-pi/4,0,pi/4 and asymptotes oddpi/8; all curveends arrowed, labelsblue/red abovegraph.}
+\te{COMMON ERROR. Since the function(y=2\cos x) has an amplitude of2, you may think that the function(y=2\tan4x) has an amplitude of2. The tangent function, however, has no maximum or minimum values, so it has no amplitude.}
+\answer{Vertical stretch by2, horizontal compression; period of(g(x)=2\tan4x) is(pi/4).}
+\end{example}
+\begin{tryit}{3}
+Sketch the graph of the function (h(x)=\frac12\cot3x).
+\answer{Graph shown.}
+% FIG 70 157 390 350 585
+\placeholder{graph}{Red(1/2)cot3x,arrowed x,y axes,O; xgridpi/8 labeled-pi/2,-pi/4,pi/4,pi/2; ygrid2 labels-8,-4,4,8;window-5pi/8..5pi/8,-10..10. Decreasing branches with asymptotes x=-pi/3,0,pi/3,zeros oddpi/6,curveend arrows.}
+\end{tryit}
+\begin{te-addendum}{3}{CommonError}
+\textbf{Common Error. Try It!3}
+Some students may think the value (b=3) horizontally stretches the graph, and therefore graph the function from(-3\pi) to(3\pi). Encourage students to create a table of values for the function and plot points to create their graph.
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners. Use with EXAMPLE4}
+LISTENING. BEGINNING. Functions can model many things in mathematics, science, and business. Have students listen as you explain that the word model can be used as a verb ("Write a function to model the height of the rocket."), as a noun ("The architect made a model of the home he would build."), or as an adjective ("Selena was a model student."). Have students listen to the following sentences and determine which part of speech the word model represents.
+Q: At First Rate Motor Company, all car models are spotless.
+\answer{noun}
+Q: Tanishka made a model airplane.
+\answer{adjective}
+Q: Sofia was asked to model in the fashion show.
+\answer{verb}
+READING. DEVELOPING. Have students read the second sentence in the example. Then have students read the definitions of angle and inclination from a dictionary
+Q: Which definition of angle makes the most sense for modeling the rocket's height?
+\answer{the difference in direction between two lines}
+Q: Which definition of inclination makes the most sense for modeling the rocket's height?
+\answer{a slope or slant}
+Q: Define angle of inclination as it relates to this problem.
+\answer{The angle of inclination is the difference in direction between the line representing the ground and the slanted line drawn from Seth's position to the rocket's position.}
+SPEAKING. EXPANDING. Display the words launch and lunch. Have students say both words and note the differences in pronunciation. Explain that the addition of the letter a to the word lunch changes both the sound and the meaning of the word. Lunch is a meal eaten in the middle of the day, and launch is the act of setting something in motion. Have students work in pairs to pronounce the following words and to give their meanings.
+Q: punch/paunch
+\answer{Punch means to hit something; paunch is a large stomach.}
+Q: hunt/haunt
+\answer{Hunt means to go after or pursue; haunt means to appear as a ghost.}
+\end{te-addendum}
+% Source page 71: 384 Understand & Apply
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Model With a Trigonometric Function. Pose Purposeful Questions}
+Q: Does the asymptote of the function change when(a=3)?
+\answer{No, multiplying the output of a function stretches the graph vertically where(|a|>1), but has no effect on the asymptotes.}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Model With a Trigonometric Function}
+APPLICATION. Seth is observing today's rocket launch at Cape Canaveral from the viewing area about3 mi away. Write a function to model the height(h) of the rocket as a function of the angle of inclination(theta), from Seth's position in the viewing area to the rocket. Identify an appropriate domain, and use the function to describe the motion of the rocket.
+% FIG 71 799 301 1029 417
+\placeholder{illustration}{Rocket lifting vertically from launchpad with yellow exhaust, cloudy blue sky and dark water in foreground. Seth stands at left; right triangle overlays view, angle theta at Seth, right angle at rocket base, vertical segment to rocket and diagonal sightline.}
+\te{MODEL WITH MATHEMATICS. Why does the function involve the tangent? Could you use a sine or cosine function to model this problem instead?}
+% FIG 71 798 426 909 479
+\placeholder{diagram}{Right triangle with horizontal base3, left vertical leg h, right-angle square lowerleft, sloping hypotenuse downward to right, angle theta at lowerright; labels red.}
+(\tan\theta=\frac h3)
+(h=3\tan\theta)
+(h(\theta)=3\tan\theta)
+\te{Callout: The rocket will never be directly overhead, because there is always a horizontal distance of3 mi.}
+In this context, the domain of the function is(\{\theta\mid0<\theta<\frac\pi2\}) because the rocket is taller than Seth. The range is(\{h(\theta)\mid h>0\}), because the height of the rocket is always positive.
+\answer{(h(\theta)=3\tan\theta); domain(0,pi/2), range h>0.}
+\end{example}
+\begin{tryit}{4}
+About how high is the rocket when the angle of inclination is(pi/3)?
+\answer{The rocket is about5.2 miles from the ground.}
+\end{tryit}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES3\&4}
+Use Structure Since the tangent function has no amplitude, how can you describe the effect of the parameter a in the equation(y=a\tan x)?
+\answer{For(|a|>1), the graph is stretched vertically.}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Graph a Secant Function. Pose Purposeful Questions}
+Q: How are the secant and cosine functions related?
+\answer{They are reciprocal functions;(\sec x=\frac1{\cos x}).}
+Q: How are the graphs of the cosine and secant functions similar? Different?
+\answer{Similar: Both are periodic functions with period(2\pi); when one is positive (or negative), the other is also positive (or negative); when one has the value1 (or-1), the other also has the value1 (or-1). Different: The graph of the secant function has asymptotes, while the graph of the cosine function does not.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Graph a Secant Function}
+How is the graph of(y=\sec x) related to the graph of(y=\cos x)?
+% FIG 71 798 617 1027 702
+\placeholder{graph}{Red sec x and blue cos x, arrowed x,y axes,O; x gridpi/4 labels-pi,-pi/2,pi/2,pi; ygrid1 labels-2,2; window-3pi/2..3pi/2,-4..4. Purple dashed vertical asymptotes+-pi/2 with purple cosine zeros; green intersections(-pi,-1),(0,1),(pi,-1); all curve end arrows. Callouts sec x>0 when cos x>0, sec x<0 when cos x<0. Equation labelsred/blue.}
+\te{STUDY TIP. Use the unit circle to help you learn the values of sine and cosine for key angle measures. You can then use this knowledge to find values and sketch the graphs of the remaining trigonometric functions.}
+The domain of(y=\sec x) is(\{x\mid x\neq\frac\pi2+n\pi,\text{ integer n}\}). The graph of(y=\sec x) has a vertical asymptote wherever(x=\frac\pi2+n\pi) for any integer n. This makes sense, since(\sec x=\frac1{\cos x}) and(cos x) is0 for any(\frac\pi2+n\pi). Since the graph of(y=\cos x) changes sign at those values, the graph of(y=\sec x) approaches(+\infty) on one side of the asymptote and(-\infty) on the other. The range of(y=\sec x) is(\{y\mid-\infty<y\leq-1\text{ or }1\leq y<\infty\}).
+\answer{Reciprocal graphs; secant undefined at cosine zeros, with vertical asymptotes x=pi/2+n pi; range y<=-1 or y>=1.}
+\end{example}
+\begin{tryit}{5}
+How is the graph of(y=\csc x) related to the graph of(y=\sin x)?
+\answer{The asymptotes of(y=\csc x) correspond to the zeros of(y=\sin x). The graphs intersect at(pi/2+n pi) where n is an integer.(y=\csc x) is increasing (decreasing) when(y=\sin x) is decreasing (increasing). The functions have the same sign.}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLE5}
+Communicate Precisely What are the period and amplitude for the graphs of the secant and cosecant functions?
+\answer{Both graphs repeat every(2\pi) units, so the period of each function is(2\pi). However, neither function has amplitude because there is no upper or lower limit for the graphs.}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE5}
+Some students may struggle with graphing a secant function.
+\item Have students prepare a3-row table of values to help graph(y=\sec x). Have students label the first row x and fill it in with multiples of(pi/4) from0 to(2\pi). In the second row, have students calculate the values for(cos x). In the third row, have them calculate the values for(sec x).
+Q: How can you fill in and use the third row?
+\answer{Find the reciprocals of the corresponding values of cos x.}
+Q: How can you graph(y=\sec x)?
+\answer{Plot the ordered pairs(x,sec x).}
+\end{te-addendum}
+% Source page 72: 385 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY. Graph Ratios and Reciprocals of Sine and Cosine}
+Q: How can you use transformations to describe the graph of(y=\cot x), given the graph of(y=\tan x)? To describe the graph of(y=\csc x), given the graph of(y=\sec x)?
+\answer{The graph of(y=\cot x) is a reflection of(y=\tan x) across the y-axis, followed by a translation of(pi/2) units right. The graph of(y=\csc x) is a translation of(y=\sec x) shifted(pi/2) units right.}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? Do You KNOW HOW? Common Error. Exercises4 and5}
+Some students may not understand how a and b affect the graph of(y=a\tan bx). Encourage students to write these two statements in their notes and refer to them as needed:
+\item When(bx=\frac\pi2),(y=a).
+\item The period is(pi/b).
+\te{Printed bx=pi/2,y=a; likely bx=pi/4. Period formula assumes positive b.}
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Graph Ratios and Reciprocals of Sine and Cosine}
+\begin{tabular}{lll}
+ & Tangent and Cotangent & Secant and Cosecant \\
+ALGEBRA & (y=\tan x=\frac{\sin x}{\cos x}); (y=\cot x=\frac{\cos x}{\sin x}) & (y=\sec x=\frac1{\cos x}); (y=\csc x=\frac1{\sin x}) \\
+KEY FEATURES & Zeros in denominators (\Leftrightarrow) vertical asymptotes; tan x increasing; cot x decreasing; Period=(pi) & Zeros in denominators (\Leftrightarrow) vertical asymptotes; Sign of reciprocal matches sign of denominator; Period=(2\pi) \\
+\end{tabular}
+GRAPHS
+% FIG 72 789 305 876 390
+\placeholder{graph}{Red tan x on arrowed x,y axes,O; xgridpi/4 labels-pi,-pi/2,pi/2,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Increasing branches,zeros-pi,0,pi;asymptotes oddpi/2 not drawn;end arrows.}
+% FIG 72 881 305 970 390
+\placeholder{graph}{Red cot x on arrowed x,y axes,O; xgridpi/4 labels-pi,-pi/2,pi/2,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Decreasing branches,zeros oddpi/2,asymptotes integerpi not drawn;end arrows.}
+% FIG 72 976 305 1059 387
+\placeholder{graph}{Red sec x on arrowed x,y axes,O; xgridpi/4 labels-pi,-pi/2,pi/2,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Central upbranchvertex(0,1),downbranchesvertices(+-pi,-1),asymptotes oddpi/2 not drawn,end arrows.}
+% FIG 72 1067 305 1154 393
+\placeholder{graph}{Red csc x on arrowed x,y axes,O; xgridpi/4 labels-pi,-pi/2,pi/2,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Upbranchvertex(pi/2,1),downbranchvertex(-pi/2,-1),asymptotes integerpi not drawn;end arrows.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How do key features of one trigonometric function relate to key features of other trigonometric functions?
+\answer{Where a function (like sine) is0, its reciprocal, cosecant, is undefined and has a vertical asymptote. Wherever sine reaches its maximum value at1, the cosecant will reach its turning point at y=1; wherever the sine reaches its minimum value of-1, the cosecant will reach its turning point at y=-1. Wherever sine is positive and <1, the cosecant will be positive and >1; wherever the sine is negative but >-1, the cosecant will be negative but <-1. The same reasoning can be used to describe the cosine function and its reciprocal, secant, as well as the tangent function and its reciprocal, cotangent.}
+2. Error Analysis Mia said the period of the tangent function is(2\pi). Explain an error that Mia could have made.
+\answer{The period of the tangent function is(pi). Mia could have thought since both the sine and the cosine function have a period of(2\pi) and since(\tan x=\frac{\sin x}{\cos x}), then the tangent function should have a period of(2\pi).}
+3. Reason Explain why the graph of(y=\tan x) does not have an amplitude.
+\answer{The graph of(y=\tan x) does not have a maximum or minimum value.}
+\textbf{Do You KNOW HOW?}
+4. Sketch the graph of the function(y=\frac12\tan x) over the interval(-\frac\pi2<x<\frac\pi2). How does this graph differ from the graph of(y=\tan x)?
+\answer{The coefficient compresses the graph vertically by a factor of(1/2).}
+% FIG 72 152 1050 347 1247
+\placeholder{graph}{Red(1/2)tan x on arrowed x,y axes,O;xgridpi/4 labelspi/2,pi,3pi/2;ygrid1 labels-4,-2,2,4;window-pi/2..2pi,-5..5. Rising branches through0,pi,2pi,asymptotes oddpi/2 notdrawn;end arrows. Printed graph extends beyond requested interval.}
+5. Find the period of the function(y=\tan3x).
+\answer{(\pi/3)}
+\end{concept-summary}
+% Source page 73: 386 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+6--25 & 6--25 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of20 total points.
+Understand, Apply:2 points each
+Practice:1 point each
+Assessment Practice:1 point each
+Performance Task:3 points each
+Scan the QR code to access a video tutorial.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 15,23 & 2 \\
+2 & 10,16 & 2 \\
+3 & 7,13,17,18,24 & 2 \\
+4 & 19,21,22 & 2 \\
+5 & 6,8,9,11,12,20 & 2 \\
+5 & 14,25 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{6}{2}
+UNDERSTAND. Look for Relationships Describe the relationship between the ranges of the sine and cosine graphs and the ranges of the secant and cosecant graphs. What values do all their ranges share?
+\answer{The range of sine and cosine is all real numbers from-1 to1, inclusive; the range of cosecant and secant is all real numbers(\geq1) or(\leq-1). The values they all share are(\pm1).}
+\end{practice}
+\begin{practice}{7}{2}
+UNDERSTAND. Use Structure Write at least2 different tangent functions that have a period of(2\pi).
+\answer{(y=\tan(\frac12 x)) or(y=\tan(-\frac12 x))}
+\end{practice}
+\begin{practice}{8}{2}
+UNDERSTAND. Error Analysis Describe and correct the error a student made in graphing the function(y=\sec x).
+% FIG 73 509 456 727 637
+\placeholder{graph}{Student error red sec x+1 on pale-blue squared paper with curled corner and redX; x,y doublearrowaxes,O; xgridpi/4 labels-pi,-pi/2,pi/2,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Central upbranch minimum(0,2),downbranches max(+-pi,0),asymptotes+-pi/2 implied,end arrows.}
+\answer{The graph has been shifted up one unit. This is the correct graph for(y=\sec x):}
+% FIG 72 700 968 857 1163
+\placeholder{graph}{Correct red sec x,arrowed x,y axes,O; xgridpi/4 labels-pi/2,pi/2;ygrid1 labels-4,-2,2,4;window-pi..pi,-5..5. Central upbranch min(0,1),downbranch tops at(+-pi,-1),asymptotes+-pi/2 implied,end arrows.}
+\end{practice}
+\begin{practice}{9}{2}
+UNDERSTAND. Construct Arguments Explain why the cosecant function is undefined at multiples of(pi) radians or180°.
+\answer{That is where its reciprocal function, sine, is0.}
+\end{practice}
+\begin{practice}{10}{2}
+UNDERSTAND. Generalize For what values of x is the function(y=\tan x) undefined? Explain.
+\answer{The function for(y=\tan x) is undefined at all the odd integer multiples of(pi/2) or90°.}
+\end{practice}
+\begin{practice}{11}{2}
+UNDERSTAND. Look for Relationships Explain how the periods of the tangent and cotangent functions differ from the periods of the other four trigonometric functions.
+\answer{The period for the tangent and cotangent functions is(pi), whereas the other four trigonometric functions have a period of(2\pi).}
+\end{practice}
+\begin{practice}{12}{2}
+UNDERSTAND. Generalize Identify all the asymptotes of the graph of(y=\sec x).
+\answer{all the odd multiples (positive and negative) of(pi/2)}
+\end{practice}
+\begin{practice}{13}{2}
+UNDERSTAND. Use Structure Write a tangent function that has a period of(pi/3). Graph the function.
+\answer{(y=\tan3x); graph shown.}
+% FIG 73 124 1234 279 1392
+\placeholder{graph}{Red tan3x on arrowed x,y axes,O;xgridpi/4 labels-pi,-pi/2,pi/2,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Seven rising branches zeros integerpi/3 and asymptotes pi/6+kpi/3,not drawn;end arrows.}
+\end{practice}
+\begin{practice}{14}{3}
+UNDERSTAND. Higher Order Thinking A function f is considered even if(f(-x)=f(x)) for all x in the domain of f; a function is odd if(f(-x)=-f(x)) for all x in the domain of f. Which of the six trigonometric functions are even, and which are odd?
+\answer{Cosine and secant are even; all the others are odd.}
+\end{practice}
+\begin{practice}{15}{2}
+PRACTICE. Sketch the graph of(y=\tan x) over the domain(-\pi) to(pi). SEE EXAMPLE1
+\answer{Graph shown.}
+% FIG 73 473 1176 668 1373
+\placeholder{graph}{Red tan x,arrowed x,y axes,O;xgridpi/4 labels-pi,-pi/2,pi/2,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Three rising branches zeros-pi,0,pi,asymptotes+-pi/2 implied,end arrows.}
+\end{practice}
+\begin{practice}{16}{2}
+PRACTICE. Describe the domain, range, period, zeros, and asymptotes of the function(y=\tan x). SEE EXAMPLE2
+\answer{domain:(\{x:x\neq\frac\pi2+n\pi,\text{ where n is an integer}\}); range:(-\infty,\infty); period:(\pi); zeros:(\{x:x=n\pi,\text{ where n is an integer}\}); asymptotes:(y=\frac\pi2+n\pi), where n is an integer}
+\te{Printed y for vertical asymptotes; likely x.}
+\end{practice}
+\begin{practice}{17}{2}
+PRACTICE. Sketch the graphs of the functions. Then describe how the graph of each function compares to the graph of the parent function. SEE EXAMPLE3
+(y=\frac12\tan3x)
+\answer{There is a vertical compression that makes the graph look more bent than the parent function(y=\tan x). The horizontal compression changes the period of the function from(pi) (for y=tan x) to(pi/3).}
+% FIG 74 158 165 350 360
+\placeholder{graph}{Red(1/2)tan3x,arrowed x,y axes,O; xgridpi/4 labeled-pi,-pi/2,pi/2,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Seven steep rising branches with zeros kpi/3 and asymptotes pi/6+kpi/3,notdrawn;curveend arrows.}
+\end{practice}
+\begin{practice}{18}{2}
+PRACTICE. Sketch the graphs of the functions. Then describe how the graph of each function compares to the graph of the parent function. SEE EXAMPLE3
+(y=2\cot\frac12 x)
+\answer{There is a vertical stretch that makes the graph look more straight than the parent function(y=\cot x). The horizontal stretch changes the period of the function from(pi) (for y=cot x) to(2\pi).}
+% FIG 74 157 503 350 698
+\placeholder{graph}{Red2cot(x/2),arrowed x,y axes,O;xgridpi/4 labelspi/2,pi,3pi/2;ygrid1 labels-2,2,4;window-pi/2..9pi/4,-4..6. One decreasing branch from nearx0,y6 through(pi,0) towardx2pi,y-4,curveend arrows.}
+\end{practice}
+\begin{practice}{19}{2}
+PRACTICE. Shiri is observing a glass elevator from a bench20 ft away from the elevator's entrance. SEE EXAMPLE4
+a. Write a function to model the height h of the elevator as a function of the angle of inclination(theta) from Shiri's position to the elevator.
+\answer{a.(h=20\tan\theta)}
+b. Identify an appropriate domain, and use the function to graph and describe the motion of the elevator.
+\answer{b. domain:(0,\frac\pi2); graph shown.}
+% FIG 74 123 868 350 1100
+\placeholder{graph}{Red20tan theta first-quadrant graph,unlabeled arrowed axes; origin0 on both axes; horizontalgridpi/12 labels0,pi/6,pi/3,pi/2,pi; verticalgrid50 labels0,100,200,300,400;window0..5pi/6,0..500. Rising fromorigin toward asymptote pi/2 with top arrow. Printed final horizontal pi label is at2pi/3 gridposition.}
+\te{Printed graph's last horizontal label pi is inconsistent with preceding tick spacing; likely2pi/3.}
+c. About how high is the elevator when the angle of inclination is(pi/4)?
+\answer{c.about20 ft}
+% FIG 73 808 684 1079 854
+\placeholder{illustration}{Glass hotel building in perspective,blue windows, HOTEL sign. Observer on benchlowerleft, triangle sightline to elevator aboveentrance,base20ft,angle theta atobserver,right angle atbase ofvertical elevator line.}
+\end{practice}
+\begin{practice}{20}{2}
+PRACTICE. Graph the function(y=\csc x). Describe how the graph of(y=\csc x) is related to the graph of(y=\sin x). SEE EXAMPLE5
+\answer{The domain of(y=\csc x) is(\{x:x\neq n\pi\text{ where n is an integer}\}). The graph has a vertical asymptote wherever(x=n\pi), for some integer n, which is where the graph of(sin x=0). The graph of(sin x) has a range of[-1,1], whereas the graph of(y=\csc x) approaches(+\infty) on one side of the asymptote and(-\infty) on the other side.}
+% FIG 74 156 1111 350 1307
+\placeholder{graph}{Red csc x,arrowed x,y axes,O;xgridpi/4 labels-pi,-pi/2,pi/2,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Upbranchvertex(pi/2,1),downbranchvertex(-pi/2,-1),asymptotes integerpi notdrawn;end arrows.}
+\end{practice}
+% Source page 74: 387 Practice & Problem Solving
+\begin{practice}{21}{2}
+APPLY. Make Sense and Persevere An architect is designing a sloped rooftop that is triangular from the side view.
+% FIG 74 566 330 816 495
+\placeholder{illustration}{Side view of building with sloped roof rising left to right. Right triangleoutlined onwooden gable, horizontalbase12ft,rightanglelowerright,angle theta lowerleft,skylight inroof;blue sky and birds.}
+a. Write a function that models the height of the triangle where(theta) is the angle indicated.
+\answer{a.(h=12\tan\theta)}
+b. Graph the function over the domain[0,pi/4].
+\answer{b.Graph shown.}
+% FIG 74 531 1269 646 1393
+\placeholder{graph}{Red12tan theta curve from(0,0) to(pi/4,12),no endpoint circles; unlabeled arrowed positive axes; horizontalgridpi/16 labels0,pi/8,pi/4;verticalgrid3 labels0,6,12;window0..5pi/16,0..15.}
+c. What is the height of the triangle if(theta) is(pi/10)? Round to the nearest tenth of a foot.
+\answer{c.approximately3.9 ft}
+\end{practice}
+\begin{practice}{22}{2}
+APPLY. Make Sense and Persevere A carpenter is constructing a hexagonal floor for a treehouse. The floor will be made of six isosceles triangles placed together as shown.
+% FIG 74 556 684 797 909
+\placeholder{illustration}{Underview ofhexagonal wooden treehousefloor aroundcentral tree,greenfoliage. Six triangular floorsegments,one outlinedwhite onright,outerbase16ft withdimensionarrow,angle theta atlowerrightbasecorner.}
+a. Write a function that models the height of one of the triangles where(theta) is the measure of one of the base angles and the base of the triangle is16 ft in length.
+\answer{a.(h=8\tan\theta)}
+b. Graph the function over the domain(0,60°].
+\answer{b.Graph shown.}
+% FIG 74 879 1177 1074 1374
+\placeholder{graph}{Red8tan theta withtheta degrees,unlabeled arrowedpositiveaxes; horizontalgrid5 labeled0,20,40;verticalgrid1 labeled0,2,4,6,8;window0..50,0..10. Curve fromorigin increasing toabout(50,9.5),upperrightarrow;printed plot stops before60degree domain endpoint.}
+\end{practice}
+\begin{practice}{23}{2}
+ASSESSMENT PRACTICE. Fill in the blanks to complete each statement regarding the properties of the tangent function.
+a. The domain is the set of all real numbers, except odd multiples of\underline{\hspace{1cm}}.
+\answer{a.(\pi/2)}
+b. The range is the set of\underline{\hspace{1cm}}.
+\answer{b.all real numbers}
+c. The x-intercepts are\{...,-2pi,\underline{\hspace{1cm}},0,pi,2pi,\underline{\hspace{1cm}}...\}; the y-intercept is0.
+\answer{c.(-\pi),(3\pi)}
+d. Vertical asymptotes occur at x=...,\underline{\hspace{1cm}},-pi/2,\underline{\hspace{1cm}},3pi/2,....
+\answer{d.(-3\pi/2),(\pi/2)}
+\end{practice}
+\begin{practice}{24}{2}
+ASSESSMENT PRACTICE. SAT/ACT Which equation is represented by the graph?
+% FIG 74 969 463 1127 592
+\placeholder{graph}{Red cot2x on arrowed x,y axes,O;xgridpi/10 labels-pi/2,pi/2;ygrid1 labels-4,-2,2,4;window-3pi/5..3pi/5,-5..5. Decreasing branches withzeros+-pi/4,asymptotes-pi/2,0,pi/2 notdrawn;end arrows.}
+A.(y=2\cot x)
+B.(y=\cot2x)
+C.(y=2\tan x)
+D.(y=\tan2x)
+\answer{B}
+\end{practice}
+\begin{practice}{25}{3}
+ASSESSMENT PRACTICE. Performance Task A homeowner wants to move a flat screen television around the corner of two hallways that meet at a right angle as shown. One hallway is6 ft wide, and the other hallway is only4 ft wide. The length L of the diagonal through which the television must pass, as a function of(theta), is(L(\theta)=\frac4{\sin\theta}+\frac6{\cos\theta}).
+Part A Write the function in terms of(csc theta) and(sec theta).
+\answer{Part A (L(\theta)=4\csc\theta+6\sec\theta)}
+Part B Use your graphing calculator to graph the function for(0<\theta<90°) in order to determine the greatest length the television could have to the nearest foot.
+\answer{Part B14 ft}
+% FIG 74 854 824 1117 1036
+\placeholder{illustration}{Topview roomwithwoodfloor,bluecouch/chairs,table;L-shapedhall alongbottom andright. Bottomhall width4ft markedverticaldoublearrow,right hallwidth6ft markedhorizontal doublearrow. Blue thinTV diagonal frombottomlefttorightupper,justtouchinginnercorner. Dashedhorizontal/verticallegs andrightangles atouterwalls,angle theta atinnercornerbetweenleftwardhorizontal andTVtowardlowerleft.}
+\end{practice}
+% Source page 75: 387A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+Lesson Quiz is available at SavvasRealize.com. Assessment.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F89,F90 \\
+2 & 2 & F89,F90 \\
+3 & 2 & F91 \\
+4 & 1 & F90,F91 \\
+5 & 2 & F89,F90 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{7-5 Lesson Quiz: Graphing Other Trigonometric Functions}
+ASSESSMENT RESOURCES. Name\underline{\hspace{2cm}}. enVision Algebra2. SavvasRealize.com.
+1. Select all the correct statements about the graph of(y=\tan x).
+A. The period of the function is(pi).
+B. The range of the function is(-pi/2,pi/2).
+C. The function has vertical asymptotes whenever(sin x=0).
+D. The function has zeros whenever(cos x=0).
+E. The function is increasing everywhere in its domain.
+\answer{1.A,E}
+2. The graph of(y=\tan x) is stretched vertically by a factor of4 and compressed horizontally to have a period of(pi/3). What is the equation of the new graph?
+(y=\underline{\hspace{1cm}}\tan\underline{\hspace{1cm}})
+\answer{2.(y=4\tan3x)}
+3. Choose from(cot x),(sec x), and(csc x) to complete the sentences below.
+Word bank: sin x; cos x; tan x; csc x; sec x; cot x.
+The graph of(y=\frac1{\sin x}) is the same as the graph of(y=\underline{\hspace{1cm}}).
+\answer{csc x}
+The graph of(y=\frac1{\cos x}) is the same as the graph of(y=\underline{\hspace{1cm}}).
+\answer{sec x}
+The graph of(y=\frac{\cos x}{\sin x}) is the same as the graph of(y=\underline{\hspace{1cm}}).
+\answer{cot x}
+4. The function(y=f(x)) is a tangent or cotangent function and its graph is as shown.
+What is the equation of this function? Use decimals rounded to one decimal place.
+(f(x)=\underline{\hspace{1cm}}\cot(\underline{\hspace{1cm}}x))
+% FIG 75 1009 634 1108 734
+\placeholder{graph}{Black0.5cot4x,arrowed x,y axes,O; xgridpi/16 labels-pi/4,pi/4;ygrid1/4 labels-1,1;window-5pi/16..5pi/16,-5/4..5/4. Decreasingbranches withzeros+-pi/8,asymptotes-pi/4,0,pi/4 notdrawn,end arrows.}
+\answer{4.(f(x)=0.5\cot(4x))}
+5. Nadia is observing the ascent of a hot air balloon from a viewing area about300 feet away. What function models the height h in feet of the balloon as a function of the angle of inclination(theta) from Nadia's position in the viewing area to the balloon?
+A.(h=\tan(150\theta))
+B.(h=150\tan\theta)
+C.(h=\tan(300\theta))
+D.(h=300\tan\theta)
+\answer{5.D}
+enVision Algebra2. Assessment Sourcebook. Copyright©Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+% Source page 76: 387B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I=Intervention. O=On-Level. A=Advanced.
+Reteach to Build Understanding I. Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+Additional Practice I O. Provides extra practice for each lesson. MathXL for School.
+Enrichment O A. Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Mathematical Literacy and Vocabulary I O. Helps students develop and reinforce understanding of key terms and concepts.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{7-5 Reteach to Build Understanding. Graphing Other Trigonometric Functions}
+Name\underline{\hspace{2cm}}. enVision Algebra2. SavvasRealize.com.
+The trigonometric functions(tan x),(cot x),(sec x), and(csc x) are based on the trigonometric functions(sin x) and(cos x). Understanding these relationships will help you determine the points on the unit circle to graph the other trigonometric functions.
+1. Match the function to the ratio. Use the trigonometry relationships you have learned throughout the lesson. The first one has been done for you.
+a.(y=\tan x)
+b.(y=\cot x)
+c.(y=\sec x)
+d.(y=\csc x)
+Choices:(\frac1{\sin x}),(\frac1{\cos x}),(\frac{\cos x}{\sin x}),(\frac{\sin x}{\cos x}).
+\answer{a. sin x/cos x (black given line); b. cos x/sin x; c.1/cos x; d.1/sin x (magenta matching lines).}
+2. Deondra graphed the function(y=\sec x), over the domain(-\pi<x<\pi). Secant is equal to(\frac1{\cos x}). First, she created a table of x values and y values. Then, using the unit circle, she filled in the values. Draw a circle around her mistake and fix it.
+\begin{tabular}{llllllllll}
+x & (-\pi/2) & (-\pi/3) & (-\pi/4) & (-\pi/6) & 0 & (\pi/6) & (\pi/4) & (\pi/3) & (\pi/2) \\
+(sec x) & undefined & 2 & (\sqrt2) & (\sqrt3/3) & 1 & (2\sqrt3/3) & (\sqrt2) & 2 & undefined \\
+\end{tabular}
+\answer{Circle the column x=-pi/6. The correct value is(2\sqrt3/3).}
+% FIG 76 363 525 438 643
+\placeholder{diagram}{Unit Circle rightsemicircle centered ataxesintersection,positive x,y arrowed; endpoints(0,1),pi/2,90degrees and(0,-1),3pi/2,270degrees; rightmost(1,0),0degrees,0,360degrees,2pi. Upperpoints30degrees pi/6(sqrt3/2,1/2),45degrees pi/4(sqrt2/2,sqrt2/2),60degrees pi/3(1/2,sqrt3/2). Lowerpoints330degrees11pi/6(sqrt3/2,-1/2),315degrees7pi/4(sqrt2/2,-sqrt2/2),300degrees5pi/3(1/2,-sqrt3/2). Labels crowded,blacklines andtext,no grid.}
+3. Fill in the table for(y=\tan x) over the domain(-\pi<x<\pi). Use the unit circle and the ratio and reciprocal functions to help you determine the missing values.
+\begin{tabular}{llllllllll}
+x & (-\pi/2) & (-\pi/3) & (-\pi/4) & (-\pi/6) & 0 & (\pi/6) & (\pi/4) & (\pi/3) & (\pi/2) \\
+(tan x) & \answer{undefined} & (-\sqrt3) & \answer{-1} & \answer{(-\sqrt3/3)} & \answer{0} & \answer{(\sqrt3/3)} & 1 & \answer{(\sqrt3)} & \answer{undefined} \\
+\end{tabular}
+enVision Algebra2. Teaching Resources. Copyright©Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{7-5 Additional Practice. Graphing Other Trigonometric Functions}
+Name\underline{\hspace{2cm}}. enVision Algebra2. SavvasRealize.com.
+Sketch the graph over the interval(-2\pi) to(2\pi). Describe the domain, range, period, zeros and asymptotes of the function.
+1.(y=\tan x)
+Domain:\answer{(\{x:x\neq\frac\pi2+n\pi,\text{ where n is an integer}\})}
+Range:\answer{(-\infty,\infty)}
+Period:\answer{(\pi)}
+Asymptotes:\answer{any multiple of(pi/2)}
+\te{Printed any multiple; likely odd multiples of pi/2. No separate zeros answer field is printed.}
+% FIG 76 733 436 808 498
+\placeholder{graph}{Magenta tan x,black x,y arrowed axes,O;xgridpi/2 labels-2pi,-pi,pi,2pi;ygrid1 labels-4,-2,2,4;window-3pi..3pi,-5..5. Five visible risingbranches withzeros kpi,verticalasymptotes oddpi/2 notdrawn,no explicitcurvearrowheads.}
+For Items2 and3, sketch the graphs of the functions. Then describe how the graph of each function compares to the graph of the parent function.
+2.(y=\frac14\tan4x)
+\answer{Vertical compression makes the graph look more bent than the parent function(y=\tan x). Horizontal compression changes the period of the function to(pi/4).}
+% FIG 76 743 525 809 585
+\placeholder{graph}{Magenta(1/4)tan4x onblack arrowedx,y axes,O;xgridpi/4 labels-pi,pi;ygrid1 labels-4,-2,2,4;window-5pi/4..5pi/4,-5..5. Closelyspacedsteeprisingbranches withzeros kpi/4,asymptotes pi/8+kpi/4 notdrawn,no explicitcurvearrows.}
+3.(y=2\cot0.25x)
+\answer{Vertical stretch makes the graph look straighter than the parent function(y=\cot x). The horizontal stretch changes the period of the function from(pi/2) to(2\pi).}
+\te{Printed period from pi/2 to2pi; likely from pi to4pi for the stated equation.}
+% FIG 76 755 591 809 653
+\placeholder{graph}{Magenta2cot(.25x),blackarrowedx,yaxes,O;xgridpi/2 labels-pi,pi;ygrid5 labels-20,-10,10,20;window-2pi..2pi,-25..25. Two decreasing reciprocal-like branchesapproachverticalx0,zerosat+-2pi,notdrawnasdashed;no curvearrowheads.}
+4. Benjamin is observing a hotel's entrance from a bench30 ft away.
+a. Write a function to model the height h of the hotel as a function of the angle of inclination x from his position to the entrance of the hotel.
+\answer{a.(y=30\tan x)}
+b. Identify an appropriate domain.
+\answer{b.Answers may vary. Sample:(-\pi<x<\pi)}
+\te{Printed domain includes undefined values and negative heights; likely0<x<pi/2 in this context. Printed answer uses y instead of h.}
+5. Write a csc function that has a period of(pi/4).
+\answer{(y=\csc8x)}
+6. Graph the function(y=\sec x). Describe how the graph of(y=\sec x) is related to the graph of(y=\cos x).
+\answer{(y=\sec x) is the reciprocal of(y=\cos x).}
+% FIG 76 733 688 809 750
+\placeholder{graph}{Magenta sec x and black cos x onblackarrowed x,y axes,O;xgridpi/2 labels-2pi,2pi;ygrid1 labels-4,-2,2,4;window-3pi..3pi,-5..5. Magentaupvertices(-2pi,1),(0,1),(2pi,1),downvertices(+-pi,-1);blackcosinepassesallvertices,amplitude1;secantasymptotes oddpi/2 notdrawn;no explicitcurvearrows.}
+enVision Algebra2. Teaching Resources. Copyright©Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{7-5 Enrichment. Graphing Other Trigonometric Functions}
+Name\underline{\hspace{2cm}}. enVision Algebra2. SavvasRealize.com.
+Find a possible asymptote for each equation. Depending on whether the asymptote is horizontal or vertical, use the table to find the letter that corresponds to the answer. Write the letter above the numbered blank that corresponds to the item number to answer the riddles.
+\begin{tabular}{lllllll}
+ & \uncertain{(\pi/10)}{(2\pi/10)} & \uncertain{(3\pi/5)}{(5\pi/3)} & (\pi) & \uncertain{(5\pi/7)}{(3\pi/7)} & \uncertain{(\pi/8)}{(3\pi/8)} & (2\pi) \\
+Vertical:tan/cot & A & U & E & G & I & C \\
+Horizontal:sec/csc & N & O & R & T & Y & S \\
+\end{tabular}
+1.(y=0.7\csc\frac12 x)
+2.(y=2.6\tan\frac12 x)
+3.(y=3.1\cot\frac12 x)
+4.(y=3\tan\uncertain{5}{3}x)
+5.(y=1.2\csc10x)
+6.(y=3.4\csc1.4x)
+7.(y=3.1\cot\frac12 x)
+8.(y=120\cot\frac53 x)
+9.(y=3.1\csc\frac12 x)
+10.(y=54\tan4x)
+11.(y=2.3\csc10x)
+12.(y=5.5\tan\frac12 x)
+If you pass the finish line after the first place and before the third place, you must be
+\answer{1.S;2.E;3.C;4.A;5.N;6.T (SECANT)}
+If you are not able to get a loan on your own, you may need someone to
+\answer{7.C;8.O;9.S;10.I;11.N;12.E (COSINE)}
+\te{Printed horizontal category for sec/csc; these functions have vertical asymptotes, not horizontal ones. Printed item8 cotangent maps to a horizontal-row letter O. Header fractions and item4 coefficient are pixelated in the scan, with uncertain readings marked.}
+enVision Algebra2. Teaching Resources. Copyright©Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{7-5 Mathematical Literacy and Vocabulary. Graphing Other Trigonometric Functions}
+Name\underline{\hspace{2cm}}. enVision Algebra2. SavvasRealize.com.
+Your teacher made a set of note cards describing how to graph the function(y=\tan\frac12\pi\theta). The cards got mixed up as he was about to show them to your class. Use the note cards to write the steps in the correct order.
+\te{Printed coefficient appears1/2 pi, and the period note card explicitly says substitute1/2 pi for b.}
+\textbf{Note cards}
+Divide the period into fourths and locate3 points between the asymptotes. Plot the points and sketch the curve.
+Find the asymptotes of the function. The asymptotes occur at each end of the cycle.
+Determine the cycle of the function by using the formula(-\frac\pi{2b}) to(\frac\pi{2b}).
+Use the formula for the period(p=\frac\pi b). Substitute(\frac12\pi) for b and simplify.
+1. First,\answer{use the formula for the period(p=\frac\pi b). Substitute(\frac12\pi) for b and simplify.}
+2. Second,\answer{determine the cycle of the function by using the formula(-\frac\pi{2b}) to(\frac\pi{2b}).}
+3. Then,\answer{find the asymptotes of the function. The asymptotes occur at each end of the cycle.}
+4. Finally,\answer{divide the period into fourths and locate3 points between the asymptotes. Plot the points and sketch the curve.}
+enVision Algebra2. Teaching Resources. Copyright©Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Tablet example screen: Exit. Solve the system of equations by graphing. (y=3x+4),(y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Question Help:Help Me Solve This;View an Example;Video;Textbook;Glossary;Math Tools;Print. Click the graph,choose a tool in the palette and follow the instructions to create your graph.1 part remaining.Clear All.Check Answer.Review progress.Question5 of14.Go.Back.Next.}
+% FIG 76 616 978 1067 1299
+\placeholder{illustration}{Blacktabletwithhomebuttonleft,white digitalmathscreen linear system3x+4,-2x+4,blankgridupperright labeledx,y,-10,-8,...10 withunitgrid,origin0;QuestionHelpdropdown;bluefooterwithbuttons andprogressbar.}
+\end{te-addendum}
+
+\end{document}

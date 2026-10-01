@@ -1,0 +1,1019 @@
+\documentclass{article}
+% Source: Topic_10_Teacher_Edition.pdf, PDF pages 35-48 (printed pages 498A-507B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 35: 498A Lesson Overview
+\begin{lesson-meta}
+lesson: 10-3
+title: Vectors
+standards: none printed
+practices: none printed
+objective: I CAN... interpret and use vectors for addition, subtraction, and scalar multiplication.
+
+essential question: How does including a direction with a quantity affect how you carry out operations on quantities?
+
+\textbf{VOCABULARY}
+\item component form
+\item direction
+\item initial point
+\item magnitude
+\item terminal point
+\item vector
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 10-3 \\
+Title & Vectors \\
+Standards & none printed \\
+I CAN Objective & I CAN... interpret and use vectors for addition, subtraction, and scalar multiplication. \\
+Essential Question & How does including a direction with a quantity affect how you carry out operations on quantities? \\
+Lesson Vocabulary & component form; direction; initial point; magnitude; terminal point; vector \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use vectors to represent quantities with both magnitude and direction.
+\item Add and subtract vectors graphically, algebraically, and by the Parallelogram Rule.
+\item Apply scalar multiplication to produce a new vector.
+\item Transform a vector using matrix multiplication.
+Essential Understanding. A vector is a quantity with both direction and magnitude. It can be used to determine the position of one point in space relative to another. Vectors are transformed using matrix multiplication, and the sums and differences of vectors are used to find magnitude and direction in real-world problems.
+\textbf{COHERENCE}
+Previously in this courses, students:
+\item Added and subtracted matrices and multiplied matrices by a scalar.
+In this lesson, students:
+\item Add and subtract vectors and multiply a vector by a scalar.
+\item Transform vectors using matrix multiplication.
+Increasing Coherence. This lesson is not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Find the area of a parallelogram or a triangle defined by vectors.
+\te{Printed ``in this courses''; likely ``in this course.''}
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that a vector written in component form (\langle x,y\rangle) or matrix form (\begin{bmatrix}x\\y\end{bmatrix}) indicates a horizontal change of x and a vertical change of y.
+\item Students apply vectors to solve real-world problems, such as finding the magnitude and direction of a boat's path.
+\textbf{Mathematics Overview}
+Students use vectors, in both component form and matrix form, to represent quantities that have both magnitude and direction. They add or subtract vectors and multiply vectors by a scalar. They use vectors in matrix form to transform the vector using matrix multiplication.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively. Students understand the meaning of quantities when they recognize that (\overrightarrow{MN}) is not equivalent to (\overrightarrow{NM}) because, though they have the same magnitude, their directions are different.
+Look For and Make Use of Structure. Students apply general mathematical rules to specific situations when they use what they know about matrices and dilations to multiply a vector by a scalar.
+SavvasRealize.com. Program Resources.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder. NEW VOCABULARY}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+English & Spanish \\
+component form & forma del componente \\
+direction & dirección \\
+initial point & punto de inicio \\
+magnitude & magnitud \\
+terminal point & punto terminal \\
+vector & vector \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Introduce students to the term vector by having a student walk diagonally across the classroom counting his or her steps. Explain that the number of steps is the magnitude. Then ask students to describe the change in the student's position in the classroom from his or her starting to ending point. Point out that there is both a horizontal and a vertical change, which is the direction. Have students complete the multiple choice question.
+What is a quantity with both magnitude and direction?
+a. line segment
+b. scalar
+c. vector
+d. component
+\answer{c. vector}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 35 932 736 1084 916
+\placeholder{illustration}{Student Companion cover with purple and blue circular artwork on black, enVision Algebra 2 and SAVVAS.}
+\end{te-addendum}
+% Source page 36: 498B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students explore the result of following travel instructions that contain direction and distance in different orders. This activity prepares students to understand vectors as quantities with both direction and magnitude.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+Critique \& Explain is available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS: Implement Tasks that Promote Reasoning and Problem Solving}
+Q: What do you notice about the steps of Olivia's path compared to the steps of Benito's path?
+\answer{Each path contains the same steps but in a different order.}
+\textbf{During SMALL GROUP: Support Productive Struggle in Learning Mathematics}
+Q: How important is the direction compared to the distance for each step in reaching the finish line?
+\answer{They are equally important because going the correct distance in the wrong direction or the wrong distance in the correct direction would not get Olivia or Benito to the finish line.}
+Q: What is the end result of traveling 5 blocks south and 3 blocks north?
+\answer{traveling 2 blocks south}
+For Early Finishers
+Q: How can you calculate the shortest distance from start to finish? Compare it to the distance that Olivia and Benito traveled.
+\answer{The shortest distance is the hypotenuse of a right triangle with side lengths 2 (total change in north-south direction) and 11 (total change in east-west direction). Using the Pythagorean Theorem, the shortest distance is (\approx11.2) blocks. The distance traveled by both Olivia and Benito is the sum of the individual steps, or 19 blocks.}
+\textbf{After WHOLE CLASS: Facilitate Meaningful Mathematical Discourse}
+Q: How can you model the travel directions mathematically?
+\answer{Use the coordinate system and make the north-south travel direction the y-axis and the east-west travel direction the x-axis.}
+Q: How could you change the directions if the finish line moved to the exact same position on the other side of the starting point?
+\answer{Change the direction of each step to its opposite (west to east).}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Use with CRITIQUE \& EXPLAIN. Look for Relationships}
+A student looked at his list of four directions and decided that he could reach the finish line in fewer blocks. What is a possible set of directions for a path he could take?
+\answer{Sample: 2 blocks south, 11 blocks west}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Olivia and Benito are taking part in a scavenger hunt. They are given a map that shows the start and finish line. They are also given a list of directions on how to get to the finish line. They get to choose how they want to follow the directions, so they took different paths.
+% FIG 36 829 687 1029 868
+\placeholder{map}{Street-grid map with one square representing one city block. Red Start at (0,0) and Finish at (-11,-2). Unit grid, horizontal labels -12,-10,-8,-6,-4,-2,2 and vertical labels -6,-4,-2,2,4,6. Illustrated trees, grass, streets, and houses surround the grid.}
+Olivia's path: 5 blocks south; 7 blocks west; 3 blocks north; 4 blocks west.
+Benito's path: 7 blocks west; 3 blocks north; 4 blocks west; 5 blocks south.
+A. Will both Olivia and Benito reach the finish line? Explain.
+\answer{Yes; they both reached the finish. Both paths go a total of 11 blocks west and 2 blocks south.}
+B. Create a different set of directions that would get someone to the finish line.
+\answer{Another order could be 3 blocks north, 4 blocks west, 5 blocks south, 7 blocks west.}
+C. Communicate Precisely Does the order of the instructions that pair distance and direction affect the outcome? Explain.
+\answer{When distance and direction are paired, the order of a set of directions does not matter.}
+\te{Digital preview repeats the same map, paths and prompt A, adding ``You can use the pen tool to trace each person's path.'' Controls: Go back, Enter your answer.}
+% FIG 36 669 186 1184 532
+\placeholder{illustration}{Digital Critique and Explain screen showing the same start/finish map, Olivia and Benito path lists, prompt A and empty response field; vertical drawing-tool palette to the right.}
+\end{model-discuss}
+% Source page 37: 498 Understand and Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Students are introduced to vectors as quantities with both magnitude and direction. Students learn that trigonometric identities can be used to find the lengths of intersecting lines and the angles between them. Students also learn that they can use trigonometry to add and subtract vectors.
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{CONCEPT Vectors. Use and Connect Mathematical Representations}
+Q: How is a vector different from a line or a ray?
+\answer{A vector has a specific start or initial point and end or terminal point, indicated by the magnitude.}
+Q: Why is the magnitude of a vector always a positive number?
+\answer{The magnitude is the length of the vector, which is the absolute value, since length is always a positive value.}
+\te{Printed ``always a positive number'' excludes the zero vector, whose magnitude is zero.}
+Q: How do you know the direction of the vector?
+\answer{The direction of a drawn vector is indicated by the arrow.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{CONCEPT Vectors}
+A \textbf{vector}, written as (\vec a), is a quantity with both direction and magnitude.
+The \textbf{direction} of a vector is considered from the \textbf{initial point} to the \textbf{terminal point}.
+The \textbf{magnitude} is the length of the vector and is written as (|\vec a|).
+% FIG 37 963 334 1131 494
+\placeholder{diagram}{Black arrow a pointing diagonally up and right from an initial point at lower left to a terminal point at upper right. Labels initial point, terminal point, vector a is written as vector a, magnitude equals absolute-value vector a. Callout: A vector can be used to determine the position of one point in space relative to another.}
+A vector can be used to determine the position of one point in space relative to another.
+\end{concept-box}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 2}
+Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.
+What is the sum of the two vectors shown? Use both graphic and algebraic methods.
+% FIG 37 366 934 473 999
+\placeholder{graph}{Unit coordinate grid with x labels -4,-2,2,4 and y label 2. Blue vector from (0,0) to (2,4), red vector from (0,0) to (-2,1), dashed translated copies joining at (0,5), green sum vector from origin to (0,5).}
+Solve algebraically by adding the components.
+(\vec s+\vec t=\langle2,4\rangle+\langle-2,1\rangle)
+(=\langle2+(-2),4+1\rangle)
+(=\langle0,5\rangle)
+To add two vectors graphically, draw both vectors with an initial point at the origin. Create a parallelogram by drawing a copy of one of the vectors using the terminal point of the other vector as its initial point.
+The fourth point of the parallelogram, at the end of the green arrow, is the sum (\langle0,5\rangle).
+\answer{(\langle0,5\rangle)}
+Example 2 Students explore adding vectors presented graphically in this additional example.
+Q: Do the lengths of the two vectors allow you to predict the length of the sum vector?
+\answer{No; because the magnitude of the sum is not the same as the sum of the magnitudes}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 5}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+On a test flight, the change in position of a drone during the initial 15 minutes is represented by the vector (\vec d=\langle4.34,2\rangle), with distances in kilometers. The engineers then increase the speed by 2.5 times the speed every 15 minutes for the next hour, without changing the direction the drone flies. What vector represents the change in position for the entire test flight, and how far does the drone travel?
+Since the direction does not change, the vector that represents the change in position during each 15 minute increment can be found by successively multiplying the initial vector (\langle4.34,2\rangle) by 2.5.
+Initial 15 minutes: (\vec d=\langle4.34,2\rangle)
+Second 15 minutes: (2.5\cdot\vec d=2.5\cdot\langle4.34,2\rangle=\langle10.85,5\rangle)
+Third 15 minutes: (2.5\cdot\langle10.85,5\rangle=\langle27.13,12.5\rangle)
+Fourth 15 minutes: (2.5\cdot\langle27.13,12.5\rangle=\langle67.81,31.25\rangle)
+Fifth 15 minutes: (2.5\cdot\langle67.81,31.25\rangle=\langle169.53,78.13\rangle)
+The vector representing the total change in position is the sum of the vectors.
+\answer{The vector representing the total change in position is the sum of the vectors.}
+\te{The printed preview stops here without a numerical total vector or distance. Rounded components are printed with equals signs.}
+Example 5 Students transition to using multiplication of a vector by a scalar to solve a real-world problem.
+Q: How would the vector change if the engineers flew the drone back to the start position at the top speed?
+\answer{The magnitude would stay the same, but the direction would be the opposite.}
+\end{te-addendum}
+% Source page 38: 499 Represent Vector Quantities
+\begin{example}{1}
+\textbf{Represent Vector Quantities. CONCEPTUAL UNDERSTANDING}
+A plane is flying due north, but it is pushed off course by a crosswind blowing east. At 1 P.M. the plane is at the point (10,10), and at 2 P.M. the plane is at (100,410).
+\textbf{A.} Find the speed of the wind and the speed of the plane due to its engine. How can you represent the change in the plane's location as a vector written in component and matrix form?
+% FIG 38 1050 235 1120 316
+\placeholder{diagram}{Right triangle of directed segments: A(10,10) at bottom, B directly above A, C(100,410) to right of B. Vertical AB labeled 400; horizontal BC labeled 90. Red arrow A to C shows plane's path.}
+\te{Because the plane's path has both distance and direction, it is a vector.}
+The wind is responsible for the eastward change in the plane's location. Subtract the x-coordinates to find the amount of change.
+(100-10=90)
+The plane travels 90 mi east in 1 hour. The windspeed is 90 mph.
+The plane's engine is responsible for the northward change in the plane's location. Subtract the y-coordinates to find the amount of change.
+(410-10=400)
+The plane travels 400 mi north in 1 hour, so the speed of the plane due to its engine is 400 mph.
+The \textbf{component form} of a vector is represented by the coordinates (\langle x,y\rangle). They describe the horizontal and vertical change of position from the initial point to the terminal point. In this case, the vector includes both eastward and northward changes.
+The vector (\overrightarrow{AC}) represents a horizontal change of 90 mi and a vertical change of 400 mi.
+The change in the plane's location is (\langle90,400\rangle) in component form and (\begin{bmatrix}90\\400\end{bmatrix}) in matrix form.
+\answer{Windspeed 90 mph; speed due to engine 400 mph; (\langle90,400\rangle) or (\begin{bmatrix}90\\400\end{bmatrix}).}
+\textbf{B.} How can you describe the direction the plane is heading? How fast is the plane moving with respect to the ground?
+The direction of the vector can be defined using an angle.
+(\theta=\tan^{-1}(\frac{90}{400})\approx12.7^\circ)
+Calculate the magnitude of (\overrightarrow{AC}) using the distance formula.
+(|\overrightarrow{AC}|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2})
+(=\sqrt{90^2+400^2})
+(=410\text{ mph})
+% FIG 38 992 607 1035 718
+\placeholder{diagram}{Right triangle with blue upward vertical arrow length 400, red rightward horizontal arrow length 90, black resultant arrow from lower-left to upper-right. Right-angle square at upper-left. Angle theta marked between vertical side and resultant at bottom.}
+\te{Remember that (\tan\theta=\frac{opposite}{adjacent}).}
+\te{STUDY TIP. You could also use the Pythagorean Theorem to find the magnitude, or length, of the vector.}
+The plane is traveling at about (12.7^\circ) east of north at a speed of 410 mph in that direction.
+\answer{About (12.7^\circ) east of north at 410 mph.}
+\end{example}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 1. Build Procedural Fluency From Conceptual Understanding}
+Examples are available at SavvasRealize.com. Activity.
+PART A
+Q: How does the component form of the vector differ from standard coordinate pairs?
+\answer{Coordinate pairs are the x- and y-values of a point. The component vector coordinates represent the change in x- and y-values for a vector.}
+Q: What do you notice about the path of the plane?
+\answer{The path of the plane has both distance and direction, so it is a vector.}
+PART B
+Q: How is the component form of the vector useful in determining the direction of the vector?
+\answer{The coordinates of the component form are the lengths of the two sides of the right triangle formed with the vector described by the component form.}
+Q: How is the direction of the vector defined and expressed?
+\answer{The direction is defined using an angle and determined by the inverse of the tangent.}
+Q: How is the magnitude of the vector determined?
+\answer{Since the original two vectors form a right angle, the Pythagorean Theorem can be used to find the length, or magnitude, of the other vector, which is the direction the plane is heading.}
+\end{te-addendum}
+\begin{tryit}{1}
+A vector has an initial point at (8,2) and a terminal point at (5,6). What is the vector in component form, and what are its magnitude and direction?
+\answer{(\langle-3,4\rangle); magnitude (=5), direction is (36.9^\circ) west of north}
+\end{tryit}
+\begin{te-addendum}{1}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 1)}
+\textbf{READING BEGINNING} Display the following definitions for students to read: crosstown---extending across a town or city; crosswalk---a lane used when walking across a street; cross section---a cut through or across something.
+Q: In each compound word, what is the meaning of cross?
+\answer{Sample: move across, pass through, or extending across}
+Q: What do you think the term crosswind means?
+\answer{Sample: a wind that blows across something}
+\textbf{WRITING DEVELOPING} Remind students that a vector is a quantity drawn as an arrow with both direction and magnitude, or the length and size of a quantity. Direct students to create 3 columns on a piece of paper and label them example, magnitude, and direction. In the example column, ask students to write the words force, temperature, compass, length, velocity, and mass. Have students check whether each word includes magnitude, direction, or both.
+Q: Which words include only magnitude? \answer{temperature, length, mass}
+Q: Which words include only direction? \answer{compass}
+Q: Which words include both magnitude and direction and therefore can be drawn as a vector? \answer{force and velocity}
+\textbf{WRITING EXPANDING} Discuss how in the component form of a vector, (\langle a,b\rangle), a represents the horizontal change and b represents the vertical change. Have students practice identifying the component form of a vector given two points and identifying two possible points given the component form of a vector.
+Q: What is the component form of the vector connecting (5,26) and (12,53)?
+\answer{(\langle7,27\rangle); There is a horizontal change of 7 units and a vertical change of 27 units.}
+Q: What are possible coordinates for a vector if its component form is (\langle25,70\rangle)?
+\answer{Sample: (30,45) and (55,115)}
+\end{te-addendum}
+% Source page 39: 500 Understand Vector Addition
+\begin{example}{2}
+\textbf{Understand Vector Addition}
+How can you add vectors (\vec v=\langle4,8\rangle) and (\vec w=\langle3,-6\rangle) graphically and algebraically?
+\te{LEARN TOGETHER. How can you share your ideas and communicate your thinking with others?}
+To add two vectors graphically, draw both vectors with an initial point at the origin.
+Create a parallelogram by drawing a copy of one of the vectors using the terminal point of the other vector as its initial point.
+% FIG 39 802 321 931 490
+\placeholder{graph}{Unit grid x 0 to 12, y -7 to 10 with ticks labeled every 2. A at origin, B(4,8), C(3,-6), D(7,2). Red v arrow A to B, blue w arrow A to C, green v+w arrow A to D. Dashed blue B to D and dashed red C to D complete parallelogram.}
+\te{Locate the fourth point D with a copy of (\vec w) with initial point at the terminal point of (\vec v). A copy of (\vec v) with initial point at the terminal point of (\vec w) leads to the same location for point D.}
+The terminal point of this copy is the fourth point D of the parallelogram, (7,2).
+The Parallelogram Rule states that if two vectors represent adjacent sides of a parallelogram, then the sum of the vectors is equal to the vector that is the diagonal of the parallelogram with the same initial point.
+The initial point of (\overrightarrow{AD}) is the origin, and its terminal point is (7,2). So, the sum of vectors (\vec v) and (\vec w) is the vector (\overrightarrow{AD}) with the component form (\langle7,2\rangle).
+The components of (\overrightarrow{AD}) can also be found algebraically by adding the components of (\vec v=\langle4,8\rangle) and (\vec w=\langle3,-6\rangle).
+(\vec v+\vec w=\langle4+3,8+(-6)\rangle)
+(=\langle7,2\rangle)
+Adding the vectors together graphically or algebraically results in the same sum, (\overrightarrow{AD}=\langle7,2\rangle).
+\te{COMMON ERROR. Remember to keep track of the x- and y-terms when adding vectors. Add the x-terms together and the y-terms together.}
+\answer{(\vec v+\vec w=\overrightarrow{AD}=\langle7,2\rangle)}
+\end{example}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 2. Use and Connect Mathematical Representations}
+Examples are available at SavvasRealize.com. Activity.
+Q: What do you notice about the graph showing the addition of the two vectors?
+\answer{Sample: The sum vector has the same initial point as the two vectors being added, and it lies between them.}
+Q: How do you find the component form of the sum vector graphically?
+\answer{Since the initial point of the vector is the origin (0,0), the component form is the same as the coordinates of the vector's terminal point.}
+Q: How do you find the component form of the sum vector algebraically?
+\answer{The x-term is the sum of the x-components of the two vectors being added, and the y-term is the sum of the y-components of the two vectors being added.}
+\end{te-addendum}
+\begin{te-addendum}{2}{LearnTogether}
+\textbf{Learn Together: Communicate Your Thinking}
+Explaining your thinking helps other people see different ways to reason about a problem. Sometimes it can be hard to figure out how to share your ideas. Ask: How can you let others know that you have an idea? How can you ensure that others understand your idea?
+\end{te-addendum}
+\begin{tryit}{2}
+a. If (\overrightarrow{MN}=\langle9,12\rangle) and (\overrightarrow{NO}=\langle2,7\rangle), what is (\overrightarrow{MN}+\overrightarrow{NO})?
+\answer{(\langle11,19\rangle)}
+b. If (\vec v=\langle-3,4\rangle) and (\vec w=\langle5,-8\rangle), what is (\vec v+\vec w)?
+\answer{(\langle2,-4\rangle)}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How do you begin to add the two vectors graphically?
+\answer{Draw both vectors with an initial point at (0,0).}
+\end{te-addendum}
+% Source page 40: 501 Find the Magnitude and Direction of a Sum
+\begin{example}{3}
+\textbf{Find the Magnitude and Direction of a Sum. APPLICATION}
+Paige is operating a boat across a river with engine speed set at 12 mph headed (30^\circ) south of east. The current of the river is 2 mph at a direction that is (30^\circ) west of south. What are the magnitude and direction of the path of her boat as she operates it across the river?
+\textbf{Step 1} Use trigonometry to find the component form of the vectors.
+The boat engine (\vec e) is going 12 mph (magnitude) at (30^\circ) south of east.
+(12\sin30^\circ=6)
+(12\cos30^\circ=6\sqrt3\approx10.39)
+Since the vertical component is in the negative direction, (\vec e\approx\langle10.39,-6\rangle).
+% FIG 40 995 305 1157 387
+\placeholder{graph}{Unit grid, x labels 4,6,8 and y -2,-4,-6. Red engine vector e from origin to (10.39,-6), making 30 degrees below positive x-axis. Dashed horizontal component labeled 12 cos 30 degrees, vertical component 12 sin 30 degrees; right-angle mark at upper-right. Blue current vector c from origin to (-1,-1.73).}
+The current (\vec c) is 2 mph (magnitude) at (30^\circ) west of south. This vector makes a (60^\circ) angle with the horizontal axis. Find its component form in the same way.
+(2\sin60^\circ=\sqrt3\approx1.73)
+(2\cos60^\circ=1)
+Since both components are in the negative direction, (\vec c\approx\langle-1,-1.73\rangle).
+\textbf{Step 2} Find the sum of the vectors that represent the boat's speed and the current of the river.
+(\vec r=\vec e+\vec c)
+(=\langle10.39+(-1),-6+(-1.73)\rangle)
+(=\langle9.39,-7.73\rangle)
+% FIG 40 1025 493 1157 593
+\placeholder{graph}{Unit grid with x labels 2,4,6,8,10 and y -4,-6,-8. Red e arrow to (10.39,-6), blue c arrow to (-1,-1.73), dashed translated copies to resultant endpoint (9.39,-7.73). Green r arrow from origin to resultant endpoint.}
+\te{Paige's actual speed is the sum of the two vectors, which is the diagonal of the parallelogram.}
+\te{LOOK FOR RELATIONSHIPS. The magnitude of the sum of the vectors is not the same as the sum of the magnitudes of those vectors. In this problem, (|\vec r|\ne|\vec e|+|\vec c|).}
+\textbf{Step 3} Find the magnitude of (\vec r) using the Pythagorean Theorem.
+(|\vec r|=\sqrt{9.39^2+(7.73)^2}\approx12.2)
+\textbf{Step 4} Use the components of (\vec r) to find its direction as an angle.
+Direction of (\vec r): (\theta=\tan^{-1}(\frac{7.73}{9.39})\approx39.5^\circ)
+% FIG 40 1027 619 1157 717
+\placeholder{graph}{Green resultant arrow r from origin to (9.39,-7.73), dashed horizontal leg length 9.39 and vertical leg 7.73. Angle theta below positive x-axis. Unit grid x labels 4,6,8,10; y -2,-4,-6,-8.}
+Recall that the first component of the vector sum is positive and the second component is negative. Therefore the vector that represents direction of Paige's boat is in Quadrant IV. Paige's boat went at a speed of about 12.2 mph in the direction of about (40^\circ) south of east.
+\answer{About 12.2 mph, about (40^\circ) south of east.}
+\end{example}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 3. Use and Connect Mathematical Representations}
+Examples are available at SavvasRealize.com. Activity.
+Q: How is the terminal point of the vector determined?
+\answer{A right triangle can be formed between the vector and the x-axis. The coordinates of the terminal point of the vector are found by using trigonometric functions.}
+Q: How is the vector representing the boat's actual speed drawn?
+\answer{It is the diagonal of the parallelogram formed by the two vectors for the forward motion of the boat and the motion of the current.}
+Q: Why is the magnitude of the sum of the two vectors not the sum of the magnitudes of the two vectors?
+\answer{Because the two vectors are moving in different directions, only part of one's movement affects only part of the other's movement, determined by their magnitudes and the angle between them.}
+\end{te-addendum}
+\begin{tryit}{3}
+If the engine speed was 9 mph northwest at (135^\circ) with the same current, what would be the magnitude and direction of the boat's speed? Round the magnitude and angle of direction to the nearest tenth.
+\answer{8.7 miles per hour, direction (148^\circ)}
+\te{Printed direction is rounded to a whole degree although the prompt requests the nearest tenth; likely (147.8^\circ).}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How is the terminal point of the vector for the boat's engine speed changed?
+\answer{The terminal point is in the second quadrant so the component form has a negative x-component and a positive y-component.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{Use with EXAMPLES 1, 2, \& 3. Reason}
+Let (\vec v=\langle-4,12\rangle) and (\vec w=\langle-3,9\rangle). Find (|\vec v|+|\vec w|) and (|\vec v+\vec w|). Does this mean that the sum of the magnitudes of any two vectors is equal to the magnitude of their sum? Explain.
+\answer{(7\sqrt{10}) and (7\sqrt{10}); no; these two vectors have the same direction, but when this is not the case, the magnitude of the sum is less than the sum of the magnitudes.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 3}
+Some students may struggle with understanding the trigonometric calculations.
+Help students practice with this example.
+(\sin\theta=\frac{opp}{hyp}), (opp=hyp(\sin\theta))
+(\cos\theta=\frac{adj}{hyp}), (adj=hyp(\cos\theta))
+% FIG 40 462 1102 579 1221
+\placeholder{graph}{First-quadrant unit grid with x and y labels 2,4. Blue arrow from origin to approximately (2.44,3.48), dashed vertical from endpoint to x-axis. Red angle arc labeled 55 degrees from positive x-axis to arrow.}
+Silvia is walking (55^\circ) northeast at 4.25 m/hr.
+Q: What is the component form of the vector (\vec s) for Silvia's path?
+\answer{(\langle2.44,3.48\rangle)}
+Q: Use the given formula to calculate the length of the opposite side. \answer{3.48}
+Q: Use the given formula to calculate the length of the adjacent side. \answer{2.44}
+\end{te-addendum}
+% Source page 41: 502 Understand Vector Subtraction and Multiply a Vector by a Scalar
+\begin{example}{4}
+\textbf{Understand Vector Subtraction}
+How can you subtract (\vec v-\vec w) graphically and algebraically, when (\vec v=\langle6,2\rangle) and (\vec w=\langle0,-4\rangle)? What are the components, magnitude, and direction of (\vec v-\vec w)?
+The graph of (\vec v-\vec w) can be found in a similar way to the graph of the sum of two vectors.
+% FIG 41 801 308 898 426
+\placeholder{graph}{Unit grid x -2 to 8 and y -5 to 7; numeric labels every 2. Blue v arrow from (0,0) to (6,2), red w downward to (0,-4), red -w upward to (0,4). Green difference arrow to (6,6), dashed blue (0,4) to (6,6), dashed red (6,2) to (6,6).}
+In order to subtract (\vec w), add its additive inverse, (-\vec w), a vector with the same magnitude but opposite direction.
+The terminal point of (\vec v-\vec w) is (6,6), so its component form is (\langle6,6\rangle).
+The components of (\vec v-\vec w) can also be found algebraically by subtracting the components of (\vec v=\langle6,2\rangle) and (\vec w=\langle0,-4\rangle).
+(\vec v-\vec w=\vec v+(-\vec w)=\langle6+0,2+4\rangle=\langle6,6\rangle)
+The direction of the difference is (\theta=\tan^{-1}\frac66=45^\circ).
+The magnitude of (\vec v-\vec w) is (\sqrt{6^2+6^2}=\sqrt{72}\approx8.5).
+Subtracting the vectors graphically or algebraically results in the same difference, (\vec v-\vec w=\langle6,6\rangle). The magnitude of (\vec v-\vec w) is about 8.5, and its direction is (45^\circ).
+\te{COMMON ERROR. When you are finding the direction using the inverse tangent, make sure your angle is in the correct quadrant. The possible outputs of (\tan^{-1}\theta) are (-90^\circ<\theta<90^\circ).}
+\answer{(\langle6,6\rangle); magnitude about 8.5; direction (45^\circ).}
+\end{example}
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 4. Use and Connect Mathematical Representations}
+Example 5 is powered by Desmos. Examples are available at SavvasRealize.com. Activity.
+Q: How is subtracting a vector graphically different from adding a vector graphically?
+\answer{The vector that is being subtracted is drawn in the opposite direction from its component form.}
+Q: How is subtracting a vector graphically the same as adding a vector graphically?
+\answer{Once the vectors are drawn, the remaining steps are the same for both operations.}
+Q: How are vectors subtracted algebraically?
+\answer{The additive inverses of the components of the vector being subtracted are added to the components of the other vector.}
+\end{te-addendum}
+\begin{tryit}{4}
+a. What are the components, magnitude, and direction of (\vec s-\vec t), where (\vec s=\langle6,-3\rangle) and (\vec t=\langle3,2\rangle)?
+\answer{(\langle3,-5\rangle), magnitude (\approx5.8), direction is (-59.0^\circ) or (301^\circ)}
+b. For (\vec m=\langle1,-3\rangle) and (\vec n=\langle-2,7\rangle), what is (\vec m-\vec n)?
+\answer{(\langle3,-10\rangle)}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How could you show (\vec s-\vec t) graphically?
+\answer{Graph (\vec s\ \langle6,-3\rangle) and (-\vec t\ \langle-3,-2\rangle) and then show addition of those vectors.}
+\end{te-addendum}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error. Try It! 4}
+Some students may subtract the wrong components when solving algebraically. Have students stack the component forms of the vectors before adding or subtracting so that the x-components and the y-components are aligned. This process ensures that the correct components are being added or subtracted.
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 4}
+Students solve a real-world problem using vector subtraction.
+A swimmer is in trouble (32^\circ) south of east of a lifeguard's position. The current flows (12^\circ) west of south at 1.6 m/s and the lifeguard's boat travels at 7.5 m/s.
+1. What direction should the lifeguard travel to reach the swimmer?
+\answer{(21.7^\circ) south of east}
+Q: Which vector was subtracted and why?
+\answer{The current was subtracted because it would move the path of the boat as it traveled.}
+Q: How is the magnitude of the vector leading to the swimmer determined?
+\answer{Sample: The boat is moving toward the swimmer, so its velocity is used.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Multiply a Vector by a Scalar. Powered by Desmos}
+Multiply each vector by the given scalar. How do the magnitude and direction of the product compare to the original vector?
+\textbf{A.} (\vec r=\langle9,3\rangle); scalar (=5)
+To multiply a vector by a scalar, multiply each of the components of the vector by the scalar:
+(5\cdot\vec r=5\cdot\langle9,3\rangle=\langle5\cdot9,5\cdot3\rangle=\langle45,15\rangle)
+% FIG 41 942 642 1113 727
+\placeholder{graph}{First-quadrant grid with x labels 0 through 50 every 5 and y labels 0,5,10,15. Solid blue arrow from origin to (9,3), dashed blue continuation to (45,15), closed endpoints shown.}
+\te{Note that the new vector has the same direction as (\vec r).}
+\te{USE STRUCTURE. What have you learned about matrices and dilations that might apply to this problem?}
+\te{CONTINUED ON THE NEXT PAGE.}
+% Source page 42: 503 Example 5 continued
+While the direction does not change, the magnitude is increased by a factor of the scalar. Check that this works algebraically.
+(5|\vec r|=5\sqrt{9^2+3^2}=5\sqrt{90}\approx47.4)
+(|5\vec r|=\sqrt{45^2+15^2}=\sqrt{2,250}\approx47.4)
+(\theta_r=\tan^{-1}\frac39\approx18.4^\circ) and (\theta_{5r}=\tan^{-1}\frac{15}{45}\approx18.4^\circ)
+The scalar product (5\vec r=\langle45,15\rangle) has the same direction and 5 times the magnitude of (\vec r).
+\answer{(5\vec r=\langle45,15\rangle); magnitude (\approx47.4), same direction (\approx18.4^\circ), 5 times the original magnitude.}
+\textbf{B.} (\vec s=\langle4,5\rangle); scalar (=-3)
+Find the new vector components.
+(-3\cdot\vec s=-3\cdot\langle4,5\rangle=\langle-3\cdot4,-3\cdot5\rangle=\langle-12,-15\rangle)
+Compare the magnitude and direction.
+(|-3||\vec s|=3\sqrt{4^2+5^2}=3\sqrt{41}\approx19.2)
+(|-3\vec s|=\sqrt{(-12)^2+(-15)^2}=\sqrt{369}\approx19.2)
+(|\vec s|=\sqrt{4^2+5^2}=\sqrt{41}\approx6.4)
+(|-3||\vec s|\approx3(6.4)=19.2)
+(\theta_s=\tan^{-1}\frac54\approx51.3^\circ) and
+(\theta_{-3s}=\tan^{-1}\frac{-15}{-12}\approx231.3^\circ)
+\te{Printed inverse-tangent expression omits the 180-degree quadrant adjustment described in the Study Tip; likely (\tan^{-1}((-15)/(-12))+180^\circ). The printed direction (231.3^\circ) is correct.}
+% FIG 42 1050 383 1151 514
+\placeholder{graph}{Grid x -14 to 6, y -18 to 8, grid spacing 2 with labels every 4. Blue vector from origin to (4,5); dashed blue arrow from origin to (-12,-15), opposite direction and triple length.}
+\te{Because the scalar is negative, the new vector has the opposite direction as (\vec s).}
+\te{STUDY TIP. The resulting vector after the scalar multiplication is in the third quadrant, so its direction is (180^\circ) greater than the inverse tangent of its components.}
+The scalar product (-3\vec s=\langle-12,-15\rangle) has the opposite direction and 3 times the magnitude of (\vec s).
+The magnitude of the resulting vector after scalar multiplication is the product of the magnitude of the original vector and the absolute value of the scalar. The direction of the resulting vector is the same unless the sign of the scalar is negative, and then the resulting vector differs by (180^\circ).
+\answer{(-3\vec s=\langle-12,-15\rangle); magnitude (\approx19.2), direction (\approx231.3^\circ), opposite direction and 3 times the original magnitude.}
+\end{example}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{EXAMPLE 5. Pose Purposeful Questions}
+PART A
+Q: How is the magnitude of a vector affected when multiplied by a positive scalar?
+\answer{The magnitude is increased or decreased by a factor equivalent to the scalar.}
+Q: How is the direction of a vector affected when multiplied by a positive scalar?
+\answer{The direction remains the same.}
+PART B
+Q: How is the magnitude of a vector affected when multiplied by a negative scalar?
+\answer{The magnitude is increased or decreased by a factor equivalent to the absolute value of the scalar.}
+Q: How is the direction of a vector affected when multiplied by a negative scalar?
+\answer{The resulting vector has the opposite direction or differs by (180^\circ).}
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{tryit}{5}
+a. If (\vec t=\langle-5,-7\rangle), what are the components, magnitude, and direction of (-4(\vec t))?
+\answer{(-4\vec t=\langle20,28\rangle); (|-4\vec t|\approx34.4), direction (\approx54.5^\circ)}
+b. What are the components, magnitude, and direction of (2\vec t)?
+\answer{(2\vec t=\langle-10,14\rangle); (|2\vec t|\approx17.2), direction (\approx-125.5^\circ)}
+\te{Printed second component in part b is positive 14; likely -14, consistent with the given vector and the printed direction.}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What is meant by the expression (-4\vec t)?
+\answer{The vector (\vec t) is multiplied by the scalar -4.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{Use with EXAMPLES 4 \& 5. Make Sense and Persevere}
+Suppose you were to multiply a vector by the scalar (\frac13). Subtract this result from the original vector. How would the magnitude and direction of the difference relate to the original magnitude and direction?
+\answer{The magnitude is (\frac23) the original magnitude, and the direction is the same.}
+\end{te-addendum}
+% Source page 43: 504, Example 6
+\begin{example}{6}
+\textbf{Use Matrices to Transform a Vector}
+How can you use matrix multiplication to transform each vector by the given transformation?
+A. Rotate (\vec{AB}=\langle7,9\rangle) (180^\circ) around the origin using matrices.
+The matrix used to rotate a vector (180^\circ) around the origin will change each point ((x,y)) to ((-x,-y)). The matrix that does this is (T=\begin{bmatrix}-1&0\\0&-1\end{bmatrix}).
+(T\cdot\vec{AB}=\begin{bmatrix}-1&0\\0&-1\end{bmatrix}\begin{bmatrix}7\\9\end{bmatrix}=\begin{bmatrix}-7+0\\0+(-9)\end{bmatrix}=\begin{bmatrix}-7\\-9\end{bmatrix})
+Notice that the effect of multiplying (\begin{bmatrix}7&9\end{bmatrix}) by the matrix (\begin{bmatrix}-1&0\\0&-1\end{bmatrix}) is to multiply the each component of the vector by (-1). This results in another vector equal in magnitude, but with opposite direction.
+\te{Printed row matrix in the explanation, while the displayed transformation uses a column vector; likely the explanation should use the same column vector. Printed "the each" retained.}
+% FIG 43 1012 282 1116 386
+\placeholder{graph}{Example 6A: square coordinate grid with x and y axes, origin O, grid spacing 2, labeled ticks -8,-4,4,8, window approximately [-10,10] on each axis. Solid blue vector from A at (0,0) to B at (7,9); dashed blue vector from A to B_1 at (-7,-9). Blue counterclockwise semicircular arrow around the origin labeled 180 degrees. Arrowheads at both vector terminal points.}
+\te{Callout: The magnitude of the image is the same and the direction is the opposite of the direction of the original vector.}
+\answer{A. (\langle-7,-9\rangle).}
+B. Reflect (\vec{CD}=\langle6,2\rangle) across the (x)-axis using matrices.
+The matrix that will reflect a vector across the (x)-axis will change each point ((x,y)) to ((x,-y)). The matrix that does this is (T=\begin{bmatrix}1&0\\0&-1\end{bmatrix}).
+(T\cdot\vec{CD}=\begin{bmatrix}1&0\\0&-1\end{bmatrix}\begin{bmatrix}6\\2\end{bmatrix}=\begin{bmatrix}6+0\\0+(-2)\end{bmatrix}=\begin{bmatrix}6\\-2\end{bmatrix})
+Notice that the effect of multiplying (\begin{bmatrix}6&2\end{bmatrix}) by the matrix (\begin{bmatrix}1&0\\0&-1\end{bmatrix}) is to multiply the second component of the vector by (-1). This results in another vector equal in magnitude, but reflected over the (x)-axis.
+\te{Printed row matrix in the explanation; likely the column vector used in the calculation is intended.}
+% FIG 43 1012 458 1116 560
+\placeholder{graph}{Example 6B: coordinate grid with x and y axes, origin O, unit grid spacing, x labels -2 and 4, y labels -2 and 2; window approximately x=-3 to 7 and y=-5 to 5. Solid red vector from C at the origin to D at (6,2); dashed red vector from C to D_1 at (6,-2), both with terminal arrowheads.}
+\te{Callout: The magnitude of the image is the same, but the direction of the vector is changed by a reflection across the x-axis.}
+\te{LOOK FOR RELATIONSHIPS Recall what you know about the effects of these transformations from Geometry. How does a reflection affect magnitude and direction?}
+\answer{B. (\langle6,-2\rangle).}
+\end{example}
+\begin{te-addendum}{6}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations ETP}
+Examples are available at SavvasRealize.com. Activity.
+PART A
+Q: How does rotating a vector (180^\circ) affect the component form of the vector?
+\answer{It changes the sign of both components.}
+Q: How does the matrix indicate that both components change signs?
+\answer{The matrix has (-1) on the main diagonal.}
+PART B
+Q: How does a reflection across the (x)-axis affect the component form of the vector?
+\answer{The x-component remains unchanged, while the sign of the y-component is changed.}
+Q: How does the matrix indicate that the (x)-component is unchanged but the (y)-component changes sign?
+\answer{The matrix has a 1 in the first row and a (-1) in the second row of the main diagonal.}
+\end{te-addendum}
+\begin{tryit}{6}
+a. Let (\vec{EF}=\langle5,10\rangle). How is (\vec{EF}) transformed when it is multiplied by the matrix (\begin{bmatrix}-1&0\\0&1\end{bmatrix})?
+b. How is (\vec{EF}) transformed when it is multiplied by the matrix (\begin{bmatrix}0&-1\\1&0\end{bmatrix})?
+\answer{a. reflected across y-axis; b. rotated (90^\circ) counterclockwise about the origin}
+\end{tryit}
+\begin{te-addendum}{6}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How are the values of the component form of the vector affected by the values in the matrix?
+\answer{The component changes sign if there is a (-1) in the same row of the matrix.}
+\te{Printed rule omits the position of the nonzero entry; for the rotation in Try It 6b, the components are also exchanged.}
+\end{te-addendum}
+\begin{te-addendum}{6}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 6
+Communicate Precisely How can a matrix and a vector be multiplied?
+\answer{A vector can also be written as a (2\times1) matrix, which allows for multiplication on the left by a (2\times2) matrix.}
+\end{te-addendum}
+% Source page 44: 505, Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Vectors}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+Q: When is the component form of the vector more useful than the magnitude and direction?
+\answer{When adding or subtracting vectors algebraically, using the component form is quicker and easier than adding or subtracting graphically using magnitude and direction.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Exercise 8 When calculating the direction of the vector, students may divide the components but forget to use the (\tan^{-1}) function to find the angle. Have students rewrite the equation to solve for tangent, so that they are looking for the angle whose tangent is defined by the vector components.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Vectors}
+WORDS
+A vector is a quantity that has both magnitude and direction.
+Vectors may be labeled as (\vec v) or (\vec{AB}).
+The components of a vector are (x) and (y), noted (\vec v=\langle x,y\rangle).
+GRAPH
+Magnitude (|\vec v|=\sqrt{x^2+y^2})
+Direction (\theta=\tan^{-1}(\frac{y_2-y_1}{x_2-x_1})=\tan^{-1}\frac yx)
+\te{Printed inverse-tangent formula needs a quadrant adjustment for vectors with negative x-component and a separate treatment when x=0.}
+% FIG 44 878 315 1018 433
+\placeholder{diagram}{Concept Summary vector v is a blue arrow rising rightward from A(x_1,y_1) to B(x_2,y_2). A dashed horizontal ray extends rightward from A. An orange angle arc theta lies between this horizontal ray and the vector.}
+OPERATIONS
+\begin{tabular}{lll}
+Scalar Multiplication & Addition & Subtraction \\
+For (\vec t=\langle c,d\rangle), (a\cdot\vec t=\langle a\cdot c,a\cdot d\rangle); (|a\cdot\vec t|=|a|\cdot|\vec t|) & For (\vec r=\langle j,k\rangle) and (\vec s=\langle m,n\rangle), (\vec r+\vec s=\langle j+m,k+n\rangle). & For (\vec r=\langle j,k\rangle) and (\vec s=\langle m,n\rangle), (\vec r-\vec s=\vec r+(-\vec s)=\langle j+(-m),k+(-n)\rangle), or (\vec r-\vec s=\langle j-m,k-n\rangle). \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How does including a direction with a quantity affect how you carry out operations on quantities?
+\answer{To perform arithmetic operations on vectors, you perform the operations to each of the components (the magnitude and direction) of the vector.}
+\te{Printed components described as magnitude and direction; likely x- and y-components are intended for componentwise addition and subtraction.}
+2. Error Analysis Drew says the sum of the vectors (\vec{AB}=\langle5,11\rangle) and (\vec{BC}=\langle2,-4\rangle) is (\vec{AC}=\langle7,13\rangle). Explain and correct Drew's error.
+\answer{She mistakenly added 11 and 2, rather than 11 and (-4); (\vec{AC}=\langle7,7\rangle)}
+3. Communicate Precisely Explain the process for vector subtraction.
+\answer{You add the opposite of the vector.}
+4. Look for Relationships Explain why you can use matrix multiplication to perform transformations on vectors.
+\answer{Since a vector can be represented as a (2\times1) matrix, its components can be transformed by matrix multiplication.}
+5. Reason A boat is at the origin and headed (60^\circ) north of west. In which quadrant is the vector representing the boat's movement?
+\answer{Quadrant II}
+\textbf{Do You KNOW HOW?}
+Write the component form of the vector, given its initial and terminal points.
+6. initial point ((6,2)); terminal point ((3,-5))
+\answer{(\langle-3,-7\rangle)}
+7. initial point ((4,-1)); terminal point ((-8,0))
+\answer{(\langle-12,1\rangle)}
+8. A vector has an initial point at ((6,13)) and a terminal point at ((3,2)). What is the vector in component form, and what are its magnitude and direction?
+\answer{(\langle-3,-11\rangle); magnitude (\approx11.4); direction (\approx254.7^\circ)}
+9. A vector has a direction of (235^\circ) and magnitude of 6. What is the component form of the vector? Express your answer to the nearest tenth of a unit.
+\answer{(\langle-3.4,-4.9\rangle)}
+10. Find (\vec{MN}+\vec{NO}) and (\vec{MN}-\vec{NO}) if (\vec{MN}=\langle6,10\rangle) and (\vec{NO}=\langle-3,0\rangle).
+\answer{sum (\langle3,10\rangle); difference (\langle9,10\rangle)}
+\end{concept-summary}
+% Source page 45: 506, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice & Problem Solving}
+Practice & Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+11--26, 29--37 & 11--19, 22--37 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 13, 15, 17--20, 35 & 1 \\
+1 & 14 & 2 \\
+2 & 21--23, 36 & 1 \\
+2 & 12, 32, 33 & 2 \\
+2 & 16 & 3 \\
+3 & 11, 24 & 1 \\
+3 & 34, 37 & 2 \\
+4 & 25--27 & 1 \\
+5 & 28--30 & 1 \\
+6 & 31 & 1 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{1}
+UNDERSTAND. Communicate Precisely Explain two ways in which you can find the magnitude of vectors.
+\answer{You can use the Distance Formula or the Pythagorean Theorem.}
+\end{practice}
+\begin{practice}{12}{2}
+UNDERSTAND. Error Analysis Describe and correct the error a student made in graphically adding the vectors (\vec{AB}=\langle2,5\rangle) and (\vec{BC}=\langle4,-1\rangle).
+% FIG 45 507 386 745 580
+\placeholder{graph}{Incorrect student vector addition on pale blue unit grid, x and y axes with arrows both ends, labels -4,-2,2,4 and origin O. Solid gray arrows from (0,0) to (2,5) and (4,-1); dashed arrow from (2,5) to (4,-1). Window approximately [-5,5] on both axes. Large red X marks the work incorrect.}
+\answer{Rather than placing the beginning of (\vec{BC}) at the terminal point of (\vec{AB}), the student placed it at the origin.}
+\end{practice}
+\begin{practice}{13}{1}
+UNDERSTAND. Generalize Why is the magnitude of a vector always represented by a positive value?
+\answer{Because the magnitude is the distance measure, it must be positive.}
+\te{Printed positive; likely nonnegative, since the zero vector has magnitude zero.}
+\end{practice}
+\begin{practice}{14}{2}
+UNDERSTAND. Construct Arguments Is (\vec{MN}) the same as (\vec{NM})? Justify your answer with an explanation.
+\answer{No; even though they have the same magnitude, their directions are opposites.}
+\end{practice}
+\begin{practice}{15}{1}
+UNDERSTAND. Make Sense and Persevere If (\vec{EF}=\langle-2,6\rangle), write the component form of a vector with the same magnitude but in the opposite direction.
+\answer{(\langle2,-6\rangle)}
+\end{practice}
+\begin{practice}{16}{3}
+UNDERSTAND. Higher Order Thinking The sum of two vector forces operating on an object gives the total net force on the object. Use the Law of Cosines to find the magnitude of (\vec v) when two forces of 15 and 22 kg act on a point (P) in the plane.
+% FIG 45 503 822 679 1023
+\placeholder{diagram}{Parallelogram of forces with lower-left vertex P. Blue arrows from P run up-left with magnitude 22 and right/slightly upward with magnitude 15. Dashed opposite sides are labeled 15 on top and 22 on right. Red resultant v runs from P to the opposite upper vertex. Interior angle at P is 100 degrees; interior lower-right angle is 80 degrees.}
+\answer{The magnitude of (\vec v) is approximately 24 kg.}
+\te{Printed force unit kg retained.}
+\end{practice}
+\begin{practice}{17}{1}
+PRACTICE. Write each vector in component form. Identify its magnitude and direction. SEE EXAMPLE 1
+initial point at ((9,5)); terminal point at ((4,3))
+\answer{(\langle-5,-2\rangle); magnitude (=\sqrt{29}\approx5.4); direction (\approx201.8^\circ)}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Write each vector in component form. Identify its magnitude and direction. SEE EXAMPLE 1
+initial point at ((0,6)); terminal point at ((-1,2))
+\answer{(\langle-1,-4\rangle); magnitude (=\sqrt{17}\approx4.1); direction (\approx256^\circ)}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. Write each vector in component form. Identify its magnitude and direction. SEE EXAMPLE 1
+initial point at ((0,0)); terminal point at ((7,3))
+\answer{(\langle7,3\rangle); magnitude (=\sqrt{58}\approx7.6); direction (\approx23.2^\circ)}
+\end{practice}
+\begin{practice}{20}{1}
+PRACTICE. Write each vector in component form. Identify its magnitude and direction. SEE EXAMPLE 1
+initial point at ((2,-2)); terminal point at ((1,8))
+\answer{(\langle-1,10\rangle); magnitude (=\sqrt{101}\approx10.05); direction (\approx-84.3^\circ) or (95.7^\circ)}
+\te{Printed -84.3 degrees describes the opposite direction; likely only 95.7 degrees is intended (or its coterminal angle -264.3 degrees).}
+\end{practice}
+\begin{practice}{21}{1}
+PRACTICE. Add each vector pair. SEE EXAMPLE 2
+(\vec{MN}=\langle12,4\rangle) and (\vec{NO}=\langle-5,0\rangle)
+\answer{(\langle7,4\rangle)}
+\end{practice}
+\begin{practice}{22}{1}
+PRACTICE. Add each vector pair. SEE EXAMPLE 2
+(\vec{MN}=\langle2,13\rangle) and (\vec{NO}=\langle-10,6\rangle)
+\answer{(\langle-8,19\rangle)}
+\end{practice}
+\begin{practice}{23}{1}
+PRACTICE. Add each vector pair. SEE EXAMPLE 2
+(\vec{MN}=\langle-7,10\rangle) and (\vec{NO}=\langle14,-9\rangle)
+\answer{(\langle7,1\rangle)}
+\end{practice}
+\begin{practice}{24}{1}
+PRACTICE. Yumiko is operating a boat across a river with engine speed set at 15 mph headed (45^\circ) south of west. The current of the river is 3 mph at a direction that is (45^\circ) east of south. What are the magnitude and direction of the path of her boat as she operates it across the river? SEE EXAMPLE 3
+\answer{The magnitude of her boat is about 15.3 mph in the direction of about (236.2^\circ).}
+\end{practice}
+\begin{practice}{25}{1}
+PRACTICE. Find the components, magnitude, and direction of (\vec s-\vec t) for each given vector pair. SEE EXAMPLE 4
+(\vec s=\langle6,5\rangle) and (\vec t=\langle-8,1\rangle)
+\answer{(\langle14,4\rangle); magnitude (\approx14.6); direction (\approx16.0^\circ)}
+\end{practice}
+\begin{practice}{26}{1}
+PRACTICE. Find the components, magnitude, and direction of (\vec s-\vec t) for each given vector pair. SEE EXAMPLE 4
+(\vec s=\langle-1,10\rangle) and (\vec t=\langle1,1\rangle)
+\answer{(\langle-2,9\rangle); magnitude (\approx9.2); direction (\approx102.5^\circ)}
+\end{practice}
+\begin{practice}{27}{1}
+PRACTICE. Find the components, magnitude, and direction of (\vec s-\vec t) for each given vector pair. SEE EXAMPLE 4
+(\vec s=\langle-3,7\rangle) and (\vec t=\langle0,0\rangle)
+\answer{(\langle-3,7\rangle); magnitude (\approx7.6); direction (\approx113.2^\circ)}
+\end{practice}
+\begin{practice}{28}{1}
+PRACTICE. Multiply each vector by the given scalar. SEE EXAMPLE 5
+(\vec t=\langle-7,-9\rangle); scalar (=4)
+\answer{(\langle-28,-36\rangle)}
+\end{practice}
+\begin{practice}{29}{1}
+PRACTICE. Multiply each vector by the given scalar. SEE EXAMPLE 5
+(\vec t=\langle4,12\rangle); scalar (=-6)
+\answer{(\langle-24,-72\rangle)}
+\end{practice}
+\begin{practice}{30}{1}
+PRACTICE. Multiply each vector by the given scalar. SEE EXAMPLE 5
+(\vec t=\langle6,-1\rangle); scalar (=2)
+\answer{(\langle12,-2\rangle)}
+\end{practice}
+\begin{practice}{31}{1}
+PRACTICE. (\vec{EF}=\langle8,4\rangle). How can you reflect (\vec{EF}) across the (y)-axis using matrices? SEE EXAMPLE 6
+\answer{Multiply (\vec{EF}=\langle8,4\rangle) by the matrix (\begin{bmatrix}-1&0\\0&1\end{bmatrix}) to get (\langle-8,4\rangle). (\langle-8,4\rangle) is the image of (\vec{EF}) after reflection across the y-axis.}
+\end{practice}
+\te{Printed page 506: See answers for Exercises 23--31 on the next page. Answers are placed with their items here.}
+% Source page 46: 507, Practice & Problem Solving continued
+\begin{practice}{32}{2}
+APPLY. Reason A ball is thrown with an initial speed of 20 mph in a direction that makes an angle of (30^\circ) with the positive (x)-axis. Express the velocity vector (\vec v) in terms of the horizontal movement along the (x)-axis (\vec{AP}) and the vertical movement along the (y)-axis (\vec{AQ}).
+\answer{horizontal: 17.3 mph; vertical: 10 mph}
+\end{practice}
+\begin{practice}{33}{2}
+APPLY. Model With Mathematics A plane is flying due south, but it is pushed off course by a crosswind blowing east. At 7 A.M. the plane is located at point (A), and at 8 A.M. the plane is located at point (C). The diagram below shows the movement of the plane and the coordinates of the locations.
+% FIG 46 562 492 655 566
+\placeholder{diagram}{Right triangle with A(0,0) at top left, B directly below A, and C(40,600) to the right of B. Black arrow A to B points down and is labeled 600; black arrow B to C points right and is labeled 40; red resultant arrow A to C points down and right.}
+a. What is the component form of vector (\vec{AC})?
+\answer{a. (\langle40,600\rangle)}
+b. What does each of the components of vector (\vec{AC}) represent?
+\answer{b. 40 represents the wind speed of 40 mph; 600 represents the plane speed of 600 mph.}
+c. Find and interpret the magnitude of (\vec{AC}).
+\answer{c. 601 mph represents the speed of the plane relative to the ground.}
+d. To what degree did the crosswind change the plane's original course?
+\answer{d. (3.8^\circ)}
+\te{Printed diagram and component answer take south as positive in the second coordinate.}
+\end{practice}
+\begin{practice}{34}{2}
+APPLY. Make Sense and Persevere You are pushing a 225 lb sofa on wheels onto a ramp that inclines (10^\circ). Find the component form and magnitude of the parallel force to determine how much force you need to apply to keep the sofa from rolling down the ramp.
+% FIG 46 559 792 825 969
+\placeholder{illustration}{Person pushes a purple sofa up a brown ramp into a moving truck. Ramp rises rightward at 10 degrees. Force diagram through sofa has vertical downward arrow, an arrow perpendicular down-right to the ramp, and an arrow parallel down-left to the ramp, with dashed component segments and a right-angle marker. The 10-degree label is near the angle between the vertical and the perpendicular direction below the sofa.}
+\answer{magnitude 39.1 lb; (\langle38.5,6.8\rangle)}
+\end{practice}
+\begin{practice}{35}{1}
+ASSESSMENT PRACTICE. Which of the following vectors have the same magnitude? Select all that apply.
+A.
+% FIG 46 883 313 993 423
+\placeholder{graph}{Choice A: square unit coordinate grid, x and y axes with arrows both ends, origin O, labeled ticks x=-2,2,4 and y=-2,2, window approximately x=-3 to 5 and y=-4 to 4. Red vector from labeled (4,1) to labeled (-2,-3), arrowhead at (-2,-3).}
+B.
+% FIG 46 1013 313 1125 423
+\placeholder{graph}{Choice B: same unit-grid axes and window as A. Red vector from closed point (2,3) to (4,1), both coordinates labeled; arrowhead at (4,1).}
+C.
+% FIG 46 883 437 994 548
+\placeholder{graph}{Choice C: same unit-grid axes and window as A. Red vector from closed point (-2,2) to (4,1), both coordinates labeled; arrowhead at (4,1).}
+D.
+% FIG 46 1013 437 1128 548
+\placeholder{graph}{Choice D: same unit-grid axes and window as A. Red vector from closed point (4,1) to (2,3), both coordinates labeled; arrowhead at (2,3).}
+\answer{B, D}
+\end{practice}
+\begin{practice}{36}{1}
+ASSESSMENT PRACTICE. SAT/ACT If (\vec s=\langle-2,8\rangle) and (\vec t=\langle7,11\rangle), find (\vec s+\vec t).
+A. (\langle-5,3\rangle)
+B. (\langle9,19\rangle)
+C. (\langle9,3\rangle)
+D. (\langle5,19\rangle)
+\answer{D}
+\end{practice}
+\begin{practice}{37}{2}
+ASSESSMENT PRACTICE. Performance Task Starting from her cabin, Marta hikes 2 mi east to a cove and then turns (60^\circ) toward the north to hike 6 mi to a waterfall. The component form, (\vec v), of Marta's hike to the cove is (\langle2,0\rangle). Let (\vec u) represent Marta's hike from the cove to the waterfall.
+% FIG 46 873 704 1132 870
+\placeholder{map}{Illustrated landscape with cabin at origin, cove near (2,0), waterfall near (5,5), river, hills and another building at right. Overlaid unit coordinate grid with x-axis labels -2, O, 2,4,6,8,10, and y-axis labels 2,4,6. Black connected segments from closed point (0,0) to closed point (2,0), then to closed point approximately (5,5); terminal point corresponds to (5,3 sqrt(3)) in the problem. Axes have arrowheads, window approximately x=-3 to13, y=-2 to8.}
+Part A Find the component form of (\vec u).
+\answer{Part A (\langle3,3\sqrt3\rangle)}
+Part B Use vector addition to find the component form of the vector that represents the straight distance from Marta's current location back to her cabin.
+\answer{Part B (\langle5,3\sqrt3\rangle)}
+\te{Printed positive vector points from the cabin to the waterfall; likely the vector back to the cabin should be (\langle-5,-3\sqrt3\rangle).}
+Part C Find Marta's actual straight distance from her cabin by finding the magnitude of the vector in part (b).
+\answer{Part C 7.2 mi}
+\end{practice}
+% Source page 47: 507A, Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & G53 \\
+2 & 2 & G53 \\
+3 & 1 & G53 \\
+4 & 1 & G53 \\
+5 & 2 & G53 \\
+\end{tabular}
+RtI Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{10-3 Lesson Quiz: Vectors}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. A vector has an initial point at ((2.1,2.1)) and a terminal point at ((4.5,7.8)). Complete the statements below with the correct numbers. Express your answers to the nearest tenth of a unit.
+The component form of the vector is (\langle\_,\_\rangle).
+The magnitude of the vector is about \_.
+The direction of the vector is about (\_^\circ).
+\answer{1. (\langle2.4,5.7\rangle); 6.2; (67.2^\circ).}
+2. Consider the vectors (\vec v=\langle1,6\rangle) and (\vec w=\langle0,-4\rangle). What is the magnitude of (\vec v+\vec w) expressed to the nearest tenth of a unit?
+A. 10.1
+B. 6.1
+C. 4.0
+D. 2.2
+\answer{2. D}
+3. The vector (\vec r=\langle2,3\rangle) is multiplied by the scalar (-4). Which statements about the components, magnitude, and direction of the scalar product (-4\vec r) are true? Select all that apply.
+A. The component form of (-4\vec r) is (\langle-8,-12\rangle).
+B. The magnitude of (-4\vec r) is 4 times the magnitude of (\vec r).
+C. The direction of (-4\vec r) is the same as the direction of (\vec r).
+D. The vector (-4\vec r) is in the fourth quadrant.
+E. The direction of (-4\vec r) is (180^\circ) greater than the inverse tangent of its components.
+\answer{3. A, B, E}
+4. Consider the vectors (\vec v=\langle3,-2\rangle) and (\vec w=\langle-6,10\rangle). What is (\vec v-\vec w)?
+(\vec v-\vec w=\langle\_,\_\rangle)
+\answer{4. (\langle9,-12\rangle)}
+5. A plane is set to fly due north, but it is pushed off course by a crosswind blowing west. At 1 P.M. the plane is located at point (A) and at 2 P.M. the plane is located at point (C), as shown in the diagram. In what direction and at what speed is the plane traveling?
+% FIG 47 1030 672 1118 796
+\placeholder{diagram}{Thin right triangle with A(20,20) at lower right, B directly above A, and C(-30,520) left of B. Vertical arrow A to B points up, labeled 500; horizontal arrow B to C points left, labeled 50. Diagonal arrow A to C points up and left.}
+A. about (5.7^\circ) west of north at approximately 500.1 mph
+B. about (5.7^\circ) west of north at approximately 502.5 mph
+C. about (84.3^\circ) west of north at approximately 500.1 mph
+D. about (84.3^\circ) west of north at approximately 502.5 mph
+\answer{5. B}
+\te{enVision Algebra 2 • Assessment Sourcebook. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+% Source page 48: 507B, Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES. I = Intervention; O = On-Level; A = Advanced}
+\textbf{Reteach to Build Understanding. I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{10-3 Reteach to Build Understanding. Vectors}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. Given vectors (\vec s=\langle2,4\rangle) and (\vec t=\langle3,5\rangle), complete the table to calculate the difference, directional difference, and magnitude.
+\begin{tabular}{lllll}
+ & (\vec s=\langle x,y\rangle), (\vec t=\langle x,y\rangle) & (\vec s-\vec t) & Directional Difference & Magnitude \\
+Algebra & (\vec s=\langle x_1,y_1\rangle), (\vec t=\langle x_2,y_2\rangle) & (\langle x_1-x_2,y_1-y_2\rangle) & (\theta=\tan^{-1}(\frac{y_1-y_2}{x_1-x_2})) & (\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}) \\
+Numbers & (\vec s=\langle\_,\_\rangle), (\vec t=\langle\_,\_\rangle) \answer{(\vec s=\langle2,4\rangle), (\vec t=\langle3,5\rangle)} & (\langle2-3,4-5\rangle), (\langle\_,\_\rangle) \answer{(\langle-1,-1\rangle)} & (\theta=\tan^{-1}(\frac{4-5}{2-3})=\tan^{-1}(\frac{-1}{-1})), (\tan^{-1}1=\_) \answer{(45^\circ)} & (\sqrt{(2-3)^2+(4-5)^2}), (\sqrt{(-1)^2+(-1)^2}), (\sqrt{1+1}=\sqrt{\_}) \answer{2} \\
+\end{tabular}
+\te{Printed 45 degrees for the difference vector (-1,-1); likely 225 degrees is intended after quadrant adjustment.}
+2. Inés determined that the direction of (\vec r=\langle-2,4\rangle) is approximately (27^\circ). What errors did she make? What is the direction of (\vec r)?
+(\theta=\tan^{-1}(\frac{-2}{4}))
+(\theta=\tan^{-1}(\frac12))
+(\theta\approx27^\circ)
+\answer{Sample: Inés wrote (\frac xy) instead of (\frac yx). She also forgot the negative sign when simplifying. She should have solved for (\theta=\tan^{-1}(\frac4{-2})), which is about (-63^\circ). Since the x-coordinate is negative and the y-coordinate is positive, the correct angle is (180-63=117^\circ).}
+3. Suppose (\vec v=\langle4,-6\rangle), and (\vec v) is multiplied by a scalar of 4. Write the component form, magnitude, and direction of the resultant vector.
+Component Form:
+(4\cdot\vec v=4\cdot\langle4,-6\rangle=\langle\_\cdot4,4\cdot(\_)\rangle=\langle\_,\_\rangle)
+\answer{(4\cdot\vec v=4\cdot\langle4,-6\rangle=\langle4\cdot4,4\cdot(-6)\rangle=\langle16,-24\rangle)}
+Magnitude:
+(4|\vec v|=\_\sqrt{(4)^2+(-6)^2}=\_\sqrt{16+36}=4\sqrt{\_}=\_(7.2)\approx\_)
+\answer{(4|\vec v|=4\sqrt{(4)^2+(-6)^2}=4\sqrt{16+36}=4\sqrt{52}=4(7.2)\approx28.8)}
+Direction:
+(\theta=\tan^{-1}(\frac{-24}{16}))
+(\theta=\tan^{-1}(\frac{-3}{2}))
+(\theta\approx\_)
+\answer{(-56.3^\circ)}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice. I O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{10-3 Additional Practice. Vectors}
+Name. enVision Algebra 2. SavvasRealize.com.
+Write each vector in component form. Identify its magnitude and direction.
+1. initial point ((4,6)); terminal point ((-2,3))
+\answer{(\langle-6,-3\rangle), about 6.7, about (206.6^\circ)}
+2. initial point ((-5,8)); terminal point ((4,-1))
+\answer{(\langle9,-9\rangle), about 12.7, (-45^\circ)}
+Add each vector pair.
+3. (\vec{MN}=\langle10,5\rangle) and (\vec{NO}=\langle-2,5\rangle)
+\answer{(\langle8,10\rangle)}
+4. (\vec{MN}=\langle-3,7\rangle) and (\vec{NO}=\langle-1,-2\rangle)
+\answer{(\langle-4,5\rangle)}
+Find the components, magnitude, and direction of (\vec s-\vec t) for each given vector pair. Round to the nearest hundredth.
+5. (\vec s=\langle2,-6\rangle), (\vec t=\langle-1,4\rangle)
+\answer{(\langle3,-10\rangle), 10.44, (-73.30^\circ)}
+6. (\vec s=\langle4,7\rangle), (\vec t=\langle0,-1\rangle)
+\answer{(\langle4,8\rangle), 8.94, (63.43^\circ)}
+Multiply each vector by the given scalar. Find the components, magnitude, and direction. Round to the nearest hundredth.
+7. (\vec t=\langle2,3\rangle); scalar (=8)
+\answer{(\langle16,24\rangle), 28.84, (56.31^\circ)}
+8. (\vec t=\langle-4,8\rangle); scalar (=6)
+\answer{(\langle-24,48\rangle), 53.67, (116.57^\circ)}
+9. Reflect (\vec{EF}=\langle5,3\rangle) across the (x)-axis using a matrix.
+\answer{(T\cdot\vec{EF}=\begin{bmatrix}1&0\\0&-1\end{bmatrix}\begin{bmatrix}5\\3\end{bmatrix}=\begin{bmatrix}5+0\\0+(-3)\end{bmatrix}=\begin{bmatrix}5\\-3\end{bmatrix})}
+10. Reflect (\vec{GH}=\langle2,1\rangle) across the (y)-axis using matrices.
+\answer{(T\cdot\vec{GH}=\begin{bmatrix}-1&0\\0&1\end{bmatrix}\begin{bmatrix}-2\\1\end{bmatrix}=\begin{bmatrix}2+0\\0+1\end{bmatrix}=\begin{bmatrix}2\\1\end{bmatrix})}
+\te{Printed answer uses (-2,1) as the original vector, while the prompt gives (2,1); likely the reflected answer should be (-2,1).}
+11. Emelia is paddling a kayak in the ocean at 5 mph headed (20^\circ) north of west. The current of the ocean is 3 mph at a direction that is (20^\circ) east of south. What are the magnitude and direction of the path of her kayak as she paddles across the ocean?
+\answer{3.83 mph; (196.8^\circ) or (16.8^\circ) south of west}
+12. Describe how the magnitude and the direction of (\vec t=\langle x,y\rangle) is affected when (\vec t) is multiplied by a scalar of (z), a scalar of (-z)?
+\answer{The magnitude for (z\cdot\vec t) increases by a factor of z, while the direction remains the same. The magnitude of (-z\cdot\vec t) increases by a factor of (|-z|), or z. The direction of (-z\cdot\vec t) would be the direction of (\vec t+180^\circ).}
+\te{Printed explanation assumes z positive; magnitude decreases when 0<z<1, and the statement about direction does not apply to the zero vector.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment. O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{10-3 Enrichment. Vectors}
+Name. enVision Algebra 2. SavvasRealize.com.
+Complete the table for each operation listed. Round your answers to the nearest tenth.
+(\vec r=\langle125,325\rangle)
+(\vec s=\langle-67.58,49.64\rangle)
+(\vec t=\langle-45.3,-84.6\rangle)
+(\vec u=\langle102,-59.7\rangle)
+(\vec w=\langle-264.78,22.26\rangle)
+\begin{tabular}{llll}
+ & Vector in Component Form & Direction of Vector & Magnitude of Vector \\
+(\vec v=30(\vec r+\vec s)) & \answer{(\langle1,722.6,11,239.2\rangle)} & \answer{(81.3^\circ)} & \answer{11,370.4} \\
+(\vec v=100(\vec r-\vec t)) & \answer{(\langle17,030,40,960\rangle)} & \answer{(67.4^\circ)} & \answer{44,359.2} \\
+(\vec v=-0.9(\uncertain{\vec s+\vec u}{\vec t+\vec u})) & \answer{(\langle-31.0,9.1\rangle)} & \answer{(163.7^\circ)} & \answer{32.3} \\
+(\vec v=-12(\uncertain{\vec u+\vec w}{\vec r+\vec w})) & \answer{(\langle1,953.4,449.3\rangle)} & \answer{(12.9^\circ)} & \answer{2,004.4} \\
+(\vec v=100(\vec w-\vec t)) & \answer{(\langle-21,948,10,686\rangle)} & \answer{(154.0^\circ)} & \answer{24,411.2} \\
+\end{tabular}
+\te{Commas inside large vector components are printed thousands separators. Two degraded vector labels in the operation column remain uncertain after enlarged inspection.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary. I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{10-3 Mathematical Literacy and Vocabulary. Vectors}
+Name. enVision Algebra 2. SavvasRealize.com.
+A plane was heading south when the wind began blowing east. At 11 A.M., the plane is at point ((115,170)) and at noon it is at ((220,80)). What direction is the plane heading? How fast is it traveling in that direction?
+There are two sets of note cards that show how to find the solution of this problem. The set on the left explains the thinking process. The set on the right shows the steps. Write the thinking process and the steps in the correct order.
+\begin{tabular}{ll}
+Think Cards & Write Cards \\
+Write the differences in component form. & (\langle105,-90\rangle) \\
+Use the distance formula to calculate the magnitude. & (220-115=105); (80-170=-90) \\
+Find the differences between the x- and y-coordinates. & (\sqrt{105^2+90^2}=\sqrt{11,025+8,100}); (\sqrt{19,125}\approx138\text{ mph}) \\
+Solve for the angle in order to determine the direction of the plane. & (\theta=\tan^{-1}(\frac{-90}{105})\approx-41^\circ) \\
+\end{tabular}
+\begin{tabular}{ll}
+First, \answer{find the differences between the x- and y-coordinates.} & Step 1 \answer{(220-115=105); (80-170=-90)} \\
+Second, \answer{write the differences in component form.} & Step 2 \answer{(\langle105,-90\rangle)} \\
+Third, \answer{solve for the angle in order to determine the direction of the plane.} & Step 3 \answer{(\theta=\tan^{-1}(\frac{-90}{105})\approx-41^\circ)} \\
+Finally, \answer{use the distance formula to calculate the magnitude.} & Step 4 \answer{(\sqrt{105^2+90^2}=\sqrt{11,025+8,100}); (\sqrt{19,125}\approx138\text{ mph})} \\
+\end{tabular}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital preview: Exit. Solve the system of equations by graphing. (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Question Help. Help Me Solve This. View an Example. Video. Textbook. Glossary. Math Tools. Print. Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining. Clear All. Check Answer. Review progress. Question 5 of 14. Go. Back. Next.}
+% FIG 48 617 980 1065 1297
+\placeholder{illustration}{Black tablet showing digital graphing exercise y=3x+4 and y=-2x+4. Blank coordinate grid x and y -10 to 10 with unit grid and numeric labels every 2, arrowheads on positive axes, origin at center. Question Help dropdown overlays upper right; menu Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Bottom controls include 1 part remaining, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\end{te-addendum}
+
+
+\end{document}

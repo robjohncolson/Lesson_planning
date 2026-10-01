@@ -1,0 +1,879 @@
+\documentclass{article}
+% Source: Topic_11_Teacher_Edition.pdf, PDF pages 46-57 (printed pages 553A-560B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 46: 553A Lesson Overview
+\begin{lesson-meta}
+lesson: 11-4
+title: Normal Distributions
+standards: none printed
+practices: none printed
+objective: I can understand where a data value falls in relation to other values in a normal distribution.
+
+essential question: How can you use the normal distribution to explain where data values fall within a population?
+
+\textbf{VOCABULARY}
+\item percentile
+\item standard normal distribution
+\item z-score
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 11-4 \\
+Title & Normal Distributions \\
+Standards & none printed \\
+I CAN Objective & I can understand where a data value falls in relation to other values in a normal distribution. \\
+Essential Question & How can you use the normal distribution to explain where data values fall within a population? \\
+Lesson Vocabulary & percentile; standard normal distribution; z-score \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+• Fit a normal distribution to data.
+• Compare and evaluate data values using z-scores.
+• Use technology to calculate the area under the standard normal distribution curve.
+Essential Understanding. The normal distribution is used to explain where data values fall within a population. The standard normal distribution allows for a comparison of values across different population distributions.
+\textbf{COHERENCE}
+Previously in this course, students:
+• Determined if the distribution of a data set is normal or skewed.
+In this lesson, students:
+• Fit a normal distribution to data and use it to understand where a data value falls in relation to other values.
+Later in this topic, students will:
+• Use sample statistics, which tend to be normally distributed, to estimate population parameters.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+• Students understand that normal distributions can be used to compare data values that cannot be compared directly by comparing their relative position within each distribution.
+• Students apply a normal distribution to evaluate real-world data, such as comparing a score on the SAT test to a score on the ACT test.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+normal distribution & distribución normal \\
+standard deviation & desviación típica \\
+\end{tabular}
+\textbf{NEW VOCABULARY}
+\begin{tabular}{ll}
+percentile & percentile \\
+standard normal distribution & distribución normal estándar \\
+z-score & puntaje z \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Review the terms normal distribution and standard deviation. Have students brainstorm a list of the mathematical terms that they have used that include standard as part of the term. Then introduce the term standard normal distribution and have students answer the multiple-choice questions shown.
+1. What is the mean of the standard normal distribution?
+a. 0; b. 1; c. 5; d. 10
+\answer{a. 0}
+2. What is the standard deviation of the standard normal distribution?
+a. 0; b. 1; c. 5; d. 10
+\answer{b. 1}
+\te{Printed Spanish percentile; likely percentil.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 46 963 792 1114 971
+\placeholder{illustration}{Student Companion cover with multicolored abstract circular design on black; enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students learn to use normal distributions in real-world situations. They use the Empirical Rule and z-scores to compare data and to solve problems.
+\textbf{Applying Math Practices}
+Use Appropriate Tools Strategically
+Students use tools appropriately when they consider an accurate sketch of the normal distribution of SAT math scores to determine whether the distribution is normal and the Empirical Rule applies.
+Look For and Make Use of Structure
+Students look for the overall structure in the mathematics when they compare a normal distribution to the standard normal distribution.
+\end{te-addendum}
+% Source page 47: 553B Explore & Reason
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore — EXPLORE & REASON}
+INSTRUCTIONAL FOCUS Students explore the shape of two distributions, compare the shapes, and interpret the standard deviation and the mean. This leads students to find and compare the percentage of data that falls within a certain number of standard deviations of the mean.
+STUDENT COMPANION Students can complete the Explore & Reason activity in their Student Companion.
+Explore & Reason is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before — WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving
+Q: What do you notice about the histograms?
+\answer{The histograms of the fruit production data both appear to have a normal distribution.}
+\textbf{During — SMALL GROUP}
+Support Productive Struggle in Learning Mathematics
+Q: How do the estimated mean, median, and mode of histograms with normal distributions relate to each other?
+\answer{The mean, median, and mode are all about the same for histograms with normal distributions.}
+For Early Finishers
+Q: Draw both histograms as graphs with normal distributions. Label the mean and 1 standard deviation from the mean appropriately.
+\answer{Check students' graphs.}
+\textbf{After — WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse
+Q: How can you compare the data values of the two histograms?
+\answer{The histograms' shapes look similar, so you can interpret and place the data values relative to each mean and standard deviation.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Reason — Use with EXPLORE & REASON}
+Could you calculate an exact value for the mean and standard deviation for either of the distributions? Explain.
+\answer{No, the distributions show only the frequencies within a range of data values, not each specific data value.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE & REASON}
+The owner of an apple orchard and the owner of an orange grove create histograms to display fruit production data.
+% FIG 47 806 670 963 788
+\placeholder{graph}{Apple Orchard Yield per Tree histogram filled with orchard photograph. Horizontal Number of Apples boundaries 600,900,1200,1500,1800,2100,2400,2700,3000. Vertical Number of Trees labels 0 to 18 every 2. Approximate bar heights 2,8,11,17,14,10,6,4. No arrows.}
+mean = 1,750; standard deviation = 296
+% FIG 47 970 670 1129 788
+\placeholder{graph}{Orange Grove Yield per Tree histogram filled with orange-tree photograph. Horizontal Number of Oranges boundaries 0,50,100,150,200,250,300,350,400. Vertical Number of Trees labels 0 to 30 every 5. Approximate bar heights 3,10,15,25,27,18,12,6. No arrows.}
+mean = 210; standard deviation = 47
+A. Describe the shape of each distribution. Discuss how the distributions are alike and how they are different.
+\answer{Each histogram shows an approximately normal distribution. The measure of center and spread are different, but the overall shape is the same.}
+B. Use Structure Explain how you could estimate the mean from the graphs. The standard deviation measures spread from the mean. Which data values are within a standard deviation of the mean on each graph?
+\answer{Since these are normal distributions, estimate the mean on the graph by locating the midpoint of the tallest bar. On each graph, the data values in the three tallest bar fall within one standard deviation of the mean.}
+\te{Printed three tallest bar; likely bars. The stated intervals within one standard deviation are 1454–2046 apples and 163–257 oranges, which do not contain all values in the three tallest bars.}
+% FIG 47 637 186 1153 534
+\placeholder{illustration}{Digital Explore & Reason preview repeats the two fruit-yield histograms, their means and standard deviations, and question A with an answer-entry field.}
+\end{model-discuss}
+% Source page 48: 553 The Empirical Rule
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand & Apply — INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning
+Students learn that there is a special property called the Empirical Rule for a normal distribution. Students can use the mean, standard deviations from the mean, and the z-scores to compare data and explain where data falls within a population.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{PurposefulQuestions}
+\textbf{CONCEPT The Empirical Rule — Pose Purposeful Questions}
+Q: How can just the mean and standard deviation determine the approximate percentage of data values that fall in a given interval in a normal distribution?
+\answer{The standard deviation tells how far from the mean the data values fall. Each standard deviation coincides with a percentage.}
+Q: Does the Empirical Rule apply to any kind of distribution?
+\answer{No; the Empirical Rule only applies to normal distributions. The Empirical Rule refers to the data values that fall within three standard deviations of the mean. If most of the data values do not fall within three standard deviations, then the distribution is not normal.}
+Q: What is the percentage of the area that falls outside of one deviation?
+\answer{32\%, since 68\% of all values fall within one standard deviation.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{The Empirical Rule}
+The normal distribution has a special property called The Empirical Rule. The approximate percentage of data values falling in any interval of the range of the data can be determined using just the mean and the standard deviation.
+% FIG 48 955 290 1158 433
+\placeholder{graph}{Red normal curve with peak at mu over a rectangular grid. Horizontal labels mu-4sigma, mu-2sigma, mu, mu+2sigma, mu+4sigma, vertical grid lines every sigma and no vertical numbers. Blue shading within one sigma, pale green between one and two sigma, pink between two and three sigma. Braces below span mu±sigma labeled 68 percent, mu±2sigma labeled 95 percent, and mu±3sigma labeled 99.7 percent. No arrows.}
+\te{Callout: For a population, the mean is denoted by (\mu) and the standard deviation by (\sigma).}
+How far from the mean does a value in a normal distribution fall?
+• About 68\% of all values fall within 1 standard deviation.
+• About 95\% of all values fall within 2 standard deviations.
+• About 99.7\% of all values fall within 3 standard deviations.
+\te{Callout: The rule applies only to normal distributions.}
+\end{concept-box}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Example 2}
+Additional Examples are available at SavvasRealize.com.
+Use the graph to determine a range of weights that contain 47.5\% of all dogs' weights.
+% FIG 48 409 921 544 1013
+\placeholder{graph}{Distribution of Dogs' Weights (lb): red normal curve with peak at 65, horizontal labels 50,55,60,65,70,75,80. Vertical guides at each tick, solid guides at 60,65,70; no vertical scale or arrows.}
+The Empirical Rule says that 95\% of the data fall between 2 standard deviations below the mean and 2 standard deviations above the mean.
+So 47.5\% of the data fall between the mean and 2 standard deviations above the mean, or between 65 and 75 pounds.
+Similarly, 47.5\% of the data fall between the mean and 2 standard deviations below the mean, or between 55 and 65 pounds.
+\answer{between 65 and 75 pounds; or between 55 and 65 pounds.}
+Example 2 Students use a graph to find the range of values when given a percentage of all values.
+Q: Is there only one range that has the percentage provided?
+\answer{There is more than one range that fits the percentage. As long as half of 1 standard deviation and half of the amount between 1 and 2 standard deviations from the mean are included, the range can be above or below the mean.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Example 3}
+Keith's score in the card game of Hearts is 99 while Bruce's score in the card game of Five Crowns is 229. The z-score for both players is 1.3, but the standard deviation in Hearts is 6 and the standard deviation in Five Crowns is 16. Compare the means of each game.
+(\frac{\text{data value}-\text{mean}}{\text{standard deviation}}=z)
+Keith:
+(\frac{99-\text{mean}}{6}=1.3)
+(99-\text{mean}=7.8)
+(-\text{mean}=-91.2)
+(\text{mean}=91.2)
+Bruce:
+(\frac{229-\text{mean}}{16}=1.3)
+(229-\text{mean}=20.8)
+(-\text{mean}=-208.2)
+(\text{mean}=208.2)
+\answer{Keith's mean for Hearts is less than Bruce's mean for Five Crowns.}
+Example 3 Have students calculate the means of different data with the same z-score in this additional example.
+Q: How can the z-scores be the same but the mean, standard deviation, and data values be different?
+\answer{The proportions are the same or equal, but the data value and mean in the numerator and the standard deviation in the denominator of each z-score is different.}
+Q: Who is scoring better in their card game?
+\answer{Neither since the z-scores are the same.}
+\end{te-addendum}
+% Source page 49: 554 Example 1
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Find Population Intervals — Pose Purposeful Questions}
+PART A
+Q: How are the standard deviation and the mean useful when determining the range of chest circumferences that fall within 68\%?
+\answer{The Empirical Rule states 68\% of all values in a normal distribution fall within one standard deviation of the mean. One standard deviation in this study is 2 in. from the mean in either direction.}
+Q: What do you notice about the curve at one standard deviation from the mean?
+\answer{The curve changes direction—from opening upward to downward on the left side of the mean, and from opening downward to upward on the right side of the mean.}
+PART B
+Q: Do you know the upper and lower boundary values for the whole population in this study? Explain.
+\answer{No; the Empirical Rule covers 99.7\% of the values and does not cover the last 0.3\%.}
+Q: How do you find the remaining data values when you know the smallest 2.5\% and the largest 2.5\% of a normal distribution?
+\answer{After subtracting 5\% from 100\%, 95\% remains. 95\% of all values in a normal distribution fall within 2 standard deviations of the mean.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Find Population Intervals}
+An example of an early application of statistics was in the year 1817. A study of chest circumference among a group of Scottish men exhibited an approximately normal distribution. Their chest circumferences ranged from 33 to 48 in., with a mean chest measurement of 40 in. and a standard deviation of 2 in. Use the Empirical Rule to help you understand the distribution of chest circumferences in the study.
+A. What range of chest measurements contains the 68\% which fall closest to the mean?
+To draw the graph, first draw the horizontal axis. Draw the “bell curve” of the normal distribution and add the labels to the axis with the mean at the center. Count by the standard deviation to each end of the curve.
+% FIG 49 866 392 1027 504
+\placeholder{graph}{Distribution of Chest Circumferences. Red symmetric bell curve peaks at 40; horizontal labels 34,36,38,40,42,44,46 with vertical guides every 2. Blue area between 38 and 42, pale green between 36–38 and 42–44, pink tails. 38 and 42 circled green; sigma=2 below 40. No vertical scale or arrows.}
+\te{Callout: The curve peaks at the mean.}
+\te{Callout: The Empirical Rule is sometimes called the 68-95-99.7 Rule.}
+\te{Callout: Each vertical bar represents 1 standard deviation.}
+\te{Callout: Here, the mean (\mu=40) and the standard deviation (\sigma=2).}
+\te{LOOK FOR RELATIONSHIPS One standard deviation from the mean is where the curve changes from opening upward to downward (left of mean), and from opening downward to upward (right of mean).}
+You would expect approximately 68\% of the men in the population had chest measurements between 38 and 42 in.
+\answer{A. between 38 and 42 in.}
+B. What would you expect the chest measurements to be for the 2.5\% of the men with the smallest chest measurements in the population?
+% FIG 49 953 611 1113 718
+\placeholder{graph}{Distribution of Chest Circumferences. Red normal curve centered at 40; horizontal labels 34,36,38,40,42,44,46, vertical guides every 2. Blue area between 36 and 44; pink tails. 36 and 44 circled purple. No vertical scale or arrows.}
+\te{Callout: The question asks for the smallest 2.5\% of measurements. The symmetry of the curve means that the largest 2.5\% of measurements will be equally far from the mean.}
+\te{Callout: After subtracting 5\%, 95\% remains. The Empirical Rule says that 95\% of all values in a normal distribution fall within 2 standard deviations of the mean.}
+\te{STUDY TIP You won't know the upper and lower boundary values for a whole population in a study just by knowing (\mu) and (\sigma). The Empirical Rule only covers 99.7\% of the values, not the farthest 0.3\% from the mean.}
+You would expect 2.5\% of the men in the population to have chests measuring less than 36 in.
+\answer{B. less than 36 in.}
+\end{example}
+\begin{te-addendum}{1}{ELLAddendum}
+\textbf{English Language Learners — Use with EXAMPLE 1}
+WRITING BEGINNING It is important that students understand the Empirical Rule in statistics. Have students write what they already know about the Empirical Rule in their journals. Then have students complete the following sentences to enhance their understanding of this important rule.
+Q: 68\% of the data falls between the mean minus one standard deviation and the mean \underline{\hspace{1cm}}.
+\answer{plus one standard deviation.}
+Q: The Empirical Rule is only applicable when the distribution is \underline{\hspace{1cm}}.
+\answer{normal}
+Q: 95\% of all values fall within \underline{\hspace{1cm}}.
+\answer{2 standard deviations of the mean}
+SPEAKING DEVELOPING The data collected are the circumferences of the chests of a group of Scottish men. Students may only think of circumference with respect to a two-dimensional circle. With a partner, have students discuss the following questions.
+Q: What is the formula for the circumference of a circle?
+\answer{(C=\pi d) or (C=2\pi r)}
+Q: Do you think the researchers used the formula to find the chest circumferences?
+\answer{No, they likely measured around the men's chests using a measuring tape.}
+Q: What would be a reason to measure chest circumferences?
+\answer{to make clothing in sizes that fit correctly}
+LISTENING EXPANDING Display different definitions for application and read them aloud as students listen.
+1) a form or request for employment or other purposes; 2) the action of putting to a special use or purpose; 3) the action of putting something on a surface
+Read the following sentences and have students determine which definition is used.
+Q: The application of the cream helped the patient with her poison ivy.
+\answer{3}
+Q: Dominique was annoyed by the lengthiness of the loan application.
+\answer{1}
+Q: Which definition of application is used in the sentence?
+\answer{2; The study used the Empirical Rule to analyze data.}
+\end{te-addendum}
+% Source page 50: 555 Try It 1 and Example 2
+\begin{tryit}{1}
+\te{Printed header EXAMPLE 2 CONTINUED; this Try It continues Example 1.}
+a. What would you expect to be the smallest and largest chest measurements of the “middle” 95\% of the men?
+\answer{a. 36 inches and 44 inches}
+b. What would you expect to be the measurements of the 16\% of the men with the largest chests in the population?
+\answer{b. greater than 42 inches}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How do you know whether the measurements are referring to values below, above, or somewhere near the mean?
+\answer{The smallest chest measurements refer to the left side of the mean. The middle chest measurements refer to the values closest to the mean. The largest chest measurements refer to the right side of the mean.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Use The Empirical Rule — Pose Purposeful Questions}
+PART A
+Q: How do you compute the numbers for the horizontal scale of the normal distribution graph?
+\answer{Add (\pm121) to the mean score of 508 to calculate the scores that are one standard deviation from the mean. Then add (\pm2(121)) to calculate the scores that are two standard deviations from the mean and add (\pm3(121)) to calculate the scores that are three standard deviations from the mean.}
+PART B
+Q: Why do you begin solving this problem with subtraction?
+\answer{Since you already know 387 is one standard deviation from the mean and you know that 68\% of scores are within one standard deviation of the mean, you subtract 68\% from 100\% to find the percentage of scores not within one standard deviation of the mean.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Use The Empirical Rule}
+Recent SAT scores for college-bound seniors are normally distributed with mean score 508 and standard deviation 121. How does the Empirical Rule help you understand the performances of individual students?
+A. What proportion of students received scores between 387 and 629?
+Sketch the graph to see where the numbers 387 and 629 fall in terms of the distribution.
+% FIG 50 851 415 1038 514
+\placeholder{graph}{Distribution of SAT Math Scores. Blue normal curve peaks at 508; horizontal labels 145,266,387,508,629,750,871 with vertical guides, no vertical scale or axis arrows. Curved blue arrows labeled sigma extend from 508 to circled 387 and 629.}
+\te{Callout: When you compute the numbers for the horizontal scale, 387 and 629 are each 1 standard deviation from the mean.}
+According to the Empirical Rule, 68\% of scores are within 1 standard deviation of the mean. That means that approximately 68\% of students received SAT Math scores between 387 and 629.
+\answer{A. approximately 68\%.}
+B. What proportion of students received scores greater than 387?
+% FIG 50 851 574 1038 672
+\placeholder{graph}{Distribution of SAT Math Scores. Blue normal curve centered at 508; horizontal labels 145,266,387,508,629,750,871. Solid vertical segments at 387 and 629 enclose region labeled 68 percent; left and right tails labeled 16 percent each. No vertical scale or axis arrows.}
+\te{Callout: 100\% − 68\% = 32\% of students earned scores either greater than 629 or less than 387.}
+\te{Callout: The symmetry of the curve means half, or 16\%, of the remaining 32\% of scores are greater than 629, and half are less than 387.}
+\te{USE APPROPRIATE TOOLS Consulting an accurate sketch of the distribution under consideration will help tell you determine whether the Empirical Rule applies.}
+\te{Printed help tell you determine; likely help you determine.}
+So 68\% + 16\% = 84\% of students received scores greater than 387.
+\answer{B. 84\%.}
+\end{example}
+\begin{tryit}{2}
+Find the proportion of students who earned SAT Math scores in the following ranges.
+a. between 266 and 750
+\answer{a. 95\%}
+b. between 266 and 629
+\answer{b. 81.5\%}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{Use Structure — Use with EXAMPLES 1 \& 2}
+A set of data is normally distributed with a mean of 80 and a standard deviation of 10. How do you use the symmetry of the distribution to find the percentage of the values that lie between 80 and 90? Explain.
+\answer{According to the Empirical Rule, 68\% of the data lie between 70 and 90. Because the distribution is symmetric about the mean, half of 68\% of values, or 34\%, lie between 80 and 90.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What does it mean that 95\% of the data values in a normal distribution fall within 2 standard deviations of the mean?
+\answer{It means that approximately 95\% of students received SAT Math scores between 266 and 750.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Try It! 2}
+Some students may think 95\% of students earned SAT Math scores between 266 and 629 because 266 falls within two standard deviations of the mean. Have students highlight between 266 and 629 on the graph to help them recognize that 629 is only one standard deviation above the mean.
+\end{te-addendum}
+% Source page 51: 556 Example 3
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Compare Values Using z-Scores — Build Procedural Fluency from Conceptual Understanding}
+Q: How can you compare scores on different scales?
+\answer{Since you cannot compare the scores directly, you can compare the relative position on the bell curve by finding how many standard deviations above or below the mean the scores fall.}
+Q: How can z-scores tell you how many standard deviations a data value is from the mean?
+\answer{The z-scores describe the fractional numbers of standard deviations from the mean. The z-scores divide the difference between the data value and the mean by the distance of a standard deviation.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Compare Values Using z-Scores}
+CONCEPTUAL UNDERSTANDING
+Ella and Alida are comparing scores on their college entrance exams. Ella's SAT score is 1380. Alida's ACT score is 32. The mean SAT score is 1000 with a standard deviation of 200. The mean ACT score is 21 with a standard deviation of 5. Who has the better score?
+You cannot compare their scores directly, but you can compare their relative position within each distribution.
+% FIG 51 800 322 954 408
+\placeholder{graph}{Distribution of SAT Scores. Red normal curve centered at 1000; horizontal labels 400,600,800,1000,1200,1400,1600. Red vertical at mean and short marker near 1380. Vertical guides, no vertical scale or arrows.}
+Ella's score is less than 2 standard deviations greater than the mean.
+% FIG 51 961 322 1111 408
+\placeholder{graph}{Distribution of ACT Scores. Blue normal curve centered at 21; horizontal labels 0,5,10,15,20,25,30,35,40. Blue vertical at 21, short marker near 32, vertical guides. No vertical scale or arrows.}
+Alicia's score is more than 2 standard deviations greater than the mean.
+To analyze where a data value falls in the distribution, find how many standard deviations it is above or below the mean. Most data values are not an exact integer number of standard deviations from the mean, so we need to find a way to describe fractional numbers of standard deviations from the mean.
+The z-score counts how many standard deviations a data value is above or below the mean, because it divides the difference from the mean by the distance of a standard deviation. These distributions are normal, but you can use z-scores with any distribution.
+(z=\frac{\text{data value}-\text{mean}}{\text{standard deviation}})
+Ella's z-score is: (z_E=\frac{1380-1000}{200}=1.9)
+Alicia's z-score is: (z_A=\frac{32-21}{5}=2.2)
+Alicia's score is better than Ella's.
+\te{Callout: Ella's score: 1380; Mean SAT score: 1000; Standard deviation of scores: 200.}
+\te{Callout: Alida's score: 32; Mean ACT score: 21; Standard deviation of scores: 5.}
+\answer{Alicia's score is better than Ella's; (z_E=1.9), (z_A=2.2).}
+\te{Printed Alicia in the worked solution; the prompt and callout name Alida.}
+\te{COMMON ERROR You may think that a positive z-score is always better than a negative one. Be careful to consider the context, though. Test scores: higher is better; Golf scores: lower is better; Height: no “better” score.}
+\end{example}
+\begin{tryit}{3}
+How does an SAT score of 1120 compare to an ACT score of 23?
+\answer{An SAT score of 1120 represents (z=0.6), and an ACT score of 23 represents (z=0.4); the SAT is the better score.}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What does it mean to have a positive z-score versus a negative z-score?
+\answer{A positive z-score indicates how many standard deviations the score is above the mean while a negative z-score indicates how many standard deviations the score is below the mean.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 Some students struggle with comparing values using z-scores. Have students practice comparing z-scores by guiding them through the step-by-step process.
+Kim's grade is 92. The mean is 85 with a standard deviation of 4.
+Diane's grade is 7. The mean is 8 with a standard deviation of 1.
+Q: What is the formula for finding the z-score?
+\answer{(z=\frac{\text{data value}-\text{mean}}{\text{standard deviation}})}
+Q: Write the equation to find the z-score for each student.
+\answer{(\text{Kim}=\frac{92-85}{4}); (\text{Diane}=\frac{7-8}{1})}
+Q: What is the z-score for each student?
+\answer{Kim = 1.75; Diane = −1}
+Q: Whose grade is better?
+\answer{Kim}
+\end{te-addendum}
+% Source page 52: 557 Example 4
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Use a z-Score to Compute Percentage — Pose Purposeful Questions}
+Q: How does the normal distribution relate to the standard normal distribution?
+\answer{The normal distribution is a transformation of the standard normal distribution parent function.}
+Q: What is the relationship between the z-score for a data value and the standard normal distribution?
+\answer{When you calculate the z-score for a data value, you are finding its corresponding value on the standard normal distribution.}
+Q: What does the area under the curve of the standard normal distribution represent?
+\answer{The total area under the curve of a standard normal distribution equals 1 and represents 100\% of the data values.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use a z-Score to Compute Percentage}
+APPLICATION
+The weight of captive adult female lowland gorillas is normally distributed with a mean of (\mu=82.30) kg and standard deviation of (\sigma=15.33) kg. Calculate a z-score for Sasha. How can you use this score to find the percentage of captive adult female lowland gorillas whose weights are less than or equal to Sasha's?
+% FIG 52 1045 240 1150 392
+\placeholder{photo}{Adult female gorilla Sasha holding a young gorilla; caption Adult female Sasha weighs 61.8 kg.}
+Sasha's weight of 61.8 kg gives her a z-score of (\frac{61.8-82.3}{15.33}\approx-1.34).
+When you calculate the z-score for a data value, you are finding its corresponding value on the standard normal distribution. The standard normal distribution is the normal distribution with mean (\mu=0) and standard deviation (\sigma=1).
+\te{LOOK FOR RELATIONSHIPS (z=\frac{x-\mu}{\sigma}). The formula for the z-score can be used to determine part of the transformation of the standard normal distribution into the normal distribution with mean (\mu) and standard deviation (\sigma). For example, there is a horizontal translation of (\mu) units.}
+% FIG 52 1018 401 1158 493
+\placeholder{graph}{Standard Normal Distribution. Red bell curve peaks at 0, horizontal labels -4 through 4 at integers, vertical guides at integers. Red vertical at z approximately -1.34 and shaded left-tail area; z labeled below that marker. No vertical scale or arrows.}
+\te{Callout: The total area under the curve of the standard normal distribution is equal to 1, and represents 100\% of the data values.}
+The percentage of values less than or equal to a particular data value is equal to the percentage of the total area under the distribution curve for that population to the left of that data value. This percentage is called the percentile of the data value. The percentage of area to the left of a data value is equal to the area to the left of the value's z-score under the standard normal distribution.
+To calculate the area under the curve of the standard normal distribution to the left of (z=-1.34), use a spreadsheet program or a calculator.
+Spreadsheet formula: =NORM.S.DIST(-1.34,1)
+\begin{tabular}{rrr}
+D & E & F \\
+0.090122672 & & \\
+ & & \\
+ & & \\
+\end{tabular}
+Calculator: normalcdf(-1E99,-1.34,0,1)
+.0901227339
+The percentile of Sasha's weight or of a z-score of −1.34 is approximately 9\%. This means that about 9\% of all captive adult female lowland gorillas have a weight less than or equal to Sasha's weight.
+\answer{(z\approx-1.34); approximately 9\%.}
+\end{example}
+\begin{tryit}{4}
+Find the percentage of all values in a normal distribution with (z\leq1.85).
+\answer{96.8\%}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How can you use a spreadsheet program or a calculator to help interpret a z-score?
+\answer{You can calculate the percentile of the z-score using a spreadsheet program or calculator. This percentile represents the area under the curve of the standard normal distribution with values to the left of (z=1.85).}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Communicate Precisely — Use with EXAMPLES 3 \& 4}
+Why is the z-score a good measure for comparing data values from two different normally distributed data sets?
+\answer{For any normal distribution, the z-score of a data value tells you how many standard deviations from its respective mean a data value lies. This gives you a way to determine which of the data values you are comparing is farther from its respective mean.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Have students explore finding the error when calculating the percentage of all values in a normal distribution in a given situation.
+Alfred believes that in a normal distribution with a mean of 156.41 and a standard deviation of 12.33, the percentage of all values that are greater than a data value of 144.20 is 99\%.
+Q: Is Alfred correct? Explain.
+\answer{No; Answers may vary. Sample: The z-score is −0.99, so Alfred may have tried to convert the z-score into a percentage. Instead, if he continued his calculations, he would have found that 16.11\% of all data values are less than 144.20 and 83.89\% of data values are greater than 144.20.}
+\end{te-addendum}
+% Source page 53: 558 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Using Normal Distributions in the Real World}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+Q: How do the Empirical Rule and z-scores relate?
+\answer{The Empirical Rule tells you the percentage of data values that fall within one, two, and three standard deviations from the mean. The z-scores tell you how many standard deviations a data value is above or below the mean.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Exercise 6 Some students may subtract the data value from the mean in order to get a positive z-score. Have students write the formula for the z-score, pointing out that the mean is subtracted from the data value. Have students write a sentence explaining what it means when the z-score is negative.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Using Normal Distributions in the Real World}
+EMPIRICAL RULE
+% FIG 53 775 241 967 381
+\placeholder{graph}{Red normal curve with rectangular grid and peak at mu. Horizontal labels mu-4sigma, mu-2sigma, mu, mu+2sigma, mu+4sigma; vertical guides every sigma. Blue central region within one sigma, pale green from one to two sigma, pink from two to three sigma. Braces below show 68 percent over mu±sigma, 95 percent over mu±2sigma, 99.7 percent over mu±3sigma. No vertical scale or arrows.}
+Approximately 68\% of data values in a normal distribution fall within 1 standard deviation of the mean.
+Approximately 95\% of data values in a normal distribution fall within 2 standard deviations of the mean.
+Approximately 99.7\% of data values in a normal distribution fall within 3 standard deviations of the mean.
+z-SCORES
+(z=\frac{\text{data value}-\text{mean}}{\text{standard deviation}})
+(z) tells how many standard deviations a data value is above or below the mean.
+STANDARD NORMAL DISTRIBUTION
+% FIG 53 775 469 948 562
+\placeholder{graph}{Red standard normal bell curve with peak at 0, horizontal labels -4 to 4 at unit increments. Vertical red line at z about -1.34; pink area to the left. Vertical grid lines at integers; no vertical scale or arrows.}
+Mean: 0
+Standard Deviation: 1
+Along with z-scores, the standard normal distribution allows you to compare values across different population distributions.
+Normal distributions are predictable, allowing you to calculate percentiles using tables, calculators, or spreadsheets.
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you use the normal distribution to explain where data values fall within a population?
+\answer{The area under the normal distribution curve tells what percent of the data is one, two, three, or more standard deviations away from the mean.}
+2. Vocabulary Write a definition for z-score using your own words.
+\answer{The z-score counts how many standard deviations a data value is from the mean, because it divides the distance from the mean by the distance of a standard deviation.}
+3. Look for Relationships Why is it useful to compare a normal distribution to the standard normal distribution?
+\answer{You can use your calculator or a spreadsheet to find the area under the curve to the left of any z-score in the standard normal distribution, but it is much more complicated to find the area under the curve to the left of a data value in a general normal distribution.}
+\textbf{Do You KNOW HOW?}
+A data set with a mean of 75 and a standard deviation of 3.8 is normally distributed.
+4. What value is three standard deviations above the mean?
+\answer{86.4}
+5. What percent of the data is from 67.4 to 82.6?
+\answer{95\%}
+6. What is the z-score for a data value of 69.3?
+\answer{−1.5}
+\end{concept-summary}
+% Source page 54: 559 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice & Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+7–23, 26–34 & 7–13, 16–34 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each
+Practice: 1 point each
+Assessment Practice: 1 point each
+Performance Task: 3 points
+\te{Scan the QR code to access a video tutorial.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 13, 14, 33 & 1 \\
+1 & 11 & 2 \\
+2 & 15--17 & 1 \\
+2 & 7 & 2 \\
+3 & 18, 25--28, 31 & 1 \\
+3 & 9, 12 & 2 \\
+3 & 10, 34 & 3 \\
+4 & 19--24 & 1 \\
+4 & 8, 29, 30, 32 & 2 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{7}{2}
+\textbf{UNDERSTAND — Communicate Precisely} Explain how to use the Empirical Rule to find the percentage of the population that falls in a given interval of values.
+\answer{Determine how many standard deviations away from the mean the endpoints of the interval are, then use the corresponding percentage from the Empirical Rule.}
+\end{practice}
+\begin{practice}{8}{2}
+\textbf{Mathematical Connections} How could you use the standard normal curve to verify the Empirical Rule? Show your computations.
+\answer{To verify the Empirical Rule for 68\%, subtract the percentile for a z-score of −1 from the percentile for a z-score of 1: ((84.1345)-(15.8655)=68.269\approx68\%). To verify it for 95\%, subtract the percentile for a z-score of −2 from the percentile for a z-score of 2: ((97.725)-(2.275)=95.45\approx95\%). To verify it for 99.7\%, subtract the percentile for a z-score of −3 from the percentile for a z-score of 3: ((99.865)-(0.135)=99.73\approx99.7\%).}
+\end{practice}
+\begin{practice}{9}{2}
+\textbf{Error Analysis} The cost of movie tickets at several movie theaters is normally distributed with a mean ticket price of \$10 and a standard deviation of \$0.50. Kenji bought a movie ticket for \$9.25. Explain and correct the error in finding the z-score.
+\te{Student work marked incorrect: (z=\frac{\text{mean}-\text{data value}}{\text{standard deviation}}); (z=\frac{\$10-\$9.25}{\$0.5}=1.5).}
+\answer{Answers may vary. Sample: To find the z-score, use the formula (z=\frac{\text{data value}-\text{mean}}{\text{standard deviation}}), not (z=\frac{\text{mean}-\text{data value}}{\text{standard deviation}}). The z-score is −1.5.}
+\end{practice}
+\begin{practice}{10}{3}
+\textbf{Higher Order Thinking} Sineen took an English test and a French test. The mean score for both tests was 84. Sineen got an 88 on the English test and a 92 on the French test. What condition would have to exist so that Sineen's score on the English test was more impressive relative to his classmates' scores than on the French test?
+\answer{If the standard deviation of the scores on the English test were less than half the standard deviation of the scores on the French test, her z-score would be greater on the English test. For example, if the standard deviation of the English test scores were 2 and the standard deviation of the French test scores were 8, then Skyler's test score of 88 on the English test would be 2 standard deviations above the mean, and Skyler's test score on the French test would be 1 standard deviation above the mean.}
+\te{Printed Skyler and her in the key; the prompt names Sineen and uses his.}
+\end{practice}
+\begin{practice}{11}{2}
+\textbf{Use Structure} The graph of normally distributed data is shown. What are the mean and standard deviation of the data? Explain how you know.
+% FIG 54 638 744 812 860
+\placeholder{graph}{Red normal bell curve with peak and solid vertical line at 46.5. Horizontal labels 21,29.5,38,46.5,55,63.5,72, vertical guides every 8.5. No vertical scale or arrows.}
+\answer{The mean is the value at the peak on the graph, or 46.5. Subtract the value of one standard deviation above the mean, where the curvature of the graph changes, from the mean: (55-46.5=8.5). So, the standard deviation is 8.5.}
+\te{Printed subtraction wording reverses the order in its displayed calculation.}
+\end{practice}
+\begin{practice}{12}{2}
+\textbf{Reason} The monthly cost of joining a gym is normally distributed with a mean of \$50 and a standard deviation of \$5. The cost of the gym Tyler joined was exactly two standard deviations away from the mean.
+a. What are possible z-scores of Tyler's cost?
+\answer{a. −2 or 2}
+b. Suppose the cost of Tyler's gym stays the same, but other gyms change their prices. How would your answer to part (a) be affected?
+\answer{b. Answers may vary. Sample: If either the mean or standard deviation changes, the cost of Tyler's gym would have a different z-score. However, if both change, the cost of Tyler's gym may or may not have a different z-score.}
+\end{practice}
+\begin{practice}{13}{1}
+\textbf{PRACTICE} The lifespan of a certain brand of car tires is approximately normally distributed. The car tires have a mean lifespan of 50,000 miles and a standard deviation of 7,500 miles. SEE EXAMPLE 1
+What range of car tire lifespan contains the 95\% closest to the mean?
+\answer{between 35,000 miles and 65,000 miles}
+\end{practice}
+\begin{practice}{14}{1}
+The lifespan of a certain brand of car tires is approximately normally distributed. The car tires have a mean lifespan of 50,000 miles and a standard deviation of 7,500 miles. SEE EXAMPLE 1
+What would the lifespan be for the 2.5\% of the tires with the greatest lifespan in the population?
+\answer{greater than 65,000 miles}
+\end{practice}
+\begin{practice}{15}{1}
+The price of a certain brand of printers is normally distributed with mean cost of \$215 and standard deviation \$35. SEE EXAMPLE 2
+What proportion of printers cost between \$110 and \$320?
+\answer{99.7\%}
+\end{practice}
+\begin{practice}{16}{1}
+The price of a certain brand of printers is normally distributed with mean cost of \$215 and standard deviation \$35. SEE EXAMPLE 2
+What proportion of printers cost less than \$145?
+\answer{2.5\%}
+\end{practice}
+\begin{practice}{17}{1}
+The price of a certain brand of printers is normally distributed with mean cost of \$215 and standard deviation \$35. SEE EXAMPLE 2
+What proportion of printers cost more than \$250?
+\answer{16\%}
+\end{practice}
+\begin{practice}{18}{1}
+In their last basketball game, Helena scored 25 points and Juanita scored 16 points. The mean number of points Helena scores is 20 with a standard deviation of 2. The mean number of points Juanita scores is 12 with a standard deviation of 1.25. Whose score is better relative to her average number of points per game? SEE EXAMPLE 3
+\answer{Holly scoring 25 points represents (z=2.5), and Juanita scoring 16 points represents (z=3.2); Juanita scored better relative to her average.}
+\te{Printed Holly in the key; the prompt names Helena.}
+\end{practice}
+\begin{practice}{19}{1}
+Find the percentage of all values in a normal distribution for each z-score. SEE EXAMPLE 4
+(z\leq2.15)
+\answer{0.9842, or 98.42\%}
+\end{practice}
+\begin{practice}{20}{1}
+Find the percentage of all values in a normal distribution for each z-score. SEE EXAMPLE 4
+(z\leq1.25)
+\answer{0.8944, or 89.44\%}
+\end{practice}
+\begin{practice}{21}{1}
+Find the percentage of all values in a normal distribution for each z-score. SEE EXAMPLE 4
+(z\geq0.62)
+\answer{0.2676, or 26.76\%}
+\end{practice}
+\begin{practice}{22}{1}
+Find the percentage of all values in a normal distribution for each z-score. SEE EXAMPLE 4
+(z\leq0.48)
+\answer{0.6844, or 68.44\%}
+\end{practice}
+\begin{practice}{23}{1}
+Find the percentage of all values in a normal distribution for each z-score. SEE EXAMPLE 4
+(z\geq-1.39)
+\answer{0.9177, or 91.77\%}
+\end{practice}
+\begin{practice}{24}{1}
+Find the percentage of all values in a normal distribution for each z-score. SEE EXAMPLE 4
+(z\leq-2.26)
+\answer{0.0119, or 1.19\%}
+\end{practice}
+\begin{practice}{25}{1}
+Given the mean (\mu) and standard deviation (\sigma), find the z-score for each data point (x).
+(\mu=0); (\sigma=2); (x=3)
+\answer{1.5}
+\end{practice}
+\begin{practice}{26}{1}
+Given the mean (\mu) and standard deviation (\sigma), find the z-score for each data point (x).
+(\mu=1); (\sigma=0.15); (x=0.70)
+\answer{−2}
+\end{practice}
+\begin{practice}{27}{1}
+Given the mean (\mu) and standard deviation (\sigma), find the z-score for each data point (x).
+(\mu=100); (\sigma=15); (x=70)
+\answer{−2}
+\end{practice}
+\begin{practice}{28}{1}
+Given the mean (\mu) and standard deviation (\sigma), find the z-score for each data point (x).
+(\mu=2.7); (\sigma=0.5); (x=3.0)
+\answer{0.6}
+\end{practice}
+% Source page 55: 560 Practice & Problem Solving
+\begin{practice}{29}{2}
+\textbf{APPLY — Make Sense and Persevere} Mrs. Burleson surveyed the students in her class to find the number of minutes they spent doing homework each night. She found that the data was normally distributed with (\mu=30) min and (\sigma=10) min.
+a. What range of time spent doing homework contains the 68\% closest to the mean?
+\answer{between 20 min and 40 min}
+b. How much time spent on homework would you expect from the 2.5\% of the students with the least time spent on homework?
+\answer{less than 10 min}
+c. Jamaal studied 25 min last night. What percent of the students studied fewer minutes than Jamaal? Round to the nearest hundredth.
+\answer{30.85\%}
+\end{practice}
+\begin{practice}{30}{2}
+\textbf{Reason} A random sample of attendance numbers for last year's soccer matches for a local team are shown.
+\begin{tabular}{rrr}
+678 & 698 & 746 \\
+748 & 832 & 686 \\
+693 & 787 & 828 \\
+639 & 812 & 734 \\
+754 & 808 & 648 \\
+\end{tabular}
+% FIG 55 519 591 773 762
+\placeholder{photo}{Crowded soccer stadium with green playing field and spectator stands. Attendance table overlaid at upper left, transcribed in the accompanying tabular.}
+a. Find the mean of the attendance numbers to the nearest tenth.
+\answer{a. 739.4}
+b. Use the data given in the problem to find what percent of last year's games had at least 808 people in attendance. Round to the nearest tenth of a percent.
+\answer{b. (\frac{4}{15}) or 26.7\% of the games had at least 808 people in attendance.}
+c. The standard deviation of the sample is 64.3. Given that the data is normally distributed, estimate the percent of games that will have at least 808 people in attendance.
+\answer{c. z-score: (z=\frac{808-739.4}{64.3}\approx1.067), 14.3\% of games would have had at least 808 people in attendance if the data were normally distributed.}
+\end{practice}
+\begin{practice}{31}{1}
+Anna scored an 89 on an exam with (\mu=68) points and (\sigma=10) points. Damian scored a 95 on an exam with (\mu=76) points and (\sigma=12) points. If both exams had normally distributed scores, what was the z-score for each student? Who did better on their exam? Explain.
+\answer{Anna's z-score (=\frac{89-68}{10}=2.1); Damian's z-score (=\frac{95-76}{12}\approx1.6); Anna's score is better relative to her exam than Damian's. Although her raw score is lower, she scored more than 2 standard deviations above the mean.}
+\end{practice}
+\begin{practice}{32}{2}
+\textbf{ASSESSMENT PRACTICE} A normally distributed data set has a mean of 35 and a standard deviation of 5.23. Complete the table to find the probability that a randomly selected value is in the given interval. Round to the nearest hundredth percent, if necessary.
+\begin{tabular}{ll}
+Interval & Probability (\%) \\
+at most 43 & \answer{93.69\%} \\
+at least 48 & \answer{0.65\%} \\
+between 32 and 38 & \answer{43.38\%} \\
+at least 41.6 & \answer{10.35\%} \\
+Between 30.2 and 42.6 & \answer{74.75\%} \\
+at most 36.25 & \answer{59.44\%} \\
+\end{tabular}
+\end{practice}
+\begin{practice}{33}{1}
+\textbf{SAT/ACT} In a set of data that is normally distributed, the value that is 1 standard deviation above the mean is 93. The value that is 2 standard deviations below the mean is 39. What is the mean of the set of data?
+A. 3
+B. 18
+C. 57
+D. 75
+\answer{D}
+\end{practice}
+\begin{practice}{34}{3}
+\textbf{Performance Task} Outliers can be identified using the interquartile method. Multiply the interquartile range by 1.5. If a data value has a distance below the first quartile or above the third quartile greater than this product, it is an outlier. Another way is to use the z-score method. If a data value falls more than 3 standard deviations from the mean, the data value is an outlier. The table shows the high temperature for 14 days.
+\begin{tabular}{rrrrrrr}
+81°F & 78°F & 77°F & 75°F & 80°F & 81°F & 80°F \\
+77°F & 74°F & 75°F & 49°F & 71°F & 72°F & 80°F \\
+\end{tabular}
+Part A Identify the mean, standard deviation, first quartile, third quartile, and interquartile range of the data.
+\answer{Part A mean: 75; standard deviation: 7.86; first quartile: 74; third quartile: 80; interquartile range: 6}
+Part B Which data values, if any, are outliers using the interquartile method? Explain your reasoning.
+\answer{Part B The data value 49°F is more than 1.5(6), or 9°F below the first quartile. So, 49°F is an outlier.}
+Part C Which data values, if any, are outliers using the z-score method? Explain your reasoning.
+\answer{Part C The data value 49°F is more than 3 standard deviations, or 3(7.86) = 23.58°F, below the mean. So, 49°F is an outlier.}
+\end{practice}
+% Source page 56: 560A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate — LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Resources book.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & DP28 \\
+2 & 2 & DP28 \\
+3 & 2 & DP28 \\
+4 & 1 & DP28 \\
+5 & 1 & DP28 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0–3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerds videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{ASSESSMENT RESOURCES — 11-4 Lesson Quiz — Normal Distributions}
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+A data set with a mean of 34 and a standard deviation of 2.5 is normally distributed. Use this information for Items 1–2.
+1. According to the Empirical Rule, what percent of the data is in each of the following ranges? Round to the nearest tenth of a percent if necessary.
+Between 34 and 39: \answer{47.5}\%
+Less than 31.5: \answer{16}\%
+Between 29 and 36.5: \answer{81.5}\%
+2. Select the data value that best matches each statement.
+\begin{tabular}{lllll}
+ & −36.1 & 36.1 & 34.5 & 40.0 \\
+Greater than approximately 80\% of the distribution & & \answer{selected} & & \\
+Greater than approximately 97.6\% of the distribution & & & & \answer{selected} \\
+\end{tabular}
+\te{Printed 97.6\% with 40.0 selected; for mean 34 and standard deviation 2.5, 40.0 is at approximately the 99.18th percentile.}
+3. Find the percent of all values in a normal distribution for which (z\leq1.00), to the nearest tenth of a percent.
+percent = \answer{84.1}\%
+Keenan scored 80 points on an exam with a mean of 77 points and a standard deviation of 4.9 points. Rachel scored 78 points on an exam with a mean of 75 points and a standard deviation of 3.7 points. Use this information for Items 4–5.
+4. Kennan's z-score = \answer{0.61}; Rachel's z-score = \answer{0.81}.
+\te{Printed Kennan in Item 4; the preceding text names Keenan.}
+5. It is meaningless to compare Keenan's and Rachel's scores directly, because they each took a different exam. Which of the following describes a valid way to use statistics to compare Keenan's score on his exam with Rachel's score on her exam?
+A. Keenan did equally as well as Rachel because each of them scored 3 points above the mean for their exam.
+B. Keenan did better than Rachel because his exam had a greater standard deviation than Rachel's had.
+C. Rachel did better than Keenan because her z-score was greater than Keenan's.
+D. Rachel did better than Keenan because the mean for her exam was less than the mean for Keenan's exam.
+\answer{C}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 57: 560B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate — DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced. SavvasRealize.com. Practice.
+\textbf{Reteach to Build Understanding — I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL® for School.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-4 Reteach to Build Understanding — Normal Distributions}
+1. Use the information in the graph to fill out the table. The mean (\mu) is 50 and the standard deviation (\sigma) is 5.
+\begin{tabular}{llll}
+Percent & Standard Deviation & Range Minimum & Range Maximum \\
+\answer{68}\% & \answer{1} & (\mu-\sigma); (50-5=\answer{45}) & (\mu+\sigma); (50+\answer{5}=55) \\
+\answer{95}\% & 2 & (\mu-\answer{2}\sigma); (\answer{50}-10=40) & (\mu+2\sigma); (50+\answer{10}=60) \\
+99.7\% & 3 & (\mu-3\sigma); (50-\answer{15}=35) & (\mu+\answer{3}\sigma); (50+15=\answer{65}) \\
+\end{tabular}
+% FIG 57 280 413 404 504
+\placeholder{graph}{Grayscale normal curve centered at mu. Horizontal ticks mu minus 4 sigma, mu minus 2 sigma, mu, mu plus 2 sigma, mu plus 4 sigma, with unit-sigma grid lines. Nested shaded regions and braces show 68 percent within one sigma, 95 percent within two, 99.7 percent within three. No vertical scale.}
+2. Helena scored a 75 on a history exam and an 80 on a science test. The class average for the history test was 70 with a standard deviation of 2.5. The class average for the science test was 75 with a standard deviation of 5. She believes that she did better in science than history in comparison with her class. Explain her error.
+\answer{Since she scored 5 points higher on her science test, that is a better grade. However, she scored 2 standard deviations better than her classmates on the history exam and only 1 standard deviation better than her classmates on the science test, so in comparison to her class, she did better on the history exam.}
+3. A study concluded that the amount of sugar consumed by each child followed the pattern of a normal distribution. If the average child consumed 30 grams of sugar and the standard deviation is 4 grams, how many grams of sugar did the 99.7\% of the children who are closest to the mean consume?
+a. Use the Empirical Rule. 99.7\% of the sample is within \answer{3} standard deviations of the mean.
+b. Multiply the standard deviation by 3. (4\cdot\answer{3}=12)
+c. To find the minimum of the range, subtract 12 from the mean. (30-\answer{12}=18)
+d. To find the maximum of the range, add 12 to the mean. (30+\answer{12}=42)
+e. The range for the 99.7\% of the children closest to the mean is \answer{18} to \answer{42} grams.
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice — I O}
+Provides extra practice for each lesson. MathXL® for School.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-4 Additional Practice — Normal Distributions}
+A sleep study found that the number of hours each person slept was normally distributed. The study found that the average person slept 8.2 hours with a standard deviation of 0.7 hours.
+1. What range of hours of sleep are the 99.7\% closest to the mean?
+\answer{6.1 to 10.3 h}
+2. The 2.5\% of the people who slept the most got more than how many hours of sleep?
+\answer{9.6 h}
+3. The 16\% of the people who slept the least got less than how many hours sleep?
+\answer{7.5 h}
+The actual weights of bags of pet food are normally distributed about the mean of 50.0 lb, with a standard deviation of 0.2 lb.
+4. About what percentage of bags of pet food weigh between 49.8 lb and 50.2 lb?
+\answer{68\%}
+5. About what percentage of bags weigh less than 49.8 lb?
+\answer{16\%}
+6. In a group of 250 bags, what percentage of bags would you expect to weigh more than 50.4 lb?
+\answer{2.5\%}
+7. Hugo averages 32 home runs per season with a standard deviation of 2.5. Jacob averages 27 home runs per season with a standard deviation of 1.6. Last season Hugo hit 36 home runs and Jacob hit 31 home runs. Who had more home runs relative to their usual seasonal average? Explain.
+\answer{Jacob; Hugo homered 1.6 standard deviations above his average while Jacob homered 2.5 standard deviations above his average.}
+Find the percent of all values in a normal distribution described by each z-score.
+8. (z\leq1.24) \answer{89.25\%}
+9. (z\geq3.45) \answer{0.03\%}
+10. (z\leq-0.98) \answer{16.35\%}
+11. The number of miles traveled by a car before a certain part fails is normally distributed with a mean of 60,000 mi and a standard deviation of 5,000 mi. What is the probability that the part will fail before 55,000 mi or after 65,000 mi?
+\answer{32\%}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment — O A}
+Presents engaging problems and activities that extend the lesson concepts.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-4 Enrichment — Normal Distributions}
+A sneaker company needs to determine how many shoes of each size to make in order to best meet the needs of their vendors. The company's research shows that their shoe sizes fit a normal distribution, with an average men's foot-size of 10.76 in. and a standard deviation of 0.24.
+1. Use the difference between the z-scores to determine the percent of each shoe-size needed. Round your answers to the nearest tenth of a percent.
+\begin{tabular}{lll}
+Shoe Size & Inches & Percent \\
+8 & 9.75–9.94 & \answer{0.0\%} \\
+8.5 & 9.95–10.13 & \answer{0.4\%} \\
+9 & 10.14–10.25 & \answer{1.2\%} \\
+9.5 & 10.26–10.44 & \answer{7.7\%} \\
+10 & 10.45–10.56 & \answer{10.5\%} \\
+10.5 & 10.57–10.75 & \answer{\uncertain{26.9\%}{26.3\%}} \\
+11 & 10.76–10.94 & \answer{\uncertain{27.9\%}{27.3\%}} \\
+11.5 & 10.95–11.13 & \answer{15.3\%} \\
+12 & 11.14–11.25 & \answer{3.4\%} \\
+13 & 11.26–11.56 & \answer{1.8\%} \\
+14 & 11.57–\uncertain{11.88}{11.86} & \answer{0.0\%} \\
+ & Total Percent & \answer{94.5\%} \\
+\end{tabular}
+\te{Tiny preview remains pixelated at 1800 dpi. Two percentage digits and the final range endpoint are uncertain; the best readings of the percentages do not sum to the printed total. Printed difference between the z-scores; the intended computation is a difference of cumulative normal probabilities.}
+2. If all of the sneakers made equal 100\%, why did the percents of each shoe-size needed not total 100\%?
+\answer{Answers may vary. Sample: This curve shows the most popular shoe-sizes. There may be men who have shoe-sizes below or above the measurements shown.}
+3. If you were in charge of production for the sneaker company, how would you determine how many sneakers to make of the sizes not listed on the chart?
+\answer{Answers may vary. Sample: The sneaker company could set aside production for special orders or custom shoes. They could also add data to the table for sizes greater than 14 and below 8.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary — I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-4 Mathematical Literacy and Vocabulary — Normal Distributions}
+Match the z-score in Column A to the correct percentile in Column B.
+\begin{tabular}{ll}
+Column A & Column B \\
+1. (z\geq1) & 10.75\% \\
+2. (z\leq3) & 15.87\% \\
+3. (z\leq-3.02) & 95.45\% \\
+4. (z\geq1.24) & 73.24\% \\
+5. (z\leq2.31) & 99.73\% \\
+6. (z\geq-2.34) & 99.87\% \\
+7. (z\leq0.62) & 98.96\% \\
+8. (-1\leq z\leq1) & 68.27\% \\
+9. (-2\leq z\leq2) & 0.13\% \\
+10. (-3\leq z\leq3) & 99.04\% \\
+\end{tabular}
+\answer{Matching lines: 1. 15.87\%; 2. 99.87\%; 3. 0.13\%; 4. 10.75\%; 5. 98.96\%; 6. 99.04\%; 7. 73.24\%; 8. 68.27\%; 9. 95.45\%; 10. 99.73\%.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 57 584 977 1035 1298
+\placeholder{illustration}{Black tablet showing a digital exercise: Solve the system of equations by graphing, y=3x+4 and y=-2x+4. Use the graphing tool to graph the system. Blank coordinate grid from -10 to 10 on both axes, labeled every 2; menu Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Buttons Clear All, Check Answer, Review progress, Back, Next.}
+\end{te-addendum}
+
+\end{document}

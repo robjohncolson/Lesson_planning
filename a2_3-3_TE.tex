@@ -1,0 +1,1154 @@
+\documentclass{article}
+% Source: Topic_03_Teacher_Edition.pdf, PDF pages 35-46 (printed pages 134A-141B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 35: 134A Lesson Overview
+\begin{lesson-meta}
+lesson: 3-3
+title: Polynomial Identities
+standards: none printed
+practices: none printed
+objective: I can prove and use polynomial identities.
+
+essential question: How can you use polynomial identities to rewrite expressions efficiently?
+
+\textbf{VOCABULARY}
+\item Binomial Theorem
+\item identity
+\item Pascal's Triangle
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 3-3 \\
+Title & Polynomial Identities \\
+Standards & none printed \\
+I CAN Objective & I can prove and use polynomial identities. \\
+Essential Question & How can you use polynomial identities to rewrite expressions efficiently? \\
+Lesson Vocabulary & Binomial Theorem; identity; Pascal's Triangle \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Prove polynomial identities and use them to multiply and factor polynomials.
+\item Expand binomials using the Binomial Theorem and coefficients determined by Pascal's Triangle.
+Essential Understanding. Polynomial identities and the Binomial Theorem are helpful tools for efficiently rewriting expressions and describing mathematical relationships.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Added, subtracted, and multiplied polynomial expressions.
+In this lesson, students:
+\item Know and apply the Binomial Theorem to expand powers of binomial expressions using Pascal's Triangle.
+\item Use polynomial identities to efficiently multiply and factor polynomials.
+Increasing Coherence. Examples 4 and 5 are not necessarily expected to be addressed on high-stakes assessments.
+Later in this topic, students will:
+\item Factor a polynomial to find the zeros of the function.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that polynomial identities are useful tools for multiplying and factoring polynomials.
+\item Students use numbers from Pascal's Triangle and the Binomial Theorem to expand binomials.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{lll}
+ & English & Spanish \\
+REVIEW VOCABULARY & binomial & binomio \\
+NEW VOCABULARY & Binomial Theorem & Teorema binomial \\
+ & identity & identidad \\
+ & Pascal's Triangle & Triángulo de Pascal \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Review the term binomial. Help students to remember that a binomial has two terms by calling their attention to the prefix bi-. Discuss other terms that also have this prefix.
+Explain that the Binomial Theorem tells how to expand binomials when they are raised to different powers, and that the numbers in Pascal's Triangle are used as coefficients in the Binomial Theorem.
+Q: What is the name of the theorem that tells how to use coefficients from Pascal's Triangle when expanding a binomial?
+\answer{the Binomial Theorem}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion book cover, multicolored light rings around reflective spheres on a dark background; Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students use the proven polynomial identities Difference of Squares or Cubes, Square of a Sum, and Sum of Cubes to multiply and factor polynomials.
+Students use the Binomial Theorem to expand the powers of a binomial expression. They also use Pascal's Triangle to determine the coefficients of the terms in the binomial expansion.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively
+Students make sense of quantities and their relationships when they use Pascal's Triangle to find the value of (n) in polynomial expressions, given the sum of coefficients in the expansion.
+Look For and Make Use of Structure
+Students see polynomial expressions as a sum or difference of squares or cubes that can be multiplied or expanded to rewrite the expression.
+\end{te-addendum}
+% Source page 36: 134B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students are introduced to Pascal's Triangle. They discover patterns in Pascal's Triangle, which will help them determine the coefficients when expanding expressions with the Binomial Theorem.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\te{Critique \& Explain is available at SavvasRealize.com. The digital-resource heading says Critique \& Explain; the activity is titled Explore \& Reason.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving ETP}
+Q: What do you notice about the triangle?
+\answer{There's one more number in each row than in the row above it.}
+\textbf{During SMALL GROUP. Support Productive Struggle in Learning Mathematics ETP}
+Q: Compare the rows of the triangle. What similarities and differences can you find?
+\answer{A similarity in the patterns is the first and last number of a row is always 1. A difference is for every other row the center number is repeated.}
+Q: How does the sum of the numbers in one row in the triangle compare to that of the row above it?
+\answer{The sum of the numbers in a row is double the sum of the numbers in the row above it.}
+For Early Finishers
+Q: Look at the sums of the numbers in the diagonals of rows 0 through 8. Then write out the numbers for row 9. What do you notice? Do you think this will always be true?
+\answer{The sums of the diagonals are the same numbers as the next row of numbers with an additional 1 at the end. This is always true.}
+\textbf{After WHOLE CLASS. Facilitate Meaningful Mathematical Discourse ETP}
+Ask students to describe the relationships and patterns they see in the triangle.
+Q: How could you determine the first two numbers of a row using your patterns?
+\answer{Let the first row be row 0. Then the first term is 1 and the second number is the number of the row.}
+Q: How do you know the last two numbers of a row?
+\answer{The numbers in a row are symmetric, so the last two numbers of a row are the same as the first two numbers, just in reverse order.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXPLORE \& REASON
+Look for Relationships Create a triangle that starts with 2 instead of 1. How does this new triangle relate to the original triangle?
+\answer{Each value of the triangle that starts with 2 will be twice that of the corresponding value of the triangle that starts with 1.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{EXPLORE \& REASON: Digital activity}
+Look at the triangle.
+Each number is the sum of the two numbers diagonally above. If there is not a second number, think of it as 0.
+\placeholder{diagram}{Digital Pascal's Triangle, centered rows 1; 1 1; 1 2 1; 1 3 3 1; 1 4 6 4 1; 1 5 10 10 5 1. Paired diagonal arrows from adjacent entries point to their sum below: orange into row 2, blue into row 3, green into row 4, purple into row 5. Left controls 1 Row, 2 Rows, 3 Rows, 4 Rows, 5 Rows, 6 Rows, with 6 Rows selected.}
+A. Write the numbers in the next three rows.
+\te{Go back. Enter your answer.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Look at the following triangle.
+Each number is the sum of the two numbers diagonally above. If there is not a second number, think of it as 0.
+\placeholder{diagram}{Pascal's Triangle, centered rows 1; 1 1; 1 2 1; 1 3 3 1; 1 4 6 4 1; 1 5 10 10 5 1. Paired colored diagonal arrows from adjacent entries to their sum below, red into row 2, blue into row 3, green into row 4, purple into row 5.}
+A. Write the numbers in the next three rows.
+\answer{A. 1 6 15 20 15 6 1; 1 7 21 35 35 21 7 1; 1 8 28 56 70 56 28 8 1.}
+B. Look for Relationships What other patterns do you see?
+\answer{B. The numbers one from the left move up by 1 in each consecutive row}
+C. Find the sum of the numbers in each row of the triangle. Write a formula for the sum of the numbers in the nth row.
+\answer{C. 1, 2, 4, 8, 16, 32, 64, 128, 256; (2^n)}
+\te{SAMPLE STUDENT WORK.}
+\end{model-discuss}
+% Source page 37: 134 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Introduce students to polynomial identities. Remind students that they have previously added, subtracted, and multiplied polynomial expressions. Explain that students will use polynomial identities to help multiply and factor polynomial expressions more efficiently.
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{PurposefulQuestions}
+\textbf{CONCEPT Polynomial Identities. Pose Purposeful Questions ETP}
+Q: How is a difference of squares similar to and different from a difference of cubes?
+\answer{Both have two terms raised to a power; one is a square and one is a cube. The difference of squares results in a binomial multiplied by a binomial, while a difference of cubes results in a binomial multiplied by a trinomial.}
+Q: How can knowing these identities help when factoring a polynomial?
+\answer{It makes the factoring easier. If you recognize that a polynomial is in one of these forms, you can factor it by using the identity.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Polynomial Identities}
+A mathematical statement that equates two polynomial expressions is an identity if one side can be transformed into the other side using mathematical operations. These polynomial identities are helpful tools used to multiply and factor polynomials.
+Difference of Squares
+(a^2-b^2=(a+b)(a-b))
+Example: (25x^2-36y^2)
+Substitute (5x) for (a) and (6y) for (b).
+(25x^2-36y^2=(5x+6y)(5x-6y))
+Square of a Sum
+((a+b)^2=a^2+2ab+b^2)
+Example: ((3x+4y)^2)
+Substitute (3x) for (a) and (4y) for (b).
+((3x+4y)^2=(3x)^2+2(3x)(4y)+(4y)^2)
+(=9x^2+24xy+16y^2)
+Difference of Cubes
+(a^3-b^3=(a-b)(a^2+ab+b^2))
+Example: (8m^3-27)
+Substitute (2m) for (a) and 3 for (b).
+(8m^3-27=(2m-3)[(2m)^2+(2m)(3)+3^2])
+(=(2m-3)(4m^2+6m+9))
+Sum of Cubes
+(a^3+b^3=(a+b)(a^2-ab+b^2))
+Example: (g^3+64h^3)
+Substitute (g) for (a) and (4h) for (b).
+(g^3+64h^3=(g+4h)[g^2-(g)(4h)+(4h)^2])
+(=(g+4h)(g^2-4gh+16h^2))
+\end{concept-box}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 1}
+Which identity is represented by (16d^2+64df+64f^2)? Rewrite the expression using the polynomial identity.
+Square of a Sum
+((a+b)^2=a^2+2ab+b^2)
+Therefore, (16d^2+64df+64f^2=(4d+8f)^2).
+\answer{Square of a Sum; ((4d+8f)^2)}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION.}
+Example 1 Students gain practice in identifying which polynomial identity is represented.
+Q: How can you determine the coefficients in order to rewrite the polynomial identity?
+\answer{You can find the coefficients by finding the square roots of the first and last coefficient of the original polynomial.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 2}
+Additional Examples are available at SavvasRealize.com.
+Audra wants to build a larger food container to feed her ducklings. The current side lengths are (2x+4y) in. She would like the sides of the new food container to be triple the original lengths. What is the area of the new food container?
+\placeholder{diagram}{Small pale green square at upper right, left and bottom side labels 2x+4y in orange; larger pale green square below left, left and bottom side labels 3(2x+4y) in orange.}
+New side length: (3(2x+4y)=6x+12y) in.
+Square of a Sum: ((6x+12y)^2=36x^2+2\cdot6\cdot12+144y^2)
+Area: (36x^2+144+144y^2) in.²
+\answer{(36x^2+144+144y^2) in.²}
+\te{Printed calculation omits xy from the middle term; likely 144xy. Go back. ESSENTIAL QUESTION. SOLUTION.}
+Example 2 Students use their knowledge of multiplying polynomials to solve a real-life problem.
+Q: Suppose the height of the container is the same as the length and width. How could you write an expression to determine the volume of food that fits in the new container?
+\answer{Cube the length of the side.}
+\end{te-addendum}
+% Source page 38: 135 Understand & Apply
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Prove a Polynomial Identity. Pose Purposeful Questions ETP}
+Q: When proving the identity, why does it make sense to start with the expression on the right side?
+\answer{You start with the expression on the right because you need to multiply the two polynomials first using the Distributive Property. You then group and combine like terms in order to finish transforming it to the expression on the left.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Prove a Polynomial Identity}
+How can you prove the Sum of Cubes Identity, (a^3+b^3=(a+b)(a^2-ab+b^2))?
+To prove an identity, start with the expression on one side of the equation and use properties of operations on polynomials to transform it into the expression on the other side.
+((a+b)(a^2-ab+b^2))
+(=a(a^2-ab+b^2)+b(a^2-ab+b^2))
+(=a^3-a^2b+ab^2+a^2b-ab^2+b^3)
+(=a^3+(-a^2b+a^2b)+(ab^2-ab^2)+b^3)
+(=a^3+b^3)
+So, (a^3+b^3=(a+b)(a^2-ab+b^2)).
+\answer{(a^3+b^3=(a+b)(a^2-ab+b^2))}
+\te{REASON Why do we start with ((a+b)(a^2-ab+b^2)) to show the identity?}
+\end{example}
+\begin{tryit}{1}
+Prove the Difference of Cubes Identity.
+\answer{((a-b)(a^2+ab+b^2)); Difference of Cubes Identity
+(=(a)(a^2+ab+b^2)+(-b)(a^2+ab+b^2)); Distributive Property
+(=a^3+a^2b+ab^2-a^2b-ab^2-b^3); Simplify.
+(=a^3+(a^2b-a^2b)+(ab^2-ab^2)-b^3); Group like terms.
+(=a^3-b^3); Combine like terms.}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: When proving the Difference of Cubes Identity, which side of the equal sign should you start with? Explain.
+\answer{You should start with the right side of the equation, so you can multiply the two polynomials first.}
+\end{te-addendum}
+\begin{te-addendum}{1}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 1
+Reason Is the trinomial factor in the Difference of Cubes Identity a perfect square trinomial? Explain.
+\answer{No; a perfect square trinomial is in the form (a^2+2ab+b^2), not (a^2+ab+b^2).}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Use Polynomial Identities to Multiply. Pose Purposeful Questions ETP}
+PART A
+Q: What do you recognize about the right side of the equation in the Square of a Sum Identity?
+\answer{The first and last terms are squared, but the middle term is 2 times the first and last term.}
+PART B
+Q: How do you determine the numerical values for (a) and (b)?
+\answer{To find (b), find the difference of the numbers in the original problem and divide by 2. To find (a), subtract the number for (b) from the largest original number.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Use Polynomial Identities to Multiply}
+How can you use polynomial identities to multiply expressions?
+A. ((2x^2+y^3)^2)
+\te{Callout: The sum is a binomial, and the entire sum is being raised to the second power.}
+Use the Square of a Sum Identity to find the product:
+((a+b)^2=a^2+2ab+b^2)
+((2x^2+y^3)^2=(2x^2)^2+2(2x^2)(y^3)+(y^3)^2)
+(=4x^4+4x^2y^3+y^6)
+So, ((2x^2+y^3)^2=4x^4+4x^2y^3+y^6).
+\answer{A. (4x^4+4x^2y^3+y^6)}
+\te{Callout: Substitute (2x^2) for (a) and (y^3) for (b). COMMON ERROR When finding ((a+b)^2), recall that it is not sufficient to square the first term and square the second term. You must distribute the two binomials.}
+B. (41\cdot39)
+Rewrite the expression in terms of (a) and (b).
+(41\cdot39=(a+b)(a-b))
+(=(40+1)(40-1))
+Use the Difference of Squares Identity:
+((40+1)(40-1)=40^2-1^2)
+(=1,600-1)
+(=1,599)
+So (41\cdot39=1,599).
+\answer{B. 1,599}
+\end{example}
+\begin{tryit}{2}
+Use polynomial identities to multiply the expressions.
+a. ((3x^2+5y^3)(3x^2-5y^3))
+b. ((12+15)^2)
+\answer{a. (9x^4-25y^6); b. 729}
+\end{tryit}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error}
+Try It! 2 When squaring (3x^2) or (5y^3), students may only square the variable and forget to square the coefficient. Encourage students to check their work by factoring their result using the appropriate identity.
+\end{te-addendum}
+% Source page 39: 136 Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Use Polynomial Identities to Factor and Simplify. Pose Purposeful Questions ETP}
+PARTS A AND B
+Q: What does it mean for a term to be a perfect square?
+\answer{The square root of the coefficient is an integer, and the exponent of the variable is divisible by 2.}
+PART C
+Q: How can you determine if a variable raised to a power is a perfect cube?
+\answer{Check if the power is divisible by 3. If it is, it is a perfect cube.}
+PART D
+Q: Why can you use the Sum of Cubes Identity when 11 and 5 are not divisible by 3?
+\answer{11 and 5 take the place of the variables. The exponents are the parts of the expression that need to be divisible by 3.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Use Polynomial Identities to Factor and Simplify}
+How can you use polynomial identities to factor polynomials and simplify numerical expressions?
+A. (9m^4-25n^6)
+(9m^4) and (25n^6) are both perfect squares.
+(9m^4=(3m^2)^2)
+(25n^6=(5n^3)^2)
+Use the Difference of Squares Identity: (a^2-b^2=(a+b)(a-b)).
+(9m^4-25n^6=(3m^2)^2-(5n^3)^2)
+(=(3m^2+5n^3)(3m^2-5n^3))
+So, (9m^4-25n^6=(3m^2+5n^3)(3m^2-5n^3)).
+\answer{A. ((3m^2+5n^3)(3m^2-5n^3))}
+B. (16g^8+49)
+Use the Difference of Squares Identity to factor over the complex numbers.
+(16g^8+49=(4g^4)^2+(7)^2)
+(=(4g^4)^2-i^2\cdot(7)^2)
+(=(4g^4)^2-(7i)^2)
+(=(4g^4+7i)(4g^4-7i))
+\te{Callout: Substitute (1=-i^2).}
+So, (16g^8+49=(4g^4+7i)(4g^4-7i)).
+\answer{B. ((4g^4+7i)(4g^4-7i))}
+C. (x^3-216)
+(x^3) and 216 are both perfect cubes.
+(x^3=(x)^3)
+(216=6^3)
+Use the Difference of Cubes Identity: (a^3-b^3=(a-b)(a^2+ab+b^2)).
+(x^3-216=(x)^3-(6)^3)
+(=(x-6)(x^2+6x+36))
+So, (x^3-216=(x-6)(x^2+6x+36)).
+\answer{C. ((x-6)(x^2+6x+36))}
+\te{COMMON ERROR The second factor is almost a Square of a Sum. Remember that the middle term of the Difference of Cubes Identity is the product ab, not 2ab.}
+D. (11^3+5^3)
+Use the Sum of Cubes Identity: (a^3+b^3=(a+b)(a^2-ab+b^2)).
+(11^3+5^3=(11+5)(11^2-11(5)+5^2))
+(=(16)(121-55+25))
+(=16(91))
+(=1,456)
+So, (11^3+5^3=1,456).
+\answer{D. 1,456}
+\end{example}
+\begin{tryit}{3}
+Use polynomial identities to factor each polynomial or to simplify an expression.
+a. (m^8-9n^{10})
+b. (25+4b^4)
+c. (27x^9-343y^6)
+d. (12^3+2^3)
+\answer{a. ((m^4+3n^5)(m^4-3n^5))
+b. ((5+2b^2i)(5-2b^2i))
+c. ((3x^3-7y^2)(9x^6+21x^3y^2+49y^4))
+d. 1,736}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How do you determine which polynomial identity you will use to factor each expression?
+\answer{Consider whether the coefficients are perfect squares or perfect cubes, and whether the exponents of each term are divisible by 2 or 3 to determine if you are working with squares or cubes.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 2 \& 3
+Look for Relationships What binomial has factors ((a-3b)) and ((a^2+3ab+9b^2))?
+\answer{(a^3-27b^3)}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 3 Students will rewrite expressions using polynomial identities.
+Q: Use polynomial identities to rewrite the expression ((-12m^6-10n^8)(144m^{12}-120m^6n^8+100n^{16})).
+\answer{(-1728m^{18}-1000n^{24})}
+Q: Use polynomial identities to rewrite the expression ((8x^9-9z^7)(64x^{18}+72x^9z^7+81z^{14})).
+\answer{(512x^{27}-729z^{21})}
+Q: Use polynomial identities to rewrite the expression ((12x^4+8x^7)(12x^4-8x^7)).
+\answer{(144x^8-64x^{14})}
+Q: Use polynomial identities to rewrite the expression ((3x^4+5x^7)(9x^8-15x^{11}+25x^{14})).
+\answer{(27x^{12}+125x^{21})}
+\end{te-addendum}
+% Source page 40: 137 Understand & Apply
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Expand a Power of a Binomial. Use and Connect Mathematical Representations ETP}
+PART A
+Q: How is the diagram in the example similar to Pascal's Triangle?
+\answer{The coefficients of each term of the simplified expressions are the numbers in Pascal's Triangle.}
+Q: What are the patterns of the powers when reading the terms from left to right?
+\answer{The powers of (x) decrease from (n) to 0, and the powers of (y) increase from 0 to (n).}
+PART B
+Q: What pattern do you notice in the coefficients of each row?
+\answer{Each coefficient is the sum of the two coefficients above it in the previous row.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Expand a Power of a Binomial}
+\textbf{CONCEPTUAL UNDERSTANDING}
+How is ((x+y)^n) obtained from ((x+y)^{n-1})?
+A. What are ((x+y)^3) and ((x+y)^4)?
+((x+y)^3=(x+y)(x+y)^2)
+(=(x+y)(x^2+2xy+y^2))
+\placeholder{diagram}{Expansion tree: top row 1x² + 2xy + 1y² with blue coefficients. Each term branches to factors (x+y), giving x³+x²y+2x²y+2xy²+xy²+y³. Green joining arrows combine like terms into 1x³+3x²y+3xy²+1y³=(x+y)³. Each of these four terms branches again through (x+y), giving x⁴+x³y+3x³y+3x²y²+3x²y²+3xy³+xy³+y⁴. Purple joining arrows combine like terms into 1x⁴+4x³y+6x²y²+4xy³+1y⁴=(x+y)⁴. Callouts: Multiply each term by (x+y) to get (x+y)³; Multiply each term in (1x³+3x²y+3xy²+1y³) by (x+y) to get (x+y)⁴.}
+The coefficients of the terms may be found using an array known as Pascal's Triangle. Pascal's Triangle is the triangular pattern of numbers where each number is the sum of the two numbers diagonally above it. If there is not a second number diagonally above in the triangle, think of the missing number as 0.
+\placeholder{diagram}{Five-row Pascal's Triangle with horizontal colored connectors to corresponding expansions: Row 0 black: 1 connected to 1 and (x+y)⁰; Row 1 red: 1 1 connected to 1x+1y and (x+y)¹; Row 2 blue: 1 2 1 connected to 1x²+2xy+1y² and (x+y)²; Row 3 green: 1 3 3 1 connected to 1x³+3x²y+3xy²+1y³ and (x+y)³; Row 4 purple: 1 4 6 4 1 connected to 1x⁴+4x³y+6x²y²+4xy³+1y⁴ and (x+y)⁴.}
+You can obtain ((x+y)^n) by adding adjacent pairs of coefficients from ((x+y)^{n-1}).
+\answer{A. ((x+y)^3=x^3+3x^2y+3xy^2+y^3); ((x+y)^4=x^4+4x^3y+6x^2y^2+4xy^3+y^4).}
+B. Use Pascal's Triangle to expand ((x+y)^5).
+Add pairs of coefficients from Row 4 to complete Row 5.
+\begin{tabular}{lllllll}
+Row 4 & 1 & 4 & 6 & 4 & 1 & \\
+Row 5 & 1 & 5 & 10 & 10 & 5 & 1 \\
+\end{tabular}
+Write the expansion. Use the coefficients from Row 5 with powers of (x) starting at 5 and decreasing to 0 and with powers of (y) starting at 0 and increasing to 5.
+((x+y)^5=1x^5+5x^4y+10x^3y^2+10x^2y^3+5xy^4+1y^5)
+\answer{B. (1x^5+5x^4y+10x^3y^2+10x^2y^3+5xy^4+1y^5)}
+\te{Callout: The sum of the exponents in each term is equal to the exponent on the original binomial. USE STRUCTURE Notice the patterns of the powers. The powers of x decrease from n to 0 and the powers of y increase from 0 to n when reading the terms from left to right. So the sum of the exponents of any term is n.}
+\end{example}
+\begin{tryit}{4}
+Use Pascal's Triangle to expand ((x+y)^6).
+\answer{(x^6+6x^5y+15x^4y^2+20x^3y^3+15x^2y^4+6xy^5+y^6)}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How can you determine which row of Pascal's Triangle to use in order to expand the expression?
+\answer{You need to use Row 6 because the binomial is raised to the sixth power.}
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 4)}
+LISTENING BEGINNING Give students each a bowl of small items (buttons, game tokens, or coins). Have students listen to instructions you give on how to arrange the items on their desks. Use the words from the example---such as array, pattern, and diagonally---in your instructions.
+Q: How are the words array and pattern related?
+\answer{A pattern is an arrangement of items ordered in a certain way that is repeated, and an array is a type of pattern arranged in rows and columns.}
+Q: What are some other words that are like diagonally that tell you about the direction or placement of something?
+\answer{horizontally and vertically}
+SPEAKING DEVELOPING The question posed by the example asks how one expression is obtained from another. Ask the students to discuss the word obtain and its meaning. Have students work with a partner to rephrase the question and present their rephrased version of the question to class.
+Q: What does it mean to obtain something from someone or somewhere?
+\answer{to get it or to be given it}
+Q: How is the word obtained used in this question?
+\answer{It means the first expression can be found from the second expression.}
+READING EXPANDING Have students read the paragraph describing Pascal's Triangle. Ask students questions about what they read and how it relates to the diagram.
+Q: Where in the paragraph does it explain how to get the numbers 2, 3, 4, and 6 in the diagram?
+\answer{Each number is the sum of the two numbers diagonally above it.}
+Q: Where in the paragraph does it explain why numbers along the sides of the triangle in the diagram are always 1?
+\answer{The last sentence explains that if there is not a second number, you should think of it as 0.}
+\end{te-addendum}
+% Source page 41: 138 Understand & Apply
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Apply the Binomial Theorem. Pose Purposeful Questions ETP}
+PART A
+Q: Why is it important to use Pascal's Triangle when applying the Binomial Theorem?
+\answer{Pascal's Triangle determines the coefficients of each term.}
+PART B
+Q: What do you think is a common mistake when using the Binomial Theorem to expand an expression with exponents inside the parentheses?
+\answer{forgetting to multiply the original exponents by the exponents from the expansion}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Binomial Theorem}
+The Binomial Theorem states that, for every positive integer (n),
+((a+b)^n=C_0a^n+C_1a^{n-1}b+C_2a^{n-2}b^2+\cdots+C_{n-1}ab^{n-1}+C_nb^n).
+The coefficients (C_0,C_1,C_2,\cdots,C_{n-1},C_n) are the numbers in Row (n) of Pascal's Triangle.
+Notice that the powers of (a) are decreasing while the powers of (b) are increasing, and that the sum of the powers of (a) and (b) in each term is always (n).
+\end{concept-box}
+\begin{example}{5}
+\textbf{Apply the Binomial Theorem}
+Use the Binomial Theorem to expand the expressions.
+A. Find ((x-3)^4).
+Step 1 Use the Binomial Theorem to write the expansion when (n=4).
+(C_0a^4+C_1a^3b+C_2a^2b^2+C_3ab^3+C_4b^4)
+Step 2 Use Row 4 in Pascal's Triangle to write the coefficients.
+(a^4+4a^3b+6a^2b^2+4ab^3+b^4)
+\placeholder{diagram}{Box labeled Pascal's Triangle with centered rows 1; 1 1; 1 2 1; 1 3 3 1; 1 4 6 4 1; 1 5 10 10 5 1. Row 4, 1 4 6 4 1, is red; other entries black.}
+Step 3 Identify (a) and (b).
+(a=x) and (b=-3)
+Step 4 Substitute (x) for (a) and (-3) for (b) in the pattern. Then simplify.
+(x^4+4x^3(-3)+6x^2(-3)^2+4x(-3)^3+(-3)^4)
+(x^4-12x^3+54x^2-108x+81)
+So ((x-3)^4=x^4-12x^3+54x^2-108x+81).
+\answer{A. (x^4-12x^3+54x^2-108x+81)}
+\te{COMMON ERROR Remember that the base of ((a+b)^n) in the Binomial Theorem is ((a+b)). If the terms are being subtracted, use the opposite of b in the expansion.}
+B. Find ((s^2+3)^5).
+The expansion of ((a+b)^5) is (a^5+5a^4b+10a^3b^2+10a^2b^3+5ab^4+b^5).
+Since (a=s^2) and (b=3), the expansion is:
+((s^2+3)^5=(s^2)^5+5(s^2)^4(3)+10(s^2)^3(3)^2+10(s^2)^2(3)^3+5(s^2)(3)^4+(3)^5)
+(=s^{10}+15s^8+90s^6+270s^4+405s^2+243)
+So ((s^2+3)^5=s^{10}+15s^8+90s^6+270s^4+405s^2+243).
+\answer{B. (s^{10}+15s^8+90s^6+270s^4+405s^2+243)}
+\end{example}
+\begin{tryit}{5}
+Use the Binomial Theorem to expand each expression.
+a. ((x-1)^7)
+b. ((2c+d)^6)
+\answer{a. (x^7-7x^6+21x^5-35x^4+35x^3-21x^2+7x-1)
+b. (64c^6+192c^5d+240c^4d^2+160c^3d^3+60c^2d^4+12cd^5+d^6)}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 4 \& 5
+Use Structure For what binomial expression is the expansion (243x^5-405x^4y^2+270x^3y^4-90x^2y^6+15xy^8-y^{10})?
+\answer{((3x-y^2)^5)}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 5 Students practice the step-by-step process of expanding expressions using the Binomial Theorem and Pascal's Triangle.
+Q: Write the powers of the expanded expression ((x+12)^5) using the Binomial Theorem.
+\answer{(C_0a^5+C_1a^4b+C_2a^3b^2+C_3a^2b^3+C_4ab^4+C_5b^5)}
+Q: Use Pascal's Triangle to list the coefficients for the above expression.
+\answer{(C_0=1,C_1=5,C_2=10,C_3=10,C_4=5,C_5=1)}
+Q: Write the expanded expression.
+\answer{(a^5+5a^4b+10a^3b^2+10a^2b^3+5ab^4+b^5)}
+\te{Printed answer retains generic a and b rather than substituting x and 12 from the prompt.}
+\end{te-addendum}
+% Source page 42: 139 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Polynomial Identities}
+Q: Why are polynomial identities useful?
+\answer{Polynomial identities make it easier and more efficient to multiply and factor polynomials.}
+Q: How are the Binomial Theorem and Pascal's Triangle used together?
+\answer{You use the Binomial Theorem to expand the powers of binomial expressions and use Pascal's Triangle to find the values of the coefficients of the terms of the expansion.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Exercise 2 Students may state that the middle term is (5x). Have students multiply ((x+5)(x+5)) using the Distributive Property, pointing out the repetition of (5x) in the unsimplified result.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Polynomial Identities}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\textbf{POLYNOMIAL IDENTITIES}
+Special polynomial identities can be used to multiply and factor polynomials.
+\begin{tabular}{ll}
+Difference of Squares & Square of a Sum \\
+(a^2-b^2=(a+b)(a-b)) & ((a+b)^2=a^2+2ab+b^2) \\
+Difference of Cubes & Sum of Cubes \\
+(a^3-b^3=(a-b)(a^2+ab+b^2)) & (a^3+b^3=(a+b)(a^2-ab+b^2)) \\
+\end{tabular}
+\textbf{BINOMIAL EXPANSION}
+The binomial expansion of ((a+b)^n) has the following properties:
+1) The expansion contains (n+1) terms.
+2) The coefficients of each term are numbers from the nth row of Pascal's Triangle.
+3) The exponent of (a) is (n) in the first term and decreases by 1 in each successive term.
+4) The exponent of (b) is 0 in the first term and increases by 1 in each successive term.
+5) The sum of the exponents in any term is (n).
+\placeholder{diagram}{Pascal's Triangle rows 0 through 4, colored black, red, blue, green, and purple respectively, linked to expansions: row 0: 1, (1=(x+y)^0); row 1: 1,1, (1x+1y=(x+y)^1); row 2: 1,2,1, (1x^2+2xy+1y^2=(x+y)^2); row 3: 1,3,3,1, (1x^3+3x^2y+3xy^2+1y^3=(x+y)^3); row 4: 1,4,6,4,1, (1x^4+4x^3y+6x^2y^2+4xy^3+1y^4=(x+y)^4). Horizontal colored lines connect the triangle to the corresponding coefficients and powers.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you use polynomial identities to rewrite expressions efficiently?
+\answer{First determine if an expression contains a difference of squares, square of a sum, difference of cubes, or sum of cubes. Then identify the squares or cubes. Finally, substitute the squares or cubes into the identity to simplify a calculation.}
+2. Reason Explain why the middle term of ((x+5)^2) is (10x).
+\answer{((x+5)^2) is the same as ((x+5)(x+5)). When expanding the polynomial, two of the terms are (5x) and (5x). The sum of these terms is (10x).}
+3. Use Structure Explain how to use a polynomial identity to factor (8x^6-27y^3).
+\answer{(8x^6) and (27y^3) are perfect cubes because (\sqrt[3]{8x^6}=2x^2) and (\sqrt[3]{27y^3}=3y). Use the difference of cubes to factor the polynomial. Substitute (2x^3) for (a) and (3y) for (b): ((2x^2-3y)((2x^2)^2+(2x^2)(3y)+(3y)^2)=(2x^2-3y)(4x^4+6x^2y+9y^2)).}
+\te{Printed substitution says (2x^3); likely (2x^2), as used in the displayed factors.}
+4. Communicate Precisely How are Pascal's Triangle and a binomial expansion, such as ((a+b)^5), related?
+\answer{The coefficients of the terms of the binomial expansion follow the pattern in Pascal's Triangle.}
+5. Make Sense and Persevere What number does (C_3) represent in the expansion (C_0a^5+C_1a^4b+C_2a^3b^2+C_3a^2b^3+C_4ab^4+C_5b^5)? Explain.
+\answer{10, because the first term of expansion is (C_0a^5), the expansion will use the fifth row of Pascal's Triangle. Since (C_3) represents the coefficient of the fourth term in the expansion, it is the fourth number in the fifth row of Pascal's Triangle, 10.}
+6. Error Analysis Dakota said the third term of the expansion of ((2g+3h)^4) is (36g^2h^2). Explain Dakota's error. Then correct the error.
+\answer{Sample: Dakota did not multiply by the coefficient of the third term, which is 6. The third term of ((2g+3h)^4) is (216g^2h^2).}
+\textbf{Do You KNOW HOW?}
+Use polynomial identities to multiply each expression.
+7. ((2x+8y)(2x-8y))
+\answer{(4x^2-64y^2)}
+8. ((5c-6i)(5c+6i))
+\answer{(25c^2+36)}
+9. ((x+3y)(x^2-3xy+9y^2))
+\answer{(x^3+27y^3)}
+Use polynomial identities to factor each polynomial.
+10. (36a^6-4b^2)
+\answer{((6a^3+2b)(6a^3-2b))}
+11. (121y^{12}+49z^4)
+\answer{((11y^6+7z^2i)(11y^6-7z^2i))}
+12. (8x^6-y^3)
+\answer{((2x^2-y)(4x^4+2x^2y+y^2))}
+13. (m^9+27n^6)
+\answer{((m^3+3n^2)(m^6-3m^3n^2+9n^4))}
+Find the term of the binomial expansion.
+14. fifth term of ((x+y)^5)
+\answer{(5xy^4)}
+15. third term of ((a-3)^6)
+\answer{(135a^4)}
+Use Pascal's Triangle or the Binomial Theorem to expand each expression.
+16. ((x+1)^5)
+\answer{(x^5+5x^4+10x^3+10x^2+5x+1)}
+17. ((a-b)^6)
+\answer{(a^6-6a^5b+15a^4b^2-20a^3b^3+15a^2b^4-6ab^5+b^6)}
+18. ((d-3)^4)
+\answer{(d^4-12d^3+54d^2-108d+81)}
+19. ((2x+4y)^7)
+\answer{(128x^7+1792x^6y+10,752x^5y^2+35,840x^4y^3+71,680x^3y^4+86,016x^2y^5+57,344xy^6+16,384y^7)}
+\end{concept-summary}
+% Source page 43: 140 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem-Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+21, 26, 28--53, 66--69 & 20--29, 31--51 odd, 53--71 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 29 & 2 \\
+2 & 30--41, 67 & 1 \\
+2 & 66, 68 & 3 \\
+3 & 42--53 & 1 \\
+3 & 21, 26, 28, 69 & 2 \\
+4 & 54--59, 70 & 1 \\
+4 & 25, 27 & 2 \\
+5 & 20, 60--65 & 1 \\
+5 & 23, 24 & 2 \\
+5 & 22, 71 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{20}{1}
+UNDERSTAND. Use Structure Expand ((3x+4y)^3) using Pascal's Triangle and the Binomial Theorem.
+\answer{(27x^3+108x^2y+144xy^2+64y^3)}
+\end{practice}
+\begin{practice}{21}{2}
+Error Analysis Akil factored (625g^{16}-25h^4). Describe and correct the error Akil made in factoring the polynomial.
+(625g^{16}-25h^2)
+(=(25g^4)^2-(5h^2)^2)
+(=(25g^4+5h^2)(25g^4-5h^4))
+\answer{Emma took the square root of the exponents. She should have divided the exponents by 2. Factored correctly, (625g^{16}-25h^4=(25g^8+5h^2)(25g^8-5h^2)).}
+\te{Printed prompt names Akil, but key names Emma. The incorrect-work display also changes the exponent of h between lines; all retained as printed.}
+\end{practice}
+\begin{practice}{22}{3}
+Higher Order Thinking Use Pascal's Triangle and the Binomial Theorem to expand ((x+i)^4). Justify your work.
+\answer{Use the Binomial Theorem to write the expansion when (n=4): (C_0a^4+C_1a^3b+C_2a^2b^2+C_3ab^3+C_4b^4). Use Pascal's Triangle to write the coefficients: (a^4+4a^3b+6a^2b^2+4ab^4+b^4). Identify (a) and (b): (a=x) and (b=i). Substitute (x) for (a) and (i) for (b): ((x)^4+4(x)^3(i)+6(x)^2(i)^2+4(x)(i)^3+(i)^4). (i=\sqrt{-1}), so (i^2=-1), (i^3=-i), and (i^4=1). So, ((x-i)^4=x^4+4x^3i-6x^2-4xi+1).}
+\te{Printed intermediate term (4ab^4); likely (4ab^3). Printed final left side ((x-i)^4); likely ((x+i)^4), matching the prompt and expansion.}
+\end{practice}
+\begin{practice}{23}{2}
+Use Structure Expand the expression ((2x-1)^4). What is the sum of the coefficients?
+\answer{1}
+\end{practice}
+\begin{practice}{24}{2}
+Error Analysis A student says that the expansion of the expression ((-4y+z)^7) has seven terms. Describe and correct the error the student may have made.
+\answer{The coefficients in Pascal's Triangle when (n=7) are 1, 7, 21, 35, 35, 21, 7, and 1. There are 8 coefficients, so there will be 8 terms in the expansion of the expression ((-4y+z)^7).}
+\end{practice}
+\begin{practice}{25}{2}
+Reason The sum of the coefficients in the expansion of the expression ((a+b)^n) is 64. Use Pascal's Triangle to find the value of (n).
+\answer{(n=6)}
+\end{practice}
+\begin{practice}{26}{2}
+Use Structure Factor (x^3-125y^6) in the form ((x-A)(x^2+Bx+C)). What do (A), (B), and (C) represent?
+\answer{(A=5y^2), (B=5y^2), (C=25y^4)}
+\end{practice}
+\begin{practice}{27}{2}
+Generalize How many terms will there be in the expansion of the expression ((x+3)^n)? Explain how you know.
+\answer{(n+1) terms; based on the pattern in Pascal's Triangle, each row has 1 more term than the row number.}
+\end{practice}
+\begin{practice}{28}{2}
+Make Sense and Persevere How could you use polynomial identities to factor the expression (x^6-y^6)?
+\answer{Use the Difference of Squares Identity.
+((x^6-y^6)=(x^3+y^3)(x^3-y^3))
+(=(x+y)(x^2-xy+y^2)(x-y)(x^2+xy+y^2))}
+\end{practice}
+\begin{practice}{29}{2}
+PRACTICE. Prove the polynomial identity. SEE EXAMPLE 1
+(x^4-y^4=(x-y)(x+y)(x^2+y^2))
+\answer{(x^4-y^4=(x-y)(x+y)(x^2+y^2))
+Multiply the first two factors using the Difference of Squares.
+(=(x^2-y^2)(x^2+y^2))
+Multiply remaining factors using the Difference of Squares.
+(=x^4-y^4)}
+\end{practice}
+\begin{practice}{30}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((x+9)(x-9))
+\answer{(x^2-81)}
+\end{practice}
+\begin{practice}{31}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((x+6)^2)
+\answer{(x^2+12x+36)}
+\end{practice}
+\begin{practice}{32}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((3x-7)^2)
+\answer{(9x^2-42x+49)}
+\end{practice}
+\begin{practice}{33}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((2x-5)(2x+5))
+\answer{(4x^2-25)}
+\end{practice}
+\begin{practice}{34}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((4x^2+6y^2)(4x^2-6y^2))
+\answer{(16x^4-36y^4)}
+\end{practice}
+\begin{practice}{35}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((x^2+y^6)^2)
+\answer{(x^4+2x^2y^6+y^{12})}
+\end{practice}
+\begin{practice}{36}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((8-x^2)(8+x^2))
+\answer{(64-x^4)}
+\end{practice}
+\begin{practice}{37}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((6-y^3)^2)
+\answer{(36-12y^3+y^6)}
+\end{practice}
+\begin{practice}{38}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+(18\cdot22)
+\answer{(396)}
+\end{practice}
+\begin{practice}{39}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+(103\cdot97)
+\answer{(9,991)}
+\end{practice}
+\begin{practice}{40}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((7+9)^2)
+\answer{(256)}
+\end{practice}
+\begin{practice}{41}{1}
+Use polynomial identities to multiply the expressions. SEE EXAMPLE 2
+((10+5)^2)
+\answer{(225)}
+\end{practice}
+\begin{practice}{42}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(x^8-9)
+\answer{((x^4+3)(x^4-3))}
+\end{practice}
+\begin{practice}{43}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(x^9-8)
+\answer{((x^3-2)(x^6+2x^3+4))}
+\end{practice}
+\begin{practice}{44}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(8x^3+y^9)
+\answer{((2x+y^3)(4x^2-2xy^3+y^6))}
+\end{practice}
+\begin{practice}{45}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(x^6-27y^3)
+\answer{((x^2-3y)(x^4+3x^2y+9y^2))}
+\end{practice}
+\begin{practice}{46}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(4x^2+144)
+\answer{((2x+12i)(2x-12i))}
+\end{practice}
+\begin{practice}{47}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(216+27y^{12})
+\answer{((6+3y^4)(36-18y^4+9y^8))}
+\end{practice}
+\begin{practice}{48}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(64x^3-125y^6)
+\answer{((4x-5y^2)(16x^2+20xy^2+25y^4))}
+\end{practice}
+\begin{practice}{49}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(\frac{1}{16}x^6-25y^4)
+\answer{((\frac14x^3+5y^2)(\frac14x^3-5y^2))}
+\end{practice}
+\begin{practice}{50}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(9^3+6^3)
+\answer{(945)}
+\end{practice}
+\begin{practice}{51}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(10^3+5^3)
+\answer{(1,125)}
+\end{practice}
+\begin{practice}{52}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(10^3-3^3)
+\answer{(973)}
+\end{practice}
+\begin{practice}{53}{1}
+Use polynomial identities to factor the polynomials or simplify the expressions. SEE EXAMPLE 3
+(8^3-2^3)
+\answer{(504)}
+\end{practice}
+\begin{practice}{54}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((x+3)^3)
+\answer{(x^3+9x^2+27x+27)}
+\end{practice}
+\begin{practice}{55}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((2a-b)^5)
+\answer{(32a^5-80a^4b+80a^3b^2-40a^2b^3+10ab^4-b^5)}
+\end{practice}
+\begin{practice}{56}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((b-\frac12)^4)
+\answer{(b^4-2b^3+\frac32b^2-\frac12b+\frac{1}{16})}
+\end{practice}
+\begin{practice}{57}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((x^2+1)^4)
+\answer{(x^8+4x^6+6x^4+4x^2+1)}
+\end{practice}
+\begin{practice}{58}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((2x+\frac13)^3)
+\answer{(8x^3+4x^2+\frac23x+\frac{1}{27})}
+\end{practice}
+\begin{practice}{59}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((x^3+y^2)^6)
+\answer{(x^{18}+6x^{15}y^2+15x^{12}y^4+20x^9y^6+15x^6y^8+6x^3y^{10}+y^{12})}
+\end{practice}
+\begin{practice}{60}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((d-3)^4)
+\answer{(d^4-12d^3+54d^2-108d+81)}
+\end{practice}
+\begin{practice}{61}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((2m+2n)^6)
+\answer{(64m^6+384m^5n+960m^4n^2+1,280m^3n^3+960m^2n^4+384mn^5+64n^6)}
+\end{practice}
+\begin{practice}{62}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((n+5)^5)
+\answer{(n^5+25n^4+250n^3+1,250n^2+3,125n+3125)}
+\end{practice}
+\begin{practice}{63}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((3x-0.2)^3)
+\answer{(27x^3-5.4x^2+0.36x-0.008)}
+\end{practice}
+\begin{practice}{64}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((4g+2h)^4)
+\answer{(256g^4+512g^3h+384g^2h^2+128gh^3+16h^4)}
+\end{practice}
+\begin{practice}{65}{1}
+Use the Binomial Theorem to expand the expressions. SEE EXAMPLES 4 and 5
+((m^2+\frac12n)^3)
+\answer{(m^6+\frac32m^4n+\frac34m^2n^2+\frac18n^3)}
+\end{practice}
+% Source page 44: 141 Practice & Problem Solving; preceding practice answers appear in this page's answer column.
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice \& Problem Solving is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{practice}{66}{3}
+APPLY. Reason A medium-sized shipping box with side length (s) units has a volume of (s^3) cubic units.
+\placeholder{illustration}{Three brown cardboard shipping boxes labeled DORM: an open medium box containing dorm supplies has all three visible dimensions labeled s; a small closed box rests on a large closed box to its right.}
+a. A large shipping box has side lengths that are 3 units longer than the medium shipping box. Write a binomial expression for the volume of the large shipping box.
+\answer{a. ((s+3)^3)}
+b. Expand the polynomial in part a to simplify the volume of the large shipping box.
+\answer{b. (s^3+9s^2+27s+27)}
+c. A small shipping box has side lengths that are 2 units shorter than the medium shipping box. Write a binomial expression for the volume of the small shipping box.
+\answer{c. ((s-2)^3)}
+d. Expand the polynomial in part c to simplify the volume of the small shipping box.
+\answer{d. (s^3-6s^2+12s-8)}
+\end{practice}
+\begin{practice}{67}{1}
+Use Structure The dimensions of a rectangle are shown. Write the area of the rectangle as a sum of cubes.
+\placeholder{diagram}{Unshaded horizontal rectangle; right vertical side labeled (x+3) in red; bottom horizontal side labeled (x^2-3x+9) in red.}
+\answer{(x^3+27)}
+\end{practice}
+\begin{practice}{68}{3}
+A Pythagorean triple is a set of three positive integers (a), (b), and (c) that satisfy (a^2+b^2=c^2). The identity ((x^2-y^2)^2+(2xy)^2=(x^2+y^2)^2) can be used to generate Pythagorean triples. Use the identity to generate a Pythagorean triple when (x=5) and (y=4).
+\answer{9, 40, 41}
+\end{practice}
+\begin{practice}{69}{2}
+ASSESSMENT PRACTICE. Are the expressions below perfect square trinomials? Select Yes or No.
+\begin{tabular}{lll}
+ & Yes & No \\
+(x^2+16x-64) & & \\
+(4x^2-44x+121) & & \\
+(9x^2-15x+25) & & \\
+\end{tabular}
+\answer{Yes; Yes; No.}
+\te{Printed first selection is Yes for (x^2+16x-64); likely a sign error in the constant, since a perfect square would have (+64).}
+\end{practice}
+\begin{practice}{70}{1}
+SAT/ACT How many terms are in the expansion of ((2x+7y)^9)?
+A. 2
+B. 7
+C. 8
+D. 9
+E. 10
+\answer{E}
+\end{practice}
+\begin{practice}{71}{3}
+Performance Task If an event has a probability of success (p) and a probability of failure (q), then each term in the expansion of ((p+q)^n) represents a probability. To find the probability the basketball player will make exactly (h) out of (k) free throws, find (C_{k-h}p^hq^{k-h}), where (C_{k-h}) is a coefficient of row (k) of Pascal's Triangle, (p) is the probability of success, and (q) is the probability of failure.
+\placeholder{illustration}{Basketball player shoots toward a hoop. Red curved arrow enters the hoop, labeled (p=0.6); blue curved arrow misses to the right, labeled (q=0.4).}
+Part A What is the probability the basketball player will make exactly 6 out of 10 free throws? Round to the nearest percent.
+\answer{Part A 25\%}
+Part B Another basketball player makes 80\% of her free throw attempts. Write an expression to find the probability of this basketball player making exactly 7 out of 10 free throws. Find the probability and round to the nearest percent.
+\answer{Part B (120(0.8)^7(0.2)^3); 20\%}
+Part C Find the probability that the basketball player from Part B will make 9 or 10 free throws out of 10 attempts. Round to the nearest percent.
+\answer{Part C 38\%}
+\end{practice}
+% Source page 45: 141A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & G100 \\
+2 & 2 & G100 \\
+3 & 2 & G100 \\
+4 & 2 & G100 \\
+5 & 2 & G100 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{ASSESSMENT RESOURCES}
+\textbf{3-3 Lesson Quiz: Polynomial Identities}
+Name \underline{\hspace{3cm}}
+1. Prove the identity (x^3-y^6=(x-y^2)(x^2+xy^2+y^4)).
+\begin{tabular}{llllll}
+Distributive & Associative & Commutative & Reflexive & & \\
+Add & Subtract & Multiply & Divide & 1 & (-1) \\
+(x) & (y) & variables & coefficients & like terms & constants \\
+\end{tabular}
+((x-y^2)(x^2+xy^2+y^4))
+(=x(x^2+xy^2+y^4)-y^2(x^2+xy^2+y^4)) Use the \underline{\hspace{1cm}} Property.
+(=x^3+x^2y^2+xy^4-(x^2y^2+xy^4+y^6)) \underline{\hspace{1cm}}.
+(=x^3+x^2y^2+xy^4-x^2y^2-xy^4-y^6) Distribute the factor of \underline{\hspace{1cm}}.
+(=x^3-y^6) Combine \underline{\hspace{1cm}}.
+\answer{1. Distributive; Multiply; (-1); like terms.}
+2. Part A Use polynomial identities to multiply ((5-4x^3)(5+4x^3)).
+A. (25-4x^9)
+B. (25-40x^3+16x^6)
+C. (25-4x^6)
+D. (25-16x^6)
+Part B What identity did you use?
+A. Difference of squares
+B. Difference of cubes
+C. Sum of cubes
+D. Square of a sum
+\answer{2. Part A D; Part B A.}
+3. Part A Use polynomial identities to factor (1-125n^3). Select all factors.
+A. (1-5n)
+B. (1+5n)
+C. (1+5n+5n^2)
+D. (1-5n+5n^2)
+E. (1+5n+25n^2)
+F. (1-5n+25n^2)
+Part B What identity did you use?
+A. Difference of squares
+B. Difference of cubes
+C. Sum of cubes
+D. Square of a sum
+\answer{3. Part A A, E; Part B B.}
+4. Use Pascal's Triangle to expand the expression ((x+2)^8).
+A. (x^8+256)
+B. (256+x+16x^2+112x^3+448x^4+1120x^5+1792x^6+1792x^7+1024x^8)
+C. (x^8+16x^7+112x^6+448x^5+1120x^4+1792x^3+1792x^2+1024x+256)
+D. (x^7+14x^6+84x^5+280x^4+560x^3+672x^2+448x+128)
+\answer{4. C.}
+5. Expand ((a+4)^5): (a^5+\underline{\hspace{.5cm}}a^4+\underline{\hspace{.5cm}}a^3+\underline{\hspace{.5cm}}a^2+\underline{\hspace{.5cm}}a+\underline{\hspace{.5cm}})
+\answer{5. 20; 160; 640; 1280; 1024.}
+\end{te-addendum}
+% Source page 46: 141B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+\textbf{Reteach to Build Understanding} I
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School
+\textbf{3-3 Reteach to Build Understanding: Polynomial Identities}
+Name \underline{\hspace{3cm}}
+Special polynomial identities can be used to multiply polynomials.
+For example, ((ax+b)(ax+b)) or ((ax-b)(ax-b)) can be multiplied using the formula (ax^2\pm2abx+b^2), where the sign of the second term is determined by whether you are adding or subtracting the polynomial.
+\te{Printed formula begins (ax^2); likely (a^2x^2).}
+\textbf{Example}
+Find the product of ((3x+2)(3x+2)) and ((3x-2)(3x-2)) using (a^2\pm2ab+b^2).
+Let (a=3x), (2ab=2(3x)(2)), (b=2), (a^2=9x^2), (2ab=12x), and (b^2=4).
+Substitute each value into the expression (a^2\pm2ab+b^2).
+((3x+2)(3x+2)=9x^2+2(3x)(2)+4)
+(=9x^2+12x+4)
+and ((3x-2)(3x-2)=9x^2-2(3x)(2)+4)
+(=9x^2-12x+4)
+1. Multiply each polynomial using the formula (a^2\pm2ab+b^2).
+a. ((2x+2)(2x+2))
+Identify the values: (a=\underline{\hspace{.5cm}}), (b=\underline{\hspace{.5cm}})
+Substitute: (a^2=(2x)^2), (2ab=2(2x)(2)), (b^2=(2)^2)
+Solve: ((2x+2)(2x+2)=\underline{\hspace{.5cm}}x^2+\underline{\hspace{.5cm}}x+4)
+\answer{a. (a=2x), (b=2); 4; 8.}
+b. ((x-3)(x-3))
+Identify the values: (a=\underline{\hspace{.5cm}}), (b=\underline{\hspace{.5cm}})
+Substitute: (a^2=(\underline{\hspace{.5cm}})^2), (2ab=\underline{\hspace{.5cm}}), (b^2=(\underline{\hspace{.5cm}})^2)
+Solve: ((x-3)(x-3)=\underline{\hspace{.5cm}}x^2-\underline{\hspace{.5cm}}x+\underline{\hspace{.5cm}})
+\answer{b. (a=1x), (b=3); 1; (2(x)(3)); 3; 1; 6; 9.}
+\te{Printed substitution gives (a^2=(1)^2); likely (a^2=(x)^2).}
+2. Martin multiplied the polynomials using the polynomial formula. Find and fix his error.
+((3x-4)(3x-4)=9x^2+24x+16)
+\answer{Sample Answer: Martin should have subtracted the second term since he was subtracting the polynomial. The correct answer is (9x^2-24x+16).}
+3. Solve ((5x-2)(5x-2)).
+(a=\underline{\hspace{.5cm}}), (2ab=\underline{\hspace{.5cm}}), (b=-2)
+(a^2=(\underline{\hspace{.5cm}})^2), (2ab=\underline{\hspace{.5cm}}), (b^2=(\underline{\hspace{.5cm}})^2)
+((5x-2)(5x-2)=\underline{\hspace{2cm}}+4)
+\answer{3. (5x); (2(5x)(-2)); (5x); (2(5x)(-2)); (-2); (25x^2-20x+4).}
+\te{Printed final answer fills the blank with (25x^2-20x+4), followed by another preprinted (+4).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice} I O
+Provides extra practice for each lesson.
+MathXL for School
+\textbf{3-3 Additional Practice: Polynomial Identities}
+Name \underline{\hspace{3cm}}
+Prove the polynomial identity.
+1. (x^2-y^2=(x-y)(x+y))
+\answer{(x^2-y^2=(x^2+xy-xy+y^2))
+(x^2-y^2=x^2-y^2)}
+\te{Printed first expansion ends in (+y^2); likely (-y^2).}
+2. ((x^4-y^4)=(x^2+y^2)(x+y)(x-y))
+\answer{((x^4-y^4)=(x^2+y^2)(x^2-xy+xy-y^2))
+((x^4-y^4)=(x^2+y^2)(x^2-y^2))
+((x^4-y^4)=(x^4+x^2y^2-x^2y^2-y^4))
+((x^4-y^4)=(x^4-y^4))}
+Use polynomial identities to multiply the polynomial.
+3. ((3x+9)(3x-9))
+\answer{(9x^2-81)}
+4. ((-6x^2+7y^3)^2)
+\answer{(36x^4-84x^2y^3+49y^6)}
+5. ((8x^4+5y^3)^2)
+\answer{(64x^8+80x^4y^3+25y^6)}
+Use polynomial identities to factor the polynomial.
+6. (n^6-25m^4)
+\answer{((n^3-5m^2)(n^3+5m^2))}
+7. (16x^{12}-64y^4)
+\answer{((4x^6-8y^2)(4x^6+8y^2))}
+8. (b^2-36c^4)
+\answer{((b-6c^2)(b+6c^2))}
+9. (25x^6-100y^4)
+\answer{((5x^3-10y^2)(5x^3+10y^2))}
+10. ((s+4t)^6)
+\answer{((15x^3-y^3)(15x^3+y^3))}
+\te{Printed answer for item 10 is unrelated to its prompt.}
+Expand the equations using Pascal's Triangle and the Binomial Theorem.
+11. ((x+0.5)^3)
+\answer{(x^3+1.5x^2+0.75x+0.125)}
+12. ((s+4t)^6)
+\answer{(s^6+24s^5t+240s^4t^2+1280s^3t^3+3840s^2t^4+6144st^5+4096t^6)}
+Use Pascal's Triangle to expand the equations below.
+13. ((3a-3b)^4)
+\answer{(81a^4-324a^3b+486a^2b^2-324ab^3+81b^4)}
+14. ((3m-2n)^5)
+\answer{(243m^5-810m^4n+1080m^3n^2-720m^2n^3+240mn^4-32n^5)}
+15. ((a-4)^5)
+\answer{(a^5-20a^4+160a^3-640a^2+1280a-1024)}
+16. A rectangular lawn has an area of (a^3-125). Use the difference of cubes to find the dimensions of the rectangle.
+\answer{((a-5)(a^2+5a+25))}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment} O A
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School
+\textbf{3-3 Enrichment: Polynomial Identities}
+Name \underline{\hspace{3cm}}
+Although other mathematicians before Pascal knew of the patterns seen in Pascal's Triangle, Pascal discovered interesting patterns within the triangle. One of the patterns he saw was that the sum of the rows is (2^n), where (n) is the number of the row starting with row 0. You can use the formula to calculate the sum of each row.
+1. Use Pascal's Triangle to find the sum of Rows 9, 10, and 11.
+\begin{tabular}{lll}
+Row 0: & (2^0=1) & 1 \\
+Row 1: & (2^1=2) & (1+1) \\
+Row 2: & (2^2=4) & (1+2+1) \\
+Row 3: & (2^3=8) & (1+3+3+1) \\
+Row 4: & (2^4=16) & (1+4+6+4+1) \\
+Row 9: & (2^9=\underline{\hspace{1cm}}) & \\
+Row 10: & (2^{10}=\underline{\hspace{1cm}}) & \\
+Row 11: & (2^{11}=\underline{\hspace{1cm}}) & \\
+\end{tabular}
+\answer{1. Row 9: 512; Row 10: 1,024; Row 11: 2,048.}
+2. Find the values for Rows 5--8. Then find the values for Rows 9, 10, and 11. Fill in the missing numbers for each row.
+\answer{2. Row 9: (1+9+36+84+126+126+84+36+9+1)
+Row 10: (1+10+45+120+210+252+210+120+45+10+1)
+Row 11: (1+11+55+165+330+462+462+330+165+55+11+1)}
+3. Using Pascal's Triangle and the Binomial Theorem, work backwards for each polynomial shown to create the polynomial that was expanded.
+a. (81x^4+216x^3+216x^2+96x+16)
+\answer{a. ((3x+2)^4)}
+b. (x^6+24x^5+240x^4+1280x^3+3840x^2+6144x+4096)
+\answer{b. ((x+4)^6)}
+4. Use Pascal's Triangle and the Binomial Theorem to find the coefficient for the 4th term of the expanded polynomial of ((3x+6)^5). Choose the correct answer shown.
+A. 7,776
+B. 19,440
+C. 9,720
+D. 2,430
+\answer{4. B.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I O
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{3-3 Mathematical Literacy and Vocabulary: Polynomial Identities}
+Name \underline{\hspace{3cm}}
+1. Match the polynomial identity to the correct answer.
+\begin{tabular}{ll}
+a. Difference of Squares & ((a-b)(a^2+ab+b^2)) \\
+b. Difference of Cubes & (a^2+2ab+b^2) \\
+c. Square of a Sum & ((a+b)(a^2-ab+b^2)) \\
+d. Sum of Cubes & ((a-b)(a+b)) \\
+\end{tabular}
+\answer{1. a. ((a-b)(a+b)); b. ((a-b)(a^2+ab+b^2)); c. (a^2+2ab+b^2); d. ((a+b)(a^2-ab+b^2)).}
+2. Match the polynomial identity to the correct answer.
+\begin{tabular}{ll}
+a. Difference of Squares & ((4x-5)(16x^2+20x+25)) \\
+b. Difference of Cubes & ((4x-5y)(4x+5y)) \\
+c. Square of a Sum & ((4x+5)(16x^2-20x+25)) \\
+d. Sum of Cubes & (20x^2+40xy+25y^2) \\
+\end{tabular}
+\answer{2. a. ((4x-5y)(4x+5y)); b. ((4x-5)(16x^2+20x+25)); c. (20x^2+40xy+25y^2); d. ((4x+5)(16x^2-20x+25)).}
+\te{Printed square-of-a-sum match begins (20x^2); likely (16x^2).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{diagram}{Tablet screenshot of a digital assignment: Solve the system of equations by graphing, (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Blank coordinate grid with x and y axes, unit grid, labeled even ticks from -10 to 10 on both axes; arrows at positive ends. Controls: Exit; Question Help; Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print; Click to enlarge graph. Bottom instruction: Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.}
+\end{te-addendum}
+
+\end{document}

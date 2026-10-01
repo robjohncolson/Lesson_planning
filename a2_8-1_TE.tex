@@ -1,0 +1,898 @@
+\documentclass{article}
+% Source: Topic_08_Teacher_Edition.pdf, PDF pages 12-23 (printed pages 395A-402B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 12: 395A Lesson Overview
+\begin{lesson-meta}
+lesson: 8-1
+title: Solving Trigonometric Equations Using Inverses
+standards: none printed
+practices: none printed
+objective: I can use inverse trigonometric functions.
+
+essential question: How can you use an inverse function to find all the solutions of a trigonometric equation?
+
+\textbf{VOCABULARY}
+\item standard position
+\item inverse function
+\item unit circle
+\item restrict the domain
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 8-1 \\
+Title & Solving Trigonometric Equations Using Inverses \\
+Standards & none printed \\
+I CAN Objective & I can use inverse trigonometric functions. \\
+Essential Question & How can you use an inverse function to find all the solutions of a trigonometric equation? \\
+Lesson Vocabulary & standard position; inverse function; unit circle; restrict the domain \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Define and evaluate inverse trigonometric functions.
+\item Solve trigonometric equations using inverse functions, and interpret the solutions within a modeling context.
+Essential Understanding. An inverse trigonometric function maps each value in the range of the original function to only one value in the domain of the original function. It is derived by restricting the domain to a portion of the graph where the function is always increasing (or decreasing) and includes 0. An inverse trigonometric function can be used to solve a trigonometric equation.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Used the unit circle to evaluate trigonometric functions.
+In this lesson, students:
+\item Use the unit circle to evaluate inverse trigonometric functions.
+Increasing Coherence. This lesson is not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Use the unit circle to verify trigonometric identities.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that inverse functions can be used to find the solutions of a trigonometric equation.
+\item Students apply trigonometric models to solve real-world problems, such as finding the months that the average temperature will exceed a specified temperature.
+\textbf{Mathematics Overview}
+Students extend their knowledge of inverse functions to trigonometric functions. They restrict the domains of trigonometric functions so they have an inverse, and use the inverse trigonometric functions to solve trigonometric equations.
+\textbf{Applying Math Practices}
+Use Appropriate Tools Strategically. Students recognize the strengths of technology when they choose to use a calculator to find an unknown angle measure because the value of a trigonometric function does not stem from a common angle.
+Look For and Make Use of Structure. Students look for the overall structure in mathematics when they relate the domain and range of trigonometric functions to those of their inverses.
+\te{SavvasRealize.com. Program Resources.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+REVIEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+standard position & posición estándar \\
+inverse function & función inversa \\
+unit circle & círculo unitario \\
+restrict the domain & restringir el dominio \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Review the term inverse and discuss students' understanding of the relationship between the definitions of the terms function and inverse function. Have students complete the sentences below using the terms function and inverse function.
+Show students a group of fruit (or a picture).
+1. A relation that maps each element of the domain to only one element in the range is a(n) blank. \answer{function}
+2. A relation that maps each element in range to only one element in the domain is a(n) blank. \answer{inverse function}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 12 964 703 1115 882
+\placeholder{illustration}{Student Companion cover, black background with luminous purple, blue and orange spherical line art; enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+% Source page 13: 395B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students critique methods used to find angles with the same sine value. This introduces students to the concept of inverse trigonometric functions.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+\te{Activity. Critique \& Explain is available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: What do you notice about Marisol and Nadia's answers?
+\answer{Marisol gives only two solutions; however, Nadia gives a pattern that represents an infinite number of solutions.}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: How can you verify each student's solutions?
+\answer{Evaluate (\sin\theta) for the listed values of (\theta). Compare the results to (\frac{\sqrt3}{2}).}
+For Early Finishers
+Q: Find values of (\theta) that are solutions of the equation (\sin\theta=-\frac{\sqrt3}{2}). How do these values compare to the solutions of (\sin\theta=\frac{\sqrt3}{2})?
+\answer{The solutions of (\sin\theta=-\frac{\sqrt3}{2}) are opposites of the solutions of (\sin\theta=\frac{\sqrt3}{2}). Sample solutions: (\frac\pi3,-\frac\pi3) and (\frac{2\pi}3,-\frac{2\pi}3).}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Q: How could you use Marisol's answers to find all of the correct solutions for (\theta)?
+\answer{Add multiples of (2\pi) to each of her answers.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with CRITIQUE \& EXPLAIN
+Communicate Precisely Dylan answers the same question by writing (\frac\pi3+2k\pi) and (\frac{2\pi}3+2k\pi) for integer values of (k). Does this show all the possible solutions? Explain.
+\answer{Yes; adding (2k\pi) to each solution for integer values of (k) accounts for all angles that are coterminal with the given angle, thereby representing all possible solutions.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Marisol and Nadia are both asked to find (\theta) given (\sin\theta=\frac{\sqrt3}{2}).
+% FIG 13 976 658 1127 754
+\placeholder{illustration}{Whiteboard with gray frame and tray holding purple and blue markers and brown eraser. Purple underlined Marisol: theta=pi/3 and theta=2pi/3. Blue underlined Nadia: theta=pi/3,7pi/3,13pi/3,... .}
+A. Is either student correct? Explain.
+\answer{Both Marisol and Nadia are partially correct Marisol found the angles in Quadrant I and Quadrant II of the unit circle. Nadia found the first angle and then recognized that any coterminal angle would also be a solution.}
+B. Make Sense and Persevere What are all of the correct solutions for (\theta)?
+\answer{(\frac\pi3,\frac{2\pi}3), and all the angles coterminal with those two angles.}
+\te{STUDENT EDITION. SAMPLE STUDENT WORK. Digital panel repeats the prompt and whiteboard, with Go back, ESSENTIAL QUESTION, Enter your answer fields and SOLUTION button. I CAN... use inverse trigonometric functions.}
+\end{model-discuss}
+% Source page 14: 395 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Introduce students to inverse trigonometric functions. Students learn to evaluate inverse trigonometric functions and use them to solve trigonometric equations.
+\te{Activity. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Define Inverse Trigonometric Functions}
+Pose Purposeful Questions ETP
+Q: Is there more than one way to restrict the domain of (y=\sin x) so the function has a valid inverse function?
+\answer{Yes; you can restrict (y=\sin x) on any interval of length (\pi) in which every value of the restricted range is represented exactly once and none are missing.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Define Inverse Trigonometric Functions}
+\te{CONCEPTUAL UNDERSTANDING. ESSENTIAL QUESTION How can you use an inverse function to find all the solutions of a trigonometric equation?}
+How can we construct inverse trigonometric functions? Why use an inverse function?
+The sine and cosine functions are periodic, so the values of the range repeat throughout their domains. For their inverse relations to be functions, the domains of (y=\sin x) and (y=\cos x) must be restricted. Choose a portion of the graph where the function is always increasing (or decreasing) and includes 0°.
+\te{LOOK FOR RELATIONSHIPS How do the domain and range of the sine function relate to those of its inverse function?}
+Look at the restricted portion of the sine graph over ([-\frac\pi2,\frac\pi2]). Its range is the same as (f(x)=\sin x), and it has an inverse function.
+% FIG 14 838 340 918 402
+\placeholder{graph}{Red sine wave on black arrowed x,y axes,O; x labels-pi,pi, grid pi/2; y labels-1,1,grid1/2,window-2pi..2pi,-1.5..1.5. Blue rectangle highlights -pi/2..pi/2. Red curve throughorigin, maxima(pi/2,1),(-3pi/2,1),minima(-pi/2,-1),(3pi/2,-1); curve end arrows.}
+The inverse function is defined as (y=\sin^{-1}x) where (x=\sin y) for (-\frac\pi2\leq y\leq\frac\pi2).
+Look at a similar section of the cosine graph, over ([0,\pi]). It has the same range as (f(x)=\cos x), and it has an inverse function.
+% FIG 14 1061 341 1142 402
+\placeholder{graph}{Red cosine on black arrowed x,y axes,O;x labels-pi,pi,gridpi/2;y labels-1,1,grid1/2;window-2pi..2pi,-1.5..1.5. Blue rectangle highlights0..pi. Red maximum(0,1), minima(+-pi,-1),end arrows.}
+The inverse function is defined as (y=\cos^{-1}x) where (x=\cos y) for (0\leq y\leq\pi).
+An inverse trigonometric function returns the angle measure when the ratio is known. Set your calculator to degrees and enter (\cos^{-1}(\frac35)) and (\sin^{-1}(\frac45)). Since this is the same angle, (\cos^{-1}(\frac35)=\sin^{-1}(\frac45)\approx53.1°).
+% FIG 14 1052 482 1149 579
+\placeholder{diagram}{Black unit circle on gray square grid .2 units,arrowed x,y axes,O, labels+-1 bothaxes,window+-1.2. Red radius tofilledpoint(3/5,4/5) inquadrantI,redtheta counterclockwisearc frompositivexaxis;bluegiven arrowtopoint,blueunknown arrowtotheta.}
+\answer{Restrict the domains to intervals on which the functions are always increasing or decreasing and include 0°. An inverse trigonometric function returns the angle measure when the ratio is known; (\cos^{-1}(3/5)=\sin^{-1}(4/5)\approx53.1°).}
+\end{example}
+\begin{tryit}{1}
+Use an inverse trigonometric function to find the radian measure of the angle that intersects the unit circle at (\frac35,\frac45). Round to the nearest hundredth.
+\answer{0.93 radians}
+\end{tryit}
+\begin{te-addendum}{1}{HabitsOfMind}
+Use with EXAMPLE 1
+Construct Arguments Does choosing any interval for sine where the function is always increasing (or decreasing) guarantee that the restricted domain includes all values in the range? Explain.
+\answer{No; you have to choose the largest such interval, such as ([-\frac\pi2,\frac\pi2]). On the interval ([0,\frac\pi2]), cosine is always decreasing, but only positive values of the range are included.}
+\te{Printed question asks about sine, while the answer switches to cosine; likely sine increasing is intended for the example interval. The endpoint also includes 0.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Example 1}
+Additional Examples are available at SavvasRealize.com.
+Q: How should the domain of (y=\sec x) be restricted to define the inverse secant function?
+% FIG 14 168 1004 266 1104
+\placeholder{graph}{Orange secant on black arrowed x,y axes,O,unitgrid andlabels-4,-2,2,4 onbothaxes;window-5..5,-5..5. Upbranchvertex(0,1),downbranchesvertices(+-pi,-1),asymptotesoddpi/2 implied. Blue rectanglefromx0topi,y-5to5,no endpointcircles.}
+\answer{The inverse function can be defined as (y=\sec^{-1}x), where (x=\sec y) for (0\leq x<\frac\pi2) or (\frac\pi2<x\leq\pi).}
+\te{Printed restrictions use x; likely y in the inverse relation. Digital Go back, ESSENTIAL QUESTION, SOLUTION.}
+Example 1 Help students explore restricting the domain of other trigonometric functions to define an inverse function.
+Q: Why is (y=\frac\pi2) not included in the range of the inverse secant function?
+\answer{The secant function is not defined at (x=\frac\pi2), so it is not included in the range of the inverse function.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Example 2}
+Q: A building is 42 ft tall. The length of the shadow of the building is 55 ft long. The building and the ground form a right angle. What is the angle of elevation from the end of the building's shadow to the top of the building?
+% FIG 14 997 975 1105 1066
+\placeholder{diagram}{Black righttriangle withverticalleftleg labeled height of building,horizontalbase labeled length of shadow,orange rightangle lowerleft,theta lowerright betweenbase anddescendinghypotenuse.}
+\answer{In the triangle formed, the building height is the leg opposite (\theta). The length of the shadow is the leg adjacent to (\theta). Therefore, (\tan\theta=\frac{42}{55}). So, (\theta=\tan^{-1}(\frac{42}{55})\approx37.4°).}
+\te{Digital Go back,ESSENTIAL QUESTION,TRY ANOTHER ONE,SOLUTION.}
+Example 2 Help students explore finding the measure of an angle using inverse trigonometric functions in real-world situations.
+Q: Can the length of the shadow be longer than the height of the building?
+\answer{Yes; if the shadow is longer than the height of the building, the angle is less than 45°.}
+\end{te-addendum}
+% Source page 15: 396 Evaluate Inverse Trigonometric Functions
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Evaluate Inverse Trigonometric Functions}
+Pose Purposeful Questions ETP
+Q: What do you know about the value of (\sin^{-1}(\frac12))?
+\answer{The value is between (-\frac\pi2) and (\frac\pi2).}
+Q: What is another way to determine the value of (\sin^{-1}(\frac12))?
+\answer{Graph the function (y=\sin x) on the interval (-\frac\pi2\leq x\leq\frac\pi2) and find the x-value where (y=\frac12).}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Inverse Trigonometric Functions}
+\begin{tabular}{llll}
+ & Inverse sine & Inverse cosine & Inverse tangent \\
+Function & (y=\sin^{-1}x) & (y=\cos^{-1}x) & (y=\tan^{-1}x) \\
+Domain & ([-1,1]) & ([-1,1]) & ((-\infty,\infty)) \\
+Range & ([-\frac\pi2,\frac\pi2]) & ([0,\pi]) & ((-\frac\pi2,\frac\pi2)) \\
+\end{tabular}
+% FIG 15 845 332 924 413
+\placeholder{graph}{Graph inverse sine,green increasing curve from(-1,-pi/2)through(0,0)to(1,pi/2),no endpointcircles orcurvearrows. Black doublearrowx,yaxes,O;xgrid1/2 labels-1,1;ygridpi/4 labels+-pi/2;window-2..2,-pi..pi.}
+% FIG 15 927 332 1007 416
+\placeholder{graph}{Graph inverse cosine,red decreasing curve from(-1,pi)through(0,pi/2)to(1,0),no endpointcircles. Black doublearrowx,yaxes,O;xgrid1/2 labels-1,1;ygridpi/4 labels-pi/2,pi/2,pi;window-2..2,-3pi/4..5pi/4.}
+% FIG 15 1010 332 1091 416
+\placeholder{graph}{Graph inverse tangent,blue increasing S-curve throughorigin withend arrows approachingy+-pi/2. Blackdoublearrowx,yaxes,O;xgrid1/2 labels-1,1;ygridpi/4 labels+-pi/2;window-2..2,-pi..pi. Noasymptotelinesdrawn.}
+\end{concept-box}
+\begin{example}{2}
+\textbf{Evaluate Inverse Trigonometric Functions}
+A. What is (\sin^{-1}(\frac12))?
+The sine of an angle is positive in Quadrant I and Quadrant II, but Quadrant II angles are outside the range of (f(x)=\sin^{-1}x). So, there is only one possible value:
+(\sin^{-1}(\frac12)=\theta)
+(\theta=30°)
+\te{COMMUNICATE PRECISELY The expression (\sin^{-1}x) asks for the angle measure that has x for its sine. Callout: Think about what angle has a sine of (\frac12). You can work in degrees or radians.}
+% FIG 15 977 479 1120 603
+\placeholder{diagram}{Unitcircle blackrightsemicircle anddashedgrayleftsemicircle,arrowedx,yaxes. Redfilledaxispoints labeled0 atright,pi/2 attop,-pi/2 atbottom. Blackray30degreesabovepositivexthroughredpoint(sqrt3/2,1/2),redverticalleg1/2 andrightangleonxaxis;redthetaarc betweenrayandpositivex.}
+\answer{A. (\theta=30°)}
+B. What is (\cos^{-1}(-\frac{\sqrt3}{2}))?
+The cosine of an angle is negative in Quadrant II and Quadrant III. But Quadrant III angles are outside the range of (f(x)=\cos^{-1}(x)). So, there is only one possible answer:
+(\cos^{-1}(-\frac{\sqrt3}{2})=\theta)
+(\theta=150°)
+% FIG 15 976 646 1102 774
+\placeholder{diagram}{Unitcircle blackuppersemicircle anddashedgraylowersemicircle,arrowedx,yaxes. Redfilledaxispoints labeled0 atright,pi/2 attop,pi atleft. Blackray150degreesfrompositivexthroughredpoint(-sqrt3/2,1/2),redverticallegtonegativexaxisandrightangle;redthetaarc shownbetweenrayandnegativexaxis.}
+\te{Printed theta arc marks the30° reference angle while the solution theta is 150°; likely full angle from positive x-axis intended.}
+\answer{B. (\theta=150°)}
+\end{example}
+\begin{tryit}{2}
+a. What is (\cos^{-1}(\frac{\sqrt2}{2}))?
+b. What is (\tan^{-1}(-\sqrt3))?
+\answer{a. (45°=\frac\pi4) b. (-60°=-\frac\pi3)}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: What is the difference between representing (\cos^{-1}(\frac{\sqrt2}{2})) on the unit circle and representing (\sin^{-1}(\frac12)) on the unit circle?
+\answer{The points for (\cos^{-1}(\frac{\sqrt2}{2})) are plotted at (\frac{\sqrt2}{2},\frac{\sqrt2}{2}) instead of (\frac{\sqrt3}{2},\frac12).}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+Try It!2a Some students may state that there are two answers, (\frac\pi4) and (\frac{7\pi}4). Show students the graph of the inverse cosine function. Use the graph to explain that (\frac{7\pi}4) is not in the range of the inverse cosine function.
+\end{te-addendum}
+% Source page 16: 397 Find All Angles With a Given Trigonometric Value
+\begin{te-addendum}{3}{PurposefulQuestions}
+Pose Purposeful Questions ETP
+Q: Why do you need to check that your calculator has the correct units of measure selected?
+\answer{If you have your calculator set to radians, and you are expecting the answer to be in degrees, then you would write the answer using the wrong units.}
+Q: Why do you add ((360°)k) to two angles to identify all angles with the cosine value in Part A, but add ((180°)k) to only one value to identify all angles with the tangent value in Part B?
+\answer{The tangent function values have the same signs in Quadrants I and III, and in Quadrants II and IV. So if you add 180° to an angle, the angle has the same tangent value. This is not the case for cosine, so you have to add 360° to both angles.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Find All Angles With a Given Trigonometric Value}
+A. Find all angles (\theta), in degrees, whose cosine is 0.57.
+Step 1 Use your calculator to find one angle. Since (\cos\theta=0.57), one angle is (\theta=\cos^{-1}0.57), or (\theta\approx55.25°).
+Step 2 Find another angle on the unit circle. An angle in Quadrant IV with a 55.25° reference angle will have a cosine of 0.57. One such angle is (\theta\approx-55.25°).
+Any angle that is coterminal with either 55.25° or-55.25° will have the same cosine. Therefore, any angle of the form (55.25°+k\cdot360°) or (-55.25°+k\cdot360°) where (k) is an integer has a cosine of 0.57.
+% FIG 16 1026 282 1154 383
+\placeholder{diagram}{Blackunitcircle witharrowedx,yaxes,O,squaregrid1/4,xlabels-1,-0.5,ylabels-1,-0.5,0.5,1;windowx-1.5..1.75,y-1.25..1.25. Two blackrays toquadrantsIandIV throughred(0.57,0.82)andblue(0.57,-0.82),verticalredandbluelegs toxaxis,red55°arc. Callout: Two points on the unit circle have an x-coordinate of 0.57.}
+\te{COMMON ERROR When using technology to solve trigonometric functions, make sure you have the correct system of angle measure selected.}
+\answer{A. (55.25°+k\cdot360°) or (-55.25°+k\cdot360°), where k is an integer.}
+B. Find all angles (\theta), in radians, whose tangent is-0.35.
+Step 1 Use your calculator to find one angle. Since (\tan\theta=-0.35), one angle is (\theta=\tan^{-1}-0.35), or (\theta\approx-0.34) radians.
+Step 2 Find another angle on the unit circle. An angle in Quadrant II with a 0.34 radian reference angle will have a tangent of-0.35. One such angle is (\theta\approx2.80) radians.
+Any angle that is coterminal with-0.34 or 2.80 radians will have the same tangent. The tangent function has a period of (\pi), so every angle of the form (-0.34+k\pi) where k is an integer will have a tangent of-0.35.
+% FIG 16 1036 473 1154 574
+\placeholder{diagram}{Blackunitcircle witharrowedx,yaxes,labels+-1bothaxes,grid1/4;windowx-1.5..1.5,y-1.25..1.25. Redray fromorigin throughquadrantIV at-0.34radians,blueoppositeray toquadrantII,botharrowed. Redclockwisearcfrompositivexaxis labeled-0.34,andredreferencearc atnegativexaxis.}
+\te{STUDY TIP When asked to solve an equation involving an inverse trig function, use the domain and range of the function. When asked about all possible angles, provide a complete list, such as (55.25°+(360°)k) or (-55.25°+(360°)k).}
+\answer{B. (-0.34+k\pi), where k is an integer.}
+\end{example}
+\begin{tryit}{3}
+a. What are all of the angles that have a sine value of 0.95?
+b. What are all of the angles that have a cosine value of 0.54?
+\answer{a. (71.8°+(360°)k), (108.2°+(360°)k), where k is an integer. b. (57.3°+(360°)k), (-57.3°+(360°)k), where k is an integer.}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How can using a unit circle help you find all of the angles with the same sine value?
+\answer{Find the value of the inverse sine. Then, plot the point on a unit circle. Plot the point in the other quadrant that has the same sine value, then find the measure of that angle.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+Use with EXAMPLES 2 \&3
+Look for Relationships For any valid input into an inverse sine function, there are an infinite number of angles that have that sine value. Why is it important that an inverse sine function returns a single angle?
+\answer{For a relation to be a function, any input can return only one output.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 Some students may struggle identifying coterminal angles.
+Have students find a positive and negative angle that is coterminal to each given angle.
+1.77° \answer{Sample:437°,-283°}
+2.302° \answer{Sample:662°,-58°}
+3.-138° \answer{Sample:-498°,222°}
+4.246° \answer{Sample:606°,-114°}
+\end{te-addendum}
+% Source page 17: 398 Solve a Trigonometric Equation
+\begin{te-addendum}{4}{PurposefulQuestions}
+Pose Purposeful Questions ETP
+Q: How is solving the trigonometric equation in the example similar to solving a linear equation?
+\answer{When solving the trigonometric equation, you use properties of equality to isolate the term with the trigonometric expression, like you do when isolating the variable in a linear equation.}
+Q: How do you know if you made an error isolating the sine function?
+\answer{You may have made an error if the value equal to the sine function is greater than 1 or less than -1. These values are not in the range of the sine function.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Solve a Trigonometric Equation}
+How can you solve the trigonometric equation (6\sin\theta=3\sin\theta+2) for values between 0 and (2\pi)?
+(6\sin\theta=3\sin\theta+2)
+(3\sin\theta=2)
+(\sin\theta=\frac23)
+(\theta=\sin^{-1}(\frac23))
+(\theta\approx0.73\text{ radians})
+The Quadrant II angle with a reference angle equal to 0.73 radian will also have a sine of (\frac23). That angle is (\pi-0.73\approx2.41) radians. So, (\theta\approx0.73) or (\theta\approx2.41).
+% FIG 17 988 244 1109 365
+\placeholder{diagram}{Blackunitcircle centeredatfilledblackO,arrowedx,yaxes,no ticks/grid. Two blueradii tofilledbluepoints inquadrantsIandII atsameheight2/3. Redreferenceangletheta between eachradius andnearesthorizontalaxis.}
+\te{USE APPROPRIATE TOOLS You will need to use a calculator to find the angle measure when you do not recognize the value of the trigonometric function to be from a common angle.}
+\answer{(\theta\approx0.73) or (\theta\approx2.41).}
+\end{example}
+\begin{tryit}{4}
+a. Solve (0.25\cos\theta+1=1.5\cos\theta) for values of (\theta) between 0 and (2\pi).
+b. Solve (3\tan\theta-4=\tan\theta) for values of (\theta) between 0 and (\pi).
+\answer{a.0.64 radians and 5.64 radians (36.87° and 323.13°) b.1.11 radians (63.43°)}
+\end{tryit}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Use a Trigonometric Model}
+Pose Purposeful Questions ETP
+Q: How is one year represented in this function?
+\answer{One year is represented by the period of the function. The period of the function is 12 months.}
+Q: Why is looking at a graph helpful when answering this question?
+\answer{to approximate values for higher temperatures}
+Q: How do you know if the angle in the expression (\cos(\frac{\pi x}{6})) is measured in radians or degrees?
+\answer{Radians, since expressions with angles measured in radians do not include the units, while those measured in degrees include the degree symbol.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Have students transition to solving trigonometric equations where they need to use a calculator to estimate the value of the solutions.
+Solve each trigonometric equation for values between 0 and 360°. Round each answer to the nearest tenth.
+1. (3\cos x-2=0) \answer{48.2°,311.8°}
+2. (2\tan x+7=0) \answer{105.9°,285.9°}
+3. (4\sin x-1=0) \answer{14.5°,165.5°}
+4. (5\sin x+2=0) \answer{203.6°,336.4°}
+5. (4\cos x-1=0) \answer{75.5°,284.5°}
+6. (8\tan x-3=0) \answer{20.6°,200.6°}
+7. (4\tan x+9=0) \answer{294.0°,114.0°}
+8. (5\cos x+4=0) \answer{143.1°,216.9°}
+9. (9\sin x-8=0) \answer{62.7°,117.3°}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Use a Trigonometric Model}
+\te{APPLICATION}
+The average monthly temperature in New Zealand fluctuates periodically throughout the year. Write a function that models the average temperature. Then use the model to determine in what months the average temperature will be less than 15°C.
+\begin{tabular}{lll}
+ & Temperature(°C) & Time of Year \\
+Maximum temperature & 18 & Early January \\
+Minimum temperature & 10 & Early July \\
+\end{tabular}
+% FIG 17 799 537 1115 725
+\placeholder{photo}{Sheep in grassy NewZealand pasture,treesandsnowcappedmountains behind; temperature table overlaysuppermiddle.}
+\te{CONTINUED ON THE NEXT PAGE}
+% Source page 18: 399 Example 5 continued
+To find the model, first consider the periodic functions. The sine or cosine function would be suitable since average temperatures fluctuate predictably. The cosine is the better choice because it starts with a maximum instead of on the midline. Next consider the period.
+Recall that you can find the period of the function (f(x)=\cos(bx)) by dividing (2\pi) by (b).
+Period: (12=\frac{2\pi}{b})
+(b=\frac{2\pi}{12}=\frac\pi6)
+\te{Callout: Since we are looking at the temperature over one year, a period of 12 (or 12 months) makes sense.}
+For the model, the average yearly temperature is the midline,14, and the difference between the midline and the maximum is the amplitude,4.
+Let (x) be the month and (T) be the average temperature.
+(T=4\cos(\frac{\pi x}{6})+14)
+To validate the model, graph the function. The temperature fluctuates periodically. The maximum and minimum are correct, with the maximum in the summer and the minimum in the winter.
+% FIG 18 1021 421 1151 485
+\placeholder{graph}{RedcosinetemperaturecurveT=4cos(pi x/6)+14,onblackpositivearrowedx,yaxes;horizontalgrid1month withverticalJan,Feb,Mar,Apr,May,June,July,Aug,Sep,Oct,Nov,Dec labels atx0..11,window0..12;verticalgrid5 labels0,10,20,window0..25. Maximum(0,18),minimum(6,10),returnto18atrightedge;noendpointmarkers.}
+Now use the model to find when the temperature is 15°C.
+(15=4\cos(\frac{\pi x}{6})+14)
+(1=4\cos(\frac{\pi x}{6}))
+(\frac14=\cos(\frac{\pi x}{6}))
+(\cos^{-1}(\frac14)=\frac{\pi x}{6})
+\te{Callout: Start to isolate x by subtracting 14 from both sides. HAVE A GROWTH MINDSET How can you take on challenges with positivity?}
+(1.32\approx\frac{\pi x}{6}\quad\text{or}\quad4.96\approx\frac{\pi x}{6})
+(\frac{1.32(6)}\pi\approx x\qquad\frac{4.96(6)}\pi\approx x)
+(2.5\approx x\qquad9.5\approx x)
+\te{Callout: Find the angles whose cosine is (\frac14). In radians, they are 1.32 and (2\pi-1.32=4.96). Substitute into the left side of the equation.}
+The solutions for (x) are about 2.5 and 9.5, which correspond to mid-March and mid-October when (x=0) represents the beginning of January.
+% FIG 18 851 653 981 721
+\placeholder{graph}{Same redtemperaturecosinecurveT=4cos(pi x/6)+14 withbluehorizontalliney15,intersectionsnearx2.5and9.5. Positivearrowedx,yaxes;monthgrid1,xlabelsJan..Decvertical,window0..12;verticalgrid5 labels0,10,20,window0..25. Noendpointmarkers.}
+\te{Callout: Alternately, you can add to the graph the line (y=15), and use the intersection tool to find (x\approx2.5) and (x\approx9.5). This is effective because you can clearly see the months when the temperature is below 15°C. Printed inverse-cosine step followed by two values; likely solving cosine equation for both branches is intended.}
+So, the average monthly temperature is below 15°C from mid-March to mid-October.
+\answer{(T=4\cos(\frac{\pi x}{6})+14); below 15°C from mid-March to mid-October.}
+\end{example}
+\begin{tryit}{5}
+The average monthly high temperature in a city is modeled by the function (T=30\sin(\frac\pi6 x-1.8)+61), where (T) is the temperature in°F, (x) is the month, and (x=1) corresponds to January. Use this function to determine the months that have a monthly high temperature of 54°.
+\answer{March and September}
+\end{tryit}
+\begin{te-addendum}{5}{PurposefulQuestions}
+Q: How do you know that (x=2.5) represents mid-March and (x=9.5) represents mid-October?
+\answer{Since the problem states that (x=0) represents January, then (x=11) represents December. So (x=2) represents March and (x=2.5) represents the middle of March; (x=9) represents October and (x=9.5) represents the middle of October.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How is solving this equation different than solving the equation in the example?
+\answer{After taking the inverse sine of each side of the equation, there are more steps needed to isolate the variable x.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+Use with EXAMPLES 4 \&5
+Generalize How do the steps for solving the equation (0.25x+1=1.5x) compare to solving the equation (0.25\cos\theta+1=1.5\cos\theta)?
+\answer{The steps are parallel---start by using the properties of equality to combine like terms in order to isolate the variable on one side of the equation. The cosine equation requires an additional step to find the inverse cosine to find (\theta).}
+\end{te-addendum}
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Have a Growth Mindset: Take on Challenges with Positivity}
+When you struggle with a challenge, you build connections in your brain. Ask: What can you tell yourself so you keep a positive attitude and don't give up when you struggle? What can you do when something seems hard?
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 5)
+LISTENING BEGINNING Have students listen as you read the following story. ``The farmer's crop yielded enough food for the family to live on through the winter, but did not yield a profit for the farm. The farmer hopes an analysis of the year's events will yield an explanation, so that he can do things differently and have a better season next year.''
+Q: What does yield mean in the story?
+\answer{produce or result}
+Q: What does using the formula for any value of x where (2.5<x<9.5) should yield an answer less than 15 mean?
+\answer{Any x-value between 2.5 and 9.5 results in a temperature below 15°C.}
+SPEAKING DEVELOPING Explain that exceed means to go beyond, surpass, or be superior to. It can have both positive and negative implications. Discuss the answers to the following questions with the students.
+Q: What happens when someone exceeds the speed limit while driving?
+\answer{They might get a speeding ticket or get into an accident.}
+Q: What happens when someone exceeds their goal of raising \$1,000 for a charity?
+\answer{They raised more money than their goal.}
+Q: What is implied by the temperature exceeding 15°C?
+\answer{It is summer in New Zealand.}
+WRITING EXPANDING Distribute scissors and a piece of unlined square paper to each student. Direct students to fold the paper in half vertically and then horizontally. Ask them to draw a simple pattern and then cut out their design. Although all of the designs are different, they can all be described as symmetric.
+Q: How does the shape of your design change as you rotate it?
+\answer{It looks the same no matter how it is rotated.}
+Q: Based on what you've learned from creating the design, write a definition for symmetry.
+\answer{when a figure has parts that are the same when rotated or reflected}
+\te{Printed ``no matter how it is rotated''; likely rotations preserving the particular symmetry are intended.}
+\end{te-addendum}
+% Source page 19: 400 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Inverse Trigonometric Functions}
+Q: How are the domain and the range of the three inverse functions the same?
+\answer{The domains of all three inverse functions contain the interval ([-1,1]). The ranges of all three inverse functions contain the interval ([0,\frac\pi2)).}
+\te{Presentation. Practice. Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercise 8 Some students may say the answer is (56.1°+(360°)k). Draw a unit circle and point out to students that there are two angles that have a sine value of 0.83,56.1°, and 123.9°. So (123.9°+(360°)k) is also part of the answer to the question.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Inverse Trigonometric Functions}
+\begin{tabular}{llll}
+ & Inverse sine & Inverse cosine & Inverse tangent \\
+FUNCTION & (y=\sin^{-1}x) & (y=\cos^{-1}x) & (y=\tan^{-1}x) \\
+DOMAIN & ([-1,1]) & ([-1,1]) & ((-\infty,\infty)) \\
+RANGE & ([-\frac\pi2,\frac\pi2]) & ([0,\pi]) & ((-\frac\pi2,\frac\pi2)) \\
+\end{tabular}
+% FIG 19 775 359 855 440
+\placeholder{graph}{Inverse sine green curve(-1,-pi/2)throughorigin to(1,pi/2),noendpointcircles. Blackdoublearrowx,yaxes,O;xgrid1/2 labels-1,1;ygridpi/4 labels+-pi/2;window-2..2,-pi..pi.}
+% FIG 19 894 359 974 440
+\placeholder{graph}{Inverse cosine redcurve(-1,pi)through(0,pi/2)to(1,0),noendpointcircles. Blackdoublearrowx,yaxes,O;xgrid1/2 labels-1,1;ygridpi/4 labels-pi/2,pi/2,pi;window-2..2,-3pi/4..5pi/4.}
+% FIG 19 1013 359 1093 440
+\placeholder{graph}{Inverse tangent blueincreasingS-curve throughorigin,endarrowsapproachy+-pi/2,noasymptotelines. Blackdoublearrowx,yaxes,O;xgrid1/2 labels-1,1;ygridpi/4 labels+-pi/2;window-2..2,-pi..pi.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you use an inverse function to find all the solutions of a trigonometric equation?
+\answer{You can use inverse functions and their graphs to find the measures of angles that have a given value of the trigonometric function.}
+2. Error Analysis Luis said that the inverse of (y=\cos x) is a function. Explain and correct Luis's error.
+\answer{The inverse of (y=\cos(x)) does not pass the vertical line test. In order to talk about the inverse as a function, the domain has to be restricted.}
+3. Use Structure What are the radian measures of the angles whose sine is 1?
+\answer{(\frac\pi2+2\pi n), where n is an integer.}
+4. Error Analysis Describe and correct the error a student made when asked to find the radian measures of the angles whose sine is 1.
+Let n be an integer
+(\sin(0+2\pi n)=1)
+% FIG 19 703 657 843 734
+\placeholder{illustration}{Palegraystudentworknote withcurledlowerrightcorner andredX. Text Let n be an integer; sin(0+2pi n)=1.}
+\answer{The student may have confused sine and cosine. The angles whose sine is 1 are (\frac\pi2+2\pi n) where n is an integer.}
+\textbf{Do You KNOW HOW?}
+5. What is (\sin^{-1}(\frac{\sqrt2}{2}))?
+\answer{45° or (\frac\pi4)}
+6. What is (\tan^{-1}(\sqrt3))?
+\answer{60° or (\frac\pi3)}
+7. What are all of the angles (in degrees) that have a cosine value of 0.74?
+\answer{(\pm42.27°+(360°)k), where k is an integer}
+8. What are all of the angles (in degrees) that have a sine value of 0.83?
+\answer{(56.1°+(360°)k), (123.9°+(360°)k), where k is an integer}
+9. Solve (4\sin\theta-1=0) for values between 0 and (2\pi).
+\answer{(\theta=0.25) radians and 2.89 radians}
+10. Solve (2\tan\theta+3=0) for values from 0° to 360°. Round angle measures to the nearest degree.
+\answer{(\theta=124°) and 304°}
+\end{concept-summary}
+% Source page 20: 401 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+11--30,32--38 & 11--22,24--38 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Scan the QR code to access a video tutorial.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 19 & 1 \\
+1 & 12 & 2 \\
+2 & 20--23 & 1 \\
+2 & 11,14--16 & 2 \\
+2 & 34 & 3 \\
+3 & 24--27 & 1 \\
+4 & 17,28--31,37 & 1 \\
+4 & 13,18,35 & 2 \\
+5 & 32--33,38 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{2}
+UNDERSTAND. Use Structure Find the radian measures of the angles (\theta) whose cosine is -1.5. Explain your reasoning.
+\answer{There are no such angles for (\theta) whose cosine is -1.5 because-1.5 is not an element of the domain of cosine.}
+\te{Printed domain of cosine; likely range of cosine.}
+\end{practice}
+\begin{practice}{12}{2}
+Communicate Precisely In order to define the inverse sine, inverse cosine, and inverse tangent functions, the domains of the sine, cosine, and tangent functions must be restricted. Explain why.
+\answer{The inverse relations would not be functions because there would be multiple y-values for the same x-value.}
+\end{practice}
+\begin{practice}{13}{2}
+Error Analysis Describe and correct the error a student made in solving the following trigonometric equation for (\theta).
+(2\sin\theta+3=4)
+(2\sin\theta=1)
+(\sin\theta=\frac12)
+(\theta=\sin^{-1}(\frac12))
+(\theta=\frac\pi3+2\pi n\text{ or }\frac{5\pi}3+2\pi n)
+% FIG 20 548 474 760 618
+\placeholder{illustration}{Palegraycurledstudentworknote,redX atlowerright;fiveequationlines transcribedabove.}
+\answer{The student gave values for (\theta=\cos^{-1}(\frac12)), rather than sine. The correct answer is (\theta=\frac\pi6+2\pi n) or (\frac{5\pi}6+2\pi n) where n is an integer.}
+\end{practice}
+\begin{practice}{14}{2}
+Construct Arguments Explain why there is no solution for (\theta=\cos^{-1}3.75).
+\answer{Cosine (\theta) is never greater than 1.}
+\end{practice}
+\begin{practice}{15}{2}
+Generalize Find (\sec^{-1}(\frac12)). Justify your answer.
+\answer{(\sec^{-1}(\frac12)) does not exist, since (\sec x=\frac1{\cos x}) and (\cos x) cannot equal2.}
+\end{practice}
+\begin{practice}{16}{2}
+Higher Order Thinking Evaluate or simplify.
+a. (\cos^{-1}(\cos(\frac\pi8)))
+\answer{a. (\frac\pi8)}
+b. (\tan(\tan^{-1}(-3.6)))
+\answer{b.-3.6}
+c. (\sin^{-1}(\tan(-\frac\pi4)))
+\answer{c. (-\frac\pi2)}
+\end{practice}
+\begin{practice}{17}{1}
+Generalize Find the value(s) of (\sin\theta), if (\sin^2\theta=1).
+\answer{(\sin\theta=\pm1)}
+\end{practice}
+\begin{practice}{18}{2}
+Mathematical Connections Write a trigonometric equation with solutions of 240° and 300° in the domain ([0,360°]).
+\answer{Answers may vary. Sample: (2\sin\theta+\sqrt3=0)}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. How would you restrict the domain of the cotangent function to define the inverse cotangent function? SEE EXAMPLE 1
+\answer{(0<x<\pi)}
+\end{practice}
+\begin{practice}{20}{1}
+Evaluate the inverse trigonometric functions at the given value. Keep the angle values within the range of each inverse function. Give answers in both radian and degree measures. SEE EXAMPLE 2
+(\tan^{-1}(\frac{\sqrt3}3))
+\answer{30° or (\frac\pi6)}
+\end{practice}
+\begin{practice}{21}{1}
+Evaluate the inverse trigonometric functions at the given value. Keep the angle values within the range of each inverse function. Give answers in both radian and degree measures. SEE EXAMPLE 2
+(\sin^{-1}(\frac{\sqrt3}2))
+\answer{60° or (\frac\pi3)}
+\end{practice}
+\begin{practice}{22}{1}
+Evaluate the inverse trigonometric functions at the given value. Keep the angle values within the range of each inverse function. Give answers in both radian and degree measures. SEE EXAMPLE 2
+(\tan^{-1}(-1))
+\answer{-45° or (-\frac\pi4)}
+\end{practice}
+\begin{practice}{23}{1}
+Evaluate the inverse trigonometric functions at the given value. Keep the angle values within the range of each inverse function. Give answers in both radian and degree measures. SEE EXAMPLE 2
+(\cos^{-1}(-\frac12))
+\answer{120 or (\frac{2\pi}3)}
+\te{Printed 120 omits the degree symbol; likely120°.}
+\end{practice}
+\begin{practice}{24}{1}
+Find all the angle values of the trigonometric functions that have the given values. Give answers in degree measures rounded to the nearest tenth. SEE EXAMPLE 3
+(\sin x=0.64)
+\answer{(39.8°+(360°)k), (140.2°+(360°)k), where k is an integer}
+\end{practice}
+\begin{practice}{25}{1}
+Find all the angle values of the trigonometric functions that have the given values. Give answers in degree measures rounded to the nearest tenth. SEE EXAMPLE 3
+(\cos x=-0.6293)
+\answer{(129.0°+(360°)k), (231.0°+(360°)k), where k is an integer}
+\end{practice}
+\begin{practice}{26}{1}
+Find all the angle values of the trigonometric functions that have the given values. Give answers in degree measures rounded to the nearest tenth. SEE EXAMPLE 3
+(\sin x=-0.39)
+\answer{(-23.0°+(360°)k), (-157.0°+(360°)k), where k is an integer}
+\end{practice}
+\begin{practice}{27}{1}
+Find all the angle values of the trigonometric functions that have the given values. Give answers in degree measures rounded to the nearest tenth. SEE EXAMPLE 3
+(\tan x=-0.6293)
+\answer{(-32.2°+(180°)k), where k is an integer}
+\end{practice}
+\begin{practice}{28}{1}
+Solve each trigonometric equation for values between 0 and (2\pi). SEE EXAMPLE 4
+(\sqrt3\tan x+1=0)
+\answer{(\frac{5\pi}6,\frac{11\pi}6)}
+\end{practice}
+\begin{practice}{29}{1}
+Solve each trigonometric equation for values between 0 and (2\pi). SEE EXAMPLE 4
+(2\sin x+\sqrt3=0)
+\answer{(\frac{4\pi}3,\frac{5\pi}3)}
+\end{practice}
+\begin{practice}{30}{1}
+Solve each trigonometric equation for values between 0 and (2\pi). SEE EXAMPLE 4
+(2\cos^2\theta-1=0)
+\answer{(\frac\pi4,\frac{3\pi}4,\frac{5\pi}4,\frac{7\pi}4)}
+\end{practice}
+\begin{practice}{31}{1}
+Solve each trigonometric equation for values between 0 and (2\pi). SEE EXAMPLE 4
+(2\sin^2\theta+\sin\theta-1=0) (Hint: Factor the trinomial).
+\answer{(\frac\pi6,\frac{5\pi}6,\frac{3\pi}2)}
+\end{practice}
+\begin{practice}{32}{2}
+A sprint car with a loud engine is racing around a track. The engine's volume (V), in dB, is defined as (V) where (t) is the time in minutes since the sprint car has passed your position. Find the appropriate time when the volume will be less than 65 dB. SEE EXAMPLE 5
+Engine noise: (V=-12\sin(\frac{2\pi}{15}t)+70)
+% FIG 20 859 820 1119 984
+\placeholder{illustration}{Orange sprintcar12 racingright ontrack,handforegroundholds yellowandblacknoisemeter showing65dB;engine-noiseformula inwhitebox.}
+\answer{about 1.03 minutes}
+\te{Printed answer is approximately the first 65dB crossing; likely the requested less-than interval starts just after it.}
+\end{practice}
+% Source page 21: 402 Apply and Assessment Practice
+\begin{practice}{33}{2}
+APPLY. Make Sense and Persevere A pendulum is pulled away from its resting position and released. The equation (h=2\cos(\pi t)+6) models the height (h) in inches as a function of time at (t) seconds.
+a. Solve the equation for (t).
+\answer{a. (t=\frac1\pi\cos^{-1}(\frac{h-6}2))}
+b. Find the first time at which the pendulum is at a height of 5 in. Round to the nearest hundredth second.
+\answer{b.0.67 s}
+\end{practice}
+\begin{practice}{34}{3}
+Model With Mathematics The angle of elevation from the end of the Washington Monument's shadow to its top is (\theta). The cosecant of (\theta) is 1.10.
+% FIG 21 519 513 710 719
+\placeholder{photo}{AerialWashingtonMonumentphotograph withwhiteoverlaidrighttriangle,verticalmonumentleg555ft,slopinghypotenused,groundshadowell,thetaatshadowendpointlowerleft,rightangleatmonumentbase.}
+Part A What is the measure of the angle (\theta)?
+\answer{a. (\theta=65.4°)}
+Part B What is the distance (d) from the end of the monument's shadow to the top of the monument? Round to the nearest tenth of a foot.
+\answer{b. (d=610.5\text{ ft})}
+Part C What is the length (\ell) of the monument's shadow? Round to the nearest tenth of a foot.
+\answer{c. (\ell=254.3\text{ ft})}
+\end{practice}
+\begin{practice}{35}{2}
+Model With Mathematics A North Carolina beach experiences two high tides about every 25 hours based on the lunar day. The difference between high tide and low tide is 9 feet. The first high tide of the day occurs at midnight.
+a. Write a function to model the height of the tide with respect to time past midnight.
+\answer{a. (h=4.5\cos\frac{2\pi}{25}t), where h is the height of the tide and t is the number of hours past midnight.}
+b. Use your model to predict at what times in the first 24 hours the tide will be about (2\frac12) feet above the mean water level.
+\answer{b.3:54 A.M. and 9:06 P.M.}
+\te{Printed model has a 25-hour period although the prompt says two high tides per25 hours; likely period 12.5 hours and corresponding additional times are intended.}
+\end{practice}
+\begin{practice}{36}{1}
+ASSESSMENT PRACTICE. Solve the equation (4\sin\theta-2=0) for (\theta) measured in radians. Determine if each of the following are part of the solution set. Select Yes or No.
+\begin{tabular}{lll}
+ & Yes & No \\
+a. (\frac\pi6+2k\pi), where k is an integer & blank & blank \\
+b. (\frac\pi6+k\pi), where k is an integer & blank & blank \\
+c. (\frac\pi3+2k\pi), where k is an integer & blank & blank \\
+d. (\frac{2\pi}3+2k\pi), where k is an integer & blank & blank \\
+e. (\frac{5\pi}6+2k\pi), where k is an integer & blank & blank \\
+f. (\frac{5\pi}6+k\pi), where k is an integer & blank & blank \\
+\end{tabular}
+\answer{a.Yes; b.No; c.No; d.No; e.Yes; f.No.}
+\te{Item36 is absent from Item Analysis and no DOK is printed beside it. DOK assigned \uncertain{1}{2}.}
+\end{practice}
+\begin{practice}{37}{1}
+SAT/ACT What is the approximate measure of the angle (\theta) in the triangle shown?
+% FIG 21 979 505 1082 568
+\placeholder{diagram}{Blackrighttriangle,horizontalbase,verticalrightleg5,upslopinghypotenuse12,redthetaatleftbase andredrightanglelowerright;Not drawn to scale.}
+A. (\theta=22.6°)
+B. (\theta=65.4°)
+C. (\theta=24.6°)
+D. (\theta=67.4°)
+\answer{C}
+\end{practice}
+\begin{practice}{38}{2}
+Performance Task Air traffic controllers at LaGuardia Airport have asked an aircraft to maintain a holding pattern near the airport. The plane follows a periodic pattern of horizontal distance from the airport. At 2.5 minutes the plane is at its maximum distance away,190 miles. At 7.5 minutes the plane is at its minimum distance,50 miles.
+Part A Write a function to model the plane's distance with respect to time in minutes.
+\answer{a. (d(x)=70\sin(0.60x)+120), where d is the horizontal distance in miles and x is time in minutes.}
+Part B Validate your model.
+\answer{b. Sample answer: the equation fits the maximum and minimum distance the airplane is away from the airport and the period is 10 minutes.}
+Part C When the aircraft enters the holding pattern, (x=0), how far is it from LaGuardia Airport?
+\answer{c.120 mi}
+Part D During the first 15 min after the aircraft enters the holding pattern, at what time (x) is the aircraft approximately187 mi from the airport?
+\answer{d. about 2.13 min}
+\te{Printed coefficient 0.60 gives period about 10.47, not10; likely pi/5 intended. Printed partD gives only one time, though the15-minute interval contains multiple crossings.}
+\end{practice}
+% Source page 22: 402A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F93 \\
+2 & 1 & F93 \\
+3 & 1 & F93 \\
+4 & 1 & F93 \\
+5 & 2 & F93 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; athematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\te{Printed ``athematical'' omits initialM; likely Mathematical. Assessment. Lesson Quiz is available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{8-1 Lesson Quiz: Solving Trigonometric Equations Using Inverses}
+\te{ASSESSMENT RESOURCES. Name blank. enVision Algebra 2. SavvasRealize.com. Copyright© Savvas Learning Company LLC. All Rights Reserved. enVision Algebra 2 Assessment Sourcebook.}
+1. Which of these is necessary to define the inverse cosine function?
+A. The cosine function must be always increasing.
+B. The range of the cosine function must be (y\mid y\geq0).
+C. The domain of the cosine function must be restricted to (0\leq x\leq\pi).
+D. The cosine function must be periodic.
+\answer{1.C}
+2. What is (\sin^{-1}(-\frac{\sqrt2}2))? Select all that apply.
+A. (-\frac\pi4)
+B. (-\frac\pi2)
+C.-45°
+D.-60°
+\answer{2.A,C}
+3. What are the measures of all of the angles that have a tangent value of 1.99? Give the answer in degrees rounded to the nearest tenth. Choose the numbers to finish the sentence.
+The measures of all the angles are blank+blank k, where k is blank.
+First choices:63.3°,55.2°,143.2°,137.5°.
+Second choices:180°,90°,270°,45°.
+Third choices: a multiple of 45; an integer; a multiple of 10; a whole number.
+\answer{3. (63.3°+180°k), where k is an integer.}
+4. Solve (3\sin\theta+2=\sin\theta+1) for values between 0 and (2\pi).
+A. (\frac{2\pi}3) and (\frac{4\pi}3)
+B. (\frac{7\pi}6) and (\frac{11\pi}6)
+C. (\frac\pi6) and (-\frac\pi6)
+D. (\frac\pi6) and (\frac{5\pi}6)
+\answer{4.B}
+5. The average daily high temperature in Seattle is modeled by the function (T=-15\cos(\frac{\pi m}6)+61), where (T) is the temperature in°F, and (m) is the number of months since the beginning of the year. What is the value of (m) when the average daily high temperature (T) is 76°F?
+(m=\text{blank})
+\answer{5.6}
+\end{te-addendum}
+% Source page 23: 402B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I=Intervention; O=On-Level; A=Advanced.
+Reteach to Build Understanding I. Provides scaffolded reteaching for the lesson concepts. MathXL for School.
+Additional Practice I O. Provides extra practice for each lesson. MathXL for School.
+Enrichment O A. Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Mathematical Literacy and Vocabulary I O. Helps students develop and reinforce understanding of key terms and concepts.
+\te{Resource sheets each print Name blank, enVision Algebra 2, SavvasRealize.com, lesson title Solving Trigonometric Equations Using Inverses, Copyright© Savvas Learning Company LLC. All Rights Reserved., and enVision Algebra 2 Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{8-1 Reteach to Build Understanding}
+1. Evaluate (\sin^{-1}(\frac{\sqrt3}2)).
+Hint: In an inverse function, the domain and range are reversed. Therefore, look for the y-value when the x-value is (\frac{\sqrt3}2).
+a. What points on the unit circle have a y-value of (\frac{\sqrt3}2)?
+\answer{a. (-\frac12,\frac{\sqrt3}2) and (\frac12,\frac{\sqrt3}2)}
+b. What is the measure of the point (\frac12,\frac{\sqrt3}2) in degrees?
+\answer{b.60°}
+c. To convert the angle-measure to radians, multiply (60\times\frac\pi{180}=\text{blank}).
+\answer{c. (\frac\pi3)}
+% FIG 23 274 417 402 552
+\placeholder{diagram}{Blackunitcircle witharrowedx,yaxes,filledoriginand16standardanglepoints,radialguides. At 0/360degrees and 0/2pi:(1,0);30degrees pi/6:(sqrt3/2,1/2);45degrees pi/4:(sqrt2/2,sqrt2/2);60degrees pi/3:(1/2,sqrt3/2);90degrees pi/2:(0,1);120degrees2pi/3:(-1/2,sqrt3/2);135degrees3pi/4:(-sqrt2/2,sqrt2/2);150degrees5pi/6:(-sqrt3/2,1/2);180degreespi:(-1,0);210degrees7pi/6:(-sqrt3/2,-1/2);225degrees5pi/4:(-sqrt2/2,-sqrt2/2);240degrees4pi/3:(-1/2,-sqrt3/2);270degrees3pi/2:(0,-1);300degrees5pi/3:(1/2,-sqrt3/2);315degrees7pi/4:(sqrt2/2,-sqrt2/2);330degrees11pi/6:(sqrt3/2,-1/2). Coordinatesoutside,degreesandradiansinside,nogrid.}
+2. Denzel determined that (\cos^{-1}(\frac{\sqrt2}2)) was equal to (\frac{7\pi}4). Because the point (\frac{\sqrt2}2,-\frac{\sqrt2}2) is on the unit circle (\frac{7\pi}4). What error did he make? What is the correct answer?
+\answer{Denzel forgot to consider the range. Inverse cosine has a range of ([0,\pi]). The correct answer is (\frac\pi4).}
+3. What angles have a cosine value of 0.88?
+\begin{tabular}{ll}
+Steps & Answer \\
+Write the inverse cosine function. & (\cos^{-1}(\answer{0.88})=\theta) \\
+Use a calculator to find the value. Type: ``0.88'', ``Shift'', ``Cosine''. Round your answer to the nearest hundredth. & \answer{28.36°} \\
+Since the negative value of 28.36° is also equal to cos(0.88), write the angle-measure as a negative number. & \answer{-28.36°} \\
+Now generalize the two solutions by adding 360°k to both angles to include all of the coterminal angles. & \answer{(28.36°+360°k), (-28.36°+360°k)} \\
+\end{tabular}
+\te{Printed ``negative value ... equal to cos(0.88)''; likely the cosine of the negative angle also equals 0.88.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{8-1 Additional Practice}
+1. How would you restrict the domain of the sine function to define the inverse sine function?
+\answer{(-\frac\pi2\leq t\leq\frac\pi2)}
+2. Evaluate the inverse trigonometric function at the given value.
+a. (\sin^{-1}(\frac{\sqrt3}2)) \answer{a. (\frac\pi3)}
+b. (\tan^{-1}(\frac{\sqrt3}3)) \answer{b. (\frac\pi6)}
+3. What are all of the angles in radians that have a sine value of 0.85?
+\answer{(1.02+2k\pi) or (2.12+2k\pi)}
+4. What is the value for (\theta) in radians when (0.15\cos\theta+1=1.30\cos\theta) for values between 0 and (2\pi)?
+\answer{0.52,5.76}
+5. What is the value for (\theta) in radians when (4\tan\theta-5=\tan\theta) for values between 0 and (\pi)?
+\answer{1.03}
+6. The total monthly sales of a retail store is modeled by the function (S=29\sin(0.18x-4.8)+54), where (S) is the sales in thousands, (x) is the month, and (x=1) corresponds to January. Use this function to determine the month in which the total sales was approximately \$54,000.
+\answer{September}
+7. Can you find the radian measures of the angles (\theta) whose cosine is -1.75? Explain.
+\answer{No; (\cos\theta) cannot be less than -1.}
+8. A simple harmonic motion of a hanging spring is defined by (d=3\cos(\frac\pi2 t)+9), where (d) is the displacement of the end of the spring in inches, and (t) is the time in seconds.
+a. Solve the equation for (t).
+\answer{a. (t=\frac{2\cos^{-1}(\frac{d-9}3)}\pi)}
+b. Find the first time at which the spring is displaced 6 in.
+\answer{b.2 s}
+9. Solve the equation (8\sin^2\theta-2=0). Write your answer in radians.
+\answer{(\theta=\frac{5\pi}6+2\pi k); and (\frac\pi6+2\pi k)}
+\te{Printed answer omits the negative-sine branches; likely also7pi/6+2pi k and 11pi/6+2pi k.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{8-1 Enrichment}
+Match each term in the right column with its equivalent in the left column.
+\begin{tabular}{ll}
+A. (\cos[\sin^{-1}(\frac12)]) & 1. (\frac9{13}) \\
+B. (\tan[\cos^{-1}(\frac{\sqrt2}2)]) & 2. (-\frac\pi3) \\
+C. (\cos^{-1}[\cos(\frac{5\pi}3)]) & 3. (\frac{2\sqrt5}5) \\
+D. (\sin^{-1}[\sin(-\frac{5\pi}4)]) & 4.1 \\
+E. (\sin^{-1}[\cos(\frac{7\pi}6)]) & 5. (-\frac{24}7) \\
+F. (\sec[\cos^{-1}(\frac{\sqrt3}2)]) & 6. (\frac{\sqrt3}2) \\
+G. (\tan[2\cos^{-1}(-\frac45)]) & 7. (\frac{\sqrt{85}}7) \\
+H. (\sin^2[\frac12\cos^{-1}(-\frac5{13})]) & 8. (-\frac{3\sqrt{14}}7) \\
+I. (\sec[\tan^{-1}(\frac67)]) & 9. (\frac\pi3) \\
+J. (\cot[\sin^{-1}(-\frac{\sqrt7}5)]) & 10. (\frac{2\sqrt3}3) \\
+K. (\tan[\sin^{-1}(\frac23)]) & 11. (\frac\pi4) \\
+\end{tabular}
+\answer{A--6; B--4; C--9; D--11; E--2; F--10; G--5; H--1; I--7; J--8; K--3.}
+\te{Printed magenta matching lines cross between the two columns.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{8-1 Mathematical Literacy and Vocabulary}
+Lily wrote the thinking process and the steps for solving the trigonometric equation (6\sin\theta=2\sin\theta+2) using inverses on note cards, but they got mixed up. Help Lily by reordering the ``Think'' cards and the ``Write'' cards. Write the thinking process and the steps for solving trigonometric equations using inverses in the correct order.
+Think Cards:
+\item Subtract (2\sin\theta) from each side.
+\item Divide both sides by 4.
+\item Simplify both sides.
+\item Given equation
+\item Apply the inverse sine function to each side.
+Write Cards:
+\item (\theta=30°)
+\item (6\sin\theta-2\sin\theta=2\sin\theta+2-2\sin\theta)
+\item (6\sin\theta=2\sin\theta+2)
+\item (4\sin\theta=2)
+\item (\sin\theta=\frac24)
+\answer{Correct order:}
+\begin{tabular}{ll}
+Think & Write \\
+\answer{Given equation} & \answer{(6\sin\theta=2\sin\theta+2)} \\
+\answer{Subtract (2\sin\theta) from each side.} & \answer{(6\sin\theta-2\sin\theta=2\sin\theta+2-2\sin\theta)} \\
+\answer{Simplify both sides.} & \answer{(4\sin\theta=2)} \\
+\answer{Divide both sides by 4.} & \answer{(\sin\theta=\frac24)} \\
+\answer{Apply the inverse sine function to each side} & \answer{(\theta=30°)} \\
+\end{tabular}
+\te{Printed solution gives only the principal angle; the unrestricted original equation has additional solutions.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+Solve the system of equations by graphing.
+(y=3x+4)
+(y=-2x+4)
+Use the graphing tool to graph the system.
+Click to enlarge graph.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+% FIG 23 585 979 1037 1298
+\placeholder{illustration}{Blacktabletlandscape withhomebuttonleft. WhiteMathXLscreen,systemequationsleft,blankcoordinategridupperright,x,yaxeslabels-10,-8,...10,unitgrid. QuestionHelpdropdown: HelpMeSolveThis,ViewanExample,Video,Textbook,Glossary,MathTools,Print. Bluefooter Reviewprogress,Question5of14,Go,Back,Next,CheckAnswer,ClearAll;1partremainingprogressbar.}
+\end{te-addendum}
+
+\end{document}

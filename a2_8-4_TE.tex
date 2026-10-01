@@ -1,0 +1,897 @@
+\documentclass{article}
+% Source: Topic_08_Teacher_Edition.pdf, PDF pages 52-63 (printed pages 421A-428B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 52: 421A Lesson Overview
+\begin{lesson-meta}
+lesson: 8-4
+title: The Complex Plane
+standards: none printed
+practices: none printed
+objective: I can use the complex plane to show complex numbers and operations on them.
+
+essential question: How can you represent complex numbers and their relationships on a graph?
+
+\textbf{VOCABULARY}
+\item complex plane
+\item imaginary axis
+\item modulus of a complex number
+\item real axis
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 8-4 \\
+Title & The Complex Plane \\
+Standards & none printed \\
+I CAN Objective & I can use the complex plane to show complex numbers and operations on them. \\
+Essential Question & How can you represent complex numbers and their relationships on a graph? \\
+Lesson Vocabulary & complex plane; imaginary axis; modulus of a complex number; real axis \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Represent complex numbers and their relationships on the complex plane.
+\item Find the midpoint of a segment on the complex plane.
+\item Calculate the distance between numbers in the complex plane using the modulus of the difference.
+\item Use the complex plane to represent addition and subtraction of complex numbers geometrically.
+Essential Understanding. A complex number, written in the form (a+bi), corresponds to the point (a,b) on the complex plane. The complex plane can be used to show operations of complex numbers geometrically.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Used properties to add and subtract complex numbers.
+In this lesson, students:
+\item Represent complex numbers on the complex plane.
+\item Add and subtract complex numbers geometrically.
+Increasing Coherence This lesson is not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Use the complex plane to model complex numbers in rectangular and polar form.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that the complex plane uses the horizontal axis to represent the real part of a complex number and the vertical axis to represent the imaginary part.
+\item Students find the distance between two complex numbers in the complex plane by finding the modulus of their difference.
+\textbf{Mathematics Overview}
+Students are introduced to the complex numbers. They plot numbers on the complex plane, identify complex conjugates, and perform operations on complex numbers. Students identify the modulus of a complex number and connect it to the distance from the origin to the point on the complex plane.
+\textbf{Applying Math Practices}
+Look For and Make Use of Structure
+Students notice the similarity between the results of using the midpoint formula on two points (a,b) and (c,d) and taking their average as complex numbers.
+Look For and Express Regularity in Repeated Reasoning
+Students notice similarities between the coordinate plane and the complex plane.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+NEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+complex plane & plano complejo \\
+imaginary axis & eje imaginario \\
+modulus of a complex number & módulo de un número complejo \\
+real axis & eje real \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Show students a coordinate plane and have them identify the x-axis, y-axis, and origin. Explain that the complex plane is used to represent complex numbers and that the horizontal axis is the real axis and the vertical axis is the imaginary axis. Have students label the real and imaginary axes on the complex plane.
+\answer{imaginary axis; real axis}
+% FIG 52 663 568 950 758
+\placeholder{graph}{Complex Plane: square unit grid window [-4,4] by [-4,4], purple double-arrowed axes, O origin, labels -2 and 2 each axis. Black horizontal callout arrows from right identify vertical imaginary axis and horizontal real axis. No points plotted.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 52 961 792 1118 976
+\placeholder{illustration}{Student Companion cover showing colored glowing loops on dark background; enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+% Source page 53: 421B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students simplify expressions involving complex numbers algebraically in preparation for representing complex numbers and their relationships on a graph.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+\te{Critique \& Explain is available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: How are the expressions alike? How are they different?
+\answer{Both expressions contain two complex numbers. The first expression involves subtraction and the second involves multiplication.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: How could you use addition to simplify the first expression?
+\answer{Distribute the -1 to both terms in the parentheses, which changes the subtraction to addition.}
+Q: What process is being used to simplify the second expression?
+\answer{The complex numbers are multiplied as if they were binomials, so you use the FOIL method and then combine like terms.}
+For Early Finishers
+Q: What are two complex numbers with a sum that is a real number? An imaginary number? What generalizations can you come to about such numbers?
+\answer{(3+5i) and (6-5i), or any two complex numbers (a+bi) and (c-bi), where a, b, and c are real numbers; (4-8i) and (-4+6i), or any two complex numbers (a+bi) and (-a+di), where a, b, and d are real numbers.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Q: When could the simplified expression containing complex numbers be a real number?
+\answer{(i^2=-1), so whenever i is squared, the imaginary part goes away. Also, if the coefficients of the imaginary terms are opposites, their sum is 0.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+A group of students is asked to simplify the following complex number expressions:
+(6+4i-(-3+7i))
+((3+5i)(3-5i))
+% FIG 53 938 253 1068 346
+\placeholder{illustration}{Whiteboard with purple expressions 6+4i-(-3+7i) and (3+5i)(3-5i); markers and eraser along tray.}
+A. How would you simplify (6+4i-(-3+7i))? Explain.
+\answer{A. ((6+4i)-(-3+7i)=9-3i). The procedure is to distribute the negative sign and then combine like terms.}
+B. One student simplified the second expression this way:
+((3+5i)(3-5i)=3^2-3(5i)+3(5i)-5^2(i)^2)
+(=9-25i^2)
+Is the student's answer correct? Explain why or why not.
+\answer{B. The answer is correct so far but is not finished. The student has to recall that (i=\sqrt{-1}), so the final answer is (9-25(-1)=9+25=34).}
+C. Use Structure What is ((a+bi)(a-bi))?
+\answer{C. (a^2+b^2)}
+\te{Digital version: Go back; Enter your answer.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with CRITIQUE \& EXPLAIN
+Communicate Precisely When Ines calculates with complex numbers, she treats i as a variable until the last step, when she simplifies powers of i. Will her method always work? Explain
+\answer{Yes, while i is a constant, you can still operate with it as you would a variable. You can evaluate powers of i at any point in the process.}
+\end{te-addendum}
+% Source page 54: 421 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Students learn to represent complex numbers (a+bi) and their relationships on a complex plane. Students learn to find the midpoint of the segment joining two complex numbers, the modulus of a complex number, and the distance between complex numbers. Students also use the complex plane to add and subtract complex numbers geometrically.
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Represent Numbers in the Complex Plane}
+Use and Connect Mathematical Representations ETP
+PART A
+Q: How is the complex plane different from the Cartesian coordinate plane?
+\answer{On the coordinate plane, both axes represent real numbers. On the complex plane, the vertical axis represents imaginary numbers.}
+Q: How is the ordered pair of a point related to the complex number it represents?
+\answer{The ordered pair of a point for complex number (a+bi) is (a,b), or (real part, imaginary part).}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 1}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+Graph (3+4i) and (-3+4i). What is their relationship?
+% FIG 54 165 908 270 1015
+\placeholder{graph}{Black double-arrowed R horizontal and i vertical axes, O origin, unit grid window [-5,5] by [-5,5], labels -4,-2,2,4 each axis. Orange filled points at (3,4),(-3,4).}
+\answer{The points are a reflection of each other over the imaginary y-axis.}
+Example 1 Having learned the graphical relationship between complex conjugates, students transition to graphing two points on a complex plane to determine the relationship between complex points with opposite real values.
+Q: Where are these points located on the complex plane?
+\answer{These points are located in the first and second quadrants.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 2}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION.}
+a. Find the midpoint of the segment joining (7i) and (-9+3i).
+\answer{a. The corresponding points are (0,7) and (-9,3). The midpoint is (\frac{0+(-9)}2,\frac{7-3}2)=(\frac{-9}2,\frac{10}2)=(-4.5,5), which corresponds to the complex number (-4.5+5i).}
+\te{Printed first imaginary-coordinate numerator is 7-3; likely 7+3 as used by the subsequent result.}
+b. What is the average value of 4 and (6+i)?
+\answer{b. (\frac{4+(6+i)}2=\frac{10+i}2=5+0.5i)}
+Example 2 Students transition to finding the midpoint of a segment in the complex plane where the endpoints of the segment lie on one of the axes. Students also find the average of the endpoints of the segment.
+Q: For the point (7i), where is it located on the complex plane and what would you use for the x-value in the formula?
+\answer{on the imaginary y-axis; 0}
+Q: For the point 4, where is it located on the complex plane and what would you use for the y-value in the formula?
+\answer{on the real x-axis; 0}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Represent Numbers in the Complex Plane}
+A. What point in the complex plane represents (5-3i)?
+The complex plane has two axes, like the coordinate plane. The horizontal axis, called the real axis, is for the real part of a complex number. The vertical axis, called the imaginary axis, is for the imaginary part of a complex number.
+% FIG 54 853 320 961 412
+\placeholder{graph}{Complex plane unit grid, horizontal real axis R, vertical imaginary axis i, black double arrows, O origin. Window real [-2,9], imaginary [-7,2]; real labels 2,4,6,8, imaginary -2,-4,-6. Red filled point (5,-3), labeled (5,-3) and 5-3i.}
+\te{Callout: Real numbers fall on the real axis, and purely imaginary numbers like -3i fall on the imaginary axis.}
+\te{Callout: The point (5,-3) corresponds to the complex number 5-3i.}
+\te{COMMUNICATE PRECISELY In both the xy-plane and the complex plane, a point can be labeled with an ordered pair (a,b). In the complex plane, a point can be labeled as a complex number a+bi. CONTINUED ON THE NEXT PAGE.}
+\answer{A. (5,-3)}
+% Source page 55: 422 Example 1 continued
+B. Graph (-6+2i) and (-6-2i). What is their relationship?
+% FIG 55 815 244 925 363
+\placeholder{graph}{Complex plane unit grid, double-arrowed R horizontal and i vertical axes, O origin. Window real [-9,2], imaginary [-6,6]; horizontal labels -8,-6,-3, vertical -3,3. Red filled points (-6,2),(-6,-2) labeled (-6+2i),(-6-2i).}
+On the graph, (-6+2i) corresponds to the point (-6,2), and (-6-2i) corresponds to the point (-6,-2).
+The two numbers are complex conjugates. On the complex plane, complex conjugates are images of each other in a reflection over the real axis.
+If z represents a complex number, then (\overline z) is its complex conjugate.
+\answer{B. Complex conjugates; reflections over the real axis.}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+PART B
+Q: How are complex conjugates related both algebraically and graphically?
+\answer{Their imaginary terms have opposite values, and they are reflections of each other over the x-axis.}
+Q: Are points that are reflections of each other over the y-axis complex conjugates?
+\answer{No, in these cases, the real terms have opposite values.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{tryit}{1}
+a. What point in the complex plane represents (-3+4i)?
+\answer{a. (-3,4)}
+b. Let (z=4+i). Graph z and (\overline z).
+\answer{b. See graph.}
+% FIG 55 148 405 345 602
+\placeholder{graph}{Unit grid real [-4,6], imaginary [-5,5], black double-arrowed R horizontal and i vertical axes, O origin; real labels -2,2,4, imaginary -4i,-2i,2i,4i. Red filled points (4,1),(4,-1) labeled 4+i and 4-i.}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How could you graph the complex conjugate for (4+i) without writing it?
+\answer{Graph the reflection of the point (4+i) over the real x-axis.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Find the Midpoint of a Segment in the Complex Plane}
+Pose Purposeful Questions ETP
+PART A
+Q: When finding the midpoint, does it matter which point is used as ((x_1,y_1)) and which is used as ((x_2,y_2))?
+\answer{No, the x-coordinates are averaged, and the y-coordinates are averaged. The Commutative Property states that the order in which two numbers are added does not change the sum, therefore, the average would not change.}
+PART B
+Q: How are finding the midpoint and finding the average of the endpoints similar?
+\answer{They both result in the point that is halfway between the endpoints. They both require dividing by 2.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Find the Midpoint of a Segment in the Complex Plane}
+What is the midpoint of the segment joining the points representing (3+4i) and (6-2i)?
+A. How can you find the midpoint of the segment by using the Midpoint Formula?
+The Midpoint Formula states that the midpoint of the segment joining ((x_1,y_1)) and ((x_2,y_2)) is ((\frac{x_1+x_2}2,\frac{y_1+y_2}2)).
+The complex numbers (3+4i) and (6-2i) correspond to (3,4) and (6,-2).
+Their midpoint is ((\frac{3+6}2,\frac{4+(-2)}2)=(4.5,1)).
+This point in the complex plane corresponds to the complex number (4.5+i).
+% FIG 55 985 523 1115 624
+\placeholder{graph}{Complex plane unit grid, black double-arrowed R horizontal and i vertical axes, O origin; window real [-4,9], imaginary [-4,6]. Real labels -2,2,4,6,8; imaginary -2,2,4. Red segment from filled (3,4) labeled 3+4i to (6,-2) labeled 6-2i, red midpoint (4.5,1) labeled M.}
+\answer{A. (4.5,1), corresponding to (4.5+i).}
+B. How can you find the midpoint of the segment by taking the average of the complex numbers?
+The average of the complex numbers (3+4i) and (6-2i) is
+(\frac{(3+4i)+(6-2i)}2=\frac{(3+6)+(4-2)i}2=\frac{9+2i}2=4.5+i).
+\te{Callout: This number corresponds to the ordered pair (4.5,1) in the complex plane---the same midpoint you found above.}
+So (4.5,1) is the midpoint of the segment. You can find the midpoint of any segment in the complex plane by finding the average of the complex numbers.
+\te{LOOK FOR RELATIONSHIPS Notice the similarity between the result of 1) using the Midpoint Formula on two points (a,b) and (c,d), and 2) taking their average as complex numbers:
+1) (\frac{a+c}2,\frac{b+d}2)
+2) (\frac{(a+c)}2+\frac{(b+d)i}2).}
+\answer{B. (4.5,1)}
+\end{example}
+\begin{tryit}{2}
+a. Find the midpoint of the segment that joins the points representing (15-4i) and (-11-7i).
+\answer{a. (2,-5.5) or (2-5.5i)}
+b. Find the average of the complex numbers (-4+6i) and (1-4i). What is the midpoint of the line segment joining the points that represent the numbers in the complex plane?
+\answer{b. (-1.5,1) or (-1.5+i)}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: Why does either method for finding the midpoint work?
+\answer{Either way, you are averaging the constants and the coefficients of the imaginary term. In the first method, you work with points on the graph. In the second method, you work with complex numbers.}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2
+Look for Relationships If the midpoint of a segment joining two complex numbers is the origin, how are the two complex numbers related?
+\answer{The two complex numbers must be opposites, such as (a+bi) and (-a-bi).}
+\end{te-addendum}
+% Source page 56: 423 Modulus and Geometric Operations
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Find the Modulus of a Complex Number}
+Use and Connect Mathematical Representations ETP
+Q: Why do you multiply the complex number by its complex conjugate?
+\answer{Because the result of multiplying a complex number by its conjugate is the sum of the terms squared. Therefore, doing so provides an alternative way for finding the modulus of a complex number by using the distance formula.}
+Q: How is finding the modulus related to the Pythagorean Theorem?
+\answer{You could draw a right triangle with the distance from the point to the origin as the hypotenuse. Then you could use the lengths of the sides and the Pythagorean Theorem to find the modulus.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Find the Modulus of a Complex Number}
+What is the modulus of (5-8i)?
+The modulus of a complex number is the distance from the point representing the number in the complex plane to the origin. Calculating the modulus of a complex number corresponds to using the Distance Formula to find the distance between its corresponding point and the origin.
+The complex number (5-8i) corresponds to (5,-8). Its distance to the origin (0,0) is
+(d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2})
+(=\sqrt{(5-0)^2+(-8-0)^2})
+(=\sqrt{25+64})
+(=\sqrt{89})
+% FIG 56 1051 260 1154 378
+\placeholder{graph}{Unit grid complex plane, black double-arrowed R horizontal and i vertical axes, O origin. Window real [-2,8], imaginary [-9,3]; real labels 2,4,6, imaginary -8,-6,-4,-2,2. Red segment from origin to red filled (5,-8) labeled 5-8i.}
+You can get the same result using the complex number and its complex conjugate.
+(|5-8i|=\sqrt{(5-8i)(5+8i)}=\sqrt{25-64i^2}=\sqrt{25+64}=\sqrt{89})
+The modulus of (5-8i) is (\sqrt{89}). In general,
+(|z|=\sqrt{z\cdot\overline z}=\sqrt{(a+bi)(a-bi)}=\sqrt{a^2+b^2}).
+\te{Callout: The modulus of a complex number (z=a+bi) is (\sqrt{a^2+b^2}).}
+\te{LOOK FOR RELATIONSHIPS Just as the absolute value of a real number gives its distance from zero on the number line, the modulus of a complex number gives the distance from its corresponding point to the origin in the complex plane. Because of the similarity to the absolute value, the notation to find the modulus is the same.}
+\answer{(\sqrt{89})}
+\end{example}
+\begin{tryit}{3}
+Find the modulus of each complex number.
+a. (-5-12i)
+b. (\frac12-\frac14i)
+\answer{a. 13 b. (\frac{\sqrt5}{4})}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: Could the modulus ever be negative or imaginary?
+\answer{No, because it is a distance, it must be nonnegative and real.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 3 Help students explore finding points on the complex plane with a given modulus.
+\item Identify eight points on the complex plane with a modulus of (\sqrt{61}).
+Q: How can you find the points?
+\answer{Find a complex number and its conjugate, the sum of whose squares is equal to 61.}
+\te{Printed answer says the sum of the squares of the number and its conjugate; likely the intended sum is of the squared real and imaginary coefficients.}
+Q: How many points have a modulus of (\sqrt{61})?
+\answer{an infinite number}
+Q: If you graphed all of those points, what figure would you graph?
+\answer{a circle}
+Q: Name eight points with a modulus of (\sqrt{61}).
+\answer{(5+6i), (5-6i), (-5+6i), (-5-6i), (6+5i), (6-5i), (-6+5i), (-6-5i)}
+\end{te-addendum}
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Add and Subtract Complex Numbers Geometrically}
+Build Procedural Fluency From Conceptual Understanding ETP
+Part A
+Q: How do you know how to move from a point on the complex plane to find the sum of two complex numbers?
+\answer{Start at the given point representing one complex number. The real number for the other complex number tells you how to move horizontally, and the coefficient of the imaginary number tells you how to move vertically from the given point.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Add and Subtract Complex Numbers Geometrically}
+\te{CONCEPTUAL UNDERSTANDING}
+How can you use parallelograms to represent addition and subtraction of complex numbers?
+A. How can you use a parallelogram in the complex plane to represent (-3+5i+5+i)?
+Plot two points in the complex plane: P at (-3,5) to represent (-3+5i) and N at (5,1) to represent (5+i). Then draw OP and ON by connecting the points to the origin.
+% FIG 56 854 685 965 786
+\placeholder{graph}{Unit complex grid real [-5,6], imaginary [-3,7], black double-arrowed R horizontal and i vertical axes, O origin. Real labels -4,-2,2,4; imaginary -2,2,4,6. Red filled origin and P(-3,5), red segment OP; blue filled N(5,1) with blue segment ON.}
+\te{CONTINUED ON THE NEXT PAGE.}
+% Source page 57: 424 Example 4 continued
+From N, find the point M that is 3 units left and 5 units up. Segment NM has the same length and slope as segment OP. Since opposite sides of MNOP have the same length and are parallel, MNOP is a parallelogram.
+% FIG 57 994 232 1103 331
+\placeholder{graph}{Unit complex grid real [-5,6], imaginary [-3,7], double-arrowed R and i axes, O origin; real labels -4,-2,2,4, imaginary -2,2,4,6. Filled O(0,0), P(-3,5), N(5,1), M(2,6). Solid red OP and blue ON; dashed red NM and dashed blue PM complete parallelogram.}
+\te{Callout: P is 3 units left and 5 units up from the origin.}
+Point M is located at (2,6), and represents the complex number (2+6i). This is the same number you get by adding (-3+5i) and (5+i) algebraically.
+((-3+5i)+(5+i)=(-3+5)+(5i+i)=2+6i)
+\answer{A. (2+6i)}
+B. Use a parallelogram in the complex plane to represent ((-3+5i)-(5+i)).
+Step 1 Find the opposite of (5+i): ((-1)(5+i)=-5-i).
+Step 2 Represent ((-3+5i)-(5+i)) as ((-3+5i)+(-5-i)).
+% FIG 57 877 450 1035 570
+\placeholder{graph}{Unit complex grid, real [-10,6], imaginary [-4,8], double-arrowed R and i axes, O origin; real labels -8,-6,-4,-2,2,4, imaginary -2,2,4,6. Red filled points O,(-3,5),(5,1),(-5,-1),(-8,4); labels -3+5i red, 5+i blue, -5-i green, -8+4i black. Red segment O to (-3,5), blue O to (5,1), green O to (-5,-1); dashed black sides join (-3,5) to (-8,4) to (-5,-1).}
+\te{Callout: Draw the parallelogram and find the complex number for the fourth vertex.}
+\te{Callout: Graph -5-i, the opposite of the original complex number 5+i.}
+Step 3 Find the fourth vertex by translating the segment (-5-i) so that the origin corresponds to (-3+5i). By moving left 5 and down 1, you end at (-8+4i).
+This is the same result you get from subtracting the complex numbers algebraically: ((-3+5i)-(5+i)=-3+5i-5-i=-8+4i).
+\te{STUDY TIP Just as with real numbers, subtracting is the same as adding the opposite. Therefore, when subtracting two complex numbers geometrically, draw the opposite of the subtrahend and add.}
+\answer{B. (-8+4i)}
+\end{example}
+\begin{te-addendum}{4}{PurposefulQuestions}
+PART B
+Q: What transformation plots the opposite of a complex number on a complex plane?
+\answer{a 180° rotation about the origin}
+Q: How is finding the difference of two complex numbers similar to adding two complex numbers?
+\answer{Finding the difference is the same as adding the opposite of the second complex number. So finding the difference is the same as adding once the opposite of the second complex number has been found.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{tryit}{4}
+Use a parallelogram to determine each sum or difference.
+a. ((-2+i)+(-5-3i))
+\answer{a. (-7-2i)}
+% FIG 57 159 450 391 645
+\placeholder{graph}{Unit grid complex plane real [-8,2], imaginary [-5,5], double-arrowed R and i axes, O origin; real -6,-4,-2, imaginary -4i,-2i,2i,4i. Red filled O,(-2,1),(-5,-3),(-7,-2); complex labels -2+i,-5-3i,-7-2i. Solid red segments from O to first two points; dashed red opposite sides to sum (-7,-2).}
+b. ((-8+3i)-(-2-3i))
+\answer{b. (-6+6i)}
+% FIG 57 157 698 356 894
+\placeholder{graph}{Unit grid complex plane real [-8,2], imaginary [-2,8], double-arrowed R and i axes, O origin. Real labels -6,-4,-2, imaginary 2,4,6. Red filled O,(-8,3),(2,3),(-6,6), complex labels -8+3i,2+3i,-6+6i. Solid red segments from O to (-8,3),(2,3); dashed opposite sides to (-6,6).}
+\end{tryit}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 4 Some students may struggle with finding the opposite of a complex number when using a graph to subtract complex numbers.
+\item Find the opposite of the following complex numbers.
+1. (5+7i) \answer{(-5-7i)}
+2. (11-13i) \answer{(-11+13i)}
+3. (-12+9i) \answer{(12-9i)}
+4. (-8-10i) \answer{(8+10i)}
+Q: What do you multiply both the real and imaginary parts of the complex number by to find its opposite?
+\answer{-1}
+Q: How can you tell that the complex numbers are opposites?
+\answer{Two complex numbers are opposites if their sum is zero.}
+\end{te-addendum}
+% Source page 58: 425 Distance Between Complex Numbers
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Find the Distance Between Two Complex Numbers}
+Pose Purposeful Questions ETP
+Q: How are the two formulas for modulus and distance similar? How are they different?
+\answer{They both result in the same distance. The modulus always includes the origin as a point, so the formula simplifies to being the square root of the sum of the squares of two numbers, rather than the sum of the squares of two differences.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Find the Distance Between Two Complex Numbers}
+For two complex numbers (r=-7+3i) and (s=2-8i), how can you show that the modulus of the difference (r-s) is the same as the distance between their corresponding points?
+Step 1 Use the method in Example 4 to find the difference ((-7+3i)-(2-8i)).
+% FIG 58 870 299 978 413
+\placeholder{graph}{Complex plane grid 2 units, double-arrowed R horizontal and i vertical axes, O origin. Window real [-12,10], imaginary [-10,12]. Horizontal labels -8,-4,4,8; vertical -8,-4. Red filled O, r(-7,3), s(2,-8), opposite s(-2,8), difference(-9,11); labels -7+3i,2-8i,-2+8i,-9+11i. Black segments O to r and -s, red O to s, dashed red opposite sides from r and -s to difference.}
+\te{Callout: Graph r=-7+3i and s=2-8i. Then form a parallelogram with r and the opposite of s.}
+The graph shows that (r-s=-9+11i).
+Step 2 Use the formula (|z|=\sqrt{z\cdot\overline z}) to find the modulus for the complex number (-9+11i).
+(|-9+11i|=\sqrt{(-9+11i)(-9-11i)})
+(=\sqrt{81-121i^2})
+(=\sqrt{81+121})
+(=\sqrt{202})
+The modulus of the difference (r-s) is (\sqrt{202}).
+\te{COMMON ERROR Remember that i²=-1, so the calculation of the radicand is (-121)(-1)=121.}
+Step 3 Find the distance between (-7,3) and (2,-8).
+(d=\sqrt{(-7-2)^2+(3-(-8))^2})
+(=\sqrt{(-9)^2+11^2})
+(=\sqrt{202})
+% FIG 58 1017 558 1134 677
+\placeholder{graph}{Complex grid 2 units, real window [-16,6], imaginary [-10,12], double-arrowed R and i axes, O origin; printed horizontal labels -10,-8,-4,4, vertical -8,-4,8. Red filled r(-7,3),s(2,-8),-s(-2,8),r-s(-9,11),origin; labels -7+3i,2-8i,-2+8i,-9+11i,r-s,S. Black O to r and -s; red O to s; dashed red opposite sides to r-s. Green segments O to r-s and r to s demonstrate equal distances.}
+\te{Printed horizontal label -10 in the second graph lies at the position expected for -12 on the otherwise uniform scale; likely -12 was intended.}
+\te{Callout: The distance between r and s is the same as the modulus of r-s.}
+Therefore, the distance between the points representing r and s is the same as the modulus (|r-s|).
+\answer{Both distances are (\sqrt{202}).}
+\end{example}
+\begin{tryit}{5}
+Find the modulus of the difference (r-s).
+a. (r=4-3i), (s=10+2i)
+b. (r=-3-i), (s=-5-4i)
+\answer{a. (\sqrt{61}) b. (\sqrt{13})}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: Do you need to find the modulus of the difference or the distance between the complex numbers?
+\answer{It does not matter which method you use because the results are the same.}
+\end{te-addendum}
+\begin{te-addendum}{5}{CommonError}
+Try It! 5 Some students may forget to take the opposite of the real and imaginary terms in the complex number being subtracted. Have them use the Distributive Property and multiply both the real part and the imaginary part of the complex number by -1 before graphing the opposite point.
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+Use with EXAMPLES 3, 4, \& 5
+Make Sense and Persevere Two complex numbers determine a parallelogram. How can you use the parallelogram to interpret the modulus of each vector, their sum, and the distance between them?
+\answer{The modulus is the length of one side of the parallelogram, the sum is the vector from the origin to the fourth point of the parallelogram (one diagonal of the parallelogram), and the distance is the length of the other diagonal.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 5)
+READING BEGINNING Display the mathematical definition of distance for students to read: The distance between two points is the length of a straight-line segment that joins them. Then have students read the question asked in the example.
+Q: How is modulus similar to distance?
+\answer{It is the length from a complex number to the origin.}
+Q: Which is more specific, modulus or distance?
+\answer{Modulus, a modulus is the length between a complex number and the origin while distance can be between any two points.}
+LISTENING DEVELOPING Have students listen as you read aloud the callout for the first graph in the example. Then read the definitions of the word opposite; first as used in the sentence, and then as it pertains to antonyms. Give students words and have them work in pairs to find words with an opposite meaning.
+Q: What is the opposite of fragrant? Of lengthy? Of answer?
+\answer{bland or without smell; short or concise; question}
+Q: What is the opposite of a complex number?
+\answer{a complex number where both the real and the imaginary part have opposite signs from the original}
+SPEAKING EXPANDING In small groups, have students discuss the reason for drawing a parallelogram, rather than some other shape, to help them solve the problem. Listen for them to explain using mathematical vocabulary and complete sentences.
+Q: What are the characteristics of a parallelogram?
+\answer{a four-sided figure with opposite sides that are parallel and equal in length}
+Q: Why is a parallelogram drawn in this example?
+\answer{because one of the vertices represents the difference of two complex numbers, for which the modulus can be found}
+\end{te-addendum}
+% Source page 59: 426 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Represent Complex Numbers in the Complex Plane}
+Q: How can you represent a complex number graphically?
+\answer{On a complex plane, graph the real part along the horizontal axis and the imaginary part along the vertical axis.}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercises 9--10 Some students may find the midpoint instead of finding the average. Have students write the formula for finding the average of two complex numbers on their papers as their first step in the solution process.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Represent Complex Numbers in the Complex Plane}
+\begin{tabular}{ll}
+ & WORDS \\
+The Complex Plane and Complex Numbers & The complex plane has a vertical imaginary axis and a horizontal real axis. A complex number of the form a+bi corresponds to the point (a,b). \\
+Complex Conjugate & On the complex plane, points representing complex conjugates are images of each other in a reflection over the real axis. \\
+Modulus & The modulus |z| of a complex number corresponds to its distance from the origin on the complex plane. The modulus is the square root of the number times its conjugate: (|z|=\sqrt{z\cdot\overline z}). \\
+Distance and Difference & The distance between points representing two complex numbers in the complex plane is the modulus of the difference between the two numbers. \\
+\end{tabular}
+GRAPHS
+% FIG 59 730 428 831 536
+\placeholder{graph}{Complex plane unit grid window real [-5,6], imaginary [-6,7], black double-arrowed axes imaginary axis (i) and real axis (R), O origin. Labels real -4,-2,2,4 and imaginary -4,-2,2,4,6. Red filled (-3,5),(1,-4), labeled coordinates and -3+5i,1-4i.}
+% FIG 59 833 427 916 537
+\placeholder{graph}{Unit grid complex plane real [-7,1], imaginary [-6,5], double-arrowed R and i axes, O origin. Real -6,-4,-2, imaginary -4,-2,2,4; red filled (-6,2),(-6,-2), labels -6+2i,-6-2i.}
+% FIG 59 919 427 1002 537
+\placeholder{graph}{Unit complex grid real [-2,6], imaginary [-9,2], double-arrowed R and i axes, O origin. Real 2,4, imaginary -8,-6,-4,-2. Red segment O to filled (5,-8) labeled 5-8i.}
+% FIG 59 1007 425 1099 543
+\placeholder{graph}{Complex grid 2 units real [-10,4], imaginary [-10,12], double-arrowed R and i axes, O origin, labels real -8,-4, imaginary -8,-4,8. Red filled O,r(-7,3),s(2,-8),-s(-2,8),r-s(-9,11), labels -7+3i,2-8i,-2+8i,-9+11i,r-s,S. Black O to r,-s; red O to s; dashed red opposite parallelogram sides; green segments O to r-s and r to s.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you represent complex numbers and their relationships on a graph?
+\answer{To model the complex number (a+bi), graph the ordered pair (a,b) in the complex plane. To model complex conjugates, use reflection images of their corresponding points over the real axis. To model the modulus of a complex number, find its distance from the origin on the complex plane. To model (r+s), where r and s are complex numbers, graph the points for r, the origin, and s as three vertices of a parallelogram. The fourth vertex of the parallelogram represents (r+s). To model (r-s), graph the points for r, the origin, and the opposite of s as three vertices of a parallelogram. The fourth vertex of the parallelogram represents (r-s).}
+2. Error Analysis Amari found the complex conjugate of (7+3i) to be (-7-3i). Explain and correct Amari's error.
+\answer{To find a complex conjugate, reflect over the real x-axis. Reflecting over the real x-axis affects only the y-coordinate, or the imaginary part of the complex number. Casey took the opposite of both parts of the complex number. The complex conjugate of (7+3i) is (7-3i).}
+\te{Printed answer calls the student Casey; likely Amari as in the prompt.}
+3. Vocabulary Explain how the complex plane is similar to and different from the Cartesian plane.
+\answer{The complex plane and the standard xy-plane both have two axes. Instead of the standard x- and y-axes, the complex plane has real (horizontal) and imaginary (vertical) axes.}
+4. Use Structure How does a parallelogram demonstrate that the distance between two points is the same as the modulus of their difference?
+\answer{Opposite sides of a parallelogram are congruent. The side formed by the two points and the side that is the modulus of the difference are opposite sides when graphed as a parallelogram, so they must be the same length.}
+\textbf{Do You KNOW HOW?}
+Write the ordered pair that corresponds to the complex number.
+5. (14-7i) \answer{(14,-7)}
+6. (-6+2i) \answer{(-6,2)}
+Find the modulus of the complex number.
+7. (3+i) \answer{(\sqrt{10})}
+8. (-5-4i) \answer{(\sqrt{41})}
+Find the average of the complex numbers.
+9. (8+i) and (5-6i) \answer{(6.5-2.5i)}
+10. (-2+3i) and (-7-4i) \answer{(-4.5-0.5i)}
+11. What point, S, completes the parallelogram PTSR that has points P at (0,0), R at (-4,-5), and T at (8,-1)?
+\answer{(4,-6)}
+\end{concept-summary}
+% Source page 60: 427 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+12--26,29--36 & 12--20,23--36 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Scan the QR code to access a video tutorial. 12--13. Answers on previous page. See answers for Exercises 15--18 and 24--27 on next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 17,18 & 1 \\
+1 & 33 & 2 \\
+2 & 19--21,34 & 1 \\
+2 & 13 & 2 \\
+3 & 22,23,35 & 1 \\
+3 & 15 & 2 \\
+3 & 14 & 3 \\
+4 & 24--27 & 1 \\
+4 & 12,16,32 & 2 \\
+5 & 28--30 & 1 \\
+5 & 31 & 2 \\
+5 & 36 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{12}{2}
+UNDERSTAND. Construct Arguments LaTanya needed to find the fourth point in the parallelogram shown. She found the slope of RP to be -3 and used that slope to find that the missing point, T, is at (6,8). Is LaTanya correct? Explain your reasoning.
+% FIG 60 548 385 741 566
+\placeholder{graph}{Unit complex grid real [-5,10], imaginary [-2,12], black double-arrowed R and i axes, O origin. Real labels -4,-2,2,4,6,8, imaginary 2,4,6,8,10. Red filled P(0,0),R(-3,9),S(5,11), labels P(0,0),R(-3,9),S(5+11i). No connecting segments.}
+\answer{No, LaTanya is not correct. The slope of RP is (\frac{-9}3). This reduces to -3, but she needed to count down 9 and right 3 from point S, not down 3 and right 1. The point T should be at (8,2).}
+\end{practice}
+\begin{practice}{13}{2}
+Error Analysis Describe and correct the error a student made in finding the midpoint of the segment joining (5+8i) and (4-4i).
+(midpoint=\frac{(5+8i)+(4-4i)}2)
+(midpoint=\frac{(5+4)+(8-4)i}2)
+(midpoint=\frac{9+4i}2)
+(midpoint=\frac{13i}2=6.5i)
+\te{Student work appears on a gray curled note with red X.}
+\answer{The student added 9 and 4i to get 13i, but 9 and 4i can't be added since they are not like terms.
+(midpoint=\frac{(5+8i)+(4-4i)}2)
+(midpoint=\frac{(5+4)+(8-4)i}2)
+(midpoint=\frac{9+4i}2)
+(midpoint=\frac92+\frac{4i}2=4.5+2i)}
+\end{practice}
+\begin{practice}{14}{3}
+Construct Arguments Show that finding the modulus of a complex number (a+bi) gives you the same result as using the Distance Formula to find the distance between (a,b) and the origin.
+\answer{Using the distance formula:
+(d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2})
+(d=\sqrt{(x_2-0)^2+(y_2-0)^2})
+(d=\sqrt{(x_2)^2+(y_2)^2})
+Using the modulus formula gives:
+(modulus=\sqrt{(a+bi)(a-bi)})
+(modulus=\sqrt{a^2+abi-abi-(bi)^2})
+(modulus=\sqrt{a^2-b^2i^2})
+(modulus=\sqrt{a^2-b^2(-1)})
+(modulus=\sqrt{a^2+b^2})
+Since (x_2=a) and (y_2=b),
+(\sqrt{(x_2)^2+(y_2)^2}=\sqrt{a^2+b^2}).}
+\end{practice}
+\begin{practice}{15}{2}
+Generalize Is the modulus of a complex number the same as the modulus of its complex conjugate? Explain.
+\answer{Yes, the modulus of (a+bi) and the modulus of (a-bi) are both (\sqrt{a^2+b^2}).}
+\end{practice}
+\begin{practice}{16}{2}
+Higher Order Thinking When using a parallelogram to represent a subtraction of two complex numbers, you plot the opposite of the subtrahend. Why?
+\answer{Using a parallelogram with the given complex numbers models addition only. In order to model subtraction, you have to write the subtraction problem as adding a negative, or the opposite, instead.}
+\end{practice}
+\begin{practice}{17}{1}
+PRACTICE. Graph the complex number and its conjugate. SEE EXAMPLE 1
+(9+i)
+\answer{See graph.}
+% FIG 61 135 343 351 540
+\placeholder{graph}{Unit complex grid real [-1,10], imaginary [-5,5], double-arrowed R and i axes, O origin; real labels 2,4,6,8, imaginary -4i,-2i,2i,4i. Red filled (9,1),(9,-1), labeled 9+i and 9-i.}
+\end{practice}
+\begin{practice}{18}{1}
+Graph the complex number and its conjugate. SEE EXAMPLE 1
+(-3+2i)
+\answer{See graph.}
+% FIG 61 130 566 347 761
+\placeholder{graph}{Unit complex grid real [-7,4], imaginary [-5,5], double-arrowed R and i axes, O origin; real labels -6,-4,-2,2, imaginary -4i,-2i,2i,4i. Red filled (-3,2),(-3,-2), labeled -3+2i and -3-2i.}
+\end{practice}
+\begin{practice}{19}{1}
+Find the midpoint of the segment that joins the points corresponding to the complex numbers. SEE EXAMPLE 2
+(-4+2i) and (2+(-8i))
+\answer{(-1,-3)}
+\end{practice}
+\begin{practice}{20}{1}
+Find the midpoint of the segment that joins the points corresponding to the complex numbers. SEE EXAMPLE 2
+(1+i) and (3-5i)
+\answer{(2,-2)}
+\end{practice}
+\begin{practice}{21}{1}
+Find the midpoint of the segment that joins the points corresponding to the complex numbers. SEE EXAMPLE 2
+(-12+6i) and (-5-5i)
+\answer{(-8.5,0.5)}
+\end{practice}
+\begin{practice}{22}{1}
+Find the modulus of each complex number. SEE EXAMPLE 3
+% FIG 60 853 526 1003 657
+\placeholder{graph}{Complex plane, real grid spacing 2, imaginary spacing 1, window real [-2,20], imaginary [-5,5], double-arrowed R and i axes, O origin. Real labels 4,8,12,16, imaginary -4,-2,2,4. Red filled (18,-4) labeled 18-4i.}
+\answer{(\sqrt{340}\approx18.44)}
+\end{practice}
+\begin{practice}{23}{1}
+Find the modulus of each complex number. SEE EXAMPLE 3
+% FIG 60 853 670 1002 801
+\placeholder{graph}{Unit complex grid real [-10,1], imaginary [-5,5], double-arrowed R and i axes, O origin. Real labels -8,-6,-4,-2, imaginary -4,-2,2,4. Red filled point plotted at (-9,-2), labeled -9-i.}
+\answer{(\sqrt{82}\approx9.06)}
+\te{Printed point is at imaginary coordinate -2 but label and key use -1; likely the plotted point should be one unit higher.}
+\end{practice}
+\begin{practice}{24}{1}
+Use a parallelogram to represent each operation. SEE EXAMPLE 4
+Add (11+6i) and (7-4i).
+\answer{See graph: (18+2i).}
+% FIG 61 135 787 387 986
+\placeholder{graph}{Complex grid spacing 2 both axes, real [-2,20], imaginary [-10,10], double-arrowed R and i axes, O origin. Real labels 4,8,12,16, imaginary -8i,-4i,4i,8i. Solid red parallelogram with filled vertices O,(11,6),(18,2),(7,-4), labels 11+6i,18+2i,7-4i.}
+\end{practice}
+\begin{practice}{25}{1}
+Use a parallelogram to represent each operation. SEE EXAMPLE 4
+Add (7+5i) and (4-3i).
+\answer{See graph: (11+2i).}
+% FIG 61 132 1008 421 1225
+\placeholder{graph}{Unit complex grid real [-1,12], imaginary [-5,6], double-arrowed R and i axes, O origin. Real labels 2,4,6,8,10, imaginary -4i,-2i,2i,4i. Solid red parallelogram with filled vertices O,(7,5),(11,2),(4,-3); labels 7+5i,11+2i,4-3i.}
+\end{practice}
+\begin{practice}{26}{1}
+Use a parallelogram to represent each operation. SEE EXAMPLE 4
+Subtract (-8+3i) from (15+i).
+\answer{See graph: (23-2i).}
+% FIG 61 487 1142 724 1341
+\placeholder{graph}{Complex grid real spacing 2.5, imaginary spacing 1, real window [-5,25], imaginary [-5,5], double-arrowed R and i axes, O origin. Real labels 5,10,15,20, imaginary -4i,-2i,2i,4i. Solid red parallelogram with filled vertices O,(15,1),(23,-2),(8,-3); labels 15+i,23-2i,8-3i.}
+\end{practice}
+\begin{practice}{27}{1}
+Use a parallelogram to represent each operation. SEE EXAMPLE 4
+Subtract (3-9i) from (10-7i).
+\answer{See graph: (7+2i).}
+% FIG 61 826 1142 1093 1341
+\placeholder{graph}{Complex grid spacing 2, real [-6,16], imaginary [-10,10], double-arrowed R and i axes, O origin. Real labels -4,4,8,12, imaginary -8i,-4i,4i,8i. Solid red parallelogram filled vertices O,(-3,9),(7,2),(10,-7); labels -3+9i,7+2i,10-7i.}
+\end{practice}
+\begin{practice}{28}{1}
+Find the distance between the points representing the complex numbers. SEE EXAMPLE 5
+(r=4+6i), (s=7-10i)
+\answer{(\sqrt{265}\approx16.28)}
+\end{practice}
+\begin{practice}{29}{1}
+Find the distance between the points representing the complex numbers. SEE EXAMPLE 5
+(r=-12+2i), (s=-2+i)
+\answer{(\sqrt{101}\approx10.05)}
+\end{practice}
+\begin{practice}{30}{1}
+Find the distance between the points representing the complex numbers. SEE EXAMPLE 5
+(r=-5-7i), (s=1+4i)
+\answer{(\sqrt{157}\approx12.53)}
+\end{practice}
+% Source page 61: 428 Apply and Assessment Practice
+\begin{practice}{31}{2}
+APPLY. Make Sense and Persevere Start with a complex number c. Square it and add c to get a new complex number. Then square that and add c again. Keep going. If, for your number c, your results never get larger than 2, then c is part of a collection of points called the Mandelbrot set. Both (-1+\frac18i) and (\frac18-\frac14i) are in the Mandelbrot set. What is the modulus of the difference between the two numbers?
+% FIG 61 517 420 779 610
+\placeholder{graph}{Mandelbrot set picture on salmon background with yellow and green boundary and cyan interior. Black axes Real horizontal from -2 to1 ticks -2,-1,0,1, Imaginary vertical ticks -1 and1, no arrows/grid. Black points at (-1,1/8),(1/8,-1/4) with white callout labels. Symmetric blue cardioid-like main region and left circular lobe.}
+\answer{(\frac{3\sqrt{10}}8\approx1.19)}
+\end{practice}
+\begin{practice}{32}{2}
+Reason Alternating current (AC) circuits use complex numbers to represent impedance in ohms. To find the total impedance in a circuit, you need to find the sum of the impedances from each part of the circuit. A circuit has partial impedances of (4.2+3i) and (5-2.2i). What is the total impedance for the circuit?
+\answer{(9.2+0.8i) ohms}
+\end{practice}
+\begin{practice}{33}{2}
+Model With Mathematics A complex number is used to describe an electromagnetic field. The real and imaginary pieces represent the electric and magnetic components, respectively, that result from the motion of an electric charge or electric current. What ordered pair on the complex plane represents the electromagnetic field described below?
+% FIG 61 518 860 722 1043
+\placeholder{diagram}{Orange wire coil horizontal with ends pointing down, surrounded by pale blue closed curved arrow loops representing magnetic field. White callouts Magnetic field: -14 above top loop and Electric current 9 pointing to coil.}
+\answer{(9,-14)}
+\end{practice}
+\begin{practice}{34}{1}
+ASSESSMENT PRACTICE. Fill in the blanks to complete the statements about midpoints of segments.
+I. The midpoint of the segment joining (-6-8i) and (7-9i) is blank.
+II. The midpoint of the segment joining (-4i) and blank is (2+5i).
+III. The midpoint of the segment joining blank and (-3+3i) is (-7+5.5i).
+\answer{I. (0.5-8.5i) II. (4+14i) III. (-11+8i)}
+\end{practice}
+\begin{practice}{35}{1}
+SAT/ACT What is the modulus of the complex number (1+8i)?
+A. (\sqrt{63})
+B. 8
+C. (\sqrt{65})
+D. (\sqrt{66})
+E. 9
+\answer{C}
+\end{practice}
+\begin{practice}{36}{3}
+Performance Task Deon is practicing with coordinates in the complex plane by determining the coordinates needed to draw a capital "A." He wants the horizontal bar of his "A" to connect the midpoints of the sides. He has chosen the top point of the "A" to be represented by (6i) and the bottom left point to be represented by (-4+i).
+% FIG 61 826 703 1019 841
+\placeholder{illustration}{White note with curled lower right corner, small capital A centered, no coordinate grid or labels.}
+Part A What complex number represents the bottom right point of the "A"?
+\answer{Part A (4+i)}
+Part B What complex numbers represent the points where the horizontal bar connects the sides of the "A"?
+\answer{Part B (-2+3.5i) and (2+3.5i)}
+Part C What are the lengths (in units) of the three segments that make up the "A"?
+\answer{Part C The segments have lengths (\sqrt{41}) units, (\sqrt{41}) units, and 4 units.}
+\end{practice}
+% Source page 62: 428A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & A93 \\
+2 & 1 & A93 \\
+3 & 1 & A93 \\
+4 & 2 & A93 \\
+5 & 2 & A93 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\te{Assessment. Lesson Quiz is available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{8-4 Lesson Quiz: The Complex Plane}
+\te{ASSESSMENT RESOURCES. Name blank. enVision Algebra 2. SavvasRealize.com. Copyright© Savvas Learning Company LLC. All Rights Reserved. enVision Algebra 2 Assessment Sourcebook.}
+1. Graph the complex number (2+4i) and its conjugate.
+\answer{1. See graph.}
+% FIG 62 725 326 825 425
+\placeholder{graph}{Magenta filled points (2,4),(2,-4), labeled 2+4i and 2-4i. Black double-arrowed real and imaginary axes, O origin, unit grid window [-5,5] on both axes, real labels -4,-2,2,4, imaginary labels -4,-2,2.}
+2. What is the midpoint of the segment that joins the complex numbers (7+3i) and (-5-8i)?
+A. (-6+\frac{11}2i)
+B. ((1,\frac52))
+C. (1-\frac52i)
+D. ((-6,\frac{11}2))
+\answer{2. C}
+3. Find the modulus of the complex number (15-8i).
+modulus = blank
+\answer{3. 17}
+4. Graph a parallelogram in the complex plane to represent ((-3+i)+(-1-4i)).
+\answer{4. See graph.}
+% FIG 62 725 625 842 727
+\placeholder{graph}{Magenta parallelogram with filled vertices O,( -3,1),(-4,-3),(-1,-4), solid sides; sum vertex labeled -4-3i. Black double-arrowed real and imaginary axes, O origin, unit grid window [-5,5] on both axes, real labels -4,-2,2,4, imaginary label 2.}
+5. Find the distance between the complex numbers (-12+6i) and (-10+5i).
+A. (\sqrt{605}\approx24.60)
+B. (\sqrt5\approx2.24)
+C. (-1+\frac{11}2i)
+D. (\sqrt{363}\approx19.05)
+\answer{5. B}
+\end{te-addendum}
+% Source page 63: 428B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I=Intervention; O=On-Level; A=Advanced.
+Reteach to Build Understanding I. Provides scaffolded reteaching for the lesson concepts. MathXL for School.
+Additional Practice I O. Provides extra practice for each lesson. MathXL for School.
+Enrichment O A. Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Mathematical Literacy and Vocabulary I O. Helps students develop and reinforce understanding of key terms and concepts.
+\te{Resource sheets each print Name blank, enVision Algebra 2, SavvasRealize.com, lesson title The Complex Plane, Copyright© Savvas Learning Company LLC. All Rights Reserved., and enVision Algebra 2 Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{8-4 Reteach to Build Understanding}
+1. Graph each point on the imaginary plane. The first number x is along the horizontal axis, referred to as the real axis. The second number y is along the vertical axis, referred to as the imaginary axis. Record the values of x and y. Then graph the points.
+\begin{tabular}{lll}
+(x+yi) & x & y \\
+(3-4i) & \answer{3} & \answer{-4} \\
+(-5-2i) & \answer{-5} & \answer{-2} \\
+(4+3i) & \answer{4} & \answer{3} \\
+(-2+4i) & \answer{-2} & \answer{4} \\
+\end{tabular}
+% FIG 63 300 451 366 516
+\placeholder{graph}{Black double-arrowed R horizontal and i vertical axes, O origin, unit grid [-5,5] on both axes, labels -4,-2,2,4. Magenta filled points (-5,-2),(-2,4),(4,3),(3,-4).}
+2. Elijah is trying to find the midpoint of the segment joining (8+4i) and (4+2i). He concluded that (2,1) is the correct answer. What error did he make? What is the correct midpoint?
+\te{Student note: Find the midpoint of the segment joining the points (8,4) and (4,2). ((\frac{8-4}2,\frac{4-2}2)=(\frac42,\frac22)=(2,1)).}
+\answer{Elijah found the difference between each point instead of their sum. The correct midpoint is (6,3).}
+3. What is the modulus, the distance from the point to the origin, of (3-2i)? Round your answer to the nearest tenth.
+(3-2i) corresponds to (3,-2), so the modulus is the distance from (0,0) to (3,-2).
+(d=\sqrt{(\answer{3}-0)^2+(-\answer{2}-0)^2})
+(d=\sqrt{(\answer{3})^2+(-\answer{2})^2})
+(d=\sqrt{9+\answer{4}})
+(d=\sqrt{13})
+(d\approx\answer{3.6})
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{8-4 Additional Practice}
+Round all answers to the nearest tenth.
+1. What point in the complex plane represents (-8+5i)?
+\answer{(-8,5)}
+2. Find the midpoint of the segment that joins the complex numbers (12-3i) and (-16-9i).
+\answer{(-2-6i)}
+3. Find the modulus of the complex number (-5-13i).
+\answer{13.9}
+4. Find the distance between the complex numbers (r=3-2i) and (s=12+5i).
+\answer{11.4}
+5. Find the distance between the complex numbers (r=-2+4i) and (s=-5+2i).
+\answer{3.6}
+6. Correct the error of the following student's solution.
+Find the midpoint between the complex numbers (r=6+9i) and (s=5-4i).
+(Midpoint=\frac{(6+9i)+(5-4i)}2)
+(Midpoint=\frac{\uncertain{(6+9)i+5-4i}{(6+9i)+5-4i}}2)
+(Midpoint=\frac{20-4i}2)
+(Midpoint=8i)
+\answer{(Midpoint=\frac{(6+9i)+(5-4i)}2). (Midpoint=\frac{11+5i}2). Correct answer: (5.5+2.5i).}
+7. The total impedance of an electrical circuit is defined by (Z=\frac{Z_1Z_2}{Z_1+Z_2}), where (Z_1=3-2i) and (Z_2=3+2i) are the parallel impedances of the circuit. What ordered pair describes the total impedance of the circuit?
+\answer{(\frac{(3-2i)(3+2i)}{(3-2i)+(3+2i)}=\frac{3^2-(2i)^2}6=\frac{9-4i^2}6=\frac{13}6)}
+\te{Printed answer is a fraction rather than the requested ordered pair; likely (13/6,0), or (2.2,0) under the rounding instruction.}
+8. Two alternate resistors connected to a circuit have voltages of (6.4+5i) and (7-4.2i). What is the total voltage of the circuit?
+\answer{(13.4+0.8i)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{8-4 Enrichment}
+The complex numbers in all rows and columns and on diagonals have a sum of (90+90.75i). What are the missing values of x and y?
+\begin{tabular}{lll}
+(2+26i); (10+0.5i) & (7+31i); (35+1.75i) & (6+30i); (30+1.5i) \\
+(9+xi); (45+2.25i) & (5+29i); (25+1.25i) & (1+25i); (5+0.25i) \\
+(4+28i); (20+i) & (3+27i); (y+0.75i) & (8+32i); (40+2i) \\
+\end{tabular}
+\answer{(x=33); (y=15).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{8-4 Mathematical Literacy and Vocabulary}
+Choose a concept from the list that best represents an operation or an attribute of the complex numbers in the table.
+\begin{tabular}{ll}
+Adding complex numbers & Real axis \\
+Finding the modulus of a complex number & Multiplying two complex numbers \\
+Dividing complex numbers & Finding the midpoint \\
+Imaginary axis & Subtracting complex numbers \\
+\end{tabular}
+\begin{tabular}{ll}
+1. Horizontal axis, represents the real part of a complex number on the complex plane & \answer{Real axis} \\
+2. (\frac{4+i}2-\frac{\uncertain{3i-3i}{31-3i}}2) & \answer{Subtracting complex numbers} \\
+3. ((\frac{4+9}2,\frac{-3i+9i}2)) & \answer{Finding the midpoint} \\
+4. (\sqrt{(6-0)^2+(-9-0)^2}) & \answer{Finding the modulus of a complex number} \\
+5. ((19-31i)-\frac{\uncertain{7i-2i}{71-2i}}2) & \answer{Subtracting complex numbers} \\
+6. (\frac{4+i}{2i}) & \answer{Dividing complex numbers} \\
+7. ((\frac{4-7i}2)(\frac{-1+3i}2)) & \answer{Multiplying two complex numbers} \\
+8. (\frac{4+i}2+\frac{\uncertain{3i-3i}{31-3i}}2) & \answer{Adding complex numbers} \\
+9. ([(6-0)^2+(-9-0)^2]^{\frac12}) & \answer{Finding the modulus of a complex number} \\
+10. The vertical axis, represents the imaginary part of a complex number on the complex plane & \answer{Imaginary axis} \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+Solve the system of equations by graphing.
+(y=3x+4)
+(y=-2x+4)
+Use the graphing tool to graph the system.
+Click to enlarge graph.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+% FIG 63 584 978 1035 1300
+\placeholder{illustration}{Black landscape tablet with home button left, white MathXL screen. System equations left, empty coordinate grid upper right, arrowed x,y axes, unit grid and labels -10,-8,...,10. Question Help menu Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Footer Review progress, Question 5 of 14, Go, Back, Next, Check Answer, Clear All; 1 part remaining.}
+\end{te-addendum}
+
+\end{document}

@@ -1,0 +1,949 @@
+\documentclass{article}
+% Source: Topic_10_Teacher_Edition.pdf, PDF pages 49-61 (printed pages 508A-516B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 49: 508A, Lesson Overview
+\begin{lesson-meta}
+lesson: 10-4
+title: Inverses and Determinants
+standards: none printed
+practices: none printed
+objective: I CAN... find and use the inverse of a matrix.
+
+essential question: How do you find and use an inverse matrix?
+
+\textbf{VOCABULARY}
+\item determinant of a (2\times2) matrix
+\item inverse matrix
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 10-4 \\
+Title & Inverses and Determinants \\
+Standards & none printed \\
+I CAN Objective & I CAN... find and use the inverse of a matrix. \\
+Essential Question & How do you find and use an inverse matrix? \\
+Lesson Vocabulary & determinant of a (2\times2) matrix; inverse matrix \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Determine if a matrix has an inverse, and if it does, find it.
+\item Use the absolute value of the determinant of a matrix to find the areas of triangles and parallelograms.
+Essential Understanding. The multiplicative inverse of a square matrix A is the unique matrix (A^{-1}) such that the product of A and (A^{-1}), in each order, is the identity matrix. It is used to solve systems of linear equations. The determinant of a (2\times2) matrix (\begin{bmatrix}a&b\\c&d\end{bmatrix}) is equal to (ad-bc).
+\textbf{COHERENCE}
+Previously in this courses, students:
+\item Used matrices to organize data and solve problems.
+\item Found the product of matrices.
+In this lesson, students:
+\item Find the product of a matrix and its inverse and recognize that the product is the identity matrix.
+\item Use matrix multiplication to find the inverse of a matrix and use it to solve problems.
+Later in this topic, students will:
+\item Use inverse matrices to simplify the process of solving systems of linear equations.
+Increasing Coherence. This lesson is not necessarily expected to be addressed on high stakes assessments.
+\te{Printed "in this courses"; likely "in this course."}
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+\item Students find inverse matrices by writing and solving an equation for the inverse or by using technology.
+\item Students apply inverse matrices and determinants to solve real-world problems, such as finding the area of a triangle.
+\textbf{Mathematics Overview}
+Students find the inverse and determinant of a square matrix, either by hand or with technology. Then they use the inverse and the determinant for various applications such as determining the area of a parallelogram or triangle.
+\textbf{Applying Math Practices}
+Use Appropriate Tools Strategically
+Students use technology tools, such as calculators, to find the determinant and the inverse of a (3\times3) matrix.
+Look For and Make Use of Structure
+Students look for relationships and patterns in mathematics when they recognize that even though all real numbers have inverses, all matrices do not.
+\te{Printed all real numbers have inverses; likely all nonzero real numbers have multiplicative inverses.}
+SavvasRealize.com. Program Resources.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+identity matrix & matriz identidad \\
+zero matrix & matriz cero \\
+\end{tabular}
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+determinant of (2\times2) matrix & determinante de una matriz de (2\times2) \\
+inverse matrix & matriz inversa \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Have students think about how they have previously used the words inverse and determinant in past topics. Then have them apply this understanding to predict the meanings of these terms as they apply to matrices. Help students to differentiate the inverse matrix from the identity and zero matrices by having them complete the matching activity shown.
+(\begin{bmatrix}1&0\\0&1\end{bmatrix}) \answer{c}
+(\begin{bmatrix}0&0\\0&0\end{bmatrix}) \answer{a}
+(A^{-1}=\begin{bmatrix}1&2\\3&4\end{bmatrix}^{-1}) \answer{b}
+a. zero matrix
+b. inverse matrix
+c. identity matrix
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 49 932 736 1084 916
+\placeholder{illustration}{Student Companion cover with purple and blue circular artwork on black, enVision Algebra 2 and SAVVAS.}
+\end{te-addendum}
+% Source page 50: 508B, Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students recognize multiplicative inverses from three different types of equations and explore methods for solving these equations. This prepares students to learn how to find and use inverse matrices to solve equations.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+Explore \& Reason is available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS: Implement Tasks that Promote Reasoning and Problem Solving ETP}
+Q: What do you notice about the three equations?
+\answer{Sample: All the equations are equal to the multiplicative identity.}
+\textbf{During SMALL GROUP: Support Productive Struggle in Learning Mathematics}
+Q: How does knowing what a multiplicative inverse is help you in solving these equations?
+\answer{Each product is set equal to the multiplicative identity, so it is helpful to know that the identity is the result of a number, expression, or matrix multiplied by its multiplicative inverse.}
+For Early Finishers
+Solve the equations below.
+1. (\frac34t=1)
+\answer{1. (t=\frac43)}
+2. ((6+4i)(m+ni)=1)
+\answer{2. (m+ni=\frac1{6+4i})}
+3. (\begin{bmatrix}3&1\\0&4\end{bmatrix}\cdot\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})
+\answer{3. (\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}\div\begin{bmatrix}3&1\\0&4\end{bmatrix}) or (\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}\frac13&-\frac1{12}\\0&\frac14\end{bmatrix})}
+\te{Printed matrix division notation retained; multiplication by the inverse is the defined operation.}
+Q: Write and solve an equation using a multiplicative inverse.
+\answer{Check students' work.}
+\textbf{After WHOLE CLASS: Facilitate Meaningful Mathematical Discourse ETP}
+Q: Is it possible to solve for all the variables in the matrix given the information provided?
+\answer{Yes; write the matrices as four equations in order to solve for the variables.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+A teacher writes these three equations on the board.
+(\frac23m=1)
+((2+3i)(p+qi)=1)
+(\begin{bmatrix}2&0\\0&2\end{bmatrix}\cdot\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})
+A. Carolina notices that the solution to the first equation is given by (\frac32), and she hypothesizes that (p+qi=\frac1{2+3i}) and (\begin{bmatrix}w&x\\y&z\end{bmatrix}=\frac{\begin{bmatrix}1&0\\0&1\end{bmatrix}}{\begin{bmatrix}2&0\\0&2\end{bmatrix}}). Is Carolina correct?
+\answer{A. Yes}
+\te{Printed quotient of matrices retained; likely multiplication by the inverse is intended.}
+B. Look for Relationships What do the methods for solving these equations have in common?
+\answer{B. Each solution method shows a multiplicative inverse.}
+\te{Digital preview repeats the same board and both prompts; controls Go back and Enter your answer.}
+% FIG 50 668 186 1184 532
+\placeholder{illustration}{Digital Explore and Reason screen with three equations on a whiteboard at right, prompts A and B at left and two blank answer fields. Board displays (2/3)m=1, (2+3i)(p+qi)=1, and [2,0;0,2][w,x;y,z]=[1,0;0,1].}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXPLORE \& REASON}
+Communicate Precisely What does the term multiplicative inverse mean?
+\answer{A multiplicative inverse is a number, expression, or matrix such that its product with the original number, expression, or matrix is the identity.}
+\end{te-addendum}
+% Source page 51: 508, Example 1 and Additional Examples
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP.
+Students are introduced to inverse matrices. Students learn that they can find the inverse of matrices by using the identity matrix or by using the determinant for (2\times2) matrices. Students discover how to find the areas of a parallelogram and a triangle using determinants.
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{EXAMPLE 1 Explore Inverses of (2\times2) Matrices}
+Build Procedural Fluency From Conceptual Understanding ETP.
+Q: How is the identity matrix related to a matrix and its inverse matrix?
+\answer{The product of a matrix and its inverse is the identity matrix.}
+Q: How can you find the inverse of a matrix?
+\answer{Set the product of a known matrix A and an unknown inverse matrix B equal to the identity matrix. Solve for matrix B by multiplying the matrices A and B and solving the equations that result from the matrix multiplication.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 3}
+Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.
+Lulu cannot remember her social security number, so she wants to write it down. Since she doesn't want anyone to steal her identity, she has encoded her social security number using the encoding matrix (\begin{bmatrix}1&2&3\\0&1&4\\5&6&0\end{bmatrix}).
+She wrote the encoding matrix and the word left on one piece of paper. On a separate piece of paper, she wrote down her coded social security number 21, 18, 37, 30, 37, 11, 36, 31, 63. Decode Lulu's social security number by rewriting the coded number as the (3\times3) matrix (\begin{bmatrix}21&30&36\\18&37&31\\37&11&63\end{bmatrix}).
+Use this information to determine the decoding matrix and Lulu's social security number.
+\answer{See back of book.}
+\te{No solution is visible in the printed preview; only a SOLUTION button is shown.}
+Example 3 Students explore finding the decoding matrix from a given coded number in this additional example.
+Q: If you are given the social security number, what else would you need to calculate the number to write down?
+\answer{the encoding matrix}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 5}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+A parallelogram has one vertex at the origin, is defined by the vectors (\langle-3,3\rangle) and (\langle c,-3\rangle), and has an area of 36 square units. What are the possible values of c?
+Form the matrix (T=\begin{bmatrix}-3&3\\c&-3\end{bmatrix}) from the two vectors.
+The area, A, of the parallelogram is (A=|\det(T)|).
+(|-3(-3)-c(3)|=36)
+(|9-3c|=36)
+\begin{tabular}{lll}
+(9-3c=36) & or & (9-3c=-36) \\
+(-3c=27) & & (-3c=-45) \\
+(c=-9) & & (c=15) \\
+\end{tabular}
+% FIG 51 884 936 1020 1075
+\placeholder{graph}{Coordinate grid with x and y labels every 4 from -12 to 12, grid spacing 2, window approximately [-16,16] on both axes. Two parallelograms share the blue vector from origin to (-3,3). One has second vertex (-9,-3) and fourth vertex (-12,0); the other has second vertex (15,-3) and fourth vertex (12,0). Green solid vectors from origin to (-9,-3) and (15,-3); green dashed translated copies from (-3,3) to (-12,0) and (12,0); blue translated edges join the respective endpoints.}
+\answer{(c=-9) or (c=15)}
+Example 5 Students transition to using the area of a parallelogram to help find the missing value of one of the vectors that defines a parallelogram.
+Q: How do you know both values for c are accurate?
+\answer{Find the absolute value of the determinant with both values of c to check that each calculation equals 36.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Explore Inverses of (2\times2) Matrices. CONCEPTUAL UNDERSTANDING}
+A. What is the inverse matrix of (\begin{bmatrix}2&1\\3&0\end{bmatrix})?
+An inverse matrix of a matrix (\begin{bmatrix}a&b\\c&d\end{bmatrix}) is a matrix (\begin{bmatrix}w&x\\y&z\end{bmatrix}) such that the product of the two matrices is the identity matrix.
+(\begin{bmatrix}a&b\\c&d\end{bmatrix}\cdot\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})
+\te{LOOK FOR RELATIONSHIPS For a matrix A and its inverse matrix B, (AB=BA=I), where I is the identity matrix.}
+Step 1 Write the equation for the inverse.
+(\begin{bmatrix}2&1\\3&0\end{bmatrix}\cdot\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})
+Step 2 Multiply the matrices on the left side of the equation.
+(\begin{bmatrix}2w+y&2x+z\\3w+0y&3x+0z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})
+Step 3 Solve the equations that result from the matrix multiplication. Set each element of the first matrix equal to the corresponding element in the second matrix. This results in a system of four equations:
+\begin{tabular}{ll}
+(2w+y=1) & (2x+z=0) \\
+(3w+0y=0) & (3x+0z=1) \\
+\end{tabular}
+Solve the equations that involve only one variable first.
+\begin{tabular}{ll}
+(3w+0y=0) & (3x+0z=1) \\
+(3w=0) & (3x=1) \\
+(w=0) & (x=\frac13) \\
+\end{tabular}
+\te{CONTINUED ON THE NEXT PAGE.}
+% Source page 52: 509, Example 1 continued
+\textbf{EXAMPLE 1 CONTINUED}
+Substituting w and x into the first two equations yields the following.
+\begin{tabular}{ll}
+(2w+y=1) & (2x+z=0) \\
+(2(0)+y=1) & (2(\frac13)+z=0) \\
+(y=1) & (z=-\frac23) \\
+\end{tabular}
+\te{Callout: (\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}0&\frac13\\1&-\frac23\end{bmatrix})}
+Step 4 Verify the solution:
+(\begin{bmatrix}0&\frac13\\1&-\frac23\end{bmatrix}\cdot\begin{bmatrix}2&1\\3&0\end{bmatrix}=\begin{bmatrix}0(2)+\frac13(3)&0(1)+\frac13(0)\\1(2)-\frac23(3)&1(1)-\frac23(0)\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})
+The inverse matrix of (\begin{bmatrix}2&1\\3&0\end{bmatrix}) is (\begin{bmatrix}0&\frac13\\1&-\frac23\end{bmatrix}).
+\answer{A. (\begin{bmatrix}0&\frac13\\1&-\frac23\end{bmatrix})}
+B. What is the inverse matrix of (\begin{bmatrix}1&-1\\-1&1\end{bmatrix})?
+Find a matrix (\begin{bmatrix}w&x\\y&z\end{bmatrix}), so that (\begin{bmatrix}1&-1\\-1&1\end{bmatrix}\cdot\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}).
+Multiplying the matrices on the left of the equation yields
+(\begin{bmatrix}w-y&x-z\\-w+y&-x+z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})
+Create a system of four equations from the equal matrices.
+\begin{tabular}{ll}
+(w-y=1) & (x-z=0) \\
+(-w+y=0) & (-x+z=1) \\
+\end{tabular}
+\te{Callout: Combining these equations to solve for x and z leads to the contradiction (0=1). The two equations in x and z are circled.}
+\te{LOOK FOR RELATIONSHIPS Do all real numbers have a multiplicative inverse?}
+To solve, combine two equations that contain the same variables. This system has no solution. Some matrices do not have inverses.
+The matrix (\begin{bmatrix}1&-1\\-1&1\end{bmatrix}) does not have an inverse.
+\answer{B. The matrix does not have an inverse.}
+\end{example}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Build Procedural Fluency From Conceptual Understanding ETP. PART B}
+Examples are available at SavvasRealize.com. Activity.
+Q: Do all matrices have an inverse?
+\answer{No; if the system has no solution because combining equations that contain the same variables leads to an untrue statement, then the matrix does not have an inverse.}
+\end{te-addendum}
+\begin{tryit}{1}
+What is the inverse matrix of (\begin{bmatrix}1&5\\1&3\end{bmatrix})?
+\answer{The inverse of (\begin{bmatrix}1&5\\1&3\end{bmatrix}) is (\begin{bmatrix}-\frac32&\frac52\\\frac12&-\frac12\end{bmatrix}).}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How do you form the system of four equations to find the inverse matrix?
+\answer{Multiply the original matrix by the matrix (\begin{bmatrix}w&x\\y&z\end{bmatrix}) and set the product equal to the identity matrix. Then find the product and create the equations from the product matrix.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{CONCEPT The Inverse of a (2\times2) Matrix}
+For (A=\begin{bmatrix}a&b\\c&d\end{bmatrix}), the determinant of a (2\times2) matrix A, denoted (\det A), is the value (ad-bc).
+The inverse of A is denoted (A^{-1}) and exists if and only if (\det A\ne0).
+If (A=\begin{bmatrix}a&b\\c&d\end{bmatrix}) and A has an inverse, then (A^{-1}=\frac1{\det A}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}).
+\end{concept-box}
+\begin{te-addendum}{1}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 1}
+Some students may not understand the process of finding the inverse matrix, so they need to practice this process with guidance.
+Q: Write the equation for the inverse of (\begin{bmatrix}6&0\\4&1\end{bmatrix}).
+\answer{(\begin{bmatrix}6&0\\4&1\end{bmatrix}\cdot\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})}
+Q: Find the product of the matrices on the left side of the equation.
+\answer{(\begin{bmatrix}6w+0y&6x+0z\\4w+1y&4x+1z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})}
+Q: Set each element of the product matrix equal to the corresponding element in the identity matrix on the right side of the equation. This results in a system of four equations.
+\answer{(6w+0y=1), (6x+0z=0), (4w+1y=0), (4x+1z=1)}
+Q: Solve for the equations with one variable first.
+\answer{(w=\frac16), (x=0)}
+Q: Substitute the variables you now know and solve for the remaining variables.
+\answer{(y=-\frac23), (z=1)}
+Q: What is the inverse matrix?
+\answer{(\begin{bmatrix}\frac16&0\\-\frac23&1\end{bmatrix})}
+\end{te-addendum}
+% Source page 53: 510, Example 2
+\begin{example}{2}
+\textbf{Find Inverses of Square Matrices}
+A. What is the inverse of (A=\begin{bmatrix}4&1\\-1&2\end{bmatrix})?
+The matrix is a square matrix, (2\times2). The inverse exists because (\det A=ad-bc=4(2)-1(-1)=9).
+\te{VOCABULARY A determinant is a number associated with a square matrix that determines whether or not the matrix has an inverse.}
+(A^{-1}=\frac1{\det A}\begin{bmatrix}2&-1\\1&4\end{bmatrix})
+(A^{-1}=\frac19\begin{bmatrix}2&-1\\1&4\end{bmatrix}=\begin{bmatrix}\frac29&-\frac19\\\frac19&\frac49\end{bmatrix})
+The inverse of (A=\begin{bmatrix}4&1\\-1&2\end{bmatrix}) is (\begin{bmatrix}\frac29&-\frac19\\\frac19&\frac49\end{bmatrix}).
+Check your work by using your calculator to multiply A by the matrix you found for (A^{-1}). If your answer is correct, the product will be the identity matrix.
+\answer{A. (A^{-1}=\begin{bmatrix}\frac29&-\frac19\\\frac19&\frac49\end{bmatrix})}
+B. What is the inverse of (B=\begin{bmatrix}6&8\\3&4\end{bmatrix})?
+The matrix is a square matrix, (2\times2).
+Since (\det B=ad-bc=6(4)-8(3)=0), the inverse matrix does not exist.
+\answer{B. The inverse matrix does not exist.}
+C. What is the inverse of (C=\begin{bmatrix}1&2&1\\0&-1&0\\2&1&4\end{bmatrix})?
+The matrix is a square matrix, (3\times3). The formulas that we have shown you for finding the determinant and inverse matrix apply only to matrices that are (2\times2). Use a calculator to find the determinant and inverse of a (3\times3) matrix.
+Since (\det C=-2), the inverse exists.
+The calculator shows that the inverse matrix is
+(C^{-1}=\begin{bmatrix}2&\frac72&-\frac12\\0&-1&0\\-1&-\frac32&\frac12\end{bmatrix})
+\te{Calculator display: (\det C=-2); ([C]^{-1}=\begin{bmatrix}2&3.5&-.5\\0&-1&0\\-1&-1.5&.5\end{bmatrix}).}
+% FIG 53 1000 598 1097 681
+\placeholder{illustration}{Calculator screen displays det C = -2 and [C] inverse as the three-by-three decimal matrix with rows (2,3.5,-.5), (0,-1,0), (-1,-1.5,.5).}
+\answer{C. (C^{-1}=\begin{bmatrix}2&\frac72&-\frac12\\0&-1&0\\-1&-\frac32&\frac12\end{bmatrix})}
+\end{example}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{EXAMPLE 2 Find Inverses of Square Matrices. Pose Purposeful Questions ETP}
+Examples are available at SavvasRealize.com. Activity.
+PART A
+Q: How is the determinant helpful in finding the inverse of a matrix?
+\answer{First, the determinant tells whether an inverse even exists for a matrix because when the determinant equals 0, there is no inverse. Then, when the determinant does not equal 0, its reciprocal is the coefficient of the inverse matrix.}
+Q: How can you determine whether your inverse matrix is correct?
+\answer{Multiply the original matrix by its inverse matrix to determine whether the product of the matrices equals the identity matrix.}
+PART B
+Q: How do you know if the inverse of a matrix does not exist?
+\answer{If the determinant equals 0, then the inverse of the matrix does not exist.}
+PART C
+Q: Do the formulas for finding determinants and inverse matrices of (2\times2) matrices apply to matrices that are (3\times3)?
+\answer{No; the formulas for finding the determinant and the inverse of a matrix only apply to the (2\times2) matrices. You need to use a calculator to find the determinants and inverse matrices of (3\times3) matrices.}
+\end{te-addendum}
+\begin{tryit}{2}
+Does each given matrix have an inverse? If so, find it.
+a. (P=\begin{bmatrix}-4&2\\-6&3\end{bmatrix})
+\answer{a. (P^{-1}) does not exist.}
+b. (Q=\begin{bmatrix}7&3\\2&1\end{bmatrix})
+\answer{b. (Q^{-1}=\begin{bmatrix}1&-3\\-2&7\end{bmatrix})}
+c. (R=\begin{bmatrix}5&1&-1\\2&0&5\\1&0&2\end{bmatrix})
+\answer{c. (R^{-1}=\begin{bmatrix}0&-2&5\\1&11&-27\\0&1&-2\end{bmatrix})}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How does matrix Q compare to its inverse?
+\answer{The inverse of (\begin{bmatrix}a&b\\c&d\end{bmatrix}) is (\begin{bmatrix}d&-b\\-c&a\end{bmatrix}) because the determinant equals 1.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 2}
+Students explore finding the matrix when the determinant and inverse matrix are known.
+Q: The determinant of matrix A is 6. What are the possible values for matrix A if the inverse matrix is (\begin{bmatrix}1&-2\\-\frac13&\frac56\end{bmatrix})?
+\answer{(a=5), (b=12), (c=2), (d=6)}
+Q: How do you find these missing values?
+\answer{Set the inverse matrix equal to (\begin{bmatrix}\frac d6&-\frac b6\\-\frac c6&\frac a6\end{bmatrix}) to calculate the values or find the inverse of the inverse matrix.}
+\end{te-addendum}
+% Source page 54: 511, Use a Matrix Inverse
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations ETP}
+Q: How can you create a matrix from letters?
+\answer{There are 26 letters in the alphabet, so each letter can be assigned a number, and 27 can represent a space. Place the numbers into a matrix to represent letters or spaces, as needed, to encode or decode a message.}
+Q: Why do you need to choose a matrix that has an inverse to encode?
+\answer{In order to create the encoded matrix, or the inverse matrix, you need to multiply the matrix that has an inverse by the message matrix.}
+Q: Why do you need to break the message into strings?
+\answer{The strings allow you to create a matrix from the message.}
+Q: How can you use an inverse matrix to encode messages?
+\answer{Multiply the translated matrix by the encoding matrix to get the new encoded message matrix.}
+Q: When you multiply the inverse matrix by the matrix with the encoded message, what is the resulting message?
+\answer{The original matrix representation of the message; Since you multiplied the original message matrix by the encoding matrix to encode the message, you work in reverse to get the original matrix back. So, to decode the message, multiply the inverse of the encoding matrix by the matrix with the encoded message.}
+\te{Printed question asks about using an inverse matrix to encode, and the earlier answer calls the encoded matrix the inverse matrix; likely encoding and decoding matrices are being conflated.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 1, 2, \& 3.
+Generalize What must be true in order for a matrix to have an inverse?
+\answer{Sample: Its determinant is not zero.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Use a Matrix Inverse}
+Use matrices to encode and decode the message WE COME IN PEACE.
+Matrix multiplication can be used to encode and decode messages.
+Step 1 Convert the message into a string of numbers.
+Assign every letter in the alphabet a number, from A = 1 to Z = 26. Let 27 represent a space between words.
+Write the message, and translate each letter into its corresponding number.
+\begin{tabular}{rrrrrrrrrrrrrrrr}
+W & E & * & C & O & M & E & * & I & N & * & P & E & A & C & E \\
+23 & 5 & 27 & 3 & 15 & 13 & 5 & 27 & 9 & 14 & 27 & 16 & 5 & 1 & 3 & 5 \\
+\end{tabular}
+Step 2 Choose a matrix that has an inverse to encode the message, such as
+(A=\begin{bmatrix}2&2&3\\1&-3&-1\\2&-1&1\end{bmatrix}).
+The encoding matrix is a (3\times3) matrix, so break the message into three-digit strings.
+(\begin{bmatrix}23\\5\\27\end{bmatrix},\begin{bmatrix}3\\15\\13\end{bmatrix},\begin{bmatrix}5\\27\\9\end{bmatrix},\begin{bmatrix}14\\27\\16\end{bmatrix},\begin{bmatrix}5\\1\\3\end{bmatrix},\begin{bmatrix}5\\27\\27\end{bmatrix})
+\te{Callout: Insert spaces at the end to complete the string.}
+Create a matrix from these strings, and multiply by the encoding matrix.
+Encoding Matrix. Matrix representation of message.
+(\begin{bmatrix}2&2&3\\1&-3&-1\\2&-1&1\end{bmatrix}\begin{bmatrix}23&3&5&14&5&5\\5&15&27&27&1&27\\27&13&9&16&3&27\end{bmatrix}=\begin{bmatrix}137&75&91&130&21&145\\-19&-55&-85&-83&-1&-103\\68&4&-8&17&12&10\end{bmatrix})
+\te{USE APPROPRIATE TOOLS: Use technology to perform the matrix multiplications and to find the inverse matrix.}
+Step 3 Multiply by the inverse of (A) to decode the message.
+The inverse matrix is (A^{-1}=\begin{bmatrix}-4&-5&7\\-3&-4&5\\5&6&-8\end{bmatrix}).
+\te{Callout: Try decoding the matrix by making a chart of letters to convert the matrix product back into the message.}
+(\begin{bmatrix}-4&-5&7\\-3&-4&5\\5&6&-8\end{bmatrix}\begin{bmatrix}137&75&91&130&21&145\\-19&-55&-85&-83&-1&-103\\68&4&-8&17&12&10\end{bmatrix}=\begin{bmatrix}23&3&5&14&5&5\\5&15&27&27&1&27\\27&13&9&16&3&27\end{bmatrix})
+Now, this matrix can be reorganized into a string of numbers that represents the letter in the message.
+\answer{WE COME IN PEACE}
+\te{CONTINUED ON THE NEXT PAGE. Examples are available at SavvasRealize.com. Activity.}
+\end{example}
+% Source page 55: 512, Example 3 continued; Example 4
+\begin{tryit}{3}
+The matrix (\begin{bmatrix}-3&-5&11&6\\130&105&106&65\\323&269&205&128\end{bmatrix}) was encoded using the matrix (A=\begin{bmatrix}2&1&-2\\5&3&0\\4&3&8\end{bmatrix}). What is the message?
+\answer{WE LOVE MATH}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How do you decode the message?
+\answer{Multiply the encoded matrix by (A^{-1}).}
+\end{te-addendum}
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations ETP}
+PART A
+Q: What do you notice about the white triangle shown on the graph?
+\answer{It has one vertex on the origin and is defined by vectors (\langle a,b\rangle) and (\langle c,d\rangle).}
+Q: How is the area of a triangle defined by vectors (\langle a,b\rangle) and (\langle c,d\rangle) related to the determinant?
+\answer{The area of a triangle is half the absolute value of the determinant, or (\frac12|ad-bc|).}
+PART B
+Q: Why is a matrix used to represent the vectors?
+\answer{Vectors can be easily organized into a matrix to help compute the determinant.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use Determinants to Find the Area of a Triangle}
+A. How can you use vectors and determinants to find the area of a triangle?
+Orient the triangle so that one vertex is at the origin. Use the vectors (\langle a,b\rangle) and (\langle c,d\rangle) that result from the two sides of the triangle, so that each side has an endpoint at the origin.
+Use the vectors to form a matrix, placing one point in each column.
+(T=\begin{bmatrix}a&c\\b&d\end{bmatrix})
+The area of the triangle can be found by subtracting the areas of the surrounding triangles from the area of the rectangle.
+% FIG 55 815 472 1020 573
+\placeholder{diagram}{First-quadrant rectangle from origin O to (a,d), with arrowed positive x and y axes and no ticks. White triangle has vertices O, (c,d) on upper edge, and (a,b) on right edge. Surrounding left triangle red, labeled Area = one-half cd; upper-right triangle blue, Area = one-half (a-c)(d-b); lower triangle green, Area = one-half ab. Black boundaries and labeled vertex dots.}
+If you compute the area this way, the result is that the area of the triangle is half the absolute value of the determinant:
+(area of T=\frac12(ad-bc)=\frac12|\det T|)
+\answer{The area of the triangle is half the absolute value of the determinant.}
+\te{USE APPROPRIATE TOOLS: Determinants can be used for more than determining the existence of an inverse matrix. You can also use them to find the areas of triangles in the coordinate plane.}
+B. What is the area of the triangle defined by the vectors (\langle3,4\rangle) and (\langle-1,2\rangle)?
+The vector matrix is (T=\begin{bmatrix}3&-1\\4&2\end{bmatrix}).
+Then (|\det T|=|3(2)-(4)(-1)|=10).
+(\text{Area of the triangle}=\frac12|\text{determinant}|=\frac12(10)=5)
+The area of the triangle is 5 square units.
+\answer{5 square units}
+\end{example}
+\begin{tryit}{4}
+a. Find the area of the triangle determined by the vectors (\langle-2,10\rangle) and (\langle-1,-5\rangle).
+b. Find the area of the triangle determined by the vectors (\langle8,4\rangle) and (\langle7,-3\rangle).
+\answer{a. 10 square units b. 26 square units}
+\end{tryit}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error}
+Try It! 4b Some students may forget to find the absolute value of the determinant (-52) when calculating the area of the triangle. Encourage students to write the formula for the area of a triangle with vectors as (\frac12|\text{determinant}|) to ensure that they use absolute value in their calculation.
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 4)
+LISTENING BEGINNING Explain that the term orient means to establish location in relation to something else. Give students a copy of a coordinate plane and a triangle with vertices labeled (L), (M), and (N). Then direct students to orient the triangle in different ways, such as with vertex (M) at the origin, side (MN) along the x-axis, point (N) at coordinates (3,2), etc.
+Q: If you orient triangle (LMN) so that side (LM) is named as vector (\langle4,3\rangle), how would you name the vector that forms side (LN)?
+\answer{Check students' answers.}
+WRITING DEVELOPING Provide sentence stems for students to complete directions for finding the area of a triangle on a coordinate plane. (Use the vectors to form a blank. Find the blank of the matrix. Multiply the blank of the determinant by (\frac12).)
+\answer{matrix; determinant; absolute value}
+Q: Why do you think determinant is named with the word determine in it?
+\answer{Sample: The value of the determinant determines whether a matrix has an inverse.}
+READING EXPANDING Have students read through Part A of the example and number the paragraphs. Then direct students to look at the diagram. Have students label each area of the diagram with the number that corresponds to the paragraph explaining what is shown in that area.
+Q: What is the area of the rectangle?
+\answer{(b\times c)}
+\te{Printed rectangle area is (b\times c); likely (a\times d) for the displayed rectangle.}
+Q: Why would the area have to be an absolute value?
+\answer{Area cannot be a negative value.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+% Source page 56: 513, Area of a Parallelogram
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+PART A
+Q: What do you notice about the parallelogram shown on the graph?
+\answer{It has one vertex at the origin and is defined by vectors (\langle5,7\rangle) and (\langle2,-5\rangle).}
+Q: How are the area of a parallelogram, the area of a triangle, and the determinant related to each other?
+\answer{The area of the parallelogram formed by the vectors is the absolute value of the determinant, which is twice the area of the triangle.}
+PART B
+Q: Why are there two possible values for (a)?
+\answer{The area of the parallelogram is the absolute value of the determinant. The definition of the absolute value states that the equation would equal 5 or (-5), so (a) would have two possible values.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Use a Determinant to Find the Area of a Parallelogram}
+APPLICATION
+A. What is the area of a parallelogram with one vertex at the origin and defined by the vectors (\langle5,7\rangle) and (\langle2,-5\rangle)?
+% FIG 56 1000 276 1140 418
+\placeholder{graph}{Red parallelogram with solid vertex dots O=(0,0), labeled (5,7), unlabeled (7,2), and labeled (2,-5). Dashed red diagonal joins (2,-5) and (5,7). Arrowed x and y axes, unit grid, window x=-3 to 11 and y=-6 to 8; x labels -2,2,4,6,8,10 and y labels -4,-2,2,4,6. O labels origin.}
+\te{Callout: Use the origin as the initial point for both given vectors. Then graph a copy of each vector starting at the terminal point of the other to complete the parallelogram.}
+The area of the parallelogram formed by the vectors is twice the area of the triangle, so area of (P=|\det T|).
+Using the matrix (T=\begin{bmatrix}5&2\\7&-5\end{bmatrix}), the area of the parallelogram is (|\det T|).
+(|\det T|=|5(-5)-7(2)|=39)
+The area of the parallelogram is 39 square units.
+\answer{39 square units}
+\te{COMMON ERROR: The sign of the determinant changes based on the order of vectors in your matrix. Remember to use absolute value when calculating area.}
+B. A parallelogram has one vertex at the origin, is defined by the vectors (\langle-2,1\rangle) and (\langle1,a\rangle), and has an area of 5 square units. What are the possible value(s) of (a)?
+(T=\begin{bmatrix}-2&1\\1&a\end{bmatrix})
+Write the matrix defined by the two vectors.
+(|-2a-1(1)|=5)
+Find the absolute value of the determinant, and set it equal to the area of the parallelogram.
+(|-2a-1|=5) Simplify.
+(-2a-1=5\text{ or }-2a-1=-5) Rewrite using definition of absolute value.
+(-2a=6\text{ or }-2a=-4) Solve.
+(a=-3\text{ or }a=2)
+Check the solutions.
+(|\det\begin{bmatrix}-2&1\\1&-3\end{bmatrix}|=5) (|\det\begin{bmatrix}-2&1\\1&2\end{bmatrix}|=5)
+(|(-2)(-3)-(1)(1)|=5) (|(-2)(2)-(1)(1)|=5)
+(5=5) (5=5)
+The possible values for (a) are (-3) and 2.
+\answer{(-3) and 2}
+\end{example}
+\begin{tryit}{5}
+Find the area of the parallelogram defined by the vectors (\langle3,8\rangle) and (\langle1,4\rangle).
+\answer{4 square units}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How do you find the determinant of a (2\times2) matrix?
+\answer{For matrix (\begin{bmatrix}a&c\\b&d\end{bmatrix}), the determinant is (ad-bc).}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 4 \& 5.
+Look for Relationships Find the area of the triangle defined by the vectors (\langle2,6\rangle) and (\langle-1,-3\rangle). How do you explain the result?
+\answer{The area is (\frac12|2(-3)-6(-1)|=0) because the vectors lie along the same line and do not form a triangle.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+% Source page 57: 514, Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Matrix Inverses and Determinants}
+Q: How does the area of a parallelogram defined by vectors compare to the area of a triangle defined by vectors?
+\answer{The areas of both can be found using vectors and matrices. The area of a parallelogram is the absolute value of the determinant, whereas the area of a triangle is half the absolute value of the determinant.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error}
+Exercise 5 Some students may multiply (\frac1{\text{determinant}}) or (\frac12) by (\begin{bmatrix}-2&-4\\2&3\end{bmatrix}) instead of by (\begin{bmatrix}3&4\\-2&-2\end{bmatrix}). Have students first list the values for (a), (b), (c), and (d) and then write the formula for finding the inverse matrix to see how the placement and signs for (a), (b), (c), and (d) change in the inverse matrix formula.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Matrix Inverses and Determinants}
+DETERMINANT
+The determinant of a (2\times2) matrix, (A=\begin{bmatrix}a&b\\c&d\end{bmatrix}), is denoted (\det A) and is equal to (ad-bc).
+If (A) is an (n\times n) matrix with (n\geq3), use technology to calculate the determinant.
+INVERSE
+The multiplicative inverse of a square matrix (A), denoted (A^{-1}), exists if and only if (\det A\neq0). It is the unique matrix such that:
+\item (A\cdot A^{-1}=I).
+\item (A^{-1}\cdot A=I).
+For a (2\times2) matrix (A=\begin{bmatrix}a&b\\c&d\end{bmatrix}), the inverse matrix is (A^{-1}=\frac1{\det A}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}).
+If (A) is an (n\times n) matrix with (n\geq3), use technology to calculate the inverse matrix.
+APPLICATIONS
+\begin{tabular}{ll}
+The area of the parallelogram defined by vectors (\langle a,b\rangle) and (\langle c,d\rangle) and the matrix (P=\begin{bmatrix}a&c\\b&d\end{bmatrix}) is given by (|\det P|). & For vectors (\langle4,-3\rangle) and (\langle6,7\rangle), (P=\begin{bmatrix}4&6\\-3&7\end{bmatrix}); (|\det P|=|28-(-18)|=46). The area of the parallelogram is 46 square units. \\
+The area of the triangle defined by vectors (\langle a,b\rangle) and (\langle c,d\rangle) and the matrix (T=\begin{bmatrix}a&c\\b&d\end{bmatrix}) is (\frac12|\det T|). & For vectors (\langle2,3\rangle) and (\langle6,-2\rangle), (T=\begin{bmatrix}2&6\\3&-2\end{bmatrix}); (|\det P|=\frac12|-4-18|=\frac12(22)=11). The area of the triangle is 11 square units. \\
+\end{tabular}
+\te{Printed triangle calculation begins (|\det P|); likely it should begin with triangle area (\frac12|\det T|).}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How do you find and use an inverse matrix?
+\answer{The multiplicative inverse of a square matrix (A) is the unique matrix (A^{-1}) such that (A\cdot A^{-1}=I) and (A^{-1}\cdot A=I). For a (2\times2) matrix (A=\begin{bmatrix}a&b\\c&d\end{bmatrix}), the inverse matrix is (A^{-1}=\frac1{\det A}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}). If (A) is an (n\times n) matrix with (n\geq3), use technology to calculate the inverse matrix.}
+2. Vocabulary What is the determinant of a (2\times2) matrix?
+\answer{For (A=\begin{bmatrix}a&b\\c&d\end{bmatrix}), the determinant of (A), denoted (\det A), is the value (ad-bc).}
+3. Error Analysis Enrique says the matrix (\begin{bmatrix}3&4\\6&8\end{bmatrix}) has an inverse. Explain his error.
+\answer{The value of the determinant is (3(8)-6(4)=0). Because the determinant is equal to 0, the matrix does not have an inverse.}
+4. Communicate Precisely Explain how to use the determinant of a matrix to find the area of a triangle.
+\answer{The area of the triangle defined by vectors (\langle a,b\rangle) and (\langle c,d\rangle) and the matrix (T=\begin{bmatrix}a&b\\c&d\end{bmatrix}) is (\frac12|\det T|).}
+\textbf{Do You KNOW HOW?}
+Find the inverse of each matrix, if it exists.
+5. (\begin{bmatrix}-2&-4\\2&3\end{bmatrix})
+\answer{(\begin{bmatrix}1.5&2\\-1&-1\end{bmatrix})}
+6. (\begin{bmatrix}-1&3\\-3&9\end{bmatrix})
+\answer{The inverse does not exist.}
+7. (\begin{bmatrix}-3&-2&1\\5&4&-3\\6&-4&2\end{bmatrix})
+\answer{(\begin{bmatrix}-\frac16&0&\frac1{12}\\-\frac76&-\frac12&-\frac16\\-\frac{11}6&-1&-\frac1{12}\end{bmatrix})}
+8. (\begin{bmatrix}2&0&-4\\0&6&3\\-1&1&3\end{bmatrix})
+\answer{(\begin{bmatrix}\frac52&-\frac23&4\\-\frac12&\frac13&-1\\1&-\frac13&2\end{bmatrix})}
+9. Make Sense and Persevere What is the area of a triangle determined by the vectors (\langle2,3\rangle) and (\langle6,-1\rangle)?
+\answer{10 square units}
+10. What is the area of a parallelogram determined by the vectors (\langle5,2\rangle) and (\langle-1,-10\rangle)?
+\answer{48 square units}
+\end{concept-summary}
+\begin{te-addendum}{ConceptSummary}{GeneralizeETP}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+\end{te-addendum}
+% Source page 58: 515, Practice and Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+11--28, 30--35 & 11--19, 21--35 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 14, 18, 19 & 1 \\
+1 & 15 & 3 \\
+2 & 20--23, 33 & 1 \\
+2 & 11, 12, 16, 17 & 2 \\
+3 & 24, 25, 30 & 1 \\
+3 & 35 & 3 \\
+4 & 26, 27, 34 & 1 \\
+4 & 31 & 2 \\
+5 & 28, 29 & 1 \\
+5 & 13, 32 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{2}
+UNDERSTAND. Use Structure Write a (2\times2) matrix that does not have an inverse. Explain how you can tell that it does not have an inverse.
+\answer{Sample: (\begin{bmatrix}1&2\\3&6\end{bmatrix}); The value of the determinant is 0, so the matrix does not have an inverse.}
+\end{practice}
+\begin{practice}{12}{2}
+Construct Arguments Can a (2\times3) matrix have an inverse? Explain.
+\answer{No; only square matrices, with the same number of rows and columns, have an inverse. Because a (2\times3) matrix is not a square matrix, it cannot have an inverse.}
+\end{practice}
+\begin{practice}{13}{2}
+Error Analysis Licia wants to find the area of a parallelogram with one vertex at the origin and defined by the vectors (\langle3,6\rangle) and (\langle-4,-10\rangle). Explain and correct Licia's error in finding the area of the parallelogram.
+Let (T=\begin{bmatrix}3&-4\\6&-10\end{bmatrix})
+(A=\frac12|\det T|)
+(A=\frac12|-6|=3)
+The area of the parallelogram is 3 square units.
+\te{Student work marked with a red X.}
+\answer{Leah found the area of a triangle with one vertex at the origin, defined by the vectors (\langle3,6\rangle) and (\langle-4,-10\rangle). The area of the parallelogram is (|\det T|=|-6|=6) square units.}
+\te{Printed answer names Leah; likely Licia, as named in the prompt.}
+\end{practice}
+\begin{practice}{14}{1}
+Reason Are (\begin{bmatrix}8&4\\4&-2\end{bmatrix}) and (\begin{bmatrix}\frac1{16}&\frac18\\\frac18&-\frac14\end{bmatrix}) inverses? Explain how you know.
+\answer{Yes; when the product of two matrices equals the identity matrix, the matrices are inverses. Because (\begin{bmatrix}8&4\\4&-2\end{bmatrix}\cdot\begin{bmatrix}\frac1{16}&\frac18\\\frac18&-\frac14\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}), the matrices are inverses.}
+\end{practice}
+\begin{practice}{15}{3}
+Higher Order Thinking Let (A=\begin{bmatrix}a&b\\c&d\end{bmatrix}). Find values of (a), (b), (c), and (d), where (A=A^{-1}).
+(Hint: There are four distinct possible values.)
+\answer{(a=\pm1,b=0,c=0,d=\pm1)}
+\te{Printed hint and answer give four diagonal matrices; likely an unstated restriction is intended, since other matrices also equal their inverses.}
+\end{practice}
+\begin{practice}{16}{2}
+Construct Arguments Moniqua said that to find (\det B), where (B=\begin{bmatrix}a&b\\c&d\end{bmatrix}), you can use the expression (ad-bc) or the expression (bc-ad). Is Moniqua correct? Explain.
+\answer{Moniqua is not correct because subtraction is not commutative.}
+\end{practice}
+\begin{practice}{17}{2}
+Reason Matrix (A) does not have an inverse. Find the value of (b) and explain how you know that this value for (b) is correct.
+(A=\begin{bmatrix}-1&b\\3&6\end{bmatrix})
+\answer{(b=-2), when (b=-2), the determinant of the matrix is 0. If (\det A=0), the matrix has no inverse.}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Find the inverse of each matrix. SEE EXAMPLE 1.
+(\begin{bmatrix}10&2\\-5&-3\end{bmatrix})
+\answer{(\begin{bmatrix}\frac3{20}&\frac1{10}\\-\frac14&-\frac12\end{bmatrix})}
+\end{practice}
+\begin{practice}{19}{1}
+Find the inverse of each matrix. SEE EXAMPLE 1.
+(\begin{bmatrix}\frac12&\frac14\\\frac12&\frac34\end{bmatrix})
+\answer{(\begin{bmatrix}3&-1\\-2&2\end{bmatrix})}
+\te{Answers for Exercises 19--23 are printed on the next page.}
+\end{practice}
+\begin{practice}{20}{1}
+Does each given matrix have an inverse? If so, find it. SEE EXAMPLE 2.
+(P=\begin{bmatrix}1&-3\\-1&4\end{bmatrix})
+\answer{(P^{-1}=\begin{bmatrix}4&3\\1&1\end{bmatrix})}
+\end{practice}
+\begin{practice}{21}{1}
+Does each given matrix have an inverse? If so, find it. SEE EXAMPLE 2.
+(R=\begin{bmatrix}-2&8&-5\\3&-11&7\\9&-34&21\end{bmatrix})
+\answer{(R^{-1}=\begin{bmatrix}7&2&1\\0&3&-1\\-3&4&-2\end{bmatrix})}
+\end{practice}
+\begin{practice}{22}{1}
+Does each given matrix have an inverse? If so, find it. SEE EXAMPLE 2.
+(Q=\begin{bmatrix}-6&-9\\-4&-6\end{bmatrix})
+\answer{(Q^{-1}) does not exist.}
+\end{practice}
+\begin{practice}{23}{1}
+Does each given matrix have an inverse? If so, find it. SEE EXAMPLE 2.
+(S=\begin{bmatrix}-24&18&5\\20&-15&-4\\-5&4&1\end{bmatrix})
+\answer{(S^{-1}=\begin{bmatrix}1&2&3\\0&1&4\\5&6&0\end{bmatrix})}
+\end{practice}
+\begin{practice}{24}{1}
+The matrix (\begin{bmatrix}30&15&106&63&33&121\\18&120&80&102&102&164\\101&24&154&43&111&162\end{bmatrix}) was encoded using the matrix (A=\begin{bmatrix}-1&3&2\\4&6&-2\\0&1&5\end{bmatrix}). What is the message? SEE EXAMPLE 3.
+\answer{MATRICES ARE FUN}
+\end{practice}
+\begin{practice}{25}{1}
+The matrix (\begin{bmatrix}49&145&173&124&76&215\\18&50&62&46&30&78\end{bmatrix}) was encoded using the matrix (\begin{bmatrix}6&5\\2&2\end{bmatrix}). What is the secret word?
+\answer{DETERMINANTS}
+\end{practice}
+\begin{practice}{26}{1}
+Find the area of the triangle defined by the given vectors. SEE EXAMPLE 4.
+vectors (\langle2,10\rangle) and (\langle-1,5\rangle)
+\answer{10 square units}
+\end{practice}
+\begin{practice}{27}{1}
+Find the area of the triangle defined by the given vectors. SEE EXAMPLE 4.
+vectors (\langle9,-3\rangle) and (\langle-6,-1\rangle)
+\answer{(13\frac12) square units}
+\end{practice}
+\begin{practice}{28}{1}
+What is the area of a parallelogram with one vertex at the origin and defined by the given vectors? SEE EXAMPLE 5.
+vectors (\langle-4,16\rangle) and (\langle-2,12\rangle)
+\answer{16 square units}
+\end{practice}
+\begin{practice}{29}{1}
+What is the area of a parallelogram with one vertex at the origin and defined by the given vectors? SEE EXAMPLE 5.
+vectors (\langle-5,3\rangle) and (\langle7,-1\rangle)
+\answer{16 square units}
+\end{practice}
+% Source page 59: 516, Practice and Problem Solving continued
+\begin{practice}{30}{1}
+APPLY. Reason A job title was hidden in the matrix (\begin{bmatrix}-34&-29&-35&-23&-19&-92\\123&93&114&219&66&153\\97&26&-137&-83&11&16\end{bmatrix}) using the encoding matrix (A=\begin{bmatrix}-4&-2&1\\0&3&6\\5&-8&2\end{bmatrix}). Only those who discovered the title could apply. What job title was advertised?
+\answer{MATHEMATICS EDITOR}
+\end{practice}
+\begin{practice}{31}{2}
+Model With Mathematics The coordinate plane shows the location of a triangular park, where each unit on the grid represents 10 ft.
+% FIG 59 515 475 675 585
+\placeholder{graph}{Red triangle with labeled solid vertices A(0,0), B(2,5), C(8,1). Arrowed positive x and y axes; unit grid, x=0 to 10 and y=0 to 7; x ticks labeled 2,4,6,8 and y ticks 2,4,6.}
+a. Use the vectors to write a matrix that represents the coordinates of the vertices of the triangular park.
+\answer{(\begin{bmatrix}20&80\\50&10\end{bmatrix})}
+b. What is the area of the triangular park?
+\answer{1,900 square feet}
+c. A five-pound bag of grass seed covers about 300 square feet and costs \$17.98. How much will it cost to cover the park with grass seed? Explain.
+\answer{\$125.86; divide to find the number of bags of grass seed that will cover the area of the park: (1,900\div300\approx6.3). Since partial bags of grass seed cannot be purchased, the landscaping company will need to purchase 7 bags of grass seed: (\$17.98\times7=\$125.86).}
+\end{practice}
+\begin{practice}{32}{2}
+Make Sense and Persevere A city planner uses a coordinate plane to plan out a new neighborhood. Each grid square represents 4,000 square feet. A park, roughly in the shape of a parallelogram, is to be built so that one vertex of the parallelogram is located at (1,10) on the planner's coordinate plane. Using this as an initial point, the points (10,9) and (3,7) are the terminal points of the two vectors that determine the parallelogram. What is the area of the park?
+% FIG 59 517 907 732 1050
+\placeholder{map}{Landscaped park illustration beneath coordinate grid: fountain near (8,7), paths, trees, building and cars at left. Black solid labeled points (1,10), (10,9), and (3,7). Arrowed x and y axes, unit grid, x labels 0,2,4,6,8,10,12,14 and y labels 2,4,6,8,10. Visible grid extends about x=-5 to 16 and y=-1 to 12.}
+\answer{100,000 square feet}
+\end{practice}
+\begin{practice}{33}{1}
+ASSESSMENT PRACTICE. Does the matrix have an inverse? Write Yes or No.
+a. (\begin{bmatrix}-5&10\\-2&-3\end{bmatrix})
+b. (\begin{bmatrix}15&2\\-12&-3\end{bmatrix})
+c. (\begin{bmatrix}9&-6\\12&8\end{bmatrix})
+d. (\begin{bmatrix}-3&-6\\-6&-12\end{bmatrix})
+\answer{a. yes b. yes c. yes d. no}
+\end{practice}
+\begin{practice}{34}{1}
+SAT/ACT The area of a triangle defined by the vectors (\langle2,y\rangle) and (\langle4,7\rangle) is 11 square units. What are the possible values of (y)?
+A. 2 and 9
+B. (-2) and (-9)
+C. (-9) and 2
+D. (-2) and 9
+\answer{D}
+\end{practice}
+\begin{practice}{35}{3}
+Performance Task A credit card company encodes its issued credit card numbers when transmitting them electronically so that a customer's number is more secure. The company uses a (2\times8) matrix to represent the 16 digits in the card number. The first column represents the first two digits, and so on.
+% FIG 59 824 579 1044 733
+\placeholder{illustration}{Red credit card in black card reader, labeled Encoding matrix: [10 40; 25 80]. Card shows CREDIT CARD, a chip, curved decoration and globe; reader has red and green indicator lights and a cord.}
+Part A The matrix (\begin{bmatrix}450&450&280&30&10&330&100&370\\945&945&580&75&25&685&210&765\end{bmatrix}) was encoded by the card reader. What was the customer's credit card number?
+\answer{9999 4630 1057 2258}
+Part B Create your own 16-digit credit card number and an encoding matrix, and encode your card number. Trade encoded card number matrices and the encoding matrix you used with a partner, and decode each other's numbers.
+\answer{Check students' work.}
+Part C The head of the company decides that a (2\times2) encoding matrix is not secure enough and wants to institute a policy of using (3\times3) encoding matrices. How will this affect the encoding process?
+\answer{The credit card number would have to be in a matrix that has 3 rows. The matrix would have to have 6 columns to allow for the 16 digits, but there would be 2 blank spaces. A designation of a specified number, such as (-1), would have to be made and used to represent the lack of a digit in that place.}
+\end{practice}
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice \& Problem Solving is available at SavvasRealize.com. Practice.
+\end{te-addendum}
+% Source page 60: 516A, Assess and Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & A67 \\
+2 & 2 & A64 \\
+3 & 2 & A64 \\
+4 & 1 & A67 \\
+5 & 1 & A64 \\
+\end{tabular}
+RtI Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{10-4 Lesson Quiz: Inverses and Determinants}
+Name blank. enVision Algebra 2. SavvasRealize.com. ASSESSMENT RESOURCES.
+1. What is the inverse matrix of (\begin{bmatrix}3&2\\4&1\end{bmatrix})?
+A. (\begin{bmatrix}-\frac15&\frac25\\\frac45&-\frac35\end{bmatrix})
+B. (\begin{bmatrix}-\frac15&\frac13\\\frac45&-\frac13\end{bmatrix})
+C. (\begin{bmatrix}-\frac1{11}&\frac4{11}\\-1&2\end{bmatrix})
+D. (\begin{bmatrix}-\frac1{11}&\frac13\\-1&-\frac13\end{bmatrix})
+\answer{1. A}
+2. The graph shows the location of a triangle to be painted on a wall mural, where each unit on the grid represents 1 foot. What is the area of the triangle in (\text{ft}^2)?
+% FIG 60 1005 396 1106 478
+\placeholder{graph}{Black triangle with vertices labeled A(0,0), B(4,1), C(5,6); arrowed positive x and y axes, unit grid from 0 to 7 on each axis, ticks labeled 0,2,4,6.}
+A. (2.5\text{ ft}^2)
+B. (5\text{ ft}^2)
+C. (9.5\text{ ft}^2)
+C. (18\text{ ft}^2)
+\answer{2. C, (9.5\text{ ft}^2)}
+\te{Printed fourth choice is also labeled C; likely D was intended.}
+3. A parallelogram that has one vertex at the origin, is defined by the vectors (\langle4,6\rangle) and (\langle-3,a\rangle), and has an area of 6 square units. What are the possible values of (a)? Select all that apply.
+A. (-6)
+B. (-3)
+C. 0
+D. 3
+E. 6
+\answer{3. A, B}
+4. Which of the given matrices has an inverse? Select all that apply.
+A. (\begin{bmatrix}4&6\\-2&3\end{bmatrix})
+B. (\begin{bmatrix}-6&-2\\9&-3\end{bmatrix})
+C. (\begin{bmatrix}-2&6\\1&-3\end{bmatrix})
+D. (\begin{bmatrix}4&6\\-2&-3\end{bmatrix})
+E. (\begin{bmatrix}-2&6\\9&-3\end{bmatrix})
+F. (\begin{bmatrix}-2&-6\\1&-3\end{bmatrix})
+\answer{4. A, B, E, F}
+5. What is the area of the triangle defined by the vectors (\langle2,4\rangle) and (\langle-1,6\rangle)?
+area = blank square units
+\answer{5. 8}
+enVision Algebra 2 Assessment Sourcebook. Copyright Savvas Learning Company LLC. All Rights Reserved.
+Lesson Quiz is available at SavvasRealize.com. Assessment.
+\end{te-addendum}
+% Source page 61: 516B, Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced. SavvasRealize.com. Practice.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Reteach to Build Understanding} I
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{10-4 Reteach to Build Understanding: Inverses and Determinants}
+Name blank. enVision Algebra 2. SavvasRealize.com.
+1. Find the inverse of (A=\begin{bmatrix}2&4\\3&0\end{bmatrix}).
+If you multiply a (2\times2) matrix by its inverse, the result is (\begin{bmatrix}1&0\\0&1\end{bmatrix}).
+Suppose the inverse for matrix (\begin{bmatrix}a&c\\b&d\end{bmatrix}) is a matrix (\begin{bmatrix}w&x\\y&z\end{bmatrix}).
+The equation is
+(\begin{bmatrix}a&c\\b&d\end{bmatrix}\cdot\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}\rightarrow\begin{bmatrix}aw+cy&ax+cz\\bw+dy&bx+dz\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix})
+a. Use the equations to solve for the value of (w), (x), (y), and (z).
+\begin{tabular}{llll}
+Equations (see above) & Write out with known numbers. & Simplify the equations. & Solution \\
+(bw+dy) & (3w+\answer{0}y=0) & (3w=0). Divide each side by 3. & (w=0) \\
+(aw+cy) & (\answer{2}w+4y=1) & (2w+\answer{4}y=1). Substitute 0 for (w). (2(0)+4y=1). (\answer{4}y=1). Divide each side by 4. & (y=\frac14) \\
+(bx+dz) & (3x+0z=1) & (\answer{3}x=1). Divide each side by 3. & (x=\frac13) \\
+(ax+cz) & (\answer{2}x+4z=0) & (2x+\answer{4}z=0). Substitute (\frac13) for (x). (2(\answer{\frac13})+4z=0). (\frac23+4z=0). Subtract (\frac23) from each side. (4z=-\frac23). Divide each side by 4. & (z=-\frac2{12}=-\frac16) \\
+\end{tabular}
+b. Complete the matrix for the inverse (A^{-1}=\begin{bmatrix}w&x\\y&z\end{bmatrix}=\text{blank}).
+\answer{(\begin{bmatrix}0&\frac13\\\frac14&-\frac16\end{bmatrix})}
+2. Enrique solved for the determinant of (B=\begin{bmatrix}3&2\\4&5\end{bmatrix}) as shown.
+(3(5)+2(4)=?)
+(15+8=23)
+What error did he make? What is the correct answer?
+\answer{He should subtract rather than add the products. The correct answer is 7.}
+enVision Algebra 2 Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice} I, O
+Provides extra practice for each lesson. MathXL for School.
+\textbf{10-4 Additional Practice: Inverses and Determinants}
+Name blank. enVision Algebra 2. SavvasRealize.com.
+Find the inverse of each matrix.
+1. (\begin{bmatrix}3&4\\-3&4\end{bmatrix})
+\answer{(\begin{bmatrix}\frac16&-\frac16\\\frac18&\frac18\end{bmatrix})}
+2. (\begin{bmatrix}4&3\\3&2\end{bmatrix})
+\answer{(\begin{bmatrix}-2&3\\3&-4\end{bmatrix})}
+3. (\begin{bmatrix}30&-4\\-25&3\end{bmatrix})
+\answer{(\begin{bmatrix}-\frac3{10}&-\frac25\\-\frac52&-3\end{bmatrix})}
+Does each given matrix have an inverse? If so, find it.
+4. (A=\begin{bmatrix}3&4\\3&4\end{bmatrix})
+\answer{no inverse}
+5. (B=\begin{bmatrix}5&0\\-5&1\end{bmatrix})
+\answer{(\begin{bmatrix}\frac15&0\\1&1\end{bmatrix})}
+6. (C=\begin{bmatrix}2&1&1\\1&1&2\\1&2&1\end{bmatrix})
+\answer{(\begin{bmatrix}\frac34&-\frac14&-\frac14\\-\frac14&-\frac14&\frac34\\-\frac14&\frac34&-\frac14\end{bmatrix})}
+7. Assign every letter in the alphabet a number, from A = 1 to Z = 26. Let 27 represent a space between words. The matrix (\begin{bmatrix}162&133&109&139&83\\141&113&81&110&61\\129&108&80&101&42\end{bmatrix}) was encoded using the matrix (P=\begin{bmatrix}2&4&3\\1&4&2\\1&4&1\end{bmatrix}). What is the message?
+\answer{I LOVE MATRICES}
+Find the area of the triangle or parallelogram defined by the given vectors.
+8. triangle; vectors (\langle5,3\rangle) and (\langle-3,7\rangle)
+\answer{22}
+9. parallelogram; vectors (\langle4,-8\rangle) and (\langle5,-1\rangle)
+\answer{36}
+10. triangle; vectors (\langle-3,-4\rangle) and (\langle-8,6\rangle)
+\answer{25}
+11. The area between the North Carolina cities of Raleigh, Durham, and Chapel Hill is called the Research Triangle. Use the map to determine the approximate area of the triangle. The coordinates are given in miles.
+% FIG 61 638 641 774 746
+\placeholder{map}{Grayscale road map showing outlined Research Triangle connecting Chapel Hill near (0,0), Durham near (5,2.5), and Raleigh near (15,-7.5). Horizontal scale at bottom -2.5,0,2.5,5.0,7.5,10.0,12.5,15.0,17.5; vertical scale at right 2.5,0,-2.5,-5.0,-7.5,-10.0,-12.5. Labels include Oak Grove, Bethesda, Morrisville, Farrington, Nelson, Raleigh-Durham, Carpenter, Cary, Green Level, Raleigh, Bells, Apex; roads and route shields appear under triangle.}
+\answer{Answers may vary. Sample: (\approx32\text{ mi}^2)}
+enVision Algebra 2 Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment} O, A
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{10-4 Enrichment: Inverses and Determinants}
+Name blank. enVision Algebra 2. SavvasRealize.com.
+\begin{tabular}{rrrrrrrrrrrrrr}
+! & A & B & C & D & E & F & G & H & I & J & K & L & M \\
+(\frac12) & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 \\
+N & O & P & Q & R & S & T & U & V & W & X & Y & Z & Space \\
+14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 \\
+\end{tabular}
+The matrix (\begin{bmatrix}142&140&46&143&128&14\\40&36&156&20&-36&51\\-71&-133&-31&-94&-73&44\\-16&-92&-94&-47&-16&\frac{75}2\end{bmatrix}) was encoded using the matrix (A=\begin{bmatrix}1&2&-1&4\\-2&4&4&-2\\1&-2&2&-4\\2&-4&1&-1\end{bmatrix}).
+Solve using the inverse matrix (A^{-1}) and the table shown.
+\answer{YOU ARE A MATRIX MASTER!}
+enVision Algebra 2 Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I, O
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{10-4 Mathematical Literacy and Vocabulary: Inverses and Determinants}
+Name blank. enVision Algebra 2. SavvasRealize.com.
+Choose the best concept from the list to complete the sentence. You may use each concept more than once.
+\begin{tabular}{ll}
+determinant & identity matrix \\
+inverse matrix & square matrix \\
+\end{tabular}
+1. A (2\times2) matrix is an example of a(n) blank.
+\answer{square matrix}
+2. The blank of (A=\begin{bmatrix}a&c\\b&d\end{bmatrix}) is (ad-bc).
+\answer{determinant}
+3. The blank is written as (\begin{bmatrix}1&0\\0&1\end{bmatrix}).
+\answer{identity matrix}
+4. The product of the blank and the original matrix is (\begin{bmatrix}1&0\\0&1\end{bmatrix}).
+\answer{inverse matrix}
+5. The blank of matrix (A) can be written as (\det A).
+\answer{determinant}
+6. A(n) blank is a matrix with the same number of rows and columns.
+\answer{square matrix}
+7. A matrix with ones on the main diagonal and zeros for all the other elements is called the blank.
+\answer{identity matrix}
+8. The product of the blank and the original matrix will result in the identity matrix.
+\answer{inverse matrix}
+enVision Algebra 2 Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 61 585 978 1033 1298
+\placeholder{illustration}{Black tablet displaying digital assignment. Prompt: Solve the system of equations by graphing, y=3x+4 and y=-2x+4. Use the graphing tool to graph the system. Click to enlarge graph button. Empty x/y coordinate grid, unit ticks and even labels from -10 to 10. Question Help menu lists Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Bottom instructions: Click the graph, choose a tool in the palette and follow the instructions to create your graph. Controls Exit, 1 part remaining, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\end{te-addendum}
+
+\end{document}

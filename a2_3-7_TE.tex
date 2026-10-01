@@ -1,0 +1,884 @@
+\documentclass{article}
+% Source: Topic_03_Teacher_Edition.pdf, PDF pages 86-97 (printed pages 167A-174B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 86: 167A Lesson Overview
+\begin{lesson-meta}
+lesson: 3-7
+title: Transformations of Polynomial Functions
+standards: none printed
+practices: none printed
+objective: I can identify symmetry in and transform polynomial functions.
+
+essential question: How are symmetry and transformations represented in the graph and equation of a polynomial function?
+
+\textbf{VOCABULARY}
+\item even function
+\item odd function
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 3-7 \\
+Title & Transformations of Polynomial Functions \\
+Standards & none printed \\
+I CAN Objective & I can identify symmetry in and transform polynomial functions. \\
+Essential Question & How are symmetry and transformations represented in the graph and equation of a polynomial function? \\
+Lesson Vocabulary & even function; odd function \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Recognize even and odd functions from their graphs and algebraic equations.
+\item Identify the effect on the graphs of cubic and quartic functions of replacing (f(x)) with (f(x)+k), (kf(x)), (f(kx)), and (f(x+k)).
+\item Given a graph, determine the equation as it is related to its parent cubic function or quartic function.
+\textbf{Essential Understanding}
+Polynomial functions are categorized as even, odd, or neither. Even functions are symmetric about the (y)-axis, and for all (x) in the domain, (f(x)=f(-x)). Odd functions are symmetric about the origin, and for all (x) in the domain, (f(-x)=-f(x)).
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Understood how the sign of the leading coefficient affects the end behavior of polynomial functions.
+\item Graphed polynomial functions using the zeros and turning points of the function.
+In this lesson, students:
+\item Recognize even and odd polynomial functions.
+\item Identify transformations of polynomial functions related to parent cubic or quartic functions.
+Later in this course, students will:
+\item Graph transformations of the reciprocal function.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural fluency.
+\item Students understand the properties of even and odd functions and transformations of polynomial functions.
+\item Students apply the properties of even and odd functions and transformations to determine the equation of a graph.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+Glossary is available at SavvasRealize.com.
+\textbf{Vocabulary Builder}
+\begin{tabular}{ll}
+English & Spanish \\
+REVIEW VOCABULARY & \\
+axis of symmetry & eje de simetría \\
+parent function & función elemental \\
+NEW VOCABULARY & \\
+even function & incluso funcionar \\
+odd function & función impar \\
+\end{tabular}
+\te{Printed Spanish incluso funcionar; likely función par.}
+\textbf{VOCABULARY ACTIVITY}
+Introduce the terms even function and odd function by drawing graphs of several functions with different types of symmetry and asking the students to describe the symmetry of each graph. Explain that when talking about functions, the familiar terms even and odd have new meanings based on the symmetry of a function. As needed, have students complete these sentences.
+1. A function that is symmetric about the (y)-axis is \underline{\hspace{1cm}}. \answer{even}
+2. A function that is symmetric about the origin is \underline{\hspace{1cm}}. \answer{odd}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 86 963 733 1118 918
+\placeholder{illustration}{Student Companion cover, enVision Algebra 2, SAVVAS; luminous purple and blue circular design.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students determine whether a polynomial function is even, odd, or neither by interpreting the meaning of the symmetry and degree of the function. A function is even if it is symmetric about the (y)-axis, odd if it is symmetric about the origin.
+Students graph, identify, and apply transformations of cubic and quartic functions.
+\textbf{Applying Math Practices}
+\textbf{Construct Viable Arguments}
+Students use stated mathematical definitions to construct an argument to explain that having an even degree does not imply that a function is even.
+\textbf{Look For and Make Use of Structure}
+Students use the structure of equations to graph transformed functions and to write equations for transformed functions from their graphs.
+\end{te-addendum}
+% Source page 87: 167B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students explore the symmetry of polynomial functions, introducing the idea that functions of different degrees have different types of symmetry.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+\textbf{Implement Tasks that Promote Reasoning and Problem Solving}
+Q: What do you notice about the two graphs?
+\answer{(f(x)) is a parabola that opens upward; it is symmetric across the (y)-axis and has a minimum at the origin. (g(x)) is cubic; it passes through the origin and it is symmetric about the origin.}
+\textbf{During: SMALL GROUP}
+\textbf{Support Productive Struggle in Learning Mathematics}
+Q: What does it mean for a graph to be symmetrical?
+\answer{It has an axis of symmetry; the graph is reflected across a line. One part of the graph is the mirror image of the other part.}
+\textbf{For Early Finishers}
+Q: Graph the functions (m(x)=x) and (h(x)=x^4). How does the symmetry of these graphs compare to the symmetry of (f(x)) and (g(x))?
+\answer{The graph of (m(x)) is symmetric about the origin, like the graph of (g(x)). The graph of (h(x)) is symmetric about the (y)-axis, like the graph of (f(x)).}
+\textbf{After: WHOLE CLASS}
+\textbf{Facilitate Meaningful Mathematical Discourse}
+Discuss the relationship between the degree of a polynomial and its symmetry.
+Q: What do you notice about the degree of the polynomial and the type of symmetry it has?
+\answer{A polynomial with an even degree is symmetric about the (y)-axis. A polynomial with an odd degree is symmetric about the origin.}
+\te{Printed symmetry claims apply to the power functions under discussion, not all polynomials of a given degree. The During answer describes reflection symmetry only.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Look for Relationships} Do you notice any other patterns among the functions with even degree and the functions with odd degree?
+\answer{Functions with an even degree always go the same direction when approaching positive and negative infinity, while odd functions always go opposite directions when approaching positive and negative infinity.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Look at the polynomial graphs below.
+% FIG 87 825 658 1105 801
+\placeholder{graph}{Two red graphs: f(x)=x squared, vertex O=(0,0), both ends up; x grid -12 to 12 in steps of 2 with labels -10,10, y grid -2 to 22 in steps of 2 with labels 10,20. g(x)=x cubed through O, lower left and upper right arrowheads; x and y window -12 to 12 in steps of 2, labels -10 and 10. Axes x,y have arrows.}
+A. Is the graph of (f) or (g) symmetric about the (y)-axis? Is the graph of (f) or (g) symmetric about the origin? Explain.
+\answer{(f) is symmetric about the (y)-axis because the reflection across the (y)-axis is identical, and (g) is symmetric about the origin because the graph is identical when rotated 180 degrees about the origin.}
+B. \textbf{Look for Relationships} Graph more functions of the form (y=x^n) where (n) is a natural number. Which of these functions are symmetric about the origin? Which are symmetric about the (y)-axis? What conjectures can you make?
+\answer{Functions that have an even degree are symmetric about the (y)-axis, and functions that have an odd degree are symmetric about the origin.}
+\end{model-discuss}
+\begin{te-addendum}{0}{GeneralizeETP}
+Explore \& Reason is Powered by Desmos. Explore \& Reason is available at SavvasRealize.com.
+\te{Digital display: Go back; EXPLORE \& REASON; Look at the polynomial graphs. Part A repeats the student prompt; Enter your answer.}
+% FIG 87 681 280 961 426
+\placeholder{graph}{Digital duplicate of launch graphs f(x)=x squared and g(x)=x cubed, orange curves with arrowheads; same axes, windows and tick spacing as the student graphs.}
+\end{te-addendum}
+% Source page 88: 167 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+\textbf{Establish Mathematics Goals To Focus Learning}
+Introduce students to symmetry and transformations of polynomial functions. Remind them that functions can be reflected across an axis of symmetry or have rotational symmetry. Explain that symmetry and transformations can be represented in both the graph and the algebraic representation of a polynomial function.
+\textbf{CONCEPT Odd and Even Functions}
+Q: Are you able to tell if a function is even or odd without seeing the graph?
+\answer{Yes; you could evaluate (f(-x)) and compare it to (f(x)) to determine whether the function is even or odd.}
+Q: Can you think of some functions that would not be classified even or odd?
+\answer{any function without an axis or point of symmetry: exponential functions, logarithmic functions, and square root functions}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Odd and Even Functions}
+A function (f(x)) is an even function if it is symmetric about the (y)-axis and an odd function if it is symmetric about the origin.
+\textbf{Even Function}
+% FIG 88 835 315 961 421
+\placeholder{graph}{Red upward parabola vertex (0,-4), black x,y axes with arrows, O at origin. Window x,y -5 to 5, unit grid, x labels -4,4 and y -2,2,4. Symmetric red points near (-2.5,2.5),(2.5,2.5) labeled (-x,f(-x)), (x,f(x)); blue dashed horizontal double arrow joins them.}
+For all (x) in the domain, (f(x)=f(-x)).
+Reflecting an even graph across the (y)-axis results in the same graph.
+\textbf{Odd Function}
+% FIG 88 964 314 1073 422
+\placeholder{graph}{Red increasing cubic through O, window -2.5 to 2.5 on x,y, half-unit grid, labels -2,2. Points (x,f(x)) near (1,1), (-x,-f(x)) near (-1,-1); blue dashed semicircular rotation arrow about origin. Red ends lower left and upper right with arrowheads.}
+For all (x) in the domain, (f(-x)=-f(x)).
+Rotating an odd graph 180 degrees about the origin results in the same graph.
+\textbf{Neither}
+% FIG 88 1075 314 1159 421
+\placeholder{graph}{Red cubic with local maximum near (0,1), local minimum near (1.3,-0.2); marked (1,f(1))=(1,0), (-1,f(-1)) near (-1,-1.8). Window x -1.5 to 2.5,y -2.5 to 2.5, half-unit grid; labels x 1,2,y2,O. Lower-left and upper-right arrowheads.}
+(f(1)\neq f(-1)) (not even)
+(f(-1)\neq-f(1)) (not odd)
+\end{concept-box}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Examples}
+Additional Examples are available at SavvasRealize.com.
+\textbf{ADDITIONAL EXAMPLE 3}
+Describe the transformation from (g(x)) to (h(x)).
+(g(x)=x^4)
+(h(x)=2(x-1)^4+7)
+\answer{The graph of (h) is the graph of the parent function (g), stretched vertically by a factor of 2 and translated 1 unit right and 7 units up.}
+% FIG 88 496 794 593 914
+\placeholder{graph}{Red g=x to fourth, vertex O; blue h=2(x-1) to fourth+7, vertex (1,7). Window x -4 to 4 with unit grid, y -2 to 18 with grid 2; x labels -2,2; y4,8,12,16. Both ends of both curves point upward.}
+\te{Display labels: Go back; ESSENTIAL QUESTION; SOLUTION.}
+Example 3 Help students understand the effect of transformations on the graph of a polynomial.
+Q: What do you notice about the two graphs that is similar?
+\answer{They are even functions. They have an axis of symmetry. They are quadratic functions. They are parabolas. They both open upward.}
+\te{Printed even/quadratic/parabola claims are inconsistent with the quartic equations and the horizontal translation of h.}
+Q: How is the graph of (h(x)) transformed from the graph of (g(x))?
+\answer{(h(x)) is stretched by a factor of 2, shifted right 1 unit and up 7 units.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+Determine the equation of the graph as it relates to the parent cubic function or parent quartic function.
+% FIG 88 1002 801 1104 900
+\placeholder{graph}{Orange descending cubic g=-(x+2) cubed+1; labeled solid points (-2,1),(0,-7). x window -7 to 3,y -8 to 2; unit grid, x labels -6,-4,-2,2, y -2,-4,-6. Arrowheads at upper left and lower right.}
+The graph has the shape of a cubic graph.
+The graph is a translation of the parent function (-2) horizontally and 1 vertically.
+The end behavior indicates that the leading coefficient is negative.
+\answer{So (g(x)=-(x+2)^3+1).}
+\te{Display labels: Go back; ESSENTIAL QUESTION; TRY ANOTHER ONE; SOLUTION.}
+Example 4 Help students recognize transformations of polynomials.
+Q: What do you notice about the graph of (f(x)=x^3)?
+\answer{It is an odd function, its point of symmetry is at the origin, and its end behaviors are in opposite directions.}
+Q: How can you use the graph of (f(x)=(x-h)^3) to determine the value of (h)?
+\answer{Subtracting a number from (x) before cubing shifts the graph along the (x)-axis. By noting the direction that the graph of the function shifts, you can determine whether (h) is positive or negative. The magnitude of the shift will tell you the value of (h).}
+\end{te-addendum}
+% Source page 89: 168
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+Q: What do you notice about the graphs that can help you identify whether the function is even or odd?
+\answer{If the (y)-axis is an axis of symmetry of the graph, the function is even. If the origin is a point of symmetry of the graph, the function is odd.}
+Q: When is it helpful to test points to determine whether a function is odd or even?
+\answer{Testing points is helpful if you cannot easily visually determine the symmetry of a graph.}
+Example 1 is Powered by Desmos. Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Identify Even and Odd Functions From Their Graphs}
+Use the graph to classify the polynomial function. Is it even, odd, or neither?
+A.
+% FIG 89 815 260 902 362
+\placeholder{graph}{Red cubic y=x cubed through solid O,(1,1),(-1,-1), arrowheads lower left and upper right; blue dashed rotation arc about origin from (1,1) to (-1,-1). x -2 to2,y -2.5 to2.5, half-unit grid, x labels -1,1,y -2,-1,1,2.}
+What happens when you reflect the graph across the (y)-axis?
+The result is a new graph, so the function is not even.
+What happens when you rotate the graph 180 degrees about the origin?
+The result is the same graph, so the function is odd.
+Test points to confirm: (1,1) and (-1,-1) are both on the graph.
+\answer{This function is odd.}
+B.
+% FIG 89 818 418 904 502
+\placeholder{graph}{Red upward quartic with minimum (0,1), solid points (-1,2),(1,2), blue dashed horizontal double arrow at y2. x window -2 to2,y -1 to3, half-unit grid; x labels -1,1,O,y2; ends point up.}
+What happens when you reflect the graph across the (y)-axis?
+The result is the same graph, so the function is even.
+Test points to confirm: (1,2) and (-1,2) are both on the graph.
+\answer{This function is even.}
+C.
+% FIG 89 816 522 904 623
+\placeholder{graph}{Red increasing cubic with inflection (0,1), marked (1,2), crossing x-axis at -1. Window x -2 to2,y -2 to3, half-unit grid; x labels1,O,y -1,2. Arrowheads lower left and upper right.}
+What happens when you reflect the graph across the (y)-axis?
+The result is a new graph, so the function is not even.
+What happens when you rotate the graph 180 degrees about the origin?
+The result is a new graph, so the function is not odd.
+Test points to confirm: (1,2) is on the graph, but (-1,2) and (-1,-2) are not.
+\answer{This function is neither even nor odd.}
+\te{COMMON ERROR An odd degree polynomial function may have rotational symmetry around a point other than (0,0). It is only an odd function if the symmetry is around the origin.}
+\end{example}
+\begin{tryit}{1}
+Classify the polynomial functions as even or odd based on the graphs.
+a.
+% FIG 89 860 715 963 815
+\placeholder{graph}{Red decreasing cubic through O, resembling y=-x cubed, ends upper left/lower right. x,y window -5 to5, unit grid labeled -4,-2,2,4, axes x,y with arrows.}
+b.
+% FIG 89 989 715 1094 815
+\placeholder{graph}{Red downward parabola vertex (0,-2), symmetric about y-axis, ends down. x,y window -5 to5, unit grid labeled -4,-2,2,4, O at origin, axes x,y with arrows.}
+\answer{a. odd; b. even}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What features of the graph help you to classify the polynomial function?
+\answer{the symmetry of the graph; Evaluate (f(x)) and (f(-x)). If they are equal, then the function is even. Evaluate (f(-x)) and (-f(x)). If they are equal, then the function is odd.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 In part (b), students may have trouble recognizing transformations of cubic functions.
+\item Have students use technology to graph the following functions. Suggest different values for (a), (h), and (k), but only change one variable each time, so students can see the transformation of the graph.
+1. (f(x)=x^3)
+2. (g(x)=a(x-h)^3+k)
+Q: How does changing the values for (a), (h), and (k) transform the graph?
+\answer{(a) stretches and compresses the graph, (h) shifts the graph horizontally, and (k) shifts the graph vertically.}
+\end{te-addendum}
+% Source page 90: 169
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+PART A
+Q: If the highest degree of a function is even, why isn't that enough to say that it is an even function?
+\answer{By definition, an even function must have an axis of symmetry. Not all functions with an even degree have an axis of symmetry.}
+PART B
+Q: If the highest degree of a function is odd, why isn't that enough to say that it is an odd function?
+\answer{By definition, an odd function must have symmetry about the origin. Not all functions with an odd degree are symmetrical about the origin.}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Identify Even and Odd Functions From Their Equations}
+Is the function odd, even, or neither?
+A. (f(x)=4x^4+5)
+(f(-x)=4(-x)^4+5)
+(=4x^4+5)
+\te{Replace x with -x, and then simplify.}
+\answer{Since (f(x)=f(-x)), (f(x)=4x^4+5) is an even function.}
+B. (g(x)=2x^3+3x)
+(g(-x)=2(-x)^3+3(-x))
+(=-2x^3-3x)
+(=-(2x^3+3x))
+(=-g(x))
+\te{Replace x with -x, and then simplify.}
+\answer{Since (g(-x)=-g(x)), (g(x)=2x^3+3x) is an odd function.}
+\te{CONSTRUCT ARGUMENTS Use a variable rather than a specific value, because you must show that (f(x)=f(-x)) or that (-f(x)=f(-x)) for all x in the domain, not just one value.}
+\end{example}
+\begin{tryit}{2}
+Is the function odd, even, or neither?
+a. (f(x)=7x^5-2x^2+4)
+b. (f(x)=x^6-2)
+\answer{a. neither; b. even}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2
+\textbf{Make Sense and Persevere} Why do you replace (x) with (-x) when determining if a function is odd, even, or neither?
+\answer{Replacing (x) with (-x) helps you to determine what kind of symmetry the function has.}
+\end{te-addendum}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+PART A
+Q: Compare and contrast the two functions shown in the graph.
+\answer{The graph of the parent function is wider. The graph of the transformed function is shifted below the (x)-axis. Both graphs are even, open upward, and are symmetrical across the (y)-axis.}
+PART B
+Q: Is the order in which you apply the transformations important?
+\answer{It doesn't matter in which order you apply the translations, but the vertical stretch should be applied before the vertical translation.}
+Q: Why is knowing the graph of the parent function a valuable tool?
+\answer{Knowing the parent graph gives you a starting place. You do not have to make a table of points to graph the function; instead, you can compare the function to the parent function to determine the transformation.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Graph Transformations of Cubic and Quartic Parent Functions}
+How do transformed graphs compare to the graph of the parent function?
+A. (g(x)=3x^4-18)
+The parent function is (f(x)=x^4).
+The leading coefficient, 3, stretches the graph vertically, making it narrower than the graph of the parent function.
+Subtracting 18 translates the graph down 18 units.
+% FIG 90 1053 550 1157 651
+\placeholder{graph}{Blue f=x to fourth with minimum O; red g=3x to fourth-18 with minimum (0,-18) and marked (-2,30),(2,30). x grid half units window -2.5 to2.5 labeled -2,-1,1,2; y grid10 window -40 to60 labeled20,40; both ends up, axes x,y.}
+\answer{The leading coefficient, 3, stretches the graph vertically, making it narrower than the graph of the parent function. Subtracting 18 translates the graph down 18 units.}
+B. (h(x)=5(x-2)^3+4)
+The parent function is (f(x)=x^3).
+Subtracting 2 (before calculating the cube) shifts the graph to the right 2 units.
+Multiplying by 5 stretches the translated graph vertically, making it narrower than the graph of the parent function.
+Adding 4 translates the stretched graph up 4 units.
+% FIG 90 1053 666 1156 766
+\placeholder{graph}{Blue f=x cubed through O, red h=5(x-2) cubed+4 with solid inflection point (2,4). x window -4 to6 unit grid labels -2,2,4; y window -20 to30 in5-unit steps labeled -10,10,20. Both increasing curves have lower-left and upper-right arrowheads.}
+\answer{Subtracting 2 shifts the graph to the right 2 units; multiplying by 5 stretches the translated graph vertically; adding 4 translates the stretched graph up 4 units.}
+\te{USE APPROPRIATE TOOLS The graph of the parent function is a valuable tool, because it provides the foundation for sketching the graphs of related functions using transformations.}
+\end{example}
+\begin{tryit}{3}
+How does the graph of the function (g(x)=2x^3-5) differ from the graph of its parent function?
+\answer{Multiplying by 2 stretches the graph vertically. Subtracting 5 units shifts the graph down 5 units.}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How does the graph of a function (g(x)=a(x-h)^n+k) compare to the graph of the parent function (f(x)=x^n)?
+\answer{The (a)-value stretches or compresses the graph vertically, the (h)-value shifts the graph horizontally, and the (k)-value shifts the graph vertically.}
+\end{te-addendum}
+% Source page 91: 170
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+PART A
+Q: What key features of a graph can you use to determine the transformation of a parent function?
+\answer{end behavior, axis of symmetry, vertical or horizontal shift of a point or vertex, stretch or compression}
+PART B
+Q: What is the end behavior of the graph?
+\answer{Both ends extend in the same direction. As (x) approaches (\infty) or (-\infty), (y) approaches (-\infty).}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Identify a Transformation}
+Each of the given graphs is a transformation of the parent cubic function or parent quartic function. How can you determine the equation of the graph?
+\te{VOCABULARY A cubic function is a 3rd degree function. A quartic function is a 4th degree function.}
+A.
+% FIG 91 816 274 917 375
+\placeholder{graph}{Red descending cubic with labeled solid (-4,0),(-3,-1),(-2,-2), arrowheads upper left/lower right. x window -8 to2,y -5 to5, unit grid, x labels -6,-4,-2,O; y -4,-2,2,4.}
+Since the ends extend in opposite directions, the end behavior shows that the parent function has odd degree: (y=x^3).
+The end behavior indicates that the graph is a reflection across the (x)-axis: (y=-x^3).
+The point (-3,-1) indicates that the graph has been translated 3 units left and 1 unit down:
+(y=-(x+3)^3-1)
+\answer{The function is (f(x)=-(x+3)^3-1).}
+B.
+% FIG 91 975 274 1078 375
+\placeholder{graph}{Red downward quartic vertex solid (1,5), labeled solid (0,4); x window -1.5 to3.5 in half units,y -4 to6 unit grid; x labels -1,1,2, y -2,2,4, O. Both ends down with arrowheads.}
+Since the ends extend in the same direction, the end behavior shows that the parent function has even degree: (y=x^4).
+The end behavior indicates that the graph is a reflection across the (x)-axis: (y=-x^4).
+The point (1,5) indicates that the graph has been translated 1 unit right and 5 units up:
+(y=-(x-1)^4+5)
+\answer{The function is (f(x)=-(x-1)^4+5).}
+\end{example}
+\begin{tryit}{4}
+Determine the equation of each graph as it relates to its parent cubic function or quartic function.
+a.
+% FIG 91 860 630 959 727
+\placeholder{graph}{Red decreasing cubic with solid points (1,5),(2,4),(3,3); inflection (2,4), arrows upper left/lower right. Window x -3 to7,y -3 to7, unit grid; labels -2,2,4,6 on x and -2,2,4 on y.}
+b.
+% FIG 91 989 628 1092 728
+\placeholder{graph}{Red upward quartic vertex solid (-1,-3), solid (0,-2), both ends up. x,y window -5 to5 unit grid; labels -4,-2,2,4, O, axes x,y.}
+\answer{a. (f(x)=-(x-2)^3+4); b. (f(x)=(x+1)^4-3)}
+\end{tryit}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error}
+Try It! 4 Students may account for the vertical and horizontal translations of the graph and forget to look for a reflection. Have students make a checklist to verify all four transformations: horizontal translation, vertical translation, stretch or compression, and reflection.
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+Use with EXAMPLES 3 \& 4
+\textbf{Look for Relationship} What type of transformation would change the end behavior of a function?
+\answer{Multiplying the function by a negative value would change the end behavior of the function.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Have students work through another example.
+\item Display this graph.
+% FIG 91 112 1125 312 1322
+\placeholder{graph}{Orange downward parabola with solid labeled A=(6,4),B=(4,0),C=(8,0), arrowheads at lower ends. x window -1 to9,y -3 to7, unit grid, x labels2,4,6,8,y -2,2,4,6, O; axes x,y.}
+Q: What is the equation for this function?
+\answer{(f(x)=-(x-6)^2+4)}
+Q: If the graph were reflected across the (y)-axis, how would that change the equation of the function? What if it were reflected across the (x)-axis? Write the equations for both of these functions.
+\answer{If the graph were reflected across the (y)-axis, the equation would be (f(x)=-(x+6)^2+4). If the graph were reflected across the (x)-axis, the equation would be (f(x)=(x-6)^2-4).}
+\end{te-addendum}
+% Source page 92: 171
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions}
+Q: What does it mean to scale the dimensions to any size?
+\answer{Each dimension will be multiplied by the same factor.}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Apply a Transformation of a Cubic Function}
+A. The volume of a box, in cubic feet, is given by the function (V(x)=x^3). The post office lists permissible shipping volumes in cubic yards. Write a function for the volume in cubic yards if (x) is the edge length in feet.
+Replace (x) with (\frac{1}{3}x).
+(V(\frac{1}{3}x)=(\frac{1}{3}x)^3)
+(V(x)=\frac{1}{27}x^3)
+\answer{The function that represents the volume of the box, in cubic yards, is (V(x)=\frac{1}{27}x^3).}
+\te{COMMON ERROR Remember to apply exponents correctly: (\left(\frac{1}{3}x\right)^3\neq\frac{1}{3}x^3). Printed notation reuses V for the converted function.}
+B. A terrarium is in the shape of a rectangular prism. The volume of the tank is given by (V(x)=(x)(2x)(x+5)=2x^3+10x^2), where (x) is measured in inches. The manufacturer wants to compare the volume of this tank with one that has a width 2 inches shorter but maintains the relationships between the width and the other dimensions. Write a new function for the volume of this smaller tank.
+% FIG 92 854 452 1077 580
+\placeholder{illustration}{Terrarium containing rocks, plants and lizards, brown lid and two lamps. Dimension arrows: depth x, front length 2x, vertical height x+5.}
+(V(x-2)=(x-2)[2(x-2)][(x-2)+5])
+(=(x-2)(2x-4)(x+3))
+(=(2x^2-8x+8)(x+3))
+(=2x^3-2x^2-16x+24)
+\te{Replace x with x-2.}
+\answer{The function that represents the volume of the smaller tank is (V(x-2)=2x^3-2x^2-16x+24).}
+\end{example}
+\begin{tryit}{5}
+a. The volume of a cube, in cubic feet, is given by the function (V(x)=x^3). Write a function for the volume of the cube in cubic inches if (x) is the edge length in feet.
+\answer{(V(x)=1,728x^3)}
+b. A storage unit is in the shape of a rectangular prism. The volume of the storage unit is given by (V(x)=(x)(x)(x-1)=x^3-x^2), where (x) is measured in feet. A potential customer wants to compare the volume of this storage unit with that of another storage unit that is 1 foot longer in every dimension. Write a function for the volume of this larger unit.
+\answer{(V(x)=x^3+2x^2+x)}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: When finding the equation for a storage container that is 1 ft longer in every dimension, does it matter whether you replace (x) with (x+1) in the expression ((x)(x)(x-1)) or in the expression (x^3-x^2)?
+\answer{No, the two expressions are equivalent, so you will end up with the same answer no matter which expression you use. The calculations will be easier, though, if you use the first expression.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{Critique Arguments} A student thought that, for Try It! 5a, the new function should be (V(x)=\frac{1}{9}x^3). What are the two errors the student made?
+\answer{The student converted to yards instead of inches, and squared (\frac{1}{3}) instead of cubing it. The new function should be (V(x)=(12x)^3), or (V(x)=1,728x^3).}
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 5)}
+SPEAKING BEGINNING The customary system of measurement is rarely used outside of the U.S. Ensure that students understand the relationship between yards and feet.
+Q: What are yards and feet used to measure? \answer{length}
+Q: Discuss some objects that you would measure using yards or feet. \answer{yards: fencing; feet: dimensions of a room}
+Q: Which unit in the metric system is similar to yards? \answer{meters}
+Q: Discuss which measurement is larger---yards or feet---and by how much. \answer{yards; 3 times as large}
+LISTENING DEVELOPING As you read part (b) aloud to students, have them point to the words sculptor and sculpture.
+Q: How are these words related? \answer{They share the same base, sculpt.}
+Q: A sculptor is a person who makes sculptures. What other words ending in -or refer to a person with a specific job? \answer{doctor, conductor}
+Q: What context clue can help you understand what a sculpture is? \answer{clay model; The sculptor is building a shape out of clay.}
+\te{Printed sculptor/sculpture guidance does not match the terrarium in Example 5B.}
+READING EXPANDING Have students read part (a).
+Q: What does volume measure? \answer{the number of cubic units of space an object takes up}
+Q: Do you know a word that sounds similar to permissible? \answer{Yes; permission and permit are similar to permissible.}
+Q: What does permissible mean in this example? \answer{allowable; Only boxes that have certain volumes are allowed to be shipped through the post office.}
+\end{te-addendum}
+% Source page 93: 172 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Understand Polynomial Functions}
+Q: What are properties of even and odd functions?
+\answer{The graphs of even functions are symmetric about the (y)-axis, and the end behavior is in the same direction as (x) approaches both (\infty) and (-\infty). The graphs of odd functions are symmetric about the origin, and the end behavior is in opposite directions as (x) approaches (\infty) and (-\infty).}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error}
+Exercise 6 Students may just add 2 to the volume equation since every dimension is 2 units longer. Have students identify the dimensions that are used to calculate volume. Then ask which of these dimensions are included in the Exercise's reference to every dimension.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Understand Polynomial Functions}
+\begin{tabular}{lll}
+ & Even Function & Odd Function \\
+DEFINITION & Line of symmetry: (y)-axis. For all (x), (f(x)=f(-x)). & Point of symmetry: origin. For all (x), (f(-x)=-f(x)). \\
+PARENT FUNCTION & Has even degree: (y=x^2,y=x^4,y=x^6,\ldots) & Has odd degree: (y=x,y=x^3,y=x^5,\ldots) \\
+TRANSFORMATIONS & The vertex moves to the right 4 units and up 1 unit, and the graph is stretched vertically by a factor of 3. (y=x^2\to y=3(x-4)^2+1) & The graph of the function moves to the left 5 units and down 2 units and is compressed vertically by factor of (\frac{1}{2}). (y=x^3\to y=\frac{1}{2}(x+5)^3-2) \\
+\end{tabular}
+% FIG 93 773 349 873 448
+\placeholder{graph}{Blue y=x squared vertex O and red y=3(x-4) squared+1 vertex (4,1); blue arrows labeled Right 4, Up 1. Window x -3 to7,y -4 to6, unit grid; x labels -2,2,4,6, y -2,2,4. Both parabola ends up.}
+% FIG 93 933 349 1047 448
+\placeholder{graph}{Blue y=x cubed through O, red y=one-half(x+5) cubed-2 centered (-5,-2); blue arrows Left 5, Down 2. Window x -7 to3,y -5 to5, unit grid; x labels -6,-2,O,y -4,-2,2,4. Curves increasing with lower-left and upper-right arrows.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How are symmetry and transformations represented in the graph and equation of a polynomial function?
+\answer{If the function is even, then its graph will be symmetric about the (y)-axis, and if the function is odd, its graph will be symmetric about the origin. The transformations can be used to determine a function's dilation, reflection, and horizontal and vertical translations.}
+2. Vocabulary What is the difference between the graph of an even function and the graph of an odd function?
+\answer{An even function has the (y)-axis as a line of symmetry and is defined for all (x), such that (f(x)=f(-x)). An odd function has the origin as its point of symmetry and is defined for all (x), such that (f(-x)=-f(x)).}
+3. Error Analysis A student identified the transformations of the polynomial function (f(x)=3(x-1)^3-6) as follows:
+The function shifted to the left 1 unit, stretched vertically, and shifted downward 6 units.
+Describe and correct the error the student made.
+\answer{The function is shifted to the right 1 unit.}
+\textbf{Do You KNOW HOW?}
+4. Classify the function on the graph as odd, even, or neither.
+% FIG 93 1013 556 1117 657
+\placeholder{graph}{Red upward quartic minimum solid (-1,-3), both ends up. Window x,y -5 to5, unit grid, labels -4,-2,2,4 and O; axes x,y arrows.}
+\answer{neither}
+5. Use the equation to classify the function as odd, even, or neither.
+(g(x)=4x^3-x)
+\answer{odd}
+6. The volume in cubic inches of a cardboard box is given by the function (V(x)=x(x-2)(x)=x^3-2x^2). Write a new function for the volume of a cardboard box that is 2 in. longer in every dimension.
+\answer{(V(x+2)=x^3+4x^2+4x)}
+\end{concept-summary}
+% Source page 94: 173 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+7, 8, 10, 13--27 & 7--27 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{See answers for 9--11, 17--18 on the next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 13, 14, 26 & 1 \\
+2 & 15, 16 & 1 \\
+2 & 11, 12 & 3 \\
+3 & 17, 18, 25 & 1 \\
+3 & 8 & 2 \\
+4 & 7, 19, 20 & 1 \\
+4 & 9, 10 & 2 \\
+5 & 21--24, 27 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{7}{1}
+UNDERSTAND. \textbf{Communicate Precisely} How can you use a graph of a function to determine if it is an odd function?
+\answer{Rotate the graph 180 degrees about the origin. If the result is the same graph, then the function is an odd function.}
+\end{practice}
+\begin{practice}{8}{2}
+\textbf{Error Analysis} Describe the error Terrence made in graphing the transformation of the cubic function (g(x)=x^3) to (f(x)=-\frac{1}{2}x^3+10).
+% FIG 94 551 383 734 565
+\placeholder{graph}{Student's incorrect red increasing cubic labeled f(x), inflection at (0,10), through about (-2,6),(2,14); arrows lower left and upper right. Light blue unit x grid and y grid5, x labels -4,-2,2,4, y -20,-10,10,20, O. Displayed window approximately x -5 to5,y -25 to25.}
+\answer{The graph should be reflected across the (x)-axis before being translated, because the coefficient, (-\frac{1}{2}), is negative.}
+\end{practice}
+\begin{practice}{9}{2}
+\textbf{Higher Order Thinking} Explain how to identify a transformation of the function (y=x^3) by looking at a graph. What do you look for to determine a translation? A reflection? A stretch or compression?
+\answer{To determine a translation, look at the point where the graph is least steep. That point is at the origin in the parent graph, so the coordinates of that point in the new graph show the translation. To determine a reflection, look at the end behaviors. If the end behavior of the new function matches that of the parent function, there is no reflection. If not, look to see whether the reflection is across the (x)- or (y)-axis. To determine a stretch or compression, look at the (y)-values of a pair of points one (x)-unit apart in the parent and in the new function. If the ratio of the (y)-values in the parent is different from the ratio of (y)-values in the new graph, then there is a stretch or compression. The ratio of the two ratios gives its value.}
+\te{Printed ratio-of-ratios rule does not generally determine a vertical scale factor.}
+\end{practice}
+\begin{practice}{10}{2}
+\textbf{Use Structure} Describe the steps used to determine the equation of the graph of the transformed parent quartic function.
+% FIG 94 551 719 695 862
+\placeholder{graph}{Red downward quartic with solid vertex (2,6), both ends down. Window x -8 to14,y -8 to14, grid2, x labels -4,8,12 and O; y -4,4,8,12; axes x,y arrows.}
+\answer{The parent function is even because it is given that it is quartic. Since the end behavior is opposite of the parent quartic function, it is a reflection over the (x)-axis. The point (2,6) shows that the graph has shifted 2 units right and 6 units upward.}
+\end{practice}
+\begin{practice}{11}{3}
+\textbf{Construct Arguments} Explain why the function (g(x)=2x^5+3x^4+1) is neither even nor odd.
+\answer{Because (g(x)\neq g(-x)), the function is not even. Because (g(-x)\neq-g(x)), the function is not odd.}
+\end{practice}
+\begin{practice}{12}{3}
+\textbf{Construct Arguments} Provide an example that demonstrates the following statement is not true.
+If the degree of a function is an even number, then the function is an even function.
+\answer{Sample: (f(x)=2x^4+x^3-2) has even degree but is not even. (f(x)=2(-x)^4+(-x)^3-2=2x^4-x^3-2), which is not equal to (f(x)).}
+\te{Printed second f(x) likely means f(-x).}
+\end{practice}
+\begin{practice}{13}{1}
+PRACTICE. Use the graph to classify the polynomial function. Is it even, odd, or neither? SEE EXAMPLE 1
+% FIG 94 860 316 967 421
+\placeholder{graph}{Red increasing odd polynomial through O with very flat center, lower-left/upper-right arrowheads; x,y grid unit, window -4 to4, x labels -2,2,y -2,2; axes x,y.}
+\answer{odd}
+\end{practice}
+\begin{practice}{14}{1}
+Use the graph to classify the polynomial function. Is it even, odd, or neither? SEE EXAMPLE 1
+% FIG 94 1000 316 1108 421
+\placeholder{graph}{Red asymmetric polynomial with local max near (-1.2,3.2), local min (0,2), crossing x-axis near -1.7; ends down left/up right. x,y window -4 to4 unit grid, labels -2,2,O; axes x,y.}
+\answer{neither}
+\end{practice}
+\begin{practice}{15}{1}
+Use the equation to classify the polynomial function. Is it even, odd, or neither? SEE EXAMPLE 2
+(f(x)=2x^5+4x^2)
+\answer{neither}
+\end{practice}
+\begin{practice}{16}{1}
+Use the equation to classify the polynomial function. Is it even, odd, or neither? SEE EXAMPLE 2
+(g(x)=6x^4+2x^2)
+\answer{even}
+\end{practice}
+\begin{practice}{17}{1}
+How do the graphs of transformed functions compare to the graph of the parent function? SEE EXAMPLE 3
+(f(x)=3(x+1)^3-2)
+% FIG 94 860 580 967 685
+\placeholder{graph}{Red increasing cubic through marked (-1,-2), y-intercept1; x,y window -4 to4 with unit grid labeled -2,2,O; arrows lower left/upper right.}
+\answer{parent function: (y=x^3); Adding 1 (before calculating the cube) shifts the graph to the left 1 unit; multiplying by 3 stretches the translated graph vertically; subtracting 2 shifts the graph down 2 units.}
+\end{practice}
+\begin{practice}{18}{1}
+How do the graphs of transformed functions compare to the graph of the parent function? SEE EXAMPLE 3
+(g(x)=-x^4-8)
+% FIG 94 1004 580 1110 685
+\placeholder{graph}{Red downward quartic below x-axis with solid vertex (0,-8), ends point down. x window -5 to3 unit grid labeled -4,-2,2; y -10 to6 grid2 labeled -4,4; O, axes x,y.}
+\answer{parent function: (y=x^4); The leading coefficient of (-1) reflects the graph across the (x)-axis; subtracting 8 shifts the graph down 8 units.}
+\end{practice}
+\begin{practice}{19}{1}
+Each graph is a transformation of the parent cubic function or quartic function. Determine the equation of the graph. SEE EXAMPLE 4
+% FIG 94 860 750 967 855
+\placeholder{graph}{Red descending cubic centered at solid (1,0), crossing y at1, arrows upper left/lower right. x,y window -4 to4, unit grid, labels -2,2,O; axes x,y.}
+\answer{(f(x)=-(x-1)^3)}
+\end{practice}
+\begin{practice}{20}{1}
+Each graph is a transformation of the parent cubic function or quartic function. Determine the equation of the graph. SEE EXAMPLE 4
+% FIG 94 1001 750 1109 855
+\placeholder{graph}{Red upward quartic with solid vertex (5,10), ends point up; x window -4 to12, grid2, labels4,8; y -10 to30, grid5, labels10,20; O, axes x,y.}
+\answer{(f(x)=(x-5)^4+10)}
+\end{practice}
+\begin{practice}{21}{2}
+The volume of a rectangular room, in cubic yards, is given by the (V(x)). Write a function for the volume in cubic feet. SEE EXAMPLE 5
+% FIG 94 928 904 1149 1025
+\placeholder{illustration}{Bedroom with yellow bunk bed, desk, chair, plant and window; callout V(x)=x(3x)(x+4)=3x cubed+12x squared.}
+(V(x)=x(3x)(x+4)=3x^3+12x^2)
+\answer{(V(x)=81x^3+108x^2)}
+\te{Printed answer substitutes 3x into the original polynomial. A unit conversion of the full volume with x still in yards would multiply both coefficients by 27.}
+\end{practice}
+% Source page 95: 174
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice \& Problem Solving is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{practice}{22}{2}
+APPLY. \textbf{Make Sense and Persevere} Last season the approximate number of guests in week (x) at an amusement park could be modeled by the function, (f), where (x) represents the number of weeks since the park opened for the season. This year, since the park opened its new water slide, the approximate number of guests in week (x) at the park can be modeled by (g).
+% FIG 95 516 407 773 523
+\placeholder{photo}{Two water-slide photos. Last year: f(x)=0.8x cubed+6x squared+1000. This year: g(x)=f(x)+1,245.}
+Last year: (f(x)=0.8x^3+6x^2+1000)
+This year: (g(x)=f(x)+1,245)
+a. Write the function (g) in terms of (x).
+\answer{(g(x)=f(x)+1,245=0.8x^3+6x^2+2,245)}
+b. Describe the transformation of the graph of (g) compared to (f).
+\answer{a shift 1,245 units upward}
+c. Compare the number of weekly visitors from last year to this year.
+\answer{an increase of 1,245 weekly visitors}
+\end{practice}
+\begin{practice}{23}{2}
+\textbf{Generalize} The volume of a storage box, in cubic feet, is given by the function (V(x)=(x)(x+1)^2). A freight company lists the shipping rates of items in cubic inches. Write a function for the volume of the box in cubic inches if (x) is its width in feet.
+\answer{(V(x)=1,728x^3+288x^2+12x)}
+\te{Printed answer substitutes 12x; converting the full volume while retaining x in feet would multiply the original polynomial by 1728.}
+\end{practice}
+\begin{practice}{24}{2}
+\textbf{Model With Mathematics} A swimming pool is in the shape of a rectangular prism. The width is one more than five times the height, and the length is one less than eleven times the height.
+% FIG 95 513 804 778 919
+\placeholder{illustration}{Cutaway rectangular swimming pool, length arrow l along long edge, width w across water, vertical depth h. People and pool building in background.}
+a. Using (x) for the height, write a function (V(x)) to represent the volume of the pool.
+\answer{(V(x)=55x^3+6x^2-x)}
+b. Compare the volume of this pool with a larger one that is the same height, but twice the length and twice the width of this pool. Write a function (Z(x)) for the volume of this larger pool.
+\answer{(Z(x)=220x^3+24x-4x)}
+\te{Printed middle term 24x; likely 24x squared.}
+\end{practice}
+\begin{practice}{25}{1}
+ASSESSMENT PRACTICE. Match the number in each function with its effect on the parent function.
+(f(x)=2(x-1)^4+5)
+(g(x)=(x+3)^6-7)
+\begin{tabular}{ll}
+I vertical stretch & A. 7 \\
+II shift to the left & B. 5 \\
+III shift to the right & C. 3 \\
+IV shift upward & D. 2 \\
+V shift downward & E. 1 \\
+\end{tabular}
+\answer{I--D; II--C; III--E; IV--B; V--A}
+\end{practice}
+\begin{practice}{26}{1}
+\textbf{SAT/ACT} Which of the following functions is neither even nor odd?
+A. (f(x)=x^4+3x^2)
+B. (g(x)=5x^3-x)
+C. (h(x)=x^5+4x^3+x^2)
+D. (k(x)=9-8x^2)
+E. (p(x)=5)
+\answer{C}
+\end{practice}
+\begin{practice}{27}{2}
+\textbf{Performance Task} The height of a ball thrown in the air can be modeled by the function (h(x)=-16t^2+32t+6), where (h(x)) represents the height in feet of the ball after (t) seconds. The graph of this function is shown below.
+% FIG 95 822 680 987 855
+\placeholder{graph}{Red downward parabola from (0,6) rising to (1,22), then down with arrow near (2.17,0). Horizontal axis time (seconds), x, labels0,1,2,3,4, grid0.5, window0 to5. Vertical axis height (feet), y, labels0,6,12,18,24, grid3, window0 to30.}
+Part A What do the vertex, (y)-intercept, and (x)-intercept represent?
+\answer{vertex: maximum altitude (in feet) reached by the ball; (y)-intercept: the height from which the ball is thrown; (x)-intercept: the time (in seconds) it took the ball to hit the ground}
+Part B If the ball is thrown from a height of 10 ft, how will this transform the graph?
+\answer{It will shift the graph up by 4 units, or 4 ft.}
+Part C About how much longer will the ball be in the air when it is thrown from 10 ft compared to when it was thrown from 6 ft? (Hint: You may want to use your graphing calculator to compare the two graphs.)
+\answer{0.102 s}
+\te{Printed h(x) uses t as the time variable.}
+\end{practice}
+% Source page 96: 174A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F63 \\
+2 & 2 & F63 \\
+3 & 2 & F63 \\
+4 & 2 & F63 \\
+5 & 2 & F63 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{3-7 Lesson Quiz: Transformations of Polynomial Functions}
+1. Use the graph to classify the polynomial function as even, odd, or neither.
+% FIG 96 754 331 856 432
+\placeholder{graph}{Black cubic symmetric about origin, crosses near x=-1.7,0,1.7, local maximum near (-1,1.3), minimum near (1,-1.3), arrows lower left/upper right. Window x,y -5 to5 unit grid labeled -4,-2,2,4,O; axes x,y.}
+The function is: even; odd; neither.
+\answer{odd}
+2. Identify the parent function of the function (f(x)=-x^4-1), and list the transformations from the parent function to create (f(x)).
+A. (x^4); translate down 1 unit, reflect over the (x)-axis
+B. (x^4); reflect over the (x)-axis, translate down 1 unit
+C. (x^3); reflect over the (x)-axis, translate down 1 unit
+D. (x^3); compress the graph by a factor of (x), translate down 1 unit
+\answer{B}
+3. How does the graph of (g(x)=3x^3+6) differ from the graph of its parent function (f(x)=x^3)? Select all the transformations.
+A. The leading coefficient, 3, translates the graph up 3 units.
+B. The leading coefficient, 6, compresses the graph vertically.
+C. The leading coefficient, 3, stretches the graph vertically.
+D. Adding 6 translates the graph up 6 units.
+E. Adding 6 translates the graph right 6 units.
+\answer{C, D}
+4. Determine the equation of the graph as it relates to either its parent cubic function or quartic function.
+% FIG 96 1009 681 1111 782
+\placeholder{graph}{Black upward quartic with labeled solid minimum (2,-3), both ends up. Window x -2 to8,y -5 to5 unit grid labeled x2,4,6,O,y -4,-2,2,4.}
+A. (f(x)=(x-2)^3-3)
+B. (f(x)=(x-3)^4-2)
+C. (f(x)=(x+3)^4+2)
+D. (f(x)=(x-2)^4-3)
+\answer{D}
+5. The volume of a cube, in cubic centimeters, is given by the function (V(x)=x^3), where (x) is the side length of the cube in centimeters. Write a new function for the volume of the cube in cubic millimeters.
+(V(x)=\underline{\hspace{1cm}}x^3)
+\answer{1000; (V(x)=1000x^3)}
+\end{te-addendum}
+% Source page 97: 174B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding (I)} Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{3-7 Reteach to Build Understanding: Transformations of Polynomial Functions}
+1. A function (f(x)) is called even, if replacing (x) by (-x) does not change the function. If changing (x) to (-x) results in changing (f(x)) to (-f(x)), then the function is called odd. Identify the functions as even, odd, or neither.
+\begin{tabular}{ll}
+Type of Function: Unknown & Type of Function \\
+(f(x)=-x^3-21x) & \answer{odd} \\
+(g(x)=2x^2+5x-8) & \answer{neither} \\
+(g(x)=20x^4-6x^2-8) & \answer{even} \\
+\end{tabular}
+2. Trevor described the transformations of the functions shown. Put an X next to the error and correct Trevor's error.
+\begin{tabular}{lll}
+Parent Function & Transformed Function & Description \\
+(f(x)=-x^2) & (g(x)=x^2+3) & Graph of (f(x)) moved 3 units downward. \answer{X; Graph of (f(x)) moved 3 units upward.} \\
+(f(x)=x^2) & (g(x)=(x+6)^2) & Graph of (f(x)) moved 6 units to the left. \\
+\end{tabular}
+\te{Printed first parent function is negative while the transformed function is positive; the answer omits the reflection.}
+3. If (f(x)=x^2) is the parent function of (g(x)=x^2+4x-3), determine how the graph of (f) transforms to the graph of (g).
+\begin{tabular}{ll}
+(g(x)=x^2+4x-3) & Given function. \\
+(g(x)=x^2+4x-3+4-4) & Add and subtract 4 in order to factor the first two terms. \\
+(g(x)=(x^2+4x+4)-3-4) & Group trinomial inside parentheses. \\
+(g(x)=(x+2)^2-3-4) & \answer{Factor the trinomial using the identity (a+b)^2=a^2+2ab+b^2.} \\
+(g(x)=(x+2)^2-7) & \answer{Simplify terms} \\
+\end{tabular}
+The graph of (f) moved \underline{\hspace{1cm}} to the left and \underline{\hspace{1cm}}.
+\answer{2 units; 7 units downward}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice (I, O)} Provides extra practice for each lesson. MathXL for School.
+\textbf{3-7 Additional Practice: Transformations of Polynomial Functions}
+Classify the polynomial as odd, even, or neither.
+1. (f(x)=x^5+2x^4+3x-14) \answer{Neither}
+2. (f(x)=-x^{\uncertain{4}{6}}+2x^2+3) \answer{Even}
+3. (f(x)=x^{11}+11x^9-11x) \answer{Odd}
+4. Classify the graphs (f), (g), (h), and (p) as odd, even, or neither.
+% FIG 97 708 449 774 515
+\placeholder{graph}{Four black curves on x,y grid -4 to6 horizontally and -5 to5 vertically, unit grid with labels x2,4 and y -4,2,4. f is upward even curve centered at (0,-1); g is upward parabola vertex (3,0); h is asymmetric W curve with minima near (-0.5,-2) and (1.4,-3.5); p is an increasing cubic passing near origin. Curve labels near arrowheads at top, p near bottom left.}
+\answer{f: even; g: even; h: neither; p: odd}
+\te{Printed classification of g as even conflicts with the graph's vertex displaced to the right of the y-axis.}
+5. How do the graphs of the functions (g(x)=2x^4-5) and (h(x)=3x^4+5) compare to the parent functions?
+\answer{Parent of g moved 5 units downward. Parent of h moved 5 units upward.}
+\te{Printed answer omits vertical stretches by 2 and 3 relative to y=x to the fourth.}
+6. Tennis balls are made to certain specifications but are allowed certain variances. For example, its weight can be from 1.975 to 2.095 ounces. However, tennis ball manufacturers use the formula, (V=\frac{4}{3}\pi r^3), where (r) is the radius of the ball in mm. If one cm = 10 mm, then what function defines the volume of the tennis ball with a radius of (r) cm long in terms of mm?
+\answer{(V=\frac{4000}{3}\pi r^3); where (r) is in mm}
+\te{The printed answer's unit label for r conflicts with the prompt's radius in cm.}
+7. The annual profit of a company is equal to the difference between annual revenue and total annual expenses of the company. The annual revenue of the company is defined by the function (R(x)=6x^4-4x^2+11) and the annual total expenses of the company is defined by the function (C(x)=4x^4-2x^3-6x^2+x). What function defines the annual profit of the company?
+\answer{(P(x)=2x^4+2x^3+2x^2-x+11)}
+8. The graph shown is a transformation of a parent quadratic function.
+% FIG 97 714 635 772 688
+\placeholder{graph}{Black upward parabola with labeled solid vertex (2,-3) and point (0,1), ends up. x window -3 to6,y -4 to4, unit grid, x labels -2,2,4 and O, y -2,2; axes x,y.}
+a. Describe the steps used to determine the equation of this graph.
+\answer{Sample answer: The vertex of the parent function is at (0,0), which is transformed to (2,-3). That is, the function moved 2 units to the right, and then 3 units downward.}
+b. Determine the equation of the transformed function.
+\answer{(g(x)=(x-2)^2-3)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment (O, A)} Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{3-7 Enrichment: Transformations of Polynomial Functions}
+An engineer designed a suspension bridge with three hanging cables with the end of each cable attached to a tower. He defined the cable AB by the function (f(x)=0.1(x+11)^2+5) with a clearance of 24 ft above the water's surface.
+% FIG 97 908 441 1048 511
+\placeholder{diagram}{Suspension bridge with four towers A,B,C,D from left to right, three upward curved cables AB,BC,CD and vertical hangers to horizontal deck on x-axis. y-axis through B, x-axis points right. Labels Cable, Tower at left, Width of Cable across BC, Surface of water at gray band below deck, vertical double arrow Clearance between water and deck. No numbered ticks.}
+1. Knowing that the width of each tower is 2 ft, what is the height of each tower?
+\answer{15 ft}
+2. What is the distance from the point where cable A is attached to the tower, to the (y)-axis?
+\answer{21 ft}
+3. What are the coordinates of the lowest point on the cable AB?
+\answer{(-11,5)}
+4. What is the height of the midpoint of the cable AB from the surface of water?
+\answer{29 ft}
+5. The engineer modified the same function to define the cables BC and CD. What are the functions of BC and CD?
+\answer{BC: (g(x)=0.1(x-11)^2+5); CD: (h(x)=0.1(x-33)^2+5)}
+6. If the distance between the lowest point of each cable from the water's surface were 31 ft, what function would represent cable AB?
+\answer{(f(x)=0.1(x+11)^2+8)}
+7. If the distance between the lowest point of the cable BC from the water surface were 27 ft, what function would represent cable BC?
+\answer{(f(x)=0.1(x+11)^2+8)}
+8. The total length of the bridge is the distance between the beginning of tower A and the end of tower B. What is the total length of the bridge?
+\answer{68 ft}
+\te{Printed answers 6 and 7 repeat +8, inconsistent with the stated 24-ft clearance and requested heights. Item 7 also uses the AB shift for BC. Item 8 says tower B although the full bridge ends at D.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary (I, O)} Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{3-7 Mathematical Literacy and Vocabulary: Transformations of Polynomial Functions}
+Match the parent function and transformed function in the left column with the corresponding graph in the right column.
+1. (f(x)=-3x^2); (g(x)=-3x^2+18x-27)
+2. (f(x)=-2x^3); (g(x)=-2(0.4x)^3)
+3. (f(x)=-0.8x^5); (g(x)=-0.8x^5-8)
+A.
+% FIG 97 350 1020 414 1083
+\placeholder{graph}{Two black decreasing cubic curves through O, one narrow and one horizontally stretched. Axes x,y window -5 to5 with unit grid and labels -4,-2,2,4, O. Arrowheads upper left/lower right.}
+B.
+% FIG 97 350 1115 415 1178
+\placeholder{graph}{Two black downward parabolas, vertices (0,0),(3,0), arrowheads downward; axes x,y window -5 to5 with unit grid and labels -4,-2,2,4,O.}
+C.
+% FIG 97 350 1210 416 1275
+\placeholder{graph}{Two black decreasing fifth-degree curves, one through O, other through (0,-8); narrow relative to window x,y -25 to25, grid5, labels -20,-10,10,20,O. Arrowheads upper left/lower right.}
+\answer{1--B; 2--A; 3--C}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 97 584 978 1035 1299
+\placeholder{illustration}{Tablet screenshot with blank coordinate grid x,y -10 to10 in steps of2, system y=3x+4 and y=-2x+4.}
+Solve the system of equations by graphing. (y=3x+4); (y=-2x+4).
+Use the graphing tool to graph the system. Click to enlarge graph.
+Question Help: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.
+\end{te-addendum}
+
+\end{document}

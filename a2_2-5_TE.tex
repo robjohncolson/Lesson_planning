@@ -1,0 +1,989 @@
+\documentclass{article}
+% Source: Topic_02_Teacher_Edition.pdf, PDF pages 60-70 (printed pages 91A-97B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+% Source page 60: 91A Lesson Overview
+\begin{lesson-meta}
+lesson: 2-5
+title: Completing the Square
+standards: none printed
+practices: none printed
+objective: I can solve quadratic equations by completing the square.
+
+essential question: How can you solve a quadratic equation by completing the square?
+
+\textbf{VOCABULARY}
+\item completing the square
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 2-5 \\
+Title & Completing the Square \\
+Standards & none printed \\
+I CAN Objective & I can solve quadratic equations by completing the square. \\
+Essential Question & How can you solve a quadratic equation by completing the square? \\
+Lesson Vocabulary & completing the square \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Transform a quadratic equation into the form ((x-p)^2=q) by completing the square.
+\item Complete the square to reveal the minimum or maximum value of a quadratic expression.
+Essential Understanding. A quadratic equation can be solved by completing the square to transform the equation to an equivalent equation, ((x-p)^2=q).
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Used inspection or factoring to solve quadratic equations.
+In this lesson, students:
+\item Solve quadratic equations by completing the square.
+\item Find the minimum or maximum value of a quadratic function by completing the square.
+Later in this topic, students will:
+\item Derive the quadratic equation by completing the square.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that completing the square is a method for solving a quadratic equation and identifying the maximum and minimum values of the function it defines.
+\item Students efficiently determine the value needed to complete the square. They accurately complete the steps to find the solution to a quadratic equation.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+Glossary is available at SavvasRealize.com.
+\textbf{Vocabulary Builder}
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+perfect square trinomial & trinomio cuadrado perfecto \\
+principal root & raíz principal \\
+\end{tabular}
+\textbf{NEW VOCABULARY}
+completing the square | completer el cuadrado
+\textbf{VOCABULARY ACTIVITY}
+Have students give examples of perfect squares and discuss what the word perfect means in this context. Ask students how they can apply this understanding to the term perfect square trinomial. Then use the following activity to help students understand the term completing the square by connecting it to their prior knowledge.
+Show students the expression (x^2+4x).
+Q: Is this expression a perfect square trinomial? Explain.
+\te{No answer printed.}
+Q: What could you add to (x^2+4x) to create a perfect square trinomial?
+\te{No answer printed.}
+Introduce the term completing the square as the process of finding a constant c to add to (x^2+bx) to create a perfect square trinomial.
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS, with a purple and blue abstract spherical design on black.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students use a geometric model to represent an algebraic quadratic expression and identify the number needed to complete the square. They use this number to rewrite quadratic equations in the form ((x-p)^2=q) in order to solve problems involving quadratic functions.
+Students use an algebraic model to complete the square. They square half the coefficient of the linear term to find the number needed to complete the square.
+Students understand that completing the square is useful to find the minimum or maximum value of a quadratic expression.
+\textbf{Applying Math Practices}
+Construct Viable Arguments
+Students use mathematical ideas to justify whether or not using completing the square is an efficient method for solving a quadratic equation.
+Attend to Precision
+Students attend to precision when they use the definition of absolute value to rewrite the principal square root using both the positive and negative values of the root.
+\end{te-addendum}
+% Source page 61: 91B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore: CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students compare methods for solving quadratic equations and explore the circumstances in which each method is a viable option.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+Critique \& Explain is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: How do the results of each student's work compare?
+\answer{They both get the same answer.}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: How do the solution methods compare?
+\answer{They both factored; however, Hana began by transforming the equation into the form (ax^2+bx+c=0), and Enrique began by transforming the equation into the form ((x-p)^2=q).}
+Q: Are the solutions accurate?
+\answer{Yes; when you substitute the values into the original equation, the result is a true statement.}
+Q: How is the equation in Part C different?
+\answer{There is not a way to factor it and set the factored expression equal to a perfect square.}
+\textbf{For Early Finishers}
+Q: Solve the equation in Part C.
+\answer{(x=-5\pm\sqrt{3})}
+Q: Whose solution method did you use? How do the solutions compare?
+\answer{Enrique's method; 3 is not a perfect square, so the solutions are irrational.}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Lead a discussion about using different methods to solve quadratic equations.
+Q: Do you think there are other methods for solving quadratic equations?
+\answer{Yes. The left side of the quadratic equation in the form (ax^2+bx+c=0) can be graphed as a parabola. The real solutions can be seen as x-intercepts.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Make Sense and Persevere}
+Q: Why does Hana set her two factors equal to zero, while Enrique sets his factors equal to 4 and (-4)?
+\answer{Hana applies the Zero Product Property, while Enrique recognizes perfect squares on both sides of the equation and so uses square roots to solve.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Hana and Enrique used different methods to solve the equation (x^2-6x+9=16).
+Hana
+(x^2-6x+9=16)
+(x^2-6x-7=0)
+((x-7)(x+1)=0)
+(x-7=0\quad\text{OR}\quad x+1=0)
+(x=7\quad\text{OR}\quad x=-1)
+The solutions are 7 and (-1).
+Enrique
+(x^2-6x+9=16)
+((x-3)^2=16)
+I can square 4 or (-4) to get 16.
+(x-3=4\quad\text{OR}\quad x-3=-4)
+(x=7\quad\text{OR}\quad x=-1)
+The solutions are 7 and (-1).
+A. Does Hana's method work? If her method is valid, explain the reasoning she used. If her method is not valid, explain why not.
+\answer{Yes; Hana rearranged the equation and then factored the resulting quadratic equation to determine the solutions.}
+B. Does Enrique's method work? If his method is valid, explain the reasoning he used. If his method is not valid, explain why not.
+\answer{Yes; Enrique first factored and saw that the factors on the left side of the equation were the same. He then took the square root of both sides of the equation to determine the solutions.}
+C. Use Structure Can you use either Hana's or Enrique's method to solve the equation (x^2+10x+25=3)? Explain.
+\answer{You can use Enrique's method. You can factor the left side of the equation, and because the factors are the same, you can take the square root of both sides. Because the equation has an irrational solution, you cannot use Hana's method of factoring.}
+\te{Digital activity repeats the prompt and parts A--C, with Enter your answer fields; Hana's card initially shows (x^2-6x+9=16), and Enrique's card is blank. Go back.}
+\end{model-discuss}
+% Source page 62: 91 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Introduce students to quadratic equations that cannot be solved by factoring alone. Students will explore a solution method that helps them convert a quadratic equation into one that can be factored as a perfect square.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Use Square Roots to Solve Quadratic Equations}
+What are the solution(s) of (25=x^2+14x+49)?
+Previously, you solved a simple quadratic equation by finding the square root of both sides. You can use a similar method to solve more complicated quadratic equations.
+(25=x^2+14x+49)
+(25=x^2+2(7)x+7^2)
+\te{Write the quadratic expression as a perfect square trinomial.}
+(25=(x+7)^2)
+(\sqrt{25}=\sqrt{(x+7)^2})
+(5=|x+7|)
+(\pm5=x+7)
+(5=x+7\quad\text{or}\quad -5=x+7)
+(-2=x\quad\text{or}\quad -12=x)
+The solutions of (25=x^2+14x+49) are (x=-2) and (x=-12).
+\answer{(x=-2) and (x=-12).}
+\te{COMMUNICATE PRECISELY The principal square root returns only positive values, but you can square either 5 or (-5) to get 25. How does the absolute value account for this?}
+\end{example}
+\begin{tryit}{1}
+Find the solution(s) to the equations.
+a. (81=x^2+12x+36)
+b. (9=x^2-16x+64)
+\answer{a. (-15), 3\quad b. 5, 11}
+\end{tryit}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: Why do you use absolute value in the solution process?
+\answer{When using the principal square root in the solution, you have to account for the positive and negative square roots.}
+\end{te-addendum}
+\begin{te-addendum}{1}{HabitsOfMind}
+\textbf{Use Structure}
+Q: How do you recognize a perfect square trinomial?
+\answer{A perfect square trinomial in the form (x^2+bx+c) occurs when the value of c equals the square of half the value of b.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Additional Examples}
+Additional Examples are available at SavvasRealize.com.
+\textbf{ADDITIONAL EXAMPLE 4}
+A veterinary clinic has daily costs that can be given by the equation (c=x^2-16x+73), where x is the number of customers and c is the cost in hundreds of dollars. The clinic has received a grant that will cover \$9,000 worth of costs. How many customers would the clinic need in order to use all of the grant money?
+Complete the square to write the function in vertex form.
+(c=x^2-16x+73)
+(c-73=x^2-16x)
+(c-73+64=x^2-16x+64)
+(c-9=(x-8)^2)
+(c=(x-8)^2+9)
+c represents the cost, in hundreds of dollars, and 9,000 is equivalent to 90 hundreds. So, substitute in 90 for c: (90=(x-8)^2+9)
+Isolate the x-term: ((x-8)^2=81)
+\te{SOLUTION button; no further solution displayed.}
+Example 4 Provide students with another application problem relating the number of customers at a veterinary clinic to daily costs with this additional example.
+Q: What does the vertex of the cost function tell you?
+\answer{The number of customers that minimizes the daily cost.}
+Q: If the cost function is (f(x)=x^2-16x+73), what is the new cost function g after receiving the grant in terms of (f(x))?
+\answer{(g(x)=f(x)-90)}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 5}
+Write the function (y=3x^2+4.5x-9) in vertex form and graph it. What is the function's minimum or maximum value?
+Rewrite the function in vertex form:
+(y+9=3(x^2+1.5x))
+(y+9+3(0.5625)=2(x^2+1.5x+0.5625))
+(y=3(x+0.75)^2-10.6875)
+The minimum value is (-10.6875), which occurs at (x=-0.75).
+\answer{(y=3(x+0.75)^2-10.6875); minimum (-10.6875) at (x=-0.75).}
+\te{Printed second line has multiplier 2 on the right; likely 3. TRY ANOTHER ONE. SOLUTION.}
+\placeholder{graph}{Additional Example 5: black x- and y-axes with arrowheads, origin O; x window -5 to 5 with unit grid and labels -4,-2,2,4; y window -15 to 3 with grid steps 2.5 and labels -5,-10. Orange upward parabola y=3(x+0.75)^2-10.6875 with arrows at its upper ends, vertex near (-0.75,-10.6875), y-intercept -9.}
+Example 5 Have students practice writing functions in vertex form and graphing them with this additional example.
+Q: What are two ways to determine whether a function has a minimum or a maximum value?
+\answer{You can look at the value of a in the equation; if (a>0), the function has a minimum value and if (a<0), the function has a maximum value. You can look at the graph; if it opens upward, the function has a minimum value, and if it opens downward, the function has a maximum value.}
+\end{te-addendum}
+% Source page 63: 92 Understand & Apply
+\begin{example}{2}
+\textbf{Understand the Process of Completing the Square}
+CONCEPTUAL UNDERSTANDING
+How can you complete the square to write an expression as a perfect square?
+A. How can you rewrite the expression (x^2+bx) in the form ((x+p)^2)?
+Not every quadratic expression is a perfect square trinomial. Completing the square is the process of finding the constant to add to (x^2+bx) to create a perfect square trinomial.
+The model below depicts the process of completing the square.
+\placeholder{diagram}{Three stages connected by right arrows. First: blue square area x squared, side x, plus peach rectangle area bx, width b, height x; callout x squared plus bx. Second: blue x by x square with two peach strips each area (b/2)x, one to the right and one below, both width b/2. Third: assembled square of side x+b/2 has an empty lower-right corner; separate green square of side b/2 fills it, labeled (b/2) squared. Callout x squared plus bx plus (b/2) squared.}
+To create a perfect square trinomial, add ((\frac{b}{2})^2) to the variable expression.
+(x^2+bx+(\frac{b}{2})^2=(x+\frac{b}{2})^2)
+\answer{(x^2+bx+(\frac{b}{2})^2=(x+\frac{b}{2})^2)}
+B. Write (x^2+8x+5=0) in the form ((x+p)^2=q).
+(x^2+8x+5=0)
+(x^2+8x=-5)
+(x^2+8x+16=-5+16)
+((x+4)^2=11)
+\te{Determine the constant needed to complete the square: ((\frac{b}{2})^2=(\frac{8}{2})^2=16).}
+The equation (x^2+8x+5=0) can be rewritten as ((x+4)^2=11).
+\answer{((x+4)^2=11)}
+\te{STUDY TIP Recall that you must keep the equation balanced. Any value that is added to one side of the equation must be added to the other side.}
+\end{example}
+\begin{tryit}{2}
+How can you write the equation (x^2-6x-11=0) in the form ((x-p)^2=q)?
+\answer{((x-3)^2=20)}
+\end{tryit}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Build Procedural Fluency from Conceptual Understanding ETP}
+Q: How does the diagram help you visualize completing the square?
+\answer{Using geometric representations of each term, you can see how the small green square that represents ((\frac{b}{2})^2) completes the larger square.}
+Q: Why is 16 added to each side of the equation?
+\answer{It is the constant needed to be able to write (x^2+8x) as a perfect square trinomial. It must be added to each side of the equation to maintain equality.}
+Q: How can you tell if you have correctly written the expression in factored form?
+\answer{You can expand ((x+4)(x+4)) and see that it is equivalent to (x^2+8x+16).}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Solve a Quadratic Equation by Completing the Square}
+How can you solve (0=x^2-2x+3) by completing the square?
+(0=x^2-2x+3)
+(-3=x^2-2x)
+(-3+1=x^2-2x+1)
+(-2=(x-1)^2)
+(\pm i\sqrt{2}=x-1)
+(1\pm i\sqrt{2}=x)
+\te{Add ((\frac{-2}{2})^2=1) to both sides of the equation. Write the right side of the equation as a perfect square.}
+The solutions of (0=x^2-2x+3) are (x=1+i\sqrt{2}) and (x=1-i\sqrt{2}).
+\answer{(x=1+i\sqrt{2}) and (x=1-i\sqrt{2}).}
+\te{HAVE A GROWTH MINDSET In what ways can you be inquisitive and open to learning new things?}
+\end{example}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How do you know that you need to complete the square to solve the equation?
+\answer{The quadratic expression is not a perfect square trinomial.}
+Q: How could you check to make sure you completed the square correctly?
+\answer{Check the solution in the original equation.}
+Q: What types of solutions does this equation have? Explain.
+\answer{The solutions are complex because the square root of a negative number is imaginary.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 2 Have students make a notecard with the steps for completing the square. Ask them to follow each step to write the following equations in the form ((x+p)^2=q).
+\item (x^2+6x=-10)
+\item (x^2+4x+12=0)
+Q: How do the equations compare?
+\answer{One less step is needed to rewrite the first one because the variable expression is already by itself on the left side of the equation.}
+Q: When following the process of completing the square, how can you ensure that you have written an equation that is equivalent to the original equation?
+\answer{When you add ((\frac{b}{2})^2) to one side of the equation, make sure you also add it to the other side.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 3 Have students practice the process of solving a quadratic equation by completing the square on an equation that contains rational numbers.
+\item (x^2-\frac{2}{3}x-\frac{1}{3}=0)
+Q: How is the process of completing the square in this example similar to the process used in Example 3? How is it different?
+\answer{The process is the same in both cases: you find the value ((\frac{b}{2})^2) and add it to each side of the equation. In this equation, you must also remember that, to square a fraction, you square both the numerator and the denominator.}
+Q: What is the solution?
+\answer{(x=1), (x=-\frac{1}{3})}
+\end{te-addendum}
+% Source page 64: 93 Understand & Apply
+\begin{tryit}{3}
+Solve the following equations by completing the square.
+a. (0=x^2+4x+8)
+b. (0=x^2-8x+17)
+\answer{a. (-2\pm2i)\quad b. (4\pm i)}
+\end{tryit}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{Reason} Use with EXAMPLES 2 \& 3
+Q: Richard is completing the square to solve the equation (2x^2+8x=19). He wrote: (2(x^2+4x+4)=19+\underline{\hspace{1em}}). What number should Richard write in the blank?
+\answer{8}
+\end{te-addendum}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Have a Growth Mindset: Be Open to Learning New Things}
+Be curious and open to learning something new. Ask: In what ways can you be open to new things? How can you find opportunities to try new things?
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Complete the Square to Solve a Real-World Problem}
+APPLICATION
+A rancher plans to create a rectangular pasturing enclosure. She has 340 m of fencing available for the enclosure's perimeter and wants it to have an area of 6,000 (m^2). What dimensions should the rancher use?
+\placeholder{illustration}{Green rectangular horse pasture enclosed by wooden fencing; a horse inside. Double-ended black dimension arrows label adjacent front sides w and ell.}
+Formulate
+Let (\ell) and w represent the length and width of the enclosure.
+The perimeter is (2\ell+2w=340), so:
+(2w=340-2\ell)
+(w=170-\ell)
+The rancher wants the area to be 6,000 (m^2). Write this as an equation:
+(A=\ell w)
+(6,000=\ell(170-\ell))
+\te{Substitute for A and w.}
+Compute
+(6,000=170\ell-\ell^2)
+(\ell^2-170\ell=-6,000)
+(\ell^2-170\ell+7,225=-6,000+7,225)
+\te{Find the number to complete the square: (\frac{-170}{2}=-85) and ((-85)^2=7,225).}
+((\ell-85)^2=1,225)
+(\ell-85=\pm35)
+(\ell=85\pm35)
+(\ell=120\text{ or }\ell=50)
+Interpret
+When (\ell=120), then (w=170-120), or 50.
+When (\ell=50), then (w=170-50), or 120.
+In each case, there is (2(120)+2(50)), or 340 m, of fencing used.
+Likewise, the area is ((120)(50)), or 6,000 (m^2).
+The rancher should make two sides of the enclosure 120 m long and the other two sides 50 m long.
+\answer{Two sides 120 m long and the other two sides 50 m long.}
+\end{example}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How are the formulas for the perimeter and the area of a rectangle related?
+\answer{They are both written in terms of the length and the width of the rectangle.}
+Q: Could the formula for perimeter have been solved for (\ell) rather than for w?
+\answer{Yes; the final answer would be the same whether the width is expressed in terms of the length or the length is expressed in terms of the width.}
+Q: Why are there two values for the length of the pen?
+\answer{There is a positive and negative value of the square root, so there are two solutions, or possible lengths.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 2)
+SPEAKING BEGINNING To complete something means to finish it or make it whole. Give students some algebra blocks (or building blocks) and have them take turns showing and explaining how to complete a square.
+Q: How do you know if the square is complete?
+\answer{Its length and width are equal.}
+Q: What is being done in the picture to make the length and width equal?
+\answer{The bx section is split in half, and one of the halves is moved to the bottom to make the length and width both equal to (x+\frac{b}{2}).}
+Q: What piece is missing to complete the square?
+\answer{the ((\frac{b}{2})^2) section in the bottom right corner}
+WRITING DEVELOPING Have students consider the following questions about squares and perfect squares and write their responses in their math journals.
+Q: How is a square in geometry related to a square in algebra?
+\answer{In geometry, a square is a shape with equal side lengths. To find the area, you multiply the length of a side s by itself. In algebra, that is written as (s^2).}
+Q: What does perfect mean?
+\answer{without flaw, excellent, ideal, complete}
+Q: How would you describe a perfect square trinomial?
+\answer{a trinomial whose first and last terms are perfect squares that can be rewritten as a binomial squared}
+READING EXPANDING Have students read the written instruction beside the mathematical steps in Part A. Talk about the words variable and constant.
+Q: What does the word variable mean? What is a variable in math?
+\answer{changing; an unknown amount}
+Q: The word variable is used as an adjective here describing an expression. Does it mean a changing expression? Explain.
+\answer{No; it means an expression that contains a variable. The variable itself is what can change.}
+Q: What does the word constant mean? What is a constant in math?
+\answer{the same or unchanging; a known quantity that does not change}
+\end{te-addendum}
+% Source page 65: 94 Understand & Apply
+\begin{tryit}{4}
+The relationship between the time since a ball was thrown and its height can be modeled by the equation (h=32t-16t^2+4), where h is the height of the ball after t seconds. Complete the square to find how long it will take the ball to reach a height of 20 ft.
+\answer{The ball will reach a height of 20 ft after 1 second.}
+\end{tryit}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error}
+Try It! 4 Students may not factor out the 16 before completing the square. Have students check their work by squaring their result and verifying that it matches the initial equation.
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Write a Quadratic Equation in Vertex Form}
+Write the equation (y=-2x^2+10x+1) in vertex form and graph it. What is the maximum or minimum value of the graph of the equation?
+(y=-2x^2+10x+1)
+(y-1=-2x^2+10x)
+(y-1=-2(x^2-5x))
+\te{Factor out the (x^2) coefficient, (-2). To complete the square, a must equal 1.}
+(y-1-(2)(6.25)=-2(x^2-5x+6.25))
+(y-13.5=-2(x-2.5)^2)
+(y=-2(x-2.5)^2+13.5)
+\placeholder{graph}{Black x- and y-axes with arrowheads and origin O. Window x=-2 to 6, y=-7.5 to 15; grid intervals x=1, y=2.5, labels x=2,4 and y=-5,5,10. Orange parabola y=-2(x-2.5) squared+13.5 opens downward with arrowheads on both lower ends; vertex (2.5,13.5), y-intercept 1. Callout: The vertex of the parabola is (2.5,13.5).}
+The graph of this equation is a parabola that opens downward, so it has a maximum of (y=13.5), at (x=2.5).
+\answer{(y=-2(x-2.5)^2+13.5); maximum of (y=13.5), at (x=2.5).}
+\te{COMMON ERROR You may think that you have to add 6.25 to both sides; on the right side, 6.25 was added with (-2) already factored out. So add (-2(6.25)), or (-12.5), to the left side of the equation.}
+\end{example}
+\begin{tryit}{5}
+Write each equation in vertex form. Identify the maximum or minimum value of the graph of each equation.
+a. (y=-3x^2-9x+7)
+b. (y=2x^2+12x+9)
+\answer{a. (y=-3(x+\frac{3}{2})^2+13.75); maximum is 13.75 when (x=-\frac{3}{2}). b. (y=2(x+3)^2-9); minimum is (-9) when (x=-3).}
+\end{tryit}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How do you know if the function will have a minimum or maximum value?
+\answer{Since the coefficient of (x^2) is negative, the parabola opens downward and has a maximum value.}
+Q: Why was (2(6.25)) subtracted from the left side?
+\answer{Because there was a factor of (-2) distributed to the 6.25 on the right side, that same product had to be added to the left side. Because the product is negative, it looks like subtraction.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How is solving an equation by completing the square different than writing a function in vertex form?
+\answer{When solving an equation by completing the square, there is only one variable in the equation, x. The final result is the value or values of x for which the equation is true. The same process is followed to write an equation in vertex form, but the equation has two variables, x and y. The final result is an expression equal to y that represents the equation of a parabola.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{Make Sense and Persevere} Use with EXAMPLES 4 \& 5
+Q: A pelican swoops down under the surface of the ocean to catch a fish. An equation that describes the pelican's path is (y=4x^2-16x+15). The pelican catches the fish at the deepest point of the dive. How deep was the fish swimming?
+\answer{1 unit below the surface}
+\end{te-addendum}
+% Source page 66: 95 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Key Features of Completing the Square}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+Q: Why do you have to add something to each side of the equation to complete the square?
+\answer{A value is added to make the quadratic expression a perfect square trinomial. In order to maintain equality, it must be added to each side of the equation.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 6 Students may try to complete the square without first factoring out the coefficient of (x^2). For all problems, before completing the square, have students circle the coefficient of (x^2) to remind them to factor out the coefficient if it is not 1.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Key Features of Completing the Square}
+GEOMETRIC MODEL The rectangles showing (x^2+10x) are arranged into a square.
+\placeholder{diagram}{Left rectangle: blue square area x squared, side x, plus two adjacent peach vertical strips each area 5x and width 5, their combined width labeled 10. Right rearrangement: blue x squared square at lower left, peach 5x strip above and to right, green upper-right corner labeled ?. Total horizontal and vertical sides labeled x+5. Callout: The green section represents the part of the square that has to be added in order to complete the square.}
+The square has side length (x+5), so the number needed to complete the square is 25.
+ALGEBRAIC MODEL The number needed to complete the square is half the coefficient of the middle term, squared: the middle term coefficient is 10, half of 10 is 5, and (5^2=25).
+To solve (x^2+10x=3), add 25 to both sides of the equation, take the square root of both sides and solve for x:
+(x^2+10x+25=3+25)
+((x+5)^2=28)
+(x+5=\pm2\sqrt{7})
+(x=-5\pm2\sqrt{7})
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you solve a quadratic equation by completing the square?
+\answer{Completing the square is used to rewrite a quadratic equation to make it easier to solve. Once the quadratic is a perfect square form, you can solve it by taking the square root of each side of the equation and then isolating the variable}
+2. Error Analysis Khalan said that only quadratic equations with leading coefficients of 1 can be solved by completing the square. Is Khalan correct? Explain.
+\answer{No, if the leading coefficient is a number other than one, you can factor it out and then continue with completing the square.}
+3. Generalize Given the expression (x^2+bx), describe how to find c so that (x^2+bx+c) is a perfect square trinomial.
+\answer{Find half of b, then square that result.}
+4. Make Sense and Persevere How can you complete the square to find the vertex of a parabola?
+\answer{Use completing the square to write the quadratic in vertex form, (y=a(x-h)^2+k), in order to determine the vertex (h,k).}
+\textbf{Do You KNOW HOW?}
+Solve each equation by completing the square.
+5. (0=x^2+12x+11)
+\answer{(-1), (-11)}
+6. (27=3x^2+12x)
+\answer{(-2+\sqrt{13}), (-2-\sqrt{13})}
+7. (0=2x^2+6x-14)
+\answer{(\frac{-3+\sqrt{37}}{2}), (\frac{-3-\sqrt{37}}{2})}
+Write the equation in vertex form, and identify the maximum or minimum value of the graph of the function.
+8. (y=x^2+6x-6)
+\answer{(y=(x+3)^2-15); the minimum is (y=-15) when (x=-3)}
+9. (y=-2x^2+20x-42)
+\answer{(y=-2(x-5)^2+8); the maximum is (y=8) when (x=5)}
+10. The daily profit, P, for a company is modeled by the function (P(x)=-0.5x^2+40x-300), where x is the number of units sold. How many units does the company need to sell each day to maximize profits?
+\answer{40 units}
+\end{concept-summary}
+% Source page 67: 96 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+11, 12, 15, 18--54 & 11--17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41--43, 45, 47--54 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 18--23 & 1 \\
+2 & 24--29 & 1 \\
+2 & 13 & 2 \\
+2 & 14, 15 & 3 \\
+3 & 30--41, 52 & 1 \\
+3 & 11, 12 & 2 \\
+3 & 16 & 3 \\
+4 & 42 & 2 \\
+4 & 54 & 3 \\
+5 & 43--48, \te{52} & 1 \\
+5 & 17, 49--51 & 2 \\
+\bottomrule
+\end{tabular}
+\te{The printed table lists item 52 under both Examples 3 and 5, each DOK 1. The second occurrence is retained as a teacher annotation to avoid a duplicate parser assignment. Item 53 is absent from the printed table.}
+\end{item-analysis}
+\begin{practice}{11}{2}
+UNDERSTAND. Use Appropriate Tools How could you use a graphing calculator to determine whether you have correctly solved a quadratic equation by completing the square?
+\answer{You can compare the zeros of the graph to the solutions that you calculated and, because completing the square rearranges the equation to vertex form, you can also compare the vertices.}
+\end{practice}
+\begin{practice}{12}{2}
+UNDERSTAND. Error Analysis Describe and correct the error a student made in solving a quadratic equation by completing the square.
+(0=x^2+16x-5)
+(5=x^2+16x+64)
+(5=(x+8)^2)
+(x=-8\pm\sqrt{5})
+\te{Student work marked with a red X.}
+\answer{The student did not add the value for completing the square, 64, to both sides of the equation.}
+\end{practice}
+\begin{practice}{13}{2}
+UNDERSTAND. Higher Order Thinking What number do you need to add to (x^2+\frac{7}{2}x) in order to create a perfect square trinomial? Explain.
+\answer{(\frac{49}{16}); Half of (\frac{7}{2}) is (\frac{7}{4}), and ((\frac{7}{4})^2=\frac{49}{16}).}
+\end{practice}
+\begin{practice}{14}{3}
+UNDERSTAND. Reason Does the geometric model hold for finding the number that completes the square of the expression (x^2-12x)? Explain.
+\answer{No; you cannot geometrically depict negative values or subtracted values.}
+\end{practice}
+\begin{practice}{15}{3}
+UNDERSTAND. Error Analysis When given the equation (-23=x^2+8x), a student says that you can add 64 to each side of the equation to complete the square. Is the student correct? If not, describe and correct the error.
+\answer{The student forgot to divide the b-term by 2 before squaring it. He or she should have added 16 to each side of the equation to complete the square.}
+\end{practice}
+\begin{practice}{16}{3}
+UNDERSTAND. Construct Arguments Explain why you should not try to complete the square when solving (0=x^2-4).
+\answer{There is already a ``complete'' square in the equation, namely (x^2). There is no need to complete the square. Add 4 to each side, then take the square root of each side.}
+\end{practice}
+\begin{practice}{17}{2}
+UNDERSTAND. Use Structure Jacob completed the square to rewrite the equation (f(x)=-2x^2+12x-13) as (f(x)=-2(x-3)^2+5). Which form of the equation is more helpful for identifying the key features of the graph? Explain.
+\answer{Answers may vary. Sample: The vertex form of the equation is more helpful because you can immediately identify the vertex of the graph.}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Use square roots to solve the quadratic equations. SEE EXAMPLE 1
+(9=x^2+2x+1)
+\answer{2, (-4)}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. Use square roots to solve the quadratic equations. SEE EXAMPLE 1
+(16=x^2-10x+25)
+\answer{1, 9}
+\end{practice}
+\begin{practice}{20}{1}
+PRACTICE. Use square roots to solve the quadratic equations. SEE EXAMPLE 1
+(50=2x^2+16x+32)
+\answer{(-9), 1}
+\end{practice}
+\begin{practice}{21}{1}
+PRACTICE. Use square roots to solve the quadratic equations. SEE EXAMPLE 1
+(5=3x^2-36x+108)
+\answer{(6\pm\sqrt{\frac{5}{3}})}
+\end{practice}
+\begin{practice}{22}{1}
+PRACTICE. Use square roots to solve the quadratic equations. SEE EXAMPLE 1
+(7=x^2+4x+4)
+\answer{(-2\pm\sqrt{7})}
+\end{practice}
+\begin{practice}{23}{1}
+PRACTICE. Use square roots to solve the quadratic equations. SEE EXAMPLE 1
+(-4=x^2+14x+49)
+\answer{(-7\pm2i)}
+\end{practice}
+\begin{practice}{24}{1}
+PRACTICE. Rewrite the equations in the form ((x-p)^2=q). SEE EXAMPLE 2
+(0=x^2-18x+64)
+\answer{((x-9)^2=17)}
+\end{practice}
+\begin{practice}{25}{1}
+PRACTICE. Rewrite the equations in the form ((x-p)^2=q). SEE EXAMPLE 2
+(x^2+22x+120.5=0)
+\answer{((x+11)^2=0.5)}
+\end{practice}
+\begin{practice}{26}{1}
+PRACTICE. Rewrite the equations in the form ((x-p)^2=q). SEE EXAMPLE 2
+(x^2+3x-\frac{27}{4}=0)
+\answer{((x+\frac{3}{2})^2=9)}
+\end{practice}
+\begin{practice}{27}{1}
+PRACTICE. Rewrite the equations in the form ((x-p)^2=q). SEE EXAMPLE 2
+(0=4x^2+4x-14)
+\answer{((x+\frac{1}{2})^2=\frac{15}{4})}
+\end{practice}
+\begin{practice}{28}{1}
+PRACTICE. Rewrite the equations in the form ((x-p)^2=q). SEE EXAMPLE 2
+(0=x^2-\frac{3}{2}x-\frac{70}{8})
+\answer{((x-\frac{3}{4})^2=\frac{149}{16})}
+\end{practice}
+\begin{practice}{29}{1}
+PRACTICE. Rewrite the equations in the form ((x-p)^2=q). SEE EXAMPLE 2
+(x^2+0.6x-19.1=0)
+\answer{((x+0.3)^2=19.19)}
+\end{practice}
+\begin{practice}{30}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(x^2+8x+60=0)
+\answer{(-4\pm2i\sqrt{11})}
+\end{practice}
+\begin{practice}{31}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(x^2+14x=51)
+\answer{(-17), 3}
+\end{practice}
+\begin{practice}{32}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(4x^2+16x-65=0)
+\answer{(-6.5), 2.5}
+\end{practice}
+\begin{practice}{33}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(7x^2+56x-22=0)
+\answer{(-4\pm\sqrt{\frac{134}{7}})}
+\end{practice}
+\begin{practice}{34}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(3x^2-6x+13=0)
+\answer{(1\pm i\sqrt{\frac{10}{3}})}
+\end{practice}
+\begin{practice}{35}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(x^2-0.4x-1.2=0)
+\answer{(0.2\pm\sqrt{1.24})}
+\end{practice}
+\begin{practice}{36}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(x^2+6x=59)
+\answer{(-3\pm2\sqrt{17})}
+\end{practice}
+\begin{practice}{37}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(8x^2+16x=42)
+\answer{(-\frac{7}{2}), (\frac{3}{2})}
+\end{practice}
+\begin{practice}{38}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(5x^2-25=10x)
+\answer{(1\pm\sqrt{6})}
+\end{practice}
+\begin{practice}{39}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(-2x^2-12x+18=0)
+\answer{(-3\pm3\sqrt{2})}
+\end{practice}
+\begin{practice}{40}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(-3x^2-24x-19=0)
+\answer{(-4\pm\sqrt{\frac{29}{3}})}
+\end{practice}
+\begin{practice}{41}{1}
+PRACTICE. Solve the following quadratic equations by completing the square. SEE EXAMPLES 3 AND 4
+(17-x^2-18x=0)
+\answer{(-9\pm7\sqrt{2})}
+\end{practice}
+\begin{practice}{42}{2}
+PRACTICE. What is the length and width of the skate park?
+\placeholder{illustration}{Rectangular skate park in perspective with yellow ramps, rails, and several skaters. Callout 1,029.1 square feet area; boundary marked with black directional arrows and labeled 141.4 ft perimeter.}
+\answer{50.2 ft and 20.5 ft}
+\end{practice}
+\begin{practice}{43}{1}
+PRACTICE. Write the equation in vertex form. Identify the maximum or minimum value of the graph of the equation. SEE EXAMPLE 5
+(y=x^2+4x-13)
+\answer{(y=(x+2)^2-17); minimum (= -17)}
+\end{practice}
+\begin{practice}{44}{1}
+PRACTICE. Write the equation in vertex form. Identify the maximum or minimum value of the graph of the equation. SEE EXAMPLE 5
+(y=x^2-14x+71)
+\answer{(y=(x-7)^2+22); minimum (=22)}
+\end{practice}
+\begin{practice}{45}{1}
+PRACTICE. Write the equation in vertex form. Identify the maximum or minimum value of the graph of the equation. SEE EXAMPLE 5
+(y=-2x^2-20x-58)
+\answer{(y=-2(x+5)^2-8); maximum (=-8)}
+\end{practice}
+\begin{practice}{46}{1}
+PRACTICE. Write the equation in vertex form. Identify the maximum or minimum value of the graph of the equation. SEE EXAMPLE 5
+(y=-3x^2+36x-93)
+\answer{(y=-3(x-6)^2+15); maximum (=15)}
+\end{practice}
+\begin{practice}{47}{1}
+PRACTICE. Write the equation in vertex form. Identify the maximum or minimum value of the graph of the equation. SEE EXAMPLE 5
+(y=6x^2-42x+74.5)
+\answer{(y=6(x-3.5)^2+1); minimum (=1)}
+\end{practice}
+\begin{practice}{48}{1}
+PRACTICE. Write the equation in vertex form. Identify the maximum or minimum value of the graph of the equation. SEE EXAMPLE 5
+(y=0.5x^2+0.5x+2.125)
+\answer{(y=0.5(x+0.5)^2+2); minimum (=2)}
+\end{practice}
+% Source page 68: 97 Practice & Problem Solving
+\begin{practice}{49}{2}
+APPLY. Make Sense and Persevere Keenan launches a model helicopter. The height of the helicopter is given in feet and t is the time in seconds. To the nearest hundredth, how many seconds will it take the helicopter to be five feet above the ground? What is the maximum height of the helicopter?
+\placeholder{illustration}{Keenan in a green field holding a remote control, flying a yellow model helicopter; equation callout h(t)=-0.05t squared+2.4t.}
+(h(t)=-0.05t^2+2.4t)
+\answer{about 2.18 seconds and 45.82 seconds; 28.8 feet}
+\end{practice}
+\begin{practice}{50}{2}
+APPLY. Use Structure The decreasing population, p, of owls in a national park is being monitored by ecologists and is modeled by the equation (p=-0.4t^2+128t+1,200), where t is the number of months since the ecologists started observing the owls.
+a. If this model is accurate, when will the population reach its maximum?
+\answer{160 months}
+b. What is the maximum population? Round to the nearest whole number.
+\answer{11,440 owls}
+c. Use the equation to determine in how many months the population of owls will disappear.
+\answer{329.1 months}
+\te{Printed description says decreasing population; the stated model initially increases until month 160.}
+\end{practice}
+\begin{practice}{51}{2}
+APPLY. Make Sense and Persevere Between 2000 and 2005, the number of skateboarders s in the United States, in millions, can be approximated by the equation (s=0.33t^2+2.27t+3.96), where t represents the number of years since 2000. If this model is accurate, in what year did 9.8 million people skateboard?
+\answer{2002}
+\end{practice}
+\begin{practice}{52}{1}
+ASSESSMENT PRACTICE. The roots of (f(x)=-2x^2+8x+13) are \underline{\hspace{2em}} and \underline{\hspace{2em}}. The vertex of the parabola is at \underline{\hspace{2em}}.
+\answer{(-1.24), 5.24, (2,21)}
+\end{practice}
+\begin{practice}{53}{1}
+ASSESSMENT PRACTICE. SAT/ACT Solve (x^2+2x-5=0).
+A. (-5), 1
+B. (-1\pm\sqrt{5})
+C. (-1\pm\sqrt{6})
+D. (1\pm\sqrt{5})
+E. (-3), 1
+\answer{C}
+\te{DOK \uncertain{1}{not printed; item omitted from Item Analysis}.}
+\end{practice}
+\begin{practice}{54}{3}
+ASSESSMENT PRACTICE. Performance Task Ariel wants to double the size of his patio, so he has room to build a sukkah for the Jewish festival celebrating the harvest. He has a rectangular shaped patio and he want to increase the length and the width by the same amount.
+\placeholder{illustration}{Top view of a rectangular brick patio with a round table, four chairs, two large shrubs and smaller potted plants. Red double-ended dimension arrows label bottom 14 ft and right side 10 ft.}
+Part A Write a function to calculate the number of feet Ariel would need to add to the length and width. Explain your reasoning.
+\answer{(x^2+24x+140=280); Let x represent the number of feet to add to the length and width. The new dimensions and the new area can be represented as ((14+x)(10+x)=2(10)(14)). Expand to determine the function.}
+Part B To the nearest hundredth, what are the new dimensions of the patio?
+\answer{18.85 ft by 14.85 ft}
+\end{practice}
+% Source page 69: 97A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & A30 \\
+2 & 2 & A30 \\
+3 & 2 & A30 \\
+4 & 2 & A30 \\
+5 & 2 & A30 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+Lesson Quiz is available at SavvasRealize.com.
+ASSESSMENT RESOURCES
+\textbf{2-5 Lesson Quiz: Completing the Square}
+Name \underline{\hspace{4em}}
+1. Solve (x^2-18x+81=4) by completing the square. Select all solutions that apply.
+A. (x=-11)
+B. (x=-7)
+C. (x=7)
+D. (x=11)
+E. (x=0)
+\answer{C, D}
+2. Write the equation (x^2+24x+60=0) in the form ((x+p)^2=q).
+A. ((x+12)^2=-60)
+B. ((x+12)^2=84)
+C. ((x+12)^2=204)
+D. ((x+6)^2=-24)
+\answer{B}
+3. Solve (0=x^2+6x+13) by completing the square.
+A. (x=5) and (x=1)
+B. (x=3+i\sqrt{22}) and (x=3-i\sqrt{22})
+C. (x=-1) and (x=1)
+D. (x=-3+2i) and (x=-3-2i)
+\answer{D}
+4. The perimeter of a rectangular baking sheet is 58 inches and its area is 201.25 (in.^2). What are the length and width of the baking sheet?
+A. length 17.5 in., width 11.5 in.
+B. length 83.3 in., width 17.3 in.
+C. length 14.2 in., width 14.2 in.
+D. length 50.3 in., width 50.3 in.
+\answer{A}
+5. Find the zeros of the function (f(x)=-5x^2+4x-1) by completing the square.
+(x=\boxed{\phantom{0}}+\boxed{\phantom{0}}i\text{ and }x=\boxed{\phantom{0}}-\boxed{\phantom{0}}i)
+\answer{(x=\frac{2}{5}+\frac{1}{5}i) and (x=\frac{2}{5}-\frac{1}{5}i)}
+\end{te-addendum}
+% Source page 70: 97B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+\textbf{Reteach to Build Understanding} I
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School
+\textbf{2-5 Reteach to Build Understanding: Completing the Square}
+Name \underline{\hspace{4em}}
+1. Solve the equation (x^2-6x=-5) by completing the square.
+Step 1: Add ((\frac{-6}{2})^2) to each side of the equation.
+(x^2-6x+9=-5+9)
+Step 2: Factor the perfect square trinomial on the left side.
+((x-3)^2=4)
+Step 3: Solve for x.
+(x-3=\pm2)
+(x-3=2\text{ or }x-3=-2)
+(x=5\text{ or }x=1)
+\answer{Blanks: (-6), 9, 9, 3, 5, 1.}
+2. Solve the equation (x^2+4x=12) by completing the square.
+Step 1: Add ((\frac{4}{2})^2) to each side of the equation.
+(x^2+4x+4=12+4)
+Step 2: Factor the perfect square trinomial on the left side.
+((x-2)^2=16)
+Step 3: Solve for x.
+(x+2=\pm4)
+(x+2=4\text{ or }x+2=-4)
+(x=2\text{ or }x=-6)
+\answer{Blanks: 4, 4, 4, 2, 2, (-6).}
+\te{Printed Step 2 uses ((x-2)^2=16); likely ((x+2)^2=16), consistent with Step 3.}
+3. Aisha completed the square. But she made a mistake. What mistake did she make? What is the correct solution?
+(x^2+16x=-15)
+(x^2+16x+64=-15-64)
+(x^2+16x+64=-79)
+((x+8)^2=-79)
+(x+8=\pm\sqrt{-79})
+There are no real solutions.
+\answer{Aisha added 64 to one side, and subtracted 64 from the other.
+(x^2+16x+64=-15+64)
+(x^2+16x+64=49)
+((x+8)^2=49)
+(x+8=\pm\sqrt{49})
+(x+8=7\text{ and }x+8=-7)
+(x=-15,-1)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice} I O
+Provides extra practice for each lesson.
+MathXL for School
+\textbf{2-5 Additional Practice: Completing the Square}
+Name \underline{\hspace{4em}}
+Solve each equation by first finding the principal square root of each side.
+1. (x^2+12x+36=25)
+\answer{(x=-11), (x=-1)}
+2. (x^2-10x+25=144)
+\answer{(x=17), (x=-7)}
+3. (x^2+6x+9=\frac{49}{4})
+\answer{(x=\frac{1}{2}), (x=-\frac{13}{2})}
+4. (x^2-22x+121=225)
+\answer{(x=-4), (x=26)}
+Rewrite each equation in the form ((x-p)^2=q).
+5. (x^2+4x+3=0)
+\answer{((x+2)^2=1)}
+6. (x^2-6x+13=0)
+\answer{((x-3)^2=-4)}
+Solve each quadratic equation by completing the square.
+7. (x^2+10x-1=0)
+\answer{(x=-5\pm\sqrt{26})}
+8. (x^2+2x-7=0)
+\answer{(x=-1\pm2\sqrt{2})}
+9. (-x^2+6x+10=0)
+\answer{(x=3\pm\sqrt{19})}
+10. (x^2+5x=3x+11)
+\answer{(x=-1\pm2\sqrt{3})}
+Write each equation in vertex form.
+11. (y=x^2-6x+4)
+\answer{(y=(x-3)^2-5)}
+12. (y=x^2+14x+50)
+\answer{(y=(x+7)^2+1)}
+13. (y=3x^2+8x+2)
+\answer{(y=3(x+\frac{4}{3})^2-\frac{10}{3})}
+14. (y=-2x^2+6x-2)
+\answer{(y=-2(x-\frac{3}{2})^2+\frac{5}{2})}
+15. The quadratic equation (d=-t^2+4t+33) models the depth of water, d, in feet in a flood channel t hours after a rainstorm.
+a. Solve the equation (-t^2+4t+33=0).
+\answer{(t=2\pm\sqrt{37})}
+b. Approximate the positive solution found in part (a) to two decimal places.
+\answer{8.08}
+c. Interpret the answer to part (b) in terms of the problem.
+\answer{The depth of the water is 0 feet 8.08 hours after the rainstorm.}
+16. While in orbit, a space scientist measures the pressure inside a container as it is being heated and then cooled. She records the information and discovers the pressure, p, in pounds per square inch, is related to the time, t, in minutes after the experiment began according to the equation (p=-0.2t^2+1.6t). After how many seconds is the pressure in the container the greatest?
+\answer{After 4 seconds}
+\te{Printed t is measured in minutes, but the question and answer say seconds. The vertex occurs at t=4 minutes.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment} O A
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School
+\textbf{2-5 Enrichment: Completing the Square}
+Name \underline{\hspace{4em}}
+The city needs to reconfigure an empty lot that measures 140 ft wide by 322 ft long, into two parks, one on either side of a road that leads to the new community center. The road will divide the lot into two parks of equal size.
+The city has hired you to be the civic engineer.
+Create a plan for the vacant lot.
+\placeholder{diagram}{Horizontal empty rectangle, left vertical dimension 140 ft, bottom horizontal dimension 322 ft.}
+Each park should be a perfect square with area 19,600 (ft^2). Landscaped sections with a width of 15 ft will run along the top and one side of each park.
+1. Label the dimensions of the parts of each lot. Assign variables to unknown dimensions.
+\placeholder{diagram}{Answer plan: two square parks separated by a narrow vertical rectangular road. Each park has an L-shaped border along top and side nearest road. Pink dimension labels 15 feet on top-border width and side-border width, x feet on the unlandscaped square's two sides; road bottom width y feet.}
+\answer{Each landscaped strip is 15 ft wide; non-landscaped sides x ft; road width y ft.}
+The city needs the new dimensions written in the form of a perfect square trinomial.
+2. Write the area of one of the parks as a perfect square trinomial.
+\answer{(x^2+30x+225)}
+3. Use the perfect square trinomial to write an equation that you can use to find the length of a side of the park.
+\answer{(x^2+30x+225=19,600)}
+4. What are the dimensions of the non-landscaped section of each park?
+\answer{125 ft by 125 ft}
+5. What are the dimensions of the entire park?
+\answer{140 ft by 140 ft}
+6. Write and solve an equation to find the dimensions of the road.
+\answer{(y+2(140)=322); (y=42); 42 ft wide by 140 ft long}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I O
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{2-5 Mathematical Literacy and Vocabulary: Completing the Square}
+Name \underline{\hspace{4em}}
+Creating a perfect square trinomial, (x^2+bx+c), allows you to solve quadratic functions.
+\textbf{Problem}
+Solve the quadratic function (x^2+12x=-11) by completing the square.
+\begin{tabular}{ll}
+(x^2+12x=-11) & The expression is binomial form: (x^2+bx). \\
+(\frac{12}{2}=(6)^2=36) & Find the needed value to create the perfect trinomial and complete the square. \\
+(x^2+12x+36=-11+36) & Add ((\frac{b}{2})^2) to both sides of the equation. \\
+(x^2+12x+36=25) & Now the expression is (x^2+bx+(\frac{b}{2})^2). \\
+\end{tabular}
+This is the perfect square trinomial form.
+\begin{tabular}{ll}
+((x+6)^2=25) & Factor the trinomial. \\
+(x-6=5\text{ and }x+6=5) & Take the square root of both sides. Remember to use addition and subtraction to solve. \\
+(x=11\text{ and }x=-1) & Solve. \\
+\end{tabular}
+\te{Printed (12/2=(6)^2=36) omits squaring the first expression. Printed (x-6=5) and solution 11 have sign errors; the original equation has solutions -11 and -1.}
+Solve the quadratic function: (x^2+2x=15), by completing the square.
+List the rationale to the right of each step.
+\begin{tabular}{ll}
+(x^2+2=17) & The expression in binomial form: (x^2+bx). \\
+((\frac{2}{2})^2=(1)^2=1) & Find the needed value to complete the square. \\
+(x^2+2x+1=15+1) & Add ((\frac{b}{2})^2) to both sides of the equation. \\
+(x^2+2x+1=16) & Now the expression is written in perfect square trinomial form: (x^2+bx+(\frac{b}{2})^2) or (x^2+bx+c). \\
+((x+1)^2=4) & Factor the trinomial. \\
+(x-1=4\text{ and }x+1=4) & Take the square root of both sides. Remember to use addition and subtraction to solve. \\
+(x=5\text{ and }x=3) & Solve. \\
+\end{tabular}
+\answer{Printed blanks: (2/2), 1, 1; 1, 1; 1, 16; (x+1), 4; (x-1), (x+1); 5, 3. Rationale blanks: The expression in binomial form: (x^2+bx). Add ((\frac{b}{2})^2) to both sides of the equation. Factor the trinomial. Solve.}
+\te{Printed initial work is (x^2+2=17), not the stated equation (x^2+2x=15). Printed factored line has 4 instead of 16, and the negative-root step is replaced by (x-1=4), yielding printed 5 instead of -5. These inconsistencies are retained.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{graph}{Tablet screenshot: blank Cartesian grid with x and y axes, window -10 to 10 both axes, unit grid and tick labels every 2; axis arrowheads at positive ends. Prompt Solve the system of equations by graphing: y=3x+4 and y=-2x+4. Use the graphing tool to graph the system. Click to enlarge graph. Interface: Exit; Question Help; Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print; Click the graph, choose a tool in the palette and follow the instructions to create your graph; 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.}
+\te{Printed digital screenshot shows a linear system, unrelated to completing the square.}
+\end{te-addendum}
+
+\end{document}

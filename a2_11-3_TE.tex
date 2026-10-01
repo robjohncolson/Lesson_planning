@@ -1,0 +1,896 @@
+\documentclass{article}
+% Source: Topic_11_Teacher_Edition.pdf, PDF pages 34-45 (printed pages 545A-552B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 34: 545A Lesson Overview
+\begin{lesson-meta}
+lesson: 11-3
+title: Data Distributions
+standards: none printed
+practices: none printed
+objective: I can evaluate data distributions.
+
+essential question: How can you interpret the distribution of data in a data set?
+
+\textbf{VOCABULARY}
+\item normal distribution
+\item skewed distribution
+\item standard deviation
+\item symmetrical distribution
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 11-3 \\
+Title & Data Distributions \\
+Standards & none printed \\
+I CAN Objective & I can evaluate data distributions. \\
+Essential Question & How can you interpret the distribution of data in a data set? \\
+Lesson Vocabulary & normal distribution; skewed distribution; standard deviation; symmetrical distribution \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Find measures of center and spread, such as median, mean, interquartile range, and standard deviation.
+\item Compare data sets using statistical measures that are appropriate for the distribution of the data.
+Essential Understanding. A data distribution can be normal, skewed left, or skewed right. Normal distributions are described using the mean and standard deviation. For skewed distributions, median and quartiles are used to describe the data.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Understood statistics as measures that described a sample of a population.
+In this lesson, students:
+\item Use statistics such as mean, median, quartiles, and standard deviation to describe and compare data sets representing a sample of a population.
+Later in this topic, students will:
+\item Use normal distribution to explore where data values fall within a population.
+\item Use the mean and standard deviation to make predictions about data with a symmetric distribution.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that the distribution of a data set affects which statistical measures are used to describe it.
+\item Students calculate the mean and standard deviation of a data set using a spreadsheet. Then they arrange the data in ascending order and find the five-number summary.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+REVIEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+normal curve & curva normal \\
+\end{tabular}
+NEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+normal distribution & distribución normal \\
+skewed distribution & distribución sesgada \\
+standard deviation & desviación estándar \\
+symmetrical distribution & distribución simétrica \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Have students think about their understanding of the word normal as it is used in everyday life. Then discuss how it relates to the terms normal curve and normal distribution. Differentiate a normal distribution from a skewed distribution. Have students match the terms to the images.
+% FIG 34 717 630 866 770
+\placeholder{graph}{Red symmetric bell curve over unscaled horizontal and vertical axes with positive arrowheads. Blue vertical dashed line through the center and peak labeled Mean Median Mode. No numeric ticks.}
+% FIG 34 923 626 1078 770
+\placeholder{graph}{Red curve skewed right with long right tail over unscaled axes, positive arrowheads. Three blue vertical dashed lines from left to right labeled Mode at the peak, Median to its right, Mean farther right. Positive direction with rightward arrow below horizontal axis.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 34 963 811 1114 990
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS; purple glowing sphere on black.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students learn to interpret the distribution of data by calculating median, mean, interquartile range, and standard deviation. They also learn when to use each of these measures of center and spread to compare normal and skewed distributions.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively. Students make sense of quantities and their relationships when they consider the shape of a distribution to determine which measure of center is more representative of the data.
+Attend to Precision. Students use precision when finding the median and quartiles of a data set, while recognizing that in a data set with an odd number of values, the median is the middle value and is not included when finding the quartiles.
+\end{te-addendum}
+% Source page 35: 545B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students critique statements about the mean and median of a data set. This prepares students to evaluate data distributions and understand their properties.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+Critique \& Explain is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving
+Q: What do you notice about the data set?
+\answer{The values of the scores range from 6 to 16. The values of the frequencies go up to 18. The scores on the left side of the graph have higher frequencies than the scores on the right side.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics
+Q: Can you determine the number of items in the data set?
+\answer{Yes; add the frequencies for each interval.}
+Q: How is the median different from the mean?
+\answer{The median is the middle value in an ordered set of data. The mean is found by adding all values in a data set and dividing by the total number of values.}
+For Early Finishers
+Q: Draw a new histogram with a new score of 5 and a frequency of 4. Estimate the mean and median of the new data set. How do the new mean and median compare to those of the original data set?
+\answer{The mean of the new data set is less than the mean of the original data set. The median of both data sets is the same.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse
+Q: How does the histogram help you estimate the mean and median?
+\answer{By looking at the histogram, you can see that most of the data are on the left side. Of all the scores, the values between 8 and 9 have the highest frequency, so 8.5 is a good estimate of the mean. A good estimate of the median is 9 because there are many values to the left and to the right of 9.}
+\te{Printed 8.5 as a good estimate of the mean based on the modal interval; the launch key says the mean is greater than 9.}
+Q: Why might the mean and median be similar in this data set?
+\answer{The data set has a large number of values, so the mean and median are close together.}
+\te{Printed large number of values as the reason for a close mean and median; sample size alone does not ensure this.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Construct Arguments}
+Kyle thinks that the mode is the most representative measure of center for this set of data. Do you agree? Explain.
+\answer{No; the mode is not affected by the spread or distribution of the data.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Chen and Dakota were asked to estimate the mean and median of the following data set. Chen said, ``The middle value is 11. Both the mean and median are approximately 11.'' Dakota said, ``Most of the data are the left. I think the mean and median will be about 9, with the mean slightly larger.''
+\te{Printed are the left in the student preview; likely are on the left. The digital preview includes on.}
+% FIG 35 865 691 1063 805
+\placeholder{graph}{Blue histogram on a whiteboard: horizontal Score from 6 to 16 with unit interval boundaries; vertical Frequency 0 to 20 in increments of 5. Ten contiguous bars for intervals 6-7 through 15-16 have approximate heights 12,13,18,15,9,7,5,4,4,2. No axis arrows; distribution has a long right tail.}
+A. Is either Chen or Dakota correct? Explain.
+\answer{Dakota is correct, because most of the data are close to 9; however, there are a relatively large number of data values that are greater than 9 that will make the mean greater than 9.}
+B. What strategies could you use to approximate the exact mean and median?
+\answer{Write the approximate data values from the graph and see what number falls in the middle of the data set to find the median. Then find the mean by averaging all of the approximate values.}
+C. Reason Which measure of center is more representative in this case, the mean or the median? Explain.
+\answer{The median is more representative of the data, because the mean is affected more by the data being stretched out to the right.}
+% FIG 35 637 186 1152 532
+\placeholder{illustration}{Digital Critique \& Explain preview repeats Chen and Dakota's statements, histogram, and questions A-C, with answer-entry fields. Dakota's text here reads Most of the data are on the left.}
+\end{model-discuss}
+% Source page 36: 545 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning
+Review the terms mean and standard deviation, and revisit measures of center and spread. Students learn to use these measures to interpret and compare different data sets. They also learn to recognize a normal distribution and to classify a data distribution.
+Example 1 is powered by Desmos. Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Find Measures of Center and Spread: Pose Purposeful Questions, PART A}
+Q: Do you need to arrange the data in numerical order when finding the mean and standard deviation?
+\answer{No, the order of the data does not matter when calculating the mean and standard deviation. The calculations are the same.}
+Q: What does a large standard deviation mean? What does a small standard deviation mean?
+\answer{A large standard deviation means that the data points are generally spread out from the mean. A small standard deviation means that the data points are generally close to the mean.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Example 1A}
+Additional Examples are available at SavvasRealize.com.
+An electronics store has 8 computers in stock. The prices of the computers are shown.
+550, 450, 600, 625, 825, 450, 500, 525
+What are the mean and standard deviation of the data set?
+Calculate the mean and standard deviation of the data set using technology.
+\answer{(\bar{x}\approx565.6), (s\approx114.5)}
+\te{Printed s with 114.5, which is the population standard deviation; likely the symbol should be (\sigma).}
+Example 1A Have students find the mean and standard deviation of a real-world data set.
+Q: What does the mean tell you about the data set in the context of the situation?
+\answer{The mean is a representation of the average cost of the computers.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Additional Example 4}
+Use the box plot to describe the type of distribution of the data set.
+% FIG 36 985 929 1116 977
+\placeholder{graph}{Horizontal box plot below a number line with arrowheads at both ends and equally spaced labels 24,32,40,48,56,62. Orange dots at minimum 24, first quartile approximately 47, median approximately 51, third quartile approximately 58, and maximum 62. Left whisker is much longer than right; box extends from just left of 48 to just right of 56.}
+\answer{The box plot shows that the data are skewed left. The shape of the distribution is stretched much farther in the negative direction than in the positive direction.}
+\te{Printed final equally spaced tick 62 after 56; likely 64 would maintain the interval of 8.}
+Example 4 Have students describe the distribution of a data set given a box plot.
+Q: How would you describe a box plot of a positively skewed data set?
+\answer{The whisker to the right is much longer than the whisker to the left.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Find Measures of Center and Spread}
+A. What are the mean and standard deviation of the following data set?
+4, 12, 15, 9, 14, 16, 13, 6, 7, 6, 25, 3, 13, 17, 22, 4
+The mean, or average, of a data set is the sum of the values in the data set divided by the number of values in the data set. The standard deviation is a measure of how much the values in a data set vary, or deviate, from the mean. It is a measure of the variability or spread of the data.
+\te{Callout: The mean and the standard deviation are used together to measure the center and spread of the data.}
+You can use a spreadsheet to calculate the mean and standard deviation.
+\te{STUDY TIP Most technology has the ability to calculate mean and standard deviation.}
+\begin{tabular}{rrrrrrrrrrrrrrrrrrr}
+ & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R \\
+1 & & & & & & & & & & & & & & & & & & \\
+2 & 4 & 12 & 15 & 9 & 14 & 16 & 13 & 6 & 7 & 6 & 25 & 3 & 13 & 17 & 22 & 4 & Mean & 11.625 \\
+3 & & & & & & & & & & & & & & & & & SD & 6.313 \\
+4 & & & & & & & & & & & & & & & & & & \\
+\end{tabular}
+The mean is (\bar{x}\approx11.6), and the standard deviation is (\sigma\approx6.3).
+\answer{A. (\bar{x}\approx11.6); (\sigma\approx6.3).}
+% Source page 37: 546 Example 1 continued
+B. What is the five-number summary of the data set?
+The five-number summary includes the minimum value, first quartile, median, third quartile, and maximum value.
+Step 1 Rearrange the data in ascending numerical order.
+3, 4, 4, 6, 6, 7, 9, 12, 13, 13, 14, 15, 16, 17, 22, 25
+Step 2 Note the minimum and maximum values:
+(minimum=3)
+(maximum=25)
+Step 3 Calculate the median, the number in the middle of the data set. Since there are an even number of values, the median is the average of the two middle values, or 12.5.
+(\{3,4,4,\underbrace{6,6}_{\text{1st quartile}},7,9,12\}\quad\{13,13,14,\underbrace{15,16}_{\text{3rd quartile}},17,22,25\})
+\te{The values 12 and 13 on either side of the group division are blue and labeled median.}
+Step 4 Calculate the first and third quartiles. The quartiles show how the data are distributed. The first quartile is the median of the lower half of the data, 6. The third quartile is the median of the upper half of the data, 15.5.
+These data can be represented in a box-and-whisker plot. Notice that the one quartile is closer to the median than the other.
+\te{COMMON ERROR Remember that for a data set that has an odd number of values, the median is the middle value. Do not consider this value when finding the quartiles.}
+% FIG 37 873 485 1036 528
+\placeholder{graph}{Horizontal box-and-whisker plot with red dots at 3,6,12.5,15.5,25. Box from 6 to 15.5 with median line at 12.5, whiskers to 3 and 25. Number line above has arrows both ends and labels 3,5,7,9,11,13,15,17,19,21,23,25.}
+The five-number summary of this data set is: minimum = 3, 1st quartile = 6, median = 12.5, 3rd quartile = 15.5, maximum = 25
+\answer{B. minimum = 3; 1st quartile = 6; median = 12.5; 3rd quartile = 15.5; maximum = 25.}
+\end{example}
+\begin{tryit}{1}
+List the mean, standard deviation, and five-number summary of the following data set.
+3 4 9 12 12 14 15 19 25 30 32 33 34 34 35
+\answer{mean: (\approx20.73), standard deviation: (\approx11.26), median: 19, minimum: 3, maximum: 35, 1st quartile: 12, 3rd quartile: 33}
+\end{tryit}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions, PART B}
+Q: Do you need to arrange the data in numerical order when finding the median of a data set?
+\answer{Yes, you need to order the data in ascending numerical order so that you can easily identify the minimum, maximum, and median values.}
+Q: How is the median related to the first and third quartiles?
+\answer{Since the median is the middle value of the data set, it is between the first and third quartiles.}
+Q: Why can one quartile be very close to the median and the other quartile be farther from the median?
+\answer{This occurs when values in one half of the data set are closer to the median than the values in the other half.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What is the method used to find the mean of the data set?
+\answer{Add all the values of the data set and then divide the sum by the number of values in the data set.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Use Appropriate Statistics to Compare Data Sets: Pose Purposeful Questions}
+Example 2 is powered by Desmos. Examples are available at SavvasRealize.com.
+PART A
+Q: How does the range of a data set compare to the interquartile range of the same data set?
+\answer{The value of the range, which is the difference between the maximum and minimum values, is greater than the value of the interquartile range and is affected by outliers in the data set. The interquartile range is not affected by outliers in the data set because it is the difference between the first and third quartiles. The interquartile range gives information about the middle of the data set.}
+Q: How are the mean, median, and mode of a skewed data set different from those in a symmetric data set?
+\answer{In a symmetric data set, the mean, median, and mode are all about the same. In a skewed data set, the median and mode are near each other and the mean is farther away from the mode.}
+Q: Why might the mean and standard deviation be better measures to describe symmetric distributions?
+\answer{Because the mean, median, and mode are all about the same in a symmetric distribution and the spread is about the same on both sides, the mean and the standard deviation provide enough information to describe the center and the spread of the data.}
+PART B
+Q: Why would you use the median and interquartile range as the measures of center and spread when a data distribution is skewed?
+\answer{The median and interquartile range are less affected by a data distribution that is skewed. They are better representations of the center and spread of a skewed data distribution.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Use Appropriate Statistics to Compare Data Sets}
+A. How can you describe different types of distributions?
+To compare the different types of distributions, look at the shape, the center, and the spread of the distributions.
+The standard deviation, range, and the interquartile range are three measures of spread. The range of a data set is the difference between the maximum and minimum values. The interquartile range is the difference between the third quartile and the first quartile.
+\te{Callout: When measuring center and spread, median and interquartile range are used together, and mean and standard deviation are used together.}
+A skewed distribution is one with a shape that is stretched out in either the positive or negative direction. A symmetrical distribution has a shape that, when reflected across the mean, the display is roughly the same.
+\te{LEARN TOGETHER How can you respectfully disagree and manage your emotions?}
+% Source page 38: 547 Example 2 continued
+The shape of a distribution can affect the measures of center and spread and determine which measures of center and spread best describe the data.
+% FIG 38 848 267 954 384
+\placeholder{graph}{Skewed left red curve with long left tail, unscaled horizontal axis and vertical Frequency axis, positive arrowheads. Dashed blue vertical lines from left to right are Mean, Median, Mode, with Mode at peak. Leftward arrow below labeled Negative direction.}
+% FIG 38 955 267 1061 395
+\placeholder{graph}{Symmetric red bell curve with blue dashed vertical line at center and peak labeled Mean Median Mode. Unscaled axes with positive arrowheads. Caption: The graph looks the same on both sides.}
+% FIG 38 1063 267 1166 384
+\placeholder{graph}{Skewed right red curve with long right tail. Unscaled axes with positive arrowheads. Blue dashed lines left to right Mode at peak, Median, Mean. Rightward arrow below labeled Positive direction.}
+The mean, median, and mode are all about the same in a symmetric distribution. You can use the mean and the standard deviation to describe the center and spread.
+\answer{A. Compare the shape, center, and spread; use mean and standard deviation for a symmetric distribution and median and interquartile range for a skewed distribution.}
+\te{Printed statement that mean, median, and mode are all about the same for a symmetric distribution assumes the single central peak illustrated; it need not hold for every symmetric distribution.}
+B. What measures of center and spread would you use for the following data set?
+10 13 16 21 22 26 29 29 30 32 33 33 33 35 37
+You can use a histogram to determine the shape.
+% FIG 38 971 487 1150 604
+\placeholder{graph}{Green histogram. Horizontal Data Values 0 through 40, labeled every 5; vertical Frequency 0 through 6, labels every 2. Contiguous bins (5,10],(10,15],(15,20],(20,25],(25,30],(30,35],(35,40] have heights 1,1,1,2,4,5,1; no axis arrows.}
+Since the mean is more affected than the median by a data distribution that is skewed, it is better to use the median and interquartile range as the measures of center and spread. Also, the quartiles show how the data are distributed differently on either side of the center.
+The data are already in numerical order.
+(\{10\ 13\ 16\ \underbrace{21}_{\text{1st quartile}}\ 22\ 26\ 29\}\ \underbrace{29}_{\text{median}}\ \{30\ 32\ 33\ \underbrace{33}_{\text{3rd quartile}}\ 33\ 35\ 37\})
+The range is (37-10=27), and the interquartile range is (33-21=12).
+\answer{B. median 29 and interquartile range 12.}
+\te{USE APPROPRIATE TOOLS What are some other ways you can determine the shape of the distribution of these data?}
+\end{example}
+\begin{tryit}{2}
+What are the better measures of center and spread of the following data sets?
+a. 55 55 57 57 57 58 58 59 59 59 61 61
+\answer{a. mean: 58, standard deviation: (\approx1.87)}
+b. 110 110 110 120 120 130 140 150 160 170 180 190
+\answer{b. median: 135; interquartile range: 50}
+\end{tryit}
+\begin{te-addendum}{2}{LearnTogether}
+\textbf{Disagree Respectfully}
+People can have different ideas about the correct answer or way to do something.
+Q: How can you let someone know that you understand their idea but that you disagree? What words and actions show that you are able to manage your emotions and be respectful?
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{Use Structure — Use with EXAMPLES 1 \& 2}
+How can you determine whether or not a data set is skewed by examining the five-number summary?
+\answer{A data set is more likely skewed if the distance between the first quartile and the median is significantly different from the distance between the median and the third quartile; or if the distance between the minimum value and the median is significantly different from the distance between the median and the maximum value.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Try It! 2a}
+Some students may say the median and quartiles are better measures of center and spread. Have students calculate and compare the mean, mean, and mode of the data set. In a symmetrical distribution, the mean, median, and mode are all about the same value, so the mean and standard deviation are better measures of center and spread.
+\te{Printed mean, mean, and mode; likely mean, median, and mode.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners}
+LISTENING BEGINNING Have students listen as you read the following sentence from the example: ``The standard deviation, the range of a data set, and the interquartile range are three measures of spread.'' As a noun, spread means the area covered by something. As a verb, spread means to stretch out. Have students listen as you read the following sentences and identify the correct part of speech of spread.
+Q: They spread their wet clothes on rocks beside the river to let them dry.
+\answer{verb}
+Q: The family provided a nice spread of food at the party.
+\answer{noun}
+Q: There was a large spread of scores on the test.
+\answer{noun}
+Q: News of the fire spread quickly throughout the village.
+\answer{verb}
+READING DEVELOPING Have students read the sentence in Part A that defines a symmetrical distribution.
+Q: What does it mean that the reflected shape is roughly the same?
+\answer{that it is very similar but not necessarily an exact reflection}
+Display the following sentences for students to read: 1) It costs roughly \$500 to fix the car. 2) He roughly throws the box into the truck.
+Q: Which sentence uses the word roughly in the same way as the definition of a symmetrical distribution?
+\answer{1; The cost is close to \$500.}
+Q: How is the word roughly used in the other sentence?
+\answer{forcefully or harshly}
+SPEAKING EXPANDING In small groups, have students discuss the differences between the shapes of negatively and positively skewed distributions. Then have them discuss data sets that could be negatively or positively skewed.
+Q: Would workers' incomes more likely be negatively or positively skewed? Explain.
+\answer{positively; Answers may vary. Sample: Few workers make millions of dollars, so this distribution would have a longer tail on the right.}
+Q: Would the test scores on an easy test more likely be negatively or positively skewed?
+\answer{Negatively, most students will get high scores, so this distribution would have a longer tail on the left.}
+\end{te-addendum}
+% Source page 39: 548 Example 3
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Recognize a Normal Distribution: Build Procedural Fluency From Conceptual Understanding}
+PART A
+Q: Is every symmetric distribution a normal distribution?
+\answer{No; normal distributions are modeled by a bell-shaped curve. You can have a symmetric distribution that is not modeled by a bell-shaped curve.}
+PART B
+Q: What do you notice about the probabilities of the 8 parts of the spinner?
+\answer{The 8 parts each have the same probability, and the sum of the probabilities is 1.}
+Q: Why is uniform distribution a good name to describe this data distribution?
+\answer{The word uniform in this context means all the same. A uniform distribution is a data distribution with all values having the same probability of occurring.}
+PART C
+Q: How do the mean and median of the test scores compare to each other if the shape of the distribution is skewed left?
+\answer{The mean of the test scores is less than the median of the test scores.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 Some students may struggle with determining whether a given situation is normally distributed. Have students determine whether the graph of a data set is normally distributed.
+Give students the following graphs.
+% FIG 39 94 1111 298 1269
+\placeholder{graph}{Graph 1: red symmetric bell-shaped curve over unscaled horizontal and vertical axes, arrowheads at positive ends. No tick labels.}
+% FIG 39 345 1111 552 1269
+\placeholder{graph}{Graph 2: red curve with long left tail and peak to the right, then steep descent to horizontal axis. Unscaled axes with positive arrowheads, no tick labels.}
+% FIG 39 587 1111 794 1269
+\placeholder{graph}{Graph 3: red curve with peak to the left and long right tail. Unscaled axes with positive arrowheads, no tick labels.}
+Q: Does each graph represent a normal distribution?
+\answer{1. yes; 2. no; 3. no}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Recognize a Normal Distribution}
+CONCEPTUAL UNDERSTANDING
+Are the following variables likely to have a normal distribution?
+A. The heights of all the people in a large group
+A normal distribution can be modeled by a particular bell-shaped curve that is symmetric about the mean. This is called a normal curve.
+% FIG 39 938 274 1113 352
+\placeholder{graph}{Blue symmetric normal curve with a dashed vertical centerline labeled Mean, Median, Mode. Horizontal axis has arrows both ends and two unlabeled ticks equidistant from the center. Red horizontal double arrow from center to right tick is labeled standard deviation.}
+Approximately normal distributions can be found in many real-world situations where the data are symmetric and mostly clustered near the mean.
+% FIG 39 969 358 1115 440
+\placeholder{graph}{Blue narrow-bin height histogram overlaid by a red normal curve. Horizontal Height (in.) labels 55,60,65,70,75,80. Vertical Proportion labels 0,.05,.1,.15,.2. Histogram peaks near 68 inches at about .18, with small tails near 58 and 78; red curve peaks near 68 at about .16. No arrows.}
+The heights of people in a large group are likely to be normally distributed.
+\answer{A. likely to be normally distributed.}
+\te{STUDY TIP Notice that for real-world examples, the data in a normal distribution might not be perfectly normally distributed but can be modeled by a normal curve.}
+B. The probability of landing on each of 8 equal parts of a spinner
+This data set is not normally distributed because each outcome has the same probability of occurring as any other.
+% FIG 39 948 466 1118 565
+\placeholder{graph}{Blue separated bars for Spinner outcomes 1 through 8. Vertical Frequency 0 to 20, labels every 5. Bar heights 16,13,7,16,9,13,19,11. No axis arrows.}
+\answer{B. not normally distributed.}
+\te{Printed graph shows observed frequencies of unequal heights, while the text describes equal theoretical probabilities.}
+C. The scores on an easy test
+The scores on an easy test are often skewed left and not normally distributed, because more students will receive higher scores.
+% FIG 39 937 578 1117 697
+\placeholder{graph}{Blue histogram with horizontal Test Scores intervals 51-55,56-60,61-65,66-70,71-75,76-80,81-85,86-90,91-95,96-100. Vertical Frequency 0 to 10, labels every 2. Contiguous bar heights 1,1,2,3,6,5,9,8,5,2. No arrows.}
+\answer{C. often skewed left and not normally distributed.}
+% Source page 40: 549 Example 3 continued
+D. The number of children in a family
+The number of children in a family is not normally distributed. The distribution is skewed right because many families have 0, 1, 2, or 3 children, but very few families have 10 or more children.
+% FIG 40 1004 224 1154 339
+\placeholder{graph}{Blue histogram, horizontal Number of Children with labels 0,1,2,3,4,5,6,7,8,9,10+. Vertical Frequency has no numerical ticks. Bar for 0 is highest; 1 is about one third as tall; subsequent bars decrease toward almost zero at 10+. No arrows.}
+\answer{D. not normally distributed; skewed right.}
+\end{example}
+\begin{tryit}{3}
+Is each situation likely to be normally distributed? Explain.
+a. weight of individuals in a population
+\answer{a. normal}
+b. the scores on a difficult test
+\answer{b. skewed positively}
+\end{tryit}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Build Procedural Fluency From Conceptual Understanding, PART D}
+Q: How would you know that the number of children is positively skewed without looking at the graph?
+\answer{Most families have a small number of children (0, 1, 2, or 3) so most of the data would be on one end of the data set.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How can you determine whether each situation is likely to be normally distributed?
+\answer{You can think about the different types of data in the data set. Then draw a graph to estimate what the data set looks like. If the data are symmetric and clustered around the mean, then they are normally distributed.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Classify a Data Distribution: Pose Purposeful Questions}
+Q: How do you know whether a data distribution is skewed?
+\answer{Make a histogram of the data. Data that are skewed right are bunched on one side and have a long tail on the other side.}
+Q: How do you know whether a data distribution is symmetric?
+\answer{Make a box plot of the data. Symmetric data have a median near the center of the box and whiskers of about the same length.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Classify a Data Distribution}
+How would you classify the following data set? Describe the shape of the distribution and the center and spread of the data.
+106, 96, 86, 120, 98, 76, 112, 64, 99, 72, 119, 115, 76, 120, 97
+Step 1 Make a histogram of the data.
+% FIG 40 988 492 1158 596
+\placeholder{graph}{Orange contiguous histogram. Horizontal Data Values boundaries 55,65,75,85,95,105,115,125. Vertical Frequency 0 through 5 in unit increments. Seven bar heights 1,1,2,1,4,3,3. No arrows.}
+Step 2 Analyze the shape of the histogram.
+Since the data are bunched to the right and have a long tail to the left, the data are skewed left.
+\te{STUDY TIP If the median and the mean are equal or very close, then the data are likely to be symmetric.}
+Step 3 Determine the center and spread of the data. Use the median and interquartile range.
+64 72 76 76 86 96 97 98 99 106 112 115 119 120 120
+1st quartile = 76, median = 98, 3rd quartile = 115
+The interquartile range is (115-76=39). Notice that the 3rd quartile is closer to the median than the 1st quartile is. This is characteristic of a distribution that is skewed left.
+The distribution is skewed left with median 98 and interquartile range 39.
+\answer{skewed left; median 98; interquartile range 39.}
+\end{example}
+\begin{tryit}{4}
+What is the type of distribution and the center and spread of the data? 20, 17, 17, 12, 18, 21, 19, 18, 13, 14, 17, 23, 25
+\answer{normal distribution, median = 18, mean = 18, standard deviation (\approx3.59)}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What process would you use to determine the type of distribution of a data set?
+\answer{First, rearrange the data in numerical order. Then find the mean and median of the data set. If the mean and median are close, then the distribution is probably symmetric. If not, the distribution is probably skewed.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Look for Relationships — Use with EXAMPLES 3 \& 4}
+How are the mean and median of a normally distributed data set related?
+\answer{The mean and median should be approximately equal.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Have students further explore finding the type of distribution and the center and spread of larger data sets.
+Give the students the following 2 data sets.
+1. 54, 60, 61, 67, 75, 76, 78, 80, 81, 81, 83, 85, 85, 85, 85, 87, 88, 88, 89, 90, 92, 92, 92, 93, 95, 97, 97, 97, 100, 100
+2. 30, 35, 35, 36, 37, 38, 38, 38, 39, 39, 39, 40, 40, 40, 40, 40, 40, 40, 40, 41, 41, 42, 42, 42, 42, 42, 44, 44, 45, 50
+Q: For the first data set, what is the type of distribution, the center, and the spread of the data?
+\answer{skewed left; median: 86; first quartile: 80, third quartile: 92; interquartile range: 12}
+Q: For the second data set, what is the type of distribution, the center, and the spread of the data?
+\answer{normal; mean: 39.97; standard deviation: 3.51}
+\end{te-addendum}
+% Source page 41: 550 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Data Distributions}
+Concept Summary is powered by Desmos. Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+Q: How are skewed distributions different from symmetric distributions?
+\answer{In a skewed distribution, most of the data are on one side of the distribution. In a symmetric distribution, most of the data are near the center of the distribution.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Exercise 5 Some students may forget to arrange the data in numerical order before finding the five-number summary. Explain to them that the median is the middle number of the data set. Have students write the data in ascending numerical order and identify the middle value by counting. If the data set has an even number of values, have students find the average of the two middle values.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Data Distributions}
+SHAPES
+For distributions that are approximately normal, use mean and standard deviation to describe the data.
+For skewed distributions, use median and quartiles to describe the data.
+GRAPHS
+% FIG 41 729 308 834 432
+\placeholder{graph}{Skewed left: red curve with long left tail; vertical Frequency axis, unlabeled horizontal axis, positive arrowheads. Blue dashed vertical lines from left to right Mean, Median, Mode at peak. Negative direction with leftward arrow below. No numerical ticks.}
+% FIG 41 837 308 940 448
+\placeholder{graph}{Normal (no skew): red symmetric bell curve with a blue dashed vertical centerline labeled Mean Median Mode; unscaled axes with positive arrowheads. Caption: Normal distributions are symmetric with a central peak.}
+% FIG 41 942 308 1044 432
+\placeholder{graph}{Skewed right: red curve with long right tail; blue dashed lines from left to right Mode at peak, Median, Mean. Unscaled axes with positive arrowheads. Positive direction with rightward arrow below.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you interpret the distribution of data in a data set?
+\answer{Look at the shape of a data distribution to determine if it is skewed left, skewed right, or symmetrically distributed. Use mean and standard deviation to determine center and spread for symmetric distributions, and use median and interquartile range to determine center and spread for skewed distributions.}
+2. Vocabulary Write a definition for normally distributed in your own words.
+\answer{The graph of a model that is normally distributed has a bell-shaped curve that is symmetric about the mean.}
+3. Error Analysis A data set has a mean that is approximately equal to the median. Ralph says the median should be used to describe the measure of center, and the quartiles should be used to describe the measure of spread. Explain his error.
+\answer{When the mean is approximately equal to the median, the data set is more likely to be symmetric. This means the mean should be used to describe the center and the standard deviation should be used to describe the spread.}
+4. Communicate Precisely Explain how to determine if the data distribution shown is skewed left, right, or is symmetric.
+% FIG 41 695 682 879 771
+\placeholder{graph}{Blue narrow-bin histogram with no axis labels or numerical ticks. Very low bars on the left grow gradually into a broad high peak near the right; bars fall rapidly at the far right. Long left tail; no arrows.}
+\answer{The data distribution is skewed left because the long tail of data values is on the left side of the distribution.}
+\textbf{Do You KNOW HOW?}
+Determine the mean, standard deviation, and five-number summary of each data set. Round to the nearest hundredth, if necessary.
+5. 5, 8, 5, 9, 6, 14, 9, 3, 8, 7, 10, 12
+\answer{mean: 8; standard deviation: (\approx2.97); minimum: 3; 1st quartile: 5.5; median: 8; 3rd quartile: 9.5; maximum: 14}
+6. 10.5, 2.25, 7.75, 8.8, 3.4, 9.2, 6.5, 4.3, 3.9, 6.4
+\answer{mean: 6.3; standard deviation: (\approx2.63); minimum: 2.25; 1st quartile: 3.9; median: 6.45; 3rd quartile: 8.8; maximum: 10.5}
+Describe the shape of the data summarized in the histograms.
+7.
+% FIG 41 905 603 1064 685
+\placeholder{graph}{Orange histogram, horizontal bin centers 1 through 9, vertical ticks 0,2,4,6,8, no axis titles or arrows. Bar heights 1,1,3,5,7,6,1,2,1. Approximately symmetric with central peak near 5.}
+\answer{The data are symmetric and approximately normally distributed with a mean of about 5.}
+8.
+% FIG 41 905 697 1064 793
+\placeholder{graph}{Orange histogram, horizontal bin centers 1 through 10, vertical ticks 0 through 5 at unit increments, no axis titles or arrows. Approximate heights 1.5,3.7,4.6,3.6,1.5,.8,.5,.3,.25,.2. Long right tail.}
+\answer{The data distribution is skewed right (positive) because the long tail of the data values is on the right side of the distribution.}
+\end{concept-summary}
+% Source page 42: 551 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice & Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+7–24, 26–31 & 9–15, 17–31 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each
+Practice: 1 point each
+Assessment Practice: 1 point each
+Performance Task: 3 points
+\te{Scan the QR code to access a video tutorial.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 12--14 & 1 \\
+1 & 11 & 2 \\
+2 & 15--17 & 1 \\
+3 & 18--21, 30 & 1 \\
+3 & 9 & 2 \\
+4 & 22--25, 29 & 1 \\
+4 & 10, 26--28 & 2 \\
+4 & 31 & 3 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{9}{2}
+\textbf{UNDERSTAND — Communicate Precisely} Describe a situation that is likely to produce the following data distribution.
+% FIG 42 552 333 731 451
+\placeholder{graph}{Six separated green bars at horizontal values 1,2,3,4,5,6. Vertical ticks 0,.05,.10,.15,.20. Heights approximately .16,.15,.14,.16,.18,.16. No axis titles or arrows.}
+\answer{Sample: The probability of drawing each of 6 colored marbles from a hat, replacing the marble for each draw.}
+\end{practice}
+\begin{practice}{10}{2}
+\textbf{Error Analysis} Maalik's teacher asked him to compare the mean and median of the data distribution. Explain and correct Maalik's error in comparing the mean and median.
+% FIG 42 555 529 813 612
+\placeholder{graph}{Red curve rises steeply from lower left to a peak near the left and descends gradually into a long right tail. Unscaled horizontal and vertical axes, arrowheads at positive ends; no labels or ticks.}
+\te{Student work marked incorrect: The distribution is skewed right. This implies the mean is less than the median.}
+\answer{Maurice is correct that the distribution is skewed right. Maurice incorrectly concluded that the mean is less than the median. The mean is greater than the median.}
+\te{Printed Maurice in the key; the prompt names Maalik.}
+\end{practice}
+\begin{practice}{11}{2}
+\textbf{Higher Order Thinking} Diego drew the following box plot to represent a data set.
+% FIG 42 552 782 813 830
+\placeholder{graph}{Horizontal box plot below number line 80 to 100 labeled every 2 with arrowheads both ends. Red dots at minimum 80, first quartile 82, median approximately 85.5, third quartile 93, maximum 100; box from 82 to 93.}
+a. Identify the five-number summary of the data.
+\answer{a. approximate values for the five-number summary: minimum: 80; first quartile: 82; median: 85.5; third quartile: 93; and maximum: 100}
+b. Explain how to use the five-number summary to write a data set with 14 data values to match the box plot. Then write such a data set.
+\answer{b. There are 7 data values below the median and 7 data values above the median. The median is 85.5, so the 7th and 8th data values could be 85 and 86. The minimum value is 80 and the first quartile is 82. So, the 1st data value is 80 and the 4th data value could be 82. There are two data values greater than or equal to the minimum value and less than or equal to the first quartile. So, the 2nd and 3rd data values could be 81 and 81. There are two data values greater than or equal to the first quartile and less than or equal to the median. So, the 5th and 6th data values could be 83 and 85. The third quartile is 93 and the maximum value is 100. So, the 11th data value could be 93 and the 14th data value is 100. There are two data values greater than or equal to the median and less than or equal to the third quartile. So, the 9th and 10th data values could be 91 and 92. There are two data values greater than or equal to the third quartile and less than or equal to the maximum value. So, the 12th and 13th data values could be 96 and 98. Therefore, a possible data set is 80, 81, 81, 82, 83, 85, 85, 86, 90, 92, 93, 96, 98, 100.}
+\te{Printed ninth value 91 in the explanation but 90 in the final list; both fit the stated five-number summary.}
+\end{practice}
+\begin{practice}{12}{1}
+\textbf{PRACTICE} Find the mean, standard deviation, and five-number summary of each data set. Round to the nearest tenth, if necessary. SEE EXAMPLE 1
+9, 15, 17, 21, 23, 31, 33, 39, 46, 50
+\answer{mean: 28.4; standard deviation: 13.0; minimum: 9; first quartile: 17; median: 27; third quartile: 39; and maximum: 50}
+\end{practice}
+\begin{practice}{13}{1}
+Find the mean, standard deviation, and five-number summary of each data set. Round to the nearest tenth, if necessary. SEE EXAMPLE 1
+35, 12, 25, 33, 27, 48, 30, 34, 35, 41, 14
+\answer{mean: 30.4; standard deviation: 10.1; minimum: 12; first quartile: 25; median: 33; third quartile: 35; and maximum: 48}
+\end{practice}
+\begin{practice}{14}{1}
+Find the mean, standard deviation, and five-number summary of each data set. Round to the nearest tenth, if necessary. SEE EXAMPLE 1
+9, 24, 10, 11, 5, 16, 18, 30, 19, 22, 12, 28, 9, 33
+\answer{mean: 17.6; standard deviation: 8.5; minimum: 5; first quartile: 10; median: 17; third quartile: 24; and maximum: 33}
+\end{practice}
+\begin{practice}{15}{1}
+For each set of data, describe the shape of the distribution and calculate the measures of center and spread that best represent the data. SEE EXAMPLE 2
+28, 13, 23, 34, 55, 38, 44, 65, 49, 33, 50, 59, 67, 45
+\answer{Normal distribution, so the mean and standard deviation best represent the data set; mean: 43.1; standard deviation: 15.3}
+\end{practice}
+\begin{practice}{16}{1}
+For each set of data, describe the shape of the distribution and calculate the measures of center and spread that best represent the data. SEE EXAMPLE 2
+3.1, 2.3, 8.8, 2.8, 3.2, 3.5, 3.9, 4.3, 4.5, 2.9, 3.9, 5.5
+\answer{Skewed right, so median and interquartile range best represent the data set; median: 3.7; interquartile range: 1.4}
+\end{practice}
+\begin{practice}{17}{1}
+For each set of data, describe the shape of the distribution and calculate the measures of center and spread that best represent the data. SEE EXAMPLE 2
+12, 2, 14, 4, 1, 6, 11, 7, 8, 5, 9, 10, 8, 15
+\answer{Normal distribution, so the mean and standard deviation best represent the set; mean: 8; standard deviation: 4.1}
+\end{practice}
+\begin{practice}{18}{1}
+Determine if each situation is likely to be uniformly distributed, normally distributed, skewed left, or skewed right. SEE EXAMPLE 3
+The age at which people die in the United States
+\answer{skewed left}
+\end{practice}
+\begin{practice}{19}{1}
+Determine if each situation is likely to be uniformly distributed, normally distributed, skewed left, or skewed right. SEE EXAMPLE 3
+number of pets owned by students at your school
+\answer{skewed right}
+\end{practice}
+\begin{practice}{20}{1}
+Determine if each situation is likely to be uniformly distributed, normally distributed, skewed left, or skewed right. SEE EXAMPLE 3
+Selling price of cars in 2018
+\answer{skewed right}
+\end{practice}
+\begin{practice}{21}{1}
+Determine if each situation is likely to be uniformly distributed, normally distributed, skewed left, or skewed right. SEE EXAMPLE 3
+The height of all adult females in Connecticut
+\answer{normally distributed}
+\end{practice}
+\begin{practice}{22}{1}
+Determine the type of distribution and calculate the best measure of center and spread of each data set. Round to the nearest hundredth, if necessary. SEE EXAMPLE 4
+3, 6, 12, 14, 17, 17, 18, 21, 21, 22, 23, 28
+\answer{skewed left; median = 17.5; interquartile range = 8.5}
+\end{practice}
+\begin{practice}{23}{1}
+Determine the type of distribution and calculate the best measure of center and spread of each data set. Round to the nearest hundredth, if necessary. SEE EXAMPLE 4
+17, 9, 27, 13, 15, 19, 19, 21, 11, 23, 17, 25
+\answer{normal distribution; mean = 18; standard deviation = 5.3}
+\end{practice}
+\begin{practice}{24}{1}
+Determine the type of distribution and calculate the best measure of center and spread of each data set. Round to the nearest hundredth, if necessary. SEE EXAMPLE 4
+7.8, 4.9, 5.7, 24.2, 3.3, 6.2, 9.1, 10.6, 11.9, 3.9, 12.3, 17.2, 18
+\answer{skewed right; median = 9.1; interquartile range = 9.45}
+\end{practice}
+\begin{practice}{25}{1}
+Determine the type of distribution and calculate the best measure of center and spread of each data set. Round to the nearest hundredth, if necessary. SEE EXAMPLE 4
+53, 24, 65, 26, 60, 32, 41, 7, 44, 49, 50, 52, 55, 46
+\answer{skewed left; median = 47.5; interquartile range = 21}
+\end{practice}
+% Source page 43: 552 Practice & Problem Solving
+\begin{practice}{26}{2}
+\textbf{APPLY — Make Sense and Persevere} The test scores from a history test are 88, 95, 92, 60, 86, 78, 95, 98, 92, 96, 70, 80, 89, and 96.
+a. Find the mean and standard deviation of the test scores.
+\answer{a. mean: 86.79; standard deviation: 10.74}
+b. Find the five-number summary of the test scores.
+\answer{b. minimum: 60; first quartile: 80; median: 90.5; third quartile: 95; and maximum: 98}
+c. Describe the type of distribution. Explain.
+\answer{c. Because there is a long tail of data to the left, the distribution is skewed left.}
+d. Do you think the test was an easy test or a hard test for these students? Explain.
+\answer{d. The test was an easy test because more students received higher scores, leading to a distribution that is skewed left.}
+\end{practice}
+\begin{practice}{27}{2}
+\textbf{Reason} The salaries of some employees at a company are shown.
+% FIG 43 518 499 771 656
+\placeholder{illustration}{Employee Salary: two rows of four colored employee portraits. Top row salaries left to right \$40,000, \$50,000, \$75,000, \$175,000. Bottom row \$55,000, \$90,000, \$100,000, \$60,000.}
+a. Describe the type of distribution.
+\answer{a. The distribution is skewed right with a large outlier.}
+b. Find an appropriate measure of center and measure of spread. Explain your choice.
+\answer{b. center = median: \$67,500; spread = interquartile range: \$42,500; Use these because the distribution is skewed.}
+\end{practice}
+\begin{practice}{28}{2}
+A real estate agent wants to convince a client to raise the asking price on his home so she can earn a higher commission. Based on the data shown, should she tell her client the mean or median home price? Explain.
+% FIG 43 521 809 779 1016
+\placeholder{graph}{Residential Prices histogram on an illustration of a row of houses. Horizontal Prices (Thousands of Dollars), bins 100-149,150-199,200-249,250-299,300-349,350-399,400-449,450-499,500-549,550-599. Vertical Number of Homes 0 through 15 labeled every 3. Teal bars have heights approximately 8,12,11,10,7,7,5,4,2,1. No arrows.}
+\answer{This distribution is skewed right. That means that the median price will be less than the mean, so the real estate agent should report the mean to encourage her client to increase the asking price.}
+\end{practice}
+\begin{practice}{29}{1}
+\textbf{ASSESSMENT PRACTICE} Select all five-number summaries that represent a data distribution that is normally distributed.
+A. 2, 7, 8, 9, 10
+B. 2, 4.6, 6, 7.4, 10
+C. 2, 2, 2, 2, 2
+D. 1, 2.3, 3, 3.7, 5
+\answer{B, D}
+\end{practice}
+\begin{practice}{30}{1}
+\textbf{SAT/ACT} How are the data representing the age of people who purchased movie tickets at a senior citizen discount likely to be distributed?
+A. uniformly distributed
+B. skewed right
+C. normally distributed
+D. skewed left
+\answer{B}
+\end{practice}
+\begin{practice}{31}{3}
+\textbf{Performance Task} A voice coach looks up the ages of all the contestants on a popular singing competition and creates two graphs by grouping the data differently.
+% FIG 43 827 584 1036 748
+\placeholder{graph}{First Contestant Ages histogram, purple bars. Horizontal Age (years) intervals 15-19,20-24,25-29,30-34,35-39,40-44,45-49,50-54,55-59. Vertical Frequency labels 0,40,80,120,160 with grid lines every 20. Approximate heights 120,160,110,65,20,8,3,8,1. No arrows.}
+% FIG 43 827 757 1036 905
+\placeholder{graph}{Second Contestant Ages histogram, purple bars. Horizontal Age (years) intervals 10-19,20-29,30-39,40-49,50-59. Vertical Frequency labels 0,100,200,300 with grid lines every 50. Approximate heights 120,270,85,11,9. No arrows.}
+Part A Describe the shape of the data. How would you expect the mean and median to compare?
+\answer{Part A Both graphs show a distribution that is skewed right because most of the data are on the left and the long tail is to the right, so the median age will likely be less than the mean age.}
+Part B Which graph would be better to convince students that they should continue singing lessons into 20s? Which graph would be better to convince students to continue lessons into their 30s?
+\answer{Part B The second graph would be the best to convince students to continue their lessons into their 20s, because it makes it look like there is a steep increase in contestants starting at age 20 and dropping off at age 30. The first graph would be the best to convince students to continue lessons into their 30s because it makes it look like the number of contestants does not drop off sharply until age 35.}
+\end{practice}
+% Source page 44: 552A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate — LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & DP28 \\
+2 & 1 & DP28 \\
+3 & 2 & DP28 \\
+4 & 2 & DP28 \\
+5 & 2 & DP28 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0–3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerds video \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{11-3 Lesson Quiz — Data Distributions}
+Name \underline{\hspace{2cm}}
+Use the following data sets for Items 1–2.
+\begin{tabular}{ll}
+Data Set A & 24, 31, 30, 32, 23, 25, 34, 32, 25, 21, 22, 29 \\
+Data Set B & 35, 33, 32, 21, 22, 23, 24, 25, 24, 22, 25, 25 \\
+\end{tabular}
+1. Identify the five-number summary for each data set.
+\begin{tabular}{llllll}
+ & Minimum & 1st Quartile & Median & 3rd Quartile & Maximum \\
+Data Set A & \answer{21} & \answer{23.5} & \answer{27} & \answer{31.5} & \answer{34} \\
+Data Set B & \answer{21} & \answer{22.5} & \answer{24.5} & \answer{28.5} & \answer{35} \\
+\end{tabular}
+2. Describe each data set as skewed left, skewed right, or symmetrical.
+Data Set A is [skewed left; symmetrical; skewed right]. Data Set B is [skewed right; skewed left; symmetrical].
+\answer{Data Set A: symmetrical; Data Set B: skewed right.}
+3. Use the following data set.
+35, 22, 20, 22, 16, 24, 25, 24, 23, 25, 25, 19, 15, 28, 32, 37, 40
+How would you classify the data set? What statistics should you use to describe the center and spread of data?
+It is [symmetrical; skewed right; skewed left]. The [median; mean; mode; average] and [range; variance; standard deviation; quartiles] should be used in this case.
+\answer{skewed right; median; quartiles.}
+4. Which of the following is likely to be an example of a normal distribution?
+A. the last digits of the street addresses in your contacts
+B. the number of bicycles owned by people who live in a particular city
+C. the scores on a nationwide math test
+D. the value of a card drawn at random from a stack of cards numbered from 1 to 10
+\answer{C}
+5. In a data distribution that is skewed left, the [median; mean] will be greater.
+\answer{median}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 45: 552B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate — DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+\textbf{Reteach to Build Understanding — I}
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School. Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-3 Reteach to Build Understanding — Data Distributions}
+A data distribution is a listing or a function showing all the possible values of the data and how often they occur. It is a tool that lets you visually identify the trends in the data and in measures of center such as the mean, median, and mode.
+• When data are represented by a symmetrical curve, the mean and the median are equal, or very close to equal.
+• When data are skewed in the negative direction, or skewed left, the mean is to the left of, or less than, the value represented by the highest part of the curve.
+• When data are skewed in the positive direction, or skewed right, the mean is to the right of, or greater than, the value represented by the highest part of the curve.
+% FIG 45 169 509 236 586
+\placeholder{graph}{Skewed left black distribution with long left tail, vertical Frequency axis without ticks, and dashed mean, median, mode lines in that left-to-right order. Left arrow below: Negative direction. No numeric scale.}
+% FIG 45 240 509 301 586
+\placeholder{graph}{Symmetric black bell curve; a single central dashed line labeled Mean, Median, Mode. Unscaled axes. Caption: The graph looks the same on both sides.}
+% FIG 45 302 509 367 586
+\placeholder{graph}{Skewed right black distribution with long right tail, dashed Mode, Median, Mean lines in that left-to-right order. Right arrow below: Positive direction. Unscaled axes.}
+1. Choose the correct answer.
+a. If the mean is greater than the median, what type of distribution is this?
+a. skewed left; b. symmetric; c. skewed right
+\answer{c}
+b. If the mean is less than the median, what type of distribution is this?
+a. skewed left; b. symmetric; c. skewed right
+\answer{a}
+c. If the mean, median and mode are equal, what type of distribution is this?
+a. skewed left; b. symmetric; c. skewed right
+\answer{b}
+2. Libby says a data distribution that is skewed right has a mean, median and mode in the center of the bell curve. Find and fix her error.
+\answer{A symmetric distribution has a mean, median and mode at the center of the bell curve.}
+3. Fill in the blanks.
+a. Skewed right: the mean is \underline{\hspace{1cm}} the median.
+\answer{greater than}
+b. \underline{\hspace{1cm}}: the mean is less than the median.
+\answer{Skewed left}
+c. \underline{\hspace{1cm}}: the \underline{\hspace{1cm}}, median and \underline{\hspace{1cm}} are equal.
+\answer{Symmetric; mean; mode}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice — I, O}
+Provides extra practice for each lesson.
+MathXL for School. Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-3 Additional Practice — Data Distributions}
+1. Determine the mean, standard deviation, and five-number summary for each data set. Round to the nearest tenth if necessary.
+a. 98, 87, 79, 82, 101, 99, 97, 97, 102, 91, 93
+mean: \answer{93.3}; standard deviation: \answer{7.3}
+five-number summary: minimum: \answer{79}; 1st quartile: \answer{87}; median: \answer{97}; 3rd quartile: \answer{99}; maximum: \answer{102}
+b. 3.2, 3.1, 4.5, 5.0, 4.1, 2.9, 1.8, 0.8, 2.2, 2.3, 3.1, 3.0
+mean: \answer{3}; standard deviation: \answer{1.1}
+five-number summary: minimum: \answer{0.8}; 1st quartile: \answer{2.3}; median: \answer{3.1}; 3rd quartile: \answer{3.7}; maximum: \answer{5.0}
+2. Describe the shape of the distribution and determine which measures of center and spread best represent the data.
+\begin{tabular}{rrrrrrr}
+1,022 & 1,065 & 1,287 & 1,385 & 1,499 & 1,499 & 1,298 \\
+1,109 & 1,067 & 1,384 & 1,499 & 1,032 & 1,222 & 1,046 \\
+\end{tabular}
+\answer{skewed left; median; interquartile range}
+3. Every other week, a horticulturist sprays fertilizer on the roses in one section of a garden. Do you expect the height of the roses in the garden to be uniformly distributed, normally distributed, skewed left, or skewed right? Explain.
+\answer{skewed left; She sprays only some of the roses. You might expect the sprayed roses to grow more.}
+4. Describe the shape of the distribution of a set of data where the median and mean are the same. How would the median and mean compare if the data were skewed left?
+\answer{Symmetrical distribution; the mean would be less than the median.}
+5. The ages of students in a gymnastics class are 12, 15, 17, 9, 7, 8, 15, 10, 13, 6, 5, 7, 13, 10, 7, 9, 5, 6, 7, 7, and 4.
+a. Determine the mean, median, and standard deviation of the ages of the students. Round to the nearest hundredth.
+mean: \answer{9.14}; median: \answer{8}; standard deviation: \answer{3.62}
+b. Describe the shape of the distribution of ages. \answer{skewed right}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment — O, A}
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School. Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-3 Enrichment — Data Distributions}
+For each item, state what number could be added to the data set to cause the data to be shaped as indicated. Round answers to the nearest thousandth, if necessary.
+1. 989.9, 256.3, 364.7, 569.7, 512.3, 878.6, 368.6, 897.3, 369.2, \underline{\hspace{1cm}}
+a. What number would cause the data to be skewed left? Explain.
+\answer{Answers may vary. Sample: −1,000; mean = 420.66; median = 440.75; The mean is less than the median, so the data are skewed left.}
+b. What number would cause the data to be symmetric? Explain.
+\answer{Answers may vary. Sample: −799.1; mean = 440.75; median = 440.75; the mean is equal to the median, so the data are symmetric.}
+\te{Printed equal mean and median as sufficient for symmetry; the displayed data with −799.1 are not symmetric.}
+c. What two numbers would cause the data to be skewed right? Explain.
+\answer{Answers may vary. Sample: 200; mean = 540.66; median = 440.75; The mean is greater than the median, so the data are skewed right.}
+\te{Printed two numbers in the question but only one number in the sample answer.}
+2. (\frac{2}{3},\frac{1}{9},\frac{7}{15},\frac{21}{22},\frac{2}{67},\frac{64}{87},\frac{5}{8},\frac{9}{15},\frac{2}{13}), \underline{\hspace{1cm}}
+a. What number would cause the data to be skewed left? Explain.
+\answer{Answers may vary. Sample: 0.25; mean: 0.495; median: 0.613; The mean is less than the median, so the data are skewed left.}
+b. What number would cause the data to be symmetric? Explain.
+\answer{Answers may vary. Sample: 1.624; mean: 0.633; median: 0.633; The mean is equal to the median, so the data are symmetric.}
+c. What number would cause the data to be skewed right?
+\answer{Answers may vary. Sample: 3.3; mean: 0.823; median: 0.633; The mean is greater than the median, so the data are skewed right.}
+\te{Printed numerical keys for Item 2 do not agree with the displayed fractions; for example, adding 0.25 gives a median of approximately 0.533, rather than 0.613.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary — I, O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-3 Mathematical Literacy and Vocabulary — Data Distributions}
+\textbf{Concept List}
+\begin{tabular}{lll}
+mean & median & normal curve \\
+normal distribution & quartiles & range of a data set \\
+skewed distribution & standard deviation & interquartile range \\
+\end{tabular}
+Choose the concept from the list above that best represents the item in each box.
+1. graph of a normal distribution
+\answer{normal curve}
+2. 7, 9, 17, 26, 38, 40, 45, 53, 55, 62
+(Q1=17), (Q2=39), (Q3=53), (Q4=62)
+\answer{quartiles}
+3. 10, 6, 8, 9, 15, 12, 18
+((10+6+8+9+15+12+18)\div7\approx11.1)
+\answer{mean}
+4. 15, 17, 17, \uncertain{19}{18}, 21, 23, 24. \te{The fourth number is circled; its final digit is obscured by the circle.}
+\answer{median}
+5. 12, 16, 18, 6, 3, 19, 16, 12
+(\sigma\approx5.36)
+\answer{standard deviation}
+6. 34, 72, 29, 25, 13, 81, 56
+(81-13=68)
+\answer{range of a data set}
+7. 29, 7, 35, 29, 56, 12, 75, 26, 39, 8
+(Q_3-Q_1=39-12=27)
+\answer{interquartile range}
+8.
+% FIG 45 268 1250 336 1294
+\placeholder{graph}{Black symmetric bell curve on unscaled horizontal and vertical axes, centered peak and nearly horizontal tails. No ticks, numbers or arrows.}
+\answer{normal distribution}
+9.
+% FIG 45 350 1250 424 1297
+\placeholder{graph}{Black skewed-left curve on unscaled horizontal and vertical axes. Long left tail, peak to the right, steep right descent and short right tail. No ticks, numbers or arrows.}
+\answer{skewed distribution}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 45 585 978 1033 1299
+\placeholder{illustration}{Tablet displaying MathXL practice: Solve the system of equations by graphing, (y=3x+4), (y=-2x+4). Blank coordinate grid with horizontal and vertical axes spanning -10 to 10 with unit grid, labels at even integers, arrows on positive directions. Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print; Click to enlarge graph; Check Answer; Review progress; Question 6 of 14; Back; Next.}
+\end{te-addendum}
+
+\end{document}

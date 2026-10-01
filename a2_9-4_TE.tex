@@ -1,0 +1,987 @@
+\documentclass{article}
+% Source: Topic_09_Teacher_Edition.pdf, PDF pages 52-64 (printed pages 469A-477B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 52: 469A, Lesson Overview
+\begin{lesson-meta}
+lesson: 9-4
+title: Hyperbolas
+standards: none printed
+practices: none printed
+objective: I can understand the geometric properties of a hyperbola.
+
+essential question: How does the equation of a hyperbola relate to the features of its graph?
+
+\textbf{VOCABULARY}
+\item center of a hyperbola
+\item conjugate axis
+\item foci of a hyperbola
+\item hyperbola
+\item standard form of the equation of a hyperbola
+\item transverse axis
+\item vertices of a hyperbola
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 9-4 \\
+Title & Hyperbolas \\
+Standards & none printed \\
+I CAN Objective & I can understand the geometric properties of a hyperbola. \\
+Essential Question & How does the equation of a hyperbola relate to the features of its graph? \\
+Lesson Vocabulary & center of a hyperbola; conjugate axis; foci of a hyperbola; hyperbola; standard form of the equation of a hyperbola; transverse axis; vertices of a hyperbola \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use the foci and the Distance Formula to derive an equation of a hyperbola.
+\item Write and graph the equation of a hyperbola and use it to model a real-world situation.
+\item Determine which conic section is represented by a second-degree equation.
+Essential Understanding. A hyperbola is the set of all points (P) such that the difference of the distances from any point (P) to two fixed points, or foci, of the hyperbola is constant. This definition is used to derive the equation of a hyperbola and apply the geometric properties of a hyperbola.
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Wrote, graphed, and applied the equations for conic sections in the shapes of parabolas, circles, and ellipses.
+In this lesson, students:
+\item Write, graph, and apply the equation for a conic section in the shape of a hyperbola.
+Increasing Coherence Examples from this lesson are not necessarily expected to be addressed on high stakes assessments.
+Later in other courses, students will:
+\item Study rotations of conics sections in a plane.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that the coefficients (A) and (C) in a second-degree equation (Ax^2+Cy^2+Dx+Ey+F=0) determine the type of conic section the equation represents.
+\item Students apply the equation of a hyperbola to solve real-world problems, such as finding the distance a detector should be placed from a hyperbolic mirror.
+\te{The printed word world is displaced and overlaps should be.}
+\textbf{Mathematics Overview}
+Students conclude their investigation of conic sections with hyperbolas. They derive the equation of a hyperbola using the distance formula and the foci. Students then graph a hyperbola by finding the asymptotes, vertices, and foci.
+\textbf{Applying Math Practices}
+Make Sense of Problems and Persevere in Solving Them
+Students connect mathematical ideas when they substitute (y=0) into the equation of a hyperbola and solve for the x-coordinates.
+Look For and Make Use of Structure
+Students apply an understanding of the overall structure in mathematics when they derive the equation for a hyperbola using the equation of an ellipse.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+NEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+center of a hyperbola & centro de una hipérbola \\
+conjugate axis & eje conjugado \\
+foci of a hyperbola & focos de una hipérbola \\
+hyperbola & hipérbola \\
+standard form of the equation of a hyperbola & forma normal de una ecuación de un hipérbola \\
+transverse axis & eje transversal \\
+vertices of a hyperbola & vértices de una hipérbola \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Review the terms center, focus, and vertex as they relate to the other types of conic sections students have studied so far. Show students an image of a hyperbola and use the center to illustrate both the conjugate and transverse axes. Have students complete the following sentences.
+1. The axis that passes through the foci and the vertices is the \underline{\hspace{1cm}} axis.
+\answer{transverse}
+2. The axis that passes through the center and is perpendicular to the transverse axis is the \underline{\hspace{1cm}} axis.
+\answer{conjugate}
+\te{Printed Spanish un hipérbola is retained.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 52 1000 786 1153 967
+\placeholder{illustration}{Student Companion cover with glowing purple, blue, and orange loops on black; enVision Algebra 2; SAVVAS.}
+\end{te-addendum}
+% Source page 53: 469B, Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students explore a set of points where the difference of the distance from any point to two set points is constant. This introduces them to hyperbolas and their properties.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\te{Explore \& Reason is Powered by Desmos. Activities are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: Whole Class}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: What do you notice about the graph?
+\answer{The graph shows an ellipse. The foci are labeled, and the distances from a point on the graph to the foci are shown.}
+\textbf{During: Small Group}
+Support Productive Struggle in Learning Mathematics ETP
+Q: What do you notice about the graph when (F_1) and (F_2) are on the y-axis and have a constant sum?
+\answer{The bottom half of the graph is a reflection of the top half of the graph.}
+Q: Imagine you sketch the graph with constant differences where (F_1) and (F_2) are on the y-axis. Do you see any patterns in the graph?
+\answer{The bottom part of the graph is still a reflection of the top part of the graph, but the graph extends toward infinity in all directions.}
+For Early Finishers
+Q: Sketch an ellipse with (F_1) and (F_2) on the x-axis. Then sketch a graph where the differences of the distances from (F_1) and (F_2) on the x-axis are constant. How is the graph of the points with a constant difference of distances from (F_1) and (F_2) different from the graph you found when (F_1) and (F_2) were on the y-axis?
+\answer{When (F_1) and (F_2) are on the y-axis, the parts of the graph open upward and downward. When (F_1) and (F_2) are on the x-axis, the parts of the graph open to the left and right.}
+\textbf{After: Whole Class}
+Facilitate Meaningful Mathematical Discourse ETP
+Q: Why are there two parts to the graph with constant differences?
+\answer{One part represents the points where the distance from (F_1) is greater than the distance from (F_2). The other part represents the points where the distance from (F_2) is greater than the distance from (F_1).}
+Q: Why does the graph with constant differences continue to infinity?
+\answer{The difference of the distances is constant, so as one distance increases, the other distance increases by the same amount. Therefore, the graph moves farther away from the foci points toward infinity.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{Explore \& Reason: Hyperbolas}
+I CAN... understand the geometric properties of a hyperbola.
+An ellipse is the set of all points where the sum of the distances of any point to two fixed points called foci is a constant.
+% FIG 53 1008 647 1125 778
+\placeholder{graph}{Black vertical ellipse with vertices about (0,+/-3) and co-vertices (+/-2,0), no grid, black double-arrow x/y axes with unit ticks, O origin, +/-2 labels. Blue filled foci F1 at (0,2), F2 at (0,-2). Blue point P on upper-left curve near (-1.8,1.3), green dashed segments d1 to F1 and d2 to F2.}
+A. Describe how the lengths of (d_1) and (d_2) in the ellipse relate to each other. What happens to (d_2) as (d_1) gets larger?
+\answer{A. (d_1) and (d_2) have an inverse relationship: if (d_1+d_2=a), then (d_2=a-d_1); so as (d_1) gets larger, (d_2) gets smaller.}
+B. Imagine that instead of the sum of the distances being a constant, the difference of the distances was a constant. What would happen to (d_2) as (d_1) gets larger?
+\answer{B. In this case, (d_1) and (d_2) have a direct relationship: if (d_2-d_1=a), then (d_2=d_1+a); so as (d_1) gets larger, (d_2) also gets larger.}
+C. Make Sense and Persevere Imagine what the graph of those points would look like. Where would the points lie in relation to the foci? How would it compare to the graph of an ellipse?
+\answer{C. As (d_1) and (d_2) increase, the points are farther away from the foci. In an ellipse, one distance decreases as the other increases, so all points exist within a limited distance from the foci.}
+\te{Printed inverse and direct relationship describe decreasing and increasing affine relationships, not inverse and direct variation.}
+\textbf{Digital Explore \& Reason}
+An ellipse is the set of all points where the sum of the distance of any point to two set points called foci is a constant.
+A. Describe how the length of (d_1) and (d_2) in the ellipse relate to each other. What happens to (d_2) as (d_1) gets larger?
+Enter your answer.
+% FIG 53 637 185 1152 532
+\placeholder{illustration}{Explore & Reason Desmos screen with Go back and play icons, prompt and blank response area. Half-unit grid window x [-5,5], y [-4,4], black axes with labels +/-2,+/-4 and 0. Orange vertical ellipse centered at origin, vertices (0,+/-3), horizontal extrema +/-2. Blue F1 (0,2), F2 (0,-2), P near (-1.8,1.3); green solid segments d1 and d2 from P to foci. Wrench/home controls, Powered by Desmos.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with EXPLORE \& REASON
+Reason Do you think that the graph of the figure in Part C is symmetric across the y-axis? Explain.
+\answer{Yes; If you reflect a point on the figure across the y-axis, the distances to the two foci remain the same.}
+\end{te-addendum}
+% Source page 54: 469, Concept and Additional Examples
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Introduce the Essential Question}
+Establish Mathematics Goals to Focus Learning ETP
+Students are introduced to hyperbolas. Students learn to write the equation of a hyperbola and use the equation of a hyperbola to determine features of its graph.
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{PurposefulQuestions}
+\textbf{Concept: Hyperbolas}
+Q: How are the two branches of the hyperbola related to the conjugate axis?
+\answer{One branch of the hyperbola is a reflection over the conjugate axis of the other branch.}
+Q: How does the graph of a hyperbola change if the transverse axis is vertical?
+\answer{The two branches of the hyperbola open upward and downward. The conjugate axis is horizontal.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Hyperbolas}
+A hyperbola is the set of all points (P) such that the difference of the distances from any point (P) to two fixed points, or foci of a hyperbola, is constant. A hyperbola has two branches and two asymptotes.
+A line drawn through the foci intersects the hyperbola at two points called the vertices of a hyperbola.
+The foci and the vertices lie along the transverse axis. The conjugate axis is perpendicular to the transverse axis and passes through the center of a hyperbola.
+% FIG 54 836 329 1025 438
+\placeholder{diagram}{No grid or numerical ticks. Black double-arrow horizontal transverse axis and vertical conjugate axis meet at filled black center. Red hyperbola opens left/right with arrows at branch ends; green filled vertices, purple filled foci F1 left of left vertex and F2 right of right vertex. Two solid blue diagonal asymptotes through center, labeled by black arrows. Red point P on lower-right branch; black dashed distances d1 from F2 to P, d2 from F1 to P, with red labels.}
+A hyperbola is the intersection of a plane with an infinite double right cone such that the plane intersects both of the cones.
+\end{concept-box}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Example 2}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+Graph the hyperbola (\frac{y^2}{9}-\frac{x^2}{25}=1).
+To graph the hyperbola, first determine the vertices, foci, and asymptotes. (a=3), (b=5), and (c=\sqrt{9+25}=\sqrt{34}). The vertices of the hyperbola are ((0,-3)). The foci of the hyperbola are ((0,-\sqrt{34})). The equations of the asymptotes are (y=-\frac{3}{5}x).
+% FIG 54 168 1025 266 1123
+\placeholder{graph}{Unit gray grid [-5,5] both axes, black x/y axes O origin, labels +/-2,+/-4. Orange vertical hyperbola with vertices (0,+/-3), no marked foci; dashed blue asymptotes y=+/-3x/5.}
+\answer{(a=3), (b=5), (c=\sqrt{34}); vertices ((0,-3)); foci ((0,-\sqrt{34})); asymptotes (y=-\frac35x); see graph.}
+\te{Printed text lists only the negative vertex, focus, and asymptote; the graph contains both branches and both asymptotes.}
+Example 2 Students graph vertical hyperbolas given the equation of the hyperbola in this additional example.
+Q: How can you determine if the hyperbola is vertical or horizontal from the equation?
+\answer{If the hyperbola is vertical, the (x^2)-term of the equation is subtracted from the (y^2)-term. If the hyperbola is horizontal, the (y^2)-term is subtracted from the (x^2)-term.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Additional Example 4}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION. TRY ANOTHER ONE.}
+The light of a lamp shines on a wall and forms a hyperbola. The vertex of the hyperbola is 4 inches above the lamp. The asymptotes of the hyperbola are (y=\pm\frac21x). Write an equation for the parabola.
+The vertex is at ((0,4)), so (a=4). The slopes of the asymptotes are equal to (\frac{a}{b}), so (b=2).
+Therefore, the equation of the hyperbola is (\frac{y^2}{16}-\frac{x^2}{4}=1).
+\answer{(\frac{y^2}{16}-\frac{x^2}{4}=1)}
+\te{Printed parabola in the question; the worked equation is a hyperbola.}
+Example 4 Students transition to using vertical hyperbolas in real-world situations.
+Q: How would you determine the foci of this hyperbola?
+\answer{Square the values of (a) and (b), add them, then take the square root of the sum. These are the y-coordinates of the foci. The x-coordinates are both 0.}
+\te{The teacher answer omits the negative square root needed for the second focus.}
+\end{te-addendum}
+% Source page 55: 470, Example 1
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Derive an Equation of a Hyperbola}
+Pose Purposeful Questions ETP
+Q: Why is absolute value used with the expression (d_2-d_1)?
+\answer{The expression (d_2-d_1) represents the difference between the distances. Absolute value is used to ensure that the result is positive.}
+Q: How is deriving the equation of a hyperbola different from deriving the equation of an ellipse?
+\answer{You need to use the Distance Formula to derive both the equation of an ellipse and the equation of a hyperbola. In the equation of a hyperbola, the differences of the distances is constant, and in the equation of an ellipse, the sum of the distances is constant.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Derive an Equation of a Hyperbola}
+How can you derive an equation for the graph of a hyperbola?
+By definition, the difference of the distances between any point ((x,y)) on the hyperbola and the foci is constant. The vertices ((-a,0)) and ((a,0)) lie on the hyperbola so you can use a vertex to find the constant difference.
+The distance from ((a,0)) to the focus ((-c,0)) is ((a+c)).
+The distance from ((a,0)) to the focus ((c,0)) is (c-a).
+The difference of these distances is (a+c-(c-a)=2a).
+So, (d_2-d_1=2a).
+% FIG 55 985 258 1108 385
+\placeholder{graph}{No grid or numerical ticks. Black double-arrow x/y axes through origin. Red hyperbola opens left/right with arrows; blue filled vertices on x-axis labeled red (-a,0),(a,0), blue filled foci farther out labeled blue (-c,0),(c,0). Green filled point (x,y) on upper-right branch, green dashed segments d1 to right focus, d2 to left focus.}
+\te{LOOK FOR RELATIONSHIPS What is the relationship between deriving an equation for an ellipse and deriving an equation for a hyperbola?}
+Use the Distance Formula, to derive the hyperbola equation.
+(d_2-d_1=2a)
+(d_2=2a+d_1)
+(\sqrt{(x+c)^2+y^2}=2a+\sqrt{(x-c)^2+y^2})
+((x+c)^2+y^2=(2a+\sqrt{(x-c)^2+y^2})^2)
+((x+c)^2+y^2=4a^2+(x-c)^2+y^2+4a\sqrt{(x-c)^2+y^2})
+(x^2+2xc+c^2+y^2=4a^2+x^2-2xc+c^2+y^2+4a\sqrt{(x-c)^2+y^2})
+(4xc=4a^2+4a\sqrt{(x-c)^2+y^2})
+(4xc-4a^2=4a\sqrt{(x-c)^2+y^2})
+(xc-a^2=a\sqrt{(x-c)^2+y^2})
+((xc-a^2)^2=a^2((x-c)^2+y^2))
+(x^2c^2+a^4=a^2x^2+a^2c^2+a^2y^2)
+(x^2c^2-a^2x^2-a^2y^2=a^2c^2-a^4)
+(x^2(c^2-a^2)-a^2y^2=a^2(c^2-a^2))
+\te{Callout: Let (b^2=c^2-a^2).}
+(x^2b^2-a^2y^2=a^2b^2)
+(\frac{x^2}{a^2}-\frac{y^2}{b^2}=1)
+So the equation for the hyperbola is (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1).
+The standard form of the equation for a hyperbola centered at the origin that opens horizontally is (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1).
+The equation for a hyperbola that opens vertically is (\frac{y^2}{a^2}-\frac{x^2}{b^2}=1).
+\answer{Horizontal: (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1); vertical: (\frac{y^2}{a^2}-\frac{x^2}{b^2}=1).}
+\end{example}
+\begin{tryit}{1}
+What is the equation for the hyperbola with foci at ((10,0)) and ((-10,0)) and a constant difference of 16?
+\answer{(\frac{x^2}{64}-\frac{y^2}{36}=1)}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: What method would you use to determine the coordinates of the vertices of the hyperbola?
+\answer{The constant difference and foci are given. Calculate the distance between the foci. Find two positive values that add up to this distance and that have a difference equal to the constant difference (given). This determines how many units each vertex is from the foci.}
+\end{te-addendum}
+% Source page 56: 471, Example 2
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Understand the Graph of a Hyperbola}
+Build Procedural Fluency From Conceptual Understanding ETP
+Q: How are the asymptotes of a hyperbola different from asymptotes of other functions you have studied?
+\answer{The asymptotes of a hyperbola are not vertical or horizontal like the asymptotes of other functions.}
+Have students check their asymptotes by sketching horizontal lines (y=b) and (y=-b), and vertical lines through the vertices at (x=a) and (x=-a).
+Q: How does the rectangle you drew relate to the asymptotes of the hyperbola?
+\answer{The asymptotes include the diagonals and corners of the rectangle.}
+Q: Is this relationship true for all hyperbolas? Why or why not?
+\answer{Yes; the equations of the asymptotes are (y=\frac{b}{a}x) and (y=-\frac{b}{a}x). The first equation includes the corners of the rectangle ((a,b)) and ((-a,-b)) since the slope is (\frac{b}{a}). The second equation includes the corners ((-a,b)) and ((a,-b)) since the slope is (-\frac{b}{a}).}
+\te{The displayed asymptote formulas and rectangle convention apply to horizontal hyperbolas centered at the origin; vertical hyperbolas interchange (a) and (b).}
+Q: What relationship do you see between the foci and the vertices on the graph of a hyperbola?
+\answer{The vertices are located between the foci on the transverse axis.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Understand the Graph of a Hyperbola}
+CONCEPTUAL UNDERSTANDING
+How does the equation of a hyperbola help you to understand the graph of the hyperbola?
+Graph (\frac{x^2}{9}-\frac{y^2}{16}=1). The equation is in the form (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1), so the graph is a hyperbola that opens horizontally.
+In this example, (a^2=9) and (b^2=16), so (a=3) and (b=4).
+The first step in graphing a hyperbola is to find the asymptotes. Start with the equation for the hyperbola and isolate the (y^2)-term. Then you can solve for (y).
+(\frac{x^2}{9}-\frac{y^2}{16}=1)
+(-\frac{y^2}{16}=1-\frac{x^2}{9})
+(y^2=-16+\frac{16}{9}x^2)
+(y^2=\frac{16}{9}x^2(1-\frac9{x^2}))
+(y=\pm\frac43x\sqrt{1-\frac9{x^2}})
+\te{MAKE SENSE AND PERSEVERE For a vertical hyperbola with equation (\frac{y^2}{a^2}-\frac{x^2}{b^2}=1), what are the slopes of its asymptotes?}
+As (x) goes to positive or negative infinity, (\frac9{x^2}) approaches 0, and (\sqrt{1-\frac9{x^2}}) approaches to 1. Therefore,
+(y=\pm\frac43x\sqrt{1-\frac9{x^2}}\approx\pm\frac43x)
+So as (x) goes to positive or negative infinity, the hyperbola can be approximated by lines with slopes (\pm\frac43): (y=\frac43x) or (y=-\frac43x). These are the asymptotes of the hyperbola.
+\te{Callout: The slopes of the lines equal (\pm\frac{b}{a}) from (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1).}
+Since (a=3) and the hyperbola is horizontal, the vertices are ((3,0)) and ((-3,0)).
+The foci are ((c,0)) and ((-c,0)). Use the relationship (c^2=a^2+b^2) to find (c).
+(c^2=a^2+b^2)
+(c^2=9+16)
+(c=\pm5)
+So the foci are ((5,0)) and ((-5,0)).
+Sketch the graph using the vertices and asymptotes. From the graph, determine the domain and range. The domain is ((-\infty,-3]) and ([3,\infty)). The range is all real numbers.
+% FIG 56 1002 591 1155 718
+\placeholder{graph}{No grid, black double-arrow x/y axes, O origin, unit ticks, labels +/-2,+/-4, window about [-6,6] both axes. Red horizontal hyperbola with arrows, filled red vertices labeled (-3,0),(3,0), blue filled foci labeled (-5,0),(5,0). Black dashed asymptotes y=+/-4x/3 with arrows through origin.}
+\te{Callout: Draw the asymptotes to help you graph the hyperbola. The graph of the hyperbola will approach, but not touch, the asymptotes.}
+\answer{Vertices ((3,0)), ((-3,0)); foci ((5,0)), ((-5,0)); asymptotes (y=\pm\frac43x); domain ((-\infty,-3]) and ([3,\infty)); range all real numbers; see graph.}
+\end{example}
+\begin{tryit}{2}
+Graph the hyperbola (\frac{y^2}{64}-\frac{x^2}{36}=1).
+\answer{See graph.}
+% FIG 56 158 742 354 938
+\placeholder{graph}{Grid spacing 3, black double-arrow x/y axes, O origin, labels +/-6,+/-12, window [-15,15] both axes. Red vertical hyperbola with arrowheads; filled red vertices labeled (0,8),(0,-8). Red dashed asymptotes y=+/-4x/3 through origin.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: Why is it important to first determine the values of (a) and (b)?
+\answer{If you know the values of (a) and (b), you can determine the vertices, the foci, and the equations of the asymptotes.}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2
+Use Structure In an ellipse, the magnitude of denominators in the equation determines the orientation of the graph of the ellipse. Is the same true for a hyperbola? Explain.
+\answer{No, the orientation of a hyperbola is determined by the signs of the variable terms, not the magnitude of the denominators.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 2 Some students may struggle with determining all the information needed to graph a hyperbola. Have them practice finding the equation of the asymptotes, given the equation of the hyperbola.
+\item Give students the following equations.
+1. (\frac{x^2}{16}-\frac{y^2}{25}=1)
+2. (\frac{y^2}{4}-\frac{x^2}{36}=1)
+3. (\frac{y^2}{9}-\frac{x^2}{64}=1)
+4. (\frac{x^2}{121}-\frac{y^2}{49}=1)
+Q: Write the equations of the asymptotes of each hyperbola.
+\answer{1. (y=\pm\frac54x); 2. (y=\pm\frac13x); 3. (y=\pm\frac38x); 4. (y=\pm\frac7{11}x)}
+\end{te-addendum}
+% Source page 57: 472, Example 3
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Write an Equation of a Hyperbola}
+Pose Purposeful Questions ETP
+Q: How can you determine if the transverse axis is the x-axis or y-axis, given the ordered pairs of the vertices?
+\answer{The transverse axis is the x-axis if the y-coordinate of the vertices is 0. The transverse axis is the y-axis if the x-coordinate of the vertices is 0.}
+Q: When would you use the equation of the form (\frac{y^2}{a^2}-\frac{x^2}{b^2}=1) versus (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1)?
+\answer{When the vertices are on the y-axis and the hyperbola is vertical, use (\frac{y^2}{a^2}-\frac{x^2}{b^2}=1). When the vertices are on the x-axis and the hyperbola is horizontal, use (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1).}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Write an Equation of a Hyperbola}
+How do you write the equation of a hyperbola?
+A. What is the equation of a hyperbola with vertices ((0,-3)) and ((0,3)) and asymptotes (y=\pm\frac12x)?
+Step 1 The vertices are on the y-axis, so this is a vertical hyperbola with an equation of the form (\frac{y^2}{a^2}-\frac{x^2}{b^2}=1).
+Step 2 Find (a) and (b). The vertices are ((0,\pm3)), so (a=3).
+A vertical hyperbola has asymptotes (y=\pm\frac{a}{b}x).
+In this example, the asymptotes are (y=\pm\frac12x), so (\frac12=\frac3b) and (b=6).
+Step 3 Substitute (a) and (b) into the equation to get (\frac{y^2}{9}-\frac{x^2}{36}=1).
+The equation of the hyperbola is (\frac{y^2}{9}-\frac{x^2}{36}=1).
+% FIG 57 989 290 1111 391
+\placeholder{graph}{Grid spacing 2, black double-arrow x/y axes O origin, labels +/-4,+/-8, window [-10,10] both axes. Red vertical hyperbola vertices (0,+/-3), arrows on branch ends. Blue solid asymptotes through origin labeled y=x/2 and y=-x/2, arrowheads.}
+\te{Callout: While it is not essential to sketch the graph, it may help guide your writing of the equation for a hyperbola.}
+\te{COMMON ERROR Always remember to check if the transverse axis is horizontal or vertical. For a hyperbola centered at the origin, if the vertices are on the horizontal axis, the equation will be in the form of (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1). If the vertices are on the vertical axis, the equation will be in the form of (\frac{y^2}{a^2}-\frac{x^2}{b^2}=1).}
+\answer{A. (\frac{y^2}{9}-\frac{x^2}{36}=1)}
+B. What is the equation of a hyperbola with foci at ((-3,0)) and ((3,0)) and vertices at ((2,0)) and ((-2,0))?
+The vertices of this hyperbola are on the x-axis so this is a horizontal hyperbola with an equation in the form (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1).
+The vertices are ((\pm2,0)), so (a=2).
+The foci are at ((\pm3,0)), so (c=3).
+Use (c^2=a^2+b^2) to find (b^2).
+(3^2=2^2+b^2)
+(9=4+b^2)
+(5=b^2)
+Use this information to write the equation of the hyperbola in standard form.
+(\frac{x^2}{4}-\frac{y^2}{5}=1)
+The equation of a hyperbola with foci ((-3,0)) and ((3,0)) and vertices ((2,0)) and ((-2,0)) is (\frac{x^2}{4}-\frac{y^2}{5}=1).
+% FIG 57 1016 563 1115 664
+\placeholder{graph}{Unit grid [-5,5] both axes, black x/y axes arrows, O origin and labels +/-2,+/-4. Red horizontal hyperbola with arrows and filled vertices (+/-2,0); blue filled foci (+/-3,0). No asymptotes drawn.}
+\te{HAVE A GROWTH MINDSET When it takes time to learn something new, how do you stick with it?}
+\answer{B. (\frac{x^2}{4}-\frac{y^2}{5}=1)}
+\end{example}
+\begin{tryit}{3}
+What is the equation of a hyperbola with foci ((-\sqrt5,0)) and ((\sqrt5,0)) and constant difference 2? (Hint: What is the relationship between the constant difference and the vertices?)
+\answer{(\frac{x^2}{1}-\frac{y^2}{4}=1)}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How is the relationship between the constant difference and the vertices helpful when finding the equation of the hyperbola?
+\answer{You can use the relationship to determine the coordinates of the vertices and the value of (a). Because you are given the coordinates of the foci, you can determine the value of (c). You can use (a) and (c) to determine (b) and then write the equation of the hyperbola.}
+\end{te-addendum}
+\begin{te-addendum}{3}{CommonError}
+Try It! 3 Some students may write the equation of the hyperbola using (a=2). Graph a hyperbola to show that the value of (a) is equal to half of the constant difference, or 1.
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 3 Have students explore writing equations of hyperbolas given the coordinates of the foci and vertices, with the coordinates containing radicals.
+1. What is the equation of a hyperbola with vertices at ((\sqrt2,0)) and ((-\sqrt2,0)) and foci at ((2\sqrt2,0)) and ((-2\sqrt2,0))?
+\answer{(\frac{x^2}{2}-\frac{y^2}{6}=1)}
+2. What is the equation of a hyperbola with vertices at ((0,\sqrt{10})) and ((0,-\sqrt{10})) and foci at ((0,3\sqrt2)) and ((0,-3\sqrt2))?
+\answer{(\frac{y^2}{10}-\frac{x^2}{8}=1)}
+\end{te-addendum}
+% Source page 58: 473, Example 4
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Use a Hyperbola to Model a Real-World Situation}
+Pose Purposeful Questions ETP
+Q: What method would you use to find the distance that the detector should be placed from the mirror?
+\answer{Use the given information to find the equation of the hyperbola. Then use the equation to find the coordinates of the focus opposite the mirror. Find the distance from this focus to the given vertex.}
+Q: Why do you consider only one branch of the hyperbola in this situation?
+\answer{There is only one hyperbolic mirror in this example, so it is not necessary to use the other branch of the hyperbola in the model.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Application: Use a Hyperbola to Model a Real-World Situation}
+Some telescopes use a hyperbolic mirror. Light is directed inward at the hyperbolic mirror. It is reflected through a hole in the parabolic mirror toward a focus, where it can be captured by a detector. A hyperbolic mirror is shown on a coordinate plane. What equation can be used to represent the mirror? How far must the detector be placed from the mirror?
+% FIG 58 850 307 1130 457
+\placeholder{diagram}{Telescope cross section: concave parabolic primary mirror on left, smaller hyperbolic secondary mirror on right. White dashed incoming parallel rays reflect from primary to secondary, then left through primary hole to focal point F. Labels Parabolic Primary Mirror, Hyperbolic Secondary Mirror, Focal Point F. Yellow telescope photograph at lower right.}
+% FIG 58 840 455 957 573
+\placeholder{graph}{Black x/y axes with arrows; no numeric ticks. Horizontal blue hyperbola has dashed left branch and solid right branch, both with arrows. Right vertex (5,0), point (6,3), red right focus labeled focus, black left focus. Black light ray from upper left to (6,3), reflected to left focus; labels light from primary mirror and hyperbolic mirror.}
+One of the vertices is at ((5,0)), so (a=5). A given point on the hyperbola is ((6,3)).
+(\frac{x^2}{a^2}-\frac{y^2}{b^2}=1)
+(\frac{6^2}{5^2}-\frac{3^2}{b^2}=1)
+(\frac{36}{25}-\frac{9}{b^2}=1)
+(36b^2-225=25b^2)
+(11b^2=225)
+(b^2=20.5)
+\te{The foci are on the x-axis, so this is a horizontal hyperbola. Use the form (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1).}
+\te{STUDY TIP You are looking for (b^2) to place in the formula, so you don't need to take the square root.}
+The equation that models this hyperbolic mirror is (\frac{x^2}{25}-\frac{y^2}{20.5}=1).
+The detector would have to be placed at the focus of the other branch of the hyperbola, at the point ((-c,0)). Since (c^2=a^2+b^2), the coordinates for the detector are ((-\sqrt{45.5},0)) or about ((-6.7,0)) which is about 11.7 units away from the mirror.
+\answer{(\frac{x^2}{25}-\frac{y^2}{20.5}=1); about 11.7 units}
+\te{Printed (b^2=20.5); likely rounded from (225/11).}
+\end{example}
+\begin{tryit}{4}
+How far from the vertex of the hyperbolic mirror is the second focus?
+\answer{about 1.7 inches}
+\te{Printed inches in the answer; the student example specifies only units.}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How is the focus of the hyperbolic mirror related to the location of the detector?
+\answer{The two foci of the hyperbola in the model represent the location of the detector and the focus of the mirror. The x-coordinate of the focus of the mirror is the opposite of the x-coordinate of the detector.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Mathematical Habits of Mind}
+USE WITH EXAMPLES 3 AND 4
+Construct Arguments A hyperbola has asymptotes (y=\pm\frac{2}{3}x). Is this enough information to be able to sketch the graph of the hyperbola? If not, what else would you need to know?
+\answer{No, you would need to know either the coordinates of one focus or a point on the hyperbola.}
+\end{te-addendum}
+% Source page 59: 474, Example 5
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Classify a Second-Degree Equation}
+Pose Purposeful Questions ETP
+Q: What conic sections are possible when the coefficients of the (x^2)-term and the (y^2)-term are both equal to 1? Explain.
+\answer{A circle; In a parabola the coefficient of either the (x^2)-term or the (y^2)-term is 0, and in an ellipse or hyperbola, the coefficients of the (x^2)-term and the (y^2)-term are not equal.}
+Q: What conic sections are possible when the coefficients of the (x^2)-term and the (y^2)-term have opposite signs?
+\answer{A hyperbola.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Classify a Second-Degree Equation}
+What conic section is represented by the equation?
+A. (3x^2-12x-y+17=0)
+There is no (y^2)-term. Solve for (y) in terms of (x^2) and (x).
+(3x^2-12x-y+17=0)
+(y=3x^2-12x+17)
+This is a quadratic function. Its graph is a parabola.
+\answer{A. parabola}
+\te{Use Structure By using algebra to transform equations, you can put some second-degree equations into standard form for the four conic sections.}
+B. (x^2+y^2-2x-8y+8=0)
+When there are quadratic and linear terms for both (x) and (y), complete the square for each variable.
+(x^2+y^2-2x-8y+8=0)
+(x^2-2x+y^2-8y=-8)
+(x^2-2x+1+y^2-8y+16=-8+1+16)
+((x-1)^2+(y-4)^2=9)
+The result is the equation of a circle.
+\answer{B. circle}
+C. (4x^2+9y^2-36=0)
+When the coefficients of (x^2) or (y^2) are not equal to 1, divide each side of the equation by their least common multiple.
+(4x^2+9y^2-36=0)
+(4x^2+9y^2=36)
+(\frac{x^2}{9}+\frac{y^2}{4}=1)
+The result is the equation of an ellipse.
+\answer{C. ellipse}
+D. (8x^2-9y^2+16x-64=0)
+You may need to complete the square in one or both variables before dividing by the least common multiple of the (x^2) and (y^2) terms.
+(8x^2-9y^2+16x-64=0)
+((8x^2+16x)-9y^2=64)
+(8(x^2+2x)-9y^2=64)
+(8(x^2+2x+1)-9y^2=64+8)
+(8(x+1)^2-9y^2=72)
+(\frac{(x+1)^2}{9}-\frac{y^2}{8}=1)
+The result is the equation of a hyperbola.
+\answer{D. hyperbola}
+\end{example}
+\begin{tryit}{5}
+Which conic section is represented by each equation?
+a. (x^2+y^2+4x-6y+9=0)
+b. (6y^2-3x^2-18=0)
+\answer{a. circle; b. hyperbola}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How can you tell without doing any algebra what conic sections are possible for each equation?
+\answer{The equation in part (a) can only represent a circle because the coefficients of (x^2) and (y^2) are equal. The equation in part (b) can only represent a hyperbola because the coefficients of (x^2) and (y^2) have opposite signs.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{Mathematical Habits of Mind}
+USE WITH EXAMPLE 5
+Generalize How can you recognize the equation of a parabola in general form?
+\answer{The equation of the parabola in general form is the only equation that does not have both x- and y-variables in the second degree.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{ENGLISH LANGUAGE LEARNERS}
+USE WITH EXAMPLE 5
+READING: BEGINNING Display this sentence: ``The caterpillar will transform into a butterfly.''
+Q: What does the word transform mean in the sentence?
+\answer{to change into something different}
+Have the students read the Use Structure portion of the example. Then discuss the meaning of the parts that make up the word: trans (across/beyond/through) and form (shape).
+Q: How is the meaning of transform connected to equations?
+\answer{When you transform an equation, you change it by writing it in a different form. Then new form of the equation must be equivalent to the original and have the same solutions.}
+\te{Printed ``Then new form''; likely ``The new form.''}
+SPEAKING: DEVELOPING Give pairs of students cards that contain terms beginning with trans, and have them discuss how each term describes going across, beyond, or through something. Listen for mathematical vocabulary in their discussion.
+Q: translation
+\answer{A translation helps people understand a word's meaning in another language, by going beyond the language they already know.}
+Q: transcontinental
+\answer{A transcontinental flight goes across the entire continent.}
+Q: transverse axis
+\answer{The transverse axis passes through the foci, vertices, and center of a hyperbola.}
+LISTENING: EXPANDING Have students listen as you read the following two mathematical definitions of the word transform, followed by the nonmathematical definition. You can transform an equation into an equivalent form by applying properties of operations. You can transform shapes on a coordinate plane by rotating, reflecting, or translating them. Identify the use of the word transform as either mathematical or nonmathematical.
+Q: The speaker was talking about how he transformed his life by moving overseas.
+\answer{nonmathematical}
+Q: Sylvia reflected triangle (ABC) over the x-axis, transforming it into triangle (A'B'C').
+\answer{mathematical}
+Q: Benjamin determines that an equation can be transformed from standard form into slope-intercept form in order to easily find the slope.
+\answer{mathematical}
+\end{te-addendum}
+% Source page 60: 475, Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Hyperbolas}
+Q: What is the relationship between (d_1) and (d_2) in the graph of the hyperbola?
+\answer{The difference between (d_1) and (d_2) is constant.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercise 8 Some students may confuse the foci of the hyperbola with the vertices. Have students write the standard form of the equation of a hyperbola (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1). Then have students identify (a^2) and (b^2). The foci of this hyperbola are ((c,0)) and ((-c,0)), where (c=\sqrt{a^2+b^2}).
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{GeneralizeETP}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Hyperbolas}
+DEFINITION A hyperbola is the set of all points (P) such that the difference of the distances from any point (P) to two fixed points is constant.
+GRAPHS
+% FIG 60 774 277 1080 469
+\placeholder{graph}{Two schematic hyperbolas with arrowed black axes, no ticks or axis letters. Left Horizontal Hyperbola: red branches opening left/right, red filled vertices on horizontal axis and red center; green foci F1 left and F2 right; point P on lower right branch with dashed green segments d1 to F2 and d2 to F1. Blue diagonal asymptotes with arrows and labels. Right Vertical Hyperbola: red branches opening up/down, red filled vertices and center, red foci F1 above and F2 below; P on upper right branch, dashed green d1 from F1 and d2 from F2; blue arrowed asymptotes.}
+\begin{tabular}{lll}
+EQUATION & Horizontal & Vertical \\
+ & (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1) & (\frac{y^2}{a^2}-\frac{x^2}{b^2}=1) \\
+vertices & ((\pm a,0)) & ((0,\pm a)) \\
+asymptotes & (y=\pm\frac{b}{a}x) & (y=\pm\frac{a}{b}x) \\
+foci & ((\pm c,0)), where (c=\sqrt{a^2+b^2}) & ((0,\pm c)), where (c=\sqrt{a^2+b^2}) \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How does the equation of a hyperbola relate to the features of its graph?
+\answer{For a horizontal hyperbola in the form (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1), the vertices are located at ((\pm a,0)), the asymptotes are located at (y=\pm\frac{b}{a}x), and the foci are located at ((\pm c,0)), where (c=\sqrt{a^2+b^2}).}
+2. Error Analysis Alberto said that a hyperbola is two parabolas opening in opposite directions. Explain his error.
+\answer{While one side of a hyperbola appears to have the same shape as a parabola, the relationships that define the points on a hyperbola are different from those that define the points on a parabola.}
+3. Vocabulary Describe the transverse axis of a horizontal and a vertical hyperbola.
+\answer{The line that goes from one vertex to the other vertex, through the center, is the transverse axis.}
+4. Look for Relationships Describe the position of the asymptotes in the graph of a hyperbola. How do the equations of the asymptotes help you sketch a graph of a hyperbola?
+\answer{The asymptotes are lines that have opposite slopes and intersect at the center of the hyperbola. The graph of a hyperbola approaches, but never intersects, the asymptotes. By drawing the asymptotes on a graph, you can use them as guidelines to sketch the hyperbola, making sure the hyperbola approaches, but never intersects, the asymptotes.}
+5. Communicate Precisely Explain how to determine which conic section is represented by a second degree equation in (x) and (y) with no (xy)-term.
+\answer{If there is no (x^2)- or (y^2)-term, solve for (x) or (y). If the coefficients of (x^2) and (y^2) are both not equal to 0, complete the square in each variable and divide by the LCM of the (x^2) and (y^2) terms. Compare the result to the standard form of a circle, ellipse, or hyperbola.}
+\textbf{Do You KNOW HOW?}
+Find the vertices of the hyperbola.
+6. (\frac{y^2}{144}-\frac{x^2}{56}=1)
+\answer{((0,12)) and ((0,-12))}
+7. (\frac{x^2}{121}-\frac{y^2}{12}=1)
+\answer{((11,0)) and ((-11,0))}
+Find the foci of the hyperbola.
+8. (\frac{x^2}{64}-\frac{y^2}{36}=1)
+\answer{((10,0)) and ((-10,0))}
+9. (\frac{y^2}{9}-\frac{x^2}{16}=1)
+\answer{((0,5)) and ((0,-5))}
+Write an equation for the asymptotes of the hyperbola.
+10. (\frac{x^2}{9}-\frac{y^2}{100}=1)
+\answer{(y=\pm\frac{10}{3}x)}
+11. (\frac{y^2}{4}-\frac{x^2}{36}=1)
+\answer{(y=\pm\frac{1}{3}x)}
+12. Look for Relationships Explain how to find the value of (b) in the equation of a hyperbola, given one focus at ((0,1)) and one vertex at ((0,0.5)).
+\answer{A focus at ((0,1)) means the value of (c) is 1, so (c^2=1). A vertex at ((0,0.5)) means the value of (a) is 0.5, so (a^2=0.25). Use the equation (a^2+b^2=c^2) to find the value of (b): (0.25+b^2=1), so (b^2=0.75) and (b=\sqrt{0.75}).}
+\end{concept-summary}
+% Source page 61: 476, Practice and Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE & PROBLEM SOLVING}
+Practice & Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+ou may also take advantage of the bank of exercises for assigning additional practice.
+\te{Printed ``ou may''; likely ``You may.''}
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+13--15, 18--24, 26--36 & 13--17, 19--36 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 18, 19 & 1 \\
+2 & 20--23 & 1 \\
+2 & 15 & 2 \\
+3 & 24, 25, 34 & 1 \\
+3 & 14, 16 & 2 \\
+4 & 26, 31--33 & 2 \\
+4 & 36 & 3 \\
+5 & 27--30, 35 & 1 \\
+5 & 13, 17 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{13}{2}
+UNDERSTAND. Look for Relationships Juanita wants to graph the equation (25x^2-9y^2=225).
+a. What kind of conic section could the equation represent? Explain.
+\answer{The coefficients (x^2) and (y^2) in the equation have opposite signs, so it could be a hyperbola.}
+b. Explain how to write the equation in standard form. Then write the equation in standard form.
+\answer{Divide each side of the equation by 225; (\frac{x^2}{9}-\frac{y^2}{25}=1)}
+c. What are the vertices?
+\answer{((-3,0)) and ((3,0))}
+d. What are the asymptotes?
+\answer{(y=\pm\frac{5}{3}x)}
+e. What are the foci?
+\answer{((-\sqrt{34},0)) and ((\sqrt{34},0))}
+f. Is the transverse axis horizontal or vertical? Explain.
+\answer{The transverse axis is horizontal because the vertices and foci lie along the x-axis.}
+g. Graph the equation.
+\answer{See graph.}
+% FIG 60 723 1023 916 1217
+\placeholder{graph}{Answer 13g: unit grid [-5,5] both axes, black x/y axes with arrows, O origin, labels +/-2,+/-4. Red horizontal hyperbola x^2/9-y^2/25=1 with arrowheads at four ends and vertices (+/-3,0). No asymptotes.}
+\end{practice}
+\begin{practice}{14}{2}
+Use Structure Write the equation of the hyperbola that has its center at the origin, vertices on the y-axis 8 units apart, and asymptotes (y=\pm\frac{4}{3}x). Then graph the hyperbola.
+\answer{(\frac{y^2}{16}-\frac{x^2}{9}=1)}
+% FIG 61 474 1168 666 1365
+\placeholder{graph}{Answer 14: grid [-10,10] both axes with spacing 2, labels +/-4,+/-8, black x/y axes arrows and O origin. Red vertical hyperbola y^2/16-x^2/9=1 with vertices (0,+/-4) and arrowheads at four ends.}
+\end{practice}
+\begin{practice}{15}{2}
+Error Analysis Describe and correct the error Elaine made in determining the vertices, asymptotes, and foci of a hyperbola.
+\te{Student work marked with a red X:}
+hyperbola: (\frac{y^2}{144}-\frac{x^2}{256}=1)
+vertices: ((-12,0)) and ((12,0))
+asymptotes: (y=\pm\frac{4}{3}x)
+foci: ((0,-400)) and ((0,400))
+\answer{The equation shows that there is a vertical transverse axis, so the vertices are at ((0,-12)) and ((0,12)), not ((-12,0)) and ((12,0)). Also, because the transverse axis is vertical, the asymptotes are at (y=\pm\frac{3}{4}x), not (y=\pm\frac{4}{3}x). Finally, (c^2=144+256=400), so (c=20). This means the foci are at ((0,-20)) and ((0,20)), not ((0,-400)) and ((0,400)).}
+\end{practice}
+\begin{practice}{16}{2}
+Higher Order Thinking The square of the distance from the center of a hyperbola to a focus is 78. The intersections of the hyperbola with the transverse axis are ((-\sqrt{20},0)) and ((\sqrt{20},0)). Write the equation of the hyperbola.
+\answer{(\frac{x^2}{20}-\frac{y^2}{58}=1)}
+\end{practice}
+\begin{practice}{17}{2}
+Construct Arguments Determine whether the equation (\frac{x^2}{18}-\frac{y^2}{32}=-2) represents a hyperbola. Explain.
+\answer{The equation (\frac{x^2}{18}-\frac{y^2}{32}=-2) is a hyperbola because after dividing both sides of the equation by (-2), the result is (-\frac{x^2}{36}+\frac{y^2}{64}=1). Then the (x^2)- and (y^2)-terms can be switched using the Commutative Property of Addition. The result is (\frac{y^2}{64}-\frac{x^2}{36}=1), which is in the general form of the equation of a hyperbola.}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Write an equation for the hyperbola. SEE EXAMPLE 1
+foci at ((5,0)) and ((-5,0)) and a constant difference of 8
+\answer{(\frac{x^2}{16}-\frac{y^2}{9}=1)}
+\end{practice}
+\begin{practice}{19}{1}
+Write an equation for the hyperbola. SEE EXAMPLE 1
+foci at ((0,15)) and ((0,-15)) and a constant difference of 18
+\answer{(\frac{y^2}{81}-\frac{x^2}{144}=1)}
+\end{practice}
+\begin{practice}{20}{1}
+Graph the hyperbola. SEE EXAMPLE 2
+(\frac{y^2}{4}-\frac{x^2}{9}=1)
+\answer{See graph.}
+% FIG 62 154 352 347 547
+\placeholder{graph}{Answer 20: unit grid [-5,5] both axes, black arrowed x/y axes, O and labels +/-2,+/-4. Red vertical hyperbola y^2/4-x^2/9=1, vertices (0,+/-2), four arrowheads.}
+\end{practice}
+\begin{practice}{21}{1}
+Graph the hyperbola. SEE EXAMPLE 2
+(\frac{x^2}{1}-\frac{y^2}{25}=1)
+\answer{See graph.}
+% FIG 62 154 570 347 765
+\placeholder{graph}{Answer 21: unit grid [-5,5] both axes, black arrowed x/y axes, O and labels +/-2,+/-4. Red narrow horizontal hyperbola x^2-y^2/25=1, vertices (+/-1,0), four arrowheads.}
+\end{practice}
+\begin{practice}{22}{1}
+Graph the hyperbola. SEE EXAMPLE 2
+(\frac{x^2}{16}-\frac{y^2}{36}=1)
+\answer{See graph.}
+% FIG 62 154 788 347 983
+\placeholder{graph}{Answer 22: unit grid [-5,5] both axes, black arrowed x/y axes, O and labels +/-2,+/-4. Red horizontal hyperbola x^2/16-y^2/36=1, vertices (+/-4,0), four arrowheads.}
+\end{practice}
+\begin{practice}{23}{1}
+Graph the hyperbola. SEE EXAMPLE 2
+(\frac{y^2}{49}-\frac{x^2}{25}=1)
+\answer{See graph.}
+% FIG 62 154 1005 387 1239
+\placeholder{graph}{Answer 23: grid [-12,12] both axes with spacing 2, black arrowed x/y axes, O and labels +/-4,+/-8. Red vertical hyperbola y^2/49-x^2/25=1, vertices (0,+/-7), four arrowheads.}
+\end{practice}
+\begin{practice}{24}{1}
+Write an equation for the hyperbola with the given information. SEE EXAMPLE 3
+vertices ((0,-6)) and ((0,6)) and asymptotes (y=\pm\frac{2}{3}x)
+\answer{(\frac{y^2}{36}-\frac{x^2}{81}=1)}
+\end{practice}
+\begin{practice}{25}{1}
+Write an equation for the hyperbola with the given information. SEE EXAMPLE 3
+vertices ((-9,0)) and ((9,0)) and asymptotes (y=\pm\frac{4}{3}x)
+\answer{(\frac{x^2}{81}-\frac{y^2}{144}=1)}
+\end{practice}
+\begin{practice}{26}{2}
+A telescope is made with a hyperbolic mirror, shown graphed on the coordinate plane. To assemble the telescope correctly, the manufacturer needs to know the distance to the focus on the same side as the reflective side of the mirror. What is this distance? What equation represents the location of the mirror? SEE EXAMPLE 4
+% FIG 61 813 713 954 833
+\placeholder{graph}{Grid spacing 4, x from -8 to 28 and y from -28 to 8. Black arrowed x/y axes, O origin; labels x=8,16,24 and y=-16,-24. Red downward branch y=-sqrt(25+25x^2/144) with arrowheads and filled labeled points (0,-5) and (12,-sqrt(50)).}
+\answer{(\frac{y^2}{25}-\frac{x^2}{144}=1); The focus is 8 units behind the mirror.}
+\end{practice}
+\begin{practice}{27}{1}
+Which conic section is represented by each equation? SEE EXAMPLE 5
+(16x^2+25y^2-64=0)
+\answer{ellipse}
+\end{practice}
+\begin{practice}{28}{1}
+Which conic section is represented by each equation? SEE EXAMPLE 5
+(-49x^2+36y^2-48=0)
+\answer{hyperbola}
+\end{practice}
+\begin{practice}{29}{1}
+Which conic section is represented by each equation? SEE EXAMPLE 5
+(4y^2+8y-x-16=0)
+\answer{parabola}
+\end{practice}
+\begin{practice}{30}{1}
+Which conic section is represented by each equation? SEE EXAMPLE 5
+(-x^2-y^2+5x-10y+15=0)
+\answer{circle}
+\end{practice}
+% Source page 62: 477, Apply and Assessment Practice
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice & Problem Solving is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{practice}{31}{2}
+APPLY. Model With Mathematics When the light from a lamp shines on a wall, a hyperbola is formed. What is the equation of the hyperbola with asymptotes (y=\pm\frac{2}{5}x)?
+% FIG 62 575 346 833 515
+\placeholder{illustration}{Wall lamp illuminating a wooden wall upward in a hyperbolic region. Black horizontal/vertical axes with arrows cross at top of lamp; filled vertex on vertical axis labeled (0,2). No ticks or axis letters.}
+\answer{(\frac{y^2}{4}-\frac{x^2}{25}=1)}
+\end{practice}
+\begin{practice}{32}{2}
+Model With Mathematics In order to take a panoramic photograph, a camera must have a hyperbolic mirror. The graphic shows that the camera is below the mirror. The lens is at one focus of the camera, and the mirror is at one vertex. Write an equation for the cross section of the mirror.
+% FIG 62 584 635 841 802
+\placeholder{illustration}{Camera below blue hyperbolic mirror, white vertical segment joining white dot at mirror bottom labeled Vertex: (0,2) and white dot at lens top labeled Focus: (0,-2.5).}
+\answer{(\frac{y^2}{4}-\frac{x^2}{2.25}=1)}
+\end{practice}
+\begin{practice}{33}{2}
+Reason Jupiter's gravity changes a spacecraft's path to a hyperbola as it approaches. The focus of the hyperbola nearest the spacecraft's path is the center of Jupiter. The diameter of the planet is 139,822 km. Suppose the path of an approaching spacecraft has an equation with (a=80,000) km and (c=170,000) km. Assuming the transverse axis is horizontal, write the equation that models the path of the spacecraft as it approaches Jupiter. What is the distance from the spacecraft to the planet at the vertex of the hyperbola?
+\answer{(\frac{x^2}{6,400,000,000}-\frac{y^2}{22,500,000,000}=1); 20,089 km}
+\end{practice}
+\begin{practice}{34}{1}
+ASSESSMENT PRACTICE. Write an equation of the hyperbola shown in the graph.
+% FIG 62 896 319 1027 448
+\placeholder{graph}{Unit grid [-5,5] both axes, black x/y axes with arrows, O origin. Printed x tick labels -4,-2,2,5 (5 at x=4); y labels 8 at y=4,2,-2,-4. Red vertical hyperbola with vertices (0,+/-1), four arrows and red filled foci (0,+/-2).}
+\answer{(\frac{y^2}{1}-\frac{x^2}{3}=1)}
+\te{Printed graph labels 8 at the upper y=4 gridline and 5 at the x=4 gridline; likely 4 in each position.}
+\end{practice}
+\begin{practice}{35}{1}
+SAT/ACT Which equation represents a hyperbola?
+A. (4x^2+81y^2+12=0)
+B. (9x^2+16y^2-4x-24y+18=0)
+C. (49y^2+7y-2x+14=0)
+D. (-36x^2-36y^2+6x-13y+20=0)
+E. (25x^2-121y^2+64=0)
+\answer{E}
+\end{practice}
+\begin{practice}{36}{3}
+Performance Task Lateisha wants to graph a hyperbola with the equation (y^2-x^2+16=0). The function (y=\sqrt{x^2-16}) represents part of the hyperbola. Lateisha used the TABLE feature on her graphing calculator to show several points on the graph of (y=\sqrt{x^2-16}).
+\begin{tabular}{ll}
+X & Y1 \\
+0 & ERROR \\
+1 & ERROR \\
+2 & ERROR \\
+3 & ERROR \\
+4 & 0 \\
+5 & 3 \\
+6 & 4.4721 \\
+\end{tabular}
+\te{Calculator cursor highlights X=0; status line X=0.}
+Part A Explain why some entries show ERROR.
+\answer{For x-values of 0, 1, 2, and 3, the expression (x^2-16) is negative. The square root of a negative number results in entries that show ERROR.}
+Part B Using the information in the table, what can you conclude about the vertices of the equation (y^2-x^2+16=0)?
+\answer{The table shows that ((4,0)) is a vertex of the equation (y^2-x^2+16=0). This means ((-4,0)) is also a vertex.}
+Part C Write the equation (y^2-x^2+16=0) in standard form to prove you correctly found the vertices from the table.
+\answer{(\frac{x^2}{16}-\frac{y^2}{16}=1); The value of (a^2) is 16, so (a=4). This means the vertices are at ((-4,0)) and ((4,0)).}
+\end{practice}
+% Source page 63: 477A, Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & G93 \\
+2 & 1 & G93 \\
+3 & 1 & G93 \\
+4 & 1 & G93 \\
+5 & 1 & G93 \\
+\end{tabular}
+RtI Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{9-4 Lesson Quiz: Hyperbolas}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. Which statement is true for the hyperbola represented by the equation (\frac{y^2}{25}-\frac{x^2}{75}=1)?
+A. The vertices are ((5\sqrt3,0)) and ((-5\sqrt3,0)).
+B. The foci are ((0,5\sqrt2)) and ((0,-5\sqrt2)).
+C. The asymptotes are (y=\pm\frac{\sqrt3}{3}x).
+D. It opens left and right.
+\answer{1. C}
+2. Write an equation for the hyperbola with foci ((0,6)) and ((0,-6)) and a constant difference of 8.
+A. (\frac{y^2}{4}-\frac{x^2}{9}=1)
+B. (\frac{y^2}{4}+\frac{x^2}{9}=1)
+C. (\frac{y^2}{16}+\frac{x^2}{20}=1)
+D. (\frac{y^2}{16}-\frac{x^2}{20}=1)
+\answer{2. D}
+3. Write an equation for the hyperbola with vertices ((9,0)) and ((-9,0)) and asymptotes (y=\pm\frac{2}{3}x).
+A. (\frac{y^2}{81}-\frac{x^2}{36}=1)
+B. (\frac{x^2}{81}-\frac{y^2}{36}=1)
+C. (\frac{x^2}{9}-\frac{y^2}{4}=1)
+D. (\frac{y^2}{9}-\frac{x^2}{4}=1)
+\answer{3. B}
+4. Graph the hyperbola represented by the equation (9x^2-4y^2-36=0).
+\answer{4. See graph.}
+% FIG 63 695 615 793 714
+\placeholder{graph}{Quiz answer 4: unit grid [-5,5] both axes; arrowed black x/y axes, O and labels +/-2,+/-4. Magenta horizontal hyperbola x^2/4-y^2/9=1, vertices (+/-2,0), four arrowheads; dashed magenta asymptotes y=+/-3x/2 through origin with arrows.}
+5. Which type of conic section does the equation (3x^2-3y^2+15=0) represent?
+A. parabola
+B. circle
+C. ellipse
+D. hyperbola
+\answer{5. D}
+enVision Algebra 2 Assessment Sourcebook. Copyright by Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+% Source page 64: 477B, Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced. Practice. SavvasRealize.com.
+\textbf{Reteach to Build Understanding} I
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+Name. 9-4 Reteach to Build Understanding. Hyperbolas. enVision Algebra 2. SavvasRealize.com.
+1. Use the graph of the hyperbola shown to complete the table.
+The direction of the hyperbola is horizontal.
+Since the graph is horizontal, use the equation (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1).
+% FIG 64 359 414 435 489
+\placeholder{graph}{Reteach 1: unit grid [-6,6] both axes, black x/y axes with arrows, labels +/-2,+/-4. Black horizontal hyperbola with vertices (-3,0),(3,0) labeled and four arrowheads, dashed asymptotes y=+/-2x/3. Right slope triangle marks a=3 horizontally and b=2 vertically.}
+\begin{tabular}{lll}
+Part of Graph & Explanation & Hyperbola in Graph \\
+Vertices & Points where hyperbola crosses the x-axis & \answer{((3,0)) and ((-3,0))} \\
+Constant & Distance between vertices & (3-(-3)=\answer{6}) \\
+Asymptotes & (y=\pm\frac{b}{a}x), where (\frac{b}{a}) is the slope & (y=\pm\answer{\frac{2}{3}}x) \\
+Equation of Hyperbola & (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1) & (\frac{x^2}{\answer{9}}-\frac{y^2}{\answer{4}}=1) \\
+\end{tabular}
+2. Edwin determined that the equation for a hyperbola with vertices ((0,-2)) and ((0,2)) with an asymptote of (y=\frac{1}{2}x) is (\frac{x^2}{4}-\frac{y^2}{16}=1). What error did he make? What is the correct equation?
+\answer{He confused the (x) and (y). The vertices are on the y-axis, so the graph is vertical. The equation should be (\frac{y^2}{4}-\frac{x^2}{16}=1).}
+3. Find the equation of a hyperbola using the Pythagorean Theorem, if (b=9) and (c=12). Assume that the transverse axis is horizontal.
+Use (a^2+b^2=c^2), where (b^2=\answer{81}), and (c^2=\answer{144}).
+(a^2+\answer{81}=\answer{144})
+(a^2=\answer{63})
+Since the transverse axis is horizontal, (a^2) correlates to (x^2).
+Substitute (a^2=\answer{63}) and (b^2=\answer{81}) into the equation (\frac{x^2}{a^2}-\frac{y^2}{b^2}=1).
+The equation for the hyperbola is (\frac{x^2}{\answer{63}}-\frac{y^2}{81}=1).
+enVision Algebra 2 Teaching Resources. Copyright by Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice} I O
+Provides extra practice for each lesson. MathXL for School.
+Name. 9-4 Additional Practice. Hyperbolas. enVision Algebra 2. SavvasRealize.com.
+Write an equation for the hyperbola with the given information.
+1. foci at ((6,0)) and ((-6,0)) and a constant difference of 10
+\answer{(\frac{x^2}{25}-\frac{y^2}{11}=1)}
+2. foci at ((3,0)) and ((-3,0)) and a constant difference of 4
+\answer{(\frac{x^2}{4}-\frac{y^2}{5}=1)}
+Graph each hyperbola.
+3. (\frac{x^2}{4}-\frac{y^2}{4}=1)
+\answer{See graph.}
+% FIG 64 563 483 623 543
+\placeholder{graph}{Additional Practice 3: grid spacing 2, window [-10,10] both axes, black arrowed x/y axes, O and labels +/-4,+/-8. Magenta horizontal hyperbola x^2/4-y^2/4=1, vertices (+/-2,0), four arrowheads.}
+4. (y^2-\frac{x^2}{9}=1)
+\answer{See graph.}
+% FIG 64 649 483 710 543
+\placeholder{graph}{Additional Practice 4: grid spacing 2, window [-10,10] both axes, black arrowed x/y axes, O and labels +/-4,+/-8. Magenta vertical hyperbola y^2-x^2/9=1, vertices (0,+/-1), four arrowheads.}
+5. (\frac{x^2}{25}-\frac{y^2}{4}=1)
+\answer{See graph.}
+% FIG 64 737 483 797 543
+\placeholder{graph}{Additional Practice 5: grid spacing 2, window [-10,10] both axes, black arrowed x/y axes, O and labels +/-4,+/-8. Magenta horizontal hyperbola x^2/25-y^2/4=1, vertices (+/-5,0), four arrowheads.}
+Write an equation for the hyperbola with the given information.
+6. vertices at ((4,0)) and ((-4,0)) and asymptotes (y=\pm\frac{3}{2}x)
+\answer{(\frac{x^2}{16}-\frac{y^2}{36}=1)}
+7. vertices at ((0,5)) and ((0,-5)) and asymptotes (y=\pm\frac{5}{7}x)
+\answer{(\frac{y^2}{25}-\frac{x^2}{49}=1)}
+8. The graph shows a two-dimensional side view of a satellite dish and the small reflector inside it. The vertex of the small reflector is 6 in. from focus (F_1) and 20 in. from focus (F_2). What equation best models the small reflector?
+% FIG 64 746 597 807 659
+\placeholder{graph}{Additional Practice 8: black grid spacing 3, x/y axes with arrows, O origin and labels +/-6,+/-12, window approximately [-15,15] both axes. Left-opening reflector branch with arrows, labeled vertex (-7,0), left focus F1=(-13,0), right focus F2=(13,0). Larger dish drawn as narrow left-opening curve at right edge near x=13 with arrowheads.}
+\answer{(\frac{x^2}{49}-\frac{y^2}{120}=1)}
+Which conic section is represented by each equation?
+9. (3x^2+6x+5y^2-20y-13=0)
+\answer{ellipse}
+10. (x^2-9y^2+36y-45=0)
+\answer{hyperbola}
+11. (x^2+y^2-8x-4y+19=0)
+\answer{circle}
+12. Describe how you can find the asymptotes when you know the (a) and (c) values for a vertical hyperbola.
+\answer{Use the equation (c^2=a^2+b^2) to find the value of (b). Then substitute values of (a) and (b) in the equation (y=\pm\frac{a}{b}x) to find the asymptotes.}
+enVision Algebra 2 Teaching Resources. Copyright by Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment} O A
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Name. 9-4 Enrichment. Hyperbolas. enVision Algebra 2. SavvasRealize.com.
+A contractor has been hired to replicate the design of two nuclear cooling towers in another city. To design the towers properly, he must determine the equation of the hyperbolas formed by the towers. Assuming that the center of each tower is the origin, use the standard form for a horizontal hyperbola to develop the equation for each hyperbola. Round the values in the final equations to the nearest integer.
+% FIG 64 939 470 1081 555
+\placeholder{photo}{Two nuclear cooling towers, labeled Tower 1 (left) and Tower 2 (right), with dimension lines. Tower 1 top diameter 78 m, waist diameter 72 m, height from waist to top 65.96 m. Tower 2 top diameter 84 m, waist diameter 80 m, waist-to-top height 79.52 m.}
+\answer{Tower A:
+(a^2=(72\div2)^2=36^2=1,296)
+(y^2=65.96^2\approx4,350.72)
+(x^2=(78\div2)^2=39^2=1,521)
+(b^2=\frac{y^2}{\frac{x^2}{a^2}-1})
+(b^2=\frac{4,350.72}{\frac{1,521}{1,296}-1})
+(b^2\approx25,060)
+The equation for Tower A is (\frac{x^2}{1,296}-\frac{y^2}{25,060}=1).
+Tower B:
+(a^2=(80\div2)^2=40^2=1,600)
+(y^2=79.52^2\approx6,323.43)
+(x^2=(84\div2)^2=42^2=1,764)
+(b^2=\frac{y^2}{\frac{x^2}{a^2}-1})
+(b^2=\frac{6,323.43}{\frac{1,764}{1,600}-1})
+(b^2\approx61,692)
+The equation for Tower B is (\frac{x^2}{1,600}-\frac{y^2}{61,692}=1).}
+\te{Printed Tower 1/2 in the photograph and Tower A/B in the key; likely corresponding labels.}
+enVision Algebra 2 Teaching Resources. Copyright by Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I O
+Helps students develop and reinforce understanding of key terms and concepts.
+Name. 9-4 Mathematical Literacy and Vocabulary. Hyperbolas. enVision Algebra 2. SavvasRealize.com.
+Gregory wanted to find the equation for a hyperbola with foci ((0,-9)) and ((0,9)) and a constant difference of 16. He wrote the steps to solve the problem on note cards, but they got mixed up.
+\te{Note cards in printed reading order:}
+(x^2+(y+9)^2=256+32\sqrt{x^2+(y-9)^2}+x^2+(y-9)^2)
+(\frac{y^2}{64}-\frac{x^2}{17}=1)
+(\frac{81}{64}y^2-18y+64=x^2+y^2-18y+81)
+(\frac{9}{8}y-8=\sqrt{x^2+(y-9)^2})
+(\frac{17}{64}y^2-x^2=17)
+(36y-256=32\sqrt{x^2+(y-9)^2})
+(x^2+y^2+18y+81=256+32\sqrt{x^2+(y-9)^2}+x^2+y^2-18y+81)
+List the steps in order to solve the problem.
+1. (d_2=\sqrt{x^2+(y+9)^2}) and (d_1=\sqrt{x^2+(y-9)^2})
+2. (\sqrt{x^2+(y+9)^2}-\sqrt{x^2+(y-9)^2}=16)
+3. (\sqrt{x^2+(y+9)^2}=16+\sqrt{x^2+(y-9)^2})
+4. \answer{(x^2+(y+9)^2=256+32\sqrt{x^2+(y-9)^2}+x^2+(y-9)^2)}
+5. \answer{(x^2+y^2+18y+81=256+32\sqrt{x^2+(y-9)^2}+x^2+y^2-18y+81)}
+6. \answer{(36y-256=32\sqrt{x^2+(y-9)^2})}
+7. \answer{(\frac{9}{8}y-8=\sqrt{x^2+(y-9)^2})}
+8. \answer{(\frac{81}{64}y^2-18y+64=x^2+y^2-18y+81)}
+9. \answer{(\frac{17}{64}y^2-x^2=17)}
+10. The equation is \answer{(\frac{y^2}{64}-\frac{x^2}{17}=1)}.
+enVision Algebra 2 Teaching Resources. Copyright by Savvas Learning Company LLC. All Rights Reserved.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Tablet preview: Solve the system of equations by graphing. (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Exit. Question Help. Help Me Solve This. View an Example. Video. Textbook. Glossary. Math Tools. Print. 1 part remaining. Clear All. Check Answer. Review progress. Question 5 of 14. Go. Back. Next.}
+% FIG 64 853 1047 960 1156
+\placeholder{graph}{Digital preview blank unit coordinate grid [-10,10] both axes, arrowed x/y axes, labels at even integers, no plotted data.}
+\end{te-addendum}
+
+\end{document}

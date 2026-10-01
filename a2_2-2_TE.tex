@@ -1,0 +1,926 @@
+\documentclass{article}
+% Source: Topic_02_Teacher_Edition.pdf, PDF pages 23-34 (printed pages 68A-75B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 23: 68A Lesson Overview
+\begin{lesson-meta}
+lesson: 2-2
+title: Standard Form of a Quadratic Function
+standards: none printed
+practices: none printed
+objective: I can write and graph quadratic functions in standard form.
+
+essential question: What key features can you determine about a quadratic function from an equation in standard form?
+
+\textbf{VOCABULARY}
+\item standard form of a quadratic function
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 2-2 \\
+Title & Standard Form of a Quadratic Function \\
+Standards & none printed \\
+I CAN Objective & I can write and graph quadratic functions in standard form. \\
+Essential Question & What key features can you determine about a quadratic function from an equation in standard form? \\
+Lesson Vocabulary & standard form of a quadratic function \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Create quadratic functions written in standard form.
+\item Identify key features of quadratic functions and graph a quadratic function written in standard form.
+Essential Understanding. A quadratic function in vertex form can be rewritten in standard form to highlight different features of the function's graph. The key features are used to interpret values in context.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Identified the key features of a quadratic function written in vertex form and used those features to graph the function.
+In this lesson, students:
+\item Rewrite quadratic functions in standard form.
+\item Graph a quadratic function written in standard form by identifying its key features.
+Later in this topic, students will:
+\item Rewrite quadratic functions in factored form.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that the standard form of a quadratic function can be used to find the vertex and axis of symmetry for the function's graph.
+\item Students apply the standard form of a quadratic function to solve real-world problems such as projectile motion problems.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+REVIEW VOCABULARY English & Spanish \\
+vertex form of a quadratic function & forma del vértice de una función \\
+NEW VOCABULARY & \\
+standard form of a quadratic function & forma normal de una función \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Review the term vertex form of a quadratic function and introduce the term standard form of a quadratic function. If necessary, help students to differentiate between the two by having students sort the equations shown below to indicate which illustrate the vertex form of a quadratic function and which illustrate the standard form of a quadratic function.
+(f(x)=x^2+2x-1)
+(f(x)=(x+1)^2-2)
+(f(x)=a(x-h)^2+k)
+(f(x)=ax^2+bx+c)
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion cover, dark background and blue/purple spherical artwork, labeled Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students create quadratic functions written in standard form. They use the coefficients of the quadratic and linear terms to calculate the coordinates of the vertex and the axis of symmetry. Students also understand why the constant term in the quadratic function provides the value of the (y)-intercept.
+Students identify key features of quadratic functions and relate them to the graphs of the functions.
+\textbf{Applying Math Practices}
+Model with Mathematics
+Students use the standard form of a quadratic function to represent a real-world situation where height is expressed as a function of time.
+Look For and Make Use of Structure
+Students find relationships involving (a), (h), and (k) by converting from vertex form to standard form and then use it to identify the key features of the function's graph, including the vertex, axis of symmetry, maximum, and minimum.
+\end{te-addendum}
+% Source page 24: 68B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE & EXPLAIN}
+INSTRUCTIONAL FOCUS Students apply their understanding of multiplying binomial expressions and using the Distributive Property to determine whether the vertex form of a quadratic function is rewritten correctly in standard form.
+STUDENT COMPANION Students can complete the Critique & Explain activity in their Student Companion.
+Critique & Explain is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving
+Q: How was the process used by Jordan similar to that used by Emery? How was it different?
+\answer{Both students expanded the binomial. Jordan distributed the coefficient before expanding, while Emery used an incorrect sign and forgot to include the middle term.}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics
+Q: How does understanding the order of operations help you to determine whether Jordan and/or Emery are correct?
+\answer{For each expression, you can check whether it was simplified according to the order of operations. If it was, then the resulting equation is equivalent to the original equation and is therefore correct. If it was not, then the resulting equation is not equivalent to the original equation and is therefore incorrect.}
+For Early Finishers
+Q: Rewrite (y=\frac{1}{3}(x-\frac{1}{2})^2-\frac{3}{4}) in the form (y=ax^2+bx+c).
+\answer{(y=\frac{1}{3}x^2-\frac{1}{3}x-\frac{2}{3})}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse
+Discuss the correct method for rewriting the vertex form of the quadratic function in (y=ax^2+bx+c) form.
+Q: How would you summarize the steps needed to rewrite the vertex form of the quadratic function in the form (y=ax^2+bx+c)?
+\answer{Square the binomial, distribute the coefficient, and then combine like terms.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with CRITIQUE & EXPLAIN
+Reason Casey rewrote the vertex form too.
+(y=2(x-4)^2+5)
+(=2(x+1)^2)
+(=2(x^2+2x+1)^2)
+(=2x^2+4x+2)
+Q: Is Casey correct? Explain.
+\answer{No; Casey incorrectly added 5 to the parenthetical expression. Instead, she should have expanded the parenthetical expression first, then distributed the 2, and then added like terms to get (y=2x^2-16x+37).}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE & EXPLAIN}
+Jordan and Emery are rewriting the vertex form of the quadratic function (y=2(x-4)^2+5) in the form (y=ax^2+bx+c).
+\begin{tabular}{ll}
+Jordan & Emery \\
+(y=2(x-4)^2+5) & (y=2(x-4)^2+5) \\
+(=(2x-8)^2+5) & (=2(x^2-16)+5) \\
+(=4x^2-32x+64+5) & (=2x^2-32+5) \\
+(=4x^2-32x+69) & (=2x^2-27) \\
+\end{tabular}
+A. Communicate Precisely Did Jordan rewrite the equation correctly? Did Emery? Explain.
+\answer{A. Neither Jordan nor Emery is correct. The correct equation is (y=2x^2-16x+37).}
+B. Without rewriting the equation, how could you prove that Jordan or Emery's equations are not equivalent to the original?
+\answer{B. You can say that neither Student squared the binomial correctly. Jordan distributed the 2 before squaring the binomial. Emery didn't square the binomial correctly.}
+\te{Digital version repeats the same prompt and adds: Drag the slider to reveal the rest of their solutions. Its whiteboard displays only the initial equation for each student.}
+\end{model-discuss}
+% Source page 25: 68 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning
+Introduce students to the features of a quadratic function. Remind them that the graph of a quadratic function is a parabola. Explain that the standard form of the function provides key information about the shape of the parabola.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Find the Vertex from a Quadratic Function in Standard Form}
+Build Procedural Fluency from Conceptual Understanding
+Q: How are the values of (a), (b), and (c) in the standard form and vertex form of the quadratic function related?
+\answer{(a) is the same in both forms, (b) is equal to (-2ah), and (c) is equal to (ah^2+k).}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Find the Vertex from a Quadratic Function in Standard Form}
+\textbf{CONCEPTUAL UNDERSTANDING}
+How can you find the vertex from a quadratic function written in standard form?
+A. What is the (x)-coordinate of the vertex of (f(x)=ax^2+bx+c)?
+The standard form of a quadratic function is (y=ax^2+bx+c) where (a), (b), and (c) are real numbers, and (a\neq 0). Use the vertex form to derive the standard form.
+(y=a(x-h)^2+k)
+(y=a(x^2-2xh+h^2)+k)
+(y=ax^2-2ahx+ah^2+k)
+The equation (y=ax^2-2ahx+ah^2+k) is a quadratic function in standard form with (a=a), (b=-2ah), and (c=ah^2+k).
+The vertex of a quadratic function is (h,k), so to determine the (x)-coordinate of the vertex, solve (b=-2ah) for (h).
+(b=-2ah)
+(-\frac{b}{2a}=h)
+\te{Callout: Since (h) is the (x)-coordinate of the vertex, you can use this value to find the (y)-value, (k), of the vertex.}
+\te{LOOK FOR RELATIONSHIPS By converting vertex form into standard form, you can see how (h) and (k) relate to the coefficients of the equation.}
+\answer{A. (h=-\frac{b}{2a})}
+B. What is the vertex of the function (f(x)=x^2-6x+10)?
+Step 1 Identify the coefficients (a), (b), and (c).
+(a=1), (b=-6), and (c=10)
+Step 2 Solve for (h), the (x)-coordinate of the vertex.
+(h=-\frac{b}{2a}=-\frac{(-6)}{2(1)}=3)
+\answer{B. (3,1)}
+\te{Example 1 continues on printed page 69, transcribed below in its continuation addendum.}
+\end{example}
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: What do you need to know to determine the (x)-coordinate of the vertex? The (y)-coordinate of the vertex?
+\answer{(a) and (b); the value of the (x)-coordinate of the vertex}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples} Additional Examples are available at SavvasRealize.com.
+\textbf{ADDITIONAL EXAMPLE 2}
+A hang-glider jumps from a cliff and falls before the wind catches the glider. Graph the path of the glider described by the function (f(x)=2.5x^2-25x+500).
+\placeholder{graph}{Additional Example 2: orange upward parabola f(x)=2.5x^2-25x+500 shown in first quadrant, minimum (5,437.5), starts (0,500) and rises to (20,1000); gray axes x,y, x labels 0,4,8,12,16, y labels 0,200,400,600,800; grid spacing x=2,y=100, window x=0 to 20,y=0 to 1000.}
+\answer{See graph.}
+Example 2 Give students practice graphing parabolas with a real-world context with this additional example.
+Q: How can you determine how far the glider falls before the wind catches it?
+\answer{Calculate the minimum value for (y) (the (y)-coordinate of the vertex).}
+\te{Printed answer gives the minimum height; distance fallen would be the initial height minus that height.}
+Q: What does the (x)-axis in your graph represent?
+\answer{the distance from the cliff}
+Q: What does the (y)-axis in your graph represent?
+\answer{the height from the ground}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+What is the equation of the parabola that passes through the points (2,-3), (3,-6), and (-1,-6)?
+Substitute each given coordinate into the standard form of a parabola equation.
+(-3=a(2)^2+b(2)+c)
+(-6=a(3)^2+b(3)+c)
+(-6=a(-1)^2+b(-1)+c)
+Solve the system to find the values of (a), (b), and (c).
+(a=-1), (b=2), (c=-3)
+Substitute -1 for (a), -6 for (b), and 8 for (c) in the standard form of a quadratic equation.
+(y=-x^2+2x-3)
+\answer{(y=-x^2+2x-3)}
+\te{Printed substitution sentence says -6 for b and 8 for c; likely 2 and -3, as the preceding coefficients and final equation show.}
+Example 4 Have students practice writing the equation of a parabola that passes through three points, none of which is the vertex, with this additional example.
+Q: How is the process of writing the equation of the parabola similar whether you use a calculator or not?
+\answer{Start by writing an equation in standard form for each point.}
+\end{te-addendum}
+% Source page 26: 69 Step 2 Understand & Apply
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{EXAMPLE 1 CONTINUED}
+Step 3 Substitute the value of (h) into the equation for (x) to find (k), the (y)-coordinate of the vertex.
+(f(3)=(3)^2-6(3)+10)
+(=9-18+10)
+(=1)
+The vertex of the function is ((h,k)=(3,1)).
+\end{te-addendum}
+\begin{tryit}{1}
+What is the vertex of the graph of the function (f(x)=x^2-8x+5)?
+\answer{(4,-11)}
+\end{tryit}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Graph a Quadratic Function in Standard Form}
+Examples are available at SavvasRealize.com.
+Use and Connect Mathematical Representations
+Q: What does the value of (a) tell you about the vertex and shape of the parabola?
+\answer{If (a>0), the vertex is the lowest point of the parabola and the parabola opens upward. If (a<0), the vertex is the highest point of the parabola and the parabola opens downward.}
+Q: How does knowing the axis of symmetry help to graph a quadratic function?
+\answer{Every point on one side of the axis of symmetry will have a corresponding point on the other side, which helps in sketching its shape.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Graph a Quadratic Function in Standard Form}
+How can you use key features to graph (f(x)=x^2-4x+8)?
+For (f(x)), identify (a), (b), and (c): (a=1), (b=-4), and (c=8).
+Step 1 Find the vertex and the axis of symmetry of the quadratic function.
+The (x)-coordinate of the vertex and the axis of symmetry can be determined by:
+(h=-\frac{b}{2a}=-\frac{(-4)}{2(1)}=2)
+Substitute the value of (h) for (x) into the equation to find the (y)-coordinate of the vertex, (k):
+(f(2)=(2)^2-4(2)+8=4)
+The vertex is (2,4), and the axis of symmetry is (x=2).
+Step 2 Find the (y)-intercept of the quadratic function.
+The (y)-intercept occurs at
+(f(0)=(0)^2-4(0)+8=8).
+\te{Callout: If the (y)-intercept is the same as the vertex, choose a different point here.}
+Step 3 Find a point symmetric to the (y)-intercept across the axis of symmetry.
+Since (0,8) is a point on the parabola 2 units to the left of the axis of symmetry, (x=2), (4,8) will be a point on the parabola 2 units to the right of the axis of symmetry.
+Step 4 Sketch the graph.
+Once you have three points associated with the quadratic function, you can sketch the parabola based on your knowledge of its general shape.
+\placeholder{graph}{Example 2: red upward parabola y=x^2-4x+8 with closed labeled points (0,8),(2,4),(4,8), red dashed axis of symmetry x=2, arrows on branches and vertical symmetry line. Gray axes x,y, x unit grid with labels -2,2,4,6, origin O, y spacing 2 with labels 4,8,12,16; window x=-3 to 7,y=-4 to 18. Callouts: axis of symmetry, y-intercept, point symmetric to the y-intercept, vertex.}
+\te{USE STRUCTURE How does (c) from the standard form of a quadratic function compare to (b) in a slope-intercept form of a linear function?}
+\answer{Vertex (2,4); axis of symmetry (x=2); (y)-intercept (0,8); symmetric point (4,8). See graph.}
+\end{example}
+\begin{tryit}{2}
+Use the key features to graph the function (f(x)=x^2-6x-1).
+\answer{See graph.}
+\placeholder{graph}{Try It 2 answer: red upward parabola y=x^2-6x-1, closed labeled points (0,-1),(6,-1), vertex (3,-10), vertical red axis x=3 with arrows. Gray axes x,y, x unit grid labels 2,4,6, y spacing 2 labels -8,-4,4, origin O; window x=-2 to 8,y=-12 to 8. Arrows at both upper ends of parabola.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: Why do you need to find the vertex in order to graph the function?
+\answer{The vertex is where the parabola changes direction.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error}
+Try It! 2 When (b) is negative, students sometimes forget to include the negative sign when calculating the (x)-coordinate of the vertex because there is already a negative sign in (h=-\frac{b}{2a}). Remind students to include the negative sign in the calculation when (b) is negative.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 2
+Q: Error Analysis Yuson says that for the quadratic function (f(x)=2x^2+3x+1), the vertex is located at the point (0,1). Is she correct? Explain.
+\answer{No; the vertex is (-\frac{3}{4},-\frac{1}{8}).}
+\end{te-addendum}
+\begin{te-addendum}{1}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 1 Some students may have difficulty with writing the vertex form of the quadratic equation in standard form. In particular, the relationship between (h) and (k) in the vertex form and the calculated values of (h) and (k) in the standard form can be confusing. To help students understand this relationship, have them draw two parabolas, labeling the vertex of one (h,k) and the vertex of the other (-\frac{b}{2a},f(-\frac{b}{2a})). Students can then practice calculating the coordinates of the vertex.
+Q: Find the vertex of (y=2x^2-8x+4).
+\answer{(2,-4)}
+Q: Find the vertex of (y=-2x^2-10x+6).
+\answer{(-2.5,18.5)}
+Q: Find the vertex of (y=x^2-2x-3).
+\answer{(1,-4)}
+\end{te-addendum}
+% Source page 27: 70 Step 2 Understand & Apply
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Interpret the Graph of a Quadratic Function}
+Examples are available at SavvasRealize.com.
+Use and Connect Mathematical Representations
+Q: On the graph, what do you notice about the value of (y) when (x=60)? What does this mean for the company?
+\answer{(y=0), if the company sold the headphones for \$60, there would be no profit, so it is likely that very few people will buy headphones at that price.}
+Q: Explain why it would never make sense for this function to have a negative value for (b).
+\answer{If (b) were negative, the selling prices would be negative.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Interpret the Graph of a Quadratic Function}
+\textbf{APPLICATION}
+The graph of the function (f(x)=-10x^2+700x-6,000) shows the profit a company earns for selling headphones at different prices. What is the maximum profit the company can expect to earn?
+\placeholder{illustration}{Three headphones colored orange, blue, and purple with respective price tags \$55, \$45, \$35 against a yellow-orange band.}
+\placeholder{graph}{Example 3 profit: orange downward parabola f(x)=-10x^2+700x-6000, vertex (35,6250), intercepts (10,0),(60,0). Gray first-quadrant x,y axes, x title Selling Price (\$), labels 0,20,40,60,80, grid spacing 10, window 0 to 90; y title Profit (\$), labels 0,2000,4000,6000,8000, grid spacing 1000, window 0 to 8000.}
+Formulate The (x)-axis shows selling price and the (y)-axis shows the profit. The maximum (y)-value of the profit function occurs at the vertex of its parabola. Find the vertex of the parabola.
+Compute Use the function to find the (x)- and (y)-coordinates of the vertex.
+Find the (x)-coordinate of the vertex.
+(h=-\frac{b}{2a})
+(h=-\frac{700}{2(-10)})
+(h=35)
+Find the (y)-coordinate of the vertex.
+(y=-10x^2+700x-6,000)
+(y=-10(35)^2+700(35)-6,000)
+(y=6,250)
+The vertex is (35,6,250).
+Interpret The selling price of \$35 per item gives the maximum profit of \$6,250.
+\te{COMMON ERROR Be careful with the negative signs; there is a negative in the formula and a negative value for (a).}
+\answer{Maximum profit \$6,250 at a selling price of \$35 per item.}
+\end{example}
+\begin{tryit}{3}
+A water balloon is tossed straight up from the ground. The height of the water balloon over time can be modeled by the function (y=-14x^2+34x+3). What was the maximum height of the water balloon after it was tossed?
+\placeholder{graph}{Try It 3: red downward parabola y=-14x^2+34x+3 starts at (0,3), maximum near (1.21,23.64), arrow as curve reaches x-axis near 2.51. Gray first quadrant x,y axes; x title Time (seconds), labels 0,1,2,3, grid spacing 0.5, window 0 to 4; y title Height (feet), labels 0,5,10,15,20, grid spacing 2.5, window 0 to 25.}
+\answer{23.6 ft}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: How could you determine how long it took the projectile to hit the ground?
+\answer{Substitute 0 for (y) and solve the equation for (x).}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 3
+Q: Make Sense and Persevere How long does it take for the projectile to reach its maximum height?
+\answer{(1\frac{3}{14}) seconds}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners} Use with EXAMPLE 3
+LISTENING BEGINNING Read the Formulate section to students while they listen. Have students point to the graph to identify each part as they listen to it being read: (x)-axis, (y)-axis, vertex, parabola.
+Q: Which axis shows the selling price?
+\answer{(x)-axis}
+Q: Which axis shows the profit in dollars?
+\answer{(y)-axis}
+Q: What point on the graph corresponds to the maximum value of the profit function?
+\answer{the vertex of the parabola}
+SPEAKING DEVELOPING Review the Interpret section and discuss what the (x)- and (y)-coordinate values of the vertex mean in the context of the problem. Challenge students to continue the discussion and tell in their own words what the other values on the parabola mean.
+Q: Why wouldn't selling the headphones at a higher price make a higher profit for the company?
+\answer{When a product costs too much, not as many people will buy it.}
+Q: What does the ordered pair (40,6,000) mean in the context of this situation?
+\answer{When the selling price is \$40, the profit is \$6,000.}
+WRITING EXPANDING Read the first sentence of the example together and have students identify the words related to money: profit, earns, selling, and prices. Ask students to write sentences in their journals showing how these words are related to each other and to money.
+Q: How are the words selling and prices related to each other?
+\answer{Prices tell the amount of money a company is selling something for.}
+Q: How are the words profit and earns related to each other?
+\answer{Profit is the money a company earns from selling something above the cost to make and/or sell it.}
+\end{te-addendum}
+% Source page 28: 71 Step 2 Understand & Apply
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Write the Equation of a Parabola Given Three Points}
+Examples are available at SavvasRealize.com.
+Use and Connect Mathematical Representations
+Q: Does the vertex always need to be one of the three points in order to write the equation of a parabola? Explain.
+\answer{No, any three points can be used to find the equation of the parabola. The vertex can then be calculated from the equation.}
+Q: What is another strategy you could use to write the equation of a parabola given three points?
+\answer{Use substitution.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Write the Equation of a Parabola Given Three Points}
+What is the equation of a parabola that passes through the points (-2,32), (1,5), and (3,17)?
+Step 1 Write three equations by substituting the given (x)- and (y)-values into the standard form of a parabola equation, (y=ax^2+bx+c). Then set up a system of three equations with three unknowns.
+(-2,32): (32=a(-2)^2+b(-2)+c)
+(32=4a-2b+c)
+(1,5): (5=a(1)^2+b(1)+c)
+(5=1a+1b+c)
+(3,17): (17=a(3)^2+b(3)+c)
+(17=9a+3b+c)
+Step 2 Solve the system.
+First, reduce the number of variables and equations to two by elimination.
+(32=4a-2b+c) (A)
+(5=a+b+c) (B)
+(17=9a+3b+c) (C)
+\te{Callouts: Subtracting (B) from (A) results in (27=3a-3b). Subtracting (B) from (C) results in (12=8a+2b).}
+Then, solve the system of two equations.
+(27=3a-3b) Multiply by (\frac{1}{3}): (9=a-b)
+(12=8a+2b) Multiply by (\frac{1}{2}): (6=4a+b)
+(15=5a)
+So (15=5a), or (3=a).
+Substitute values back into the equations to find (b) and (c).
+(9=a-b)
+(9=(3)-b)
+(b=-6)
+(5=a+b+c)
+(5=(3)+(-6)+c)
+(c=8)
+\te{Callouts: Substitute for (a) to find (b). Substitute for (a) and (b) to find (c).}
+The solution is (a=3), (b=-6), and (c=8).
+Step 3 Substitute for (a), (b), and (c) in the quadratic equation.
+(y=3x^2-6x+8)
+Step 4 Confirm that the graph of the equation passes through the three given points.
+\placeholder{graph}{Calculator graph, orange upward parabola Y=3X^2-6X+8, labeled points (-2,32),(1,5),(3,17), vertex (1,5); gray x,y axes and square grid; printed x scale:1, y scale:4, no numerical axis labels. Window approximately x=-7 to 7,y=-4 to 36.}
+\te{STUDY TIP Once you have eliminated one equation and one variable, you have multiple ways to solve the remaining two equations with two unknowns.}
+\answer{(y=3x^2-6x+8)}
+\end{example}
+\begin{tryit}{4}
+What is the equation of a parabola that passes through the points (2,-12), (-1,-15), and (-4,-90)?
+\answer{(y=-4x^2+5x-6)}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: Why is the coefficient for (c) always equal to 1 in the system of equations?
+\answer{Because in the quadratic expression (ax^2+bx+c), no matter what number you substitute for (x), the term (c) remains constant with a coefficient of 1.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 3 Try It Have students apply their understanding of quadratic functions to parabolic motion of projectiles.
+\item Graph of parabolic motion of projectile
+\item Equation: (y=-\frac{g}{2\cdot v^2\cdot\cos^2\theta}\cdot x^2+\tan\theta\cdot x)
+(g)=acceleration from gravity, (v)=velocity, (\theta)=angle the projectile was launched
+\placeholder{diagram}{Parabolic projectile motion: gray x axis right, y axis up, origin at launch; red downward parabolic arc starts at origin and returns to x-axis at right. Gray arrow v slopes up and right from origin, angle theta between it and x-axis. Downward arrow g drops from left side of arch. No grid, ticks, or numeric labels.}
+Q: Why is there no (c) term in the quadratic equation?
+\answer{(c) is equal to 0 since the (y)-intercept is (0,0), which would be the launch point of the projectile.}
+Q: What effect would a change in the angle have on the motion?
+\answer{Since it is part of both the (a) and the (b) terms, it would affect the height of the vertex and the width of the parabola (distance of travel).}
+\end{te-addendum}
+% Source page 29: 72 Step 2 Understand & Apply
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Use Quadratic Regression}
+Examples are available at SavvasRealize.com.
+Pose Purposeful Questions
+Q: If you substitute the values for (x) from the points on the graph into the quadratic equation obtained by regression, how would the calculated values for (y) be related to those in the graph?
+\answer{The values will differ slightly. The regression is finding the quadratic equation that best fits the data, but it may not fit exactly.}
+Q: How does using quadratic regression help when determining the maximum height the discus will reach?
+\answer{You can approximate the maximum height by calculating the vertex of the regression equation.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Use Quadratic Regression}
+Esteban is training for the discus throw. His coach recorded the horizontal distance and height of one of Esteban's discus throws. The graph shows the horizontal distance the discus traveled, in meters, and the height of the discus, in meters. What will be the height of the discus when it has traveled 15 meters from Esteban? Validate your model.
+\placeholder{graph}{Discus throw scatterplot over stadium illustration: thrower at lower left, red discus points labeled (1,1.75),(2,2.71),(3,3.52),(4,4.28),(5,5.45),(6,6.12),(7,6.79),(8,7.34),(9,7.99),(10,8.55). Black axes with arrows, horizontal Distance (meters) labels 0 through 11 by 1, vertical Height (meters) labels 0 through 9 by 1. No plotted fitted curve.}
+The discus will reach a maximum height and return to the ground. A quadratic equation could represent this data.
+Use graphing technology to perform quadratic regression with the data.
+\begin{tabular}{lll}
+X & Y & L3 \\
+1 & 1.75 & \\
+2 & 2.71 & \\
+3 & 3.52 & \\
+4 & 4.28 & \\
+5 & 5.45 & \\
+6 & 6.12 & \\
+7 & 6.79 & \\
+8 & 7.34 & \\
+\end{tabular}
+QuadReg
+(y=ax^2+bx+c)
+(a=-.0270833333)
+(b=1.058280303)
+(c=.6721666667)
+(R^2=.994486877)
+(y\approx -0.027x^2+1.058x+0.672)
+\te{Callout: Here is our model.}
+Use the model to find the height when the discus is 15 m away from Esteban.
+(y\approx -0.027(15)^2+1.058(15)+0.672)
+(y\approx 10.467\text{ m})
+Based on this model, when the discus is 15 meters away from Esteban, it will be at a height of approximately 10.5 meters.
+The (r)-squared value is close to one which indicates a good fit for the given data. The predicted height of 10.467 m is reasonable based on the last recorded height of 10 m.
+\te{Printed last recorded height of 10 m; the last plotted point is (10,8.55), so 10 is the horizontal distance.}
+\te{COMMON ERROR Remember that once you use a regression equation, you are approximating values. Regression is used to make predictions, not to find exact values of variables.}
+\te{Callout: To validate a mathematical model is to determine its reasonableness and its accuracy for the model's purpose.}
+\answer{Approximately 10.5 meters; (y\approx 10.467\text{ m}).}
+\end{example}
+\begin{te-addendum}{5}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: What does the information in the table tell you about the maximum height of the football?
+\answer{The maximum height is at the vertex, which occurs between 0.2 and 0.6 second. The height increases and then decreases during this interval.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 5
+Q: Model with Mathematics How many points does it take to determine the equation of a quadratic function? Why are so many more points used in Example 5?
+\answer{3 points, or the vertex and 1 other point; More points are used because the data may not precisely fit a quadratic equation; quadratic regression is used to find the equation that most nearly fits the data points.}
+\end{te-addendum}
+% Source page 30: 73, Example 5 continued and Concept Summary
+\begin{tryit}{5}
+\textbf{EXAMPLE 5 CONTINUED. Try It!}
+A fan threw a souvenir football into the air from the top of the bleachers toward the bottom of the bleachers. The table shows the height of the football, in feet, above the ground at various times, in seconds. If the football was not touched by anyone on its way to the ground, about how long did it take the football to reach the ground after it was thrown?
+\begin{tabular}{lrrrrrr}
+Time (s) & 0 & 0.2 & 0.4 & 0.6 & 0.8 & 1.0 \\
+Height (ft) & 10 & 11.76 & 12.24 & 11.44 & 9.36 & 6.0 \\
+\end{tabular}
+\answer{1.25 seconds}
+\end{tryit}
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{Concept Summary}
+Q: How is the standard form of a quadratic function useful?
+\answer{Using (a), (b), and (c) from the standard form of a quadratic function, you can find the (x)- and (y)-coordinates of the vertex, the axis of symmetry, the (y)-intercept, and whether it opens up or down.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 6 Students may omit the negative signs for the (x^2) and (x) terms in this quadratic function. Remind students that the negative signs need to be included when calculating the (x)-coordinate of the vertex, even though there is already a negative in the formula.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Standard Form of a Quadratic Function}
+\begin{tabular}{lll}
+STANDARD FORM & (y=ax^2+bx+c) & (y=-2x^2-8x+1) \\
+KEY FEATURES & & \\
+Vertex (h,k) & (x)-coordinate of vertex: (h=-\frac{b}{2a}). Substitute (h) for (x) and solve for (y) to find (k). & (h=-\frac{-8}{2(-2)}=-2); (y=-2(-2)^2-8(-2)+1=9\to(-2,9)) \\
+Axis of Symmetry & (x=-\frac{b}{2a}) & (x=-2) \\
+(y)-intercept & (0,c) & (0,1) \\
+\end{tabular}
+\textbf{GRAPHS}
+\placeholder{graph}{Generic red upward parabola labeled (y=ax^2+bx+c), red closed (y)-intercept (0,c) above the origin, vertex right of the (y)-axis below the (x)-axis. Red dashed vertical axis through the vertex labeled (x=-\frac{b}{2a}), arrowheads both ends. Black (x),(y) axes with arrows, origin O, no numbered ticks. Both parabola ends have arrows.}
+\placeholder{graph}{Red downward parabola (y=-2x^2-8x+1), red labeled closed points (-2,9), (-4,1), (0,1); red dashed axis (x=-2). Square grid spacing 2, window [-10,10] on both axes, numbered ticks -8,-4,4,8, axes (x),(y), origin O, arrows on axes and both downward curve ends.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION What key features can you determine about a quadratic function from an equation in standard form?
+\answer{axis of symmetry, vertex point, (y)-intercept, and whether it opens up or down}
+2. Error Analysis Amos said that the (y)-intercept of a quadratic function always tells the maximum value of that function. Explain Amos' error.
+\answer{The (y)-intercept may or may not represent the maximum value. The (y)-intercept is the same as the (y)-coordinate of the vertex if the parabola opens downward and the vertex is on the (y)-axis.}
+3. Make Sense and Persevere Why do you need at least three points to graph a quadratic function when not given an equation?
+\answer{Since the standard form of the equation has 3 coefficients: (a), (b), and (c), three ordered pairs are needed to determine the values of each coefficient. Solve the system of 3 equations to find the equation in standard form and then graph it.}
+\textbf{Do You KNOW HOW?}
+Find the vertex and (y)-intercept of the quadratic function.
+4. (y=3x^2-12x+40)
+\answer{vertex: (2,28); (y)-intercept: (0,40)}
+5. (y=-x^2+4x+7)
+\answer{vertex: (2,11); (y)-intercept: (0,7)}
+For 6 and 7, find the maximum or minimum of the parabola.
+6. (y=-2x^2-16x+20)
+\answer{Maximum: 52}
+7. (y=x^2+12x-15)
+\answer{Minimum: -51}
+8. Find the equation in standard form of the parabola that passes through the points (0,6), (-3,15), and (-6,6).
+\answer{(y=-x^2-6x+6)}
+Graph the parabola.
+9. (y=3x^2+6x-2)
+\answer{See graph.}
+\placeholder{graph}{Answer 9: red upward parabola (y=3x^2+6x-2), vertex (-1,-5), (y)-intercept (0,-2), arrows on both upper ends. Black (x),(y) axes with arrows, O at origin, square grid spacing 2, window [-10,10] on each axis, labeled ticks -8,-4,4,8.}
+10. (y=-2x^2+4x+1)
+\answer{See graph.}
+\placeholder{graph}{Answer 10: red downward parabola (y=-2x^2+4x+1), vertex (1,3), (y)-intercept (0,1), arrows on both lower ends. Black (x),(y) axes with arrows, O at origin, square grid spacing 2, window [-10,10] on each axis, labeled ticks -8,-4,4,8.}
+\te{Concept Summary, Do You Understand?, and Do You Know How? are available at SavvasRealize.com.}
+\end{concept-summary}
+% Source page 31: 74, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+11, 12, 14--30 & 11--30 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Scan the QR code to access a video tutorial. SavvasRealize.com. Answers 11--13. Answers on previous page. See answers for Exercises 18--24 on next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 12, 15--16 & 1 \\
+1 & 14 & 2 \\
+1 & 13 & 3 \\
+2 & 17--20, 28 & 2 \\
+3 & 21 & 2 \\
+3 & 26--27 & 3 \\
+4 & 22--23, 25 & 2 \\
+4 & 11, 30 & 3 \\
+5 & 24, 29 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{3}
+UNDERSTAND. Construct Arguments Devin found the parabola that fits the three points in the table to be (y=0.345x^2-0.57x-2.78). Is Devin correct? Explain.
+\begin{tabular}{lrrr}
+(x) & -4 & 0.6 & 9 \\
+(y) & 5 & -3 & 20 \\
+\end{tabular}
+\answer{No; This is a fairly accurate model of the data, but it is not the exact model found when substituting the 3 points into the standard equation and solving for (a), (b), and (c).}
+\end{practice}
+\begin{practice}{12}{1}
+Generalize How can you find the maximum or minimum value of a quadratic function?
+\answer{Find the (y)-coordinate of the vertex.}
+\end{practice}
+\begin{practice}{13}{3}
+Higher Order Thinking The quadratic function whose graph is shown represents a cereal bowl. Its equation is (y=0.32x^2-1.6x+2). Describe how you could use the function to find the diameter of the cereal bowl if you know its depth.
+\placeholder{graph}{Red upward parabola (y=0.32x^2-1.6x+2), vertex (2.5,0), (y)-intercept 2, both ends arrowed. Black arrowed axes (x),(y), origin O, square grid spacing 2, window (x) from -8 to 12, (y) from -6 to 14. (x) labels -4,4,8; (y) labels -4,4,8,12.}
+\answer{First find the vertex. Since the vertex is on the (x)-axis, the top of the bowl can be represented by a horizontal line with (y) equal to the bowl's depth. You can calculate the diameter by setting (y) equal to the depth and solving for (x), then finding the difference between the two solutions.}
+\end{practice}
+\begin{practice}{14}{2}
+Error Analysis Pedro found the vertex for the function (y=-9.5x^2-47.5x+63) as shown.
+(x=-\frac{b}{2a})
+(x=-\frac{47.5}{2(-9.5)})
+(x=-\frac{47.5}{-19})
+(x=-(-2.5))
+(x=2.5)
+(y=-9.5(2.5)^2-47.5(2.5)+63)
+(y=-59.375-118.75+63)
+(y=-115.125)
+Find and correct Pedro's error.
+\answer{Micah forgot to use the sign associated with the value of (b).
+(x=-\frac{b}{2a})
+(x=-\frac{-47.5}{2(-9.5)})
+(x=\frac{47.5}{-19})
+(x=-2.5)
+(y=-9.5(-2.5)^2-47.5(-2.5)+63)
+(=-59.375+118.75+63)
+(=122.375)}
+\te{Printed prompt names Pedro; printed answer names Micah, likely referring to Pedro.}
+\end{practice}
+\begin{practice}{15}{1}
+PRACTICE. Find the vertex of each parabola. SEE EXAMPLE 1
+(y=-x^2+6x+30)
+\answer{(3,39)}
+\end{practice}
+\begin{practice}{16}{1}
+Find the vertex of each parabola. SEE EXAMPLE 1
+(y=3x^2+12x-5)
+\answer{(-2,-17)}
+\end{practice}
+\begin{practice}{17}{2}
+Find the vertex and (y)-intercept of the quadratic function, and use them to graph the function. SEE EXAMPLES 1 AND 2
+(y=-x^2+6x-8)
+\answer{vertex: (3,1); (y)-intercept: (0,-8)}
+\placeholder{graph}{Answer 17: red downward parabola (y=-x^2+6x-8), vertex (3,1), intercepts (2,0),(4,0); both lower ends arrowed. Black arrowed (x),(y) axes, O at origin, unit grid over [-5,5] on both axes, tick labels -4,-2,2,4.}
+\end{practice}
+\begin{practice}{18}{2}
+Find the vertex and (y)-intercept of the quadratic function, and use them to graph the function. SEE EXAMPLES 1 AND 2
+(y=x^2-8x+11)
+\answer{vertex: (4,-5); (y)-intercept: (0,11)}
+\placeholder{graph}{Answer 18, printed on PDF page 32: red upward parabola (y=x^2-8x+11), vertex (4,-5), (y)-intercept (0,11), both upper ends arrowed. Black arrowed (x),(y) axes, origin O, grid spacing 2, window (x) [-10,10], (y) [-8,12], (x) labels -8,-4,4,8, (y) labels -4,4,8.}
+\end{practice}
+\begin{practice}{19}{2}
+Find the vertex and (y)-intercept of the quadratic function, and use them to graph the function. SEE EXAMPLES 1 AND 2
+(y=3x^2+18x+10)
+\answer{vertex: (-3,-17); (y)-intercept: (0,10)}
+\placeholder{graph}{Answer 19, PDF page 32: red upward parabola (y=3x^2+18x+10), vertex (-3,-17), (y)-intercept (0,10), both upper ends arrowed. Black arrowed (x),(y) axes, O at origin, grid spacing 5, window [-25,25] both axes, labels -20,-10,10,20.}
+\end{practice}
+\begin{practice}{20}{2}
+Find the vertex and (y)-intercept of the quadratic function, and use them to graph the function. SEE EXAMPLES 1 AND 2
+(y=-2x^2-12x-5)
+\answer{vertex: (-3,13); (y)-intercept: (0,-5)}
+\placeholder{graph}{Answer 20, PDF page 32: red downward parabola (y=-2x^2-12x-5), vertex (-3,13), (y)-intercept (0,-5), both lower ends arrowed. Black arrowed (x),(y) axes, O at origin, grid spacing 5, window [-25,25] both axes, labels -20,-10,10,20.}
+\end{practice}
+\begin{practice}{21}{2}
+A model rocket is launched into the air by a club. The path of the rocket is modeled by an equation. What is the maximum height reached by the rocket, in feet? SEE EXAMPLE 3
+\placeholder{illustration}{Blue, white, and red model rocket on a launch stand in a grassy yard beside a wooden fence. Callout to rocket: (y=-10x^2+19x).}
+\answer{9.025 ft}
+\end{practice}
+\begin{practice}{22}{2}
+Write the equation of a quadratic function in standard form for the parabola that passes through the given points. SEE EXAMPLE 4
+(-1,5), (4,0), (5,-7)
+\answer{(y=-x^2+2x+8)}
+\end{practice}
+\begin{practice}{23}{2}
+Write the equation of a quadratic function in standard form for the parabola that passes through the given points. SEE EXAMPLE 4
+(-2,2), (1,8), (4,50)
+\answer{(y=2x^2+4x+2)}
+\end{practice}
+\begin{practice}{24}{2}
+Use quadratic regression to find the equation of a quadratic function that fits the given points. SEE EXAMPLE 5
+\begin{tabular}{lrrrrr}
+(x) & 0 & 0.5 & 1 & 1.5 & 2 \\
+(y) & 35 & 36 & 29 & 14 & -9 \\
+\end{tabular}
+\answer{(y=-16x^2+10x+35)}
+\end{practice}
+% Source page 32: 75, Practice & Problem Solving continued
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice and Problem Solving is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{practice}{25}{2}
+APPLY. Model With Mathematics The height of Amelia's waist was measured three times during a long jump.
+\begin{tabular}{lrrr}
+Time in seconds, (x) & 0 & 0.5 & 1 \\
+Height in meters, (y) & 0.7 & 1.5 & 0.55 \\
+\end{tabular}
+\placeholder{photo}{Athlete in blue top jumping over a sand pit, knees bent and arms raised. Vertical dimension from the sand to waist level labeled (h=1.5) meters. Track and stadium behind.}
+Using quadratic regression, write the equation of a quadratic function that describes Amelia's height as a function of time.
+\answer{(y=-3.5x^2+3.35x+0.7)}
+\end{practice}
+\begin{practice}{26}{3}
+Make Sense and Persevere A college's business office found the relationship between the number of admissions counselors they employ and the college's profit from tuition could be modeled by the function (y=-10x^2+1,500x-35,000).
+a. Graph the function.
+\answer{a. See graph.}
+\placeholder{graph}{Answer 26a: blue downward parabola (y=-10x^2+1500x-35000), vertex (75,21250), (y)-intercept (0,-35000), both lower ends arrowed. Black arrowed (x),(y) axes, origin O. Window (x) [-50,200], (y) [-60000,40000], grid spacing 25 horizontally and 10000 vertically. Labeled (x) ticks 50,100,150; (y) ticks -40000,-20000,20000.}
+b. How many admissions counselors should the college employ to maximize its profit?
+\answer{b. 75 admission counselors}
+c. What is the maximum amount of profit the college can make?
+\answer{c. \$21,250}
+\end{practice}
+\begin{practice}{27}{3}
+Mathematical Connections A rectangular tile has a perimeter of 48 inches.
+a. The graph shows the relationship between the width of the tile and the area of the tile. What function describes this relationship?
+\placeholder{graph}{First-quadrant red downward parabola from (0,0) through vertex (12,144) to (24,0), downward arrow at right end. Horizontal axis (x), Width (in.), numbered 0,6,12,18,24 with grid spacing 3; vertical (y), Area (in.^2), labels 0,40,80,120,160 with grid spacing 20. Window (x) 0 to 27 and (y) 0 to 160. Axes arrowed.}
+\answer{a. Equation of the parabola: (y=-x^2+24x). Vertex form: (y=-(x-12)^2+144). Intercept form: (y=-x(x-24)).}
+b. What is the maximum area? What length and width give the maximum area?
+\answer{b. maximum area: 144 sq. in.; length: 12; width: 12}
+\end{practice}
+\begin{practice}{28}{2}
+ASSESSMENT PRACTICE. Consider the quadratic function (y=5x^2-50x-100). Which of the following are true? Select all that apply.
+A. Its vertex is (5,-225).
+B. Its (y)-intercept is (0,100).
+C. It passes through the point (-1,-45).
+D. The minimum height occurs when (x=5).
+E. The maximum height occurs when (x=5).
+\answer{A, C, D}
+\end{practice}
+\begin{practice}{29}{2}
+SAT/ACT Which quadratic equation contains the three points (-4,12), (2,42), and (3,40)?
+A. (y=-x^2+3x+42)
+B. (y=1.7x^2-10x-55.2)
+C. (y=-1.7x^2+10x+55.2)
+D. (y=x^2-3x-40)
+E. (y=-x^2+3x+40)
+\answer{E}
+\end{practice}
+\begin{practice}{30}{3}
+Performance Task A diver jumped from a diving platform. The image shows her height above the water at several different times after leaving the platform.
+\placeholder{illustration}{Diving platform at left above pool. Five successive diver poses along an arc from the high platform down toward the water, with callouts in order: 0.25 s, 27 ft; 0.5 s, 29 ft; 1.5 s, 29 ft; 2.0 s, 25 ft; 2.75 s, 15 ft. Lower platform and ladders visible, trees and hills beyond pool.}
+Part A Find the equation of the quadratic function that describes the relationship between the diver's time and height by regression. Round the coefficients to the nearest tenth.
+\answer{Part A (y=-5.0x^2+10.2x+24.9)}
+Part B How high is the platform the diver jumped from? What is the maximum height reached?
+\answer{Part B 24.9 ft; 30.1 ft}
+Part C From the maximum height, how long does it take the diver to get halfway down? Which part of the dive is faster, from the top to the halfway point, or from the halfway point to the water? Explain.
+\answer{Part C about 2.76 seconds; Diving from the halfway point to the water is faster.}
+\te{Printed 2.76 seconds appears to measure time since launch; the prompt asks elapsed time from maximum height, likely about 1.74 seconds using the printed model.}
+\end{practice}
+% Source page 33: 75A, Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & F16 \\
+2 & 2 & F16 \\
+3 & 2 & F16 \\
+4 & 2 & F50 \\
+5 & 2 & F16 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd Videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\te{Lesson Quiz is available at SavvasRealize.com. ASSESSMENT RESOURCES.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{2-2 Lesson Quiz: Standard Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+1. What is the minimum point of the graph of the function (f(x)=x^2-4x)?
+A. (2,4)
+B. (0,0)
+C. (4,0)
+D. (2,-4)
+\answer{1. D}
+2. The amount of profit Bill makes per toy when he increases or decreases the price of his handmade toys can be modeled by the function (f(x)=-x^2-2x+3). What price change gives him the highest profit? What is his highest profit per toy?
+Price change: \$\underline{\hspace{1cm}}
+Maximum profit per toy: \$\underline{\hspace{1cm}}
+\answer{2. Price change: \$-1. Maximum profit per toy: \$4.}
+3. A pebble is tossed into the air from the top of a cliff. The height, in feet, of the pebble over time is modeled by the equation (y=-16x^2+32x+80). What is the maximum height, in feet, reached by the pebble?
+\answer{3. 96}
+4. What is the equation of a parabola that passes through the points (-5,-10), (-1,6), and (2,-3)?
+A. (y=-x^2-2x+5)
+B. (y=-x^2+6x-7)
+C. (y=-\frac{18}{9}x^2-\frac{28}{9}x+\frac{35}{3})
+D. (y=-x^2-3x+2)
+\answer{4. A}
+5. An equation that represents the path of a diver jumping off a diving board is (y=-7x^2+5x+16). Graph this function from the point where the diver jumped to the point where they reach the water.
+\answer{5. See graph.}
+\placeholder{graph}{Quiz answer 5: magenta downward parabola segment for (y=-7x^2+5x+16), filled endpoints at (0,16) and approximately (1.91,0), vertex near (0.36,16.89); no arrows on curve. Arrowed black axes with magenta (x),(y), origin O; grid spacing 0.5 horizontally and 2 vertically, window (x) [-1.5,3.5], (y) [-2,18]. Tick labels (x): -1,1,2,3; (y): 4,8,12,16.}
+\te{enVision Algebra 2 • Assessment Sourcebook. Copyright © 2024 Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+% Source page 34: 75B, Assess & Differentiate, Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced.
+\textbf{Reteach to Build Understanding} I
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School.
+\textbf{Additional Practice} I O
+Provides extra practice for each lesson.
+MathXL for School.
+\textbf{Enrichment} O A
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{2-2 Reteach to Build Understanding: Standard Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+1. What is the graph of (f(x)=2x^2-8x+5)? Fill in the blanks.
+(a=2); (b=\underline{\hspace{1cm}}); (c=\underline{\hspace{1cm}})
+\answer{(b=-8); (c=5)}
+Find the equation of the axis of symmetry.
+(x=-\frac{b}{2a}=\frac{-1(-8)}{2(\underline{\hspace{.5cm}})}=\frac{\underline{\hspace{.5cm}}}{4}=2)
+\answer{(x=-\frac{b}{2a}=\frac{-1(-8)}{2(2)}=\frac{8}{4}=2)}
+Find the (x)-coordinate of the vertex: (-\frac{b}{2a}=\underline{\hspace{1cm}})
+\answer{2}
+Find the (y)-value when (x=2).
+(f(2)=2(2)^2-8(2)+5)
+(=\underline{\hspace{.5cm}}-\underline{\hspace{.5cm}}+5=-3)
+\answer{(=8-16+5=-3)}
+(y)-coordinate of vertex: -3. The vertex is (2,\underline{\hspace{.5cm}}).
+\answer{(2,-3)}
+(y)-intercept: (0,\underline{\hspace{.5cm}}). The (y)-intercept is at (0,c) = (0,\underline{\hspace{.5cm}}).
+\answer{(0,5); (0,5)}
+Because (a) is positive, the graph opens upward, and the vertex is at the bottom of the graph. Plot the vertex and draw the axis of symmetry. Plot (0,5) and its corresponding point on the other side of the axis of symmetry.
+\placeholder{graph}{Reteach 1: black upward parabola (f(x)=2x^2-8x+5), labeled closed points (0,5),(4,5),(2,-3). Magenta dashed axis (x=2), labeled with callout (x=2). Black arrowed (x),(y) axes, origin O, unit grid, window (x) approximately [-2,6], (y) [-4,6], labels (x) 2,4,6 and (y) 2,4. Curve ends arrowed.}
+2. Abby found the axis of symmetry, (x)-coordinate, the vertex, and (y)-intercept of the equation (f(x)=-x^2-8x-15). Find and explain Abby's errors.
+axis of symmetry (x=-4)
+(x)-coordinate of vertex (x=-4)
+vertex (4,-31)
+(y)-intercept (0,-15)
+\answer{The vertex should be (-4,1). When finding the (y)-coordinate of the vertex, Abby forgot the negative signs on the (x)-coordinate and in front of the first term.}
+3. Find the key features of the following equation, which is in standard form:
+(f(x)=2x^2+8x-3)
+a. Find the equation of the axis of symmetry.
+\answer{(x=-\frac{b}{2a}=\frac{-(8)}{2(2)}=\frac{-8}{4}=-2)}
+b. Find the (x)-coordinate of the vertex:
+\answer{(-\frac{b}{2a}=-2)}
+c. Find the (y)-value when (x=-2).
+(f(x)=2x^2+8x-3)
+(f(-2)=2(-2)^2+8(-2)-3)
+\answer{(=8-16-3=-11)}
+d. (y)-coordinate of vertex: -11. The vertex is (\underline{\hspace{.5cm}},\underline{\hspace{.5cm}}).
+\answer{(-2,-11)}
+e. The (y)-intercept is at (0,c) = (\underline{\hspace{.5cm}},\underline{\hspace{.5cm}}).
+\answer{(0,-3)}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © 2024 Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{2-2 Additional Practice: Standard Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+Find the vertex of a quadratic function written in standard form.
+1. (f(x)=3x^2+18x+32)
+\answer{Vertex: (-3,5)}
+2. (f(x)=x^2+2x-5)
+\answer{Vertex: (-1,-6)}
+3. (f(x)=-3x^2+18x-27)
+\answer{Vertex: (3,0)}
+Find the vertex, axis of symmetry, and (y)-intercept of the functions, then sketch the graph.
+4. (f(x)=x^2-8x+19)
+\answer{Vertex: (4,3). Axis of symmetry (x=4). (y)-intercept (0,19). point symmetric to (y)-intercept (8,19).}
+\placeholder{graph}{Additional Practice 4: magenta upward parabola (f(x)=x^2-8x+19), closed labeled points (0,19),(8,19), vertex (4,3), vertical dashed axis (x=4). Magenta callouts: (y)-intercept; point symmetric to the (y)-intercept through the axis of symmetry; axis of symmetry; vertex. Arrowed (x),(y) axes, O at origin, window (x) approximately [-2,10], (y) [-2,22], horizontal grid spacing 1 labeled 2,4,6,8, vertical spacing 2 labeled 4,8,12,16.}
+5. (f(x)=-2x^2-4x+6)
+\answer{Vertex: (-1,8). Axis of symmetry (x=-1). (y)-intercept (0,6). point symmetric to (y)-intercept (-2,6).}
+\placeholder{graph}{Additional Practice 5: magenta downward parabola (f(x)=-2x^2-4x+6), closed labeled points (-2,6),(0,6), vertex (-1,8), dashed vertical axis (x=-1). Callouts: vertex; (y)-intercept; point symmetric to the (y)-intercept through the axis of symmetry; axis of symmetry. Arrowed (x),(y) axes, O at origin, unit horizontal grid labeled -4,-2,2; vertical grid spacing 2 labeled 4,6,8. Window approximately (x) [-6,3], (y) [-2,10]; both lower ends arrowed.}
+Interpret the graph of a quadratic function.
+6. A small independent movie company determines the profit (P) for producing (n) DVD copies of a recent release is (P=-0.02n^2+3.40n-16).
+(P) is the profit in thousands of dollars and (n) is in thousands of units.
+\placeholder{graph}{Additional Practice 6: black increasing concave-down segment of (P=-0.02n^2+3.40n-16), visible from its positive horizontal intercept near 5 to about (50,104), arrow at right. Horizontal axis (n), Number of DVDs (thousands), labels 0,10,20,30,40; vertical axis (P), Profit (thousands), labels 0,40,80,120. First-quadrant grid spacing 5 horizontally and 20 vertically; window approximately [0,50] by [0,140].}
+a. How many DVDs should the company produce to maximize the profit?
+\answer{85,000 DVDs}
+b. What will the maximum profit be?
+\answer{\$128,500}
+What is the equation of a parabola that passes through the following points?
+7. (1,-1), (2,-5), (3,-7)
+\answer{(f(x)=x^2-7x+5)}
+8. (2,-8), (3,-8), (6,4)
+\answer{(f(x)=x^2-5x-2)}
+9. (-3,2), (1,-6), (4,9)
+\answer{(f(x)=x^2-7)}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © 2024 Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{2-2 Enrichment: Standard Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+A field goal kicker discussed his performance with his coach. Based on the coach's data, the kicker usually kicks the ball so it reaches a maximum height of 50 yards after it has traveled 25 yards down the field. What is the equation, in standard form, of the kick? Round your answer to the nearest hundredth.
+\answer{(y=-0.08x^2+4x)}
+If the goal posts are 10 yards high, what is the minimum and maximum distance that his kick will make it over the goalpost? Round your answer to the nearest hundredth.
+\answer{
+(10=-0.08x^2+4x)
+(.08x^2-4x+10=0)
+(8x^2-400x+1000=0)
+(x^2-50x+125=0)
+(x=\frac{50\pm\sqrt{2500-500}}{2})
+(x\approx2.64) or (x\approx47.36)
+The kicker can make any goal 2.64 to 47.36 yards from the goalpost.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © 2024 Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I O
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{2-2 Mathematical Literacy and Vocabulary: Standard Form of a Quadratic Function}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{Problem}
+Graph the equation (f(x)=-x^2+6x+2). Justify and explain your work.
+\begin{tabular}{lll}
+Explain & Work & Justify \\
+First, write the equation in standard form. & (f(x)=-x^2+6x+2) & Original equation. \\
+Second, identify (a), (b) and (c). & (a=-1); (b=6); (c=2) & Identify the constants. \\
+Then, find the vertex using the equation. & (h=-\frac{b}{2a}); (h=\frac{-6}{2(-1)}); (h=3) & Find (h). \\
+Next, substitute (h), into the equation. & (f(3)=-x^2+6x+2); (f(3)=-(3)^2+6(3)+2); (f(3)=11); (3,11) & Find the vertex. \\
+Next, find the axis of symmetry. & (x=-\frac{b}{2a}); (x=\frac{-6}{2(-1)}); (x=3) & axis of symmetry \\
+Then, find the (y)-intercept. & (0,2) & (y)-intercept \\
+Finally, graph using the values found above. & See graph. & Graph. \\
+\end{tabular}
+\placeholder{graph}{Vocabulary graph: black downward parabola (f(x)=-x^2+6x+2), vertex (3,11), (y)-intercept (0,2), arrows on both lower branches. Arrowed (x),(y) axes, O at origin, grid spacing 1 horizontally and 2 vertically, (x) labels 2,4,6; (y) labels 4,8. Window approximately (x) [-1,7], (y) [-4,12].}
+\te{Printed first substitution row retains (x) on the right of (f(3)=-x^2+6x+2); the following row performs the substitution. enVision Algebra 2 • Teaching Resources. Copyright © 2024 Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{illustration}{Tablet showing digital practice. Prompt: Solve the system of equations by graphing. System (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Blank unit coordinate grid [-10,10] each axis with ticks labeled every 2, axes (x),(y), arrows. Question Help menu: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Bottom text: Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining. Buttons Exit, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\te{Printed digital screenshot illustrates a linear system rather than the quadratic lesson.}
+\end{te-addendum}
+
+\end{document}

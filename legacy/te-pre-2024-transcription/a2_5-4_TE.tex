@@ -1,0 +1,950 @@
+\documentclass{article}
+% Source: 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+\begin{lesson-meta}
+\begin{tabular}{ll}
+Lesson Code & 5-4 \
+Title & Solving Radical Equations \
+I CAN Objective & I can solve radical equations and radical inequalities. \
+Essential Question & What properties of exponents allow you to solve equations that include radicals or rational exponents? \
+Lesson Vocabulary & extraneous solution \
+Topic Vocabulary & radical equation; rational number; rational exponent; reciprocal power
+\end{tabular}
+\end{lesson-meta}
+
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \
+\midrule
+1 & 21--24, 44 & 1 \
+1 & 18 & 2 \
+2 & 25--28 & 1 \
+2 & 16, 17, 40, 43, 46 & 2 \
+3 & 29--32 & 1 \
+3 & 15 & 2 \
+4 & 33--35, 45 & 1 \
+4 & 19, 41 & 3 \
+5 & 36--38 & 1 \
+5 & 20 & 2 \
+6 & 39 & 1 \
+6 & 42 & 2 \
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+
+\begin{model-discuss}
+\textbf{EXPLORE & REASON}
+
+A. Solve (3(a+1)^2+2=11). Use at least two different methods.
+\answer{(a=-1\pm\sqrt{3}); You can solve this by isolating ((a+1)^2) and then taking the square root of each side. Or you could graph each side of the equation on the same coordinate grid and find the intersection points.}
+
+B. Try each of the methods you used in part A to solve (3\sqrt{a+1}+2=11).
+\answer{(a=8)}
+
+C. Generalize Which of the methods is better suited for solving an equation with a radical? What problems arise when using the other method?
+\answer{Solving algebraically seems easier for an equation with a radical. Graphing can be difficult without technology, and it may only yield an approximate answer.}
+\end{model-discuss}
+
+\begin{te-addendum}{0}{LearnTogether}
+Instructional Focus Students explore solving an equation with exponents using two different methods. This prepares students to solve equations with radicals. Students learn that the methods used to solve equations with exponents and radicals are similar.
+\end{te-addendum}
+
+\begin{te-addendum}{0}{GeneralizeETP}
+Before: Implement Tasks that Promote Reasoning and Problem Solving.
+
+Q: What do you notice about the equations in Parts A and B?
+\answer{Each equation contains the same integers and operations. However, in part A, you find ((a+1)^2), whereas in Part B, you find ((a+1)).}
+\end{te-addendum}
+
+\begin{te-addendum}{0}{GeneralizeETP}
+During: Support Productive Struggle in Learning Mathematics.
+
+Q: How can your knowledge of solving equations with exponents assist you in solving equations with radicals?
+\answer{In order to isolate the expression with the variable, you need to perform the opposite operation. This means if the expression has a square root, you need to square it to isolate the variable.}
+\end{te-addendum}
+
+\begin{te-addendum}{0}{GeneralizeETP}
+For Early Finishers
+
+Q: Solve (5(x-2)^4-7=73) and (5\sqrt[4]{x-2}-7=73). Which solution method did you choose?
+\answer{(x=0,4); (x=65{,}538); Each equation can be solved algebraically in just a few steps. It would be difficult to solve these equations by graphing because the numbers get very large.}
+\end{te-addendum}
+
+\begin{te-addendum}{0}{GeneralizeETP}
+After: Facilitate Meaningful Mathematical Discourse.
+
+Q: What methods can you use to solve an equation with a radical and an equation with an exponent?
+\answer{For each type of equation, you can isolate the variables by performing the opposite operations. You can also graph the two equations created from the original equation.}
+\end{te-addendum}
+
+\begin{te-addendum}{0}{HabitsOfMind}
+Construct Arguments The squares of two numbers are equal. Does that mean that the two numbers themselves must also be equal? Explain.
+\answer{No; two numbers that have the same value but opposite signs have the same square.}
+\end{te-addendum}
+
+\begin{te-addendum}{1}{LearnTogether}
+Establish Mathematics Goals to Focus Learning. Introduce students to solving equations with radicals and rational exponents. Remind them that, just as they used properties of exponents to solve equations with exponents, they can use these properties to solve equations with radicals.
+\end{te-addendum}
+
+\begin{concept-box}
+\textbf{LOOK FOR RELATIONSHIPS}
+
+When you square both sides of an equation, you are multiplying each side by the same quantity. The expression for the quantity differs, but (\sqrt{x+5}) and 4 are equal.
+\end{concept-box}
+
+\begin{example}{1}
+\textbf{Solve an Equation With One Radical}
+
+A. Solve the radical equation (\sqrt{x+5}-1=3).
+
+To solve this equation, you can isolate the radical. Then you can square both sides of the equation to eliminate the radical and solve for (x).
+\begin{align*}
+\sqrt{x+5}-1&=3\
+\sqrt{x+5}&=4\
+(\sqrt{x+5})^2&=4^2 &&\text{Square both sides to eliminate the radical.}\
+x+5&=16\
+x&=11
+\end{align*}
+So the solution to the radical equation is (x=11).
+
+You can check by graphing (y=\sqrt{x+5}-1) and (y=3) on the same coordinate axes. The graphs of the equations intersect at ((11,3)).
+
+\begin{tikzpicture}
+\begin{axis}[
+width=7cm,height=5cm,
+axis lines=middle,
+xlabel=(x), ylabel=(y),
+xmin=-6,xmax=14,ymin=-4,ymax=5,
+xtick={-4,0,4,8,12}, ytick={-4,-2,0,2,4},
+grid=both,
+samples=120,
+legend style={at={(0.02,0.98)},anchor=north west}
+]
+\addplot[domain=-5:14, red, thick] {sqrt(x+5)-1};
+\addlegendentry{(y=\sqrt{x+5}-1)}
+\addplot[domain=-6:14, blue, thick] {3};
+\addlegendentry{(y=3)}
+\addplot[only marks, mark=*, red] coordinates {(11,3)} node[pos=0, above] {((11,3))};
+\end{axis}
+\end{tikzpicture}
+
+B. Solve the radical equation (\sqrt[3]{x}+2=4).
+\begin{align*}
+\sqrt[3]{x}+2&=4\
+\sqrt[3]{x}&=2\
+(\sqrt[3]{x})^3&=2^3 &&\text{Cube both sides to eliminate the cube root.}\
+x&=8
+\end{align*}
+So the solution to the radical equation is (x=8).
+
+Check your answer by substituting 8 for (x) in the original equation:
+[
+\sqrt[3]{8}+2=2+2=4.
+]
+\answer{A. (x=11); B. (x=8)}
+\end{example}
+
+\begin{tryit}{1}
+Solve each radical equation. Check your solution by substituting into the given equation or graphing.
+
+A. (\sqrt{x-2}+3=5)
+
+B. (\sqrt{x}-1=2)
+\answer{A. (x=6); B. (x=9)}
+\end{tryit}
+
+\begin{te-addendum}{1}{PurposefulQuestions}
+Q: What does it mean to isolate the radical?
+\answer{Rewrite the equation so the radical is alone on one side of the equation.}
+
+Q: How do you eliminate the square root or cube root? Why do you want to eliminate them?
+\answer{First isolate the radical on one side of the equation. Then perform the opposite operation (square or cube) on both sides of the equation. Eliminating the radical allows you to solve for (x).}
+\end{te-addendum}
+
+\begin{te-addendum}{1}{ElicitEvidence}
+Q: How do you know whether to square or cube the radical when solving for (x)?
+\answer{If the equation contains a square root, then square both sides to eliminate the radical. If the equation contains a cube root, then cube both sides to eliminate the radical.}
+\end{te-addendum}
+
+\begin{example}{2}
+\textbf{Rewrite a Formula}
+
+The suspension cables from the Golden Gate Bridge's towers are farther above the roadway near the towers and closer to the roadway near the middle of the bridge. You can figure out your distance from the middle of the bridge, (x), in feet, and the height of the suspension cable, (y), in feet, by using the given equation. About how far is the cable from the roadway when you are 200 ft from the middle of the bridge?
+
+\placeholder{photo}{Golden Gate Bridge suspension cables with formula label (x=\frac{\sqrt{y-220}}{0.010583}) pointing to the suspension cable.}
+
+Rewrite the equation to isolate (y) so you can express the vertical distance between the roadway of the bridge and the suspension cable in terms of (x).
+\begin{align*}
+x&=\frac{\sqrt{y-220}}{0.010583}\
+0.010583x&=\sqrt{y-220}\
+(0.010583x)^2&=(\sqrt{y-220})^2\
+0.000112x^2&\approx y-220\
+0.000112x^2+220&\approx y\
+0.000112(200)^2+220&\approx y\
+224.48&\approx y
+\end{align*}
+This equation gives the vertical distance between the deck and the suspension cable for different values of (x).
+
+The cable is about 224 ft above the bridge's roadway when you are 200 ft from the middle of the bridge.
+\answer{The cable is about 224 ft above the bridge's roadway.}
+\end{example}
+
+\begin{concept-box}
+\textbf{COMMON ERROR}
+
+When squaring a term that includes a coefficient and a variable, remember to square both parts of the term. If you have to round the coefficient after squaring, be sure to use the approximately equal sign.
+\end{concept-box}
+
+\begin{tryit}{2}
+The speed, (v), of a vehicle in relation to its stopping distance, (d), is represented by the equation (v=3.57\sqrt{d}). What is the equation for the stopping distance in terms of the vehicle's speed?
+\answer{(d=\frac{v^2}{12.74})}
+\end{tryit}
+
+\begin{te-addendum}{2}{PurposefulQuestions}
+Q: Why is the equation solved for (y)?
+\answer{The equation is solved for (y) so you can find the height of the suspension cable more easily when you know your distance from the middle of the bridge.}
+
+Q: Why are parentheses placed around (0.010583x) in the third step?
+\answer{Parentheses are placed around (0.010583x) to ensure that you square both (0.010583) and (x).}
+\end{te-addendum}
+
+\begin{te-addendum}{2}{CommonError}
+Try It! 2 After dividing by the constant, some students may forget to square both the variable and the constant, which would result in (\frac{v^2}{3.57}=d) instead of (\frac{v^2}{12.74}=d). Have students make sure the entire equation has been squared, including 3.57.
+\end{te-addendum}
+
+\begin{te-addendum}{2}{HabitsOfMind}
+Reason Reese solved the equation in Try It 1a by first squaring both sides. Is this an appropriate first step? Why or why not?
+\answer{No; you must first subtract 3 from both sides of the equation to isolate the radical. Then you can square both sides.}
+\end{te-addendum}
+
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{SPEAKING BEGINNING} In small groups, have students isolate an object from a group of objects. Have students discuss what the term isolate means (to set apart or to be alone). If they have not heard the word before, challenge them to use it in a sentence based on the definition given.
+
+Q: When have you heard the word, or a form of the word, isolate used?
+\answer{The prisoner was put in solitary isolation. The patient with an infectious disease must be isolated, even from his family.}
+
+Q: How are your answers to the last question related to isolating the variable (y) in the example?
+\answer{Isolating (y) means to rewrite the equation so (y) is alone on one side.}
+
+\textbf{READING DEVELOPING} Ask students to read the first sentence of the example and read the definition of suspend from the dictionary.
+
+Q: Can you identify the root word in the word suspension?
+\answer{suspend}
+
+Q: What does suspend mean?
+\answer{to hang by attachment to something above}
+
+Q: Have the definitions of suspension and suspension bridge on index cards. Hand out the cards and have students read the definitions aloud. How do the definitions help you to understand the meaning of suspension cables mentioned in the example?
+\answer{A suspension bridge is a bridge suspended by cables anchored on the ends and raised by towers, so the suspension cables are the cords from which the Golden Gate Bridge hangs.}
+
+\textbf{LISTENING EXPANDING} Have students listen as you read the following sentences aloud. 1) He wore a pair of glasses on the bridge of his nose. 2) The isthmus is a land bridge between the two countries. 3) The interpreter is a bridge between people who speak different languages.
+
+Q: What does the word bridge indicate in each of these examples?
+\answer{a connection between two things}
+
+Q: The example describes the physical structure of a bridge. Does a bridge always have to be a structure that you physically cross over? Explain.
+\answer{No; the interpreter is acting as a different kind of bridge.}
+\end{te-addendum}
+
+\begin{concept-box}
+\textbf{VOCABULARY}
+
+An extraneous solution is a solution of an equation derived from an equation, but it is not a solution of the original equation.
+\end{concept-box}
+
+\begin{example}{3}
+\textbf{Identify an Extraneous Solution}
+
+A. Solve the radical equation (\sqrt{3x-2}=x-4).
+\begin{align*}
+\sqrt{3x-2}&=x-4\
+(\sqrt{3x-2})^2&=(x-4)^2\
+3x-2&=x^2-8x+16\
+0&=x^2-11x+18\
+0&=(x-9)(x-2)\
+x&=9\text{ or }x=2
+\end{align*}
+Check the potential solutions by substituting the solutions for (x) in the original equation:
+\begin{align*}
+\sqrt{3x-2}&=x-4 & \sqrt{3x-2}&=x-4\
+\sqrt{3(9)-2}&=9-4 & \sqrt{3(2)-2}&=2-4\
+\sqrt{25}&=5 & \sqrt{4}&\ne -2
+\end{align*}
+So 9 is the only solution to the equation and 2 is an extraneous solution.
+
+B. Why does this extraneous solution arise?
+
+The first step in solving the equation in part (a) was to square both sides.
+
+Graph on one grid, (y=\sqrt{3x-2}) and (y=x-4). Then graph on another grid (y=3x-2) and (y=(x-4)^2).
+
+\begin{tikzpicture}
+\begin{axis}[
+width=6.2cm,height=5cm,
+axis lines=middle,
+xlabel=(x), ylabel=(y),
+xmin=-5,xmax=14,ymin=-10,ymax=15,
+xtick={-4,0,4,8,12}, ytick={-10,0,10},
+grid=both,
+samples=120,
+legend style={at={(0.02,0.98)},anchor=north west,font=\tiny}
+]
+\addplot[domain=0.6667:14, red, thick] {sqrt(3*x-2)};
+\addlegendentry{(y=\sqrt{3x-2})}
+\addplot[domain=-5:14, blue, thick] {x-4};
+\addlegendentry{(y=x-4)}
+\addplot[only marks, mark=*, red] coordinates {(9,5)} node[pos=0, above] {((9,5))};
+\end{axis}
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\begin{axis}[
+width=6.2cm,height=5cm,
+axis lines=middle,
+xlabel=(x), ylabel=(y),
+xmin=-5,xmax=14,ymin=-10,ymax=30,
+xtick={-4,0,4,8,12}, ytick={-10,0,10,20},
+grid=both,
+samples=160,
+legend style={at={(0.02,0.98)},anchor=north west,font=\tiny}
+]
+\addplot[domain=-5:14, red, thick] {3*x-2};
+\addlegendentry{(y=3x-2)}
+\addplot[domain=-1:12, blue, thick] {(x-4)^2};
+\addlegendentry{(y=(x-4)^2)}
+\addplot[only marks, mark=*, red] coordinates {(2,4) (9,25)};
+\node at (axis cs:2,4) [above left] {((2,4))};
+\node at (axis cs:9,25) [above left] {((9,25))};
+\end{axis}
+\end{tikzpicture}
+
+These intersect at ((9,5)), so the solution to (\sqrt{3x-2}=x-4) is (x=9).
+
+These intersect at ((2,4)) and ((9,25)), so the solutions to ((\sqrt{3x-2})^2=(x-4)^2) are (x=2) and (x=9).
+
+This means that the equations (\sqrt{3x-2}=x-4) and ((\sqrt{3x-2})^2=(x-4)^2) are not equivalent equations. Both graphs have an intersection point at (x=9), but the second graph also has an intersection point at (x=2). Squaring both sides of the original equation created an extraneous solution.
+\answer{(x=9); (x=2) is an extraneous solution.}
+\end{example}
+
+\begin{tryit}{3}
+Solve each radical equation. Check for any extraneous solutions.
+
+A. (x=\sqrt{7x+8})
+
+B. (x+2=\sqrt{x+2})
+\answer{A. (x=8); (x=-1) is an extraneous solution. B. (x=-1), (x=-2)}
+\end{tryit}
+
+\begin{te-addendum}{3}{PurposefulQuestions}
+PART A
+
+Q: Why can you find potential solutions to an equation that are not actual solutions of the original equation?
+\answer{Squaring both sides of an equation may create a new equation with two solutions. Only one of these solutions may satisfy the original equation.}
+
+PART B
+
+Q: When solving an equation, what indicates that there may be an extraneous solution?
+\answer{When the solution steps require you to solve a quadratic equation, it indicates there may be an extraneous solution.}
+\end{te-addendum}
+
+\begin{te-addendum}{3}{ElicitEvidence}
+Q: In part (b), why do you need to be careful when squaring both sides of the equation?
+\answer{You need to make sure that you square the entire left side, ((x+2)). This will require applying the Distributive Property to multiply the two binomials.}
+\end{te-addendum}
+
+\begin{te-addendum}{3}{PurposefulQuestions}
+Example 3 Help students understand how to use what they know about radical equations to solve a system consisting of a linear and a radical equation.
+
+Q: How can you use the graph to predict whether there will be any extraneous solutions?
+\answer{The graphs of the functions intersect at 1 point, so I expect to find 1 solution when I solve the equation. If I find 2 solutions, it is likely that 1 will be extraneous.}
+\end{te-addendum}
+
+\begin{concept-box}
+\textbf{STUDY TIP}
+
+An equation can have one solution, multiple solutions, or no solutions, so it's important to check all potential solutions.
+\end{concept-box}
+
+\begin{example}{4}
+\textbf{Solve Equations With Rational Exponents}
+
+A. What are the solutions to the equation ((x^2+5x+5)^{\frac{3}{2}}=1)?
+\begin{align*}
+(x^2+5x+5)^{\frac{3}{2}}&=1\
+\left((x^2+5x+5)^{\frac{3}{2}}\right)^{\frac{2}{3}}&=(1)^{\frac{2}{3}} &&\text{Raise both sides to the reciprocal power.}\
+x^2+5x+5&=1\
+x^2+5x+4&=0\
+(x+4)(x+1)&=0 &&\text{Use the Zero-Product Property.}\
+x+4&=0\quad\text{or}\quad x+1=0\
+x&=-4\quad\text{or}\quad x=-1
+\end{align*}
+Check for extraneous solutions.
+\begin{align*}
+((-4)^2+5(-4)+5)^{\frac{3}{2}}&\stackrel{?}{=}1 & ((-1)^2+5(-1)+5)^{\frac{3}{2}}&\stackrel{?}{=}1\
+(16-20+5)^{\frac{3}{2}}&\stackrel{?}{=}1 & (1-5+5)^{\frac{3}{2}}&\stackrel{?}{=}1\
+(1)^{\frac{3}{2}}&\stackrel{?}{=}1 & (1)^{\frac{3}{2}}&\stackrel{?}{=}1\
+1&=1 & 1&=1
+\end{align*}
+This equation has two solutions, (x=-4) and (x=-1). There are no extraneous solutions.
+
+B. What is the solution to ((x+18)^{\frac{3}{2}}=(x-2)^3)?
+\begin{align*}
+(x+18)^{\frac{3}{2}}&=(x-2)^3\
+\left((x+18)^{\frac{3}{2}}\right)^{\frac{2}{3}}&=\left((x-2)^3\right)^{\frac{2}{3}} &&\text{Raise both sides to the reciprocal power.}\
+x+18&=(x-2)^2\
+x+18&=x^2-4x+4\
+x^2-5x-14&=0\
+(x+2)(x-7)&=0\
+x+2&=0\quad\text{or}\quad x-7=0 &&\text{Use the Zero-Product Property.}\
+x&=-2\quad\text{or}\quad x=7
+\end{align*}
+Check for extraneous solutions.
+\begin{align*}
+(-2+18)^{\frac{3}{2}}&\stackrel{?}{=}(-2-2)^3 & (7+18)^{\frac{3}{2}}&\stackrel{?}{=}(7-2)^3\
+16^{\frac{3}{2}}&\stackrel{?}{=}(-4)^3 & 25^{\frac{3}{2}}&\stackrel{?}{=}5^3\
+64&\ne -64 & 125&=125
+\end{align*}
+So 7 is the only solution to the equation, and -2 is an extraneous solution.
+\answer{A. (x=-4) and (x=-1); B. (x=7), and (x=-2) is an extraneous solution.}
+\end{example}
+
+\begin{tryit}{4}
+Solve each equation.
+
+A. ((x^2-3x-6)^{\frac{3}{2}}-14=-6)
+
+B. ((x-8)^{\frac{3}{2}}=(10-x)^3)
+\answer{A. (x=5,-2); B. (x=9)}
+\end{tryit}
+
+\begin{te-addendum}{4}{PurposefulQuestions}
+PART A
+
+Q: Why do you raise each side of an equation to the reciprocal power?
+\answer{Multiplying a rational exponent by its reciprocal equals 1.}
+
+PART B
+
+Q: Why did the right side of the equation change from ((x-2)^3) to ((x-2)^2)?
+\answer{Each side of the equation was raised to the reciprocal power of the left side, so (3\cdot\frac{2}{3}=2).}
+\end{te-addendum}
+
+\begin{te-addendum}{4}{ElicitEvidence}
+Q: Why do you isolate the expression with the rational exponent?
+\answer{When you isolate the expression with the rational exponent, only the expression will remain after each side of the equation is raised to the reciprocal power.}
+\end{te-addendum}
+
+\begin{te-addendum}{4}{RtIExtend}
+Use with Example 4 Have students explore solving equations with rational exponents that have no solution by graphing. Students should recognize that (\sqrt{\phantom{x}}) is equal to an expression raised to the (\frac{1}{2}) power.
+
+Solve the equation (\sqrt{6x+8}=x-7).
+
+Q: What strategy can you use to solve this equation?
+\answer{Sample: graphing}
+
+Q: What do you recognize about the solution?
+\answer{There is no real solution. The graphs of (y=\sqrt{6x+8}) and (y=x-7) do not intersect. Also, when you solve for (x), you find (x=-3), and because (-3) is not in the domain of either expression, it is an extraneous solution.}
+\end{te-addendum}
+
+\begin{concept-box}
+\textbf{COMMON ERROR}
+
+A common mistake when squaring an expression like (\sqrt{2x}+3) is to only square the radical portion. Square this expression as you would any binomial, by using the Distributive Property.
+\end{concept-box}
+
+\begin{example}{5}
+\textbf{Solve an Equation With Two Radicals}
+
+Solve the radical equation (\sqrt{x+9}-\sqrt{2x}=3).
+
+When an equation has two radicals, start the solution process by isolating one radical.
+\begin{align*}
+\sqrt{x+9}-\sqrt{2x}&=3\
+\sqrt{x+9}&=\sqrt{2x}+3 &&\text{Isolate one radical sign.}\
+(\sqrt{x+9})^2&=(\sqrt{2x}+3)^2\
+x+9&=2x+6\sqrt{2x}+9\
+0&=x+6\sqrt{2x}\
+-x&=6\sqrt{2x} &&\text{Isolate the remaining radical and square again.}\
+(-x)^2&=(6\sqrt{2x})^2\
+x^2-72x&=0\
+x(x-72)&=0\
+x&=0\quad\text{or}\quad x=72
+\end{align*}
+Check the potential solutions by substituting 0 and 72 for (x) in the original equation:
+\begin{align*}
+\sqrt{x+9}-\sqrt{2x}&\stackrel{?}{=}3 & \sqrt{x+9}-\sqrt{2x}&\stackrel{?}{=}3\
+\sqrt{(0)+9}-\sqrt{2(0)}&\stackrel{?}{=}3 & \sqrt{(72)+9}-\sqrt{2(72)}&\stackrel{?}{=}3\
+\sqrt{9}-\sqrt{0}&\stackrel{?}{=}3 & \sqrt{81}-\sqrt{144}&\stackrel{?}{=}3\
+3-0&\stackrel{?}{=}3 & 9-12&\stackrel{?}{=}3\
+3&=3 & -3&\ne 3
+\end{align*}
+The only solution is 0. The value 72 does not make the original equation true, so it is an extraneous solution.
+
+You can also see this by graphing (y=\sqrt{x+9}-\sqrt{2x}) and (y=3) together. They intersect only at (x=0).
+
+\begin{tikzpicture}
+\begin{axis}[
+width=7cm,height=5cm,
+axis lines=middle,
+xlabel=(x), ylabel=(y),
+xmin=-4,xmax=5,ymin=-4,ymax=5,
+xtick={-4,-2,0,2,4}, ytick={-4,-2,0,2,4},
+grid=both,
+samples=120,
+legend style={at={(0.02,0.98)},anchor=north west,font=\tiny}
+]
+\addplot[domain=0:5, red, thick] {sqrt(x+9)-sqrt(2*x)};
+\addlegendentry{(y=\sqrt{x+9}-\sqrt{2x})}
+\addplot[domain=-4:5, blue, thick] {3};
+\addlegendentry{(y=3)}
+\addplot[only marks, mark=*, red] coordinates {(0,3)} node[pos=0, above right] {((0,3))};
+\end{axis}
+\end{tikzpicture}
+\answer{(x=0); (x=72) is an extraneous solution.}
+\end{example}
+
+\begin{tryit}{5}
+Solve each radical equation. Check for extraneous solutions.
+
+A. (\sqrt{x+4}-\sqrt{3x}=-2)
+
+B. (\sqrt{15-x}-\sqrt{6x}=-3)
+\answer{A. (x=12); (x=0) is an extraneous solution. B. (x=6); (x=\frac{49}{6}) is an extraneous solution.}
+\end{tryit}
+
+\begin{te-addendum}{5}{PurposefulQuestions}
+Q: What is another strategy you could use to find the solution to an equation without doing calculations?
+\answer{You could graph the two sides of the equation separately. The solution is where the graphs intersect.}
+
+Q: Why does a radical remain in the solution steps after the two sides of the equation have been squared the first time?
+\answer{After expanding the right side using the Distributive Property, an integer multiplied by a radical will contain a radical.}
+\end{te-addendum}
+
+\begin{te-addendum}{5}{ElicitEvidence}
+Q: What method can you use to solve equations with two radicals?
+\answer{Isolate the radicals on either side of the equation and square both sides. Then the first equation can be solved by factoring, but the second equation must be solved using the Quadratic Formula.}
+\end{te-addendum}
+
+\begin{te-addendum}{5}{HabitsOfMind}
+Reason Why are extraneous solutions a possibility for radical equations?
+\answer{Extraneous solutions can occur when you square both sides of the equation.}
+\end{te-addendum}
+
+\begin{te-addendum}{5}{RtISupport}
+Use with Example 5 Some students may struggle with squaring each side of an equation when solving an equation with two radicals. Have students practice squaring expressions.
+
+Square the following expressions.
+
+Q: (12)
+\answer{144}
+
+Q: (\sqrt{5x})
+\answer{(5x)}
+
+Q: (\sqrt{x}+6)
+\answer{(x+12\sqrt{x}+36)}
+
+Q: (\sqrt{3x}+10)
+\answer{(3x+20\sqrt{3x}+100)}
+
+Q: What is important to remember when squaring these expressions?
+\answer{Square the entire expression, not just what is under the radical.}
+\end{te-addendum}
+
+\begin{example}{6}
+\textbf{Solve a Radical Inequality}
+
+The body surface area (BSA) of a human being is used to determine some doses of medication. The formula for finding BSA is (\mathrm{BSA}=\sqrt{\frac{H\cdot M}{3{,}600}}), where (H) is the height in centimeters and (M) is the mass in kilograms.
+
+A doctor calculates a particular dose of medicine for a patient. What must the mass of the person be for the dose to be appropriate?
+
+\placeholder{illustration}{Doctor using a tablet while speaking with a patient; tablet text: "BSA < 1.9" and "Height = 160 cm".}
+
+\begin{align*}
+\mathrm{BSA}&<1.9\
+\sqrt{\frac{H\cdot M}{3{,}600}}&<1.9 &&\text{Substitute in an expression equal to BSA.}\
+\sqrt{\frac{160\cdot M}{3{,}600}}&<1.9 &&\text{Substitute 160 for (H), and solve for (M).}\
+\left(\sqrt{\frac{160M}{3{,}600}}\right)^2&<1.9^2\
+\frac{160M}{3{,}600}&<3.61\
+M&<81.225
+\end{align*}
+The mass of the patient must be less than 81.225 kg for the dose to be appropriate.
+\answer{The mass of the patient must be less than 81.225 kg.}
+\end{example}
+
+\begin{concept-box}
+\textbf{CONSTRUCT ARGUMENTS}
+
+Another way to solve this problem is to substitute values into the formula, solve it as an equation, and then use logic to determine the inequality symbol. When there are many possible solution methods, how do you decide which to use?
+\end{concept-box}
+
+\begin{tryit}{6}
+A doctor calculates that a particular dose of medicine is appropriate for an individual whose BSA is less than 1.8. If the mass of the individual is 75 kg, how many cm tall can he or she be for the dose to be appropriate?
+\answer{less than 155.52 cm tall}
+\end{tryit}
+
+\begin{te-addendum}{6}{PurposefulQuestions}
+Q: Why is the inequality written as (<1.9)?
+\answer{This dosage is for a patient whose BSA is less than 1.9.}
+
+Q: How do the steps to solve the problem change if you are given the height instead of the mass?
+\answer{The steps are similar; the only difference is that you substitute for (M) and solve for (H) in this case.}
+\end{te-addendum}
+
+\begin{te-addendum}{6}{ElicitEvidence}
+Q: How can this inequality be written according to these new conditions?
+\answer{(\sqrt{\frac{H\cdot75}{3{,}600}}<1.8)}
+\end{te-addendum}
+
+\begin{te-addendum}{6}{HabitsOfMind}
+Make Sense and Persevere How are the steps for solving a radical inequality different from the steps for solving a radical equation?
+\answer{The steps for solving a radical inequality are the same as the steps for solving a radical equation. The only time they would be different is when multiplying or dividing each side of the inequality by a negative number; then you have to remember to reverse the inequality symbol.}
+\end{te-addendum}
+
+\begin{te-addendum}{6}{PurposefulQuestions}
+Example 6 Help students understand how to solve real-world inequalities.
+
+Q: How do you know what to solve for when you are finding how high off the ground the ride should be?
+\answer{The pendulum needs to be hung so that the bottom of it is 3 feet off the ground, so you need to solve for (H), or (L+3).}
+\end{te-addendum}
+
+\begin{concept-summary}
+\textbf{Solving Radical Equations}
+
+\begin{tabular}{p{0.08\linewidth}p{0.23\linewidth}p{0.37\linewidth}p{0.24\linewidth}}
+\toprule
+& Words & Algebra & Graph \
+\midrule
+Step 1 & Isolate the radical term. & (2\sqrt{x+3}-x=0)\newline (2\sqrt{x+3}=x) & \
+Step 2 & Square both sides to remove the radical. & ((2\sqrt{x+3})^2=(x)^2) & \
+Step 3 & Solve the equation. & (4(x+3)=x^2)\newline (x^2-4x-12=0)\newline ((x-6)(x+2)=0)\newline (x=6\text{ or }x=-2) &
+\begin{tikzpicture}
+\begin{axis}[
+width=4.4cm,height=3.4cm,
+axis lines=middle,
+xlabel=(x), ylabel=(y),
+xmin=-5,xmax=9,ymin=-2,ymax=9,
+xtick={-4,0,4,8}, ytick={0,4,8},
+grid=both,
+samples=100,
+tick label style={font=\tiny}, label style={font=\tiny}
+]
+\addplot[domain=-3:9, red, thick] {2*sqrt(x+3)};
+\addplot[domain=-5:9, blue, thick] {x};
+\addplot[only marks, mark=*, red] coordinates {(6,6)} node[pos=0, above] {\scriptsize ((6,6))};
+\node[red] at (axis cs:0,5.5) {\scriptsize (y=2\sqrt{x+3})};
+\node[blue] at (axis cs:7,7.5) {\scriptsize (y=x)};
+\end{axis}
+\end{tikzpicture} \
+Step 4 & Eliminate extraneous solutions. & (2\sqrt{6+3}=6)\newline (2\sqrt{9}=6)\newline (6=6)\newline (2\sqrt{-2+3}=-2)\newline (2\sqrt{1}=-2)\newline (2\ne -2) & \
+\bottomrule
+\end{tabular}
+
+\textbf{Do You UNDERSTAND?}
+
+1. Essential Question What properties of exponents allow you to solve equations that include radicals or rational exponents?
+   \answer{You can use Power of a Power Property to eliminate radicals and rational exponents.}
+
+2. Construct Arguments How can you use a graph to show that the solution to (\sqrt[3]{84x+8}=8) is 6?
+   \answer{Graph (y=\sqrt[3]{84x+8}) and (y=8). The graphs will intersect at (x=6).}
+
+3. Vocabulary Why does solving a radical equation sometimes result in an extraneous solution?
+   \answer{Squaring both sides of an equation when solving sometimes produces an extraneous solution.}
+
+4. Error Analysis Nazim said that (-3) and 6 are the solutions to (\sqrt{3x+18}=x). What error did Nazim make?
+   \answer{Nazim didn't check for extraneous solutions. The real solution is 6; (-3) is extraneous.}
+
+5. Communicate Precisely Describe how you would solve the equation (x^{\frac{2}{3}}=n). How is this solution method to be interpreted if the equation had been written in radical form instead?
+   \answer{Raise both sides to the power (\frac{3}{2}); cube both sides and then find the square root of the result.}
+
+\textbf{Do You KNOW HOW?}
+
+Solve for (x).
+
+6. (3\sqrt{x+22}=21)
+   \answer{(x=27)}
+
+7. (\sqrt[3]{5x}=25)
+   \answer{(x=3{,}125)}
+
+In 8 and 9, find the extraneous solution.
+
+8. (\sqrt{8x+9}=x)
+   \answer{(x=-1)}
+
+9. (x=\sqrt{24-2x})
+   \answer{(x=-6)}
+
+10. Rewrite the equation (y=\sqrt{\frac{x-48}{6}}) to isolate (x).
+    \answer{(x=6y^2+48)}
+
+11. Use a graph to find the solution to the equation (9=\sqrt{3x+11}).
+    \answer{(x=23.3)}
+
+Solve each equation.
+
+12. ((3x+2)^{\frac{2}{5}}=4)
+    \answer{(x=10)}
+
+13. (\sqrt{2x-5}-\sqrt{x-3}=1)
+    \answer{(x=7) or (x=3)}
+
+14. (\sqrt{x+2}+\sqrt{3x+4}=2)
+    \answer{(x=-1)}
+    \end{concept-summary}
+
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+Q: What are two methods you can use to check for extraneous solutions?
+\answer{You can substitute your solutions in the original equation, or you can graph the expression on each side of the equation and find the intersection.}
+\end{te-addendum}
+
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercise 12 Students may forget to multiply by the reciprocal power and may multiply both sides by the exponent. In this case, they may think (3x+2=4). Encourage students to make sure, when they multiply by an exponent, that the exponent will equal 1, (\frac{2}{5}\cdot\frac{5}{2}=1).
+\end{te-addendum}
+
+\begin{practice}{15}{2}
+Generalize Explain how to identify an extraneous solution for an equation containing a radical expression.
+\answer{Substitute each potential solution into the original equation. If it makes the equation true, it is a real solution.}
+\end{practice}
+
+\begin{practice}{16}{2}
+Look for Relationships Write a radical equation that relates a square's perimeter to its area. Explain your reasoning. Use (s) to represent the side length of the square.
+\answer{(P=4\sqrt{A}); Sample: If (A=s^2), then (s=\sqrt{A}). Substituting (\sqrt{A}) for (s) in the perimeter formula results in the given answer.}
+\end{practice}
+
+\begin{practice}{17}{2}
+Error Analysis Describe and correct the error a student made in rewriting the equation to isolate (y).
+\begin{align*}
+x&=\frac{\sqrt{58+y}}{1.98}\
+1.98x&=\sqrt{58+y}\
+1.98x^2&=58+y\
+1.98x^2-58&=y
+\end{align*}
+\answer{The student squared (x) only instead of 1.98 and (x). Here is the correct work: (1.98x=\sqrt{58+y}), (3.92x^2=58+y), (3.92x^2-58=y).}
+\end{practice}
+
+\begin{practice}{18}{2}
+Use Appropriate Tools Find the point of intersection of the two graphs.
+
+\begin{tikzpicture}
+\begin{axis}[
+width=7cm,height=6cm,
+axis lines=middle,
+xlabel=(x), ylabel=(y),
+xmin=0,xmax=30,ymin=-12,ymax=12,
+xtick={0,8,16,24}, ytick={-12,-8,-4,0,4,8,12},
+grid=both,
+samples=120,
+legend style={at={(0.02,0.98)},anchor=north west,font=\tiny}
+]
+\addplot[domain=8:30, red, thick] {10-sqrt(x-8)};
+\addlegendentry{(y=10-\sqrt{x-8})}
+\addplot[domain=0:30, blue, thick] {7};
+\addlegendentry{(y=7)}
+\addplot[only marks, mark=*, red] coordinates {(17,7)} node[pos=0, above right] {((17,7))};
+\end{axis}
+\end{tikzpicture}
+\answer{(x=17, y=7)}
+\end{practice}
+
+\begin{practice}{19}{3}
+Higher Order Thinking Some, but not all, equations with rational exponents have extraneous solutions. What is the relationship between the exponents and the possibility of having extraneous solutions for equations with rational exponents? Explain your reasoning.
+\answer{Only if the denominator of the rational exponent is even can there be extraneous solutions. Taking an even root of a negative number gives an extraneous solution, so if the root isn't even, there can't be an extraneous solution.}
+\end{practice}
+
+\begin{practice}{20}{2}
+Communicate Precisely Describe the process used to solve an equation with two radical expressions. How is this process different from solving an equation with only one radical expression?
+\answer{The process of solving an equation with two radicals is like solving an equation with one radical. Simplify the equation and square both sides to eliminate one radical; because there are two radicals, you have to square both sides a second time; Rewrite the equation in standard form, and then factor the equation using the Zero-Product Property to solve for the variable. There are additional steps needed to eliminate the second radical.}
+\end{practice}
+
+\begin{practice}{21}{1}
+Solve each radical equation. (\sqrt[3]{x}+8=13)
+\answer{(x=125)}
+\end{practice}
+
+\begin{practice}{22}{1}
+Solve each radical equation. (\sqrt{4x}=11)
+\answer{(x=30.25)}
+\end{practice}
+
+\begin{practice}{23}{1}
+Solve each radical equation. (\sqrt{75+x}-6=14)
+\answer{(x=325)}
+\end{practice}
+
+\begin{practice}{24}{1}
+Solve each radical equation. (25-\sqrt[4]{x}=22)
+\answer{(x=81)}
+\end{practice}
+
+\begin{practice}{25}{1}
+Solve for (y). (x=3\sqrt[3]{15+y})
+\answer{(y=\frac{x^3}{27}-15)}
+\end{practice}
+
+\begin{practice}{26}{1}
+Solve for (y). (x=\frac{\sqrt{2y}}{26})
+\answer{(y=338x^2)}
+\end{practice}
+
+\begin{practice}{27}{1}
+Solve for (y). (x=\frac{\sqrt{y-14.2}}{0.05})
+\answer{(y=0.0025x^2+14.2)}
+\end{practice}
+
+\begin{practice}{28}{1}
+Solve for (y). (x=\frac{1}{3}\sqrt[4]{y})
+\answer{(y=81x^4)}
+\end{practice}
+
+\begin{practice}{29}{1}
+Solve each radical equation. Check for extraneous solutions. (x=\sqrt{x+6})
+\answer{(x=3)}
+\end{practice}
+
+\begin{practice}{30}{1}
+Solve each radical equation. Check for extraneous solutions. (2x=\sqrt{17x-15})
+\answer{(x=\frac{5}{4}) and (x=3)}
+\end{practice}
+
+\begin{practice}{31}{1}
+Solve each radical equation. Check for extraneous solutions. (4x=\sqrt{6x+10})
+\answer{(x=1)}
+\end{practice}
+
+\begin{practice}{32}{1}
+Solve each radical equation. Check for extraneous solutions. (x=\sqrt{56-x})
+\answer{(x=7)}
+\end{practice}
+
+\begin{practice}{33}{1}
+Solve. (0.5(x^2+5x+136)^{\frac{2}{3}}=50)
+\answer{(x=27) and (x=-32)}
+\end{practice}
+
+\begin{practice}{34}{1}
+Solve. (2(x^2-12x-4)^{\frac{1}{2}}-3=15)
+\answer{(x=-5) and (x=17)}
+\end{practice}
+
+\begin{practice}{35}{1}
+Solve. ((x^2+4x+5)^{\frac{3}{2}}+1=0)
+\answer{There are no solutions.}
+\end{practice}
+
+\begin{practice}{36}{1}
+Solve each radical equation. Check for extraneous solutions. (\sqrt{6+x}-\sqrt{x-5}=2)
+\answer{(x=8\frac{1}{16}) or (x=\frac{129}{16})}
+\end{practice}
+
+\begin{practice}{37}{1}
+Solve each radical equation. Check for extraneous solutions. (\sqrt{4x+5}-\sqrt{x+1}=1)
+\answer{(x=-1) and (x=-\frac{5}{9})}
+\end{practice}
+
+\begin{practice}{38}{1}
+Solve each radical equation. Check for extraneous solutions. (\sqrt{x+1}+1=\sqrt{x+3})
+\answer{(x=-\frac{3}{4})}
+\end{practice}
+
+\begin{practice}{39}{1}
+Solve using the formula (\mathrm{BSA}=\sqrt{\frac{H\cdot M}{3{,}600}}). A sports medicine specialist determines that a hot-weather training strategy is appropriate for this athlete. To the nearest tenth, what can the mass of the athlete be for the training strategy to be appropriate?
+
+\placeholder{illustration}{Athlete in white coat at a finish line with labels "BSA < 2.0" and "165 cm".}
+\answer{less than (87.3) kg}
+\end{practice}
+
+\begin{practice}{40}{2}
+Specialists can determine the speed a vehicle was traveling from the length of its skid marks, (d), and the coefficient of friction, (f). Rewrite the formula to solve for the length of the skid marks.
+
+\placeholder{illustration}{Car skid marks on a road with label "Vehicle's speed is (15.9\sqrt{df})".}
+\answer{(d=\frac{s^2}{252.81f})}
+\end{practice}
+
+\begin{practice}{41}{3}
+Make Sense and Persevere The half-life of a certain type of soft drink is 5 h. If you drink 50 mL of this drink, the formula (y=50(0.5)^{\frac{t}{5}}) tells the amount of the drink left in your system after (t) hours. How much of the soft drink will be left in your system after 16 hours?
+\answer{about 5.44 mL}
+\end{practice}
+
+\begin{practice}{42}{2}
+Model With Mathematics Big Ben's pendulum takes 4 s to swing back and forth. The formula (t=2\pi\sqrt{\frac{L}{32}}) gives the swing time, (t), in seconds, based on the length of the pendulum, (L), in feet. What is the minimum length necessary to build a clock with a pendulum that takes longer than Big Ben's pendulum to swing back and forth?
+\answer{13 ft}
+\end{practice}
+
+\begin{practice}{43}{2}
+Make Sense and Persevere Derek is hang gliding on a clear day. Use the formula for visibility, (v=1.225\sqrt{a}), to find the altitude at which Derek is hang gliding.
+
+\placeholder{illustration}{Hang glider with labels "visibility, (v=67.1) miles" and "Distance to ground = (a) feet".}
+\answer{3,000 ft}
+\end{practice}
+
+\begin{practice}{44}{1}
+Complete the table to solve for the unknown value in the equation (y=\sqrt[3]{2x+z}-12), using the given values in each row.
+
+\begin{tabular}{ccc}
+\toprule
+(y) & (x) & (z) \
+\midrule
+0 & 462 & (\square) \
+-3 & (\square) & 439 \
+-10 & 1.25 & (\square) \
+3 & (\square) & 16 \
+\bottomrule
+\end{tabular}
+\answer{\begin{tabular}{ccc}\toprule (y) & (x) & (z) \ \midrule 0 & 462 & 804 \ -3 & 145 & 439 \ -10 & 1.25 & 5.5 \ 3 & 1,679.5 & 16 \ \bottomrule\end{tabular}}
+\end{practice}
+
+\begin{practice}{45}{1}
+SAT/ACT What is the solution to the equation ((x^2+5x+25)^{\frac{3}{2}}=343)?
+
+A. (-8) only
+
+B. 3 only
+
+C. 77 only
+
+D. (-8) and 3
+
+E. There are no solutions.
+\answer{D. (-8) and 3}
+\end{practice}
+
+\begin{practice}{46}{2}
+Performance Task Escape velocity is the velocity at which an object must be traveling to leave a star or planet without falling back to its surface or into orbit. Escape velocity depends on the gravitational constant, (G=6.67\times10^{-11}), the mass, (M) in kilograms, and radius, (r), of the star or planet.
+
+Escape velocity: (v=\sqrt{\frac{2GM}{r}})
+
+\placeholder{illustration}{Earth with a rocket path and labels "Escape velocity: (v=\sqrt{\frac{2GM}{r}})" and "Earth's radius = 6,371,000 m".}
+
+Part A Rewrite the equation to solve for mass.
+
+Part B Earth has an escape velocity of about 11,200 meters per second. What is Earth's mass in kilograms?
+\answer{Part A (M=\frac{v^2r}{2G}). Part B (M\approx5.99\times10^{24}).}
+\end{practice}
+
+\end{document}

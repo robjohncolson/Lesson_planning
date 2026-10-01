@@ -1,0 +1,929 @@
+\documentclass{article}
+% Source: Topic_06_Teacher_Edition.pdf, PDF pages 24-35 (printed pages 293A-300B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 24: 293A Lesson Overview
+\begin{lesson-meta}
+lesson: 6-2
+title: Exponential Models
+standards: none printed
+practices: none printed
+objective: I can write exponential models in different ways to solve problems.
+
+essential question: How can you develop exponential models to represent and interpret situations?
+
+\textbf{VOCABULARY}
+\item compound interest formula
+\item continuously compounded interest formula
+\item natural base e
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 6-2 \\
+Title & Exponential Models \\
+Standards & none printed \\
+I CAN Objective & I can write exponential models in different ways to solve problems. \\
+Essential Question & How can you develop exponential models to represent and interpret situations? \\
+Lesson Vocabulary & compound interest formula; continuously compounded interest formula; natural base e \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Rewrite exponential functions to identify rates.
+\item Interpret the parameters of an exponential function within the context of compound interest problems.
+\item Construct exponential models given two points or by using regression.
+Essential Understanding. Exponential models are useful for representing situations in which the rate increases by the same percent for each period of time and for interpreting problems that involve compound interest. Exponential regression can be used to generate exponential models for real-world contexts.
+\textbf{COHERENCE}
+Previously in earlier courses, students: Interpreted key features of exponential functions.
+In this lesson, students: Analyze real-world situations using exponential models.
+Later in this topic, students will: Connect their understanding of exponential functions to logarithmic functions as they evaluate and simplify common and natural logarithms.
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+\item Students practice applying the compound interest formula and the continuously compounded interest formula.
+\item Students apply exponential models to solve problems involving compound interest.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+REVIEW VOCABULARY English & Spanish \\
+compound interest & interés compuesto \\
+exponential function & función exponencial \\
+NEW VOCABULARY & \\
+compound interest formula & fórmula de interés compuesto \\
+continuously compounded interest formula & fórmula de interés compuesto en forma continua \\
+natural base e & base natural e \\
+\end{tabular}
+VOCABULARY ACTIVITY. Discuss why an exponential model can be used to represent compound interest and work through a simple example. Without using their books, have students write the definitions of the new vocabulary terms in their own words.
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 24 963 679 1113 858
+\placeholder{illustration}{Student Companion cover: luminous purple and blue circular design on black; Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students write an exponential function to model a situation and rewrite the function to identify the rate.
+Students interpret the parameters of an exponential function within the contexts of compound interest and continuously compounded interest problems.
+Students find an exponential model by using 2 points or by using regression.
+\textbf{Applying Math Practices}
+Make Sense of Problems and Persevere in Solving Them. Students find entry points to problems involving exponential relationships by identifying given information and goals. They write exponential growth or decay equations in a form determined by the context of the problem in order to find solutions.
+Model With Mathematics. Students use functions to describe how the value of land varies over time and to draw conclusions about when a bowl of soup is cool enough to consume.
+\end{te-addendum}
+% Source page 25: 293B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS. Reactivate students' knowledge of exponential growth by exploring bacteria. Students should look for a pattern when the product of the growth rate per day and the number of days is constant.
+STUDENT COMPANION. Students can complete the Explore \& Reason activity in their Student Companion.
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Juan is studying exponential growth of bacteria cultures. Each is carefully controlled to maintain a specific growth rate. Copy and complete the table to find the number of bacteria cells in each culture.
+\begin{tabular}{lllll}
+Culture & Initial Number of Bacteria & Growth Rate per Day & Time (days) & Final Number of Bacteria \\
+A & 10,000 & 8\% & 1 & \underline{\hspace{1cm}} \\
+B & 10,000 & 4\% & 2 & \underline{\hspace{1cm}} \\
+C & 10,000 & 2\% & 4 & \underline{\hspace{1cm}} \\
+D & 10,000 & 1\% & 8 & \underline{\hspace{1cm}} \\
+\end{tabular}
+\answer{Sample student work:
+\begin{tabular}{lllll}
+Culture & Initial Number of Bacteria & Growth Rate per day & Time(days) & Final Number of Bacteria \\
+A & 10.000 & 8\% & 1 & 10.800 \\
+B & 10.000 & 4\% & 2 & 10.816 \\
+C & 10.000 & 2\% & 4 & 10.824 \\
+D & 10.000 & 1\% & 8 & 10.828 \\
+\end{tabular}}
+\te{Printed sample uses periods as thousands separators.}
+A. What is the relationship between the daily growth rate and the time in days for each culture?
+\answer{When multiplied together, each growth rate and time is equal to 0.08.}
+B. Look for Relationships. Would you expect a culture with a growth rate of (\frac12\%) and a time of 16 days to have more or fewer cells than the others in the table? Explain.
+\answer{I would expect that culture to have more cells than the others in the table because when looking at the other cultures, it seems like cultures given more days to grow have more cells, even though their growth rate per day is smaller.}
+\te{Digital preview: EXPLORE \& REASON; Go back; introductory sentence omits the instruction to copy and complete the table; its table omits the final-number column and it shows question A with a blank response box. The page's availability caption instead reads ``Critique \& Explain is available at SavvasRealize.com.''}
+\end{model-discuss}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving.
+Q: Do you expect the final number of bacteria to be the same for each culture? Explain.
+\answer{No; Although the product of the growth rate per day and the number of days is constant, the final number of bacteria will be different because the growth rate is compounded.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics.
+Q: How do the growth rate of (\frac12\%) and the time of 16 days fit the table?
+\answer{They continue the patterns in the table. The growth rate is halved in each row, the number of days is doubled, and the product of the two values is 0.08.}
+For Early Finishers.
+Q: How would the result change with a rate of decay rather than one of growth?
+\answer{When the rate is one of growth, a lower rate over a longer period of time causes more bacteria to grow. But when the rate is one of decay, a lower rate over a longer period of time causes fewer bacteria to die.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse. Facilitate a discussion about what happens to the number of bacteria as the number of days changes.
+Q: Did the result of the activity match your expectation before starting the activity?
+\answer{Sample: No; I thought the number of bacteria would be constant because the product of the growth rate and the number of days was constant.}
+Introduce exponential models as models that can be used to calculate compound interest.
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Generalize} How would the numbers of final bacteria change if the initial number were doubled in each culture? Explain.
+\answer{The values would also double because the exponentiation only applies to the growth rate, not the initial number of bacteria.}
+\end{te-addendum}
+% Source page 26: 293 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Point out to students that exponential models can be used to represent real-world situations such as compound interest and population growth.
+Help them discover how knowing an exponential model (y=ab^x) and the initial amount (a) and growth factor (b) are useful when working through the examples in this lesson.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Rewrite an Exponential Function to Identify a Rate}
+In 2021, the population of a small town was 8,000. The population is increasing at a rate of 2.5\% per year. Rewrite an exponential growth function to find the monthly growth rate.
+Write an exponential growth function using the annual rate to model the town's population (y), in (t) years after 2015.
+(y=8,000(1+0.025)^t)
+(y=8,000(1.025)^t)
+\te{Callouts: initial population: 8,000; annual growth rate: 0.025; years after 2021: t. Printed ``after 2015'' in the solution; likely after 2021, as in the prompt and callout.}
+To identify the monthly growth rate, you need the exponent to be the number of months in (t) years, or (12t).
+(y=8,000(1.025)^{\frac{12t}{12}})
+(y=8,000(1.025^{\frac{1}{12}})^{12t})
+(y\approx8,000(1.00206)^{12t})
+\te{Callouts: Multiply the exponent by (\frac{12}{12}) so that (12t) represents the number of months. Applying the Power of a Power rule helps to reveal the monthly growth rate by producing an expression with the exponent (12t).}
+\te{COMMON ERROR. Dividing the annual growth rate by 12 does not give the exact monthly growth rate. You must use the Power of a Power rule to find the exact monthly growth rate.}
+The monthly growth rate is about (1.00206-1=0.00206). The population is increasing about 0.206\% per month.
+\answer{About 0.206\% per month.}
+\end{example}
+\begin{tryit}{1}
+The population in a small town is increasing annually by 1.8\%. What is the quarterly rate of population increase?
+\answer{0.447\%}
+\end{tryit}
+\begin{te-addendum}{1}{RtISupport}
+\textbf{Support Productive Struggle in Learning Mathematics}
+Q: How does the monthly rate compare to the annual rate?
+\answer{The monthly rate is almost (\frac1{12}) of the annual rate.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How is the Try It different from the Example and how does the difference affect the process used to answer the question?
+\answer{The Try It asks for a quarterly rate rather than a monthly rate. So instead of multiplying the exponent by (\frac{12}{12}), multiply it by (\frac44).}
+\end{te-addendum}
+\begin{te-addendum}{1}{HabitsOfMind}
+\textbf{Generalize} Why can't you divide an annual interest rate by 4 to obtain a quarterly interest rate?
+\answer{The annual interest rate is (r) while the quarterly interest rate is ((1+r)^{\frac14}-1) which is approximately, but not exactly, equal to (\frac r4).}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Example 1}
+Additional Examples are available at SavvasRealize.com. ESSENTIAL QUESTION. Go back. SOLUTION.
+What is the monthly growth rate for the function (f(t)=7,500(1.025)^t)?
+To identify the monthly growth rate, you need the exponent to be the number of months in (t) years, or (12t).
+(f(t)=7,500(1.025)^t)
+(f(t)=7,500(1.025)^{\frac{12}{12}t})
+Multiply the exponent by (\frac{12}{12}) so that (12t) represents the number of months.
+(f(t)=7,500(1.025^{\frac1{12}})^{12t})
+Applying the Power of Power rule helps to reveal the monthly growth rate by producing an expression with the exponent (12t).
+(f(t)=7,500(1.00206)^{12t})
+Simplify.
+\answer{The monthly growth rate is about (1-1.00206=0.00206).}
+\te{Printed subtraction is reversed; likely (1.00206-1=0.00206).}
+Example 1. This example applies the Power of a Power rule to identify rates.
+Q: Given the same initial population, annual growth rate, and time, which will be higher, the monthly rate or the quarterly rate? Explain.
+\answer{The quarterly rate will be higher because it is applied less often than the monthly rate but yields the same annual rate.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Additional Example 4}
+ESSENTIAL QUESTION. Go back. SOLUTION.
+Use the information at the right. What is the total amount of money in an account in which interest is compounded continuously?
+(P=\$3,500), (r=4\%), (t=8\text{ years}).
+Use the continuously compounded interest formula with (P=3,500), (r=0.04), and (t=8).
+(A=Pe^{rt})
+(=3,500e^{(0.04)(8)})
+(=\$4,974.47)
+\answer{The value of the account after 8 years is approximately \$4,974.47.}
+Example 4. Help students understand continuously compounded interest with this additional example.
+Q: How does the total amount of money in the account change if the interest is compounded daily?
+\answer{The total amount of money in the account is less if the interest is compounded daily.}
+\end{te-addendum}
+% Source page 27: 294 Understand & Apply
+\begin{concept-box}
+\textbf{Compound Interest}
+Compound interest is interest earned on interest already deposited.
+The compound interest formula is an exponential model that is used to calculate the value of an investment when interest is compounded.
+(A=P(1+\frac rn)^{nt})
+(P=\text{the initial principal invested})
+(r=\text{annual interest rate, written as a decimal})
+(n=\text{number of compounding periods per year})
+(A=\text{the value of the account after }t\text{ years})
+\end{concept-box}
+\begin{example}{2}
+\textbf{Understand Compound Interest}
+Tamira invests \$5,000 in an account that pays 4\% annual interest.
+A. How much will there be in the account after 3 years if the interest is compounded annually, quarterly, or monthly?
+Use the Compound Interest formula to find the amount in Tamira's account after 3 years.
+\begin{tabular}{lll}
+ & Compound Interest Formula & Amount After 3 Years (\$) \\
+Annually & (A=5000(1+\frac{0.04}{1})^{3(1)}) & 5,624.32 \\
+Quarterly & (A=5000(1+\frac{0.04}{4})^{3(4)}) & 5,634.13 \\
+Monthly & (A=5000(1+\frac{0.04}{12})^{3(12)}) & 5,636.36 \\
+\end{tabular}
+As the number of compounding periods increases, the amount in the account also increases.
+\te{REASON. The more frequently interest is added to the account, the earlier that interest generates more interest. This reasoning supports the trend shown in the table.}
+\answer{A. Annually: \$5,624.32; quarterly: \$5,634.13; monthly: \$5,636.36.}
+B. What is the annual growth rate for each possible account?
+Using the properties of exponents, you can transform the compound interest formula to find the annual growth rate over a single year.
+\begin{tabular}{lll}
+ & Interest Formula & Annual Growth Rate \\
+Annually & (A=5000(1+\frac{0.04}{1})^{1t}=5000(1.04)^t) & 4\% \\
+Quarterly & (A=5000(1+\frac{0.04}{4})^{4t}=5000((1+0.01)^4)^t\approx5000(1.0406)^t) & 4.06\% \\
+Monthly & (A=5000(1+\frac{0.04}{12})^{12t}\approx5000((1+0.003)^{12})^t\approx5000(1.0407)^t) & 4.07\% \\
+\end{tabular}
+\te{Printed intermediate monthly decimal is 0.003; likely intended 0.003333... to obtain the final annual growth factor 1.0407.}
+\answer{B. 4\%; 4.06\%; 4.07\%.}
+\end{example}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions}
+Q: Why is 0.04 used in the formula for (r) rather than 4?
+\answer{The rate is 4\%; percent means out of 100 and (4\div100=0.04).}
+\end{te-addendum}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: When banks advertise an interest rates of 3\% interest compounded quarterly, do they really pay 3\% every quarter? Explain.
+\answer{No; 3\% is the annual rate. The bank only pays (\frac14) of the annual rate each quarter.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners}
+WRITING: BEGINNING. Show students a dollar and four quarters. Draw a diagram to show how they are related and explain what happens when interest is compounded quarterly.
+Q: What currency could be used to apply this same illustration to semi-annually?
+\answer{half dollar}
+Q: Using complete sentences, write a description of what happens when interest is compounded monthly.
+\answer{Check students' work.}
+READING: DEVELOPING. To help with reading comprehension, pull out the words from the example that end in -ly. Write each word on the board. Below the word, write a model sentence using the word.
+Q: The words in the example that specify time all end in -ly. How does that ending change the meaning of the words?
+\answer{It changes the meaning from a single time unit to a frequency of occurrence.}
+Q: What things might you do or might happen annually? semi-annually? quarterly? monthly? weekly? daily?
+\answer{Answers will vary.}
+SPEAKING: EXPANDING. Pair students up to discuss the relationship between annual and semi-annual. Remind students that when the period is annual, (n=1).
+Q: What is the value of (n) when the period is semi-annual?
+\answer{2; Semi- means half, so when interest is compounded semi-annually, it is applied every half year, or two times per year.}
+\end{te-addendum}
+% Source page 28: 295 Understand & Apply
+\begin{tryit}{2}
+\$3,000 is invested in an account that earns 3\% annual interest, compounded monthly.
+a. What is the value of the account after 10 years? 100 years?
+b. What is the effective annual interest rate of the account?
+\answer{a. \$4,048.06, \$60,031.45. b. 3.0416\%.}
+\end{tryit}
+\begin{example}{3}
+\textbf{Understanding Continuous Compounded Interest}
+\te{CONCEPTUAL UNDERSTANDING. Powered by Desmos. Example 3 is Powered by Desmos. Examples are available at SavvasRealize.com. Teacher heading: Understand Continuous Compounded Interest.}
+Consider an investment of \$1 in an account that pays a 100\% annual interest rate for one year. The equation (A=1(1+\frac1n)^{n(1)}=(1+\frac1n)^n) gives the amount in the account after one year for the number of compounding periods (n). Find the value of the account for the number of periods given in the table.
+\begin{tabular}{ll}
+Number of Periods, (n) & Value of ((1+\frac1n)^n) \\
+1 & ((1+\frac11)^1=2) \\
+10 & ((1+\frac1{10})^{10}=2.59374246) \\
+100 & ((1+\frac1{100})^{100}=2.704813829) \\
+1,000 & ((1+\frac1{1,000})^{1,000}=2.716923932) \\
+10,000 & ((1+\frac1{10,000})^{10,000}=2.718145927) \\
+100,000 & ((1+\frac1{100,000})^{100,000}=2.718268237) \\
+\end{tabular}
+Notice that as (n) continues to increase, the value of the account remains very close to 2.718. This special number is called the natural base.
+The natural base (e) is defined as the value that the expression ((1+\frac1n)^n) approaches as (n\to+\infty). The number (e) is an irrational number.
+(e=2.718281828459\ldots)
+The number (e) is the base in the continuously compounded interest formula.
+(A=Pe^{rt})
+(P=\text{the initial principal invested})
+(e=\text{the natural base})
+(r=\text{annual interest rate, written as a decimal})
+(A=\text{the value of the account after }t\text{ years})
+\te{HAVE A GROWTH MINDSET. How can you use mistakes as opportunities to learn and grow?}
+\answer{2; 2.59374246; 2.704813829; 2.716923932; 2.718145927; 2.718268237.}
+\end{example}
+\begin{tryit}{3}
+If you continued the table for (n=1,000,000), would the value in the account increase or decrease? How do you know?
+\answer{increase; the values increase each time the number grows}
+\end{tryit}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions}
+Q: Are the values of ((1+\frac1n)^n) exact values?
+\answer{No; The values are approximations to the last place shown on a calculator.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Is it necessary to calculate the value of the account to nine decimal places?
+\answer{No; The balance is given in dollars, which are only measured to the hundredths place. When interpreted within the real-world context, when the interest is compounded 1000 times, the balance of the account is \$2.72. And when the interest is compounded 100,000 times, the balance of the account will still be \$2.72.}
+Have a Growth Mindset: Reflect on Mistakes. When you take on new challenges, you will sometimes make mistakes. Ask: How can you learn from a mistake? How can you stay positive even when you make a mistake?
+\end{te-addendum}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What part of the continuously compounded interest formula represents the concept of continuous?
+\answer{(e); It is an irrational number, meaning that it's continuous or never ends.}
+\te{Printed explanation conflates irrationality with continuous compounding; likely intended the limiting process as compounding frequency tends to infinity.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Generalize} Which yields the greatest return on investment: compounding quarterly, hourly, or continuously? Explain.
+\answer{continuously; (e) is a greater base than ((1+\frac r4)) and ((1+\frac r{8,760})).}
+\te{Printed reasoning compares bases alone; likely intended to compare complete compound-interest expressions, including their different exponents.}
+\end{te-addendum}
+% Source page 29: 296 Understand & Apply
+\begin{example}{4}
+\textbf{Find Continuously Compounded Interest}
+Regina invests \$12,600 in an account that is compounded continuously. What is the value of the account after 12 years? Round your answer to the nearest dollar.
+% FIG 29 1017 239 1117 329
+\placeholder{illustration}{Blue bank building with four columns, triangular roof, and steps labeled 3.2\% interest rate, 12-year term.}
+Use the continuously compounded interest formula with (P=12,600), (r=0.032), and (t=12).
+(A=Pe^{rt})
+(=12,600e^{0.032(12)})
+(=12,600e^{0.384})
+(\approx18,498.63)
+\te{Callout: To evaluate (e^{0.384}), use the (e^x) key on your calculator.}
+\te{COMMON ERROR. Be sure that when you evaluate (e^{0.032(12)}) you either simplify 0.032(12) as 0.384 first, or use parentheses to ensure that (e) is raised to the entire product, rather than just the first factor.}
+\answer{To the nearest dollar, the value of the account after 12 years is \$18,499.}
+\end{example}
+\begin{tryit}{4}
+You invest \$125,000 in an account that earns 4.75\% annual interest, compounded continuously.
+a. What is the value of the account after 15 years?
+b. What is the value of the account after 30 years?
+\answer{a. \$254,885.32. b. \$519,732.23.}
+\end{tryit}
+\begin{example}{5}
+\textbf{Use Two Points to Find an Exponential Model}
+\te{APPLICATION}
+Tia knew that the number of instant messages (IM) she sent was growing exponentially. She generated a record of the number of IM she sent each year since 2018. What is an exponential model that describes the data?
+% FIG 29 814 539 995 635
+\placeholder{illustration}{Two hands holding a tablet; green speech bubble 2022, 6000 and purple speech bubble 2023, 6600.}
+Write an exponential model in the form (y=a\cdot b^x), with (y) equal to the number of IM in hundreds and (x) equal to the number of years since 2018. Use the data to find the values of the constants (a) and (b).
+The growth factor for Tia's IM in the two consecutive years was (\frac{11}{10}), or 1.1.
+\te{Callout: When data points have consecutive, integer x-values, the growth factor, (b), is the ratio of their y-values.}
+Use the value of (b) and one of the data points to find the initial value, (a).
+(y=a\cdot b^x)
+(66=a(1.1)^5)
+(\frac{66}{(1.1)^5}=a)
+(40.98\approx a)
+\te{Callout: Substitute 1.1 for (b), 5 for (x), and 66 for (y).}
+\te{COMMON ERROR. Remember that the growth factor ((1+r)) is different from the growth rate ((r)). In this example, the growth factor is 1.1 while the growth rate is 0.1, or 10\%.}
+\answer{The function (y=40.98(1.1)^x) models the number of instant messages (in hundreds) Tia sends (x) years after 2018.}
+\end{example}
+\begin{te-addendum}{5}{RtISupport}
+\textbf{Support Productive Struggle in Learning Mathematics}
+Q: Why is 5 substituted for (x)?
+\answer{5 is the number of years between 2018 and 2023.}
+Q: How can you find the growth factor when the data points have x-values that are 2 units apart?
+\answer{Divide the second y-value by the first y-value, then take the square root of the quotient.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: According to the model, the value of the land in 2060 will be \$5,789. Is it definite the land will be actually worth that much? Explain.
+\answer{No; Exponential models may only be accurate over a restricted domain. It's not likely that the land value would increase exponentially for 45 years.}
+\end{te-addendum}
+\begin{te-addendum}{5}{CommonError}
+\textbf{Try It! 5} Some students may use the first value given as the initial value in the exponential model. Ask students what the initial value in this context might be. Emphasize that they need to use the growth factor and one of the given points to solve for the initial value.
+\end{te-addendum}
+\begin{te-addendum}{5}{RtISupport}
+\textbf{Support Struggling Students}
+Some students have difficulty finding an exponential model using two points.
+Have students practice finding the growth factor of an exponential model using pairs of points.
+1. (4,8) and (5,12)
+2. (7,32) and (8,40)
+3. (12,20) and (13,26)
+Q: What is each growth factor?
+\answer{1. 1.5. 2. 1.25. 3. 1.3.}
+Q: Once you know the growth factor, what do you need to do next to write an exponential model?
+\answer{You need to substitute the growth factor and the x- and y-values of one of the points into (y=a(b)^x). Then solve for (a).}
+Q: Use the growth factor you found to write an exponential model with data points (12,20) and (13,26).
+\answer{(y=0.858(1.3)^x)}
+\end{te-addendum}
+% Source page 30: 297 Understand & Apply
+\begin{tryit}{5}
+A Kansas realtor reported the value of an acre of farm land over a period of several years since 2015. The land was worth \$2010 in 2017 and \$2060 in 2018. Use the data to determine an exponential model that describes the value of the land per acre.
+\answer{(y\approx1914(1.0249^x))}
+\end{tryit}
+\begin{example}{6}
+\textbf{Use Regression to Find an Exponential Model}
+\te{APPLICATION}
+A radioactive iodine isotope that decays over time is used for medical treatments. A hospital pharmacy must keep a back-up supply. When there is less than 40 mL of the isotope, the pharmacy orders a new supply.
+% FIG 30 963 322 1144 427
+\placeholder{illustration}{Prescription pad marked Rx beside a capped glass vial with yellow CAUTION header, black radiation symbol and RADIOACTIVE MATERIAL label.}
+\begin{tabular}{lllllll}
+Day & 0 & 5 & 10 & 15 & 20 & 25 \\
+Volume (mL) & 120.0 & 76.9 & 53.1 & 33.0 & 22.6 & 12.8 \\
+\end{tabular}
+A. Find a model for the amount of iodine isotope after (x) days.
+Create a scatter plot.
+% FIG 30 999 488 1154 656
+\placeholder{graph}{Scatter plot with x-axis Day, labels 0,5,10,15,20,25,30; y-axis Volume (mL), labels 0,20,40,60,80,100,120,140. Grid every 2.5 days horizontally and 10 mL vertically. Window x=0 to30, y=0 to140. Axes have positive arrowheads and x,y labels. Blue filled points (0,120),(5,76.9),(10,53.1),(15,33),(20,22.6),(25,12.8); no connecting curve.}
+\te{Callout: The data appear to be exponential, as they approach but do not cross the x-axis.}
+Use exponential regression to find the model.
+(y=a(b^x))
+(y\sim122.39(0.92^x))
+\te{MODEL WITH MATHEMATICS. How can you validate this model? When would it make sense to substitute 120 for (a)?}
+\answer{A. (y\sim122.39(0.92^x)).}
+B. Should the pharmacy reorder a new supply before the 12th day?
+Use the model to find the amount of isotope on the 12th day.
+(y\sim122.39(0.92^{12}))
+(\approx45.0)
+\answer{On the 12th day, there is approximately 45 mL of iodine isotope. The hospital can wait until after that day to reorder its supply.}
+\end{example}
+\begin{tryit}{6}
+The pharmacy hopes to keep a supply of at least 10 mL of iodine isotope. Will the pharmacy have enough iodine on the 27th day if it has not received a new supply yet?
+\answer{Yes, they should have 12.8 mL left.}
+\end{tryit}
+\begin{te-addendum}{6}{GeneralizeETP}
+\textbf{Facilitate Mathematical Discourse}
+Q: Why can't the value of (y) ever go below 0?
+\answer{The y value represents the amount of the isotope, and there cannot be a negative amount of a substance.}
+Q: What does 0.92 mean in the given context?
+\answer{The iodine isotope is decaying by about 8\% per day.}
+Q: Would it make sense for this situation to be represented by an exponential growth function?
+\answer{No, the amount of the isotope does not increase; it only decreases.}
+\end{te-addendum}
+\begin{te-addendum}{6}{CommonError}
+\textbf{Try It! 6} Students may get slightly different answers depending on the tool used to do the regression. The Desmos graphing tool has a feature where you can see expected results based on the features of the tool.
+\end{te-addendum}
+\begin{te-addendum}{6}{HabitsOfMind}
+\textbf{Generalize} How can a graph help you determine whether an exponential model is appropriate for a data set? Explain.
+\answer{If the graph of the data curves and tends toward a horizontal asymptote, an exponential model may be appropriate.}
+\end{te-addendum}
+\begin{te-addendum}{6}{RtIExtend}
+\textbf{Extend Student Thinking}
+Provide these additional data sets for further exploration of exponential models through regression.
+a. (4,112), (6,264), (7,391), (10,1048), (12,1776)
+b. (10,95), (31,159), (38,189), (45,225), (49,248)
+c. (1,79), (7,241), (15,457), (19,565), (25,727)
+Q: Which data set is best modeled by an exponential function? Explain.
+\answer{B; Using a graphing calculator, the value of (r) is closer to 1 for this data set then for the others.}
+Q: What exponential model best fits the data set you chose?
+\answer{(y=74.2(1.025)^x)}
+Q: What situation could the data and model be describing?
+\answer{Sample: A home is purchased for \$74,200. Over time, improvements to the home increase its value by about 2.5\% per year.}
+\end{te-addendum}
+% Source page 31: 298 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{Writing Exponential Models}
+Q: Write models for the balance in an account with \$500 principal and an interest rate of 4.5\% compounded both monthly and continuously.
+\answer{(A=500(1+\frac{0.045}{12})^{12t}); (A=500e^{0.045t})}
+Q: How does the value of (n) affect the value of (A)?
+\answer{As (n) increases, the value of (A) increases also.}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Writing Exponential Models}
+\begin{tabular}{llll}
+ & General Exponential Model & Compound Interest & Continuously Compounded Interest \\
+ALGEBRA & (y=a\cdot b^x) & (A=P(1+\frac rn)^{nt}) & (A=Pe^{rt}) \\
+NUMBERS & A necklace costs \$250 and increases in value by 2\% per year. & A principal of \$3,000 is invested at 5\% annual interest, compounded monthly, for 4 years. & A principal of \$3,000 is invested at 5\% continuously compounded interest for 4 years. \\
+ & (a=\text{initial amount }\$250) & (P=3,000) & (P=3,000) \\
+ & (b=\text{growth factor }1.02) & (r=5\%) & (r=5\%) \\
+ & (x=\text{number of years}) & (n=12\text{ compounding periods per year}) & (t=4\text{ years}) \\
+ & (y=250(1.02)^x) & (t=4\text{ years}) & (A=3000e^{(0.05)(4)}) \\
+ & & (A=3000(1+\frac{0.05}{12})^{(12)(4)}) & \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION. How can you develop exponential models to represent and interpret situations?
+\answer{Answers may vary. Sample: Exponential models can be used to represent how the balances in investment accounts change as they earn interest.}
+2. Error Analysis. The exponential model (y=5,000(1.05)^t) represents the amount Yori earns in an account after (t) years when \$5,000 is invested. Yori said the monthly interest rate of the exponential model is 5\%. Explain Yori's error.
+\answer{Yori confused the annual interest rate and the monthly rate.}
+3. Vocabulary. Explain the similarities and differences between compound interest and continuously compounded interest.
+\answer{Sample: Both are exponential functions. For continuously compounded interest, the base is always (e), whereas the base of a compound interest function varies.}
+4. Communicate Precisely. Kylee is using a calculator to find an exponential regression model. How should Kylee explain what the variables in the model (y=a\cdot b^x) represent?
+\answer{Answers may vary. Sample: (a) represents the initial value, (b) represents the decay factor, (x) represents the amount of time that has passed, and (y) represents the value at a given time.}
+\te{Printed answer calls (b) the decay factor; likely growth or decay factor for a general exponential model.}
+\textbf{Do You KNOW HOW?}
+The exponential function models the annual rate of increase. Find the monthly and quarterly rates.
+5. (f(t)=2,000(1.03)^t)
+\answer{0.25\%; 0.74\%}
+6. (f(t)=500(1.055)^t)
+\answer{0.45\%; 1.3\%}
+Find the total amount of money in an account at the end of the given time period.
+7. compounded monthly, (P=\$2,000), (r=3\%), (t=5\text{ years})
+\answer{\$2,323.23}
+8. continuously compounded, (P=\$1,500), (r=1.5\%), (t=6\text{ years})
+\answer{\$1,641.26}
+Write an exponential model given two points.
+9. (3,55) and (4,70)
+\answer{(y=26.9(1.27)^x)}
+10. (7,12) and (8,25)
+\answer{(y=0.071(2.08)^x)}
+11. Paul invests \$6,450 in an account that earns continuously compounded interest at an annual rate of 2.8\%. What is the value of the account after 8 years?
+\answer{\$8,069.41}
+\end{concept-summary}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Exercise 5} Students may try to find the monthly rate by dividing the annual rate by 12 and the quarterly rate by dividing the annual rate by 4. Emphasize that to find the monthly rate, students should raise the annual growth factor to the (\frac1{12}) power, then subtract 1. To find the quarterly rate, students should raise the annual growth factor to the (\frac14) power, then subtract 1.
+\end{te-addendum}
+% Source page 32: 299 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{Lesson Practice}
+You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+12--23, 25--33 & 12--15, 17--33 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example: Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 25, 28 & 2 \\
+2 & 16--19 & 1 \\
+2 & 12 & 2 \\
+2 & 33 & 3 \\
+4 & 20--21, 29, 31--32 & 2 \\
+4 & 27 & 3 \\
+5 & 22--24 & 1 \\
+5 & 13 & 3 \\
+6 & 26, 30 & 2 \\
+6 & 14, 15 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{12}{2}
+UNDERSTAND. Error Analysis. Suppose \$6,500 is invested in an account that earns interest at a rate of 2\% compounded quarterly for 10 years. Describe and correct the error a student made when finding the value of the account.
+\te{Student work, marked with a red X:}
+(A=6500(1+\frac{0.02}{12})^{12(10)})
+(A=7937.80)
+\answer{The student compounded the interest monthly instead of quarterly. (A=\$7,935.16).}
+\end{practice}
+\begin{practice}{13}{3}
+UNDERSTAND. Use Structure. The points (2,54.61) and (4,403.48) are points on the graph of an exponential model in the form (y=a\cdot e^x).
+a. Find the exponential model.
+\answer{a. Substitute one of the given points into the model to find the value of (a); (y=7.39e^x).}
+b. Use the exponential model to find the value of (y) when (x=8)?
+\answer{b. Substitute 8 into the model to find (y=22,029).}
+\end{practice}
+\begin{practice}{14}{3}
+UNDERSTAND. Model with Mathematics. Use the points listed in the table for years 7 and 8 to find an exponential model. Then use regression to find an exponential model for the data. Explain how to find each model. Predict the amount in the account after 15 years.
+\begin{tabular}{ll}
+Time (yr) & Amount (\$) \\
+1 & 3,225 \\
+2 & 3,500 \\
+3 & 3,754 \\
+4 & 4,042 \\
+5 & 4,368 \\
+6 & 4,702 \\
+7 & 5,063 \\
+8 & 5,456 \\
+\end{tabular}
+\answer{(y=2,954(1.08)^x); (y=3,002(1.078)^x); To find the exponential model using data points, find the growth rate between two consecutive data points and that growth rate and one of the points to find the initial value. To find the model using a calculator, enter the data and find the exponential regression. \$9,262.}
+\end{practice}
+\begin{practice}{15}{3}
+UNDERSTAND. Higher Order Thinking. A power model is a type of function in the form (y=a\cdot x^b). Use the points (1,4), (2,8), (3,16) and (4,64) and a calculator to find an exponential model and a power model for the data. Then use each model to predict the value of (y) when (x=6). Graph the points and models in the same window. What do you notice?
+\answer{exponential model: (y=1.414(2.462)^x); power model: (y=3.125(x^{1.837})); exponential model: 314.9; power model: 120.1; The exponential model is a better fit because its (r^2) value is higher. The exponential functions increases at a faster rate than the power function.}
+% FIG 33 123 322 271 471
+\placeholder{graph}{Printed answer graph: x-axis x labeled 2,4,6, origin O; y-axis y labeled 20,40,60. Grid spacing 1 horizontally,10 vertically; window x=-2 to7, y=-20 to70. Both axes have positive arrowheads, y also negative. Red exponential curve near y=0 on left, crossing y-axis near1.4 and exiting top near x4.3; blue curve crosses the y-axis near3.1 and exits top nearx5; both curves have left and upper arrowheads. No individual data points or legend printed.}
+\te{Printed blue curve extends to negative x; likely a schematic drawing, as the stated noninteger power model has no real values for negative x.}
+\end{practice}
+\begin{practice}{16}{1}
+PRACTICE. Find the amount in the account for the given principal, interest rate, time, and compounding period. SEE EXAMPLES 2 AND 4.
+(P=\$800), (r=6\%), (t=9\text{ years}); compounded quarterly
+\answer{\$1,367.31}
+\end{practice}
+\begin{practice}{17}{1}
+PRACTICE. Find the amount in the account for the given principal, interest rate, time, and compounding period. SEE EXAMPLES 2 AND 4.
+(P=\$3,750), (r=3.5\%), (t=20\text{ years}); compounded monthly
+\answer{\$7,543.88}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Find the amount in the account for the given principal, interest rate, time, and compounding period. SEE EXAMPLES 2 AND 4.
+(P=\$2,400), (r=5.25\%), (t=12\text{ years}); compounded semi-annually
+\answer{\$4,469.79}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. Find the amount in the account for the given principal, interest rate, time, and compounding period. SEE EXAMPLES 2 AND 4.
+(P=\$1,500), (r=4.5\%), (t=3\text{ years}); compounded daily
+\answer{\$1,716.79}
+\end{practice}
+\begin{practice}{20}{2}
+PRACTICE. Find the amount in the account for the given principal, interest rate, time, and compounding period. SEE EXAMPLES 2 AND 4.
+(P=\$1,000), (r=2.8\%), (t=5\text{ years}); compounded continuously
+\answer{\$1,150.27}
+\end{practice}
+\begin{practice}{21}{2}
+PRACTICE. Find the amount in the account for the given principal, interest rate, time, and compounding period. SEE EXAMPLES 2 AND 4.
+(P=\$16,000), (r=4\%), (t=25\text{ years}); compounded continuously
+\answer{\$43,492.51}
+\end{practice}
+\begin{practice}{22}{1}
+PRACTICE. Write an exponential model given two points. SEE EXAMPLE 5.
+(9,140) and (10,250)
+\answer{(y=0.757(1.786)^x)}
+\end{practice}
+\begin{practice}{23}{1}
+PRACTICE. Write an exponential model given two points. SEE EXAMPLE 5.
+(6,85) and (7,92)
+\answer{(y=53.0(1.082)^x)}
+\end{practice}
+\begin{practice}{24}{1}
+PRACTICE. Write an exponential model given two points. SEE EXAMPLE 5.
+(10,43) and (11,67)
+\answer{(y=0.510(1.558)^x)}
+\end{practice}
+\begin{practice}{25}{2}
+PRACTICE. In 2012, the population of a small town was 3,560. The population is decreasing at a rate of 1.7\% per year. How can you rewrite an exponential growth function to find the quarterly decay rate? SEE EXAMPLE 1.
+\answer{Multiply the exponent by (\frac44) so that the model compounds quarterly.}
+\end{practice}
+\begin{practice}{26}{2}
+PRACTICE. Selena took a pizza out of the oven and it started to cool to room temperature (68\textdegree F). She will serve the pizza when it reaches 150\textdegree F. She took the pizza out of the oven at 5:00 p.m. When can she serve it? SEE EXAMPLE 6.
+\begin{tabular}{ll}
+Time (min) & Temperature (\textdegree F) \\
+5 & 310 \\
+8 & 264 \\
+10 & 238 \\
+15 & 202 \\
+20 & 186 \\
+25 & 175 \\
+\end{tabular}
+\answer{after about 27 minutes}
+\end{practice}
+% Source page 33: 300 Practice & Problem Solving
+\begin{practice}{27}{3}
+APPLY. Reason. Adam and Jacinta open an account on the same day. Who do you predict will have more money in their account after 20 years? Explain your reasoning.
+% FIG 33 517 352 768 515
+\placeholder{diagram}{Two horizontal money-growth arrows: Adam, green, starts with a bill labeled \$8,000, arrow reads Interest compounded quarterly at1.25\%, 20years below, ending at a stack of bills labeled ?. Jacinta, magenta, same \$8,000, arrow Interest compounded continuously at1.25\%, 20years, ending at bills labeled ?.}
+\answer{Jacinta; Continuously compounded interest increases at a faster rate.}
+\end{practice}
+\begin{practice}{28}{2}
+APPLY. Make Sense and Persevere. A blogger found that the number of visits to her Web site increases 5.6\% annually. The Web site had 80,000 visits this year. Write a model to represent this situation. Rewrite this model so it represents the daily increase in traffic to her web site. Explain how you found the daily rate.
+\answer{(y=80,000(1.000149)^{365t}); 0.0149\%; Multiply the exponent by 365 so that the model compounds daily, then calculate ((1.056)^{\frac1{365}}-1) to find the daily rate.}
+\te{Printed ``multiply the exponent by 365'' omits division by 365 in the equivalent base transformation; likely multiply by (365/365).}
+\end{practice}
+\begin{practice}{29}{2}
+APPLY. Use Structure. Jae invested \$3,500 at a rate of 2.25\% compounded continuously in 2010. How much will be in the account in 2025? How much interest will the account have earned by 2025?
+\answer{\$4,905.04; \$1,405.04}
+\end{practice}
+\begin{practice}{30}{2}
+APPLY. Model with Mathematics. A scientist is conducting an experiment with a new natural pesticide. Use regression to find a model for the data. Use the model to determine how much pesticide remains after 30 days.
+% FIG 33 515 824 771 990
+\placeholder{diagram}{Green circles representing pesticide shrink in seven rows over a brown insect lying on its back. Dotted horizontal guides read Day0 20.00g; Day1 14.73g; Day2 11.29g; Day3 8.38g; Day4 6.82g; Day5 4.75g; Day6 3.15g.}
+\answer{(y=20.361(0.743)^x); 0.0027 grams}
+\end{practice}
+\begin{practice}{31}{2}
+ASSESSMENT PRACTICE. The table shows the account information of five investors. Which of the following are true, assuming no withdrawals are made? Select all that apply.
+\begin{tabular}{lllll}
+Employee & (P) & (r) & (t) (years) & Compound \\
+Annika & 4000 & 1.5\% & 12 & Quarterly \\
+Nick & 2500 & 3\% & 8 & Monthly \\
+Jasmine & 7200 & 5\% & 15 & Annually \\
+Teresa & 2100 & 4.5\% & 6 & Continuously \\
+Salvador & 3800 & 3.5\% & 20 & Semi-annually \\
+\end{tabular}
+\item After 12 years, Annika will have about \$4,788.33 in her account.
+\item After 8 years, Nick will have about \$3,177.17 in his account.
+\item After 15 years, Jasmine will have about \$15,218.67 in her account.
+\item After 6 years, Teresa will have about \$2,750.93 in her account.
+\item After 20 years, Salvador will have about \$7,629.00 in his account.
+\answer{Second and fourth statements: Nick and Teresa.}
+\te{Printed choices are unlettered checkboxes; second and fourth are filled magenta.}
+\end{practice}
+\begin{practice}{32}{2}
+ASSESSMENT PRACTICE. SAT/ACT. Raavi invested money in an account with an interest rate of 3\% compounded continuously. How long will it take Raavi's account to double?
+A. about 2 years
+B. about 10 years
+C. about 23 years
+D. about 46 years
+E. about 67 years
+\answer{C}
+\end{practice}
+\begin{practice}{33}{3}
+ASSESSMENT PRACTICE. Performance Task. Cassie is financing a \$2,400 treadmill. She is going to use her credit card for the purchase. Her card charges 17.5\% interest compounded monthly. She is not required to make minimum monthly payments.
+Part A. How much interest will she be charged if she makes no payments the first year?
+\answer{Part A. \$455.38}
+Part B. How much additional interest will Cassie pay if she waits two full years before paying on the account?
+\answer{Part B. \$541.78}
+Part C. If both answers represent a single year of interest, why is the answer in Part B more than double the answer in Part A?
+\answer{Part C. Each month of the second year, she continues to pay interest on more interest.}
+\te{Printed Part C says ``more than double''; likely ``more than,'' since \$541.78 is less than twice \$455.38.}
+\end{practice}
+% Source page 34: 300A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Resources book.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & F14 \\
+2 & 2 & F13 \\
+3 & 2 & F67 \\
+4 & 2 & F67 \\
+5 & 2 & F67 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{6-2 Lesson Quiz: Exponential Models}
+Lesson Quiz is available at SavvasRealize.com. ASSESSMENT RESOURCES. Name \underline{\hspace{2cm}}. enVision Algebra 2. Assessment Sourcebook.
+1. In 1970, the population of a small town was 4,200. The population is decreasing at a rate of 2.4\% per year.
+Complete the function that models the population (y) in the town, (t) years after 1970.
+(y=\underline{\hspace{1cm}}(\underline{\hspace{1cm}})^t)
+To the nearest thousandth of a percent, the population is decreasing about \underline{\hspace{1cm}}\% per quarter.
+\answer{1. (y=4200(0.976)^t); 0.605\%.}
+2. The graph of an exponential model in the form (y=a\cdot b^x) passes through the points (3,5) and (4,10). Which point is also on the graph?
+A. (2,0)
+B. (2,1)
+C. (5,15)
+D. (5,20)
+\answer{2. D}
+3. Micah invests \$5,280 in an account that earns 4.2\% interest, compounded monthly.
+Complete the function that models the amount (A) in the account after (t) years.
+\begin{tabular}{lll}
+5280 & 5501 & 5298.48 \\
+(\frac{0.042}{12}) & (\frac{0.042}{6}) & 0.042 \\
+(12t) & (t) & (\frac t{12}) \\
+\end{tabular}
+(A(t)=\underline{\hspace{1cm}}(1+\underline{\hspace{1cm}})^{\underline{\hspace{1cm}}})
+\answer{3. (A(t)=5280(1+\frac{0.042}{12})^{12t})}
+4. Steve invests \$1,800 in an account that earns 3.7\% annual interest, compounded continuously. What is the approximate value of the account after 10 years?
+A. \$2,466
+B. \$2,589
+C. \$2,601
+D. \$2,606
+\answer{4. D}
+5. Paul considers investing \$8,000 in three different accounts for 6 years.
+Option A: 5\% simple interest
+Option B: 4.5\% interest compounded continuously
+Option C: 4.75\% interest compounded yearly
+After 6 years, Option B, to the nearest dollar, will be worth \$\underline{\hspace{1cm}} more than Option A and \$\underline{\hspace{1cm}} less than Option C.
+\te{Word bank: linear, exponential, quadratic, constant.}
+Option A is a \underline{\hspace{1cm}} function while Options B and C are \underline{\hspace{1cm}} functions.
+While the \underline{\hspace{1cm}} function gains value the fastest initially, over time the \underline{\hspace{1cm}} functions will gain value faster.
+\answer{5. 80; 89; linear; exponential; linear; exponential.}
+\end{te-addendum}
+% Source page 35: 300B Assess & Differentiate
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced.
+Reteach to Build Understanding (I). Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+Additional Practice (I, O). Provides extra practice for each lesson. MathXL for School.
+Enrichment (O, A). Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Mathematical Literacy and Vocabulary (I, O). Helps students develop and reinforce understanding of key terms and concepts.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{6-2 Reteach to Build Understanding: Exponential Models}
+Name \underline{\hspace{2cm}}. enVision Algebra 2. Teaching Resources.
+1. It is important to know what the variables in interest-rate formulas represent.
+Compound Interest: (A=P(1+\frac rn)^{nt})
+Continuously Compounded Interest: (A=Pe^{rt})
+Write the variable in the blank next to its description.
+\begin{tabular}{ll}
+\underline{\hspace{1cm}} & the principal, or the initial amount of money that is invested \\
+\underline{\hspace{1cm}} & the annual rate of interest, or interest rate \\
+\underline{\hspace{1cm}} & the accumulated value of the account, or the balance \\
+\underline{\hspace{1cm}} & the number of compounding periods each year \\
+\underline{\hspace{1cm}} & the time given in years \\
+\underline{\hspace{1cm}} & approximately 2.718282... is a constant called the natural base \\
+\end{tabular}
+\answer{1. (P), (r), (A), (n), (t), (e).}
+2. Abby invested \$4,500 in a savings account where she earned 2.5\% interest compounded quarterly. She miscalculated what the accumulated value would be in her account after 5 years. Find and correct her error.
+(A(5)=4,500(1+\frac{0.025}{4})^5)
+(=4,500(1.00625)^5)
+(\approx\$4,642)
+\te{Printed work marked X.}
+\answer{2. She forgot to multiply the time (t) by 4. (\approx\$5,097).}
+3. Danielle has two interest rates to choose from to invest her inheritance of \$5,000.
+BANK A: 2.75\% compounded monthly
+BANK B: 3.25\% compounded semi-annually
+Complete Danielle's work to find the better return after 10 years.
+BANK A:
+(A(t)=a(1+\frac rn)^{nt})
+(A(10)=5,000(1+\frac{0.0275}{12})^{12\cdot10})
+(\approx\$6,581)
+BANK B:
+(A(t)=a(1+\frac rn)^{nt})
+\answer{3. (A(10)=5,000(1+\frac{0.0325}{2})^{2\cdot10}\approx\$6,902). Bank B has the better return after 10 years.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{6-2 Additional Practice: Exponential Models}
+Name \underline{\hspace{2cm}}. enVision Algebra 2. Teaching Resources.
+1. Darren invests \$4,500 into an account that earns 5\% annual interest. How much will be in the account after 10 years if the interest rate is compounded annually, quarterly, monthly, or daily? Which compounded interest rate should Darren choose? Use the table below to find the value of the account after 10 years.
+\answer{1.
+\begin{tabular}{lll}
+ & Use the Compound Interest Formula & Amount after 10 years \\
+Annually & (A=4500(1+\frac{0.05}{1})^{1\times10}) & \$7,330.03 \\
+Quarterly & (A=4500(1+\frac{0.05}{4})^{4\times10}) & \$7,396.29 \\
+Monthly & (A=4500(1+\frac{0.05}{12})^{12\times10}) & \$7,411.54 \\
+Daily & (A=4500(1+\frac{0.05}{365})^{365\times10}) & \$7,418.99 \\
+\end{tabular}
+Sample answer: Choose interest compounded daily for the investment because the value increases more over time.}
+2. Ella invests \$2,000 in an account that pays a 4\% annual interest rate, compounded continuously. What is the value of her account after 5 years? Round your answer to the nearest dollar. Show your work.
+\answer{2. (A=P\times e^{rt}); (A=2,000\times e^{0.04\times5}=2,000\times e^{0.2}\approx\$2,443).}
+The data below shows the estimated population of a highly populated area of the United States during a period of 6 decades.
+\begin{tabular}{llllllll}
+Decade & 1950 & 1960 & 1970 & 1980 & 1990 & 2000 & 2010 \\
+Population (in millions) & 10.6 & 13 & 16 & 19.7 & 24.2 & 29.8 & 36.7 \\
+\end{tabular}
+3. Use a graphing calculator to find an exponential model that shows the relationship between the decades (x) since 1950 and the population (y). Use 0 for 1950, 1 for 1960, ...
+\answer{3. (y=10.6(1.23)^x)}
+4. How can you rewrite the exponential growth function in Exercise 3 to find the yearly growth rate?
+\answer{4. (y=12.2(1.021)^x)}
+\te{Printed initial value changes from 10.6 to 12.2; likely initial value should remain 10.6 when measuring years since 1950.}
+5. In 2015, Allie inherited land that was valued at \$200,000. In 2016, the value of the land increased to \$212,000. If this rate of increase continues, what exponential model can you use to describe the increase in the value of the land over time?
+\answer{5. (y=200,000(1.06)^x)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{6-2 Enrichment: Exponential Models}
+Name \underline{\hspace{2cm}}. enVision Algebra 2. Teaching Resources.
+A bank offers these two investment options.
+LONG-TERM INVESTMENT: HIGH APR!
+10-year CD at 2.75\% \uncertain{APR}{APY}
+Apply online or at our four convenient locations!
+Note: CD means Certificate of Deposit.
+(APY=(1+\frac r{12})^{12}-1.)
+Early withdrawal fee before 10 years is 2\% of account balance.
+MONEY MAKER SAVINGS:
+Minimum balance: \$10,000
+Earn 2.5\% interest compounded monthly.
+LOYALTY PROGRAM:
+Every 4 years with us, your interest rate increases by \uncertain{0.25\%}{0.2\%; 0.1\%}!
+For Exercises 1--5, find the value (to the nearest dollar) for each investment option. Assume the full amount is withdrawn.
+1. \$10,000 for 4 years
+\answer{1. Long-Term: \$10,938; Money Maker: \$11,051}
+2. \$10,000 for 5 years
+\answer{2. Long-Term: \$11,243; Money Maker: \$11,359}
+3. \$20,000 for 8 years
+\answer{3. Long-Term: \$24,417; Money Maker: \$24,668}
+4. \$20,000 for 10 years
+\answer{4. Long-Term: \$26,323; Money Maker: \$26,191}
+5. \$25,000 for 20 years
+\answer{5. Long-Term: \$43,305; Money Maker: \$45,517}
+6. Another option to invest money is shown at the right.
+PORTFOLIO MANAGEMENT
+For the last 10 years, our clients have earned an overall 5\%--7\% return on their investments.
+CALL OR EMAIL US TODAY!
+Note: Account management fee of 2\% of the total account balance is deducted at the beginning of each year.
+A distant relative just gave you a gift of \$10,000, but there's a catch. You can only use the money to buy a car after you graduate from college. Which of the three plans would you use to invest the money for five years? Explain.
+\answer{6. Sample answer: Money Maker. With Money Maker, I would definitely have \$11,359 after 5 years. With Portfolio Management, if the return was 5\% for each of the five years, I would have \$11,537. I could have more, but I could also have a lot less than that.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{6-2 Mathematical Literacy and Vocabulary: Exponential Models}
+Name \underline{\hspace{2cm}}. enVision Algebra 2. Teaching Resources.
+\textbf{Problem}
+The graph of an exponential model in the form (y=a\cdot b^x) passes through the points (1,13.5) and (2,18.225). Find the equation and check your work.
+Substitute the coordinates of the two given points into the exponential growth equation (y=a\cdot b^x) to obtain two equations in (a) and (b).
+(13.5=a\times b^1) Substitute 13.5 for (y) and 1 for (x).
+(18.225=a\times b^2) Substitute 18.225 for (y) and 2 for (x).
+To find the values of (a) and (b), solve for (a) in the first equation, (a=\frac{13.5}{b^1}), then substitute this value into the second equation.
+(18.225=\frac{13.5}{b}\times b^2) Substitute (\frac{13.5}{b}) for (a).
+(18.225=13.5b) Simplify.
+(1.35=b) Divide each side by 13.5 and simplify.
+Substitute 1.35 for (b) into the equation (a=\frac{13.5}{b}) to find the value of (a). Then (a=10), and the exponential model is (y=10(1.35)^x).
+Check: Substitute the original coordinates into the equation (y=10(1.35)^x).
+(10\times1.35^1=13.5) \te{Check mark.}
+(10\times1.35^2=18.225) \te{Check mark.}
+\textbf{Exercise}
+The graph of an exponential model in the form (y=a\cdot b^x) passes through the points (2,12.8) and (3,20.48). Find the equation and check your work.
+(12.8=a\times b^2) \answer{Substitute 12.8 for (y) and 2 for (x).}
+(20.48=a\times b^3) \answer{Substitute 20.48 for (y) and 3 for (x).}
+To find the values of (a) and (b), solve for (a) in the first equation, \answer{(a=\frac{12.8}{b^2})}, then substitute.
+(20.48=\frac{12.8}{b^2}\times b^3) \answer{Substitute (a=\frac{12.8}{b^2}) for (a).}
+(20.48=12.8b) \answer{Simplify.}
+(1.6=b) \answer{Divide each side by 12.8 and simplify.}
+Substitute 1.6 for (b) into the equation (a=\frac{12.8}{b^2}) to find the value of (a). Then \answer{(a=5)} and the exponential model is \answer{(y=5(1.6)^x)}.
+Check: Substitute the original two points into (y=5(1.6)^x).
+\answer{(5(1.6)^2=12.8); (5(1.6)^3=20.48).} \te{Both marked with check marks.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Tablet preview: Solve the system of equations by graphing. (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Question Help menu: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Exit; 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.}
+% FIG 35 822 1040 926 1158
+\placeholder{graph}{Blank coordinate grid in digital tablet preview. x,y axes, window -10 to10 on each axis, grid spacing1 and labels every2. Positive y arrow visible; upper-right graph and positive x-axis partly obscured by Question Help menu. No plotted points or lines.}
+\end{te-addendum}
+
+\end{document}

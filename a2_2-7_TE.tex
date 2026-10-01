@@ -1,0 +1,827 @@
+\documentclass{article}
+% Source: Topic_02_Teacher_Edition.pdf, PDF pages 82-92 (printed pages 105A-111B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+% Source page 82: 105A, Lesson Overview
+\begin{lesson-meta}
+lesson: 2-7
+title: Linear-Quadratic Systems
+standards: none printed
+practices: none printed
+objective: I can solve linear-quadratic systems.
+
+essential question: How can you solve a system of two equations or inequalities in which one is linear and one is quadratic?
+
+\textbf{VOCABULARY}
+\item system of equations
+\item solution of a system
+\item linear system
+\item linear-quadratic system
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 2-7 \\
+Title & Linear-Quadratic Systems \\
+Standards & none printed \\
+I CAN Objective & I can solve linear-quadratic systems. \\
+Essential Question & How can you solve a system of two equations or inequalities in which one is linear and one is quadratic? \\
+Lesson Vocabulary & system of equations; solution of a system; linear system; linear-quadratic system \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use algebra to solve a linear-quadratic system.
+\item Solve a linear-quadratic system using graphing and explain why the points of intersection are the solutions.
+Essential Understanding. A linear-quadratic system consists of a linear equation and a quadratic equation. The points of intersection are the solutions.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Solved and graphed linear and quadratic equations
+In this lesson, students:
+\item Solve linear-quadratic systems in two variables algebraically and graphically.
+\item Explain why the points where the graphs intersect are the solutions to the system.
+Later in this topic, students will:
+\item Solve logarithmic and exponential equations by graphing.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand the points of intersection of a linear-quadratic system represent the solutions to the system.
+\item Students create and solve a linear-quadratic system to find points of intersection in real-world problems such as finding where the path of a ball intersects with a hill.
+\te{Printed ``Later in this topic'' refers to logarithmic and exponential equations, although this is the final lesson of Topic 2. Program Resources.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+\te{Glossary is available at SavvasRealize.com.}
+REVIEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+system of equations & Sistema de ecuaciones \\
+solution of a system & solución de un Sistema \\
+linear system & sitema lineal \\
+linear-quadratic system & Sistema lineal cuadrática \\
+\end{tabular}
+\te{Printed Spanish ``sitema'' and ``Sistema lineal cuadrática'' retained.}
+VOCABULARY ACTIVITY
+Have students provide examples of linear systems.
+Q: What is necessary for any two equations to be called a system of equations?
+\answer{They have the same variables (exception for vertical and horizontal lines).}
+Q: What is the set of values for the variables that makes all the equations in a system true?
+A. x-intercept
+B. y-intercept
+C. solution of the equation
+D. solution of the system
+\answer{D}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion book cover: dark background with multicolored concentric light rings around a cluster of reflective spheres, labeled Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students use substitution or elimination to solve a linear-quadratic system of equations. They also approximate solutions to a linear-quadratic system by graphing. They relate the number of solutions to the system to the number of points of intersection of the graphs of the equations.
+Students graph the solutions to linear-quadratic systems of inequalities. They consider whether the graph is solid or dotted and use shading to identify the solution region. They recognize that the solution region represents the points that satisfy both the linear and the quadratic inequalities.
+\textbf{Applying Math Practices}
+Construct Viable Arguments
+Students use mathematical assumptions and established results to construct an argument about the number of possible intersections between a linear and a quadratic function.
+Look For and Make Use of Structure
+Students apply the structure used to solve systems of linear equations to solve linear-quadratic systems by substitution and elimination.
+\end{te-addendum}
+% Source page 83: 105B, Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students will use their knowledge of graphs of functions to explore the possible intersections between a linear and a quadratic function.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\te{Explore \& Reason is Powered by Desmos. Explore \& Reason is available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving ETP}
+Q: Describe the graph you sketched.
+\answer{There are two equations graphed. One is a parabola and one is a line. The parabola and the line intersect in two places.}
+\textbf{During SMALL GROUP. Support Productive Struggle in Learning Mathematics ETP}
+Q: Would using a vertical line help you determine the different number of intersection points between a linear function and a quadratic function?
+\answer{No; A vertical line is not a function.}
+For Early Finishers
+Q: If the line is of the form (y=c), would it change the number of intersection points possible, when combined with the graph of a quadratic function?
+\answer{No; a horizontal line could be drawn so as not to intersect with the parabola, to only intersect it at its vertex, or to intersect it at two points.}
+\textbf{After WHOLE CLASS. Facilitate Meaningful Mathematical Discourse ETP}
+Lead students in a discussion about their answers to Part C.
+Q: What method did you use to determine the possible number of intersection points?
+\answer{Draw a parabola. Change the position of the straight edge so that it intersects the parabola at two points, at one point, or not at all.}
+Q: Does changing the position of the parabola instead of the position of the line change the number of possible intersection points from 2, 1, or 0?
+\answer{No; the number of possible intersection points is the same whether you move the line or the parabola.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXPLORE \& REASON
+Construct Arguments What must be true about the equation for a horizontal line that has no points of intersection with the parabola of the equation (y=x^2)?
+\answer{The equation must be of the form (y=a), for a constant (a<0).}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{EXPLORE AND REASON: Digital activity}
+A. Use the pen tool to draw a rough sketch of a parabola and a line on the coordinate plane. Count the number of points of intersection between the two graphs.
+\placeholder{graph}{Digital drawing panel with empty square grid, about 20 cells across and high, centered arrowed x- and y-axes. No numerical tick labels, points, or curves; pen and selection tools at left.}
+\te{Go back. Enter your answer.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Draw a rough sketch of a parabola and a line on the coordinate plane.
+A. Count the number of points of intersection between the two graphs.
+\answer{2 intersections}
+\placeholder{graph}{Sample student sketch: red upward-opening parabola with vertex about (0,-3) and red increasing line through the origin, both ends arrowed. Two filled red intersection dots near (-1.3,-1.3) and (2.3,2.3). Square grid x,y from -10 to 10, grid spacing 2, labeled ticks -8,-4,4,8 and origin O; gray axes arrowed both ends. No equations printed.}
+B. Sketch another parabola on a coordinate plane. Use a straightedge to investigate the different ways that a line and a parabola intersect. What conjectures can you make?
+\answer{Using a straight edge, you can see that a parabola might intersect a line at no points, at two points, or at one point (where the line is tangent to the parabola).}
+C. Construct Arguments How many different numbers of intersection points are possible between a quadratic function and a linear function? Justify that you have found all of the possibilities.
+\answer{A linear function and a quadratic function can intersect at zero, one, or two points. By inspecting various graphs showing a line and a parabola, you can see that they might not intersect at all, or they might intersect at one point (where the line is tangent to the parabola, or where the line bisects the parabola), or they might intersect at two points (if the line crosses the parabola once and is not a bisector or a tangent, you can see that it will cross it again exactly one more time).}
+\te{Printed answer includes a bisector as a linear function case; a vertical bisector is not a function of x. SAMPLE STUDENT WORK.}
+\end{model-discuss}
+% Source page 84: 105, Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Introduce students to linear-quadratic systems. Students will learn that some of the methods used to solve linear systems can also be used to solve linear-quadratic systems.
+\te{Example 1 is Powered by Desmos. Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Determine the Number of Solutions. Build Procedural Fluency From Conceptual Understanding ETP}
+Q: For how many values of b will there be 2 solutions? 1 solution? No solution?
+\answer{There are an infinite number of values of b that will produce 2 solutions or no solution. There is one value of b that will produce 1 solution.}
+Q: Suppose the constant b was added to the quadratic function instead of the linear function. For what values of b will there be 2 solutions? 1 solution? No solution?
+\answer{When (b<1), there are 2 solutions. When (b=1), there is one solution. When (b>1), there is no solution.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Determine the Number of Solutions}
+\textbf{CONCEPTUAL UNDERSTANDING}
+How many solutions can there be for a linear-quadratic system?
+A. How many real solutions does the system (y=x^2), (y=2x) have?
+\placeholder{graph}{Red parabola (y=x^2) and blue line (y=2x), both ends arrowed. Filled red points (0,0),(2,4) at intersections. Unit grid x=[-5,5], y=[-2,7]; labeled x ticks -4,-2,2,4, y ticks 2,4,6, origin O. Black x,y axes arrowed. Callout: The graph seems to show that the quadratic function and linear function intersect at two points.}
+This system has two real solutions.
+\answer{two real solutions}
+\te{COMMUNICATE PRECISELY A solution to a system of equations is an ordered pair that produces a true statement in all the equations of the system. In the graph, the solutions are the coordinates of the intersection points.}
+B. How many solutions could this system have? (y=x^2), (y=2x+b)
+Test values for b to determine when the system has different numbers of solutions.
+\placeholder{graph}{Blue parabola (y=x^2) with vertex (0,0); red line (y=2x+2) intersects at two red marked points approximately (-0.73,0.54),(2.73,7.46); purple line (y=2x-1) tangent at (1,1); green line (y=2x-8) does not intersect. All curve and line ends arrowed. Unit grid x=[-4,6], y=[-3,9]; x labels -2,O,2,4 and y labels 2,4,6,8, black arrowed axes x,y.}
+\te{Callout: When (b=2), there are two solutions. The graphs intersect at two points.}
+\te{Callout: When (b=-1), there is one solution. The graph of (y=2x-1) is tangent to the graph of (y=x^2).}
+\te{Callout: When (b=-8), there are no solutions. The graph of (y=2x-8) does not intersect the graph of (y=x^2).}
+Visually inspecting the graph suggests that there is no way for a line to cross a parabola more than twice. Thus, the system of a linear function and a quadratic function may have 0, 1, or 2 solutions.
+\answer{0, 1, or 2 solutions}
+\end{example}
+\begin{tryit}{1}
+Determine the number of real solutions of the system (y=3x^2), (y=3x-2).
+\answer{no real solutions}
+\end{tryit}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 3}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION.}
+A golfer is hitting a shot up a hill. The hill is represented by the equation (y=0.125x). The path of the ball is modeled by the equation (y=-0.03x^2+3x). How much higher will the ball be when it lands than when it was hit?
+Set the two equations equal to each other:
+(-0.03x^2+3x=0.125x)
+(-0.03x^2+3x-0.125x=0)
+(-0.03x^2+2.875x=0)
+(x(-0.03x+2.875)=0)
+(x=0), (x\approx95.833)
+Substitute: (y=0.125(95.833)\approx11.98)
+The ball will be about 12 units higher when it lands than when it was hit.
+\placeholder{graph}{Blue downward parabola (y=-0.03x^2+3x) from (0,0) through vertex (50,75) to (100,0); orange increasing line (y=0.125x) through origin, arrow at right. Window x=0 to about 105, y=0 to 80, grid spacing 10, labels x=0,20,40,60,80,100 and y=0,20,40,60; x,y axes labeled. The line crosses the parabola near (95.83,11.98).}
+\answer{about 12 units higher}
+\te{SOLUTION.}
+Example 3 Students can practice applying linear-quadratic systems to the game of golf with this additional example.
+Q: What mathematical value are you trying to find when solving this problem?
+\answer{the y-value of the point when the ball hits the ground}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 5}
+Solve the equation (3x^2-x+8=4x-3) by writing a linear-quadratic system and solving using the intersection feature of a graphing calculator.
+Write the equations as a linear-quadratic system:
+(y=3x^2-x+8); (y=4x-3)
+Graph on a calculator and use the intersection feature to solve.
+The line and curve do not intersect. Therefore there is no solution.
+\placeholder{graph}{Orange upward parabola (y=3x^2-x+8), vertex near (0.167,7.917), blue line (y=4x-3) through (0,-3), no intersections; arrowed curve ends and line. Unit grid window x=[-10,10], y=[-3,15]; x labels -5,O,5 and y labels 5,10; axes x,y arrowed.}
+\answer{no solution}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION.}
+Example 5 Help students understand that a quadratic equation can be rewritten as a linear-quadratic system and can be solved using the intersection feature of a graphing calculator with this additional example.
+Q: Can you tell by looking at the equation whether it will have 0, 1, or 2 solutions?
+\answer{No; you could rewrite the equation in standard form and calculate the discriminant, but you can not tell just by looking at the equation.}
+\end{te-addendum}
+% Source page 85: 106, Understand & Apply
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Solve a Linear-Quadratic System Using Substitution. Build Procedural Fluency from Conceptual Understanding ETP}
+Q: Do you have to substitute the first equation into the second equation to solve the problem?
+\answer{No, you could solve the second equation for y and substitute into the first equation.}
+Q: How can you decide which equation to substitute into the other equation?
+\answer{Use the equation that already has one of the variables isolated on one side. If neither equation has an isolated variable, then look for an equation that has a variable with a coefficient of 1 and solve for that variable in order to substitute into the other equation.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Solve a Linear-Quadratic System Using Substitution}
+How can you use substitution to solve this system? (y=3x^2+3x-5), (2x-y=3)
+The first equation provides an expression for y in terms of x. Substitute this expression in the second equation.
+(2x-(3x^2+3x-5)=3)
+(2x-3x^2-3x+5=3)
+(3x^2+x-2=0)
+((x+1)(3x-2)=0)
+So (x=-1) and (x=\frac{2}{3}) are solutions of this quadratic equation.
+When (x=-1), (y=2(-1)-3), or -5. When (x=\frac{2}{3}), (y=2(\frac{2}{3})-3), or (-\frac{5}{3}).
+The solutions of the system are (-1,-5) and (\frac{2}{3},-\frac{5}{3}).
+\answer{(-1,-5) and (\frac{2}{3},-\frac{5}{3})}
+\te{Callouts: Substitute (3x^2+3x-5) for y in the second equation. Two values here mean that the line will intersect the parabola twice, so the solution needs two ordered pairs.}
+\te{USE STRUCTURE As with a system of linear equations, you can use substitution and elimination to find the values of x and y that make the system true. In this case, substitution yields a new quadratic equation to solve.}
+\end{example}
+\begin{tryit}{2}
+Solve each system by substitution.
+a. (y=2x^2-6x-8), (2x-y=16)
+b. (y=-3x^2+x+4), (4x-y=2)
+\answer{a. (2,-12); b. (-2,-10) and (1,2)}
+\end{tryit}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Applying a Linear-Quadratic System. Pose Purposeful Questions ETP}
+Q: Do you need to know the horizontal distance the ball traveled in order to determine how far Laika must run up the hill?
+\answer{Yes, the horizontal distance traveled is one of the legs of the right triangle that is used to determine how far Laika must run up the hill.}
+Q: How are the two graphs related?
+\answer{Both graphs show the slope of the hill. The first graph shows the hill as a line with the horizontal distance and height scaled by 2.5 feet. The second graph shows the hill as a line with the horizontal distance and height scaled by 1 foot.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 2 Have students solve linear-quadratic systems using substitution that require the student to use the Quadratic Formula to solve.
+1. Solve (y=x^2-2x+5); (3x-y=-4).
+\answer{(\frac{5-\sqrt{21}}{2},\frac{23-3\sqrt{21}}{2}), (\frac{5+\sqrt{21}}{2},\frac{23+3\sqrt{21}}{2})}
+2. Solve (y=-x^2+4x-1); (5x+y=1).
+\answer{(\frac{9-\sqrt{73}}{2},\frac{-43+5\sqrt{73}}{2}), (\frac{9+\sqrt{73}}{2},\frac{-43-5\sqrt{73}}{2})}
+3. Solve (y=0.5x^2+x-4); (4y-x=12).
+\answer{(\frac{-3-\sqrt{233}}{4},\frac{45-\sqrt{233}}{16}), (\frac{-3+\sqrt{233}}{4},\frac{45+\sqrt{233}}{16})}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 4 Some students may struggle with solving linear-quadratic systems of inequalities.
+Have students practice solving systems of linear inequalities.
+Q: Solve (y\leq x+3); (y>2x-4)
+\answer{See graph.}
+\placeholder{graph}{Answer graph: solid blue line (y=x+3) shaded blue below; dashed red line (y=2x-4) shaded yellow above; overlapping green region between lines for x<7. Both lines arrowed. First-quadrant grid x,y=[0,16], spacing 2, numbered every 4, axes arrowed and labeled x,y; intersection (7,10) not labeled.}
+Q: Solve (y>x-4); (y\leq3x)
+\answer{See graph.}
+\placeholder{graph}{Answer graph: solid blue line (y=3x) and dashed red line (y=x-4), both arrowed; printed blue shading lies above the blue line and yellow shading lies below the red line, with green overlap on right, opposite to the requested inequalities. Grid x=[-7,1], y=[-7,1], unit spacing, ticks -6,-4,-2 on each axis, O, arrowed x,y axes. Lines intersect (-2,-6).}
+\te{Second support graph shades the opposite sides from the printed inequalities; retained as shown.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Applying a Linear-Quadratic System}
+\textbf{APPLICATION}
+Andrew kicks a ball up a hill for his dog, Laika, to chase. The hill is modeled by a line through the origin. The path of the ball is modeled by the quadratic function shown. How far does the ball travel horizontally? How far must Laika run up the hill to catch it?
+\placeholder{graph}{Illustrated hillside with Andrew and Laika at origin. Black upward-sloping hill line labeled (y=0.5x), black downward ball trajectory labeled (y=-0.5x^2+6x), vertex (6,18), meeting hill at (11,5.5), red ball on ascending arc; curves arrowed. Axes x Horizontal Distance (ft), y Height (ft), first quadrant to about x=27.5,y=20, ticks every 2.5 with x labels O,5,10,15,20,25 and y labels 5,10,15.}
+Create a system of equations and determine where the path of the ball intersects the hill.
+(y=-0.5x^2+6x)
+(y=0.5x)
+(0.5x=-0.5x^2+6x)
+(0=-0.5x^2+5.5x)
+(0=-0.5x(x-11))
+(-0.5x=0) and (x-11=0)
+(x=0) and (x=11)
+% Source page 86: 107, Understand & Apply
+\textbf{EXAMPLE 3 CONTINUED}
+The solution (x=0) represents the horizontal distance, in feet, when Andrew kicks the ball. The solution (x=11) represents the horizontal distance, in feet, when the ball lands on the hill. So the ball travels 11 ft horizontally.
+The route Laika runs can be modeled as the hypotenuse of a right triangle.
+\placeholder{graph}{Blue line (y=0.5x) across grid, red vertical line x=11, red points (0,0),(11,0),(11,5.5); right triangle legs labeled 11 ft and 5.5 ft, hypotenuse labeled (\sqrt{11^2+5.5^2}\approx12.3\ \mathrm{ft}). Unit grid x=[-2,12], y=[-2,7], labels x=O,2,4,6,8,10 and y=2,4,6; arrowed axes x,y.}
+So Laika runs approximately 12.3 ft to get the ball.
+\answer{11 ft horizontally; approximately 12.3 ft}
+\te{COMMON ERROR Make sure to answer every part of the question. After solving this equation, you still need to find the distance that Laika ran.}
+\end{example}
+\begin{tryit}{3}
+Revenue for the high school band concert is given by the function (y=-30x^2+250x), where x is the ticket price, in dollars. The cost of the concert is given by the function (y=490-30x). At what ticket price will the band make enough revenue to cover their costs?
+\answer{when ticket prices are between about \$2.33 and \$7}
+\end{tryit}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 1, 2, \& 3
+Make Sense and Persevere Why does the substitution method work? How does it change the problem and make it possible for you to solve?
+\answer{It eliminates one variable in one of the equations, allowing you to solve that equation for the other variable.}
+\end{te-addendum}
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{Solve a Linear-Quadratic System of Inequalities. Use and Connect Mathematical Representations ETP}
+Q: What do the three shaded regions represent? Which region contains solutions of the system?
+\answer{The shaded region below the parabola represents all ordered pairs that are solutions of the equation (y<-2x^2+10x-10). The region above the line represents all ordered pairs that are solutions of the equation (4x+y>4). The overlapping region represents all ordered pairs that are solutions of both equations; these ordered pairs are the solutions of the system.}
+\te{Printed teacher answer has +10x; the student example uses +12x.}
+Q: How can you check your work to ensure that the shaded region actually contains the solutions of the system?
+\answer{Choose a point that is not on the graph of either equation. Substitute the x- and y-values of the point into both inequalities and simplify. If both inequalities result in a true statement, then it is a solution, and all points in the same region are solutions.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Solve a Linear-Quadratic System of Inequalities}
+How can you solve this system of inequalities? (y<-2x^2+12x-10), (4x+y>4)
+Solving a linear-quadratic system of inequalities is similar to solving a linear system.
+Step 1 Graph the linear and quadratic inequalities.
+\placeholder{graph}{First panel: dashed red parabola (y=-2x^2+12x-10), vertex (3,8), zeros 1,5, y-intercept -10; yellow shading below parabola. Solid blue line (y=-4x+4) for reference. Red origin marked (0,0). Grid x=[-5,10], y=[-45,25], horizontal spacing 1 and vertical spacing 5; x labels -4,-2,2,4,6,8, y labels 20,10,-10,-20,-30,-40; arrowed axes x,y. Callout: The origin does not satisfy (y<-2x^2+12x-10).}
+\placeholder{graph}{Second panel: dashed blue line (y=-4x+4), blue shading above, solid red reference parabola (y=-2x^2+12x-10), vertex (3,8). Red origin labeled (0,0). Same window x=[-5,10], y=[-45,25], grid 1 by 5, x labels -4,-2,2,4,6,8 and y labels 20,10,-10,-20,-30,-40. Arrowed axes x,y. Callout: The origin does not satisfy (4x+y>4).}
+Step 2 Determine the solutions to the linear-quadratic system.
+The solutions of the linear-quadratic system are the ordered pairs where the regions overlap.
+You can verify the overlapping region is correct by testing a point in the region, such as (2,0).
+(y<-2x^2+12x-10)
+(0<-2(2)^2+12(2)-10)
+(0<6) \te{check mark}
+(4x+y>4)
+(4(2)+0>4)
+(8>4) \te{check mark}
+\placeholder{graph}{Combined graph: dashed red downward parabola (y=-2x^2+12x-10) with yellow shading below; dashed blue line (y=-4x+4) with blue shading above; green overlap between the boundaries for 1<x<7. Red test point labeled (2,0). Grid x=[-5,10], y=[-45,25], spacing 1 by 5, x labels -4,-2,2,4,6,8, y labels 20,10,-10,-20,-30,-40; axes and curve ends arrowed. Boundaries excluded.}
+\answer{The ordered pairs where the regions overlap.}
+\te{STUDY TIP Every point in a region will have the same truth value. Try several points to verify.}
+\end{example}
+\begin{tryit}{4}
+Solve the system of inequalities (y>x^2+6x-12), (3x-y\geq-8) using shading.
+\answer{See graph.}
+\placeholder{graph}{Answer on page 108: dashed red upward parabola (y=x^2+6x-12), vertex (-3,-21), yellow shading above; solid blue line (y=3x+8), blue shading below; green overlap above parabola and below line, between x=-\frac{3+\sqrt{89}}{2} and x=\frac{-3+\sqrt{89}}{2}. Grid x=[-12.5,12.5], y=[-22.5,2.5], spacing 2.5, x labels -10,-5,O,5,10 and y labels -5,-10,-15,-20; both axes and curves arrowed.}
+\end{tryit}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 4)}
+LISTENING BEGINNING Have students listen as you read the following sentences.
+1. The class takes a math test.
+2. The test came back negative.
+3. It was a test of her strength.
+Q: Based on how you heard it used in these sentences, what do you think the word test means?
+\answer{evaluate}
+Q: How is the use of the word test different among the three sentences?
+\answer{In the first sentence, test describes a school assessment. In the second sentence, it refers to a medical evaluation. In the third sentence, test is used to mean a challenge.}
+SPEAKING DEVELOPING Ask students to read Step 2 of the solution. As they read, have them point to the word determine.
+Q: Using context clues, what does the word determine mean?
+\answer{to find or identify}
+WRITING EXPANDING In small groups, have students discuss the word region. Ask them to use the word in as many sentences as possible with different contexts.
+Q: In what contexts can you use the word region?
+\answer{regions in a country, regional sports championships}
+Q: In what part of speech did you use the word shade?
+\answer{noun, verb}
+Q: How is region used in the example?
+\answer{It is used to mean an area or section of the coordinate plane.}
+\te{Printed ``shade'' in a question otherwise discussing ``region.''}
+\end{te-addendum}
+% Source page 87: 108, Understand & Apply
+\begin{te-addendum}{4}{CommonError}
+\textbf{EXAMPLE 4 CONTINUED. Common Error}
+Try It! 4 Students may forget to reverse the sign of the inequality symbol when they solve the linear inequality for y, causing them to shade the wrong part of the graph. Have students check by selecting a point in the shaded region and use the point's coordinates to verify that each of the original inequalities is true.
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Using a System to Solve an Equation. Pose Purposeful Questions ETP}
+Q: How can you show that the system of equations is equivalent to the original equation?
+\answer{Both equations in the system are equal to y. You can substitute the second equation into the first equation to obtain the original equation.}
+\te{Example 5 is Powered by Desmos. Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Using a System to Solve an Equation}
+Solve the equation (x^2+9x-5=4-3x) by writing a linear-quadratic system and using the intersection feature of a graphing calculator to solve it.
+Graph the system (y=x^2+9x-5), (y=4-3x).
+The graphing calculator shows the curve and line intersect at (x\approx0.71) and (x\approx-12.71).
+\placeholder{graph}{Calculator display with orange upward parabola (y=x^2+9x-5), vertex (-4.5,-25.25), and blue decreasing line (y=4-3x), crossing near (-12.71,42.13) and (0.71,1.87). Unnumbered axes; printed x scale: 2 and y scale: 10. Visible window approximately x=[-18,10], y=[-30,80]. No marked or labeled intersection points.}
+Check: Substitute the values into the original equation to verify the solutions. Because the values are approximations, one side of the equation should be approximately equal to the other.
+(x^2+9x-5=4-3x)
+((0.71)^2+9(0.71)-5\stackrel{?}{=}4-3(0.71))
+(0.5041+6.39-5\stackrel{?}{=}4-2.13)
+(1.8941\approx1.87)
+(x^2+9x-5=4-3x)
+((-12.71)^2+9(-12.71)-5\stackrel{?}{=}4-3(-12.71))
+(161.5441-114.39-5\stackrel{?}{=}4+38.13)
+(42.1541\approx42.13)
+The equations show that the approximate solutions are reasonable.
+\answer{(x\approx0.71) and (x\approx-12.71)}
+\te{LEARN TOGETHER What are ways to stay positive and work toward goals?}
+\end{example}
+\begin{tryit}{5}
+Solve the equation (3x^2-7x+4=9-2x) by writing a linear-quadratic system and solving using the intersection feature of a graphing calculator.
+\answer{The points of intersection are approximately (-0.70,10.41) and (2.37,4.26), so the solutions are (x\approx-0.70) and (x\approx2.37).}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 4 \& 5
+Look for Relationships How could solve the inequality (3x+8>x^2+6x-2) graphically?
+\answer{Write a linear-quadratic system and graph the two equations. Then see for which x-values (y=3x+8) is greater than (y=x^2+6x-2).}
+\end{te-addendum}
+\begin{te-addendum}{5}{LearnTogether}
+\textbf{Learn Together: Work Toward Goals}
+Set goals with positivity and work to achieve them. Ask: Why is it important to set goals with positivity? How do you make progress toward achieving your goals?
+\end{te-addendum}
+% Source page 88: 109, Understand & Apply
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Key Features of Linear-Quadratic Systems}
+Q: Why would you use graphing when solving a linear-quadratic system of equations?
+\answer{to estimate the solutions of the system, or to verify that the solutions are reasonable}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 3 Students may make computational errors when trying to determine the number of solutions of an equation algebraically. Have students sketch a graph for this system to estimate the number of real solutions. Emphasize that if the two graphs do not intersect, then the system has no real solutions.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Key Features of Linear-Quadratic Systems}
+\textbf{Linear-Quadratic Systems of Equations}
+WORDS Use substitution or graphing to solve the system.
+GRAPHS
+\placeholder{graph}{First schematic: red upward parabola vertex at O, consistent with (y=2x^2), and blue increasing line crossing x-axis at about 0.5, no intersections. Unboxed x,y axes with arrows, x ticks -0.5,O,0.5,1, y ticks 0.5,1, no grid or equations printed. Curves have arrows; view about x=[-1,1.5], y=[-0.5,1.5].}
+\placeholder{graph}{Second schematic: red upward parabola vertex at O, consistent with (y=2x^2), and blue increasing tangent line, filled red point (0.5,0.5). Arrowed x,y axes, x ticks -0.5,O,0.5,1 and y ticks 0.5,1; no grid or equations printed; approximate view x=[-1,1.5], y=[-0.5,1.5].}
+\placeholder{graph}{Third schematic: red upward parabola vertex at O, consistent with (y=2x^2), blue increasing line through O and filled red point (1,2); two intersections. Arrowed x,y axes, x ticks -1,O,1 and y ticks 1,2; no grid or equations printed; view about x=[-2.5,2.5], y=[-0.5,3].}
+\textbf{Linear-Quadratic Systems of Inequalities}
+WORDS Graph linear and quadratic inequalities, considering whether the graph is solid or dotted.Use shading to identify the solution region.
+GRAPH
+\placeholder{graph}{Dashed red downward parabola through approximately (0,0),(1.5,0), vertex approximately (0.75,1.1), and dashed blue increasing line crossing y-axis at -5. Red intersection dots at approximately (-1.1,-6.1) and (2.1,-2.9). Yellow shading below parabola and blue shading above line, green overlap between. Grid x=[-5,5], y=[-9,2], unit spacing; x labels -4,-2,O,2,4 and y labels -2,-4,-6,-8. Both curves and x,y axes arrowed; no equations printed.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you solve a system of two equations or inequalities in which one is linear and one is quadratic?
+\answer{You can solve a linear-quadratic system of equations by graphing the two equations and finding their points of intersection, or by using substitution to create one quadratic equation and solving it.}
+2. Error Analysis Dyani was asked to use substitution to solve this system:
+(y=2x^2-6x+4)
+(x-y=7)
+She began as follows, to find the x-coordinate(s) to the solution(s) of the system:
+\begin{tabular}{ll}
+(x+2x^2-6x+4=7) & Substitute for y. \\
+(2x^2-5x-3=0) & Simplify. \\
+((2x+1)(x-3)=0) & Factor. \\
+(x=-\frac{1}{2}), (x=3) & Set each factor equal to 0, solve for x. \\
+\end{tabular}
+\te{Student work marked with red X.}
+But Dyani has already made an error. What was her mistake?
+\answer{Dyani forgot to distribute the -1 when substituting for y.}
+\textbf{Do You KNOW HOW?}
+Determine the number of solutions for the system of equations.
+3. (y=\frac{2}{5}x^2), (y=x-2)
+\answer{no solutions}
+4. (y=-x-1), (3x^2+2y=4)
+\answer{two solutions}
+Use substitution to solve the system of equations.
+5. (y=3x^2+7x-10), (y-19x=22)
+\answer{(5.83,132.76), (-1.83,-12.76)}
+6. (y=3x^2), (y-3x=-2)
+\answer{no solutions}
+\end{concept-summary}
+% Source page 89: 110, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+\te{Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.}
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+7--9, 11--29 & 7--29 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each
+Practice: 1 point each
+Assessment Practice: 1 point each
+Performance Task: 3 points
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 11, 12, 27, 28 & 1 \\
+1 & 8--10, 13--15 & 2 \\
+2 & 16, 17 & 1 \\
+2 & 7 & 2 \\
+3 & 18, 24, 26 & 2 \\
+3 & 29 & 3 \\
+4 & 19, 20 & 1 \\
+5 & 21--23 & 1 \\
+5 & 25 & 2 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{7}{2}
+\textbf{UNDERSTAND. Construct Arguments} Azzure and William are asked to solve the system of equations (y-1=3x), (y=2x^2-4x+9) without graphing.
+Azzure wants to use substitution, inserting (2x^2-4x+9) in place of y in the upper equation and solving. William wants to rewrite (y-1=3x) as (y=3x+1) and begin by setting (3x+1) equal to (2x^2-4x+9), and then solving. Which student is correct, and why?
+\answer{Both methods are correct, since both reduce the system to one quadratic equation which can then be solved for x.}
+\end{practice}
+\begin{practice}{8}{2}
+Error Analysis Chris was given the system of equations (y=-x^2), (y=2x+b) and asked to use graphing to test the number of solutions of the system for different values of b. He graphed the system as shown, and concluded that the system could have one solution or no solutions depending on the value of b. What was Chris's error?
+\placeholder{graph}{Blue downward parabola labeled (y=-x^2), vertex (0,0); red increasing line labeled (y=2x+3), no intersection; green line labeled (y=2x+1), tangent at (-1,-1). Both line ends and parabola ends arrowed. Grid x=[-6,6], y=[-12,10], spacing 1 horizontally and 2 vertically; x labels -4,-2,O,2,4 and y labels -8,-4,4,8. Black arrowed x,y axes.}
+\answer{He did not check values for b that were less than 1.}
+\end{practice}
+\begin{practice}{9}{2}
+Reason You are given the following system of equations: (y=x^2), (y=-1). Without graphing or performing any substitutions, can you see how many solutions the system must have? Describe your reasoning.
+\answer{The system must have no solutions, since all y-values will be positive for the first equation but (y=-1) for all x's in the second equation.}
+\te{Printed ``positive'' includes the zero value at x=0; likely ``nonnegative.''}
+\end{practice}
+\begin{practice}{10}{2}
+Construct Arguments Can a system of equations with one linear and one quadratic equation have more than two solutions? Give at least two arguments for your answer.
+\answer{No; this can be seen graphically, and by the fact that the system reduces to one quadratic equation, which never has more than two solutions.}
+\end{practice}
+\begin{practice}{11}{1}
+\textbf{PRACTICE} Determine how many solutions each system of equations has by graphing them. SEE EXAMPLE 1
+(y=3), (y=x^2-4x+7)
+\answer{1 solution}
+\end{practice}
+\begin{practice}{12}{1}
+Determine how many solutions each system of equations has by graphing them. SEE EXAMPLE 1
+(y=3x^2-2x+7), (y+5=\frac{1}{2}x)
+\answer{no solutions}
+\end{practice}
+\begin{practice}{13}{2}
+Consider the system of equations (y=x^2), (y=mx+b). SEE EXAMPLE 1
+Find values for m and b so that the system has two solutions.
+\answer{Answers may vary. Sample: (m=1), (b=2)}
+\end{practice}
+\begin{practice}{14}{2}
+Consider the system of equations (y=x^2), (y=mx+b). SEE EXAMPLE 1
+Find values for m and b so that the system has no solutions.
+\answer{Answers may vary. Sample: (m=0), (b=-3)}
+\end{practice}
+\begin{practice}{15}{2}
+Consider the system of equations (y=x^2), (y=mx+b). SEE EXAMPLE 1
+Find values for m and b so that the system has one solution.
+\answer{Answers may vary. Sample: (m=0), (b=0)}
+\end{practice}
+\begin{practice}{16}{1}
+Use substitution to solve the system of equations. SEE EXAMPLE 2
+(y=5), (y=2x^2-16x+29)
+\answer{(6,5) and (2,5)}
+\end{practice}
+\begin{practice}{17}{1}
+Use substitution to solve the system of equations. SEE EXAMPLE 2
+(y=3x^2-4x), (27+y=14x)
+\answer{(3,15)}
+\end{practice}
+\begin{practice}{18}{2}
+LaToya throws a ball from the top of a bridge. Her throw is modeled by the equation (y=-0.5x^2+3x+10), and the bridge is modeled by the equation (y=-0.2x+7). About how far does the ball travel horizontally before its first bounce? SEE EXAMPLE 3
+\answer{about 7.23 ft}
+\end{practice}
+\begin{practice}{19}{1}
+Solve each system of inequalities using shading. SEE EXAMPLE 4
+(y>x^2), (5>y)
+\answer{See graph.}
+\placeholder{graph}{Answer graph on page 111: dashed red upward parabola (y=x^2), yellow shading above, and dashed blue horizontal line y=5, blue shading below. Green overlap above parabola and below y=5, -sqrt5<x<sqrt5. Window x=[-5,5], y=[-2,8], unit grid, x labels -4,-2,O,2,4, y labels 2,4,6; axes x,y arrowed, curve ends arrowed; boundaries excluded.}
+\end{practice}
+\begin{practice}{20}{1}
+Solve each system of inequalities using shading. SEE EXAMPLE 4
+(-5<y-x), (y<-3x^2+6x+1)
+\answer{See graph.}
+\placeholder{graph}{Answer graph on page 111: dashed red downward parabola (y=-3x^2+6x+1), vertex (1,4), yellow shading below; dashed blue line (y=x-5), blue shading above. Green overlap between the curves. Unit grid x,y=[-5,5]; x labels -4,-2,O,2,4, y labels -4,-2,2,4; arrowed x,y axes and curves; boundaries excluded.}
+\end{practice}
+\begin{practice}{21}{1}
+Solve each equation by writing a linear-quadratic system and solving using the intersection feature of a graphing calculator. SEE EXAMPLE 5
+(6x^2-15x+8=17-4x)
+\answer{(x\approx-0.61), (x\approx2.45)}
+\end{practice}
+\begin{practice}{22}{1}
+Solve each equation by writing a linear-quadratic system and solving using the intersection feature of a graphing calculator. SEE EXAMPLE 5
+(7x^2-28x+32=4)
+\answer{(x=2)}
+\end{practice}
+\begin{practice}{23}{1}
+Solve each equation by writing a linear-quadratic system and solving using the intersection feature of a graphing calculator. SEE EXAMPLE 5
+(-\frac{5}{2}x-10=-2x^2-x-3)
+\answer{(x\approx-1.53), (x\approx2.28)}
+\end{practice}
+% Source page 90: 111, Practice & Problem Solving
+\begin{practice}{24}{2}
+\textbf{APPLY. Model With Mathematics} A boulder is flung out of the top of a 3,000 m tall volcano. The boulder's height, y, in meters, is a function of the horizontal distance it travels, x, in meters. The slope of the line representing the volcano's hillside is (-\frac{5}{3}). At what height above the ground will the boulder strike the hillside? How far will it have traveled horizontally when it crashes?
+\placeholder{illustration}{Erupting volcano with flying boulders; blue curved trajectory and blue downward hillside line. Callout on trajectory (y=-\frac{1}{1,000}x^2-\frac{1}{6}x+3,000); hillside callout slope (=-\frac{5}{3}). No axes or tick labels.}
+\answer{The boulder will be 500 meters above the ground when it strikes the hillside, having traveled 1,500 meters horizontally.}
+\end{practice}
+\begin{practice}{25}{2}
+Use Structure An artist is using computer aided design to begin his next project. He starts with this system and needs to know the intersection points.
+(y=x+1)
+(y^2+x^2=25)
+Solve the system using any of the methods you have learned in this lesson. Explain why you selected the method you used.
+\answer{(-4,-3) and (3,4); I substituted (x+1) for y in the second equation, solved for x, then found the corresponding y values. This method was straightforward because the quadratic equation was factorable.}
+\end{practice}
+\begin{practice}{26}{2}
+Reason A football player punts the football, whose path is modeled by an equation (h_1) in terms of h, in meters, and t, in seconds. The height of a blocker's hands for the same time, t, is modeled as (h_2). Is it possible for the blocker to knock down the ball? What else would you have to know to be sure?
+\placeholder{illustration}{Football field with yellow-uniformed player punting at left and blue-uniformed blocker jumping at right. Ball callout (h_1=-4.9t^2+18.24t+0.8); blocker callout (h_2=-1.43t+4.26). Field marking 50.}
+\answer{Yes; If you knew how far away the player was standing, you could be sure.}
+\end{practice}
+\begin{practice}{27}{1}
+\textbf{ASSESSMENT PRACTICE}
+Classify each function as having exactly one or no points of intersection with the function (y=x^2+8x+11).
+a. (y=2x-12)
+b. (y=12x+7)
+c. (y=-5)
+d. (y=11+8x)
+e. (y=-6)
+\answer{a. no; b. exactly one; c. exactly one; d. exactly one; e. no}
+\end{practice}
+\begin{practice}{28}{1}
+SAT/ACT How many solutions does the following system of equations have?
+(y=16x-19)
+(y=3x^2+4x-7)
+A. two solutions
+B. no solutions
+C. an infinite number of solutions
+D. one solution
+F. The number of solutions cannot be determined.
+\answer{D}
+\te{Printed final choice is labeled F.}
+\end{practice}
+\begin{practice}{29}{3}
+Performance Task A golfer accidentally hits a ball toward a water hazard that is downhill from current position on the fairway. The hill can be modeled by a line through the origin with slope (-\frac{1}{8}). The path of the ball can be modeled by the function y.
+\placeholder{illustration}{Golfer at right on green fairway, water hazard at left down the hill; black parabolic trajectory bends upward then down toward water with left arrow. Callout (y=-\frac{1}{100}x^2+\frac{3}{2}x). No axes or tick labels.}
+Part A If the golfer stands at the origin, and the water hazard is 180 yd away, will the golfer's ball bounce or splash?
+Part B How far did the ball land from the edge of the water hazard?
+Part C Does it matter whether you measure the 180 yd horizontally or along the hill? Explain.
+\answer{Part A bounce. Part B 17.5 yards. Part C Yes; if you measure 180 yards along the hill, that is a smaller distance horizontally than 180.}
+\end{practice}
+% Source page 91: 111A, Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & A91, A54 \\
+2 & 2 & A91, A54 \\
+3 & 1 & A91, A54 \\
+4 & 2 & A91, A54 \\
+5 & 2 & A91, A54 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd Videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{ASSESSMENT RESOURCES. 2-7 Lesson Quiz: Linear-Quadratic Systems}
+Name \underline{\hspace{3cm}}
+1. Determine the number of real solutions of the system (y=x^2-3), (y=-2x+4).
+A. 2
+B. 1
+C. 3
+D. 0
+\answer{1. A}
+2. Use substitution to solve the system (y=-\frac{1}{2}x^2), (y=x-4).
+A. (-4) and (2)
+B. ((4,-8)) and ((-2,-2))
+C. ((-4,-8)) and ((2,-2))
+D. ((0,0)) and ((0,-4))
+\answer{2. C}
+3. Nate tosses a ball up a hill for his dog to chase. The path of the ball is modeled by the function (y=-\frac{1}{4}x^2+\frac{33}{5}x), where (x) is the ball's horizontal distance from Nate in feet and (y) is the ball's height in feet. The hill is modeled by the line (y=\frac{1}{5}x). How far does the ball travel horizontally before it hits the ground?
+\answer{3. 25.6 ft}
+4. Solve the system of inequalities (y\geq 2x^2+2x-3), (y\leq\frac{1}{3}x+6) using shading.
+\answer{4. See graph.}
+\placeholder{graph}{Lesson Quiz 4 answer. Square coordinate grid, x from -10 to 10 and y from -6 to 14, grid spacing 2; labeled x ticks -8,-4,4,8 and y ticks -4,4,8,12; axes labeled x and y with arrowheads. Solid magenta upward parabola y=2x^2+2x-3 with vertex (-0.5,-3.5) and solid line y=x/3+6 through (0,6), both continuing with arrows. Pink shading below the line and between the parabola's arms, with darker overlap showing the solution above the parabola and below the line.}
+5. Solve the equation (2x^2+5x-8=\frac{5}{2}x+20) by writing a linear-quadratic system and solving using the intersection feature of a graphing calculator. Round to the nearest tenth.
+The graphing calculator shows the curve and line intersect at (x\approx\underline{\hspace{1cm}}) and (x\approx\underline{\hspace{1cm}}).
+\answer{5. (x\approx 3.2) and (x\approx-4.4).}
+\te{enVision Algebra 2, Assessment Sourcebook; SavvasRealize.com.}
+\end{te-addendum}
+% Source page 92: 111B, Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced.
+\textbf{Reteach to Build Understanding. I}
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School.
+\textbf{2-7 Reteach to Build Understanding: Linear-Quadratic Systems}
+Name \underline{\hspace{3cm}}
+1. Find the solution to the set of equations by graphing and then fill in the blanks for each point of intersection. Then determine the number of solutions.
+What are the solutions?
+\answer{(2,10) and (-3,-5)}
+Count the number of intersection points. How many solutions are there to the set of equations?
+\answer{2}
+\placeholder{graph}{Reteach 1: black upward parabola y=x^2+4x-2 and increasing line y=3x+4. Axes x,y with arrows, unit x grid and y grid every 2; visible window approximately x=-7 to 3, y=-8 to 12; labeled x ticks -6,-4,-2,2 and y ticks 4,8. Vertex (-2,-6); intersections labeled in magenta (-3,-5) and (2,10), with open annotation circles. Both curves have arrowheads.}
+2. Use substitution to find the answer.
+\begin{tabular}{ll}
+Substitute & ((x^2+4x-2)-3x=4) \\
+Remove parentheses & (x^2+\answer{4x}-2-3x=\answer{4}) \\
+Simplify both sides. & (x^2\answer{+}x-2=4) \\
+Subtract 4 from both sides. & (x^2+x-2-\answer{4}=4-\answer{4}) \\
+Simplify. & (x^2+x-\answer{6}=0) \\
+Factor & ((x+\answer{3})(x-\answer{2})=0) \\
+Find the values of x. & (x=\answer{-3}) and (x=\answer{2}) \\
+Input each value into one equation to solve for y. & 1) (y=(-3)^2+4(-3)-2); (y=9-\answer{12}-2); (y=\answer{-5}) \\
+ & 2) (y=(\answer{2})^2+4(\answer{2})-2); (y=\answer{4}+\answer{8}-2); (y=\answer{10}) \\
+Write them as solution sets. & \answer{(-3,-5) and (2,10)} \\
+\end{tabular}
+3. Avery was asked to graph and shade the system of equations in order to solve. What was Avery's mistake?
+\placeholder{graph}{Reteach 3 error graph: black solid upward parabola with vertex approximately (-0.5,-3.5), passing through (0,-3), and solid increasing line through approximately (0,4) and (-1.33,0). Axes x,y with arrows; unit x grid and y grid every 2, labeled x ticks -4,-2,2,4 and y ticks -4,4,8,12. Gray shading outside the parabola and above the line; darker overlap on the left. Both curves extend with arrows.}
+\answer{Avery did not shade the graph correctly. The area within the parabola should have been shaded instead of the area outside. Also the area below the line should have been shaded instead of the area above the line.}
+\te{Printed ``system of equations'' for the shading task; likely system of inequalities. enVision Algebra 2, Teaching Resources; SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice. I O}
+Provides extra practice for each lesson.
+MathXL for School.
+\textbf{2-7 Additional Practice: Linear-Quadratic Systems}
+Name \underline{\hspace{3cm}}
+Determine the number of solutions for the system of equations.
+1. (y=-x^2+3x+2), (y=3x+2)
+\answer{1}
+2. (y=-x^2+2x+18), (y=5x-10)
+\answer{2}
+3. (y=x^2+3x-5), (y=-x^2-2x+1)
+\answer{2}
+Use substitution to solve the system of equations.
+4. (y=x^2+5x-2), (y=3x-2)
+\answer{(-2,-8) and (0,2)}
+\te{Printed (0,2); likely (0,-2), which satisfies both equations.}
+5. (y=-x^2+x+12), (y=2x-8)
+\answer{(-5,-18) and (4,0)}
+6. (y=x^2-2x-3), (y=2x-3)
+\answer{(0,-3) and (4,5)}
+Solve each system of inequalities using shading.
+7. (y\geq 3x^2+3x-5), (y\leq-3x-5)
+\answer{See graph.}
+\placeholder{graph}{Additional Practice 7 answer: magenta unit coordinate grid with x,y axes, x labels 2,4 and y labels 2,-2,-4; window approximately x=-5 to 5,y=-6 to 4. Solid upward parabola y=3x^2+3x-5 and solid decreasing line y=-3x-5 have arrows. Labeled intersections (-2,1) and (0,-5). Pink solution shading between the parabola and line for -2<=x<=0.}
+8. (y<4x^2+8x+8), (4x+8>y)
+\answer{See graph.}
+\placeholder{graph}{Additional Practice 8 answer: magenta coordinate grid, x spacing 0.5 and y spacing 1, labeled x -2,-1,0 and y 2,4,6,8; window approximately x=-3 to 1,y=-2 to 9. Dashed upward parabola y=4x^2+8x+8 with vertex (-1,4) and dashed line y=4x+8. Intersection points labeled (-1,4) and (0,8); curves continue with arrows. Pink overlap below both curves, to the lower right of the line and outside the parabola.}
+9. In business, the break-even point is the point ((x,y)) at which the graphs of the revenue and cost functions intersect. This is the point where the revenue and the expenses are equal. The business is not losing money, but it is not making money either. For one manufacturing company, the revenue from producing (x) items is given by the function (y=2x+12) and the cost of producing (x) items is given by (y=-x^2+10x+5). The numbers represent thousands. Find all break-even points. Interpret the results.
+\answer{(1,14), (7,26) The company breaks even when it spends \$1,000 to make and sell 14,000 items and it breaks even when it spends \$7,000 to make and sell 26,000 items.}
+\te{Printed interpretation reverses the coordinates' roles: x represents items and y represents cost/revenue.}
+10. Two skaters are practicing at the same time on the same rink. A coordinate grid is superimposed on the ice. One skater follows the path (y=-2x+32), while the other skater follows the curve (y=-2x^2+18x). Find all points where they might collide if they are not careful.
+\answer{(2,28), (8,16)}
+\te{enVision Algebra 2, Teaching Resources; SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment. O A}
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School.
+\textbf{2-7 Enrichment: Linear-Quadratic Systems}
+Name \underline{\hspace{3cm}}
+A skeet shooter, who wants to go to the Olympics, is practicing different angles at which to shoot in order to hit the target. The height of the discs after being shot out of the machine can be represented by the graph of the function (f(x)=-0.8x^2+18x-20).
+\placeholder{graph}{Enrichment: first-quadrant graph of downward parabola f(x)=-0.8x^2+18x-20. Axes x,y; x labels 0,5,10,15,20, grid spacing 2.5; y labels 0,20,40,60,80, grid spacing 10. Window x=0 to 22.5,y=0 to 90. Curve crosses y=0 at approximately x=1.17 and 21.33, with vertex approximately (11.25,81.25).}
+The rifle is 5 feet off the ground and is next to the machine, which launches the skeets. The shooter is aiming at an angle of (\frac{3}{4}).
+Assuming the timing of the shot is correct, at what height is the disc when it is hit?
+\answer{20 ft}
+What is the slope of the gun if the athlete hits the disc at its highest position?
+\answer{(81.25=m(11.25)+5)
+(81.25=11.25m+5)
+(11.25m=76.25)
+(m=6.78)}
+What is the equation representing the shoot if she hits the disc when it is 18 feet away from her horizontally?
+\answer{(y=-0.8(18)^2+18(18)-20)
+(=-0.8(324)+324-20)
+(=-259.2+324-20)
+(=44.8\text{ ft})
+(44.8=m(18)+5)
+(44.8=18m+5)
+(18m=39.8)
+(m\approx2.2)
+(y\approx2.2m+5)}
+\te{Printed ``angle of 3/4'' without an angle unit; likely slope 3/4. Printed ``shoot'' and final equation y approximately 2.2m+5; likely ``shot'' and y approximately 2.2x+5. enVision Algebra 2, Teaching Resources; SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary. I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{2-7 Mathematical Literacy and Vocabulary: Linear-Quadratic Systems}
+Name \underline{\hspace{3cm}}
+Look at each graph or system of equations. Determine the number of solutions that they represent and write your answer using the words from the concept list.
+Concept List:
+\begin{tabular}{ll}
+zero solutions & two solutions \\
+one solution & more than two solutions \\
+\end{tabular}
+\te{The nine cells below are transcribed left to right, top to bottom.}
+(y=3x^2+2x+7), (y=x-2)
+\answer{zero solutions}
+(y=x^2-5x+6), (y=x-3)
+\answer{one solution}
+(y>5x^2-4x+37), (2x+y<4)
+\answer{more than two solutions}
+\te{Printed ``more than two solutions'' for the inequalities with constant 37; these inequalities have no common solution.}
+\placeholder{graph}{Vocabulary middle-left cell: black dashed increasing line through approximately (-1,0), shaded to its left, and dashed downward parabola with vertex approximately (1,-3.5), shaded below. No overlap. Axes x,y with arrows, unit grid; x labels -6,-4,-2,2,4, y labels -2,-4,-6,-8; window approximately x=-7 to 6,y=-9 to 1.}
+\answer{zero solutions}
+\placeholder{graph}{Vocabulary middle-center cell: solid upward parabola with vertex (4,1), y-intercept approximately 5, and dashed increasing line through approximately (0,1),(1,4). Gray shading above the parabola and below/right of the line with darker overlap. Axes x,y, unit grid; x labels -2,2,4,6,8,10 and y labels 2,4,6,8; arrows on curves and axes; window approximately x=-3 to 11,y=-1 to 9.}
+\answer{more than two solutions}
+\placeholder{graph}{Vocabulary middle-right cell: solid downward parabola with vertex approximately (2,1), y-intercept -3, and solid increasing line through (0,-3),(2,1). Two intersections approximately (0,-3),(2,1). Axes x,y with arrows, unit grid; x labels -2,2,4 and y labels -4,-2,2; window approximately x=-4 to 5,y=-7 to 3. Both curves have arrowheads.}
+\answer{two solutions}
+\placeholder{graph}{Vocabulary bottom-left cell: solid upward parabola with vertex approximately (-2,-7), y-intercept approximately -3, and steep solid increasing line passing approximately through (0,-7),(1,-1), to the right of the parabola with no intersections. Unit grid; axes x,y with arrows, x labels -6,-4,-2,2 and y labels -2,-4,-6; window approximately x=-7 to 4,y=-8 to 2. Curves continue with arrows.}
+\answer{zero solutions}
+(y=-x^2+2x-3), (2x-y=8)
+\answer{two solutions}
+\placeholder{graph}{Vocabulary bottom-right cell: solid upward parabola with vertex (-2,1), y-intercept approximately 5, tangent to solid horizontal line y=1. Unit grid; axes x,y with arrows, x labels -4,-2 and y label 4; window approximately x=-6 to 2,y=-2 to 6. Parabola has arrows on both arms and horizontal line has arrows at both ends.}
+\answer{one solution}
+\te{enVision Algebra 2, Teaching Resources; SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital screen: Exit. Question Help. Help Me Solve This. View an Example. Video. Textbook. Glossary. Math Tools. Print.}
+Solve the system of equations by graphing.
+(y=3x+4), (y=-2x+4)
+Use the graphing tool to graph the system.
+Click to enlarge graph.
+\placeholder{graph}{Digital practice screenshot: blank square coordinate grid, x,y axes with arrows, both axes from -10 to 10 in unit squares with labels every 2, origin labeled 0; no plotted curves or points. Upper-right part of grid is covered by the Question Help menu.}
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+\te{1 part remaining. Clear All. Check Answer. Review progress. Question 5 of 14. Go. Back. Next. Printed digital example is a linear-linear system.}
+\end{te-addendum}
+
+\end{document}

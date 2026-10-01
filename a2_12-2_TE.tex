@@ -1,0 +1,851 @@
+\documentclass{article}
+% Source: Topic_12_Teacher_Edition.pdf, PDF pages 24-34 (printed pages 593A-599B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 24: 593A Lesson Overview
+\begin{lesson-meta}
+lesson: 12-2
+title: Conditional Probability
+standards: none printed
+practices: none printed
+objective: I can find the probability of an event given that another event has occurred.
+
+essential question: How are conditional probability and independence related in experiments?
+
+\textbf{VOCABULARY}
+\item conditional probability
+\item dependent events
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 12-2 \\
+Title & Conditional Probability \\
+Standards & none printed \\
+I CAN Objective & I can find the probability of an event given that another event has occurred. \\
+Essential Question & How are conditional probability and independence related in experiments? \\
+Lesson Vocabulary & conditional probability; dependent events \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview. FOCUS}
+Objective. Students will be able to:
+\item Understand the conditional probability of A given B as the fraction of outcomes in B that also belong to A.
+\item Interpret independence of events using conditional probability.
+\item Use a two-way frequency table to decide if events are independent and to approximate conditional probabilities.
+Essential Understanding. The conditional probability that event A will occur, given that another event B has occurred, is written as (P(A\mid B)) and can be calculated by dividing (P(A\text{ and }B)) by (P(B)). Two events are independent if and only if (P(A\mid B)=P(A)) and (P(B\mid A)=P(B)).
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Identified independent events.
+\item Calculated the combined probability of two independent events.
+In this lesson students:
+\item Calculate the conditional probability of A given B by dividing (P(A\text{ and }B)) by (P(B)) based on data given in text and tables.
+\item Use conditional probability to test for independence of events.
+Increasing Coherence. Example 3 is not necessarily expected to be addressed on high-stakes assessments.
+Later in this topic, students will:
+\item Find probability distributions and use them to calculate expected value and to make decisions.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students relate understanding of conditional probability to understanding of independence of events.
+\item Students find conditional probability and test for independence in real-world situations.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com. Program Resources.
+REVIEW VOCABULARY. English | Spanish
+\item frequency table | tabla de frecuencias
+\item independent events | sucesos independientes
+NEW VOCABULARY
+\item conditional probability | probabilidad condicional
+\item dependent events | sucesos dependientes
+VOCABULARY ACTIVITY
+Have students work in teams to generate examples of a pair of independent events. Each team should describe an experiment, a sample space for the experiment, and two events, and explain why the events are independent. Have teams present their examples to the whole class.
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their in-class work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 24 964 641 1115 821
+\placeholder{illustration}{Student Companion enVision Algebra 2 cover, dark background with purple and blue circular geometric artwork, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students understand the conditional probability of A given B and calculate conditional probability using the formula (\frac{P(A\text{ and }B)}{P(B)}). They use their understanding of conditional probability to interpret and test independence of events.
+Students apply the conditional probability formula to real-world situations and mathematical problems.
+\textbf{Applying Math Practices}
+Make Sense of Problems and Persevere in Solving Them
+Students make sense of real-world situations and describe them in terms of probability in order to draw conclusions.
+Look For and Make Use of Structure
+Students use the structure of two-way frequency tables to organize data and calculate conditional probabilities.
+\end{te-addendum}
+% Source page 25: 593B Explore
+\begin{te-addendum}{0}{PurposefulQuestions}
+\textbf{STEP 1 Explore. EXPLORE \& REASON}
+SavvasRealize.com. Activity. Explore \& Reason is available at SavvasRealize.com.
+INSTRUCTIONAL FOCUS Students estimate the probability of an event and then explore how their estimate might change if given additional information about the situation. This prepares students for the concept of conditional probability.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+Before. WHOLE CLASS. Pose Purposeful Questions ETP
+Q: Without calculating, what are some conclusions that you can draw from the information in the problem?
+\answer{Answers may vary. Sample: Not all of the seniors attended the dance.}
+\end{te-addendum}
+\begin{te-addendum}{0}{RtISupport}
+During. SMALL GROUP. Support Productive Struggle In Learning Mathematics ETP
+Q: Would it help you to pick a specific number for how many seniors there are? Would your answer be the same whether there were 200 seniors in the school or 2,000?
+\answer{Yes; the answer does not depend on the number of seniors. Picking a specific number could make the calculation easier.}
+\end{te-addendum}
+\begin{te-addendum}{0}{RtIExtend}
+For Early Finishers
+Q: How would your answers to Parts A and B be different if 80\% of all senior girls and 90\% of all senior boys attended the dance?
+\answer{The percent of seniors who attended the dance would be about 85\%. Since 20\% of 85\% is 17\%, the probability that a senior selected at random won a prize at the dance would be about 17\%. Since a greater percent of senior boys attended the dance than senior girls, the probability that a senior girl selected at random won a prize is less than 17\%, and the probability that a senior boy selected at random won a prize is greater than 17\%.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+After. WHOLE CLASS. Facilitate Meaningful Mathematical Discourse ETP
+Q: What strategies did you use to solve Part A? Part B?
+\answer{Have students share their strategies and how effective they were.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with EXPLORE \& REASON. Look for Relationships How would the probability that a senior selected at random won a prize be different if only 60\% of senior girls and 50\% of senior boys attended the dance? Explain.
+\answer{It would be less than 15\%; if a lower percentage of seniors attended the dance, there is a lower probability that a senior selected at random was there and had a chance to win a prize. The probability that a senior selected at random attended the dance is ((0.6)(0.5)+(0.5)(0.5)=0.55), so the probability that he or she won a prize is ((0.2)(0.55)=0.11), or 11\%.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+At Central High School, 85\% of all senior girls and 65\% of all senior boys attended the Spring Dance. Of all attendees, 20\% won a prize.
+A. Assuming that the number of senior girls at Central High School is about equal to the number of senior boys, estimate the probability that a randomly selected senior won a prize at the dance. Explain.
+\answer{SAMPLE STUDENT WORK: 0.15 or 15\%; The answer will be the same for any number of seniors, so assume there are 200 because that is an easy number to work with. So about 100 seniors are girls and 100 are boys. About 85 senior girls (85\% of 100) and 65 senior boys (65\% of 100) attended the dance, for a total of (85+65=150) seniors. Since (150\div200=0.75), about 75\% of the seniors attended the dance. Of these, 20\% won a prize. Since 20\% of 75\% is 15\%, I estimate that the probability that a randomly selected senior won a prize is 15\%.}
+B. Construct Arguments If you knew whether the selected student was a boy or a girl, would your estimate change? Explain.
+\answer{Yes; since a greater percent of the senior girls attended the Spring Dance than senior boys, the probability that a randomly chosen senior girl won a prize is greater than 15\%, and the probability that a randomly chosen senior boy won a prize is less than 15\%.}
+\te{Printed comparison assumes equal prize-winning probabilities among male and female attendees; only the overall 20\% is given.}
+% FIG 25 637 187 1153 533
+\placeholder{illustration}{Digital Explore and Reason preview, Go back; introduction reads At Central High School, 85 percent of all senior girls attended and 65 percent of all senior boys attended the Spring Dance. 20 percent of attendees won a prize. Part A shortens the student question to number of girls about equal to number of boys; Part B matches the student question. Enter your answer boxes under both.}
+\end{model-discuss}
+% Source page 26: 593 Understand and Apply
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Establish Learning ETP
+Remind students of the test for independence they learned in the previous lesson: two events are independent if the product of their probabilities is equal to the probability that both events will occur. Tell them that another test for independence involves conditional probability, which they will learn about in this lesson.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{EXAMPLE 1 Understand Conditional Probability}
+Use and Connect Mathematical Representations ETP
+Q: Why do the two methods in this example produce the same answer?
+\answer{In the second method, the number 115 appears in both the numerator and the denominator of the complex fraction, so the result simplifies to the same fraction as in the first method: (\frac{\frac{16}{115}}{\frac{58}{115}}=\frac{16}{115}\cdot\frac{115}{58}=\frac{16}{58}).}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Understand Conditional Probability}
+A student committee is being formed to decide how after-school activities will be funded. The committee members are selected at random from current club members. The frequency table shows the current club membership data.
+\textbf{Monday Club Memberships by Grade}
+\begin{tabular}{lllll}
+ & Drama & Science & Art & Total \\
+Sophomore & 3 & 9 & 24 & 36 \\
+Junior & 6 & 18 & 16 & 40 \\
+Senior & 8 & 13 & 18 & 39 \\
+Total & 17 & 40 & 58 & 115 \\
+\end{tabular}
+What is the probability that a member of the art club selected at random is a junior?
+One Method Use the frequency table to find the probability that the student chosen is a junior given that the student is a member of the art club.
+\te{The probability that an event B will occur given that another event A has already occurred is called a conditional probability and is written as (P(B\mid A)).}
+(P(\text{junior}\mid\text{member of the art club})=\frac{\text{number of juniors in art club}}{\text{total number of art club members}})
+(=\frac{16}{58}=\frac8{29})
+Another Method Use the formula for conditional probability.
+For any two events A and B, with (P(A)\neq0), (P(B\mid A)=\frac{P(B\text{ and }A)}{P(A)}).
+(P(\text{junior}\mid\text{art})=\frac{P(\text{junior and art})}{P(\text{art})}=\frac{\frac{16}{115}}{\frac{58}{115}}=\frac8{29})
+\te{Of the 115 Monday club members and 58 art club members, 16 are juniors and in the art club.}
+The probability that the student chosen is a junior member from the art club is (\frac8{29}).
+\answer{(\frac8{29})}
+\te{COMMON ERROR Avoid confusing (P(A\mid B)) with (P(B\mid A)). In the first case the prior event is B, but in the second case the prior event is A.}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples}
+Additional Examples are available at SavvasRealize.com.
+Example 1 Help students find conditional probability from a two-way frequency table.
+Q: How is (P(0\text{ cups}\mid6\text{ hours})) different from (P(6\text{ hours}\mid0\text{ cups}))?
+\answer{(P(0\text{ cups}\mid6\text{ hours})) is the probability that Diego drank 0 cups of coffee the morning before given that he got 6 hours of sleep. (P(6\text{ hours}\mid0\text{ cups})) is the probability that Diego got 6 hours of sleep given that he drank 0 cups of coffee the morning before.}
+\textbf{ADDITIONAL EXAMPLE 1}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+Diego wonders whether the amount of sleep he gets is related to the amount of coffee he drinks. For about 10 weeks, he records how many cups of coffee he drinks each morning and how many hours he sleeps that night, rounded to the nearest hour.
+\textbf{Coffee Drinking and Amount of Sleep}
+\begin{tabular}{lllll}
+ & 0 cups & 1 cup & 2 cups & Total \\
+6 hours & 4 & 10 & 13 & 27 \\
+7 hours & 6 & 9 & 7 & 22 \\
+8 hours & 12 & 7 & 4 & 23 \\
+Total & 22 & 26 & 24 & 72 \\
+\end{tabular}
+Based on this data, what is (P(8\text{ hours}\mid0\text{ cups}))? Round your answer to the nearest whole percent.
+(P(8\text{ hours}\mid0\text{ cups})=\frac{P(8\text{ hours and }0\text{ cups})}{P(0\text{ cups})})
+(=\frac{\frac{12}{72}}{\frac{22}{72}}=\frac{12}{22}\approx0.55)
+\answer{The probability is about 55\%.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+Example 2 Help students use conditional probability to determine whether a pair of events are independent.
+Q: How do you use data in the table to calculate (P(G\mid F))? How do you use data in the table to calculate (P(G))?
+\answer{To find (P(G\mid F)), divide the number of girls taking French (the upper left corner cell) by the total number of students taking French (the left-most entry in the totals row). To find (P(G)), divide the number of girls (the top entry in the totals column) by the total number of students (the grand total).}
+\textbf{ADDITIONAL EXAMPLE 2}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+The table shows data for the junior class at a high school.
+A student from the junior class is selected at random. Let G be the event “the student is a girl” and F be the event “the student is taking French.” Are events G and F independent or dependent?
+\textbf{French Language Study by Gender}
+\begin{tabular}{llll}
+ & Taking French & Not Taking French & Total \\
+Girls & 45 & 255 & 300 \\
+Boys & 30 & 170 & 200 \\
+Total & 75 & 425 & 500 \\
+\end{tabular}
+(P(G\mid F)=\frac{45}{75}=0.6) and (P(G)=\frac{300}{500}=0.6), so (P(G\mid F)=P(G)).
+(P(F\mid G)=\frac{45}{300}=0.15) and (P(F)=\frac{75}{500}=0.15), so (P(F\mid G)=P(F)).
+\answer{The events are independent.}
+\end{te-addendum}
+% Source page 27: 594 Example 1 continued and Example 2
+\begin{tryit}{1}
+\textbf{Try It!}
+a. What is the probability that a member of the drama club is a sophomore, (P(\text{sophomore}\mid\text{drama}))?
+\answer{a. (\frac3{17})}
+b. What is the probability that a sophomore is a member of the drama club, (P(\text{drama}\mid\text{sophomore}))? Is (P(\text{sophomore}\mid\text{drama})) the same as (P(\text{drama}\mid\text{sophomore}))? Explain.
+\answer{b. (\frac1{12}); No; (P(\text{sophomore}\mid\text{drama})) compares sophomores in drama club to all members of drama club, and (P(\text{drama}\mid\text{sophomore})) compares sophomores in drama club to sophomores in all clubs. The comparisons are not the same.}
+\end{tryit}
+\begin{concept-box}
+\textbf{Conditional Probability and Independent Events}
+Let A and B be events with (P(A)\neq0) and (P(B)\neq0).
+If events A and B are independent, then the conditional probability of B given A equals the probability of B and the conditional probability of A given B equals the probability of A.
+If the conditional probability of B given A equals the probability of B and the conditional probability of A given B equals the probability of A, then events A and B are independent.
+If events A and B are independent, then (P(B\mid A)=P(B)) and (P(A\mid B)=P(A)).
+If (P(B\mid A)=P(B)) and (P(A\mid B)=P(A)), then events A and B are independent.
+\end{concept-box}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{EXAMPLE 2 Use the Test for Independence}
+Pose Purposeful Questions ETP
+Q: What would you need to show in order to determine that events B and V are independent?
+\answer{You need to show that (P(V\mid B)=P(V)) and (P(B\mid V)=P(B)).}
+Q: What would you need to show in order to determine that events B and V are dependent?
+\answer{You need to show that (P(V\mid B)\neq P(V)) or (P(B\mid V)\neq P(B)). The contrapositive of the statement “If events B and V are independent, then (P(V\mid B)=P(V)) and (P(B\mid V)=P(B))” is “If (P(V\mid B)\neq P(V)) or (P(B\mid V)\neq P(B)), then events B and V are not independent.”}
+Q: If you show that (P(V\mid B)\neq P(V)), do you also need to show that (P(B\mid V)\neq P(B))?
+\answer{No; once you show that (P(V\mid B)\neq P(V)), you have shown that events B and V are dependent.}
+Q: How can you tell by looking at the table that (P(B\mid V)=1)?
+\answer{There is a total of 3 vans, and all three of them are black. So the probability that a vehicle is black, given that it is a van, is 100\% or 1.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Use the Test for Independence}
+\te{CONCEPTUAL UNDERSTANDING}
+The table below shows the vehicles in a parking garage one afternoon. A vehicle in the garage will be selected at random. Let B represent “the vehicle is black” and V represent “the vehicle is a van.” Are the events B and V independent or dependent?
+\begin{tabular}{lllll}
+ & Car & Van & Pickup & Totals \\
+Red & 5 & 0 & 2 & 7 \\
+White & 0 & 0 & 2 & 2 \\
+Black & 6 & 3 & 4 & 13 \\
+Totals & 11 & 3 & 8 & 22 \\
+\end{tabular}
+% FIG 27 800 575 1105 676
+\placeholder{illustration}{Four small vehicle illustrations overlay the table: two red cars, white/blue pickup, black van. Table entries transcribed above.}
+One Method
+Since (P(B)=\frac{13}{22}\neq0) and (P(V\text{ and }B)=\frac3{22}),
+(P(V\mid B)=\frac{P(V\text{ and }B)}{P(B)}=\frac{\frac3{22}}{\frac{13}{22}}=\frac3{13})
+Since (P(V\mid B)\neq P(V)), B and V are not independent events, they are dependent events.
+\te{STUDY TIP When looking at a table of probabilities, consider events that are impossible or guaranteed to occur. For example, it is impossible to select a red van.}
+% Source page 28: 595 Example 2 continued
+Another Method
+Since (P(V)=\frac3{22}\neq0), (P(B)=\frac{13}{22}), and (P(B\text{ and }V)=P(V\text{ and }B)),
+(P(B\mid V)=\frac{P(B\text{ and }V)}{P(V)})
+(=\frac{\frac3{22}}{\frac3{22}}=1)
+\te{A probability of 1, or 100\%, indicates that the event is certain. Given that a van is selected, it must be black.}
+Again, since (P(B\mid V)\neq P(B)), the events B and V are dependent events.
+\answer{dependent events}
+\end{example}
+\begin{tryit}{2}
+Let R represent “the vehicle is red” and C represent “the vehicle is a car.” Are the events R and C independent or dependent? Explain.
+\answer{Dependent; (P(R\mid C)\neq P(R)), so the events are not independent.}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 \& 2. Make Sense and Persevere Suppose you know that events A and B are independent, and you find that (P(B\mid A)=P(A\mid B)). What else do you know?
+\answer{Answers may vary. Sample: You know that (P(A)=P(B)).}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 2)}
+SPEAKING BEGINNING A conditional statement in everyday speech says that something is true if something else is true first. The second event depends on the first. Have students consider conditional statements, emphasizing the words if and then, such as
+If I finish on time, then I can go out.
+Q: What event is dependent? What is the condition that makes that event true?
+\answer{Going out is dependent; the condition is finishing on time.}
+Q: What is a conditional statement that you can make about something in your classroom?
+\answer{If the seat next to me is empty, then I can sit there.}
+READING DEVELOPING Read the following two definitions for the word independent.
+1) showing a desire for freedom
+2) not requiring or relying on something else
+Now read the following sentence from the Concept Box:
+If events A and B are independent, then the conditional probability of B given A equals the probability of B.
+Q: Which definition best describes the way independent is used in the Concept Box? \answer{2}
+Q: Give an example of something that is independent of something else.
+\answer{How much mail I get is independent of how much I eat for breakfast.}
+WRITING EXPANDING Dependent means requiring something or determined by something. Have students write one phrase describing something that is dependent, and then draw an arrow to it from a phrase describing something it depends on.
+Q: What are some things or events that are dependent on other things?
+\answer{a baby is dependent on a parent; today being Tuesday depends on yesterday being Monday; a pen writing depends on the pen having ink.}
+Q: What happens in each situation if the thing or event it depends on is not there or does not occur?
+\answer{the baby can't survive; today isn't Tuesday, the pen won't write.}
+\end{te-addendum}
+% Source page 28: 595 Example 3 and teaching support
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{EXAMPLE 3 Apply the Conditional Probability Formula}
+Use and Connect Mathematical Representations ETP
+Q: What part of the provided information tells you the value of (P(\text{fan}\mid\text{attend}))?
+\answer{The statement “80\% of students who plan to attend are fans of the band.”}
+Q: How is (P(A\text{ and }B)) related to (P(B\text{ and }A))? Give an example to illustrate your answer.
+\answer{They are the same. For example, suppose a card is selected at random from a set of 10 cards numbered 1 to 10. Let A be the event “the card is 2, 3, 4, or 5” and B be the event “the card is 4, 5, 6, or 7.” Then (A\text{ and }B) and (B\text{ and }A) are the same event: “the card is 4 or 5.”}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Apply the Conditional Probability Formula}
+A band's marketing agent conducted a survey to determine how many high school fans the band has. What is the probability that a surveyed student plans to attend the band's concert and is a fan of the group?
+\textbf{Concert Survey Results}
+Students who plan to attend concert
+\item 70\% of students plan to attend,
+\item 80\% of students who plan to attend are fans of the band.
+Students who do not plan to attend
+\item 30\% of students do not plan to attend,
+\item 25\% are fans of the band.
+Use the conditional probability formula to find the combined probability.
+Rewrite (P(B\mid A)=\frac{P(A\text{ and }B)}{P(A)}) as (P(A\text{ and }B)=P(A)\cdot P(B\mid A)).
+(P(A\text{ and }B)=P(A)\cdot P(B\mid A))
+(P(\text{attend and fan})=P(\text{attend})\cdot P(\text{fan}\mid\text{attend}))
+(=0.7\cdot0.8)
+(=0.56), or 56\%
+\te{Event A is “attend.” Event B is “fan.” Substitute 0.7 for (P(\text{attend})) and 0.8 for (P(\text{fan}\mid\text{attend})).}
+The probability that a surveyed student plans to attend the concert and is a fan of the group is 0.56, or 56\%.
+\answer{0.56, or 56\%}
+\te{LOOK FOR RELATIONSHIPS Why might (P(\text{fan}\mid\text{attend})) not equal (P(\text{attend}\mid\text{fan})) in this situation?}
+\end{example}
+\begin{tryit}{3}
+What is the probability that a surveyed student plans to attend but is not a fan of the group?
+\answer{0.14}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How do you find the answer to the Try It?
+\answer{(P(\text{attend and not a fan})=P(\text{attend})\cdot P(\text{not a fan}\mid\text{attend})). You know that (P(\text{attend})=70\%). Since the probability that a student is a fan, given that they plan to attend, is 80\%, the probability that a student is not a fan, given that they plan to attend, is (100\%-80\%=20\%). So you multiply 70\% and 20\% and get 14\%.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 2 Challenge students to prove that the two tests for independence are equivalent.
+\item Give students the following prompt: Let A and B be events with (P(A)\neq0) and (P(B)\neq0). Prove that if (P(A\mid B)=P(A)), then (P(B\mid A)=P(B)).
+Q: How can you rewrite each equation using the definition of conditional probability?
+\answer{(P(A\mid B)=P(A)) can be rewritten as (\frac{P(A\text{ and }B)}{P(B)}=P(A)). (P(B\mid A)=P(B)) can be rewritten as (\frac{P(A\text{ and }B)}{P(A)}=P(B)).}
+Q: How can you transform one of the equations you just wrote into the other?
+\answer{Multiply both sides of (\frac{P(A\text{ and }B)}{P(A)}=P(B)) by (P(A)), and divide both sides by (P(B)).}
+Q: What does this result tell you about using conditional probability to test for independence?
+\answer{If events A and B both have nonzero probability, they are independent if either (P(A\mid B)=P(A)) or (P(B\mid A)=P(B)). You do not have to check both to test for independence.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 Guide students in using the conditional probability formula (P(A\text{ and }B)=P(A)\cdot P(B\mid A)) to solve problems.
+\item Have students practice with these problems.
+1. 60\% of the students in a class are girls. 40\% of the girls in the class plan to go to the school play. If you select a student in the class at random, what is the probability that the student is a girl who is planning to go to the school play? \answer{24\%}
+2. 70\% of the students in a class like chocolate ice cream. 50\% of students who like chocolate ice cream also like strawberry ice cream. What is the probability that a student selected at random likes strawberry ice cream and chocolate ice cream? \answer{35\%}
+\item Guide students with questions such as this one to help them interpret the questions.
+Q: In the first situation, which percent represents a conditional probability?
+\answer{40\%; given that a student is a girl, the probability that the student plans to go to the school play is 40\%.}
+\end{te-addendum}
+% Source page 29: 596 Example 4
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{EXAMPLE 4 Use Conditional Probability to Make a Decision}
+Pose Purposeful Questions ETP
+Q: For product W, why is (P(B\mid S)=\frac{0.16}{0.46})?
+\answer{For product W, (P(S\text{ and }B)=16\%=0.16) and (P(S)=46\%=0.46), so (P(B\mid S)=\frac{P(S\text{ and }B)}{P(S)}=\frac{0.16}{0.46}).}
+Q: How might the marketer use the answer to this problem in planning an online advertising campaign?
+\answer{The marketer might put the product with the highest conditional probability at the top of a list of products on a website.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use Conditional Probability to Make a Decision}
+\te{APPLICATION}
+A marketer is looking at mobile phone statistics to help plan an online advertising campaign. She wants to find out which of her company's products is most likely to be purchased after a related search for that product on a mobile phone.
+\textbf{Mobile Phone Search and Buying Behavior}
+\begin{tabular}{lll}
+Product & Search (S) & Search \& Buy (S and B) \\
+W & 46\% & 16\% \\
+X & 32\% & 14\% \\
+Y & 35\% & 12\% \\
+Z & 40\% & 15\% \\
+\end{tabular}
+% FIG 29 946 294 973 322
+\placeholder{illustration}{Blue mobile phone icon in gray circle beside Mobile Phone Search and Buying Behavior title.}
+Find the probability a mobile phone customer buys, given that they performed a related search. Use the formula (P(B\mid S)=\frac{P(S\text{ and }B)}{P(S)}).
+\begin{tabular}{ll}
+Product & (P(B\mid S)) \\
+W & (\frac{0.16}{0.46}=0.348) or about 34.8\% \\
+X & (\frac{0.14}{0.32}=0.4375) or 43.75\% \\
+Y & (\frac{0.12}{0.35}=0.343) or 34.3\% \\
+Z & (\frac{0.15}{0.40}=0.375) or 37.5\% \\
+\end{tabular}
+\te{Printed equals for rounded W and Y quotients; likely approximately equals.}
+Product X has the highest probability of being purchased given that a related search was performed.
+\answer{Product X}
+\te{MAKE SENSE AND PERSEVERE Product W has the highest (P(S\text{ and }B)) of 16\% but not the highest (P(B\mid S)). Can you explain why?}
+\end{example}
+\begin{tryit}{4}
+The marketer also has data from desktop computers. Which product is most likely to be purchased after a related search?
+\textbf{Computer Search and Buying Behavior (\% of computer-based site visitors)}
+\begin{tabular}{lll}
+Product & Search & Search \& Buy \\
+J & 35\% & 10\% \\
+K & 28\% & 9\% \\
+L & 26\% & 8\% \\
+M & 24\% & 5\% \\
+\end{tabular}
+\answer{Product K, with a conditional probability of about 32\%}
+\te{Printed teacher answer numbered 3; likely 4.}
+\end{tryit}
+\begin{te-addendum}{4}{CommonError}
+Try It! 4 Students may be unsure which data to select from the table for calculating the relevant conditional probability. Encourage them to rephrase the question in terms of conditional probability: For which product is the probability of buying, given that a customer also performed a search, the greatest?
+In this scenario, you need to use the “Search \& Buy” column for (P(S\text{ and }B)) and the “Search” column for (P(S)).
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+Use with EXAMPLES 3 \& 4. Communicate Precisely Compare the formula used in Example 3, (P(A\text{ and }B)=P(A)\cdot P(B\mid A)), to the formula used in Example 4, (P(B\mid A)=\frac{P(A\text{ and }B)}{P(A)}). How are they related? When would you use each formula?
+\answer{Answers may vary. Sample: They are equivalent; you can multiply both sides of the second formula by (P(A)) and simplify to get the first one. You can use the first formula to find the probability that two events both occur. You can use the second formula to find the conditional probability of an event, given another event.}
+\end{te-addendum}
+% Source page 30: 597 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Conditional Probability}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+Q: What data could you use to calculate the probability that tonight's temperature will drop below freezing, given that today's high temperature was 60°F? How would you calculate the conditional probability?
+\answer{You could use data for daily high and low temperatures. Count the number of days with a high temperature of 60°F and the number of those days with a low temperature less than or equal to 32°F. Divide the second number by the first number.}
+\te{Printed less than or equal to 32°F includes freezing, while the question asks below freezing.}
+Q: For events A and B, how can you use conditional probability to show that A and B are independent?
+\answer{Show that (P(A\mid B)=P(A)) and (P(B\mid A)=P(B)).}
+Q: For events A and B, how can you use conditional probability to show that A and B are dependent?
+\answer{Show that (P(A\mid B)\neq P(A)) or that (P(B\mid A)\neq P(B)).}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Do You UNDERSTAND? | Do You KNOW HOW?
+Exercise 7 When finding conditional probabilities, students may divide (P(B\text{ and }A)) by the wrong individual probability. Suggest that they write down one of the following equivalent forms of the formula:
+(P(B\mid A)=\frac{P(B\text{ and }A)}{P(A)}) or (P(A\mid B)=\frac{P(A\text{ and }B)}{P(B)}).
+Point out that the “given” event, which appears after the “|” symbol in the conditional probability, goes in the denominator of the fraction. Also remind students that (P(A\text{ and }B)=P(B\text{ and }A)), so the numerator is the same in both cases.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Conditional Probability}
+\begin{tabular}{lll}
+ & Conditional Probability Formula & Conditional Probability and Independent Events \\
+WORDS & The probability that an event B will occur given that another event A has already occurred is called a conditional probability. & Events A and B are independent events if and only if the conditional probability of A given B is the same as the probability of A, and the conditional probability of B given A is the same as the probability of B. \\
+ALGEBRA & For any two events A and B, with (P(A)\neq0), (P(B\mid A)=\frac{P(A\text{ and }B)}{P(A)}) & For any events A and B with (P(A)\neq0) and (P(B)\neq0), A and B are independent if and only if (P(B\mid A)=P(B)) and (P(A\mid B)=P(A)). \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How are conditional probability and independence related in experiments?
+\answer{For any two events A and B, find (P(B\mid A)) and (P(B)) and compare them. If they are equal, then events A and B are independent; if not, then A and B are dependent events.}
+2. Vocabulary How is the sample space for (P(B\mid A)) different from the sample space for (P(B))?
+\answer{The sample space for (P(B)) is all possible outcomes. The sample space for (P(B\mid A)) includes all the possible outcomes that are in A, but none of the possible outcomes outside of A.}
+3. Vocabulary Why does the definition of (P(B\mid A)) have the condition that (P(A)\neq0)?
+\answer{By definition (P(B\mid A)=\frac{P(A\text{ and }B)}{P(A)}). Division by 0 is undefined, so (P(A)) cannot equal 0.}
+4. Use Structure Why is (P(A)\cdot P(B\mid A)=P(B)\cdot P(A\mid B))?
+\answer{From the formula for conditional probability, both (P(A)\cdot P(B\mid A)) and (P(B)\cdot P(A\mid B)) are equal to (P(A\text{ and }B)).}
+5. Error Analysis Jamal knows that (P(R)=0.8), (P(B)=0.2), and (P(R\text{ and }B)=0.05). Explain Jamal's error.
+(P(B\mid R)=\frac{0.05}{0.2}=0.25)
+\te{Printed erroneous work marked with red X.}
+\answer{Jamal divided (P(R\text{ and }B)) by (P(B)) and found (P(R\mid B)) instead of (P(B\mid R)). (P(B\mid R)=\frac{0.05}{0.8}=0.0625)}
+6. Reason At a sports camp, a coach wants to find the probability that a soccer player is a local camper. Because 40\% of the students in the camp are local, the coach reasons that the probability is 0.4. Is his conclusion justified? Explain.
+\answer{No; The coach does not know whether local and non-local campers are equally likely to play soccer.}
+\textbf{Do You KNOW HOW?}
+7. Let (P(A)=\frac34), (P(B)=\frac23), and (P(A\text{ and }B)=\frac12). Find each probability.
+a. What is (P(B\mid A))? \answer{a. (P(B\mid A)=\frac23)}
+b. What is (P(A\mid B))? \answer{b. (P(A\mid B)=\frac34)}
+8. Students generate two digits from 0 to 9 at random to write a number between 0 and 99. Are the events “first digit 5” and “second digit 6” independent or dependent in each case below? What is (P(56)) in each experiment?
+a. The digits may not be repeated. \answer{a. dependent; (\frac1{90})}
+b. The digits may be repeated. \answer{b. independent; (\frac1{100})}
+9. Suppose that you select one card at random from the set of 6 cards below.
+% FIG 30 956 654 1129 685
+\placeholder{diagram}{Six cards in a row: W2 white, B3 blue, W4 white, B3 blue, B2 blue, W3 white.}
+Let B represent the event “select a blue card” and T represent the event “select a card with a 3.” Are B and T independent events? Explain your reasoning.
+\answer{No; (P(B\text{ and }T)=\frac13), (P(T)=\frac12), and (P(B)=\frac12). For the events to be independent, (P(B\mid T)=\frac{P(B\text{ and }T)}{P(T)}=P(B)) has to be true. But (\frac{\frac13}{\frac12}=\frac23\neq\frac12), so the events are not independent.}
+\end{concept-summary}
+% Source page 31: 598 Practice and Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+10, 11, 13--25, 27--29 & 10--29 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items.
+You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each
+Practice: 1 point each
+Assessment Practice: 1 point each
+Performance Task: 3 points
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 14--17, 20, 28 & 1 \\
+1 & 12, 13, 23, 25 & 2 \\
+2 & 18, 21 & 2 \\
+2 & 27 & 3 \\
+3 & 19, 24 & 2 \\
+3 & 10, 11, 26 & 3 \\
+4 & 22, 29 & 3 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{10}{3}
+\textbf{UNDERSTAND. Mathematical Connections} How can the formula (P(A\text{ and }B)=P(A)\cdot P(B\mid A)) be simplified to find the probability of A and B when the events are independent? Explain.
+\answer{When A and B are independent, (P(B\mid A)=P(B)). Then the formula (P(A\text{ and }B)=P(A)\cdot P(B\mid A)) simplifies to (P(A\text{ and }B)=P(A)\cdot P(B)), which is true when events A and B are independent.}
+\end{practice}
+\begin{practice}{11}{3}
+Error Analysis From a bag containing 3 red marbles and 7 blue marbles, 2 marbles are selected without replacement. Esteban calculated the probability that two red marbles are selected. Explain Esteban's error.
+(P(\text{red})=0.3)
+(P(\text{red and red})=P(\text{red})\cdot P(\text{red}))
+(=0.3\cdot0.3)
+(=0.09)
+\te{Erroneous work marked with red X.}
+\answer{The events are not independent, so (P(\text{red second}\mid\text{red first})) is not the same as (P(\text{red first})). (P(\text{red second and red first})=P(\text{red first})\cdot P(\text{red second}\mid\text{red first})=\frac3{10}\cdot\frac29\approx0.067).}
+\end{practice}
+\begin{practice}{12}{2}
+Generalize Kiyo is decorating a table using mosaic tiles chosen and placed at random. She is picking tiles without looking. How does (P(\text{yellow second}\mid\text{blue first})) compare to (P(\text{yellow second}\mid\text{yellow first})) if the tiles are selected without replacement? If the tiles are selected and returned to the pile because Kiyo wants a different color?
+% FIG 31 518 682 759 807
+\placeholder{illustration}{Round wooden table with fifteen colored mosaic tiles: six blue B, four green G, three yellow Y and two orange-red R.}
+\answer{Without replacement: (P(\text{yellow second}\mid\text{blue first})=\frac3{14}), which is greater than (P(\text{yellow second}\mid\text{yellow first})=\frac2{14}=\frac17); With replacement: (P(\text{yellow second}\mid\text{blue first})=P(\text{yellow second}\mid\text{yellow first})=\frac3{15}=\frac15).}
+\end{practice}
+\begin{practice}{13}{2}
+Use Structure At a fundraiser, a participant is asked to guess the contents of an unlabeled can for a possible prize. If there are two crates to choose from, each holding cans of vegetables and cans of soup, what is the probability that the first participant selected a can from the left crate if they selected a can of vegetables?
+a. The left crate has 2 cans of vegetables and 8 cans of soup, and the right crate has 7 cans of vegetables and 3 cans of soup.
+\answer{a. (\frac29); (P(\text{left crate}\mid\text{vegetable})=\frac{P(\text{left crate and vegetable})}{P(\text{vegetable})}=\frac{\frac2{20}}{\frac9{20}}=\frac29)}
+b. The left crate has 8 cans of vegetables and 2 cans of soup, and the right crate has 5 cans of vegetables and 5 cans of soup.
+\answer{b. (\frac8{13}); (P(\text{left crate}\mid\text{vegetable})=\frac{P(\text{left crate and vegetable})}{P(\text{vegetable})}=\frac{\frac8{20}}{\frac{13}{20}}=\frac8{13})}
+\end{practice}
+\begin{practice}{14}{1}
+\textbf{PRACTICE}
+For Exercises 14--18, use the data in the table to find the probability of each event. SEE EXAMPLE 1
+\textbf{Technology Class Enrollment by Year}
+\begin{tabular}{lll}
+ & Sophomore & Junior \\
+Robotics & 16 & 24 \\
+Game Design & 18 & 22 \\
+\end{tabular}
+(P(\text{Junior}\mid\text{Robotics}))
+\answer{0.6 or 60\%}
+\end{practice}
+\begin{practice}{15}{1}
+(P(\text{Robotics}\mid\text{Junior}))
+\answer{about 0.52 or 52\%}
+\end{practice}
+\begin{practice}{16}{1}
+(P(\text{Game Design}\mid\text{Sophomore}))
+\answer{about 0.53 or 53\%}
+\end{practice}
+\begin{practice}{17}{1}
+(P(\text{Sophomore}\mid\text{Game Design}))
+\answer{0.45 or 45\%}
+\end{practice}
+\begin{practice}{18}{2}
+Are year and technology class enrollment dependent or independent events? Explain. SEE EXAMPLE 2
+\answer{Dependent; (P(\text{Game Design}\mid\text{Sophomore})\approx53\%) and (P(\text{Game Design})=50\%), so (P(\text{Game Design}\mid\text{Sophomore})\neq P(\text{Game Design})).}
+\te{Answer printed on next page.}
+\end{practice}
+\begin{practice}{19}{2}
+At a high school, 40\% of the students play an instrument. Of those students, 20\% are freshmen. Of the students who do not play an instrument, 30\% are freshmen. What is the probability that a student selected at random is a freshman who plays an instrument? SEE EXAMPLE 3
+\answer{0.08 or 8\%}
+\end{practice}
+\begin{practice}{20}{1}
+In a study of an experimental medication, patients were assigned at random to take either the medication or a placebo.
+\textbf{Effectiveness of New Medication As Compared to a Placebo}
+\begin{tabular}{lll}
+ & Medication & Placebo \\
+Health Improved & 53 & 47 \\
+Health Did Not Improve & 65 & 35 \\
+\end{tabular}
+What is the probability that a patient taking the medication showed improvement? Round to the nearest whole percent. SEE EXAMPLE 1
+\answer{45\%}
+\end{practice}
+\begin{practice}{21}{2}
+Are taking the medication and having improved health independent or dependent events? SEE EXAMPLE 2
+\answer{dependent}
+\end{practice}
+\begin{practice}{22}{3}
+Based on the data in the table, would you recommend that the medication be made available to doctors? Explain. SEE EXAMPLE 4
+\answer{No; (P(\text{improved}\mid\text{medication})\approx45\%) while (P(\text{improved}\mid\text{placebo})\approx57\%). Patients taking the medication showed improvement less frequently than patients taking the placebo.}
+\te{Answer printed on next page.}
+\end{practice}
+% Source page 32: 599 Practice continued
+\begin{practice}{23}{2}
+\textbf{APPLY. Reason} In a recreation center with 1,500 members, 200 are high-school students. Of the members, 300 regularly swim. The 45 students of the high-school swim team are all members and practice at the pool every week. What is the probability that a high-school member selected at random is on the swim team?
+\answer{0.225 or 22.5\%}
+\end{practice}
+\begin{practice}{24}{2}
+Use Structure At the school fair, 5\% of students will win a prize. A winner has an equally likely chance to win each prize type shown. What is the probability that a student at the fair will win a comic book? Explain.
+% FIG 32 557 492 802 599
+\placeholder{illustration}{Purple tablecloth labeled PRIZES. Five types of prizes: comic books, small rectangular item, key rings, caps and blue bottles.}
+\answer{0.01 or 1\%; Answers may vary. Sample: (P(\text{prize})=0.05) and (P(\text{comic}\mid\text{prize})=0.2), so (P(\text{prize and comic})=P(\text{prize})\cdot P(\text{comic}\mid\text{prize})=(0.05)(0.2)=0.01)}
+\end{practice}
+\begin{practice}{25}{2}
+Make Sense and Persevere A box contains 50 batteries, of which 10 are dead and 5 are weak. Suppose you select batteries at random from the box and set them aside for recycling if they are dead or weak. If the first battery you select is dead and the second one is weak, what is the probability that the next battery you select will be weak?
+\answer{(\frac1{12}) or about 0.08 or 8\%}
+\end{practice}
+\begin{practice}{26}{3}
+Higher Order Thinking An inspector at a factory has determined that 1\% of the flash drives produced by the plant are defective. If Assembly Line A produces 20\% of all the flash drives, what is the probability that a defective flash drive chosen at random is from the corresponding Conveyor Belt A? Explain.
+% FIG 32 559 852 747 1009
+\placeholder{illustration}{Two curved conveyor belts with multicolored flash drives; orange collection bin below. Label Conveyor Belt A, Defective Rate: 1.5 percent.}
+\answer{0.3 or 30\%; (P(A\mid\text{defective})=\frac{P(A\text{ and defective})}{P(\text{defective})}=\frac{P(\text{defective}\mid A)\cdot P(A)}{P(\text{defective})}=\frac{(0.015)(0.2)}{(0.01)}=0.3)}
+\end{practice}
+\begin{practice}{27}{3}
+\textbf{ASSESSMENT PRACTICE}
+Which of the following pairs of events are independent? Select all that apply.
+A. A student selected at random has a backpack. A student selected at random has brown hair.
+B. Events A and B, where (P(B\mid A)=\frac13), (P(A)=\frac35) and (P(B)=\frac59)
+C. A student selected at random is a junior. A student selected at random is a freshman.
+D. Events A and B, where (P(A)=0.30), (P(B)=0.25) and (P(A\text{ and }B)=0.075)
+E. Events A and B, where (P(A)=0.40), (P(B)=0.3) and (P(A\text{ and }B)=0.012)
+\answer{A, D}
+\end{practice}
+\begin{practice}{28}{1}
+SAT/ACT The table shows student participation in the newspaper and yearbook by year. A student on the newspaper staff is selected at random to attend a symposium. What is the probability that the selected student is a senior?
+\textbf{Journalism Club Members}
+\begin{tabular}{lll}
+ & Junior & Senior \\
+Newspaper & 16 & 9 \\
+Yearbook & 8 & 17 \\
+\end{tabular}
+A. (\frac9{50})
+B. (\frac9{26})
+C. (\frac9{25})
+D. (\frac9{17})
+E. (\frac9{16})
+\answer{C}
+\end{practice}
+\begin{practice}{29}{3}
+Performance Task In a survey of 50 male and 50 female high school students, 60 students said they exercise daily. Of those students, 32 were female.
+Part A Use the data to make a two-way frequency table.
+\answer{Part A Student Exercise Survey}
+\begin{tabular}{llll}
+ & Exercises Daily & Does Not Exercise Daily & Total \\
+Male & \answer{28} & \answer{22} & \answer{50} \\
+Female & \answer{32} & \answer{18} & \answer{50} \\
+Total & \answer{60} & \answer{40} & \answer{100} \\
+\end{tabular}
+Part B What is the probability that a surveyed student who exercises daily is female? What is the probability that a surveyed student who exercises regularly is male?
+\answer{Part B (P(\text{female}\mid\text{exercise})=\frac8{15}\approx0.53); (P(\text{male}\mid\text{exercise})=\frac7{15}\approx0.47)}
+Part C Based on the survey, what can you conclude about the relationship between exercise and gender? Explain.
+\answer{Part C Answers may vary. Sample: Of the students surveyed, 64\% of females and 56\% of males exercise daily. This suggests that females are somewhat more likely to exercise regularly than males.}
+\end{practice}
+% Source page 33: 599A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Lesson Quiz is available at SavvasRealize.com. Assessment. ASSESSMENT RESOURCES.
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & DP18 \\
+2 & 2 & DP18 \\
+3 & 2 & DP18 \\
+4 & 2 & DP18 \\
+5 & 2 & DP18 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+I Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+O On-Level & 4 points & Enrichment \\
+A Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{12-2 Lesson Quiz. Conditional Probability}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. A bookstore classifies its books by reader group, type of book, and cost. What is the probability that a book selected at random is a child's book, given that it costs more than \$10?
+\begin{tabular}{llll}
+ & & <\$10 & >\$10 \\
+Child & Fiction & 120 & 255 \\
+Child & Nonfiction & 35 & 60 \\
+Adult & Fiction & 200 & 110 \\
+Adult & Nonfiction & 75 & 150 \\
+\end{tabular}
+A. (\frac{315}{1005})
+B. (\frac{470}{1005})
+C. (\frac{315}{575})
+D. (\frac{470}{575})
+\answer{C}
+2. Half of a class took Form A of a test and half took Form B. Of the students who took Form B, 39\% passed. What is the probability that a randomly chosen student took Form B and did not pass?
+A. 0.055
+B. 0.195
+C. 0.305
+D. 0.390
+\answer{C}
+3. Select all the pairs of independent events.
+A. A student selected at random has black hair. A student selected at random drives to school.
+B. Events A and B where (P(A\mid B)=\frac89), (P(A)=\frac34), and (P(B)=\frac23)
+C. A student selected at random is in middle school. A student selected at random is in high school.
+D. Events A and B where (P(B\mid A)=0.9), (P(A\text{ and }B)=0.45), and (P(A)=0.5)
+E. Events A and B where (P(B)=0.15), (P(A)=0.25), and (P(A\mid B)=0.15)
+\answer{A, D}
+\te{Printed D selected as independent; the given values only verify the conditional-probability formula and do not supply P(B) to establish independence.}
+4. Three-fourths of a research team worked in a lab while one-fourth of the team worked near a pond. Of the researchers who worked near the pond, 14\% collected insects. What is the probability that a randomly chosen researcher worked near the pond and collected insects?
+\answer{3.5\%}
+5. A bag contains 4 blue and 6 green marbles. Two marbles are selected at random from the bag.
+Find each probability. Round to two decimal places if needed.
+\begin{tabular}{lll}
+ & With replacement & Without replacement \\
+(P(\text{blue second}\mid\text{green first})) & \answer{40\%} & \answer{44.44\%} \\
+(P(\text{green second}\mid\text{blue first})) & \answer{60\%} & \answer{66.67\%} \\
+\end{tabular}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 34: 599B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+SavvasRealize.com. Practice. I = Intervention. O = On-Level. A = Advanced.
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-2 Reteach to Build Understanding. Conditional Probability}
+1. Rhonda is competing on a game show. First she randomly decides on a target of 1 or 2 and chooses card A or B. Then she spins the spinner on the other side of the card.
+% FIG 34 190 440 357 484
+\placeholder{diagram}{Front A: gray square. Back A: four equal square quadrants with 1 upper left/lower right, 2 upper right/lower left; arrow points upper right. Front B: gray square. Back B: 1 in three quadrants, 2 upper right; arrow points upper right. Headings Front, Back, Front, Back.}
+a. What is (P(1)) if Rhonda chooses spinner A? (P(1\mid A)=\answer{0.5})
+b. What is (P(1)) if Rhonda chooses spinner B? (P(1\mid B)=\answer{0.75})
+c. Choose the correct symbol to make the statement true.
+Events A and B are dependent because (P(1\mid B)) (=, (\neq)) (P(1\mid A))
+\answer{(\neq)}
+\te{Printed events A and B; the displayed comparison concerns outcome 1 conditional on the choice of spinner.}
+2. In a survey, half of the students walk to school and the other half take the bus. Of the students who take the bus to school, 40\% play sports. Complete the tree diagram and the calculation to find the probability below.
+% FIG 34 190 571 267 628
+\placeholder{diagram}{Tree: first split walk 0.5 and bus answer 0.5. Walk splits sports 0.35 and no sports 0.65. Bus splits sports answer 0.4 and no sports answer 0.6.}
+\answer{Tree blanks: 0.5, 0.4, 0.6.}
+(P(\text{plays sports and takes bus})=P(\text{sports}\mid\text{bus})\cdot P(\answer{\text{bus}}))
+(=(0.40)(\answer{0.5}))
+(=\answer{0.2})
+3. Suppose 60\% of the freshmen at your school take a course in compass navigation. The probability that a freshman selected at random did not get lost on the class hike is 90\%. The probability that a freshman selected at random took the course and did not get lost is 50\%.
+a. What is (P(\text{did not get lost}\mid\text{took the course}))?
+(P(\text{did not get lost}\mid\text{took the course})=\frac{P(\text{took the course and did not get lost})}{P(\text{took the course})})
+(=\frac{0.5}{\answer{0.6}})
+(=\answer{\text{about }0.83})
+b. Kai says (P(\text{took the course}\mid\text{did not get lost})) is 1. Correct Kai's error.
+\answer{The probability is (\frac{0.5}{0.9}), or about 0.56.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-2 Additional Practice. Conditional Probability}
+1. The population of a high school is 51\% male. Of those who attend a school concert, 45\% are male. Are gender and concert attendance dependent or independent events? Explain.
+\answer{Dependent: (P(M)=0.51), (P(M\mid C)=0.45), so (P(M\mid C)\neq P(M))}
+The table shows the number of one doctor's patients who caught a cold one week and whether or not they exercised regularly.
+\begin{tabular}{lll}
+ & Caught a cold & Did not catch a cold \\
+Exercised & 8 & 30 \\
+Did not exercise & 10 & 2 \\
+\end{tabular}
+2. Find (P(\text{did not exercise}\mid\text{did not catch a cold})).
+\answer{(\frac1{16})}
+3. Find (P(\text{did not catch a cold}\mid\text{did not exercise})).
+\answer{(\frac16)}
+4. Are the events “did not exercise” and “did not catch a cold” dependent or independent events? Explain.
+\answer{Dependent events since (P(\text{did not exercise})=\frac6{25}) and (P(\text{did not catch a cold})=\frac{16}{25}), which differ from the conditional probabilities found in 3 and 4, respectively.}
+\te{Printed 3 and 4; likely 2 and 3.}
+5. Based on the data in the table, do you think the doctor should recommend that his patients exercise if they want to avoid colds? Explain.
+\answer{Sample answer: Yes, because (P(\text{caught a cold}\mid\text{exercised})) is about 21\% while (P(\text{caught a cold}\mid\text{did not exercise})) is about 83\%. It seems that exercising may reduce the chance of catching a cold.}
+6. A student says that if (P(A)=P(A\mid B)) and (P(B)\neq0), then A and B must be independent events. Is the student correct? Explain.
+\answer{Yes, if A and B are independent, then the probability of A will be the same whether or not B occurs.}
+\te{Printed explanation states the reverse implication of the claim being justified.}
+7. A softball game has an 80\% chance of being cancelled if it rains and a 30\% chance of being cancelled if there is fog when there is no rain. There is a 70\% chance of fog with no rain and a 30\% chance of rain. What is the probability that the game will be cancelled?
+\answer{0.45 or 45\%}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-2 Enrichment. Conditional Probability}
+Complex problems involving probability are often easier to visualize and solve using tree diagrams. You can write the probabilities on the branches of the diagram.
+An avatar in a computer game selects one of 3 doors, labeled A, B, and C. Behind each door is either a Hint (H) or an Obstacle (O) that will contribute assistance or obstacles toward winning a challenge, with levels 1, 2, 3, and 4. All choices are equally likely and made at random.
+Complete the tree diagram with the probabilities for each branch.
+% FIG 34 882 486 1114 570
+\placeholder{diagram}{Avatar tree splits A, B, C, each branch printed 0.3. Each door splits H/O, each probability 0.5; A to H printed black, other five shown pink answers. Each H/O splits levels 1,2,3,4. Six pink 0.25 answers point respectively to A-H-1, A-O-2, B-H-3, B-O-4, C-H-3, C-O-4.}
+\answer{0.5 for each of five H/O blanks; 0.25 for each of six level blanks.}
+\te{Printed initial branch probabilities 0.3 without repeating bars; likely one third each for equally likely doors.}
+Use the tree diagram to find the probabilities in Exercises 1--4.
+1. (P(4\mid A)) \answer{25\%}
+2. (P(2\mid A\text{ and }O)) \answer{25\%}
+3. (P(3\mid\text{not }2)) \answer{33.3\%}
+4. (P(1\mid A\text{ and }(H\text{ or }O))) \answer{25\%}
+A parking garage attendant records the kind of vehicle and the number of persons in the vehicle. Based upon prior records he estimates the following relative frequencies. Complete the table and find the probabilities to the nearest tenth of a percent.
+\textbf{Parking Garage Relative Frequency Data}
+Number of Persons in the Vehicle (Including driver)
+\begin{tabular}{llllll}
+Type of Vehicle & 1 & 2 & 3 & 4 & 5 or more \\
+Car & 0.042 & 0.120 & 0.021 & 0.110 & 0.002 \\
+Truck & \uncertain{0.055}{0.054} & 0.042 & 0.001 & 0.001 & 0.000 \\
+Van & 0.004 & \answer{\uncertain{0.009}{0.010}} & 0.012 & \uncertain{0.168}{0.166} & 0.192 \\
+SUV & 0.040 & 0.065 & 0.052 & 0.041 & \uncertain{0.080}{0.090} \\
+\end{tabular}
+5. (P(\text{car}\mid2\text{ or more people})) \answer{29.5\%}
+6. (P(\text{SUV}\mid\text{fewer than }4\text{ people})) \answer{33.8\%}
+7. (P(3\text{ or more people}\mid\text{van})) \answer{96.3\%}
+8. (P(2\text{ people}\mid\text{van or truck})) \answer{8.3\%}
+\te{Tiny table entries remain degraded at 1800 dpi. Printed answers retained; some do not agree with the legible entries and best readings.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-2 Mathematical Literacy and Vocabulary. Conditional Probability}
+The column on the left shows the steps for using conditional probability to make a decision. Use this column to answer each question in the column on the right.
+Problem
+Which is the better product to market online: Product Q or Product R?
+\textbf{Internet Search and Buying Behavior}
+\begin{tabular}{llll}
+Product & Search (S) & Buy (B) & Search \& Buy (S and B) \\
+Q & 78\% & 42\% & 31\% \\
+R & 75\% & 33\% & 26\% \\
+\end{tabular}
+1. Read the question. How are you going to use probability to solve the problem?
+\answer{Find the probability that a customer buys, given that the customer performed a related search.}
+Use the formula for conditional probability.
+(P(B\mid S)=\frac{P(S\text{ and }B)}{P(S)})
+2. Why do you use the formula for conditional probability?
+\answer{You want to find the probability that a customer buys the product after searching for it.}
+Find the probabilities for each product.
+\begin{tabular}{ll}
+Product & (P(B\mid S)) \\
+Q & (\frac{0.31}{0.78}\approx0.397) \\
+R & (\frac{0.26}{0.75}\approx0.347) \\
+\end{tabular}
+3. How do you interpret the probabilities?
+\answer{There is a 39.7\% probability that Product Q will be purchased after a search and a 34.7\% chance that Product R will be purchased after a search.}
+Solution.
+Product Q is the better product to market online.
+4. How do you arrive at the solution?
+\answer{Product Q is more likely to be purchased after a search since it has a higher probability, so it is the better product to market online.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital preview: A surveyor took some measurements of a piece of land. The owner needs to know the area of the land to determine the value. What is the area of the piece of land? Blank ft. Printed ft; likely square feet for area.}
+% FIG 34 615 977 1066 1298
+\placeholder{illustration}{Tablet with digital land-area problem; green irregular parcel, trees, road, dashed internal segments. Visible measurements 12 ft upper left, 21 ft lower left, 22 ft lower right, right-angle marker at bottom altitude and 54-degree lower-right angle. Help menu covers some right-hand labels. No answer printed.}
+\te{Exit. Question Help. Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Enter your answer in the answer box and then click Check Answer. 1 part remaining. Clear All. Check Answer. Review progress. Question 24 of 40. Go. Back. Next.}
+\end{te-addendum}
+
+\end{document}

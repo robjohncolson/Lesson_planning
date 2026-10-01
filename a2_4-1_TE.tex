@@ -1,0 +1,874 @@
+\documentclass{article}
+% Source: Topic_04_Teacher_Edition.pdf, PDF pages 12-23 (printed pages 181A-188B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 12: 181A Lesson Overview
+\begin{lesson-meta}
+lesson: 4-1
+title: Inverse Variation and the Reciprocal Function
+standards: none printed
+practices: none printed
+objective: I can use inverse variation and graph translations of the reciprocal function.
+
+essential question: How are inverse variations related to the reciprocal function?
+
+\textbf{VOCABULARY}
+\item asymptote
+\item constant of variation
+\item inverse variation
+\item reciprocal function
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 4-1 \\
+Title & Inverse Variation and the Reciprocal Function \\
+Standards & none printed \\
+I CAN Objective & I can use inverse variation and graph translations of the reciprocal function. \\
+Essential Question & How are inverse variations related to the reciprocal function? \\
+Lesson Vocabulary & asymptote; constant of variation; inverse variation; reciprocal function \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use inverse variation to write and graph the reciprocal function.
+\item Identify the effect of transformations on the graph of the reciprocal function and define the effects of (h) and (k) on the function (f(x)=\frac{1}{x-h}+k).
+Essential Understanding. The reciprocal function is used to model inverse variation, which is a proportional relationship between two variables such that when one variable increases, the other decreases.
+\te{The printed increasing/decreasing description assumes a positive constant of variation on one branch; it is not a general description for negative constants.}
+\textbf{COHERENCE}
+Previously in earlier courses, students:
+\item Create, graph, and transformed polynomial function.
+\item Identified the key features of the graph of a polynomial function.
+In this lesson, students:
+\item Graph and transform the reciprocal function.
+\item Identify how the values of (a), (h), and (k) affect the key features of a transformation of the reciprocal function.
+Increasing Coherence. Examples 4 and 5 are not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Extend their understanding of the reciprocal function and its transformations to create, graph, and transform rational functions.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that the reciprocal function models inverse variation.
+\item Students graph transformations of the reciprocal function, identify asymptotes, and use them to show the end behavior of a function.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+Glossary is available at SavvasRealize.com.
+\textbf{Vocabulary Builder}
+\begin{tabular}{ll}
+REVIEW VOCABULARY: English & Spanish \\
+multiplicative inverse & inversa \\
+reciprocal & recíproco \\
+NEW VOCABULARY & \\
+asymptote & asíntota \\
+constant of variation & constant de proporcionalidad \\
+inverse variation & variación inversa \\
+reciprocal function & función recíproca \\
+\end{tabular}
+\te{Printed Spanish uses constant; likely constante.}
+\textbf{VOCABULARY ACTIVITY}
+Prepare students for the lesson's vocabulary by ensuring that they understand the terms inverse, multiplicative inverse, and reciprocal. Use this understanding to explain the terms inverse variation and reciprocal function.
+The reciprocal of 3 is \underline{\hspace{1cm}}. \answer{(\frac{1}{3})}
+The multiplicative inverse of 3 is \underline{\hspace{1cm}}. \answer{(\frac{1}{3})}
+The function (f(x)=\frac{1}{x}) is the \underline{\hspace{1cm}}. \answer{reciprocal function}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 12 964 754 1114 933
+\placeholder{illustration}{Student Companion cover: dark background, purple and blue circular geometric structure; text Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students write and graph the reciprocal function and relationships that represent inverse variation. They also identify the (x)- and (y)-asymptotes and the end behavior of each function.
+Students determine how the graph changes when the reciprocal function is transformed, using the function (f(x)=\frac{1}{x-h}+k). They recognize that the value of (h) translates the graph horizontally and the value of (k) shifts the graph vertically.
+\textbf{Applying Math Practices: Make Sense of Problems and Persevere in Solving Them}
+Students look for entry points to a problem when they use what they know about inverse variation to mentally compute an approximate answer to a problem that uses an inverse variation model to find the frequency of a guitar string.
+\end{te-addendum}
+% Source page 13: 181B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{MODEL \& DISCUSS}
+INSTRUCTIONAL FOCUS Students first explore the lengths and widths of various rectangles that have the same area and record this information. This provides an introduction to using a list of factors to show inverse variation, and to graphing reciprocal functions.
+STUDENT COMPANION Students can complete the Model \& Discuss activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving.
+Q: How many length-width combinations for a rectangle can be created from a given pair of factors?
+\answer{Two; Given the factors 2 and 3, a rectangle can be created with a length of 2 and a width of 3. A second rectangle can be created with a length of 3 and a width of 2.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics.
+Q: Do the lengths and widths always have to be integers?
+\answer{No; a rectangle with a length of 5 units and a width of 28.8 units has an area of 144 square units.}
+For Early Finishers.
+Q: Sketch as many rectangles as you can that have an area of 25 square units. Record your data. Is the relationship between the lengths and widths of these rectangles the same as or different from the relationship you noticed among rectangles with an area of 144 square units?
+\answer{the same}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse.
+Demonstrate to students how the factors of a number can be listed as coordinate pairs---(x,y)---and explain that as one factor increases, the other must decrease because the product remains constant.
+Q: Can you write a general equation that models this situation?
+\answer{(xy=k)}
+Q: What would the equation look like solved for the dependent variable (y)?
+\answer{(y=\frac{k}{x})}
+Introduce students to inverse variation by relating it to the reciprocal of direct variation.
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Use Structure}
+Q: How does the formula for the area of a rectangle make sense with the relationships you found?
+\answer{The area of a rectangle is equivalent to its length multiplied by its width, so any two factors could be the length and width and produce the same product, the area.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+Model \& Discuss is available at SavvasRealize.com.
+\textbf{Digital MODEL \& DISCUSS}
+The two rectangles shown both have an area of 144 square units.
+% FIG 13 675 289 885 358
+\placeholder{diagram}{Digital launch: blue outlined horizontal rectangles, long thin one width 72 and height 2, shorter one width24 and height6. Red double arrows mark dimensions.}
+A. Use the pen tool to sketch as many other rectangles as you can that have the same area. Organize and record your data for the lengths and widths of the rectangles.
+B. Use Structure Considering rectangles with an area of 144 square units, what happens to the width of the rectangle as the length increases?
+Enter your answer.
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{MODEL \& DISCUSS}
+The two rectangles shown both have an area of 144 square units.
+% FIG 13 812 663 1082 745
+\placeholder{diagram}{Student launch: two blue outlined rectangles, top width72 and height2, bottom width24 and height6. Dimensions in red on double-ended arrows.}
+A. Sketch as many other rectangles as you can that have the same area. Organize and record your data for the lengths and widths of the rectangles.
+\answer{1 by 144, 3 by 48, 4 by 36, 8 by 18, 9 by 16, and 12 by 12}
+% FIG 13 684 988 1144 1185
+\placeholder{diagram}{Sample student work: six blue outlined rectangles with red double arrows: top 144 wide by1 high; next row48 by3 and36 by4; bottom row18 by8,16 by9,12 by12.}
+B. Use Structure Considering rectangles with an area of 144 square units, what happens to the width of the rectangle as the length increases?
+\answer{As the width increases, the length decreases.}
+C. Examine at least five other pairs of rectangles, each pair sharing the same area. How would you describe the relationship between the lengths and widths?
+\answer{In each pair, the lengths and widths are different by reciprocal factors.}
+\end{model-discuss}
+% Source page 14: 181 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Introduce students to inverse variation and what it represents (a relation between two variables such that as one variable increases, the other decreases proportionally). Students first examine relationships of inverse variation in order to understand and use reciprocal functions.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Identify Inverse Variation: Pose Purposeful Questions}
+Q: What do you notice about the pattern?
+\answer{As (x) increases, (y) decreases proportionally, and the product of each (xy) is 12.}
+Q: How can you confirm that a table of values represents an inverse variation using multiplication?
+\answer{A table of values represents an inverse variation when there is a constant product (xy) for all ordered pairs.}
+Q: What does it mean if the product of (xy) is not constant within a table?
+\answer{The relationship between (x) and (y) does not vary inversely.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Identify Inverse Variation}
+How do you determine if a relationship represents an inverse variation?
+A. Does the table of values represent an inverse variation?
+\begin{tabular}{lrrrrrr}
+x & 1 & 2 & 3 & 4 & 6 & 12 \\
+y & 12 & 6 & 4 & 3 & 2 & 1 \\
+\end{tabular}
+An inverse variation is a relation between two variables such that as one variable increases, the other decreases proportionally. For the table to represent an inverse variation, the product of (x) and (y) must be constant. Find the product, (xy), for each column in the table.
+\begin{tabular}{lrrrrrr}
+x & 1 & 2 & 3 & 4 & 6 & 12 \\
+y & 12 & 6 & 4 & 3 & 2 & 1 \\
+xy & 12 & 12 & 12 & 12 & 12 & 12 \\
+\end{tabular}
+\te{STUDY TIP Be sure to check the products for every pair of values before drawing a conclusion.}
+\answer{Since the product of the values is constant, the table of values represents an inverse variation.}
+B. Does the table of values represent an inverse variation?
+\begin{tabular}{lrrrrrr}
+x & 1 & 2 & 3 & 4 & 5 & 6 \\
+y & 20 & 17 & 14 & 11 & 8 & 5 \\
+\end{tabular}
+Find the products.
+\begin{tabular}{lrrrrrr}
+x & 1 & 2 & 3 & 4 & 5 & 6 \\
+y & 20 & 17 & 14 & 11 & 8 & 5 \\
+xy & 20 & 34 & 42 & 44 & 40 & 30 \\
+\end{tabular}
+\answer{Since the products are not constant, the table does not represent an inverse variation.}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Example 1}
+John draws five rectangles, in which (x) represents the length and (y) represents the width. What are the areas of his rectangles? Does this data represent an inverse variation? Why or why not?
+\begin{tabular}{lrrrrr}
+x & (\frac{1}{2}) & 1 & 3 & 5 & 12 \\
+y & 15 & (7\frac{1}{2}) & (2\frac{1}{2}) & (1\frac{1}{2}) & (\frac{5}{8}) \\
+\end{tabular}
+\answer{The area of each rectangle is (7\frac{1}{2}) square units. The data does represent an inverse variation because as (x) increases, (y) decreases proportionally, creating a constant of variation where (xy=7\frac{1}{2}).}
+Example 1 Help students explore inverse variation further with an example that includes fractions, to help them understand that the coordinates of an inverse variation can be any real number.
+\te{Printed any real number overlooks the exclusion of zero for a nonzero constant of variation.}
+Q: How does this inverse variation differ from others you have seen?
+\answer{The process is the same, but this example involves multiplying fractions.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Example 2}
+In an inverse variation, (x=\frac{2}{3}) when (y=\frac{5}{6}). Write an equation to represent the inverse variation. Then, find the value of (y) when (x=\frac{1}{3}).
+(xy=k)
+((\frac{2}{3})(\frac{5}{6})=\frac{5}{9})
+(xy=\frac{5}{9})
+Then, if (x=\frac{1}{3})
+(y=\frac{k}{x})
+(y=\frac{\frac{5}{9}}{\frac{1}{3}})
+(y=(\frac{5}{9})(\frac{3}{1}))
+(y=\frac{5}{3})
+\answer{(xy=\frac{5}{9}); (y=\frac{5}{3})}
+Example 2 Help students understand the process of setting up the inverse variation when (x), (y), and (k) are not whole numbers.
+Q: How can you rewrite the equation for an inverse variation in a different form to make it easier to work with when using fractions?
+\answer{Since fractions represent division, the equation can be written in the form (y=k\div x).}
+\end{te-addendum}
+% Source page 15: 182 Understand & Apply
+\begin{tryit}{1}
+Determine if each table of values represents an inverse variation.
+a.
+\begin{tabular}{lrrrrrr}
+x & 1 & 2 & 3 & 5 & 6 & 15 \\
+y & 25.5 & 12.75 & 8.50 & 5.10 & 4.25 & 1.70 \\
+\end{tabular}
+\answer{Yes; as the (x)-values increase the (y)-values decrease proportionally. The products of all the pairs of (x)- and (y)-values are constant at 25.5.}
+b.
+\begin{tabular}{lrrrrrr}
+x & 6.6 & 5.5 & 4.4 & 3.3 & 2.2 & 1.1 \\
+y & 3 & 5 & 7 & 9 & 11 & 13 \\
+\end{tabular}
+\answer{No; while the (x)-values decrease as the (y)-values increase, the product of all the pairs of (x)- and (y)-values is not the same; therefore, there is no constant of variation.}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Is it necessary to check for more products that are constant after identifying two that are not constant?
+\answer{No; if any two have a product that is not constant, the table of values does not represent an inverse variation.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Inverse Variation}
+When a relation between (x) and (y) is an inverse variation, we say that (x) varies inversely as (y). Inverse variation is modeled by the equation (y=\frac{k}{x}), where (k\neq0). The variable (k) represents the constant of variation, the number that relates the two variables in an inverse variation.
+\begin{tabular}{lrrrrrrrr}
+x & 1 & 2 & 3 & 4 & 6 & 8 & 12 & 24 \\
+y & 24 & 12 & 8 & 6 & 4 & 3 & 2 & 1 \\
+k & 24 & 24 & 24 & 24 & 24 & 24 & 24 & 24 \\
+\end{tabular}
+\te{Notice how as x doubles in value from 1 to 2 to 4 to 8, ... the value of y is halved from 24 to 12 to 6 to 3.}
+\end{concept-box}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations}
+Q: How does the constant of variation (k) help determine the values of (x) and (y)?
+\answer{The constant of variation (k) is the product of (x) and (y); therefore, any two values that have a product equal to the constant of variation satisfy the inverse relationship.}
+Q: What are two more pairs of values for (x) and (y) that would fit the relationship?
+\answer{When (x=2), (y=15); when (x=\frac{1}{2}), (y=60). Any two numbers that have a product of 30 fit the relationship.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Use Inverse Variation}
+In an inverse variation, (x=10) when (y=3). Write an equation to represent the inverse variation. Then find the value of (y) when (x=-6).
+Step 1 Write the equation for an inverse variation and solve for (k).
+(y=\frac{k}{x})
+(3=\frac{k}{10})
+\te{Substitute 10 and 3 for x and y.}
+(30=k)
+Step 2 Substitute (k=30) in the inverse variation equation and then find (y).
+(y=\frac{30}{x})
+(y=\frac{30}{-6})
+\te{Substitute -6 for x in the equation.}
+(y=-5)
+\answer{The equation that represents the inverse relation is (y=\frac{30}{x}). When (x=-6), (y=-5).}
+\te{COMMON ERROR Remember in direct variation, y=kx, that x and y increase or decrease at the same time. In inverse variation xy=k, as one variable increases the other decreases. Printed generalization assumes positive k on one branch.}
+\end{example}
+\begin{tryit}{2}
+In an inverse variation, (x=6) and (y=\frac{1}{2}).
+a. What is the equation that represents the inverse variation?
+\answer{(y=\frac{3}{x})}
+b. What is the value of (y) when (x=15)?
+\answer{When (x=15), (y=\frac{1}{5}).}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: With an inverse variation, can you find an unknown value for (x) or (y) without finding (k) first?
+\answer{No; the values of (x) and (y) are dependent upon (k).}
+\te{Printed No overlooks solving with a proportion directly from known pairs.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error: Try It! 2}
+Students may write the equation (\frac{y}{x}=3) to represent the inverse variation and calculate (y=45). Have students look at the two forms of an inverse variation and compare that to the equation they wrote. Ask them how their equation differs from these forms of the inverse variation.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{Construct Arguments} Use with EXAMPLES 1 \& 2.
+Q: For rectangles that have a constant perimeter, the length increases as the width decreases. Is the relationship between the length and width an inverse variation? Explain.
+\answer{No; the relationship between length and width is not an inverse variation because you add twice the length and twice the width to find the perimeter. Inverse variations involve variables that are multiplied and divided.}
+\end{te-addendum}
+% Source page 16: 183 Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Use an Inverse Variation Model: Pose Purposeful Questions}
+Q: What information about the inverse variation model is given that will be used to set up an equation?
+\answer{The model explains that a certain length of bouzouki string, (s), will produce a certain frequency, (f), from which you can find the constant of variation, their product.}
+Q: Using the inverse variation model, can you find the frequency for any string length?
+\answer{Yes; if you know the values of (k) and (s), then any frequency can be found using the equation (f=\frac{k}{s}).}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Use an Inverse Variation Model}
+APPLICATION. On a Greek bouzouki, the string length (s) varies inversely with the frequency (f) of its vibrations.
+\te{LEARN TOGETHER How can you share your ideas and communicate your thinking with others?}
+% FIG 16 840 273 1160 439
+\placeholder{illustration}{Greek bouzouki, orange and gray rounded body at left, neck rising right. Arrow along full string labeled329.63 cycles/sec, shorter arrow from bridge to midpoint labeled ? cycles/sec. Callout: Players can vary string length by placing their fingers behind the frets.}
+The frequency of a 26-inch E-string is 329.63 cycles per second. What is the frequency when the string length is 13 inches?
+Step 1 Write the equation for an inverse variation and solve for (k).
+(s=\frac{k}{f})
+(26=\frac{k}{329.63})
+\te{Substitute 26 for s and 329.63 for f.}
+(8,570.38=k)
+Step 2 Substitute (k=8,570.38) in the inverse variation equation and then find (f).
+(s=\frac{8,570.38}{f})
+(13=\frac{8,570.38}{f})
+(f=659.26)
+\answer{So the frequency of the 13-inch string is 659.26 cycles per second.}
+\te{MAKE SENSE AND PERSEVERE In stringed instruments, higher frequencies result in higher pitched sounds. How does varying string length affect pitch?}
+\end{example}
+\begin{tryit}{3}
+The amount of time it takes for an ice cube to melt varies inversely to the air temperature in degrees Celsius. At (20^\circ) Celsius, the ice will melt in 20 minutes. How long will it take the ice to melt if the temperature is (30^\circ) Celsius?
+\answer{(\approx13.3) minutes}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How can you write an inverse variation model to represent the situation being described?
+\answer{Since the temperature determines the time, (\text{(degrees)(time)}=k), creating the inverse variation model (t=\frac{k}{d}).}
+\end{te-addendum}
+\begin{te-addendum}{3}{LearnTogether}
+\textbf{Communicate Your Thinking}
+People approach problem-solving in different ways. Explaining your thinking helps others understand there may be more than one way to reason about a problem. Ask: In what ways are you most comfortable sharing your ideas with others?
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners} Use with EXAMPLE 3.
+WRITING BEGINNING Cycle means any complete round, as in a series of occurrences that repeats; or as in a recurring period of time, such as the cycle of months in a year. Have students draw a round wheel with spokes, or lines drawn from the center of the wheel to the circumference.
+Q: On each spoke, write something that occurs in cycles.
+\answer{Samples: the Olympics, full moon, seasons, school year, cell phone bills, life cycle of a butterfly}
+Q: What is a cycle in regards to a guitar string?
+\answer{the number of times it vibrates back and forth}
+READING DEVELOPING Have students read the following two definitions for the word frequency. 1) The frequency of an event is the number of times it happens during a particular period. 2) In physics, the frequency of a sound wave or a radio wave is the number of times it vibrates within a specified period of time. Now have students read the first sentence of the example.
+Q: Although the definitions are similar, which one best describes the way frequency is used in the example?
+\answer{2}
+Q: What affects the frequency of sounds from a guitar?
+\answer{Samples: the string length; the tension of the string}
+SPEAKING EXPANDING Have a student tap a pencil on a desk at a constant rate. Have another student with a timer call out increments of 10 seconds while a third student counts and records the number of taps. Repeat this process with a slower tapping rate. Have students use the word inverse to discuss in small groups the relationship between the variables.
+Q: Why is this situation an example of an inverse variation?
+\answer{As one variable increases, the other decreases proportionally.}
+\te{Printed tapping activity does not specify a fixed number of taps; tap count and elapsed time at a fixed rate vary directly.}
+\end{te-addendum}
+% Source page 17: 184 Understand & Apply
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Graph the Reciprocal Function: Pose Purposeful Questions}
+Q: What do you notice about the relationship between the (x)- and (y)-values?
+\answer{They have a product of 1, which means that they are reciprocals.}
+Q: How does the reciprocal function relate to inverse variation?
+\answer{The reciprocal function is a set of (x)- and (y)-values that are reciprocals. This represents an inverse variation because the constant product is 1.}
+Q: Why is the domain and range of the inverse function restricted?
+\answer{An inverse function will have a denominator that is a variable; therefore, any number that causes that denominator to be zero will be undefined for that (x)-value. Also, the function cannot equal zero if the numerator is a nonzero real number.}
+\te{Printed inverse function here refers to the reciprocal function, not inverse functions in general.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Understand the Graph of the Reciprocal Function}
+CONCEPTUAL UNDERSTANDING. What are the key features of the reciprocal function (f(x)=\frac{1}{x})?
+The reciprocal function (f(x)=\frac{1}{x}) maps every non-zero real number to its reciprocal. Use technology to graph the function.
+% FIG 17 846 253 1109 391
+\placeholder{graph}{Red y=1/x, branches in quadrants I and III, arrows toward axes at all four ends; x,y axes with O, labels -5,5, unit grid, window -6 to6 both directions. No intercepts; axes are asymptotes.}
+\te{As x approaches plus or minus infinity, the graph approaches the x-axis. As x approaches 0, the graph approaches the y-axis.}
+You can use the TRACE feature to understand the end behavior. Notice that the values of (f(x)) get closer and closer to 0 as (x) goes to (\infty) or (-\infty), but never equal 0.
+% FIG 17 790 437 1092 543
+\placeholder{graph}{Red y=1/x in wide window: x from -15000 to15000 with grid1250 and labels -10000,-5000,5000,10000; y from -0.00125 to0.00125 grid0.00025 labels -0.001,0.001. x,y,O axes, arrows at ends. Six solid labeled red points (1000,1/1000),(5000,1/5000),(10000,1/10000),(-1000,-1/1000),(-5000,-1/5000),(-10000,-1/10000).}
+The graph of (f) has a horizontal asymptote (y=0). An asymptote is a line that a graph approaches.
+Recall that a fraction with a denominator of 0 is undefined. Use the TRACE feature again with (x)-values close to 0. For positive (x)-values, as (x) approaches 0, (f(x)) goes to (\infty). For negative (x)-values, as (x) approaches 0, (f(x)) goes to (-\infty).
+% FIG 17 969 555 1118 773
+\placeholder{graph}{Red y=1/x tall window: x -0.007 to0.005, grid0.001, labels -0.005,0.005; y -14000 to14000, grid1250 approximately, labels -10000,-5000,5000,10000. x,y,O axes; red branches I and III with arrows. Labeled solid points (1/10000,10000),(1/5000,5000),(1/1000,1000),(-1/1000,-1000),(-1/5000,-5000),(-1/10000,-10000).}
+The graph of (f) has a vertical asymptote (x=0).
+The domain of (f(x)=\frac{1}{x}) is (\{x\mid x\neq0\}). The range is (\{y\mid y\neq0\}).
+The end behavior is (f(x)\to0) as (x\to\pm\infty).
+\answer{Horizontal asymptote (y=0); vertical asymptote (x=0); domain (\{x\mid x\neq0\}); range (\{y\mid y\neq0\}); (f(x)\to0) as (x\to\pm\infty).}
+\end{example}
+\begin{tryit}{4}
+Graph the function (g(x)=\frac{10}{x}). What are the domain, range, and asymptotes of the function?
+% FIG 17 126 596 327 796
+\placeholder{graph}{Answer: red y=10/x, branches I and III, four end arrows, asymptotes x=0,y=0. Axes x,y,O; window -12 to12 both, grid2, labels x -4,4,8 and y -4,4,8. Solid labeled points (1,10),(10,1),(-10,-1),(-1,-10).}
+\answer{domain: all real numbers, (x\neq0); range: all real numbers, (y\neq0). A horizontal asymptote of the graph is (y=0). A vertical asymptote of the graph is (x=0).}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How does the graph of (f(x)=\frac{1}{x}) compare with the graph of (g(x)=\frac{10}{x})?
+\answer{The graph of (g(x)) is a vertical stretch of the graph of (f(x)).}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students}
+Students may struggle to understand the concept of an asymptote and how a function can continually approach a line but never reach it.
+Use a table of values to graph the function (y=\frac{2}{x}) for (x=\frac{1}{6},\frac{1}{4},\frac{1}{2},1,2,3,4).
+Q: What happens to the (y)-values as (x) approaches 0?
+\answer{The (y)-values increase.}
+Q: What do you think the graph looks like for (x)-values between 0 and (\frac{1}{6})?
+\answer{Since lesser (x)-values have greater (y)-values, the points with (x)-values between 0 and (\frac{1}{6}) will be higher up on the graph, making this part of the graph look almost vertical.}
+Q: What does your calculator show when you use zero as an (x)-value? Why?
+\answer{An error occurs because (\frac{2}{0}) is undefined.}
+\end{te-addendum}
+% Source page 18: 185 Understand & Apply
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Graph Translations of the Reciprocal Function: Use and Connect Mathematical Representations}
+Q: How can you recognize and describe a translation on a coordinate plane?
+\answer{A translation is a shift from an original position that is described by horizontal movement and/or vertical movement.}
+Q: What is a good point of reference when graphing a translation?
+\answer{The parent function (f(x)=\frac{1}{x}) has asymptotes that intersect at (0,0). Therefore, that is a good point to count from when identifying the asymptotes of a translation as well as the points of the graph.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Graph Translations of the Reciprocal Function}
+Graph (g(x)=\frac{1}{x-3}+2). What are the equations of the asymptotes? What are the domain and range?
+Use technology to graph the parent function, (f(x)=\frac{1}{x}).
+% FIG 18 837 305 938 405
+\placeholder{graph}{Red f(x)=1/x labeled beside quadrant I branch; axes x,y,O, unit grid window -5 to5, x labels -4,2,4,y -4,2,4; branches I,III with four end arrows, no intercepts.}
+In terms of (f(x)), you can write (g(x)) as (g(x)=\frac{1}{x-3}+2=f(x-3)+2).
+Therefore, the graph of (g) is the graph of (f) translated 3 units right and 2 units up.
+% FIG 18 837 449 1056 556
+\placeholder{graph}{Red g(x)=1/(x-3)+2, labeled upper right, on x,y axes window x -2 to8,y -3 to7, unit grid with x2,4,6,y -2,2,4,6,O. Blue dashed asymptotes x=3,y=2, arrows on asymptotes and red curve ends.}
+\te{The vertical asymptote is shifted 3 units to the right. The horizontal asymptote is shifted 2 units up.}
+The line (x=3) is a vertical asymptote. The line (y=2) is a horizontal asymptote.
+The domain is (\{x\mid x\neq3\}).
+The range is (\{y\mid y\neq2\}).
+\answer{Vertical asymptote (x=3); horizontal asymptote (y=2); domain (\{x\mid x\neq3\}); range (\{y\mid y\neq2\}).}
+\te{GENERALIZE Recall that subtracting h from x translates the graph of f horizontally. Adding k to f(x) translates the graph of f vertically. So the graph of g(x)=1/(x-h)+k is the graph of f(x)=1/x translated h units horizontally and k units vertically.}
+\end{example}
+\begin{tryit}{5}
+Graph (g(x)=\frac{1}{x+2}-4). What are the equations of the asymptotes? What are the domain and range?
+% FIG 18 158 495 354 691
+\placeholder{graph}{Red g(x)=1/(x+2)-4, branches above-right and below-left of asymptote intersection (-2,-4), four end arrows. x,y,O axes; window -10 to10 both, grid2, x labels -8,-4,4,8 and y -8,-4,4,8. No marked points.}
+\answer{vertical asymptote: (x=-2); horizontal asymptote: (y=-4); domain: the set of real numbers with (x\neq-2); range: the set of real numbers with (y\neq-4)}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What can you use to determine the specific transformation in order to identify the equations of the asymptotes, and how does this relate to the domain and the range?
+\answer{For the function in (f(x)=\frac{1}{x-h}+k) form, (h,k) is the point of intersection of the asymptotes. Therefore, (x=h) and (y=k) are the equations of the asymptotes. The values of (h) and (k) also define the limitations on the domain and range.}
+Q: How can you define (h,k) in translations of the reciprocal function?
+\answer{The coordinate (h,k) is the intersection of the horizontal and vertical asymptotes.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{Communicate Precisely} Use with EXAMPLES 2, 3, \& 5.
+Q: A translation of the reciprocal function has a vertical asymptote at (x=5). What is a possible equation for the function?
+\answer{Sample: (f(x)=\frac{1}{x-5})}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtIExtend}
+\textbf{Extend Student Thinking}
+Students that grasp the concept of translations can take their understanding a step further by identifying translations from one function to another.
+Describe the translation that occurs from the function (f(x)=\frac{1}{x-6}+4) to the function (g(x)=\frac{1}{x+3}-9).
+Q: How can you use a graph to identify the translation from one function to another?
+\answer{Graph both functions by identifying their translation from the parent function. Then describe the translation from the first function to the second function detailing the horizontal and vertical shifts.}
+\end{te-addendum}
+% Source page 19: 186 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Inverse Variation and the Reciprocal Function}
+Q: How does an inverse variation relate to the concept of reciprocal functions?
+\answer{The reciprocal function is an inverse variation when (h) and (k) equal zero. The model of the reciprocal function is based on an inverse variation.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error: Exercise 6}
+Students may include 5 as part of the domain and neglect to recognize that when (x=5), the function is undefined. Have students find (f(5)). Then ask them what they notice about the function that would help them recognize that 5 is not part of the domain.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Inverse Variation and the Reciprocal Function}
+\begin{tabular}{lll}
+ & Inverse Variation & Transformations of the Reciprocal Function \\
+WORDS & An inverse variation is a relation between two variables such that as one variable increases, the other decreases proportionally. & The reciprocal function models the inverse variation, (y=\frac{1}{x}). Like other functions, it can be transformed. \\
+ALGEBRA & (y=\frac{k}{x}), where (k\neq0) & (y=\frac{a}{x-h}+k) \\
+EXAMPLES & (y=\frac{1}{x}); asymptotes: (x=0), (y=0) & (y=\frac{1}{x-4}-2); (h=4), (k=-2). Parent is transformed down 2 and right 4. asymptotes: (x=4), (y=-2) \\
+\end{tabular}
+% FIG 19 816 363 879 427
+\placeholder{graph}{Red y=1/x on x,y,O axes, grid1 window -6 to6 both, labels -4,4; green dashed asymptotes along axes, red four arrowheads.}
+% FIG 19 1041 366 1114 441
+\placeholder{graph}{Blue y=1/(x-4)-2, green dashed asymptotes x=4,y=-2; x,y,O axes window x -4 to10,y -8 to6, grid2, labels x -4,8 and y -4,4; blue four arrowheads.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How are inverse variations related to the reciprocal function?
+\answer{You can represent an inverse variation with a reciprocal function multiplied by a nonzero constant.}
+2. Construct Arguments Explain why the amount of propane in a grill's tank and the time spent grilling could represent an inverse variation.
+% FIG 19 790 561 889 680
+\placeholder{illustration}{Gray open outdoor grill with teal propane cylinder underneath; top callout A longer cooking time...; bottom ...results in less propane.}
+\answer{As the time spent grilling increases, the amount of propane in the tank decreases.}
+\te{A decrease alone does not establish inverse variation; a constant product is needed.}
+3. Vocabulary Why is it impossible for the graph of the function (y=\frac{1}{x}) to intersect the horizontal asymptote at the (x)-axis?
+\answer{At the (x)-axis (x=0), but (y=\frac{1}{x}) is undefined at (x=0).}
+\te{Printed answer confuses the x-axis with the y-axis. On the x-axis y=0, and 1/x cannot be zero.}
+4. Error Analysis Carmen said the table of values shown represents an inverse variation. Explain why Carmen is mistaken.
+\begin{tabular}{lrrrrrr}
+x & 1 & 2 & 3 & 4 & 8 & 16 \\
+y & 24 & 12 & 8 & 6 & 3 & 2 \\
+\end{tabular}
+\answer{The product of (x) and (y) is not constant. (It is 32 in one column and 24 in the others.)}
+\textbf{Do You KNOW HOW?}
+5. In an inverse variation, (x=-8) when (y=-\frac{1}{4}). What is the value of (y) when (x=4)?
+\answer{When (x=4), (y=\frac{1}{2}).}
+6. What are the equations of the asymptotes of the function (f(x)=\frac{1}{x-5}+3)? What are the domain and range?
+\answer{vertical asymptote: (x=5); horizontal asymptote: (y=3); domain: the set of real numbers with (x\neq5); range: the set of real numbers with (y\neq3)}
+7. Until a truck runs out of gas, the amount of gas in its fuel tank varies inversely with the number of miles traveled. Model a relationship between the amount of gas in a fuel tank and the number of miles traveled as an inverse variation. How many gallons are left after the truck travels 225 miles?
+% FIG 19 901 672 1099 827
+\placeholder{illustration}{Two blue trucks on diagonal gray road through tan and green countryside. Upper-left truck callout g gal left after225 mi; lower-right truck 9 gal left after135 mi.}
+\answer{(y=\frac{1,215}{x}); 5.4 gallons left after 225 mi.}
+\end{concept-summary}
+% Source page 20: 187 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+9, 10, 13--17, 20, 22, 23--26 & 8--26 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points each \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 9, 14, 15 & 1 \\
+1 & 10 & 2 \\
+2 & 13, 16 & 1 \\
+2 & 24 & 2 \\
+3 & 12, 17, 23 & 2 \\
+3 & 20, 22, 25, 26 & 3 \\
+4 & 11, 18, 21 & 2 \\
+5 & 8, 19 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{8}{2}
+UNDERSTAND. Communicate Precisely Explain the difference between the graphs of inverse variation functions when (k>0) and when (k<0).
+\answer{When (k>0), the graph lies in Quadrants I and III; when (k<0), the graph lies in Quadrants II and IV.}
+\end{practice}
+\begin{practice}{9}{1}
+Generalize Just from looking at the table of values, how can you determine that the data do not represent an inverse variation?
+\begin{tabular}{lrrrrrr}
+x & -2 & 2 & 4 & 6 & 8 & 10 \\
+y & -6 & 6 & 12 & 18 & 24 & 30 \\
+\end{tabular}
+\answer{As the (x)-values increase, the (y)-values also increase.}
+\te{Printed answer alone is not a general test for inverse variation with negative constant; here the products differ.}
+\end{practice}
+\begin{practice}{10}{2}
+Construct Arguments Explain why zero cannot be in the domain of an inverse variation.
+\answer{Division by zero is undefined.}
+\end{practice}
+\begin{practice}{11}{2}
+Error Analysis Describe and correct the error a student made in graphing the function (y=\frac{5}{x}).
+% FIG 20 554 532 760 711
+\placeholder{graph}{Student graph on blue grid, axes x,y,O, window -6 to6 both grid1 labels -4,-2,2,4. Red reciprocal curve with six solid points labeled (1,5),(2,4),(5,1),(-5,-1),(-2,-4),(-1,-5). The points at x=2,-2 are drawn near y=2.5,-2.5 but mislabeled; red X lower right; arrowheads on curve.}
+\answer{The points (2,4) and (-2,-4) are not correct. The labels of these points should be (2,2.5) and (-2,-2.5).}
+\end{practice}
+\begin{practice}{12}{2}
+Higher Order Thinking Suppose (y) varies inversely as the square of (x). If (x) is multiplied by 4, what is true for the value of (y)?
+\answer{Divide by 16.}
+\end{practice}
+\begin{practice}{13}{1}
+Generalize For an inverse variation, write an equation that gives the value of (k) in terms of (x) and (y).
+\answer{(k=xy)}
+\end{practice}
+\begin{practice}{14}{1}
+PRACTICE. Do the tables of values represent inverse variations? Explain. SEE EXAMPLE 1.
+\begin{tabular}{lrrrrrr}
+x & (-\frac{1}{4}) & (-\frac{1}{2}) & (\frac{1}{3}) & 2 & 5 & 11 \\
+y & (-\frac{9}{2}) & -9 & 6 & 36 & 90 & 198 \\
+\end{tabular}
+\answer{No; as the (x)-values increase, the (y)-values also increase. (This is a direct variation, where (k=18).)}
+\end{practice}
+\begin{practice}{15}{1}
+Do the tables of values represent inverse variations? Explain. SEE EXAMPLE 1.
+\begin{tabular}{lrrrrrr}
+x & 1 & 2 & 3 & 4 & 5 & 6 \\
+y & 60 & 30 & 20 & 15 & 12 & 10 \\
+\end{tabular}
+\answer{Yes; as the (x)-values increase, the (y)-values decrease. Also the product of each pair of (x)- and (y)-values is 60.}
+\end{practice}
+\begin{practice}{16}{1}
+If (x) and (y) vary inversely and (x=3) when (y=\frac{2}{3}), what is the value of (y) when (x=-1)? SEE EXAMPLE 2.
+\answer{When (x=-1), (y=-2).}
+\end{practice}
+\begin{practice}{17}{2}
+The wavelength, (w), of a radio wave varies inversely to its frequency, (f), as shown in the graph.
+% FIG 20 863 537 1053 727
+\placeholder{graph}{Red decreasing w=300000/f in first quadrant. Horizontal axis f Frequency (kilohertz), window0 to11000, grid1000, labels2000,4000,6000,8000,10000. Vertical axis w Radio wavelength (m), window0 to1200 grid100 labels200,400,600,800,1000,1200. Solid red points (1000,300),(2000,150),(4000,75),(6000,50),(8000,37.5),(10000,30); no point at origin; arrows toward positive axes.}
+A radio wave with a frequency of 1,000 kilohertz has a length of 300 m. What is the frequency when the wave-length is 375 m? SEE EXAMPLE 3.
+\answer{800 kHz}
+\end{practice}
+\begin{practice}{18}{2}
+Graph the function (y=\frac{-2}{x}). What are the domain, range, and asymptotes of the function? SEE EXAMPLE 4.
+\answer{vertical asymptote: (x=0); horizontal asymptote: (y=0); domain: the set of real numbers with (x\neq0); range: the set of real numbers with (y\neq0)}
+% FIG 20 532 1180 729 1375
+\placeholder{graph}{Answer red y=-2/x, branches II,IV with four end arrows. Axes x,y,O window -5 to5 both, unit grid, labels -4,-2,2,4. No marked points, axes asymptotes.}
+\end{practice}
+\begin{practice}{19}{2}
+Graph (g(x)=\frac{1}{x-2}+6). What are the equations of the asymptotes? What are the domain and range? What are the intercepts? SEE EXAMPLE 5.
+\answer{vertical asymptote: (x=2); horizontal asymptote: (y=6); domain: the set of real numbers with (x\neq2); range: the set of real numbers with (y\neq6); (y)-intercept: (5\frac{1}{2}); (x)-intercept: (\frac{11}{6})}
+% FIG 20 982 1129 1178 1325
+\placeholder{graph}{Answer red g(x)=1/(x-2)+6 on x,y,O axes, window x -2 to8 grid1, y -4 to16 grid2; x labels2,4,6, y4,8,12. Branches above-right and below-left of (2,6), four arrows, no marked points or dashed asymptotes.}
+\end{practice}
+% Source page 21: 188 Practice & Problem Solving
+\begin{practice}{20}{3}
+APPLY. Model With Mathematics The time (t) required to empty a water tank varies inversely as the rate of pumping (p). A pump can empty a water tank in 40 min at the rate of 120 gal/min. Write the equation of the inverse variation. How long it will take the pump to empty the water tank at the rate of 200 gal/min?
+\answer{(t=\frac{4,800}{p}); 24 min}
+\end{practice}
+\begin{practice}{21}{2}
+Use Structure The number of downloaded games that can be stored on a video game system varies inversely with the average size of a video game. A certain video game system can store 160 games when the average size of a game is 2.0 gigabytes (GB).
+a. Write an inverse equation that relates the number of games (n) that will fit on the video game system as a function of the average game size (s) in GB.
+\answer{(n=\frac{320}{s})}
+b. Use the inverse relationship to complete the table of values.
+\begin{tabular}{lrrrr}
+Game Size (GB), s & 1.0 & 2.5 & 3.0 & 4.0 \\
+Number of Games, n & \answer{320} & \answer{128} & \answer{106.7} & \answer{80} \\
+\end{tabular}
+c. Sketch a graph of this inverse relationship on a coordinate plane.
+\answer{See graph.}
+% FIG 21 141 356 386 552
+\placeholder{graph}{Answer red reciprocal n=320/s; unlabeled axes with O, horizontal -5 to5 grid1 labels -4,-2,2,4; vertical -500 to500 grid100 labels -400,-200,200,400. Branches I and III, four end arrows, solid points labeled (1,320),(2,160),(-2,-160),(-1,-320).}
+\te{Printed answer includes negative sizes/counts and a fractional number of games; these belong to the unrestricted mathematical model rather than feasible game counts.}
+\end{practice}
+\begin{practice}{22}{3}
+Reason The voltage (V), in volts, in an electrical circuit varies inversely as the resistance (R) in ohms. The voltage in the circuit is 15 volts when the resistance is 192 ohms.
+a. Write the equation of the inverse variation.
+\answer{(V=\frac{2880}{R})}
+b. Find the voltage in the circuit when the resistance is 144 ohms.
+\answer{When the resistance is 144 ohms, the voltage is 20 V.}
+\end{practice}
+\begin{practice}{23}{2}
+Model With Mathematics Boyle's Law states that the pressure exerted by fixed quantity of a gas, (P), varies inversely with the volume the gas occupies, (V), assuming constant temperature.
+The volume and air pressure of a volleyball are 300 (\text{in.}^3) and 4.5 psi. The volume and air pressure of a basketball are 415 (\text{in.}^3) and 8 psi. How much smaller would the volleyball have to be to equal the air pressure of the basketball?
+\answer{131.25 (\text{in.}^3)}
+\end{practice}
+\begin{practice}{24}{2}
+ASSESSMENT PRACTICE. Given that (\frac{Ai}{B}=k), which of the following is true?
+A. (k) varies inversely with (A).
+B. (k) varies inversely with (B).
+C. (A) varies inversely with (k).
+D. (A) varies inversely with (B).
+\answer{B}
+\end{practice}
+\begin{practice}{25}{3}
+SAT/ACT In a given set of experiments, (t) and (w) always vary inversely. When (t=0.4) seconds, (w=172.8) grams. How much time has passed when (w=14.4) grams.
+A. 2.4 s
+B. 4.8 s
+C. 27.648 s
+D. 995.328 s
+\answer{B}
+\end{practice}
+\begin{practice}{26}{3}
+Performance Task Suppose Ramón takes a road trip. He starts from his home in the suburbs of Cleveland, OH and travels to Pittsburgh, PA to visit his aunt and uncle.
+% FIG 21 817 575 1078 758
+\placeholder{map}{Tan/green road map with white route from teal dot Cleveland at upper left to orange dot Pittsburgh at lower right. Callouts 133 mi in2 h near upper route and ? miles in5 h near lower route.}
+Part A The distance Ramón drives from Cleveland to Pittsburgh is 133 miles. The trip takes him 2 hours. The distance (d) in miles that Ramón drives varies directly with the amount of time (t) in hours, he spends driving. Write the equation of the direct variation. Use the given relationship and the equation to find the number of miles Ramón would travel if he continues on for 5 more hours.
+\answer{(d=66.5t); 465.5 mi}
+Part B The amount of gas in Ramón's car is 9 gal after he drives for 2 h. The amount of gas (g) in gallons in his tank varies inversely with the amount of time (t), in hours, he spends driving. Write the equation of the inverse variation. Use the given relationship and the equation to find the number of gallons in Ramón's tank after 5 more hours of driving.
+\answer{(g=\frac{18}{t}); (\approx2.57) gal}
+\end{practice}
+% Source page 22: 188A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F74 \\
+2 & 2 & F74 \\
+3 & 1 & F74 \\
+4 & 2 & F74 \\
+5 & 2 & F74 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+I Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+O On-Level & 4 points & Enrichment \\
+A Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{4-1 Lesson Quiz: Inverse Variation and the Reciprocal Function}
+1. The chart represents an inverse variation. Find the value of (p).
+\begin{tabular}{lrrrr}
+x & 3 & 10 & 15 & 30 \\
+y & 5 & p & 1 & 0.5 \\
+\end{tabular}
+\answer{(p=1.5)}
+2. Write an equation for the inverse variation represented by the table.
+\begin{tabular}{lrrrr}
+x & -3 & -1 & (\frac{1}{2}) & (\frac{2}{3}) \\
+y & 4 & 12 & -24 & -18 \\
+\end{tabular}
+A. (y=\frac{x}{-12})
+B. (y=\frac{-x}{12})
+C. (y=\frac{12}{x})
+D. (y=\frac{-12}{x})
+\answer{D}
+3. Three students can wash a car in 16 minutes. If the time varies inversely with the number of students washing the car, how many minutes will it take two students to complete that same job?
+A. 20
+B. 22
+C. 24
+D. 26
+\answer{C}
+4. What is the equation of the horizontal asymptote of the graph of (y=\frac{1}{x+5}-4)?
+\answer{(y=-4)}
+5. The graph of (y=\frac{1}{x}) is translated 3 units up and 2 units to the left. What is an equation of the translated graph?
+A. (y=\frac{1}{x+2}+3)
+B. (y=\frac{1}{x-2}+3)
+C. (y=\frac{1}{x-3}+2)
+D. (y=\frac{1}{x+3}-2)
+\answer{A}
+\end{te-addendum}
+% Source page 23: 188B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding (I)} Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{4-1 Reteach to Build Understanding: Inverse Variation and the Reciprocal Function}
+An inverse variation is a function of the form (y=\frac{k}{x}), where (k) is a constant that is not 0. As one variable increases, the other decreases proportionally.
+1. Use the inverse variation function to fill in the values for (y) when (k=48). Use the equation (y=\frac{k}{x}) in each step to find the value for (y). The first one is done.
+Equation (y=\frac{k}{x})
+\begin{tabular}{lrrrrrr}
+(y=\frac{48}{x}) & (y=\frac{48}{1}) & (y=\frac{48}{2}) & (y=\frac{48}{3}) & (y=\frac{48}{4}) & (y=\frac{48}{6}) & (y=\frac{48}{8}) \\
+x & 1 & 2 & 3 & 4 & 6 & 8 \\
+y & 48 & \answer{24} & \answer{16} & \answer{12} & \answer{8} & \answer{6} \\
+\end{tabular}
+2. Kona completed the table of values for an inverse variation, based on the equation (y=\frac{12}{x}). Explain the error Kona made. Then fix the table to make the (y)-values accurate.
+\begin{tabular}{lrrrrrr}
+x & 1 & 2 & 3 & 4 & 12 & 24 \\
+y & 12 & 24 & 36 & 48 & 144 & 288 \\
+\end{tabular}
+When (x=1), (y=\frac{12}{1}=12).
+When (x=2), (y=\frac{12}{2}=\underline{\hspace{1cm}}). Fill in the table. \answer{6}
+When (x=3), (y=\frac{12}{3}=\underline{\hspace{1cm}}). Fill in the table. \answer{4}
+Continue finding the missing values by substituting the values in the equation.
+\begin{tabular}{lrrrrrr}
+x & 1 & 2 & 3 & 4 & 12 & 24 \\
+y & 12 & \answer{6} & \answer{4} & \answer{3} & \answer{1} & \answer{0.5} \\
+\end{tabular}
+\answer{Answers may vary. Sample: Kona misinterpreted the inverse variation and multiplied the (x)-values by 12. She should have made sure the product of the (x)- and (y)-values was 12.}
+3. Fill in the chart to show an inverse variation using the equation (y=\frac{6}{x}).
+Substitute the (x)-values in the equation to find the values for (y).
+\begin{tabular}{lrrrrrrr}
+x & 1 & 2 & 3 & 4 & 5 & 6 & \answer{12} \\
+y & 6 & \answer{3} & \answer{2} & \answer{(\frac{3}{2})} & \answer{(\frac{6}{5})} & \answer{1} & 0.5 \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice (I, O)} Provides extra practice for each lesson. MathXL for School.
+\textbf{4-1 Additional Practice: Inverse Variation and the Reciprocal Function}
+Do the tables below represent a direct variation or an inverse variation? Explain.
+1.
+\begin{tabular}{rr}
+x & y \\
+2 & 10 \\
+4 & 5 \\
+5 & 4 \\
+20 & 1 \\
+\end{tabular}
+\answer{Inverse; (y=\frac{20}{x})}
+2.
+\begin{tabular}{rr}
+x & y \\
+1 & 6 \\
+2 & 12 \\
+5 & 30 \\
+7 & 42 \\
+\end{tabular}
+\answer{Direct; (y=6x)}
+3.
+\begin{tabular}{rr}
+x & y \\
+0.2 & 25 \\
+0.5 & 62.5 \\
+2 & 250 \\
+3 & 375 \\
+\end{tabular}
+\answer{Direct; (y=125x)}
+Suppose (x) and (y) vary inversely. Write an equation that models each inverse variation. Find (y) when (x=10).
+4. (x=7) when (y=2) \answer{(y=\frac{14}{x}); (\frac{7}{5})}
+5. (x=4) when (y=0.2) \answer{(y=\frac{4}{5x}); 0.08 or (\frac{2}{25})}
+6. (x=2) when (y=5) \answer{(y=\frac{10}{x}); 1}
+Graph each function. Identify the asymptotes of each graph and state the domain and the range of each function.
+7. (f(x)=\frac{12}{x})
+% FIG 23 534 565 585 616
+\placeholder{graph}{Magenta f(x)=12/x in quadrants I,III with four end arrows; axes x,y,O and grid, window -12 to12 both, grid3, positive tick labels6 on x,y. No marked points; asymptotes axes.}
+\answer{Asymptotes: (x=0), (y=0). Domain: all real numbers except (x=0). Range: all real numbers except (y=0).}
+8. (f(x)=\frac{1}{x}+3)
+% FIG 23 661 565 715 618
+\placeholder{graph}{Magenta f(x)=1/x+3, vertical asymptote x=0 and dashed horizontal y=3; axes x,y,O, unit grid window x -4 to4,y -2 to6, labels x -2,2 and y4; curve arrows at four ends.}
+\answer{Asymptotes: (x=0), (y=3). Domain: all real numbers except (x=0). Range: all real numbers except (y=3).}
+9. The length of a pipe in a panpipe (l), in ft, is inversely proportional to its pitch (p), in hertz. The inverse variation is modeled by the equation (p=\frac{497}{l}). Find the length of pipe required to produce a pitch of 220 Hz.
+\answer{about 2.26 ft}
+10. From the table of values, how can you determine that the data do not represent an inverse variation?
+\begin{tabular}{lrrrrrr}
+x & -4 & -2 & 2 & 4 & 6 & 8 \\
+y & 100 & 100 & 100 & 50 & 25 & 20 \\
+\end{tabular}
+\answer{Sample answer: The product (xy) is not constant.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment (O, A)} Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{4-1 Enrichment: Inverse Variation and the Reciprocal Function}
+1. A puzzle with the following clues is given:
+\item The graph of the reciprocal of (h(x)) is between the graph of (f) and the graph of (g), with no common points.
+\item (f(x)=5x-3)
+\item (g(x)=ax+b)
+\item Translating the reciprocal of (h(x)) one unit to the right results in the function (k(x)).
+\item (p(x)) is the reciprocal of (k(x)), and (p(x)) represents an inverse variation.
+1. What is the value of (k(-3))? \answer{-15}
+2. What is the common feature of the three functions (f), (g), and the reciprocal of (h)?
+\answer{They have the same slope.}
+3. What is the value of (p(-3))? \answer{(-\frac{1}{15})}
+\te{Printed worksheet numbers the introductory puzzle 1 and then restarts its questions at 1.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary (I, O)} Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{4-1 Mathematical Literacy and Vocabulary: Inverse Variation and the Reciprocal Function}
+Choose the concept from the list that best represents the item in each box. Concepts can be used more than once.
+Word bank: asymptote; constant of variation; inverse variation; reciprocal function.
+1. represented by the variable (k) \answer{constant of variation}
+2. when one quantity increases and the other quantity decreases proportionally \answer{inverse relationship}
+\te{Printed answer inverse relationship is not the word-bank term inverse variation.}
+3. guides the end behavior of a function \answer{asymptote}
+4. maps every non-zero real number to its reciprocal \answer{reciprocal function}
+5. (xy=k) \answer{inverse variation}
+6. the product of two variables in an inverse variation \answer{constant of variation}
+7. a function that models inverse variation \answer{reciprocal function}
+8. a line that a graph approaches \answer{asymptote}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 23 584 978 1035 1299
+\placeholder{illustration}{Black tablet displaying graphing exercise: system y=3x+4, y=-2x+4, blank x,y grid -10 to10 with labels every2. Help menu and graph tool controls at right and bottom.}
+Solve the system of equations by graphing. (y=3x+4); (y=-2x+4).
+Use the graphing tool to graph the system. Click to enlarge graph.
+Question Help: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.
+\end{te-addendum}
+
+\end{document}

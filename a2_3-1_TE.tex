@@ -1,0 +1,916 @@
+\documentclass{article}
+% Source: Topic_03_Teacher_Edition.pdf, PDF pages 12-23 (printed pages 119A-126B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+% Source page 12: 119A, Lesson Overview
+\begin{lesson-meta}
+lesson: 3-1
+title: Graphing Polynomial Functions
+standards: none printed
+practices: none printed
+objective: I can predict the behavior of polynomial functions.
+
+essential question: How do the key features of a polynomial function help you sketch its graph?
+
+\textbf{VOCABULARY}
+\item degree of a polynomial
+\item leading coefficient
+\item polynomial function
+\item relative maximum
+\item relative minimum
+\item standard form of a polynomial
+\item turning point
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 3-1 \\
+Title & Graphing Polynomial Functions \\
+Standards & none printed \\
+I CAN Objective & I can predict the behavior of polynomial functions. \\
+Essential Question & How do the key features of a polynomial function help you sketch its graph? \\
+Lesson Vocabulary & degree of a polynomial; leading coefficient; polynomial function; relative maximum; relative minimum; standard form of a polynomial; turning point \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Graph polynomial functions and show the key features of the graph.
+\item Predict the end behavior of polynomial functions by interpreting the leading coefficients and degrees.
+\item Sketch graphs showing key features, given a verbal description.
+Essential Understanding. A polynomial function is a function whose rule is either a monomial or a sum of monomials. The key features of the graph of a polynomial function---such as its end behavior, intercepts, and turning points---can be used to sketch a graph of the function.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Identified the key features of quadratic functions.
+In this lesson, students:
+\item Graph and identify the key features of a polynomial function.
+\item Use the leading coefficient and degree of the polynomial function to predict the end behavior of its graph.
+Later in this topic, students will:
+\item Add, subtract, multiply, and divide polynomials.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that the leading coefficient and the degree of a polynomial can be used to predict the end behavior of a function.
+\item Students graph polynomials and interpret the key features to solve problems that involve predicting the behavior of the function that the graph represents.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+NEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+degree of a polynomial & grado de un polinomio \\
+leading coefficient & coeficiente de liderazgo \\
+polynomial function & función polinomial \\
+relative maximum & máximo relativo \\
+relative minimum & mínimo relativo \\
+standard form of a polynomial & forma normal de una polinomial \\
+turning point & punto de giro \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Introduce the term monomial and have students list examples of monomials fitting each part of the definition: real number, variable, and product of a real number and a variable with a whole number exponent. Introduce the terms polynomial and standard form of a polynomial. Have students use the definitions to determine how to combine the monomials they wrote to create a polynomial in standard form.
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion book cover: dark background, multicolored concentric light rings surrounding reflective spheres; labels Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students describe turning points and relative minimum and maximum values of the graphs of polynomial functions.
+Students understand that when the leading coefficient is positive, the graph increases as x approaches infinity. When the leading coefficient is negative the graph decreases as x approaches infinity. They recognize that for functions with even highest degree, the end behavior of the graph is the same as x approaches positive and negative infinity, and for functions with odd highest degree, the end behavior of the graph is different as x approaches positive and negative infinity.
+\textbf{Applying Math Practices}
+Use Appropriate Tools Strategically
+Students use tools strategically when they use technology to make tables of values and explore the graphs of polynomial functions.
+Look For and Make Use of Structure
+Students use the structure of a polynomial equation, including the sign of the leading coefficient and the degree of the polynomial, to predict the end behavior of the graph of the function.
+\end{te-addendum}
+% Source page 13: 119B, Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students determine the key features of the polynomial function, such as its leading coefficients, degree, and end behavior. These key features can be used to sketch the graph of the polynomial function.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\te{Explore \& Reason is Powered by Desmos. Explore \& Reason is available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving ETP}
+Q: What do you know about the effect of exponents on negative and positive numbers?
+\answer{If a negative number is raised to an even power, its product will be positive. If a negative number is raised to an odd power, its product will remain negative.}
+\textbf{During SMALL GROUP. Support Productive Struggle in Learning Mathematics ETP}
+Q: What general observation can you make about the graphs with exponents that are odd numbers?
+\answer{They start at the bottom left, in Quadrant III, and move to the top right, in Quadrant I.}
+For Early Finishers
+For (f(x)=-x^n), graph the functions for (n=2,3,4), and 5.
+Q: What happens to the graphs and the range of each function when -1 is the coefficient of x?
+\answer{The graph is reflected across the x-axis. When (n=3) or 5 the range is unchanged. When (n=2) or 4 the range changes from real numbers (\geq0) to real numbers (\leq0).}
+\textbf{After WHOLE CLASS. Facilitate Meaningful Mathematical Discourse ETP}
+Q: What generalizations can be made about how specific features of equations cause specific behaviors in the graphs?
+\answer{For graphs of equations of the form (f(x)=x^n) with an even exponent, the points on both sides of the y-axis have positive y-values. For graphs of equations of the form (f(x)=x^n) with an odd exponent, the points on the left side of the y-axis have negative y-values while the points on the right side of the y-axis have positive y-values.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXPLORE \& REASON
+Construct Arguments Compare and contrast the end behavior of the graphs of (f(x)=x^n) when (n=1,3), and 5 with the graphs of (f(x)=x^n) when (n=2,4), and 10. Write a general statement that compares the end behavior of the graphs when the exponents are odd with the end behavior when the exponents are even.
+\answer{When the value of n is odd, the sign of the y-values differs as x approaches positive or negative infinity. When the value of n is even, the sign of the y-values is the same as x approaches positive or negative infinity.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{EXPLORE \& REASON: Digital activity}
+Consider functions of the form (f(x)=x^n), where n is a positive integer.
+A. Use the tool to graph (f(x)=x^n) for (n=1,3) and 5. Look at the graphs in Quadrant I. As the exponent increases, what is happening to the graphs? Which quadrants do the graphs pass through?
+\placeholder{graph}{Blank Desmos grid, x from -10 to 10 and y from approximately -8 to 8, unit grid, labels x=-10,-5,0,5,10 and y=-5,5. No plotted points or curves. Toolbar says desmos, Clear; tool icons and Enter your answer field at left.}
+\te{Go back. Enter your answer.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Consider functions of the form (f(x)=x^n), where n is a positive integer.
+A. Graph (f(x)=x^n) for (n=1,3), and 5. Look at the graphs in Quadrant I. As the exponent increases, what is happening to the graphs? Which quadrants do the graphs pass through?
+\placeholder{graph}{Small calculator-style graph: red line labeled y=x, blue cubic labeled y=x^3, and green quintic labeled y=x^5, all through (0,0),(-1,-1),(1,1). Unnumbered coordinate axes and square unit grid, approximately x,y=[-5,5]; red line diagonal lower left to upper right, higher powers steeper outside [-1,1].}
+\answer{As the exponent increases, the graph becomes steeper. Quadrants I and III.}
+B. Look for Relationships Now graph (f(x)=x^n) for (n=2,4), and 6. What happens to these graphs in Quadrant I as the exponent increases? Which quadrants do the graphs pass through?
+\answer{As the exponent increases, the graph becomes steeper. Quadrants I and II.}
+C. Write two equations in the form (f(x)=x^n) with graphs that you predict are in Quadrants I and II. Write two equations with graphs that you predict are in Quadrants I and III. Use graphing technology to test your predictions.
+\answer{(f(x)=x^6), (f(x)=x^8), (f(x)=x^7), (f(x)=x^9)}
+\te{SAMPLE STUDENT WORK. Printed ``becomes steeper'' describes the outer portions; behavior between 0 and 1 differs.}
+\end{model-discuss}
+% Source page 14: 119, Understand \& Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Introduce students to the process of classifying polynomials. Remind them that identifying key features of polynomial functions helps to accurately sketch the graph. Explain that they will be able to look at polynomials in standard form and use the leading coefficient and degree of the polynomial function to determine the end behavior of its graph.
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Identify Features of a Polynomial. Pose Purposeful Questions ETP}
+Q: Why is the order of the terms important when writing a polynomial?
+\answer{The order helps you identify the leading coefficient. The leading coefficient is one of the indicators of the graph's behavior.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Polynomial}
+A polynomial is a monomial or the sum of two or more monomials, called terms. The degree of a term with one variable is its exponent and all exponents are whole numbers.
+\end{concept-box}
+\begin{example}{1}
+\textbf{Identify Features of a Polynomial}
+How can you write a polynomial in standard form and use it to identify the leading coefficient, the degree, and the number of terms?
+(-4x+9+2x^3)
+Standard form of a polynomial lists the terms by degree in descending numerical order. For each degree, all like terms are combined.
+Standard form of this polynomial is:
+(2x^3-4x+9)
+The leading coefficient refers to the coefficient of the greatest power of x. The leading coefficient of this polynomial is 2.
+The polynomial has three terms.
+The degree of a polynomial is the greatest degree of any of the terms. This is a polynomial of degree 3, also known as a cubic polynomial.
+\answer{(2x^3-4x+9); leading coefficient 2; degree 3; three terms.}
+\te{USE STRUCTURE Note that there is no x^2-term in the polynomial (2x^3-4x+9). In some cases, it may be useful to write the polynomial as (2x^3+0x^2-4x+9).}
+\end{example}
+\begin{tryit}{1}
+Write each polynomial in standard form and identify the leading coefficient, the degree, and the number of terms of each.
+a. (2x-3x^4+6-5x^3)
+b. (x^5+2x^6-3x^4-8x+4x^3)
+\answer{a. standard form: (f(x)=-3x^4-5x^3+2x+6); leading coefficient: -3; degree: 4; number of terms: 4
+b. standard form: (g(x)=2x^6+x^5-3x^4+4x^3-8x); leading coefficient: 2; degree: 6; number of terms: 5}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Why do you think it is important to identify the polynomial's degree, type, number of terms, and leading coefficient?
+\answer{These key features of the polynomial aid in classifying the polynomial and sketching its graph.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 2}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+Use the leading coefficient and the degree of the polynomial function to determine the end behavior of the graph.
+\uncertain{(f(x)=1+2x^3-5x^4+6x^2-7x^5)}{Printed equation symbols are damaged: equals appears as a dash, plus signs as vertical strokes, and minus signs are faint or absent.}
+Rewrite the function so the polynomial is in standard form:
+\uncertain{(f(x)=-7x^5-5x^4+2x^3+6x^2+1)}{Equality and operation symbols are damaged as in the preceding equation.}
+Leading coefficient: -7
+Degree: 5
+This is an odd function with a negative leading coefficient, so the function will increase infinitely as x decreases and decrease infinitely as x increases.
+\answer{Leading coefficient: -7; Degree: 5. The function will increase infinitely as x decreases and decrease infinitely as x increases.}
+\te{Printed ``odd function''; likely polynomial of odd degree.}
+Example 2 Students need more experience with the many different forms of polynomial functions that they may encounter.
+Q: How do you write the polynomial in standard form without changing its rule?
+\answer{It must be written in descending order by degree, being careful to move the entire term, the sign, the coefficient, and the exponent.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 3}
+Graph the polynomial function (f(x)=-x^3-x^2+6x). Identify key features and sketch a graph.
+Use a table to estimate the turning points.
+\begin{tabular}{llllllll}
+x & -3 & -2 & -1 & 0 & 1 & 2 & 3 \\
+y & 0 & -8 & -6 & 0 & 4 & 0 & -18 \\
+\end{tabular}
+Turning points occur at about (-2,-8) and about (1,4).
+The polynomial has an odd degree and negative leading coefficient, so, as (x\to-\infty), (y\to+\infty). As (x\to+\infty), (y\to-\infty).
+\placeholder{graph}{Orange cubic f(x)=-x^3-x^2+6x on square gray grid, axes x,y with arrows, window approximately x,y=[-10,10], grid spacing 2.5; labels x=-5,O,5 and y=5. Curve has left end up, right end down; zeros -3,0,2, approximate minimum (-1.8,-8.2), maximum (1.1,4.1). No points marked.}
+\answer{Turning points occur at about (-2,-8) and about (1,4). As (x\to-\infty), (y\to+\infty); as (x\to+\infty), (y\to-\infty).}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION.}
+Example 3 Students may need more examples of how to interpret a graph's behavior.
+Q: How will you use the leading coefficient and its degree to begin sketching the graph?
+\answer{The degree will determine if the ends of the graph point in the same or opposite directions. The sign of the leading coefficient will determine whether the right-most end of the graph points up or down.}
+\end{te-addendum}
+% Source page 15: 120, Understand \& Apply
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Understand End Behavior of Polynomial Functions. Build Procedural Fluency from Conceptual Understanding ETP}
+Q: What differences and similarities do you notice between the graphs?
+\answer{Two of the graphs are the same shape, but going in different directions. One opens upward, and one opens downward.}
+Q: How does each feature describe the end behavior of the graphs?
+\answer{The degree of the polynomial determines the shape of the graph. The sign of the leading coefficient affects the orientation of the graph.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Understand End Behavior of Polynomial Functions}
+\textbf{CONCEPTUAL UNDERSTANDING}
+How do the sign of the leading coefficient and the degree of a polynomial affect the end behavior of the graph of a polynomial function?
+A polynomial function is a function whose rule is a polynomial. The end behavior of a graph describes what happens to the function values as x approaches positive and negative infinity, (x\to\pm\infty).
+\textbf{Odd Degree. Positive Leading Coefficient}
+(f(x)=x); degree 1
+(g(x)=0.5x^3-x^2+3); degree 3
+(h(x)=2x^5-x^2-x-2); degree 5
+\placeholder{graph}{Upper-left panel: square grid x,y=[-5,5], unit spacing; labeled ticks -4,-2,2,4, origin O, axes x,y arrowed. Red line f(x)=x, blue cubic g(x)=0.5x^3-x^2+3, green quintic h(x)=2x^5-x^2-x-2. Curves labeled f,g,h in matching colors; left ends down and right ends up with arrows. Blue y-intercept 3, local maximum (0,3); green y-intercept -2. No points marked.}
+End behaviors follow the behavior of the linear parent function (f(x)=x).
+As (x\to\infty), (y\to\infty) and as (x\to-\infty), (y\to-\infty).
+\textbf{Even Degree. Positive Leading Coefficient}
+(f(x)=x^2); degree 2
+(g(x)=0.9x^4-2x^3+x^2-2x); degree 4
+(h(x)=2x^6+x^2-2); degree 6
+\placeholder{graph}{Upper-right panel: square unit grid x,y=[-5,5], labeled ticks -4,-2,2,4, origin O, arrowed axes x,y. Red parabola f(x)=x^2 with vertex (0,0); blue quartic g(x)=0.9x^4-2x^3+x^2-2x through (0,0) with minimum near (1.7,-2.9); green sextic h(x)=2x^6+x^2-2 with minimum (0,-2). Curves labeled f,g,h; both ends of each point upward with arrows.}
+End behaviors follow the behavior of the quadratic parent function (f(x)=x^2).
+As (x\to\pm\infty), (y\to\infty).
+\textbf{Odd Degree. Negative Leading Coefficient}
+(f(x)=-x); degree 1
+(g(x)=-0.5x^3+x^2-3); degree 3
+(h(x)=-2x^5+x^2+x+2); degree 5
+\placeholder{graph}{Lower-left panel: square unit grid x,y=[-5,5], tick labels -4,-2,2,4, origin O, arrowed axes x,y. Red line f(x)=-x, blue cubic g(x)=-0.5x^3+x^2-3 with y-intercept -3, green quintic h(x)=-2x^5+x^2+x+2 with y-intercept 2. Curves labeled f,g,h; left ends up, right ends down, all arrowed. No marked points.}
+End behaviors follow (f(x)=-x).
+As (x\to\infty), (y\to-\infty) and as (x\to-\infty), (y\to\infty).
+\textbf{Even Degree. Negative Leading Coefficient}
+(f(x)=-x^2); degree 2
+(g(x)=-0.9x^4+2x^3-x^2+2x); degree 4
+(h(x)=-2x^6-x^2+2); degree 6
+\placeholder{graph}{Lower-right panel: square unit grid x,y=[-5,5], labeled ticks -4,-2,2,4, origin O, arrowed axes x,y. Red parabola f(x)=-x^2 with vertex (0,0); blue quartic g(x)=-0.9x^4+2x^3-x^2+2x with maximum near (1.7,2.9); green sextic h(x)=-2x^6-x^2+2 with maximum (0,2). Curves labeled f,g,h; both ends down with arrows.}
+End behaviors follow (f(x)=-x^2).
+As (x\to\pm\infty), (y\to-\infty).
+\answer{For positive leading coefficient, odd degree gives opposite ends (left down, right up) and even degree gives both ends up. For negative leading coefficient, odd degree gives left up and right down; even degree gives both ends down.}
+\te{LOOK FOR RELATIONSHIPS Though a polynomial function may have many terms, the leading term determines the end behavior because it has the greatest exponent; therefore, it has the greatest impact on function values when x approaches positive or negative infinity.}
+\end{example}
+\begin{tryit}{2}
+Use the leading coefficient and degree of the polynomial function to determine the end behavior of each graph.
+a. (f(x)=2x^6-5x^5+6x^4-x^3+4x^2-x+1)
+b. (g(x)=-5x^3+8x+4)
+\answer{a. The leading coefficient is positive and the degree is even, so the graph opens upward. As x becomes infinitely positive or negative, the y-values approach (+\infty).
+b. The leading coefficient is negative and the degree is odd, so as (x\to-\infty), (y\to+\infty). As (x\to+\infty), (y\to-\infty).}
+\end{tryit}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error}
+Try It! 2 Students may incorrectly define the greatest coefficient as the leading coefficient. Remind students to rewrite the polynomial, reordering the terms so the exponents are in descending order.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 1 \& 2
+Reason How does the leading coefficient help determine the end behavior of a function with an even degree?
+\answer{When the value of the leading coefficient is positive, the y-values approach positive infinity as x approaches positive infinity and as x approaches negative infinity. When the value of the leading coefficient is negative, the y-values approach negative infinity as x approaches positive infinity and as x approaches negative infinity.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 2 Students may find it interesting that the leading coefficient and its degree have such a significant effect on the graph of functions.
+\item Use the following polynomial functions and a table to determine how the leading coefficient and its degree control the end behavior of the graphs and why their effects are important.
+1. (f(x)=x^2+3)
+2. (f(x)=x^3+2x^2+5)
+Q: Which term has the greatest effect on the output of the functions?
+\answer{The term with the highest degree has the greatest effect on the final output of the functions.}
+Q: Which coefficient has the most influence on the output of the functions?
+\answer{Since the leading coefficient belongs to the term with the greatest degree, it has the most influence on the functions' output; therefore, it will also have the most influence on the graph.}
+\end{te-addendum}
+% Source page 16: 121, Understand \& Apply
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Graph a Polynomial Function. Use and Connect Mathematical Representations ETP}
+Q: What can be determined from looking at the polynomial function before graphing?
+\answer{The leading coefficient is negative, and the degree is even; therefore, the y-values will decrease as the x-values go to negative infinity, and the y-values will decrease as the x-values go to positive infinity.}
+Q: How is the table helpful when sketching the graph of a polynomial function? What points are important?
+\answer{The table is used to help determine the behavior of the graph that occurs between the ends. The turning points are important points.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Graph a Polynomial Function}
+Consider the polynomial function (f(x)=-0.5x^4+3x^2+2).
+A. How can you use a table of values to identify key features and sketch a graph of the function?
+Make a table of values and identify intervals where the function is increasing and decreasing.
+\begin{tabular}{ll}
+x & f(x) \\
+-3 & -11.5 \\
+-2 & 6 \\
+-1 & 4.5 \\
+0 & 2 \\
+1 & 4.5 \\
+2 & 6 \\
+3 & -11.5 \\
+\end{tabular}
+\te{Table braces: increasing from -3 to -2; decreasing from -2 to 0; increasing from 0 to 2; decreasing from 2 to 3.}
+Points where the function values change from increasing to decreasing, or vice-versa, are turning points. This function has turning points when the value of x is near -2, 0 and 2.
+This is a polynomial function with an even degree and a negative leading coefficient, so both ends of the graph approach (-\infty).
+Plot the points and sketch the graph with a smooth curve.
+\placeholder{graph}{Red quartic f(x)=-0.5x^4+3x^2+2 on pale blue square grid. Axes x,y with arrows; x labels -4,-2,O,2,4; y labels 2,4,6; unit grid; visible window approximately x=[-5,5],y=[-2,8]. Filled red plotted points (-2,6),(-1,4.5),(0,2),(1,4.5),(2,6); two maxima slightly above 6 near x=+-1.73 and minimum (0,2). Both ends descend with arrows near x=+-2.6.}
+A point where the function has the least value over an interval is a relative minimum. This function has a relative minimum near (0,2).
+A point where the function has the greatest value over an interval is a relative maximum. This function has two relative maximums near (-2,6) and (2,6).
+\answer{A. Turning points near (-2,6), (0,2), and (2,6); both ends approach (-\infty). See graph.}
+B. How can you use the graph to estimate the average rate of change over the interval [-2,0]?
+Recall that the average rate of change is (\frac{f(b)-f(a)}{b-a}) for two points on a graph ((a,f(a))) and ((b,f(b))).
+(Average rate of change=\frac{f(b)-f(a)}{b-a})
+(=\frac{2-6}{0-(-2)})
+(=-2)
+\te{Callout: Substitute (-2,6) and (0,2).}
+The average rate of change over the interval [-2,0] is -2.
+\answer{B. -2}
+\te{USE APPROPRIATE TOOLS It can be very difficult to locate the precise turning points and zeros of polynomial functions from a table of values. But using a spreadsheet and more decimal places may help.}
+\end{example}
+\begin{tryit}{3}
+Consider the polynomial function (f(x)=x^5+18x^2+10x+1).
+a. Make a table of values to identify key features and sketch a graph of the function.
+b. Find the average rate of change over the interval [0,2].
+\answer{a. See table and graph. There is a positive leading coefficient with odd degree, so as (x\to-\infty), (y\to-\infty), and as (x\to+\infty), (y\to+\infty). b. 62}
+\begin{tabular}{ll}
+x & y \\
+-3 & -110 \\
+-2 & 21 \\
+-1 & 8 \\
+0 & 1 \\
+1 & 30 \\
+2 & 125 \\
+3 & 436 \\
+\end{tabular}
+\placeholder{graph}{Try It 3 answer: red quintic f(x)=x^5+18x^2+10x+1, left end down and right end up with arrows; local maximum near (-1.8,22), local minimum near (-0.28,-0.39). Axes x,y with arrows; x labels -4,-2,O,2,4, grid spacing 1; y labels 10,20, grid spacing 5; window x=[-5,5],y=[-10,30]. No marked points.}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How can you identify the turning points of the graph?
+\answer{You can use a table to find where the values change from increasing to decreasing.}
+\end{te-addendum}
+% Source page 17: 122, Understand \& Apply
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Sketch the Graph from a Verbal Description. Pose Purposeful Questions ETP}
+Q: How do you recognize the zeros of the function from the verbal descriptions?
+\answer{By the locations of positive to negative transitions where intervals are connected.}
+Q: How do these verbal descriptions relate to the degree and leading coefficient of a polynomial function?
+\answer{The end behavior as described by the intervals matches the end behavior as predicted by the polynomial's leading coefficient and degree.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Sketch the Graph from a Verbal Description}
+How can you sketch a graph of the polynomial function f from a verbal description?
+\item (f(x)) is positive on the intervals ((-\infty,-4)) and ((-1,4)).
+\item (f(x)) is negative on the intervals ((-4,-1)) and ((4,\infty)).
+\item (f(x)) is decreasing on the intervals ((-\infty,-2.67)) and ((2,\infty)).
+\item (f(x)) is increasing on the interval ((-2.67,2)).
+Step 1: Identify or estimate x-intercepts. The function values change signs at (x=-4), (x=-1), and (x=4).
+Step 2: Identify or estimate turning points. The function changes direction at (x=-2.67) and (x=2).
+\item There is a relative minimum at (x=-2.67).
+\item There is a relative maximum at (x=2).
+Step 3: Determine end behavior.
+\placeholder{graph}{End-behavior schematic: arrowed unnumbered x,y axes, no grid. Two disconnected red descending diagonal strokes, one in quadrant II with arrow toward upper left, one in quadrant IV with arrow toward lower right; central region blank. Callouts identify decreasing on (-infinity,-2.67) at left and (2,infinity) at right.}
+\te{Callouts: (f(x)) is decreasing on the interval ((-\infty,-2.67)). This model is empty in the middle because a variety of key features occur here. This is to emphasize only what happens with the end behavior, that is as (x\to\pm\infty). (f(x)) is decreasing on the interval ((2,\infty)).}
+Step 4: Sketch the graph.
+\placeholder{graph}{Red cubic-shaped sketch on pale blue grid, x-axis labels -4,-2,O,2,4, unit horizontal grid; y-axis unnumbered with arrowheads. Labeled filled intercepts (-4,0),(-1,0),(4,0), filled minimum near x=-2.67 just below x-axis and filled maximum at x=2 above x-axis. Left end up, right end down, arrowed. Visible x interval approximately [-6,6], no numerical y scale.}
+\answer{See graph: x-intercepts -4,-1,4; relative minimum at x=-2.67; relative maximum at x=2; left end up, right end down.}
+\te{Callout: The y-axis does not show any scale because you only know general function behavior, not specific values.}
+\te{COMMON ERROR Positive/negative intervals tell only where the function's graph lies above or below the x-axis. It does not indicate whether the function is increasing or decreasing.}
+\end{example}
+\begin{tryit}{4}
+Use the information below to sketch a graph of the polynomial function (y=f(x)).
+\item (f(x)) is positive on the intervals ((-2,-1)) and ((1,2)).
+\item (f(x)) is negative on the intervals ((-\infty,-2)), ((-1,1)), and ((2,\infty)).
+\item (f(x)) is increasing on the interval ((-\infty,-1.5)) and ((0,1.5)).
+\item (f(x)) is decreasing on the intervals ((-1.5,0)) and ((1.5,\infty)).
+\answer{See graph.}
+\placeholder{graph}{Try It 4 answer: red downward quartic-shaped curve, symmetric about y-axis, zeros -2,-1,1,2; maxima near x=-1.5 and x=1.5 above the x-axis, minimum at x=0 below it. Arrowed ends down. Square grid, x labels -4,O,4, unit x spacing; no y numbers; window x=[-5,5], five vertical grid cells each side of horizontal axis. Min lies four cells below, maxima about 2.25 cells above. Arrowed axes x,y.}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Is it necessary to include the descriptions indicating where the polynomial function increases or decreases?
+\answer{Yes; if the increasing and decreasing intervals are not included, then it is not possible to determine the number of turning points.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 3 \& 4
+Generalize What can you tell about the graph of a function if its equation has an odd degree and a negative leading coefficient?
+\answer{If the equation of a function has an odd degree and a negative leading coefficient, then as x-values of the graph of the function increase, the y-values will decrease, and as x-values of the graph of the function decrease, the y-values will increase.}
+\te{Printed statement describes end behavior, but is not generally true on every interval.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 4 Students may struggle with interpreting verbal descriptions, as well as with interval notation. Use the following descriptions to take a closer look at how to interpret the actual shape of the graph.
+\item Use the verbal descriptions to sketch a graph of the polynomial function f.
+(f(x)) is positive on the intervals ((-\infty,-3)) and ((5,\infty)).
+(f(x)) is negative on the interval ((-3,5)).
+(f(x)) is increasing on the interval ((0,\infty)).
+(f(x)) is decreasing on the interval ((-\infty,0))
+Q: What might be a strategy to organize your thoughts about the descriptions?
+\answer{Rewrite the descriptions with interpretations of key words.}
+Q: How can you use the interval descriptions to mark key points on the graph?
+\answer{The interval descriptions help to locate the turning points to begin sketching.}
+\end{te-addendum}
+% Source page 18: 123, Understand \& Apply
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Interpret a Polynomial Model. Pose Purposeful Questions ETP}
+Q: Initially, what can you interpret about the end behavior of the function by looking at the written model?
+\answer{The leading coefficient is negative, and the degree is odd; therefore, as x approaches negative infinity, y approaches positive infinity. Also, as x approaches positive infinity, y approaches negative infinity.}
+Q: What is important to consider when a real-world context is represented by a polynomial model?
+\answer{There may be values in the domain and range of the function that do not make sense in the context, such as negative values. Therefore, the domain and range need to be limited to represent the situation.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Interpret a Polynomial Model}
+\textbf{APPLICATION}
+In science class, Sofia mixes a fixed amount of baking soda with different amounts of vinegar in a bottle capped by a balloon. She records the amount of time it takes the gases produced by the reaction to inflate the balloon.
+From her data, Sofia created a function to model the situation. For x quarter-cups of vinegar, it takes (t(x)) seconds to inflate the balloon.
+\placeholder{illustration}{Box labeled BAKING SODA and bottle labeled VINEGAR capped with an inflated red balloon; callout t(x)=-0.12x^3+x^2-3.38x+13.16.}
+(t(x)=-0.12x^3+x^2-3.38x+13.16)
+A. How long would it take to inflate the balloon with 5 quarter-cups of vinegar?
+Use technology to sketch the graph.
+\placeholder{graph}{Calculator display: decreasing orange cubic t(x)=-0.12x^3+x^2-3.38x+13.16 in first quadrant, flattening through middle then descending steeply to x-axis. Unnumbered axes, unit tick marks; visible x approximately 0 to 15, y 0 to 15. Red y-intercept label (0,12.16) and red x-intercept label (\uncertain{6.585}{5.585},0). Callouts: The y-intercept is about 13.2. Use technology to determine the value of the function when x=5. The x-intercept is about 6.6.}
+\te{Printed graph y-intercept label appears as (0,12.16), while the equation and explanatory text use 13.16 and about 13.2.}
+When (x=5), the value of the function is about 6.3. This means that if Sofia uses 5 quarter-cups of vinegar, the balloon will inflate in approximately 6.3 seconds.
+\answer{A. approximately 6.3 seconds}
+B. What do the x- and y-intercepts of the graph mean in this context? Do those values make sense? What do the average rates of change over the x-intervals [2,4] and [5,6] mean?
+The x-intercept is approximately 6.6 which means that if 6.6 quarter-cups of vinegar are used, the balloon would inflate in 0 seconds.
+The y-intercept is approximately 13.2, which means that if no vinegar is used, the balloon will inflate in 13.2 seconds.
+Neither the x- nor the y-intercept make sense in this context. Therefore, we must limit the domain and range when considering this model.
+The average rate of change over [2,4] is about -0.7 seconds per quarter-cup; over [5,6] it is about -3.3 seconds per quarter-cup. This shows that increasing the amount of vinegar from 5 to 6 quarter-cups increases the speed at which the balloon inflates more than 4 times as much as increasing the amount of vinegar from 2 to 4 quarter-cups does.
+\answer{B. The intercepts do not make sense in this context; average rates of change are about -0.7 and -3.3 seconds per quarter-cup.}
+\te{STUDY TIP Recall that when you are using a graph in a real-world context, you need to consider the context when thinking about domain and range. Does it make sense for x to be negative? Does it make sense for y to be negative?}
+\end{example}
+\begin{tryit}{5}
+Salim is engineering a new style of shoes. For x shoes sold, in thousands, a profit of (p(x)=-3x^4+4x^3-2x^2+5x+10) dollars, in ten thousands, will be earned.
+a. How much will be earned in profit for selling 1,000 shoes?
+b. What do the x- and y-intercepts of the graph mean in this context? Do those values make sense?
+\answer{a. \$140,000
+b. approximate x-intercepts: -0.86 and 1.9; -0.86 does not make sense because a negative number of shoes cannot be sold. 1.9 makes sense because it is possible that costs will equal revenue when 1,900 pairs of shoes are sold. The y-intercept is 10. This does not make sense because profit cannot be earned when there is no product being sold.}
+\te{Printed prompt counts shoes; answer refers to pairs of shoes.}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 5
+Use Appropriate Tools Estimate the turning point of the graph of (p(x)=-3x^4+4x^3-2x^2+5x+10). What does this point represent in the context of Try It 5?
+\answer{The turning point occurs at about (1,14). This represents the point at which less profit will be earned as more shoes are sold.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 5)}
+WRITING BEGINNING In their journals, have students copy and complete these sentences to ensure that they understand the definitions of gases, reaction, and inflate.
+Q: Substances that are neither solid nor liquid are referred to as \underline{\hspace{1cm}}.
+\answer{gases}
+Q: Chemical changes often cause a \underline{\hspace{1cm}}, or a result of two things acting together.
+\answer{reaction}
+Q: To \underline{\hspace{1cm}} is to cause to expand with air or with gas.
+\answer{inflate}
+SPEAKING DEVELOPING In small groups, have students discuss the foundation of a science experiment in order to better understand the example.
+Q: What term do we typically use in math to describe a fixed amount?
+\answer{constant}
+Q: What term do we typically use in math to describe different amounts?
+\answer{variable}
+Q: Why does Abby only change the amount of vinegar and not the amount of baking soda?
+\answer{In an experiment, if you change more than one quantity, then you would not be able to tell which change was responsible for the result.}
+READING EXPANDING With a partner, have students take turns reading the first paragraph. Use the following questions to check students' comprehension.
+Q: What does the word capped mean? What part of the text helps you understand the meaning?
+\answer{placed over the opening; the picture}
+Q: Why is Abby mixing baking soda and vinegar?
+\answer{She is conducting an experiment to determine the amount of vinegar needed to cause a chemical reaction that will release gases and fill the balloon.}
+\te{Printed ELL questions use Abby; the example names Sofia.}
+\end{te-addendum}
+% Source page 19: 124, Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Graphing Polynomial Functions}
+Q: Explain the importance of what the degree and the leading coefficient describe about the graph of a polynomial function.
+\answer{The degree tells if the y-values will have the same signs or different signs as x-values approach negative infinity and positive infinity. The leading coefficient determines what the signs will be as the graph goes from left to right.}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 2 Students may not remember that, when moving and reordering a polynomial, the sign belongs to the term and must be moved with it. Have students rewrite the polynomial so all terms are added together before reordering.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Graphing Polynomial Functions}
+WORDS A polynomial function is a function whose rule is either a monomial or a sum of monomials.
+KEY FEATURES
+Turning points -- function values change from increasing to decreasing, or vice-versa
+Relative minimum -- changes from decreasing to increasing
+Relative maximum -- changes from increasing to decreasing
+GRAPHS End behavior depends on the degree of the polynomial and the sign of its leading coefficient.
+\placeholder{graph}{Four end-behavior schematic panels, each with unnumbered arrowed x,y axes, no grid and no central curve. Blue diagonal end arrows: first lower left and upper right, labeled Degree: odd, Leading Coefficient: +; second upper left and lower right, Degree: odd, Leading Coefficient: -; third upper left and upper right, Degree: even, Leading Coefficient: +; fourth lower left and lower right, Degree: even, Leading Coefficient: -.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How do the key features of a polynomial function help you sketch its graph?
+\answer{The degree and leading coefficient of a polynomial function help determine its end behavior. The end behavior, turning points, and x-intercepts help you sketch a graph.}
+2. Error Analysis Allie said the degree of the polynomial function (f(x)=x^5+2x^4+3x^3-2x^6-9x^2-6x+4) is 5. Explain and correct Allie's error.
+\answer{Allie did not write the polynomial function in standard form; instead, she said the exponent of the first term was the degree of the polynomial. The degree is 6.}
+3. Vocabulary Explain how to determine the leading coefficient of a polynomial function.
+\answer{Write the polynomial function in standard form. The leading coefficient is the coefficient of the first term when written in standard from.}
+\te{Printed ``standard from'' retained.}
+4. Look for Relationships What is the relationship between the degree and leading coefficient of a polynomial function and the end behavior of the polynomial?
+\answer{For a polynomial function with an even degree, as (x\to-\infty) and (x\to+\infty), y-values either both approach (+\infty) or both approach (-\infty). If the leading coefficient is positive, both ends approach (+\infty). If negative, both ends approach (-\infty). A polynomial function with an odd degree has end behavior for positive and negative x in opposite directions. If the leading coefficient is positive, as (x\to-\infty), (y\to-\infty), and as (x\to+\infty), (y\to+\infty). If the leading coefficient is negative, the end behavior is in the opposite direction.}
+\textbf{Do You KNOW HOW?}
+The graph shows the function (f(x)=x^4+2x^3-13x^2-14x+24). Find the following.
+\placeholder{graph}{Red quartic f(x)=x^4+2x^3-13x^2-14x+24 on gray grid. Filled red zeros (-4,0),(-2,0),(1,0),(3,0); minima near (-3.19,-25),(2.19,-25), maximum near (-0.5,27.56). Arrowed ends up. Axes x,y with arrows; unit x grid, y grid every 5, labels x=-4,-2,O,2,4 and y=-20,-10,10,20,30. Window approximately x=[-6,5], y=[-30,40].}
+5. number of terms
+\answer{5}
+6. degree
+\answer{4}
+7. leading coefficient
+\answer{1}
+8. end behavior
+\answer{As (x\to-\infty), (y\to+\infty). As (x\to+\infty), (y\to+\infty).}
+9. turning point(s)
+\answer{between -4 and -2, between -2 and 1, between 1 and 3}
+10. x-intercept(s)
+\answer{(x=-4), (x=-2), (x=1), (x=3)}
+11. relative minimum(s)
+\answer{approximately (-3,-25), (2,-25)}
+12. relative maximum(s)
+\answer{approximately (-0.5,28)}
+\end{concept-summary}
+% Source page 20: 125 Practice \& Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{Practice \& Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+15--32 & 13--32 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+Scan the QR code to access a video tutorial.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 18--20, 30, 31 & 1 \\
+2 & 21--23 & 1 \\
+3 & 24, 25 & 1 \\
+3 & 14, 15 & 3 \\
+4 & 13, 16, 17, 26 & 2 \\
+5 & 27 & 2 \\
+5 & 28, 29, 32 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{13}{2}
+UNDERSTAND. Make Sense and Persevere The table shows some values of a polynomial function. Deshawn says there are turning points between the x-values (-3) and (-2) and between 0 and 1. He also says there is a relative minimum between the x-values (-3) and (-2), and a relative maximum between 0 and 1. Sketch a graph that shows how Deshawn could be correct and another graph that shows how Deshawn could be incorrect.
+\begin{tabular}{lllllllll}
+x & -5 & -4 & -3 & -2 & -1 & 0 & 1 & 2 \\
+f(x) & -1004 & 129 & 220 & 85 & 12 & 1 & 4 & 165 \\
+\end{tabular}
+\answer{Check students' graphs.}
+\end{practice}
+\begin{practice}{14}{3}
+Higher Order Thinking Use the information below about a polynomial function in standard form to write a possible polynomial function. Explain how you determined your function and graph it to verify that it satisfies the criteria.
+\item 6 terms
+\item y-intercept at 1
+\item end behavior: As (x\to-\infty), (y\to+\infty). As (x\to+\infty), (y\to-\infty).
+\answer{(f(x)=-2x^5+2x^4-2x^3+x^2-x+1); The polynomial function must have a negative leading coefficient and an odd degree because of the end behavior. The function must have a degree of at least 5 because there are 6 terms. The last term of the function is 1 because the y-intercept is (0,1).}
+\placeholder{graph}{Answer 14 on PDF page 19: red quintic (f(x)=-2x^5+2x^4-2x^3+x^2-x+1), descending from upper left to lower right, with arrows on both ends. Black x- and y-axes with arrowheads; square grid at unit intervals, window approximately [-5,5] on both axes, labels -4,-2,2,4 and O at the origin. Curve passes through (0,1) and crosses the x-axis between 0 and 1.}
+\end{practice}
+\begin{practice}{15}{3}
+Reason An analyst for a new company used the first three years of revenue data to project future revenue for the company. The analyst predicts the function (f(x)=-2x^5+6x^4-x^3+5x^2+6x+50) will give the revenue after x years. Should the CEO expect the company to be successful? Explain.
+\answer{No; the end behavior of the function when x approaches infinity is negative infinity. The revenue earned by the company will be negative.}
+\end{practice}
+\begin{practice}{16}{2}
+Look for Relationships Sketch a graph of each of the functions described below.
+\item a cubic function with one x-intercept
+\item a cubic function with 2 x-intercepts
+\item a cubic function with 3 x-intercepts
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{17}{2}
+Make Sense and Persevere Compare the rate of change for the function (f(x)=x^3-2x^2+x+1) over the intervals [0,2] and [2,4].
+\answer{average rates of change: 1, 17; The average rate of change is much greater over the interval [2,4].}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Write each polynomial function in standard form. For each function, find the degree, number of terms, and leading coefficient. SEE EXAMPLE 1
+(f(x)=-3x^3+2x^5+x+8x^3-6+x^4-3x^2)
+\answer{(f(x)=2x^5+x^4+5x^3-3x^2+x-6); 5; 6; 2}
+\end{practice}
+\begin{practice}{19}{1}
+Write each polynomial function in standard form. For each function, find the degree, number of terms, and leading coefficient. SEE EXAMPLE 1
+(f(x)=8x^2+10x^7-7x^3-x^4)
+\answer{(f(x)=10x^7-x^4-7x^3+8x^2); 7; 4; 10}
+\end{practice}
+\begin{practice}{20}{1}
+Write each polynomial function in standard form. For each function, find the degree, number of terms, and leading coefficient. SEE EXAMPLE 1
+(f(x)=-x^3+9x+12-x^4+5x^2)
+\answer{(f(x)=-x^4-x^3+5x^2+9x+12); 4; 5; -1}
+\end{practice}
+\begin{practice}{21}{1}
+Use the leading coefficient and degree of the polynomial function to determine the end behavior of the graph. SEE EXAMPLE 2
+(f(x)=-x^5+2x^4+3x^3+2x^2-8x+9)
+\answer{The leading coefficient, -1, is negative, so the graph falls to the right. The degree is 5, which is odd, so the end behaviors are different. As x becomes infinitely positive, the y-values approach (-\infty). As x becomes infinitely negative, the y-values approach (+\infty).}
+\end{practice}
+\begin{practice}{22}{1}
+Use the leading coefficient and degree of the polynomial function to determine the end behavior of the graph. SEE EXAMPLE 2
+(f(x)=7x^4-4x^3+7x^2+10x-15)
+\answer{The leading coefficient, 7, is positive, so the graph opens upward. The degree is 4, which is even, so the end behaviors are the same. As x becomes infinitely positive or negative, the y-values approach (+\infty).}
+\end{practice}
+\begin{practice}{23}{1}
+Use the leading coefficient and degree of the polynomial function to determine the end behavior of the graph. SEE EXAMPLE 2
+(f(x)=-x^6+7x^5-x^4+2x^3+9x^2-8x-2)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{24}{1}
+Use a table of values to estimate the intercepts and turning points of the function. Then graph the function. SEE EXAMPLE 3
+(f(x)=x^3+2x^2-5x-6)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{25}{1}
+Use a table of values to estimate the intercepts and turning points of the function. Then graph the function. SEE EXAMPLE 3
+(f(x)=x^4-x^3-21x^2+x+20)
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{26}{2}
+Use the information below to sketch a graph of the polynomial function (y=f(x)). SEE EXAMPLE 4
+\item (f(x)) is positive on the intervals (-\infty,-3), (-2,0), and (2,3).
+\item (f(x)) is negative on the intervals (-3,-2), (0,2), and (3,\infty).
+\item (f(x)) is increasing on the interval (-2.67,-1) and (1,2.5).
+\item (f(x)) is decreasing on the intervals (-\infty,-2.67), (-1,1), and (2.5,\infty).
+\answer{See back of book.}
+\end{practice}
+\begin{practice}{27}{2}
+The equation shown models the average depth y, in feet, of a lake, x years after 2022, where (0<x<6). Use technology to graph the function. In what year does this model predict a relative minimum value for the depth? SEE EXAMPLE 5
+\placeholder{illustration}{Cross-section of a lake with mountains behind it and a cliff at the left; turquoise water over a brown lake bottom. Upper dashed horizontal line labeled 2022, x=0; lower dashed line labeled Lake Bottom. White label in water: depth: (y=x^4-9x^3+24x^2-31x+66).}
+\answer{See back of book.}
+\end{practice}
+% Source page 21: 126 Practice \& Problem Solving
+\begin{practice}{28}{3}
+APPLY. Reason Bisa has a piece of construction paper that she wants to use to make an open rectangular prism. She will cut a square with side length x from each corner of the paper, so the finished length and width are decreased.
+\placeholder{diagram}{Purple and orange rectangular construction paper, width 11 in. shown above and height 8 in. at the right with dimension arrows. White dashed cut lines mark a square at each corner; each corner square has horizontal and vertical side lengths labeled x.}
+a. Write a function that models the volume of the rectangular prism.
+\answer{a. (f(x)=4x^3-38x^2+88x)}
+b. Graph the function and identify a reasonable domain.
+\answer{b. reasonable domain: (0<x<4)}
+\placeholder{graph}{Answer 28b: red cubic (f(x)=4x^3-38x^2+88x), arrows at lower left and upper right. Axes x and y with arrows, O at origin. Grid x spacing 1, labeled -2,2,4,6; y spacing 10, labeled -20,20,40,60. Window approximately x[-3,7], y[-70,70]. Intercepts x=0,4,5.5; relative maximum near (1.5,60), relative minimum near (4.8,-10).}
+c. What do the x-intercepts of the graph mean in this context?
+\answer{c. x-intercepts: 0, 4, and 5.5; 0 and 4 represent the side lengths of the cut squares that will result in a box with 0 volume. The intercept at 5.5 is not meaningful, because it is not possible to cut two 5.5-inch corners from an 8-inch side.}
+d. If Bisa wants to maximize the volume of the box, what is the side length of the squares that should be cut from each corner of the piece of construction paper? Explain.
+\answer{d. About 1.5 in. will create a box with a volume of about 60 (in.^3).}
+\end{practice}
+\begin{practice}{29}{3}
+Make Sense and Persevere Alberto is designing a container in the shape of a rectangular prism to ship electronic devices. The sum of the length, width, and height is 25 inches. Write a function for the volume of the prism. What do the x-intercepts of the graph mean in this context? What dimensions of the container will maximize the volume?
+\placeholder{diagram}{Light blue rectangular prism in perspective, all edges dashed. Red dimension arrows label vertical height x at left and front horizontal length x+10 below. Depth edges recede upward and to the right; no depth label printed.}
+\answer{(V=f(x)=-2x^3-5x^2+150x). The x-intercepts 0 and 7.5 are values of x for which the volume is 0. There is also an x-intercept at -10, but it has no contextual meaning. The function has a maximum when x is approximately 4. So the container has a maximum volume when height (\approx4) in., length (\approx14) in., and width (\approx7) in.}
+\end{practice}
+\begin{practice}{30}{1}
+ASSESSMENT PRACTICE. Copy and complete the table to give the leading coefficient of each polynomial function.
+\begin{tabular}{ll}
+Polynomial Function & Leading coefficient \\
+(f(x)=3x^3+2x^2+9x-6) & \\
+(f(x)=-3x^4+8x^2-2x+7x^5) & \\
+(f(x)=-3x^5+7x^3+6x^2-2) & \\
+(f(x)=3x^2-12x^4-3x^6-3x^3) & \\
+(f(x)=6x^3+9x^2-5x-3) & \\
+\end{tabular}
+\answer{3, 7, -3, -3, 6}
+\end{practice}
+\begin{practice}{31}{1}
+SAT/ACT What is the maximum number of terms a fourth-degree polynomial function in standard form can have?
+A. 1
+B. 2
+C. 3
+D. 4
+E. 5
+\answer{E}
+\end{practice}
+\begin{practice}{32}{3}
+Performance Task In the year 2010, a demographer predicted the estimated population of a city, which can be modeled by the function (f(x)=5x^4-4x^3+25x+8,000). Several years later, a statistician, using data from the U.S. Census Bureau, modeled the actual population with the function (P(x)=7x^4-6x^3+5x+8,000). The graphs of the functions are shown.
+\placeholder{graph}{Predicted vs. Actual Populations. Horizontal axis x, Number of years since 2010, unit grid and labels 1 through 9, 0 at origin. Vertical axis y, Population, broken between 0 and 8,000; labels 8,000,9,000,10,000,11,000,12,000, grid spacing 500, upper window about 12,500. Red P and blue f curves start together at (0,8000), extend slightly left with arrows and curve upward to upper arrows near x=5.4 and x=5.7 respectively. Red P lies above blue f for x greater than about 2. Both are labeled by color.}
+Part A What is the y-intercept of each function, and what does it represent?
+\answer{Part A The y-intercept for both functions is 8,000, which represents the population of the city in 2010.}
+Part B Identify the end behaviors of f and P.
+\answer{Part B For both functions, as (x\to\infty), (y\to\infty). The end behavior for (x\to-\infty) is not relevant because the graphs of both functions begin at the y-intercept, (0,8,000).}
+Part C Compare the average rates of change of f and P from 2013 to 2015.
+\answer{Part C P's average rate of change, about 1,600, is greater than f's average rate of change, which is about 1,200.}
+\end{practice}
+% Source page 22: 126A Assess \& Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & A73 \\
+2 & 1 & A73 \\
+3 & 2 & A73 \\
+4 & 2 & A73 \\
+5 & 2 & A73 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{ASSESSMENT RESOURCES}
+\textbf{3-1 Lesson Quiz: Graphing Polynomial Functions}
+Name \underline{\hspace{3cm}}
+1. Which statement is true of the function (f(x)=x^2+6x^3-4+2x^5)?
+A. The function is positive for all values of x.
+B. The end behavior of the graph of (f(x)) is similar to that of (g(x)=-x).
+C. The graph has exactly one x-intercept.
+D. The function is increasing for all real numbers.
+\answer{1. C}
+2. Use the leading coefficient and degree of the polynomial function (f(x)=x^3-7x^2+10x) to determine the end behavior of its graph. Select all the true statements.
+A. As (x\to\infty), (y\to\infty).
+B. As (x\to\infty), (y\to-\infty).
+C. As (x\to\infty), (y\to0).
+D. As (x\to-\infty), (y\to\infty).
+E. As (x\to-\infty), (y\to-\infty).
+\answer{2. A, E}
+3. The graph of a function f is shown. Use the graph to estimate all turning points. Select all x-values that are turning points of f.
+\placeholder{graph}{Lesson Quiz 3: black W-shaped quartic symmetric about the y-axis, both ends arrowed upward. Axes x,y arrowed; O at origin; grid unit spacing, window x[-5,5], y[-3,6]; x labels -4,4 and y labels -2,4. Relative maximum (0,4), minima near (-1.5,-2) and (1.5,-2); x-intercepts approximately -2,-1,1,2.}
+A. -3
+B. 0
+C. 4
+D. -1.5
+E. 1
+F. -1
+G. 1.5
+\answer{3. B, D, G}
+4. Use the graph of the polynomial function (f(x)=-x^3+5x^2-2x-8) to complete the sentences.
+\placeholder{graph}{Lesson Quiz 4: black cubic (f(x)=-x^3+5x^2-2x-8) with upper-left and lower-right arrowheads. Axes x,y with arrows, O at origin; x unit grid, labeled -2,2,4,6; y grid spacing 2, labeled -8,4,8; window x[-3,7], y[-10,10]. Intercepts (-1,0),(2,0),(4,0),(0,-8), minimum near (1/3,-8.3), maximum at (3,4).}
+Word bank: decreasing; increasing; negative; positive.
+f is \underline{\hspace{1cm}} on the intervals (-\infty,\frac13) and (3,\infty).
+f is \underline{\hspace{1cm}} on the intervals (-1,2) and (4,\infty).
+f is \underline{\hspace{1cm}} on the interval (\frac13,3).
+f is \underline{\hspace{1cm}} on the intervals (-\infty,-1) and (2,4).
+\answer{4. decreasing; negative; increasing; positive}
+5. The volume of water in a tank is modeled by (y=1.15x^3-0.1x^2+2), where x is the number of minutes after the faucet is turned on. What is the y-intercept of the graph, and what does it represent in this context?
+Complete the sentence.
+The y-intercept is \underline{\hspace{1cm}} and represents the [volume of water; number of minutes] before the faucet is [turned off; turned on].
+\answer{5. 2; volume of water; turned on.}
+\te{Resource footer: enVision Algebra 2, Assessment Sourcebook.}
+\end{te-addendum}
+% Source page 23: 126B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding} I
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School
+\textbf{3-1 Reteach to Build Understanding: Graphing Polynomial Functions}
+Name \underline{\hspace{3cm}}
+1. Complete the table shown for each type of polynomial.
+\te{Completed table includes the printed magenta answers.}
+\begin{tabular}{lllll}
+Type of Polynomial; Number of Terms & Degree of Polynomial (Greatest Exponent): 1--Linear & 2--Quadratic & 3--Cubic & 4--Quartic \\
+1--Monomial & Linear Monomial & Quadratic Monomial & Cubic Monomial & Quartic Monomial \\
+2--Binomial & Linear Binomial & Quadratic Binomial & Cubic Binomial & Quartic Binomial \\
+3--Trinomial & Linear Trinomial & Quadratic Trinomial & Cubic Trinomial & Quartic Trinomial \\
+\end{tabular}
+\te{Printed table includes Linear Trinomial; a simplified polynomial in one variable of degree 1 cannot have three nonzero terms.}
+2. Identify the degree, number of terms, type, and leading coefficient of each equation.
+\begin{tabular}{llll}
+ & Explanation & (9x^2-2x-9) & (-x^3-5) \\
+Degree & Greatest exponent. & 2 & 3 \\
+Number of Terms & The number of items being added together. & 3 & 2 \\
+Type & See ``Type of Polynomial Table''. & Quadratic Trinomial & Cubic Binomial \\
+Leading Coefficient & The number being multiplied times x to the greatest exponent. & 9 & -1 \\
+\end{tabular}
+3. Cameron graphed (f(x)=x^3-6). He concluded that it is a quadratic trinomial. What was his error?
+\answer{Cameron confused the degree of the function with the number of terms. There are 2 terms and the largest exponent is to the third power. The function is a cubic binomial.}
+4. Complete the table shown to describe a graph using the leading coefficient and degree of the function.
+\te{Completed table includes the printed magenta answers.}
+\begin{tabular}{lll}
+Largest Exponential Value & Leading Coefficient: Positive & Negative \\
+Odd Degree & As (x\to+\infty),(y\to+\infty); As (x\to-\infty),(y\to-\infty) & As (x\to+\infty),(y\to-\infty); As (x\to-\infty),(y\to+\infty) \\
+Even Degree & As (x\to+\infty),(y\to+\infty); As (x\to-\infty),(y\to+\infty) & As (x\to+\infty),(y\to-\infty); As (x\to-\infty),(y\to-\infty) \\
+\end{tabular}
+\te{Resource footer: enVision Algebra 2, Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice} I, O
+Provides extra practice for each lesson.
+MathXL for School
+\textbf{3-1 Additional Practice: Graphing Polynomial Functions}
+Name \underline{\hspace{3cm}}
+Write each polynomial in standard form. Then classify it by degree and by number of terms.
+1. (4x+x+2)
+\answer{(5x+2); linear binomial}
+2. (1-2x+5x^4)
+\answer{(5x^4-2x+1); quartic trinomial}
+Use the leading coefficient and degree of the polynomial function to determine the end behavior of the graph.
+3. (f(x)=-2x^4-x^3+5x^2-2x+3)
+\answer{(x\to+\infty),(y\to-\infty); (x\to-\infty),(y\to-\infty)}
+4. (f(x)=4x^2+4x-6)
+\answer{(x\to+\infty),(y\to+\infty); (x\to-\infty),(y\to+\infty)}
+Sketch the graph using the clues listed. Identify the turning points and x-intercepts.
+5. (f(x)) is negative on the intervals (-\infty,-5) and (-1,3)
+(f(x)) is positive on the intervals (-5,-1) and (3,\infty)
+(f(x)) is increasing on the interval (-\infty,-3.5) and (1.25,\infty)
+(f(x)) is decreasing on the interval (-3.5,1.25)
+\answer{x-intercepts: (x=-1) and (x=3). Turning points: (x=-3.5) and (x=1.25)}
+\te{Printed answer omits the x-intercept -5 indicated by the sign intervals.}
+\placeholder{graph}{Additional Practice 5: magenta curve rises from the left edge near (-5,0) to a maximum near (-3.5,2), descends through (-1,0) to a minimum near (1.25,-1.3), then rises through (3,0) to the right edge near (5,1.5). Axes x,y with arrows, O at origin; unit square grid, window approximately [-5,5] on both axes, labels -4,-2,2,4.}
+6. Keegan is printing and selling his original design on t-shirts. He has concluded that for x shirts in thousands sold, his total amount earned in thousands of dollars can be represented with the function (p(x)=-2x^4+4x^2+3x+2). How many t-shirts, rounded to the nearest whole number, should he print in order to maximize his earnings? What will his earnings be, rounded to the nearest whole dollar, if he prints that number of shirts?
+\answer{1,151 shirts; \$7,242}
+7. The table shows data representing a polynomial function.
+\begin{tabular}{ll}
+x & y \\
+-3 & -999 \\
+-2 & -140 \\
+-1 & -7 \\
+0 & 0 \\
+1 & 1 \\
+2 & 116 \\
+3 & 945 \\
+\end{tabular}
+a. What is the degree of this polynomial function?
+\answer{5th degree}
+b. What are the second differences of the y-values?
+\answer{-726, -126, -6,}
+c. What are the differences when they are constant?
+\answer{114, 714}
+\te{Printed answers to 7b and 7c split a list of second differences between the two parts; they are retained as printed.}
+\te{Resource footer: enVision Algebra 2, Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment} O, A
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School
+\textbf{3-1 Enrichment: Graphing Polynomial Functions}
+Name \underline{\hspace{3cm}}
+The first 27-yd section of a roller coaster can be expressed by the equation:
+(y=-0.0001x^6+0.0069x^5-0.1681x^4+1.6979x^3-6.167x^2+6.6x-32.4)
+The x-axis represents the ramp that the maintenance crew uses as a platform to work on parts of the roller coaster and the y-axis represents the ladder used by the crew to access the platform.
+1. Sketch the graph. Label the ramp the workers walk on as well as the ladder used by the crew.
+\answer{Answer:}
+\placeholder{graph}{Enrichment 1: magenta sixth-degree curve from the displayed equation, both ends downward with arrows. Axes x,y; x labels -5,5,10,15,20,25,30, O at origin, grid spacing 2.5; y labels -40,-20,20,40,60,80,100, grid spacing 10; window about x[-7.5,32.5],y[-60,120]. Small maximum near (0.74,-30), minimum near (3.018,-34), maximum near (11.17,27), minimum near (17.799,-20), high maximum near (24.772,113.4). Curve crosses x-axis near 7.452,15,20,27. Magenta Ladder label beside y-axis; Platform label above x-axis with arrow pointing down to x-axis near x=18.}
+2. Assuming the ride goes from left to right, during which intervals is the ride going uphill?
+\answer{(x<0.74); (3.018<x<11.17); (17.799<x<24.772)}
+3. During which intervals is the ride going downhill?
+\answer{(0.74<x<3.018); (11.17<x<17.799); (x>24.772)}
+4. At what points of the ride can the maintenance crew access the track from the ramp?
+\answer{(x=7.452), 15, 20 and 27}
+5. If the y-intercept on the graph represents the point where the passengers enter the ride from the ground, how many yards above the ground is the ramp?
+\answer{32.4 yd}
+6. Based on this section of the roller coaster, how high is the steepest point from ground level?
+\answer{145.806 yd}
+\te{Resource footer: enVision Algebra 2, Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I, O
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{3-1 Mathematical Literacy and Vocabulary: Graphing Polynomial Functions}
+Name \underline{\hspace{3cm}}
+Match each term in Column A to the definition in Column B.
+\begin{tabular}{ll}
+Column A & Column B \\
+Degree of a Polynomial & It is the point at which a function changes direction. \\
+End Behavior & It is the point where the function changes from increasing to decreasing. \\
+Leading Coefficient & This describes what happens to the function values as x approaches positive and negative infinity. \\
+Polynomial Function & It is the name of each part of the polynomial. \\
+Relative Maximum & It is the point where the function changes from decreasing to increasing. \\
+Relative Minimum & It is a function whose rule is a polynomial. \\
+Term & It is the degree of the greatest degree of any of the terms. \\
+Turning Point & It is the non-zero term that is multiplied by the greatest power of x. \\
+\end{tabular}
+\answer{Degree of a Polynomial: It is the degree of the greatest degree of any of the terms. End Behavior: This describes what happens to the function values as x approaches positive and negative infinity. Leading Coefficient: It is the non-zero term that is multiplied by the greatest power of x. Polynomial Function: It is a function whose rule is a polynomial. Relative Maximum: It is the point where the function changes from increasing to decreasing. Relative Minimum: It is the point where the function changes from decreasing to increasing. Term: It is the name of each part of the polynomial. Turning Point: It is the point at which a function changes direction.}
+\te{Answers transcribe the magenta matching lines. Resource footer: enVision Algebra 2, Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Tablet screenshot: Solve the system of equations by graphing. (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Exit; Question Help; Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print; 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next. No answer is shown.}
+\placeholder{graph}{Digital Differentiated Resources screenshot: blank Cartesian grid on tablet, x and y axes, each from -10 to 10 with unit grid and labels every 2 units. Positive y arrow and y label visible; help menu obscures upper-right part of grid. No plotted lines or points.}
+\end{te-addendum}
+
+\end{document}

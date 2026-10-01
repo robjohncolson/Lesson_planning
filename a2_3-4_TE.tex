@@ -1,0 +1,1060 @@
+\documentclass{article}
+% Source: Topic_03_Teacher_Edition.pdf, PDF pages 47-58 (printed pages 142A-149B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 47: 142A Lesson Overview
+\begin{lesson-meta}
+lesson: 3-4
+title: Dividing Polynomials
+standards: none printed
+practices: none printed
+objective: I can divide polynomials.
+
+essential question: How can you divide polynomials?
+
+\textbf{VOCABULARY}
+\item Factor Theorem
+\item Remainder Theorem
+\item synthetic division
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 3-4 \\
+Title & Dividing Polynomials \\
+Standards & none printed \\
+I CAN Objective & I can divide polynomials. \\
+Essential Question & How can you divide polynomials? \\
+Lesson Vocabulary & Factor Theorem; Remainder Theorem; synthetic division \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Divide polynomial expressions using long division.
+\item Use synthetic division to rewrite rational expressions.
+Essential Understanding. Polynomial expressions can be divided by linear factors using long division or synthetic division. The Remainder Theorem is used to determine the remainder of a polynomial division problem.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Used identities and theorems to rewrite polynomial expressions in different forms.
+\item Added, subtracted, and multiplied polynomials.
+In this lesson, students:
+\item Divide polynomials using long division and synthetic division.
+\item Use the Remainder Theorem to evaluate polynomials.
+\item Use the Factor Theorem to identify factors of a polynomial.
+Later in this topic, students will:
+\item Use factoring or synthetic division to identify the zeros of a polynomial function and use the zeros to sketch its graph.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students use the Remainder Theorem to understand the relationship between the divisor and the remainder in polynomial division.
+\item Students use flexibility when choosing between the two methods for dividing polynomial expressions.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{lll}
+ & English & Spanish \\
+REVIEW VOCABULARY & division & división \\
+NEW VOCABULARY & Factor Theorem & Teorema de factores \\
+ & Remainder Theorem & Teorema del residuo \\
+ & synthetic division & división sintética \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Review the word division by asking students what it means to divide. Next, ask students to think about when they have heard the word synthetic before. Students should be familiar with synthetic fabrics.
+Q: How is synthetic wool related to wool?
+\answer{Synthetic wool is imitation wool, but it is made to look and feel like real wool.}
+Now, have them relate this understanding to the term synthetic division.
+Q: How might synthetic division be related to division?
+\answer{Synthetic division is not the same as long division, but is designed to imitate the division process.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion cover: colored light rings around reflective spheres on a dark background; Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students divide polynomial expressions using long division. When the divisor is linear and the leading coefficient is 1, students may use synthetic division instead.
+Students find the remainder of a division problem using the Remainder Theorem and factor polynomials using the Factor Theorem.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively
+Students contextualize the results of dividing a polynomial within the context of a real-world problem about the relationship between the volume and possible dimensions of an object.
+Attend to Precision
+Students use clear mathematical language when explaining how they know that a specific binomial is a factor of a polynomial.
+\end{te-addendum}
+% Source page 48: 142B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students will use algebra tiles to critique an attempted division problem and to explain whether one polynomial is a factor of another.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+Critique \& Explain is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving ETP}
+Q: What is different about Santiago arrangement of algebra tiles when compared to other arrangements you have seen?
+\answer{There are 2 tiles that are not part of the arrangement.}
+\textbf{During SMALL GROUP. Support Productive Struggle in Learning Mathematics ETP}
+Q: Santiago arranged some of the algebra tiles to form a rectangle. What two factors do these tiles represent? What is their product?
+\answer{((x+2)) and ((3x+1)); (3x^2+7x+2)}
+Q: How does this product compare to Santiago's original expression?
+\answer{It is slightly different: the constant term is 2 less than the constant term in Santiago's original expression.}
+For Early Finishers
+Q: Write an expression for (3x^2+14x+18) in terms of (x+3).
+\answer{((x+3)(3x+5)+\frac{3}{(x+3)})}
+\te{Printed expression adds a fractional remainder to the product; likely the final term should be 3.}
+\textbf{After WHOLE CLASS. Facilitate Meaningful Mathematical Discourse ETP}
+Facilitate a discussion about how to write a polynomial as a the product of two factors and a remainder in order to apply the knowledge of the use of long division with polynomials in the lesson.
+Q: How did you determine how to write the quotient of (2x^2+7x+6) and (x+2)?
+\answer{You can start with 2 (x^2)-tiles, 7 (x)-tiles, and 6 unit tiles. If you arrange them into a rectangle, with 1 (x)-tile and 2 1-tiles along one side, then the other side will have 2 (x)-tiles and 3 1-tiles, with no tiles leftover.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with CRITIQUE \& EXPLAIN
+Look for Relationships If the remainder in a division problem is zero, what can you say about the dividend?
+\answer{If the remainder is zero, then the divisor is a factor of the dividend.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{CRITIQUE \& EXPLAIN: Digital activity}
+Santiago tried factoring (x+2) out of (3x^2+7x+4). Using algebra tiles, he made the following arrangement, with 2 tiles left over.
+\placeholder{diagram}{Digital algebra tiles: three blue x² squares across the top, one vertical green x tile to their right; two rows beneath, each with three horizontal green x tiles and one yellow unit tile at right. Two additional yellow unit tiles lie outside the rectangle on the right.}
+A. Reason Can you conclude whether (x+2) is a factor of (3x^2-7x-4)? Explain your reasoning.
+B. Write an expression for (3x^2+7x+4) in terms of (x+2).
+\te{Digital part A prints minus signs in (3x^2-7x-4), unlike the opening statement and student edition. Go back. Enter your answer.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Santiago tried factoring (x+2) out of (3x^2+7x+4). Using algebra tiles, he made the following arrangement, with 2 tiles left over.
+\placeholder{diagram}{Three blue x² square tiles form the top of a rectangle, with one vertical green x tile at right. Two rows below each contain three horizontal green x tiles and one yellow 1 tile. Two extra yellow 1 tiles lie outside the rectangle to its right.}
+A. Reason Can you conclude whether (x+2) is a factor of (3x^2+7x+4)? Explain your reasoning.
+\answer{A. No. If (x+2) was a factor, then there would be no tiles outside of the rectangle. Here there is a remainder of two.}
+B. Write an expression for (3x^2+7x+4) in terms of (x+2).
+\answer{B. (3x^2+7x+4=(x+2)(3x+1)+\frac{2}{(x+2)})}
+\te{Printed answer adds a fractional remainder to the product; likely the final term should be 2.}
+C. Use algebra tiles to show (2x^2+7x+6) divided by (x+2).
+\answer{C. (2x^2+7x+6=(x+2)(2x+3))}
+\placeholder{diagram}{Sample student work for C: rectangle made of two blue x² squares across the top left, three vertical green x tiles at top right; two rows below, each with two horizontal green x tiles and three yellow 1 tiles. No tiles remain outside the rectangle.}
+\te{SAMPLE STUDENT WORK.}
+\end{model-discuss}
+% Source page 49: 142 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Introduce students to the division of polynomials. Remind them that they can use their knowledge of dividing numerical values. Explain that they will learn multiple ways to divide polynomials.
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Use Long Division to Divide Polynomials. Pose Purposeful Questions ETP}
+PART A
+Q: How do you determine the terms in the quotient when dividing two polynomials?
+\answer{Divide the greatest degree terms to get the first term in the quotient. Multiply this result by the divisor, and subtract from the dividend to discover what remains in order to continue dividing using the same process.}
+PART B
+Q: Why do you need to have terms with 0 as coefficients in the dividend?
+\answer{These are placeholders for (x^2) and (x). The quotient may have (x^2)- and (x)-terms even if the dividend does not.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: What do you notice about the divisors that is different from the example?
+\answer{The divisors are quadratic polynomials.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 1}
+Use long division to complete the table.Write the dividend as the quotient times the divisor plus the remainder.
+\begin{tabular}{lll}
+Dividend & Divisor & Divisor (\times) Quotient + Remainder \\
+(7x^2+2) & (3x) & (3x(2x+1)+x^2-3x+2) \\
+(7x^3+10x) & (3x+8) & \\
+(7x^4+16x^2+9) & (3x^2+8x) & \\
+\end{tabular}
+\te{The printed table fills only the first row. Its remainder has degree 2, greater than the divisor's degree. Go back. ESSENTIAL QUESTION. SOLUTION.}
+Example 1 Students practice dividing polynomials with varying degrees/powers using long division.
+Q: Why is it useful to replace a missing term with a zero?
+\answer{The zero is a placeholder to keep the columns lined up for long division.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 2}
+Additional Examples are available at SavvasRealize.com.
+Use the Remainder and Factor Theorems to determine whether the given binomial is a factor of (P(x)). If so, write the polynomial in factored form.
+(P(x)=x^3-5x^2+2x-10); binomial: (x-5)
+The binomial (x-5) is a factor of (P(x)) if 5 is a zero of (P(x)).
+Use synthetic substitution.
+\begin{tabular}{r|rrrr}
+5 & 1 & (-5) & 2 & (-10) \\
+ & & 5 & 0 & 10 \\
+\hline
+ & 1 & 5 & 2 & 0 \\
+\end{tabular}
+Because (P(5)=0), you can conclude that (x-5) is a factor of (P(x)).
+(x^3-5x^2+2x-10=(x^2+2)(x-5))
+\answer{(x^3-5x^2+2x-10=(x^2+2)(x-5))}
+\te{Printed bottom row's second entry is 5; likely 0. Go back. ESSENTIAL QUESTION. SOLUTION.}
+Example 2 Students determine if a linear divisor is a factor of a polynomial, and if so, write the factorization.
+Q: How can you use the Factor Theorem and synthetic substitution to quickly determine any factors of (P(x))?
+\answer{If (P(a)=0), then (x-a) is a factor. The bottom line of synthetic substitution gives the coefficients of the other factor. The first term of that factor is one degree less than the first term of (P(x)).}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Use Long Division to Divide Polynomials}
+How can you use long division to divide (P(x)) by (D(x))? Write the polynomial (P(x)) in terms of the quotient and remainder.
+A. Let (P(x)=x^3+5x^2+6x+9) and (D(x)=x+3).
+Long division of polynomials is similar to long division of numbers.
+\begin{tabular}{r|rrrr}
+ & (x^2) & (+2x) & & \\
+(x+3) & (x^3) & (+5x^2) & (+6x) & (+9) \\
+ & (-(x^3) & (+3x^2)) & & \\
+\cline{2-5}
+ & & (2x^2) & (+6x) & (+9) \\
+ & & (-2x^2) & (+6x) & \\
+\cline{3-5}
+ & & & & 9 \\
+\end{tabular}
+\te{Printed second subtraction row is (-2x^2+6x), without parentheses; likely (-(2x^2+6x)). Callout: Divide the leading terms: (x^3\div x=x^2). Write above the 2nd term to keep like terms together.}
+\te{LOOK FOR RELATIONSHIPS Compare the long division of these two polynomials to this numerical long division problem.}
+\begin{tabular}{r|r}
+ & 120 \\
+13 & 1,569 \\
+ & (-13) \\
+\cline{2-2}
+ & 26 \\
+ & (-26) \\
+\cline{2-2}
+ & 09 \\
+\end{tabular}
+When you divide polynomials, you can express the relationship of the quotient and remainder to the dividend and divisor in two ways.
+(\frac{x^3+5x^2+6x+9}{x+3}=x^2+2x+\frac{9}{x+3})
+\te{Callout: (\frac{\text{dividend}}{\text{divisor}}=\text{quotient}+\frac{\text{remainder}}{\text{divisor}}).}
+(x^3+5x^2+6x+9=(x^2+2x)(x+3)+9)
+\te{Callout: dividend = quotient (\times) divisor + remainder. CONTINUED ON THE NEXT PAGE.}
+\answer{A. (x^3+5x^2+6x+9=(x^2+2x)(x+3)+9)}
+% Source page 50: 143 Example 1 continued
+B. Let (P(x)=8x^3+27) and (D(x)=4x^2-6x+9).
+The dividend is a cubic polynomial with no first- or second-degree term.
+\begin{tabular}{r|rrrr}
+ & & (2x) & (+3) & \\
+(4x^2-6x+9) & (8x^3) & (+0x^2) & (+0x) & (+27) \\
+ & (-(8x^3) & (-12x^2) & (+18x)) & \\
+\cline{2-5}
+ & & (12x^2) & (-18x) & (+27) \\
+ & & (-(12x^2) & (-18x) & (+27)) \\
+\cline{3-5}
+ & & & & 0 \\
+\end{tabular}
+\te{Callouts: Use 0 as the coefficient for the missing 1st- and 2nd-degree terms. The remainder is 0. This means (4x^2-6x+9) is a factor of (8x^3+27). GENERALIZE When the remainder is 0, you can use the results of the long division to write P(x) in factored form.}
+So, (\frac{8x^3+27}{4x^2-6x+9}=2x+3) and (8x^3+27=(4x^2-6x+9)(2x+3)).
+\answer{B. (8x^3+27=(4x^2-6x+9)(2x+3))}
+\end{example}
+\begin{tryit}{1}
+Use long division to divide the polynomials. Then write the dividend in terms of the quotient and remainder.
+a. (x^3-6x^2+11x-6) divided by (x^2-4x+3)
+b. (16x^4-85) divided by (4x^2+9)
+\answer{a. (x^3-6x^2+11x-6=(x-2)(x^2-4x+3))
+b. (16x^4-85=(4x^2+9)(4x^2-9)-4)}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Use Synthetic Division to Divide by (x-a). Pose Purposeful Questions ETP}
+Q: When would you use synthetic division and why is it useful?
+\answer{Synthetic division can be used to divide a polynomial by a linear factor. Synthetic division keeps the coefficients organized and is more efficient.}
+Q: Why do you reverse the sign of the constant term in the divisor?
+\answer{The linear divisor is represented as ((x-a)), so the subtraction sign would reverse the sign of the constant term.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error}
+Try It! 2 Students may multiply the zero of the divisor, 1, by (-5) and place that answer under the second coefficient. Have students use long division to do the same problem, and ask them to consider the relationship between the values in the synthetic division and the values in the long division.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 1 \& 2
+Communicate Precisely Which method would you use to divide a polynomial by (x^2+5)? Why?
+\answer{long division; Synthetic division is not possible because the first term is (x^2), not (x).}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 2)}
+SPEAKING BEGINNING To complete synthetic division, it is important to follow directions. Have students practice giving directions by directing a partner to a certain destination. Discuss what the directions in the example mean.
+Q: What does it mean to reverse the sign of the constant term in the divisor?
+\answer{The divisor is (x-2). The constant is (-2), so reversing the sign means to use 2.}
+Q: What does bring down the coefficient mean in Step 2?
+\answer{Copy the coefficient below the line.}
+READING DEVELOPING Synthetic often refers to items that are man-made or artificial, rather than naturally occurring. Have students read the paragraph that defines synthetic division.
+Q: Why might this method of dividing be considered artificial?
+\answer{It appears to be an artificial form of dividing because the variables and exponents are removed during the process.}
+Q: Could you use synthetic division to divide (3x^3+5x^2-x+7) by (2x+3)?
+\answer{No; the method only works when the leading coefficient of the linear factor is 1.}
+LISTENING EXPANDING Have students listen as you read the Example.
+Q: Which mathematical terms did you hear?
+\answer{divided by, synthetic division, polynomial, linear expression, leading coefficient, divisor, zero, long division, coefficients, dividend, coefficients of the dividend, multiply, add}
+Read through the Example again. As you complete each sentence, have students point to where they see the sentence illustrated in the worked-out solution.
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Use Synthetic Division to Divide by (x-a)}
+What is (2x^3-7x^2-4) divided by (x-3)? Use synthetic division.
+Synthetic division is a method used to divide a polynomial by a linear expression in the form (x-a). Note that the leading coefficient of the divisor is 1, and that (a) is the zero of the divisor.
+Step 1 To change from long division format to synthetic division format, write only (a) and the coefficients of the dividend.
+\placeholder{diagram}{Conversion diagram: long-division setup (x-3) outside, (2x^3-7x^2+0x-4) inside. Down arrows connect -3 in divisor to red 3 labeled zero of the divisor, a, and connect dividend terms to blue coefficients 2, -7, 0, -4, labeled coefficients of the dividend. A short division bracket surrounds 3 at the left of coefficient row.}
+Step 2 Bring down the first coefficient. Multiply (a) by the first coefficient. Add the result to the second coefficient.
+\begin{tabular}{r|rrrr}
+3 & 2 & (-7) & 0 & (-4) \\
+ & & 6 & & \\
+\hline
+ & 2 & (-1) & & \\
+\end{tabular}
+\te{Callouts: (3\cdot2=6); (-7+6=-1). CONTINUED ON THE NEXT PAGE.}
+% Source page 51: 144 Example 2 continued
+Step 3 Repeat the process until all the columns are complete.
+\begin{tabular}{r|rrrr}
+3 & 2 & (-7) & 0 & (-4) \\
+ & & 6 & (-3) & \\
+\hline
+ & 2 & (-1) & (-3) & \\
+\end{tabular}
+\te{Callout: (3\cdot-1=-3).}
+\begin{tabular}{r|rrrr}
+3 & 2 & (-7) & 0 & (-4) \\
+ & & 6 & (-3) & (-9) \\
+\hline
+ & 2 & (-1) & (-3) & (-13) \\
+\end{tabular}
+\te{Callout: (3\cdot-3=-9). COMMON ERROR Remember to keep track of all positive and negative signs when multiplying.}
+Step 4 Use the numbers in the last row to write the quotient and remainder.
+\begin{tabular}{r|rrrr}
+3 & 2 & (-7) & 0 & (-4) \\
+ & & 6 & (-3) & (-9) \\
+\hline
+ & 2 & (-1) & (-3) & (-13) \\
+\end{tabular}
+(2x^2-1x-3-\frac{13}{x-3})
+\te{Callouts label 2, -1, -3 as coefficients of the quotient and -13 as remainder, with downward arrows connecting each to the corresponding term.}
+Since the dividend is cubic and the divisor is linear, the quotient is quadratic.
+So, (\frac{2x^3-7x^2-4}{(x-3)}=2x^2-x-3-\frac{13}{x-3}).
+\answer{(2x^2-x-3-\frac{13}{x-3})}
+\te{USE STRUCTURE You can use the result to write the dividend (2x^3-7x-4) in the form ((2x^2-x-3)(x-3)-13). Printed callout omits the exponent 2 on the dividend's middle term.}
+\end{example}
+\begin{tryit}{2}
+Use synthetic division to divide (3x^3-5x+10) by (x-1).
+\answer{(3x^2+3x-2+\frac{8}{x-1})}
+\end{tryit}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Relate P(a) to the Remainder of (P(x)\div(x-a)). Pose Purposeful Questions ETP}
+Q: Explain how (P(x)=x^3+10x^2+29x+24) was rewritten as (P(x)=(x^2+5x+4)(x+5)+4).
+\answer{((x+5)) was given as one factor. Synthetic division was used to find the other factor, (x^2+5x+4), and the remainder, 4.}
+Q: Why would you evaluate (P(-5)) using the function in the form (P(x)=(x^2+5x+4)(x+5)+4)?
+\answer{When (x=-5), (x+5=0). Since the product of any number and 0 is 0, (P(-5)=4). This demonstrates that (P(-5)) is equal to the remainder when (P(x)) is divided by (x-(-5)).}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: What is the purpose of using synthetic division in this situation?
+\answer{to prove the remainder is equal to (f(-2))}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 Students use synthetic division to solve ((x^4+3x^3-10x)\div(x+2)) in this guided instruction.
+Q: What is the value of (a)?
+\answer{(a=-2)}
+Q: What is the quotient?
+\answer{(x^3+x^2-2x-6)}
+Q: What is the remainder? How do you find the remainder?
+\answer{12; It is the last number of the bottom row of the synthetic division.}
+Q: How can you check that your remainder is accurate?
+\answer{Substitute (-2) for (x) in (x^4+3x^3-10x). The answer should be the same as the remainder because of the Remainder Theorem.}
+Q: What is the value of (x^4+3x^3-10x) if (x=-2)?
+\answer{12}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Relate P(a) to the Remainder of (P(x)\div(x-a))}
+\textbf{CONCEPTUAL UNDERSTANDING}
+How is the value of (P(a)) related to the remainder of (P(x)\div(x-a))?
+To explore this question, let (P(x)=x^3+10x^2+29x+24). Use synthetic division to divide (P(x)) by (x+5).
+(x+5=x-(-5))
+\te{Callout: To identify the value of a, write the divisor (x+5) in the form (x-a).}
+\begin{tabular}{r|rrrr}
+(-5) & 1 & 10 & 29 & 24 \\
+ & & (-5) & (-25) & (-20) \\
+\hline
+ & 1 & 5 & 4 & 4 \\
+\end{tabular}
+\te{Callouts: The remainder is 4. The quotient is (x^2+5x+4).}
+So, (P(x)=(x^2+5x+4)(x+5)+4). Use this equivalent form to evaluate (P(-5)).
+(P(-5)=[((-5)^2+5(-5)+4)(-5+5)]+4)
+(=[(25-25+4)(0)]+4)
+(=0+4)
+(=4)
+\te{Callout: (-5) is the zero of the divisor, so the product of the quotient and the divisor is 0.}
+So, (P(-5)) is the remainder, 4, of (P(x)) divided by (x-(-5)).
+\answer{(P(-5)=4), the remainder.}
+\te{CONTINUED ON THE NEXT PAGE.}
+% Source page 52: 145 Example 3 continued
+In general, dividing (P(x)) by (x-a) results in a quotient (Q(x)) and a remainder (r).
+(P(x)=Q(x)(x-a)+r)
+(P(a)=Q(x)(a-a)+r)
+(=Q(x)(0)+r)
+(=r)
+\te{Callout: Evaluating P(x) at a shows that (P(a)=r). Printed evaluation retains Q(x); likely Q(a).}
+So, the for a polynomial (P(x)) the value of (P(a)) is equal to the remainder of the division (P(x)\div(x-a)).
+\end{example}
+\begin{tryit}{3}
+Use synthetic division to show that the remainder of (f(x)=x^3+8x^2+12x+5) divided by (x+2) is equal to (f(-2)).
+\answer{(f(-2)=(-2)^3+8(-2)^2+12(-2)+5=5)
+Use synthetic division to divide, and check to see that the remainder is 5.}
+\begin{tabular}{r|rrrr}
+(-2) & 1 & 8 & 12 & 5 \\
+ & & (-2) & (-12) & 0 \\
+\hline
+ & 1 & 6 & 0 & 5 \\
+\end{tabular}
+\end{tryit}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{CONCEPT Remainder Theorem and Factor Theorem}
+Use and Connect Mathematical Representations ETP
+Q: How do the Remainder Theorem and Factor Theorem compare?
+\answer{The Remainder Theorem states that when (P(x)) is divided by (x-a), the remainder is equivalent to (P(a)). The Factor Theorem states that the binomial ((x-a)) is a factor of (P(x)) if and only if (P(a)=0). The Factor Theorem is a special case of the Remainder Theorem, describing the situation when the remainder is zero.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Remainder Theorem and Factor Theorem}
+The Remainder Theorem states that if a polynomial (P(x)) is divided by (x-a), the remainder is (P(a)).
+The Factor Theorem states that the expression (x-a) is a factor of a polynomial (P(x)) if and only if (P(a)=0).
+PROOF: SEE EXERCISE 15.
+\end{concept-box}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Use the Remainder Theorem to Evaluate Polynomials. Pose Purposeful Questions ETP}
+Q: How do you determine what value to use for (a)?
+\answer{(a) is the number of years between 2021 and 2029, so subtract them to determine (a=8).}
+Q: How is understanding the Remainder Theorem helpful in solving this problem?
+\answer{According to the Remainder Theorem, the remainder of the division problem using (a=8) will be the value of the function at (a=8). So the remainder 293 is also the number of turtles on the island in 2029.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use the Remainder Theorem to Evaluate Polynomials}
+\textbf{APPLICATION}
+The population of sea turtles nesting on a barrier island is modeled by the function (P(x)) where (x) is the number of years since 2021. Use the Remainder Theorem to estimate the population in 2029.
+\placeholder{photo}{Three small sea turtles on sand near the water. Callout gives the population model (P(x)=-x^3+6x^2+12x+325).}
+Use synthetic division to find (P(a)) when (a=8).
+\begin{tabular}{r|rrrr}
+8 & (-1) & 6 & 12 & 325 \\
+ & & (-8) & (-16) & (-32) \\
+\hline
+ & (-1) & (-2) & (-4) & 293 \\
+\end{tabular}
+The estimated population in 2029 is 293 turtles.
+\answer{293 turtles}
+\end{example}
+\begin{tryit}{4}
+A technology company uses the function (R(x)=-x^3+12x^2+6x+80) to model expected annual revenue, in thousands of dollars, for a new product, where (x) is the number of years after the product is released. Use the Remainder Theorem to estimate the revenue in year 5.
+\answer{\$285,000}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How does the remainder for year 5 compare to the estimated revenue in year 5?
+\answer{The remainder is 285 for year 5. Since the expected annual revenue is in thousands of dollars, you need to multiply \$1000 by the remainder to estimate the revenue in year 5.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Have students practice using the Remainder Theorem to solve for the linear divisor when the remainder is known.
+Q: Divide (f(x)=9x^2-3x+1) by a linear divisor ((x-a)). The remainder is 21. Solve for (a). Explain your process.
+\answer{Set (9x^2-3x+1=21) because the remainder is equal to (f(a)). Solve (9x^2-3x-20=0). The solutions are (a=\frac{-4}{3}) and (a=\frac53). Substitute your answers for (a) in (f(x)=9x^2-3x+1) to check your work.}
+\end{te-addendum}
+% Source page 53: 146 Understand & Apply
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Check Whether (x-a) Is a Factor of P(x). Pose Purposeful Questions ETP}
+Q: How does understanding the Factor Theorem help to determine whether ((x-a)) is a factor of a given polynomial?
+\answer{If (P(a)=0) or there is not a remainder when dividing the polynomial by the binomial, the binomial is a factor. If (P(a)\neq0) or there is a remainder when dividing the polynomial by the binomial, the binomial is not a factor.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Check Whether (x-a) Is a Factor of P(x)}
+How can you use the Factor Theorem to determine whether the given binomial is a factor of (P(x))? If it is a factor, write the polynomial in factored form.
+A. (P(x)=x^4-8x^3+16x^2-23x-6); binomial: (x-6)
+The binomial (x-6) is a factor of (P(x)) if 6 is a zero of (P(x)).
+Method 1 Use synthetic substitution.
+\begin{tabular}{r|rrrrr}
+6 & 1 & (-8) & 16 & (-23) & (-6) \\
+ & & 6 & (-12) & 24 & 6 \\
+\hline
+ & 1 & (-2) & 4 & 1 & 0 \\
+\end{tabular}
+Method 2 Use direct substitution.
+(P(6)=6^4-8(6^3)+16(6^2)-23(6)-6)
+(=1,296-1,728+576-138-6)
+(=0)
+Because (P(6)=0), you can use the Factor Theorem to conclude that (x-6) is a factor of (P(x)): (P(x)=(x^3-2x^2+4x+1)(x-6)).
+\answer{A. (P(x)=(x^3-2x^2+4x+1)(x-6))}
+B. (P(x)=x^5-5x^3+9x^2-x+3); binomial: (x+3)
+Method 1 Use synthetic substitution.
+\begin{tabular}{r|rrrrrr}
+(-3) & 1 & 0 & (-5) & 9 & (-1) & 3 \\
+ & & (-3) & 9 & (-12) & 9 & (-24) \\
+\hline
+ & 1 & (-3) & 4 & (-3) & 8 & (-21) \\
+\end{tabular}
+\te{COMMON ERROR When using synthetic division, remember to include 0 as the coefficient for any missing terms.}
+Method 2 Use direct substitution.
+(P(-3)=(-3)^5-5((-3)^3)+9((-3)^2)-(-3)+3)
+(P(-3)=-243+135+81+3+3)
+(P(-3)=-21)
+Because (-3) is a not a zero of (P(x)), you can use the Factor Theorem to conclude that (x+3) is not a factor of (P(x)).
+\answer{B. (x+3) is not a factor of (P(x)); (P(-3)=-21).}
+\end{example}
+\begin{tryit}{5}
+Use the Factor Theorem to determine whether the given binomial is a factor of (P(x)).
+a. (P(x)=x^3-10x^2+28x-16); binomial: (x-4)
+b. (P(x)=2x^4+9x^3-2x^2+6x-40); binomial: (x+5)
+\answer{a. The remainder is 0, so (x-4) is a factor of (P(x)=x^3-10x^2+28x-16); (P(x)=(x-4)(x^2-6x+4))
+b. The remainder is 5, not 0, so (x+5) is not a factor of (P(x)=2x^4+9x^3-2x^2+6x-40).}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Why is the binomial not a factor of the polynomial if the remainder is not 0?
+\answer{If there is a remainder, then the divisor does not divide evenly into the dividend.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 3, 4, \& 5
+Make Sense and Persevere Is (x-2) a factor of (x^5+x^4-6x^3+2x^2-11x+15)? If not, what is the remainder?
+\answer{no; 1}
+\end{te-addendum}
+% Source page 54: 147 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Dividing Polynomials}
+Q: What are two methods used to divide polynomials? When should each method be used?
+\answer{The two methods are long division and synthetic division. Long division can be used anytime. Synthetic division is used when the divisor is linear and the leading coefficient of the divisor is 1.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Exercise 7 Students may substitute 9 instead of (-9) into the polynomial (P(x)) when checking to see if (x+9) is a factor of it. Have students refer back to the Remainder Theorem, and ask them to identify the value of (a).
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Dividing Polynomials}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\textbf{LONG DIVISION}
+Long division can be used for any polynomial division.
+\begin{tabular}{r|rrrr}
+ & & (x^2) & (+x) & (+4) \\
+(x-9) & (x^3) & (-8x^2) & (-5x) & (-30) \\
+ & (-(x^3) & (-9x^2)) & & \\
+\cline{2-5}
+ & & (x^2) & (-5x) & (-30) \\
+ & & (-(x^2) & (-9x)) & \\
+\cline{3-5}
+ & & & (4x) & (-30) \\
+ & & & (-(4x) & (-36)) \\
+\cline{4-5}
+ & & & & 6 \\
+\end{tabular}
+\textbf{SYNTHETIC DIVISION}
+Synthetic division may only be used when the divisor is linear and its leading coefficient is 1.
+\begin{tabular}{r|rrrr}
+9 & 1 & (-8) & (-5) & (-30) \\
+ & & 9 & 9 & 36 \\
+\hline
+ & 1 & 1 & 4 & 6 \\
+\end{tabular}
+Either method shows that (x^3-8x^2-5x-30=(x^2+x+4)(x-9)+6)
+\textbf{REMAINDER THEOREM}
+If a polynomial (P(x)) is divided by a linear divisor (x-a), the remainder is (P(a)).
+(P(x)=x^3-2x+1) divided by (x-2) has remainder 5.
+\begin{tabular}{r|rrrr}
+2 & 1 & 0 & (-2) & 1 \\
+ & & 2 & 4 & 4 \\
+\hline
+ & 1 & 2 & 2 & 5 \\
+\end{tabular}
+(P(2)=5)
+\textbf{FACTOR THEOREM}
+The binomial (x-a) is a factor of (P(x)) if and only if (P(a)=0).
+(P(x)=2x^4-5x^3-12x^2+x-4) divided by (x-4) has remainder 0.
+\begin{tabular}{r|rrrrr}
+4 & 2 & (-5) & (-12) & 1 & (-4) \\
+ & & 8 & 12 & 0 & 4 \\
+\hline
+ & 2 & 3 & 0 & 1 & 0 \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you divide polynomials?
+\answer{You can use long division or synthetic division to divide polynomials. The process is similar to long division with numbers: ask how many times the divisor goes into the quotient, write the partial quotient, multiply, and subtract. Then bring down the next term(s) and repeat the process until what is left after subtraction has a smaller degree than the divisor. That is then the remainder.}
+\te{Printed explanation says the divisor goes into the quotient; likely dividend.}
+2. Error Analysis Jettie said the remainder of (x^3+2x^2-4x+6) divided by (x+5) is 149. Is Jettie correct? Explain.
+\answer{No; Substitute (-5) for (x) in the expression: ((-5)^3+2(-5)^2-4(-5)+6=-49). So, the remainder is (-49), not 149.}
+3. Look for Relationships You divide a polynomial (P(x)) by a linear expression (D(x)). You find a quotient (Q(x)) and a remainder (R(x)). How can you check your work?
+\answer{The dividend, (P(x)), is equal to the product of the quotient, (Q(x)), and the divisor, (D(x)), plus the remainder, (R(x)). So, (P(x)=Q(x)\cdot D(x)+R(x)).}
+\textbf{Do You KNOW HOW?}
+4. Use long division to divide (x^4-4x^3+12x^2-3x+6) by (x^2+8).
+\answer{(x^2-4x+4+\frac{29x-26}{x^2+8})}
+5. Use synthetic division to divide (x^3-8x^2+9x-5) by (x-3).
+\answer{(x^2-5x-6-\frac{23}{x-3})}
+6. Use the Remainder Theorem to find the remainder of (2x^4+x^2-10x-1) divided by (x+2).
+\answer{(f(-2)=2(-2)^4+(-2)^2-10(-2)-1=55)}
+7. Is (x+9) a factor of the polynomial (P(x)=x^3+11x^2+15x-27)? If so, write the polynomial as a product of two factors. If not, explain how you know.
+\answer{The remainder is 0, so (x+9) is a factor of (P(x)=x^3+11x^2+15x-27); (P(x)=(x+9)(x^2+2x-3))}
+\end{concept-summary}
+\begin{te-addendum}{Practice}{RtISupport}
+\textbf{Practice \& Problem Solving}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+\textbf{Lesson Practice} You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+8--10, 16--38 & 8--38 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 16--19 & 1 \\
+1 & 10, 14, 35 & 2 \\
+1 & 11 & 3 \\
+2 & 20--23 & 1 \\
+2 & 33, 34, 38 & 3 \\
+3 & 24 & 1 \\
+3 & 8 & 2 \\
+3 & 15 & 3 \\
+4 & 25--28 & 1 \\
+4 & 12, 13 & 2 \\
+5 & 29--32, 36 & 1 \\
+5 & 9, 37 & 2 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{8}{2}
+\textbf{Reason} Write a polynomial division problem with a quotient of (x^2-5x+7) and a remainder of 2. Explain your reasoning. How can you verify your answer?
+\answer{(x^3-6x^2+12x-5) divided by (x-1); I multiplied (x^2-5x+7) by (x-1), and then added the remainder, 2. To check, use long division or synthetic division.}
+\end{practice}
+\begin{practice}{9}{2}
+\textbf{Communicate Precisely} Show that (x-3) and (x+5) are factors of (x^4+2x^3-16x^2-2x+15). Explain your reasoning.
+\answer{First use synthetic division to divide (x^4+2x^3-16x^2-2x+15) by (x-3). The remainder is 0, so (x-3) is a factor of (x^4+2x^3-16x^2-2x+15). The quotient is (x^3+5x^2-x-5). Now use synthetic division to divide (x^3+5x^2-x-5) by (x+5).
+\begin{tabular}{r|rrrr}
+(-5) & 1 & 5 & (-1) & (-5) \\
+ & & (-5) & 0 & 5 \\
+\hline
+ & 1 & 0 & (-1) & 0 \\
+\end{tabular}
+The remainder is 0, so (x+5) is a factor of (x^3+5x^2-x-5), and therefore a factor of (x^4+2x^3-16x^2-2x+15).}
+\end{practice}
+\begin{practice}{10}{2}
+\textbf{Error Analysis} Alana divided the polynomial (2x^3-4x^2+6x+10) by (x^2+x). Describe and correct the error Alana made in dividing the polynomials.
+\begin{tabular}{rl}
+ & (2x-6+\frac{10}{x^2+x}) \\
+(x^2+x) & (2x^3-4x^2+6x+10) \\
+ & (-(2x^3+2x^2)) \\
+\hline
+ & (-6x^2+6x) \\
+ & (-(-6x^2-6x)) \\
+\hline
+ & 10 \\
+\end{tabular}
+\answer{Alana subtracted (-6x^2-6x) from (-6x^2+6x) and got a difference of 0. The difference is (12x). So, the remainder should be (\frac{12x+10}{x^2+x}).}
+\te{The printed key calls the fractional term the remainder; the polynomial remainder is (12x+10).}
+\end{practice}
+\begin{practice}{11}{3}
+\textbf{Higher Order Thinking} When dividing polynomial (P(x)) by polynomial (d(x)), the remainder is (R(x)). The remainder can also be written as (\frac{R(x)}{d(x)}). How can you use the degrees of (R(x)) and (d(x)) to determine whether you are finished dividing?
+\answer{If the degree of (R(x)) is greater than or equal to the degree of (d(x)), then you are not finished dividing. If the degree of (R(x)) is less than the degree of (d(x)), then the division is complete.}
+\end{practice}
+\begin{practice}{12}{2}
+\textbf{Look for Relationships} When dividing polynomial (P(x)) by polynomial (x-n), the remainder is 0. When graphing (P(x)), what is an (x)-intercept of the graph?
+\answer{((n,0))}
+\end{practice}
+\begin{practice}{13}{2}
+\textbf{Reason} When dividing (x^3+nx^2+4nx-6) by (x+3), the remainder is (-48). What is the value of (n)?
+\answer{(n=5)}
+\end{practice}
+\begin{practice}{14}{2}
+\textbf{Mathematical Connections} Use polynomial long division to divide (4x^3+8) by (x-3). Repeat using synthetic division. Did you get the same answer? Show your work.
+\answer{
+\begin{tabular}{rl}
+ & (4x^2+12x+36+\frac{27}{x-3}) \\
+(x-3) & (4x^3+0x^2+0x-81) \\
+ & (4x^3-12x^2) \\
+\hline
+ & (12x^2+0x) \\
+ & (12x^2-36x) \\
+\hline
+ & (36x-81) \\
+ & (36x-108) \\
+\hline
+ & 27 \\
+\end{tabular}
+\begin{tabular}{r|rrrr}
+3 & 4 & 0 & 0 & (-81) \\
+ & & 12 & 36 & 108 \\
+\hline
+ & 4 & 12 & 36 & r27 \\
+\end{tabular}
+(4x^2+12x+36+\frac{27}{x-3})}
+\te{The prompt gives (4x^3+8); the printed worked answer divides (4x^3-81).}
+\end{practice}
+\begin{practice}{15}{3}
+\textbf{Construct Arguments} Prove the Factor Theorem: The expression (x-a) is a factor of a polynomial (P(x)) if and only if (P(a)=0).
+\answer{If (x-a) is a factor of (P(x)), then (P(a)=0) because
+(P(x)=Q(x)(x-a))
+(P(a)=Q(a)(a-a))
+(P(a)=Q(a)(0-0)). So (P(a)=0).
+If (P(a)=0), then ((x-a)) must be a factor because any polynomial may be written as
+(P(x)=Q(x)(x-a)+r). By the Remainder Theorem
+(P(x)=Q(x)(x-a)+P(a)), substitute the given.
+(P(x)=Q(x)(x-a)+0), so (P(x)=Q(x)(x-a)) and (x-a) must be a factor of (P(x)).}
+\end{practice}
+\begin{practice}{16}{1}
+Use long division to divide. SEE EXAMPLE 1
+(x^3+5x^2-x-5) divided by (x-1)
+\answer{(x^2+6x+5)}
+\end{practice}
+\begin{practice}{17}{1}
+Use long division to divide. SEE EXAMPLE 1
+(2x^3+9x^2+10x+3) divided by (2x+1)
+\answer{(x^2+4x+3)}
+\end{practice}
+\begin{practice}{18}{1}
+Use long division to divide. SEE EXAMPLE 1
+(3x^3-2x^2+7x+9) divided by (x^2-3x)
+\answer{(3x+7+\frac{28x+9}{x^2-3x})}
+\end{practice}
+\begin{practice}{19}{1}
+Use long division to divide. SEE EXAMPLE 1
+(2x^4-6x^2+3) divided by (2x-6)
+\answer{(x^3+3x^2+6x+18+\frac{111}{2x-6})}
+\end{practice}
+\begin{practice}{20}{1}
+Use synthetic division to divide. SEE EXAMPLE 2
+(x^4-25x^2+144) divided by (x-4)
+\answer{(x^3+4x^2-9x-36)}
+\end{practice}
+\begin{practice}{21}{1}
+Use synthetic division to divide. SEE EXAMPLE 2
+(x^3+6x^2+3x-10) divided by (x+5)
+\answer{(x^2+x-2)}
+\end{practice}
+\begin{practice}{22}{1}
+Use synthetic division to divide. SEE EXAMPLE 2
+(x^5+2x^4-3x^3+x-1) divided by (x+2)
+\answer{(x^4-3x^2+6x-11+\frac{21}{x+2})}
+\end{practice}
+\begin{practice}{23}{1}
+Use synthetic division to divide. SEE EXAMPLE 2
+(-x^4+7x^3+x^2-2x-12) divided by (x-3)
+\answer{(-x^3+4x^2+13x+37+\frac{99}{x-3})}
+\end{practice}
+\begin{practice}{24}{1}
+Use synthetic division to show that the remainder of (f(x)=x^4-6x^3-33x^2+46x+75) divided by (x-9) is (f(9)). SEE EXAMPLE 3
+\answer{(f(9)=(9)^4-6(9)^3-33(9)^2+46(9)+75=3)
+\begin{tabular}{r|rrrrr}
+9 & 1 & (-6) & (-33) & 46 & 75 \\
+ & & 9 & 27 & (-54) & (-72) \\
+\hline
+ & 1 & 3 & (-6) & (-8) & 3 \\
+\end{tabular}
+The remainder is 3, and since (f(9)=3), the Remainder Theorem is verified.}
+\end{practice}
+\begin{practice}{25}{1}
+Use the Remainder Theorem to evaluate each polynomial for the given value of (x). SEE EXAMPLE 4
+(f(x)=x^3+9x^2+3x-7); (x=-5)
+\answer{78}
+\end{practice}
+\begin{practice}{26}{1}
+Use the Remainder Theorem to evaluate each polynomial for the given value of (x). SEE EXAMPLE 4
+(f(x)=2x^3-3x^2+4x+13); (x=3)
+\answer{52}
+\end{practice}
+\begin{practice}{27}{1}
+Use the Remainder Theorem to evaluate each polynomial for the given value of (x). SEE EXAMPLE 4
+(f(x)=-x^4+2x^3-x^2+4x+8); (x=-2)
+\answer{(-36)}
+\end{practice}
+\begin{practice}{28}{1}
+Use the Remainder Theorem to evaluate each polynomial for the given value of (x). SEE EXAMPLE 4
+(f(x)=x^5-3x^4-2x^3+x^2-2x-1); (x=4)
+\answer{135}
+\end{practice}
+\begin{practice}{29}{1}
+Is each given binomial a factor of the given polynomial? If so, write the polynomial as a product of two factors. SEE EXAMPLE 5
+polynomial: (P(x)=8x^3-10x^2+28x-16); binomial: (x-3)
+\answer{The remainder is not 0, so (x-3) is not a factor of (P(x)=8x^3-10x^2+28x-16).}
+\end{practice}
+\begin{practice}{30}{1}
+Is each given binomial a factor of the given polynomial? If so, write the polynomial as a product of two factors. SEE EXAMPLE 5
+polynomial: (P(x)=4x^4-9x^3-7x^2-2x+25); binomial: (x+4)
+\answer{The remainder is not 0, so (x+4) is not a factor of (P(x)=4x^4-9x^3-7x^2-2x+25).}
+\end{practice}
+\begin{practice}{31}{1}
+Is each given binomial a factor of the given polynomial? If so, write the polynomial as a product of two factors. SEE EXAMPLE 5
+polynomial: (P(x)=-x^5+12x^3+6x^2-23x+1); binomial: (x-2)
+\answer{The remainder is not 0, so (x-2) is not a factor of (P(x)=-x^5+12x^3+6x^2-23x+1).}
+\end{practice}
+\begin{practice}{32}{1}
+Is each given binomial a factor of the given polynomial? If so, write the polynomial as a product of two factors. SEE EXAMPLE 5
+polynomial: (P(x)=2x^3+3x^2-8x-12); binomial: (2x+3)
+\answer{The remainder is 0, so (2x+3) is a factor of (P(x)=2x^3+3x^2-8x-12); (P(x)=(2x+3)(x^2-4)).}
+\end{practice}
+\begin{practice}{33}{3}
+\textbf{Model With Mathematics} Darren is placing shipping boxes in a storage unit with a floor area of (x^4+5x^3+x^2-20x-14) square units. Each box has a volume of (x^3+10x^2+29x+20) cubic units and a height of (x+5) units.
+\placeholder{illustration}{Storage unit and shipping boxes; box height (x+5)}
+a. How much floor space will each box cover?
+\answer{(x^2+5x+4) square units}
+b. What is the maximum number of boxes Darren can place on the floor of the storage unit?
+\answer{(x^2-3) boxes}
+c. Assume Darren places the maximum number of boxes on the floor of the storage unit, with no overlap. How much of the floor space is not covered by a box?
+\answer{(-5x-2) square units}
+\te{The printed answer for part c is negative for positive (x); retained as printed.}
+\end{practice}
+\begin{practice}{34}{3}
+\textbf{Reason} Dajuan wants to determine the length and height of his DVD stand. The function (f(x)=x^3+14x^2+57x+72) represents the volume of the DVD stand, where the width is (x+3) units. What are possible dimensions for the length and height of the DVD stand? Explain.
+\answer{Use synthetic division to divide (x^3+14x^2+57x+72) by (x+3). The quotient is (x^2+11x+24). Factor (x^2+11x+24) to get ((x+3)(x+8)). So, (x+3) and (x+8) are possible dimensions for the length and height of the DVD stand.}
+\end{practice}
+\begin{practice}{35}{2}
+\textbf{Make Sense and Persevere} Given the number of miles and hours traveled, what rate did the semi-truck travel? (Hint: Use the formula (d=rt), where (d) is the distance, (r) is the rate, and (t) is the time.)
+\placeholder{illustration}{Semi-truck; Miles (6x cubed plus x squared plus 20x minus 11); Hours (2x minus 1)}
+Miles: (6x^3+x^2+20x-11). Hours: (2x-1).
+\answer{(3x^2+2x+11) mi/h}
+\end{practice}
+\begin{practice}{36}{1}
+\textbf{Assessment Practice} When the polynomial (P(x)) is divided by the linear factor (x-n), the remainder is 0. What can you conclude? Select all that apply.
+\begin{enumerate}
+\item[A.] (P(x)=0)
+\item[B.] (P(n)=0)
+\item[C.] (P(-n)=0)
+\item[D.] (x-n) is a factor of (P(x)).
+\item[E.] (x+n) is a factor of (P(x)).
+\end{enumerate}
+\answer{B, D}
+\end{practice}
+\begin{practice}{37}{2}
+\textbf{SAT/ACT} (x+3) is a factor of the polynomial (x^3+2x^2-5x+n). What is the value of (n)?
+\begin{enumerate}
+\item[A.] (-6)
+\item[B.] (-3)
+\item[C.] (-2)
+\item[D.] 3
+\item[E.] 6
+\end{enumerate}
+\answer{A}
+\end{practice}
+\begin{practice}{38}{3}
+\textbf{Performance Task} The table shows some quotients of the polynomial (x^n-1) divided by the linear factor (x-1).
+\begin{tabular}{lll}
+Dividend & Divisor & Quotient \\
+(x^2-1) & (x-1) & (x+1) \\
+(x^3-1) & (x-1) & (x^2+x+1) \\
+(x^4-1) & (x-1) & \\
+(x^5-1) & (x-1) & \\
+(x^6-1) & (x-1) & \\
+\end{tabular}
+\textbf{Part A} Use long division or synthetic division to find the missing quotients to complete the table.
+\answer{(x^3+x^2+x+1); (x^4+x^3+x^2+x+1); (x^5+x^4+x^3+x^2+x+1)}
+\textbf{Part B} Look for a pattern. Then describe the pattern when (x^n-1) is divided by (x-1).
+\answer{When (x^n-1) is divided by (x-1), the quotient is (x^{n-1}+x^{n-2}+x^{n-3}+\cdots+x+1).}
+\textbf{Part C} Use the pattern to find the quotient when (x^{10}-1) is divided by (x-1).
+\answer{(x^9+x^8+x^7+x^6+x^5+x^4+x^3+x^2+x+1)}
+\end{practice}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Lesson Quiz}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & A74 \\
+2 & 2 & A75 \\
+3 & 2 & A74 \\
+4 & 2 & F01 \\
+5 & 2 & A75 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{3-4 Lesson Quiz: Dividing Polynomials}
+1. Use long division to divide (x^3+x^2-2x+14) by (x+3).
+Choices: (x^2), (2x), (-2x), (4x), (-8), 4, 10, (-\frac{10}{x+3}), (\frac{2}{x+3}), (\frac{38}{x+3}), (\frac{44}{x+3}).
+\answer{(x^2)+(-2x)+(4)+(\frac{2}{x+3})}
+2. Morgan begins to use synthetic division to divide (x^4+x^3-6x^2-4x+8) by (x-2), as shown at the right. Which of the following shows the correct values to replace the question marks, and also gives the quotient?
+\begin{tabular}{r|rrrrr}
+2 & 1 & 1 & (-6) & (-4) & 8 \\
+ & & ? & ? & ? & ? \\
+\hline
+\end{tabular}
+\begin{enumerate}
+\item[A.] 2, 6, 0, (-8); (x^3-3x^2+4)
+\item[B.] 2, 6, 0, (-8); (x^3+3x^2-4)
+\item[C.] 1, 3, 0, (-4); (x^2+3x-4)
+\item[D.] 1, 1, (-6), (-4); (x^3+3x^2-4)
+\end{enumerate}
+\answer{B}
+3. Verify the Remainder Theorem if (P(x)=2x^3-x^2+4x+5) is divided by (x+2). Complete the sentences.
+When (P(x)) is divided by (x+2), the remainder is [(-23), (-7), 1, 33].
+(P(-2)=) [(-25), (-23), 9, 25].
+Does this example verify the Remainder Theorem? [Yes, No]
+\answer{(-23); (-23); Yes}
+4. What is the remainder if (f(x)=x^4-5x^2-6x-10) is divided by (x-3)?
+\begin{enumerate}
+\item[A.] (-46)
+\item[B.] 8
+\item[C.] 44
+\item[D.] 224
+\end{enumerate}
+\answer{B}
+5. If (x+2) is a factor of (P(x)=2x^3+5x^2+5x+6), select the two factors that express (P(x)) as a product.
+\begin{enumerate}
+\item[A.] ((x+2))
+\item[B.] ((2x^2-x-3))
+\item[C.] ((2x^2-x+3))
+\item[D.] ((2x^2+x-3))
+\item[E.] ((2x^2+x+3))
+\item[F.] not a factor
+\end{enumerate}
+\answer{A, E}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Differentiated Resources}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding (I)}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{3-4 Reteach to Build Understanding: Dividing Polynomials}
+1. Complete the diagram shown using synthetic division to solve the equation ((-2x^3+15x^2-22x-15)\div(x-3)).
+\textbf{Step 1} Begin by bringing the coefficients down from the equation and write each number in the box.
+\textbf{Step 2} Bring the first number down to the box below. Multiply this number by 3 and write the product in the circle.
+\textbf{Step 3} Add the number in the circle to the number in the box above. Write the sum in the box below.
+\textbf{Step 4} Multiply the number in the box by 3 and write the product in the circle. Repeat the process until all columns are complete.
+\textbf{Step 5} Bring the numbers from the bottom boxes to complete the dividend and remainder.
+\placeholder{diagram}{Synthetic division flow diagram with boxes circles and arrows}
+\answer{
+\begin{tabular}{r|rrrr}
+3 & (-2) & 15 & (-22) & (-15) \\
+ & & (-6) & 27 & 15 \\
+\hline
+ & (-2) & 9 & 5 & 0 \\
+\end{tabular}
+((x-3)(-2x^2+9x+5)+0)}
+2. Corey concluded that the remainder of ((3x^3+8x^2-4x-3)\div(x+2)) is 45. What error did he make?
+\answer{Corey was using the Remainder Theorem and solved for (P(2)) instead of (P(-2)). The correct remainder is 13.}
+3. Use the Remainder Theorem to determine what the remainder of ((x^3+3x^2-6x-8)\div(x+2)).
+Since (a=-2), use the Remainder Theorem to find (P(-2)).
+\answer{(P(-2)=(-2)^3+3(-2)^2-6(-2)-8=-8+12+12-8=8). The remainder is 8.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice (I, O)}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{3-4 Additional Practice: Dividing Polynomials}
+\textbf{Divide using long division.}
+1. ((x^2-13x-48)\div(x+3))
+\answer{(x-16)}
+2. ((x^3+5x^2-3x-1)\div(x-1))
+\answer{(x^2+6x+3), R 2}
+3. ((3x^3-x^2-7x+6)\div(x+2))
+\answer{(3x^2-7x+7), R (-8)}
+\textbf{Divide using synthetic division.}
+4. ((x^3-8x^2+17x-10)\div(x-5))
+\answer{(x^2-3x+2)}
+5. ((x^3+5x^2-x-9)\div(x+2))
+\answer{(x^2+3x-7), R 5}
+6. ((2x^4+7x^3-11x^2+21x+5)\div(x+5))
+\answer{(2x^3-3x^2+4x+1)}
+7. Verify the Remainder Theorem if (P(x)=x^3-5x^2-7x+25) is divided by ((x-5)). Explain.
+\answer{Sample Answer: (P(5)=(5)^3-5(5)^2-7(5)+25=125-125-35+25=-10)
+\begin{tabular}{r|rrrr}
+5 & 1 & (-5) & (-7) & 25 \\
+ & & 5 & 0 & (-35) \\
+\hline
+ & 1 & 0 & (-7) & (-10) \\
+\end{tabular}
+The remainder is (-10), and since (P(5)=-10), the Remainder Theorem is verified.}
+Determine whether each binomial is a factor of (x^3+3x^2-10x-24).
+8. (x+4) \answer{yes}
+9. (x-3) \answer{yes}
+10. (x+6) \answer{no}
+11. The volume, in cubic inches, of a rectangular box can be expressed as the product of its three dimensions and with the function (V(x)=x^3-16x^2+79x-120). The length of the box is represented by the expression (x-8). Find linear expressions with integer coefficients for the width and height. Hint: The width is greater than the height.
+\answer{width: (x-3); height: (x-5)}
+12. What does it mean if (P(-4)) for the polynomial function (P(x)=x^3+11x^2+34x+24=0)?
+\answer{Sample answer: It means that ((x+4)) is a factor of the polynomial.}
+\te{Item 12 has the printed equation and incomplete wording retained.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment (O, A)}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{3-4 Enrichment: Dividing Polynomials}
+When each polynomial is divided by one of the divisors from the list, it will result in one of the remainders from the list. Find the divisor and remainder that go with each polynomial. Then match the letter that corresponds with the remainder to answer the riddle.
+Divisors: ((x+2)), ((x+1)), ((x-3)), ((x-2)), ((x+5)).
+Remainders:
+\begin{tabular}{ll}
+A. 11,484,665 & B. 8,025 \\
+C. (-63) & E. 27,578,435 \\
+G. 7,971 & H. 1,490 \\
+L. (-12,918) & P. 473 \\
+R. 13,386 & S. (-1,490) \\
+\end{tabular}
+\begin{tabular}{llll}
+ & Polynomial & Divisors & Remainders \\
+1. & (3x^4+7x^3-5x^2+20x+8000) & ((x+1)) & 7,971 \\
+2. & (6x^7+3x^4-x^2+10x) & ((x-3)) & 13,386 \\
+3. & (2x^{10}+4x^9+3x^7+2x+300) & ((x+5)) & 11,484,665 \\
+4. & (20x^3+42x^2+54x+37) & ((x-2)) & 473 \\
+5. & (-8x^7-12x^5-4x^3-25x) & ((x+2)) & 1,490 \\
+\end{tabular}
+What is the most stable form of carbon? \answer{G R A P H I T E.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary (I, O)}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{3-4 Mathematical Literacy and Vocabulary: Dividing Polynomials}
+What is the solution of the equation ((x^3+2x^2+6x-9)\div(x-2))? Explain your work.
+\begin{tabular}{ll}
+((x^3+2x^2+6x-9)\div(x-2)); 2 | 1, 2, 6, (-9) & Reverse the sign of the constant term in the divisor and bring down the coefficients in the dividend. \\
+2 | 1, 2, 6, (-9); product 2; bottom 1, 4 & Bring down the first coefficient. Multiply the number from the divisor by the first coefficient. Write the result under the second coefficient. Then add. \\
+2 | 1, 2, 6, (-9); products 2, 8, 28; bottom 1, 4, 14, 19 & Multiply the number from the divisor by the second coefficient. Write the result under the third coefficient. Then add. Multiply the number from the divisor by the third coefficient. Write the result under the fourth coefficient. Then add. \\
+((x^2+4x+14)(x-2)+19) & Use the coefficients in the bottom row to write the quotient. The first number is the coefficient of the term that is one degree less than the original degree. The last number is the remainder. \\
+\end{tabular}
+\textbf{Exercise:}
+What is the solution of the equation ((x^3-5x^2-2x+24)\div(x-3))? Explain your work.
+\answer{
+\begin{tabular}{ll}
+((x^3-5x^2-2x+24)\div(x-3)); 3 | 1, (-5), (-2), 24 & Reverse the sign of the constant term in the divisor and bring down the coefficients in the dividend. \\
+3 | 1, (-5), (-2), 24; product 3; bottom 1, (-2) & Bring down the first coefficient. Multiply the number from the divisor by the first coefficient. Write the result under the second coefficient. Then add. \\
+3 | 1, (-5), (-2), 24; products 3, (-6), (-24); bottom 1, (-2), (-8), 0 & Multiply the number from the divisor by the second coefficient. Write the result under the third coefficient. Then add. Multiply the number from the divisor by the third coefficient. Write the result under the fourth coefficient. Then add. \\
+((x^2-2x-8)(x-3)) & Use the coefficients in the bottom row to write the quotient. The first number is the coefficient of the term that is one degree less than the original degree. The last number is the remainder. \\
+\end{tabular}}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{illustration}{Digital differentiated resources tablet screenshot with system of equations and coordinate grid}
+Solve the system of equations by graphing. (y=3x+4); (y=-2x+4).
+Use the graphing tool to graph the system. Click to enlarge graph.
+Question Help: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.
+\end{te-addendum}
+
+\end{document}

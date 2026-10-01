@@ -1,0 +1,912 @@
+\documentclass{article}
+% Source: Topic_10_Teacher_Edition.pdf, PDF pages 12-23 (printed pages 483A-490B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 12: 483A Lesson Overview
+\begin{lesson-meta}
+lesson: 10-1
+title: Operations with Matrices
+standards: none printed
+practices: none printed
+objective: I CAN... interpret the parts of a matrix and use matrices for addition, subtraction, and scalar multiplication.
+
+essential question: How can you interpret matrices and operate with matrices?
+
+\textbf{VOCABULARY}
+\item dimensions
+\item equal matrices
+\item matrix
+\item scalar
+\item scalar multiplication
+\item zero matrix
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 10-1 \\
+Title & Operations with Matrices \\
+Standards & none printed \\
+I CAN Objective & I CAN... interpret the parts of a matrix and use matrices for addition, subtraction, and scalar multiplication. \\
+Essential Question & How can you interpret matrices and operate with matrices? \\
+Lesson Vocabulary & dimensions; equal matrices; matrix; scalar; scalar multiplication; zero matrix \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use a matrix to represent data.
+\item Apply scalar multiplication to produce a new matrix.
+\item Add and subtract matrices by adding and subtracting the corresponding elements.
+\item Translate and dilate figures using matrices.
+Essential Understanding. A matrix uses rows and columns to represent data. To multiply a matrix by a scalar, multiply each element in the matrix by the scalar. To add or subtract matrices, add or subtract the corresponding elements.
+\textbf{COHERENCE}
+Previously in this courses, students:
+\item Represented and interpreted data in a table and on the coordinate plane.
+In this lesson, students:
+\item Represent data using matrices and use scalar multiplication to create new matrices.
+\item Add and subtract matrices to solve problems.
+Increasing Coherence. This lesson is not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Find the product of matrices to solve problems or explain why a product cannot be determined.
+\te{Printed "in this courses"; likely "in this course".}
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+\item Students add or subtract matrices with the same dimensions by adding or subtracting the corresponding elements.
+\item Students apply scalar multiplication to matrices to solve real-world problems, such as finding the sales tax for each item represented by the elements of a matrix.
+\textbf{Mathematics Overview}
+Students represent data values in a matrix and use scalar multiplication to generate a new set of data values. They also add or subtract matrices. Students then use operations with matrices to translate or dilate figures.
+\textbf{Applying Math Practices}
+Model With Mathematics. Students see data presented in a table and recognize that representing such data in a matrix can be used to solve real-world problems, such as converting all elements in the matrix from seconds to minutes.
+Attend to Precision. Students understand the meanings of symbols used in mathematics when they recognize that the subscripts represent first the row and then the column where a specific element in a matrix is located.
+SavvasRealize.com. Program Resources.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+Glossary is available at SavvasRealize.com.
+\textbf{Vocabulary Builder: NEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+dimensions & dimensiones \\
+equal matrices & matrices equivalentes \\
+matrix & matriz \\
+scalar & escalar \\
+scalar multiplication & multiplicación escalar \\
+zero matrix & matriz cero \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Discuss students' previous understanding of the word scale as it has been used in mathematics, such as in a scaled drawing. Use this understanding to introduce the terms scalar and scalar multiplication. Have students complete the sentences.
+1. Multiplication of each element in a matrix by a single real number is called \underline{\hspace{1cm}}.
+\answer{scalar multiplication}
+2. The number multiplied by each element in a matrix is the \underline{\hspace{1cm}}.
+\answer{scalar}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 12 964 752 1114 930
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS; purple and blue circular abstract artwork on black.}
+\end{te-addendum}
+% Source page 13: 483B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. MODEL \& DISCUSS}
+INSTRUCTIONAL FOCUS Students explore constructing tables showing the merchandise sold, the remaining inventory, and the relationship between them. By representing real-world data in tables, students are prepared to understand and interpret data as it is presented in matrices.
+STUDENT COMPANION Students can complete the Model \& Discuss activity in their Student Companion.
+Model \& Discuss is available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS: Implement Tasks that Promote Reasoning and Problem Solving}
+Q: What do you notice about the information on the computer screen?
+\answer{The computer screen shows two different-colored shirts and how many of each size are in stock in each color.}
+Q: What other information might you want to know about the shirts being sold at the boutique?
+\answer{Samples: how many are sold; how much they cost}
+\textbf{During SMALL GROUP: Support Productive Struggle in Learning Mathematics}
+Q: Why would you use a table to summarize this information?
+\answer{It organizes the data and makes it easier to understand and read.}
+For Early Finishers
+Q: How could you create a table showing the profits the boutique makes on the sales of shirts? Explain. Construct a table summarizing the profits.
+\answer{Sample: Make a table that shows how much the boutique paid for the shirts, how much they sold them for, and what the difference in these totals is. Check students' tables.}
+\textbf{After WHOLE CLASS: Facilitate Meaningful Mathematical Discourse}
+Q: How do you find the number of shirts left?
+\answer{Subtract the number sold from the number originally in the inventory.}
+Q: What are other ways this data could be represented?
+\answer{Samples: on a spreadsheet; in an organized list}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with MODEL \& DISCUSS. Make Sense and Persevere}
+A student summarized the information given in the problem in 2 rows and 4 columns. In Part B, he summarized the information about the number of shirts sold in a table that had 4 rows and 2 columns. Was this organizational strategy helpful? Explain.
+\answer{No; This strategy would make it difficult for Edwin to pair up the corresponding entries.}
+\te{Printed answer names Edwin, who is not named in the prompt.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{MODEL \& DISCUSS}
+This screen shows the number of Small, Medium, Large, and Extra Large limited-edition silkscreen shirts on sale at an online boutique.
+% FIG 13 965 640 1122 760
+\placeholder{illustration}{Tablet showing Online Shopping Club, Exclusive Edition T-Shirts on Sale! Blue shirt has white pi symbol, with S 23, M 53, L 21, XL 32; red shirt has white square-root-x symbol, with S 11, M 45, L 25, XL 28.}
+A. Construct a table to summarize the inventory that is on sale.
+\answer{\begin{tabular}{lrrrr}
+ & S & M & L & XL \\
+Red & 23 & 53 & 21 & 32 \\
+Blue & 11 & 45 & 25 & 28 \\
+\end{tabular}}
+B. At the end of the day, the boutique has sold this many of each T-shirt from the sale items: red: 4 S, 6 M, 3 L, 5 XL; blue: 2 S, 8 M, 4 L, 0 XL. Make two new tables, one showing the merchandise sold and one showing the inventory that is left.
+\answer{Purchases:
+\begin{tabular}{lrrrr}
+ & S & M & L & XL \\
+Red & 4 & 6 & 3 & 5 \\
+Blue & 2 & 8 & 4 & 0 \\
+\end{tabular}
+Remaining Inventory:
+\begin{tabular}{lrrrr}
+ & S & M & L & XL \\
+Red & 19 & 47 & 18 & 27 \\
+Blue & 9 & 37 & 21 & 28 \\
+\end{tabular}}
+C. Look for Relationships What relationships did you use in creating the two tables in Part B?
+\answer{To create the purchases table, I used the same row and columns heads as in Part A. Then I subtracted the corresponding numbers in the two tables to create the remaining inventory table.}
+\te{Printed answer tables reverse the blue and red inventory counts shown on the shirts. Printed "columns heads"; likely "column heads".}
+\te{Digital variant: Go back. MODEL \& DISCUSS. The chart shows the number of Small, Medium, Large, and Extra Large limited-edition silkscreen shirts on sale at an online boutique: A. Construct a table to summarize the inventory that is on sale.}
+% FIG 13 637 187 1152 532
+\placeholder{illustration}{Digital Model and Discuss preview: Online Shopping Club, Exclusive Edition T-Shirts on Sale! Blue shirt S 23, M 53, L 21, XL 32; red shirt S 11, M 45, L 25, XL 28. Blank response table below has three columns and five rows including dark header row; first column shaded green. Go back control at top.}
+\end{model-discuss}
+% Source page 14: 483 Understand and Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Students are introduced to matrices and the ways in which they are helpful for organizing data. Students learn to interpret and use matrices to add, subtract, and multiply by a scalar.
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{EXAMPLE 1 Represent Data With a Matrix. Use and Connect Mathematical Representations}
+PART A
+Q: How can you interpret each number in the matrix?
+\answer{The rows represent the clothing items, and the columns represent the sizes. If you find the row of a clothing item and then the column of the size, the number in that position tells how many pieces there are available of that clothing item in that size.}
+PART B
+Q: Why is it important to refer to the row before the column in the matrix notation?
+\answer{The subscript lists the row first and then the column. If the numbers are reversed, the wrong element, or number, could be identified.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 2}
+Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.
+The leader of a travel group pays for breakfast (\$7), lunch (\$10), and dinner (\$15). The group has 13 people. Write a matrix equation to calculate the total amount paid for each meal.
+(13\begin{bmatrix}7\\10\\15\end{bmatrix}=\begin{bmatrix}91\\130\\195\end{bmatrix})
+\answer{The breakfasts cost \$91, the lunches cost \$130, and the dinners cost \$195.}
+Example 2 Have students further explore applying scalar multiplication to a real-world situation in this additional example. Students use scalar multiplication to find the total amount paid for each meal by the group leader.
+Q: What does the scalar represent in this situation?
+\answer{the number of people in the group}
+Q: Would you get the same results if the matrix were written as a (1\times3) matrix? Explain.
+\answer{Yes; No matter which way the matrix is written, each element of the matrix must be multiplied by the same scalar value.}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 5}
+Go back. ESSENTIAL QUESTION. SOLUTION.
+A line segment has endpoints ((3,-2)) and ((-4,5)). The segment is translated 3 units left and 1 unit up. Then the image is dilated by a factor of 1.5 from the origin. Show the results on a graph. What are the endpoints of the resulting segment?
+Subtract 3 from the x-coordinates and add 1 to the y-coordinates to find the coordinates of the translated image. The endpoints of the translated image are ((0,-1)) and ((-7,6)).
+Multiply these coordinates by 1.5 to get the dilated coordinates ((0,-1.5)) and ((-10.5,9)).
+\answer{((0,-1.5)) and ((-10.5,9))}
+% FIG 14 944 867 1097 1020
+\placeholder{graph}{Coordinate grid, x horizontal and y vertical, unit spacing; window approximately x -12 to 4 and y -4 to 12. Numeric x labels -10,-8,-6,-4,-2,2; numeric y labels -2,2,4,6,8,10; O at origin. Axes have arrowheads. Blue closed-endpoint segment connects (-4,5) and (3,-2); orange closed-endpoint segment connects (-10.5,9) and (0,-1.5).}
+Example 5 Students are given the opportunity to create a matrix that shows the endpoints of a segment after a translation and a dilation.
+Q: How do you use a matrix to translate the line segment 3 units left and 1 unit up?
+\answer{Use a matrix where each element in the top row is -3 and each element in the second row is 1.}
+Q: Does it matter if you apply the dilation before or after the translation? Explain.
+\answer{Yes; the results are different if you dilate and then translate.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Represent Data With a Matrix}
+A. What could the data values in the matrix represent?
+(\begin{bmatrix}5&3&0\\2&1&4\end{bmatrix})
+A matrix, plural matrices, is a rectangular array of values that may be used to help organize information. For example, if the columns of this matrix represent sizes (Small, Medium, Large) and the rows represent clothing items (Shirts, Sweaters), then "4" can represent 4 large sweaters.
+\begin{tabular}{lrrr}
+ & S & M & L \\
+Shirts & 5 & 3 & 0 \\
+Sweaters & 2 & 1 & 4 \\
+\end{tabular}
+\answer{"4" can represent 4 large sweaters.}
+\te{HAVE A GROWTH MINDSET. In what ways do you give your best effort and persist?}
+B. How can you refer to an entire matrix or to the elements of the matrix?
+(A=\begin{bmatrix}7&5\\-2&0\\4&8\end{bmatrix})
+A capital letter is used to refer to the entire matrix. This matrix is referred to as Matrix A or just A.
+The dimensions of a matrix are given in the form of row (\times) column. Matrix A has dimensions (3\times2).
+A specific element can be referred to using subscripts to indicate the row and the column where the element is located. In general, (a_{ij}) indicates the element in row (i) and column (j).
+In matrix A, (a_{32}) refers to the element in row 3, column 2, which is the number 8.
+\begin{tabular}{lll}
+ & j & k \\
+g & (a_{gj}) & (a_{gk}) \\
+h & (a_{hj}) & (a_{hk}) \\
+i & (a_{ij}) & (a_{ik}) \\
+\end{tabular}
+\answer{Matrix A or just A; (a_{ij}) indicates the element in row (i) and column (j); (a_{32}=8).}
+\te{CONTINUED ON THE NEXT PAGE.}
+% Source page 15: 484 Example 1 continued
+C. What are the values of the variables in the matrix equation?
+(\begin{bmatrix}12&0\\2x&10\end{bmatrix}=\begin{bmatrix}12&y\\14&10\end{bmatrix})
+Equal matrices have the same dimensions, and corresponding elements are equal.
+(a_{11}:12=12)
+(a_{12}:0=y), so (y=0).
+(a_{21}:2x=14), so (x=7).
+(a_{22}:10=10)
+The matrices are equal for (y=0) and (x=7).
+\answer{(y=0) and (x=7)}
+\end{example}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{EXAMPLE 1 CONTINUED. Use and Connect Mathematical Representations. PART C}
+Q: What does it mean for two matrices to be equal?
+\answer{They have the same dimensions, and their corresponding elements are equal.}
+Q: How do you find the values of variables in equal matrices?
+\answer{Set corresponding elements equal and solve the equation.}
+Have a Growth Mindset: Give Your Best Effort and Persist. When you are determined to do your best and keep trying, you can do anything. Ask: When have you seen that making an effort pays off? What can you tell yourself when you might not feel like trying?
+\end{te-addendum}
+\begin{tryit}{1}
+In matrix C, the entries are the numbers of students on a committee. Column 1 lists girls, column 2 lists boys, row 1 lists sophomores, and row 2 lists juniors. Find (a_{12}), (a_{21}), and (a_{22}), and tell what each number represents.
+(C=\begin{bmatrix}7&5\\8&10\end{bmatrix})
+\answer{(a_{12}=5) sophomore boys; (a_{21}=8) junior girls; (a_{22}=10) junior boys}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What do the subscripts in (a_{12}), (a_{21}), (a_{22}) mean? How would you represent the number 7 using subscript notation?
+\answer{For each element, the first number in the subscript indicates the row and the second number in the subscript indicates the column; (a_{11})}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Apply Scalar Multiplications. APPLICATION}
+Cool Threads, a clothing store, uses a matrix C to represent the prices of women's clothes.
+(C=\begin{bmatrix}320&210&160\\240&110&65\end{bmatrix})
+The columns represent the brands Vintage, Casual, and Distressed, and the rows represent jeans and jackets. If the sales tax rate is 5\%, how can you use a matrix operation to find the amount of sales tax on each item?
+Formulate. If the sales tax rate is 5\%, you can multiply each element in the matrix by 0.05 to get S, the matrix of sales tax amounts.
+Scalar multiplication is the multiplication of each element in a matrix by a single real number, called a scalar.
+Compute.
+(S=0.05\cdot C)
+(=0.05\cdot\begin{bmatrix}320&210&160\\240&110&65\end{bmatrix})
+(=\begin{bmatrix}(320)(0.05)&(210)(0.05)&(160)(0.05)\\(240)(0.05)&(110)(0.05)&(65)(0.05)\end{bmatrix}=\begin{bmatrix}16&10.50&8\\12&5.50&3.25\end{bmatrix})
+\te{Callout: Scalar multiplication does not change the dimensions or the headings of the rows and columns of the original matrix.}
+Interpret. This scalar product represents the sales tax amounts for each item of clothing.
+\answer{(S=\begin{bmatrix}16&10.50&8\\12&5.50&3.25\end{bmatrix})}
+\end{example}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{EXAMPLE 2 Apply Scalar Multiplication. Pose Purposeful Questions}
+Q: How does scalar multiplication affect the matrix? Explain.
+\answer{Each element in the matrix increases by a factor equal to the scalar, but the dimensions of the matrix stay the same.}
+\te{Printed "increases"; likely "is multiplied", since a scalar such as 0.05 decreases positive elements.}
+\end{te-addendum}
+\begin{tryit}{2}
+In this matrix C, the rows represent prices for shirts and khakis. The columns have the same meaning as in Example 2. If the sales tax rate is 6\%, use scalar multiplication to find the sales tax for each item.
+(C=\begin{bmatrix}75&40&25\\100&60&30\end{bmatrix})
+\answer{(\begin{bmatrix}4.50&2.40&1.50\\6.00&3.60&1.80\end{bmatrix})}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What is scalar multiplication?
+\answer{the multiplication of each element in a matrix by a single real number}
+Q: What is a scalar?
+\answer{a real number multiplying a matrix}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error. Try It! 2}
+Some students may forget to multiply every element of the matrix by the scalar. Have them write a matrix where they show the multiplication of each element by the scalar before writing the final product matrix.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES 1 \& 2. Generalize}
+Let the dimensions of matrix Z be (3\times4). After multiplying this matrix by a scalar, what are the dimensions of the product matrix? Explain.
+\answer{(3\times4); Each entry in the matrix is multiplied by the scalar to make the product matrix, so the product matrix must have the same configuration of entries.}
+\end{te-addendum}
+\begin{te-addendum}{1}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 1}
+Some students may struggle to understand the notation associated with matrices. Have students use the given notation to practice writing a matrix.
+Write matrix A that has the following elements.
+(a_{32}=16,a_{13}=24,a_{22}=-8,a_{31}=-2,a_{11}=4,a_{12}=0,a_{23}=1,a_{21}=-12,a_{33}=40)
+Q: How does the notation tell you where each element goes?
+\answer{The subscript shows where the element is located: the first number tells the row, and the second tells the column.}
+Q: What is the matrix?
+\answer{(A=\begin{bmatrix}4&0&24\\-12&-8&1\\-2&16&40\end{bmatrix})}
+\end{te-addendum}
+% Source page 16: 485 Example 3
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 3 Add and Subtract Matrices. Pose Purposeful Questions}
+Examples are available at SavvasRealize.com. Activity.
+PART A
+Q: How is adding matrices like adding real numbers? How is it different?
+\answer{Adding matrices is like adding several pairs of real numbers. The addition rules are the same, but they are applied to each pair of corresponding elements.}
+PART B
+Q: Is there another strategy that you could use to subtract (A-B) that gives the same result? Explain.
+\answer{Yes; Subtracting B is the same as multiplying B by the scalar -1 and then adding A and B, so (A-B=A+-1(B)).}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Add and Subtract Matrices. APPLICATION}
+Cool Threads uses matrices to keep track of monthly sales. In matrices A and B, Row 1 represents the sale of jeans and Row 2 represents the sale of jackets, with the columns representing Vintage, Casual, and Distressed brands, respectively, during two consecutive months.
+(A=\begin{bmatrix}14&11&28\\10&15&35\end{bmatrix},B=\begin{bmatrix}18&17&25\\16&9&45\end{bmatrix})
+% FIG 16 838 290 1177 444
+\placeholder{illustration}{Clothing store displays labeled MARCH SALES! on left and APRIL SAVINGS on right. Folded clothes on shelves labeled Casual, Vintage, Distressed; jackets hang on outer racks. Left sign A=[14,11,28;10,15,35]; right sign B=[18,17,25;16,9,45].}
+A. What is the sales total for the two months?
+The sum (A+B) represents the totals sold during the two months. Add corresponding elements of the two matrices.
+(A+B=\begin{bmatrix}14&11&28\\10&15&35\end{bmatrix}+\begin{bmatrix}18&17&25\\16&9&45\end{bmatrix}=\begin{bmatrix}14+18&11+17&28+25\\10+16&15+9&35+45\end{bmatrix}=\begin{bmatrix}32&28&53\\26&24&80\end{bmatrix})
+\te{Callout: The entry "25" means that 25 pairs of distressed jeans were sold in the second month.}
+\te{Callout: The entry "26" means that in these two months, 26 Vintage jackets were sold.}
+\te{STUDY TIP. Adding matrices is similar to adding complex numbers. When finding ((a+bi)+(c+di)), you combine (a+c) and (bi+di), just like you add the corresponding parts of the matrices.}
+\answer{(\begin{bmatrix}32&28&53\\26&24&80\end{bmatrix})}
+B. What is the difference in the number of items sold each month?
+The difference (A-B) represents the differences in the monthly sales. Subtract corresponding elements of the two matrices.
+(A-B=\begin{bmatrix}14&11&28\\10&15&35\end{bmatrix}-\begin{bmatrix}18&17&25\\16&9&45\end{bmatrix}=\begin{bmatrix}14-18&11-17&28-25\\10-16&15-9&35-45\end{bmatrix}=\begin{bmatrix}-4&-6&3\\-6&6&-10\end{bmatrix})
+In the matrix (A-B), a positive number means more of this type were sold in the first month. A negative number means that more were sold in the second month.
+\answer{(\begin{bmatrix}-4&-6&3\\-6&6&-10\end{bmatrix})}
+\end{example}
+\begin{tryit}{3}
+Consider matrices M and N.
+(M=\begin{bmatrix}-3&5\\2&0\end{bmatrix},N=\begin{bmatrix}6&5\\-8&0.2\end{bmatrix})
+a. What are matrices (M+N) and (N+M)?
+\answer{(M+N=\begin{bmatrix}3&10\\-6&0.2\end{bmatrix},N+M=\begin{bmatrix}3&10\\-6&0.2\end{bmatrix})}
+b. What are matrices (M-N) and (N-M)?
+\answer{(M-N=\begin{bmatrix}-9&0\\10&-0.2\end{bmatrix},N-M=\begin{bmatrix}9&0\\-10&0.2\end{bmatrix})}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Does the Commutative Property apply to the addition and subtraction of matrices? Explain.
+\answer{Since addition of matrices is actually several addition problems of corresponding elements, and subtraction of matrices is actually several subtraction problems of corresponding elements, the Commutative Property applies to adding matrices, but it does not apply to subtracting matrices.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 3}
+Have students explore using scalar multiplication and addition of matrices to solve a real-world problem.
+For a trip to the museum, there are 4 member and 6 nonmember adults. There are 22 member and 28 nonmember children. Members pay \$10 and nonmembers pay \$14.
+Q: How could you use matrices to represent the cost to members and to nonmembers?
+\answer{A (2\times1) matrix for each, with the top row for adults and the bottom for children.}
+Q: Write a matrix that represents the total cost of the trip.
+\answer{(C=10\begin{bmatrix}4\\22\end{bmatrix}+14\begin{bmatrix}6\\28\end{bmatrix}=\begin{bmatrix}40\\220\end{bmatrix}+\begin{bmatrix}84\\392\end{bmatrix}=\begin{bmatrix}124\\612\end{bmatrix})}
+Q: How do you interpret the resulting matrix?
+\answer{Adults pay a total of \$124 and children pay a total of \$612.}
+\end{te-addendum}
+% Source page 17: 486 Example 4
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 4 Understand Matrix Addition and Subtraction. Build Procedural Fluency From Conceptual Understanding}
+Examples are available at SavvasRealize.com. Activity.
+Q: When can you not add or subtract two matrices? Explain.
+\answer{You cannot add or subtract two matrices when their dimensions are different because there would be elements that did not correspond.}
+Q: What do you know about each pair of corresponding elements in matrices where the sum is a zero matrix?
+\answer{They are opposites, or both zero.}
+Q: How do you find the additive inverse of a matrix?
+\answer{The additive inverse of a matrix is a matrix with the same dimensions but in which corresponding elements are opposites.}
+Q: Does the Commutative Property of Addition hold true for all matrices? Explain.
+\answer{Yes; because real number addition is commutative, and matrix addition uses real number addition of corresponding elements, the Commutative Property of Addition holds for all matrices.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Understand Matrix Addition and Subtraction. CONCEPTUAL UNDERSTANDING}
+Consider the matrices below. How can you add and subtract these matrices?
+(A=\begin{bmatrix}5&-7&3\\4&8&-2\end{bmatrix},B=\begin{bmatrix}6&5\\-2&0\\3&-4\end{bmatrix},C=\begin{bmatrix}12&0&0\\0&15&-9\end{bmatrix},D=\begin{bmatrix}-5&7&-3\\-4&-8&2\end{bmatrix})
+A. Which matrices can be combined using addition or subtraction?
+Adding (or subtracting) matrices involves adding (or subtracting) corresponding pairs of elements. To have corresponding pairs of elements, the matrices must have the same dimensions.
+The matrices A, C, and D are (2\times3) matrices, so they can be added or subtracted in any order, but matrix B is a (3\times2) matrix so it cannot be combined with A, C, or D using addition or subtraction.
+\answer{A, C, and D}
+\te{COMMON ERROR. The dimensions of a matrix, (r\times c), always give the number of rows first and number of columns second.}
+B. How can you interpret a matrix of zeros?
+(A+D=\begin{bmatrix}5&-7&3\\4&8&-2\end{bmatrix}+\begin{bmatrix}-5&7&-3\\-4&-8&2\end{bmatrix}=\begin{bmatrix}0&0&0\\0&0&0\end{bmatrix})
+Every element in (A+D) is zero. A matrix with all zeros is a zero matrix. When the sum of two matrices is a zero matrix, the matrices are additive inverses.
+\te{Callout: This is the zero (2\times3) matrix. A zero (3\times2) matrix would also have all zeros, but it would have 3 rows and 2 columns.}
+\answer{A matrix with all zeros is a zero matrix.}
+C. What is the additive inverse of matrix B?
+Solve the equation (B+X=0), so that X is the additive inverse of B.
+(\begin{bmatrix}6&5\\-2&0\\3&4\end{bmatrix}+\begin{bmatrix}-6&-5\\2&0\\-3&-4\end{bmatrix}=\begin{bmatrix}0&0\\0&0\\0&0\end{bmatrix})
+(X=\begin{bmatrix}-6&-5\\2&0\\-3&-4\end{bmatrix})
+\te{Callout: Think about what elements of Matrix X will make every element of the sum matrix equal to 0.}
+\te{Callout: The additive inverse of a matrix is the scalar multiple of -1 times the matrix.}
+\answer{(X=\begin{bmatrix}-6&-5\\2&0\\-3&-4\end{bmatrix})}
+\te{Printed Part C changes the bottom-right entry of B from -4 to 4; likely the additive inverse of the originally given B should have bottom-right entry 4.}
+D. How does (A+C) relate to (C+A)?
+(A+C=\begin{bmatrix}5&-7&3\\4&8&-2\end{bmatrix}+\begin{bmatrix}12&0&0\\0&15&-9\end{bmatrix}=\begin{bmatrix}17&-7&3\\4&23&-11\end{bmatrix})
+(C+A=\begin{bmatrix}12&0&0\\0&15&-9\end{bmatrix}+\begin{bmatrix}5&-7&3\\4&8&-2\end{bmatrix}=\begin{bmatrix}17&-7&3\\4&23&-11\end{bmatrix})
+In this example, (A+C=C+A). Matrix addition is real number addition of corresponding elements. Because real number addition is commutative, a Commutative Property of Addition holds for matrices.
+\answer{(A+C=C+A)}
+\end{example}
+\begin{tryit}{4}
+Consider the matrices below.
+(P=\begin{bmatrix}5&2&-3\\7&0&-5\end{bmatrix},Q=\begin{bmatrix}2&-2\\5&-5\\-7&7\end{bmatrix},R=\begin{bmatrix}6&0.5\\-3&0\\-2&-2\end{bmatrix})
+a. Find (R-Q). What other matrix sums or differences can be calculated?
+\answer{(R-Q=\begin{bmatrix}4&2.5\\-8&5\\5&-9\end{bmatrix}); (Q+R,R+Q,Q-R)}
+b. Find the additive inverses of P, Q, and R.
+\answer{(-P:\begin{bmatrix}-5&-2&3\\-7&0&5\end{bmatrix}); (-Q:\begin{bmatrix}-2&2\\-5&5\\7&-7\end{bmatrix}); (-R:\begin{bmatrix}-6&-0.5\\3&0\\2&2\end{bmatrix})}
+\end{tryit}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES 3 \& 4. Communicate Precisely}
+What must be true about two matrices for their sum or difference to exist?
+\answer{The two matrices must have the same dimensions.}
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 4)}
+LISTENING BEGINNING Read the second paragraph of Part A aloud as students listen. Tell students to think about the use of the word order as the arrangement of the matrices. Talk about another meaning of the word order: a command, or direction. Read the following sentences aloud and tell the students to stand if order means arrangement or stay seated if it means command.
+Q: called out in order of their rank.
+\answer{stand}
+Q: The cadet does not take the order from the captain seriously.
+\answer{stay seated}
+Q: There are many studies done on the personalities of people based on their birth order.
+\answer{stand}
+SPEAKING DEVELOPING Discuss with students the word element and its everyday use. Then have students break into pairs and talk with their partners about the word element and how it is used in mathematics.
+Q: What is an element?
+\answer{a part of a whole; or, in chemistry, a simple substance that can be broken down}
+\te{Printed chemistry definition says "can be broken down"; likely "cannot be broken down" by chemical means.}
+Q: What does an element of a matrix refer to?
+\answer{the values or entries inside the matrix}
+Q: What does it mean for an element in one matrix to correspond to an element in another matrix?
+\answer{The element in the first matrix is in the same row and column as the element in the second matrix.}
+WRITING EXPANDING Have students write the definition of the word dimension in their journals. Review with students the meaning of the word dimension as it is used in the Common Error box. Prepare students for the writing activity by talking about the importance of dimensions in everyday life.
+Q: List three items that you need to know the dimensions of in order to buy the right product to fit your needs.
+\answer{Samples: rugs, doors, shoes}
+Q: In your own words, write a sentence to explain why it is necessary for the dimensions of two matrices to be the same in order to add them.
+\answer{Sample: If the number of rows and columns are not the same, then the elements to be added will not match.}
+\end{te-addendum}
+% Source page 18: 487 Example 5
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 5 Use Matrices to Translate and Dilate Figures. Use and Connect Mathematical Representations}
+Examples are available at SavvasRealize.com. Activity.
+PART A
+Q: When representing endpoints of a line segment using a matrix, what does each row of the matrix represent?
+\answer{The top row represents x-coordinates of the endpoints, and the bottom row represents y-coordinates of the endpoints.}
+Q: How would the translation matrix for a translation "4 left and 2 down" differ?
+\answer{Each of the elements of the translation matrix would now be negative.}
+PART B
+Q: What does the scalar represent in relation to the length of the line segment?
+\answer{The scalar tells how many times longer the line segment will be after the dilation.}
+Q: Why can this method only be used for a dilation centered at the origin?
+\answer{To be directly proportional, it has to go through the origin.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Use Matrices to Translate and Dilate Figures}
+In this diagram (\overline{AB}) is translated 4 units right and 2 units up to (\overline{PQ}). Also, (\overline{XY}) is a dilation of (\overline{AB}) by a factor of (\frac12), centered at the origin.
+% FIG 18 850 266 1023 390
+\placeholder{graph}{First-quadrant coordinate grid, x horizontal and y vertical with positive arrowheads; unit grid. x ticks 0,2,4,6,8,10,12,14, window to 16; y ticks 0,2,4,6,8,10, window to 11. Red segment with closed endpoints A(2,6), B(8,4); blue segment P(6,8), Q(12,6); green segment X(1,3), Y(4,2). All endpoints labeled in matching colors.}
+How can you use matrices to show a translation and a dilation?
+A. Show the translation of (\overline{AB}) to (\overline{PQ}) using matrices.
+A matrix with one column can represent an ordered pair. A matrix with two columns can represent two ordered pairs, where the first row gives the x-coordinates and the second row gives the y-coordinates.
+Point A: (\begin{bmatrix}2\\6\end{bmatrix}); endpoints of (\overline{AB}): (\begin{bmatrix}2&8\\6&4\end{bmatrix})
+A translation can be represented as a matrix. The matrix for (\overline{AB}) has two columns, so a matrix for a translation of (\overline{AB}) also has two columns.
+Since the translation results in the x-coordinates increasing by 4 and the y-coordinates increasing by 2, add the matrix (\begin{bmatrix}4&4\\2&2\end{bmatrix}) to the matrix representing (\overline{AB}).
+To show the translation of (\overline{AB}), use matrix addition:
+(\begin{bmatrix}2&8\\6&4\end{bmatrix}+\begin{bmatrix}4&4\\2&2\end{bmatrix}=\begin{bmatrix}6&12\\8&6\end{bmatrix})
+preimage + translation = image
+\te{Callout: The sum represents the endpoints P(6,8) and Q(12,6).}
+\te{GENERALIZE. The coordinates of the vertices of an n-sided polygon can be represented as a (2\times n) matrix, with 2 rows and n columns.}
+\answer{(\begin{bmatrix}6&12\\8&6\end{bmatrix}); P(6,8) and Q(12,6)}
+B. Show the dilation of (\overline{AB}) by a scale factor of (\frac12).
+Use scalar multiplication:
+(\frac12\cdot\begin{bmatrix}2&8\\6&4\end{bmatrix}=\begin{bmatrix}1&4\\3&2\end{bmatrix})
+scalar (\cdot) preimage = image
+\te{Callout: This method can be used only for a dilation centered at the origin.}
+\answer{(\begin{bmatrix}1&4\\3&2\end{bmatrix})}
+\end{example}
+\begin{tryit}{5}
+A segment has endpoints M(8,-7) and N(1,2).
+a. Use matrices to represent a translation of (\overline{MN}) to (\overline{RS}) by 6 units left and 3 units down. What are the coordinates of R and S?
+\answer{(\begin{bmatrix}8&1\\-7&2\end{bmatrix}+\begin{bmatrix}-6&-6\\-3&-3\end{bmatrix}=\begin{bmatrix}2&-5\\-10&-1\end{bmatrix}), R(2,-10), S(-5,-1)}
+b. Use matrices to represent a dilation of (\overline{MN}) to (\overline{DE}) by a scale factor of 3, centered at the origin. What are the coordinates of D and E?
+\answer{(3\begin{bmatrix}8&1\\-7&2\end{bmatrix}=\begin{bmatrix}24&3\\-21&6\end{bmatrix}), D(24,-21), E(3,6)}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How does the dilation of a segment by a scale factor greater than 1 differ from one by a scale factor less than 1?
+\answer{The segment gets longer if the scale factor is greater than 1 and shorter if the scale factor is less than 1.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLE 5. Model With Mathematics}
+The matrix (T=\begin{bmatrix}1&1&4\\2&3&2\end{bmatrix}) represents a triangle. Use matrices to determine whether dilating by a factor of 2 and then translating 5 units right is the same as translating the triangle 5 units right and then dilating by a factor of 2. Does the order of the transformations matter? Explain.
+\answer{Yes; if you dilate first and then translate, the resulting matrix is (\begin{bmatrix}7&7&13\\4&6&4\end{bmatrix}), but if you translate first and then dilate, the resulting matrix is (\begin{bmatrix}12&12&18\\4&6&4\end{bmatrix}). Since the resulting matrices are different, the order of the transformations does matter.}
+\end{te-addendum}
+% Source page 19: 488 Concept Summary
+\begin{te-addendum}{ConceptSummary}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. CONCEPT SUMMARY Operating With and Interpreting Matrices}
+Q: How can you operate with matrices?
+\answer{To add or subtract matrices, you must have matrices with the same dimensions. Then you can add or subtract corresponding elements. Scalar multiplication multiplies each element in the matrix by a scalar, or a single real number.}
+SavvasRealize.com. Presentation. Practice. Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error. Exercise 5}
+Some students may reverse the meanings of the subscripts. Have students write "rc" above the subscripts to remind them that the first number in the subscript indicates the row and the second number in the subscript indicates the column.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Operating With and Interpreting Matrices}
+DIMENSIONS. The dimensions of a matrix are stated as the number of rows (r) by the number of columns (c).
+(A=\begin{bmatrix}t&u&v\\x&y&z\end{bmatrix})
+The dimensions of this matrix are (2\times3), because it has 2 rows and 3 columns.
+(a_{13}=v), because v is in the 1st row and 3rd column.
+OPERATIONS. To multiply a matrix by a scalar, multiply each element in the matrix by the scalar.
+(k\cdot\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}kw&kx\\ky&kz\end{bmatrix})
+To add matrices, add the corresponding elements.
+(\begin{bmatrix}a&b\\c&d\end{bmatrix}+\begin{bmatrix}e&f\\g&h\end{bmatrix}=\begin{bmatrix}a+e&b+f\\c+g&d+h\end{bmatrix})
+To subtract matrices, subtract the corresponding elements.
+(\begin{bmatrix}p&q\\r&s\end{bmatrix}-\begin{bmatrix}w&x\\y&z\end{bmatrix}=\begin{bmatrix}p-w&q-x\\r-y&s-z\end{bmatrix})
+DILATIONS. A matrix can represent the transformation of a figure such as a dilation, centered at the origin, of a quadrilateral.
+(3\begin{bmatrix}5&-3&0&-8\\6&5&-2&7\end{bmatrix}=\begin{bmatrix}15&-9&0&-24\\18&15&-6&21\end{bmatrix})
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you interpret matrices and operate with matrices?
+\answer{Each element in a matrix is in a particular row and a particular column. Use the meaning of each row and each column to interpret the element. Adding and subtracting with matrices involves adding and subtracting pairs of corresponding elements. Scalar multiplication involves multiplying all elements by a single number. The result of addition, subtraction, and scalar multiplication is a matrix with the same dimensions.}
+2. Error Analysis Tonya says (\begin{bmatrix}3&2\\-4&1\end{bmatrix}-\begin{bmatrix}3&2\\4&1\end{bmatrix}) would produce a zero matrix. Explain her error.
+\answer{Her answer should be (\begin{bmatrix}0&0\\-8&0\end{bmatrix}), since (-4-4=-8) and not 0.}
+3. Communicate Precisely Explain how you know if two matrices can be added. Then explain how to add them.
+\answer{The two matrices must have the same dimensions. If they have the same dimensions, you can add corresponding elements.}
+4. Vocabulary What are equal matrices? Give an example of equal matrices.
+\answer{Equal matrices have the same dimensions, and their corresponding elements are equal. Sample: (\begin{bmatrix}1&2\\3&4\end{bmatrix}=\begin{bmatrix}1&2\\3&4\end{bmatrix})}
+\textbf{Do You KNOW HOW?}
+Identify the element for each matrix.
+5. (\begin{bmatrix}4&1&0\\7&3&5\end{bmatrix}); (a_{23})
+\answer{5}
+6. (\begin{bmatrix}-6\\2\end{bmatrix}); (a_{11})
+\answer{-6}
+Given (A=\begin{bmatrix}3&-2\\7&1\end{bmatrix}) and (B=\begin{bmatrix}0&7\\-4&12\end{bmatrix}), calculate each of the following.
+7. (A+B)
+\answer{(\begin{bmatrix}3&5\\3&13\end{bmatrix})}
+8. (4A)
+\answer{(\begin{bmatrix}-3&9\\-11&11\end{bmatrix})}
+9. (B-A)
+\answer{(\begin{bmatrix}12&-8\\28&4\end{bmatrix})}
+\te{Printed answers 8 and 9 are interchanged; likely answer 8 should be [12,-8;28,4] and answer 9 should be [-3,9;-11,11].}
+10. (A-B)
+\answer{(\begin{bmatrix}3&-9\\11&-11\end{bmatrix})}
+11. The endpoints of (\overline{AB}) are represented by the matrix (\begin{bmatrix}3&7\\1&5\end{bmatrix}). Find the image of the segment after a dilation, centered at the origin, by a scale factor of 2.
+\answer{(\begin{bmatrix}6&14\\2&10\end{bmatrix})}
+\end{concept-summary}
+% Source page 20: 489 Practice and Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice \& Problem Solving. PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Practice. Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+12--27, 29--36 & 12--20, 22--36 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Printed note: See answers for Exercises 22--30 on the next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 19, 34 & 1 \\
+1 & 12, 31, 33 & 2 \\
+2 & 18, 20, 32, 35 & 2 \\
+3 & 21--24 & 1 \\
+4 & 13, 25--28 & 1 \\
+4 & 15--17 & 2 \\
+5 & 29, 30 & 1 \\
+5 & 14 & 2 \\
+5 & 36 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{12}{2}
+UNDERSTAND. Communicate Precisely Explain how you would solve for each variable. Then find the value of each variable.
+(\begin{bmatrix}a&b-3\\c&d+5\end{bmatrix}=\begin{bmatrix}4&-3\\6&4\end{bmatrix})
+\answer{You would set up equations for corresponding elements and then solve for the variable; (a=4,b=0,c=6,d=-1)}
+\end{practice}
+\begin{practice}{13}{1}
+UNDERSTAND. Make Sense and Persevere Find the sum of (A=\begin{bmatrix}5\\3\\8\end{bmatrix}) and the additive inverse of (P=\begin{bmatrix}-2\\1\\7\end{bmatrix}).
+\answer{(\begin{bmatrix}7\\2\\1\end{bmatrix})}
+\end{practice}
+\begin{practice}{14}{2}
+UNDERSTAND. Error Analysis Describe and correct the error a student made in translating the points A(1,-3), B(2,1) and C(-3,-2) 3 units left and 1 unit up.
+Original points (\begin{bmatrix}1&2&-3\\-3&1&-2\end{bmatrix})
+Translation matrix (\begin{bmatrix}-3&-3&-3\\-1&-1&-1\end{bmatrix})
+Answer matrix (\begin{bmatrix}-2&-1&-6\\-4&0&-3\end{bmatrix})
+\te{Student work is marked with a red X.}
+\answer{In the translation matrix, Row 2 should be all 1s since the points are being translated up 1 unit. The answer matrix should be (\begin{bmatrix}-2&-1&-6\\-2&2&-1\end{bmatrix}).}
+\end{practice}
+\begin{practice}{15}{2}
+UNDERSTAND. Construct Arguments Suppose A and B are two matrices with the same dimensions. Explain how to find (A+B), (A-B), and matrix C such that (A+C) is the zero matrix.
+\answer{To find (A+B), you would add corresponding elements. To find (A-B), you would subtract corresponding elements. To find C, find the additive inverse of A.}
+\end{practice}
+\begin{practice}{16}{2}
+UNDERSTAND. Higher Order Thinking Explain why (A=\begin{bmatrix}0.5\\4\end{bmatrix}) and (B=\begin{bmatrix}\frac12\\1+3\end{bmatrix}) have the same additive inverse.
+\answer{Matrix A and B have the same corresponding elements when they are simplified.}
+\end{practice}
+\begin{practice}{17}{2}
+UNDERSTAND. Mathematical Connections For the set of real numbers, if the sum of two numbers is the additive identity element, then the two numbers are additive inverses of each other. How does this property relate to matrix addition?
+\answer{If the sum of two matrices is the zero matrix, then the two matrices are additive inverse matrices.}
+\end{practice}
+\begin{practice}{18}{2}
+UNDERSTAND. Reason The coordinates of the vertices of a square are represented in a matrix. The matrix is then multiplied by the scalar 3. How does the area of the new square compare to the area of the original square?
+\answer{The area of the new square is 9 times the area of the original square.}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. In matrix D, the entries are the number of students playing volleyball at a high school. Column 1 lists boys, column 2 lists girls, row 1 lists juniors, and row 2 lists seniors. Find (d_{22}), (d_{12}), and (d_{11}), and tell what each number represents. (D=\begin{bmatrix}4&5\\7&6\end{bmatrix}) SEE EXAMPLE 1
+\answer{(d_{22}=6), 6 senior girls; (d_{12}=5), 5 junior girls; (d_{11}=4), 4 junior boys}
+\end{practice}
+\begin{practice}{20}{2}
+PRACTICE. In the price matrix P, the rows represent prices for sweatshirts and sweatpants. The columns represent the color scheme of the items: white, red, and tie-dye. If the sales tax rate is 7\%, find the sales z of each item.
+(P=\begin{bmatrix}30&40&50\\25&35&55\end{bmatrix}) SEE EXAMPLE 2
+\answer{(\begin{bmatrix}2.10&2.80&3.50\\1.75&2.45&3.85\end{bmatrix})}
+\te{Printed "sales z"; likely "sales tax".}
+\end{practice}
+\begin{practice}{21}{1}
+PRACTICE. Given matrices (X=\begin{bmatrix}7&2&1\\4&-3&6\end{bmatrix}), (Y=\begin{bmatrix}-2&4\\3&8\end{bmatrix}), and (Z=\begin{bmatrix}0&3&7\\1&-2&6\end{bmatrix}), calculate each of the following. If not possible, state so. SEE EXAMPLE 3
+(X+Y)
+\answer{not possible}
+\end{practice}
+\begin{practice}{22}{1}
+PRACTICE. Given matrices (X=\begin{bmatrix}7&2&1\\4&-3&6\end{bmatrix}), (Y=\begin{bmatrix}-2&4\\3&8\end{bmatrix}), and (Z=\begin{bmatrix}0&3&7\\1&-2&6\end{bmatrix}), calculate each of the following. If not possible, state so. SEE EXAMPLE 3
+(Z-X)
+\answer{(\begin{bmatrix}-7&1&6\\-3&1&0\end{bmatrix})}
+\end{practice}
+\begin{practice}{23}{1}
+PRACTICE. Given matrices (X=\begin{bmatrix}7&2&1\\4&-3&6\end{bmatrix}), (Y=\begin{bmatrix}-2&4\\3&8\end{bmatrix}), and (Z=\begin{bmatrix}0&3&7\\1&-2&6\end{bmatrix}), calculate each of the following. If not possible, state so. SEE EXAMPLE 3
+(X+Z)
+\answer{(\begin{bmatrix}7&5&8\\5&-5&12\end{bmatrix})}
+\end{practice}
+\begin{practice}{24}{1}
+PRACTICE. Given matrices (X=\begin{bmatrix}7&2&1\\4&-3&6\end{bmatrix}), (Y=\begin{bmatrix}-2&4\\3&8\end{bmatrix}), and (Z=\begin{bmatrix}0&3&7\\1&-2&6\end{bmatrix}), calculate each of the following. If not possible, state so. SEE EXAMPLE 3
+(X-Z)
+\answer{(\begin{bmatrix}7&-1&-6\\3&-1&0\end{bmatrix})}
+\end{practice}
+\begin{practice}{25}{1}
+PRACTICE. Find the additive inverse of each matrix. SEE EXAMPLE 4
+(Q=\begin{bmatrix}3\\2\end{bmatrix})
+\answer{(\begin{bmatrix}-3\\-2\end{bmatrix})}
+\end{practice}
+\begin{practice}{26}{1}
+PRACTICE. Find the additive inverse of each matrix. SEE EXAMPLE 4
+(R=\begin{bmatrix}2&0\\6&-5\\-4&11\end{bmatrix})
+\answer{(\begin{bmatrix}-2&0\\-6&5\\4&-11\end{bmatrix})}
+\end{practice}
+\begin{practice}{27}{1}
+PRACTICE. Find the additive inverse of each matrix. SEE EXAMPLE 4
+(S=\begin{bmatrix}4&-7&-8&9\end{bmatrix})
+\answer{(\begin{bmatrix}-4&7&8&-9\end{bmatrix})}
+\end{practice}
+\begin{practice}{28}{1}
+PRACTICE. Find the additive inverse of each matrix. SEE EXAMPLE 4
+(T=\begin{bmatrix}9&-1\\4&10\\3&-7\end{bmatrix})
+\answer{(\begin{bmatrix}-9&1\\-4&-10\\-3&7\end{bmatrix})}
+\end{practice}
+\begin{practice}{29}{1}
+PRACTICE. A segment has endpoints E(5,-1) and F(6,11). SEE EXAMPLE 5
+Use matrices to represent a translation of (\overline{EF}) to (\overline{YZ}) by 5 units right and 1 unit down. What are the coordinates of Y and Z?
+\answer{Y(10,-2); Z(11,10)}
+\end{practice}
+\begin{practice}{30}{1}
+PRACTICE. A segment has endpoints E(5,-1) and F(6,11). SEE EXAMPLE 5
+Use matrices to represent a dilation of (\overline{EF}) to (\overline{UV}) by a scale factor of 4, centered at the origin. What are the coordinates of U and V?
+\answer{U(20,-4); V(24,44)}
+\end{practice}
+% Source page 21: 490 Practice and Problem Solving continued
+\te{STEP 3 Practice \& Problem Solving. Practice \& Problem Solving is available at SavvasRealize.com. Practice.}
+\begin{practice}{31}{2}
+APPLY. Model With Mathematics Using a (10\times10) grid, create a battleship game board with 5 ships placed. Write a matrix B for your battleship board. Use a 1 for a space a ship is placed and a 0 for a space no ship exists.
+\answer{Check students' work.}
+\end{practice}
+\begin{practice}{32}{2}
+APPLY. Model With Mathematics The table shows some of the men's running records in seconds.
+\begin{tabular}{rrrr}
+Distance (meters) & World record & American record & Olympic record \\
+100 & 9.58 & 9.69 & 9.63 \\
+200 & 19.19 & 19.32 & 19.30 \\
+400 & 43.03 & 43.18 & 43.03 \\
+1,500 & 206 & 209.3 & 212.07 \\
+\end{tabular}
+a. Write a matrix that represents the difference between the Olympic and World records for each race distance expressed as a column matrix.
+\answer{(\begin{bmatrix}0.05\\0.11\\0\\6.07\end{bmatrix})}
+b. If all of the records in the table are expressed in seconds and are represented by a matrix B, what matrix expression could be used to convert all data to minutes?
+\answer{(\frac1{60}B)}
+\end{practice}
+\begin{practice}{33}{2}
+APPLY. Use Structure A matrix can be used to represent which towns are connected by a single road to each other on a map. Use a 1 to represent two towns connected to each other and a 0 to represent two towns not connected to each other. Use a 0 to show that the indicated row and column both represent the same town. Create a matrix C to represent this situation.
+% FIG 21 518 826 684 1007
+\placeholder{map}{Stylized map with white roads, yellow and green land blocks, blue river and water at lower right. Five red town dots labeled Loveland (upper center), Norwood (left just below Loveland), Mariemont (right middle), Pleasant Ridge (lower left), Oakley (lower center-right). One north-south road connects Norwood and Pleasant Ridge; roads connect Loveland to Mariemont and Oakley; Norwood to Oakley; Pleasant Ridge to Oakley. River curves from upper right toward lower left.}
+\answer{(C=\begin{bmatrix}0&1&0&1&0\\1&0&0&0&0\\0&0&0&1&1\\1&0&1&0&1\\0&0&1&1&0\end{bmatrix})}
+\end{practice}
+\begin{practice}{34}{1}
+ASSESSMENT PRACTICE. Use these matrices to complete the statements.
+(A=\begin{bmatrix}0&9&6\\1&2&4\\7&-3&1\end{bmatrix},B=\begin{bmatrix}2&-7&-2\\0&5&8\\-3&1&1\end{bmatrix})
+In matrix A, the value of (a_{31}) is \underline{\hspace{1cm}} the value of (a_{12}). In matrix B, the value of (b_{31}) is \underline{\hspace{1cm}} the value of (b_{12}).
+A. less than; less than
+B. less than; greater than
+C. greater than; less than
+D. greater than; greater than
+\answer{B}
+\end{practice}
+\begin{practice}{35}{2}
+ASSESSMENT PRACTICE. SAT/ACT If (5\begin{bmatrix}a\\b\end{bmatrix}=14\begin{bmatrix}20\\12\end{bmatrix}), then what is the value of (a+b)?
+A. 29
+B. (\frac{148}{5})
+C. (\frac{448}{5})
+D. (\frac{191}{4})
+E. (\frac{41}{5})
+\answer{C}
+\end{practice}
+\begin{practice}{36}{3}
+ASSESSMENT PRACTICE. Performance Task A computer animator uses a screen that is 1,000 pixels wide and 800 pixels tall. The animator uses matrix columns to represent three locator points on an avatar. The top row represents the horizontal coordinate of each point, and the bottom row represents the vertical coordinate. Let (P=\begin{bmatrix}100&150&200\\50&150&50\end{bmatrix}) represent the initial position of the avatar.
+% FIG 21 827 672 1035 871
+\placeholder{illustration}{Three costumed game avatars on a pale green background. Center avatar has black locator dots at hood peak labeled (150,150), left foot labeled (100,50), and right foot labeled (200,50). No coordinate axes.}
+Part A The animator wants the avatar to move up at a rate of 100 pixels per second. Use addition of matrices to show the position of the avatar after 2 seconds and after 5 seconds.
+\answer{after 2 seconds: (\begin{bmatrix}100&150&200\\50&150&50\end{bmatrix}+\begin{bmatrix}0&0&0\\200&200&200\end{bmatrix}=\begin{bmatrix}100&150&200\\250&350&250\end{bmatrix}); after 5 seconds: (\begin{bmatrix}100&150&200\\50&150&50\end{bmatrix}+\begin{bmatrix}0&0&0\\500&500&500\end{bmatrix}=\begin{bmatrix}100&150&200\\550&650&550\end{bmatrix})}
+Part B The animator wants the avatar to move right at a rate of 50 pixels per second. Use addition of matrices to show the position of the avatar after 3 seconds and after 8 seconds.
+\answer{after 3 seconds: (\begin{bmatrix}100&150&200\\50&150&50\end{bmatrix}+\begin{bmatrix}150&150&150\\0&0&0\end{bmatrix}=\begin{bmatrix}250&300&350\\50&150&50\end{bmatrix}); after 8 seconds: (\begin{bmatrix}100&150&200\\50&150&50\end{bmatrix}+\begin{bmatrix}400&400&400\\0&0&0\end{bmatrix}=\begin{bmatrix}500&550&600\\50&150&50\end{bmatrix})}
+Part C How could the animator use scalar multiplication and matrix addition to show the position of the avatar at any given time?
+\answer{(\begin{bmatrix}100&150&200\\50&150&50\end{bmatrix}+n\begin{bmatrix}50&50&50\\100&100&100\end{bmatrix}) for (n=1) to 6}
+\end{practice}
+% Source page 22: 490A Assess and Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & A60 \\
+2 & 2 & A63 \\
+3 & 1 & A62 \\
+4 & 2 & A67 \\
+5 & 2 & A62 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{10-1 Lesson Quiz: Operations With Matrices}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+1. In matrix C, the entries are the numbers of students in a chess club at a high school. Column 1 lists boys, column 2 lists girls, row 1 lists juniors, and row 2 lists seniors. What does the number in position (c_{21}) represent?
+(C=\begin{bmatrix}5&6\\4&3\end{bmatrix})
+A. 4 girls who are juniors
+B. 4 boys who are seniors
+C. 6 girls who are seniors
+D. 6 boys who are juniors
+\answer{1. B}
+2. The rows in matrix A represent the prices of long-sleeved and short-sleeved shirts. The columns represent the fabrics: cotton, linen, and silk. If the sales tax rate is 5\%, use scalar multiplication to list the sales tax for each shirt in matrix S. Express each entry as a decimal to the nearest hundredth.
+(A=\begin{bmatrix}25&40&50\\20&35&45\end{bmatrix})
+\answer{2. (S=\begin{bmatrix}1.25&2.00&2.50\\1.00&1.75&2.25\end{bmatrix})}
+3. Given matrices (X=\begin{bmatrix}2&-3\\-1&4\end{bmatrix}) and (Y=\begin{bmatrix}-4&1\\3&-2\end{bmatrix}), complete the matrix for each sum or difference.
+(X+Y=\begin{bmatrix}\square&\square\\\square&\square\end{bmatrix}); (X-Y=\begin{bmatrix}\square&\square\\\square&\square\end{bmatrix}); (Y-X=\begin{bmatrix}\square&\square\\\square&\square\end{bmatrix})
+\answer{3. (X+Y=\begin{bmatrix}-2&-2\\2&2\end{bmatrix}), (X-Y=\begin{bmatrix}6&-4\\-4&6\end{bmatrix}), (Y-X=\begin{bmatrix}-6&4\\4&-6\end{bmatrix})}
+4. What are the values of the variables in the matrix equation? (\begin{bmatrix}9&3x\\18&16\end{bmatrix}=\begin{bmatrix}9&6\\2y&16\end{bmatrix})
+A. (x=5,y=8)
+B. (x=6,y=3)
+C. (x=3,y=6)
+D. (x=2,y=9)
+\answer{4. D}
+5. If (A=\begin{bmatrix}2&1&-3\\5&-4&-6\end{bmatrix}), (B=\begin{bmatrix}-2&-1&3\\-5&4&6\end{bmatrix}), and (C=\begin{bmatrix}-2&-5\\-1&4\\3&6\end{bmatrix}), which statements about matrices A, B, and C are true? Select all that apply.
+A. Matrices A and B are additive inverses.
+B. Matrices A and C are additive inverses.
+C. Matrices B and C cannot be combined using addition or subtraction.
+D. Matrices A and B cannot be combined using addition or subtraction.
+E. (A+B=B+A)
+F. (A-B=B-A)
+\answer{5. A, C, E}
+\te{Copyright © Savvas Learning Company LLC. All Rights Reserved. enVision Algebra 2 • Assessment Sourcebook.}
+\end{te-addendum}
+% Source page 23: 490B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced. SavvasRealize.com. Practice.
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{10-1 Reteach to Build Understanding: Operations with Matrices}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+To add two matrices, add the corresponding elements.
+(\begin{bmatrix}a&b\\c&d\end{bmatrix}+\begin{bmatrix}s&t\\x&y\end{bmatrix}=\begin{bmatrix}a+s&b+t\\c+x&d+y\end{bmatrix})
+To multiply a matrix by a scalar, multiply each element in the matrix by the scalar.
+(a\cdot\begin{bmatrix}s&t\\x&y\end{bmatrix}=\begin{bmatrix}as&at\\ax&ay\end{bmatrix})
+1. Solve.
+(\begin{bmatrix}1&2\\3&4\end{bmatrix}+\begin{bmatrix}5&6\\7&8\end{bmatrix}=\begin{bmatrix}1+5&2+6\\3+7&4+8\end{bmatrix})
+\answer{(=\begin{bmatrix}6&8\\10&12\end{bmatrix})}
+(1.5\begin{bmatrix}1&2\\3&4\end{bmatrix}=\begin{bmatrix}(1.5)\cdot1&(1.5)\cdot2\\(1.5)\cdot3&(1.5)\cdot4\end{bmatrix})
+\answer{(=\begin{bmatrix}1.5&3\\4.5&6\end{bmatrix})}
+2. Jennifer added the following matrices to get a third matrix. Find and fix her error.
+(\begin{bmatrix}1&1\\1&1\end{bmatrix}+\begin{bmatrix}2&6\\7&8\end{bmatrix}=\begin{bmatrix}3&7\\8&8\end{bmatrix})
+\answer{Jennifer did not add the (1+8) in the bottom lower right corner correctly. The correct answer is (\begin{bmatrix}3&7\\8&9\end{bmatrix}).}
+3. Jayesh started to solve the problems below, but he ran out of time and left some blanks. Help Jayesh by filling in the blanks.
+a. (\begin{bmatrix}4&10\\6&8\end{bmatrix}+\begin{bmatrix}5&3\\2&6\end{bmatrix}=\begin{bmatrix}4+5&\square\\\square+2&8+\square\end{bmatrix}=\begin{bmatrix}\square&13\\8&\square\end{bmatrix})
+\answer{(\begin{bmatrix}4+5&10+3\\6+2&8+6\end{bmatrix}=\begin{bmatrix}9&13\\8&14\end{bmatrix})}
+b. (0.2\begin{bmatrix}2&4\\6&8\end{bmatrix}=\begin{bmatrix}0.2\cdot(2)&\square\cdot(4)\\\square&0.2\cdot\square\end{bmatrix}=\begin{bmatrix}0.4&\square\\1.2&\square\end{bmatrix})
+\answer{(\begin{bmatrix}0.2\cdot(2)&1.2\cdot(4)\\0.2\cdot(6)&0.2\cdot(8)\end{bmatrix}=\begin{bmatrix}0.4&0.8\\1.2&1.6\end{bmatrix})}
+\te{Printed first-row second-column intermediate factor is 1.2; likely 0.2.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{10-1 Additional Practice: Operations with Matrices}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+1. In matrix D, the entries represent the number of students in clubs in a high school. Column 1 lists the males and column 2 lists the females. Row 1 lists the number of students in the Spanish club, and row 2 lists the number of students in the French club. Find (d_{11}), (d_{21}) and (d_{12}) and tell what each number represents.
+(D=\begin{bmatrix}46&39\\62&12\end{bmatrix})
+\answer{(d_{11}=46=) number of males in the Spanish club; (d_{21}=62=) number of males in the French club; (d_{12}=39=) number of females in the Spanish club}
+2. For matrix P, the rows represent the price of sweaters and pants. The columns represent the color scheme of black, blue and khaki. A black sweater costs \$45, a blue sweater costs \$60, and a khaki sweater costs \$25. The black pants cost \$30, the blue pants cost \$40, and the khaki pants cost \$20.
+a. Write matrix P to represent this scenario.
+\answer{(P=\begin{bmatrix}45&60&25\\30&40&20\end{bmatrix})}
+b. The store is having a 35\% off sale. Find the reduced price of each type of sweater and pants and write a new matrix that represents the sale prices.
+\answer{(P=\begin{bmatrix}29.25&39&16.25\\19.50&26&13\end{bmatrix})}
+For Items 3--5, find the sum or difference, if possible. If not possible, explain why.
+(P=\begin{bmatrix}0&2&4\\9&8&2\end{bmatrix},Q=\begin{bmatrix}-2&-4&1\\9&7&0\end{bmatrix},R=\begin{bmatrix}4&-1&0\\2&3&5\\0&-6&1\end{bmatrix})
+3. (P+Q=)
+\answer{(\begin{bmatrix}-2&-2&5\\18&15&2\end{bmatrix})}
+4. (Q-P=)
+\answer{(\begin{bmatrix}-2&-6&-3\\0&-1&-2\end{bmatrix})}
+5. (Q+R=)
+\answer{Not possible; they do not have the same dimensions.}
+6. Find the additive inverse of the matrix (X=\begin{bmatrix}2&-5\\-6&3\end{bmatrix}).
+\answer{(X=\begin{bmatrix}-2&5\\6&-3\end{bmatrix})}
+\te{Printed inverse is labeled X again; likely -X.}
+7. (\overline{EF}) has endpoints (2,4) and (4,5).
+c. Use matrices to translate (\overline{EF}) 2 units right and 4 units down to (\overline{YZ}). What are the coordinates of Y and Z?
+\answer{Y: (4,0); Z: (6,1)}
+d. Use matrices to dilate (\overline{EF}) to (\overline{UV}) by a scale factor of 4, centered at the origin. What are the coordinates of U and V?
+\answer{U: (8,16); V: (16,20)}
+\te{Printed parts are labeled c and d; no a or b appears in this preview.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{10-1 Enrichment: Operations with Matrices}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+At the end of this year, two major juice companies created matrices to show their sales in millions of fruit juices. The columns represent apple and cranberry and the rows represent bottles and juice boxes.
+Sales for last year in millions of dollars:
+Company (J=\begin{bmatrix}12.5&9.7\\10.5&8.6\end{bmatrix}); Company (T=\begin{bmatrix}11.2&8.1\\8.3&6.4\end{bmatrix})
+1. Add the two matrices to show the total revenue in millions of dollars for both juice companies last year.
+\answer{Total sales (=\begin{bmatrix}23.7&17.8\\18.8&15.0\end{bmatrix})}
+2. Sales for Company J were 8\% greater at the end of this year compared to sales last year. Complete the matrix to represent sales for Company J at the end of this year. Round each value to the nearest tenth.
+\answer{Company (J=\begin{bmatrix}13.5&10.5\\11.3&9.3\end{bmatrix})}
+3. Sales for Company T decreased by 6\% at the end of this year compared to sales last year. Complete the matrix to represent sales for Company T at the end of this year. Round each value to the nearest tenth.
+\answer{Company (T=\begin{bmatrix}20.5&7.6\\7.8&6.0\end{bmatrix})}
+\te{Printed top-left entry is 20.5; likely 10.5.}
+4. Complete the matrix to represent the total revenue of both companies at the end of this year.
+\answer{Total sales this year (=\begin{bmatrix}24.0&18.1\\19.1&15.3\end{bmatrix})}
+5. Complete the matrix to represent the difference in total sales between this year and last year.
+\answer{Difference in sales (=\begin{bmatrix}0.3&0.3\\0.3&0.3\end{bmatrix})}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{10-1 Mathematical Literacy and Vocabulary: Operations with Matrices}
+Name \underline{\hspace{3cm}}. enVision Algebra 2. SavvasRealize.com.
+Complete the vocabulary chart by filling in the missing information.
+\begin{tabular}{lll}
+Word or Word Phrase & Definition & Picture or Example \\
+Equal matrices & matrices that have the same dimensions, and the corresponding elements of each matrix are equal & 1. \answer{Sample: (\begin{bmatrix}1&3\\5&7\end{bmatrix}) (\begin{bmatrix}1&3\\5&7\end{bmatrix})} \\
+Scalar & 2. \answer{a real number multiplied by each element in a matrix.} & (0.5\cdot\begin{bmatrix}4&6\\2&8\end{bmatrix}) \te{Arrow points to 0.5.} \\
+Scalar multiplication & 3. \answer{multiplication of each element in a matrix by a single real number.} & (0.5\cdot\begin{bmatrix}4&6\\2&8\end{bmatrix}=\begin{bmatrix}2&3\\1&8\end{bmatrix}) \\
+Zero matrix & a matrix that has zeros for each element & 4. \answer{Sample: (\begin{bmatrix}0&0\\0&0\end{bmatrix})} \\
+\end{tabular}
+\te{Printed scalar-product bottom-right entry is 8; likely 4.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital preview: Exit. Solve the system of equations by graphing. (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Question Help. Help Me Solve This. View an Example. Video. Textbook. Glossary. Math Tools. Print. Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining. Clear All. Check Answer. Review progress. Question 5 of 14. Go. Back. Next.}
+% FIG 23 586 980 1034 1297
+\placeholder{illustration}{Black tablet showing digital graphing exercise y=3x+4 and y=-2x+4. Blank coordinate grid x and y -10 to 10 with unit grid and numeric labels every 2, arrowheads on positive axes, origin at center. Question Help dropdown overlays upper right; menu Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Bottom controls include 1 part remaining, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\end{te-addendum}
+
+\end{document}

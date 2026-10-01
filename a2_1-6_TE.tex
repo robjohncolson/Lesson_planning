@@ -1,0 +1,854 @@
+\documentclass{article}
+% Source: Topic_01_Teacher_Edition.pdf, PDF pages 74-83 (printed pages 47A-52B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+% Source page 74: 47A Lesson Overview
+\begin{lesson-meta}
+lesson: 1-6
+title: Linear Systems
+standards: none printed
+practices: none printed
+objective: I can use a variety of tools to solve systems of linear equations and inequalities.
+
+essential question: How can you find and represent solutions of systems of linear equations and inequalities?
+
+\textbf{VOCABULARY}
+\item inconsistent system
+\item solution of a system of linear equations
+\item system of linear equations
+\item system of linear inequalities
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 1-6 \\
+Title & Linear Systems \\
+Standards & none printed \\
+I CAN Objective & I can use a variety of tools to solve systems of linear equations and inequalities. \\
+Essential Question & How can you find and represent solutions of systems of linear equations and inequalities? \\
+Lesson Vocabulary & inconsistent system; solution of a system of linear equations; system of linear equations; system of linear inequalities \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Solve linear systems graphically and algebraically.
+\item Identify regions that satisfy systems of inequalities.
+Essential Understanding. The solution of a system of linear equations or inequalities is the set of ordered pairs that satisfy all the equations or inequalities in the system.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Solved linear equations using graphing, tables, and technology.
+In this lesson, students:
+\item Solve systems of linear equations using graphing or elimination.
+\item Solve systems of linear inequalities.
+Later in this course, students will:
+\item Solve systems consisting of a linear equation and a quadratic equation in two variables.
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+\item Students solve systems of linear equations and inequalities using graphing and elimination.
+\item Students write inequalities to model constraints in real-world situations such as time spent mowing lawns and walking dogs.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+inconsistent system & sistema inconsistente \\
+solution of a system of linear equations & Solución de un sistema de ecuación lineal \\
+system of linear equations & Sistema de ecuaciones lineal \\
+system of linear inequalities & Sistema de desigualdads lineal \\
+\end{tabular}
+\te{Printed Spanish desigualdads; likely desigualdades.}
+\textbf{VOCABULARY ACTIVITY}
+Discuss how a system of linear equations or inequalities is a set of two or more equations or inequalities using the same variables.
+1. A set of linear equations that all use the same variables is called a blank.
+\answer{system of linear equations}
+2. A set of linear inequalities that all use the same variables is called a blank.
+\answer{system of linear inequalities}
+3. The blank is the set of ordered pairs that satisfy all the equations in the system.
+\answer{solution of a system of linear equations}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG: 74 963 735 1116 917
+\placeholder{illustration}{Student Companion cover: black background, purple and multicolored circular design, Student Companion at top, enVision Algebra 2 and SAVVAS at bottom.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students approximate the solution(s) of a system of equations by graphing and find the exact solution(s) of the system algebraically, including systems of equations in three variables. Students also identify the region of a graph that represents the solution of a system of inequalities.
+Students rewrite systems of equations in standard form, then represent the system as either a coefficient matrix or an augmented matrix.
+\textbf{Applying Math Practices}
+Make Sense of Problems and Persevere in Solving Them
+Students see relationships between equations and matrices that represent the same system of linear equations.
+Reason Abstractly and Quantitatively
+Students understand that the solution of a system of linear equations is the set of ordered pairs that makes all equations in the system true.
+\te{Printed overview discusses coefficient and augmented matrices; no matrix example appears in this lesson's three printed examples.}
+\end{te-addendum}
+% Source page 75: 47B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students use their knowledge of graphs of linear functions to determine the coordinates of the point where two lines intersect. This prepares them to estimate the solution of a system of linear equations by graphing and then solve algebraically.
+STUDENT COMPANION Students can complete the Explore \& Reason activity on page 21 of their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving.
+Q: What do you notice about the graph?
+\answer{There are two linear functions. They both have positive slopes and intersect at approximately (3,4.5).}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics.
+Q: What do the coordinates of the point of intersection of the two lines represent?
+\answer{The point is a solution to the equations of both lines. If you input the x-coordinate into both functions, the output, the y-coordinate, will be the same.}
+\textbf{For Early Finishers}
+Q: What is the equation in slope-intercept form for each line?
+\answer{(y=0.5x+3), (y=3x-5)}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse.
+Q: What do you notice about the point of intersection?
+\answer{The point lies on both lines. The point is a solution to the equation of each line. There is only one point of intersection.}
+Q: How many possible points of intersection can two straight lines have?
+\answer{Two straight lines can intersect once. Two straight lines that are parallel will never intersect. Two straight lines that are the same line will intersect at every point.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Use with EXPLORE \& REASON}
+Q: Communicate Precisely The graphs of two equations appear to intersect at the point (2,3). Does that guarantee that (x=2) and (y=3) is a solution to both equations? Explain.
+\answer{No; graphing shows an approximate solution. To show that the point is the exact solution, substitute (x=2) and (y=3) into the original equations.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+The graph shows two lines that intersect at one point.
+% FIG: 75 1011 641 1121 752
+\placeholder{graph}{Student launch graph on unit grid, x,y axes with arrows, origin O, labels 2,4,6,8 on both positive axes; window about [-1,10] on each axis. Blue line y=0.5x+3 and red line y=3x-5, with arrows at visible ends, red dot near (3.2,4.6). Equations are inferred from the teacher's printed early-finisher answer; they are not labeled on the graph.}
+A. What are the approximate coordinates of the point of intersection?
+\answer{(3.1,4.8)}
+B. How could you verify whether the coordinates you estimated are, in fact, the solution? Is the point the solution to the equations of both lines?
+\answer{The coordinates can be verified by substitution into the equation of each line. Yes; the point where the lines intersect is the solution.}
+C. Make Sense and Persevere Use your result to refine your approximation, and try again. Can you find the point of intersection this way? Is there a more efficient way?
+\answer{Yes; the answer could be obtained this way as long as the coordinates are rational; solving algebraically might be more efficient.}
+\te{Printed approximate coordinates differ between the discussion (3,4.5) and sample work (3.1,4.8); the printed early-finisher equations intersect exactly at (3.2,4.6).}
+\te{Digital launch repeats the graph and parts A-C, with Go back, Enter your answer, and SOLUTION controls. The availability banner says Critique \& Explain is available at SavvasRealize.com although the activity itself is labeled EXPLORE \& REASON.}
+% FIG: 75 927 261 1028 364
+\placeholder{graph}{Digital launch repeats the unit-grid graph: x,y axes with arrows, O and 2,4,6,8 labels, blue rising line through (0,3), red steeper rising line through roughly (2,1), red intersection dot near (3.2,4.6). Both lines extend with arrows; window about [-1,10] on each axis.}
+\end{model-discuss}
+
+% Source page 76: 47 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Introduce students to systems of linear equations and inequalities as a set of equations or inequalities using the same variables. Explain that for systems of linear equations, the solution is the set of all ordered pairs that simultaneously make all equations in the system true. For systems of linear inequalities, the solution is the set of all ordered pairs in the region of the graph that simultaneously make all inequalities in the system true.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Solve a System of Linear Equations}
+Use and Connect Mathematical Representations.
+Q: What methods can you use to graph a linear equation?
+\answer{Make a table of x- and y-values, rewrite the equation in slope-intercept form, and use the slope and y-intercept to sketch the graph.}
+Q: Why can you set the equations (x=3-2y) and (x=4+2y) equal to each other?
+\answer{You can use the Transitive Property. If two equations are equal to the same term, in this case x, then they are equal to each other.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Solve a System of Linear Equations}
+What is the solution of the system of linear equations (\begin{cases}x+2y=3\\x-2y=4\end{cases})?
+A system of linear equations is a set of two or more equations using the same variables. The solution of a system of linear equations is the set of all ordered coordinates that simultaneously make all equations in the system true.
+Sketch the graph of each equation to estimate the solutions. Then solve algebraically.
+(x+2y=3\Rightarrow x=3-2y)
+(x-2y=4\Rightarrow x=4+2y)
+(3-2y=4+2y)
+(-1=4y)
+(-\frac14=y)
+(x=3-2(-\frac14))
+(x=\frac72)
+% FIG: 76 1031 392 1120 473
+\placeholder{graph}{Unit grid with x,y axes and arrowheads, x labels O,2,6, y labels -3,3. Red falling line y=(3-x)/2 and blue rising line y=(x-4)/2 intersect at red dot (3.5,-0.25). Window x [-2,7], y [-4,4]. Both lines have arrows at visible ends.}
+\te{Callout: The x-coordinate of the solution is between 3 and 4, and the y-coordinate of the solution is between -1 and 0. Generalize: Recall that there are three possible outcomes when solving a system of two linear equations: no solution, one solution, or an infinite number of solutions.}
+The solution is ((\frac72,-\frac14)). These values are close to the estimate made from the graph. You can check to confirm that these values satisfy both equations.
+\answer{(\frac72,-\frac14)}
+\end{example}
+\begin{tryit}{1}
+Solve each system of equations.
+a. (\begin{cases}2x+y=-1\\5y-6x=7\end{cases})
+b. (\begin{cases}3x+2y=5\\6x+4y=3\end{cases})
+\answer{a. (-\frac34,\frac12). b. no solution}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: What does it mean when there is no solution to a system of linear equations? What type of system is this?
+\answer{The graphs of the equations do not intersect. There is no ordered pair that is a solution of both equations. This is an inconsistent system.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples: ADDITIONAL EXAMPLE 1}
+Additional Examples are available at SavvasRealize.com.
+Solve the system of linear equations.
+(\begin{cases}2x+6y=10\\-3x-6y=9\end{cases})
+(2x+6y=10\longrightarrow x=5-3y)
+(-3x-6y=9\longrightarrow x=-3-2y)
+(5-3y=-3-2y)
+(8=y)
+(x=5-3y=5-3(8)=-19)
+\answer{(-19,8)}
+\te{Digital controls: Go back; ESSENTIAL QUESTION; SOLUTION.}
+Example 1 Help students understand how to solve a system of linear equations.
+Q: Some of these systems of linear equations have one solution and some have no solutions. Can you think of a situation where a system of linear equations could have infinitely many solutions?
+\answer{Yes; if the equations represented the same line, there would be infinitely many solutions.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 3}
+Solve the system of equations.
+(\begin{cases}x+5y=4\\3x-2y+z=-6\\-x-y+9z=-9\end{cases})
+The first equation only contains the variables x and y.
+Multiply the second equation by (-9) and add it to the third equation to eliminate z.
+(-27x+18y-9z=54)
+(-x-y+9z=-9)
+(-28x+17y=45)
+Now solve the system of equations that consists of the resulting equation and the first equation from the original system.
+(-28x+17y=45\longrightarrow -28x+17y=45)
+(x+5y=4\longrightarrow 28x+140y=112)
+(157y=157)
+(y=1)
+(x+5y=4)
+(x+5(1)=4)
+(x=-1)
+Finally, substitute the values of x and y into either the second or third equation to solve for z.
+\answer{See back of book.}
+\te{The screenshot displays x=-1 and y=1 but stops before displaying z or an ordered triple. Digital controls: Go back; ESSENTIAL QUESTION; SOLUTION.}
+Example 3 Help students understand how to reduce a system of three variables to a system of two variables.
+Q: When one of the equations only contains two variables, what might be an efficient first step in solving the system?
+\answer{If you use elimination to eliminate z from the second and third equations, you can solve a system of two equations with just x and y.}
+\end{te-addendum}
+% Source page 77: 48 Understand & Apply
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Solve a System of Linear Inequalities}
+Use and Connect Mathematical Representations.
+Q: Why is this a system of inequalities rather than a system of equations?
+\answer{The situation deals with ranges of numbers. Notice the language and the use of at least and not more than.}
+Q: Why are there multiple solutions of a system of inequalities?
+\answer{The inequalities represent a range of values that are solutions, rather than just one point of intersection. Any point in the shaded region of the graph is a solution of the system of linear inequalities.}
+\textbf{Have a Growth Mindset: Persist in Learning}
+Learning something new does not always happen quickly. Most people learn by doing something many times. Ask: What is something in math that you feel confident doing? How long ago did you learn that skill?
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Solve a System of Linear Inequalities}
+Malcolm earns money doing chores for neighbors. His goal is to earn at least \$200 each week, but he can work a maximum of 20 hours per week. Malcolm must spend at least 5 hours per week walking his neighbors' dogs. For how many hours should Malcolm work at each job in order to meet his goals?
+% FIG: 77 952 247 1114 340
+\placeholder{illustration}{Two side-by-side chore illustrations: Malcolm pushing a lawn mower labeled \$20 per hour, and walking dogs labeled \$10 per hour.}
+A system of linear inequalities is a set of two or more inequalities using the same variables.
+Step 1 Define the variables.
+(x=\text{number of hours spent mowing lawns})
+(y=\text{number of hours spent walking dogs})
+Step 2 Write inequalities to model the constraints.
+Malcolm wants to earn at least \$200 each week at \$20 per hour mowing lawns and \$10 per hour walking dogs: (20x+10y\geq200).
+Malcolm cannot work more than 20 h each week: (x+y\leq20).
+Malcolm must spend at least 5 h walking dogs each week: (y\geq5).
+Step 3 Choose test points to determine which areas of the graph to shade.
+(20x+10y\geq200), (0,0), False
+(x+y\leq20), (0,0), true
+(y\geq5), (8,8) is true
+Use arrows to show the region of the graph that satisfies each inequality.
+Shade the region that satisfies all three inequalities.
+% FIG: 77 990 517 1114 645
+\placeholder{graph}{First-quadrant grid, x Hours Spent Mowing Lawns and y Hours Spent Walking Dogs; ticks every 2, labels 0,4,8,12,16,20, window [0,20] both axes. Solid red y=20-2x from (0,20) to (10,0), solid blue y=20-x from (0,20) to (20,0), green horizontal y=5. Yellow solution triangle with vertices (0,20),(7.5,5),(15,5). Colored arrows indicate right/above red, below blue, above green; axes and lines have arrowheads.}
+Any point in the shaded region, such as (12,7), is a solution to the system of inequalities. So if Malcolm spends 12 hours mowing lawns and 7 hours walking dogs, he will have met his goals.
+\answer{Any point in the shaded region, such as (12,7), is a solution; 12 hours mowing lawns and 7 hours walking dogs meets his goals.}
+\te{HAVE A GROWTH MINDSET: When it takes time to learn something new, how do you stick with it? STUDY TIP: Using color to sketch graphs of equations or inequalities can make the graph easier to analyze.}
+\end{example}
+\begin{tryit}{2}
+Sketch the graph of the set of all points that solve this system of linear inequalities.
+(\begin{cases}2x+y\leq14\\x+2y\leq10\\x\geq0\\y\geq0\end{cases})
+% FIG: 77 134 552 304 692
+\placeholder{graph}{Try It 2 teacher graph: unit grid x [0,8], y [0,6], axes x,y blue and arrowheads, O and labels 2,4,6 on x, 2,4 on y. Solid blue lines y=14-2x and y=5-x/2 intersect (6,2); boundary axes x=0 and y=0 also solid blue. Yellow solution quadrilateral vertices (0,0),(0,5),(6,2),(7,0). Sloped lines continue with arrows.}
+\answer{See graph.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: What is the effect of including (x\geq0) and (y\geq0) in this system of inequalities?
+\answer{It limits the solutions to the first quadrant.}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{Use with EXAMPLES 1 \& 2}
+Q: Make Sense and Persevere Is it possible to solve a system of linear inequalities using the same methods you used to solve a system of linear equations?
+\answer{No; you could find the coordinates of the vertices at the points of intersection, but you could not show all of the solutions.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 5)}
+\te{Printed reference to Example 5; this lesson has only Examples 1-3. The quoted inconsistent-system sentence appears in Example 3B.}
+LISTENING BEGINNING Have students listen as you use the term eliminate in different context. (e.g., "The team was eliminated from the tournament.") Challenge students to offer a definition of the term based on how they heard the word used.
+Q: What does eliminate mean?
+\answer{remove something}
+Q: What is eliminated?
+\answer{one of the variables}
+READING DEVELOPING Have students note the similarities in the words solve and solution. Give students cards with verbs written on them, and have them work in pairs to write the corresponding noun with a suffix -ion.
+Q: Why might it be helpful to know this relationship between verbs and the suffix -ion?
+\answer{It can help you recognize the meaning of some nouns if you are familiar with the verb.}
+WRITING EXPANDING Have students read the last line of the example: "There is no solution for this system of equation; it is an inconsistent system." Ask students to describe what this means in their own words.
+Q: What does the word inconsistent mean in this sentence?
+\answer{It means that there are no values for the variables that make the equations true simultaneously.}
+Q: Why would you need to check the values of x and y in both equations?
+\answer{For the values to be a solution of the system, they have to create true statements when substituted into both equations.}
+\end{te-addendum}
+% Source page 78: 49 Understand & Apply
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Solve a System of Equations in Three Variables}
+Use and Connect Mathematical Representations.
+Q: What ideas do you have about how to start solving a set of equations?
+\answer{Look for variables whose coefficients can be easily made negatives of each other.}
+Q: Would it be possible to solve this system of equations graphically, as you did with systems of equations in two variables?
+\answer{No; you cannot graph an equation with three variables on an x-y coordinate plane.}
+Q: Why are you able to add a product of the second equation to the third equation without changing the solution?
+\answer{If you replace one equation by the sum of that equation and a multiple of the other, the resulting system has the same solutions.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Solve a System of Equations in Three Variables}
+How can you solve a system of equations in three variables?
+A. What is the solution of this system?
+(\begin{cases}2x+y-z=-10\\-x+2y+z=3\\x+2y+3z=13\end{cases})
+First, reduce the system to two variables by using elimination.
+(\begin{cases}x+3y=-7\\4x-4y=4\end{cases})
+\te{Callouts: Add 2x+y-z=-10 to -x+2y+z=3. Add -3 times -x+2y+z=3 to x+2y+3z=13. LOOK FOR RELATIONSHIPS: The following actions do not change the solutions of a system of equations: multiplying an equation by a nonzero number; adding one equation to another and replacing one of these equations with the sum.}
+Now solve the new system by any method you like. You can use elimination to solve for y.
+(x+3y=-7)
+(4x-4y=4)
+Divide by (-4).
+(x+3y=-7)
+(-x+y=-1)
+(4y=-8)
+So (y=-2). Substitute for y in the equation (x+3y=-7).
+(x+3(-2)=-7)
+(x=-1)
+So (x=-1). Now substitute x and y into one of the original equations. You can use (2x+y-z=-10).
+(2(-1)+(-2)-z=-10)
+(-4-z=-10)
+(z=6)
+The solution to the system is (x=-1), (y=-2), and (z=6), or (-1,-2,6).
+\answer{A. (-1,-2,6)}
+B. What is the solution of this system of equations?
+(\begin{cases}2x-y+z=3\\x+y+z=5\\-4x+2y-2z=0\end{cases})
+First eliminate y:
+(\begin{cases}3x+2z=8\\-6x-4z=-10\end{cases})
+\te{Callout: Adding the first two equations together eliminates y. Multiplying the second equation by -2 and adding to the third equation also eliminates y.}
+(3x+2z=8)
+(-6x-4z=-10)
+Multiply by 2.
+(6x+4z=16)
+(-6x-4z=-10)
+(0=6)
+There is no solution for this system of equations; it is an inconsistent system.
+\answer{B. no solution; inconsistent system}
+\end{example}
+\begin{tryit}{3}
+Solve the following systems of equations.
+a. (\begin{cases}x+y+z=3\\x-y+z=1\\x+y-z=2\end{cases})
+b. (\begin{cases}2x+4y-6z=8\\-4x+y+12z=-16\\x-3z=4\end{cases})
+\answer{a. (\frac32,1,\frac12). b. Infinitely many solutions; (\begin{cases}x-3z=4\\y=0\end{cases})}
+\end{tryit}
+\begin{te-addendum}{3}{CommonError}
+\textbf{Common Error Try It! 3}
+Students may be overwhelmed when starting the problem. Encourage them to look for an easy first step that reduces one variable in two equations. And then repeat that process.
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{Use with EXAMPLE 3}
+Q: Generalize What is the goal of the substitution and elimination methods?
+\answer{The goal is to rewrite a system of three equations in three variables as a simpler system of two equations in two variables, and eventually as a single equation in one variable.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking: USE WITH EXAMPLE 2}
+Have students work through an example of solving a system of linear inequalities using graphing.
+(\begin{cases}2x+7y\geq1\\3x\leq2\\x-6y\geq-43\\5y-8x\geq13\end{cases})
+% FIG: 78 289 1043 522 1201
+\placeholder{graph}{RtI extension graph: gray grid spacing 2, x labels -16,-12,-8,-4,O,4, y labels 4,8; window x [-18,6], y [-4,12]. Solid blue boundaries y=(1-2x)/7, x=2/3, y=(x+43)/6, y=(8x+13)/5 with arrowheads. Yellow region above falling line, below gently rising line, above steep rising line and left of vertical boundary. Four vertices inferred from displayed equations: (-295/19,87/19),(-43/33,17/33),(2/3,11/3),(2/3,131/18).}
+Q: Is there an easy way to graph this without using technology?
+\answer{Yes; Rewrite each inequality as an equation in slope-intercept form to graph the lines. Then refer to the (\geq) and (\leq) symbols or test points to determine which region to shade.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students: USE WITH EXAMPLE 3}
+When finding the solution of a system of linear equations in three variables, students may have trouble deciding where to begin. Have students practice with these examples.
+1. (\begin{cases}2x+2y+z=2\\2x-2y+z=4\\x+y-z=5\end{cases})
+\answer{(\frac{17}{6},-\frac12,-\frac83)}
+2. (\begin{cases}-x-2y-z=1\\x-2y-2z=6\\2x+4y+3z=4\end{cases})
+\answer{(\frac{11}{2},-\frac{25}{4},6)}
+Q: Which two equations could you add together in order to eliminate a variable?
+\answer{1. Equations (2x+2y+z=2) and (2x-2y+z=4) could be combined to eliminate the y-terms. 2. Equations (-x-2y-z=1) and (x-2y-2z=6) could be combined to eliminate the x-terms.}
+\end{te-addendum}
+
+% Source page 79: 50 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Linear Systems}
+Q: What is the solution of a system of linear equations? What is the solution of a system of linear inequalities?
+\answer{For a system of linear equations that has one solution, the solution is the set of ordered pairs that make all equations in the system true. It is also possible for a system of linear equations to have no solution, or infinitely many solutions. The solution of a system of linear inequalities is the set of all points that make the inequalities in the system true.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Exercise 3 Students may think that they can solve a system of inequalities algebraically using substitution or elimination. Have students graph one of the inequalities and test points above and below the graph of the line. Explain how the test points show that the solution to the system of inequalities is a region of the graph rather than a single point that can be found algebraically.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Linear Systems}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\begin{tabular}{lll}
+ & System of linear equations & System of linear inequalities \\
+WORDS & a set of two or more equations using the same variables & a set of two or more inequalities using the same variables \\
+ALGEBRA & (\begin{cases}4x-3y=4\\-x+2y=5\end{cases}) & (\begin{cases}y\geq16-2x\\y\leq16-x\\y\geq6\end{cases}) \\
+ & A system of two linear equation may have one solution, infinitely many solutions, or no solution. & A system of inequalities may have a region on the coordinate grid that defines the solutions. \\
+\end{tabular}
+\textbf{GRAPHS}
+% FIG: 79 745 397 863 507
+\placeholder{graph}{Summary equations graph: first-quadrant unit grid, axes x,y with arrowheads, labels 0,2,4,6,8. Red line 4x-3y=4 and blue line -x+2y=5, both explicitly labeled in matching colors, intersection red dot (4.6,4.8). Window [0,10] on both axes; both lines have arrows at visible ends.}
+% FIG: 79 934 397 1047 509
+\placeholder{graph}{Summary inequalities graph: first-quadrant grid every 2, x,y axes with arrows, labels 0,4,8,12,16,20. Solid red y=16-2x, solid blue y=16-x, solid green horizontal y=6. Yellow triangle with vertices (0,16),(5,6),(10,6); colored small arrows indicate above red, below blue, above green. Lines continue with arrowheads, window [0,20] on each axis.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you find and represent solutions of systems of linear equations and inequalities?
+\answer{Graphs of the equations can be shown on a coordinate plane. The point of intersection of the lines can show the solution of the system. Graphs of the inequalities can also be shown on a coordinate plane. The overlapping regions of the shaded sections can show the solution of the system.}
+2. Error Analysis Shandra said the solution of the system of equations (\begin{cases}2x+y=3\\-x+4y=-6\end{cases}) is (-1,2). Is she correct? Explain.
+\answer{No; Savannah switched the x- and y-values. The solution is (2,-1).}
+\te{Printed answer says Savannah; the question names Shandra.}
+3. Communicate Precisely Why is a system of linear inequalities often solved graphically?
+\answer{A system of linear inequalities has to be solved graphically to see the regions of overlap.}
+4. Make Sense and Persevere How does knowing how to solve a system of two equations in two variables help you to solve a system of three equations in three variables?
+\answer{Knowing how to solve a system of two equations helps you understand the process of eliminating a variable and solving for another variable. This helps in solving a system of three equations.}
+\textbf{Do You KNOW HOW?}
+5. Solve the following system of equations.
+(\begin{cases}2x+2y=10\\x+5y=13\end{cases})
+\answer{(3,2)}
+6. Graph the following system of inequalities.
+(\begin{cases}-x+2y<1\\x\geq0\\y\geq0\end{cases})
+% FIG: 79 129 973 353 1199
+\placeholder{graph}{Summary item 6 teacher answer graph: unit grid window [-4,4] on both axes, x,y labeled with arrowheads, O and -2,2 labels. Solid blue coordinate axes form x>=0 and y>=0 boundaries. Dashed red line y=(x+1)/2, arrows at both ends, intercepts (-1,0),(0,0.5). Yellow region in first quadrant below dashed line, continuing right.}
+\answer{See graph.}
+7. List three sample points from item 6 that are solutions to the system of inequalities.
+\answer{Sample answer: (10,0), (4,2), (25,10)}
+8. Equations with two variables that are raised only to the first power represent lines. There are three possible outcomes for the intersections of two lines. Describe the outcomes.
+\answer{Two lines that intersect at one point have one solution. Two lines that never intersect have no solutions. Two lines that always intersect have infinitely many solutions.}
+\end{concept-summary}
+\te{Answers 9-14 are printed on PDF page 79 and transcribed with their corresponding practice prompts on PDF page 80.}
+% Source page 80: 51 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+On-Level: 10--24, 26, 28, 31--38. Advanced: 10--15, 18--20, 23--38.
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each. Practice: 1 point each. Assessment Practice: 1 point each. Performance Task: 3 points.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 16--19 & 1 \\
+1 & 11, 32, 35--37 & 2 \\
+2 & 20, 21 & 1 \\
+2 & 33, 34 & 2 \\
+2 & 14 & 3 \\
+3 & 22, 23 & 1 \\
+3 & 13 & 3 \\
+4 & 24--27 & 1 \\
+4 & 10 & 2 \\
+5 & 28, 29 & 1 \\
+5 & 12, 15, 30, 31, 38 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\te{Printed Item Analysis names Examples 4 and 5 although only Examples 1-3 occur in this lesson; includes item 38 although the practice ends at 37; omits item 9. Assignment Guide also ends at 38. The table is preserved without renumbering. DOK for item 9 is not printed.}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.
+% FIG: 80 1061 209 1118 269
+\placeholder{illustration}{QR code at upper-right of Practice and Problem Solving, under the Scan the QR code to access a video tutorial banner.}
+\end{te-addendum}
+\begin{practice}{9}{2}
+\textbf{UNDERSTAND} Communicate Precisely In a system of inequalities, what results do the constraints (x\geq0) and (y\geq0) bring to the solutions?
+\answer{The constraints limit the solutions to the first quadrant.}
+\te{DOK \uncertain{2}{not printed; item 9 is absent from the Item Analysis table}. The numeric DOK argument is provisional, not a source value.}
+\end{practice}
+\begin{practice}{10}{2}
+Error Analysis Describe and correct the error a student made in solving the system of equations.
+(2x+4y=0\Rightarrow2x+4y=0)
+(3x-2y=-24\Rightarrow6x-4y=-24)
+(8x=-24)
+(x=-3)
+(2(-3)+4y=0)
+(-6+4y=0)
+(4y=6)
+(y=\frac32)
+\te{A red X marks the displayed student work.}
+\answer{(-24) in the second equation was not multiplied by 2. (-24) should be (-48). The solution is (-6,3).}
+\end{practice}
+\begin{practice}{11}{2}
+Higher Order Thinking Interpret the solution set of a system of equations with the ordered triple ((x,y,z)=(x,2x,5)).
+\answer{There are infinitely many solutions. x may be any real number, y must be twice x and z=5.}
+\end{practice}
+\begin{practice}{12}{3}
+Use Structure Write a system of equations in three variables with integer solutions. Give the solution. Explain your process.
+\answer{Answers may vary. Sample: (\begin{cases}x+y+z=6\\x+y-z=0\\x-y+z=2\end{cases}); (1,2,3); Start with the solution. Then write 3 equations that are true for the solution.}
+\end{practice}
+\begin{practice}{13}{3}
+Make Sense and Persevere Write a system of inequalities for the shaded region.
+% FIG: 80 551 772 683 903
+\placeholder{graph}{Square unit grid, x,y axes with arrows, labels -2,O,2 on both axes, window [-5,5]. Solid red square boundary x=-4,x=4,y=-4,y=4 with yellow interior, all four corners included.}
+\answer{(\begin{cases}x\geq-4\\x\leq4\\y\geq-4\\y\leq4\end{cases})}
+\end{practice}
+\begin{practice}{14}{3}
+Mathematical Connections Find a solution to the following system of equations.
+(\begin{cases}x=5-3y\\y=-2x\end{cases})
+\answer{(-1,2)}
+\end{practice}
+\begin{practice}{15}{3}
+\textbf{PRACTICE} Solve the following systems of equations. SEE EXAMPLE 1.
+(\begin{cases}x=2y-5\\3x-y=5\end{cases})
+\answer{(3,4)}
+\end{practice}
+\begin{practice}{16}{1}
+Solve the following systems of equations. SEE EXAMPLE 1.
+(\begin{cases}y=2x+3\\2y-x=12\end{cases})
+\answer{(2,7)}
+\end{practice}
+\begin{practice}{17}{1}
+Solve the following systems of equations. SEE EXAMPLE 1.
+(\begin{cases}x-3y=1\\2x-y=7\end{cases})
+\answer{(4,1)}
+\end{practice}
+\begin{practice}{18}{1}
+Solve the following systems of equations. SEE EXAMPLE 1.
+(\begin{cases}x+2y=-4\\3x-y=-5\end{cases})
+\answer{(-2,-1)}
+\end{practice}
+\begin{practice}{19}{1}
+Sketch the graph of the set of all points that solve each system of linear inequalities. SEE EXAMPLE 2.
+(\begin{cases}0<x\leq125\\x-2y>0\\2x+2y\leq300\end{cases})
+% FIG: 80 507 1171 796 1375
+\placeholder{graph}{Teacher answer 19: grid with x step 10 and y step 10, x labels 0,20,...,140, y 0,20,...,100; window x [0,150], y [0,100]. Dashed red x=0, dashed red y=0, dashed red y=x/2; solid blue vertical x=125 and falling y=150-x. Yellow region drawn above x-axis, below y=x/2 and y=150-x, left of x=125. Lines and axes have arrows; sloped boundaries meet (100,50).}
+\answer{See graph.}
+\te{Printed system has no y>0 constraint, while its answer graph shows shading only above the x-axis and a dashed boundary y=0. Negative y values can also satisfy the printed inequalities.}
+\end{practice}
+\begin{practice}{20}{1}
+Sketch the graph of the set of all points that solve each system of linear inequalities. SEE EXAMPLE 2.
+(\begin{cases}y+2x<10\\x-2y<8\\x>0\\y>0\end{cases})
+% FIG: 80 858 1121 1056 1319
+\placeholder{graph}{Teacher answer 20 graph: grid x step 1,y step 2; labels x O,2,4,6 and y -4,4,8,12, axes x,y with arrows, window x [-2,8],y [-6,14]. Red dashed y=10-2x, y=x/2-4, x=0,y=0; yellow first-quadrant triangle below y=10-2x, vertices (0,0),(0,10),(5,0) excluded on dashed boundaries. All boundary lines extend with arrows.}
+\answer{See graph.}
+\end{practice}
+\begin{practice}{21}{1}
+Solve the following systems of equations. SEE EXAMPLE 3.
+(\begin{cases}2x-y-3z=20\\3x+y+6z=4\\x+2y+9z=-16\end{cases})
+\answer{infinitely many solutions}
+\te{Answer printed on PDF page 81.}
+\end{practice}
+\begin{practice}{22}{1}
+Solve the following systems of equations. SEE EXAMPLE 3.
+(\begin{cases}2x+5y-3z=14\\x-2y+4z=-12\\-x+3y-2z=13\end{cases})
+\answer{(-2,3,-1)}
+\te{Answer printed on PDF page 81.}
+\end{practice}
+\begin{practice}{23}{1}
+Solve the systems of equations with technology. SEE EXAMPLE 1.
+(\begin{cases}7y=2x-6\\0.5x-4=2.8y\end{cases})
+\answer{(-5.333,-2.381)}
+\end{practice}
+\begin{practice}{24}{1}
+Solve the systems of equations with technology. SEE EXAMPLE 1.
+(\begin{cases}\frac{5x}{3}-\frac14=y\\3x+2=3y\end{cases})
+\answer{(1.375,2.042)}
+\end{practice}
+\begin{practice}{25}{1}
+Solve the systems of equations with technology. SEE EXAMPLE 1.
+(\begin{cases}10x-5y=3\\x=-\frac12y\end{cases})
+\answer{(0.15,-0.3)}
+\end{practice}
+\begin{practice}{26}{1}
+Solve the systems of equations with technology. SEE EXAMPLE 1.
+(\begin{cases}x=7y-1\\0.3x-2.1y=6\end{cases})
+\answer{no solution}
+\end{practice}
+\begin{practice}{27}{1}
+Solve the systems of equations with technology. SEE EXAMPLE 1.
+(\begin{cases}162x+41y=-270\\-68y+268=349x\end{cases})
+\answer{(8.912,-41.8)}
+\end{practice}
+\begin{practice}{28}{1}
+Solve the systems of equations with technology. SEE EXAMPLE 1.
+(\begin{cases}15x=251\\7x+.75y=-67\end{cases})
+\answer{(16.733,-245.511)}
+\end{practice}
+\begin{practice}{29}{1}
+Charles has a collection of dimes and quarters worth \$1.25. He has 8 coins. How many dimes and quarters does he have? SEE EXAMPLE 2.
+\answer{Charles has 5 dimes and 3 quarters.}
+\te{Answer printed on PDF page 81.}
+\end{practice}
+\begin{practice}{30}{3}
+A set of triangular and square tiles contains 50 pieces and 170 sides. How many triangular tiles and how many square tiles are there? SEE EXAMPLE 2.
+\answer{30 triangular tiles and 20 square tiles}
+\te{Answer printed on PDF page 81.}
+\end{practice}
+% Source page 81: 52 Practice & Problem Solving continued
+\begin{practice}{31}{3}
+\textbf{APPLY} Model With Mathematics In basketball, a successful free throw is worth 1 point, a basket made from inside the 3-point arc is worth 2 points, and a basket made from outside the 3-point arc is worth 3 points. How many of each type of basket did Pilar make?
+% FIG: 81 679 280 774 453
+\placeholder{illustration}{Smartphone sports report with basketball player at bottom: SPORTS, PILAR SCORED 26 POINTS! She made 2 more free throws than 2-point baskets. She also made 4 times as many free throws as 3-point baskets.}
+\te{Phone text: SPORTS. PILAR SCORED 26 POINTS! She made 2 more free throws than 2-point baskets. She also made 4 times as many free throws as 3-point baskets.}
+\answer{8 free throws, 6 two-point baskets, and 2 three-point baskets}
+\end{practice}
+\begin{practice}{32}{2}
+Reason Raul is paid \$75 per week plus \$5 for each new gym membership he sells. He may switch to a gym that pays \$50 per week and \$7.50 for each new membership. How many memberships per week does Raul have to sell for the new gym to be a better deal for him?
+\answer{more than 10 memberships per week}
+\end{practice}
+\begin{practice}{33}{2}
+Reason Keisha is designing a rectangular giraffe enclosure with a length of at most 125 m. The animal sanctuary can afford at most 300 m of fencing, and the length of the enclosure must be at least double the width.
+% FIG: 81 516 653 774 821
+\placeholder{illustration}{Giraffe enclosure illustration with giraffes, trees, and rectangular metal fence. White label along fence reads y<=125 m.}
+a. Write inequalities to represent each constraint where (x=\text{width}) and (y=\text{length}).
+\answer{(\begin{cases}x\geq0\\y\geq0\\y\geq2x\\y\leq125\\2x+2y\leq300\end{cases})}
+b. Graph and solve the linear system of inequalities.
+% FIG: 81 149 460 383 695
+\placeholder{graph}{Teacher answer 33b: gray grid spacing 25, axes x,y with arrows, labels -100,-50,O,50,100, window [-150,150] both axes. Solid blue x=0,y=0,y=2x,y=125,y=150-x, extending with arrows. Yellow quadrilateral vertices (0,0),(0,125),(25,125),(50,100), all boundary points included.}
+\answer{See graph.}
+c. What does the solution mean?
+\answer{Keisha can design a rectangular giraffe enclosure with length x and width y shown by the solution region in the graph.}
+\te{Printed answer c reverses length and width relative to the definitions in part a.}
+\end{practice}
+\begin{practice}{34}{2}
+Make Sense and Persevere Ramona needs 10 mL of a 30\% saline solution. She has a 50\% saline solution and a 25\% saline solution. How many milliliters of each solution does she need to create the 30\% solution?
+\answer{2 mL of the 50\% saline solution and 8 mL of the 25\% saline solution}
+\end{practice}
+\begin{practice}{35}{2}
+\textbf{ASSESSMENT PRACTICE} One equation in a system of equations with one solution is (4x+2y=14). Determine if each equation could be the second equation in the system. Select Yes or No.
+a. (2x+y=7) \quad Yes / No
+b. (3x-6y=-12) \quad Yes / No
+c. (2x+6y=32) \quad Yes / No
+d. (-3x+10y=1) \quad Yes / No
+e. (2x+y=5) \quad Yes / No
+\answer{a. No; b. Yes; c. Yes; d. Yes; e. No}
+\end{practice}
+\begin{practice}{36}{2}
+SAT/ACT What value of (a) gives (-1,1) as the solution of the system (\begin{cases}3x+5y=2\\ax+8y=14\end{cases})?
+A. (-22)
+B. (-6)
+C. 0
+D. 6
+E. 22
+\answer{B}
+\end{practice}
+\begin{practice}{37}{2}
+\textbf{Performance Task} Each Sophomore, Junior, and Senior at a high school collected aluminum cans and plastic bottles. The table shows the average number of cans and bottles collected per student, by grade level, during a 3 week recycling drive.
+% FIG: 81 825 632 1084 779
+\placeholder{illustration}{Three recycling bins filled with cans and bottles: left blue Week 1, 2,319 cans and bottles; center green Week 3, 3,785 cans and bottles; right red Week 2, 2,290 cans and bottles. Recycling symbols near bin bottoms.}
+\begin{tabular}{llll}
+ & Sophomores & Juniors & Seniors \\
+Week 1 & 3 & 4 & 4 \\
+Week 2 & 4 & 4 & 3 \\
+Week 3 & 5 & 6 & 7 \\
+\end{tabular}
+Part A Write a system of equations to represent the situation.
+\answer{Assume that at each game there are the same number of sophomores, juniors, and seniors. (\begin{cases}3x+4y+4z=2319\\4x+4y+3z=2290\\5x+6y+7z=3785\end{cases})}
+\te{Printed answer says at each game although the prompt describes a recycling drive; likely each week.}
+Part B Find the solution of the system of equations you found in Part A.
+\answer{(x=185), (y=227), (z=214)}
+Part C What does your solution to part B represent in terms of this scenario?
+\answer{There are 185 sophomores, 227 juniors, and 214 seniors at the high school.}
+\end{practice}
+
+% Source page 82: 52A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & A12, A14 \\
+2 & 2 & A16 \\
+3 & 2 & A12, A15 \\
+4 & 1 & A17 \\
+5 & 1 & A59 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{1-6 Lesson Quiz: Linear Systems}
+\te{ASSESSMENT RESOURCES. Name blank; enVision Algebra 2; SavvasRealize.com; enVision Algebra 2 Assessment Sourcebook. Lesson Quiz is available at SavvasRealize.com.}
+1. Solve the system of equations.
+(\begin{cases}4x+y=-1\\-5x-2y=-4\end{cases})
+\answer{(-2,7)}
+2. Shandra is on vacation and wants to buy souvenirs for at least 8 friends. A postcard book costs \$2.50 and a magnet costs \$4.00. She can spend up to \$30 altogether. Let x represent the number of postcard books and y represent the number of magnets.
+Part A Select all the inequalities that represent constraints for the situation.
+A. (x+y\leq8)
+B. (2.5x+4y\leq30)
+C. (x+y\geq8)
+D. (2.5x+4y\geq8)
+E. (x\geq0)
+F. (y\geq0)
+G. (x+y\geq0)
+\answer{Part A: B, C, E, F}
+Part B Select all points that represent a viable solution.
+A. (2,6)
+B. (1\frac13,6\frac23)
+C. (0,8)
+D. (7,2)
+E. (12,0)
+F. (10,3)
+\answer{Part B: A, D, E}
+\te{Printed Part A excludes G although x+y>=0 follows from the nonnegative variables; the selected letters are preserved.}
+3. Solve the system of equations.
+(\begin{cases}-2x+y=3\\4y=-2+x\end{cases})
+A. (-2,-1)
+B. (-1,-2)
+C. (-1,1)
+D. (1,-1)
+\answer{A}
+4. Jamie wants to build a rectangular fence around a new chicken pen. He can afford at most 70 ft of fencing, and must fit the pen in a space that is 20 ft by 20 ft. Which of the following is a solution to the system of inequalities that represents this situation?
+A. (9,22)
+B. (16,17)
+C. (18,19)
+D. (21,14)
+\answer{B}
+5. Solve the system of equations.
+(\begin{cases}x+y+z=9\\-2x+y+2z=3\\x-4y-z=2\end{cases})
+A. (0,15,-6)
+B. (3,3,3)
+C. (4,-1,6)
+D. (7,1,1)
+\answer{C}
+\end{te-addendum}
+% Source page 83: 52B Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{1-6 Reteach to Build Understanding: Linear Systems}
+\te{Resource sheets show a Name blank, enVision Algebra 2, SavvasRealize.com, and enVision Algebra 2 Teaching Resources footer.}
+1. What is the solution to the system of equations shown? The equations have been given letters from (A) to (C) to help identify them. Fill in the blanks to complete the chart.
+(\begin{aligned}-x+3y&=8\quad(A)\\2x-2y&=12\quad(B)\end{aligned})
+\begin{tabular}{llll}
+Step & Process & Equations & Simplified Result \\
+Multiply equation (A) by 2. & 2(A) & (2(-x+3y)=2(8)) & (-2x+6y=16) \\
+Add the product to equation (B). & (2(A)+(B)=(C)) & (-2x+6y=16); (2x-2y=12); (4y=28) & (C) (4y=28) \\
+Solve for y. & Isolate y in equation (C). & (\frac14(4y)=\frac14(28)) & (y=7) \\
+Substitute the value of y into (A). & Substitute y in (A). & (-x+3(7)=8) & (-x+21=8) \\
+Solve for x. & Multiply by (-1) and isolate x. & (-1(-x+3(7))=-1(8)); (x-21=-8) & (x=13) \\
+\end{tabular}
+\answer{(-2x+6y=16); (4y=28); (4y); 28; (y=7); 7; 21; 7; (x-21=-8); (x=13).}
+2. Keegan and Margaret solved the system (4x-y=5) and (4x+y=3). Keegan says there is no solution and Margaret says the solution is (1,-1). Who is correct? Explain.
+\begin{tabular}{ll}
+Keegan & Margaret \\
+(4x-y=5) & (4x-y=5) \\
+(-4x+y=3) & (-4x-y=-3) \\
+(0\neq8) & (-2y=2) \quad (y=-1) \\
+No solution & (4x+1=5) \\
+ & (4x=4) \\
+ & (x=1) \quad (1,-1) \\
+\end{tabular}
+\answer{Margaret is correct. Keegan subtracted the two 4x's and then added (-y) and y in order to eliminate them. This left him with no solution.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{1-6 Additional Practice: Linear Systems}
+Solve the system of equations.
+1. (\begin{cases}y=7-x\\x+3y=7\end{cases})
+\answer{(7,0)}
+2. (\begin{cases}4x+3y=-16\\-x+y=4\end{cases})
+\answer{(-4,0)}
+3. (\begin{cases}2x-4y=-4\\3x-y=4\end{cases})
+\answer{(2,2)}
+4. (\begin{cases}5x+y=-4\\x-6y=-7\end{cases})
+\answer{(-1,1)}
+5. (\begin{cases}10x+7y=-1\\5x+3y=1\end{cases})
+\answer{(2,-3)}
+6. (\begin{cases}x+y=9\\2x-y=6\end{cases})
+\answer{(5,4)}
+7. (\begin{cases}2x+y=11\\3x-y=9\end{cases})
+\answer{(4,3)}
+8. (\begin{cases}2x+3y=8\\3x+5y=13\end{cases})
+\answer{(1,2)}
+9. (\begin{cases}2x-y=8\\-x-2y=6\end{cases})
+\answer{(2,-4)}
+10. (\begin{cases}3x+y=10\\-2x+4y=-2\end{cases})
+\answer{(3,1)}
+11. (\begin{cases}-3x-9y=-15\\14x-6y=118\end{cases})
+\answer{(8,-1)}
+12. (\begin{cases}4x-6y=8\\-3x-4y=11\end{cases})
+\answer{(-1,-2)}
+13. (\begin{cases}2x+3y-z=9\\-2x-y+2z=2\\x+y-2z=3\end{cases})
+\answer{(-5,6,-1)}
+14. (\begin{cases}4x-2y-z=5\\x+4y-z=-1\\2x-2y-2z=-2\end{cases})
+\answer{(2,0,3)}
+15. (\begin{cases}-3x+2y+5z=-10\\-x-2y+3z=6\\2x-y-z=8\end{cases})
+\answer{(3,-3,1)}
+16. Last year, a baseball team purchased new equipment. The equipment manager paid \$20 per bat and \$12 per glove, spending a total of \$552. The manager bought 34 pieces of equipment. Write a system of equations that can represent this situation, then solve the system.
+\answer{(\begin{cases}20x+12y=552\\x+y=34\end{cases}); (x=18); (y=16)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{1-6 Enrichment: Linear Systems}
+Systems involving more than two variables can be solved with the same strategies used in solving systems with only two variables. Amari, a basketball statistician, was hired to analyze the number and type of baskets made by Sheila, a basketball player, during a basketball season. A free throw x is worth 1 point, a field goal y is worth 2 points, and a three-point field goal z is worth 3 points. Sheila made 1,358 baskets and scored 2,460 points throughout the season. She made 796 more field goals than three-point shots.
+1. Create a system of equations to represent the situation.
+\answer{(\begin{cases}x+2y+3z=2460\\x+y+z=1358\\y-z=796\end{cases})}
+2. Algebraically eliminate a variable to solve the system of equations.
+\answer{358 free throws, 898 field goals, and 102 three-point field goals (358,898,102)}
+3. If there are 82 games in a season, what is the average number of each kind of basket that Sheila makes per game? Round your answers to the nearest tenth.
+\answer{4.4 free throws, 11.0 field goals, and 1.2 three-point field goals}
+4. How many points did Sheila average per game?
+\answer{30 points}
+5. If Sheila's three-point field goal percentage is 40\%, how many times did she attempt a three-point field goal?
+\answer{255 three-point field goal attempts}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{1-6 Mathematical Literacy and Vocabulary: Linear Systems}
+\textbf{List}
+(\begin{cases}y\geq3x+12\\y\leq4x+7\end{cases})
+The value for each variable that makes all equations in the system true
+(\begin{cases}y=5x+6\\y=-4x+2\end{cases})
+A system of equations with no solution
+Complete the vocabulary chart by filling in the missing information using the list.
+\begin{tabular}{lll}
+Word or Word Phrase & Definition & Picture or Example \\
+Inconsistent System & 1. blank & (\begin{cases}y=5x+6\\y=5x+2\end{cases}) \\
+Solution of a System of Linear Equations & 2. blank & (5,4) \\
+System of Linear Equations & A set of two or more equations using the same variables. & 3. blank \\
+System of Linear Inequalities & A set of two or more inequalities using the same variables. & 4. blank \\
+\end{tabular}
+\answer{1. A system of equations with no solution. 2. The value for each variable that makes all equations in the system true. 3. (\begin{cases}y=5x+6\\y=-4x+2\end{cases}). 4. (\begin{cases}y\geq3x+12\\y\leq4x+7\end{cases}).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital screenshot: Solve the system of equations by graphing. y=3x+4; y=-2x+4. Use the graphing tool to graph the system. Click to enlarge graph. Question Help: Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Exit; 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.}
+% FIG: 83 822 1038 929 1157
+\placeholder{graph}{Digital exercise blank unit grid, axes x,y with arrows, O at origin, even-number labels -10 to 10 on each axis, window [-10,10] both axes. No solution lines. Question Help menu covers upper-right corner of grid.}
+\end{te-addendum}
+
+\end{document}

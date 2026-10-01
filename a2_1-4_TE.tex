@@ -1,0 +1,1045 @@
+\documentclass{article}
+% Source: Topic_01_Teacher_Edition.pdf, PDF pages 50-62 (printed pages 31A-39B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+
+% Source page 50: 31A Lesson Overview
+\begin{lesson-meta}
+lesson: 1-4
+title: Arithmetic Sequences and Series
+standards: none printed
+practices: none printed
+objective: I can interpret arithmetic sequences and series.
+
+essential question: What is an arithmetic sequence, and how do you represent and find its terms and their sums?
+
+\textbf{VOCABULARY}
+\item arithmetic sequence
+\item arithmetic series
+\item common difference
+\item explicit definition
+\item recursive definition
+\item sequence
+\item series
+\item sigma notation
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list or numbered standards/practice codes is printed. Objective and Essential Question appear on PDF pages 51 and 52.}
+\begin{tabular}{ll}
+Lesson Code & 1-4 \\
+Title & Arithmetic Sequences and Series \\
+Standards & none printed \\
+I CAN Objective & I can interpret arithmetic sequences and series. \\
+Essential Question & What is an arithmetic sequence, and how do you represent and find its terms and their sums? \\
+Lesson Vocabulary & arithmetic sequence; arithmetic series; common difference; explicit definition; recursive definition; sequence; series; sigma notation \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Identify the common difference in an arithmetic sequence.
+\item Write arithmetic sequences both recursively and with an explicit formula.
+\item Construct arithmetic sequences, given a graph, a description of a relationship, or two input-output pairs.
+Essential Understanding. An arithmetic sequence is a sequence of numbers in which the terms have a common difference. An arithmetic series is the sum of the terms in an infinite arithmetic sequence and can be found using an explicit definition for the sum.
+\te{Printed infinite; likely finite, consistent with the finite sums taught in this lesson.}
+\textbf{COHERENCE}
+Previously in earlier courses, students:
+\item Created and graphed piecewise-defined functions.
+In this lesson, students:
+\item Write the general rule for an arithmetic sequence recursively as a piecewise-defined function and then translate from a recursive formula to an explicit formula.
+Later in this course, students will:
+\item Write geometric sequences recursively and with an explicit formula and translate between the two forms.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students identify the common difference in an arithmetic sequence and use it to write the arithmetic series recursively. Then students use the recursive definition to find a pattern and write an explicit definition for the sequence.
+\te{Printed arithmetic series recursively; likely arithmetic sequence recursively.}
+\item Students use arithmetic sequences to solve real-world problems, such as finding the number of seats in an auditorium where the number of seats increases in each row.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{NEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+arithmetic sequence & secuencia aritmética \\
+arithmetic series & sserie aritmética \\
+common difference & diferencia común \\
+explicit definition & definición explícita \\
+recursive definition & definición recursiva \\
+sequence & progresión \\
+series & serie \\
+sigma notation & notación sigma \\
+\end{tabular}
+\te{Printed sserie; likely serie.}
+\textbf{VOCABULARY ACTIVITY}
+Start by discussing the terms sequence and series. Explain that a series is a sum of the terms of a sequence.
+Q: The numbers 1, 2, 4, 8, 16 form a sequence. Write a series that corresponds to the sequence.
+\answer{(1+2+4+8+16)}
+Then explain that an arithmetic sequence is a sequence in which there is a common difference between the terms.
+Ask students to write an arithmetic sequence with a common difference of 2. Then ask them to write a series that corresponds to the sequence.
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG: 50 962 788 1117 973
+\placeholder{illustration}{Student Companion enVision Algebra 2 cover, black background with purple, blue, and yellow swirling circular artwork.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students identify arithmetic sequences by finding a common difference. They write recursive and explicit definitions for arithmetic sequences and translate between the two forms.
+Students use sigma notation to represent arithmetic series.
+\textbf{Applying Math Practices}
+Construct Viable Arguments. Students use the definition of an arithmetic sequence to identify and explain the flawed logic of an answer that results in a sequence being labeled incorrectly.
+Look For and Make Use of Structure. Students look for patterns when they recognize the common difference in a series by writing out all of the terms in the series.
+\end{te-addendum}
+% Source page 51: 31B Critique & Explain
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS Students describe different methods for finding a pattern of numbers, building a foundation for understanding arithmetic sequences.
+STUDENT COMPANION Students can complete the Critique \& Explain activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving.
+Q: What do you notice about the values in the table?
+\answer{The input values increase by 1. The output values increase by 4.}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics.
+Q: How else could you represent the data in the table?
+\answer{You could plot the ordered pairs of inputs and outputs on a coordinate plane.}
+Q: Plot the ordered pairs on a coordinate plane. Draw a line to connect all the points. What do you notice?
+\answer{All the points lie on a line. The equation of the line is the same as the equation Hugo found.}
+For Early Finishers
+Q: Consider the ordered pairs (0,3), (1,5), (2,7), (3,9), (4,11). Describe two different methods for finding the outputs. Compare your methods.
+\answer{You could find the outputs by using a graph. Plot the points and notice that as (x) increases by 1, (y) increases by 2. You could find an equation to represent the ordered pairs; for example, (f(x)=2x+3).}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse.
+Q: What differences do you notice between Yumiko's and Hugo's methods?
+\answer{In Yumiko's method, you need to know the previous value to calculate the current value. In Hugo's method, you can directly calculate the current value.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Use with CRITIQUE \& EXPLAIN}
+Q: Use Structure Find the average rate of change between a few pairs of points. What can you conclude about the function represented in the table?
+\answer{The average rate of change is always 4, so these values are probably from a linear function.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Yumiko and Hugo are looking at the table of data about the number of families attending a party and how many items are needed to fill piñatas.
+\begin{tabular}{lrrrrr}
+Attendees & 0 & 1 & 2 & 3 & 4 \\
+Items in Piñata & 1 & 5 & 9 & 13 & 17 \\
+\end{tabular}
+% FIG: 51 993 665 1152 787
+\placeholder{illustration}{Two striped donkey piñatas in yellow, green, blue, purple, and pink, one split open with colorful candy falling between them.}
+Yumiko writes
+(f(1)=1+4=5),
+(f(2)=f(1)+4=5+4=9),
+(f(3)=f(2)+4=9+4=13),
+(f(4)=f(3)+4=13+4=17).
+Hugo writes (g(x)=1+4x).
+A. Describe the pattern Yumiko found for finding items needed for the piñatas.
+\answer{A. Yumiko looked for the pattern in the numbers---each number was 4 more than the previous number.}
+B. Describe the pattern Hugo found for finding items needed for the piñatas.
+\answer{B. Hugo used a formula to calculate the number of items needed in the piñatas.}
+C. Use Structure Compare the two methods. Which method would be more useful in finding the items needed when 100 family members attend? Why?
+\answer{C. Both methods are valid. Hugo's method would be more useful in finding the number of items needed for 100 families because you can quickly calculate (g(100)). Using Yumiko's method, you would have to find (f(1)) through (f(99)) before you could calculate (f(100)).}
+\te{Digital and student launch repeat the same material. Digital controls read Go back, ESSENTIAL QUESTION, Enter your answer., and SOLUTION. Critique \& Explain is available at SavvasRealize.com. Printed question C says family members while the introductory paragraph and sample answer count families.}
+% FIG: 51 869 265 960 352
+\placeholder{illustration}{Digital launch repeats the two striped donkey piñatas with falling candy below the attendees/items table.}
+\end{model-discuss}
+
+
+% Source page 52: 31 Example 1
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Introduce students to arithmetic sequences. Explain that they will learn to write arithmetic sequences and find sums of the terms of arithmetic sequences.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Understand Arithmetic Sequences}
+Build Procedural Fluency From Conceptual Understanding.
+PART A
+Q: Can a term of an arithmetic sequence be less than the previous term?
+\answer{Yes; the common difference of an arithmetic sequence can be a negative number. If the common difference is negative, each term is less than the previous term.}
+\textbf{Additional Examples: ADDITIONAL EXAMPLE 1}
+Determine whether the sequence shown in the table is arithmetic.
+\begin{tabular}{rr}
+Term Number & Term \\
+1 & 5 \\
+2 & 8 \\
+3 & 12 \\
+4 & 17 \\
+5 & 23 \\
+\end{tabular}
+Find the difference between each pair of consecutive terms.
+(8-5=3)
+(12-8=4)
+(17-12=5)
+(23-17=6)
+\answer{The difference between consecutive terms is not constant, so the sequence is not arithmetic.}
+Example 1 Students will determine whether a number pattern is an arithmetic sequence.
+Q: How many differences of consecutive terms do you have to calculate to show that a sequence is not arithmetic?
+\answer{You only have to find one difference that is different from the others to have a counterexample.}
+\te{Digital controls: Go back, ESSENTIAL QUESTION, SOLUTION.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+Additional Examples are available at SavvasRealize.com.
+\textbf{ADDITIONAL EXAMPLE 4}
+There are 35 people entered in a contest. After each round of the contest, 4 people are eliminated. This continues as long as there is a positive number of participants. When the contest reaches the least possible number of participants, the contest ends and the remaining participants win a prize.
+How many rounds does the contest have? How many people will win a prize?
+(a_1=35)
+(d=-4)
+(a_n=35-4(n-1))
+(0=35-4(n-1))
+(4(n-1)=35)
+(n-1=8.75)
+(n=9.75)
+There are enough participants for 9 rounds but not enough for 10, so the contest has 9 rounds.
+(a_9=35-4(9-1))
+(a_9=35-32)
+(a_9=3)
+\answer{3 people will win a prize.}
+\te{Printed 9 rounds; likely 8 elimination rounds after the initial 35-person state. The ninth sequence term follows eight subtractions of 4.}
+Example 4 Students will solve a problem involving an arithmetic sequence with a negative common difference.
+Q: How do you know that an arithmetic sequence with a positive first term and a negative common difference has a finite number of positive terms?
+\answer{Since the common difference (d) is negative, the terms (a_1+(n-1)d) are decreasing as (n) increases. Eventually the sequence will decrease to 0.}
+\te{Printed decrease to 0; likely decrease to 0 or below. This example goes from 3 to -1 and never equals 0. Digital controls: Go back, ESSENTIAL QUESTION, SOLUTION.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Understand Arithmetic Sequences}
+\te{CONCEPTUAL UNDERSTANDING. Examples are available at SavvasRealize.com.}
+A. Is the sequence arithmetic? If so, what is the common difference? What is the next term in the sequence?
+(3,8,13,18,23,\ldots)
+A sequence is a function whose domain is the natural numbers.
+Create a table that shows the term number, or domain, and the term, or range.
+\begin{tabular}{rl}
+Term Numbers & Term \\
+1 & (f(1)=3) \\
+2 & (f(2)=8) \\
+3 & (f(3)=13) \\
+4 & (f(4)=18) \\
+5 & (f(5)=23) \\
+6 & (f(6)=?) \\
+\end{tabular}
+\te{Five blue curved arrows between adjacent table terms are each labeled +5. Callout: The difference between consecutive terms is 5.}
+An arithmetic sequence is a sequence with a constant difference between consecutive terms. This difference is known as the common difference, or (d).
+\answer{This sequence is an arithmetic sequence with the common difference, (d=5). The next term in the sequence is (23+5), or 28.}
+% Source page 53: 32 Example 1 continued; Example 2
+B. Is the sequence (4,7,10,13,16,\ldots) arithmetic? If so, what is the next term in the sequence?
+(4,7,10,13,16)
+\te{Callouts: (a_1=4). The common difference, (d), is 3, so this is an arithmetic sequence.}
+The next term is (16+3=19).
+\answer{Nineteen is the next term in the sequence.}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{EXAMPLE 1 CONTINUED PART B}
+Q: How can you determine whether a pattern is an arithmetic sequence?
+\answer{You can subtract each term from the next term. If the result of each subtraction is the same number, then the terms have a common difference and the sequence is arithmetic.}
+\end{te-addendum}
+\begin{tryit}{1}
+Are the following sequences arithmetic? If so, what is the next term in the sequence?
+a. (25,20,15,10,\ldots)
+b. (2,4,7,12,13,\ldots)
+\answer{a. yes; next term is 5. b. no.}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: Can the terms of an arithmetic sequence be negative numbers?
+\answer{Yes; the terms of an arithmetic sequence can be negative. A sequence can start with a negative number, or a sequence can have a negative common difference, so that the terms will eventually become negative.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Write a Function for an Arithmetic Sequence}
+Pose Purposeful Questions.
+Q: When considering a sequence as a function, what is the domain of the function?
+\answer{When considering a sequence as a function, its domain is positive integers.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Write a Function for an Arithmetic Sequence}
+How could you write a formula for the terms of the sequence (3,8,13,18,23,\ldots) based on the previous terms?
+Represent each term by (f(n)) where (n) represents the number of the term.
+So, for (n=1), (f(1)=3).
+If (n>1), each term is the sum of the previous term and 5.
+(f(2)=f(1)+5)
+(f(3)=f(2)+5)
+(f(n)=f(n-1)+5)
+You can write a formula for an arithmetic sequence with common difference (d) as a piecewise-defined function:
+(f(n)=\begin{cases}f(1),&n=1\\f(n-1)+d,&n>1\end{cases})
+So, the sequence (3,8,13,18,23,\ldots) can be written as
+(f(n)=\begin{cases}3,&n=1\\f(n-1)+5,&n>1\end{cases})
+This is the recursive definition for the arithmetic sequence. Each term is defined by operations on the previous term.
+Another way to write a sequence is to use subscript notation.
+(a_n=\begin{cases}a_1,&n=1\\a_{n-1}+d,&n>1\end{cases})
+\te{Callout: With the notation, the subscript shows the number of the term. COMMON ERROR Writing a sequence recursively requires an initial condition.}
+The sequence (3,8,13,18,23,\ldots) can therefore be written as
+\answer{(a_n=\begin{cases}3,&n=1\\a_{n-1}+5,&n>1\end{cases})}
+\end{example}
+\begin{tryit}{2}
+Write recursive definitions for each arithmetic sequence, using function notation and subscript notation.
+a. (103,99,95,91,87,\ldots)
+b. (-6\frac13,-4\frac23,-3,-1\frac13,\frac13,\ldots)
+\answer{a. (a_n=\begin{cases}103,&n=1\\a_{n-1}-4,&n>1\end{cases}), (f(n)=\begin{cases}103,&n=1\\f(n-1)-4,&n>1\end{cases}). b. (a_n=\begin{cases}-6\frac13,&n=1\\a_{n-1}+1\frac23,&n>1\end{cases}), (g(n)=\begin{cases}-6\frac13,&n=1\\g(n-1)+1\frac23,&n>1\end{cases}).}
+\end{tryit}
+
+
+% Source page 54: 33 Examples 3 and 4
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Translate Between Recursive and Explicit Forms}
+Pose Purposeful Questions.
+Q: How does the explicit definition compare to the recursive definition?
+\answer{Each definition shows the common difference and the first term of the sequence. You can use the explicit definition to find any value of the sequence, without having to calculate all previous values.}
+Q: When might you want to use the recursive definition of the sequence rather than the explicit definition?
+\answer{The recursive definition may be the better option when you want to write all of the terms in a sequence up to a certain term.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Translate Between Recursive and Explicit Forms}
+A. Given the recursive definition (a_n=\begin{cases}3,&n=1\\a_{n-1}+0.5,&n>1\end{cases}), what is an explicit definition for the sequence?
+An explicit definition, allows you to find any term in the sequence without knowing the previous term.
+Use the recursive definition to find a pattern:
+(a_1=3)
+(a_2=a_1+0.5=3+0.5)
+(a_3=a_2+0.5=[3+0.5]+0.5=3+2(0.5))
+(a_4=a_3+0.5=[3+2(0.5)]+0.5=3+3(0.5))
+\te{USE STRUCTURE Since (a_2=a_1+0.5), use substitution to simplify the expression. Callout: The first term has 0 common differences added. The second term has 1 common difference added to the first term. The third term has 2 common differences added, and so on.}
+\answer{So the explicit definition is (a_n=3+(n-1)(0.5)).}
+In general, the explicit definition of an arithmetic sequence is (a_n=a_1+d(n-1)).
+B. Given the explicit definition (a_n=16-3(n-1)), what is the recursive definition for the arithmetic sequence?
+The common difference (d) is (-3) and (a_1=16-3(1-1)=16).
+\answer{The recursive definition is (a_n=\begin{cases}16,&n=1\\a_{n-1}-3,&n>1\end{cases}).}
+\end{example}
+\begin{tryit}{3}
+a. For the recursive definition (a_n=\begin{cases}45,&n=1\\a_{n-1}-2,&n>1\end{cases}), what is the explicit definition?
+b. For the explicit definition (a_n=1+7(n-1)), what is the recursive definition?
+\answer{a. (a_n=45-2(n-1)). b. (a_n=\begin{cases}1,&n=1\\a_{n-1}+7,&n>1\end{cases}).}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: When translating between a recursive definition and an explicit one, what should you do first?
+\answer{You should identify the common difference and the first term of the sequence.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Solve Problems With Arithmetic Sequences}
+Pose Purposeful Questions.
+Q: How can you find an explicit formula for a sequence if you do not know the common difference?
+\answer{If you know the value of two of the terms in the sequence, you can use them to calculate the common difference.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Solve Problems With Arithmetic Sequences}
+\te{APPLICATION}
+A high school auditorium has 18 seats in the first row and 26 seats in the fifth row. The number of seats in each row forms an arithmetic sequence.
+% FIG: 54 1003 609 1149 691
+\placeholder{illustration}{Auditorium seen from above the back rows: curved rows of red seats facing a yellow stage, orange walls, and blue backdrop; no numeric labels.}
+A. What is the explicit definition for the sequence?
+The problem states that (a_1=18), (n=5), and (a_5=26).
+(a_n=a_1+d(n-1))
+(26=18+d(5-1))
+(26=18+4d)
+(8=4d)
+(2=d)
+Each row has two more seats than the previous row.
+\answer{The explicit definition is (a_n=18+2(n-1)).}
+% Source page 55: 34 Example 4 continued; Example 5
+B. How many seats are in the twelfth row?
+(a_n=18+2(n-1))
+(a_{12}=18+2(12-1))
+\te{Callout: Substitute 12 for (n).}
+(a_{12}=40)
+\answer{The twelfth row has 40 seats.}
+\end{example}
+\begin{tryit}{4}
+Samantha is training for a race. The distances of her training runs form an arithmetic sequence. She runs 1 mi the first day and 2 mi the seventh day.
+a. What is the explicit definition for this sequence?
+b. How far does she run on day 19?
+\answer{a. (a_n=1+\frac16(n-1)). b. 4 miles.}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: What method could you use to find the explicit definition of the sequence?
+\answer{In the general explicit formula, you can substitute 1 for (a_1), 2 for (a_n), and 7 for (n), and solve for (d). Then you can write the explicit definition using 1 for (a_1) and (\frac16) for (d).}
+\end{te-addendum}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error Try It! 4}
+Some students may write their substitutions into the explicit formula as (1=2+d(7-1)), resulting in (d=-\frac16). Have students explain their answer in the context of the situation. Because Samantha ran farther on the seventh day than she did on the first day, the common difference should be positive.
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Use with EXAMPLES 1, 2, 3, \& 4}
+Q: Use Appropriate Tools How can you use the recursive definition for an arithmetic sequence to find the 120th term?
+\answer{Rewrite the recursive definition as an explicit definition. Then use the explicit to calculate (a_{120}).}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Find the Sum of an Arithmetic Sequence}
+Pose Purposeful Questions.
+Q: Where does the (2\cdot S_5) come from?
+\answer{The sequence (S_5) was added to itself, and adding any value to itself is the same as multiplying it by 2.}
+Q: Why is 14 rewritten as (1+13) rather than as the sum of two other addends that result in 14?
+\answer{The first and last terms of this sequence are 1 and 13. Both the first and last terms are used in the recursive and explicit definitions, so it makes sense to use them as the addends that result in 14.}
+Q: Why is it helpful to have an explicit formula for a finite series?
+\answer{The formula for the sum of the sequence can be helpful if you are finding the sum of a lot of terms. Rather than finding each term in the sequence, you can find the sum just by knowing the first term, last term, and number of terms in the sequence.}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtIExtend}
+\textbf{Extend Student Thinking USE WITH EXAMPLE 5}
+Have students find the sums of sequences with a mixture of positive and negative numbers.
+1. Find the sum of a sequence with 11 terms, with (a_1=17) and (a_{11}=-23).
+\answer{(-33)}
+2. Find the sum of a sequence with 15 terms, with (a_1=-35) and (a_{15}=63).
+\answer{210}
+3. Find the sum of the sequence (22,16,10,4,-2,-8,-14,-20).
+\answer{8}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Find the Sum of an Arithmetic Sequence}
+A. What is the sum of the terms in the arithmetic sequence (1,4,7,10,13)? What is a general formula for an arithmetic series?
+A finite series is the sum of the terms in a finite sequence. A finite arithmetic series is the sum of the terms in an arithmetic sequence. For the sum of (n) numbers in a sequence, you can use a recursive formula, or simply add the terms.
+(S_n=a_1+a_2+a_3+a_4+\cdots+a_n)
+(S_5=1+4+7+10+13=35)
+\te{Callout: This represents a partial sum of a series because it is the sum of a finite number of terms, (n), in the series.}
+If the series has many terms, it would be easier use an explicit definition.
+To find the explicit definition for the sum, use the Commutative Property of Addition and reverse the order of the terms in the recursive series.
+(S_5=13+10+7+4+1)
+\te{Callout: Substitute the values from the series. STUDY TIP The finite series represents an equation which can be added to a second related equation to help you.}
+Add the two expressions for the series. Notice you are adding the first term to the last term.
+(S_5=1+4+7+10+13)
+(+S_5=13+10+7+4+1)
+(2S_5=14+14+14+14+14)
+\te{Callout: Simplify.}
+(2\cdot S_5=5(14))
+\te{Callout: Notice that 14 is the sum of the first and last terms, or (a_1+a_5).}
+(S_5=\frac{5(1+13)}2=35)
+Write the explicit formula.
+\answer{(S_n=\frac{n(a_1+a_n)}2); sum 35.}
+% Source page 56: 35 Example 5 continued; Sigma Notation; Example 6
+B. What is the sum of the following arithmetic sequence?
+(2,6,10,14,18,22)
+(n=6), (a_1=2), (a_n=22)
+Use the general formula to find the sum.
+(S_n=\frac{n(a_1+a_n)}2) (S_n=\frac{6(2+22)}2=\frac{144}2=72)
+\answer{The sum of the terms in the sequence is 72.}
+\end{example}
+\begin{tryit}{5}
+Find the sum of each arithmetic sequence
+a. sequence with 12 terms, (a_1=3) and (a_{12}=25)
+b. (5,11,17,23,29,35,41)
+\answer{a. 168. b. 161.}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: How could you find the sum of the sequence in part (b) using the general formula? Is there another way to find the sum?
+\answer{Before using the general formula to find the sum of the sequence, you need to count the terms to find the value of (n). Then you can use the general formula for the sum. You could also find the sum of the sequence by adding all of the terms.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Sigma Notation}
+The sum of (n) terms of a sequence can be written using sigma notation:
+(\sum_{i=1}^{n}a_i=a_1+a_2+a_3+\cdots+a_i+\cdots+a_n)
+The index (i) counts through the terms in the sum. Here it takes the values from 1 up to (n), the last term in the finite series. You can use the explicit formula for the sequence in place of (a_i).
+\end{concept-box}
+\begin{te-addendum}{6}{PurposefulQuestions}
+\textbf{Use Sigma Notation}
+Pose Purposeful Questions.
+Q: When would you find a sum by writing out all of the terms?
+\answer{You would find the sum by writing all the terms when there is a small number of terms in the series.}
+Q: Can you find the sum of a sequence without knowing how many terms are in the sequence?
+\answer{No; to find the sum of a sequence you either need to know each term of the sequence or use the explicit formula for the sequence that requires the number of terms, (n).}
+\end{te-addendum}
+\begin{te-addendum}{6}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking.
+Q: How can you determine the number of terms in the series (8+13+18+\cdots+43)?
+\answer{From the terms given, you can identify the values of (a_1), (a_n), and (d). Substitute these values into the formula for the explicit definition of a sequence, and solve for (n).}
+\end{te-addendum}
+\begin{te-addendum}{6}{RtISupport}
+\textbf{Support Struggling Students USE WITH EXAMPLE 6}
+Students may struggle with the concept of sigma notation. Have students practice writing series in sigma notation.
+Write the series with the given characteristics in sigma notation.
+1. (a_1=5,d=3,n=15)
+\answer{(\sum_{i=1}^{15}3i+2)}
+2. (a_1=8,d=-2,n=13)
+\answer{(\sum_{i=1}^{13}10-2i)}
+3. (a_1=15,d=4,n=10)
+\answer{(\sum_{i=1}^{10}11+4i)}
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Use Sigma Notation}
+A. What is (\sum_{i=1}^{9}2i-6)?
+Observe that this defines an arithmetic sequence by finding several terms.
+(a_1=2(1)-6=-4) (a_2=2(2)-6=-2) (a_3=2(3)-6=0)
+(a_9=2(9)-6=12)
+\te{Callout: Find the last term. LOOK FOR RELATIONSHIPS You can quickly see that the common difference in this series is 2.}
+Find the sum with the formula.
+\answer{(S_9=\frac{9(-4+12)}2=36)}
+B. How can you write the series (2+9+16+\cdots+79) using sigma notation? What is the sum?
+Step 1 Solve for (n) to find the number of terms in the series: (a_1=2), (d=7), and (a_n=79).
+(a_n=a_1+d(n-1))
+(79=2+(7)(n-1))
+\te{Callout: Substitute (a_n), (a_1), and (d).}
+(77=(7)(n-1))
+(11=n-1)
+(n=12)
+There are 12 terms in the series.
+% Source page 57: 36 Example 6 continued; Example 7
+Step 2 Write the explicit formula for the series.
+(a_n=2+7(n-1)=7n-5)
+Step 3 Write using sigma notation.
+The index (i) will count from 1 to (n=12).
+The explicit definition gives (a_i=7i-5).
+(\sum_{i=1}^{12}7i-5)
+Step 4 Find the sum of the series.
+(S_n=\frac{n(a_1+a_n)}2)
+(S_{12}=\frac{12(2+79)}2=486)
+\answer{So the series can be written (\sum_{i=1}^{12}7i-5) in sigma notation. The sum of the series is 486.}
+\end{example}
+\begin{tryit}{6}
+a. What is the sum of the series (\sum_{i=1}^{13}3i+2)?
+b. How can you write the series (8+13+18+\cdots+43) using sigma notation? What is the sum?
+\answer{a. 299. b. (\sum_{i=1}^{8}5i+3); 204.}
+\end{tryit}
+\begin{te-addendum}{7}{PurposefulQuestions}
+\textbf{Use a Finite Arithmetic Series}
+Pose Purposeful Questions.
+Q: What information are you given to find the total number of cans?
+\answer{You are given the number of cans in each of the first three rows.}
+Q: What do you need to find in order to calculate the total number of cans in the display?
+\answer{You first need to find the common difference. Then, using the given information and the common difference, you can write the explicit formula for the sum of a series to calculate the number of cans in the display.}
+\end{te-addendum}
+\begin{example}{7}
+\textbf{Use a Finite Arithmetic Series}
+\te{APPLICATION}
+A pyramid of cans is on display in a supermarket. The top row has 1 can, the second row has 2 cans, and the third row has 3 cans. If there are 10 rows of cans, how many total cans were used to make the pyramid?
+This is an arithmetic series where the common difference is 1.
+Step 1 Find (a_1) and (a_{10}).
+(a_1=1)
+(a_{10}=a_1+d(n-1))
+(=1+1(10-1))
+(=10)
+Step 2 Use the explicit formula for finding the sum of a series.
+(S_n=\frac{n(a_1+a_n)}2)
+(S_n=\frac{10(1+10)}2=55)
+\te{STUDY TIP Since you know (n), (a_1), and (a_{10}), you can use the explicit formula to find the sum of the series efficiently.}
+\answer{There are 55 cans in the display.}
+\end{example}
+\begin{tryit}{7}
+A flight of stairs gets wider as it descends. The top stair is 15 bricks across, the second stair is 17 bricks across, and the third stair is 19 bricks across. What is the total number of bricks used in all 16 stairs?
+\answer{480}
+\end{tryit}
+\begin{te-addendum}{7}{HabitsOfMind}
+\textbf{Use with EXAMPLES 5, 6, \& 7}
+Q: Make Sense and Persevere What is the sum of the first 50 odd whole numbers? Explain how you found your answer.
+\answer{2,500; The explicit definition gives (a_i=2i-1), and the index runs from 1 to 50.}
+\end{te-addendum}
+\begin{te-addendum}{7}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 7)}
+WRITING BEGINNING Look at numbers that give positions in the example: 2 cans in the second row; 3 cans in the third row. There are 10 rows of cans in the pyramid.
+Q: The top row has 1 can. What number can be used to describe the top row?
+\answer{first}
+Have students use the formula to find the number of cans in the third, fourth, fifth, ... tenth rows. Display the ``ordinal'' numbers and find the sum of the values to show that the formula works.
+READING DEVELOPING Have students read the example title and the bold description of the problem situation. Talk about the term finite and have students identify the information in the problem that lets them know that the problem is about a finite arithmetic series.
+Q: What does the term finite mean?
+\answer{having an end or defined limits}
+Q: Which part of the description indicates that the arithmetic sequence is finite?
+\answer{``there are 10 rows of cans''}
+Q: What word means not finite?
+\answer{infinite}
+LISTENING EXPANDING Help students visualize the pyramid of cans described in the example. Provide students with blocks or other stacking manipulatives to model an arrangement as you describe it. Have students listen as you provide directions for how many cans they should stack in each row to create different pyramid arrangements.
+Q: How is a pyramid made of cans in the example different from the pyramids in Egypt?
+\answer{The can pyramid is only slanted in two dimensions (length and width), but the pyramids in Egypt are 3-D square pyramids.}
+Q: Is it possible to stack the cans to make a square pyramid?
+\answer{yes}
+Q: How many cans would be in the bottom layer of a square pyramid if it had 10 rows?
+\answer{100}
+\end{te-addendum}
+
+
+% Source page 58: 37 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Arithmetic Sequences and Series}
+Q: What do you notice when you look at the recursive formula, the explicit formula, and sigma notation?
+\answer{Each formula uses the values (n), (a_1), and (a_n).}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 11 Some students may think that the answer is 54 because that is the 7th term of the sequence. Have students identify the common difference and the amount of money deposited at the end of July. They should recognize that the sum of the first two months is greater than \$54. If necessary, have students calculate the value deposited at the end of each month and add all of the values in order to check their work when using the formula for the sum of a series.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Arithmetic Sequences and Series}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+In an arithmetic sequence, each term is equal to the previous term plus a constant (d), the common difference.
+\begin{tabular}{llll}
+ & Recursive Formula & Explicit Formula & Arithmetic Series \\
+ALGEBRA & (a_n=\begin{cases}a_1,&n=1\\a_{n-1}+d,&n>1\end{cases}) & (a_n=a_1+d(n-1)) & (S_n=\frac{n(a_1+a_n)}2) \\
+NUMBERS & For (a_1=1) and (d=7), & For (a_1=90) and (d=-4), & (\sum_{i=1}^{8}5i-2) \\
+ & (a_2=1+7=8) & (a_2=90+1(-4)=86) & (3+8+13+18+23+28+33+38=164) \\
+ & (a_3=8+7=15) & (a_3=90+2(-4)=82) & or (S_8=\frac{8(3+38)}2=164) \\
+ & (a_4=15+7=22) & (a_4=90+3(-4)=78) & \\
+ & ...and so on & ...and so on & \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION What is an arithmetic sequence, and how do you represent and find its terms and their sums?
+\answer{An arithmetic sequence is a function with the domain consisting of the natural numbers, and whose consecutive terms have a common difference. Terms of an arithmetic sequence can be represented using explicit formulas or recursive definitions. The sum of a finite arithmetic series is half of the product of the number of terms in the series and the sum of the first and last terms.}
+2. Vocabulary How do arithmetic sequences differ from arithmetic series?
+\answer{An arithmetic sequence is a set of numbers with a common difference between consecutive terms. An arithmetic series is the sum of the numbers in an arithmetic sequence.}
+3. Error Analysis A student claims the sequence (0,1,3,6,\ldots) is an arithmetic sequence, and the next number is 10. What error did the student make?
+\answer{The pattern is (+1,+2,+3,\ldots). While this is a pattern, there is no common difference between consecutive terms. This is not an arithmetic sequence.}
+4. Communicate Precisely How would you tell someone how to calculate (\sum_{n=1}^{5}(2n+1))?
+\answer{Evaluate (2n+1) for (n=1,2,3,4,5), and then add all five of those answers together for the final sum.}
+\textbf{Do You KNOW HOW?}
+Find the common difference and the next three terms of each arithmetic sequence.
+5. (\frac14,\frac12,\frac34,1,\frac54,\ldots)
+\answer{(\frac14); (\frac32,\frac74,2)}
+6. (6,1,-4,-9,-14,\ldots)
+\answer{(-5); (-19,-24,-29)}
+7. (215,227,239,251,\ldots)
+\answer{12; (263,275,287)}
+8. (-4,-5,-6,-7,\ldots)
+\answer{(-1); (-8,-9,-10)}
+9. (4.1,6.3,8.5,10.7,\ldots)
+\answer{2.2; (12.9,15.1,17.3)}
+10. (-17,-9,-1,7,15,\ldots)
+\answer{8; (23,31,39)}
+11. In June, you start a holiday savings account with a deposit of \$30. You increase each monthly deposit by \$4 until the end of the year. How much money will you have saved by the end of December?
+\answer{\$294}
+\end{concept-summary}
+% Source page 59: 38 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+12, 13, 17--32, 34--38 & 12--38 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply...2 points each
+Practice...1 point each
+Assessment Practice...1 point each
+Performance Task...3 points
+\te{Scan the QR code to access a video tutorial.}
+% FIG: 59 1022 213 1078 268
+\placeholder{diagram}{Black and white square QR code above Practice, under the banner Scan the QR code to access a video tutorial.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 18--21, 36 & 1 \\
+1 & 13 & 2 \\
+2 & 23, 24 & 1 \\
+3 & 22, 25 & 1 \\
+3 & 12 & 2 \\
+3 & 15 & 3 \\
+4 & 14, 17, 26, 35 & 2 \\
+5 & 27, 28 & 1 \\
+6 & 29, 30 & 1 \\
+7 & 16, 31--34, 37, 38 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{12}{2}
+UNDERSTAND. Use Structure Write an arithmetic sequence with at least four terms, and describe it using both an explicit and recursive definition.
+\answer{Answers may vary. Sample: (17,11,5,-1,\ldots). Explicit formula: (a_n=17-6(n-1)). Recursive formula: (a_n=\begin{cases}17,&\text{if }n=1\\a_{n-1}-6,&\text{if }n>1\end{cases}).}
+\end{practice}
+\begin{practice}{13}{2}
+UNDERSTAND. Error Analysis Alex says the common difference for an arithmetic sequence is always negative because of the definition of difference. Why is he wrong? Write an arithmetic sequence to show he is wrong.
+\answer{The common difference is the constant change between consecutive terms in an arithmetic sequence. Sample: In the arithmetic sequence (2,4,6,8,\ldots), the common difference is a positive 2.}
+\end{practice}
+\begin{practice}{14}{2}
+UNDERSTAND. Use Structure A company will pay Becky \$120 for her first sale. For each sale after that, they will pay an extra \$31.50 per sale. So, she will make \$151.50 for the second sale, \$183 for the third sale, and so on. How many sales will Becky have to make to earn at least \$2,000?
+\answer{at least 9 sales}
+\end{practice}
+\begin{practice}{15}{3}
+UNDERSTAND. Higher Order Thinking Felipe and Gregory are given the arithmetic sequence (-1,6,13,\ldots). Gregory wrote the explicit definition (a_n=-1+7(n-1)) for the sequence. Felipe wrote the definition as (a_n=7n-8). Which one of them is correct? Explain.
+\answer{Both; Gregory's formula can be simplified to get Felipe's formula.}
+\end{practice}
+\begin{practice}{16}{2}
+UNDERSTAND. Model With Mathematics Suppose you are building 10 steps with 8 concrete blocks in the top step and 80 blocks in the bottom step. If the number of blocks in each step forms an arithmetic sequence, find the total number of concrete blocks needed to build the steps.
+\answer{440}
+\end{practice}
+\begin{practice}{17}{2}
+UNDERSTAND. Model With Mathematics With her half-marathon quickly approaching, Talisa decides to train every day up to the day of the race.
+a. What is the explicit definition for this arithmetic sequence?
+\answer{(a_n=2+0.3(n-1))}
+b. Which day of training will she run the distance of a half-marathon (13.1 mi)?
+\answer{day 38}
+% FIG: 59 514 894 796 1030
+\placeholder{illustration}{Runner on a gray path through green grass with city skyline. Pathside DAY scale labeled 1,2,3,4,5; sign 2 mi at day 1 and sign 3.2 mi at day 5.}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Are the following sequences arithmetic? If so, what is the common difference? What is the next term in the sequence? SEE EXAMPLE 1
+(10,20,30,40,\ldots)
+\answer{yes; 10; 50}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. Are the following sequences arithmetic? If so, what is the common difference? What is the next term in the sequence? SEE EXAMPLE 1
+(97,86,75,64,\ldots)
+\answer{yes; (-11); 53}
+\end{practice}
+\begin{practice}{20}{1}
+PRACTICE. Are the following sequences arithmetic? If so, what is the common difference? What is the next term in the sequence? SEE EXAMPLE 1
+(1,4,9,16,\ldots)
+\answer{no}
+\end{practice}
+\begin{practice}{21}{1}
+PRACTICE. Are the following sequences arithmetic? If so, what is the common difference? What is the next term in the sequence? SEE EXAMPLE 1
+(3,7,11,15,\ldots)
+\answer{yes; 4; 19}
+\end{practice}
+\begin{practice}{22}{1}
+PRACTICE. Rewrite each sequence with a recursive definition and an explicit definition. SEE EXAMPLE 2 and 3
+(2,4,6,8,10,12,\ldots)
+\answer{(a_n=\begin{cases}2,&\text{if }n=1\\a_{n-1}+2,&\text{if }n>1\end{cases}); (a_n=2+2(n-1)).}
+\end{practice}
+\begin{practice}{23}{1}
+PRACTICE. Rewrite each sequence with a recursive definition and an explicit definition. SEE EXAMPLE 2 and 3
+(-2,5,12,19,26,33,\ldots)
+\answer{(a_n=\begin{cases}-2,&\text{if }n=1\\a_{n-1}+7,&\text{if }n>1\end{cases}); (a_n=2+7(n-1)).}
+\te{Printed explicit definition starts with +2; likely (-2+7(n-1)) to match the sequence and recursive definition.}
+\end{practice}
+\begin{practice}{24}{1}
+PRACTICE. Rewrite each sequence with a recursive definition and an explicit definition. SEE EXAMPLE 2 and 3
+(0,\frac18,\frac14,\frac38,\frac12,\frac58,\ldots)
+\answer{(a_n=\begin{cases}0,&\text{if }n=1\\a_{n-1}+\frac18,&\text{if }n>1\end{cases}); (a_n=\frac18(n-1)).}
+\end{practice}
+\begin{practice}{25}{1}
+PRACTICE. Rewrite each sequence with a recursive definition and an explicit definition. SEE EXAMPLE 2 and 3
+(-4,-8,-12,-16,-20,\ldots)
+\answer{(a_n=\begin{cases}-4,&\text{if }n=1\\a_{n-1}-4,&\text{if }n>1\end{cases}); (a_n=-4-4(n-1)).}
+\end{practice}
+\begin{practice}{26}{2}
+PRACTICE. The members of a school's color guard begin their performance in a pyramid formation. The first row has 1 member, and the third row has 5 members. The number of members in each row forms an arithmetic sequence. SEE EXAMPLE 4
+a. What is the explicit definition for this sequence?
+\answer{(a_n=1+2(n-1))}
+b. How many members are in the eighth row?
+\answer{15 members}
+% FIG: 59 818 648 1065 790
+\placeholder{illustration}{Nine color guard performers carrying pink flags on a green football field in three rows, 1 in front, 3 in middle, 5 in rear; field number 50 behind central performers and white yard lines at sides.}
+\end{practice}
+\begin{practice}{27}{1}
+PRACTICE. Find the sum of an arithmetic series with the given number of terms, (a_1), and (a_n). SEE EXAMPLE 5
+10 terms, (a_1=4), (a_{10}=31)
+\answer{175}
+\end{practice}
+\begin{practice}{28}{1}
+PRACTICE. Find the sum of an arithmetic series with the given number of terms, (a_1), and (a_n). SEE EXAMPLE 5
+15 terms, (a_1=17), (a_{15}=129)
+\answer{1,095}
+\end{practice}
+\begin{practice}{29}{1}
+PRACTICE. What is the sum of each of the following series? SEE EXAMPLE 6
+(\sum_{n=1}^{11}(3+2n))
+\answer{165}
+\end{practice}
+\begin{practice}{30}{1}
+PRACTICE. What is the sum of each of the following series? SEE EXAMPLE 6
+(\sum_{n=1}^{12}(\frac n2-9))
+\answer{(-69)}
+\end{practice}
+\begin{practice}{31}{2}
+PRACTICE. The number of seats in each row of an auditorium forms an arithmetic sequence as you go back from the stage. The front row has 24 seats, the second row has 29 seats, and the third row has 34 seats. If there are 35 rows, how many seats are in the auditorium? SEE EXAMPLE 6
+\answer{3,815 seats}
+\te{Printed SEE EXAMPLE 6; Item Analysis maps this item to Example 7.}
+\end{practice}
+% Source page 60: 39 Practice & Problem Solving continued
+\begin{practice}{32}{2}
+APPLY. Make Sense and Persevere A piece of tile artwork is in the shape of a triangle. The top row has 1 tile, the second row has 2 tiles, and the third row has 3 tiles. If there are 14 rows of tiles, how many tiles were used to make the artwork?
+\answer{105 tiles}
+\end{practice}
+\begin{practice}{33}{2}
+APPLY. Model With Mathematics A supersonic jet travels a horizontal distance of 34 feet in the first second of recording its speed. If the jet travels 21.5 additional feet each subsequent second, how many feet did the supersonic jet travel in 52 seconds?
+\answer{30,277 ft}
+\end{practice}
+\begin{practice}{34}{2}
+APPLY. Construct Arguments A school board committee has decided to spend its annual technology budget this year on 90 student laptops and plans to buy 40 new laptops each year from now on.
+a. The school board decided that each student in the school should have access to a laptop in the next ten years. If there are 500 students, will the technology coordinator meet this goal? Explain.
+\answer{a. No; there will be a total of only 450 laptops.}
+b. What are some pros and cons of buying student laptops in this manner? If you could change the plan, would you? If so, how would you change it?
+\answer{b. Answers may vary. Sample: Cons: Ones purchased in the first year may break before all students have one. Pros: Spread out the cost. One way to improve this plan would be to buy 95 laptops the first year and 45 new laptops each year after that, so that all 500 students will have a laptop after 10 years.}
+\end{practice}
+\begin{practice}{35}{2}
+APPLY. Make Sense and Persevere On October 1, Dulce starts a 16-day push-up challenge. She finishes on October 16, when she does the final push-ups in the challenge.
+a. Write an explicit definition to model the number of push-ups Dulce does each day.
+\answer{a. (a_n=18+3(n-1))}
+b. Write a recursive definition to model the number of push-ups Dulce does each day.
+\answer{b. (a_1=18); (a_n=a_{n-1}+3)}
+c. How many push-ups will Dulce do on October 16?
+\answer{c. 63 push-ups}
+d. What is the total number of push-ups Dulce does from October 1 to October 16?
+\answer{d. 648 push-ups}
+\textbf{16-Day Push-Up Challenge}
+\begin{tabular}{ll}
+Day 1 & 18 push-ups \\
+Day 2 & 21 push-ups \\
+Day 3 & 24 push-ups \\
+\end{tabular}
+% FIG: 60 583 923 840 1040
+\placeholder{illustration}{Woman doing a push-up on a green mat, with blue wall and dumbbell rack in background; challenge table above her at left is transcribed separately.}
+\end{practice}
+\begin{practice}{36}{1}
+ASSESSMENT PRACTICE. Which of the following are also numbers in the arithmetic sequence (4,11,18,25,32,\ldots)? Do the numbers belong to this sequence? Check yes or no.
+\begin{tabular}{rll}
+ & Yes & No \\
+60 & (\square) & (\square) \\
+68 & (\square) & (\square) \\
+75 & (\square) & (\square) \\
+39 & (\square) & (\square) \\
+81 & (\square) & (\square) \\
+\end{tabular}
+\answer{in the sequence: 60, 39, 81; not in the sequence: 68, 75}
+\end{practice}
+\begin{practice}{37}{2}
+ASSESSMENT PRACTICE. SAT/ACT Tamika is selling magazines door to door. On her first day, she sells 12 magazines, and she intends to sell 5 more magazines per day than on the previous day. If she meets her goal and sells magazines for a total of 10 days, how many magazines would she sell?
+A. 314
+B. 345
+C. 415
+D. 474
+E. 505
+\answer{B}
+\end{practice}
+\begin{practice}{38}{2}
+ASSESSMENT PRACTICE. Performance Task The chart shows the population of Edgar's beehive over the first four weeks. Assume the population will continue to grow at the same rate.
+\begin{tabular}{lr}
+WEEK 1 & 175 bees \\
+WEEK 2 & 203 bees \\
+WEEK 3 & 231 bees \\
+WEEK 4 & 259 bees \\
+\end{tabular}
+% FIG: 60 1024 618 1155 838
+\placeholder{illustration}{Beekeeper in white hood leaning over four stacked hive boxes alternating yellow and green. Boxes carry WEEK 1 through WEEK 4 and bee counts transcribed in the table.}
+Part A Write an explicit definition for the sequence.
+\answer{Part A (a_n=175+28(n-1))}
+Part B If Edgar's bees have a mass of 1.5 g each, what will the total mass of all his bees be in 12 wk?
+\answer{Part B 724.5 g}
+Part C When the colony reaches 1,015 bees, Edgar's beehive will not be big enough for all of them. In how many weeks will the bee population be too large?
+\answer{Part C 31 wk}
+\end{practice}
+
+
+% Source page 61: 39A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 3 & F79 \\
+2 & 2 & F79 \\
+3 & 2 & F79 \\
+4 & 2 & F79 \\
+5 & 2 & F79 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{1-4 Lesson Quiz: Arithmetic Sequences and Series}
+\te{ASSESSMENT RESOURCES. Name blank; enVision Algebra 2; SavvasRealize.com; enVision Algebra 2 Assessment Sourcebook. Lesson Quiz is available at SavvasRealize.com.}
+1. In November, the daily low temperature decreases by (2^{\circ}F) each day. Which of the following arithmetic sequences could represent the daily low temperature?
+A. (2,-4,8,-16,32,\ldots)
+B. (-2,-4,-8,-16,-32,\ldots)
+C. (8,6,4,2,0,\ldots)
+D. (-8,-6,-4,-2,0,\ldots)
+\answer{1. C}
+2. Rayna is building a tapered staircase using wooden boards. The bottom stair is (3\frac12) ft wide, and the top stair is (2\frac16) ft wide. Each stair is 4 in. shorter than the one below. What is the total length of wooden boards Rayna needs for the stair tops, in feet? Give your answer as an improper fraction.
+\answer{2. (\frac{85}{6})}
+3. A bucket holds 100 potatoes. Hal removes and cleans 4 potatoes per minute. Which explicit definition matches the sequence that represents the potatoes left in the bucket after (n) minutes?
+A. (a_n=4-100(n-1))
+B. (a_n=100-4(n-1))
+C. (a_n=96+4(n-1))
+D. (a_n=96-4(n-1))
+\answer{3. D}
+On Gabriela's first birthday, her parents gave her a \$50 savings account. On every birthday after that her parents added to the account, increasing the amount they deposited by \$25 each year.
+4. Complete the recursive definition for the sequence that represents the amount of money that Gabriela's parents deposit into the account on her (n)th birthday.
+(f(n)=\begin{cases}\square,&n=1\\f(n-1)+\square,&n>1\end{cases})
+\answer{4. 50; 25. (f(n)=\begin{cases}50,&n=1\\f(n-1)+25,&n>1\end{cases})}
+5. Calculate the total amount Gabriela's parents will have deposited into the account on her birthdays by her 18th birthday.
+\answer{5. \$4725}
+\end{te-addendum}
+% Source page 62: 39B Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate: DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced.
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the key concepts. MathXL for School.
+\textbf{1-4 Reteach to Build Understanding: Arithmetic Sequences and Series}
+\te{Resource sheets show a Name blank, enVision Algebra 2, SavvasRealize.com, and enVision Algebra 2 Teaching Resources footer.}
+An arithmetic sequence is a sequence with a constant difference between consecutive terms. This difference is known as the common difference, or (d). To write a recursive definition for an arithmetic sequence, each term is defined by operations on the previous term. An explicit definition allows you to find any term in the sequence without knowing the previous term.
+The recursive equation is defined by (a_n=a_{n-1}+d).
+(a_n) denotes the (n)th term in the sequence
+(d) denotes the difference between the terms
+The explicit equation is defined by (a_n=a_1+d(n-1)).
+(n) denotes the number of the term
+1. Given the sequence (3,8,13,18,\ldots)
+a. Use the sequence and find the recursive formula to find the 5th and 6th term.
+\begin{tabular}{lll}
+Step 1 & Find the value of the 1st term. & 3 \\
+Step 2 & Find the difference between each pair of terms, which is (d). & (d=5) \\
+Step 3 & Write the formula by filling in the missing variables. (a_n=a_{n-1}+d) & (a(1)=3); (a(2)=8); (a(3)=13); (a(4)=18) \\
+ & & So, when (a(5)): (a_n=a(4)+5) \\
+Step 4 & Use the formula to find the 5th term. & (a(5)=23) \\
+Step 5 & Use the formula to find the 6th term. & (a(6)=28) \\
+\end{tabular}
+\answer{1. (d=5); (a(3)=13); (a(4)=18); (a_n=a(4)+5); (a(5)=23); (a(6)=28).}
+2. Carla says the sequence (11,13,17,25,\ldots) is an arithmetic sequence. Explain her error. How could Carla fix the sequence so that it is an arithmetic sequence?
+\answer{Sample answer: It is not an arithmetic sequence because the difference between the terms is 2, 4, 8. In order for it to be an arithmetic sequence, (d) should be the same difference for each term. To make it an arithmetic sequence, change the sequence to (11,13,15,17,\ldots).}
+3. Find the 15th term of the sequence (45,48,51,54,\ldots).
+a. What type of formula should you use?
+\answer{Explicit}
+b. Fill in the blanks and find the 15th term. (45,48,51,54,\underline{\quad},60,\underline{\quad},66,69,\ldots,\underline{\quad})
+\answer{57; 63; 87}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{1-4 Additional Practice: Arithmetic Sequences and Series}
+Are the following sequences arithmetic? If so, what is the common difference? What is the next term in the sequence?
+1. (0,-3,-6,-9,\ldots)
+\answer{Yes; (-3), (-12)}
+2. (2,3,5,8,\ldots)
+\answer{No.}
+3. (127,140,153,166,\ldots)
+\answer{Yes; 13, 179}
+Translate between the recursive and explicit definitions for each sequence.
+4. (a_n=\begin{cases}6,&n=1\\a_{n-1}+3,&n>1\end{cases})
+\answer{(a_n=6+3(n-1))}
+5. (a_n=12-2(n-1))
+\answer{(a_n=\begin{cases}12,&n=1\\a_{n-1}-2,&n>1\end{cases})}
+6. (a_n=5-4(n-1))
+\answer{(a_n=\begin{cases}5,&n=1\\a_{n-1}-4,&n>1\end{cases})}
+7. Each year, a volunteer organization expects to add 5 more people for whom the group provides home maintenance services. This year, the organization provides the service for 32 people.
+a. Write an explicit formula for the number of people the organization expects to serve each year.
+\answer{(a_n=a_{n-1}+5), where (a_1=32)}
+b. How many people would the organization expect to serve during the year, 20 years from now?
+\answer{127 people}
+\te{Printed answer 7a is recursive although the prompt asks for explicit; likely (a_n=32+5(n-1)). Printed 7b uses the 20th year including this year; 20 years from now would give 132.}
+Find the sum of an arithmetic series with the given number of terms, (a_1) and (a_n).
+8. 9 terms; (2,5,8,11,\ldots)
+\answer{126}
+9. 12 terms; (-2,2,6,10,\ldots)
+\answer{240}
+10. 20 terms; (5,10,15,20,\ldots)
+\answer{1,050}
+Find the sum of each of the following series.
+11. (\sum_{n=2}^{5}(5n+3))
+\answer{82}
+12. (\sum_{n=1}^{4}(2n+0.5))
+\answer{22}
+13. (\sum_{n=1}^{4}(-n-3))
+\answer{(-22)}
+14. A marching band formation consists of 6 rows. The first row has 9 musicians, the second has 11, the third has 13 and so on. How many musicians are in the last row and how many musicians are there in all?
+\answer{19 musicians; 84 musicians}
+15. A student identifies the series (10,15,20,25,30) as an infinite arithmetic series. Is he correct? Explain.
+\answer{Sample answer: No, the series is a finite arithmetic series. An infinite arithmetic series would continue indefinitely and have an ellipsis, or ``...'', at the end of the series, which indicates the series goes on infinitely. There is no ellipsis at the end of this series.}
+\te{Printed series with comma-separated terms; likely sequence, or plus signs intended for a series.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{1-4 Enrichment: Arithmetic Sequences and Series}
+A new restaurant opened five weeks ago. The owner needs to estimate the food inventory needed for the next six months. To make the estimate, she will use the sales to date from the past five weeks shown in the table and assume that the restaurant will continue to expand at the same rate.
+\begin{tabular}{lrrrr}
+ & Pounds of Hamburger & Dozen Rolls & Pounds of Cheese & Pounds of French Fries \\
+Week 1 & 50 & 21 & 3.1250 & 83 \\
+Week 2 & 75 & 29 & 4.6875 & 105 \\
+Week 3 & 100 & 37 & 6.2500 & 127 \\
+Week 4 & 125 & 45 & 7.8125 & 149 \\
+Week 5 & 150 & 53 & 9.3750 & 171 \\
+\end{tabular}
+1. Write an explicit definition to model the amount of each type of food needed each week.
+\answer{See table.}
+\begin{tabular}{ll}
+Pounds of Hamburger & (a_n=50+25(n-1)) \\
+Dozen Rolls & (a_n=21+8(n-1)) \\
+Pounds of Cheese & (a_n=3.125+1.5625(n-1)) \\
+Pounds of French Fries & (a_n=83+22(n-1)) \\
+\end{tabular}
+2. Use the formula from Item 1 to complete the table.
+\answer{See completed table.}
+\begin{tabular}{lrrrr}
+ & Pounds of Hamburger & Dozen Rolls & Pounds of Cheese & Pounds of French Fries \\
+Week 6 & 175 & 61 & 10.9375 & 193 \\
+Week 10 & 275 & 93 & 17.1875 & 281 \\
+Week 16 & 425 & 141 & 26.5625 & 413 \\
+Week 20 & 525 & 173 & 32.8125 & 501 \\
+Week 24 & 625 & 205 & 39.0625 & 589 \\
+\end{tabular}
+3. If each hamburger uses (\frac15) pound of meat, how many hamburgers will the restaurant make in week 34?
+\answer{4,375 hamburgers}
+4. How many of each item will the restaurant need for their one year anniversary party in week 52?
+\answer{See table.}
+\begin{tabular}{lrrrr}
+ & Pounds of Hamburger & Dozen Rolls & Pounds of Cheese & Pounds of French Fries \\
+Week 52 & 1,325 & 429 & 82.8125 & 1,205 \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{1-4 Mathematical Literacy and Vocabulary: Arithmetic Sequences and Series}
+What is the sum of the finite arithmetic series (17+25+33+\cdots+65)? Justify and explain.
+\begin{tabular}{lll}
+Explain & Work & Justify \\
+First, write the sequence. & (17+25+33+\cdots+65) & Write the sequence. \\
+Second, find the number of terms. & (a_n=a_1+(n-1)d) & Use the explicit formula. \\
+Then, use the formula to find (n). & (65=17+(n-1)8) & Substitute and solve. \\
+Next, determine (n), (a_1) and (a_n). & (n=7), (a_1=17), (a_n=65) & Find the variables. \\
+Then, use the formula to solve for (S_n). & (S_n=\frac{n(a_1+a_n)}2) & Use the general formula. \\
+Next, substitute the values into the equation. & (S_n=\frac{7(17+65)}2) & Substitute the values. \\
+Finally, solve for (S_n). & (S_n=287) & Find the solution. \\
+\end{tabular}
+\answer{287}
+What is the sum of the finite arithmetic series (4+9+14+\cdots+44)? Justify and explain.
+\begin{tabular}{lll}
+Explain & Work & Justify \\
+First, write the sequence. & (4+9+14+\cdots+44) & Write the sequence. \\
+Second, find the number of terms. & (a_n=a_1+(n-1)d) & Use the explicit formula. \\
+Then, use the formula to find (n). & (44=4+(n-1)5) & Substitute and solve. \\
+Next, determine (n), (a_1), and (a_n). & (n=9), (a_1=4), (a_n=44) & Find the variables. \\
+Then, use the formula to solve for (S_n). & (S_n=\frac{n(a_1+a_n)}2) & Use the general formula. \\
+Next, substitute the values into the equation. & (S_n=\frac{9(4+44)}2) & Substitute the values. \\
+Finally, solve for (S_n). & (S_n=216) & Find the solution. \\
+\end{tabular}
+\answer{216}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+Solve the system of equations by graphing.
+(\begin{cases}y=3x+4\\y=-2x+4\end{cases})
+Use the graphing tool to graph the system.
+% FIG: 62 843 1034 966 1159
+\placeholder{graph}{Digital resource blank Cartesian grid: axes x and y, window [-10,10] in both directions, grid spacing 1, numeric labels every 2 from -10 to 10 with zero unlabeled. No solution lines or points drawn. Question Help menu obscures upper right portion. Small Click to enlarge graph icon at left depicts diagonal orange line on blue axes without numeric labels.}
+\te{Printed digital screenshot is a linear-system exercise, unrelated to arithmetic sequences. Controls: Exit; Question Help; Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print; Click to enlarge graph; Click the graph, choose a tool in the palette and follow the instructions to create your graph.; 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next. No answer is printed.}
+\end{te-addendum}
+
+\end{document}

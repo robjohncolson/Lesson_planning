@@ -1,0 +1,907 @@
+\documentclass{article}
+% Source: Topic_07_Teacher_Edition.pdf, PDF pages 12-24 (printed pages 345A-353B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 12: 345A, Lesson Overview
+\begin{lesson-meta}
+lesson: 7-1
+title: Angles and the Unit Circle
+standards: none printed
+practices: none printed
+objective: I can understand angles in standard position.
+
+essential question: How can we extend the trigonometric ratios to angles greater than 90°?
+
+\textbf{VOCABULARY}
+\item coterminal angle
+\item initial side
+\item radian
+\item radian measure
+\item standard position of an angle
+\item terminal side
+\item unit circle
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 7-1 \\
+Title & Angles and the Unit Circle \\
+Standards & none printed \\
+I CAN Objective & I can understand angles in standard position. \\
+Essential Question & How can we extend the trigonometric ratios to angles greater than 90°? \\
+Lesson Vocabulary & coterminal angle; initial side; radian; radian measure; standard position of an angle; terminal side; unit circle \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Find the measures of an angle in standard position.
+\item Use radian measure on the unit circle to find arc length.
+\item Convert between degrees and radians.
+Essential Understanding. An angle in standard position has a vertex at the origin and an initial side along the positive x-axis. Coordinates of points on the unit circle are used to extend trigonometric functions to angles greater than 90° or less than 0°.
+\textbf{COHERENCE}
+Previously in this courses, students:
+\item Create, graph, and transform polynomial, rational, exponential, and logarithmic functions.
+In this lesson, students:
+\item Use the unit circle to extend the trigonometric ratios to angles greater than 90 or less than 0°.
+Later in this topic, students will:
+\item Use the reference angle on a unit circle to extend the trigonometric functions to all real numbers.
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+\item Students use their knowledge of angles and circumference to find the measures of angles in standard form in both degrees and radians.
+\item Students apply the process of using radians to find arc length to solve real-world problems, such as finding the distance that a satellite can be tracked as it travels around the Earth.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{NEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+coterminal angles & ángulos coterminales \\
+initial side & lado inicial \\
+radian & radián \\
+radian measure & medida del radián \\
+standard position & posición estándar \\
+terminal side & lado terminal \\
+unit circle & círculo unitario \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Have students draw an angle with vertex at (0,0) and one of the rays on the positive x-axis. Explain that this angle is in standard position. Introduce the terms initial side and terminal side and have students label these on the angle. Then discuss the meaning of the prefix co- and introduce the term coterminal angles.
+Q: What do you think coterminal angles are?
+\answer{angles that share a terminal side}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 12 963 737 1114 915
+\placeholder{illustration}{Student Companion cover with purple and blue luminous circular pattern on black background; enVision Algebra 2 and SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students find the measure of angles in standard position, including coterminal angles. They understand and use radian measure, and convert between degrees and radians. Then, students use radian measure to find the length of an arc.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively
+Recognize the relationship between the angle measure in radians and determining the quadrant in which the terminal side of the reference angle lies.
+Use Appropriate Tools Strategically
+Students recognize that calculators can be used to work with both radians and degrees. The calculator needs to be set for the correct unit of measure to ensure that their calculation is correct and makes sense.
+\end{te-addendum}
+% Source page 13: 345B, Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students analyze side lengths of a triangle to determine if it is a right triangle. This leads students to use the ratios of side lengths within right triangles when writing trigonometric functions. Students then reason about the trigonometric ratios of an angle with the same measure in a similar triangle.
+STUDENT COMPANION Students can complete the Explore & Reason activity in their Student Companion.
+Explore & Reason is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+% FIG 13 1035 637 1120 724
+\placeholder{diagram}{Light blue triangle with vertical left side 20, horizontal bottom side 21, sloping hypotenuse 29 from top left to bottom right. Angle A is marked at bottom right between base and hypotenuse. No other vertices labeled.}
+A. Is this a right triangle? How do you know?
+\answer{This is a right triangle because it fits the Pythagorean Theorem: (20^2+21^2=29^2).}
+B. If it is, find (\sin A), (\cos A), and (\tan A).
+\answer{(\sin A=\frac{20}{29}), (\cos A=\frac{21}{29}), and (\tan A=\frac{20}{21})}
+C. Look for Relationships Suppose there is a similar triangle that has lengths twice as long. Would the sine, cosine, and tangent of the corresponding angle be twice as large? Explain.
+\answer{No. If a similar triangle had a dilation with a factor of 2, then the sine, cosine, and tangent of the corresponding angle would still be the same because in the trigonometric ratios, the numerators and denominators would both be twice as large, so the ratios would simplify to the same ratios as for (\triangle ABC).}
+\te{Digital activity repeats the same prompts and triangle; Go back, ESSENTIAL QUESTION, Enter your answer, and SOLUTION controls.}
+\end{model-discuss}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: If (\triangle ABC) is a right triangle, which angle must be the right angle?
+\answer{Angle A because it is opposite the longest side, and in a right triangle, the longest side, or hypotenuse, is opposite the right angle.}
+\te{Printed angle A as the right angle; the source diagram places A at an acute angle, opposite the side of length 20.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: Draw a triangle with lengths twice those of (\triangle ABC), then write the ratios for the sine, cosine, and tangent of the angle corresponding with (\angle A). What happens when you simplify the ratios of the side lengths?
+\answer{You have ratios equivalent to those of (\triangle DEF).}
+\te{Printed (\triangle DEF); likely refers to the original (\triangle ABC), since no DEF labels appear.}
+For Early Finishers
+Q: Draw 3 more triangles similar to (\triangle ABC). Show how the ratios created are equivalent.
+\answer{Check students' work.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Q: How many ratios of side lengths are there in one right triangle?
+\answer{6}
+Q: If a group of triangles is similar, are ratios of side lengths always equivalent?
+\answer{Yes; similar triangles are created by multiplying the same value by each side length of the original triangle. Because each length in the ratio is being multiplied by a common value, the ratio stays the same.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+HABITS OF MIND Use with EXPLORE & REASON
+Look for Relationships Find the side lengths of two right triangles, one that is similar to (\triangle ABC) above and one that is not. How do the sine, cosine, and tangent ratios in these triangles compare to the ratios for (\triangle ABC)?
+\answer{Sample: 200, 210, and 290 are side lengths for a similar right triangle. 150, 200, and 250 are side lengths for a right triangle that is not similar. The ratios for the 200, 210, 290 triangle are equivalent to the ratios for (\triangle ABC), and the ratios for the 150, 200, 250 triangle are all different.}
+\end{te-addendum}
+% Source page 14: 345 Understand & Apply
+\begin{te-addendum}{1}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Students learn about angles in standard position, including how to find their measures. Students understand radian measure and learn to convert angle measures from degrees to radians and radians to degrees.
+\te{Examples are available at SavvasRealize.com. Activity. CONCEPTUAL UNDERSTANDING. VOCABULARY: coterminal angle; initial side; radian; radian measure; standard position of an angle; terminal side; unit circle.}
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Use and Connect Mathematical Representations ETP}
+Q: What statement can you make about an angle by looking at its graph?
+\answer{You can give a range of 90° that the angle measure will fall.}
+Q: What does it mean when you say an angle is in standard position?
+\answer{The vertex of the angle is at the origin; the initial side is the positive x-axis, and the terminal side is the other ray that forms the angle.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Explore Angles in the Coordinate Plane}
+A. How can you express angle measures in the coordinate plane?
+This angle is in standard position. The vertex is at the origin and the initial side of the angle is the positive x-axis. The terminal side is the other ray that forms the angle.
+% FIG 14 1025 270 1150 375
+\placeholder{graph}{Black x- and y-axes with arrowheads at both ends, no ticks. Blue initial side ray follows positive x-axis; red terminal side ray lies in Quadrant II. Red counterclockwise arc from initial to terminal side labeled theta. Colored labels initial side and terminal side.}
+An angle, (\theta), is measured counterclockwise from its initial side to its terminal side.
+An angle such that (0°<\theta<90°) is in Quadrant I.
+An angle such that (90°<\theta<180°) is in Quadrant II.
+An angle such that (180°<\theta<270°) is in Quadrant III.
+An angle such that (270°<\theta<360°) is in Quadrant IV.
+% FIG 14 890 435 1150 650
+\placeholder{graph}{Four black arrowed coordinate axes labeled x, y, O, with cardinal degree labels 0° on positive x, 90° on positive y, 180° on negative x, 270° on negative y. Red initial rays on positive x and terminal rays respectively at theta=65° in I, theta=140° in II, theta=200° in III, theta=330° in IV. Red counterclockwise angle arcs. No coordinate ticks.}
+\answer{An angle in standard position has its vertex at the origin and initial side on the positive x-axis; its terminal side determines its quadrant.}
+% Source page 15: 346 Example 1 continued
+B. Sketch a 210° angle and a 315° angle on the coordinate grid.
+The terminal side of 210° is 30° beyond the negative x-axis in Quadrant III.
+The terminal side of an angle measuring 315° is in Quadrant IV. It is a full revolution minus 45°. (360°-45°=315°)
+% FIG 15 1015 230 1120 450
+\placeholder{graph}{Two black arrowed x,y coordinate axes labeled O and cardinal degrees 0°,90°,180°,270°. Red initial ray on positive x. Upper graph red terminal ray at theta=210° in III and small angle between negative x and ray labeled30°. Lower red terminal ray at theta=315° in IV, clockwise gap to positive x labeled45°. Red counterclockwise major angle arcs. No ticks.}
+\answer{210°: Quadrant III, 30° beyond the negative x-axis; 315°: Quadrant IV, a full revolution minus 45°.}
+C. How can you represent negative angle measures and angles with measures greater than 360°?
+\begin{tabular}{lll}
+Positive angle measure & Positive angle measure greater than 360° & Negative angle measure \\
+(0\leq\theta<360) & (\theta+360k), where (0\leq\theta<360°) and k is an integer representing the number of rotations & (-360\leq\theta<0) \\
+\end{tabular}
+% FIG 15 797 468 1104 583
+\placeholder{graph}{Three side-by-side black x,y axes with origin O, unit ticks and labels -4 and4 on both axes. Red positive x initial ray and red terminal ray in II shared by all three. Counterclockwise arcs labeled120° and480° in first and second; clockwise arc labeled-240° in third. Arrows on axes and rays. Source terminal ray appears about135° despite120° labels.}
+Since all three angles share the same terminal side, these angles are coterminal angles.
+You can represent any real number angle measure in the coordinate plane. Angle measures greater than 360° represent an angle that has rotated around the origin at least once. A negative angle is measured from its initial side clockwise to its terminal side.
+\answer{Coterminal angles share the same terminal side. Positive angles are measured counterclockwise; negative angles are measured clockwise.}
+\te{LEARN TOGETHER: How can you provide constructive feedback while being aware of the feelings and reactions of others?}
+\end{example}
+\begin{tryit}{1}
+Find a positive angle measure, a negative angle measure, and an angle measure greater than 360° for each angle.
+% FIG 15 835 735 1090 815
+\placeholder{graph}{a. Black x,y axes, red initial ray on positive x and terminal ray on negative x; red counterclockwise semicircle. b. Same axes, red terminal ray in III25° counterclockwise from the negative y direction;25° mark between terminal ray and negative y. Red counterclockwise arc from positive x. No ticks or numerical axis labels.}
+\answer{a. 180°, -180°, 540°; b. 245°, -115°, 605°}
+\end{tryit}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How do you know that the triangle you formed is a right triangle?
+\answer{The line drawn to the point is a vertical line, so it is perpendicular to the x-axis.}
+Q: What do you notice about the positive and negative measures of an angle?
+\answer{The sum of the absolute values of the measures is 360°.}
+Q: How is measuring a positive angle different than measuring a negative angle?
+\answer{When you measure a positive angle, you start at the initial side and rotate counterclockwise until you reach the terminal side. When you measure a negative angle, you start at the initial side and rotate clockwise until you reach the terminal side.}
+Q: The measure of the angle could be ((120+360k)°), where k is any natural number. How many coterminal angles are there?
+\answer{Because k could be any natural number, there are an infinite number of coterminal angles.}
+\end{te-addendum}
+\begin{te-addendum}{1}{LearnTogether}
+\textbf{Learn Together: Provide Constructive Feedback}
+``Feedback'' can include the things you do well or things you might want to keep working on. Ask: What is easy or difficult about getting feedback? How would you like someone to give you feedback?
+\end{te-addendum}
+\begin{te-addendum}{1}{CommonError}
+\textbf{Common Error}
+Try It! 1 Students may confuse the direction of the positive and negative angle measures and write the wrong sign with the measure. Have students trace the angle with their finger so they can see which direction it is going. Positive angles start at the initial side and rotate counterclockwise toward the positive part of the y-axis, and negative angles rotate clockwise toward the negative part of the y-axis.
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\te{Additional Examples printed on source page 14; placed outside the spanning Example 1. Go back, ESSENTIAL QUESTION, SOLUTION controls. Additional Examples are available at SavvasRealize.com.}
+\textbf{ADDITIONAL EXAMPLE 3}
+Convert 680° to radians.
+\answer{(680°\cdot\frac{\pi}{180°}=\frac{34\pi}{9}) radians}
+Example 3 Students convert degree measures greater than 360° to radians.
+Q: Is it possible for an angle measured in radians to be negative?
+\answer{Yes; an angle measured in radians can be positive or negative, like degree measures. When negative angle measures in degrees are converted to angle measures in radians, they are still negative.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+The hand of a clock moves through an angle of (\frac{\pi}{2}). The distance the tip of the clock hand travels is 9.4 in. What is the length of the clock hand?
+(radius=\frac{\text{length of intercepted arc}}{\text{Radian Measure}}=\frac{9.4}{\frac{\pi}{2}}\approx6)
+\answer{The length of the clock hand is about 6 in.}
+% FIG 14 975 930 1130 1060
+\placeholder{diagram}{Black circle, blue center point, orange radii to top and right marking central angle pi/2. Upper right quarter arc labeled9.4 inches. No ticks or axes.}
+Example 4 Students find the radius, given the radian measure and the length of the intercepted arc.
+Q: What is the first step when finding the radius, given the radian measure and the length of the intercepted arc?
+\answer{Rewrite the formula for calculating the radian measure so that it is solved for the radius.}
+\end{te-addendum}
+\begin{te-addendum}{1}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 1 Have students explore finding negative angle measures less than -360° that are coterminal with a given angle.
+Find a negative angle measure less than -360° that is coterminal with the given angle.
+1. 70° \answer{Answers may vary. Sample: -650°}
+2. 225° \answer{Answers may vary. Sample: -495°}
+3. -50° \answer{Answers may vary. Sample: -410°}
+4. 330° \answer{Answers may vary. Sample: -390°}
+\end{te-addendum}
+\begin{te-addendum}{1}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 1 Use these problems with students who need additional practice sketching an angle.
+Sketch the angle, and identify the quadrant in which the terminal side lies.
+1. 220° \answer{Quadrant III}
+2. 290° \answer{Quadrant IV}
+% FIG 15 635 1180 1100 1370
+\placeholder{graph}{Two black arrowed x,y axes without ticks. First red initial ray positive x, terminal ray in III, counterclockwise arc labeled220°. Second initial ray positive x, terminal ray in IV near negative y, counterclockwise arc labeled290°.}
+\end{te-addendum}
+% Source page 16: 347 Understand & Apply
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: Why does the name unit circle accurately describe the circle?
+\answer{The radius of the circle is 1 unit.}
+Q: How can you determine in which quadrant the terminal side of an angle with a given radian measure lies?
+\answer{Compare the given radian measure to 0, (\frac{\pi}{2}), (\pi), (\frac{3\pi}{2}), and (2\pi). Angle measures between 0 and (\frac{\pi}{2}) are in Quadrant I. Angle measures between (\frac{\pi}{2}) and (\pi) are in Quadrant II. Angle measures between (\pi) and (\frac{3\pi}{2}) are in Quadrant III. Angle measures between (\frac{3\pi}{2}) and (2\pi) are in Quadrant IV.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Understand Radian Measure on the Unit Circle}
+A. How can you express angles in the coordinate plane using radian measure?
+Angles may be measured in radians as well as degrees. In a circle, an angle that measures 1 radian has an arc length equal to its radius.
+The relationship between radian measure and arc length s is (s=\theta r).
+% FIG 16 1030 260 1170 365
+\placeholder{graph}{Black circle centered at origin on arrowed x,y axes without ticks. Blue radius r along positive x and blue radius to first quadrant point. Red intercepted arc labeled s=r and angle callout theta=1 radian. Blue endpoints and black center.}
+The circumference of a circle is (2\pi r). Therefore, in radian measure, a full revolution around a circle is (\theta=\frac{2\pi r}{r}=2\pi).
+A circle with a radius of one centered at the origin is the unit circle. You can use the unit circle to determine the measure of an angle in radians.
+% FIG 16 942 460 1045 560
+\placeholder{graph}{Red unit circle on black arrowed x,y axes with black origin, red radius to first quadrant labeled1. Red cardinal points labeled0°,90°,180°,270°; corresponding blue labels pi/2,pi,3pi/2. No coordinate tick scale.}
+\te{Callouts: An angle halfway around the circle is (\frac12(2\pi)=\pi) radians. An angle one-fourth around the circle is 90°, or (\frac14(2\pi)=\frac\pi2). A full rotation around the circle is 360°, or (2\pi) radians. 270° is (\frac34) around the circle, so it is equivalent to (\frac34(2\pi)=\frac{3\pi}{2}). GENERALIZE: Since the radius of a unit circle is 1, the radian measure is equal to the length of its intercepted arc.}
+In radian measures, the axis angles are 0, (\frac\pi2), (\pi), and (\frac{3\pi}{2}).
+\answer{An angle measuring 1 radian intercepts an arc equal to the radius; a full revolution measures (2\pi) radians.}
+B. Sketch the angles (\frac\pi6), (\frac{2\pi}{3}), and (\frac{7\pi}{4}) in standard position.
+% FIG 16 826 600 1170 716
+\placeholder{graph}{Three black unit circles on arrowed x,y axes centered at O, cardinal labels0,pi/2,pi,3pi/2 in blue. Red radii from O along positive x and respectively at theta=pi/6 in I, theta=2pi/3 in II, theta=7pi/4 in IV. Red points where radii meet circle, red counterclockwise angle arcs. No coordinate ticks.}
+(\pi=180°), locate the point (\frac16) of the way around the semicircle or 30° to sketch (\frac\pi6) radians.
+(\pi=180°), locate the point (\frac23) of the way around the semicircle or 120° to sketch (\frac{2\pi}{3}) radians.
+(2\pi-\frac\pi4=\frac{7\pi}{4}), which is 45° less than a full rotation or 315°
+\answer{(\frac\pi6): 30°; (\frac{2\pi}{3}): 120°; (\frac{7\pi}{4}): 315°.}
+\end{example}
+\begin{tryit}{2}
+Sketch the following angles in standard position.
+a. (\frac{4\pi}{3})
+b. (-\frac{5\pi}{6})
+\answer{See graphs.}
+% FIG 16 169 470 640 660
+\placeholder{graph}{Two black unit circles centered at origin on arrowed x,y axes. Red cardinal points labeled(1,0),(0,1),(-1,0),(0,-1); black cardinal radian labels0,pi/2,pi,3pi/2. a. Red ray from center in III at240°, red counterclockwise arc from positive x. b. Red ray in III at210°, red clockwise arc from positive x to terminal ray. Both rays extend beyond circle with arrows.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How can you determine in which quadrant an angle that measures (-\frac{5\pi}{6}) lies?
+\answer{Add (2\pi) to the angle measure and then compare to 0, (\frac\pi2), (\pi), (\frac{3\pi}{2}), and (2\pi).}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND Use with EXAMPLES 1 & 2}
+Make Sense and Persevere Why is the reference angle the angle between the terminal side and the x-axis instead of the y-axis?
+\answer{An angle in standard position has its initial side on the x-axis; therefore, the x-axis, not the y-axis, is the starting or reference point.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 1)}
+LISTENING BEGINNING Describe situations that use the word terminal, such as going to an airport terminal, or a having a terminal illness. Ask students what these situations have in common.
+Q: What does it mean to terminate?
+\answer{To terminate something means to end it.}
+Q: One ray of an angle in standard position is called the initial side. Why is the other ray called the terminal side?
+\answer{You can think of the initial side as the side where the angle starts and the terminal side as the side where the angle ends.}
+WRITING DEVELOPING Have students write the definitions of standard and position. Then have students sort words into two groups: things that can be placed in a position (a doll, a car, etc.) and things that can be described as standard (inches, procedures, etc.).
+Q: Why is it important to do some things in a standard way?
+\answer{so the results are the same each time; For example, when using standard ruler, 8 inches is always the same length.}
+Q: What makes an angle in standard position on a coordinate plane standard?
+\answer{It is always positioned so one of its rays (the initial side) is found along the x-axis and the vertex is at the origin.}
+SPEAKING EXPANDING Have students work in pairs to act out a conversation that co-terminal angles may have with each other. Encourage students to use vocabulary including terminal side, quadrant, initial side, clockwise, x-axis, etc. in their conversations.
+Q: Do co-terminal angles always share a side?
+\answer{Yes; the initial side and the terminal side are always shared.}
+Q: Can two angles that are co-terminal both be negative?
+\answer{Yes; subtracting 360° from a negative angle will result in two negative co-terminal angles.}
+\end{te-addendum}
+% Source page 17: 348 Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How do you know that (2\pi) radians is equal to 360°?
+\answer{The arc length of a 360° angle is the circumference of the circle. The circumference of a unit circle is (2\pi) units. Because 1 radian subtends an arc length of 1 unit, the radian measure of the 360° angle is (\frac{2\pi}{1}=2\pi) radians.}
+Q: Why do you multiply the number of radians by (\frac{180°}{\pi}) when converting radians to degrees?
+\answer{(\pi) radians is equal to 180°. If you divide both sides by (\pi), you find that 1 radian (=\frac{180°}{\pi}).}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Convert Between Degrees and Radians}
+A. Convert (\frac{5\pi}{4}) into degrees.
+One full rotation, or 360°, is the same as (2\pi) radians. Half a rotation, or 180°, is the same as (\pi) radians.
+\begin{tabular}{llllll}
+Radian & 0 & (\frac\pi2) & (\pi) & (\frac{3\pi}{2}) & (2\pi) \\
+Degrees & 0 & 90 & 180 & 270 & 360 \\
+\end{tabular}
+% FIG 17 1018 238 1113 350
+\placeholder{graph}{Red unit circle with black origin on black arrowed x,y axes. Red radius in I labeled1. Red cardinal points labeled0°,90°,180°,270°; blue radian labels pi/2 at top,pi at left,3pi/2 at bottom. No ticks.}
+(2\pi\text{ radians}=360°)
+(\pi\text{ radians}=180°)
+(1\text{ radian}=\frac{180°}{\pi})
+(\frac{5\pi}{4}\text{ radians}\cdot\frac{180\text{ degrees}}{\pi\text{ radians}}=225°)
+\te{Callouts: To find the value of 1 radian in terms of degrees, divide both sides by (\pi). To convert any number of radians to degrees, multiply the number of radians by (\frac{180°}{\pi}). STUDY TIP: Radians are written without the units specified, while degrees are always indicated.}
+\answer{An angle measurement of (\frac{5\pi}{4}) radians is equivalent to 225°.}
+B. Convert 75° into radians.
+(\pi\text{ radians}=180°)
+(1\text{ degree}=\frac\pi{180}\text{ radians})
+(75\text{ degrees}\cdot\frac{\pi\text{ radians}}{180\text{ degrees}}=\frac{5\pi}{12}\text{ radians})
+\te{Callouts: To find the value of 1 degree in terms of radians, divide both sides by 180. To convert any number of degrees to radians, multiply the number of degrees by (\frac\pi{180°}).}
+\answer{An angle measurement of 75° is equivalent to (\frac{5\pi}{12}) radians.}
+\end{example}
+\begin{tryit}{3}
+a. Convert (\frac\pi4) and 1.5 to degrees. Round to the nearest tenth.
+b. Convert 30° and 115° to radians.
+\answer{a. 45°, 85.9°; b. (\frac\pi6), (\frac{23\pi}{36})}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: What method can you use to rewrite a radian measure in degrees?
+\answer{You can multiply the radian measure by the conversion factor (\frac{180°}{\pi}).}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND Use with EXAMPLE 3}
+Look for Relationships How does converting between radians and degrees compare to converting between other forms of measurement?
+\answer{Just as when using unit fractions for other measurement conversions the ratio is arranged so that the given units factor out and you are left with the desired units.}
+\end{te-addendum}
+% Source page 18: 349 Understand & Apply
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: Why is 6,720 km substituted for the radius?
+\answer{The satellite orbits 320 km above Earth's surface. The radius of the satellite's orbit is equal to the radius of Earth plus the distance from the satellite to Earth's surface.}
+Q: How can you use the formula for the radian measure to find the distance the satellite travels?
+\answer{Since you know the radius length and the angle measure, you can solve the formula for radian measure for the length of the intercepted arc, substitute the values of the angle measure and the length of the radius, and simplify.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use Radians to Find Arc Length}
+NASA is tracking a satellite traveling in a circular orbit above Earth. It can only be tracked while it orbits through an angle of (\frac\pi6). The radius of Earth is 6,400 km. What is the distance the satellite travels while it is being tracked?
+% FIG 18 840 280 1148 450
+\placeholder{illustration}{Earth against blue star field with satellite above right. Callouts Earth's radius:6,400 km and Satellite:320 km above Earth's surface.}
+The satellite travels through an arc surrounding Earth
+% FIG 18 850 473 1055 607
+\placeholder{diagram}{Black Earth circle centered at origin on arrowed x,y axes without ticks. Blue radial segments from center along positive x and at angle pi/6, both extend beyond Earth to orbital radius. Dashed blue arc connects outer endpoints. Red satellite point on positive x; satellite callout. Radius of Earth=6,400 km bracket center to circle,320 km bracket circle to satellite.}
+The total distance from the center of Earth to the satellite is 6,400 km + 320 km, or 6,720 km.
+Use the formula that relates radian measure to arc length to find the distance through which the satellite can be tracked.
+(\text{Radian Measure}=\frac{\text{length of intercepted arc}}{\text{Radius}})
+(\text{Length of Intercepted Arc}=(\frac\pi6)(6,720\text{ km})\approx3,519\text{ km})
+\answer{The satellite can be tracked for about 3,519 km.}
+\te{APPLICATION. STUDY TIP: Make sure that the units are the same for the radius and the arc length.}
+\end{example}
+\begin{tryit}{4}
+If the satellite could be tracked for 5,000 km, what angle in radians would it pass through?
+\answer{0.74}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How could you determine the angle the satellite passes through while being tracked if you were given the distance the satellite travels while being tracked?
+\answer{You could substitute the distance the satellite is tracked and the radius of the satellite's orbit and solve for the angle measure.}
+\end{te-addendum}
+% Source page 19: 350 Understand & Apply
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How do you know that (\sin\theta=y) and (\cos\theta=x) on a unit circle?
+\answer{Using a reference triangle and trigonometric ratios, you know that (\sin\theta=\frac yr) and (\cos\theta=\frac xr), where r is equal to the radius of the circle. Because this is a unit circle, (r=1), so (\sin\theta=y) and (\cos\theta=x).}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Sine, Cosine, and Tangent in the Unit Circle}
+A. What is the relationship between coordinates on the unit circle, and the cosine, sine, and tangent of an angle?
+Let (\theta) be an angle in standard position and ((x,y)) be the ordered pair where the terminal side intersects the circle. Draw a right triangle with leg lengths x and y. The hypotenuse is the radius to ((x,y)), and so has length 1.
+% FIG 19 955 255 1120 385
+\placeholder{graph}{Black unit circle on arrowed x,y axes, red cardinal points with blue coordinates(1,0),(0,1),(-1,0),(0,-1). Red right triangle in I has horizontal leg x on positive x-axis, vertical leg y to circle, hypotenuse1 from origin, angle theta at origin. Terminal vertex labeled(x,y)=(cos theta,sin theta). No other ticks.}
+Recall the cosine, sine and tangent relationships in a right triangle.
+(\cos\theta=\frac{\text{adjacent}}{\text{hypotenuse}}=\frac x1=x)
+(\sin\theta=\frac{\text{opposite}}{\text{hypotenuse}}=\frac y1=y)
+(\tan\theta=\frac{\text{opposite}}{\text{adjacent}}=\frac yx)
+Because (\cos\theta=x) and (\sin\theta=y), the ordered pair ((x,y)) on the unit circle may also be written as ((\cos\theta,\sin\theta)). Since (\tan\theta=\frac yx), then (\tan\theta=\frac{\sin\theta}{\cos\theta}).
+\answer{(\cos\theta=x), (\sin\theta=y), (\tan\theta=\frac yx=\frac{\sin\theta}{\cos\theta}).}
+B. What are the sine, cosine, and tangent of 0° and of 90°?
+Use the ordered pairs of the intersections between the terminal sides of an angle and the unit circle to find the sine, cosine, and tangent of 0° and 90°.
+% FIG 19 890 570 1110 698
+\placeholder{graph}{Black unit circle centered at black origin on arrowed x,y axes, red cardinal points with blue labels(1,0),(0,1),(-1,0),(0,-1), black degree labels0°,90°,180°,270°. Red radius1 in I to(x,y), red angle theta from positive x. Callout: The ordered pair(x,y) is equivalent to(cos theta,sin theta). No ticks.}
+(\sin0°=0)
+(\cos0°=1)
+(\tan0°=\frac01=0)
+(\sin90°=1)
+(\cos90°=0)
+(\tan90°=\frac10), undefined
+\answer{0°: sine 0, cosine 1, tangent 0; 90°: sine 1, cosine 0, tangent undefined.}
+\te{CONCEPTUAL UNDERSTANDING.}
+\end{example}
+\begin{tryit}{5}
+a. Find the sine, cosine, and tangent of 180° and 270°.
+b. Find the sine, cosine, and tangent of (\frac\pi2) and (\pi).
+\answer{a. (\sin180°=0), (\cos180°=-1), (\tan180°=0); (\sin270°=-1), (\cos270°=0), (\tan270°) is undefined. b. (\sin\frac\pi2=1), (\cos\frac\pi2=0), (\tan\frac\pi2) is undefined; (\sin\pi=0), (\cos\pi=-1), (\tan\pi=0).}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND Use with EXAMPLES 4 & 5}
+Reason Which angle is larger, an angle measuring 180° or an angle measuring 3 radians? Explain.
+\answer{180°; 180° is equal to (\pi) radians, and (\pi) is greater than 3.}
+\end{te-addendum}
+% Source page 20: 351 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+Q: How can you determine the measure of an angle in Quadrant III if you are only given the measure of the reference angle?
+\answer{Calculate the sum of the measure of the reference angle and 180° or (\pi) radians.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error}
+Exercise 10 Some students may incorrectly calculate the negative angle as being -270°. Have them draw the angle in a coordinate plane and then draw an arc clockwise from the positive x-axis to the terminal side of the angle. This will help students estimate the measure of the negative angle and determine whether -210° makes sense.
+\te{Printed -210°; Exercise 10 gives270° and its printed answer is-90°.}
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Angles and the Unit Circle}
+STANDARD POSITION
+An angle is in standard position when its initial side is the positive x-axis and its vertex is at the origin.
+% FIG 20 850 237 975 341
+\placeholder{graph}{Black arrowed x,y axes without ticks; blue initial side ray on positive x, red terminal side ray in II, labeled initial side and terminal side. Red counterclockwise arc theta.}
+DEGREES AND RADIANS
+(radians=\frac\pi{180}\cdot degrees)
+(degrees=\frac{180}\pi\cdot radians)
+% FIG 20 850 361 1010 483
+\placeholder{graph}{Red unit circle on black arrowed x,y axes, cardinal points marked0,90,180,270 in red, with blue pi/2,pi,3pi/2. Three marked points in I labeled pi/3 radians=60°,pi/4 radians=45°,pi/6 radians=30°. No coordinate ticks.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can we extend the trigonometric ratios to angles greater than 90°?
+\answer{by plotting angles on a unit circle and identifying their reference angles}
+2. Error Analysis Camilla said that (\pi) radians is equal to 360°. Explain and correct Camilla's error.
+\answer{(\pi) is equal to 180° and (2\pi) is equal to 360°.}
+3. Vocabulary What two features distinguish a circle as the unit circle?
+\answer{A unit circle's center is at the origin, and its radius is 1.}
+4. Reason If given an angle measure in radians, how can you determine in which quadrant its terminal side will be, without converting to degrees?
+\answer{Since the circumference of a unit circle is (2\pi), each quadrant covers (\frac14) or (\frac\pi2). You can compare the angle measures in radians to 0, (\frac\pi2), (\pi), and (\frac{3\pi}{2}) to determine in which quadrant the angle falls.}
+5. Make Sense And Persevere If you are using a calculator to find the measure of an angle in degrees, what type of measure might make you question whether your calculator is actually in radian mode? Explain.
+\answer{Since radian measures of angles are usually less than or equal to (2\pi), if the answer is very small or written in terms of (\pi), it is likely in radian mode.}
+\textbf{Do You KNOW HOW?}
+The angles given are in standard position. In what quadrant is the terminal side of the angle?
+6. 65° \answer{Quadrant I}
+7. 145° \answer{Quadrant II}
+In what quadrant does the terminal side of angle, given in radians, lie?
+8. (\frac\pi6) \answer{Quadrant I}
+9. (\frac{5\pi}{3}) \answer{Quadrant IV}
+What is the negative angle of rotation for the angle with the given positive angle of rotation?
+10. 270° \answer{-90°}
+11. 110° \answer{-250°}
+Convert each radian measure to a degree measure.
+12. (\frac\pi3) \answer{60°}
+13. (\frac{7\pi}{4}) \answer{315°}
+Convert each degree measure to a radian measure.
+14. -30° \answer{(-\frac\pi6)}
+15. 480° \answer{(\frac{8\pi}{3})}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation; Practice.}
+\end{concept-summary}
+% Source page 21: 352 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE & PROBLEM SOLVING}
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+16--30, 33--49 & 16--22, 25--49 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points each \\
+\end{tabular}
+\te{Practice & Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 16, 21, 22, 48 & 1 \\
+1 & 19 & 2 \\
+2 & 23--26 & 2 \\
+3 & 27--34 & 1 \\
+3 & 20 & 2 \\
+4 & 17, 35, 44--46, 49 & 2 \\
+5 & 36--43, 47 & 1 \\
+5 & 18 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{16}{1}
+UNDERSTAND. Make Sense and Persevere If the given angle were drawn in standard position, in what quadrant would the terminal side be?
+% FIG 21 510 335 650 478
+\placeholder{graph}{Black x,y axes with arrows, no ticks. Two blue rays from origin into II and III. Upper ray60° from positive y; lower ray20° from negative y. Blue angle arc joins the two rays through negative x.}
+\answer{Quadrant II}
+\end{practice}
+\begin{practice}{17}{2}
+Look for Relationships Explain why the length of an intercepted arc on the unit circle always equals the corresponding central angle measure in radians.
+\answer{Since the radius of a unit circle is always 1, the angle measure in radians is equal to the length of the intercepted arc, divided by 1. Therefore, the angle measure in radians is always equal to the length of the intercepted arc.}
+\end{practice}
+\begin{practice}{18}{2}
+Error Analysis Describe and correct the error a student made in converting (\frac\pi2) radians to degrees.
+(\frac\pi2\text{ radians}=x°)
+(\frac\pi2\times\frac\pi{180}=x°)
+(\frac\pi{360}=x°)
+(\frac{25}{0.66}\approx0.03°)
+\te{Printed work appears on a note with a red X; the inconsistent fractions are reproduced literally.}
+\answer{The student used the formula to solve for radians, not degrees: (\frac\pi2\times\frac{180}\pi=\frac{180\pi}{2\pi}=\frac{180}{2}=90°).}
+\end{practice}
+\begin{practice}{19}{2}
+Generalize What is the relationship between a positive angle and a negative angle that share a common terminal side? Write a formula that relates the two measures.
+\answer{The sum of the positive angle and the negative angle is a multiple of 360° or (2\pi); negative angle + positive angle (=k\cdot360°) or (2k\pi)}
+\te{Printed sum and plus; likely difference and minus, since coterminal measures differ by an integer multiple of360° or2pi.}
+\end{practice}
+\begin{practice}{20}{2}
+Higher Order Thinking At what coordinates does the terminal side of a 60° angle intersect the unit circle?
+% FIG 21 510 886 650 1025
+\placeholder{graph}{Red unit circle centered at origin on black arrowed x,y axes without ticks. Blue rays positive x and60° in I, red60° label.}
+\answer{((\frac12,\frac{\sqrt3}{2}))}
+\end{practice}
+\begin{practice}{21}{1}
+PRACTICE. Find the measure of each angle as a positive angle measure, a negative angle measure, and an angle measure that is greater than 360°. SEE EXAMPLE 1
+% FIG 21 820 330 950 445
+\placeholder{graph}{Black arrowed x,y axes without ticks. Blue initial ray positive x; terminal ray II45° above negative x,45° red label and arc.}
+\answer{135°, -225°, 495°}
+\end{practice}
+\begin{practice}{22}{1}
+Find the measure of each angle as a positive angle measure, a negative angle measure, and an angle measure that is greater than 360°. SEE EXAMPLE 1
+% FIG 21 970 330 1110 445
+\placeholder{graph}{Black arrowed x,y axes without ticks. Blue initial ray positive x; terminal ray III60° below negative x,60° red label and arc.}
+\answer{240°, -120°, 600°}
+\end{practice}
+\begin{practice}{23}{2}
+Sketch each angle in standard position. SEE EXAMPLE 2
+(\frac{3\pi}{4})
+\answer{See graph.}
+% FIG 22 155 162 350 360
+\placeholder{graph}{Black arrowed x,y axes without ticks. Blue initial ray positive x and terminal ray135° in II. Red counterclockwise arc.}
+\end{practice}
+\begin{practice}{24}{2}
+Sketch each angle in standard position. SEE EXAMPLE 2
+(\frac\pi3)
+\answer{See graph.}
+% FIG 22 155 365 350 561
+\placeholder{graph}{Black arrowed x,y axes without ticks. Blue initial ray positive x and terminal ray60° in I. Red counterclockwise arc.}
+\end{practice}
+\begin{practice}{25}{2}
+Sketch each angle in standard position. SEE EXAMPLE 2
+(-\frac{2\pi}{3})
+\answer{See graph.}
+% FIG 22 155 572 350 765
+\placeholder{graph}{Black arrowed x,y axes without ticks. Blue initial ray positive x and terminal ray240° in III. Red clockwise arc through IV to III.}
+\end{practice}
+\begin{practice}{26}{2}
+Sketch each angle in standard position. SEE EXAMPLE 2
+(\frac{3\pi}{2})
+\answer{See graph.}
+% FIG 22 155 775 350 970
+\placeholder{graph}{Black arrowed x,y axes without ticks. Blue initial ray positive x and terminal ray negative y. Red counterclockwise three-quarter arc.}
+\end{practice}
+\begin{practice}{27}{1}
+Convert each angle measure to radians. Round to the nearest hundredth. SEE EXAMPLE 3
+148° \answer{2.58}
+\end{practice}
+\begin{practice}{28}{1}
+Convert each angle measure to radians. Round to the nearest hundredth. SEE EXAMPLE 3
+20° \answer{0.35 or (\frac\pi9)}
+\end{practice}
+\begin{practice}{29}{1}
+Convert each angle measure to radians. Round to the nearest hundredth. SEE EXAMPLE 3
+-67° \answer{-1.17}
+\end{practice}
+\begin{practice}{30}{1}
+Convert each angle measure to radians. Round to the nearest hundredth. SEE EXAMPLE 3
+305° \answer{5.32}
+\end{practice}
+\begin{practice}{31}{1}
+Convert each angle measure to degrees. Round to the nearest tenth if needed. SEE EXAMPLE 3
+(\frac{2\pi}{3}) \answer{120°}
+\end{practice}
+\begin{practice}{32}{1}
+Convert each angle measure to degrees. Round to the nearest tenth if needed. SEE EXAMPLE 3
+(\frac{5\pi}{6}) \answer{150°}
+\end{practice}
+\begin{practice}{33}{1}
+Convert each angle measure to degrees. Round to the nearest tenth if needed. SEE EXAMPLE 3
+(-\frac\pi6) \answer{-30°}
+\end{practice}
+\begin{practice}{34}{1}
+Convert each angle measure to degrees. Round to the nearest tenth if needed. SEE EXAMPLE 3
+2.3 \answer{131.8°}
+\end{practice}
+\begin{practice}{35}{2}
+Solve using the formula given. SEE EXAMPLE 4
+Earth's radius is 6,400 km. If a satellite is orbiting at 200 km above Earth's surface and can be tracked while it orbits through a (\frac\pi3) radian angle, what is the distance the satellite travels while being tracked? Round your answer to the nearest tenth.
+\answer{6,911.5 km (using (\pi)); 6,908 km (using 3.14)}
+\end{practice}
+\begin{practice}{36}{1}
+Find the desired trigonometric value. SEE EXAMPLE 5
+(\cos180°) \answer{-1}
+\end{practice}
+\begin{practice}{37}{1}
+Find the desired trigonometric value. SEE EXAMPLE 5
+(\sin270°) \answer{-1}
+\end{practice}
+\begin{practice}{38}{1}
+Find the desired trigonometric value. SEE EXAMPLE 5
+(\tan-270°) \answer{undefined}
+\end{practice}
+\begin{practice}{39}{1}
+Find the desired trigonometric value. SEE EXAMPLE 5
+(\tan720°) \answer{0}
+\end{practice}
+\begin{practice}{40}{1}
+Find the desired trigonometric value. SEE EXAMPLE 5
+(\sin\frac{7\pi}{2}) \answer{-1}
+\end{practice}
+\begin{practice}{41}{1}
+Find the desired trigonometric value. SEE EXAMPLE 5
+(\tan-\frac\pi2) \answer{undefined}
+\end{practice}
+\begin{practice}{42}{1}
+Find the desired trigonometric value. SEE EXAMPLE 5
+(\tan-\pi) \answer{0}
+\end{practice}
+\begin{practice}{43}{1}
+Find the desired trigonometric value. SEE EXAMPLE 5
+(\cos3\pi) \answer{-1}
+\end{practice}
+% Source page 22: 353 Practice & Problem Solving
+\begin{practice}{44}{2}
+APPLY. Make Sense and Persevere Physicists use the Large Hadron Collider in France and Switzerland to observe particle collisions. Particles are accelerated through circular tubes called beam pipes in opposite directions. One detector attached to a beam pipe tracks the movement of a particle. What is the distance traveled by the particle being tracked by the detector?
+% FIG 22 559 425 814 565
+\placeholder{illustration}{Underground circular turquoise beam pipes shown in perspective with vertical shafts and inset photograph of tunnel. White radius to right labeled4.3 km, central angle pi/4 between radius and ray toward lower right ring.}
+\answer{about 3.38 km}
+\end{practice}
+\begin{practice}{45}{2}
+Reason The steps into a hot tub need to span a 60° section of the tub. How can you modify the formula for finding the intercepted arc length from an angle in radians to use degrees instead?
+% FIG 22 555 660 715 808
+\placeholder{illustration}{Cylindrical pale blue hot tub with curved steps along front, two dashed vertical lines showing ends of steps. Radii from tub center to ends mark60° central angle.}
+\answer{Substitute the formula for converting radians to degrees into the arc length formula: length of intercepted arc (=(\frac\pi{180°}\times\text{angle measure in degrees})\times\text{radius}).}
+\te{Printed converting radians to degrees; displayed factor converts degrees to radians.}
+\end{practice}
+\begin{practice}{46}{2}
+Make Sense and Persevere Riders on a Ferris wheel get on a seat, then the Ferris wheel turns and stops to load the next seat. The radius of the Ferris wheel is 18 m. The riders travel 5.5 m in a circular path before stopping. What angle is the Ferris wheel turning between stops?
+\answer{(\approx0.31) radians}
+\end{practice}
+\begin{practice}{47}{1}
+ASSESSMENT PRACTICE. Match each angle measure in degrees in the left column with its corresponding measure in radians in the right column.
+\begin{tabular}{ll}
+I. 60° & A. (\frac\pi8) \\
+II. -15° & B. (-\frac\pi{12}) \\
+III. -200° & C. (\frac{4\pi}{3}) \\
+IV. -108° & D. (-\frac{10\pi}{9}) \\
+V. 22.5° & E. (-\frac{3\pi}{5}) \\
+VI. 240° & F. (\frac\pi3) \\
+\end{tabular}
+\answer{I--F; II--B; III--D; IV--E; V--A; VI--C.}
+\end{practice}
+\begin{practice}{48}{1}
+SAT/ACT What is another way to represent an angle in standard position that has a measure of 530°?
+A. 370°
+B. 170°
+C. 10°
+D. -10°
+E. -170°
+\answer{B}
+\end{practice}
+\begin{practice}{49}{2}
+Performance Task A center-pivot circular irrigator has sprayers that follow concentric circular paths as the irrigator rotates.
+% FIG 22 862 681 1118 825
+\placeholder{illustration}{Green circular crop field in perspective with concentric sprayer paths. Horizontal white radial measure from center to innermost circle is20 m; from that circle to outermost circle is400 m. Other fields and hills in background.}
+Part A What is the length of the path covered by the innermost sprayer when the irrigator rotates through an angle of (\frac{3\pi}{2}) radians?
+\answer{(\approx94) m}
+Part B What angle must the irrigator rotate through for the outermost sprayer to cover a path of the same length?
+\answer{(\approx0.224) radians}
+\end{practice}
+% Source page 23: 353A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F84 \\
+2 & 1 & F84 \\
+3 & 1 & F84 \\
+4 & 1 & F85 \\
+5 & 2 & F84 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{7-1 Lesson Quiz: The Unit Circle}
+\te{ASSESSMENT RESOURCES. Name blank. enVision Algebra 2. SavvasRealize.com. Assessment Sourcebook. Lesson Quiz is available at SavvasRealize.com.}
+1. Select all the possible measures for the angle shown.
+% FIG 23 713 327 810 425
+\placeholder{graph}{Black arrowed x,y axes centered at O without ticks. Black ray along positive x and terminal ray in II30° above negative x.30° angle label at left.}
+A. (-\frac{4\pi}{3})
+B. -210°
+C. (\frac{5\pi}{6})
+D. 210°
+E. 510°
+\answer{1. B, C, E}
+2. An angle has a reference angle measuring 35° and its terminal side lies in Quadrant IV. What are possible positive and negative measures for the angle?
+A. 325°, -35°
+B. 35°, -145°
+C. 35°, -325°
+D. 145°, -35°
+\answer{2. A}
+3. Find the measure of an angle that is positive and less than 360° in standard position for each reference angle.
+68° in quadrant II: blank°
+75° in quadrant IV: blank°
+22° in quadrant III: blank°
+\answer{3. 112°; 285°; 202°}
+4. Convert the angle measures (\frac\pi6) radians and (\frac{5\pi}{3}) radians to degrees.
+(\frac\pi6) radians = blank°
+(\frac{5\pi}{3}) radians = blank°
+\answer{4. 30°; 300°}
+5. A carousel horse travels on a circular path with a radius of 15 feet. How many feet does the horse travel over an angle of (\frac{2\pi}{3}) radians? Round to the nearest foot.
+(\frac{2\pi}{3}) radians = blank ft
+\answer{5. 31 ft}
+\te{Printed radians=ft in answer template; quantities have different units.}
+\end{te-addendum}
+% Source page 24: 353B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School
+\textbf{7-1 Reteach to Build Understanding: Angles and the Unit Circle}
+1. Fill in the missing information regarding the radian and degree measures that are equivalent. Remember, (180°=2\pi).
+\te{Printed180°=2pi; likely180°=pi.}
+Solve for radians:
+(\frac{\text{number of degrees}}{180}=\frac x\pi)
+(180x=(\text{number of degrees})\pi)
+(x=\frac{(\text{number of degrees})\pi}{180})
+Solve for degrees:
+(\frac x{180}=\frac{radians}\pi)
+(180(\text{number of radians})=x\pi)
+(x=\frac{180(radians)}\pi)
+% FIG 24 267 431 435 608
+\placeholder{graph}{Black circle centered at origin on arrowed x,y axes. Four diagonal radii to45°,135°,225°,315°. Cardinal labels0° and2pi on positive x,pi/2 and90° top,180° andpi left,3pi/2 and270° bottom. Boxed diagonal radian measures pi/4,3pi/4,5pi/4,7pi/4; degree circles45°,135°,225°,315°. Worked conversion boxes at four corners. No ticks.}
+\answer{1. (\frac{3\pi}{4}); 45°; 225°; (\frac{7\pi}{4}).}
+\te{Conversion boxes: (x=\frac{135\pi}{180}); (x=\frac{180°\frac\pi4}{\pi}=\frac{45\pi}{\pi}); (x=\frac{180°\frac{5\pi}{4}}\pi=\frac{225\pi}\pi); (x=\frac{315\pi}{180}).}
+2. Denzel was asked to find the angles of rotation of a reference angle that is 25° with a terminal side that lies in Quadrant IV. He drew the angle shown and concluded that that the answers were 205° and -155°. Where did he make his mistake?
+% FIG 24 373 615 433 681
+\placeholder{graph}{Black arrowed x,y axes without ticks, black terminal ray in III25° below negative x.}
+\answer{2. He drew his angle in Quadrant III.}
+3. A bicycle has wheels with a diameter of 622 mm. The bicycle rolls forward and the wheel turns (\frac{5\pi}{6}) radians. How many millimeters forward did the bicycle move?
+\answer{3. Distance (=(\frac{5\pi}{6})(622)=(\frac{15.708}{6})(622)=(2.618)(622)=1,628.396) mm}
+\te{Printed diameter622 but worked solution uses622 as radius; preserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson.
+MathXL for School
+\textbf{7-1 Additional Practice: Angles and the Unit Circle}
+Find the measure of each angle as a positive angle measure, a negative angle measure, and an angle measure that is greater than 360°.
+% FIG 24 563 437 804 496
+\placeholder{graph}{Three black arrowed x,y axes centered at O without ticks.1 terminal ray IV60° clockwise from positive x with60°label;2 ray II60° above negative x with60°label and counterclockwise arc;3 ray IV45° below positive x with45°label and counterclockwise major arc. Initial rays positive x.}
+\answer{1. 300°, -60°, 660°; 2. 120°, -240°, 480°; 3. 315°, -45°, 675°.}
+Sketch each angle in standard position.
+4. 210°
+5. -45°
+6. (\frac{5\pi}{6})
+\answer{4--6. See graphs.}
+% FIG 24 564 523 803 587
+\placeholder{graph}{Three black arrowed x,y axes, no ticks, magenta initial rays on positive x and terminal rays respectively210° in III,-45° in IV,5pi/6 in II. Magenta angle labels210°,-45°,5pi/6 and O at origin. Counterclockwise arcs on4,6; clockwise on5.}
+Find the measure of an angle in standard position for each reference angle.
+7. 10° in Quadrant II \answer{170°}
+8. 35° in Quadrant IV \answer{325°}
+9. 34° in Quadrant III \answer{214°}
+Convert each angle to degrees.
+10. (\frac{3\pi}{2}) = blank \answer{270°}
+11. (-\frac{4\pi}{5}) = blank \answer{144°}
+\te{Printed answer144°; likely-144° for the printed negative angle.}
+12. (\frac{7\pi}{4}) = blank \answer{315°}
+Convert each angle to radians.
+13. 140° = blank \answer{(\frac{7\pi}{9})}
+14. -160° = blank \answer{(-\frac{8\pi}{9})}
+15. 330° = blank \answer{(\frac{11\pi}{6})}
+16. A Ferris wheel rotates (\frac{9\pi}{8}) radians prior to making a stop. The total height of the Ferris wheel is 246 ft. How far around did the Ferris wheel travel? Round to the nearest whole foot.
+\answer{435 ft}
+17. How does the formula for the circumference of a circle relate to one rotation around the unit circle?
+\answer{You multiply the radius of a circle by (2\pi) to find its circumference. One rotation around the unit circle is (2\pi) radians.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School
+\textbf{7-1 Enrichment: Angles and the Unit Circle}
+William went to Fun Land Amusement Park, where there are many fun rides. After studying angles and unit circles, William decides he wants to calculate the distance he traveled on a few of the rides.
+For each ride described, sketch a graph to represent the ride, assuming that it is centered at the origin. If the graph is over 1 rotation, show the graph for the final rotation.
+Solve for the total distance traveled for each ride. Round to the nearest hundredth.
+1. Train around the park:
+Origin: Center of park
+Radius: From center of park to track is (\frac14) mi
+Starts: At a reference point of 30° from the y-axis in Quadrant II
+Travels: Clockwise and gets off at point ((\frac14,0))
+\answer{1. 0.52 mi}
+% FIG 24 896 566 959 625
+\placeholder{graph}{Black arrowed x,y axes centered at O without ticks. Magenta rays positive x and into II30° left of positive y;30°magenta label.}
+2. Merry-go-round:
+Origin: Center of merry-go-round
+Radius: From center to horse is 28 ft
+Starts: On a horse located at point ((28,0))
+Travels: Counterclockwise past the point 4 times and gets off on reference angle 15° from x-axis in Quadrant IV
+\answer{2. 872.32 ft}
+% FIG 24 1025 575 1090 642
+\placeholder{graph}{Black arrowed x,y axes centered at O without ticks. Magenta positive x ray and ray15° below positive x into IV, magenta15°label and counterclockwise nearly full arc.}
+\te{Printed872.32 ft appears inconsistent with the stated four rotations; preserved.}
+3. Ferris Wheel:
+Origin: Center of Ferris wheel
+Radius: 23.2 yards
+Starts: At a reference point of 22° from the y-axis in Quadrant III
+Travels: Clockwise around 1 full rotation, but then breaks down at ((23.2,0))
+\answer{3. 246.19 yd}
+% FIG 24 1057 660 1118 720
+\placeholder{graph}{Black arrowed x,y axes centered at O without ticks. Magenta positive x ray and ray in III22° left of negative y, magenta22°label; circle arc around origin.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{7-1 Mathematical Literacy and Vocabulary: Angles and the Unit Circle}
+For Items 1--8, draw a line from each word in Column A to the matching definition in Column B.
+\begin{tabular}{ll}
+Column A & Column B \\
+1. standard position & two angles in standard position with the same terminal side \\
+2. initial side & has a radius of 1 unit and center at the origin \\
+3. terminal side & the ray on the x-axis in an angle in standard position \\
+4. coterminal angles & describes an angle with a vertex at the origin and one ray on the positive x-axis \\
+5. radian & measure of a central angle that intercepts an arc with length equal to the radius of the circle \\
+6. radian measure & the ray not on the x-axis in an angle in standard position \\
+7. reference angle & defined as the ratio of the length of the arc the angle subtends s divided by the radius of the circle r \\
+8. unit circle & smallest angle between the terminal side and the x-axis \\
+\end{tabular}
+\answer{Printed matching lines connect1 to definition4;2 to3;3 to6;4 to1;5 to5;6 to7;7 to8;8 to2.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+Solve the system of equations by graphing.
+(y=3x+4)
+(y=-2x+4)
+Use the graphing tool to graph the system.
+% FIG 24 850 1040 1025 1165
+\placeholder{graph}{Digital screenshot blank coordinate grid, x,y axes labeled, unit grid with even-number labels-10 to10 both axes, arrowheads; no plotted lines. Question Help menu overlays upper right.}
+\te{Tablet controls: Exit; Question Help; Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print; Click to enlarge graph; Click the graph, choose a tool in the palette and follow the instructions to create your graph.;1 part remaining; Clear All; Check Answer; Review progress; Question5 of14; Go; Back; Next. Resource previews include Name blanks, enVision Algebra2, SavvasRealize.com, and Teaching Resources footers.}
+\end{te-addendum}
+
+\end{document}

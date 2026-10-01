@@ -1,0 +1,1068 @@
+\documentclass{article}
+% Source: 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+\begin{lesson-meta}
+\begin{tabular}{ll}
+Lesson Code & 1-1 \
+Title & Key Features of Functions \
+I CAN Objective & I can interpret key features of linear, quadratic, and absolute value functions given an equation or a graph. \
+Essential Question & How do key features help you understand functions and their graphs? \
+Lesson Vocabulary & average rate of change; interval notation; maximum; minimum; set-builder notation; zero of a function \
+Topic Vocabulary & domain; range; x-intercept; y-intercept; positive interval; negative interval; increasing; decreasing; linear function; quadratic function; absolute value function
+\end{tabular}
+\end{lesson-meta}
+
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \
+\midrule
+1 & 18, 23 & 1 \
+2 & 19, 24, 32 & 1 \
+2 & 30 & 3 \
+3 & 20, 25 & 1 \
+3 & 12 & 2 \
+3 & 13 & 3 \
+4 & 21, 26, 31 & 1 \
+4 & 14--17, 28 & 3 \
+5 & 22, 27 & 1 \
+5 & 29, 33 & 3 \
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+
+\begin{model-discuss}
+\textbf{EXPLORE & REASON}
+
+A diver is going through ocean search-and-rescue training. The graph shows the relationship between her depth and the time in seconds since starting her dive.
+
+\placeholder{graph}{Diver beside a boat and a dashed V-shaped depth-versus-time graph. Horizontal axis Time (s), labeled (t), ticks 1 through 9; vertical axis Depth (ft), labeled (d), ticks 2, 0, -2, -4, -6, -8. The graph descends from (0,2), crosses the surface at (1,0), reaches the solid vertex (5,-8), labeled ``5 s, -8 ft,'' and rises to (9,0). Water surface is (d=0); a diver is pictured underwater near the rising branch.}
+
+A. What details can you determine about the dive from the coordinates of the point (5, -8)?
+\answer{The diver reached the lowest point of the dive, 8 ft below the surface of the water, 5 s after beginning the dive.}
+
+B. What is the average speed of the diver in the water?
+\te{The TE student page additionally asks: How can you tell from the graph?}
+\answer{2 ft/s; Sample: There is a slope of 2 ft/s from (5,-8) to (9,0).}
+
+C. Which point on the graph shows the starting location of the diver? Explain.
+\answer{(0,2); This is the point when the time is 0 s and the dive begins.}
+
+D. Communicate Precisely What does the V-shape of the graph tell you about the dive? What information does it not tell you about the dive?
+\answer{The diver dove down and then swam back up. It does not tell you if the diver moved horizontally or how far she moved.}
+\end{model-discuss}
+
+\begin{te-addendum}{0}{LearnTogether}
+INSTRUCTIONAL FOCUS Students explore the relationship between the depth of the diver and the time since she started the dive to understand how one affects the other. This leads to understanding the key features of functions.
+
+STUDENT COMPANION Students can complete the Explore & Reason activity in their Student Companion.
+\end{te-addendum}
+
+\begin{te-addendum}{0}{GeneralizeETP}
+Before: WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving.
+
+Q: What do you notice about the graph?
+\answer{The graph decreases from left to right until the point (5,-8), and then the graph increases.}
+\end{te-addendum}
+
+\begin{te-addendum}{0}{GeneralizeETP}
+During: SMALL GROUP. Support Productive Struggle in Learning Mathematics.
+
+Q: What do the coordinates of a point on the graph tell you about the position of the diver?
+\answer{The y-coordinate tells you the depth of the diver, and the x-coordinate tells you how many seconds have passed since the start of the dive.}
+
+Q: What does a positive value of (y) tell you about the diver?
+\answer{A positive value of (y) tells you that the diver is above the surface of the water.}
+\end{te-addendum}
+
+\begin{te-addendum}{0}{GeneralizeETP}
+For Early Finishers
+
+Q: Draw the graph of (y=|x-11|-10) to represent another diver. What is the starting position of the diver? What is the deepest point of the dive? What is the average speed of the diver?
+\answer{The starting position is (0,1). The deepest point of the dive is -10, or 10 feet below the surface. The average speed of the diver in the water is 1 ft/s.}
+\end{te-addendum}
+
+\begin{te-addendum}{0}{GeneralizeETP}
+After: WHOLE CLASS. Facilitate Meaningful Mathematical Discourse.
+
+Q: Are there x-values of the graph that do not make sense in the context of the problem?
+\answer{Yes; values less than 0 do not make sense because (x=0) represents the time the dive starts.}
+
+Q: Are there y-values of the graph that do not make sense in the context of this problem?
+\answer{Yes; y-values greater than the starting point of 2 do not make sense. The diver will not continue the path once she breaks the surface of the water.}
+\end{te-addendum}
+
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with EXPLORE & REASON.
+
+Reason What do the points where the graph intersects the x-axis tell you about the dive?
+\answer{The points on the x-axis are when the diver is at the surface.}
+\end{te-addendum}
+
+\begin{te-addendum}{1}{LearnTogether}
+INTRODUCE THE ESSENTIAL QUESTION. Establish Mathematics Goals to Focus Learning.
+
+Introduce students to the key features of linear, quadratic, and absolute value functions. Explain that interpreting the key features of the graphs of these functions can help solve problems about functions.
+\end{te-addendum}
+
+\begin{concept-box}
+\textbf{CONCEPT Set-Builder Notation and Interval Notation}
+
+Set-builder notation is used to describe the elements of a set. A variable represents any number in the set, followed by a description of the elements of the set.
+
+(\{y\mid y\text{ is an integer and }y\geq10\})
+
+The set of all numbers (y) such that (y) is an integer and is greater than or equal to 10.
+
+Interval notation is used to describe a continuous set of real numbers, or interval, by the minimum and maximum values.
+
+Use parentheses when the minimum or maximum is not included in the set. Use square brackets when it is included.
+
+(-5,0] is the same as (\{y\mid -5<y\leq0\}).
+
+Use (\pm\infty) if there is no minimum or no maximum value in the set.
+
+[-3,\infty) is the same as (\{y\mid -3\leq y\}).
+
+(-\infty,7) is the same as (\{y\mid y<7\}).
+\end{concept-box}
+
+\begin{example}{1}
+\textbf{Understand Domain and Range}
+
+A. What are the domain and range of the function defined by (y=x^2-3)?
+
+The set of all possible inputs for a relation is called the domain.
+
+The domain of this function is:
+
+The set of all possible outputs for a relation is called the range.
+
+The range of this function is:
+
+\begin{tikzpicture}
+\begin{axis}[width=6cm,height=5cm,axis lines=middle,xlabel=(x),ylabel=(y),xmin=-5,xmax=5,ymin=-5,ymax=5,xtick={-4,-2,0,2,4},ytick={-4,-2,0,2,4},grid=both,samples=100]
+\addplot[red,thick,domain=-2.8:2.8,<->] {x^2-3};
+\end{axis}
+\end{tikzpicture}
+
+This graph represents a function because each input has exactly one output.
+
+In (y=x^2-3), (x) can be any real number, while (y) cannot be less than 3.
+\te{The TE graph callout prints ``less than 3''; the graph and worked range show that the lower bound is -3.}
+
+Using set-builder notation, the domain of this function is (\{x\mid x\text{ is a real number}\}) and in interval notation the domain is (-\infty,\infty).
+
+Using set-builder notation, the range of the function is (\{y\mid y\geq-3\}) and in interval notation the range is [-3,\infty).
+
+A. An airtanker flies over forest fires and drops water at a constant rate until its tank is empty. What are the domain and range of the function that represents the volume of water the airtanker can drop in (x) seconds?
+\te{The packet labels this part A again; the TE labels it B.}
+
+\placeholder{photo}{Airtanker dropping water over a forest fire, with labels ``Rate: 400 gals per second'' and ``8,000 gals. in the tank.''}
+
+The function is:
+
+The domain is:
+
+The range is:
+
+The function is (f(x)=400x). The airtanker cannot drop water for a negative number of seconds, so (x\geq0). The tanker can drop water for a maximum of (\frac{8{,}000}{400}=20) s before running out of water, so (x\leq20).
+
+The domain is (\{x\mid0\leq x\leq20\}), or [0,20].
+
+The airtanker cannot drop a negative number of gallons, and its maximum capacity is 8,000 gal.
+
+The range is (\{y\mid0\leq y\leq8{,}000\}), or [0,8{,}000].
+\answer{A. Domain: (\{x\mid x\text{ is a real number}\}); (-\infty,\infty). Range: (\{y\mid y\geq-3\}); [-3,\infty). B. (f(x)=400x); domain: (\{x\mid0\leq x\leq20\}), [0,20]; range: (\{y\mid0\leq y\leq8{,}000\}), [0,8{,}000].}
+\end{example}
+
+\begin{concept-box}
+\textbf{STUDY TIP}
+
+An interval with excluded boundary points is called ``open'' and is represented by open circle endpoints on a number line. An interval with included boundary points is called ``closed'' and is represented by solid circle end points on a number line.
+\end{concept-box}
+
+\begin{tryit}{1}
+What are the domain and range of each function? Write the domain and range in set-builder notation and interval notation.
+
+a. (y=|x-4|)
+
+b. (y=6x-2x^2)
+\answer{a. domain: (\{x\mid x\text{ is a real number}\}); (-\infty,\infty); range: (\{y\mid y\geq0\}); [0,\infty). b. domain: (\{x\mid x\text{ is a real number}\}); (-\infty,\infty); range: (\{y\mid y\leq4.5\}); (-\infty,4.5].}
+\end{tryit}
+
+\begin{te-addendum}{1}{PurposefulQuestions}
+PART A
+
+Q: What difference do you notice between set-builder notation and interval notation?
+\answer{Set-builder notation uses a verbal description or an inequality with the variable listed. Interval notation uses a pair of values that have a left minimum boundary and a right maximum boundary, with no variable listed.}
+
+PART B
+
+Q: How would the domain and range be different if the function were given without real-life context?
+\answer{If the function (f(x)=400x) were given without the context, the domain and range would be all real numbers.}
+\end{te-addendum}
+
+\begin{te-addendum}{1}{ElicitEvidence}
+Q: How can a graph help you find the domain and range of a function?
+\answer{When you graph the function, you can see the general behavior and shape of the graph, including its minimum and maximum values. Using what you see, you can translate the information into set-builder or interval notation.}
+\end{te-addendum}
+
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 1}
+
+What are the domain and range of the function (y=-x^2+3)?
+
+Domain: You can square any real number, so any number can be input for (x). The domain is all real numbers, or (-\infty,\infty).
+
+Range: The maximum of the function is (y=3). So, the range is all real numbers less than or equal to 3, or (-\infty,3].
+
+\begin{tikzpicture}
+\begin{axis}[width=5cm,height=4cm,axis lines=middle,xlabel=(x),ylabel=(y),xmin=-5,xmax=5,ymin=-5,ymax=5,xtick={-4,0,4},ytick={-4,0,2,4},grid=both,samples=80]
+\addplot[red,thick,domain=-2.8:2.8,<->] {-x^2+3};
+\end{axis}
+\end{tikzpicture}
+
+Example 1 Help students find the domain and range of a quadratic function with a negative leading coefficient.
+
+Q: Can values in the range be as large as you want them to be?
+\answer{No. The function has a maximum, which is equal to 3. Values in the range of (f) cannot be greater than 3.}
+\end{te-addendum}
+
+\begin{example}{2}
+\textbf{Find x- and y-intercepts}
+
+A. A car starts a journey with a full tank of gas. The equation (y=16-0.05x) relates the number of gallons of gas, (y), left in the tank to the number of miles the car has traveled, (x). What are the x- and y-intercepts of the graph of this equation, and what do they represent about the situation?
+
+\placeholder{photo}{Car driving along a winding road through a dry, rocky landscape beside the gas-remaining graph.}
+
+\begin{tikzpicture}
+\begin{axis}[width=7cm,height=5cm,axis lines=middle,xlabel={Travel Distance (mi)},ylabel={Gas Remaining (gal)},xmin=0,xmax=360,ymin=0,ymax=20,xtick={0,80,160,240,320,360},ytick={0,4,8,12,16,20},grid=both]
+\addplot[black,thick,domain=0:320] {16-0.05*x};
+\end{axis}
+\end{tikzpicture}
+
+A y-intercept is the y-coordinate of a point where a graph intersects the y-axis.
+
+An x-intercept is the x-coordinate of a point where a graph intersects the x-axis.
+
+The graph above intersects the x-axis at (320,0), so the x-intercept is 320. This means that the car can travel 320 mi before it runs out of gas.
+
+The graph intersects the y-axis at (0,16), so the y-intercept is 16. This means the car has 16 gal of gas when it starts its trip.
+
+B. What are the x- and y-intercepts of the graph (y=|x|-3)?
+
+Find the x-intercept(s) algebraically.
+\begin{align*}
+y&=|x|-3\
+0&=|x|-3\
+3&=|x|\
+x&=\pm3
+\end{align*}
+The y-coordinate of an x-intercept is 0.
+
+Both 3 and -3 are 3 units away from 0, so they both have an absolute value of 3.
+
+The x-intercepts of the graph of (y=|x|-3) are -3 and 3. The x-intercepts are also the zeros of the function because they are the input values that result in a function output value of 0.
+
+Find the y-intercept algebraically.
+\begin{align*}
+y&=|x|-3\
+y&=|0|-3\
+y&=0-3\
+y&=-3
+\end{align*}
+The x-coordinate at the y-intercept is 0.
+
+The y-intercept of the graph of (y=|x|-3) is -3.
+
+\begin{tikzpicture}
+\begin{axis}[width=6cm,height=5cm,axis lines=middle,xlabel=(x),ylabel=(y),xmin=-5,xmax=5,ymin=-4,ymax=4,xtick={-4,-3,0,3,4},ytick={-3,0,2,4},grid=both]
+\addplot[red,thick,domain=-5:5,samples=101,<->] {abs(x)-3};
+\end{axis}
+\end{tikzpicture}
+
+\te{The student packet provides these response headings for Example 2:}
+
+\textbf{Student Responses (in complete sentences)} \textbf{Additional Responses}
+
+\textbf{First Read -- Understanding Context}
+
+What is the core of the problem?
+
+I think the problem is about ...
+
+\textbf{Second Read -- Interpreting the Question}
+
+What are you trying to find out?
+
+The problem is asking ...
+
+\textbf{Third Read -- Identifying Necessary Information}
+
+What are the important quantities, relationships, and other relevant information?
+
+The important information is...
+
+\textbf{Explore Reasoning --} What are three different ways to think about solving this problem?
+
+\textbf{Solution} (show and explain your answer)
+
+\textbf{Interpretation of Solution} (interpret your solution in your own words)
+\answer{A. x-intercept: 320; the car can travel 320 mi before it runs out of gas. y-intercept: 16; the car has 16 gal of gas when it starts its trip. B. x-intercepts: -3 and 3; y-intercept: -3.}
+\end{example}
+
+\begin{tryit}{2}
+What are the x- and y-intercepts of (g(x)=4-x^2)?
+\answer{x-intercepts: -2 and 2; y-intercept: 4}
+\end{tryit}
+
+\begin{te-addendum}{2}{PurposefulQuestions}
+Q: Why would you want to find the x- and y-intercepts of a function?
+\answer{Knowing the x- and y-intercepts can help you graph the function.}
+
+Q: What do you know about the coordinates of the x- and y-intercepts?
+\answer{The x-coordinate of a y-intercept is 0, and the y-coordinate of an x-intercept is 0.}
+\end{te-addendum}
+
+\begin{te-addendum}{2}{LearnTogether}
+Offer Help to Others Doing math and thinking about math can be challenging. Ask: What can you say to help others feel confident? What can you do to help others persevere?
+
+\te{Student Edition sidebar: Do you seek help when needed? Do you offer help and support to others?}
+\end{te-addendum}
+
+\begin{te-addendum}{2}{ElicitEvidence}
+Q: What do you know about the x-intercepts of the function by looking at the function?
+\answer{The function is a quadratic function, so it may have 2 zeros.}
+\end{te-addendum}
+
+\begin{te-addendum}{2}{CommonError}
+Try It! 2 Some students may find only one x-intercept, 2. Have students check their work by substituting 0 for (y) and solving for (x): (x^2=4) and (x=\pm\sqrt{4}), or 2 and -2. So there are two x-intercepts, 2 and -2.
+\end{te-addendum}
+
+\begin{te-addendum}{2}{HabitsOfMind}
+Use with EXAMPLES 1 & 2.
+
+Make Sense and Persevere A function does not have any x-intercepts. What might be true about its domain and range?
+\answer{The domain could be any set of real numbers, but the range cannot include 0.}
+\end{te-addendum}
+
+\begin{te-addendum}{2}{RtISupport}
+Support Struggling Students. USE WITH EXAMPLE 2A Students may have trouble identifying the x- and y-intercepts in a real-world context.
+
+Have students practice finding the x- and y-intercepts of linear functions.
+
+Q: What are the x- and y-intercepts of (g(x)=2x-1)?
+\answer{x-intercept: (\frac{1}{2}); y-intercept: -1}
+
+Q: What are the x- and y-intercepts of (h(x)=-3x+6)?
+\answer{x-intercept: 2; y-intercept: 6}
+
+Q: What are the x- and y-intercepts of (i(x)=4x)?
+\answer{x-intercept: 0; y-intercept: 0}
+\end{te-addendum}
+
+\begin{example}{3}
+\textbf{Identify Positive or Negative Intervals}
+
+For what intervals of (x) is (f(x)=x^2-9) positive? For what intervals of (x) is the function negative?
+
+Use technology to graph the function:
+
+\begin{tikzpicture}
+\begin{axis}[width=6cm,height=6cm,axis lines=middle,xlabel=(x),ylabel=(y),xmin=-5,xmax=5,ymin=-10,ymax=9,xtick={-4,-2,0,2,4},ytick={-8,-4,0,4,8},grid=both,samples=100]
+\addplot[blue,thick,domain=-4.2:-3,<-] {x^2-9};
+\addplot[red,thick,domain=-3:3] {x^2-9};
+\addplot[blue,thick,domain=3:4.2,->] {x^2-9};
+\end{axis}
+\end{tikzpicture}
+
+(f(x)>0) (above the x-axis) when (x<-3) and when (x>3).
+
+(f(x)<0) (below the x-axis) between the x-intercepts of -3 and 3.
+
+The function is positive at (-\infty,-3) and (3,\infty).
+
+The function is negative at (-3,3).
+
+The function is neither positive nor negative at the x-intercepts of -3 and 3.
+\answer{Positive: (-\infty,-3) and (3,\infty). Negative: (-3,3). Neither positive nor negative at (x=-3) and (x=3).}
+\end{example}
+
+\begin{concept-box}
+\textbf{COMMON ERROR}
+
+Be careful not to confuse a positive function value and a positive rate of change. A positive rate of change means the y-values of the function are increasing but are not necessarily greater than 0.
+\end{concept-box}
+
+\begin{tryit}{3}
+a. For what interval(s) is (h(x)=2x+10) positive?
+
+b. For what interval(s) is (h(x)=2x+10) negative?
+\answer{a. positive: (-5,\infty). b. negative: (-\infty,-5).}
+\end{tryit}
+
+\begin{te-addendum}{3}{PurposefulQuestions}
+Q: What do you notice about the graph of the function where the positive and negative intervals meet?
+\answer{The boundary points of the intervals are the x-intercepts of the function.}
+\end{te-addendum}
+
+\begin{te-addendum}{3}{ElicitEvidence}
+Q: How can you determine the intervals over which a function with a connected graph is positive or negative without graphing the function?
+\answer{Find the x-intercepts of the function. Choose an x-value between consecutive x-intercepts and evaluate the function at that value. If the value is positive, the function is positive on the interval between the x-intercepts you selected. If the value is negative, the function is negative on that interval.}
+\end{te-addendum}
+
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 3}
+
+For what intervals is (y=-x^2+9) positive? For what intervals is the function negative?
+
+Drag the slider to graph the function.
+
+The function is positive: (-3,3).
+
+The function is negative: (-\infty,-3), (3,\infty).
+
+The function is neither positive nor negative at the x-intercepts of -3 and 3.
+
+\begin{tikzpicture}
+\begin{axis}[width=6cm,height=5cm,axis lines=middle,xlabel=(x),ylabel=(y),xmin=-10,xmax=10,ymin=-10,ymax=20,xtick={-10,-5,0,5,10},ytick={-5,0,5,10,15,20},grid=both,samples=100]
+\addplot[blue,thick,domain=-3:3] {-x^2+9};
+\addplot[red,thick,domain=-4.3:-3,<-] {-x^2+9};
+\addplot[red,thick,domain=3:4.3,->] {-x^2+9};
+\end{axis}
+\end{tikzpicture}
+
+Additional Example 3 is Powered by Desmos. Activities are available at SavvasRealize.com.
+
+Example 3 Help students find the intervals over which a quadratic function with a negative leading coefficient is positive and negative.
+
+Q: How do the positive and negative intervals of (f(x)=-x^2+4) compare to the positive and negative intervals of (g(x)=x^2-4)?
+\answer{They are opposite. The positive intervals of (f) are negative intervals of (g), and vice versa.}
+\end{te-addendum}
+
+\begin{example}{4}
+\textbf{Identify Where a Function Increases or Decreases}
+
+For what values of (x) is (g(x)=2-|x|) increasing? For what values of (x) is it decreasing?
+
+Construct a table and sketch a graph to represent the function.
+
+\begin{tabular}{cc}
+\toprule
+(x) & (g(x)) \
+\midrule
+-3 & -1 \
+-2 & 0 \
+-1 & 1 \
+0 & 2 \
+1 & 1 \
+2 & 0 \
+3 & -1 \
+\bottomrule
+\end{tabular}
+
+\begin{tikzpicture}
+\begin{axis}[width=7cm,height=5cm,axis lines=middle,xlabel=(x),ylabel={(g(x))},xmin=-7,xmax=7,ymin=-5,ymax=4,xtick={-6,-4,-2,0,2,4,6},ytick={-4,-2,0,2,4},grid=both]
+\addplot[red,thick,domain=-7:7,samples=101,<->] {2-abs(x)};
+\addplot[only marks,red] coordinates {(-3,-1) (-2,0) (-1,1) (0,2) (1,1) (2,0) (3,-1)};
+\end{axis}
+\end{tikzpicture}
+
+The greatest value a function attains is the maximum of the function. The least value a function attains is the minimum.
+
+(g(x)) is decreasing from 0 to (\infty).
+
+(g(x)) is increasing from (-\infty) to 0.
+
+The values of (g(x)) are increasing on the x-interval (-\infty,0).
+
+The values of (g(x)) are decreasing on the x-interval (0,\infty).
+\answer{Increasing: (-\infty,0); decreasing: (0,\infty). Maximum: 2 at (x=0). Table values: -1, 0, 1, 2, 1, 0, -1 for (x=-3,-2,-1,0,1,2,3).}
+\end{example}
+
+\begin{concept-box}
+\textbf{REASON}
+
+Intervals of the domain explain what is happening in the range of the function. Increasing or decreasing is determined as the x-values increase or as you trace the function from left to right. Why do you think the boundaries of the intervals are open?
+\end{concept-box}
+
+\begin{tryit}{4}
+For what values of (x) is each function increasing? For what values of (x) is it decreasing?
+
+a. (f(x)=x^2-4x)
+
+b. (f(x)=-2x-3)
+
+\te{Functions taken from the Savvas TE student page (TE p.8). The teacher's OneNote packet (a2_1-1.pdf p.6) mistakenly repeats Try It 3's h(x)=2x+10 prompts under item 4; correct the packet before reuse.}
+\answer{a. increasing: (2,\infty); decreasing: (-\infty,2). b. not increasing on any interval; decreasing: (-\infty,\infty).}
+\end{tryit}
+
+\begin{te-addendum}{4}{PurposefulQuestions}
+Q: Can there be a function that only increases or only decreases?
+\answer{Yes; a linear function does not have a maximum or minimum, so the function will not change from increasing to decreasing.}
+
+Q: What do you know about the values of a function on either side of a maximum?
+\answer{The values to the left of the maximum are increasing, and the values to the right are decreasing.}
+\end{te-addendum}
+
+\begin{te-addendum}{4}{HabitsOfMind}
+Use with EXAMPLES 3 & 4.
+
+Use Structure Can a function be increasing and negative on the same interval? Explain.
+\answer{Yes; the graph of the function can go from lower left to upper right, but still lie below the x-axis.}
+\end{te-addendum}
+
+\begin{te-addendum}{4}{RtIExtend}
+Extend Student Thinking. USE WITH EXAMPLE 4 Have students compare two functions on an interval and describe the functions as increasing or decreasing.
+
+Q: Compare (f(x)=x^2+4) and (g(x)=-|x|+1) on the interval (-\infty,0). Describe the functions as increasing or decreasing.
+\answer{(f(x)=x^2+4) is decreasing on this interval. (g(x)=-|x|+1) is increasing on this interval.}
+\end{te-addendum}
+
+\begin{concept-box}
+\textbf{Average Rate of Change}
+
+The average rate of change is the ratio (\frac{f(b)-f(a)}{b-a}). This is the same as the slope of the line segment between the points (a,f(a)) and (b,f(b)).
+\end{concept-box}
+
+\begin{example}{5}
+\textbf{Understand Average Rate of Change Over an Interval}
+
+A. What is the average rate of change of a function (f(x)) over the interval [a,b]?
+
+The interval starts at a value of (f(a)) when (x=a) and ends at a value of (f(b)) when (x=b).
+
+The total change in the function values is (f(b)-f(a)).
+
+The length of the interval is (b-a).
+
+The average rate of change is the ratio (\frac{f(b)-f(a)}{b-a}). This is the same as the slope of the line segment between the points (a,f(a)) and (b,f(b)).
+
+\placeholder{graph}{Schematic increasing, concave-up red curve labeled (y=f(x)); horizontal axis (x), vertical axis (y), without numerical ticks or specified ranges. Two positive x-values labeled (a) and (b), with (a<b), correspond to labeled points (a,f(a)) and (b,f(b)) in the TE. A dashed secant joins the points; the horizontal change is labeled (b-a), and vertical change (f(b)-f(a)). The packet version shows only the curve and axis labels (a), (b), (x), and (y).}
+
+B. A rideshare program charges fees based on how many minutes a ride lasts. What do the average rates of change over time intervals [0, 4], [10, 20], and [20, 40] indicate about the cost of rides?
+
+\te{The packet prints [20,40]. The TE prompt and worked solution use [20,24]; the plotted labeled endpoint is (24,26).}
+
+\placeholder{graph}{Rideshare cost graph: horizontal axis Time (min), displayed 0 to 28 with labels every 4 minutes; vertical axis Cost (dollars), displayed 0 to 28 with labels every 4 dollars. Horizontal red segment from (0,6) to labeled (4,6), then an increasing black segment to labeled (10,9), a rising concave-up purple curve through labeled (18,21) to labeled (20,25), then a shallow increasing blue segment through labeled (24,26) toward (28,27). y-intercept 6; no x-intercept in the displayed domain.}
+
+On [0,4], the average rate of change is (\frac{6-6}{4-0}=0) meaning the cost does not change on the interval. Any ride lasting 4 minutes or less will cost \$6.
+
+On [10,20], the average rate of change is (\frac{25-9}{20-10}=\frac{16}{10}) which is equivalent to the rate of \$1.60:1 minute. For each additional minute of the ride on this interval, the cost will increase an average of \$1.60.
+
+On [20,24], the average rate of change is (\frac{26-25}{24-20}=\frac{1}{4}); at this stage of the ride, the cost increases an average of 25 cents per extra minute.
+
+So the company charges the greatest rate for rides lasting between 10 and 20 minutes, and it gives riders a significant price break for taking rides lasting more than 20 minutes.
+\answer{A. (\frac{f(b)-f(a)}{b-a}). B. On [0,4]: 0 dollars per minute; rides lasting 4 minutes or less cost \$6. On [10,20]: \$1.60 per minute. On [20,24]: \$0.25 per minute.}
+\end{example}
+
+\begin{concept-box}
+\textbf{LOOK FOR RELATIONSHIPS}
+
+If (x_1,y_1) and (x_2,y_2) are points on the graph of the linear function (y=mx+b), then the average rate of change in the interval [x_1,x_2] is (m=\frac{y_2-y_1}{x_2-x_1}).
+\end{concept-box}
+
+\begin{tryit}{5}
+What do the average rates of change of the function (y=|x|+2) over the intervals [-2, 0], [0, 3], and [-2, 3] indicate about the function?
+\answer{rates of change: -1; 1; (\frac{1}{5}); Since the rates of change vary, the function is nonlinear.}
+\end{tryit}
+
+\begin{te-addendum}{5}{GeneralizeETP}
+Build Procedural Fluency From Conceptual Understanding.
+
+Q: What do you know about the average rate of change over any interval of a linear function?
+\answer{The average rate of change over any interval is equal to the slope of the function.}
+
+Q: What does it mean for a function to have different average rates of change over different intervals?
+\answer{A function with different average rates of change over different intervals has varying rates of increase (or decrease). For example, between 4 and 10 minutes, the cost of a ride increases, on average, by \$0.50 each minute. That increase is less than rides lasting between 10 and 18 minutes, where the cost increases by \$1.50 each minute, on average.}
+\end{te-addendum}
+
+\begin{te-addendum}{5}{HabitsOfMind}
+Use with EXAMPLE 5.
+
+Construct Arguments If a function has a positive average rate of change over an interval, does that mean that the function must be increasing over that interval? Explain.
+\answer{No; a function can change from increasing to decreasing inside the interval but still have a positive average rate of change over the interval if the final function value is greater than the initial function value.}
+\end{te-addendum}
+
+\begin{te-addendum}{5}{ELLAddendum}
+English Language Learners (Use with EXAMPLE 5)
+
+\textbf{SPEAKING BEGINNING} In pairs, have students discuss the similarities and differences between the terms line, segment, and line segment.
+
+Q: What is a line?
+\answer{a straight set of points that extends forever in opposite directions}
+
+Q: What is a segment?
+\answer{a part of a line with two endpoints and all points between them}
+
+Q: Do the terms segment of a line and line segment have the same meaning?
+\answer{The terms mean the same thing.}
+
+\textbf{WRITING DEVELOPING} In their journals, have students write the definition of the prefix inter- (between). Then have them write the answers to the following questions.
+
+Q: What are some examples of intervals of time?
+\answer{hours, days, weeks, months}
+
+Q: What is an interval in music?
+\answer{the distance between two musical notes}
+
+Q: How are intervals used in math?
+\answer{They define a range of values over which a function is studied.}
+
+Q: What other words do you know that start with the prefix inter-?
+\answer{interlude, intercept, interfere, intervene, interim}
+
+\textbf{READING EXPANDING} In pairs, have students take turns reading the example title, the problem statement, and the paragraph where average rate of change is defined. As they read, have them point to the terms average rate of change, ratio, and slope.
+
+Q: What is the ratio described?
+\answer{the change of y-values to the change of x-values}
+
+Q: How is the average rate of change similar to the slope of a line?
+\answer{It is the same ratio between points.}
+
+Q: How is the average rate of change different from the slope of a line?
+\answer{The slope of a line is constant over any interval of the line. The average rate of change for a nonlinear graph may change, based on the interval.}
+\end{te-addendum}
+
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Some Functions With Key Features}
+
+\begin{tabular}{p{0.15\linewidth}p{0.19\linewidth}p{0.19\linewidth}p{0.19\linewidth}p{0.19\linewidth}}
+\toprule
+FUNCTION & Linear (y=x) & Quadratic (y=x^2) & Absolute Value (y=|x|) & Constant (y=1) \
+\midrule
+Domain & (-\infty,\infty) & (-\infty,\infty) & (-\infty,\infty) & (-\infty,\infty) \
+Range & (-\infty,\infty) & [0,\infty) & [0,\infty) & (\{y\mid y=1\}) \
+Increasing & (-\infty,\infty) & (0,\infty) & (0,\infty) & \
+Decreasing & & (-\infty,0) & (-\infty,0) & \
+Positive & (0,\infty) & (\{x\mid x\neq0\}) & (\{x\mid x\neq0\}) & (-\infty,\infty) \
+Negative & (-\infty,0) & never & never & never \
+x-intercept & 0 & 0 & 0 & There is no x-intercept. \
+y-intercept & 0 & 0 & 0 & 1 \
+\bottomrule
+\end{tabular}
+
+\begin{tikzpicture}
+\begin{axis}[width=4cm,height=4cm,title={Linear (y=x)},axis lines=middle,xmin=-3,xmax=3,ymin=-3,ymax=3,xtick={-2,0,2},ytick={-2,0,2},grid=both]
+\addplot[red,thick,domain=-3:3,<->] {x};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+\begin{axis}[width=4cm,height=4cm,title={Quadratic (y=x^2)},axis lines=middle,xmin=-3,xmax=3,ymin=-1,ymax=4,xtick={-2,0,2},ytick={0,2},grid=both,samples=80]
+\addplot[red,thick,domain=-2:2,<->] {x^2};
+\node[below right] at (axis cs:0,0) {\tiny Vertex};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+\begin{axis}[width=4cm,height=4cm,title={Absolute Value (y=|x|)},axis lines=middle,xmin=-3,xmax=3,ymin=-1,ymax=4,xtick={-2,0,2},ytick={0,2},grid=both,samples=81]
+\addplot[red,thick,domain=-3:3,<->] {abs(x)};
+\node[below right] at (axis cs:0,0) {\tiny Vertex};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+\begin{axis}[width=4cm,height=4cm,title={Constant (y=1)},axis lines=middle,xmin=-3,xmax=3,ymin=-1,ymax=4,xtick={-2,0,2},ytick={0,2},grid=both]
+\addplot[red,thick,domain=-3:3,<->] {1};
+\end{axis}
+\end{tikzpicture}
+
+\textbf{Do You UNDERSTAND?}
+
+1. Essential Question How do key features help you understand functions and their graphs?
+\answer{Key features give you an overall description for the graph. The basic shape is determined by the type of function. Domain and range can give you the orientation as well as finding the x and y intercepts. Knowing intervals where functions are increasing, decreasing, positive and negative also help you graph the function.}
+
+2. Vocabulary Define the term zero of a function in your own words.
+\answer{The zeros of a function are the input values that result in a function output value of 0.}
+
+3. Error Analysis Lonzell said that the function shown in the graph is positive on the interval (-1, 5) and negative on the interval (-5, -1). Identify and correct Lonzell's error.
+
+\placeholder{graph}{Red V-shaped graph with arrows on both branches, vertex (-1,-3), x-intercepts (-4,0) and (2,0), and y-intercept (0,-2). Horizontal axis (x) has labeled ticks -4, -2, 0, 2, 4, with visible grid approximately -6 to 6; vertical axis (y) labeled -2, 2, 4, with visible grid approximately -4 to 5. The left branch decreases toward the vertex and the right branch increases.}
+\answer{Lonzell confused positive with increasing and negative with decreasing. The function is positive on the intervals (-\infty,-4) and (2,\infty) and negative on the interval (-4,2).}
+
+\textbf{Do You KNOW HOW?}
+
+Find each key feature.
+
+\placeholder{graph}{Graph for Lesson Check 4--11: connected red line segments from an open circle at (-4,1) to (-2,-1), then to (2,3), then to a solid circle at (4,0). Horizontal axis (x) labeled -4, -2, 0, 2, 4; vertical axis (y) labeled 2; unit grid extends approximately -5 to 5 horizontally and -2 to 4 vertically. x-intercepts (-3,0), (-1,0), (4,0); y-intercept (0,1).}
+
+4. domain
+\answer{(-4,4]}
+
+5. range
+\answer{[-1,3]}
+
+6. x-intercept(s)
+\answer{(x=-3), (x=-1), (x=4)}
+
+7. y-intercept(s)
+\answer{(y=1)}
+
+8. interval(s) where the graph is positive
+\answer{(-4,-3) and (-1,4)}
+
+9. interval(s) where the graph is decreasing
+\answer{(-4,-2) and (2,4]}
+
+10. interval(s) where the graph is increasing
+\answer{(-2,2)}
+
+11. average rate of change on [-1, 4]
+\answer{0}
+\end{concept-summary}
+
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+Q: What do these functions have in common?
+\answer{The domain of each of these functions is all real numbers. Each function has a y-intercept.}
+\end{te-addendum}
+
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercise 4 Students may forget when to use a bracket and when to use a parenthesis in interval notation. Have students make flashcards to review. One side should have interval notation and the other side should represent the same interval on a number line. Students should focus on recognizing that a parenthesis in the interval notation corresponds to an open circle on the number line (or positive/negative infinity), and a bracket represents a closed circle.
+\end{te-addendum}
+
+\begin{te-addendum}{ConceptSummary}{GeneralizeETP}
+\textbf{PRACTICE & PROBLEM SOLVING}
+
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+
+Choose from: Lesson Practice; Adaptive Practice.
+
+You may also take advantage of the bank of exercises for assigning additional practice.
+
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \
+12, 13, 15, 18--33 & 12--33 \
+\end{tabular}
+
+\textbf{Engage Through Student Choice}
+
+Promote student agency by allowing students to choose practice items. You can structure this choice in many ways.
+
+For example:
+
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+
+Understand, Apply: 2 points each.
+
+Practice: 1 point each.
+
+Assessment Practice: 1 point each.
+
+Performance Task: 3 points.
+\end{te-addendum}
+
+\begin{practice}{12}{2}
+Reason The graph of (y=-\frac{1}{2}x+2) is negative over the interval (4,\infty) and positive over the interval (-\infty,4). What happens on the graph when (x=4)? Explain.
+\answer{There is a zero at (x=4) because the function is changing from negative to positive at (x=4).}
+\te{The TE answer says ``negative to positive.'' Read from left to right, the given function changes from positive to negative.}
+\end{practice}
+
+\begin{practice}{13}{3}
+Error Analysis Describe and correct the error a student made in finding the interval(s) over which the function is positive and negative.
+
+\te{This prompt also appears as item 12 on student packet page 8. The textbook practice number is 13.}
+
+\placeholder{graph}{Red downward-opening parabola on an unlabeled square coordinate grid with arrowheads on both descending ends. Counting grid units gives vertex approximately (1,4), x-intercepts (-1,0) and (3,0), and y-intercept approximately (0,3). No numerical axis ticks or explicit axis ranges are printed; visible grid extends roughly six units left and right of the y-axis and seven units above and below the x-axis. Under the graph, the student's work reads ``positive: [-1,3]'' and ``negative: (-\infty,-1) and (3,\infty),'' with a red X.}
+\answer{The zeros, or values along the x-axis, are neither positive nor negative. These values should not be included in the interval over which the function is positive. The function is positive on the interval (-1,3) and negative on the intervals (-\infty,-1) and (3,\infty).}
+\end{practice}
+
+\begin{practice}{14}{3}
+Use Structure Sketch a graph given the following key features.
+
+\begin{tabular}{ll}
+domain: (-4,4) & range: (-4,6] \
+increasing: (-4,1) & decreasing: (1,4) \
+x-intercepts: (-2,0), (3,0) & y-intercept: (0,4) \
+negative: (-4,-2) and (3,4) & positive: (-2,3) \
+\end{tabular}
+\answer{Sample graph: line segments from an open circle at (-4,-4) through (-2,0) and (0,4) to the included maximum (1,6), then through (3,0) to an open circle at (4,-3).}
+\placeholder{graph}{TE answer graph for 14: red connected straight segments from open (-4,-4) to (1,6) to open (4,-3). Unit square grid; horizontal axis (x) labeled -4, -2, 0, 2, 4, vertical axis (y) labeled 2 and 4. Visible horizontal range approximately -5 to 5, vertical range -4 to 6. Intercepts (-2,0), (3,0), and (0,4).}
+\end{practice}
+
+\begin{practice}{15}{3}
+Construct Arguments A student says that all linear functions are either increasing or decreasing. Do you agree? Explain.
+\answer{No; linear functions can also be constant, which means neither increasing nor decreasing.}
+\end{practice}
+
+\begin{practice}{16}{3}
+Higher Order Thinking A relative maximum of a function occurs at the highest point on a graph over a certain interval. A relative minimum of a function occurs at the lowest point on a graph over a certain interval. Explain how to identify a relative maximum and a relative minimum of a function using key features.
+\answer{A relative maximum occurs when a function changes from increasing to decreasing. A relative minimum occurs when a function changes from decreasing to increasing.}
+\end{practice}
+
+\begin{practice}{17}{3}
+Model With Mathematics For a graph of speed in miles per hour as a function of time in hours, what does it mean when the function is increasing? Decreasing?
+\answer{When the graph is increasing, the speed is increasing. When the graph is decreasing, the speed is decreasing.}
+\end{practice}
+
+\begin{practice}{18}{1}
+Use the graph of the function for Exercises 18--22.
+
+\placeholder{graph}{Shared graph for Exercises 18--22: upward-opening red parabola with vertex (-1,-9), x-intercepts (-4,0) and (2,0), and y-intercept (0,-8); arrows continue upward on both ends. Unit square grid with horizontal (x) axis ticks labeled -3, -1, 1, 3 and vertical (y) axis ticks -2, -4, -6, -8. Visible window approximately x=-5 to 5 and y=-10 to 2.}
+
+Identify the domain and range of the function. SEE EXAMPLE 1
+\answer{domain: (-\infty,\infty); range: [-9,\infty)}
+\end{practice}
+
+\begin{practice}{19}{1}
+Use the graph of the function for Exercises 18--22.
+
+Identify the x- and y-intercepts of the function. SEE EXAMPLE 2
+\answer{x-intercepts: -4, 2; y-intercept: -8}
+\end{practice}
+
+\begin{practice}{20}{1}
+Use the graph of the function for Exercises 18--22.
+
+On what intervals is the function positive? On what intervals is it negative? SEE EXAMPLE 3
+\answer{negative: (-4,2); positive: (-\infty,-4) and (2,\infty)}
+\end{practice}
+
+\begin{practice}{21}{1}
+Use the graph of the function for Exercises 18--22.
+
+On what intervals is the function increasing? On what intervals is it decreasing? SEE EXAMPLE 4
+\answer{decreasing: (-\infty,-1); increasing: (-1,\infty)}
+\end{practice}
+
+\begin{practice}{22}{1}
+Use the graph of the function for Exercises 18--22.
+
+What is the average rate of change over the interval (-3,2)? SEE EXAMPLE 5
+\answer{1}
+\end{practice}
+
+\begin{practice}{23}{1}
+Use the graph of the function for Exercises 23--27.
+
+\placeholder{graph}{Shared graph for Exercises 23--27: blue connected line segments from solid (-5,0) to vertex (-1,2) to solid (5,-1). x-intercepts (-5,0) and (3,0); y-intercept (0,1.5). Square grid with horizontal (x) labels -4, -2, 0, 2, 4 and vertical (y) labels -4, -2, 2, 4; visible axes approximately -5 to 5 in both directions.}
+
+Identify the domain and range of the function. SEE EXAMPLE 1
+\answer{domain: [-5,5]; range: [-1,2]}
+\end{practice}
+
+\begin{practice}{24}{1}
+Use the graph of the function for Exercises 23--27.
+
+Identify the x- and y-intercepts of the function. SEE EXAMPLE 2
+\answer{x-intercepts: -5, 3; y-intercept: 1.5}
+\end{practice}
+
+\begin{practice}{25}{1}
+Use the graph of the function for Exercises 23--27.
+
+Determine over what interval the function is positive or negative. SEE EXAMPLE 3
+\answer{positive: (-5,3); negative: (3,5]}
+\end{practice}
+
+\begin{practice}{26}{1}
+Use the graph of the function for Exercises 23--27.
+
+Determine over what interval the function is increasing or decreasing. SEE EXAMPLE 4
+\answer{increasing: [-5,-1); decreasing: (-1,5]}
+\end{practice}
+
+\begin{practice}{27}{1}
+Use the graph of the function for Exercises 23--27.
+
+What is the average rate of change over the interval (-1,5)? SEE EXAMPLE 5
+\answer{(-\frac{1}{2})}
+\end{practice}
+
+\begin{practice}{28}{3}
+Communicate Precisely Martina is filling an empty 100 (\mathrm{ft}^3) container with sand at a rate of 1.25 (\mathrm{ft}^3/\mathrm{min}). Describe and interpret the key features of the graph of the amount of sand in the container.
+\answer{The origin is the x and y intercept and informs you that the container is empty before it starts filling with sand. The domain is [0,80] which are the times when the container is filling with sand. The range is [0,100] which are the amounts of sand measured in cubic feet inside the container while it is filling.}
+\end{practice}
+
+\begin{practice}{29}{3}
+Make Sense and Persevere The graph shows a jumper's height, (y), in feet (x) seconds after stepping onto a trampoline.
+
+\placeholder{graph}{Green periodic height curve over a photo of two children on a trampoline. Horizontal axis Time (Seconds), ticks 0, 0.5, 1, 1.5, 2, 2.5; vertical axis Height (ft), ticks -0.5, 0, 0.5, 1, 1.5. Curve begins at (0,-0.5), reaches repeated peaks near (0.375,1.75), (1.125,1.75), and (1.875,1.75), with troughs near (0.75,-0.5), (1.5,-0.5), and (2.25,-0.5). Approximate x-intercepts from TE: 0.05, 0.7, 0.8, 1.45, 1.55, 2.2. Displayed curve ends near x=2.25; grid extends beyond 2.5. No coordinate pairs are printed on the graph.}
+
+a. What are the x- and y-intercepts? Explain what the x- and y-intercepts represent.
+
+b. Over what intervals is the graph positive? Explain what the positive intervals represent.
+
+c. Over what intervals is the graph negative? Explain what the negative intervals represent.
+
+d. Choose an interval. Find the average rate of change on the interval and interpret its meaning.
+\answer{a. The x-intercepts are approximately 0.05, 0.7, 0.8, 1.45, 1.55, and 2.2. The x-intercepts represent the moment the jumper is at the height of the frame of the trampoline. The y-intercept is -0.5 and represents the sag of the trampoline when the jumper pushes down at the start of the first jump. b. (0.05,0.7), (0.8,1.45), and (1.55,2.2); The positive intervals represent the times when the jumper is above the frame of the trampoline. c. (0,0.05), (0.7,0.8), (1.45,1.55), and (2.2,2.25); The negative intervals represent the times when the jumper is below the frame of the trampoline. d. Sample answer [0.75,1.125]; 6 feet per second; The average rate of change over the interval [0.75,1.125] represents the average speed of the jumper on the upward part of a jump.}
+\end{practice}
+
+\begin{practice}{30}{3}
+Model With Mathematics Yanaye starts playing a game on her cell phone with the battery fully charged, and plays until the phone battery dies. While playing the game, the charge in Yanaye's battery decreases by half a percent per minute.
+
+a. Write a function for the percent charge in the battery while Yanaye is playing the game.
+
+b. What is the domain and range of the function?
+
+c. How long can Yanaye play the game?
+\answer{a. (f(x)=100-0.5x). b. domain: [0,200]; range: [0,100]. c. 3 hours 20 minutes.}
+\end{practice}
+
+\begin{practice}{31}{1}
+Given the graph, select yes or no for each statement.
+
+\placeholder{graph}{Downward-opening red parabola, vertex (-1,4), x-intercepts (-3,0) and (1,0), and y-intercept (0,3); arrows extend downward at both ends. Horizontal axis (x) labeled -4, -2, 0, 2; vertical axis (y) labeled -2, 2, 4. Unit square grid, visible window approximately x=-4 to 3 and y=-3 to 5.}
+
+\begin{tabular}{p{0.72\linewidth}cc}
+& Yes & No \
+a. The domain is (-\infty,4]. & (\square) & (\square) \
+b. The range is (-\infty,4]. & (\square) & (\square) \
+c. The graph is positive on the interval (0,\infty). & (\square) & (\square) \
+d. The graph is decreasing on the interval (-1,\infty). & (\square) & (\square) \
+\end{tabular}
+\answer{a. No; b. Yes; c. No; d. Yes.}
+\end{practice}
+
+\begin{practice}{32}{1}
+SAT/ACT The graph shows the amount of money in an investment account. Which statement is true?
+
+\placeholder{graph}{Investment Account: red V-shaped graph with initial solid point (0,6), vertex (3,1), and increasing right branch extending with an arrow toward (7,8). Horizontal axis Year, labels 0, 2, 4, 6; vertical axis Amount (thousands of dollars), labels 0, 2, 4, 6, 8. Displayed window approximately x=0 to 7 and y=0 to 9. y-intercept 6; no x-intercept.}
+
+A. \$6,000 was initially invested in the account.
+
+B. \$1,000 was initially invested in the account.
+
+C. At Year 3, there was \$0 in the account.
+
+D. At Year 7, there was \$0 in the account.
+\answer{A. \$6,000 was initially invested in the account.}
+\end{practice}
+
+\begin{practice}{33}{3}
+Performance Task The graph shows the amount of water in a cistern over several hours.
+
+\placeholder{graph}{Amount of Water in Cistern: red connected straight segments joining solid labeled-by-grid points (0,12), (4,4), (6,4), and (10,10). Horizontal axis Hours, labeled 0, 2, 4, 6, 8, 10; vertical axis Thousands of Gallons, labeled 0, 2, 4, 6, 8, 10, 12. The graph decreases on [0,4], is horizontal on [4,6], and increases on [6,10]. y-intercept 12 thousand gallons; no x-intercept.}
+
+Part A What is the average rate of change on the interval [0, 4] and on the interval [6, 10]? What is a possible explanation for what each rate of change indicates?
+
+Part B What is a possible explanation for what occurred between 4 and 6 h?
+
+Part C What is the average rate of change on the interval [0, 10]? What does the rate of change mean? Does this rate of change give a good indication as to what is happening with the amount of water in the cistern from 0 h to 10 h? Explain.
+\answer{Part A -2,000 gallons per hour; Over the interval [0,4], the water in the cistern is being used at a rate of 2,000 gallons per hour. 1,500 gallons per hour; Over the interval [6,10], the cistern is being filled with water at a rate of 1,500 gallons per hour. Part B The water in the cistern is not being used, and the cistern is not being filled with water. Therefore, the amount of water in the cistern is constant. Part C -200 gallons per hour; From 0 hours to 10 hours, the water in the cistern is being used at a rate of 200 gallons per hour. No, this rate of change shows the change in the starting amount of water at 0 hours and the ending amount of water at 10 hours, but it does not indicate that the amount of water decreased from 0 hours to 4 hours, remained the same from 4 hours to 6 hours, and increased from 6 hours to 10 hours.}
+\end{practice}
+
+\begin{te-addendum}{ConceptSummary}{LessonQuiz}
+\textbf{1-1 Lesson Quiz: Key Features of Functions}
+
+1. DOK 2. Benito produces and sells bulk coffee beans. The graph shows his profit as a function of the pounds of coffee beans sold. After selling a certain amount of coffee, Benito uses some earnings to buy more materials and then increases the price of the coffee. Which of the following is true?
+
+\placeholder{graph}{Quiz item 1 coffee graph: horizontal axis Pounds of coffee sold, labeled 0, 2, 4, 6, 8, 10; vertical axis Profit (dollars), labeled -20, 0, 20, 40, 60, 80. Black connected segments with solid points at integer inputs: first segment from (0,-20) through (1,-10), (2,0), (3,10), (4,20), (5,30), (6,40), (7,50); drop to (8,25); rise through (9,40), (10,55), (11,70). Visible grid approximately x=-1 to 12 and y=-40 to 90. x-intercept 2; y-intercept -20.}
+
+A. Benito increases the price after selling 50 pounds of coffee beans.
+
+B. The y-intercept represents the cost of one pound of coffee beans.
+
+C. The x-intercept represents the number of pounds of coffee he has to sell before making a profit.
+
+D. The domain of the function is (\{x\mid x\text{ is a real number greater than or equal to }0\}).
+\answer{1. C. The x-intercept represents the number of pounds of coffee he has to sell before making a profit.}
+
+2. DOK 2. The graph of the function (f(x)=-16x^2+10) shown on the right represents the distance, in feet, between a diver and the surface of the water, where (x) is the number of seconds after the diver leaves the diving board. What is the height of the diving board?
+
+\begin{tikzpicture}
+\begin{axis}[width=5cm,height=5cm,axis lines=middle,xlabel={Time (s)},ylabel={Distance (ft)},xmin=0,xmax=1,ymin=0,ymax=10,xtick={0,0.5,1},ytick={0,5,10},grid=both,samples=80]
+\addplot[black,thick,domain=0:0.790569] {-16*x^2+10};
+\end{axis}
+\end{tikzpicture}
+\answer{2. 10 feet.}
+
+3. DOK 1. Which of the following correctly compares the two parts of the function in Item 1, over the intervals [0, 7] and [8, 11]?
+
+A. Benito made an extra \$25 after selling 7 pounds of coffee.
+
+B. Benito spent \$1 after selling 50 pounds of coffee.
+
+C. Benito's profit per pound of coffee decreases from \$50 to \$25.
+
+D. Benito's profit per pound of coffee increases from \$10 to \$15.
+\answer{3. D. Benito's profit per pound of coffee increases from \$10 to \$15.}
+
+Use the graph shown.
+
+\placeholder{graph}{Quiz items 4--5: black downward-opening parabola with vertex (1,4), x-intercepts (-1,0) and (3,0), and y-intercept (0,3). Horizontal axis (x) labeled -2, 0, 2, 4; vertical axis (y) labeled -4, -2, 2, 4. Unit grid visible approximately x=-2 to 5 and y=-6 to 6; arrowheads point down on both branches.}
+
+4. DOK 2. Identify the intervals on which the function is increasing and on which the function is decreasing.
+
+Intervals on which the function increases: (-\infty,\square)
+
+Intervals on which the function decreases: (\square,\infty)
+\answer{4. Increases: (-\infty,1); decreases: (1,\infty).}
+
+5. DOK 1. At what point does the function switch from increasing to decreasing? (\square,\square)
+\answer{5. (1,4).}
+\end{te-addendum}
+
+\begin{te-addendum}{ConceptSummary}{RtISupport}
+\textbf{LESSON QUIZ}
+
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \
+1 & 2 & F25 \
+2 & 2 & F25 \
+3 & 1 & F31 \
+4 & 2 & F25 \
+5 & 1 & F25 \
+\end{tabular}
+
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+
+If students take the Lesson Quiz online, it will automatically be scored and appropriate differentiated practice will be assigned based on student performance.
+
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd Videos \
+On-Level & 4 points & Enrichment \
+Advanced & 5 points & Enrichment \
+\end{tabular}
+\end{te-addendum}
+
+\begin{te-addendum}{ConceptSummary}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+
+I = Intervention; O = On-Level; A = Advanced.
+
+\textbf{Reteach to Build Understanding} I. Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+
+\textbf{Additional Practice} I, O. Provides extra practice for each lesson. MathXL for School.
+
+\textbf{Enrichment} O, A. Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+
+\textbf{Mathematical Literacy and Vocabulary} I, O. Helps students develop and reinforce understanding of key terms and concepts.
+
+\textbf{Digital Differentiated Resources}
+
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+
+\te{The page includes thumbnail previews of the four named differentiated worksheets and an online graphing interface; these are resource previews, separate from the lesson's numbered Practice & Problem Solving items.}
+\end{te-addendum}
+
+\end{document}

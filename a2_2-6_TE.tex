@@ -1,0 +1,916 @@
+\documentclass{article}
+% Source: Topic_02_Teacher_Edition.pdf, PDF pages 71-81 (printed pages 98A-104B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+
+% Source page 71: 98A Lesson Overview
+\begin{lesson-meta}
+lesson: 2-6
+title: The Quadratic Formula
+standards: none printed
+practices: none printed
+objective: I can solve quadratic equations using the Quadratic Formula.
+
+essential question: How can you use the Quadratic Formula to solve quadratic equations or to predict the nature of their solutions?
+
+\textbf{VOCABULARY}
+\item discriminant
+\item Quadratic Formula
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 2-6 \\
+Title & The Quadratic Formula \\
+Standards & none printed \\
+I CAN Objective & I can solve quadratic equations using the Quadratic Formula. \\
+Essential Question & How can you use the Quadratic Formula to solve quadratic equations or to predict the nature of their solutions? \\
+Lesson Vocabulary & discriminant; Quadratic Formula \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use the Quadratic Formula to solve quadratic equations that have complex solutions.
+Essential Understanding. The Quadratic Formula can be used to solve any quadratic equation, including those with complex solutions.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Used factoring and completing the square to solve quadratic equations with real roots.
+\item Used complex numbers to represent numbers with both real and imaginary parts.
+In this lesson, students:
+\item Use completing the square to derive the Quadratic Formula and then use the Quadratic Formula to solve quadratic equations with real and complex roots.
+Later in this topic, students will:
+\item Solve linear-quadratic systems using graphing and substitution.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students recognize when the Quadratic Formula gives complex solutions and write the solutions in the form (a+bi).
+\item Students interpret the discriminant within the context of real-world problems involving projectile motion.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+Glossary is available at SavvasRealize.com.
+\textbf{Vocabulary Builder}
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+radicand & radicando \\
+perfect square trinomial & trinomio cuadrado perfecto \\
+\end{tabular}
+\textbf{NEW VOCABULARY}
+\begin{tabular}{ll}
+discriminant & discriminante \\
+Quadratic Formula & Fórmula cuadrática \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Explain to students that the Quadratic Formula provides the solutions to any quadratic equation. Relate the discriminant to the Quadratic Formula by explaining that it is the value of the radicand (b^2-4ac). Have students complete the following matching activity.
+\begin{tabular}{ll}
+discriminant & (ax^2+bx+c=0) \\
+quadratic equation & (b^2-4ac) \\
+Quadratic Formula & (x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}) \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS, purple and blue abstract spherical design on black.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students derive the Quadratic Formula by completing the square. They understand that this formula can be used to find the solutions to any quadratic equation.
+Students understand that they can use the value of the discriminant (b^2-4ac) to predict the number and type of solutions to a quadratic equation. They use complex numbers to represent solutions for quadratic equations with non-real solutions.
+\textbf{Applying Math Practices}
+Construct Viable Arguments
+Students analyze problems and use stated mathematical assumptions and definitions to construct arguments to justify each step in the derivation of the Quadratic Formula.
+Look For and Make Use of Structure
+Students recognize the strengths and limitations of the Quadratic Formula as a useful tool for solving quadratic equations that cannot be easily factored.
+\end{te-addendum}
+% Source page 72: 98B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore: EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students justify each step in the derivation of the Quadratic Formula.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+Explore \& Reason is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: Why might you want to complete the square on the general quadratic equation?
+\answer{If you memorize the result of completing the square in general, it will be easier to complete the process when a, b, and c are replaced by numbers.}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: How would completing the square for an equation like (2x^2+7x+6=0) help to understand how to solve (ax^2+bx+c=0) for x?
+\answer{Having a concrete model to follow makes it easier to apply the same process in an abstract situation.}
+\textbf{For Early Finishers}
+Q: Name values of a, b, and c that would result in two nonreal solutions.
+\answer{2, 4, 3; (4^2-4(2)(3)=-8<0); When (b^2-4ac) equals a negative number, then you must calculate (\pm) the square root of a negative number, which would yield two nonreal solutions.}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Discuss the relationship between the general quadratic equation and the equation that results when it is solved for x.
+Q: How did you determine what must be true about the value of (b^2-4ac) in order to have one solution or two nonreal solutions?
+\answer{When (b^2-4ac=0), x equals (\frac{-b}{2a}), which yields one solution. When (b^2-4ac<0), the negative radicand implies nonreal solutions and due to the (\pm) before the radical, there will be two of them.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Communicate Precisely}
+Q: Why is there a (\pm) sign in the second-to-last step of the derivation of the Quadratic Formula?
+\answer{Both the negative square root and the positive square root give the same value when squared.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+You can complete the square to solve the general quadratic equation, (ax^2+bx+c=0) and derive the Quadratic Formula.
+A. Construct Arguments Justify each step in this general solution.
+(ax^2+bx+c=0)
+(ax^2+bx=-c)
+(x^2+(\frac{b}{a})x=-\frac{c}{a})
+(x^2+(\frac{b}{a})x+(\frac{b}{2a})^2=-\frac{c}{a}+(\frac{b}{2a})^2)
+((x+\frac{b}{2a})^2=\frac{b^2}{4a^2}-\frac{c}{a})
+((x+\frac{b}{2a})^2=\frac{b^2-4ac}{4a^2})
+(x+\frac{b}{2a}=\pm\sqrt{\frac{b^2-4ac}{4a^2}})
+(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a})
+\answer{Step 1: General form of a quadratic equation ((a\neq0))
+Step 2: Subtract the constant term, c, from each side.
+Step 3: Divide each side by a.
+Step 4: Add ((\frac{b}{2a})^2) to each side to complete the perfect square trinomial.
+Step 5: Factor the perfect square trinomial on the left side of the equation, and simplify the expression on the right.
+Step 6: Find a common denominator and add fractions.
+Step 7: Take the square root of each side of the equation.
+Step 8: Subtract (\frac{b}{2a}) from each side of the equation.}
+B. What must be true of the value of (b^2-4ac) if the equation (ax^2+bx+c=0) has two non-real solutions? If it has just one solution?
+\answer{The equation will have 2 nonreal solutions if the radicand, (b^2-4ac), is negative. It will have one solution if the radicand equals zero.}
+\te{Digital activity: You can complete the square to solve the general quadratic equation, (ax^2+bx+c=0). A. Construct Arguments Fill in the blanks to justify each step in this general solution. Enter your answer fields beside steps 2--8. Go back. The digital board retains ((x+\frac{b}{2a})^2) on the left of the square-root step; the student-edition board correctly shows (x+\frac{b}{2a}).}
+\end{model-discuss}
+% Source page 73: 98 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Explain that the Quadratic Formula is a method for finding the solutions of any quadratic equation. Students will discover why this tool is useful as they work through the examples in the lesson.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Solve Quadratic Equations: Pose Purposeful Questions ETP}
+Q: Why must a be a nonzero number in the quadratic equation?
+\answer{If (a=0), the equation would be linear rather than quadratic.}
+Q: What distinguishes real solutions from complex solutions?
+\answer{Complex solutions contain i, which is equal to (\sqrt{-1}). Real solutions may contain a radical, but do not contain an i.}
+\te{Printed complex solutions here means nonreal complex solutions; real numbers are also complex numbers.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Compare the two equations.
+\answer{The Quadratic Formula can be used to solve both equations. The first problem has two real solutions, and the second problem has two complex solutions.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples}
+Additional Examples are available at SavvasRealize.com.
+\textbf{ADDITIONAL EXAMPLE 1}
+Use the Quadratic Formula to solve (-6x^2-5x=2(3x+2)).
+Expand: (-6x^2-5x=6x+4)
+Rearrange the terms: (6x^2+11x+4=0)
+Apply the Quadratic Formula: (x=\frac{-(11)\pm\sqrt{(11)^2-4(6)(4)}}{2(6)})
+Simplify: (x=-\frac{1}{2},-\frac{4}{3})
+\answer{(x=-\frac{1}{2},-\frac{4}{3})}
+\te{TRY ANOTHER ONE. SOLUTION.}
+Example 1 Have students use the Quadratic Formula to solve equations that are not initially written in standard form with this additional example.
+Q: Can you identify the values of a, b, and c the way the equation is written?
+\answer{No, the equation must first be rewritten in standard form in order to identify the values for a, b, and c.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 3}
+The discriminant of a quadratic equation is (8^2-4(-10)(24)).
+How many and what type of roots with the quadratic equation have?
+Write and graph a quadratic equation using the values of a, b, and c from the discriminant. Use the Quadratic Formula to find the x-intercepts to the nearest tenth.
+Simplify: (8^2-4(-10)(24)=1,024)
+Since the discriminant is positive, the quadratic equation will have two distinct, real roots.
+Write the quadratic equation: (f(x)=-10x^2+8x+24)
+Use the Quadratic Formula to find the x-intercepts
+(x=\frac{-8\pm\sqrt{8^2-4(-10)(24)}}{2(-10)})
+(x=\frac{-2\pm8\sqrt{1}}{-5})
+(x=\frac{-2+8}{-5}) or (x=\frac{-2-8}{-5})
+\placeholder{graph}{Digital example graph of (f(x)=-10x^2+8x+24): orange downward-opening parabola, vertex approximately (0.4,25.6), x-intercepts (-1.2,0) and (2,0), y-intercept (0,24). Black arrowed x- and y-axes; visible x-window about [-5,5], y-window about [-4,27.5], grid spacing 1 horizontally and 2.5 vertically; x labels -4,-2,O,2,4 and y labels 5,10,15,20. Lower graph and last equation denominators are cut off by the digital viewport.}
+\answer{two distinct, real roots}
+\te{Printed ``with the quadratic equation''; likely ``will the quadratic equation.'' The viewport clips the bottom of the last equation and graph. SOLUTION.}
+Example 3 Have students practice interpreting the meaning of the value of the discriminant.
+Q: How does the discriminant help you check that your answers are reasonable?
+\answer{If the discriminant is positive, the solution should be two real numbers and the graph should cross the x-axis in two places; if it is 0, there should be one real solution and the vertex of the graph should be on the x-axis; and if it is negative, the solution should be two complex solutions and the graph should not cross the x-axis.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Solve Quadratic Equations}
+What are the solutions to the equation?
+A. (3x^2-4x-9=0)
+Use the Quadratic Formula to solve.
+(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a})
+(=\frac{-(-4)\pm\sqrt{(-4)^2-4(3)(-9)}}{2(3)})
+(=\frac{4\pm\sqrt{124}}{6})
+(=\frac{4\pm2\sqrt{31}}{6})
+(=\frac{2\pm\sqrt{31}}{3})
+The solutions are (x=\frac{2+\sqrt{31}}{3}) and (x=\frac{2-\sqrt{31}}{3}).
+\te{Callout: Substitute 3 for a, -4 for b, and -9 for c.}
+\te{USE APPROPRIATE TOOLS The Quadratic Formula is a useful tool for finding solutions, particularly when an equation cannot be easily factored.}
+\answer{(x=\frac{2+\sqrt{31}}{3}) and (x=\frac{2-\sqrt{31}}{3})}
+% Source page 74: 99, Understand & Apply
+\textbf{EXAMPLE 1 CONTINUED}
+B. (x^2-9x+27=0)?
+(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a})
+(=\frac{-(-9)\pm\sqrt{(-9)^2-4(1)(27)}}{2(1)})
+(=\frac{9\pm\sqrt{-27}}{2})
+(=\frac{9\pm i\sqrt{27}}{2})
+(=\frac{9\pm3i\sqrt{3}}{2})
+The solutions are (x=\frac{9+3i\sqrt{3}}{2}) and (x=\frac{9-3i\sqrt{3}}{2}).
+\te{Callouts: Substitute 1 for a, -9 for b, and 27 for c. (\sqrt{-1}=i)}
+\te{GENERALIZE Discover relationships between a, b, and c from the Quadratic Formula that would help you write this equation in a factored form.}
+\answer{(x=\frac{9+3i\sqrt{3}}{2}) and (x=\frac{9-3i\sqrt{3}}{2})}
+\end{example}
+\begin{tryit}{1}
+Solve using the Quadratic Formula.
+a. (2x^2+6x+3=0)
+b. (3x^2-2x+7=0)
+\answer{a. (-\frac{3}{2}\pm\frac{\sqrt{3}}{2}); b. (\frac{1}{3}\pm\frac{2i\sqrt{5}}{3})}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Choose a Solution Method. Pose Purposeful Questions ETP}
+Q: How can you determine whether a quadratic equation is easily factorable?
+\answer{Calculate (b^2-4ac). If the solution is not a perfect square, then the quadratic equation may not be easily factored.}
+Q: If you factored by trial and error, what question would you need to start with?
+\answer{What products of factors of -20 and factors of 6 have a sum of -7?}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Choose a Solution Method}
+Solve the equation (6x^2-7x-20=0) using two different methods. Which do you prefer and why?
+\textbf{Method 1}
+Using the Quadratic Formula:
+Let (a=6), (b=-7), and (c=-20).
+(x=\frac{-(-7)\pm\sqrt{(-7)^2-4(6)(-20)}}{2(6)})
+(=\frac{7\pm\sqrt{49+480}}{12})
+(=\frac{7\pm\sqrt{529}}{12})
+(=\frac{7\pm23}{12})
+(x=\frac{7+23}{12}=\frac{30}{12}=\frac{5}{2}), and
+(x=\frac{7-23}{12}=\frac{-16}{12}=-\frac{4}{3})
+\textbf{OR Method 2}
+Factoring by Grouping:
+(6x^2-7x-20=0)
+(6x^2-15x+8x-20=0)
+(3x(2x-5)+4(2x-5)=0)
+((3x+4)(2x-5)=0)
+(x=-\frac{4}{3}) and (x=\frac{5}{2})
+\te{Callout: You may also find the factorization through trial and error.}
+Any solution method gives the same result, but some methods are difficult to use in certain situations. Know that the Quadratic Formula always gives the solutions, regardless of whether the function has real or imaginary roots.
+\te{STUDY TIP When you substitute a negative number into a formula, such as the Quadratic Formula, use parentheses to help keep track of the effect of the sign.}
+\answer{(x=-\frac{4}{3}) and (x=\frac{5}{2})}
+\end{example}
+\begin{tryit}{2}
+Solve the equation (6x^2+x-15=0) using the Quadratic Formula and another method.
+\answer{Answers may vary. Sample: Factor by grouping:
+(6x^2+x-15=0)
+(6x^2+10x-9x-15=0)
+(2x(3x+5)-3(3x+5)=0)
+((2x-3)(3x+5)=0)
+(2x-3=0) or (3x+5=0)
+(x=\frac{3}{2}) or (x=-\frac{5}{3})
+Quadratic Formula:
+(x=\frac{-1\pm\sqrt{1-4(6)(-15)}}{2(6)})
+(x=\frac{-1\pm\sqrt{361}}{12})
+(x=\frac{-1\pm19}{12})
+(x=\frac{-1+19}{12}) or (x=\frac{-1-19}{12})
+(x=\frac{3}{2}) or (x=-\frac{5}{3})}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 1 \& 2
+Construct Arguments Is it possible for a quadratic equation to have one real solution and one complex solution? Explain.
+\answer{No; the value of the discriminant determines whether the solution(s) will be real or complex. If it is positive, there are two real solutions; if it equals 0, there is one real solution; and if it is negative, there are two complex solutions.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 2 Students may make sign mistakes when negative numbers are required in factoring or using the Quadratic Formula. Use this problem to help students identify common mistakes.
+Q: Two methods were used to solve the equation (2x^2-11x+12=0). Explain the errors that were made in each method.
+(2x^2-11x+12=0)
+((2x-3)(x+4)=0)
+(x=\frac{3}{2}) and (-4)
+(x=\frac{-11\pm\sqrt{(-11)^2-4(2)(12)}}{2(2)})
+(x=\frac{-11\pm\sqrt{25}}{4})
+(x=\frac{-11\pm5}{4})
+(x=\frac{-6}{4}) and (x=\frac{-16}{4})
+(x=-\frac{3}{2}) and (-4)
+\answer{When factoring, the wrong sign was used in the second factor. Factors of 24 that have a sum of -11 must both be negative. When using the Quadratic Formula, b was used instead of -b.}
+\end{te-addendum}
+% Source page 75: 100, Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Identify the Number of Real-Number Solutions. Pose Purposeful Questions ETP}
+Q: If each parabola were reflected over the horizontal line that contains its vertex, how many and what type of roots would each parabola have?
+\answer{The first parabola would have two complex roots because it would not cross the x-axis. The second would still have one real root because its vertex would still be on the x-axis. The third would have two real roots because it would cross the x-axis in two places.}
+Q: Do you need to solve the equations to determine the number and types of solutions?
+\answer{No; evaluating the discriminant will reveal the number and types of solutions to a quadratic equation.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Identify the Number of Real-Number Solutions}
+\textbf{CONCEPTUAL UNDERSTANDING}
+How can you determine the number and type of roots for a quadratic equation?
+Graph each equation. Then use the quadratic formula to find the roots.
+\begin{tabular}{lll}
+(y=2x^2-7x+3) & (y=4x^2+12x+9) & (y=x^2+2x+8) \\
+\placeholder{graph}{Orange upward parabola (y=2x^2-7x+3), labeled vertex (1.75,-3.125), x-intercepts (0.5,0),(3,0), y-intercept (0,3); x-window [-5,5], y-window [-6,6], unit grid, labeled ticks -4,-2,2,4 on both axes and O at origin; both axes and curve ends arrowed.} & \placeholder{graph}{Orange upward parabola (y=4x^2+12x+9), labeled vertex (-1.5,0) touching x-axis; x-window [-5,5], y-window [-5,7], unit grid with x labels -4,-2,O,2,4 and y labels -4,-2,2,4,6; both axes and curve ends arrowed.} & \placeholder{graph}{Orange upward parabola (y=x^2+2x+8), labeled vertex (-1,7), no real x-intercepts, y-intercept (0,8); x-window [-5,5], y-window [-2,10], unit grid, x labels -4,-2,O,2,4 and y labels 2,4,6,8; both axes and curve ends arrowed.} \\
+(2x^2-7x+3=0) & (4x^2+12x+9=0) & (x^2+2x+8=0) \\
+(x=\frac{7\pm\sqrt{(-7)^2-4(2)(3)}}{2(2)}) & (x=\frac{-12\pm\sqrt{(12)^2-4(4)(9)}}{2(4)}) & (x=\frac{-2\pm\sqrt{(2)^2-4(1)(8)}}{2(1)}) \\
+(x=\frac{7\pm\sqrt{25}}{4}) & (x=\frac{-12\pm\sqrt{0}}{8}) & (x=\frac{-2\pm\sqrt{-28}}{2}) \\
+(x=\frac{7\pm5}{4}) & (x=\frac{-12}{8}) & (x=-1\pm i\sqrt{7}) \\
+The radicand is 25. Adding and subtracting (\sqrt{25}) gives two different roots. & The radicand is 0. Adding and subtracting (\sqrt{0}) gives one root. & The radicand is -28. Its square root is imaginary, so adding it and subtracting it will give two complex roots. \\
+The graph shows two distinct x-intercepts and the quadratic formula shows two distinct real-number roots. & The graph shows one distinct x-intercept and the quadratic formula shows one real-number root. & The graph shows no x-intercepts and the quadratic formula shows two distinct non-real number roots. \\
+\end{tabular}
+The radicand in the quadratic formula is what determines the nature of the roots.
+The discriminant of a quadratic equation in the form (ax^2+bx+c=0) is the value of the radicand, (b^2-4ac).
+If (b^2-4ac>0), then (ax^2+bx+c=0) has two real roots.
+If (b^2-4ac=0), then (ax^2+bx+c=0) has one real root.
+If (b^2-4ac<0), then (ax^2+bx+c=0) has two non-real roots.
+\answer{Two distinct real-number roots; one real-number root; two distinct non-real number roots.}
+\end{example}
+\begin{tryit}{3}
+Describe the nature of the solutions for each equation.
+a. (16x^2+8x+1=0)
+b. (2x^2-5x+6=0)
+\answer{a. 1 real solution; b. 2 non-real solutions}
+\end{tryit}
+\begin{te-addendum}{3}{CommonError}
+\textbf{Common Error}
+Try It! 3 Students may think that when the discriminant is negative, there are no solutions. Remind them that a negative discriminant means there are no real solutions, but there are two complex solutions.
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners (Use with EXAMPLE 4)}
+WRITING ADVANCED Students may confuse discriminant with discriminate. Explain that to discriminate means to make a distinction in favor of or against a person or thing. Discriminant is exclusively a math term that refers to a specific expression used to determine certain properties of an equation. In their journals, have students fill in the blank to correctly complete each sentence.
+Q: The \underline{\hspace{2cm}} is part of the Quadratic Formula. \answer{discriminant}
+Q: It is against the law for employers to \underline{\hspace{2cm}} against someone with a tattoo. \answer{discriminate}
+Q: Evaluate the \underline{\hspace{2cm}} to determine the number of solutions to a quadratic equation. \answer{discriminant}
+SPEAKING DEVELOPING Although the tennis ball is tossed straight up into the air, the equation (h(t)=-5t^2+5t+2) models the height of the ball in seconds after it is tossed. Toss a ball into the air several times and ask students to closely observe its path. With a partner, have them discuss the following questions.
+Q: What type of function do you normally think of when you hear the word straight? \answer{linear}
+Q: What do you observe as I toss the tennis ball straight into the air that could explain why the equation is quadratic? \answer{Its height increases until it reaches its maximum, and then decreases as it falls.}
+LISTENING EXPANDING Ensure that students can hear the difference between discriminant and discriminate. Distribute notecards and have students write true on one side and false on the other. Read the following sentences and have students show the side of their notecard that tells whether the correct term was used in each sentence.
+Q: The discriminate is an algebraic expression. \answer{false}
+Q: When the discriminant is positive, there are two real solutions. \answer{true}
+Q: It is against the law to discriminate against someone because of religious beliefs. \answer{true}
+\te{Printed ``height of the ball in seconds''; likely height in meters, with time in seconds.}
+\end{te-addendum}
+% Source page 76: 101, Understand & Apply
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Interpret the Discriminant. Pose Purposeful Questions ETP}
+Q: Why does the equation need to be rewritten in standard form?
+\answer{Writing the equation in standard form reduces the possibility of error in identifying the values of a, b, and c.}
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Interpret the Discriminant}
+\textbf{APPLICATION}
+Rachel is about to serve and tosses a tennis ball straight up into the air. The height, h, of the ball, in meters, at time t, in seconds is given by (h(t)=-5t^2+5t+2). Will the ball reach a height of 4 meters?
+\placeholder{illustration}{Tennis player wearing an orange visor holds a red racket and tosses a green ball upward in front of a stadium crowd. Callout at ball reads (h=-5t^2+5t+2).}
+To see if (h=4) for some value of t, set the quadratic expression for h equal to 4, and solve.
+(-5t^2+5t+2=4)
+Rewrite the equation in standard form:
+(-5t^2+5t-2=0)
+(a=-5), (b=5), (c=-2)
+The discriminant is: ((5)^2-4(-5)(-2))
+(=25-40)
+(25-40=-15)
+(-15<0)
+So the equation (h=4) does not have a real solution. Therefore, the ball does not reach 4 m.
+\answer{The ball does not reach 4 m.}
+\end{example}
+\begin{tryit}{4}
+According to the model of Rachel's serve, will the ball reach a height of 3 meters? Explain.
+\answer{Yes, (b^2-4ac=5>0), so there are 2 real solutions. Therefore, there are two times at which the ball will reach a height of 3 meters.}
+\end{tryit}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 3 \& 4
+Reason Create a quadratic equation that has two complex solutions.
+\answer{Answers may vary. Sample: (x^2-4x+5=0)}
+\end{te-addendum}
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Use the Discriminant to Find a Particular Equation. Use and Connect Mathematical Representations ETP}
+Q: Why are there two values of b that will result in one real solution?
+\answer{When the discriminant equals 0, there is only one real solution. But in this case, there are two values that cause the discriminant to equal 0.}
+Q: Describe what the graphs of (y=2x^2+12x+18) and (y=2x^2-12x+18) look like.
+\answer{When (b=12), the parabola has a minimum at (-3,0). When (b=-12), the parabola has a minimum at (3,0). Both graphs have only one real solution.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Use the Discriminant to Find a Particular Equation}
+What value(s) of b will cause (2x^2+bx+18=0) to have one real solution?
+For this equation, (a=2) and (c=18).
+The equation will have a single rational solution when the discriminant is equal to 0.
+(b^2-4ac=0)
+(b^2-4(2)(18)=0)
+(b^2-144=0)
+(b^2=144)
+(b=\pm12)
+There are two possible equations: (2x^2+12x+18=0) and (2x^2-12x+18=0).
+\te{STUDY TIP Note that the equation (2x^2+bx+18=0) will have two real solutions if (b>12) or (b<-12). It will have two non-real solutions if (-12<b<12).}
+\answer{(b=\pm12)}
+\end{example}
+\begin{tryit}{5}
+Determine the value(s) of b that ensure (5x^2+bx+5=0) has two non-real solutions.
+\answer{(-10<b<10)}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 5
+Use Appropriate Tools Why is the Quadratic Formula helpful?
+\answer{The Quadratic Formula allows you to find the solutions of a quadratic equation when it is difficult to factor or apply completing the square.}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 5 Have students practice writing quadratic equations with a given number of solutions.
+Q: Write a quadratic equation that has two nonreal solutions.
+\answer{Answers may vary. Sample: (0=3x^2+6x+5); (b^2-4ac=-24) when (a=3), (b=6), and (c=5).}
+Q: Write a quadratic equation that has one real solution.
+\answer{Answers may vary. Sample: (5=2x^2-8x+13); (b^2-4ac=0) when (a=2), (b=-8), and (c=8).}
+\end{te-addendum}
+% Source page 77: 102, Understand & Apply
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Key Features of the Quadratic Formula}
+Q: What is the difference between the Quadratic Formula and a quadratic equation?
+\answer{The Quadratic Formula provides the solutions of any quadratic equation.}
+Q: What are three ways you can solve a quadratic equation?
+\answer{factoring; Quadratic Formula; completing the square}
+Q: What are two ways to find the number and type of solutions of a quadratic equation?
+\answer{graphing; evaluating the discriminant}
+\te{Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.}
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Key Features of the Quadratic Formula}
+\textbf{QUADRATIC FORMULA}
+(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a})
+This formula is used to solve any quadratic equation: (ax^2+bx+c=0), where (a\neq0).
+\textbf{USING THE DISCRIMINANT}
+Predict the number and type of solutions using the discriminant, (b^2-4ac).
+\placeholder{graph}{Orange upward parabola (y=x^2+x-2) with vertex (-0.5,-2.25), roots -2 and 1, y-intercept -2. Unit grid x-window [-5,5], y-window [-3,5]; axes x,y arrowed, origin O, labeled ticks x=-4,-2,2,4 and y=-2,2,4. Caption (x^2+x-2=0), (b^2-4ac>0), Two real solutions.}
+(x^2+x-2=0)
+(b^2-4ac>0)
+Two real solutions
+\placeholder{graph}{Orange upward parabola (y=x^2-4x+4), vertex (2,0) touching x-axis, y-intercept 4. Unit grid x-window [-4,6], y-window [-3,5]; arrowed x,y axes, O, x ticks -2,2,4 and y ticks -2,2,4. Caption (x^2-4x+4=0), (b^2-4ac=0), One real solution.}
+(x^2-4x+4=0)
+(b^2-4ac=0)
+One real solution
+\placeholder{graph}{Orange upward parabola (y=x^2-3x+3), vertex (1.5,0.75), y-intercept 3, no x-intercepts. Unit grid x-window [-4,6], y-window [-3,5]; arrowed x,y axes, O, x ticks -2,2,4 and y ticks -2,2,4. Caption (x^2-3x+3=0), (b^2-4ac<0), Two non-real solutions.}
+(x^2-3x+3=0)
+(b^2-4ac<0)
+Two non-real solutions
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you use the Quadratic Formula to solve quadratic equations or to predict the nature of their solutions?
+\answer{The Quadratic Formula provides the solutions to a quadratic equation in the form (ax^2+bx+c=0). The discriminant in the formula, (b^2-4ac), lets you predict the number and type of solutions. If (b^2-4ac>0), there will be 2 real solutions. If (b^2-4ac=0), the equation has 1 real solution. If (b^2-4ac<0), then the equation has 2 nonreal solutions.}
+2. Vocabulary Why is the discriminant a useful tool to use when solving quadratic equations?
+\answer{The discriminant, (b^2-4ac), tells the number and type of solutions of a quadratic equation in standard form, (ax^2+bx+c=0).}
+3. Error Analysis Rick claims that the equation (x^2+5x+9=0) has no solution. Jenny claims that there are two solutions. Explain how Rick could be correct, and explain how Jenny could be correct.
+\answer{Rick may be looking at the graph for real solutions. The discriminant for this equation is (5^2-4(1)(9)=25-36=-11). There are no real-number solutions for this equation, but there are 2 nonreal solutions.}
+4. Use Appropriate Tools What methods can you use to solve quadratic equations?
+\answer{Methods include factoring, completing the square, factor by grouping, and the Quadratic Formula. Calculators can help with graphs and estimating square roots.}
+\textbf{Do You KNOW HOW?}
+5. Describe the number and type of solutions of the equation (2x^2+7x+11=0).
+\answer{2 non-real solutions}
+6. Use the Quadratic Formula to solve the equation (x^2+6x-10=0).
+\answer{(-3\pm\sqrt{19})}
+7. At time t seconds, the height, h, of a ball thrown vertically upward is modeled by the equation (h=-5t^2+33t+4). About how long will it take for the ball to hit the ground?
+\answer{about 6.7 seconds}
+8. Use the Quadratic Formula to solve the equation (x^2-8x+16=0). Is this the only way to solve this equation? Explain.
+\answer{(x=4); another way is to recognize and factor the perfect square trinomial.}
+\end{concept-summary}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Common Error}
+Exercise 8 When using the Quadratic Formula, students often forget to start with -b, especially when the value of b is negative to begin with. Remind students to be diligent when evaluating the formula.
+\end{te-addendum}
+% Source page 78: 103, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+\te{Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.}
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+10--12, 16--39 & 10--15, 17, 19, 21--39 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each
+Practice: 1 point each
+Assessment Practice: 1 point each
+Performance Task: 3 points
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 16--21, 38 & 1 \\
+1 & 10, 15 & 2 \\
+1 & 13, 39 & 3 \\
+2 & 22--25 & 1 \\
+2 & 9, 12 & 2 \\
+3 & 11, 26--29, 37 & 1 \\
+3 & 14 & 2 \\
+4 & 30, 31 & 1 \\
+4 & 35, 36 & 3 \\
+5 & 32--34 & 1 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{9}{2}
+\textbf{UNDERSTAND. Look for Relationships} How can you use the Quadratic Formula to factor a quadratic equation?
+\answer{Sample: The Quadratic Formula provides the solutions of the equation. If c and d are solutions of a quadratic equation, then the quadratic expression can be factored as (a(x-c)(x-d)).}
+\end{practice}
+\begin{practice}{10}{2}
+Error Analysis Describe and correct the error a student made in solving an equation.
+(x^2-5x+5=0)
+(a=1), (b=-5), (c=5)
+(x=\frac{-5\pm\sqrt{(-5)^2-4(1)(5)}}{2(1)})
+(=\frac{-5\pm\sqrt{25-20}}{2})
+(=\frac{5}{2}\pm\frac{\sqrt{5}}{2})
+\te{The displayed student work is marked with a red X. Printed final line changes -5 to +5, matching the correct answer despite incorrect preceding steps.}
+\answer{The student used b, not -b, in the numerator of the Quadratic Formula; the correct answer is (\frac{5}{2}\pm\frac{\sqrt{5}}{2}).}
+\end{practice}
+\begin{practice}{11}{1}
+Mathematical Connections What does the Quadratic Formula tell you about the graph of a quadratic function?
+\answer{The Quadratic Formula tells you whether the graph of a quadratic function crosses the x-axis and, if it does, where the x-intercepts are.}
+\end{practice}
+\begin{practice}{12}{2}
+Communicate Precisely Explain your process for choosing a method for solving quadratic equations.
+\answer{I first look to see if the quadratic expression has a special form like a perfect square or difference of squares. I next check to see if it is easily factored. If the coefficient of x is even, I consider completing the square. If I am not able to factor quickly, I will use the Quadratic Formula.}
+\end{practice}
+\begin{practice}{13}{3}
+Higher Order Thinking Seaira wants to use the Quadratic Formula to solve the equation (x^4+5x^2-5=0). Is this possible? If so, describe the steps she should follow.
+\answer{Seaira can use the Quadratic Formula with (a=1), (b=5), and (c=-5) to find values for (x^2) that solve the equation. The square roots of these values will solve the original equation.}
+\end{practice}
+\begin{practice}{14}{2}
+Construct Arguments Explain why the graph of the quadratic function (f(x)=x^2+x+5) crosses the y-axis but does not cross the x-axis.
+\answer{The discriminant is (b^2-4ac=-19), so there are no real solutions. There is no real number x such that (f(x)=0), so the graph will not cross the x-axis. The domain of the function is all real numbers, so must include (x=0); the graph intersects the y-axis at (0,5).}
+\end{practice}
+\begin{practice}{15}{2}
+Construct Arguments Jayden said that the Quadratic Formula does not always work. Sage used it to solve the equation (x^2-3x-2=-4), with (a=1), (b=-3), and (c=-2). The formula gave (x=\frac{3\pm\sqrt{17}}{2}) as the solutions to the equation. When Sage checked, neither one of them satisfied the equation. How could you convince Jayden that the Quadratic Formula does always work?
+\answer{Remind Sage to set the equation equal to 0 before identifying a, b, and c. Setting the equation equal to 0 shows that (c=2), not -2. When using the correct values for a, b, and c, the solutions will check.}
+\end{practice}
+\begin{practice}{16}{1}
+\textbf{PRACTICE} Use the Quadratic Formula to solve each equation. SEE EXAMPLE 1
+(x^2-10x+25=0)
+\answer{(x=5)}
+\end{practice}
+\begin{practice}{17}{1}
+Use the Quadratic Formula to solve each equation. SEE EXAMPLE 1
+(x^2+2x+2=0)
+\answer{(x=-1\pm i)}
+\end{practice}
+\begin{practice}{18}{1}
+Use the Quadratic Formula to solve each equation. SEE EXAMPLE 1
+(5x^2-8x+4=0)
+\answer{(x=\frac{4}{5}\pm\frac{2}{5}i)}
+\end{practice}
+\begin{practice}{19}{1}
+Use the Quadratic Formula to solve each equation. SEE EXAMPLE 1
+(x^2+9x-1=3x-10)
+\answer{(x=-3)}
+\end{practice}
+\begin{practice}{20}{1}
+Use the Quadratic Formula to solve each equation. SEE EXAMPLE 1
+(3x^2-20x-7=0)
+\answer{(x=7) or (x=-\frac{1}{3})}
+\end{practice}
+\begin{practice}{21}{1}
+Use the Quadratic Formula to solve each equation. SEE EXAMPLE 1
+(-x^2+3x-8=0)
+\answer{(x=\frac{3}{2}\pm\frac{\sqrt{23}}{2}i)}
+\end{practice}
+\begin{practice}{22}{1}
+Use any method to solve the equation. SEE EXAMPLE 2
+(4x^2+7x-11=0)
+\answer{(x=1) or (x=-\frac{11}{4})}
+\end{practice}
+\begin{practice}{23}{1}
+Use any method to solve the equation. SEE EXAMPLE 2
+(x^2+4x+4=100).
+\answer{(x=8) or (x=-12)}
+\end{practice}
+\begin{practice}{24}{1}
+Use any method to solve the equation. SEE EXAMPLE 2
+(3x^2+x+7=x^2+10)
+\answer{(x=1) or (x=-\frac{3}{2})}
+\end{practice}
+\begin{practice}{25}{1}
+Use any method to solve the equation. SEE EXAMPLE 2
+(6x^2+2x+3=0)
+\answer{(x=-\frac{1}{6}\pm\frac{\sqrt{17}}{6}i)}
+\end{practice}
+\begin{practice}{26}{1}
+Use the discriminant to identify the number and type of solutions for each equation. SEE EXAMPLE 3
+(25x^2-20x+4=0)
+\answer{1 real solution}
+\end{practice}
+\begin{practice}{27}{1}
+Use the discriminant to identify the number and type of solutions for each equation. SEE EXAMPLE 3
+(x^2+7x+11=0)
+\answer{2 real solutions}
+\end{practice}
+\begin{practice}{28}{1}
+Use the discriminant to identify the number and type of solutions for each equation. SEE EXAMPLE 3
+(3x^2-8x-10=0)
+\answer{2 real solutions}
+\end{practice}
+\begin{practice}{29}{1}
+Use the discriminant to identify the number and type of solutions for each equation. SEE EXAMPLE 3
+(2x^2+9x+14=0)
+\answer{2 non-real solutions}
+\end{practice}
+\begin{practice}{30}{1}
+Deon throws a ball into the air. The height, h, of the ball, in meters, at time t seconds is modeled by the function (h(t)=-5t^2+t+4). SEE EXAMPLE 4
+\placeholder{graph}{Orange downward parabola for (h(t)=-5t^2+t+4) on axes labeled x and y, vertex near (0.1,4.05), zeros -0.8 and 1, y-intercept 4; grid window x=[-3,3], y=[-2,5], unit spacing; labeled x=-2,O,2 and y=2,4; axes arrowed and curve ends arrowed downward.}
+When will the ball hit the ground?
+\answer{After 1 second}
+\end{practice}
+\begin{practice}{31}{1}
+Deon throws a ball into the air. The height, h, of the ball, in meters, at time t seconds is modeled by the function (h(t)=-5t^2+t+4). SEE EXAMPLE 4
+Will the ball reach a height of 5 meters?
+\answer{No; when written in standard form, (-5t^2+t-1=0), the discriminant is negative, so there are no real solutions. The ball will not reach a height of 5 meters.}
+\end{practice}
+\begin{practice}{32}{1}
+Find the value(s) of k that will cause the equation to have the given number and type of solutions. SEE EXAMPLE 5
+(5x^2+kx+5=0), 1 real solution
+\answer{(k=\pm10)}
+\end{practice}
+\begin{practice}{33}{1}
+Find the value(s) of k that will cause the equation to have the given number and type of solutions. SEE EXAMPLE 5
+(3x^2+12x+k=0), 2 real solutions
+\answer{(k<12)}
+\end{practice}
+\begin{practice}{34}{1}
+Find the value(s) of k that will cause the equation to have the given number and type of solutions. SEE EXAMPLE 5
+(kx^2-3x+4=0), 2 real solutions
+\answer{(k<\frac{9}{16})}
+\te{Printed answer does not exclude (k=0), which makes the equation linear.}
+\end{practice}
+% Source page 79: 104, Practice & Problem Solving
+\begin{practice}{35}{3}
+\textbf{APPLY. Model With Mathematics} The table shows the average cost of tuition and fees at a public four-year college for an in-state student in recent years.
+\begin{tabular}{ll}
+Academic Year & Tuition and Fees \\
+2012--13 & \$9,006 \\
+2013--14 & \$9,077 \\
+2014--15 & \$9,161 \\
+2015--16 & \$9,410 \\
+\end{tabular}
+a. Write an equation that can be used to find the average cost, C, of tuition after x years.
+b. Use the model to predict when tuition will exceed \$10,000.
+\answer{a. (C=44.5x^2-3.9x+9013.6) where x represents the number of years after 2012--13. b. 2017--2018}
+\end{practice}
+\begin{practice}{36}{3}
+Make Sense and Persevere In a simulation of a trip to Mars, an astronaut tosses a rock straight up. The height, h, measured in feet after t seconds, is given by the function (h(t)).
+\placeholder{illustration}{Black tablet displays an astronaut tossing an orange rock upward on Mars, a rover to the left, and orange terrain in the background. The rock's callout reads (h(t)=-6t^2+24t+6).}
+a. After how many seconds will the rock be 30 feet above the surface?
+b. After how many seconds will the rock be 10 feet above the surface?
+c. How many seconds will it take for the rock to return to the surface?
+d. The same action on Earth is modeled by the equation (g(t)=-16t^2+24t+6). On Earth, how many seconds would it take for the rock to hit the ground?
+e. What is the ratio of the effect of Mars' gravity compared to Earth's?
+\answer{a. 2 seconds; b. after about 0.2 seconds and again at about 3.8 seconds; c. about 4.2 seconds; d. about 1.72 seconds; e. 3:8}
+\end{practice}
+\begin{practice}{37}{1}
+\textbf{ASSESSMENT PRACTICE}
+Which of the following equations has two real solutions? Select Yes or No.
+\begin{tabular}{lll}
+Equation & Yes & No \\
+a. (x^2-8x-2=0) & \answer{Yes} & \\
+b. (2x^2+10x+17=0) & & \answer{No} \\
+c. (4x^2-28x+49=0) & & \answer{No} \\
+d. (x^2+10x-25=4x+2) & \answer{Yes} & \\
+e. (2x^2+x+10=5-4x-x^2) & & \answer{No} \\
+\end{tabular}
+\end{practice}
+\begin{practice}{38}{1}
+SAT/ACT Which expression can be simplified to find the solution(s) of the equation (2x^2-x-15=0)?
+A. (-1\pm\frac{\sqrt{1-4(2)(-15)}}{2(2)})
+B. (\frac{1\pm\sqrt{1-4(2)(-15)}}{2(2)})
+C. (\frac{1\pm\sqrt{-1-4(2)(-15)}}{2(2)})
+D. (\frac{1\pm\sqrt{1-4(2)(15)}}{2(2)})
+E. (\frac{1\pm\sqrt{1+4(2)(-15)}}{2(2)})
+\answer{B}
+\end{practice}
+\begin{practice}{39}{3}
+Performance Task Four congruent squares are cut from a rectangular piece of cardboard.
+\placeholder{diagram}{Light-blue rectangular cardboard net with four corner squares removed. Dotted fold lines outline the central rectangle. Red labels x to the left and x+12 below the bottom flap; two labels 7 in. at the upper-right corner indicate the square cutout side lengths.}
+Part A. If the resulting flaps are folded up and taped together to make a box, write a function to represent the volume of the box in terms of the width of the original piece of cardboard.
+Part B. What are the dimensions of the original cardboard, to the nearest tenth, if the volume of the box is 434 (\mathrm{in.}^3)
+\answer{Part A (V(w)=7w^2-112w+196), where w represents the width of the original piece of cardboard. Part B 17.9 in. by 29.9 in.}
+\end{practice}
+% Source page 80: 104A, Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & A31, A72 \\
+2 & 2 & A31, A72 \\
+3 & 1 & A32 \\
+4 & 2 & A31, A72 \\
+5 & 2 & A32 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+I Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+O On-Level & 4 points & Enrichment \\
+A Advanced & 5 points & Enrichment \\
+\end{tabular}
+\te{Lesson Quiz is available at SavvasRealize.com. ASSESSMENT RESOURCES. Assessment.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{2-6 Lesson Quiz: The Quadratic Formula}
+Name \underline{\hspace{3cm}}
+1. Solve (x^2+8x-6=0) using the Quadratic Formula.
+A. (x=32+2\sqrt{2}) and (x=32-2\sqrt{2})
+B. (x=-4+\sqrt{22}) and (x=-4-\sqrt{22})
+C. (x=12) and (x=-\frac{1}{2})
+D. (x=4+2\sqrt{22}) and (x=4-2\sqrt{22})
+\answer{B}
+2. Solve (x^2+2x+7=0) using the Quadratic Formula. Select all solutions that apply.
+A. (x=-1+i\sqrt{6})
+B. (x=-1+\sqrt{6})
+C. (x=-1-i\sqrt{6})
+D. (x=-1-\sqrt{6})
+E. (x=1-\sqrt{6})
+\answer{A, C}
+3. Describe the nature of the roots for the equation (49x^2-28x+4=0).
+A. two real roots
+B. one real root
+C. two complex roots
+D. one complex root
+\answer{B}
+4. Richard tosses a ball into the air. The function (h(t)=-5t^2+10t+6) gives the approximate height h, in meters, of the ball t seconds after he tosses it. After how many seconds does the ball reach a height of 12 meters?
+A. 0.5 seconds
+B. 1 second
+C. 1.5 seconds
+D. The ball does not reach a height of 12 meters.
+\answer{D}
+5. What value(s) of b will cause (27x^2+bx+3=0) to have one real solution? Select all that apply.
+A. (b=-18)
+B. (b=-9)
+C. (b=-3)
+D. (b=3)
+E. (b=9)
+F. (b=18)
+\answer{A, F}
+\te{enVision Algebra 2. Assessment Sourcebook. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+% Source page 81: 104B, Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School
+Name \underline{\hspace{3cm}}
+\textbf{2-6 Reteach to Build Understanding. The Quadratic Formula}
+1. You can solve any quadratic equation (ax^2+bx+c=0) by using the Quadratic Formula: (x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}). You can determine the number and type of solutions using the discriminant, (b^2-4ac).
+Fill in the missing information on the chart below.
+\begin{tabular}{lll}
+(x^2-8x+12=0), (a=1), (b=\underline{\hspace{1cm}}), (c=12) & (b^2-4ac>0) & The equation (x^2-8x+12=0) has \underline{\hspace{1cm}} real solution(s). \\
+\answer{(b=-8)} & & \answer{two} \\
+\end{tabular}
+2. Find and correct the error in solving the equation (5x^2-4x+4=0).
+(5x^2-4x+4=0)
+(x=\frac{4\pm\sqrt{(-4)^2-4(5)(4)}}{2\cdot5})
+(x=\frac{4\pm8}{10}) \te{X}
+(x=\frac{4+8}{10}=\frac{6}{5}) or (x=\frac{4-8}{10}=\frac{-2}{5})
+The equation has two real solutions.
+\answer{The discriminant is less than zero, (\sqrt{-64}=8i), so (x=\frac{4\pm8i}{10}); (x=\frac{2+4i}{5}) or (x=\frac{2-4i}{5}). The equation has two non-real solutions.}
+3. The height of a volleyball, h, in feet, is given by (h=-16t^2+11t+5.5), where t is the number of seconds after it has been hit by a player. The top of the net is 7.3 feet above the floor. Does the volleyball travel high enough to clear the top of the net?
+Step 1: Write an equation that models the height of the volleyball being equal to the height of the top of the net.
+\answer{(-16t^2+11t+5.5=7.3)}
+Step 2: Write the equation in standard form.
+\answer{(-16t^2+11t-1.8=0)}
+Step 3: Find the determinant of the quadratic equation.
+\answer{(11^2-4(-16)(-1.8)=5.8)}
+Step 4: Interpret the determinant.
+\answer{Since (5.8>0), the equation has two real solutions, and the ball travels higher than the top of the net.}
+\te{Printed ``determinant'' in Steps 3 and 4; likely ``discriminant.'' enVision Algebra 2. Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson.
+MathXL for School
+Name \underline{\hspace{3cm}}
+\textbf{2-6 Additional Practice. The Quadratic Formula}
+Use the Quadratic Formula to solve the equation. Show your work.
+1. (x^2-15x+7=0)
+\answer{(x=\frac{15\pm\sqrt{(-15)^2-4(1)(7)}}{2\times1})
+(=\frac{15\pm\sqrt{197}}{2})
+(x=\frac{15+\sqrt{197}}{2}) or (x=\frac{15-\sqrt{197}}{2})}
+2. (3x^2+2x+1=0)
+\answer{(x=\frac{-2\pm\sqrt{(-2)^2-4(3)(1)}}{2\times3})
+(=\frac{-2\pm\sqrt{-8}}{2\times3})
+(x=\frac{-1+i\sqrt{2}}{3}) or (x=\frac{-1-i\sqrt{2}}{3})}
+\te{Printed (-2) squared in the radicand; the coefficient b is +2, but its square has the same value.}
+Use two different methods to solve the equations. Show your work.
+3. (x^2+4x-5=0)
+\answer{Method 1: (x=\frac{-4\pm\sqrt{(4)^2-4(1)(-5)}}{2\times1})
+(=\frac{-4\pm\sqrt{36}}{2})
+(x=1) or (x=-5)
+Method 2: (x^2-x+5x-5=0)
+(x(x-1)+5(x-1)=0)
+((x+5)(x-1)=0)
+(x=1) or (x=-5)}
+Use the discriminant to describe the solutions as one real, two real, or two imaginary solutions.
+4. (x^2-15x+12=0)
+\answer{((-15)^2-4(1)(12)=177>0). Two real solutions.}
+5. (3x^2-6x+4=0)
+\answer{((-6)^2-4(3)(4)=-12<0). Two imaginary solutions.}
+6. Find the value(s) of k that will cause the equation (4x^2+kx+4) to have zero real solutions, one real solution, or two real solutions.
+\answer{Zero real solutions: (k^2-4(4)(4)<0), (k^2-64<0), so (-8<k<8).
+One real solution: (k^2-4(4)(4)=0), (k^2-64=0), so (k=\pm8).
+Two real solutions: (k^2-4(4)(4)>0), (k^2-64>0), so (k<-8) or (k>8).}
+\te{Printed equation omits (=0).}
+7. Margaret runs a business. This year's revenue is given by the function (R=-0.5x^2-200x). Can her revenue be at least \$25,000 this year?
+\answer{(25,000=-0.5x^2-200x)
+(-0.5x^2-200x-25,000=0)
+((-200)^2-4(-0.5)(-25,000)=40,000-50,000=-10,000<0)
+No, she cannot generate \$25,000.}
+\te{enVision Algebra 2. Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School
+Name \underline{\hspace{3cm}}
+\textbf{2-6 Enrichment. The Quadratic Formula}
+Tavon wants to design a fountain for his backyard. He wants the height of the fountain's water stream to be at least 2 m.
+1. The height of a fountain's water stream can be modeled by a quadratic function (h(x)=-8(x-0.5)^2+2). In the equation h is the height of the jet of the water and x is the horizontal distance from the jet of water from the nozzle, measured in meters. How far will the water land from the nozzle?
+\answer{(0=-8(x-0.5)^2+2)
+(x=1\ \mathrm{m})
+The water will land 1 m from the nozzle.}
+2. Tavon wants the fountain's water to stream in four directions. He puts four nozzles in the center of the pool so there will be four streams originating from the fountain. How big does the pool have to be?
+\answer{Answers will vary based on safety line. At least (2\times2=4\ \mathrm{m}^2).}
+3. Assume that the quadratic function (h(x)=-12x^2+12x) models the path of a jet of water with a constant pressure.
+a. Find the height of the jet of water, starting at the nozzle.
+\answer{Highest height of the jet of water: 3 m}
+b. Find the horizontal distance of the jet of water from nozzle.
+\answer{Horizontal distance of the jet of water: 1 m}
+c. Will the water jets fit in the pool and still be at least 2 m tall? \answer{Yes.}
+4. If Tavon puts too much water in the pool, it will spill into the water reservoir and make a flood outside of the pool. If Tavon doesn't put in enough water the pump will run dry, have air pockets, or cause excessive noise which can decrease the life of the pump.
+a. Tavon decided to put the pump in the bottom of the pool, which is 1 m deep from the nozzle. How many gallons of water does Tavon need for the entire system? The formula for one waterfall is given by (L\times W\times D\times0.25\times264.17\times2.5), where L represents the length of waterfall, W represents the width of waterfall, and D represents the depth of water.
+\answer{For one waterfall: (2\times1\times1\times0.25\times264.17\times2.5=330) gal; so for four waterfalls: (4\times330=1,320) gal.}
+b. How long, how wide, and how deep does the pool have to be to hold all of the water? (1 (\mathrm{m}^3)=264 gal)
+\answer{Answers may vary. Sample: The volume of the pool has to be greater than 5 (\mathrm{m}^3) or the length and width of the pool has to be greater than 2 m, and the depth of the pool has to be greater than 1.25 m.}
+\te{enVision Algebra 2. Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name \underline{\hspace{3cm}}
+\textbf{2-6 Mathematical Literacy and Vocabulary. The Quadratic Formula}
+Review the explanation and justification in the chart.
+\begin{tabular}{lll}
+Explain & Work & Justify \\
+First, write the equation. & (2x^2-4x=-6) & Original equation. \\
+Second, add 6 to each side to write in standard form. & (2x^2-4x+6=0) & Write the equation in standard form. \\
+Then, use the quadratic formula to find the roots. & (x=\frac{4\pm\sqrt{(-4)^2-4(2)(6)}}{2\times2}) & Use the quadratic formula to find the root. \\
+Next, use (\sqrt{-1}=i) to simplify the radicand. & (x=\frac{4\pm4i\sqrt{2}}{4}) & Use the (\sqrt{-1}=i) to simplify the radicand. \\
+Finally, simplify the answers. & (x=1+i\sqrt{2}) or (x=1-i\sqrt{2}) & Solve for x. The equations have two non-real solutions. \\
+\end{tabular}
+Determine the number and type of roots. Justify and explain your work.
+\begin{tabular}{lll}
+Explain & Work & Justify \\
+First, \answer{write the equation.} & (3x^2+9x=12) & \answer{Original equation.} \\
+Second, \answer{subtract 12 from each side to write in standard form.} & (3x^2+9x-12=0) & \answer{Write the equation in standard form.} \\
+Then, \answer{use the quadratic formula to find the roots.} & (x=\frac{-9\pm\sqrt{9^2-4(3)(-12)}}{2\times3}) & \answer{Use the quadratic formula to find the root.} \\
+Next, \answer{simplify the radicand.} & (x=\frac{-9\pm15}{6}) & \answer{Simplify the radicand.} \\
+Finally, \answer{simplify the answers.} & (x=1) or (x=-4) & \answer{Solve for x. There are two real-number solutions.} \\
+\end{tabular}
+\te{enVision Algebra 2. Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+Solve the system of equations by graphing.
+(y=3x+4)
+(y=-2x+4)
+Use the graphing tool to graph the system.
+\placeholder{graph}{Digital practice tablet with empty coordinate grid, x and y axes spanning -10 to 10 at unit intervals, labeled every 2 units, upper-right grid partly covered by Question Help menu. Small Click to enlarge graph icon at left shows two intersecting lines. No lines plotted on the main grid.}
+Click to enlarge graph
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+\te{Exit. Question Help. Help Me Solve This. View an Example. Video. Textbook. Glossary. Math Tools. Print. 1 part remaining. Clear All. Check Answer. Review progress. Question 5 of 14. Go. Back. Next. Printed digital example is a linear system, not a quadratic-formula exercise.}
+\end{te-addendum}
+
+\end{document}

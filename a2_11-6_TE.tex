@@ -1,0 +1,810 @@
+\documentclass{article}
+% Source: Topic_11_Teacher_Edition.pdf, PDF pages 70-81 (printed pages 569A-576B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 70: 569A Lesson Overview
+\begin{lesson-meta}
+lesson: 11-6
+title: Introduction to Hypothesis Testing
+standards: none printed
+practices: none printed
+objective: I can state two hypotheses for a statistics question and decide if the data support one of the hypotheses.
+
+essential question: How do you formulate and test a hypothesis using statistics?
+
+\textbf{VOCABULARY}
+\item alternative hypothesis
+\item hypothesis
+\item null hypothesis
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 11-6 \\
+Title & Introduction to Hypothesis Testing \\
+Standards & none printed \\
+I CAN Objective & I can state two hypotheses for a statistics question and decide if the data support one of the hypotheses. \\
+Essential Question & How do you formulate and test a hypothesis using statistics? \\
+Lesson Vocabulary & alternative hypothesis; hypothesis; null hypothesis \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Formulate two hypotheses for a statistical question and test using statistics to draw a conclusion.
+\item Use graphs and simulation to determine whether differences between parameters are significant.
+\item Use data from a randomized experiment to evaluate a report.
+Essential Understanding. A hypothesis and a null hypothesis can be written and tested for a statistical question. Statistics are used to compare two data groups and determine which hypothesis the data supports. Graphs and simulations can be used to determine whether differences between parameters are significant.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Wrote statistical questions and used them to collect data.
+\item Calculated statistical measures, such as mean and standard deviation.
+In this lesson, students:
+\item State two hypotheses for a statistical question and use statistical measures, such as mean and standard deviation, to decide whether the data supports one of the hypotheses.
+In later courses, students will:
+\item Accept or reject hypotheses using one- and two-tailed tests and p-values to determine the significance level of results.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that only one hypothesis can be true and that statistical measures can be used to determine which one is.
+\item Students use graphs and simulations to confirm or reject hypotheses about real-world data, such as determining whether the increase in mileage of a car is due to the fuel additive.
+SavvasRealize.com. Program Resources.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{NEW VOCABULARY — English | Spanish}
+\begin{tabular}{ll}
+alternative hypothesis & hipótesis alternativa \\
+hypothesis & hipótesis \\
+null hypothesis & hipótesis nula \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Discuss students' understanding of hypothesis as they have used it previously in their science classes.
+Tell students to imagine there is a puddle in the parking lot outside the school. Ask them to write a hypothesis about what caused the puddle.
+\answer{Sample: The puddle was caused by rain.}
+Then introduce the term null hypothesis and have students come up with a null hypothesis for their hypothesis.
+\answer{Sample: The puddle was not caused by rain.}
+Differentiate the null hypothesis from an alternative hypothesis. Have students write an alternative hypothesis.
+\answer{Sample: The puddle was caused by a fire hydrant leak.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 70 962 737 1115 918
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS, multicolored circular abstract design on a black background.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students first learn write a hypothesis. Then they study data from an experiment before moving on to evaluating hypothesis using null and alternative hypothesis. They also learn to evaluate reports by comparing distributions, means, standard deviations, and proportions and by taking natural variability into consideration.
+\te{Printed learn write; likely learn to write. Printed singular hypothesis after evaluating and alternative.}
+\textbf{Applying Math Practices}
+Use Appropriate Tools Strategically. Students use technology for resampling data, allowing them to quickly evaluate the means of the new groups and evaluate a hypothesis.
+Attend to Precision. Students communicate precisely by using data and statistical measures to support or reject a hypothesis.
+\end{te-addendum}
+% Source page 71: 569B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore — EXPLORE & REASON}
+INSTRUCTIONAL FOCUS Students study the results of flipping two coins 30 times each. Students analyze the results of the experiment and make conclusions about what they expect the results of the experiment to be. This analysis prepares them to formulate and test a hypothesis using statistics.
+STUDENT COMPANION Students can complete the Explore & Reason activity in their Student Companion.
+Model & Discuss is available at SavvasRealize.com. Activity.
+\te{Printed Model & Discuss in the digital banner; the activity is labeled Explore & Reason.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before — WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving.
+Q: What do you notice about the tables?
+\answer{Each table contains 30 items. The items are Hs or Ts, representing head and tails. The table for Coin 2 appears to have more Ts than Hs.}
+\textbf{During — SMALL GROUP}
+Support Productive Struggle in Learning Mathematics.
+Q: How can you determine the number of heads and the number of tails you would expect from flipping a fair coin 30 times?
+\answer{You know that the probability of flipping a head on a fair coin is 0.5. If you flip a coin 30 times, you would expect that half of the flips would be heads and half would be tails.}
+For Early Finishers.
+Q: Flip a coin 30 times. Flip a different coin 30 times. Make tables of the results. How do the results of your experiment compare with the results of the experiment shown?
+\answer{Both of the tables from the experiment are similar to the table shown for Coin 1.}
+\textbf{After — WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse.
+Q: What would increase your certainty that a coin is fair or not fair?
+\answer{Increasing the number of times you flip the coin should give results that are closer to the probability, and helps determine whether the coin is fair or not.}
+Q: What would cause you to believe that a coin is unfair?
+\answer{The number of heads is much larger than the number of tails, or the number of tails is much larger than the number of heads.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with EXPLORE & REASON}
+Reason If you got exactly 15 heads and 15 tails, could you say for certain that the coin was fair? Explain.
+\answer{No, the sample size is small and may not be representative of the population.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE & REASON}
+The tables below each show the results of flipping a coin 30 times.
+Coin 1
+\begin{tabular}{llllll}
+H & H & H & H & H & T \\
+H & T & T & H & H & T \\
+T & T & H & H & T & H \\
+H & H & T & T & T & H \\
+H & T & T & H & T & H \\
+\end{tabular}
+Coin 1
+\begin{tabular}{llllll}
+T & T & H & T & H & H \\
+H & T & T & T & H & T \\
+T & T & H & T & T & T \\
+H & T & T & T & T & T \\
+T & T & T & H & T & T \\
+\end{tabular}
+\te{Printed Coin 1 above both student tables; the second is Coin 2 in the digital preview and answer key.}
+A. How many heads and how many tails resulted from flipping each coin 30 times?
+\answer{SAMPLE STUDENT WORK: Coin 1: 17 heads, 13 tails; Coin 2: 8 heads, 22 tails}
+B. How many heads and how many tails would you expect from flipping a fair coin 30 times? Are either of these coins close to what you would expect?
+\answer{15 heads, 15 tails; The results of flipping Coin 1 are close to the expected results.}
+C. Construct Arguments Can you conclude with certainty that either of the coins is fair? Can you conclude that either of the coins is unfair?
+\answer{No; but the results of flipping Coin 2 are unusual enough to warrant further investigation.}
+% FIG 71 637 187 1153 533
+\placeholder{illustration}{Digital Explore & Reason preview with Go back, two coin tables labeled Coin 1 and Coin 2 and the same H/T values as the transcribed tables. Introductory text: The tables each show the results of flipping a coin 30 times. Three questions A–C match the student activity, each with Enter your answer box.}
+\end{model-discuss}
+% Source page 72: 569 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand & Apply — INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning.
+Students learn how to write hypotheses. They also examine data and use statistics to test their hypotheses.
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{EXAMPLE 1 Write Hypotheses — Build Procedural Fluency From Conceptual Understanding}
+Q: What information do you know about the situation?
+\answer{You know the gas mileage the car has been getting and the gas mileage with the fuel additive.}
+Q: What is a hypothesis?
+\answer{A hypothesis is an explanation of occurrences.}
+Q: Why must one of the hypotheses be true?
+\answer{Either the fuel additive increases the mean gas mileage or the mean gas mileage stays the same. The two hypotheses cover both of the cases.}
+\te{Printed two cases omit a decrease in gas mileage.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Write Hypotheses}
+\te{CONCEPTUAL UNDERSTANDING}
+A car has been getting 34.6 miles per gallon. With a fuel additive, the car gets 35.3 miles per gallon. What hypotheses would you test to determine whether the increase in mileage is due to the additive?
+The first step in determining whether the additive is effective is to formulate hypotheses to test using statistical methods.
+Step 1 Determine what your question means in terms of a parameter.
+The additive works if a car gets a higher mean gas mileage when using the additive than the mean gas mileage when not using the additive.
+Step 2 State this information about the parameter mathematically.
+Let (\mu) represent the mean gas mileage for the car with the additive. You want to know if (\mu>34.6). This is a hypothesis, a possible explanation of one or more observed occurrences.
+Step 3 State what would happen if this hypothesis is not true.
+If the fuel additive does not cause an increase in gas mileage, then (\mu=34.6). This is also a hypothesis.
+\te{COMMUNICATE PRECISELY Exactly one of the hypotheses can be true. Data from an experiment will provide evidence to help you argue for which hypothesis is more likely true.}
+\te{Printed (\mu=34.6) as the alternative to an increase; the complementary condition also includes values below 34.6.}
+% Source page 73: 570 Example 1 continued
+Step 4 Write the null hypothesis and alternative hypothesis.
+The hypothesis that there is no increase with the additive is the null hypothesis and is denoted (H_0). In this case you would write (H_0) as (\mu=34.6).
+The alternative hypothesis is (H_a:\mu>34.6) because it includes only the possibility of difference between the quantities of interest.
+Stating hypotheses is useful because it gives you two possibilities to test using statistics. The hypotheses used to determine whether the fuel additive causes an increase in gas mileage are:
+(H_0:\mu=34.6)
+(H_a:\mu>34.6).
+\answer{(H_0:\mu=34.6); (H_a:\mu>34.6).}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples — Additional Examples are available at SavvasRealize.com.}
+Example 1 Help students write hypotheses by describing test scores using this additional real-world situation.
+Q: How did you determine which hypothesis is the null hypothesis?
+\answer{the hypothesis that indicates no change to the mean}
+\textbf{ADDITIONAL EXAMPLE 1 — ESSENTIAL QUESTION — SOLUTION}
+The average test score at a school is 88.9\%. After the students in the school take a test prep course, the average test score is 91.2\%. What hypotheses would you test to determine if the increase in average test score is due to the test prep course?
+The test prep course has no effect.
+(H_0:\mu=88.9)
+The test prep course affects the students' test scores.
+(H_a:\mu\neq88.9)
+\answer{(H_0:\mu=88.9); (H_a:\mu\neq88.9).}
+\te{Printed two-sided alternative despite the question asking specifically about an increase.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4 — ESSENTIAL QUESTION — SOLUTION}
+Example 4 Help students evaluate a report based on data for a real-world situation.
+Q: How could this study be changed to be more accurate?
+\answer{The number of stores in the study could be increased.}
+A consumer study reports that the average price of a television is \$255. A marketing company takes a sample of the price of the television at 20 different stores. The mean price of these televisions was \$254.75.
+The standard deviation of the data is 25. Does this study provide strong evidence that the company's claim is false?
+(H_0:\mu=255; H_a:\mu\neq255)
+The margin of error is (\frac{2(25)}{\sqrt{20}}\approx11.18).
+The range of reasonable values is between 243.57 and 265.93.
+\answer{There is no evidence that the company's claim is false, because the mean price is in the acceptable range of values.}
+TRY ANOTHER ONE
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{EXAMPLE 1 CONTINUED — Build Procedural Fluency From Conceptual Understanding}
+Q: Why do the names null hypothesis and alternative hypothesis make sense?
+\answer{The null hypothesis includes the possibility of no change. The alternative hypothesis includes the possibility of a difference between, or an alternative to, the quantities of interest.}
+\end{te-addendum}
+\begin{tryit}{1}
+A soccer goalie saved 46.4\% of her opponents' tiebreaker attempts. After her coach adjusted her position in the goal, she saved 47.3\% of the attempts. Write the null hypothesis and alternative hypothesis for a statistical study to evaluate the population parameter (P), the proportion of tiebreaker goals she saves after working with her coach.
+\answer{(H_0:P=0.464); (H_a:P>0.464)}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How can you determine which hypothesis is the null hypothesis and which one is the alternative hypothesis for this statistical study?
+\answer{Find the hypothesis that includes the possibility of no change. This is the null hypothesis. The other hypothesis is the alternative hypothesis.}
+\end{te-addendum}
+\begin{te-addendum}{1}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with EXAMPLE 1}
+Make Sense and Persevere In the Try It! Problem, what are the quantities of interest? How do you know?
+\answer{46.4\%; The benchmark is always the original proportion before receiving the treatment.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{EXAMPLE 2 Examine Data from an Experiment — Pose Purposeful Questions}
+Q: How are the sample means different from the population mean?
+\answer{The sample means are the means of the items in the samples. The population mean is the mean of the entire population. The sample means are compared with the population mean.}
+Q: What do you notice about the information in the diagram?
+\answer{The gas mileage with the additive is greater than the gas mileage without the additive in 3 cases, and the gas mileage with the additive is less than the gas mileage without the additive in 2 cases.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Examine Data from an Experiment}
+\te{APPLICATION}
+A car company performed an experiment to determine whether the fuel additive from Example 1 increases a particular type of car's gas mileage.
+The company recorded the gas mileage of ten identical cars all driven under the same conditions with and without the use of the fuel additive.
+\begin{tabular}{lrrrrr}
+Without Additive & 34.1 & 33.8 & 36.7 & 35.1 & 33.1 \\
+With Additive & 34.8 & 32.9 & 36.1 & 36.0 & 36.8 \\
+\end{tabular}
+% FIG 73 814 559 1026 730
+\placeholder{illustration}{Blue car dashboard display containing the transcribed two-row mileage table. Five green rectangles above each row; time display 8:15 and three buttons below.}
+% Source page 74: 571 Example 2 continued
+How can you use the data to compare the effectiveness of the additive?
+If there were no difference in the gas mileages with or without the additive, the means of the gas mileages would be equal and their difference would be 0. If the additive increases gas mileage, the difference of the means would be greater than 0.
+Let (\mu_1) be the mean of the gas mileage with the additive and let (\mu_2) be the mean of the gas mileage without the additive. The null hypothesis and alternative hypothesis for this situation are,
+(H_0:\mu_1-\mu_2=0)
+(H_A:\mu_1-\mu_2>0)
+The sample means are (\bar{x}_1=34.56) and (\bar{x}_2=35.32).
+The difference of the sample means is
+(35.32-34.56=0.76).
+\te{Printed sample subscripts reverse the stated population groups: the With Additive sample has mean 35.32, and Without Additive has mean 34.56.}
+\te{Callout: Recall that the notation (\bar{x}) represents the sample mean. Note that the hypotheses use the population mean (\mu).}
+The average gas mileage with the additive was 0.76 miles per gallon greater than the average without it. But is this due to the additive, or to random variation?
+It is extremely unlikely that all ten cars will have exactly the same gas mileage, even if the additive has no effect. There will always be some amount of variation. It is possible that by chance alone the cars with the higher gas mileage were grouped together and the cars with the lower gas mileage were grouped together.
+One way to test the hypotheses is to randomly assign the data to two new groups many times and look at the variability of the differences of the means. The table shows one such assignment.
+\begin{tabular}{lrrrrr}
+New Group 1 & 34.8 & 33.8 & 36.7 & 36.1 & 33.1 \\
+New Group 2 & 34.1 & 35.1 & 36.0 & 32.9 & 36.8 \\
+\end{tabular}
+Mean of New Group 1 (=34.9)
+Mean of New Group 2 (=34.98)
+\te{USE APPROPRIATE TOOLS You can use technology or draw slips of paper from a container to sort the data randomly into two new groups.}
+If there is no difference in mileage between the groups with or without the additive, reassigning the data into two groups repeatedly will likely result in differences closely distributed around zero. If there is a difference in mileage, there is likely to be large variability in the distribution of differences.
+In this regrouping of the data, the difference of the sample means is 0.08, which is closer to 0 than the original difference of sample means, 0.76.
+While this provides one basis of comparison for testing the null hypothesis, many more resamples and many more comparisons are needed before you can possibly reject the null hypothesis. You will see this in Example 3.
+\answer{The original sample means differ by 0.76; the regrouped means are 34.9 and 34.98, with difference 0.08. More resamples are needed before possibly rejecting the null hypothesis.}
+\end{example}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions}
+Q: How are the new groups different from the original samples?
+\answer{The original samples are placed in two different groups based on a parameter. The two new groups are randomly selected.}
+Q: Why must you randomize the data many times before rejecting the null hypothesis?
+\answer{If you randomize the data only a few times, you may get results that do not accurately represent the situation. This may cause you to incorrectly reject the null hypothesis.}
+\end{te-addendum}
+\begin{tryit}{2}
+In one particular randomization one group has these data values: 34.1, 36.7, 35.1, 36.1, 36.8.
+a. Identify the data values for the other group.
+\answer{a. 33.8, 33.1, 34.8, 32.9, 36.0}
+b. Calculate the difference of the means for the two groups.
+\answer{b. 1.64 (The means of the two groups are 35.76 and 34.12.)}
+\end{tryit}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Common Error — Try It! 2}
+Some students may incorrectly subtract the corresponding data when calculating the difference of the means for the two groups. Review how to calculate the mean of each group with the students. Have them calculate and circle the mean of each group. Then have students use these values to calculate the difference of the means.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with EXAMPLE 2}
+Look for Relationships If you randomly sort the data into two new groups and get a greater difference between the two new sample means, what conjecture could you make?
+\answer{The original difference between the sample means was likely due to natural variation.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners — Use with EXAMPLES 1 and 2}
+WRITING — BEGINNING Discuss the difference in the words random and randomize.
+Random: describes an object lacking in order, plan or purpose. The disarrangement is solely due to chance.
+Randomize: to order or select without bias.
+Help students write the correct word in each sentence.
+Q: A \underline{\hspace{1cm}} sample is based on chance.
+\answer{random}
+Q: In this experiment, you had to \underline{\hspace{1cm}} the data.
+\answer{randomize}
+READING — DEVELOPING Display the definition of the word additive on the board: “added ingredient, preservative.” Have students read through the example until they find the word additive.
+Q: Does this definition seem to fit the use of the word additive in the sentences?
+\answer{Yes, a new ingredient was added to the fuel used in the cars to see whether it would increase their gas mileage.}
+SPEAKING — EXPANDING In small groups, have students discuss the definition of null hypothesis. Then have them discuss the null hypothesis in the example. Listen for them to translate the mathematical symbols correctly into a sentence.
+Q: What does the null hypothesis state?
+\answer{The mean gas mileage is equal to 34.6 mpg.}
+Q: Does the randomization help to support or refute the null hypothesis?
+\answer{It helps to support it because there was not much difference in the means of the gas mileage in the cars that had the additive and in those that did not.}
+\end{te-addendum}
+% Source page 75: 572 Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{EXAMPLE 3 Use Simulation Results to Evaluate Hypotheses — Pose Purposeful Questions}
+Q: How could you create two new groups of data values at random from a pool of data?
+\answer{Use technology to assign a number to each data value and randomly sort the numbers.}
+Q: Would testing with larger samples cause you to reject the null hypothesis?
+\answer{Possibly, you could perform the experiment with larger samples and find the exact same results or different results. You would have to do more testing to find the actual results.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Use Simulation Results to Test Hypotheses}
+How can continued randomization of the gas mileage data be used to test the hypotheses in Example 2?
+In Example 2, you randomly reassigned the data into two new groups to make a comparison. If you randomize the data many times, you can create a distribution that you can use to evaluate the hypotheses. To do this, follow these steps.
+\item Pool all data values into a single set.
+\item Create two new groups of data values at random from the pool. Each data value must be used exactly once.
+\item Calculate the difference of the means for the new groups.
+\item Repeat. The histogram below shows the result of 200 randomizations.
+When data values were assigned to new groups at random, the differences of the means were greater than 0.76 almost a quarter of the time.
+% FIG 75 800 435 1150 571
+\placeholder{graph}{Pale blue histogram, horizontal Difference of Means ticks -3 through 3 every 1; vertical Frequency 0 to 80 every 20. Six unit-width bins from -3 to 3 labeled with counts 4,26,71,74,22,3. Red vertical line at approximately 0.76 in the 0–1 bin. No arrows.}
+\te{Callout: In this distribution, the original difference of sample means is not that unusual.}
+\te{COMMON ERROR The initial experiment relied on a very small sample. It is difficult to establish definitive results with a small sample. Repeat the experiment with a greater number of trials.}
+The initial difference of means could reasonably be attributed to the variability inherent in random sampling.
+This small experiment does not give convincing evidence that the fuel additive improved the car's gas mileage. More testing, possibly with larger samples, is needed. For now, we cannot reject the null hypothesis, that there is no difference in the means of the gas mileage with and without the additive, and that any variation is due to chance alone.
+\answer{The initial difference could reasonably be due to sampling variability; we cannot reject the null hypothesis.}
+\end{example}
+\begin{tryit}{3}
+The fuel additive was tested again, resulting in the data displayed below. Use a simulation to randomly assign the data into two new groups. Find the difference of the means of the original sample and the new groups you just created. How do they differ? Explain what additional information you need to be able to test the hypotheses from Example 2.
+\begin{tabular}{lrrrrr}
+Without Additive & 34.1 & 32.8 & 33.8 & 30.9 & 36.7 \\
+ & 33.4 & 35.1 & 32.1 & 30.4 & 33.1 \\
+With Additive & 34.8 & 35.1 & 32.9 & 35.3 & 36.1 \\
+ & 36.9 & 36.0 & 37.2 & 36.3 & 36.8 \\
+\end{tabular}
+\answer{The difference in means in the original groups is 2.5. Check students' simulations. Sample: It is clear that 2.5 is greater than the difference in means of most samples generated at random. The null hypothesis can be rejected, and the alternative hypothesis is supported. The difference between the mean gas mileage with and without the additive is unlikely to be due to chance.}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How does your confidence in your conclusion with this experiment compare to your confidence in the results of the original experiment in the example?
+\answer{I am more confident with this experiment than with the original. In general, the larger the sample, the more accurate the results.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students — USE WITH EXAMPLE 3}
+Students may struggle with creating histograms when evaluating hypotheses.
+\item Have students create a histogram for the data in the following tables.
+1.
+\begin{tabular}{rrrrrrrrrr}
+4 & 6 & 8 & 10 & 1 & 3 & 5 & 4 & 4 & 8 \\
+2 & 5 & 4 & 6 & 5 & 5 & 5 & 6 & 9 & 4 \\
+\end{tabular}
+2.
+\begin{tabular}{rrrrrrrrrr}
+15 & 3 & 11 & 10 & 12 & 11 & 12 & 11 & 4 & 8 \\
+18 & 11 & 5 & 10 & 14 & 13 & 7 & 12 & 2 & 12 \\
+\end{tabular}
+Q: What are the frequencies for each value in each table?
+\answer{1. 1,1; 2,1; 3,1; 4,5; 5,5; 6,3; 8,2; 9,1; 10,1. 2. 2,1; 3,1; 4,1; 5,1; 7,1; 8,1; 10,2; 11,4; 12,4; 13,1; 14,1; 15,1; 18,1}
+Q: Create a histogram for each table.
+\answer{Check students' histograms.}
+\end{te-addendum}
+% Source page 76: 573 Understand & Apply
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{EXAMPLE 4 Evaluate a Report Based on Data — Pose Purposeful Questions}
+Q: How do you know which value to use to make the null and alternative hypotheses and which value to use to test the two hypotheses?
+\answer{You use the price the company claims is the average price to make the null and alternative hypotheses. The information from the marketing company's sample is what you use to test the hypotheses.}
+Q: How does the margin of error help you test your hypotheses?
+\answer{The margin of error is used to determine the reasonable range of the mean. If the mean stated in the hypotheses is not in this reasonable range, then you may reject the null hypothesis.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Evaluate a Report Based on Data}
+\te{APPLICATION}
+Best Bet Mac & Cheese reports that the average price for a box of their product is \$1.45. A marketing company selects a national sample of 100 retail prices. The standard deviation of prices nationally is \$0.20 and the mean of the prices of the sample is \$1.65. Does this study provide strong evidence that Best Bet's claim is false?
+% FIG 76 1026 246 1154 411
+\placeholder{illustration}{Blue and yellow Best Bet MAC & CHEESE box with bowl of macaroni. Callout x-bar=1.65 dollars and sigma-bar=0.20 dollars.}
+\te{Printed a bar over sigma in the illustration; the surrounding text uses sigma for the population standard deviation.}
+Step 1 Write the null hypothesis and alternative hypothesis for this study.
+(H_0:\mu=1.45) The mean price of Best Bet Mac & Cheese is \$1.45.
+(H_A:\mu\neq1.45) The mean price of Best Bet Mac & Cheese is NOT \$1.45.
+Step 2 Calculate the margin of error for the new sample.
+Use the formula (m=\frac{2\sigma}{\sqrt{n}}), where (\sigma) is the population standard deviation of \$0.20, and (n) is 100, the number of prices sampled.
+(m=\frac{2(0.20)}{\sqrt{100}}=0.04)
+Step 3 Use the sample statistic and margin of error to predict a range of reasonable values estimating the population parameter.
+Sample mean (\pm) margin of error
+(1.65\pm0.04=1.61\text{ to }1.69)
+Based on sampling, we would predict the value of the mean price to fall between \$1.61 and \$1.69.
+Step 4 Compare the claim to the predicted interval.
+The claim falls outside the range of reasonable values predicted by the statistical study. This evidence suggests you should reject the null hypothesis.
+\te{STUDY TIP You can use margin of error to find the range of reasonable means for a study. If the mean in a claim is within that range, then the data do not disprove the claim.}
+\answer{Yes; reject the null hypothesis because 1.45 is outside the predicted interval 1.61–1.69.}
+\end{example}
+\begin{tryit}{4}
+Best Bet revises their claim and reports an average retail price of \$1.60. A second marketing study sampled 300 prices for Best Bet Mac & Cheese finding a mean price of \$1.64.
+a. What is the margin of error for the new sample?
+\answer{a. 0.02}
+b. Is Best Bet's revised claim supported by this new study? Explain why or why not.
+\answer{b. new interval of reasonable values: \$1.62 to \$1.66; No—Best Bet's claim is still not within the range of predicted values and is not supported by the study.}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Without performing any calculations, would you expect the revised claim to be more or less likely to be true than the original claim?
+\answer{You would expect the revised claim to more likely be true, because the mean value the company is claiming is close to the mean value in the study.}
+\te{Printed to more likely be true; likely to be more likely true.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with EXAMPLES 3 & 4}
+Make Sense and Persevere You want to determine whether the difference between sample means is due to the treatment or due to natural variation. How do you do this through simulation? Through margin of error?
+\answer{Through simulation, you look at many groupings of the data and the resulting differences of the sample means. If the difference obtained in the original grouping is unusual compared to the others, the treatment is likely the cause. If the difference obtained in the original grouping is common compared to the others, natural variation is likely the cause. Through margin of error, you can calculate the range of reasonable means. If your sample mean is outside that range, the difference is likely due to the treatment. If your sample mean is within that range, the difference is likely due to natural variation.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking — USE WITH EXAMPLE 4}
+Have students explore finding intervals of reasonable values and determine whether a claim is likely true.
+A company claims that the mean price of a gallon of gasoline is \$2.57. A study of 300 gas stations finds that the mean price of a gallon of gasoline is \$2.65, with a standard deviation of 0.3.
+Q: Find an interval of reasonable values for the mean price of a gallon of gasoline.
+\answer{between \$2.62 and \$2.68}
+Q: Is the company's claim likely true?
+\answer{No, the company's claim is probably not true, because \$2.57 falls outside the interval of reasonable values.}
+Q: How would the interval of reasonable values change if the study used 500 gas stations, with the mean and standard deviation unchanged?
+\answer{The interval of reasonable values would be smaller than the interval for 300 gas stations.}
+\end{te-addendum}
+% Source page 77: 574 Concept Summary
+\begin{te-addendum}{ConceptSummary}{LearnTogether}
+\textbf{CONCEPT SUMMARY Using Statistical Data to Test Claims}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+Q: Why do you create a null hypothesis and an alternative hypothesis?
+\answer{You create a null hypothesis to state information mathematically about the parameter you are testing. You create an alternative hypothesis to state what happens if the null hypothesis is not true.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? — Common Error}
+Exercise 6 Some students may use the standard deviation instead of the margin of error to determine the interval of reasonable values. Have students write the formula for the margin of error and then calculate the margin of error. Have students add and subtract the margin of error from the mean to determine the interval of reasonable values.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Using Statistical Data to Test Claims}
+SET UP Write two statements.
+Null hypothesis, (H_0): The observed statistic in a treatment group is equal to the corresponding population parameter, and any variation is due to chance.
+Alternative hypothesis, (H_a): The observed statistic in a treatment group differs from the corresponding population parameter, and the variation is not due to chance alone.
+COMPARE Compare two groups by comparing their distributions, means, standard deviations, proportions, or other statistics.
+Analyze the data to determine how likely it is that differences between the two groups occurred by chance.
+DECIDE Decide whether the differences could be attributed to natural variability.
+Likely to have occurred by chance? Then there is no reason to reject the null hypothesis.
+Too different to be coincidence? Strong evidence that the difference is not due to chance points to the truth of the alternative hypothesis.
+\te{Printed hypotheses describe observed statistics; statistical hypotheses formally concern population parameters.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How do you formulate and test a hypothesis using statistics?
+\answer{You write an alternative hypothesis to state what you think or might want to show to be true. A null hypothesis is basically the opposite, that the alternative hypothesis is not true. You decide which hypothesis the data supports by sampling, creating random data simulations, and examining the evidence to see which hypothesis it supports.}
+2. Error Analysis When presented with an experiment about teeth whitening strips claiming to deliver visibly whiter teeth within two weeks, Mercedes said the null hypothesis of the experiment was that the teeth would become significantly whiter after two weeks of using the whitening strips. Explain Mercedes' error.
+\answer{What Mercedes describes was the alternative hypothesis, rather than the null hypothesis.}
+3. Vocabulary Explain the difference between a null hypothesis and an alternative hypothesis.
+\answer{The null hypothesis states there is no difference between the parameter and the benchmark, whereas the alternative hypothesis states that there is a difference between them.}
+4. Communicate Precisely If the null hypothesis of an experiment is (H_0:\mu\leq10.8), then what is the alternative hypothesis (H_a)?
+\answer{(H_a:\mu>10.8)}
+\textbf{Do You KNOW HOW?}
+5. A baseball player's career batting average was .278. After working with a new coach, the player batted .315. Write the null hypothesis and alternative hypothesis for a study of the effect of the change.
+\answer{Null hypothesis: The work with the batting coach did not improve the player's batting average, (H_0:b=0.278). Alternative hypothesis: The work with the batting coach improved the player's batting average, (H_a:b>0.278).}
+6. A lumber company claims that at least 80\% of its plywood is made from recycled materials. It tests 25 pieces of the plywood and finds that the mean of the percentage of recycled material in the sample is 78\%. The standard deviation of the population is 3\%. Give an interval of reasonable values for the percentage of recycled material in the plywood. Is the company's claim likely true?
+\answer{76.8\% to 79.2\%; no}
+7. Terrence grows two varieties of tomatoes, TomTom and Hugemato. Hugemato claims to grow 10\% heavier tomatoes. Find the difference of sample means for the samples shown. Resample randomly and find the new difference of sample means. How do they compare?
+\begin{tabular}{lrrrrr}
+Tom Tom & 10.1 & 10.5 & 9.9 & 10.4 & 11.2 \\
+Hugemato & 13.1 & 11 & 12.1 & 11.4 & 12.9 \\
+\end{tabular}
+\answer{The means for the original samples are 10.42 for TomTom and 12.1 for Hugemato, with a difference of 1.68. Answers may vary; sample: After randomization, one group is \{12.1, 11, 10.4, 12.9, 10.1\} and the other is \{13.1, 11.2, 10.5, 9.9, 11.4\}. The means are 11.3 and 11.22 with a difference of 0.08. This difference is much smaller and suggests that Hugemato tomatoes may actually be larger.}
+\end{concept-summary}
+% Source page 78: 575 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice & Problem Solving}
+Practice & Problem Solving and video tutorials are available at SavvasRealize.com. Practice. Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+8–21 & 8–21 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 19 & 1 \\
+1 & 9, 12, 18 & 2 \\
+2 & 8, 13, 16, 17 & 2 \\
+3 & 11, 14 & 2 \\
+4 & 10, 15, 20 & 2 \\
+4 & 21 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{8}{2}
+\textbf{UNDERSTAND — Communicate Precisely} Becky buys a new hybrid grass seed that is supposed to require only a small amount of water to grow. After Becky plants the new seed, it rains every other day for a two-week period, and the grass grows well. Explain why this particular situation cannot be used to support the claim about the water required to grow the seed.
+\answer{Due to the regular rainfall following the grass planting, Becky would be unable to determine whether or not the claims made by the vendor were true.}
+\end{practice}
+\begin{practice}{9}{2}
+\textbf{Error Analysis} Jiang's average bowling score was 230. Jiang bought a new bowling ball. Since using the new bowling ball Jiang's average score has improved to 250. He wrote the null hypothesis and alternative hypothesis for a statistical study to evaluate the effect of the new ball on his bowling score. Explain his error.
+\te{Student work with red X:}
+(H_0:s\leq250)
+(H_a:s>250)
+\answer{The number 230 should have been used instead of 250 in both the null and alternative hypotheses.}
+\end{practice}
+\begin{practice}{10}{2}
+\textbf{Generalize} Using the formula for margin of error, (m=\frac{2\sigma}{\sqrt{n}}) explain why the larger a sample size is, the smaller the margin of error should be.
+\answer{Since the variable (n) represents the sample size, the larger the value of (n), the larger the denominator will be. Since the denominator represents the divisor, the larger the divisor, the smaller the quotient will be, which in this case is the margin of error.}
+\end{practice}
+\begin{practice}{11}{2}
+\textbf{Reason} Answer the following questions about randomizing samples.
+a. Why is the method of randomizing samples used when working with experimental data sets?
+\answer{a. The process of randomizing samples, or rearranging data values in random order, allows you to estimate the difference between groups that arises due to natural variability. Then you can decide whether the data gives you enough evidence to support your hypothesis.}
+b. If the red vertical line in the histogram shown represents the difference in the means of the original samples, then how does it compare to the differences of the means in the randomly generated samples?
+% FIG 78 558 884 815 1043
+\placeholder{graph}{Pale blue histogram. Horizontal Difference of Means from -2 to 2 every 0.5; vertical Frequency from 0 to 60 every 10. Eight half-unit bins, approximate heights 6,28,49,51,42,23,17,9. Red vertical line near -0.85 in bin -1 to -0.5. No arrows.}
+\answer{b. The red vertical line is in an area of the distribution with many data values. Many samples have a larger difference between means, so the difference in the means of the original sample groups is likely to be due solely to natural variation.}
+\end{practice}
+\begin{practice}{12}{2}
+\textbf{PRACTICE} Tavon had an average time for the 100-yd dash of 18 seconds. Since starting a strength-training program, he has been running the 100-yd dash in an average time of 15 seconds. Write the null hypothesis and alternative hypothesis for a statistical study to evaluate the effect of the training on Tavon's time in the 100-yd dash. SEE EXAMPLE 1
+\answer{Null hypothesis: The strength training did not improve the runner's speed in the 100-yd dash, (H_0:\mu\geq18). Alternative hypothesis: The strength training improved the player's speed in the 100-yd dash, (H_a:\mu<18).}
+\end{practice}
+\begin{practice}{13}{2}
+The coach wants to perform an experiment to determine whether strength training impacts a runner's speed. The coach completed several trials and recorded the speeds of the 100-yd dash (in seconds) of a sample of five track athletes both before and after they tried strength training. SEE EXAMPLE 2
+\begin{tabular}{lrrrrr}
+Without Training & 18 & 20 & 16 & 15 & 14 \\
+With Training & 15 & 19 & 17 & 16 & 14 \\
+\end{tabular}
+a. Find the sample means and their difference.
+\answer{a. sample mean without vitamins: (\bar{x}=16.6); sample mean with vitamins: (\bar{x}=16.2); The difference in the sample means is (16.2-16.6=-0.4).}
+\te{Printed vitamins in the answer; this item concerns training. Printed speeds in seconds; these are times.}
+b. Resample the data so that one group has these data values: 15, 20, 17, 15, 14. Identify the data values for the other group.
+\answer{b. 18, 19, 16, 16, 14}
+c. Calculate the difference of the means for the two resample groups.
+\answer{c. first sample group: (\bar{x}=16.2); second sample group: (\bar{x}=16.6); The difference in the sample means is (16.6-16.2=0.4).}
+\end{practice}
+\begin{practice}{14}{2}
+The coach also performed an experiment to determine whether taking vitamins impacts runner speed, resulting in the data displayed below. Use a simulation to randomize the data without replacement, creating 50 new groupings. Create a histogram of the differences between group means to display your results. Use the data to draw a conclusion about the initial hypothesis. SEE EXAMPLE 3
+\begin{tabular}{lrrrrr}
+Without Vitamins & 14 & 12 & 18 & 19 & 15 \\
+With Vitamins & 15 & 13 & 16 & 18 & 14 \\
+\end{tabular}
+\answer{The difference in means in the original groups is −0.4. Here is a sample histogram: In this case, it is clear that −0.4 is in an area with many other differences generated by the random samples, so you would conclude that you do not have enough evidence to support the alternative hypothesis and that the vitamins do not seem to improve times for the 100-yd dash. Since different samples will lead to different results, accept all reasonable attempts.}
+% FIG 79 121 444 429 717
+\placeholder{graph}{Orange sample histogram. Horizontal Difference of Means from -4 to 4 by 1; vertical Frequency 0 to 20 by 4. Unit bins -4 to -3 through 2 to 3 labeled counts 2,5,12,15,10,4,2. Black vertical line near -0.4. No arrows.}
+\end{practice}
+\begin{practice}{15}{2}
+Grain Goodness reports the average price for a box of their granola is \$3.87. A marketing company selects a national sample of 100 retail prices and states the mean price was \$4.42. The standard deviation was \$0.60. What is the margin of error for this new sample? SEE EXAMPLE 4
+\answer{(m=0.12)}
+\end{practice}
+% Source page 79: 576 Practice & Problem Solving continued
+\begin{practice}{16}{2}
+\textbf{APPLY — Model with Mathematics} A botanist is doing an experimental research study to determine whether a certain fertilizer will increase the yield of soybean plants. The botanist included several soybean farmers in his study. The average yield of soybeans for each farmer (in bushels per acre) of the crops with and without fertilizer are recorded in the table shown.
+\begin{tabular}{lrrrrr}
+Without Fertilizer & 40 & 42 & 45 & 50 & 47 \\
+With Fertilizer & 42 & 40 & 46 & 49 & 48 \\
+\end{tabular}
+Find the means of both samples and their difference. State how the average yield of the soybean crops with the fertilizer compares to the average yield of the soybean crops without fertilizer.
+\answer{sample mean without fertilizer: (\bar{x}=44.8); sample mean with fertilizer (\bar{x}=45.0); The difference in the sample means is (44.8-45=-0.2). The average yield of bushels of soybeans with the fertilizer is slightly greater than the average yield of the bushels of soybeans without the fertilizer. Since the difference is so small, more testing would definitely be required in order to determine whether the fertilizer was responsible for the higher yield.}
+\end{practice}
+\begin{practice}{17}{2}
+\textbf{Communicate Precisely} A randomization of the data from Exercise 16, placed into two new random groups, is shown in the table.
+\begin{tabular}{lrrrrr}
+New Group 1 & 46 & 50 & 40 & 42 & 47 \\
+New Group 2 & 40 & 49 & 42 & 48 & 45 \\
+\end{tabular}
+a. Find the difference between the sample means of the new groups.
+\answer{a. sample mean new group 1: (\bar{x}=45.0); sample mean new group 2: (\bar{x}=44.8); The difference in the sample means is (45-44.8=0.2).}
+b. Does it provide evidence that the difference in the original two sample means is due to the effects of the fertilizer or just due to chance?
+\answer{b. The results of the randomization do not provide evidence that the difference in the original two sample means is due to the effects of the fertilizer. Since the difference between the two random groups is as great as the difference between the two original groups, the original difference could be due to chance.}
+\end{practice}
+\begin{practice}{18}{2}
+\textbf{Make Sense and Persevere} The rules state that a baseball must have a certain circumference. What hypotheses would you test to determine whether the baseballs made on a new machine are within the specifications?
+% FIG 79 635 804 780 976
+\placeholder{illustration}{Baseball with red stitching in a brown glove. Callout: Circumference within 3 mm of 232 mm.}
+\answer{(H_0): The circumferences of the baseballs have a mean (\mu) such that (229\text{ mm}\leq\mu\leq235\text{ mm}); (H_a): circumferences of the baseballs have a mean (\mu) such that (\mu<229\text{ mm}) or (\mu>235\text{ mm}).}
+\end{practice}
+\begin{practice}{19}{1}
+\textbf{ASSESSMENT PRACTICE} What are the different types of hypotheses used in a statistical study? Select all that apply
+experimental; alternative; null; supported; strategic
+\answer{alternative; null}
+\end{practice}
+\begin{practice}{20}{2}
+\textbf{SAT/ACT} A survey found that 72\% of freshmen planned to take at least one spring break trip while in college with a margin of error of (\pm3.5\%). Central U claims that 75\% of freshman plan trips. Is their claim reasonable?
+A. No, their claim is not within the margin of error.
+B. No, their claim is within the margin of error.
+C. Yes, their claim is not within the margin of error.
+D. Yes, their claim is within the margin of error.
+\answer{D}
+\end{practice}
+\begin{practice}{21}{3}
+\textbf{Performance Task} Loaves of a particular brand of wheat bread are labeled as weighing at least 16 oz. A consumer advocate studies the weights of 500 loaves of this bread.
+% FIG 79 833 655 1065 808
+\placeholder{illustration}{Brown sliced loaf of wheat bread with three slices in front. Callout x-bar=15.6 oz; sigma-bar=0.8 oz.}
+\te{Printed a bar over sigma in the callout; the margin calculation treats 0.8 as the population standard deviation.}
+Part A Find (H_0) and (H_a).
+\answer{Part A (H_0:\mu\geq16\text{ ounces}); (H_a:\mu<16\text{ ounces})}
+Part B Calculate the margin of error.
+\answer{Part B (m=0.07)}
+Part C Predict a range of reasonable values estimating the population parameter.
+\answer{Part C (15.53\leq\mu\leq15.67)}
+Part D Test the validity of the claim of the weight printed on the labels.
+\answer{Part D The mean weight of 16 ounces claimed by the bread company is outside the range of reasonable means, so the evidence does not support their claim.}
+\end{practice}
+% Source page 80: 576A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate — LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & DP04 \\
+2 & 1 & DP04 \\
+3 & 2 & DP04 \\
+4 & 2 & DP04 \\
+5 & 2 & DP04 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd Video \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-6 Lesson Quiz — Testing Hypotheses From Experiments}
+\te{Printed quiz subtitle differs from the lesson title.}
+1. Before a high-school football game the footballs were inflated to (p=13) psi (pounds per square inch). After the game the mean inflation was 12.5 psi. Select the null hypothesis (H_0).
+A. (H_0:p=13)
+B. (H_0:p=12.5)
+C. (H_0:p<13)
+D. (H_0:p>12.5)
+\answer{1. A}
+Use the following information for Items 2--4.
+Stacy recorded the number of minutes she used her smartphone each day for one week before using an app that awards points for decreased phone usage, and for one week after using the app. Stacy's alternative hypothesis is (H_a:x<114.6).
+\begin{tabular}{lrrrrrrr}
+Before & 103 & 127 & 87 & 124 & 95 & 136 & 130 \\
+After & 83 & 94 & 120 & 105 & 75 & 98 & 96 \\
+\end{tabular}
+2. What is the difference in the sample means? Round to the nearest tenth of a minute.
+Difference in sample means = \answer{18.7} minutes.
+3. Stacy randomly sorted her data into two new groups. The first is randomly sorted, as shown. Fill in the table with the rest of the data in ascending order.
+\begin{tabular}{lrrrrrrr}
+New Group 1 & 83 & 94 & 96 & 105 & 124 & 130 & 136 \\
+New Group 2 & \answer{75} & \answer{87} & \answer{95} & \answer{98} & \answer{103} & \answer{120} & \answer{127} \\
+\end{tabular}
+What is the new difference between the sample means? Round your answer to the nearest tenth of a minute.
+New difference = \answer{9} minutes.
+4. Stacy used a simulation to randomize her data 200 times. She found that the difference between sample means over 200 trials is approximately normally-distributed, with a mean of (-0.2) and a standard deviation of 9.1. Which of the following conclusions is most appropriate?
+A. Phone use did not change.
+B. Phone use increased and then decreased.
+C. Phone use increased.
+D. Phone use decreased.
+\answer{4. D}
+5. A car manufacturer claims that the gas mileage for an SUV is at least (m) miles per gallon (mi/gal). A national sample finds that the mileage for that model SUV is (37.8\pm2.1) mi/gal. Write an inequality to represent the values of (m) that would lead to a conclusion that the company's claim is false.
+(m) [choices: (>), (<)] [choices: 37.8, 35.7, 39.9, 2.1].
+\answer{5. (m>39.9)}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 81: 576B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess & Differentiate — DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced. SavvasRealize.com. Practice.
+\textbf{Reteach to Build Understanding — I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-6 Reteach to Build Understanding — Introduction to Hypothesis Testing}
+1. Tonya runs the 800-meter race in an average of 2.3 min. After buying new racing shoes, she reduces her average time to 2.2 min. Complete the table to write the null and alternative hypotheses to determine whether her increase in speed is due to her new shoes.
+\begin{tabular}{ll}
+Mean without new shoes & (\mu=2.3) \\
+Null Hypothesis (H_0): the mean if the shoes have no impact, or any variation in race speed is by chance & (H_0:\mu\geq\answer{2.3}) \\
+Alternative Hypothesis (H_a): the shoes improve her speed & (H_a:\mu<\answer{2.3}) \\
+\end{tabular}
+2. A golf club company states that using their driver will increase the distance the ball travels when hitting the ball using the driver. A study between an experimental group and a control group showed that the group using other brands of drivers hit the ball an average distance of 200 ft, and the group using the company's driver hit the ball an average distance of 230 ft.
+Venetta writes the hypotheses used to determine golf-ball distance as follows:
+(H_0:\mu\leq230)
+(H_a:\mu>230)
+What mistake did she make?
+\answer{Venetta used the mean of the experimental group. The correct answer would be (H_0:\mu\leq200) and (H_a:\mu>200).}
+3. Better Computing reports that they sell their 64 GB tablet for an average of \$260, with a standard deviation of \$5.00. A marketing company selects a national sample of 100 retail prices. They found the average Better Computing 64 GB tablet cost \$265. Does this study prove that Better Computing's report is true or false?
+\begin{tabular}{ll}
+Step 1: Write the hypotheses for the study. & (H_0:\mu=260); (H_a:\mu\neq\answer{260}) \\
+Step 2: Calculate the margin of error. & (m=\frac{2(5)}{\sqrt{100}}=\frac{10}{10}=\answer{1}) \\
+Step 3: Add and subtract the margin of error to the sample mean. & (265-1=\answer{264}); (265+1=\answer{266}) \\
+Step 4: Compare the interval with the reported mean. & \answer{\$260} does not fall within the interval of \$264 to \$266. The evidence suggests that the report is \answer{false}. \\
+\end{tabular}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice — I O}
+Provides extra practice for each lesson. MathXL for School.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-6 Additional Practice — Introduction to Hypothesis Testing}
+1. Terrence made 94.8\% of his putts within 5 feet of golf-ball holes with his old putter. With a new putter, he now makes 97.4\% of the same putts. Write a null and alternative hypothesis for a statistical study to evaluate the population parameter (P), the proportion of putts made after using the new putter.
+\answer{(H_0:P\leq0.948), (H_a:P>0.948)}
+2. An apple orchard claims that their bags of apples have a mean weight of 5.14 lbs. and a standard deviation of 0.08 lbs. A quality assurance specialist tests the weight of 100 bags to determine whether the bags are the correct weight. The sample has a normal distribution and a mean weight of 5.11 lbs. The specialist is testing the following hypothesis.
+(H_0:\mu=5.14)
+(H_a:\mu\neq5.14)
+a. What is the margin of error? \answer{0.016}
+b. Does the test support the null hypothesis? What does this mean for the orchard?
+\answer{No; the bags are not within a reasonable range of the population parameter, so the orchard needs to either add apples to the bags or claim the bags weigh less.}
+3. Special Candles Co. claims that their special wax will last longer than traditional candles. A study compares a group of traditional candles with those manufactured by Special Candles Co. Does the graph of the results give evidence to support the claim?
+% FIG 81 628 577 777 654
+\placeholder{graph}{Overlapping histograms. Horizontal Time (h), labels 9.6,10.0,10.4,10.8,11.2,11.6,12.0 at spacing 0.4; bars 0.2 wide, centered from about 9.4 to 12.0. Vertical Number of Candles, 0 through 10 every 2. Traditional Candles light gray concentrated from 9.4 to 11.0, highest bar 8 at 9.8, with heights approximately 4,5,8,7,7,6,6,4.5,4.5. Special Candles darker gray centered from 10.2 to 12.0, heights approximately 1,3,4,3,2,8,7,9,7,3. Overlapping regions show both profiles; legend below graph.}
+\answer{Yes; the mean for the traditional candles is 10.148 and the mean for the special candles is 11.27, so the special candles do last longer.}
+4. Only 50.9\% of 18--24 year olds voted in a recent presidential election. A college samples 100 students within that age range, and finds that 53\% of them voted. They want to know if the percent of students voters aged 18--24 is more than the percent of those 18--24 year olds who voted in the general population. Write hypotheses for this situation and run a simulation to test the hypotheses using a spreadsheet or calculator. What hypothesis does the simulation support?
+\answer{Answers may vary. Sample: (H_0:P\leq0.509), (H_a:P>0.509); my simulation finds 95\% of samples have between 48\% and 54\% voting, so the null hypothesis is supported.}
+\te{Printed 95 percent range 48--54 percent is unusually narrow for a binomial sample of 100 with proportion 0.509; retained as printed.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment — O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-6 Enrichment — Introduction to Hypothesis Testing}
+Each basketball has a sample mean and population standard deviation on it. Each hoop provides a hypothesis. Find the population parameters for each ball. If they fall within the hoop, draw a line to connect them.
+1. Sample Size: 5,000. (H_0:\mu=\uncertain{2,900}{2,800}); (H_a:\mu\neq2,900).
+\begin{tabular}{lll}
+Ball, left to right & Printed mean & Standard deviation \\
+1 & (\mu=\uncertain{2,889}{2,899}) & (\sigma=62.3) \\
+2 & (\mu=2,922) & (\sigma=\uncertain{897}{89.7}) \\
+3 & (\mu=\uncertain{2,899}{2,889}) & (\sigma=61.2) \\
+4 & (\mu=\uncertain{2,811}{2,815}) & (\sigma=146) \\
+\end{tabular}
+% FIG 81 864 447 1108 575
+\placeholder{diagram}{Basketball hoop above four gray basketballs. Sample size and hypotheses on backboard; numerical ball labels transcribed in table. Magenta answer lines connect the second and third balls to opposite sides of the hoop; first and fourth unconnected.}
+\answer{1. Connect the second and third basketballs to the hoop.}
+2. Sample Size: 1,256. (H_0:\mu=\uncertain{5,263.36}{5,263.38}); (H_a:\mu\neq5,263.36).
+\begin{tabular}{lll}
+Ball, left to right & Printed mean & Standard deviation \\
+1 & (\mu=5,263.53) & (\sigma=63.3) \\
+2 & (\mu=5,301.42) & (\sigma=232.3) \\
+3 & (\mu=5,267.89) & (\sigma=38.15) \\
+4 & (\mu=5,313.28) & (\sigma=\uncertain{1,356.8}{1,364.8}) \\
+\end{tabular}
+% FIG 81 864 594 1108 724
+\placeholder{diagram}{Second basketball hoop above four gray basketballs. Sample size and hypotheses on backboard; numerical ball labels transcribed in table. Magenta answer lines connect the first and fourth balls to opposite sides of the hoop; middle two unconnected.}
+\answer{2. Connect the first and fourth basketballs to the hoop.}
+\te{Printed mu labels on basketballs described as sample means; likely x-bar was intended. Several tiny numerical labels remain pixelated at 1800 dpi; uncertain readings are marked.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary — I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name \underline{\hspace{2cm}}. enVision Algebra 2. SavvasRealize.com.
+\textbf{11-6 Mathematical Literacy and Vocabulary — Introduction to Hypothesis Testing}
+Theo is working to develop a fertilizer that will increase the number of blueberries a bush produces. He grew two groups of bushes—one using the new fertilizer and one without using the fertilizer. The mean number of berries on the bushes without fertilizer was 750 berries. The bushes with the fertilizer produced a mean of 900 berries. He has been asked to provide a hypothesis to determine if his fertilizer has improved berry production.
+Theo wrote the steps to provide a hypothesis on note cards, but they got mixed up.
+The alternative hypothesis is (H_a:\mu>750), because it includes only the possibility of difference between the quantities of interest.
+Let (\mu) represent the mean number of berries on the bushes with fertilizer. You want to know if (\mu>750). This is one possible hypothesis.
+The fertilizer works if a bush produces a higher mean number of berries when using the fertilizer than when not using fertilizer.
+If the fertilizer does not cause an increase in berry production, then (\mu\leq750). This is the null hypothesis, or (H_0).
+List the steps in order to solve the problem.
+1. First, \answer{the fertilizer works if a bush produces a higher mean number of berries when using the fertilizer than when not using fertilizer.}
+2. Second, \answer{let (\mu) represent the mean number of berries on the bush with the fertilizer. You want to know if (\mu>750). This is one possible hypothesis.}
+3. Next, \answer{if the fertilizer does not cause an increase in berry production, then (\mu\leq750). This is the null hypothesis, or (H_0).}
+4. Finally, \answer{the alternative hypothesis is (H_a:\mu>750), because it includes only the possibility of difference between the quantities of interest.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 81 584 977 1035 1298
+\placeholder{illustration}{Black tablet showing a digital exercise: Solve the system of equations by graphing, y=3x+4 and y=-2x+4. Use the graphing tool to graph the system. Blank coordinate grid from -10 to 10 on both axes, labeled every 2; menu Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Buttons Clear All, Check Answer, Review progress, Back, Next.}
+\end{te-addendum}
+
+\end{document}

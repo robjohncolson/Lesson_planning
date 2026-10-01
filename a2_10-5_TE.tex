@@ -1,0 +1,831 @@
+\documentclass{article}
+% Source: Topic_10_Teacher_Edition.pdf, PDF pages 62-72 (printed pages 517A-523B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 62: 517A, Lesson Overview
+\begin{lesson-meta}
+lesson: 10-5
+title: Inverse Matrices and Systems of Equations
+standards: none printed
+practices: none printed
+objective: I CAN... use matrices to represent and solve systems of equations.
+
+essential question: How can matrix inverses be used to simplify the process of solving a system of linear equations?
+
+\textbf{VOCABULARY}
+\item coefficient matrix
+\item constant matrix
+\item variable matrix
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 10-5 \\
+Title & Inverse Matrices and Systems of Equations \\
+Standards & none printed \\
+I CAN Objective & I CAN... use matrices to represent and solve systems of equations. \\
+Essential Question & How can matrix inverses be used to simplify the process of solving a system of linear equations? \\
+Lesson Vocabulary & coefficient matrix; constant matrix; variable matrix \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Represent a system of equations, in two or three variables, as a single matrix equation.
+\item Find the inverse of a matrix and use it to solve a system of linear equations.
+Essential Understanding. A system of linear equations can be represented as a matrix equation, consisting of a coefficient matrix multiplied by a variable matrix to equal a constant matrix. Inverse matrices can be used to simplify the process of solving a system of linear equations.
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Multiplied matrices.
+\item Found and used the inverse of a matrix.
+In this lesson, students:
+\item Represent a system of linear equations as a matrix equation.
+\item Multiply each side of a matrix equation by its inverse matrix to solve a system of linear equations.
+Increasing Coherence. This lesson is not necessarily expected to be addressed on high stakes assessments.
+In later courses, students will:
+\item Multiply a vector by a matrix to get a linear transformation of that vector.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand the relationship between a system of linear equations and a matrix equation.
+\item Students use matrix equations to solve real-world problems, such as determining the number of different pairs of a sneakers a company produces.
+\te{Printed "pairs of a sneakers"; likely "pairs of sneakers."}
+\textbf{Mathematics Overview}
+Students solve matrix equations. Then they write and solve systems of linear equations as matrix equations containing a coefficient matrix, a variable matrix, and a constant matrix.
+\textbf{Applying Math Practices}
+Attend to Precision
+Students are able to precisely define the relationship between a system of linear equations and its corresponding matrix equation.
+Look For and Make Use of Structure
+Students apply mathematical rules they know about the definition of the reciprocal of a real number to understand the relationship between a matrix and its inverse matrix.
+SavvasRealize.com. Program Resources.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{REVIEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+inverse matrix & matriz inversa \\
+matrix & matriz \\
+\end{tabular}
+\textbf{NEW VOCABULARY}
+\begin{tabular}{ll}
+English & Spanish \\
+coefficient matrix & matriz de coeficientes \\
+constant matrix & matriz de constantes \\
+variable matrix & matriz variable \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Write a system of linear equations on the board and have students write the corresponding matrix, which is the coefficient matrix. Ask them to think about how the other components of the equations could be represented by matrices. Explain constant and variable matrices. Use the following sentences if needed.
+1. A matrix containing the constant values to the right of the equal sign in a system of linear equations is a blank.
+\answer{constant matrix}
+2. A matrix representing all the variables in a system of linear equations is called a blank.
+\answer{variable matrix}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 62 962 768 1116 950
+\placeholder{illustration}{Student Companion cover, black background with purple and blue circular artwork, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+% Source page 63: 517B, Explore and Reason
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore. EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students use their knowledge of matrices and inverse matrices to find the number of solutions to a system of equations. This prepares students to use inverse matrices to simplify solving a system of linear equations.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+Explore \& Reason is available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS: Implement Tasks that Promote Reasoning and Problem Solving ETP}
+Q: What does it mean for a system of equations to have infinite solutions?
+\answer{For every x-value, there is a corresponding y-value that makes the system of equations valid.}
+\te{Printed description assumes every x-value is allowed; likely infinitely many solution tuples is the intended general definition.}
+Q: What do you notice about the matrix equation?
+\answer{The first matrix represents the coefficients of a system of equations. The second matrix represents the variables. The final matrix represents the constants.}
+\textbf{During SMALL GROUP: Support Productive Struggle in Learning Mathematics ETP}
+Q: What do the first rows of the first and third matrix represent together?
+\answer{Together with the variables in the 2nd matrix you can recreate the first equation of the system of equations.}
+Q: How is knowing this helpful in identifying the system of equations?
+\answer{By repeating the process for each row, you can find the entire system of equations.}
+For Early Finishers
+Q: Using your knowledge of algebra and of matrices, what steps could give you the following?
+(\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}16\\18\\21\end{bmatrix})
+\answer{Multiply on the right both sides of the equation by the inverse of the first matrix. That will give you the identity matrix times the second matrix equals (\begin{bmatrix}16\\18\\21\end{bmatrix}). This means (x=16), (y=18), and (z=21).}
+\te{Printed "on the right"; likely multiplication on the left by the coefficient matrix inverse.}
+\textbf{After WHOLE CLASS: Facilitate Meaningful Mathematical Discourse ETP}
+Q: What pattern do you see between coefficient matrix and the number of solutions for the system of equations?
+\answer{Sample: If one row of the coefficient matrix is all zeroes, then the system has infinite solutions. If one row of the coefficient matrix cannot coexist with another, then there are no solutions. Otherwise, the system has exactly one solution.}
+\te{Printed solution-count rules omit consistency and row-dependence conditions; likely an analysis of the augmented system is intended.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Investigate this matrix equation by answering the questions.
+(\begin{bmatrix}1&1&1\\2&-1&-1\\1&2&-2\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}55\\-7\\10\end{bmatrix})
+A. Multiply the matrices on the left-hand side of the equation. Then write a new matrix equation substituting in your answer.
+\answer{A. (\begin{bmatrix}x&y&z\\2x&-y&-z\\x&2y&-2z\end{bmatrix}); (\begin{bmatrix}x&y&z\\2x&-y&-z\\x&2y&-2z\end{bmatrix}=\begin{bmatrix}55\\-7\\10\end{bmatrix})}
+\te{Printed sample student work uses three columns instead of summing each row; likely a column matrix with entries (x+y+z), (2x-y-z), and (x+2y-2z) is intended.}
+B. What system of linear equations does your new matrix equation represent?
+\answer{B. (\begin{cases}x+y+z=55\\2x-y-z=-7\\x+2y-2z=10\end{cases})}
+C. What is the product of these matrices: (\begin{bmatrix}1&1&1\\2&-1&-1\\1&2&-2\end{bmatrix}\cdot\begin{bmatrix}16\\18\\21\end{bmatrix})?
+\answer{C. (\begin{bmatrix}55\\-7\\10\end{bmatrix})}
+D. Look for Relationships How does the product in part C relate to the system of linear equations?
+\answer{D. The product is the same as the (3\times1) answer matrix that is given.}
+\te{SAMPLE STUDENT WORK. Digital preview repeats A--C with blank answer fields and Go back.}
+% FIG 63 637 185 1153 533
+\placeholder{illustration}{Digital Explore and Reason screen with prompts A, B, C and blank Enter your answer fields; original matrix equation at upper right and numerical matrix product in C. Go back control.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXPLORE \& REASON.
+Reason In part (c), the product is the right side of the equation. What do you think that means?
+\answer{That the new matrix is the solution to the given equation.}
+\end{te-addendum}
+% Source page 64: 517, Understand and Apply
+\begin{te-addendum}{1}{LearnTogether}
+\textbf{STEP 2 Understand \& Apply. INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Students are introduced to solving matrix equations using inverse matrices. Students learn how to write systems of linear equations as matrix equations and solve them using inverse matrices.
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{EXAMPLE 1 Solve a Matrix Equation. Build Procedural Fluency From Conceptual Understanding ETP}
+Q: What method could you use to find the inverse of a (2\times2) matrix?
+\answer{For (A=\begin{bmatrix}a&b\\c&d\end{bmatrix}), calculate the determinant. If it does not equal 0, then an inverse exists in the form (A^{-1}=\frac{1}{\det A}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}).}
+Q: Does the order of the matrices matter when multiplying the matrices in this problem?
+\answer{Yes; in this case, the number of columns in the first matrix has to equal the number of rows in the second matrix, so you cannot change the order of multiplication.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Solve a Matrix Equation}
+How can you solve the matrix equation (\begin{bmatrix}2&-1\\0&2\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}2\\8\end{bmatrix})?
+Let (A) represent the matrix (\begin{bmatrix}2&-1\\0&2\end{bmatrix}), and let (A^{-1}) represent the inverse of the matrix. The goal is to isolate the variable matrix to determine the values of (x) and (y).
+(A\cdot X=B) (\begin{bmatrix}2&-1\\0&2\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}2\\8\end{bmatrix})
+(A^{-1}\cdot A\cdot X=A^{-1}\cdot B)
+(\begin{bmatrix}\frac12&\frac14\\0&\frac12\end{bmatrix}\cdot\begin{bmatrix}2&-1\\0&2\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}\frac12&\frac14\\0&\frac12\end{bmatrix}\cdot\begin{bmatrix}2\\8\end{bmatrix})
+(I\cdot X=A^{-1}\cdot B) (\begin{bmatrix}1&0\\0&1\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}3\\4\end{bmatrix})
+(X=A^{-1}\cdot B) (\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}3\\4\end{bmatrix})
+So the solution to the equation is (\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}3\\4\end{bmatrix}).
+You can check your work by multiplying (A) by the solution matrix to be sure the product is (B).
+\te{LOOK FOR RELATIONSHIPS. Multiplying by an inverse matrix is like multiplying by the reciprocal of a real number.}
+\answer{(\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}3\\4\end{bmatrix})}
+\end{example}
+\begin{tryit}{1}
+Solve the matrix equation (A\cdot X=B) for (A=\begin{bmatrix}-1&4&-2\\2&-1&0\\-1&-4&2\end{bmatrix}) and (B=\begin{bmatrix}6\\8\\2\end{bmatrix}).
+\answer{(X=\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}-4\\-16\\-33\end{bmatrix})}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 2}
+Additional Examples are available at SavvasRealize.com.
+Write the matrix equation for the following system of linear equations.
+(\begin{cases}7x+8y+3z=8\\5x+12y+10z=3\\5x+20y+11z=10\end{cases})
+Write the product of the coefficient matrix and the variable matrix for the left hand sides of the equations, and the constant matrix for the right hand sides of the equations.
+\answer{(\begin{bmatrix}7&8&3\\5&12&10\\5&20&11\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}8\\3\\10\end{bmatrix})}
+\te{Digital controls: Go back; ESSENTIAL QUESTION; TRY ANOTHER ONE; SOLUTION.}
+Example 2 Have students explore writing systems of linear equations where the coefficient of at least one of the variables in one of the equations is 0 as matrix equations.
+\te{Printed direction describes a zero coefficient; likely a different additional example is intended, as this preview has no zero coefficients.}
+Q: Does the order of variables in the system matter? Explain.
+\answer{Yes; The variables can be in any order as long as they are in the same order in all of the equations in the system.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+\uncertain{A group sells tickets to a play. Tickets cost \$5 for students and \$10 for senior citizens. A total of 548 people have already seen the play and the box office made \$3,270. How many students and senior citizens saw the play? Solve using a matrix equation.}{Severely degraded preview; opening setting, audience categories, totals, and prices are partially unreadable.}
+\uncertain{Let (x) represent the number of students, and let (y) represent the number of senior citizens. Write a system of equations to represent the situation.}{Severely degraded explanatory text.}
+\uncertain{(\begin{cases}5x+10y=3270\\x+y=548\end{cases})}{Coefficients and totals are degraded.}
+\uncertain{Rewrite the system as a matrix equation. (\begin{bmatrix}5&10\\1&1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}3270\\548\end{bmatrix})}{Matrix entries and explanatory text are degraded.}
+\uncertain{Multiply each side of the equation by the inverse matrix. (\begin{bmatrix}-\frac15&2\\\frac15&-1\end{bmatrix}\begin{bmatrix}5&10\\1&1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-\frac15&2\\\frac15&-1\end{bmatrix}\begin{bmatrix}3270\\548\end{bmatrix})}{Most inverse entries and total values are unreadable.}
+\answer{\uncertain{(\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}442\\106\end{bmatrix}); 442 students and 106 senior citizens attended the play.}{The student result may be 422; the second result and audience category cannot be securely read.}}
+% FIG 64 670 876 1154 1202
+\placeholder{illustration}{Badly degraded digital Additional Example 4 preview, admission-price word problem and system/matrix solution; Go back, Essential Question, and Solution controls. Preserve the source for the explicitly uncertain transcription.}
+Example 4 Have students further explore how to use a matrix equation to solve a system of linear equations in different real-world situations.
+Q: How could you begin solving the matrix equation?
+\answer{Sample: Find the inverse of the coefficient matrix using technology.}
+\end{te-addendum}
+% Source page 65: 518, Examples 2 and 3
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 2 Write a System of Linear Equations as a Matrix Equation. Use and Connect Mathematical Representations ETP}
+PART A
+Q: How do you arrange the variables in the variable matrix in relation to the variables in the system of equations?
+\answer{The variables go in order from top to bottom in the same order they are from left to right in the original system of equations.}
+PART B
+Q: Why is there a zero in the coefficient matrix?
+\answer{There is no (y)-term in the middle equation, so the coefficient of (y) is equal to 0.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Write a System of Linear Equations as a Matrix Equation}
+How can each system of linear equations be represented as a matrix equation?
+A. (\begin{cases}3x-5y=7\\2x+y=4\end{cases})
+(\begin{bmatrix}3&-5\\2&1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}7\\4\end{bmatrix})
+\te{The coefficient of (y) in the second equation is 1.}
+The \textbf{coefficient matrix} has rows which contain the coefficients from a single equation. Each column contains all coefficients of a single variable.
+The \textbf{variable matrix} has one column that represents all the variables in the system of equations.
+\te{The variable matrix is sometimes called the "variable vector."}
+Use the constant values from the right-hand side of the equations to make the \textbf{constant matrix}.
+\te{USE STRUCTURE. Multiply the matrices on the left-hand side and use properties of equivalent matrices to recover the original system of linear equations from the matrix equation.}
+\answer{A. (\begin{bmatrix}3&-5\\2&1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}7\\4\end{bmatrix})}
+B. (\begin{cases}x-2y+4z=9\\2x-8z=-24\\3x+y-2z=-1\end{cases})
+\answer{B. (\begin{bmatrix}1&-2&4\\2&0&-8\\3&1&-2\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}9\\-24\\-1\end{bmatrix})}
+\end{example}
+\begin{tryit}{2}
+Express each system of linear equations as a matrix equation.
+a. (10x-9y=1), (7x+6y=13)
+b. (4x+2y-z=14), (2x-3y+5z=20), (3x-6y=8)
+\answer{a. (\begin{bmatrix}10&-9\\7&6\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}1\\13\end{bmatrix}); b. (\begin{bmatrix}4&2&-1\\2&-3&5\\3&-6&0\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}14\\20\\8\end{bmatrix})}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: What do you notice about the third equation in part b and what does it mean in relation to the coefficient matrix?
+\answer{There is no (z) term in the third equation, so the element in the third row, third column of the coefficient matrix is 0.}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 1 \& 2.
+Make Sense and Persevere Justice found (A^{-1}) in the Try It for Example 1, and then multiplied (BA^{-1}) to solve the system. Why did Justice's calculator show an error message?
+\answer{The product (BA^{-1}) does not exist because (B) has only one column while (A^{-1}) has three rows.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 3}
+Some students may have trouble multiplying matrices to solve a matrix equation.
+\item Have students complete these problems to review matrix multiplication.
+1. (\begin{bmatrix}1&2\\4&5\end{bmatrix}\cdot\begin{bmatrix}3\\6\end{bmatrix})
+\answer{(\begin{bmatrix}(1)(3)+(2)(6)\\(4)(3)+(5)(6)\end{bmatrix}=\begin{bmatrix}15\\42\end{bmatrix})}
+2. (\begin{bmatrix}2&0\\-1&5\\3&-2\end{bmatrix}\begin{bmatrix}4&1\\7&-3\end{bmatrix})
+\answer{(\begin{bmatrix}(2)(4)+(0)(7)&(2)(1)+(0)(-3)\\(-1)(4)+(5)(7)&(-1)(1)+(5)(-3)\\(3)(4)+(-2)(7)&(3)(1)+(-2)(-3)\end{bmatrix}=\begin{bmatrix}8&2\\31&-16\\-2&9\end{bmatrix})}
+Q: How can you determine the dimensions of the product matrix?
+\answer{The dimensions of the product matrix are the number of rows of the first matrix by the number of columns of the second matrix.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Solve a System of Linear Equations Using an Inverse Matrix}
+\te{CONCEPTUAL UNDERSTANDING}
+How can you use matrix inverses to solve a system of linear equations?
+A. If possible, use inverse matrices to solve (\begin{cases}-3x+z=-9\\-x+2z=2\\2x-y=10\end{cases}).
+Step 1 Express the system of linear equations as a matrix equation.
+(\begin{cases}-3x+z=-9\\-x+2z=2\\2x-y=10\end{cases}\longrightarrow\begin{bmatrix}-3&0&1\\-1&0&2\\2&-1&0\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}-9\\2\\10\end{bmatrix})
+Step 2 Find the inverse of the (3\times3) coefficient matrix using technology.
+The inverse of (\begin{bmatrix}-3&0&1\\-1&0&2\\2&-1&0\end{bmatrix}) is (\begin{bmatrix}-0.4&0.2&0\\-0.8&0.4&-1\\-0.2&0.6&0\end{bmatrix}).
+\te{STUDY TIP. Notice the original matrix has to be invertible for this method to work. CONTINUED ON THE NEXT PAGE.}
+% Source page 66: 519, Example 3 continued
+\textbf{EXAMPLE 3 CONTINUED}
+Step 3 Multiply each side of the matrix equation by the inverse matrix.
+(\begin{bmatrix}-0.4&0.2&0\\-0.8&0.4&-1\\-0.2&0.6&0\end{bmatrix}\cdot\begin{bmatrix}-3&0&1\\-1&0&2\\2&-1&0\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}-0.4&0.2&0\\-0.8&0.4&-1\\-0.2&0.6&0\end{bmatrix}\cdot\begin{bmatrix}-9\\2\\10\end{bmatrix})
+(\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}-0.4(-9)+0.2(2)+0(10)\\-0.8(-9)+0.4(2)-1(10)\\-0.2(-9)+0.6(2)+0(10)\end{bmatrix})
+\te{Multiplying a matrix by its inverse results in an identity matrix. Multiplying the inverse matrix by the constant matrix gives the solution matrix.}
+\te{USE STRUCTURE. Because matrix multiplication is only possible when the number of columns in the left matrix equal the number of rows in the right matrix, be sure to insert the inverse matrix properly.}
+Step 4 Multiply by the identity matrix, and write your solution.
+(\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}4\\-2\\3\end{bmatrix}\longrightarrow\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}4\\-2\\3\end{bmatrix})
+The solution to the original system of equations is (4,-2,3).
+\answer{A. (4,-2,3)}
+B. If possible, use inverse matrices to solve (\begin{cases}\frac14x-\frac58y=\frac12\\-2x+5y=-4\end{cases}).
+Express the system of linear equations as a matrix equation, (CX=D).
+(\begin{bmatrix}\frac14&-\frac58\\-2&5\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}\frac12\\-4\end{bmatrix})
+To use the method from part (a), you need an invertible matrix. Find the determinant of the coefficient matrix (C) to see if it has an inverse.
+(\det(C)=\frac14(5)-(-\frac58)(-2)=\frac54-\frac54=0)
+The determinant of the coefficient matrix is 0, so this matrix does not have an inverse. You will have to solve this system using a different method, such as substitution or elimination.
+(8(\frac14x-\frac58y=\frac12)\longrightarrow2x-5y=4)
+(\begin{array}{r}2x-5y=4\\+(-2x+5y=-4)\\\hline0+0=0\end{array})
+\te{Using elimination results in the equation (0=0), so the system of linear equations has infinitely many solutions.}
+\answer{B. Infinitely many solutions.}
+\end{example}
+\begin{tryit}{3}
+Solve the following systems of linear equations using inverse matrices, if possible.
+a. (\begin{cases}3x+4y=8\\\frac32x+2y=5\end{cases})
+b. (\begin{cases}x+2y-4z=4\\x-2y+2z=-10\\-x-y+z=4\end{cases})
+\answer{a. no solution; b. (x=-6), (y=-1), (z=-3)}
+\end{tryit}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{EXAMPLE 3 Solve a System of Linear Equations Using an Inverse Matrix. Build Procedural Fluency From Conceptual Understanding ETP}
+PART A
+Q: What do you notice about the system of equations and its corresponding coefficient matrix?
+\answer{The system of equations has three variables, so the coefficient matrix is a (3\times3) matrix. Each equation only has two of the three variables, so zeroes are used as placeholders in the matrix representing the coefficients of the missing variables.}
+Q: What happens when you multiply a matrix by its inverse?
+\answer{Multiplying a matrix by its inverse results in 1s along the main diagonal of the product and 0 for everything other element, which is the identity matrix.}
+\te{Printed "everything other element"; likely "every other element."}
+PART B
+Q: What does the value of the determinant of a matrix tell you?
+\answer{As long as the value of the determinant is not equal to 0, an inverse matrix exists. If the value of the determinant is 0, then an inverse matrix does not exist.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLES 3 \& 4.
+Generalize If the coefficient matrix for a system of equations does not have an inverse, does that mean that the system of equations has no solution? Explain.
+\answer{No; the system of equations could have infinitely many solutions or no solutions.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 3)
+SPEAKING BEGINNING Discuss with students the pronunciation of the word matrix. The a sound in this word is a long a sound. Other words that start with ma use the short a sound, such as the word math. Have the students pronounce words aloud using the correct sound.
+Q: Words with short a sound: manager, match, matter, material, mattress
+\answer{Listen for correct pronunciation.}
+Q: Words with long a sound: matron, matriarch, manger, mate, mail
+\answer{Listen for correct pronunciation.}
+Q: Think of two other words that start with ma, one with the short a sound and one with the long a sound.
+\answer{Sample: master, make}
+LISTENING DEVELOPING Tell students how in some words that end in -ible, the ending is a suffix added to the end of a word to make an adjective that means capable of being. In this example, an invertible matrix is a matrix that can be inverted. Other times, -ible is just part of the word itself. The word invincible means cannot be defeated or conquered. Have students listen to words that end in -ible and determine whether the -ible is used as a suffix or just part of the word.
+Q: accessible \answer{suffix}
+Q: compatible \answer{part of word}
+Q: impossible \answer{part of word}
+Q: flexible \answer{suffix}
+WRITING EXPANDING In the example, many matrices are used to solve the system of linear equations. Have students answer these questions in their math journals to help them understand the different types of matrices.
+Q: What makes up a matrix equation?
+\answer{A coefficient matrix--with rows containing the coefficients of each equation and columns containing the coefficients of each variable; a variable matrix--with each row representing a different variable; and a constant matrix--containing the constants from the right-hand side of the equation.}
+Q: What is an inverse matrix?
+\answer{An inverse matrix is a matrix such that when multiplied by a given matrix, results in the identity matrix.}
+\end{te-addendum}
+% Source page 67: 520, Example 4
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{STEP 2 Understand \& Apply. EXAMPLE 4 Solve a Real-World System With an Inverse. Pose Purposeful Questions ETP}
+Q: What information are you solving for in this example?
+\answer{the number of men's sneakers and the number of women's sneakers that were produced}
+Q: Using the diagram and the given information, how could you determine the labor costs?
+\answer{The labor costs, \$340, are the sum of the cost of producing an unknown number of women's shoes and the cost of producing an unknown number of men's shoes.}
+Q: Using the diagram and the given information, how could you determine the material costs?
+\answer{The material costs, \$420, are the sum of the cost of the materials needed for an unknown number of women's shoes and the cost of the materials needed for an unknown number of men's shoes.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Solve a Real-World System of Equations With an Inverse}
+\te{APPLICATION}
+A company makes men's and women's sneakers. Last week, the company spent \$340 on labor and \$420 on materials. How many sneakers of each type did the company produce?
+\begin{tabular}{lll}
+& WOMEN'S SNEAKERS & MEN'S SNEAKERS \\
+Labor & \$10 & \$14 \\
+Materials & \$12 & \$18 \\
+\end{tabular}
+% FIG 67 941 257 1112 475
+\placeholder{illustration}{Two-column sneaker production diagram: woman sewing orange women's sneakers and man sewing blue men's sneakers; disassembled shoes and materials below. Women's labor 10 dollars, materials 12 dollars; men's labor 14 dollars, materials 18 dollars.}
+Formulate
+To find a solution using a matrix inverse, first define the variables. Then write a system of equations to model the situation. Finally express the system as a matrix equation.
+(w=\text{the number of pairs of women's sneakers produced})
+(m=\text{the number of pairs of men's sneakers produced})
+(10w+14m=340)
+(12w+18m=420)
+(\begin{bmatrix}10&14\\12&18\end{bmatrix}\begin{bmatrix}w\\m\end{bmatrix}=\begin{bmatrix}340\\420\end{bmatrix})
+\te{The first equation represents the labor costs. The second equation represents the materials costs.}
+Compute
+Now solve the system of equations by multiplying by an inverse matrix.
+Use technology to find that the inverse of (\begin{bmatrix}10&14\\12&18\end{bmatrix}) is (\begin{bmatrix}\frac32&-\frac76\\-1&\frac56\end{bmatrix}).
+Multiply each side of the matrix equation by the inverse matrix.
+(\begin{bmatrix}\frac32&-\frac76\\-1&\frac56\end{bmatrix}\begin{bmatrix}10&14\\12&18\end{bmatrix}\begin{bmatrix}w\\m\end{bmatrix}=\begin{bmatrix}\frac32&-\frac76\\-1&\frac56\end{bmatrix}\begin{bmatrix}340\\420\end{bmatrix})
+(\begin{bmatrix}1&0\\0&1\end{bmatrix}\begin{bmatrix}w\\m\end{bmatrix}=\begin{bmatrix}\frac32(340)+(-\frac76)(420)\\-1(340)+(\frac56)(420)\end{bmatrix})
+\te{Recall that a matrix multiplied by its inverse gives the identity matrix.}
+(\begin{bmatrix}w\\m\end{bmatrix}=\begin{bmatrix}20\\10\end{bmatrix})
+Interpret
+The solution is (20,10), so the company made 20 pairs of women's sneakers and 10 pairs of men's sneakers.
+\answer{20 pairs of women's sneakers and 10 pairs of men's sneakers.}
+\end{example}
+\begin{tryit}{4}
+For a three-week period, the same company budgets \$860 for labor and \$1,080 for materials. How many pairs of men's and women's sneakers can they make in three weeks?
+\answer{30 pairs of women's sneakers, 40 pairs of men's sneakers}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: How would the matrix equation change with the new information?
+\answer{The constant matrix would change from (\begin{bmatrix}340\\420\end{bmatrix}) to (\begin{bmatrix}860\\1,080\end{bmatrix}).}
+\end{te-addendum}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error. Try It! 4}
+Some students may change the wrong part of the matrix equation in the example given the new information. Have students write out a new system of equations with the new data and compare the matrix equation in the example to the coefficient matrices, variable matrices, and constant matrices and explain why only the constant matrices change.
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 4}
+Have students further explore applying matrix equations to real-world situations.
+\item An exam has three types of questions: multiple choice, worth 2 points; fill-in-the-blank, worth 4 points; and short answer, worth 10 points. The exam is worth 120 points total with 30 questions, 10 of which are fill-in-the-blank.
+Q: How many multiple choice and short answer questions are on the exam? Show your work.
+\answer{15 multiple choice and 5 short answer}
+(\begin{cases}2x+4y+10z=120\\x+y+z=30\\y=10\end{cases}); (\begin{bmatrix}2&4&10\\1&1&1\\0&1&0\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}120\\30\\10\end{bmatrix})
+(\begin{bmatrix}-\frac18&\frac{10}8&-\frac68\\0&0&1\\\frac18&-\frac28&-\frac28\end{bmatrix}\begin{bmatrix}2&4&10\\1&1&1\\0&1&0\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}-\frac18&\frac{10}8&-\frac68\\0&0&1\\\frac18&-\frac28&-\frac28\end{bmatrix}\begin{bmatrix}120\\30\\10\end{bmatrix}=\begin{bmatrix}15\\10\\5\end{bmatrix})
+Q: What do the variables represent in this situation?
+\answer{the number of multiple choice (x); the number of fill-in-the-blank (y); and the number of short answer (z).}
+\end{te-addendum}
+% Source page 68: 521, Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{STEP 2 Understand \& Apply. CONCEPT SUMMARY Solving Systems of Linear Equations with Matrices}
+Q: What are the components of a matrix equation?
+\answer{the coefficient matrix, the variable matrix, and the constant matrix}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Common Error. Exercise 6}
+Some students may make a mistake when writing the coefficient matrix for this example because the third equation does not have a (y)-term. They may mistakenly place the zero in the third position instead of the middle position. Have the students rewrite that equation with the addition of the term (0y) between the terms (9x) and (-4z) to help them correctly write the matrix.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Solving Systems of Linear Equations With Matrices}
+LINEAR SYSTEMS
+\item Express the linear system of equations as a matrix equation.
+(\begin{cases}x+2y+3z=4\\3x-2y+z=-1\\x+y-2z=6\end{cases}\longrightarrow\begin{bmatrix}1&2&3\\3&-2&1\\1&1&-2\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}4\\-1\\6\end{bmatrix})
+\item For a (2\times2) matrix, find the determinant of the coefficient matrix, (A). If (\det A\neq0), solve the matrix equation using the inverse of the coefficient matrix. If (\det A=0), solve the original system with an alternative method. Use substitution or elimination.
+\item For an (n\times n) matrix, where (n\geq3), use technology to find the inverse of the matrix. Then multiply each side of the equation by the inverse matrix to find the solution.
+MATRIX EQUATIONS
+(AX=B)
+(A^{-1}\cdot AX=A^{-1}\cdot B)
+(I\cdot X=A^{-1}\cdot B)
+(X=A^{-1}\cdot B)
+\te{Multiply by the inverse matrix (A^{-1}) on the left to isolate the variable matrix.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can matrix inverses be used to simplify the process of solving a system of linear equations?
+\answer{Express the linear system of equations as a matrix equation. Then, find the determinant of the coefficient matrix, (A). If (\det A\neq0), solve the matrix equation using the inverse of the coefficient matrix. If (\det A=0), solve the original system with an alternative method. Use substitution or elimination.}
+2. Error Analysis Corey says the matrix equation (\begin{bmatrix}3&2\\-1&4\\2&6\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}8\\13\\22\end{bmatrix}) represents the system of linear equations (\begin{cases}3x+2y=8\\-y+4z=13\\2x+6z=22\end{cases}). Explain Corey's error.
+\answer{The coefficient matrix is (\begin{bmatrix}3&2&0\\0&-1&4\\2&0&6\end{bmatrix}), with an entry for each variable in each row.}
+3. Vocabulary How do you determine the coefficient matrix for a particular system of linear equations?
+\answer{Write all the equations in standard form. Create a matrix with the same number of rows as equations and the same number of columns as variables. For each position in the matrix, enter the coefficient of the corresponding variable in the corresponding equation, including a zero for any variable that does not appear in a particular equation.}
+4. Communicate Precisely Explain how to solve a system of linear equations using an inverse matrix.
+\answer{Express the system as a matrix equation. Find the inverse of the coefficient matrix. Multiply both sides of the matrix equation by the inverse matrix. Multiplying the coefficient matrix by its inverse gives the identity matrix. Multiplying the inverse matrix by the constant matrix gives the solution matrix.}
+\textbf{Do You KNOW HOW?}
+Express the system of linear equations as a matrix equation.
+5. (\begin{cases}5x+3y=-21\\2x-4y=-24\end{cases})
+\answer{(\begin{bmatrix}5&3\\2&-4\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-21\\-24\end{bmatrix})}
+6. (\begin{cases}6x-8y+2z=-46\\-x+5y+3z=29\\9x-4z=-35\end{cases})
+\answer{(\begin{bmatrix}6&-8&2\\-1&5&3\\9&0&-4\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}-46\\29\\-35\end{bmatrix})}
+7. Given the matrix equation (A\cdot X=B) for (A=\begin{bmatrix}1&3&-4\\2&-2&3\\-4&-6&-1\end{bmatrix}) and (B=\begin{bmatrix}0\\-5\\-5\end{bmatrix}), find (A^{-1}). Then use (A^{-1}) to solve the matrix equation for (X).
+\answer{(A^{-1}=\begin{bmatrix}\frac27&\frac{27}{70}&\frac1{70}\\-\frac17&-\frac{17}{70}&-\frac{11}{70}\\-\frac27&-\frac3{35}&-\frac4{35}\end{bmatrix}); (X=\begin{bmatrix}-2\\2\\1\end{bmatrix})}
+8. Write an equation that shows what your next step would be in solving this matrix equation for (x), (y), and (z).
+(\begin{bmatrix}-1&2&-3\\2&-13&9\\-4&12&-6\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}2\\-7\\2\end{bmatrix})
+\answer{(\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}-1&2&-3\\2&-13&9\\-4&12&-6\end{bmatrix}^{-1}\cdot\begin{bmatrix}2\\-7\\2\end{bmatrix})}
+\end{concept-summary}
+\begin{te-addendum}{ConceptSummary}{LearnTogether}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+\end{te-addendum}
+% Source page 69: 522, Practice and Problem Solving
+\begin{te-addendum}{Practice}{LearnTogether}
+\textbf{STEP 3 Practice \& Problem Solving. PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Practice. Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\end{te-addendum}
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+9--20, 22--28 & 9--13, 15--28 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 14, 15, 26, 27 & 1 \\
+1 & 9, 11, 12 & 2 \\
+2 & 16, 17 & 1 \\
+2 & 10 & 2 \\
+3 & 18--21 & 1 \\
+3 & 13 & 3 \\
+4 & 22--25 & 2 \\
+4 & 28 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{9}{2}
+UNDERSTAND. Construct Arguments Explain why the equation (X=BA^{-1}) cannot be used to solve this matrix equation in the form (AX=B).
+(\begin{bmatrix}-1&2&-3\\2&-13&9\\-4&12&-6\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}2\\-7\\2\end{bmatrix})
+\answer{Matrix multiplication is not commutative. To get (X) on the left side of the equation, you have to multiply by (A^{-1}) on the left, so you must multiply both sides of the equation by (A^{-1}) on the left.}
+\end{practice}
+\begin{practice}{10}{2}
+Communicate Precisely Give an advantage of solving a system of linear equations using matrices instead of using the substitution or elimination method. (Assume you use technology to find the inverse matrix.)
+\answer{Solving a system using matrices can be done very quickly using technology. Solving a system using substitution or elimination by hand involves many steps and is prone to error, especially when there are three or more variables.}
+\end{practice}
+\begin{practice}{11}{2}
+Error Analysis Describe and correct the error a student made in solving the matrix equation (\begin{bmatrix}5&9\\2&-3\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-26\\16\end{bmatrix}).
+\te{Student work: (\begin{bmatrix}5&9\\2&-3\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-26\\16\end{bmatrix}); (\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}5&9\\2&-3\end{bmatrix}\cdot\begin{bmatrix}-26\\16\end{bmatrix}); (\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-14\\100\end{bmatrix}). Red X.}
+\answer{The student incorrectly multiplied both sides of the matrix equation by (\begin{bmatrix}5&9\\2&-3\end{bmatrix}) instead of multiplying both sides of the matrix equation by (\begin{bmatrix}5&9\\2&-3\end{bmatrix}^{-1}). The correct solution is (\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}2\\-4\end{bmatrix}).}
+\end{practice}
+\begin{practice}{12}{2}
+Look for Relationships Assume (a=c) and (b=d) for the matrix equation (\begin{bmatrix}a&b\\c&d\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}e\\f\end{bmatrix}). What is the relationship between (e) and (f) when there are infinitely many solutions? What is the relationship between (e) and (f) when there are no solutions?
+\answer{When there are infinitely many solutions, (e=f). When there are no solutions, (e\neq f).}
+\te{Printed no-solution condition omits the degenerate case of zero coefficient rows and equal nonzero constants; likely nonzero coefficient rows are assumed.}
+\end{practice}
+\begin{practice}{13}{3}
+Higher Order Thinking Write a system of linear equations in four variables, (w), (x), (y), and (z) that has integer solutions. Then write a matrix equation to represent your system of equations. Finally, solve the matrix equation using technology to verify the integer solutions.
+\answer{Sample: (\begin{cases}2w+x-3y+4z=-13\\w+x-y-z=0\\4w+3x-2z=5\\6x-4y+5z=-24\end{cases}); (\begin{bmatrix}2&1&-3&4\\1&1&-1&-1\\4&3&0&-2\\0&6&-4&5\end{bmatrix}\cdot\begin{bmatrix}w\\x\\y\\z\end{bmatrix}=\begin{bmatrix}-13\\0\\5\\-24\end{bmatrix}); (\begin{bmatrix}w\\x\\y\\z\end{bmatrix}=\begin{bmatrix}1\\-1\\2\\-2\end{bmatrix})}
+\end{practice}
+\begin{practice}{14}{1}
+PRACTICE. Solve the matrix equation (A\cdot X=B) for the given matrices. SEE EXAMPLE 1
+(A=\begin{bmatrix}8&-7\\-6&4\end{bmatrix}) and (B=\begin{bmatrix}11\\-12\end{bmatrix})
+\answer{(\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}4\\3\end{bmatrix})}
+\end{practice}
+\begin{practice}{15}{1}
+Solve the matrix equation (A\cdot X=B) for the given matrices. SEE EXAMPLE 1
+(A=\begin{bmatrix}2&8&4\\1&-1&-3\\-3&2&-9\end{bmatrix}) and (B=\begin{bmatrix}26\\-2\\37\end{bmatrix})
+\answer{(\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}-3\\5\\-2\end{bmatrix})}
+\end{practice}
+\begin{practice}{16}{1}
+Express the system of linear equations as a matrix equation. SEE EXAMPLE 2
+(8x+y=-1), (-12x-2y=6)
+\answer{(\begin{bmatrix}8&1\\-12&-2\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-1\\6\end{bmatrix})}
+\end{practice}
+\begin{practice}{17}{1}
+Express the system of linear equations as a matrix equation. SEE EXAMPLE 2
+(2x+3y+7z=4), (10x+8y-2z=-12), (6x-y=30)
+\answer{(\begin{bmatrix}2&3&7\\10&8&-2\\6&-1&0\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}4\\-12\\30\end{bmatrix})}
+\end{practice}
+\begin{practice}{18}{1}
+Solve the following systems of linear equations using inverse matrices, if possible. SEE EXAMPLE 3
+(-x+2y=8), (-3x+6y=-12)
+\answer{no solution}
+\end{practice}
+\begin{practice}{19}{1}
+Solve the following systems of linear equations using inverse matrices, if possible. SEE EXAMPLE 3
+(9x+2y+3z=1), (-8x-3y-4z=1), (12x+y-2z=-17)
+\answer{(x=0), (y=-7), (z=5)}
+\end{practice}
+\begin{practice}{20}{1}
+Solve the following systems of linear equations using inverse matrices, if possible. SEE EXAMPLE 3
+(-3x+4y=-4), (\frac12x-3y=-11)
+\answer{(x=8), (y=5)}
+\end{practice}
+\begin{practice}{21}{1}
+Solve the following systems of linear equations using inverse matrices, if possible. SEE EXAMPLE 3
+(2x+\frac23y+z=-8), (x+2y-\frac13z=6), (-\frac12x+3y-2z=22)
+\answer{(x=-2), (y=3), (z=-6)}
+\end{practice}
+\begin{practice}{22}{2}
+Katrina makes bracelets and necklaces. Last week, she made 5 bracelets and 2 necklaces. This week, she made 3 bracelets and 5 necklaces. How many hours does it take Katrina to make one bracelet? How many hours does it take Katrina to make one necklace? SEE EXAMPLE 4
+% FIG 69 820 757 1087 947
+\placeholder{illustration}{Jewelry displays: left two necklaces and five bracelets, clock labeled 16 hours; right five necklaces and three bracelets, clock labeled 21 hours.}
+\answer{2 hr to make one bracelet and 3 hr to make one necklace}
+\end{practice}
+% Source page 70: 523, Practice and Problem Solving continued
+\begin{practice}{23}{2}
+APPLY. Use Structure Mato had some quarters and dimes in his pocket. The quarters and dimes are worth \$2.55. He has 3 times as many quarters as dimes.
+a. Write a matrix equation to find the number of quarters, (x), and dimes, (y), Mato has.
+\answer{a. (\begin{bmatrix}0.25&0.1\\1&-3\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}2.55\\0\end{bmatrix})}
+b. How many quarters and dimes does Mato have?
+\answer{b. 9 quarters and 3 dimes}
+\end{practice}
+\begin{practice}{24}{2}
+Make Sense and Persevere Maliyah is training for a triathlon. The table shows the number of hours she swam, biked, and ran and the total distance traveled on three different days. Write and solve a matrix equation to find Maliyah's average speed while swimming, biking, and running.
+\begin{tabular}{lllll}
+DAY & \te{swimming icon} & \te{biking icon} & \te{running icon} & Total Distance (mi.) \\
+1 & (\frac13) & 1 & 2 & 32 \\
+2 & (\frac23) & (\frac45) & 1 & 22 \\
+3 & 1 & 2 & (\frac12) & 37 \\
+\end{tabular}
+\answer{(\begin{bmatrix}\frac13&1&2\\\frac23&\frac45&1\\1&2&\frac12\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}32\\22\\37\end{bmatrix}); swimming: 3 mph; biking: 15 mph; running: 8 mph}
+\end{practice}
+\begin{practice}{25}{2}
+Model With Mathematics Santos wants to mix three different types of cereal to create a mixture with 3,400 calories, 90 grams of protein, and 90 grams of fiber. The boxes of cereal show the number of calories, grams of protein, and grams of fiber in one serving of cereal A, B, and C. Write a matrix equation to represent this situation. How many servings of each type of cereal does Santos need to include in the mixture?
+\begin{tabular}{llll}
+& Cereal A & Cereal B & Cereal C \\
+Calories & 300 & 300 & 320 \\
+Protein & 11g & 7g & 8g \\
+Fiber & 8g & 6g & 10g \\
+\end{tabular}
+% FIG 70 555 820 807 961
+\placeholder{illustration}{Three cereal cartons, mint-green A with cereal bowl, blue B with wheat stalks, orange C with circles; nutritional labels reproduced in the table.}
+\answer{2 servings of cereal A, 4 servings of cereal B, 5 servings of cereal C}
+\end{practice}
+\begin{practice}{26}{1}
+ASSESSMENT PRACTICE. Which matrix equation has a unique solution? Select all that apply.
+A. (\begin{bmatrix}6&2\\9&3\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}12\\18\end{bmatrix})
+B. (\begin{bmatrix}2&9\\-3&-8\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-46\\36\end{bmatrix})
+C. (\begin{bmatrix}1&1\\-1&-1\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}4\\-4\end{bmatrix})
+D. (\begin{bmatrix}-4&2\\-14&7\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}10\\-7\end{bmatrix})
+\answer{B}
+\end{practice}
+\begin{practice}{27}{1}
+SAT/ACT The coordinates (x,y) of a point in a plane are the solution of the matrix equation (\begin{bmatrix}-1&2\\3&4\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-5\\2\end{bmatrix}). In what quadrant is the point located?
+A. I
+B. II
+C. III
+D. IV
+\answer{D}
+\end{practice}
+\begin{practice}{28}{3}
+Performance Task Nitrogen ((N_2)) and hydrogen ((H_2)) can react to form ammonia ((NH_3)). To write an equation for the reaction, the number of molecules of each element that are combined must equal the number of molecules of each element in the result. You can use matrices to figure out the coefficients that will balance the reaction for ammonia.
+(a(N_2)+b(H_2)\to c(NH_3))
+% FIG 70 868 675 1132 750
+\placeholder{diagram}{Nitrogen blue two-sphere molecule plus hydrogen gray two-sphere molecule, arrow to ammonia blue center with three gray spheres. Caption Nitrogen, Hydrogen, Ammonia; equation a(N2)+b(H2) to c(NH3).}
+\te{Printed "molecules of each element"; likely atoms of each element is intended for conservation in balancing.}
+Part A Let (c=1). Write a system of equations in (a) and (b) for this reaction. Make one equation to represent (N) and one equation to represent (H), and think of the reaction arrow as an equal sign.
+\answer{Part A (\begin{cases}2a=1\\2b=3\end{cases})}
+Part B Rewrite your system of equations as a matrix equation, and solve for (a) and (b).
+\answer{Part B (\begin{bmatrix}2&0\\0&2\end{bmatrix}\begin{bmatrix}a\\b\end{bmatrix}=\begin{bmatrix}1\\3\end{bmatrix}), (\begin{bmatrix}a\\b\end{bmatrix}=\begin{bmatrix}\frac12\\\frac32\end{bmatrix})}
+Part C Substitute the coefficients into the reaction equation. Multiply the equation by the least common denominator of all fractions so that all coefficients are whole numbers. Check that it is balanced.
+\answer{Part C (N_2+3H_2\to2NH_3), balanced 2N and 6H on each side.}
+Part D Use the same process to balance the reaction for chromium oxide.
+(a(Cr)+b(O_2)\to c(Cr_2O_3))
+% FIG 70 868 974 1132 1042
+\placeholder{diagram}{Chromium purple sphere plus oxygen red two-sphere molecule, arrow to Cr2O3 diagram with two purple and three red spheres connected by bonds. Labels Chromium, Oxygen, Cr2O3; equation a(Cr)+b(O2) to c(Cr2O3).}
+\answer{Part D (4Cr+3O_2\longrightarrow2Cr_2O_3)}
+\end{practice}
+% Source page 71: 523A, Assess and Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & A61 \\
+2 & 2 & A61 \\
+3 & 2 & A61 \\
+4 & 2 & A61 \\
+5 & 1 & A61 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+Lesson Quiz is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{10-5 Lesson Quiz: Inverse Matrices and Systems of Equations}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. What is a matrix equation for the system of linear equations (\begin{cases}2x+3y=8\\4x-y=5\end{cases})?
+Complete the equation with the correct numbers.
+(\begin{bmatrix}2&\text{blank}\\\text{blank}&\text{blank}\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}\text{blank}\\\text{blank}\end{bmatrix})
+\answer{1. (\begin{bmatrix}2&3\\4&-3\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}8\\5\end{bmatrix})}
+\te{Printed lower-right answer is (-3); likely (-1), matching the coefficient of (y) in the second equation.}
+2. Which statements about the system (\begin{cases}4x+3y=12\\8x+6y=4\end{cases}) are true? Select all that apply.
+A. The coefficient matrix is (\begin{bmatrix}4&3\\8&6\end{bmatrix}).
+B. The determinant of the coefficient matrix is 8.
+C. The coefficient matrix is not invertible.
+D. The system can be solved using a matrix inverse.
+E. The solution of the system is (2,-2).
+\answer{2. A, C}
+3. A company makes short boots and tall boots. Last week, the company spent \$855 on labor and \$1,150 on materials. Let (s) represent the number of pairs of short boots produced and (t) represent the number of pairs of tall boots produced. Which matrix equation models the situation?
+\textbf{Manufacturing Costs per Pair (\$)}
+\begin{tabular}{lll}
+Boot Style & Labor & Materials \\
+Short & 15 & 22 \\
+Tall & 24 & 30 \\
+\end{tabular}
+A. (\begin{bmatrix}15&22\\24&30\end{bmatrix}\begin{bmatrix}s\\t\end{bmatrix}=\begin{bmatrix}855\\1150\end{bmatrix})
+B. (\begin{bmatrix}15&22\\24&30\end{bmatrix}\begin{bmatrix}s\\t\end{bmatrix}=\begin{bmatrix}1150\\855\end{bmatrix})
+C. (\begin{bmatrix}15&24\\22&30\end{bmatrix}\begin{bmatrix}s\\t\end{bmatrix}=\begin{bmatrix}855\\1150\end{bmatrix})
+D. (\begin{bmatrix}15&24\\22&30\end{bmatrix}\begin{bmatrix}s\\t\end{bmatrix}=\begin{bmatrix}1150\\855\end{bmatrix})
+\answer{3. C}
+4. The coordinates (x,y) of a point in a plane are the solution of the matrix equation (\begin{bmatrix}-1&2\\2&-1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}11\\-10\end{bmatrix}). In which quadrant is the point located?
+A. I
+B. II
+C. III
+D. IV
+\answer{4. B}
+5. What is the solution of the matrix equation (\begin{bmatrix}5&3\\2&1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-5\\-1\end{bmatrix})?
+\answer{5. (\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}2\\-5\end{bmatrix})}
+\te{Copyright Savvas Learning Company LLC. All Rights Reserved. enVision Algebra 2 • Assessment Sourcebook.}
+\end{te-addendum}
+% Source page 72: 523B, Differentiated Resources
+\begin{te-addendum}{Assess}{LearnTogether}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced.
+Reteach to Build Understanding I. Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+Additional Practice I O. Provides extra practice for each lesson. MathXL for School.
+Enrichment O A. Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Mathematical Literacy and Vocabulary I O. Helps students develop and reinforce understanding of key terms and concepts.
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{10-5 Reteach to Build Understanding: Inverse Matrices and Systems of Equations}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. Solve the matrix equation (A\cdot X=B): (\begin{bmatrix}12&-3\\16&4\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}144\\-64\end{bmatrix}).
+a. Find the values for (A), (X), (B), and (A^{-1}) (the inverse of (A)).
+\answer{(A=\begin{bmatrix}12&-3\\16&4\end{bmatrix}); (A^{-1}=\begin{bmatrix}\frac1{24}&\frac1{32}\\-\frac16&\frac18\end{bmatrix}); (X=\begin{bmatrix}x\\y\end{bmatrix}); (B=\begin{bmatrix}144\\-64\end{bmatrix})}
+b. Set up the equation (A^{-1}\cdot A\cdot X=A^{-1}\cdot B).
+(\begin{bmatrix}\frac1{24}&\frac1{32}\\-\frac16&\frac18\end{bmatrix}\cdot\begin{bmatrix}12&-3\\16&4\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}\frac1{24}&\frac1{32}\\-\frac16&\frac18\end{bmatrix}\cdot\begin{bmatrix}144\\-64\end{bmatrix})
+c. Any matrix (A) times its inverse equals the identity matrix (I), so (I\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}\frac1{24}&\frac1{32}\\-\frac16&\frac18\end{bmatrix}\cdot\begin{bmatrix}144\\-64\end{bmatrix}).
+\answer{c. 144}
+d. Multiply. (\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}(\frac1{24}\cdot144)+(\frac1{32}\cdot-64)\\(-\frac16\cdot144)+(\frac18\cdot-64)\end{bmatrix}=\begin{bmatrix}6+(-2)\\-24+(-8)\end{bmatrix}=\begin{bmatrix}4\\-32\end{bmatrix})
+\answer{d. (-32)}
+e. The solution is (\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}4\\-32\end{bmatrix}), so (x=\text{blank}) and (y=\text{blank}).
+\answer{e. (x=4) and (y=-32)}
+2. Solve the matrix equation (\begin{bmatrix}3&-9\\1&-6\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}12\\0\end{bmatrix}).
+a. Multiply each side by the inverse.
+\answer{(\begin{bmatrix}\frac23&-1\\\frac19&-\frac13\end{bmatrix}\cdot\begin{bmatrix}3&-9\\1&-6\end{bmatrix}\cdot\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}\frac23&-1\\\frac19&-\frac13\end{bmatrix}\cdot\begin{bmatrix}12\\0\end{bmatrix})}
+b. Simplify.
+\answer{(\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}(\frac23\cdot12)+(-1\cdot0)\\(\frac19\cdot12)+(-\frac13\cdot0)\end{bmatrix}=\begin{bmatrix}8+0\\\frac{12}9+0\end{bmatrix}=\begin{bmatrix}8\\\frac43\end{bmatrix})}
+c. Solve.
+\answer{(x=8) and (y=\frac43)}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{10-5 Additional Practice: Inverse Matrices and Systems of Equations}
+Name. enVision Algebra 2. SavvasRealize.com.
+Solve the matrix equation (A\cdot X=B) for the given matrices.
+1. (A=\begin{bmatrix}9&-4\\-3&6\end{bmatrix}), (B=\begin{bmatrix}-30\\3\end{bmatrix})
+\answer{1. (X=\begin{bmatrix}-4\\-\frac32\end{bmatrix})}
+2. (A=\begin{bmatrix}-4&6\\2&-8\end{bmatrix}), (B=\begin{bmatrix}336\\132\end{bmatrix})
+\answer{2. (X=\begin{bmatrix}-174\\-60\end{bmatrix})}
+3. (A=\begin{bmatrix}-10&6\\-5&-4\end{bmatrix}), (B=\begin{bmatrix}10\\-100\end{bmatrix})
+\answer{3. (X=\begin{bmatrix}8\\15\end{bmatrix})}
+Express the system of linear equations as a matrix equation.
+4. (\begin{cases}6x+9y=36\\4x+13y=2\end{cases})
+\answer{4. (\begin{bmatrix}6&9\\4&13\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}36\\2\end{bmatrix})}
+5. (\begin{cases}3x-4y=-9\\7y=24\end{cases})
+\answer{5. (\begin{bmatrix}3&-4\\0&7\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-9\\24\end{bmatrix})}
+6. (\begin{cases}4x-z=9\\12x+2y=17\\x-y+12z=3\end{cases})
+\answer{6. (\begin{bmatrix}4&0&-1\\12&2&0\\1&-1&12\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}9\\17\\3\end{bmatrix})}
+Solve the following systems of linear equations using inverse matrices, if possible.
+7. (\begin{cases}x+3y=5\\x+4y=6\end{cases})
+\answer{7. (x=2), (y=1)}
+8. (\begin{cases}x-3y=-1\\-6x+19y=6\end{cases})
+\answer{8. (x=-1), (y=0)}
+9. (\begin{cases}-3x+4y-z=-5\\x-y-z=8\\2x+y+2z=9\end{cases})
+\answer{9. (x=7), (y=3), (z=-4)}
+10. The difference between twice Bill's age and Carlos's age is 26. The sum of Anna's age, three times Bill's age, and Carlos's age is 92. The total of the three ages is 52.
+a. Write a matrix equation to represent this situation.
+\answer{a. (\begin{bmatrix}0&2&-1\\1&3&1\\1&1&1\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}26\\92\\52\end{bmatrix})}
+b. How old is each person?
+\answer{b. Anna: 18; Bill: 20; Carlos: 14}
+11. Explain how you can use a matrix equation to show that the lines represented by (y=-3x+4) and (4y=-4x-8) intersect.
+\answer{Answers may vary. Sample: Write the matrix equation (\begin{bmatrix}3&1\\4&4\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}4\\-8\end{bmatrix}) to solve the system. If the equation has a solution (x,y), then the lines intersect at that point. A solution exists if the determinant of the coefficient matrix (\begin{bmatrix}3&1\\4&4\end{bmatrix}) does not equal zero.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{10-5 Enrichment: Inverse Matrices and Systems of Equations}
+Name. enVision Algebra 2. SavvasRealize.com.
+Solve the matrix equation and use the values of the letters in the variable matrix to answer the riddle.
+1. (\begin{bmatrix}3&4&-3\\2&5&3\\-1&6&4\end{bmatrix}\cdot\begin{bmatrix}a\\b\\c\end{bmatrix}=\begin{bmatrix}1,833\\5,152\\5,574\end{bmatrix})
+\answer{1. (\begin{bmatrix}a\\b\\c\end{bmatrix}=\begin{bmatrix}236\\645\\485\end{bmatrix})}
+2. (\begin{bmatrix}5&-7&9\\12&2&-3\\4&8&-5\end{bmatrix}\cdot\begin{bmatrix}d\\e\\f\end{bmatrix}=\begin{bmatrix}2,262\\2,126\\920\end{bmatrix})
+\answer{2. (\begin{bmatrix}d\\e\\f\end{bmatrix}=\begin{bmatrix}215\\175\\268\end{bmatrix})}
+3. (\begin{bmatrix}18&14&-5\\-7&6&12\\11&5&10\end{bmatrix}\cdot\begin{bmatrix}g\\h\\i\end{bmatrix}=\begin{bmatrix}80,650\\35,238\\84,511\end{bmatrix})
+\answer{3. (\begin{bmatrix}g\\h\\i\end{bmatrix}=\begin{bmatrix}3,276\\2,783\\3,456\end{bmatrix})}
+4. (\begin{bmatrix}50&-37&19\\36&48&-27\\42&-53&-65\end{bmatrix}\cdot\begin{bmatrix}j\\k\\l\end{bmatrix}=\begin{bmatrix}65,902\\128,469\\-106,774\end{bmatrix})
+\answer{4. (\begin{bmatrix}j\\k\\l\end{bmatrix}=\begin{bmatrix}2,156\\1,897\\1,489\end{bmatrix})}
+5. (\begin{bmatrix}\frac52&\frac92&-\frac52\\-\frac32&-5&\frac32\\-1&-\frac52&4\end{bmatrix}\cdot\begin{bmatrix}m\\n\\o\end{bmatrix}=\begin{bmatrix}\frac{1,537}2\\-928\\\frac{205}2\end{bmatrix})
+\answer{5. (\begin{bmatrix}m\\n\\o\end{bmatrix}=\begin{bmatrix}126\\203\\184\end{bmatrix})}
+6. (\begin{bmatrix}\frac34&-\frac72&-\frac34\\\frac72&\frac32&-\frac32\\-\frac52&-\frac72&-\frac34\end{bmatrix}\cdot\begin{bmatrix}p\\q\\r\end{bmatrix}=\begin{bmatrix}-15,150\\10,707\\-23,691\end{bmatrix})
+\answer{6. (\begin{bmatrix}p\\q\\r\end{bmatrix}=\begin{bmatrix}2,628\\4,206\\3,200\end{bmatrix})}
+7. (\begin{bmatrix}20&15&-5&-5\\-5&10&15&15\\25&-10&15&20\\-10&25&10&15\end{bmatrix}\cdot\begin{bmatrix}s\\t\\u\\v\end{bmatrix}=\begin{bmatrix}3,850\\13,875\\15,050\\15,475\end{bmatrix})
+\answer{7. (\begin{bmatrix}s\\t\\u\\v\end{bmatrix}=\begin{bmatrix}155\\280\\365\\420\end{bmatrix})}\te{Printed result does not satisfy all rows of the displayed matrix equation; likely some given entries or result entries contain errors.}
+8. (\begin{bmatrix}60&-72&18&-6\\36&48&-24&12\\-24&54&-66&24\\42&-36&24&64\end{bmatrix}\cdot\begin{bmatrix}w\\x\\y\\z\end{bmatrix}=\begin{bmatrix}-21,972\\30,168\\24,948\\22,856\end{bmatrix})
+\answer{8. (\begin{bmatrix}w\\x\\y\\z\end{bmatrix}=\begin{bmatrix}168\\426\\76\\458\end{bmatrix})}
+What happened when the mathematician forgot his lunch money?
+\begin{tabular}{lllllllllllllll}
+2,783 & 175 & 485 & 184 & 365 & 1,489 & 215 & 645 & 3,456 & 203 & 184 & 126 & 3,456 & 236 & 1,489 \\
+H & E & C & O & U & L & D & B & I & N & O & M & I & A & L \\
+\end{tabular}
+\answer{HE COULD BINOMIAL}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{10-5 Mathematical Literacy and Vocabulary: Inverse Matrices and Systems of Equations}
+Name. enVision Algebra 2. SavvasRealize.com.
+Match the system of equations in Column A with its matrix equation in Column B.
+\textbf{Column A}
+1. (\begin{cases}x+y=5\\3x-5y=-1\end{cases})
+2. (\begin{cases}-2x+5y=11\\2x-7y=-17\end{cases})
+3. (\begin{cases}4x-2y=20\\7x+6y=30\end{cases})
+4. (\begin{cases}-x+y=-6\\4x-3y=25\end{cases})
+5. (\begin{cases}x+8y=11\\4x-6y=6\end{cases})
+6. (\begin{cases}-4x+3y=-14\\9x+5y=55\end{cases})
+7. (\begin{cases}-2x+3y=4\\8x+2z=14\\x-y-7z=-22\end{cases})
+8. (\begin{cases}-2x+3z=4\\8x+2y=14\\x-7y-z=-22\end{cases})
+9. (\begin{cases}3x+2y-z=9\\8y+2z=-28\\-x-y+3z=4\end{cases})
+10. (\begin{cases}5y+2z=9\\-x-3y+2z=17\\-x-y-8z=21\end{cases})
+\textbf{Column B}
+\te{Choices are unlettered; ordinal positions below describe their top-to-bottom order.}
+(\begin{bmatrix}1&8\\4&-6\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}11\\6\end{bmatrix})
+(\begin{bmatrix}3&2&-1\\0&8&2\\-1&-1&3\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}9\\-28\\4\end{bmatrix})
+(\begin{bmatrix}-1&1\\4&-3\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-6\\25\end{bmatrix})
+(\begin{bmatrix}-4&3\\9&5\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}-14\\55\end{bmatrix})
+(\begin{bmatrix}-2&0&3\\8&2&0\\1&-7&-1\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}4\\14\\-22\end{bmatrix})
+(\begin{bmatrix}1&1\\3&-5\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}5\\-1\end{bmatrix})
+(\begin{bmatrix}-2&5\\2&-7\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}11\\-17\end{bmatrix})
+(\begin{bmatrix}-2&3&0\\8&0&2\\1&-1&-7\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}4\\14\\-22\end{bmatrix})
+(\begin{bmatrix}0&5&2\\-1&-3&2\\-1&-1&-8\end{bmatrix}\begin{bmatrix}x\\y\\z\end{bmatrix}=\begin{bmatrix}9\\17\\21\end{bmatrix})
+(\begin{bmatrix}4&-2\\7&6\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}20\\30\end{bmatrix})
+\answer{Printed magenta matching lines: 1 to sixth; 2 to seventh; 3 to tenth; 4 to third; 5 to first; 6 to fourth; 7 to eighth; 8 to fifth; 9 to second; 10 to ninth.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{LearnTogether}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+Solve the system of equations by graphing.
+(\begin{cases}y=3x+4\\y=-2x+4\end{cases})
+Use the graphing tool to graph the system.
+Click to enlarge graph.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+\te{Digital controls: Exit; Question Help; Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print; 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next.}
+% FIG 72 616 978 1065 1298
+\placeholder{graph}{Digital tablet graphing exercise, blank Cartesian grid with x and y axes from -10 to 10, unit grid and labeled ticks every 2, arrow at positive y. Question Help menu overlays upper-right grid. System y=3x+4, y=-2x+4; no solution lines drawn.}
+\end{te-addendum}
+
+\end{document}

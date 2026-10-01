@@ -1,0 +1,913 @@
+\documentclass{article}
+% Source: Topic_07_Teacher_Edition.pdf, PDF pages 38-50 (printed pages 363A-371B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 38: 363A Lesson Overview
+\begin{lesson-meta}
+lesson: 7-3
+title: Graphing Sine and Cosine Functions
+standards: none printed
+practices: none printed
+objective: I can create and use graphs of sine and cosine functions.
+
+essential question: What are the key features of sine and cosine functions?
+
+\textbf{VOCABULARY}
+\item amplitude
+\item frequency
+\item midline
+\item parameter
+\item period
+\item periodic function
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 7-3 \\
+Title & Graphing Sine and Cosine Functions \\
+Standards & none printed \\
+I CAN Objective & I can create and use graphs of sine and cosine functions. \\
+Essential Question & What are the key features of sine and cosine functions? \\
+Lesson Vocabulary & amplitude; frequency; midline; parameter; period; periodic function \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Graph and identify the key features of sine and cosine functions.
+\item Understand how a change in a parameter affects the sine and cosine graphs.
+\item Compare key features of different periodic functions..
+Essential Understanding. Periodic functions are functions that repeat a pattern of (y)-values at regular intervals. The sine function (y=a\sin bx) and the cosine function (y=a\cos bx) are periodic functions that have an amplitude of (|a|) and a frequency of (\frac{b}{2\pi}).
+\textbf{COHERENCE}
+Previously in this courses, students:
+\item Graphed and identified the key features of algebraic functions.
+\item Used sine and cosine functions to solve problems.
+In this lesson, students:
+\item Create, graph, and identify the key features of sine and cosine functions.
+Increasing Coherence. Examples 4, 5, and 6 are not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Create, graph, and identify the key features of tangent and secant functions.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that sine and cosine functions are periodic functions with outputs that repeat after a constant interval of inputs.
+\item Using the graph of a periodic function, students find the period and the amplitude.
+\te{Printed double period after functions and wording "in this courses" retained.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+NEW VOCABULARY. English | Spanish
+\begin{tabular}{ll}
+amplitude & amplitud \\
+frequency & frecuencia \\
+midline & línea media \\
+parameter & parámetro \\
+period & período \\
+periodic function & función periódica \\
+\end{tabular}
+VOCABULARY ACTIVITY. Introduce the term periodic function and show students an example. Read the definitions of the terms amplitude and midline, and then have students match the terms maximum, minimum, amplitude, and midline to the parts of the graph.
+a. \answer{midline}
+b. \answer{minimum}
+c. \answer{amplitude}
+d. \answer{maximum}
+% FIG 38 870 538 1121 737
+\placeholder{graph}{Vocabulary activity: red periodic sine curve on gray square grid, axes x and y with arrows, origin O; x labels pi and 2pi, grid spacing pi/4; y labels -1 and 1, grid spacing 1/4. Curve crosses origin upward, has amplitude 1/2 and period pi/2, repeats four cycles from 0 to 2pi and continues with arrows. Four right-side arrows: a points to x-axis midline y=0; b to trough y=-1/2; c to green vertical amplitude segment from y=0 to -1/2 near x=2pi; d to crest y=1/2.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 38 961 782 1115 964
+\placeholder{illustration}{Student Companion cover: dark background, glowing multicolored rings and central spherical pattern; Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students understand and graph the sine function, (y=a\sin bx), and the cosine function, (y=a\cos bx). They identify key features, such as the minimum, maximum, amplitude which is (|a|), the frequency which is (\frac{b}{2x}), the period, and the midline. Then, students compare the key features of two periodic functions.
+\te{Printed frequency (b/(2x)); likely (b/(2\pi)), as elsewhere on the page.}
+\textbf{Applying Math Practices}
+Model with Mathematics. Students use trigonometric functions to model the movement of the tip of analog clock hands as they rotate around the face of the clock.
+Look For and Make Use of Structure. Students look for mathematical patterns when they notice that the function values that repeat occur at coterminal angles in the circle.
+\end{te-addendum}
+% Source page 39: 363B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS. Students explore the graph of the rider's height above the platform of a Ferris wheel. Students explore the changes in the graph when the Ferris wheel's height is doubled and when the speed is doubled. This introduces students to the graphs of sine and cosine functions.
+STUDENT COMPANION. Students can complete the Explore \& Reason activity in their Student Companion.
+Explore \& Reason is Powered by Desmos. Activities are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+The graph shows a rider's height above the platform when riding a Ferris wheel (t) minutes after entering the wheel car.
+% FIG 39 958 640 1128 779
+\placeholder{graph}{Student graph: horizontal axis Time (min), t, labeled 0 through 7 in units of 1; vertical Height (ft), y, labeled 4,8,12,16,20, grid every 2 feet. Red smooth periodic curve starts at (0,2), peaks at (1,22),(3,22),(5,22),(7,22), troughs (2,2),(4,2),(6,2); period 2; upward continuation arrow at right. Axes with arrows, window t=0 to7 and height0 to22.}
+A. Sketch a graph of a rider's height if the Ferris wheel is twice as high. How does the graph represent the change in height?
+\answer{The maximum points are twice as high.}
+B. Sketch a graph of a rider's height if the Ferris wheel is the same height as the first but goes twice as fast. How does the graph represent the change in speed?
+\answer{The maximum points are half as far apart, as are the x-intercepts.}
+\te{Printed "x-intercepts"; the displayed minimum height is 2 feet, so these graphs have no x-intercepts.}
+C. Communicate Precisely How are the three graphs similar? How are they different?
+\answer{All three graphs have the same curved shape. The second graph is taller than the other two, and the third graph is compressed horizontally from the first graph.}
+% FIG 39 675 914 974 1166
+\placeholder{graph}{Sample Student Work A and B together: axes x (Time (min)) and y (Height (ft)), origin O; x labels1,2,3,4,5 grid1/2, y labels8,16,24,32,40 grid4. Blue A begins at height2 at x=0, maxima44 at x=1,3,5, minima2 at x=2,4,6. Red B starts2, maxima22 at x=1/2,3/2,5/2,7/2,9/2,11/2, minima2 at each integer through6. Curves continue with right-end arrows; blue A and red B labels on right.}
+\te{Digital variant: A. Drag points to sketch a graph of a rider's height if the Ferris wheel is twice as high. How does the graph represent the change in height? B. Drag points to sketch a graph of a rider's height if the Ferris wheel is the same height as the first but goes twice as fast. How does the graph represent the change in speed? C has the same wording as the student page. Screen controls: Go back; ESSENTIAL QUESTION; SOLUTION.}
+% FIG 39 871 257 1059 458
+\placeholder{graph}{Digital launch plot: gray grid, horizontal Time (min), vertical Height (ft); x labels0,5,10 and unit grid; y labels20,40 and grid5. Green periodic wave with minimum0 and maximum20, period2, successive peaks near x=-5/2,-1/2,3/2,7/2,11/2,15/2,19/2. Displayed window roughly x=-3 to10 and y=-15 to50. Digital graph differs from the printed student graph.}
+\end{model-discuss}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS. Implement Tasks that Promote Reasoning and Problem Solving}
+Q: What do you notice about the graph of the rider's height above the platform?
+\answer{The graph shows a pattern that repeats. The maximum value is 22 ft. The minimum value is 2 ft. The graph reaches its maximum value every 2 minutes.}
+\textbf{During: SMALL GROUP. Support Productive Struggle in Learning Mathematics}
+Q: Does doubling the height of the Ferris wheel change the amount of time it takes the Ferris wheel to go around 1 time? Use your graph to explain.
+\answer{No, the distance between consecutive maximum values in the new graph is the same as in the original graph. So the time it takes for the Ferris wheel to go around 1 time is the same.}
+For Early Finishers
+Q: Sketch a graph of a rider's height when the Ferris wheel goes half as high. How does the graph represent the change in height?
+\answer{Check students' graphs. The maximum value of the new graph is 11. The minimum value remains 2.}
+\textbf{After: WHOLE CLASS. Facilitate Meaningful Mathematical Discourse}
+Q: How can you determine the length of time it takes the Ferris wheel to go around 1 time?
+\answer{You subtract the x-values of consecutive maximum or minimum values.}
+Q: Why does increasing the speed cause the time between consecutive maximum values to decrease?
+\answer{When the speed increases, the amount of time it takes to travel a distance decreases, so the time between maximum values is less.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXPLORE \& REASON}
+Reason In the section of the graph shown, how many revolutions did the Ferris wheel make? Explain.
+\answer{Three, the graph starts at the bottom and goes all the way around to the bottom again three more times.}
+\end{te-addendum}
+% Source page 40: 363 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning. Students learn to create and use graphs of sine and cosine functions. Students also learn to analyze and identify the key features of sine and cosine functions, such as the amplitude, period, and frequency.
+Example is Powered by Desmos. Activities are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Graph the Sine Function. Build Procedural Fluency From Conceptual Understanding}
+Part A
+Q: Can you choose any point as the starting point of the period?
+\answer{Yes, any point can be the starting point because the function repeats. For example, in the function (y=\sin x), the period is (2\pi). Both the interval 0 to (2\pi) and the interval (-\pi) to (\pi) represent the entire period.}
+Q: What do you notice about the (y)-values in each period?
+\answer{Beginning at the origin, the y-values start at 0, increase to 1, decrease to -1, and then increase back to 0.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 1}
+Additional Examples are available at SavvasRealize.com.
+A lab runs an experiment studying waves. The height of the waves in simulation is shown in the graph, where (y=0) represents the water level when there are no waves.
+What are the period and amplitude of the graph?
+\answer{The graph pattern repeats after intervals of 8. Therefore, the period of the graph is 8. The midline of the graph is (y=0). The maxima and minima are a distance of 4 from the midline. Therefore the amplitude is 4.}
+% FIG 40 437 935 577 1033
+\placeholder{graph}{Additional Example1 orange sine wave, axes x,y and origin O; x labels0,2,4,6,8,10,12, unit grid; y labels-4,-2,2,4, unit grid. Curve goes (0,0),(2,4),(4,0),(6,-4),(8,0),(10,4),(12,0), continuing beyond window with arrows; midline0, amplitude4, period8.}
+Example 1 Students identify the features of the graph of a periodic function in a real-world situation.
+Q: What does the period represent in this situation?
+\answer{The period represents the amount of time between waves.}
+\te{Digital controls: Go back; ESSENTIAL QUESTION; SOLUTION.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 3}
+What are the amplitude and period of (f(x)=\frac12\sin(\frac\pi3 x))?
+Amplitude: (a=\frac12)
+Period: (\frac{2\pi}{b}=\frac{2\pi}{\pi/3}=\frac{2\pi}{1}\cdot\frac3\pi=6)
+Multiplying the cosine function by (\frac12) results in an amplitude of (\frac12). The graph of the function (\sin(\frac\pi3 x)) will be a horizontal compression of the graph of (\sin x) by a factor of (\frac{1}{\pi/3}=\frac3\pi). Therefore the period is (\frac3\pi\cdot2\pi=6).
+\answer{Amplitude: (\frac12); period: 6.}
+\te{Printed "cosine function"; likely sine function. Digital controls: Go back; ESSENTIAL QUESTION; TRY ANOTHER ONE; SOLUTION.}
+Example 3 Students transition to finding the amplitude and period of functions with (a) and (b) as fractions and when (b) is a multiple of (\pi).
+Q: What do you notice about the period when (b) is a multiple of (\pi)?
+\answer{When b is a multiple of (\pi), the period is an integer or a fraction that is not multiplied by (\pi).}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Graph the Sine Function}
+\te{CONCEPTUAL UNDERSTANDING. Powered by Desmos.}
+A. What is the graph of (f(\theta)=\sin\theta)?
+A periodic function is a function for which the outputs repeat at regular intervals. When a function is periodic, (f(x)=f(x+p)) for some real number (p). The smallest such value of (p) is called the period.
+\te{Printed definition omits the positive restriction on p; the period is the smallest positive such value.}
+Look at the unit circle. Observe the value of (\sin\theta) for each indicated angle. Transfer this information to another coordinate grid using ordered pairs ((\theta,\sin\theta)).
+% FIG 40 1045 270 1151 379
+\placeholder{diagram}{Unit circle on square coordinate grid, origin O, arrowed axes with vertical labels1,-1, grid1/4. Black circle radius1. Purple cardinal points and radii at0 and2pi (right), pi/2(top),pi(left),3pi/2(bottom). Blue points and vertical segments at pi/3 and2pi/3; green atpi/4 and5pi/4; red atpi/6 and11pi/6. Each segment connects the point to the horizontal diameter; angle labels adjacent to circle.}
+As (\theta) increases from 0 to (\frac\pi2), the sine value increases from 0 to 1.
+As (\theta) increases from (\frac\pi2) to (\frac{3\pi}2), the sine value decreases from 1 to -1.
+As (\theta) increases from (\frac{3\pi}2) to (2\pi), the sine value increases from -1 to 0.
+\begin{tabular}{llllllllllllll}
+(\theta) & 0 & (\pi/6) & (\pi/4) & (\pi/3) & (\pi/2) & (2\pi/3) & (\pi) & (5\pi/4) & (3\pi/2) & (11\pi/6) & (2\pi) & (13\pi/6) & (9\pi/4) \\
+(f(\theta)) & 0 & (1/2) & (\sqrt2/2) & (\sqrt3/2) & 1 & (\sqrt3/2) & 0 & (-\sqrt2/2) & -1 & (-1/2) & 0 & (1/2) & (\sqrt2/2) \\
+\end{tabular}
+% FIG 40 850 477 1031 577
+\placeholder{graph}{Black sine curve f(theta)=sin theta labeled red; horizontal theta axis labels -2pi,-pi,pi,2pi and origin O, gridpi/4; vertical labels-1,1 with grid1/4; window approximately -9pi/4 to9pi/4 and -5/4 to5/4. Arrowheads at curve ends. Colored dots and vertical lines for theta=pi/6 red,pi/4 green,pi/3 blue,pi/2 purple,2pi/3 blue,pi purple,5pi/4 green,3pi/2 purple,11pi/6 red,2pi purple.}
+\te{REASON. Every (2\pi) radians around the unit circle, the sine values repeat with coterminal angles, so the graph of f repeats every (2\pi) radians. The function (f(\theta)=\sin\theta) is a periodic function with a period of (2\pi).}
+\te{Callout: The sine function is defined for all real numbers. Over its domain, the sine values cycle between -1 to 1 and back. So the domain of f is ((-\infty,\infty)), and the range is [-1,1].}
+\answer{A. Sine graph shown; domain ((-\infty,\infty)), range [-1,1], period (2\pi).}
+% Source page 41: 364 Example 1 continued
+B. What are the key features of the graph of (f(x)=\sin x)?
+% FIG 41 781 238 1120 400
+\placeholder{graph}{Red sine graph on arrowed x,y axes, origin O; x labels-3pi,-2pi,-pi,pi,2pi,3pi,4pi,5pi, gridpi/2; y labels-1,-0.5,0.5,1, grid1/4; window roughly -7pi/2 to11pi/2 and -5/4 to5/4. Blue dashed midline y=0 and dashed amplitude at x=5pi/2 from0 to1; green maximum y=1 segment between x=-3pi/2 andpi/2, minimum y=-1 between x=-5pi/2 and-pi/2. Callouts label amplitude, midline, zeros, minimum and maximum.}
+\te{Callout: The amplitude is the distance from the midline to the minimum or maximum value of the graph.}
+\te{Callout: The midline is the horizontal line halfway between the maximum and minimum points of the graph.}
+\te{Callout: There are infinitely many zeros, which occur at every integer multiple of (\pi).}
+\te{Callout: The minimum and maximum values of -1 and 1 occur at (\frac{3\pi}2+2k\pi) and (\frac\pi2+2k\pi), respectively, for all integers k.}
+The graph of (f(x)=\sin x) has a midline at (y=0) and an amplitude of 1.
+\answer{B. Midline (y=0), amplitude1, zeros at integer multiples of (\pi), minimum-1, maximum1.}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{EXAMPLE 1 CONTINUED. Part B}
+Q: How are the minimum and maximum of the function (y=\sin x) related?
+\answer{The minimum and maximum are opposites of each other. They are both the same distance from the midline, which in this case is the x-axis. This distance is the amplitude.}
+Q: Why do the minimum and maximum values repeat every (2\pi) radians?
+\answer{The period of the function is (2\pi), so each value repeats every (2\pi) radians.}
+\end{te-addendum}
+\begin{tryit}{1}
+a. Explain the meaning of a periodic function in your own words.
+\answer{a. A periodic function is a function which repeats outputs at regular intervals.}
+b. Create a table of values for (g(x)=\cos x) using the same angle measures as used for (\sin\theta).
+\answer{b. Table below.}
+\begin{tabular}{llllllllllllll}
+x & 0 & (\pi/6) & (\pi/4) & (\pi/3) & (\pi/2) & (2\pi/3) & (\pi) & (5\pi/4) & (3\pi/2) & (11\pi/6) & (2\pi) & (13\pi/6) & (9\pi/4) \\
+(g(x)) & 1 & (\sqrt3/2) & (\sqrt2/2) & (1/2) & 0 & (-1/2) & -1 & (-\sqrt2/2) & 0 & (\sqrt3/2) & 1 & (\sqrt3/2) & (\sqrt2/2) \\
+\end{tabular}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Graph the Cosine Function. Pose Purposeful Questions}
+Part A
+Q: What do you notice about the (y)-values in each period?
+\answer{Beginning at the origin, the y-values start at the maximum value 1, decrease to the minimum at -1 and increase back to the maximum.}
+\te{Printed "Beginning at the origin"; likely beginning at x=0, since cosine has y-intercept1.}
+Part B
+Q: How are the graphs of (y=\sin x) and (y=\cos x) the same? How are they different?
+\answer{Both graphs have the same domain, range, period, midline, and amplitude. The graphs have the same basic shape, but they are shifted horizontally by (\pi/2).}
+Q: How does the sketching an angle on the unit circle aid in understanding the sine and cosine graphs?
+\answer{The unit circle relates three values: the angle measure and its cosine and sine ratios in the ordered pair. The graphs of the sine and cosine functions focus on the independent variable, the angle measure, and then one of the ordered pair values. As the angle measure changes along the x-axis, the graph highlights the changes in positions along the unit circle.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Graph the Cosine Function}
+A. What is the graph of (f(x)=\cos x)?
+Like the sine function, the cosine function cycles between -1 and 1, but has an y-intercept of 1 instead of 0. As the angle increases from 0 to (\pi), the cosine value decreases from 1 to -1. As the angle increases from (\pi) to (2\pi), the cosine value increases back to 1.
+\te{REASON. Before you begin, what key features do you expect the graph of the cosine function to have?}
+% FIG 41 1027 521 1118 620
+\placeholder{graph}{Red f(x)=cos x, arrowed axes x,y, origin O; x labels pi,2pi with gridpi/3; y labels-1,1 with grid1/4. Curve max(0,1),(2pi,1), min(pi,-1), zeros pi/2,3pi/2,5pi/2, arrows at ends; displayed window about -pi/3 to8pi/3 and -5/4 to5/4.}
+\answer{A. Cosine graph shown, y-intercept1.}
+B. What are the key features of the graph of (f(x)=\cos x)?
+% FIG 41 856 651 1040 738
+\placeholder{graph}{Cosine curve black except red segment0 to2pi, on x,y grid with origin O, x labels-2pi,-pi,pi,2pi,4pi and gridpi/2; y labels-1,1, grid1/2. Window approximately -3pi to5pi and -3/2 to3/2, arrows at curve ends. Red labels Midline y=0 and Period=2pi with bracket from0 to2pi. Blue Amplitude label and dashed vertical segments at2pi from0 to1 and3pi from0 to-1.}
+The domain is ((-\infty,\infty)). The range is [-1,1]. The graph has a midline at (y=0) and an amplitude of 1.
+\answer{B. Domain ((-\infty,\infty)), range [-1,1], midline (y=0), amplitude1, period(2\pi).}
+\end{example}
+\begin{tryit}{2}
+Where are the zeros of the cosine function?
+\answer{The zeros of the cosine function occur when the unit circle intersects with the y-axis or at (\frac\pi2+2k\pi), (\frac{3\pi}2+2k\pi) for k any integer.}
+\end{tryit}
+% Source page 42: 365 Understand & Apply
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Identify Amplitude and Period. Pose Purposeful Questions}
+Part A
+Q: How is the amplitude related to other transformations of functions you have previously studied?
+\answer{In the equation, the output of the function is multiplied by the value of the amplitude. In the graph, multiplying by the amplitude value results in a vertical stretch ((|a|>1)).}
+Part B
+Q: Why does the negative sign in the function (y=-\sin2x) not affect the amplitude of the function?
+\answer{The negative sign is the same as multiplying the function by -1. Because the absolute value of -1 is 1, the amplitude of the function is 1.}
+Q: Under what conditions would the coefficient of (x) make the period longer?
+\answer{If the coefficient of x were between 0 and 1, the period would be longer because only a fraction of the graph would occur between 0 and (2\pi).}
+Example is Powered by Desmos. Activities are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Identify Amplitude and Period}
+A. What are the amplitude and period of (f(x)=3\cos x)?
+Graph both (f(x)=3\cos x) and the parent function (f(x)=\cos x).
+% FIG 42 834 278 1124 378
+\placeholder{graph}{Blue f(x)=cos x and red f(x)=3cos x on arrowed x,y axes, origin O. x labels -3pi,-2pi,-pi,pi,2pi,3pi, gridpi/2; y labels-4,-2,2,4 grid1; window -7pi/2 to7pi/2,-5 to5. Dashed red segment at y=3 from x=-2pi to0, blue y=1 from-2pi to0, red dashed vertical at2pi from0 to3. Curves have arrowheads at both ends; matching extrema x=integer pi and zeros oddpi/2. Right callout explains extrema.}
+\te{STUDY TIP. When looking for the amplitude of a sine or cosine function, find the minimum and maximum points and their distance from the midline.}
+\te{Callout: The midline is (y=0) and there are minimum values at -3 and maximum values at 3, which are 3 times those of (f(x)=\cos x).}
+The amplitude of (f(x)=3\cos x) is 3, and the period is (2\pi).
+\answer{A. Amplitude3; period(2\pi).}
+B. What are the amplitude and period of (y=-\sin2x)?
+(y=-\sin2x)
+The graph of (y=-f(x)) is a reflection of the graph of the parent function over the x-axis.
+The graph of (y=f(2x)) is a horizontal compression of the graph of the parent function by a factor of (\frac12).
+Neither of these transformations changes the amplitude, so the amplitude of (y=-\sin2x) is 1.
+The period is compressed by a factor of (\frac12). Since (\frac12(2\pi)=\pi), the period of (y=-\sin2x) is (\pi).
+Check with a graph:
+% FIG 42 878 563 1152 675
+\placeholder{graph}{Red y=-sin2x on grid, x,y arrowed axes with origin O; x labels-2pi,-pi,pi,2pi, gridpi/2; y label-1, grid1/4, window approximately -5pi/2 to5pi/2 and -5/4 to5/4. Curve has amplitude1, periodpi, descending through origin, troughs pi/4+kpi, peaks -pi/4+kpi; arrowheads at both ends. Green vertical segment at left peak from midline to1. Callout states amplitude1 and repeats at multiples of pi.}
+\te{STUDY TIP. Since the period of the graph of (y=\sin x) is (2\pi), multiplying the x by 2 will make the graph repeat itself twice as often, so the period of the graph of (y=\sin2x) is half the period of the graph of (y=\sin x).}
+\te{Callout: The function has an amplitude of 1, and the values of the function repeat at multiples of (\pi).}
+\answer{B. Amplitude1; period(\pi).}
+\end{example}
+\begin{tryit}{3}
+What are the amplitude and period of each function?
+a. (y=\frac13\cos\frac12 x)
+b. (y=2\sin\pi x)
+\answer{a. amplitude: (\frac13); period: (4\pi). b. amplitude:2; period:2.}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What process do you use to determine the period of each function?
+\answer{Determine the factor by which the function is stretched or compressed, and then multiply (2\pi) by this factor.}
+\end{te-addendum}
+\begin{te-addendum}{3}{CommonError}
+\textbf{Common Error. Try It! 3}
+Some students may incorrectly calculate the period by multiplying (2\pi) by the coefficient of (x) rather than dividing (2\pi) by the coefficient of (x). Have students graph the function and indicate on the graph the period of the function.
+\end{te-addendum}
+% Source page 43: 366 Understand & Apply
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Graph (y=a\sin bx) and (y=a\cos bx). Pose Purposeful Questions}
+Q: How can you determine the key points for the graphs of functions of the form (y=a\sin bx) and (y=a\cos bx)?
+\answer{Divide the x-value of each key point of the parent function by b and multiply the y-value of each key point of the parent function by a.}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What process do you use to determine the period and the frequency.
+\answer{The period is (2\pi) divided by b. The frequency is the reciprocal of the period.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES 1, 2, \& 3}
+Generalize In the equation (y=a\sin bx), how is the frequency affected by the parameters (a) and (b)?
+\answer{The value of a does not affect the frequency. Frequency is the reciprocal of the period. b indicates a horizontal stretch or compression that impacts the period, and therefore the frequency.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 4}
+Some students may struggle with issues of scale for the sine and cosine functions. Have students use their calculators and viewing windows to display two periods along the x-axis.
+Alternatively, have them graph (y_1=\sin x) and then (y_2=a\sin bx) for comparison: ZOOM, down arrow, 7: ZTrig. These exercises together will help students identify stretches and compressions.
+1. (\sin2x) \answer{window size (-\pi) to (\pi) for x-axis and -4 to 4 for y-axis}
+2. (2\cos\frac14 x) \answer{window size (-8\pi) to (8\pi) for x-axis and -8 to 8 for y-axis}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Frequency}
+Frequency is the reciprocal of the period. Period defines the duration in which a wave cycle is completed. Frequency is the number of complete cycles appearing in a specific time.
+(y=\sin x) and (y=\cos x) each have a period of (2\pi) and a frequency of (\frac{1}{2\pi}). The function completes one cycle from 0 to (2\pi).
+(y=-\sin2x) has a period of (\pi) and a frequency of (\frac1\pi). The function completes one cycle from 0 to (\pi).
+\te{USE STRUCTURE. Due to the inverse relationship between period and frequency, the greater the frequency, the lesser the period.}
+% FIG 43 786 330 1043 433
+\placeholder{graph}{Two side-by-side graphs, both arrowed x,y axes, O, x labels pi and2pi, gridpi/4; y labels1,-1, grid1/4, windows -pi/2 to5pi/2 and -5/4 to5/4. Left blue y=sin x through(0,0), maximum(pi/2,1), minimum(3pi/2,-1), period2pi. Right red y=-sin2x, descending through origin, amplitude1, periodpi. Both curves have end arrows.}
+\end{concept-box}
+\begin{example}{4}
+\textbf{Graph (y=a\sin bx) and (y=a\cos bx)}
+A. Graph (f(x)=5\sin\frac12 x).
+Identify transformations to the parent function (y=\sin x).
+(f(x)=5\sin\frac12 x)
+\te{Callout: In an equation of the form (y=a\sin bx), the parameter a indicates a vertical stretch or compression. The amplitude is stretched to 5.}
+\te{Callout: The parameter b indicates a horizontal stretch or compression. The period is stretched by a factor of 2 to (4\pi).}
+\te{VOCABULARY. A parameter is a value in an equation that determines one of its characteristics.}
+Sketch the graph. Divide one period into fourths. Plot in order, a zero, a maximum, a zero, a minimum, and a zero.
+The domain is ((-\infty,\infty)) and the range is [-5,5]. The amplitude is 5 and the period is (4\pi). The frequency is (\frac1{4\pi}). When (|b|<1), the function is horizontally stretched, and the period is increased.
+% FIG 43 962 590 1101 713
+\placeholder{graph}{Green f(x)=5sin(x/2) with arrowed x,y axes, origin O. x labels2pi,4pi,6pi, gridpi/2; y labels-4,-2,2,4, grid1. Window roughly -pi/2 to13pi/2,-6 to6. Five red filled points labeled(0,0),(pi,5),(2pi,0),(3pi,-5),(4pi,0), labels colored green,red,blue,red,blue respectively. Further maximum(5pi,5), curve end arrows.}
+\te{COMMON ERROR. Use key points to determine if a graph's appearance is different because of a change in the viewing window with technology or a transformation from the parent function.}
+\answer{A. Domain ((-\infty,\infty)), range[-5,5], amplitude5, period(4\pi), frequency(1/(4\pi)).}
+% Source page 44: 367 Example 4 continued
+B. Graph (f(x)=3\cos\pi x).
+The transformations of (f(x)=3\cos\pi x) are a vertical stretch by a factor of 3 and a horizontal compression by a factor of (\frac1\pi).
+Sketch the graph. Divide one period into fourths. Plot in order, a maximum, a zero, a minimum, a zero, and a maximum.
+The domain is ((-\infty,\infty)) and the range is [-3,3]. The amplitude is 3 and the period is 2 radians. The frequency is (\frac12). When (|b|>1), the function is compressed horizontally, and the period is decreased.
+% FIG 44 850 268 999 371
+\placeholder{graph}{Red f(x)=3cos(pi x) on arrowed x,y grid, O; x labels1,2,3,4, grid1/2; y labels-2,2, grid1; window -1/2 to5,-4 to4. Red marked and labeled points(0,3),(1/2,0),(1,-3),(3/2,0),(2,3); further minimum(3,-3), maximum(4,3); curve continues to right with arrow.}
+\te{STUDY TIP. The horizontal scale is still in radians. The period is compressed by a factor of (\frac1\pi). The period is (\frac1\pi(2\pi)=2) radians.}
+\answer{B. Domain ((-\infty,\infty)), range[-3,3], amplitude3, period2 radians, frequency(1/2).}
+\end{example}
+\begin{tryit}{4}
+Graph the functions. What are the key features?
+a. (g(x)=\frac32\cos\frac34 x)
+\answer{a. The domain is ((-\infty,\infty)). The range is [-1.5,1.5]. Amplitude is stretched vertically by a factor of 1.5, so amplitude is 1.5. Period is stretched horizontally by a factor of (\frac43) and is (\frac{8\pi}3). The frequency is (\frac3{8\pi}).}
+% FIG 43 140 362 317 482
+\placeholder{graph}{Try4a red cosine with amplitude1.5, period8pi/3, maxima(0,1.5),(8pi/3,1.5), minima(4pi/3,-1.5),(4pi,-1.5), end arrows. Arrowed x,y axes, O; x labels4,8,12, grid2; y labels-2,2, grid1. Window approximately -4 to14,-3 to3.}
+b. (h(x)=-\sin2\pi x)
+\answer{b. The domain is ((-\infty,\infty)). The range is [-1,1]. Amplitude is 1. Period is compressed horizontally by a factor of (2\pi) and is 1. The sine function is reflected about the x-axis. The frequency is 1.}
+\te{Printed compression factor (2\pi); likely (1/(2\pi)).}
+% FIG 43 139 545 316 667
+\placeholder{graph}{Try4b red -sin(2pi x), amplitude1, period1, descending through origin O; x labels1,2,3 and grid1/2; y labels-1,1 grid1/2; window -1 to7/2,-3/2 to3/2. Arrowed x,y axes and curve end arrows; minima x=1/4+k and maxima x=-1/4+k.}
+\end{tryit}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Develop a Graph and an Equation From a Description. Pose Purposeful Questions}
+Q: How can you determine the midline of a graph if you are given the minimum and maximum values of the function?
+\answer{You add the minimum and maximum values and then divide the sum by 2.}
+Q: How does the movement of the hour hand on the clock correspond to the graph of the function?
+\answer{Between 12:00 and 6:00, the tip of the hour hand is decreasing. The graph of the function decreases between (x=0) and (x=6). Between 6:00 and 12:00, the tip of the hour hand is increasing. The graph of the function increases between (x=6) and (x=12).}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What is different about the units in Example 4 compared to the time in the Try It?
+\answer{In Example 4, the units for time are hours, but in the Try It, the units for time are minutes.}
+\te{Printed Example4 twice; likely Example5.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ELLAddendum}
+\textbf{English Language Learners. Use with EXAMPLE 5}
+WRITING. BEGINNING. Review the meanings of maximum and minimum with students. Then provide several sentence frames with either the word minimum or maximum missing for them to practice using the words correctly. For example: "For people's safety, the auditorium has a \underline{\hspace{1cm}} holding capacity of 100 people." "To get an A on the quiz, you have to answer a \underline{\hspace{1cm}} of nine questions correctly."
+Q: How do the words above and below relate to maximum and minimum?
+\answer{Values must be below the maximum and above the minimum.}
+Q: In the example, are the maximum and minimum values (x)- or (y)-values?
+\answer{y-values}
+LISTENING. DEVELOPING. Help students review clock terminology with a quick game. Give them oral directions to follow that use clock locations. Distribute a paper circle with numbers on it that are placed on a coordinate grid (no hour/minute hand) to each student. Give instructions to students about where they should write letters or draw small pictures, such as draw a smiley face at midnight, or write a capital letter A where the minute hand is at 1:30.
+Q: In which quadrant is the minute hand at 4:40?
+\answer{Quadrant III}
+Q: How many hours are represented in each quadrant in the example?
+\answer{3 hours}
+READING. EXPANDING. Have students read the Compute section. Then ask them to summarize what the text is describing in their own words. Next, have them read the definitions of cycle from the dictionary
+Q: Why is noon not (0,5)?
+\answer{The x-value represents the hour of time, and time continues on. You cannot repeat hour 0 again.}
+Q: Which definition of cycle fits the example and how does it relate to the word repeat?
+\answer{a series of events that occurs again and again in the same way; To repeat something is to do something again and again; a cycle repeats.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Develop a Graph and an Equation From a Description}
+\te{APPLICATION.}
+A math teacher has a clock centered at the origin of a coordinate system. Graph the relationship between (x), in hours, and (y), in inches, between the horizontal axis and the tip of the hour hand. Let midnight represent 0 h, and graph the relationship for the time between midnight and 11:59 P.M. Write the equation describing the relationship you graphed.
+Formulate. Construct a diagram to represent the clock:
+% FIG 44 1027 503 1153 632
+\placeholder{diagram}{Analog clock face with numbers1 through12, gold rim, centered at origin of black arrowed coordinate axes x right and y up. Red hour-hand arrow points left toward9 and is labeled5 in.; gray long hand points toward2. Vertical axis passes12 and6, horizontal through9 and3.}
+Think of the horizontal axis as the midline.
+The tip of the hour hand starts 5 in. above the horizontal axis at midnight.
+3 h later it reaches the horizontal axis.
+At 6:00 A.M. it is 5 in. below the horizontal axis. At 9:00 A.M. it is back to the horizontal axis.
+At noon, after 12 h, the cycle starts over again.
+Compute. The function starts at (0,5) for midnight, then crosses (3,0) at 3 A.M. and (6,-5) at 6 A.M. The hour hand travels back up to (9,0) and then at noon is at (12,5) before repeating the cycle again to end at (24,5) at midnight the next day.
+% FIG 44 1011 635 1156 786
+\placeholder{graph}{Red hour-hand height versus time, horizontal x Time(h), vertical y Height(in.), origin O; x labels4,8,12,16,20, grid2; y labels-6,-4,-2,2,4,6 grid1. Window0 to24,-7 to7. Red cosine starts(0,5), minima(6,-5),(18,-5), maxima(12,5),(24,5), zeros3,9,15,21; no marked points. Axes arrowed.}
+% Source page 45: 368 Example 5 continued
+Interpret. The graph has a y-intercept at the maximum value, so the equation is (y=a\cos bx).
+The minimum and maximum values occur at -5 and 5 respectively, so the midline is (y=0) and the amplitude is (a=5).
+The minimum value repeats after 12 h, so the period is 12.
+(12=\frac{2\pi}{b}), so (b=\frac\pi6).
+The equation describing the relationship is (y=5\cos\frac\pi6 x).
+\answer{(y=5\cos\frac\pi6 x); midline (y=0), amplitude5, period12 h.}
+\end{example}
+\begin{tryit}{5}
+Construct a graph over 3 h for the tip of the minute hand (t) minutes after noon if the minute hand is 8 in. long. What is the period?
+\answer{The period is 60.}
+% FIG 44 154 512 438 778
+\placeholder{graph}{Try5 answer graph red cosine height, horizontal t Time(min), vertical y Height(in.); x labels30,60,90,120,150, grid15; y labels-8,-4,0,4,8, grid2, window0 to180,-12 to12. Maxima(0,8),(60,8),(120,8),(180,8); minima(30,-8),(90,-8),(150,-8); zeros15,45,75,105,135,165. Arrowed axes and curve end arrows.}
+\end{tryit}
+\begin{te-addendum}{6}{GeneralizeETP}
+\textbf{Compare Key Features of Two Periodic Functions. Use and Connect Mathematical Representations}
+Q: How can the period of a trigonometric function be determined by its graph?
+\answer{The period of a trigonometric function can be determined by its graph by subtracting the x-values of consecutive maximum points.}
+Q: How would the graph of (f) compare to the graph of (g)?
+\answer{The distance between consecutive maximums would be longer in the graph of f.}
+Q: How would the equation of (g) compare to the equation of (f)?
+\answer{The equation of g would be the same as the equation of f, except that the coefficient of x would be (\pi/2).}
+\te{Printed answer omits the phase needed for displayed g; the graphed g is (-4\sin(\pi x/2)), with maxima at3 and7.}
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Compare Key Features of Two Periodic Functions}
+The equation for (f) and the graph of (g) are given below. How do the period and amplitude of the functions compare?
+(f(x)=4\cos(\frac\pi4 x))
+% FIG 45 798 452 940 547
+\placeholder{illustration}{Whiteboard with dark gray frame, tray with purple marker and brown eraser; purple equation f(x)=4cos((pi/4)x).}
+% FIG 45 957 453 1100 566
+\placeholder{graph}{Red curve g on arrowed x,y grid, origin O, x labels2,4,6,8,10,12, grid1; y labels-4,-2,2,4, grid1. Window approximately -1 to13,-5 to6. Red filled maxima labeled(3,4),(7,4), further maximum(11,4), minima(1,-4),(5,-4),(9,-4),(13,-4); zeros every even integer; descends through origin, end arrows.}
+\te{STUDY TIP. The period of a trigonometric graph can be determined using any two points, usually the two minimum points or maximum points closest to each other.}
+Find the period of (f) by dividing the period of the parent function by the parameter (\frac\pi4).
+The period of (f) is (\frac{2\pi}{\pi/4}), or 8.
+Find the amplitude of (f) by multiplying the amplitude of the parent function by the parameter 4.
+The amplitude of (f) is (1(4)), or 4.
+Find the period of (g) by measuring the distance from one maximum to the next.
+The period of (g) is 4.
+Find the amplitude of (g) by measuring the distance from the midline to a maximum or minimum.
+The midline of (g) is the line with equation (y=0), so the distance to a maximum is 4.
+The amplitude of (g) is 4.
+The two functions have the same amplitude, but the period of (f) is twice as long as the period of (g).
+\answer{Both amplitudes4; f period8, g period4.}
+\end{example}
+\begin{tryit}{6}
+a. How do the frequencies of (f) and (g) compare?
+\answer{a. The frequency of f is half the frequency of g.}
+b. What else is different about the two functions? Explain.
+\answer{b. Because g has a shorter period than f, they have different x-intercepts.}
+\end{tryit}
+\begin{te-addendum}{6}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What do you know about the relationship between the period and the frequency of a function?
+\answer{The period and the frequency are reciprocals.}
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND. Use with EXAMPLES 4 \& 5}
+Use Structure Suppose you have two graphs, (y=a\sin bx) and (y=c\cos dx). The amplitude of the sine graph is larger than that of the cosine graph. The period of the cosine graph is larger than that of the sine graph. How are the parameters (a), (b), (c), and (d) related?
+\answer{(a>c) and (b>d)}
+\te{Printed inequalities assume positive parameters; in general (|a|>|c|) and (|b|>|d|).}
+\end{te-addendum}
+\begin{te-addendum}{6}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 6}
+Have students explore comparing the period and amplitude of two periodic functions when one has a negative coefficient and a period that is an integer value while the other has a period that is a multiple of (\pi).
+\item The equation for m and the graph of n are given below. (m=-2\sin(4\pi x))
+% FIG 45 110 1146 270 1307
+\placeholder{graph}{Red n on square grid, axes x,y arrowed, origin O; x labels-pi/2,pi/2, gridpi/4; y labels-2,2, grid1. Window-pi to pi,-4 to4. Red cosine has maxima(-pi/2,2),(0,2),(pi/2,2), troughs(-3pi/4,-2),(-pi/4,-2),(pi/4,-2),(3pi/4,-2). Curve end arrows, red n label upper right.}
+Q: How do the period and amplitude of the functions compare?
+\answer{Because amplitude is (|a|), the amplitude of each function is the same, 2. The period of m, (\frac12), is less than the period of n, (\frac\pi2).}
+\te{Printed introduction says integer period; the displayed m has period1/2. The graphed peaks occur every pi/2.}
+\end{te-addendum}
+% Source page 46: 369 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY. Key Features of Sine and Cosine Graphs}
+Q: Why is the absolute value used in the expression for the amplitude of the function?
+\answer{The amplitude is the distance between the midline and the maximum or minimum. Distance is always positive, so the absolute value of a is used.}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? Do You KNOW HOW? Common Error. Exercise 5}
+Some students may switch the period and amplitude of the function. Have students label the distance between the midline and the maximum on the graph as the amplitude and the distance between consecutive maximum values on the graph as the period.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Key Features of Sine and Cosine Graphs}
+WORDS. The general equation for a sine function is (f(x)=a\sin bx), just as the general equation for a cosine function is (g(x)=a\cos bx). In both cases, the amplitude is (|a|) and the frequency is (\frac{b}{2\pi}).
+GRAPH. (h(x)=\frac12\sin4x)
+% FIG 46 859 283 1037 384
+\placeholder{graph}{Red h(x)=1/2 sin4x on arrowed x,y grid, origin O; x labels-2pi,-pi,pi,2pi, gridpi/4; y labels-1,1 grid1/4; window-9pi/4 to9pi/4,-5/4 to5/4. Amplitude1/2, periodpi/2, curve crosses origin upward, maxima x=pi/8+kpi/2, minima3pi/8+kpi/2, continuation arrows at both ends.}
+\te{Callout: The amplitude is the distance between a minimum or maximum point and the midline, or (\frac12).}
+\te{Callout: The x-axis, or (y=0), is the midline, which is halfway between the maximum points and minimum points.}
+\te{Callout: The period is (\frac\pi2), or the length of one cycle. The frequency is (\frac2\pi), because the function repeats 2 times from 0 to (\pi).}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION. What are the key features of sine and cosine functions?
+\answer{The key features of the sine and cosine functions may described in terms of domain and range, period and frequency, amplitude, and midline.}
+\te{Printed "may described" retained; likely "may be described".}
+2. Error Analysis Christy said that the function (f(x)=3\cos4x) has an amplitude of 3 and a period of (\frac\pi4). Explain and correct Christy's error.
+\answer{The period is (\frac{2\pi}4), or (\frac\pi2), not (\frac\pi4).}
+3. Vocabulary Explain the difference between the period and the amplitude of a periodic function.
+\answer{The period is the interval of the domain before it repeats. The amplitude is the distance between the midline and the minimum or maximum.}
+4. Reason What is the range of the cosine function? How does the range compare to the amplitude of the function?
+\answer{(-1\leq y\leq1); The range is from minimum to maximum; the amplitude is half that distance.}
+\textbf{Do You KNOW HOW?}
+Find the period and amplitude of each function.
+5.
+% FIG 46 955 500 1059 583
+\placeholder{graph}{Summary5 red sine on arrowed x,y grid, O; x labels-2pi,-pi,pi,2pi, gridpi/2; y labels-2,2, grid1, window-5pi/2 to5pi/2,-4 to4. Amplitude3, periodpi, rising through origin, peaks(pi/4+kpi,3), troughs(3pi/4+kpi,-3), curve end arrows.}
+\answer{period: (\pi); amplitude:3}
+6.
+% FIG 46 955 587 1059 651
+\placeholder{graph}{Summary6 red sine on arrowed x,y grid, O; x labels-4pi,-2pi,2pi,4pi, gridpi; y labels-0.5,0.5, grid1/4; window-5pi to5pi,-3/4 to3/4. Curve rises through origin; maxima(pi,1/2),(-3pi,1/2), minima(-pi,-1/2),(3pi,-1/2), period4pi; end arrows.}
+\answer{period: (4\pi); amplitude:(\frac12)}
+7. Use the graph from Exercise 6. How many cycles does the function have in the interval from 0 to (2\pi)?
+\answer{(\frac12)}
+\end{concept-summary}
+% Source page 47: 370 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+8--23 & 8--23 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply: 2 points each
+Practice: 1 point each
+Assessment Practice: 1 point each
+Performance Task: 3 points each
+Scan the QR code to access a video tutorial.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 and 2 & 13 & 1 \\
+1 and 2 & 9, 11 & 2 \\
+3 & 14, 15, 21 & 1 \\
+3 & 10 & 2 \\
+4 & 8, 16, 22 & 2 \\
+5 & 17 & 2 \\
+5 & 19, 20 & 3 \\
+6 & 18 & 2 \\
+6 & 12, 23 & 3 \\
+\bottomrule
+\end{tabular}
+\te{Printed first example cell is "1 and 2" across two DOK rows. Retained literally; checker accepts only numeric example cells and therefore reports items9,11,13 as unmapped. Their DOK values here are directly printed, not inferred.}
+\end{item-analysis}
+\begin{practice}{8}{2}
+UNDERSTAND. Use Structure Write the equations of three cosine functions that have an amplitude of (\frac12) and that have periods of (\frac12), 2, and 4. Then graph and label all three equations on the same coordinate plane.
+\answer{period(\frac12): (y=\frac12\cos(4\pi x)); period2: (y=\frac12\cos(\pi x)); period4: (y=\frac12\cos(\frac\pi2 x))}
+% FIG 47 474 1129 784 1327
+\placeholder{graph}{Three cosine graphs with arrowed x,y axes, origin O; x labels-pi,pi, gridpi/4; y labels-1,-0.5,0.5,1, grid1/4; window-2pi to2pi,-5/4 to5/4. Red y=1/2 cos4pi x period1/2; blue y=1/2 cos pi x period2; green y=1/2 cos(pi/2)x period4. All share maximum(0,1/2), minima -1/2; all have end arrows and colored equation labels.}
+\end{practice}
+\begin{practice}{9}{2}
+UNDERSTAND. Look for Relationships Explain why the sine function is a periodic function.
+\answer{The sine function is a periodic function because the outputs repeat after a constant interval of inputs, (2\pi) radians.}
+\end{practice}
+\begin{practice}{10}{2}
+UNDERSTAND. Error Analysis Describe and correct the error a student made in solving for the period of the given function.
+\te{Student work, marked with a red X:}
+(f(x)=\frac14\sin\frac23 x)
+(period=\frac{2\pi}{1/4})
+(period=\frac{2\pi}{1}\times\frac41)
+(period=8\pi)
+\answer{The student used the value of a instead of the value of b in the formula for the period of a function. The period is (3\pi).}
+\end{practice}
+\begin{practice}{11}{2}
+UNDERSTAND. Look for Relationships A "five-point pattern" can be used to graph sine and cosine functions. The five-point pattern for the sine function when (a>0) is zero-max-zero-min-zero, as shown on the graph. What is the five-point pattern for the sine function when (a<0)?
+% FIG 47 508 733 743 867
+\placeholder{graph}{Red sine wave on arrowed x,y axes, O; x labels-2pi,-pi,pi,2pi, gridpi/4; y labels-1,1 grid1/4; window-9pi/4 to9pi/4,-5/4 to5/4. Red filled points labeled zero at(0,0),(pi,0),(2pi,0), max at(pi/2,1), min at(3pi/2,-1). Curve end arrows.}
+\answer{zero-min-zero-max-zero}
+\end{practice}
+\begin{practice}{12}{3}
+UNDERSTAND. Higher Order Thinking Use a graphing calculator to graph (y=\sin x) and (y=\csc x). What do you notice about the graph of (y=\csc x) where (y=0) on the graph of (y=\sin x)? (Hint: (y=\csc x) is equivalent to (y=\frac1{\sin x}).)
+\answer{The graph of (y=\csc x) is undefined where (y=0) on the graph of (y=\sin x).}
+\end{practice}
+\begin{practice}{13}{1}
+PRACTICE. Identify the domain, range, and period of the function (f(x)=\cos x). SEE EXAMPLES 1 AND 2
+% FIG 47 818 315 1053 438
+\placeholder{graph}{Red cosine, arrowed x,y axes and O; x labels-2pi,-pi,pi,2pi, gridpi/4; y labels1,-1, grid1/4, window-9pi/4 to9pi/4,-5/4 to5/4. Maxima(-2pi,1),(0,1),(2pi,1), minima(-pi,-1),(pi,-1), zeros oddpi/2. Curve end arrows.}
+\answer{domain: (-\infty<x<\infty); range: (-1\leq y\leq1); period:(2\pi)}
+\end{practice}
+\begin{practice}{14}{1}
+PRACTICE. What are the amplitude and period of each function? SEE EXAMPLE 3
+(g(x)=\frac12\cos\frac18 x)
+\answer{amplitude:(\frac12); period:(16\pi)}
+\end{practice}
+\begin{practice}{15}{1}
+PRACTICE. What are the amplitude and period of each function? SEE EXAMPLE 3
+(h(x)=5\sin\frac14 x)
+\answer{amplitude:5; period:(8\pi)}
+\end{practice}
+\begin{practice}{16}{2}
+PRACTICE. Use technology to graph (y=\frac34\sin2x). What is the frequency? Describe its key features. SEE EXAMPLE 4
+\answer{domain ((-\infty,\infty)); range[-\frac34,\frac34]; amplitude(\frac34); period(\pi); midline(y=0); frequency(\frac1\pi).}
+\end{practice}
+\begin{practice}{17}{2}
+PRACTICE. A particle in the ocean moves with a wave. The motion of the particle can be modeled by the cosine function. Write a function that models the height of the particle in inches (y) as it moves in seconds (x). What is the period of the function? SEE EXAMPLE 5
+% FIG 47 802 666 1068 838
+\placeholder{illustration}{Blue ocean waves on pale blue sky. Black vertical double-headed measurement arrow labeled14 in. spans from top of left crest down to nearby trough level. Callout pointing to crest: One wave every6 s.}
+\answer{(y=14\cos\frac\pi3 x); 6 seconds}
+\te{Printed14-inch arrow appears to span crest to trough; the printed answer treats14 as amplitude. If14 is full wave height, amplitude would be7.}
+\end{practice}
+\begin{practice}{18}{2}
+PRACTICE. Compare and contrast the two functions. SEE EXAMPLE 6
+(f(x)=\frac14\cos\frac\pi3 x)
+% FIG 47 817 883 963 992
+\placeholder{graph}{Red cosine curve on arrowed x,y grid, O; x labels-pi,pi, gridpi/4; y labels-1,1, grid1/2, window-5pi/4 to5pi/4,-2 to2. Maximum(0,1/4), minima(-pi,-1/4),(pi,-1/4), zeros plus/minuspi/2; end arrows.}
+\answer{Both cosine functions have an amplitude of (\frac14). The period of in the graph is (2\pi) and the period of f is 6, Therefore, the function f has a smaller period.}
+\te{Printed "period of in the graph" retained.}
+\end{practice}
+% Source page 48: 371 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice \& Problem Solving is available at SavvasRealize.com.
+\te{Answers14--18 printed here are incorporated in the corresponding preceding practice blocks.}
+\end{te-addendum}
+\begin{practice}{19}{3}
+APPLY. Make Sense and Persevere The relationship between the height of a point on a unicycle wheel, in feet, and time, in seconds, can be modeled by the sine function. A marker was placed on the wheel at time (t=0) s with a height of (h=0) ft. When Esteban is riding the unicycle, it takes (\frac\pi2) s for the unicycle wheel to make one complete revolution.
+% FIG 48 693 393 818 651
+\placeholder{illustration}{Esteban rides unicycle, orange shirt, red helmet, blue pants. Wheel has horizontal double-ended diameter arrow labeled2 ft; callout points to marker at bottom of wheel on ground: marker t=0.}
+a. What is the period of the function?
+\answer{a. (\frac\pi2)}
+b. What is the amplitude of the function?
+\answer{b. 1}
+c. Write a function to represent this situation.
+\answer{c. (h(t)=\sin(4t))}
+d. Graph the function.
+\answer{d. See graph.}
+% FIG 48 156 502 471 701
+\placeholder{graph}{Printed answer19d: red h=sin4t with arrowed t,h axes and O; horizontal labels-pi,pi gridpi/4; vertical labels-1,-0.5,0.5,1 grid1/4; window-2pi to2pi,-5/4 to5/4. Eight periods of amplitude1, passing upward through origin, troughs negative; curve end arrows.}
+e. How many revolutions will the unicycle wheel make in (4\pi) s when Esteban is riding the unicycle?
+\answer{e. 8}
+\te{Printed sine equation/graph have negative heights and rise from midline at t=0; the described ground-level starting marker on a2-foot wheel would instead have height (1-\cos4t). Source answer retained.}
+\end{practice}
+\begin{practice}{20}{3}
+APPLY. Model With Mathematics A solar day is 24 h and a lunar day is 24 h 50 min. A lunar day is 50 min longer than a solar day because the moon revolves around Earth, and Earth rotates around its axis in the same direction. This means it takes Earth 50 min longer to catch up with the moon. Each lunar day, two high tides and two low tides occur. High tides occur 12 h 25 min apart. Yesterday, high tide was measured at 8 ft above sea level and low tide was measured at 2 ft above sea level. A cosine function models the depth of the water in feet, (D), at time (t) in hours.
+a. What is the period of the function?
+\answer{a. 12 h 25 min}
+b. The amplitude is the difference between the depth of the water at high tide and the average depth of the water. What is the amplitude?
+\answer{b. 3 ft}
+c. Write a function to represent (D) as a function of (t).
+\answer{c. (D(t)=3\cos(\frac{24\pi}{149}t)+5)}
+\end{practice}
+\begin{practice}{21}{1}
+ASSESSMENT PRACTICE. Find the key features of the function (f(x)=8\cos(\frac\pi6 x)). Write the correct value from the box next to each key feature.
+amplitude = blank
+period = blank
+frequency = blank
+midline = blank
+\begin{tabular}{lll}
+3 & 8 & 12 \\
+(\frac18) & (\frac1{12}) & (\frac\pi3) \\
+(x=0) & & (y=0) \\
+\end{tabular}
+\answer{amplitude:8; period:12; frequency:(\frac1{12}); midline:(y=0)}
+\end{practice}
+\begin{practice}{22}{2}
+ASSESSMENT PRACTICE. SAT/ACT What is the equation of the graph?
+% FIG 48 904 447 1063 554
+\placeholder{graph}{Red cosine on arrowed x,y grid, O; x labels-2pi,-pi,pi,2pi, gridpi/2; y labels-1,1, grid1/2, window-3pi to3pi,-2 to2. Maxima height3/4 at x=integer pi, minima-3/4 at oddpi/2, periodpi, curve end arrows.}
+A. (y=\frac34\cos(2x))
+B. (y=\frac34\sin(2x))
+C. (y=\frac32\cos x)
+D. (y=\frac32\sin x)
+\answer{A}
+\end{practice}
+\begin{practice}{23}{3}
+ASSESSMENT PRACTICE. Performance Task Dominga is investigating how the signs of the parameters (a) and (b) create transformations of the sine function.
+Part A Graph (f(x)=(\sin2x)) and (g(x)=-\sin(2x)) on the same coordinate plane.
+\answer{Part A. See graph.}
+% FIG 48 156 886 471 1085
+\placeholder{graph}{Answer23A: red f(x)=sin2x and blue g(x)=-sin2x on arrowed x,y axes, O; x labels-pi,pi, gridpi/4; y labels-1,-0.5,0.5,1 grid1/4, window-2pi to2pi,-5/4 to5/4. Both amplitude1, periodpi, opposite y-values, zeros x=kpi/2. Red rises at origin, blue falls; labeled equations and end arrows.}
+Part B How are the graphs of (f(x)=\sin(2x)) and (g(x)=-\sin(2x)) related?
+\answer{Part B. (f(x)=\sin(2x)) and (g(x)=-\sin(2x)) are reflections of each other over the x-axis.}
+Part C Graph (f(x)=\sin(2x)) and (h(x)=\sin(-2x)) on the same coordinate plane.
+\answer{Part C. See graph.}
+% FIG 48 157 1191 472 1390
+\placeholder{graph}{Answer23C: same window, grid, labels and red f=sin2x as PartA; blue h(x)=sin(-2x) is reflected across y-axis, equivalently x-axis. Red rises through origin while blue falls, common zeros kpi/2, amplitude1 periodpi; colored equation labels and end arrows.}
+Part D How are the graphs of (f(x)=\sin2x) and (h(x)=\sin(-2x)) related?
+\answer{Part D. (f(x)=\sin(2x)) and (h(x)=\sin(-2x)) are reflections of each other over the x-axis.}
+Part E How is the graph of (y=a\sin(bx)) affected when (a) or (b) is replaced with its opposite? Explain.
+\answer{Part E. When a is replaced with its opposite, the graph is reflected over the x-axis. When b is replaced with its opposite, the graph is reflected over the y-axis.}
+\end{practice}
+% Source page 49: 371A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Resources book.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F90 \\
+2 & 1 & F31 \\
+3 & 2 & F90 \\
+4 & 1 & F90 \\
+5 & 2 & F90 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{7-3 Lesson Quiz: Graphing Sine and Cosine Functions}
+Lesson Quiz is available at SavvasRealize.com. ASSESSMENT RESOURCES.
+1. Select all the correct statements.
+A. The amplitude of (y=2\cos(\frac12 x)) is (\frac12).
+B. The period of (y=2\cos(\frac12 x)) is (\pi).
+C. The amplitude of (y=\frac\pi2\sin(\frac\pi2 x)) is (\frac\pi2).
+D. The period of (y=4\pi\sin(\frac12 x)) is (4\pi).
+E. The period of (y=\cos(2\pi x)) is 1.
+F. The amplitude of (y=2\sin(\frac12 x)) is 2.
+\answer{1. C, D, E, F.}
+2. What is the average rate of change of the function (y=3\sin(2x)) on the interval [0,(\frac\pi4)]?
+A. (-\frac{12}\pi)
+B. (-\frac6\pi)
+C. (\frac6\pi)
+D. (\frac{12}\pi)
+\answer{2. D.}
+3. The equation for (f) and the graph of (g) are given. How do the period and the amplitude of the functions compare?
+(f(x)=2\cos(\frac\pi2 x))
+% FIG 49 1025 515 1099 579
+\placeholder{graph}{Quiz3 black periodic graph g with arrowed x,y axes and O; x labels2,4, grid1; y label2, grid1; window roughly-1 to6,-3 to3. Sine curve rises through origin, maxima(1/2,2),(5/2,2),(9/2,2), minima(-1/2,-2),(3/2,-2),(7/2,-2),(11/2,-2); amplitude2 period2, curve end arrows.}
+A. The amplitudes are the same, but the period of (f) is half as long as the period of (g).
+B. The amplitudes are the same, but the period of (f) is twice as long as the period of (g).
+C. The periods are the same, but the amplitude of (f) is half as great as the amplitude of (g).
+D. The periods are the same, but the amplitude of (f) is twice as great as the amplitude of (g).
+\answer{3. B.}
+4. The graph of the function (f(x)=5\cos(2x)) is a reflection over the x-axis of the graph of (g(x)=\underline{\hspace{1cm}}\;\underline{\hspace{1cm}}(\underline{\hspace{1cm}})).
+Tiles: -5; cos; (2x); sin; (-2x); 5.
+\answer{4. -5; cos; (2x).}
+5. High tides at a beach occur at intervals of 12 hours 25 minutes. Yesterday, high tide was measured at 5 feet above sea level and low tide was measured at 1 foot above sea level. What is the amplitude of a cosine function modeling the depth of the water in feet as a function of time in hours?
+amplitude = blank ft
+\answer{5. 2 ft.}
+\te{enVision Algebra2. Assessment Sourcebook. Copyright by Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+% Source page 50: 371B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+\te{All four resource previews: Name blank; enVision Algebra2; SavvasRealize.com; enVision Algebra2 Teaching Resources. Copyright by Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Reteach to Build Understanding. I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{7-3 Reteach to Build Understanding. Graphing Sine and Cosine Functions}
+A sine curve is the graph of a sine function and a cosine curve is the graph of a cosine function.
+For all sine or cosine functions written in the form (y=a\sin b\theta) or (y=a\cos b\theta), where (a\neq0), (b>0), and (\theta) is measured in radians:
+(amplitude=|a|), (period=\frac{2\pi}{b}), (frequency=\frac{b}{2\pi})
+midline = halfway point between the maximum and minimum values
+1. Complete the table for each function shown.
+(y=-3\sin2\theta)
+\begin{tabular}{lll}
+Key Features & Formula & Answer \\
+amplitude & (|a|) & \answer{3} \\
+frequency & (\frac{b}{2\pi}) & \answer{(\frac1\pi)} \\
+period & (\frac{2\pi}{b}=\frac{2\pi}{\answer{2}}) & \answer{(\pi)} \\
+midline & NA & \answer{0} \\
+\end{tabular}
+(y=4\cos3\theta)
+\begin{tabular}{lll}
+Key Features & Formula & Answer \\
+amplitude & (|a|) & \answer{4} \\
+frequency & (\frac{b}{2\pi}) & \answer{(\frac3{2\pi})} \\
+period & (\frac{2\pi}{b}=\frac{2\pi}{\answer{3}}) & (\frac{2\pi}3) \\
+midline & NA & \answer{0} \\
+\end{tabular}
+2. Amelia was given the function (y=6\cos4\theta). She says that the amplitude is 6, the frequency is (\frac\pi2), and the period is (\frac2\pi). Determine Amelia's error and select the statements that correctly identify the key features of the function. Select all that apply.
+A. The amplitude should be 4.
+B. The amplitude is correct.
+C. The frequency should be (\frac2\pi).
+D. The frequency is correct.
+E. The period should be (\frac\pi2).
+\answer{2. B, C, E. Amelia confused the equation for the frequency and period.}
+3. Write a function for each description. Assume that (a>0).
+a. Amplitude4; period(\frac\pi3); (\cos\theta)
+\answer{a. (y=4\cos6\theta)}
+b. Amplitude6; period(2\pi); (\sin\theta)
+\answer{b. (y=6\sin\theta)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice. I O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{7-3 Additional Practice. Graphing Sine and Cosine Functions}
+Identify the domain, range, and period of the functions below.
+1. (y=4\cos3\theta)
+% FIG 50 562 436 617 478
+\placeholder{graph}{Additional1 black y=4cos3theta on small gray grid with arrowed theta,y axes, origin O; y labels4,-4, grid2; theta labels pi,2pi and gridpi/2; visible window about-pi to3pi and -6 to6. Curve amplitude4, period2pi/3; densely spaced maxima at2kpi/3, minima at(2k+1)pi/3; curve end arrows.}
+\answer{1. Domain: (\infty<x<\infty); Range: (-4\leq y\leq4); Period:(\frac{2\pi}3).}
+\te{Printed domain lacks a minus sign before first infinity; likely (-\infty<x<\infty).}
+2. (y=\sin\theta)
+% FIG 50 691 436 744 478
+\placeholder{graph}{Additional2 black sine on gray grid and arrowed theta,y axes, O; y labels2,-2, grid1; theta labels pi,2pi, gridpi/2; window roughly -pi to3pi and -3 to3. Curve rises through origin, max(pi/2,1),(5pi/2,1), min(-pi/2,-1),(3pi/2,-1), end arrows.}
+\answer{2. Domain: (-\infty<x<\infty); Range: (-1\leq y\leq1); Period:(2\pi).}
+What are the amplitude and period of each function?
+3. (y=4\sin5\theta) \answer{3. 4; (\frac{2\pi}5)}
+4. (y=3\cos4\theta) \answer{4. 3; (\frac\pi2)}
+Use a graphing calculator to graph the functions shown. What is the frequency? What is the average rate of change over the interval [0,(\frac\pi4)]?
+5. (y=3\sin6\theta)
+\answer{5. Frequency:6. Average rate of change:(-\frac{12}\pi).}
+6. (y=5\cos2\theta)
+\answer{6. Frequency:2. Average rate of change:(\frac{20}\pi).}
+\te{Printed frequencies6 and2 omit division by2pi under this lesson's definition; likely3/pi and1/pi. Printed positive20/pi for item6 average rate; likely negative20/pi.}
+7. A helicopter lowers a rope ladder to a scuba diver floating on the ocean's surface. The waves crest at 4 ft above the lowest level of the water every 8 s. Write a cosine equation to describe the height of the diver as a function of time (t).
+\answer{7. (y=2\cos\frac\pi4\theta)}
+\te{Printed answer uses theta although prompt uses t.}
+What equations represent the graphs?
+8.
+% FIG 50 563 639 631 682
+\placeholder{graph}{Additional8 black negative cosine, arrowed theta,y axes, O; horizontal labels pi,2pi,3pi and gridpi/2; y label4, grid2, window approximately-pi to4pi,-6 to6. Minima(0,-5),(2pi,-5), maxima(pi,5),(3pi,5), zeros oddpi/2; end arrows.}
+\answer{8. (y=-5\cos\theta)}
+9.
+% FIG 50 693 639 760 682
+\placeholder{graph}{Additional9 black sine graph, arrowed theta,y axes and O; horizontal labels2pi,4pi,6pi, gridpi; y label-2, grid1; window approximately-2pi to8pi,-3 to3. Descends through origin, amplitude2, period3pi, minima(3pi/4,-2),(15pi/4,-2),(27pi/4,-2), maxima(-3pi/4,2),(9pi/4,2),(21pi/4,2); curve end arrows.}
+\answer{9. (y=-2\sin\frac23\theta)}
+10. Describe and correct the error a student made in creating an equation with the given information: (y=2\sin4\theta), a period of (4\pi), and amplitude of 2.
+\answer{10. (y=2\sin\frac12\theta); Sample answer: The student did not use the proper formula to find the frequency.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment. O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{7-3 Enrichment. Graphing Sine and Cosine Functions}
+Use the image and the clues to write the equations for each of the graphs shown.
+% FIG 50 942 431 1076 532
+\placeholder{graph}{Five numbered black/gray curves on common square grid with arrowed x,y axes and origin O; axis numbers omitted. Window inferred from clues and curves about -3pi/2 to3pi/2 in x and -4 to4 in y; vertical grid1/2 and horizontal gridpi/6. Curve1 heavy solid black -3sin x, label1 at left lower trough; curve2 solid gray 3cos(x/2), label2 at left, broad central maximum3; curve3 heavy dashed black cos2x, label3 at left near y=-1, amplitude1; curve4 gray dashed3cos x, label4 at left near y=1; curve5 black dashed3sin x, label5 at left maximum3. All continue beyond frame; overlapping curves obscure some tiny axis details.}
+The equation for graph 5 is (y=3\sin x).
+The amplitude of graph 3 is (\frac13) that of graph 2.
+Graph 4 has the same period as graph 1.
+1. \answer{(y=-3\sin x) or (y=3\cos(x+\frac2\pi))}
+2. \answer{(y=3\cos\frac12 x) or (y=-3\sin(\frac12 x+\frac2\pi))}
+3. \answer{(y=\cos2x) or (y=-\sin(2x-\frac2\pi))}
+4. \answer{(y=3\cos x) or (y=-3\sin(x-\frac2\pi))}
+5. \answer{(y=3\sin x) or (y=-3\cos(x+\frac2\pi))}
+\te{Printed alternate equations all use2/pi, confirmed in enlarged source. Likely intended pi/2. Item2 additionally has a sign mismatch: 3cos(x/2) equals3sin(x/2+pi/2), or -3sin(x/2-pi/2).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary. I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{7-3 Mathematical Literacy and Vocabulary. Graphing Sine and Cosine Functions}
+Choose the concept from the list that best represents the item in each box. Each item may be used more than once.
+Word bank: amplitude; frequency; midline; period; periodic function.
+1. (y=4\cos8\theta); (\frac{2\pi}{b}=\frac\pi4) \answer{1. period}
+2. (y=-6\sin4\theta); (a=|-6|=6) \answer{2. amplitude}
+3. (y=-6\sin4\theta); (\frac{2\pi}{b}=\frac\pi2) \answer{3. period}
+4. (y=4\cos8\theta); (\frac{b}{2\pi}=\frac4\pi) \answer{4. frequency}
+5. outputs repeat after a constant interval of inputs \answer{5. periodic function}
+6. half way point between the maximum and minimum points. \answer{6. midline}
+7. (y=-6); (\frac{b}{2\pi}=\frac2\pi) \answer{7. frequency}
+8. (y=4\cos8\theta); (a=|4|=4) \answer{8. amplitude}
+\te{Printed item7 equation is only y=-6; likely truncated y=-6sin4theta, consistent with displayed frequency.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital screen: Solve the system of equations by graphing. (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Click to enlarge graph. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Exit; Question Help; Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print; 1 part remaining; Clear All; Check Answer; Review progress; Question5 of14; Go; Back; Next. No answer is printed.}
+% FIG 50 617 979 1069 1301
+\placeholder{illustration}{Black tablet displays digital differentiated exercise. Left has equations y=3x+4 and y=-2x+4 with graphing instructions, small enlarge-graph icon. Right blank square coordinate grid x,y from-10 to10 each, labels every2, grid1, axes arrows; help menu covers upper right. Blue progress/navigation bar and buttons along bottom; circular home button at left.}
+\end{te-addendum}
+
+\end{document}

@@ -1,0 +1,931 @@
+\documentclass{article}
+% Source: Topic_09_Teacher_Edition.pdf, PDF pages 39-51 (printed pages 460A-468B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 39: 460A, Lesson Overview
+\begin{lesson-meta}
+lesson: 9-3
+title: Ellipses
+standards: none printed
+practices: none printed
+objective: I can describe the features of an ellipse given its equation or graph.
+
+essential question: How does the equation of an ellipse relate to the features of its graph?
+
+\textbf{VOCABULARY}
+\item center of an ellipse
+\item co-vertices
+\item ellipse
+\item foci of an ellipse
+\item major axis
+\item minor axis
+\item standard form of the equation of an ellipse
+\item vertices of an ellipse
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 9-3 \\
+Title & Ellipses \\
+Standards & none printed \\
+I CAN Objective & I can describe the features of an ellipse given its equation or graph. \\
+Essential Question & How does the equation of an ellipse relate to the features of its graph? \\
+Lesson Vocabulary & center of an ellipse; co-vertices; ellipse; foci of an ellipse; major axis; minor axis; standard form of the equation of an ellipse; vertices of an ellipse \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Derive the equation of an ellipse.
+\item Write and graph the equation of an ellipse and use an ellipse to model a real-world situation.
+\item Graph a transformed ellipse by completing the square to rewrite the equation in an equivalent form.
+Essential Understanding. An ellipse is the set of points (P) in a plane such that the sum of the distances from (P) to two fixed points (F_1) and (F_2) is a constant. The standard form of an equation of an ellipse centered at the origin is (\frac{x^2}{b^2}+\frac{y^2}{a^2}=1) when the major axis is vertical and (\frac{x^2}{a^2}+\frac{y^2}{b^2}=1) when the major axis is horizontal.
+\textbf{COHERENCE}
+Previously in this topic, students:
+\item Wrote, graphed, and applied the equations for parabolas and circles, two types of conic sections.
+In this lesson, students:
+\item Write, graph, and apply the equation of an ellipse, one type of conic section.
+Increasing Coherence Examples from this lesson are not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Write, graph, and apply the equation of a hyperbola and determine which conic section best represents a situation.
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+\item Students write the equation of an ellipse by identifying the foci and then using the Distance Formula to find the distance between the foci and any two points on the ellipse.
+\item Students apply the equation of an ellipse to model real-world situations, such as an elliptical room with doors at either end.
+\textbf{Mathematics Overview}
+Students continue their investigation of conic sections with ellipses. They derive the equation of an ellipse using the center and the foci. Students then graph or write the equation of an ellipse given the center and the major and minor axes, or the foci and two other points on the ellipse.
+\textbf{Applying Math Practices}
+Model With Mathematics
+Students use ellipses to model real-world situations, such as a tunnel with an elliptical-shaped entrance.
+Look For and Express Regularity in Repeated Reasoning
+Students generalize mathematical relationships when they use the center, foci, and co-vertices to verify the equation of an ellipse.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+NEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+center of an ellipse & centro de una elipse \\
+co-vertices & co-vértices \\
+ellipse & elipse \\
+foci of an ellipse & focos de una elipse \\
+major axis & eje mayor \\
+minor axis & eje menor \\
+standard form of the equation of an ellipse & forma estándar de la ecuación de una elipse \\
+vertices of an ellipse & vértices de una elipse \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Introduce students to the terms ellipse, center of an ellipse, major axis, minor axis, vertex of an ellipse, and co-vertices. Have students use these terms to label the diagram.
+% FIG 39 839 568 1123 727
+\placeholder{diagram}{Black horizontal ellipse, no axes or scale. Blue horizontal major-axis segment and red vertical minor-axis segment meet at black filled center. Top red endpoint, right blue endpoint, center, and both segments have arrows to magenta answer labels co-vertex, vertex, center, major axis, minor axis, respectively.}
+\answer{co-vertex; center; vertex; major axis; minor axis}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or in Savvas Realize.
+% FIG 39 969 764 1121 947
+\placeholder{illustration}{Student Companion cover with glowing purple, blue, and orange loops on black; enVision Algebra 2; SAVVAS.}
+\end{te-addendum}
+
+% Source page 40: 460B, Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{MODEL \& DISCUSS}
+INSTRUCTIONAL FOCUS Students explore how the length of tethers and fixed points compare to the shape of the area a dog can run. This leads them to learn and understand the definition of an ellipse, which states that the sum of distances from the foci to any point on the ellipse must be constant.
+STUDENT COMPANION Students can complete the Model \& Discuss activity in their Student Companion.
+\te{Model \& Discuss is Powered by Desmos. Activities are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving
+Q: What do you notice about the anchors in relation to the dogs?
+\answer{Dogs with one anchor have a more circular range of motion. Dogs with two anchors have a more limited distance they can travel.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics
+Q: What do the tethers represent?
+\answer{the farthest distance the dog can travel}
+\textbf{For Early Finishers}
+Q: Sketch two graphs of the perimeters of the area the dog can run on an 80-ft tether when the two ends are attached at the same point and when the two ends are attached at different points. Then sketch two graphs of the perimeters of the area the dog can run on a 20-ft tether when the two ends are attached at the same point and when the two ends are attached at different points. Does changing the length of the tether change the relationship between the length of the tether and the distance from the two anchor points to any point on the perimeter?
+\answer{Check students' graphs. The relationship does not change. With the longer tether, both shapes have a wide length of 80 ft, and with the shorter tether, both shapes have a wide length of 20 ft.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse
+Q: How can your knowledge about the length of the tether from the dog and the two anchor points relate to an ellipse?
+\answer{The sum of the distances from any point on the ellipse to two other fixed points is always constant.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{MODEL \& DISCUSS}
+A dog's harness can be attached to a 40 ft tether. The tether runs freely through the harness. The dog has an area to run that is related to the length of the tether. The ends of the tether can be anchored at the same point or different points.
+% FIG 40 836 676 1150 774
+\placeholder{illustration}{Two dogs on green lawn. Left dog's doubled tether joins a single point labeled Anchor; right dog's tether runs from a left anchor through its harness to a separate right anchor. Both right-side endpoints are indicated by a callout labeled Anchor. Pink circular edging surrounds left anchor of right dog; no numerical scale.}
+A. Sketch a graph of the area a dog can run if the two ends of the tether are attached at the same point. What is the relationship between the length of the tether and the shape you graphed?
+\answer{A. The radius of the circle is half the length of the run line.}
+% FIG 40 1008 989 1169 1150
+\placeholder{graph}{Sample A: Black circle centered at O on double-arrow x and y axes; no ticks, numerical labels, or grid. Circle crosses both axes symmetrically.}
+B. Sketch a graph of the area a dog can run if the two ends are attached at different points. How is the shape similar to and different from the first shape you graphed?
+\answer{B. Both shapes are rounded and have a wide length of 40 feet. The second shape is shorter vertically.}
+% FIG 40 1008 1166 1169 1327
+\placeholder{graph}{Sample B: Black horizontal ellipse centered at O on double-arrow x and y axes; no ticks, numerical labels, or grid. Same horizontal width as sample A circle; vertical diameter about two-thirds its width.}
+C. Reason What is the relationship between the length of the tether and the distances of the dogs to their anchors?
+\answer{C. The sum of the distances between the dog and each anchor point is always the length of the run line.}
+\te{Digital version omits The tether runs freely through the harness and substitutes: A. Use the tool to sketch a graph of the perimeter of the area a dog can run if the two ends are attached at the same point. What is the relationship between the length of the tether and the shape formed by the perimeter? Go back; Enter your answer; Desmos; Clear.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND: Look for Relationships}
+Q: How would the shape be different if the two anchor points were moved closer together? Farther apart?
+\answer{As the anchor points move farther apart, the shape becomes longer and narrower; as the points get closer together, the shape becomes more circular.}
+\te{Printed longer and narrower; likely narrower vertically with unchanged major-axis length when the tether length is fixed.}
+\end{te-addendum}
+
+% Source page 41: 460, Features of an Ellipse
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning
+Introduce students to the features of an ellipse. Students learn that the equation of an ellipse helps them find the foci, vertices, and co-vertices to graph the ellipse. Students learn to write the equation of an ellipse and use the equation of an ellipse to model a real-world situation.
+\te{Examples are available at SavvasRealize.com. Activity.}
+\end{te-addendum}
+\begin{te-addendum}{0}{PurposefulQuestions}
+\textbf{CONCEPT Features of an Ellipse: Pose Purposeful Questions}
+Q: How do the foci represent the ellipse?
+\answer{The sum of the distances from the foci to any point on the ellipse must be constant.}
+Q: How do the vertices and co-vertices of an ellipse compare to each other?
+\answer{The vertices are the endpoints of the ellipse on the major axis. The co-vertices are the endpoints of the ellipse on the minor axis, which is perpendicular to the major axis.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{CONCEPT Features of an Ellipse}
+An ellipse is the set of points (P) in a plane such that the sum of the distances from (P) to two fixed points (F_1) and (F_2) is a constant. The fixed points are the foci (singular: "focus").
+(PF_1+PF_2=k)
+% FIG 41 883 326 1079 431
+\placeholder{diagram}{Black horizontal ellipse without coordinate axes or numerical scale. Blue major axis joins left and right blue filled points labeled vertex. Red minor axis joins top and bottom red filled points labeled co-vertex. Black filled center at their intersection; foci F1 and F2 black filled points left and right of center. Point P at upper left on ellipse joins each focus with black dashed segments. Callout minor axis points to red vertical segment, major axis to blue horizontal segment.}
+The major axis is the segment passing through the foci with endpoints on the ellipse. The endpoints of the major axis are called the vertices (singular: "vertex") of the ellipse.
+The minor axis is the segment perpendicular to the major axis at the center with endpoints on the ellipse. The endpoints of the minor axis are called the co-vertices of the ellipse.
+The center of an ellipse is the midpoint of the major or minor axis.
+\end{concept-box}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Example 2}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+The equation (\frac{x^2}{16}+\frac{y^2}{a^2}=1) represents an ellipse with foci ((0,\sqrt{9})) and ((0,-\sqrt{9})). Solve the equation for (a). Then graph the equation. Label the vertices, co-vertices, and foci.
+With foci ((0,\sqrt{9})) and ((0,-\sqrt{9})), the major axis of the ellipse is vertical and the distance from the center to a focus is (\sqrt{9}).
+Additionally, the distance from the center to a co-vertex is (\sqrt{16}).
+Therefore, (a) satisfies the equation
+(a^2=(\sqrt{16})^2+(\sqrt{9})^2)
+(a^2=16+9)
+(a^2=25)
+(a=5)
+% FIG 41 353 1004 452 1106
+\placeholder{graph}{Unit grid with black double-arrow x and y axes, O at origin, labels -4,-2,2,4, window x [-6,6], y [-6,6]. Orange vertical ellipse centered at origin, vertices (0,5),(0,-5), co-vertices (-4,0),(4,0), all filled and labeled orange; filled orange foci (0,3),(0,-3) labeled.}
+\answer{(a=5); see graph.}
+Example 2 Students solve for the missing variable in an equation in order to graph the ellipse in this additional example.
+Q: How far apart are the foci?
+\answer{6 units apart; (\sqrt{9}+\sqrt{9}=2\sqrt{9}) or 6}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Additional Example 4}
+\uncertain{The graph models the path of Earth's orbit around the sun, measured in millions of miles. The sun is located at one of the two foci of the elliptical orbit. The shortest distance from Earth to the sun is approximately 91.4 million miles, and the longest distance is approximately 94.5 million miles. Write an equation that models Earth's orbit.}{The source preview is severely degraded; some words and numbers are unreadable even at 1800 dpi.}
+% FIG 41 944 943 1044 1069
+\placeholder{graph}{Degraded preview: blue dashed ellipse representing Earth's orbit, near circular, with black horizontal x-axis and vertical y-axis and an Earth marker on upper left. Red labels near horizontal intercepts appear -91.4 and 94.5; center/focus marks and small text are partly unreadable.}
+\uncertain{Let (c) be the distance from the center to a focus, and let (a) be the distance from the center to a vertex. Then (a-c=91.4) and (a+c=94.5). Solve the system of equations to find (a=92.95) and (c=1.55).}{Exact printed wording and intermediate values are degraded.}
+\uncertain{The equation of the ellipse is (\frac{x^2}{a^2}+\frac{y^2}{b^2}=1), where (a), (b), and (c) satisfy the equation (a^2=b^2+c^2). Solve for (b^2).}{Symbols and wording partially unreadable.}
+\uncertain{(a^2=b^2+c^2); (b^2=a^2-c^2); (b^2=(92.95)^2-(1.55)^2=8639.7025-2.4025=8637.3). Therefore, an equation that models Earth's orbit is (\frac{x^2}{8639.7025}+\frac{y^2}{8637.3}=1).}{Printed decimal values and denominators are not reliably legible; these are best readings of the degraded equations.}
+\answer{\uncertain{(\frac{x^2}{8639.7025}+\frac{y^2}{8637.3}=1)}{Exact printed denominators unreadable.}}
+Example 4 Students use a graph to determine the equation of an ellipse and the points on the ellipse in a real-world problem involving decimal coordinates.
+Q: How do you know which value corresponds with which variable?
+\answer{The values correspond with the axis the points are on. Since the foci are on the x-axis, the distance farthest from the sun would also be on the x-axis. The vertices would then be ((94.5,0)) and ((-91.4,0)).}
+\te{Printed teacher-note vertices use the sun as origin; the best reading of the degraded worked equation uses the center as origin.}
+\end{te-addendum}
+
+% Source page 42: 461, Example 1
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Derive the Equation of an Ellipse: Build Procedural Fluency from Conceptual Understanding}
+Q: Why do you use the Distance Formula to derive the equation of an ellipse?
+\answer{The definition of an ellipse states that the sum of the distances from the foci to any point on the ellipse must be constant. So you need to use the Distance Formula twice, setting the sum of the two distances equal to the constant.}
+Q: How do you know which equation of the ellipse to use when solving for the distance from the center to the vertices and co-vertices?
+\answer{You should use (\frac{x^2}{b^2}+\frac{y^2}{a^2}=1) when the major axis is vertical and use (\frac{x^2}{a^2}+\frac{y^2}{b^2}=1) when the major axis is horizontal.}
+Q: What do (a) and (b) stand for in the standard form of the equation of an ellipse?
+\answer{(a) is the distance from the center to the vertices on the major axis, and (b) is the distance from the center to the co-vertices on the minor axis.}
+Q: How could you use transformations to relate the equation for an ellipse to the equation for a circle?
+\answer{The equation for an ellipse has the same form as the equation for a circle, except the (x^2)- and (y^2)-terms are multiplied by a fraction. This results in a vertical and/or horizontal stretch of the circle.}
+\te{Printed banner: Critique \& Explain is available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Derive the Equation of an Ellipse}
+\te{CONCEPTUAL UNDERSTANDING}
+The graph of the ellipse passes through the points ((0,5)) and ((0,-5)) and has foci at ((0,-4)) and ((0,4)). Write the equation of the ellipse.
+First, notice that the distances from vertex ((0,a)) to (F_1(0,c)) is (a-c), and (F_2(0,-c)) is (a+c). The sum of these lengths is (2a), so (PF_1+PF_2=2a) for any point (P(x,y)) on the ellipse. Use the Distance Formula to write an equation.
+% FIG 42 1043 244 1155 362
+\placeholder{graph}{Black vertical ellipse centered at O on black double-arrow x and y axes without grid, unit ticks, x labels -4,-2,2,4 and y labels 2,-4. Blue filled vertices (0,a),(0,-a) at y=5,-5; red filled foci F1 and F2 at y=4,-4 labeled (0,c),(0,-c). Horizontal extrema x=+/-3.}
+(PF_1+PF_2=2a)
+(\sqrt{(x-0)^2+(y-c)^2}+\sqrt{(x-0)^2+(y+c)^2}=2a)
+(\sqrt{x^2+(y-c)^2}=2a-\sqrt{x^2+(y+c)^2})
+(x^2+(y-c)^2=4a^2-4a\sqrt{x^2+(y+c)^2}+x^2+(y+c)^2)
+(x^2+y^2-2yc+c^2=4a^2-4a\sqrt{x^2+(y+c)^2}+x^2+y^2+2yc+c^2)
+(-2yc=4a^2-4a\sqrt{x^2+(y+c)^2}+2yc)
+(4a\sqrt{x^2+(y+c)^2}=4a^2+4yc)
+(a\sqrt{x^2+(y+c)^2}=a^2+yc)
+(a^2(x^2+(y+c)^2)=(a^2+yc)^2)
+(a^2x^2+a^2(y+c)^2=a^4+2a^2yc+y^2c^2)
+(a^2x^2+a^2y^2+2a^2yc+a^2c^2=a^4+2a^2yc+y^2c^2)
+(a^2x^2+a^2y^2+a^2c^2=a^4+y^2c^2)
+(a^2x^2+(a^2-c^2)y^2=a^4-a^2c^2)
+(a^2x^2+(a^2-c^2)y^2=a^2(a^2-c^2))
+Observe the right triangle formed with a focus, vertex, and co-vertex. Using the Pythagorean Theorem, (b^2+c^2=a^2), or (b^2=a^2-c^2). Use substitution in the last equation.
+\te{Printed focus, vertex, and co-vertex; likely focus, center, and co-vertex, as shown in the diagram.}
+(a^2x^2+b^2y^2=a^2b^2)
+(\frac{x^2}{b^2}+\frac{y^2}{a^2}=1)
+The standard form of the equation of an ellipse centered at the origin is (\frac{x^2}{b^2}+\frac{y^2}{a^2}=1) when the major axis is vertical, and (\frac{x^2}{a^2}+\frac{y^2}{b^2}=1) when the major axis is horizontal.
+\te{COMMUNICATE PRECISELY In the equation in standard form, (a) represents the distance between the center and each vertex, and (b) represents the distance between the center and each co-vertex.}
+% FIG 42 1028 635 1152 770
+\placeholder{diagram}{Black vertical ellipse on black double-arrow x and y axes, no grid or numerical ticks. Blue filled vertices (0,a),(0,-a); black filled co-vertices (-b,0),(b,0); red filled foci F1 above origin and F2 below. Right triangle has blue vertical center-to-F1 leg c, red horizontal center-to-right-co-vertex leg b, red dashed F1-to-right-co-vertex hypotenuse a and red right-angle mark at origin.}
+\te{Callout: Each co-vertex is equidistant from the foci, so (PF_1=PF_2=a).}
+Therefore, the major axis is vertical, (a=5), and the minor axis is horizontal, (b=3). So the equation is (\frac{x^2}{9}+\frac{y^2}{25}=1).
+\answer{(\frac{x^2}{9}+\frac{y^2}{25}=1)}
+\end{example}
+\begin{tryit}{1}
+What is the equation of the ellipse in standard form which has foci at ((-2,0)) and ((2,0)) and for which the sum of the distances from the foci to any point on the ellipse is 8?
+\answer{(\frac{x^2}{16}+\frac{y^2}{12}=1)}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Why do you use the foci in the Distance Formula to find the equation of the ellipse?
+\answer{In order to write the equation of an ellipse, you need to use the Distance Formula to calculate the sum of the distances from the foci to any point on the ellipse and set that sum equal to a constant.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ELLAddendum}
+\textbf{English Language Learners}
+SPEAKING BEGINNING Talk with students about words that begin with the letters -el. In the word ellipse, the e is pronounced with a long e sound. In the word elephant, it is pronounced with a short e sound. Display the following words and ask students to practice pronouncing them correctly.
+Q: elbow
+\answer{short e}
+Q: elate
+\answer{long e}
+Q: elicit
+\answer{long e}
+Q: elder
+\answer{short e}
+Q: eleven
+\answer{long e}
+LISTENING DEVELOPING Tell students to think about the use of the prefix co- in the word co-vertices as meaning additional or auxiliary vertices. Explain that co- can also mean together or jointly, like in the word coauthor, which is one of two or more people who write a book together. Read the following definitions aloud as students listen and ask them to think of a word starting with co- that matches the definition.
+Q: a person you see every day at your job
+\answer{co-worker}
+Q: a person who is second in command in the cockpit of a plane
+\answer{copilot}
+Q: a person who starts a business organization with others
+\answer{co-founder}
+Q: a performer who leads in a play or movie with another actor
+\answer{costar}
+WRITING EXPANDING Remind students that the word foci is the plural of the word focus. There are many words in the English language with irregular plural forms. Have the students find the plural forms for the following words and then write complete sentences using the plural forms.
+Q: appendix
+\answer{appendices; The end of the book contains many appendices.}
+Q: radius
+\answer{radii; He has to make sure the radii of both wheels are the same.}
+Q: calf
+\answer{calves; The calves are ready for their morning feeding.}
+\end{te-addendum}
+
+% Source page 43: 462, Example 2
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions: Graph an Ellipse}
+Q: How is the major axis determined using the equation of the ellipse in standard form?
+\answer{The major axis is determined by the variable component of the fraction with the largest denominator.}
+Q: Where are the foci found?
+\answer{on the major axis}
+Q: Why should you use the Pythagorean Theorem to help find the foci?
+\answer{You can use the Pythagorean Theorem with right triangles to show the distances from each co-vertex to each focus. The sum of these two distances equals the sum of the distances from the center to each vertex.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Graph an Ellipse}
+Graph the ellipse that has the equation (\frac{x^2}{45}+\frac{y^2}{36}=1). What are the coordinates of the foci?
+In the equation for this ellipse, the larger denominator corresponds with (x), so the major axis is horizontal. Therefore, the equation is of the form (\frac{x^2}{a^2}+\frac{y^2}{b^2}=1), where (a^2=45) and (b^2=36), or (a=3\sqrt{5}) and (b=6).
+\te{USE STRUCTURE If the largest denominator corresponds to (x), then the major axis is horizontal. If the largest denominator corresponds to (y), then the major axis is vertical.}
+% FIG 43 939 268 1123 359
+\placeholder{diagram}{Black horizontal ellipse on black double-arrow x and y axes, O at center, no grid or ticks. Red filled vertices (-3sqrt(5),0),(3sqrt(5),0), co-vertices (0,6),(0,-6), and two foci on x-axis. Right triangle from origin to top co-vertex to right focus: vertical red leg 6, blue horizontal leg c, green hypotenuse 3sqrt(5), right-angle square at origin.}
+A sketch of the ellipse can help you find the foci. Since the ellipse is centered at the origin, the vertices are ((-3\sqrt{5},0)) and ((3\sqrt{5},0)).
+The minor axis is vertical, so the co-vertices are ((0,-6)) and ((0,6)).
+To find the foci, use the Pythagorean relationship between (a), (b), and (c).
+(b^2+c^2=a^2)
+(36+c^2=45)
+(c^2=9)
+(c=3)
+So the coordinates of the foci are ((-3,0)) and ((3,0)).
+% FIG 43 972 458 1119 558
+\placeholder{graph}{Grid spaced by 2 with black double-arrow x and y axes, O at origin, window [-10,10] on both axes, labels -8,-4,4,8. Red horizontal ellipse centered at origin, red labeled filled vertices (-3sqrt(5),0),(3sqrt(5),0), co-vertices (0,6),(0,-6); blue filled foci (-3,0),(3,0) labeled.}
+\answer{Foci ((-3,0)) and ((3,0)); see graph.}
+\end{example}
+\begin{tryit}{2}
+Graph the ellipse represented by each equation. Then find the coordinates of the foci.
+a. (\frac{x^2}{64}+\frac{y^2}{100}=1)
+\answer{a. The foci are ((0,6)) and ((0,-6)).}
+% FIG 43 145 520 338 715
+\placeholder{graph}{Try It 2a: Grid spaced by 2 with black double-arrow x and y axes, O at origin, window [-10,10] on both axes, labels -8,-4,4,8. Red vertical ellipse centered at origin, vertices (0,+/-10), co-vertices (+/-8,0).}
+b. (\frac{x^2}{16}+\frac{y^2}{8}=1)
+\answer{b. The foci are ((2\sqrt{2},0)) and ((-2\sqrt{2},0)).}
+% FIG 43 145 764 340 957
+\placeholder{graph}{Try It 2b: Unit grid with black double-arrow x and y axes, O at origin, window [-5,5] on both axes, labels -4,-2,2,4. Red horizontal ellipse centered at origin, vertices (+/-4,0), co-vertices (0,+/-sqrt(8)).}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How can you find which value stands for (a) or (b) when finding the coordinates of the foci?
+\answer{(a) is always the larger number since (a) determines if the ellipse is horizontal or vertical.}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND: Generalize}
+USE WITH EXAMPLES 1 \& 2
+Q: From the equation of an ellipse, how can you tell which axis is the major axis?
+\answer{If the denominator of (x^2) is greater than the denominator of (y^2), then the major axis is horizontal. If the denominator of (y^2) is greater than the denominator of (x^2), then the major axis is vertical.}
+\end{te-addendum}
+
+% Source page 44: 463, Example 3
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions: Write the Equation of an Ellipse}
+PART A
+Q: How can you find the vertices or co-vertices if you know the length of an axis?
+\answer{Divide the length of the axis in half to find the distance from the vertices or co-vertices to the center.}
+Q: How do the vertices relate to the equation of an ellipse?
+\answer{The distances from the vertices to the center of the ellipse are squared to determine the denominators in the equation.}
+PART B
+Q: When you know the foci and the co-vertices of an ellipse, what other information do you need to find in order to write the equation of the ellipse? Explain.
+\answer{You need to find the distance from the vertices to the center, (a). You can substitute the values of (c) (from the foci) and (b) (from the co-vertices) into the Pythagorean Theorem to solve for (a).}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Write the Equation of an Ellipse}
+How can you write the equation of an ellipse?
+A. What is the equation of an ellipse centered at the origin that has a horizontal axis 10 units long and a vertical axis 16 units long?
+The horizontal axis is 10 units long. In order to find the distance from the co-vertex to the center, divide the axis in half. The co-vertices are each (\frac{10}{2}=5) units from the center, so (b=5).
+The vertical axis is 16 units long. The vertices are each (\frac{16}{2}=8) units from the center, so (a=8).
+The equation representing the ellipse is (\frac{x^2}{25}+\frac{y^2}{64}=1).
+% FIG 44 1035 286 1153 405
+\placeholder{graph}{Grid spaced by 2 with black double-arrow x and y axes, O at origin, window [-12,12] on both axes; x labels -8,-4,4,8, y labels -4,4. Black vertical ellipse centered at origin with vertices (0,+/-8) and co-vertices (+/-5,0); red horizontal minor-axis segment labeled 10 and blue vertical major-axis segment labeled 16.}
+\answer{A. (\frac{x^2}{25}+\frac{y^2}{64}=1)}
+B. What is the equation of an ellipse with foci at ((-3,0)) and ((3,0)) and that passes through the points ((0,-4)) and ((0,4))?
+The foci are each 3 units from the center on the horizontal axis, so (c=3) and the center is the origin.
+The points ((0,-4)) and ((0,4)) are on the vertical axis, so they are the co-vertices and (b=4).
+Solve for (a), the distance between each vertex and the center along the major axis.
+(a^2=b^2+c^2)
+(a^2=4^2+3^2)
+(a^2=25)
+(a=5)
+\te{GENERALIZE As in the previous example, you know this equation is true because the distance from the center to each vertex ((a)) is the same as the distance between the foci and the co-vertices (\sqrt{b^2+c^2}).}
+% FIG 44 1016 507 1153 629
+\placeholder{diagram}{Black horizontal ellipse on black double-arrow x and y axes, no ticks or grid. Black filled vertices (-a,0),(a,0), co-vertices (0,4),(0,-4), foci (-3,0),(3,0). Red dashed triangle joins both foci to top co-vertex; right side labeled a, red right-angle mark at origin.}
+The equation of the ellipse is (\frac{x^2}{25}+\frac{y^2}{16}=1).
+\answer{B. (\frac{x^2}{25}+\frac{y^2}{16}=1)}
+\end{example}
+\begin{tryit}{3}
+a. What is the equation of an ellipse with foci at ((0,-12)) and ((0,12)) and that passes through the points ((-5,0)) and ((5,0))?
+\answer{a. (\frac{x^2}{25}+\frac{y^2}{169}=1)}
+b. What is the equation of an ellipse centered at the origin if the sum of the distances to the foci from any point is 30 units and the vertical minor axis is 24 units long?
+\answer{b. (\frac{x^2}{225}+\frac{y^2}{144}=1)}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How does the process of finding the equation of each ellipse compare?
+\answer{In Try It 3a, you know (b) and (c) from the points provided but need to find (a). In Try It 3b, you divide the units you are given in half to find the values of (a) and (b).}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 Some students may struggle with writing the equation of an ellipse given the graph.
+% FIG 44 125 1047 301 1221
+\placeholder{graph}{Unit grid, black double-arrow x and y axes, O at origin, window x [-5,4], y [-4,5], x labels -4,-2,2, y label 4. Red horizontal ellipse centered at origin with vertices (+/-3,0), co-vertices (0,+/-2).}
+Help students write the equation of an ellipse by having them answer the following questions.
+Q: What are the co-vertices of the ellipse?
+\answer{((0,2)) and ((0,-2))}
+Q: How long is the horizontal axis?
+\answer{6 units}
+Q: How long is the vertical axis?
+\answer{4 units}
+Q: What is the equation representing the ellipse?
+\answer{(\frac{x^2}{9}+\frac{y^2}{4}=1)}
+\end{te-addendum}
+
+% Source page 45: 464, Example 4
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions: Use an Ellipse to Model a Real-World Situation}
+Q: Why is the negative value of (b) not considered as a solution of the equation of the ellipse?
+\answer{Since (b) is a distance of the co-vertices to the center, it must be positive. However, the points of the co-vertices have both positive and negative coordinates.}
+Q: How can you determine how far the foci are from the center?
+\answer{Since the foci are 20 feet apart, you can divide by 2 to determine how far each focus is from the center.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use an Ellipse to Model a Real-World Situation}
+\te{APPLICATION}
+A whispering gallery is an elliptical room where a soft sound at one focus in the room can be heard clearly at the other focus. The Museum of Science and Industry in Chicago has a whispering gallery that is 40 ft on its longest axis, with foci 20 ft apart. The doors are located at the co-vertices. Find the equation of the ellipse representing the shape of the room. How far are the doors from the center of the room?
+% FIG 45 801 313 1063 486
+\placeholder{photo}{Interior of a whispering gallery: curved light gray walls and ceiling, dark tiled floor, tall curved gold frame and railing in foreground, doorway at back.}
+Formulate
+Put the center of the ellipse at the origin with its foci on the x-axis.
+The vertices are each 20 ft from the center ((a=20)) since the longest axis is 40 ft.
+The foci are each 10 ft ((c=10)) from the center since they are 20 ft apart.
+% FIG 45 985 489 1120 597
+\placeholder{diagram}{Orange horizontal ellipse on black double-arrow x and y axes, no ticks or grid. Orange filled vertices labeled (-20,0),(20,0); orange filled top and bottom co-vertices labeled door. Blue filled foci at (-10,0),(10,0) labeled whisper 1 and whisper 2, blue segment joins foci.}
+Compute
+Use the Pythagorean relationship between (a), (b), and (c) to determine the co-vertices. Then write an equation for the ellipse.
+(b^2+c^2=a^2)
+(b^2+10^2=20^2)
+(b^2+100=400)
+(b^2=300)
+(b=\sqrt{300}=10\sqrt{3})
+\te{Callout: You do not need to consider (b=-10\sqrt{3}) as a solution, since (b) is a distance which is always positive.}
+Interpret
+The equation representing the room is (\frac{x^2}{400}+\frac{y^2}{300}=1). The co-vertices are located at ((0,10\sqrt{3})), and ((0,-10\sqrt{3})) so the doors are about 17.3 ft from the center of the room.
+\answer{(\frac{x^2}{400}+\frac{y^2}{300}=1); doors about 17.3 ft from the center.}
+\end{example}
+\begin{tryit}{4}
+Consider a whispering gallery like the one above, but 30 m east to west and 34 m north to south. Find the equation of the ellipse representing the shape of the room. How far are the whispering points from the center of the room?
+\answer{(\frac{x^2}{225}+\frac{y^2}{289}=1); The whispering points are 8 meters from the center of the room.}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How do the distances from north to south and east to west help you find the whispering points?
+\answer{Because you can solve for (a) and (b) knowing the given distances, you can use the equation (b^2+c^2=a^2) to solve for (c), which is the distance the foci, or whispering points, are from the center.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND: Make Sense and Persevere}
+USE WITH EXAMPLES 3 \& 4
+Q: The foci of an ellipse are located at ((4,0)) and ((-4,0)). Is this enough information to write the equation of the ellipse? If not, what else would you need to know?
+\answer{No, you also need to know at least one point on the ellipse, or the sum of the distances from a point to the two foci.}
+\end{te-addendum}
+
+% Source page 46: 465, Example 5
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions: Graph a Translated Ellipse}
+Q: Why do you add constants to each quadratic expression with x- and y-variables?
+\answer{The constants are added in order to use completing the square to rewrite the equation with perfect square factors.}
+Q: Why is the center of the ellipse not at the origin?
+\answer{After converting the equation into standard form, you recognize from the values of (h) and (k) that the center of the ellipse needs to be translated right 3 units and up 1 unit.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Graph a Translated Ellipse}
+The equation (2x^2-12x+y^2-2y+15=0) represents an ellipse. Graph the ellipse. What are its key features?
+(2x^2-12x+y^2-2y+15=0)
+(2(x^2-6x)+(y^2-2y)=-15)
+(2(x^2-6x+9)+(y^2-2y+1)=-15+2(9)+1)
+(2(x-3)^2+(y-1)^2=4)
+(\frac{(x-3)^2}{2}+\frac{(y-1)^2}{4}=1)
+\te{Callout: Group the variable terms and constants to use completing the square to rewrite the equation with perfect square factors.}
+\te{COMMON ERROR Be careful not to lose track of the 2 after factoring. You have to add (2(9)) to both sides of the equation when completing the square here, not just 9.}
+The equation (\frac{(x-3)^2}{2}+\frac{(y-1)^2}{4}=1) represents an ellipse with a vertical axis that is a translation of the graph of (\frac{x^2}{2}+\frac{y^2}{4}=1). The graph is translated 3 units right and 1 unit up so the center is ((3,1)).
+The major axis is vertical, since (4>2). Since (a=2), the vertices are ((3,-1)) and ((3,3)).
+The minor axis is horizontal and (b=\sqrt{2}), so the co-vertices are at ((3+\sqrt{2},1)) and ((3-\sqrt{2},1)), or about ((4.4,1)) and ((1.6,1)).
+To find the foci, use the equation (b^2+c^2=a^2).
+(b^2+c^2=a^2)
+(c^2=a^2-b^2)
+(c^2=(2)^2-(\sqrt{2})^2)
+(c^2=4-2=2)
+(c=\sqrt{2})
+The foci are each (\sqrt{2}) units from the center on the major axis. Their coordinates are ((3,1+\sqrt{2})) and ((3,1-\sqrt{2})), or about ((3,2.4)) and ((3,-0.4)).
+% FIG 46 1002 508 1153 637
+\placeholder{graph}{Half-unit grid, black double-arrow x and y axes, O at origin, window x [-1,6.5], y [-2.5,4], x labels 1,5, y labels -2,-1,1,2,3. Black vertical ellipse centered at black filled (3,1), blue major axis between red filled vertices (3,3),(3,-1) labeled blue; red minor axis between red filled co-vertices (3-sqrt(2),1),(3+sqrt(2),1) labeled red. Red filled foci (3,1+sqrt(2)),(3,1-sqrt(2)) with red arrow labels.}
+The standard form of the equation of an ellipse with center ((h,k)) and vertical major axis is (\frac{(x-h)^2}{b^2}+\frac{(y-k)^2}{a^2}=1). When the major axis is horizontal, the standard form of the equation is (\frac{(x-h)^2}{a^2}+\frac{(y-k)^2}{b^2}=1).
+\answer{Center ((3,1)); vertices ((3,-1)), ((3,3)); co-vertices ((3+\sqrt{2},1)), ((3-\sqrt{2},1)); foci ((3,1+\sqrt{2})), ((3,1-\sqrt{2})).}
+\end{example}
+\begin{tryit}{5}
+a. Graph the ellipse represented by (10x^2+40x+2y^2+30=0). Label the coordinates of the center, vertices, co-vertices, and foci.
+\answer{a. See graph: ((-2,0)), ((-3,0)), ((-1,0)), ((-2,2)), ((-2,-2)), ((-2,\sqrt{5})), ((-2,-\sqrt{5})).}
+% FIG 46 178 426 422 619
+\placeholder{graph}{Try It 5a: Unit grid, black double-arrow x and y axes, O at origin, window [-5,5] on both axes, labels -4,-2,2,4. Red vertical ellipse centered at red filled (-2,0), co-vertices red filled (-3,0),(-1,0). Red filled interior foci at (-2,+/-2), red filled vertices at (-2,+/-sqrt(5)). Arrow labels (-2,2) and (-2,-2) identify the foci close to the vertices; labels (-2,sqrt(5)) and (-2,-sqrt(5)) identify the vertices.}
+b. Graph the ellipse represented by (x^2+3y^2-8x+6y+10=0). Label the coordinates of the center, vertices, co-vertices, and foci.
+\answer{b. See graph: center ((4,-1)), vertices ((1,-1)), ((7,-1)), co-vertices ((4,-1+\sqrt{3})), ((4,-1-\sqrt{3})), foci ((4-\sqrt{6},-1)), ((4+\sqrt{6},-1)).}
+% FIG 46 178 640 442 834
+\placeholder{graph}{Try It 5b: Unit grid with black double-arrow x and y axes, O at origin, window x [-2,8], y [-5,5], x labels 2,4,6, y labels -4,2,4. Red horizontal ellipse centered at filled labeled (4,-1); red filled labeled vertices (1,-1),(7,-1), co-vertices (4,-1+sqrt(3)),(4,-1-sqrt(3)), foci (4-sqrt(6),-1),(4+sqrt(6),-1).}
+\end{tryit}
+\begin{te-addendum}{5}{CommonError}
+\textbf{Common Error: Try It! 5a}
+Some students may think that the center of the ellipse in Try It 5a is ((2,0)) and that ((x+2)^2) means the center is translated 2 units to the right. Encourage students to review the rules of translations. If you add a constant (m) to the input of a function (f(x+m)), then (f(x)) is translated (m) units to the left. If you subtract a constant (m) from the input of a function (f(x-m)), then (f(x)) is translated (m) units to the right.
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND: Generalize}
+Q: After graphing the ellipses in the Try It!, make a conjecture about how the coefficients of the (x^2)- and (y^2)-terms can be used to predict whether the major axis is horizontal or vertical.
+\answer{When the coefficient of the (x^2)-term is less than the coefficient of the (y^2)-term, the major axis is horizontal.}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 5 Have students explore writing equations of a translated ellipse in two different ways from a graph.
+% FIG 46 693 1192 868 1384
+\placeholder{graph}{Unit grid, black double-arrow x and y axes, O at origin, window x [-8,1], y [-1,9], x labels -6,-4,-2, y labels 2,4,6,8. Red horizontal ellipse with filled center labeled (-5,4), filled vertices (-7,4),(-3,4), filled co-vertices (-5,3),(-5,5).}
+Q: Write two equivalent equations using the graph provided.
+\answer{(\frac{(x+5)^2}{4}+\frac{(y-4)^2}{1}=1) and (2x^2+20x+8y^2-64y+170=0)}
+Q: What are the foci of the ellipse?
+\answer{((-5-\sqrt{3},4)), ((-5+\sqrt{3},4)) or ((-6.73,4)), ((-3.27,4))}
+\end{te-addendum}
+% Source page 47: 466, Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+Q: How are the features of an ellipse affected by whether the major axis is horizontal or vertical?
+\answer{If the major axis is horizontal, (a) affects the x-values of the vertices, (b) affects the y-values of the co-vertices, and (c) affects the x-values of the foci. If the major axis is vertical, (a) affects the y-values of the vertices, (b) affects the x-values of the co-vertices, and (c) affects the y-values of the foci.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercise 7 Some students may think that (a=8) and (b=2) instead of (a^2=8) and (b^2=2). Encourage students to review the standard form of the equation of an ellipse, (\frac{x^2}{2}+\frac{y^2}{8}=1), to see that the denominators contain the squared values of (a) and (b).
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{Ellipses}
+DEFINITION An ellipse is the set of points (P) in a plane such that the sum of the distances from (P(x,y)) to two fixed points, (F_1) and (F_2), is constant.
+% FIG 47 744 306 859 408
+\placeholder{graph}{Horizontal black ellipse, no coordinate axes. Filled center (h,k); red horizontal major axis with each half a, red filled vertices and interior foci F1,F2; blue vertical minor axis with each half b and blue filled co-vertices.}
+% FIG 47 904 306 993 435
+\placeholder{graph}{Vertical black ellipse, no coordinate axes. Filled center (h,k); red vertical major axis with each half a, red filled vertices and interior foci F1,F2; blue horizontal minor axis with each half b and blue filled co-vertices.}
+\begin{tabular}{lll}
+ & Horizontal Major Axis & Vertical Major Axis \\
+Equation & (\frac{(x-h)^2}{a^2}+\frac{(y-k)^2}{b^2}=1) & (\frac{(x-h)^2}{b^2}+\frac{(y-k)^2}{a^2}=1) \\
+Vertices & ((h\pm a,k)) & ((h,k\pm a)) \\
+Co-vertices & ((h,k\pm b)) & ((h\pm b,k)) \\
+Foci & ((h\pm c,k)), where (a^2=c^2+b^2) & ((h,k\pm c)), where (a^2=c^2+b^2) \\
+\end{tabular}
+1. Essential Question How does the equation of an ellipse relate to the features of its graph?
+\answer{The equation of a horizontal ellipse is (\frac{(x-h)^2}{a^2}+\frac{(y-k)^2}{b^2}=1), and the equation of a vertical ellipse is (\frac{(x-h)^2}{b^2}+\frac{(y-k)^2}{a^2}=1), where (a>b). The length of the major axis is (2a), and the length of the minor axis is (2b). The center is ((h,k)). A horizontal ellipse has vertices ((h\pm a,k)) and foci ((h\pm c,k)), where (a^2=c^2+b^2). A vertical ellipse has vertices ((h,k\pm a)) and foci ((h,k\pm c)), where (a^2=c^2+b^2).}
+2. Vocabulary What are the co-vertices of an ellipse?
+\answer{The co-vertices are the endpoints of the minor axis.}
+3. Error Analysis Darren said that an ellipse with equation (\frac{(x-4)^2}{25}+\frac{(y+1)^2}{9}=1) has vertices ((4,2)) and ((4,-4)). Explain and correct Darren's error.
+\answer{Darren found the coordinates of the co-vertices. The vertices are ((9,-1)) and ((-1,-1)).}
+4. Generalize For any ellipse, which measure is the greatest, (a), (b), or (c)? Explain.
+\answer{The greatest measure is (a), the distance from the center to one vertex on the major axis. The distance (b) is from the center to one of the co-vertices, which is on the shorter minor axis, and (c) is the distance from the center to one of the foci, which is along the major axis but in the interior of the ellipse, so it is shorter than (a).}
+Find the vertices and co-vertices of each ellipse.
+5. (\frac{x^2}{49}+\frac{y^2}{64}=1)
+\answer{vertices: ((0,8)), ((0,-8)); co-vertices: ((7,0)), ((-7,0))}
+6. (\frac{(x-1)^2}{16}+\frac{(y+5)^2}{4}=1)
+\answer{vertices: ((-3,-5)), ((5,-5)); co-vertices: ((1,-3)), ((1,-7))}
+Find the foci of each ellipse.
+7. (\frac{x^2}{2}+\frac{y^2}{8}=1)
+\answer{((0,\sqrt{6})), ((0,-\sqrt{6})); approximately ((0,2.4)), ((0,-2.4))}
+8. (\frac{(x+5)^2}{16}+\frac{(y-9)^2}{4}=1)
+\answer{((-5+2\sqrt{3},9)), ((-5-2\sqrt{3},9)); approximately ((-1.5,9)), ((-8.5,9))}
+\end{concept-summary}
+% Source page 48: 467, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice & Problem Solving}
+Practice & Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+9, 11, 14--20, 22--29 & 9--15, 17--29 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+Scan the QR code to access a video tutorial.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+Example & Items & DOK \\
+1 & 15 & 1 \\
+1 & 10, 13 & 3 \\
+2 & 16, 18 & 1 \\
+2 & 9, 12, 14 & 2 \\
+3 & 20, 21 & 1 \\
+4 & 22 & 1 \\
+4 & 24, 26, 29 & 2 \\
+5 & 17, 19, 23, 27, 28 & 1 \\
+5 & 11, 25 & 2 \\
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{9}{2}
+Look for Relationships When would an equation of an ellipse, with center at the origin, be in the shape of a circle? Explain how you know.
+\answer{When the values of (a) and (b) are equal, the vertices and co-vertices are the same distance from the center of the ellipse, which forms a circle.}
+\end{practice}
+\begin{practice}{10}{3}
+Use Appropriate Tools The equation of an ellipse is (\frac{x^2}{36}+\frac{y^2}{4}=1). Write two equations you can type in Y1 and Y2 on your graphing calculator to graph the ellipse.
+\answer{(Y_1=\frac{\sqrt{36-x^2}}{3}), (Y_2=-\frac{\sqrt{36-x^2}}{3})}
+\end{practice}
+\begin{practice}{11}{2}
+Error Analysis Kanika wants to find the key features of an ellipse. Describe and correct the error Kanika made in finding the vertices, co-vertices, and foci of the ellipse.
+original equation: (\frac{(x-4)^2}{9}+\frac{(y-6)^2}{25}=1)
+Vertices: ((0,-5)), ((0,5))
+Co-vertices: ((-3,0)), ((3,0))
+Foci: ((0,-4)), ((0,4))
+\te{The student work is marked with a red X.}
+\answer{Kendall incorrectly thought the ellipse was centered at the origin. The vertices are located at ((4,1)) and ((4,11)). The co-vertices are located at ((7,6)) and ((1,6)). The foci are located at ((4,2)) and ((4,10)).}
+\te{Printed key names Kendall; the problem names Kanika.}
+\end{practice}
+\begin{practice}{12}{2}
+Reason The equation of an ellipse is (\frac{x^2}{25}+\frac{y^2}{49}=1).
+a. Is the major axis of this ellipse vertical or horizontal?
+\answer{vertical}
+b. What are the x-intercepts of the ellipse?
+\answer{((-5,0)), ((5,0))}
+c. What are the y-intercepts of the ellipse?
+\answer{((0,-7)), ((0,7))}
+\end{practice}
+\begin{practice}{13}{3}
+Higher Order Thinking The area of a circle is given by the formula (A=\pi r^2), where (r) is the radius. The area of an ellipse is given by the formula (A=\pi ab), where (a) is half the length of the horizontal axis and (b) is half the length of the vertical axis. Explain the connection between the two formulas.
+\answer{When (c) is close to 0, (a) and (b) are close to the same. This means the area of the ellipse can be written as (A=\pi(a)(a)), or (A=\pi a^2). This formula is the same as the area of a circle with radius (a).}
+\te{The printed explanation uses equality for values described as close; exact equality requires (c=0).}
+\end{practice}
+\begin{practice}{14}{2}
+Construct Arguments Nina claims that an ellipse has vertices ((-3,0)) and ((3,0)) and co-vertices ((-7,0)) and ((7,0)). Is this possible? Explain.
+\answer{No; the vertices of an ellipse are the points farther away from the center, and the co-vertices are the points closer to the center.}
+\end{practice}
+\begin{practice}{15}{1}
+What is the equation in the form (\frac{x^2}{a^2}+\frac{y^2}{b^2}=1) of the ellipse which has foci at ((-3,0)) and ((3,0)) and for which the sum of the distances from the foci to any point on the ellipse is 12? SEE EXAMPLE 1
+\answer{(\frac{x^2}{36}+\frac{y^2}{27}=1)}
+\end{practice}
+\begin{practice}{16}{1}
+Graph the ellipse represented by each equation. SEE EXAMPLE 2
+(\frac{x^2}{4}+\frac{y^2}{9}=1)
+\answer{See graph.}
+% FIG 49 125 168 317 359
+\placeholder{graph}{Unit grid [-5,5] both axes, black x/y axes with arrows, O origin, labels +/-2,+/-4. Red vertical ellipse centered at origin, vertices (0,+/-3), co-vertices (+/-2,0).}
+\end{practice}
+\begin{practice}{17}{1}
+Graph the ellipse represented by each equation. SEE EXAMPLE 2
+(\frac{(x-1)^2}{9}+\frac{(y+2)^2}{36}=1)
+\answer{See graph.}
+% FIG 49 125 371 317 564
+\placeholder{graph}{Grid spacing 2, x window [-10,10], y [-12,8], black x/y axes arrows, O origin; x labels +/-4,+/-8; y 4,-4,-8. Red vertical ellipse center (1,-2), vertices (1,4),(1,-8), co-vertices (-2,-2),(4,-2).}
+\end{practice}
+\begin{practice}{18}{1}
+Graph the ellipse represented by each equation. SEE EXAMPLE 2
+(\frac{x^2}{25}+\frac{y^2}{16}=1)
+\answer{See graph.}
+% FIG 49 125 575 317 768
+\placeholder{graph}{Unit grid [-5,5] both axes, black x/y axes arrows, O origin, labels +/-2,+/-4. Red horizontal ellipse centered at origin, vertices (+/-5,0), co-vertices (0,+/-4).}
+\end{practice}
+\begin{practice}{19}{1}
+Graph the ellipse represented by each equation. SEE EXAMPLE 2
+(\frac{(x+3)^2}{49}+\frac{(y-1)^2}{16}=1)
+\answer{See graph.}
+% FIG 49 125 780 317 974
+\placeholder{graph}{Grid spacing 2, x window [-12,6], y [-8,10], black x/y axes arrows, O origin, x labels -8,-4,4; y -4,4,8. Red horizontal ellipse center (-3,1), vertices (-10,1),(4,1), co-vertices (-3,-3),(-3,5).}
+\end{practice}
+\begin{practice}{20}{1}
+What is the equation of an ellipse centered at the origin that has a horizontal axis 12 units long and a vertical axis 22 units long? SEE EXAMPLE 3
+\answer{(\frac{x^2}{36}+\frac{y^2}{121}=1)}
+\end{practice}
+\begin{practice}{21}{1}
+What is the equation of an ellipse with foci at ((-8,0)) and ((8,0)) that passes through the points ((0,-3)) and ((0,3))? SEE EXAMPLE 3
+\answer{(\frac{x^2}{73}+\frac{y^2}{9}=1)}
+\end{practice}
+\begin{practice}{22}{1}
+An elliptical dining table has foci that are 50 in. apart. Two chairs are located at the co-vertices. Find the equation of the ellipse representing the shape of the table. To the nearest inch, how far apart are the chairs? SEE EXAMPLE 4
+% FIG 48 870 684 1098 824
+\placeholder{diagram}{Wooden horizontal oval dining table; red horizontal diameter labeled 70 in. Chairs drawn at the left and right vertices.}
+\answer{(\frac{x^2}{1225}+\frac{y^2}{600}=1); about 49 in.}
+\te{Chairs are drawn at the vertices, although the prompt and key use co-vertices.}
+\end{practice}
+\begin{practice}{23}{1}
+Graph each ellipse. Label the coordinates of the center, vertices, co-vertices, and foci. SEE EXAMPLE 5
+a. (2x^2+4x+3y^2-6y-7=0)
+\answer{See graph; center ((-1,1)), vertices ((-1\pm\sqrt{6},1)), co-vertices ((-1,3)), ((-1,-1)), foci ((-1\pm\sqrt{2},1)).}
+% FIG 49 144 982 435 1176
+\placeholder{graph}{Unit grid [-5,5] both axes, black x/y axes, O origin; x labels +/-2,+/-4, y -4,2,4. Red horizontal ellipse, all key points filled and labeled: center (-1,1), vertices (-1+sqrt6,1),(-1-sqrt6,1), co-vertices (-1,3),(-1,-1), foci (-1+sqrt2,1),(-1-sqrt2,1).}
+b. (4x^2+y^2-16x-6y+9=0)
+\answer{See graph; center ((2,3)), vertices ((2,7)), ((2,-1)), co-vertices ((0,3)), ((4,3)), foci ((2,3\pm2\sqrt{3})).}
+% FIG 49 145 1191 422 1393
+\placeholder{graph}{Unit grid x [-3,7], y [-2,8], black x/y axes, O origin, x labels 4,6; y 2,4,6. Red vertical ellipse, filled labeled center (2,3), vertices (2,7),(2,-1), co-vertices (0,3),(4,3), foci (2,3+2sqrt3),(2,3-2sqrt3).}
+\end{practice}
+\begin{practice}{24}{2}
+Model With Mathematics The wind tunnel at Langley Research Center in Hampton, Virginia is 30 ft tall and 60 ft wide. The entrance to the tunnel is in the shape of an ellipse that can be modeled by the equation (\frac{x^2}{a^2}+\frac{y}{b^2}=1).
+a. Find the value of (a). Explain.
+\answer{The ellipse is horizontal. The major axis is 60 feet long, so (2a=60). Therefore, (a=30) feet.}
+b. Find the value of (b). Explain.
+\answer{The ellipse is horizontal. The minor axis is 30 feet long, so (2b=30). Therefore, (b=15) feet.}
+c. Write an equation of the ellipse that represents the entrance to the tunnel, assuming the center of the ellipse is at the origin.
+\answer{(\frac{x^2}{900}+\frac{y^2}{225}=1)}
+\te{Printed model omits the square on (y); an ellipse requires (y^2).}
+\end{practice}
+\begin{practice}{25}{2}
+Reason A scale drawing of an elliptical hot tub is shown. Write an equation to represent the scale drawing of the hot tub.
+% FIG 49 514 535 643 665
+\placeholder{graph}{Grid spacing 2, x window [-8,12], y [-12,8], black x/y axes arrows and O origin; x labels -4,4,8; y 4,-4,-8. Red vertical ellipse center (2,-2), vertices (2,6),(2,-10), co-vertices (-4,-2),(8,-2).}
+\answer{(\frac{(x-2)^2}{36}+\frac{(y+2)^2}{64}=1)}
+\end{practice}
+\begin{practice}{26}{2}
+Make Sense and Persevere The Colosseum, which is 188 m long and 156 m wide, is an elliptical amphitheater located at the center of Rome, Italy. A backstage entrance is located at one vertex. A stage is erected at a location that corresponds to the focus that is closest to the backstage entrance. How far from the entrance is the stage?
+% FIG 49 514 802 683 1033
+\placeholder{photo}{Aerial view of the oval Colosseum with long axis vertical. White point at top vertex labeled Backstage entrance; white point inside upper half labeled Stage.}
+\answer{about 41.5 m}
+\end{practice}
+\begin{practice}{27}{1}
+Which equation of an ellipse has a vertical major axis? Select all that apply.
+A. (\frac{x^2}{12}+\frac{y^2}{55}=1)
+B. (\frac{x^2}{53}+\frac{y^2}{25}=1)
+C. (\frac{(x-9)^2}{82}+\frac{(y-10)^2}{120}=1)
+D. (\frac{(x+7)^2}{92}+\frac{(y+16)^2}{88}=1)
+E. (\frac{(x-6)^2}{35}+\frac{(y+11)^2}{53}=1)
+\answer{A, C, E}
+\end{practice}
+\begin{practice}{28}{1}
+SAT/ACT What is the length of the minor axis of the ellipse represented by (\frac{(x-5)^2}{64}+\frac{(y+8)^2}{16}=1)?
+A. 4
+B. 8
+C. 16
+D. 32
+E. 64
+\answer{B}
+\end{practice}
+\begin{practice}{29}{2}
+Performance Task The Oval Office in the White House in Washington, DC, is actually elliptical.
+Part A Suppose that the president's desk chair is placed at one focus of the ellipse. How far is the chair from the wall behind it?
+\answer{88.7 in. or 7.4 ft}
+Part B If the president were to throw a tennis ball and bounce it off a wall in the Oval Office to the vice president, seated in a chair at the other focus of the ellipse, how far would the ball travel? (Assume that the path of the ball is level.)
+\answer{430 in. or 35.8 ft}
+% FIG 49 823 761 1078 945
+\placeholder{photo}{Oval Office with chairs foreground and desk at back. White double-headed horizontal arrow labeled Minor axis 29 ft; vertical arrow labeled Major axis 35 ft 10 in.}
+\end{practice}
+% Source page 50: 468A, Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Lesson Quiz}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+Item Analysis
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & G92 \\
+2 & 2 & G92 \\
+3 & 1 & G92 \\
+4 & 1 & G92 \\
+5 & 1 & G92 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0-3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{9-3 Lesson Quiz: Ellipses}
+1. Which ellipse has a major axis that is vertical?
+A. (\frac{(x+1)^2}{20}+\frac{(y+12)^2}{6}=1)
+B. (3x^2+7y^2-21=0)
+C. An ellipse with foci ((0,15)) and ((0,-15)) and co-vertices ((4,0)) and ((-4,0))
+D. An ellipse with vertices ((0,4)) and ((30,4)) and co-vertices ((15,3)) and ((15,5))
+\answer{C}
+2. An elliptical-shaped whispering gallery has two chairs positioned at the foci of the ellipse, 6 meters apart. The width of the room, measured along its minor axis, is 8 meters. Find an equation of the ellipse representing the floor of the room if its center is at the origin and its major axis is horizontal. What is the length of the room measured along its major axis?
+equation:
+A. (\frac{x^2}{9}+\frac{y^2}{16}=1)
+B. (\frac{x^2}{36}+\frac{y^2}{64}=1)
+C. (\frac{x^2}{2}+\frac{y^2}{64}=1)
+D. (\frac{x^2}{25}+\frac{y^2}{16}=1)
+\answer{D; length of room: 100 m}
+\te{Printed length is 100 m; with (a=5), the major axis is 10 m.}
+3. Which of the following is true about the graph of (\frac{(x-3)^2}{25}+\frac{(y+1)^2}{49}=1)?
+A. The center is ((-3,1)).
+B. The foci are ((3,-1+2\sqrt{6})) and ((3,-1-2\sqrt{6})).
+C. The vertices are ((-2,-1)) and ((8,-1)).
+D. The co-vertices are ((-5,-1)) and ((5,-1)).
+\answer{B}
+4. Graph the ellipse represented by (\frac{(x+5)^2}{9}+\frac{(y+2)^2}{4}=1).
+\answer{See graph.}
+% FIG 50 1010 646 1153 794
+\placeholder{graph}{Unit grid x [-9,1], y [-5,5], black x/y axes arrows and O origin; x labels -8,-6,-4,-2; y +/-2,+/-4. Magenta horizontal ellipse center (-5,-2), vertices (-8,-2),(-2,-2), co-vertices (-5,0),(-5,-4).}
+5. Identify the center, foci, vertices, and co-vertices of the ellipse represented by (4x^2-16x+y^2-6y+21=0).
+\answer{center: ((2,3)); vertices: ((2,1)) and ((2,5)); co-vertices: ((1,3)) and ((3,3)); foci: B}
+foci:
+A. ((1,2+\sqrt{3})) and ((1,2-\sqrt{3}))
+B. ((2,3+\sqrt{3})) and ((2,3-\sqrt{3}))
+C. ((1,3+\sqrt{3})) and ((1,3-\sqrt{3}))
+D. ((3,2+\sqrt{3})) and ((3,2-\sqrt{3}))
+\end{te-addendum}
+% Source page 51: 468B, Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Reteach to Build Understanding: Intervention}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+9-3 Reteach to Build Understanding: Ellipses
+1. Use the graph to determine the equation for the ellipse in the form of (\frac{x^2}{b^2}+\frac{y^2}{a^2}=1).
+% FIG 51 326 411 400 485
+\placeholder{graph}{Unit grid x [-6,6], y [-6,6], black axes arrows, O origin, labels +/-2,+/-4. Black horizontal ellipse center (0,0), filled vertices labeled (-5,0),(5,0), co-vertices (0,3),(0,-3). Horizontal halves labeled b and vertical halves a, with center callout.}
+a. Find the distance from the center to either vertex on the y-axis. The distance from ((0,0)) to ((0,3)) is (a).
+(a=\sqrt{(0-0)^2+(0-3)^2})
+(a=\sqrt{0^2+3^2}=\sqrt{3^2}=\sqrt{9})
+\answer{(a=3)}
+b. Find the distance from the center to either vertex on the x-axis. The distance from ((0,0)) to ((5,0)) is (b).
+(b=\sqrt{(0-5)^2+(0-0)^2})
+(b=\sqrt{5^2+0^2}=\sqrt{5^2}=\sqrt{25})
+The equation for the ellipse is (\frac{x^2}{5^2}+\frac{y^2}{3^2}=\frac{x^2}{\answer{25}}+\frac{y^2}{\answer{9}}=1).
+\answer{(b=5)}
+\te{This resource assigns (a) to the minor semiaxis and (b) to the major semiaxis, reversing the main lesson's convention.}
+2. Dylan wrote an equation for the ellipse shown as (\frac{x^2}{16}+\frac{y^2}{4}=1). What error did he make? What is the correct equation?
+\answer{Dylan switched (a) and (b). The correct equation is (\frac{x^2}{4}+\frac{y^2}{16}=1).}
+% FIG 51 326 558 387 621
+\placeholder{graph}{Unit grid [-5,5] both axes, black axes arrows and O origin, labels +/-2,+/-4. Black vertical ellipse centered at origin, vertices (0,+/-4), co-vertices (+/-2,0).}
+3. Find the foci of the ellipse (\frac{x^2}{16}+\frac{y^2}{9}=1), using the Pythagorean Theorem. Use (a^2-b^2=c^2), where (a=\sqrt{16}=\answer{4}), (b=\sqrt{\answer{9}}=3), and (c=) distance from the center to the foci. Round to the nearest hundredth.
+(a^2-\answer{3}^2=c^2)
+(\answer{16}-9=c^2)
+(c^2=\answer{7}), so (c=\pm\sqrt{7}\approx\answer{\pm2.65}).
+The foci are at ((\answer{2.65},0)) and ((\answer{-2.65},0)).
+\te{The printed work writes (c=\pm\sqrt{7}) although (c) was defined as a distance; the two signs identify the two focus coordinates.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Additional Practice: Intervention; On-Level}
+Provides extra practice for each lesson. MathXL for School.
+9-3 Additional Practice: Ellipses
+Write an equation of an ellipse for the given foci and sum of the distances from the foci to any point on an ellipse.
+1. foci ((\pm5,0)); Sum of the distances: 12
+\answer{(\frac{x^2}{36}+\frac{y^2}{11}=1)}
+2. foci ((0,\pm2)); Sum of the distances: 6
+\answer{(\frac{x^2}{5}+\frac{y^2}{9}=1)}
+Graph the ellipse represented by each equation. Then find the coordinates of the foci.
+3. (\frac{x^2}{36}+\frac{y^2}{81}=1)
+\answer{foci: ((0,3\sqrt{5})) and ((0,-3\sqrt{5})); see graph.}
+% FIG 51 582 475 632 525
+\placeholder{graph}{Grid spacing 3, window [-12,12] both axes, black axes arrows O origin, labels +/-6. Magenta vertical ellipse centered at origin with vertices (0,+/-9), co-vertices (+/-6,0).}
+4. (x^2+\frac{y^2}{36}=1)
+\answer{foci: ((0,\sqrt{35})) and ((0,-\sqrt{35})); see graph.}
+% FIG 51 714 475 765 525
+\placeholder{graph}{Grid spacing 2, window [-8,8] both axes, black axes arrows O origin, labels +/-4. Narrow magenta vertical ellipse centered at origin, vertices (0,+/-6), co-vertices (+/-1,0).}
+5. What is the equation of an ellipse centered at the origin that has a horizontal axis 18 units long and a vertical axis 24 units long?
+\answer{(\frac{x^2}{81}+\frac{y^2}{144}=1)}
+6. Graph the ellipse represented by (3x^2-12x+y^2-8y+10=0). Label the coordinates of the center, vertices, co-vertices, and foci. Round to the nearest thousandth.
+\answer{Center: ((2,4)); Vertices: ((2,8.243)) and ((2,-0.243)); Co-vertices: ((-0.449,4)) and ((4.449,4)); Foci: ((2,7.464)) and ((2,0.536)); see graph.}
+% FIG 51 714 564 778 628
+\placeholder{graph}{Unit grid x [-5,5], y [-1,9], black axes arrows O origin, x labels -4,-2,2,4 and y 2,4,6,8. Magenta vertical ellipse center (2,4), horizontal extrema about -0.449 and 4.449, vertical extrema about -0.243 and 8.243.}
+7. A track goes around a football field. The inner part of the track is 140 yd on its longest axis. The goal posts, representing the foci, are 120 yd apart. The starting lines are located on the co-vertices of the inner track. Find the equation of the ellipse representing the inner track. How far are the starting lines from the center of the field?
+\answer{(\frac{x^2}{4900}+\frac{y^2}{1300}=1); (10\sqrt{13}) or 36.06 yd}
+% FIG 51 689 641 778 687
+\placeholder{diagram}{Horizontal gray oval running track around a rectangular football field, black coordinate axes through center. Inner oval endpoints filled with callout labels -70 and 70; two interior filled goal-post points on horizontal axis labeled -60 and 60. Vertical axis through co-vertices.}
+8. A student examines an ellipse with foci of ((43,0)) and ((-43,0)) and with vertices of ((45,0)) and ((-45,0)). He claims that the ellipse has co-vertices of ((0,44)) and ((0,-44)). Is the student correct? Explain.
+\answer{No; (a^2=b^2+c^2), so (45^2=b^2+43^2) and (b=4\sqrt{11}\approx13.267), so the co-vertices are ((0,13.267)) and ((0,-13.267)).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment: On-Level; Advanced}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+9-3 Enrichment: Ellipses
+Johannes Kepler, an astronomer who collected data without a telescope, developed laws to describe the orbits of the planets around the sun. According to the Law of Orbits, all planets travel in elliptical curves with the sun at one focus. The eccentricity (e) is used to measure how much the ellipse deviates from the pattern of the circle. The eccentricity of an ellipse is always greater than 0 and less than 1. The eccentricity of a circle is 0.
+Given the eccentricity of each planet as well as its maximum or minimum distance from the sun in astronomical units (AU), use the equations provided to solve for (a) and (b) to write the equation of each planet's elliptical orbit. Round (a) and (b) to the nearest thousandth.
+(a=) semi-major axis; (b=) semi-minor axis
+Distance of sun from center: (ae)
+Minimum distance from sun: (a-ae)
+Maximum distance from sun: (a+ae)
+Eccentricity (e=\sqrt{1-\frac{b^2}{a^2}})
+% FIG 51 852 510 938 558
+\placeholder{diagram}{Horizontal ellipse with vertical minor axis and horizontal major axis. Endpoints B at left and A at right; vertical semiminor distance b, two horizontal halves a. Sun symbol at right focus, distance ae from center; black planet point on upper-right curve with dashed vertical line to focus.}
+\begin{tabular}{lllllll}
+Planet & Orbit Eccentricities & Max Distance & Min Distance & (a) & (b) & Equation of Ellipse \\
+Mercury & 0.206 & 0.467 & 0.307 & \answer{0.387} & \answer{0.379} & \answer{(\frac{x^2}{0.150}+\frac{y^2}{0.144}=1)} \\
+Venus & 0.0068 & 0.728 & 0.718 & \answer{0.723} & \answer{0.723} & \answer{(\frac{x^2}{0.523}+\frac{y^2}{0.523}=1)} \\
+Earth & 0.0167 & 1.017 & 0.983 & \answer{1} & \answer{1} & \answer{(x^2+y^2=1)} \\
+Mars & 0.0934 & 1.666 & 1.382 & \answer{1.524} & \answer{1.517} & \answer{(\frac{x^2}{2.323}+\frac{y^2}{2.301}=1)} \\
+Jupiter & 0.0485 & 5.435 & 4.931 & \answer{5.203} & \answer{5.197} & \answer{(\frac{x^2}{\uncertain{27.071}{27.081}}+\frac{y^2}{\uncertain{27.009}{27.005}}=1)} \\
+Saturn & 0.0556 & 10.044 & 9.041 & \answer{9.543} & \answer{9.528} & \answer{(\frac{x^2}{\uncertain{91.069}{91.068}}+\frac{y^2}{\uncertain{90.783}{90.788}}=1)} \\
+Uranus & 0.0472 & 20.07 & 18.31 & \answer{19.19} & \answer{19.169} & \answer{(\frac{x^2}{\uncertain{368.256}{368.250}}+\frac{y^2}{\uncertain{367.451}{367.461}}=1)} \\
+Neptune & 0.0086 & 30.36 & 29.76 & \answer{\uncertain{35.86}{35.66; 35.88}} & \answer{\uncertain{35.859}{35.858}} & \answer{(\frac{x^2}{\uncertain{1285.3}{1285.2}}+\frac{y^2}{\uncertain{1285.11}{1285.10}}=1)} \\
+\end{tabular}
+\te{The tiny Neptune row appears inconsistent with the supplied distances; its printed key is retained with uncertain marks. Jupiter and Saturn distances and eccentricities also do not precisely produce all of the printed key values.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary: Intervention; On-Level}
+Helps students develop and reinforce understanding of key terms and concepts.
+9-3 Mathematical Literacy and Vocabulary: Ellipses
+Complete the vocabulary chart by filling in the missing information.
+\begin{tabular}{lll}
+Word or Word Phrase & Definition & Picture or Example \\
+Co-vertices & the endpoints of the minor axis & 2. \answer{c.} \\
+Ellipse & the set of points (P) in a plane such that the sum of the distances from (P) to two fixed points (F1) and (F2) is a constant (k) & 3. \answer{b.} \\
+Focus of an ellipse & 4. \answer{d.} & See focus graph. \\
+Major axis & the segment passing through the foci with vertices on each end & 5. \answer{a.} \\
+Minor axis & 6. \answer{e.} & See minor-axis graph. \\
+\end{tabular}
+% FIG 51 352 1095 410 1145
+\placeholder{graph}{Focus-of-an-ellipse vocabulary picture. Gray grid spacing 2, black x/y axes arrows O origin, labels +/-4, horizontal ellipse centered at origin about semiaxes 9 and 5. Filled interior points labeled (-7.5,0),(7.5,0).}
+% FIG 51 352 1180 410 1231
+\placeholder{graph}{Minor-axis vocabulary picture. Gray grid spacing 2, black x/y axes arrows O origin, labels +/-4. Horizontal ellipse centered at origin about semiaxes 9 and 5; vertical segment joining co-vertices labeled (0,5),(0,-5).}
+a.
+% FIG 51 180 1243 241 1294
+\placeholder{graph}{Major-axis option a: gray grid spacing 2, black x/y axes arrows O origin, labels +/-4. Horizontal ellipse centered at origin, vertical extrema +/-5. Filled left and right vertices labeled (-9,0),(9,0), connected by horizontal major-axis segment.}
+b.
+% FIG 51 266 1240 326 1279
+\placeholder{diagram}{Option b: plain horizontal black ellipse, no axes or labels.}
+c.
+% FIG 51 353 1243 413 1296
+\placeholder{graph}{Co-vertices option c: gray grid spacing 2, black x/y axes arrows O origin, labels +/-4. Horizontal ellipse centered at origin with horizontal extrema about +/-9; vertical co-vertices labeled (0,5),(0,-5).}
+d. the sum of the distances from each of these two points to any point on the ellipse is a constant
+e. the segment perpendicular to the major axis at the center of the ellipse and with co-vertices as endpoints
+\te{The printed vocabulary chart begins its numbered blanks at 2.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 51 587 980 1033 1299
+\placeholder{illustration}{Black tablet showing MathXL exercise: Solve the system of equations by graphing, y=3x+4 and y=-2x+4. Use the graphing tool to graph the system; Click to enlarge graph. Blank unit grid [-10,10] both axes with black x/y arrows, labels every 2. Question Help menu: Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Bottom: Click the graph, choose a tool in the palette and follow the instructions to create your graph; 1 part remaining, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next.}
+\end{te-addendum}
+
+\end{document}

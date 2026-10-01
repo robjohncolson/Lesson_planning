@@ -1,0 +1,965 @@
+\documentclass{article}
+% Source: Topic_06_Teacher_Edition.pdf, PDF pages 81-93 (printed pages 328A-336B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 81: 328A, Lesson Overview
+\begin{lesson-meta}
+lesson: 6-7
+title: Geometric Sequences and Series
+standards: none printed
+practices: none printed
+objective: I can identify, write, and use geometric sequences and series.
+
+essential question: How can you represent and use geometric sequences and series?
+
+\textbf{VOCABULARY}
+\item common ratio
+\item geometric sequence
+\item geometric series
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 6-7 \\
+Title & Geometric Sequences and Series \\
+Standards & none printed \\
+I CAN Objective & I can identify, write, and use geometric sequences and series. \\
+Essential Question & How can you represent and use geometric sequences and series? \\
+Lesson Vocabulary & common ratio; geometric sequence; geometric series \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Construct a geometric sequence given a graph, table, or description of a relationship.
+\item Translate between geometric sequences written in recursive and explicit forms.
+\item Use the formula for the sum of a finite geometric series to solve problems.
+Essential Understanding. A geometric sequence is a sequence of numbers in which terms are related to the previous term by a common ratio, r. A geometric series is the sum of a certain number of terms in a geometric sequence.
+\textbf{COHERENCE}
+Previously in this course, students:
+\item Wrote arithmetic sequences recursively and then translated from a recursive formula to an explicit formula.
+\item Solved exponential equations.
+In this lesson, students:
+\item Write geometric sequences recursively and with an explicit formula and translate between the two forms.
+\item Find the sum of a geometric series.
+In later courses students:
+\item Will apply the concept of sequences and series to convergent and divergent series.
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+\item Students use the common ratio in a geometric sequence and use that to write a geometric series recursively. They also use a pattern to write an explicit definition for a sequence.
+\item Students use geometric sequences and series to solve real-world problems.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+REVIEW VOCABULARY English & Spanish \\
+arithmetic sequence & secuencia aritmética \\
+arithmetic series & serie aritmética \\
+NEW VOCABULARY & \\
+common ratio & razón común \\
+geometric sequence & secuencia geométrica \\
+geometric series & serie geométrica \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Help students recall the difference between arithmetic sequences and arithmetic series. Explain that for geometric sequences and geometric series, rather than the terms being separated by a common difference, consecutive terms will have a common ratio. Have students complete the matching activity to help them differentiate between the four terms.
+\begin{tabular}{ll}
+(1,3,9,27,\ldots) & arithmetic sequence \\
+(2+4+6+8) & arithmetic series \\
+(2,4,6,8,\ldots) & geometric sequence \\
+(1+3+9+27) & geometric series \\
+\end{tabular}
+\answer{Magenta matching lines: (1,3,9,27,\ldots) to geometric sequence; (2+4+6+8) to arithmetic series; (2,4,6,8,\ldots) to arithmetic sequence; (1+3+9+27) to geometric series.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 81 953 786 1105 966
+\placeholder{illustration}{Black Student Companion cover with luminous purple and blue circular pattern; enVision Algebra 2 and SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students use their knowledge of geometric sequences to translate between explicit and recursive definitions for geometric sequences.
+Students generalize the formula for the sum of a finite geometric series and use this formula to find the sum and to identify the number of terms in a finite geometric series.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively
+Students are flexible in the use of operations when they multiply each side of an equation for a geometric series by r.
+\end{te-addendum}
+% Source page 82: 328B, Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students explore writing algebraic expressions based on descriptions that imply common ratios. To prepare to write a definition for a geometric sequence, students compare the number of bonus points customers will earn.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+Critique \& Explain is available at SavvasRealize.com.
+\te{Printed availability heading says Critique & Explain; activity is Explore & Reason.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+At the ten-day opening celebration for the Parks Arcade, they are offering two special packages for their patrons to purchase prize tickets.
+% FIG 82 987 638 1145 788
+\placeholder{illustration}{Two overlapping ticket cards. Teal PLAN A: 10 TICKETS TODAY! Each day after = 2X AS MANY TICKETS as the day before. Purple PLAN B: 1 TICKET TODAY! Each day after = 3X AS MANY TICKETS as the day before. Each has an arrow downward and circular punch marks along bottom.}
+A. What expression represents the number of points received each day for Plan A?
+\answer{A. (A=10(2)^{x-1})}
+B. What expression represents the number of points received each day for Plan B?
+\answer{B. (A=1(3)^{x-1})}
+C. Reason On the 7th day, which plan would offer the most bonus points? Explain.
+\answer{C. Plan B; on the seventh day Plan A would give 640 points while Plan B would give 729 points}
+\te{Student paragraph refers to tickets; questions and sample work refer to points.}
+\te{Digital activity: Go back; EXPLORE & REASON. A store offered customers two plans for getting bonus points. Part A and B repeat the questions. Part C is labeled Look for Relationships. Enter your answer boxes follow each part. Digital plan cards say PLAN A, 10 POINTS TODAY! Following days = 2X AS MANY POINTS as the day before; PLAN B, 1 POINT TODAY! Following days = 3X AS MANY POINTS as the day before.}
+\end{model-discuss}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: Can either plan be represented by an arithmetic sequence?
+\answer{No; There is not a common difference between consecutive terms of either sequence.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: How can you calculate the points earned for any given day on Plan A if you know the previous day's points? Plan B?
+\answer{For Plan A, you multiply the previous day's points by 2. For Plan B, you multiply the previous day's points by 3.}
+For Early Finishers
+Q: Switch the points you received the first day for the two plans. How do your answers to the questions change?
+\answer{Plan A, (A=1(2)^{x-1}); Plan B, (A=10(3)^{x-1}); Plan B will be greater than Plan A on the seventh day. Plan A = 64 points; Plan B = 7,290.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Q: How did you determine which plan would offer the greatest number of points on the seventh day?
+\answer{Calculate the value of the 1st day for each plan, and then multiply by the given increase to determine the points earned on the second day. Use the points from the second day to calculate the third day. Continue this process until you calculate the points for the seventh day.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXPLORE \& REASON
+Reason Does Plan B always offer more points than Plan A? Explain.
+\answer{No; for days 1 through 6, Plan A offers more points.}
+\end{te-addendum}
+% Source page 83: 328, Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Introduce students to geometric sequences and series. Remind students that they have previously learned about arithmetic sequences and series. Explain that they will learn to write geometric sequences and find the sum of geometric series.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How are geometric sequences similar to arithmetic sequences? How are they different?
+\answer{The domains of geometric and arithmetic sequences are all natural numbers. There is a relationship between consecutive terms of the sequences that is the same for the entire sequence. For an arithmetic sequence, there is a common difference between consecutive terms. For a geometric sequence, there is a common ratio between consecutive terms.}
+Q: Suppose the sixth term of the sequence is 964. Is the sequence still geometric?
+\answer{No; For a sequence to be geometric, the ratio between consecutive terms must be the same for every term.}
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Example 1}
+Additional Examples are available at SavvasRealize.com.
+Go back; ESSENTIAL QUESTION; SOLUTION.
+Is the sequence shown in the table a geometric sequence? If so, write a recursive definition for the sequence.
+\begin{tabular}{ll}
+Term Number & Term \\
+1 & -4 \\
+2 & 20 \\
+3 & -100 \\
+4 & 500 \\
+5 & -2,500 \\
+\end{tabular}
+Find a common ratio:
+(\frac{20}{-4}=-5\quad\frac{-100}{20}=-5\quad\frac{500}{-100}=-5\quad\frac{-2500}{500}=-5)
+The common ratio is -5. The first term is -4.
+The recursive definition for this sequence is (a_n=\begin{cases}-4,&\text{if }n=1\\-5a_{n-1},&\text{if }n>1.\end{cases})
+\answer{(a_n=\begin{cases}-4,&\text{if }n=1\\-5a_{n-1},&\text{if }n>1\end{cases})}
+Example 1 Students determine whether a sequence with a negative common ratio and negative first term is geometric.
+Q: Can a geometric sequence have all negative terms?
+\answer{Yes, if the first term of the sequence is negative and the common ratio is positive.}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Additional Example 5}
+Go back; ESSENTIAL QUESTION; SOLUTION.
+A scientist records the number of cells in an experiment each day. The scientist finds a geometric series that represents the total number of cells. The sum of the cells recorded is (3+12+48+\cdots+49,152).
+How many days did the scientist record the cells?
+The common ratio is 4. Use the explicit definition to find the number of days, n.
+(49,152=3(4)^{n-1})
+(16,384=4^{n-1})
+(\log(16,384)=(n-1)\log(4))
+(\frac{\log(16,384)}{\log(4)}=n-1)
+(n=8)
+The scientist recorded the number of cells for 8 days.
+\answer{8 days}
+Example 5 Students find the number of terms of a geometric series in a real-world situation.
+Q: Why would you use logarithms to solve the equation?
+\answer{A geometric sequence is an exponential function. Logarithms are the inverse of exponents.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Identify Geometric Sequences}
+A. Is the sequence shown in the table a geometric sequence? If so, write a recursive definition for the sequence.
+\begin{tabular}{ll}
+Term number (n) & Term (a_n) \\
+1 & 4 \\
+2 & 12 \\
+3 & 36 \\
+4 & 108 \\
+5 & 324 \\
+\end{tabular}
+\te{Red arrows labeled times 3 link 4 to 12 and 12 to 36. Each term is 3 times the preceding term.}
+A geometric sequence is a sequence with a constant ratio between consecutive terms. This ratio is called the common ratio, r.
+This sequence is a geometric sequence, since each term is equal to the previous term multiplied by 3:
+(a_2=a_1\cdot3)
+(a_3=a_2\cdot3)
+(a_n=a_{n-1}\cdot3)
+The recursive definition for this sequence is (a_n=\begin{cases}4,&n=1\\3a_{n-1},&n>1.\end{cases})
+\te{Callouts label 4 First term, n=1 Term number, and 3 common ratio.}
+The preceding term (a_{n-1}) multiplied by the common ratio is the next term in the sequence (a_n).
+The general recursive definition for a geometric sequence is (a_n=\begin{cases}a_1,&n=1\\a_{n-1}\cdot r,&n>1\end{cases})
+\te{STUDY TIP Notice that r serves in a similar capacity as d in an arithmetic sequence. Where d is added to each preceding term, r is multiplied by each preceding term.}
+\answer{A. Yes; (a_n=\begin{cases}4,&n=1\\3a_{n-1},&n>1\end{cases})}
+% Source page 84: 329, Example 1 continued
+B. Is the sequence (12,9.6,7.68,6.144,\ldots) a geometric sequence? If so, write the recursive definition for the sequence.
+Find the ratio between consecutive terms.
+(12\longrightarrow9.60\longrightarrow7.68\longrightarrow6.144)
+(\frac{9.60}{12}=0.80\quad\frac{7.68}{9.6}=0.80\quad\frac{6.144}{7.68}=0.80)
+The ratio between the consecutive terms is constant. This is a geometric sequence with (a_1=12) and (r=0.8).
+The recursive definition for the sequence is (a_n=\begin{cases}12,&n=1\\0.8a_{n-1},&n>1\end{cases})
+\answer{B. Yes; (a_n=\begin{cases}12,&n=1\\0.8a_{n-1},&n>1\end{cases})}
+\end{example}
+\begin{tryit}{1}
+Is the sequence a geometric sequence? If so, write a recursive definition for the sequence.
+a. (1.22,1.45,1.68,1.91,\ldots)
+b. (-1.5,0.75,-0.375,0.1875,\ldots)
+\answer{a. No b. Yes; (a_n=\begin{cases}-1.5,&\text{if }n=1\\a_{n-1}(-0.5),&\text{if }n>1\end{cases})}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: When the terms of a geometric sequence have a negative common ratio, why do the signs of consecutive terms alternate?
+\answer{The signs of the terms alternate because when you multiply a negative number by the negative common ratio, the result is a positive number. Then when you multiply the positive number by the negative common ratio, the result is a negative number. This pattern continues.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: Why is the power of the common ratio in the explicit definition of a geometric sequence (n-1) instead of n?
+\answer{The value of (a_1) is not multiplied by the common ratio. So the common ratio is multiplied one less time than n.}
+Q: What information do the recursive and explicit definitions have in common?
+\answer{Both definitions give the value of the first term of the sequence and the common ratio.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 2 Have students write explicit and recursive definitions of sequences, given the terms of the sequence.
+Write a recursive and explicit definition for the geometric sequence.
+1. (2b,8b,32b,128b,\ldots)
+\answer{recursive: (a_n=2b), if (n=1), (a_n=4a_{n-1}), if (n>1); explicit: (a_n=2b(4)^{n-1})}
+2. (2,8b,32b^2,128b^3,\ldots)
+\answer{recursive: (a_n=2), if (n=1), (a_n=4ba_{n-1}), if (n>1); explicit: (a_n=2(4b)^{n-1})}
+Q: What do you notice about the two sequences?
+\answer{In the first sequence, the first term includes the variable b. In the second sequence, the common ratio includes the variable b.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Translate Between Recursive and Explicit Definitions}
+A. Given the recursive definition (a_n=\begin{cases}5,&n=1\\\frac12a_{n-1},&n>1\end{cases}), what is the explicit definition for the geometric sequence?
+The first term is 5, and the common ratio is (\frac12).
+The recursive definition is (a_n=\frac12a_{n-1}). Use this definition to find a pattern:
+(a_1=5)
+(a_2=5(\frac12))
+(a_3=a_2\cdot(\frac12)=(5)(\frac12)(\frac12)=(5)(\frac12)^2)
+(a_4=a_3\cdot(\frac12)=(5)(\frac12)^2(\frac12)=(5)(\frac12)^3)
+The pattern reveals the explicit definition for the sequence:
+(a_n=(5)(\frac12)^{n-1}). In function notation, (S(n)=(5)(\frac12)^{n-1}).
+The general explicit definition for any geometric sequence is: (a_n=a_1r^{n-1}).
+\te{GENERALIZE Both geometric and arithmetic sequences are functions. The domain is a subset of the Natural numbers. Each input is mapped to a unique output in the range defined by a rule given as either a recursive definition or an explicit definition.}
+\answer{A. (a_n=(5)(\frac12)^{n-1})}
+% Source page 85: 330, Example 2 continued
+B. Given the explicit definition (a_n=3(2)^{n-1}), what is the recursive definition for the geometric sequence?
+From the explicit definition, (a_1=3) and (r=2).
+The recursive definition for the sequence is (a_n=\begin{cases}3,&n=1\\2a_{n-1},&n>1\end{cases})
+\answer{B. (a_n=\begin{cases}3,&n=1\\2a_{n-1},&n>1\end{cases})}
+\end{example}
+\begin{tryit}{2}
+a. Given the recursive definition (s_n=\begin{cases}12,&n=1\\\frac13a_{n-1},&n>1\end{cases}), what is the explicit definition for the sequence?
+b. Given the explicit definition (a_n=6(1.2)^{n-1}), what is the recursive definition?
+\answer{a. (a_n=12(\frac13)^{n-1}) b. (a_n=\begin{cases}6,&\text{if }n=1\\1.2a_{n-1},&\text{if }n>1\end{cases})}
+\te{Printed Part a left-hand symbol s_n, with a_{n-1} inside and a_n in the key; likely a_n throughout.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Which do you think is easier: finding the explicit formula from the recursive formula, or finding the recursive formula when given the explicit formula? Explain.
+\answer{Sample: It is easier to write the recursive formula from the explicit formula. You can easily identify and substitute the values of r and (a_1).}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: To write the explicit formula for a geometric sequence, you need to know the value of the first term and the common ratio. Which of these is given in the problem? Which do you need to calculate from the given information?
+\answer{The first term is given in the problem. You need to calculate the common ratio.}
+Q: How can you use the explicit formula for the geometric sequence to determine how many people were called in the eighth round?
+\answer{Substitute 8 for n in the explicit formula and simplify the expression.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 3)
+WRITING BEGINNING Display each of the following phrases. Then ask students to draw a diagram to represent each use of the word tree.
+\item Apple tree
+\item Factor tree for 24
+\item Probability tree for flipping a coin 3 times
+\item Phone tree
+Q: Fill in the blanks to describe what a phone tree is: One person \rule{1cm}{0.4pt} a few people to convey information. Each of those people then calls \rule{1cm}{0.4pt} people to spread the word. This continues until \rule{1cm}{0.4pt} people on a given list have been called.
+\answer{calls, more, all}
+READING DEVELOPING Display the definitions of the words: able -- having the skills or qualifications to do something; advantage -- favorable to success; and agree -- have the same opinion.
+Q: How would the meanings of the words change if the prefix dis- were added to them?
+\answer{They would have the opposite meaning.}
+Q: Using a dictionary, read the definition of the word regard.
+\answer{to think highly of or to take into account}
+Q: What is meant by "disregard the negative solution"?
+\answer{Ignore it, or do not consider it.}
+LISTENING EXPANDING Read aloud the definitions of implicit -- implied rather than expressly stated, and explicit -- fully and clearly expressed. Distribute cards with implicit written on one side and explicit on the other. Ask students to listen to the following situations, and use the cards to indicate which term applies.
+Q: A teacher tells students to get ready for a pop quiz, so they remove their books from their desks and get out their pencils.
+\answer{implicit}
+Q: If you come home after curfew, you will be grounded.
+\answer{explicit}
+Q: Jack's mom said, "You will get sick if you wear shorts when it's snowing." So Jack changed his clothes.
+\answer{implicit}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Solve Problems With Geometric Sequences}
+\te{APPLICATION}
+A phone tree is when one person calls a certain number of people, then those people each call the same number of people, and so on.
+% FIG 85 814 448 1106 610
+\placeholder{diagram}{Phone tree: one phone branches to three phones, each branches to three more, continuing in groups of three. Callout: In the fifth round of calls, 243 people were called.}
+A. Write an explicit definition to find the number of people called in each round.
+So (a_1=3) and (a_5=243). Use the explicit definition to find (r).
+(a_n=a_1r^{n-1})
+(243=3r^{5-1})
+(81=r^4)
+(3=r)
+\te{81 has two fourth roots, (-3) and 3. Only the positive fourth root makes sense in this context.}
+The explicit definition is (a_n=3(3)^{n-1}).
+\answer{(a_n=3(3)^{n-1})}
+\te{LOOK FOR RELATIONSHIPS What is the same and different between the geometric sequence and the exponential growth function (f(x)=3(3)^{x-1})?}
+% Source page 86: 331, Example 3 continued
+B. How many people were called in the eighth round of the phone tree?
+Use the explicit definition and solve for (n=8).
+(a_n=a_1r^{n-1})
+(a_8=3(3)^{8-1})
+\te{Substitute 8 for (n) and simplify.}
+(a_8=3(3)^7)
+(a_8=6,561)
+On the eighth round, 6,561 people were called.
+\answer{6,561 people}
+\end{example}
+\begin{tryit}{3}
+A geometric sequence can be used to describe the growth of bacteria in an experiment. On the first day of the experiment there were 9 bacteria in a Petri dish. On the 10th day, there are (3^{20}) bacteria in the dish. How many bacteria were in the dish on the 7th day of the experiment?
+\answer{There are (3^{14}) bacteria in the dish on the 7th day.}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: How can (a_{10}=3^{20}) if the first term is not equal to 3?
+\answer{The first term is 9, which is equal to (3^2).}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+HABITS OF MIND Use with EXAMPLES 1--3
+Use Appropriate Tools How can you use the recursive definition for a geometric sequence to find the 19th term? Explain.
+\answer{Use the recursive definition to write the explicit definition for the sequence. Then evaluate the explicit definition for (n=19).}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Formula for the Sum of a Finite Geometric Series}
+\te{CONCEPTUAL UNDERSTANDING}
+A. How can you find the sum of a finite geometric series?
+A \textbf{geometric series} is the sum of the terms of a geometric sequence. (S_n) represents the sum of a geometric sequence with (n) terms.
+(S_n=a_1+a_1r+a_1r^2+a_1r^3+\cdots+a_1r^{n-1})
+(rS_n=a_1r+a_1r^2+a_1r^3+\cdots+a_1r^{n-1}+a_1r^n)
+(S_n-rS_n=a_1-a_1r^n)
+\te{Subtract the second equation from the first equation.}
+(S_n(1-r)=a_1(1-r^n))
+(S_n=\frac{a_1(1-r^n)}{(1-r)}) for (r\neq1)
+\te{MAKE SENSE AND PERSEVERE Notice that multiplying each side by (r) gives you a second equation with many of the same terms as the original equation. How does this help you eliminate terms to find an expression for the sum of a finite geometric series?}
+\answer{(S_n=\frac{a_1(1-r^n)}{1-r}) for (r\neq1)}
+B. Write the expanded form of the series (\sum_{k=1}^{7}3(\frac{2}{3})^{k-1}). What is the sum?
+Recall how to use sigma ((\sum)) notation to represent a series.
+(\sum_{k=1}^{n}a_1r^{k-1}=a_1+a_1r+a_1r^2+a_1r^3+\cdots+a_1r^{n-1}=\frac{a_1(1-r^n)}{1-r})
+The series is (3+2+\frac{4}{3}+\frac{8}{9}+\frac{16}{27}+\frac{32}{81}+\frac{64}{243}). To find the sum, use the sum of a finite geometric series formula with (a_1=3), (r=\frac{2}{3}), and (n=7).
+(s_7=\frac{3(1-(\frac{2}{3})^7)}{1-\frac{2}{3}}=\frac{2,059}{243})
+The sum is (\frac{2,059}{243}).
+\answer{(3+2+\frac{4}{3}+\frac{8}{9}+\frac{16}{27}+\frac{32}{81}+\frac{64}{243}); (\frac{2,059}{243})}
+\end{example}
+\begin{tryit}{4}
+a. Write the expanded form of the series (\sum_{k=1}^{5}\frac{1}{2}(3)^{k-1}). What is the sum?
+\answer{(\frac{1}{2}+\frac{3}{2}+\frac{9}{2}+\frac{27}{2}+\frac{81}{2}); (\frac{121}{2})}
+b. Write the series (-2+(\frac{-2}{3})+\cdots(\frac{-2}{243})) using sigma notation. What is the sum?
+\te{Printed no plus sign between the ellipsis and the last term; likely an omitted plus sign.}
+\answer{(\sum_{k=1}^{6}-2(\frac{1}{3})^{k-1}); (-\frac{728}{243})}
+\end{tryit}
+\begin{te-addendum}{4}{PurposefulQuestions}
+Pose Purposeful Questions
+Q: Why do you multiply by (r) in the second equation when finding the sum of a finite geometric series?
+\answer{You multiply by (r) to create an equation that you can subtract from the original equation. Subtracting these equations will eliminate most terms of the sum except the first term of the original equation and the last term of the new equation.}
+\end{te-addendum}
+\begin{te-addendum}{4}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: Why is it useful to start by finding the values of (a^1) and (r) when writing a geometric series in sigma notation?
+\te{Printed (a^1); likely (a_1).}
+\answer{To write a geometric series in sigma notation, you have to substitute the values of (a_1) and (r) into the formula.}
+\end{te-addendum}
+\begin{te-addendum}{4}{CommonError}
+Common Error
+Try It! 4 When writing the series using sigma notation, students may write the exponent as (n) instead of (n-1). Have students substitute (n=1) into the expression to verify that this value is equal to (a_1).
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+Support Struggling Students
+USE WITH EXAMPLE 4 Students may struggle with substituting and simplifying expressions. Have students practice substituting and simplifying the expressions.
+1. Substitute (x=3) and (y=\frac{1}{4}) in the expression (x(1-y)) and simplify.
+\answer{(\frac{9}{4})}
+2. Substitute (x=\frac{4}{9}) and (y=\frac{2}{3}) in the expression (\frac{1-x}{1-y}) and simplify.
+\answer{(\frac{5}{3})}
+3. Substitute (x=\frac{3}{4}) and (y=\frac{3}{8}) in the expression (2x-3y) and simplify.
+\answer{(\frac{3}{8})}
+4. Substitute (x=-2) and (y=5) in the expression (\frac{2}{3x}-\frac{y}{6}) and simplify.
+\answer{(-\frac{7}{6})}
+5. Substitute (x=-1) and (y=3) in the expression (\frac{x(x+y)}{y}) and simplify.
+\answer{(-\frac{2}{3})}
+6. Substitute (x=0.1) and (y=0.2) in the expression (3.2x+4.5y) and simplify.
+\answer{1.22}
+\end{te-addendum}
+% Source page 87: 332, Example 5
+\begin{example}{5}
+\textbf{Number of Terms in a Finite Geometric Series}
+A. How many terms are in the geometric series (200+300+450+\cdots+7,688.7)?
+Since the series is geometric, you can find that (r=1.5). Use the explicit definition to find (n), the number of terms.
+(7,688.7=200(1.5)^{n-1})
+(38.4435=(1.5)^{n-1})
+\te{Substitute the last term in the series into the explicit definition to determine (n).}
+(\log38.4435=\log(1.5)^{n-1})
+(\log38.4435=(n-1)\log(1.5))
+(\frac{\log38.4435}{\log1.5}=n-1)
+(n=\frac{\log38.4435}{\log1.5}+1)
+(n\approx10)
+There are 10 terms in the geometric series. Verify by calculating (200(1.5)^9=7,688.7).
+\te{Printed equality to rounded 7,688.7; likely an approximation, since the exact value is 7,688.671875.}
+\te{COMMON ERROR Be careful to calculate the common ratio by dividing a term by the previous term, not by the next term.}
+\answer{10 terms}
+B. The sum of a geometric series is 11,718. The first term of the series is 3, and its common ratio is 5. How many terms are in the series?
+(S_n=\frac{a_1(1-r^n)}{(1-r)})
+(11,718=\frac{3(1-5^n)}{(1-5)})
+\te{Substitute for (S_n), (a_1), and (r) in the formula for the sum of a geometric series to find (n).}
+(-46,872=3(1-5^n))
+(-15,624=1-5^n)
+(5^n=1+15,624)
+(\log(5^n)=\log15,625)
+\te{Once you have isolated the term with the exponent, take the logarithm of both sides.}
+(n\log5=\log15,625)
+(n=\frac{\log15,625}{\log5})
+(n=6)
+There are 6 terms in the series.
+\answer{6 terms}
+\end{example}
+\begin{tryit}{5}
+a. How many terms are in the geometric series (3+6+12+\cdots+768)?
+\answer{9 terms}
+b. The sum of a geometric series is 155. The first term of the series is 5, and its common ratio is 2. How many terms are in the series?
+\answer{5 terms}
+\end{tryit}
+\begin{te-addendum}{5}{PurposefulQuestions}
+Pose Purposeful Questions
+Q: Why do you need to use logarithms when solving this equation?
+\answer{The equation is an exponential equation. To isolate the variable in the exponent, you need to take the logarithm of each side of the equation.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: How can you check that your answer is correct?
+\answer{Substitute the value you found into the explicit definition of the geometric series and simplify. The value will equal the last term of the series.}
+\end{te-addendum}
+% Source page 88: 333, Example 6
+\begin{example}{6}
+\textbf{Use a Finite Geometric Series}
+\te{APPLICATION}
+Isabel needs to borrow to purchase a share in a food truck business. What will be her monthly payment?
+% FIG 88 840 275 1176 430
+\placeholder{illustration}{Purple, yellow, and red food truck with a sign: \$24,000 for 6 years; ANNUAL Interest Rate 4.5\%.}
+The formula to calculate a monthly payment is (A=\frac{P}{\sum_{k=1}^{n}(\frac{1}{1+i})^k}), where (A) is the monthly amount, (P) is the principal, or amount of the loan, (n) is the number of months, and (i) is the monthly interest rate.
+For Isabel's loan, (P=24,000), (n=72), and (i=0.00375). Substitute the values into the formula.
+\te{The annual interest rate is 4.5\%, so you must divide that by 12 to get the monthly interest rate.}
+(A=\frac{24,000}{\sum_{k=1}^{72}(\frac{1}{1+0.00375})^k})
+\te{The denominator is a finite geometric series with (a_1\approx0.996) and (r\approx0.996).}
+Find the sum.
+(\sum_{k=1}^{72}(\frac{1}{1+0.00375})^k\approx\frac{0.996(1-0.996^{72})}{(1-0.996)}\approx62.417)
+Now calculate the amount of the monthly payment:
+(A\approx\frac{24,000}{62.417}\approx384.51)
+Isabel's monthly payment for the loan would be about \$384.51.
+\te{USE APPROPRIATE TOOLS You can use your calculator's memory values to use more precise values than the estimates used here.}
+\answer{About \$384.51}
+\end{example}
+\begin{tryit}{6}
+What is the monthly payment for a \$40,000 loan for 4 years with an annual interest rate of 4.8\%?
+\answer{About \$918}
+\end{tryit}
+\begin{te-addendum}{6}{PurposefulQuestions}
+Pose Purposeful Questions
+Q: How do you use the values 6 years and 4.5\% annual interest rate to solve the problem?
+\answer{You use the number of months and the monthly interest rate to calculate the monthly payment. So convert the number of years and annual interest rate to a number of months and a monthly interest rate to solve the problem.}
+Q: How does understanding finite geometric series help you solve this problem?
+\answer{Without finite geometric series, you would need to calculate and sum 72 individual values. Using the formula for calculating the sum of a geometric series streamlines this process and allows you to calculate the monthly payment more efficiently.}
+\end{te-addendum}
+\begin{te-addendum}{6}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: Why is it useful to predict whether the total of the payments will be greater than or less than the starting principal?
+\answer{Because of the interest on the loan, the total payments will be greater than the starting principal. Predicting this will help you check the reasonableness of your answer.}
+\end{te-addendum}
+\begin{te-addendum}{6}{HabitsOfMind}
+HABITS OF MIND Use with EXAMPLES 4--6
+Make Sense and Persevere Why is using a formula easier than calculating and adding all 10 terms? Explain.
+\answer{Sample: Adding up 10 numbers could be tedious, especially as the numbers increase. Using a formula allows you to calculate the sum in just a few steps.}
+\end{te-addendum}
+% Source page 89: 334, Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+CONCEPT SUMMARY Geometric Sequences and Series
+Q: How does the explicit definition of a geometric sequence compare to an exponential function?
+\answer{Both a geometric sequence and an exponential function have a value raised to a variable power. The domain of a geometric sequence is all natural numbers. The domain of an exponential function is all real numbers.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{GeneralizeETP}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Geometric Sequences and Series}
+In a geometric sequence, the ratio defined by a term divided by the previous term is a constant, (r). Alternately, any term in a geometric sequence multiplied by (r) gives the next term.
+The sequence 1, 5, 25, 125, 625, ... is a geometric sequence, since (r=5).
+\begin{tabular}{lll}
+WORDS & ALGEBRA & EXAMPLE \\
+Each term in the sequence is (r) times the previous term. & The recursive definition for a geometric sequence is (a_n=\begin{cases}a_1,&n=1\\a_{n-1}\cdot r,&n>1\end{cases}) & (a_n=\begin{cases}1&n=1\\5a_{n-1},&n>1\end{cases}) \\
+The fourth term in a sequence is the first term multiplied by three common ratios. & The explicit definition is (a_n=a_1r^{n-1}). & (a_n=1(5)^{n-1}) \\
+You can find the sum of a certain number of terms in a geometric series. & For a finite geometric series with (r\neq1), (\sum_{m=1}^{n}a_1r^{m-1}=\frac{a_1(1-r^n)}{(1-r)}). & The sum of the first five terms is (\frac{1(1-5^5)}{1-5}=\frac{-3,124}{-4}=781). \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you represent and use geometric sequences and series?
+\answer{If a sequence has a set of numbers with a common ratio, you can create and use an explicit formula in order to extend the sequence or solve a problem.}
+2. Error Analysis Denzel claims the sequence 0, 7, 49, 343, ... is a geometric sequence and the next number is 2,401. What error did he make?
+\answer{Denzel thought the common ratio was 7, but (0(7)) does not equal 7, so the sequence is not geometric.}
+3. Vocabulary Describe the similarities and differences between a common difference and a common ratio.
+\answer{A common difference and common ratio are both the repeated pattern in a sequence of numbers. A common difference is added, while a common ratio is multiplied.}
+4. Use Structure What happens to the terms of a sequence if (a_1) is positive and (r>1)? What happens if (0<r<1)? Explain.
+\answer{The terms increase; the terms decrease.}
+\textbf{Do You KNOW HOW?}
+Find the common ratio and the next three terms of each geometric sequence.
+5. (2,-4,8,-16,\ldots)
+\answer{(-2); (32,-64,128)}
+6. (-64,-16,-4,-1,\ldots)
+\answer{(\frac{1}{4}); (-\frac{1}{4},-\frac{1}{16},-\frac{1}{64})}
+7. (0.8,2.4,7.2,21.6,\ldots)
+\answer{3; 64.8, 194.4, 583.2}
+8. (2,-10,50,-250,\ldots)
+\answer{(-5); (1,250,-6,250,31,250)}
+9. (100,50,25,12.5,\ldots)
+\answer{0.5; 6.25, 3.125, 1.5625}
+10. In a video game, players earn 100 bonus points for finishing the first level and twice as many points for each additional level. How many points does a player earn for finishing the fifth level? How many bonus points will the player have earned in the game up to that point?
+\answer{1600 points; 3100 points}
+% FIG 89 917 757 1132 832
+\placeholder{illustration}{Handheld video game console with blue screen reading NEW LEVEL Double your points!}
+\end{concept-summary}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Common Error
+Exercise 6 Students may incorrectly find the common ratio to be (-\frac{1}{4}). Have students check the common ratio they found by multiplying the first term by the common ratio and checking that their answers match the given sequence.
+\end{te-addendum}
+% Source page 90: 335, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice & Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+11--30, 33--44 & 11--20, 23--44 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Printed Assignment Guide and Item Analysis refer to item 44; the printed practice ends at 43. No item 44 is supplied on these pages.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 16--21,42 & 1 \\
+1 & 11 & 2 \\
+2 & 22--26 & 1 \\
+2 & 13 & 2 \\
+3 & 15,27,39,40 & 2 \\
+4 & 28--35 & 1 \\
+4 & 12 & 2 \\
+5 & 36,41 & 1 \\
+6 & 14,37,38 & 2 \\
+6 & 43,44 & 3 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{2}
+UNDERSTAND. Reason True or False: If the first two terms of a geometric sequence are positive, then the third term is positive. Explain your reasoning.
+\answer{True; If the first two terms are positive, the common ratio must be positive.}
+\end{practice}
+\begin{practice}{12}{2}
+UNDERSTAND. Error Analysis The first term of a geometric sequence is 4 and grows exponentially by a factor of 3. Murphy writes out the terms and says that the sum of the 4th and 5th terms is 1,296. Explain Murphy's error and correct it.
+\answer{He added terms 5 and 6 together. The actual answer is 432.}
+\end{practice}
+\begin{practice}{13}{2}
+UNDERSTAND. Construct Arguments Write a geometric sequence with at least four terms and describe it using both an explicit and recursive definitions. How can you confirm that your sequence is geometric?
+\answer{Check students' answers.}
+\end{practice}
+\begin{practice}{14}{2}
+UNDERSTAND. Higher Order Thinking Ahmad drops a ball from a height of 12 feet. Each bounce is 50\% as high as the previous bounce. What is the total vertical distance the ball has traveled when it hits the ground for the 4th time?
+% FIG 90 561 610 722 708
+\placeholder{graph}{Ball bounce graph with black arrowed x and y axes, origin O; x ticks every 0.5 labeled 1,2,3,4; y ticks every 3 labeled 6,12. Red trajectory starts at (0,12), reaches ground (1,0), peaks (1.5,6), reaches (2,0), peaks (2.5,3), reaches (3,0), peaks (3.5,1.5), reaches (4,0), with an arrow toward the final contact.}
+\answer{33 feet}
+\end{practice}
+\begin{practice}{15}{2}
+UNDERSTAND. Model With Mathematics The Sierpinski Triangle is a fractal made by cutting an equilateral triangle into four congruent pieces and removing the center piece, leaving three smaller triangles. The process is repeated on each triangle, creating more triangles that are even smaller. Continuing this pattern, how many triangles would there be after the tenth step in the process?
+% FIG 90 560 868 819 1010
+\placeholder{diagram}{Sierpinski Triangle stages joined by right arrows. Start with solid blue equilateral triangle; next remove one inverted central triangle in green, leaving three blue triangles; repeat central removal recursively to show 9,27,81 blue triangles. First three stages across upper row, then two stages below.}
+\answer{59,049}
+\end{practice}
+\begin{practice}{16}{1}
+PRACTICE. Is the sequence geometric? If so, write a recursive definition for the sequence. SEE EXAMPLE 1
+(1,-3,9,-27,\ldots)
+\answer{yes; (a_n=\begin{cases}1,&\text{if }n=1\\-3a_{n-1},&\text{if }n>1\end{cases})}
+\end{practice}
+\begin{practice}{17}{1}
+Is the sequence geometric? If so, write a recursive definition for the sequence. SEE EXAMPLE 1
+(3,-15,75,-375,\ldots)
+\answer{yes; (a_n=\begin{cases}3,&\text{if }n=1\\-5a_{n-1},&\text{if }n>1\end{cases})}
+\end{practice}
+\begin{practice}{18}{1}
+Is the sequence geometric? If so, write a recursive definition for the sequence. SEE EXAMPLE 1
+(4,5,6,7,\ldots)
+\answer{no}
+\end{practice}
+\begin{practice}{19}{1}
+Is the sequence geometric? If so, write a recursive definition for the sequence. SEE EXAMPLE 1
+(24,8,\frac{8}{3},\frac{8}{9},\ldots)
+\answer{yes; (a_n=\begin{cases}24,&\text{if }n=1\\\frac{1}{3}a_{n-1},&\text{if }n>1\end{cases})}
+\end{practice}
+\begin{practice}{20}{1}
+Is the sequence geometric? If so, write a recursive definition for the sequence. SEE EXAMPLE 1
+(2,4,6,8,\ldots)
+\answer{no}
+\end{practice}
+\begin{practice}{21}{1}
+Is the sequence geometric? If so, write a recursive definition for the sequence. SEE EXAMPLE 1
+(10,40,160,640,\ldots)
+\answer{yes; (a_n=\begin{cases}10,&\text{if }n=1\\4a_{n-1},&\text{if }n>1\end{cases})}
+\end{practice}
+\begin{practice}{22}{1}
+Translate between the recursive and explicit definitions for each sequence. SEE EXAMPLE 2
+(a_n=1,024(\frac{1}{2})^{n-1})
+\answer{(a_n=\begin{cases}1,024,&\text{if }n=1\\\frac{1}{2}a_{n-1},&\text{if }n>1\end{cases})}
+\end{practice}
+\begin{practice}{23}{1}
+Translate between the recursive and explicit definitions for each sequence. SEE EXAMPLE 2
+(a_n=\begin{cases}2,&n=1\\-2a_{n-1},&n>1\end{cases})
+\answer{(a_n=2(-2)^{n-1})}
+\end{practice}
+\begin{practice}{24}{1}
+Translate between the recursive and explicit definitions for each sequence. SEE EXAMPLE 2
+(a_n=35(2)^{n-1})
+\answer{(a_n=\begin{cases}35,&n=1\\2a_{n-1},&n>1\end{cases})}
+\end{practice}
+\begin{practice}{25}{1}
+Translate between the recursive and explicit definitions for each sequence. SEE EXAMPLE 2
+(a_n=-6(-3)^{n-1})
+\answer{(a_n=\begin{cases}-6,&n=1\\-3a_{n-1},&n>1\end{cases})}
+\end{practice}
+\begin{practice}{26}{1}
+Translate between the recursive and explicit definitions for each sequence. SEE EXAMPLE 2
+(a_n=\begin{cases}1,&n=1\\\frac{2}{3}a_{n-1},&n>1\end{cases})
+\answer{(a_n=(\frac{2}{3})^{n-1})}
+\end{practice}
+\begin{practice}{27}{2}
+In an experiment, the number of bacteria present each day form a geometric sequence. On the first day, there were 100 bacteria. On the eighth day, there were 12,800 bacteria. How many bacteria were there on the fourth day? SEE EXAMPLE 3
+\answer{800 bacteria}
+\end{practice}
+\begin{practice}{28}{1}
+Write the expansion of each series. What is the sum? SEE EXAMPLE 4
+(\sum_{n=1}^{6}4(2)^{n-1})
+\answer{252}
+\end{practice}
+\begin{practice}{29}{1}
+Write the expansion of each series. What is the sum? SEE EXAMPLE 4
+(\sum_{n=1}^{20}6(2)^{n-1})
+\answer{6,291,450}
+\end{practice}
+\begin{practice}{30}{1}
+Write the expansion of each series. What is the sum? SEE EXAMPLE 4
+(\sum_{n=1}^{7}-4(3)^{n-1})
+\answer{(-4,372)}
+\end{practice}
+\begin{practice}{31}{1}
+Write the expansion of each series. What is the sum? SEE EXAMPLE 4
+(\sum_{n=1}^{12}(-4)^{n-1})
+\answer{(-3,355,443)}
+\end{practice}
+\begin{practice}{32}{1}
+Write each series using sigma notation. Find the sum. SEE EXAMPLE 4
+(8+16+32+\cdots+1,024)
+\answer{(\sum_{n=1}^{8}8(2)^{n-1}); 2,040}
+\end{practice}
+\begin{practice}{33}{1}
+Write each series using sigma notation. Find the sum. SEE EXAMPLE 4
+(-7-42-252-\cdots-54,432)
+\answer{(\sum_{n=1}^{6}-7(6)^{n-1}); (-65,317)}
+\end{practice}
+\begin{practice}{34}{1}
+Write each series using sigma notation. Find the sum. SEE EXAMPLE 4
+(\frac{1}{5}+\frac{1}{10}+\frac{1}{20}+\cdots+\frac{1}{80})
+\answer{(\sum_{n=1}^{5}\frac{1}{5}(\frac{1}{2})^{n-1}); (\frac{31}{80})}
+\end{practice}
+\begin{practice}{35}{1}
+Write each series using sigma notation. Find the sum. SEE EXAMPLE 4
+(4-12+36-\cdots+2,916)
+\answer{(\sum_{n=1}^{7}4(-3)^{n-1}); 2,188}
+\end{practice}
+\begin{practice}{36}{1}
+The sum of a geometric series is 31.75. The first term of the series is 16, and its common ratio is 0.5. How many terms are in the series? SEE EXAMPLE 5
+\answer{7}
+\end{practice}
+\begin{practice}{37}{2}
+What is the monthly payment for a \$12,000 loan for 7 years with an annual interest rate of 2.7\%? SEE EXAMPLE 6
+\answer{\$156.94}
+\end{practice}
+% Source page 91: 336, Practice & Problem Solving continued
+\begin{practice}{38}{2}
+APPLY. Model With Mathematics Kelley opens a bank account to save for a down payment on a car. Her initial deposit is \$250, and she plans to deposit 10\% more each month. Kelley's goal is to have \$2,000 in the account after six months. Will she meet her goal?
+\answer{No, she will only have \$1,928.91 saved in the account.}
+\end{practice}
+\begin{practice}{39}{2}
+APPLY. Make Sense and Persevere Henry just started his own cleaning business. He is using word-of-mouth from his current clients to promote his business. He currently has seven clients.
+a. Five of his clients really like Henry's work and each told two friends the following month. This group each told two friends the following month, and so on for a total of five months. Assuming no one heard twice, how many people have had or heard of a positive experience with Henry's cleaning business? Validate your results.
+\answer{155 people; summed the expression for 5 terms or months, that each happy person told 2 others about their experience.}
+b. The two unhappy clients each told five people the following month. This group each told five people, and so on, for five months. Assuming no one heard twice, how many people have had or heard of a negative experience with Henry's cleaning business?
+\answer{1,562 people}
+\end{practice}
+\begin{practice}{40}{2}
+APPLY. Model With Mathematics Ricardo bought a motorcycle for \$15,000. The value depreciates 15\% at the start of every year. What is the value of the motorcycle after three years?
+% FIG 91 520 764 659 960
+\placeholder{illustration}{Time/Value diagram with four rows labeled 0 Yr, 1 Yr, 2 Yr, 3 Yr. A red motorcycle appears in each row above a gray road; an expanding gold block covers increasing fractions of its image as time increases.}
+\answer{\$9,211.88}
+\end{practice}
+\begin{practice}{41}{1}
+ASSESSMENT PRACTICE. The first term of a geometric series is (-1), and the common ratio is (-2). Fill in the number to complete the sentence.
+If the sum of the series is (-43), there are \rule{1cm}{0.4pt} terms in the series.
+\answer{7}
+\end{practice}
+\begin{practice}{42}{1}
+ASSESSMENT PRACTICE. SAT/ACT What is the value of the 11th term in the following geometric sequence?
+(\frac{1}{27},\frac{1}{9},\frac{1}{3},\ldots)
+A. (3^4)
+B. (3^5)
+C. (3^6)
+D. (3^7)
+E. (3^8)
+\answer{D}
+\end{practice}
+\begin{practice}{43}{3}
+ASSESSMENT PRACTICE. Performance Task An avid collector wants to purchase a signed basketball from a particular playoff game. He plans to put away 4\% more money each year, in a safe at his home, to save up for the basketball. In the sixth year, he puts \$580 in the safe and realizes that he has exactly enough money to purchase the basketball.
+% FIG 91 830 653 1000 812
+\placeholder{illustration}{Signed brown basketball in a clear display cube. Callout: Price = Year 5 savings + \$580.00.}
+Part A How much money did the collector put into the safe the first year?
+\answer{\$476.72}
+Part B To the nearest dollar, how much did the collector pay for the signed playoff basketball?
+\answer{\$3,162.00}
+\end{practice}
+% Source page 92: 336A, Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Resources book.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 3 & F80 \\
+2 & 2 & F80 \\
+3A & 3 & F82 \\
+3B & 3 & F82 \\
+4 & 2 & F82 \\
+5 & 2 & F67 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{6-7 Lesson Quiz: Geometric Sequences and Series}
+1. Tim is playing a game. His score in round 1 is 1.7 points, in round 2 is 5.1 points, in round 3 is 15.3 points, and it continues to increase in the same way. Is his score a geometric sequence? If so, write a recursive definition for the sequence.
+A. No; the sequence does not have a common ratio.
+B. Yes; (a_n=\begin{cases}1.7,&n=1\\3a_{n-1},&n>1\end{cases})
+C. Yes; (a_n=\begin{cases}0.6,&n=1\\3a_{n-1},&n>1\end{cases})
+D. Yes; (a_n=\begin{cases}3,&n=1\\1.7a_{n-1},&n>1\end{cases})
+\answer{1. B}
+2. The recursive definition for a sequence is (a_n=\begin{cases}32,&\text{if }n=1\\\frac{1}{4}a_{n-1},&\text{if }n>1\end{cases}). What is the explicit definition of the sequence?
+A. (a_n=16(\frac{1}{2})^n)
+B. (32,8,2,\frac{1}{2},\frac{1}{8},\ldots)
+C. (a_n=32(\frac{1}{2})^n)
+D. (a_n=32(\frac{1}{4})^{n-1})
+\answer{2. D}
+3. Part A Use the formula for the sum of a finite geometric series to find (\sum_{n=1}^{6}3(2)^{n-1}).
+(sum=\rule{1cm}{0.4pt})
+\answer{3. Part A 189}
+Part B Which finite series could you use to check your result in Part A?
+A. (3+9+27+81+243+729)
+B. (2+6+18+54+162+486)
+C. (3+6+12+24+48+96)
+D. (1+3+6+12+24+48)
+\answer{3. Part B C}
+4. How many terms are in the geometric series (2.1+10.5+\cdots+820,312.5)?
+A. 3
+B. 7
+C. 9
+D. 180
+\answer{4. C}
+5. What is the monthly payment rate for a \$20,000 loan for 4 years with an annual interest rate of 4.8\%?
+\answer{5. \$458.78}
+\end{te-addendum}
+% Source page 93: 336B, Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+Reteach to Build Understanding [I] Provides scaffolded reteaching for the key lesson concepts.
+Additional Practice [I, O] Provides extra practice for each lesson.
+Enrichment [O, A] Presents engaging problems and activities that extend the lesson concepts.
+Mathematical Literacy and Vocabulary [I, O] Helps students develop and reinforce understanding of key terms and concepts.
+MathXL for School
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{6-7 Reteach to Build Understanding: Geometric Sequences and Series}
+1. Complete the table to find the common ratio of the geometric sequence. Then, use the table to answer the questions.
+\begin{tabular}{lll}
+Term Number & Term & Common Ratio (r), (\frac{\text{term in row}}{\text{term in previous row}}) \\
+1 & (a_1=3) & No previous term. \\
+2 & (a_2=6) & (\frac{6}{3}=2) \\
+3 & (a_3=12) & (\frac{12}{6}=\answer{2}) \\
+4 & (a_4=24) & (\frac{24}{12}=\answer{2}) \\
+\end{tabular}
+a. If the common ratio is equal for each term, then the sequence is geometric. Is this a geometric sequence? Circle the correct answer. Yes No
+\answer{Yes}
+b. The first term number is (n). Circle (n) in the table. The term is (a_1). What is the value of (a_1)?
+\answer{1 circled in the table; 3}
+c. What is the recursive definition if (a_n=\begin{cases}a_1,&\text{if }n=n\\a_{n-1}(r),&\text{if }n>n\end{cases})?
+\answer{(a_n=\begin{cases}3,&\text{if }n=1\\a_{n-1}(2),&\text{if }n>1\end{cases})}
+\te{Printed conditions (n=n) and (n>n); likely (n=1) and (n>1).}
+2. Leo says that the missing number in the geometric sequence 30, \rule{1cm}{0.4pt}, 120 is 90. Is he correct? What should the number be?
+\answer{No, because the common ratio between 90 and 30 is 3 and the common ratio between 120 and 90 is 1.5. The correct answer is 60, since the common ratio is 2.}
+\te{Printed ratio 1.5 for 120 and 90; likely (\frac{4}{3}).}
+3. The sum of a geometric series is 1,456. The first term of the series is 4, and its common ratio is 3. How many terms are in the series?
+\answer{(1,456=\frac{4(1-3^n)}{1-3}\to1,456=\frac{4(1-3^n)}{-2}\to-2,912=4(1-3^n)\to\frac{-2,912}{4}=\frac{4(1-3^n)}{4}-728=(1-3^n)\to-728-1=1-3^n-1\to-729=-3^n\to3^n=729\to\log3^n=\log729\ n\log3=\log729\to n=\frac{\log729}{\log3}=6)}
+\te{Printed missing separator before (-728) and between (\log729) and (n\log3); likely arrows omitted.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{6-7 Additional Practice: Geometric Sequences and Series}
+Is the sequence geometric? If so, write a recursive definition for the sequence.
+1. (3,9,27,81,\ldots)
+\answer{Yes. (a_n=\begin{cases}3,&\text{if }n=1\\a_{n-1}(3),&\text{if }n>1\end{cases})}
+2. (4,8,12,16,\ldots)
+\answer{No}
+3. (1,0.5,0.25,0.125,\ldots)
+\answer{Yes. (a_n=\begin{cases}1,&\text{if }n=1\\a_{n-1}(0.5),&\text{if }n>1\end{cases})}
+Translate between the recursive and explicit definitions for each sequence.
+4. (a_n=\begin{cases}5,&\text{if }n=1\\a_{n-1}(4),&\text{if }n>1\end{cases})
+\answer{(a_n=5(4)^{n-1})}
+5. (a_n=\frac{2}{3}(7)^{n-1})
+\answer{(a_n=\begin{cases}\frac{2}{3},&\text{if }n=1\\a_{n-1}(7),&\text{if }n>1\end{cases})}
+6. (a_n=\begin{cases}2,&\text{if }n=1\\a_{n-1}(\frac{3}{4}),&\text{if }n>1\end{cases})
+\answer{(a_n=2(\frac{3}{4})^{n-1})}
+Write the expansion of each series. What is the sum?
+7. (\sum_{n=1}^{5}3(2)^{n-1})
+\answer{(3+6+12+24+48=93)}
+8. (\sum_{n=1}^{6}5(3)^{n-1})
+\answer{(5+15+45+135+405+1215=1820)}
+9. (\sum_{n=1}^{4}4(\frac{1}{2})^{n-1})
+\answer{(4+2+1+0.5=7.5)}
+How many terms are in the geometric series?
+10. (75+300+1200+\cdots+4,915,200)
+\answer{9}
+11. (20+60+180+\cdots+1,180,980)
+\answer{11}
+12. (400+100+\cdots+0.391)
+\answer{6}
+\te{Printed last term 0.391; likely rounded from 0.390625.}
+13. The sum of a geometric series is 2,351,461. The first term of the series is 7 and its common ratio is 6. How many terms are in the series?
+\answer{8}
+14. What is the monthly payment for a \$32,000 loan for 5 years with an annual interest rate of 5.4\%?
+\answer{\$609.76}
+15. A geometric sequence can be used to describe the population of rabbits on a farm. The first spring, the farmer purchased 8 rabbits. Five years later, there are 648 rabbits at the farm. Assuming that none of the rabbits leave the farm, how many rabbits were on the farm in year 3?
+\answer{72 rabbits}
+\te{Printed five years later with answer 72; likely intended year 5, four years after year 1.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{6-7 Enrichment: Geometric Sequences and Series}
+Find the common ratio between the terms going horizontally and vertically on the table. Then complete the table for the missing terms.
+% FIG 93 847 436 1112 654
+\placeholder{table-image}{Connected crossword-style table of intersecting geometric sequences. Grid has 12 columns and 19 rows; occupied cells and magenta printed answers are transcribed in the accompanying tabular. Blank cells outside the connected sequences have no borders. Row 3 column 5 is shaded gray.}
+\te{The following table preserves the relative row and column positions; \answer{entries} are printed in magenta.}
+\begin{tabular}{llllllllllll}
+ & & & 2 & & \uncertain{1,600,000}{16,000,000} & & & & & & \\
+ & & & 5 & \answer{2,000} & 800,000 & & & & & & \\
+\answer{960} & 240 & \answer{60} & \answer{12.5} & \text{shaded} & \answer{40,000} & & & & & & \\
+ & 48 & & \answer{31.25} & 250 & \answer{2,000} & 16,000 & 128,000 & & & & \\
+ & \answer{9.6} & & \answer{78.125} & & \answer{100} & & & & & & \\
+ & \answer{1.92} & & \answer{195.3125} & & \answer{5} & & \answer{(\frac{1}{512})} & & & & \\
+ & & & \answer{488.28125} & & \answer{(\frac{1}{4})} & (\frac{1}{16}) & (\frac{1}{64}) & & & & \\
+ & & & & & & \answer{(\frac{1}{2})} & (\frac{1}{8}) & (\frac{1}{64}) & & & \\
+ & & & & & 16 & \answer{4} & \answer{1} & & & & \\
+ & & & & & & 32 & \answer{8} & 2 & \answer{(\frac{1}{2})} & & \\
+ & & & & & & \answer{256} & & & & & \\
+ & & & & & & & 1 & \answer{5} & 25 & \answer{125} & 625 \\
+ & & & & & & & \answer{(\frac{1}{3})} & & & & \\
+ & & & & & & & (\frac{1}{9}) & & & & \\
+ & & & & & & & \answer{(\frac{1}{27})} & & & & \\
+ & & & & & & & \answer{(\frac{1}{81})} & (\frac{1}{9}) & 1 & & \\
+ & & & & & & & \answer{(\frac{1}{243})} & & 24 & & \\
+ & & & & & & & & & \answer{576} & & \\
+ & & & & & & & & & \answer{13,824} & & \\
+\end{tabular}
+\te{Printed 960,240,60,12.5 is not geometric (last term would be 15); the row containing (\frac{1}{2},\frac{1}{8},\frac{1}{64}) is likewise inconsistent (last term would be (\frac{1}{32})). Source entries retained.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{6-7 Mathematical Literacy and Vocabulary: Geometric Sequences and Series}
+For Items 1--9, match the recursive definition in Column A with the explicit definition in Column B. An example has been given.
+\begin{tabular}{ll}
+Column A & Column B \\
+Ex. (a_n=\begin{cases}3,&\text{if }n=1\\a_{n-1}(\uncertain{5}{s}),&\text{if }n>1\end{cases}) & a. (a_n=a_1r^{n-1}) \\
+1. (a_n=\begin{cases}a_1,&\text{if }n=1\\a_{n-1}(r),&\text{if }n>1\end{cases}) & b. (a_n=xq^{n-1}) \\
+2. (a_n=\begin{cases}25,&\text{if }n=1\\a_{n-1}(\frac{1}{5}),&\text{if }n>1\end{cases}) & c. (a_n=2(2.5)^{n-1}) \\
+3. (a_n=\begin{cases}2,&\text{if }n=1\\a_{n-1}(4),&\text{if }n>1\end{cases}) & d. (a_n=25(\frac{1}{5})^{n-1}) \\
+4. (a_n=\begin{cases}4,&\text{if }n=1\\a_{n-1}(2),&\text{if }n>1\end{cases}) & e. (a_n=2(4)^{n-1}) \\
+5. (a_n=\begin{cases}2.5,&\text{if }n=1\\a_{n-1}(2),&\text{if }n>1\end{cases}) & f. (a_n=3(\uncertain{5}{s})^{n-1}) \\
+6. (a_n=\begin{cases}x,&\text{if }n=1\\a_{n-1}(q),&\text{if }n>1\end{cases}) & g. (a_n=\frac{1}{3}(\uncertain{3}{5})^{n-1}) \\
+7. (a_n=\begin{cases}2,&\text{if }n=1\\a_{n-1}(2.5),&\text{if }n>1\end{cases}) & h. (a_n=4(2)^{n-1}) \\
+8. (a_n=\begin{cases}y,&\text{if }n=1\\a_{n-1}(p),&\text{if }n>1\end{cases}) & i. (a_n=2.5(2)^{n-1}) \\
+9. (a_n=\begin{cases}\frac{1}{3},&\text{if }n=1\\a_{n-1}(\uncertain{3}{5}),&\text{if }n>1\end{cases}) & j. (a_n=yp^{n-1}) \\
+\end{tabular}
+\answer{Example: f. 1. a; 2. d; 3. e; 4. h; 5. i; 6. b; 7. c; 8. j; 9. g.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 93 583 979 1065 1296
+\placeholder{illustration}{Digital assignment on a tablet. Solve the system of equations by graphing: (y=3x+4), (y=-2x+4). Use the graphing tool to graph the system. Blank coordinate grid with x,y axes from -10 to 10, grid spacing 1, labels every 2. Controls: Exit; Question Help; Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print; Click to enlarge graph; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next. Instruction: Click the graph, choose a tool in the palette and follow the instructions to create your graph.}
+\end{te-addendum}
+
+\end{document}

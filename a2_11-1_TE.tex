@@ -1,0 +1,770 @@
+\documentclass{article}
+% Source: Topic_11_Teacher_Edition.pdf, PDF pages 12-22 (printed pages 531A-537B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 12: 531A Lesson Overview
+\begin{lesson-meta}
+lesson: 11-1
+title: Statistical Questions and Variables
+standards: none printed
+practices: none printed
+objective: I can use vocabulary related to statistical questions and variables.
+
+essential question: What kinds of questions about quantities and relationships among quantities can be answered with statistics?
+
+\textbf{VOCABULARY}
+\item categorical variable
+\item parameter
+\item population
+\item quantitative variable
+\item sample
+\item statistic
+\item statistical question
+\item statistical variable
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 11-1 \\
+Title & Statistical Questions and Variables \\
+Standards & none printed \\
+I CAN Objective & I can use vocabulary related to statistical questions and variables. \\
+Essential Question & What kinds of questions about quantities and relationships among quantities can be answered with statistics? \\
+Lesson Vocabulary & categorical variable; parameter; population; quantitative variable; sample; statistic; statistical question; statistical variable \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Define and recognize a statistical question.
+\item Define and identify the type of statistical variable that is represented by a question or the data represented on a graph.
+\item Distinguish between quantities such as population/sample and parameter/statistic for the purpose of descriptive modeling.
+Essential Understanding. A statistical question is a question that can be answered by collecting many pieces of information, or data. The data can be categorical (qualitative) or statistical (quantitative). The data are measured by parameters, which describe the population, and statistics, which describe a sample of the population.
+\te{Printed statistical (quantitative); likely quantitative rather than statistical.}
+\textbf{COHERENCE}
+Previously in other courses, students:
+\item Wrote statistical questions and used them to collect data.
+In this lesson, students:
+\item Understand and use vocabulary related to statistical questions and variables for the purpose of descriptive modeling.
+Later in this topic, students will:
+\item Use vocabulary related to statistical questions when designing a statistical study.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and application.
+\item Students understand that a statistical question can be answered by collecting and summarizing many pieces of data.
+\item Students apply statistical vocabulary to distinguish between populations and samples in real-world situations, such as all students at a school versus the students surveyed.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+NEW VOCABULARY
+\begin{tabular}{ll}
+English & Spanish \\
+categorical variable & variable categórica \\
+parameter & el parámetro \\
+population & población \\
+quantitative variable & variable cuantitativa \\
+sample & muestra \\
+statistic & estadística \\
+statistical question & cuestión estadística \\
+statistical variable & variable estadística \\
+\end{tabular}
+VOCABULARY ACTIVITY
+This lesson focuses on using vocabulary related to statistics and distinguishing pairs or groups of terms that are opposites or that have similar meanings that differ in one significant way. Have students look at the terms used in the lesson and use their prior knowledge to make predictions about which terms should be paired or grouped.
+\answer{Answers may vary. Sample: categorical variable, quantitative variable, statistical variable; sample, population; statistic, parameter}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 12 963 782 1114 960
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS; glowing purple spherical design on black.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students define and identify statistical questions and statistical variables. They learn the differences between populations and samples and identify them in real-world situations. They consider populations and whether information describes the population or a sample, distinguishing between parameters and statistics.
+\textbf{Applying Math Practices}
+Attend to Precision. Students use clear mathematical language to distinguish a statistical question from a question that is not statistical.
+Look For and Express Regularity in Repeated Reasoning. Students generalize that a categorical variable represents data with a qualitative attribute, while a quantitative variable represents data with a quantitative or numerical attribute.
+\end{te-addendum}
+% Source page 13: 531B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students consider what the data in a histogram tells them, identifying what questions can be answered and who might be interested in these answers. This prepares them for analyzing statistical questions and variables.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving
+Q: What do you notice about the graph?
+\answer{The horizontal axis starts at \$25. The intervals shown on the horizontal axis are \$5 wide. The bars show the number of schools selling tickets at each price. Only a few schools sell tickets at the lowest and highest ends of the price range.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics
+Q: What shape does the graph have?
+\answer{The number of schools is small on the ends and greater in the middle, with an exception at the \$60--\$65 interval.}
+For Early Finishers
+Q: What other intervals could be used to display this information? How would that change the shape of the graph? Sketch the new graph.
+\answer{If the intervals were \$10 wide, the patterns in the heights of the bars would be similar, so the shape would be about the same. Check students' graphs.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse
+Q: What conclusion can you draw from the graph?
+\answer{Most schools charge between \$40 and \$55 per ticket.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Make Sense and Persevere}
+How many high schools were surveyed? How many charged between \$40 and \$45 for a ticket to prom? Explain.
+\answer{Seventy-nine high schools were surveyed. The histogram shows that 15 schools charged between \$40 and \$45 per ticket.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+A state questioned some of its high schools about the prices they were charging for prom tickets. The results are summarized in the histogram.
+% FIG 13 859 668 1069 803
+\placeholder{graph}{Purple histogram over a photograph of hanging lights. Horizontal Individual Ticket Cost (\$), ticks 25 through 70 every 5; vertical Number of Schools, ticks 0 through 20 every 5, window to about 23. Adjacent bars on intervals 25--30, 30--35, 35--40, 40--45, 45--50, 50--55, 55--60, 60--65, 65--70 have heights 4, 4, 6, 15, 16, 17, 4, 9, 4. No arrows.}
+A. What questions can be answered using the data in this histogram?
+\answer{What is the median cost of a prom ticket? What is the range of costs for a prom ticket?}
+B. Who might be interested in the answers to these questions? Explain.
+\answer{The state may be interested in how much its high schools are charging for prom tickets. Administrators, students, and their parents might be interested as well.}
+C. Construct Arguments Anastasia is surprised that the median cost of a prom ticket is not higher, given that her school is charging \$60 per ticket. What are some possible reasons for the data not conforming to her expectations?
+\answer{Anastasia's school may have a particularly expensive prom, and she does not realize that most of the schools in her state sell cheaper prom tickets. Or the sample of schools that were asked for this information may have a higher proportion with less expensive proms than the state as a whole.}
+% FIG 13 637 185 1153 533
+\placeholder{illustration}{Explore \& Reason digital preview repeating the histogram task with response boxes and play icons.}
+\te{Digital-only variant: Part C prints \$50 per ticket; the student page prints \$60.}
+\end{model-discuss}
+% Source page 14: 531 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning
+Students learn the kinds of questions that can be answered with statistics. Students recognize statistical variables and the difference between a population and a sample and a parameter and a statistic. Students learn that statistics tell about quantities and show relationships among quantities.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Understand Statistical Questions: Pose Purposeful Questions, PART A}
+Q: How is an interview question different from a statistical question?
+\answer{An interview question has one answer. A statistical question is answered by summarizing many pieces of information.}
+Q: Why would you use graphs to answer statistical questions?
+\answer{Graphs show many pieces of data at the same time. The picture they create summarizes the data.}
+\end{te-addendum}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Example 2}
+Additional Examples are available at SavvasRealize.com.
+Does the data displayed in the graph reflect a quantitative or a categorical statistical variable? Explain.
+% FIG 14 376 829 579 960
+\placeholder{graph}{Fruit Colors bar graph. Horizontal Colors: Blue, Red, Green, Yellow, Orange, Purple. Vertical Number of Pieces of Fruits, 0 to 12 every 2. Correspondingly colored bars at 3, 5, 8, 10, 7, 2. Rectangular grid, no arrows.}
+\answer{Since the pieces of fruit are grouped by color as shown by each bar on the graph, it is a categorical variable.}
+Example 2 Help students determine whether data displayed in a bar graph represents a categorical or quantitative variable. Have students use the bar graph to answer the following questions.
+Q: Are there groups being compared? Explain.
+\answer{Yes; the fruits are grouped by color.}
+Q: What do the numbers indicate?
+\answer{The numbers tell how many pieces of fruit are in each category, or group.}
+Q: What is a statistical question that could be asked about the fruits that would generate qualitative data?
+\answer{Sample: What is your favorite fruit?}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Additional Example 4}
+A certain brand of almonds are made so that each bag contains about the same number of almonds. The bags are filled with an average of 23 almonds. Carter gave each of his friends a bag of almonds for a snack after school. Their six bags contained an average of 24 almonds.
+Identify the parameter and the statistic. Justify your answer.
+\answer{The parameter is 23 almonds per bag because that is the average of all of the bags made. The statistic is 24 almonds per bag because that is the average of the sample of six bags.}
+Example 4 Have students analyze parameters and statistics with this additional real-world situation.
+Q: What is the population? What information is given about it?
+\answer{The population is all of the bags of almonds; the average number of almonds is 23.}
+Q: What is the sample? What information is given about it?
+\answer{The sample is the 6 bags eaten as snacks; the average number of almonds is 24.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Understand Statistical Questions}
+APPLICATION
+A. Consider the following questions.
+I. ``In what month is your birthday?''
+II. ``What month has the most birthdays of students at your school?''
+What is the difference between the two questions?
+Question I can be answered using one piece of information.
+Question II can be answered by collecting many pieces of information and summarizing them.
+\te{Callout: Question I could be asked as part of an investigation into Question II. But a specific interview question is different from the general statistical question the investigation is trying to answer.}
+Question II is a statistical question because it can be answered by collecting many pieces of information, or data, and summarizing the data.
+\answer{A. Question I can be answered using one piece of information. Question II can be answered by collecting many pieces of information and summarizing them.}
+\te{STUDY TIP The answers to statistical questions can be summarized in different types of displays such as bar graphs, line graphs, scatter plots, and frequency charts.}
+% Source page 15: 532 Example 1 continued
+B. Does each graph represent the answer to a statistical question?
+% FIG 15 811 240 933 379
+\placeholder{graph}{Distance Traveled to School. Red scatter points; horizontal Student Age (y), labels 0,10,20,30 with grid every 5; vertical Distance (mi), labels 0 through 6 every 1. Positive-axis arrows. Approximate points (5,0.5),(6,0.7),(7,0.2),(8,0.5),(8,1),(9,3),(10,1.2),(11,2),(12,3),(13,2.5),(14,4),(15,0.5),(15,2.5),(15,5),(16,1.7),(16,4.2),(16,6),(17,2.3),(17,5),(18,3.4),(18,4).}
+% FIG 15 948 240 1073 379
+\placeholder{graph}{Travel Time at 20 mi/h Average Speed. Red filled points (k/3,k), k=0 through 18, on an increasing straight pattern. Horizontal Distance (mi) 0 through 6 with labeled ticks every 2 and grid every 1; vertical Time (min) 0 through 18 every 3; positive-axis arrows.}
+The graph of distance traveled to school is a scatter plot and represents some students' answers to the question ``How far do you travel to get to school?'' This is a statistical question because it is answered by gathering and summarizing varying data about many students.
+The graph of travel time is a function model and represents answers to the question ``How long does it take to travel x miles at 20 mi/h?'' This is a question that has a predetermined answer. The answer varies predictably with x, so it is not a statistical question.
+\answer{B. The graph of distance traveled to school represents a statistical question; the graph of travel time does not.}
+\te{COMMON ERROR The word ``data'' is a plural noun, so use it with plural verbs like ``these data are'' or ``the data indicate.'' However, ``set'' and ``value'' are singular, so use singular verbs for them, like ``this data set is'' or ``the data value is.''}
+\end{example}
+\begin{tryit}{1}
+Is the given question a statistical question?
+a. ``Which is the most popular visual art form: photography, painting, sculpting, or drawing?''
+b. ``How many lithographs were created by the artist M.C. Escher?''
+\answer{a. yes; b. no}
+\end{tryit}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{EXAMPLE 1 CONTINUED: Pose Purposeful Questions, PART B}
+Q: How are the graphs the same? How are they different?
+\answer{Both graphs have points that represent data. For both graphs, the data are generally decreasing. The first graph has answers that vary, even for students of the same age. The second graph has only one answer for each distance.}
+Q: What conclusion can you draw from the data in both graphs?
+\answer{The number of hours of sleep decreases as the age of the student increases.}
+\te{Printed decreasing and hours of sleep; likely retained from a different example. The displayed graphs concern travel and show increasing patterns.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: How can you tell whether a question is a statistical question?
+\answer{If a range of answers is possible, then the question is a statistical question.}
+\end{te-addendum}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Understand Statistical Variables: Build Procedural Fluency From Conceptual Understanding, PART A}
+Q: How can you tell whether a statistical variable is categorical?
+\answer{The answers include data that fall into categories. They indicate a qualitative rather than a quantitative (numerical) characteristic.}
+Q: The answers to the question are limited to four possibilities. Why is it a statistical question?
+\answer{The answers will vary from person to person and fall into different categories of sports.}
+\end{te-addendum}
+\begin{te-addendum}{1}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 1 Students further explore the difference between statistical questions and nonstatistical questions by writing their own questions.
+\item Make a two-column table. On one side, write a statistical question. On the other side, write a related nonstatistical question. Write five pairs of questions.
+\begin{tabular}{ll}
+Statistical Question & Related Mathematical Question \\
+ & \\
+ & \\
+\end{tabular}
+Q: How can you tell if the question is statistical?
+\answer{The answers have variability.}
+Q: How can you tell if the question is not statistical?
+\answer{The question is answered with one predetermined piece of information; in other words, the question has an answer that does not vary.}
+Q: Can a statistical question be asked about nonnumeric data?
+\answer{Yes; you can ask statistical questions about nonnumeric data, such as ``What is the most popular color for a vehicle?''}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Understand Statistical Variables}
+CONCEPTUAL UNDERSTANDING
+A. What type of statistical variable is represented by the following question and corresponding chart?
+``What is your favorite Summer Olympic sport?''
+% FIG 15 970 617 1116 732
+\placeholder{illustration}{Television showing four illustrated sports: Track \& Field 25\%, Basketball 25\%, Swimming 20\%, Gymnastics 30\%.}
+A statistical variable is a quantity or quality that can be measured or counted, and for which data are expected to differ from one observation to another. Two main types are categorical and quantitative.
+Answers to the question above will be different Olympic sports, as shown by the chart summarizing the various responses. Data that fall into categories, or that indicate a qualitative rather than quantitative attribute, represent a categorical variable.
+\te{COMMUNICATE PRECISELY Variables in mathematics can be used to represent an unknown number, such as the price of a shirt at a store. Statistical variables represent a quantity that varies between observations, such as the price of the shirt at every store in the country.}
+% Source page 16: 533 Example 2 continued
+``Favorite Olympic sport'' is a categorical variable because the values belong to a limited set of possible categories.
+\answer{A. categorical variable}
+B. What type of statistical variable is represented by the following question and corresponding graph?
+``What is the typical number of apps a teenager has on a smartphone?''
+% FIG 16 853 305 1020 390
+\placeholder{graph}{Teen Smart Phones red histogram on a green smartphone. Horizontal Estimated Number of Apps, 35 through 60 every 5; vertical labels 10,20,30, no axis title, baseline zero with a break at the horizontal start. Bars 35--40:10, 40--45:20, 45--50:30, 50--55:15, 55--60:15.}
+Responses to this question are quantities representing the number of apps on a phone. Numerical data like these, that in the context of the data can be compared, added, subtracted or otherwise operated on, represent a second type of statistical variable, a quantitative variable. ``Number of apps on a phone'' is a quantitative variable because the values are numbers that you could meaningfully count, add, subtract and so on.
+\answer{B. quantitative variable}
+\te{STUDY TIP Some variables, such as month or semester grade, can be categorical or quantitative depending on the context.}
+\end{example}
+\begin{tryit}{2}
+What is the statistical variable represented by each of the following questions, and is it categorical or quantitative?
+a. ``What breed of dog is most likely to be adopted from an animal shelter?''
+b. ``What is the average number of students per activity participating in after-school activities at Jefferson High School?''
+\answer{a. breed of dog; categorical; b. average number of students; quantitative}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{EXAMPLE 2 CONTINUED, PART B}
+Q: How can you tell whether a statistical variable is quantitative?
+\answer{The answers include data values that are numbers. They indicate a quantitative (numerical), rather than qualitative, characteristic.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+\textbf{Try It! 2b}
+Students may look for the average number of activities each person participated in. Have them write the question and highlight the words average number of students per activity, then explain why the average refers to the number of students.
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{Look for Relationships: Use with EXAMPLES 1 \& 2}
+Consider the sentence ``There are 3 birthdays in our class in the 3rd month.'' What are the differences between how each 3 is used?
+\answer{The 3 in ``3 birthdays'' is a quantitative variable. The 3 in ``3rd month'' is a categorical variable.}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Distinguish Between Populations and Samples: Pose Purposeful Questions, PART A}
+Q: Why are there two different samples for this survey?
+\answer{A sample is a subset of the population being studied. There can be more than one subset for any given category.}
+\end{te-addendum}
+\begin{te-addendum}{2}{ELLAddendum}
+\textbf{English Language Learners}
+READING BEGINNING Display the following definitions for students to read: quantitative---different sizes or amounts; qualitative---relates to the nature of something. Display words or phrases for students to identify as either quantitative or qualitative: height, open-ended questions, shoe size, observations.
+Q: Which words or phrases represent quantitative data? Qualitative data?
+\answer{height and shoe size; open-ended questions and observations}
+Q: Which type of data do you think is harder to analyze?
+\answer{Qualitative data are harder to analyze because they are descriptive rather than numeric.}
+LISTENING DEVELOPING Have students listen as you read the following examples using the words operated on.
+\item I operated on my watch, hoping to fix it, but it still does not work correctly.
+\item The company operated on the theory that the customer is always right.
+\item The surgeon operated on my gall bladder.
+Q: What do you think operated on means?
+\answer{Sample: to work on}
+Q: How do you operate on numbers?
+\answer{Sample: You operate on numbers when you add, subtract, multiply, and divide them.}
+WRITING EXPANDING A variable is a quantity that can change or take on different values. Variables can be classified as categorical (qualitative) or numeric (quantitative). On a piece of paper, create a flow chart with variable at the top and with 2 branches extending from it labeled categorical and numeric.
+Q: Add the following words under the correct heading: green eyes, arm length, blue balloons, birth weight.
+\answer{categorical: green eyes, blue balloons; numeric: arm length, birth weight}
+Q: On your chart, add at least four more examples of each type of variable.
+\answer{Check students' work.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Distinguish Between Populations and Samples}
+APPLICATION
+A. A school newspaper randomly selects 30 students from each grade level to participate in a survey to determine the opinions of students at the school. What is the relationship between the sophomores surveyed, all the students surveyed, and all the students at the school?
+% FIG 16 974 618 1158 783
+\placeholder{photo}{Four photographs of students arranged around a blue oval Surveyed Students. Top left Freshmen with green border, top right Sophomores red, bottom left Juniors purple, bottom right Seniors blue.}
+In statistics, the set of all members of a group that you want to know something about is called a population. The group of all the students at the school is the population that the school newspaper is studying in their survey.
+\te{COMMON ERROR In statistics, a ``population'' does not have to be made up of people. The population is whatever whole group that is under statistical study---it could be a group of corporations, a group of bodies of water, or a group of cars of different models.}
+% Source page 17: 534 Example 3 continued
+A sample is a subset of the population that is being studied to answer a statistical question about the population. The group of all the students who were surveyed is a sample of all the students at the school, as is the group of sophomores who were surveyed.
+\answer{A. All the students at the school are the population; all the students surveyed and the sophomores surveyed are samples.}
+B. A polling organization randomly chose eligible voters in the state of Illinois to ask who they would vote for in an upcoming election for governor, to determine who will win the election. What are the sample and the population in this scenario?
+The population is all the voters in Illinois who are eligible to vote. The sample is all of the people the polling organization asked about their voting plans. The people selected by the polling organization are a subset of the voting population of Illinois.
+\answer{B. The population is all the voters in Illinois who are eligible to vote. The sample is all of the people the polling organization asked about their voting plans.}
+\te{HAVE A GROWTH MINDSET After receiving constructive feedback, how do you use it as an opportunity to improve?}
+\end{example}
+\begin{tryit}{3}
+A city worker collects five vials of water from each of ten randomly selected locations all over the city to test the levels of bacteria in the city water supply.
+a. What is the sample in this experiment?
+b. What is the population?
+\answer{a. the fifty vials of water; b. the city's entire water supply}
+\end{tryit}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{EXAMPLE 3 CONTINUED: Pose Purposeful Questions, PART B}
+Q: Why are the people who are not eligible to vote excluded from both the sample and the population?
+\answer{People who are not eligible to vote will not determine who the next governor will be, so they will not impact who will win the election.}
+\end{te-addendum}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{Construct Arguments}
+Can a sample be the same as the population? Explain.
+\answer{Yes; if you collect data from every member of a population, then the sample is the same as the population.}
+\end{te-addendum}
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Have a Growth Mindset: Accept Constructive Feedback}
+Constructive feedback can include things you do well or things you might want to improve. Ask: How can constructive feedback help you improve? How can feedback about something you're doing well help you learn?
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Distinguish Between Parameters and Statistics}
+APPLICATION
+Is each quantity a statistic or a parameter?
+A. A high school has three lunch periods. In a randomly selected lunch period, 24\% of students brought lunch from home.
+A parameter is a measure that describes a population. A statistic is a measure that describes a sample of the population. In this situation, the population is the set of all students in the school. The figure 24\% describes a sample of that population, the students who were in the selected lunch period. Therefore, it is a statistic.
+\answer{A. statistic}
+B. At the end of its first year of business, a movie theater collected data on how well its concession stand operated that year. The theater used its total yearly concessions sales and number of tickets sold to calculate that the mean amount spent at concessions by a moviegoer was \$8.14. Is this a statistic or a parameter?
+The value \$8.14 describes the concession purchases of all of the moviegoers who attended the theater that year. This value is a parameter since the theater included all moviegoers to determine how well the concession stand is doing.
+\answer{B. parameter}
+\te{GENERALIZE Categorical data are often summarized using proportions while quantitative data are often summarized using a median or a mean.}
+\end{example}
+\begin{tryit}{4}
+Is the given data summary a parameter or statistic?
+a. 53.2\% of a district's eligible voters voted for the sitting U.S. House Representative.
+b. The median age of a car in 20 randomly selected spaces in the school parking lot is 7 years.
+\answer{a. parameter; b. statistic}
+\end{tryit}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Distinguish Between Parameters and Statistics: Pose Purposeful Questions}
+PART A
+Q: What would make this statistic a parameter?
+\answer{It would be a parameter if all three lunch periods had been used to calculate the percentage.}
+PART B
+Q: What would make this parameter a statistic?
+\answer{It would be a statistic if it had included any subset of the moviegoers, like only those who attended matinee movies.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Communicate Precisely}
+Describe the difference between a parameter and a statistic.
+\answer{A statistic is a piece of data from a sample, whereas a parameter is a piece of data from a population.}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 3 Some students may struggle with distinguishing between populations and samples.
+\item Have students practice using the following situation.
+A researcher wants to know how effective a computerized study guide is at preparing students for a math test. She looks at the results of an Algebra II test.
+Q: What is the population?
+\answer{all students using the computerized study guide}
+Q: What is the sample?
+\answer{Algebra II students using the computerized study guide}
+Q: How could you use a Venn diagram to determine which is the population and which is the sample?
+\answer{The bigger circle is the population. The smaller circle, completely contained within the bigger circle, is the sample.}
+\end{te-addendum}
+% Source page 18: 535 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Statistics and Statistical Variables}
+Q: What is the purpose of a statistical question?
+\answer{The answer to a statistical question helps summarize the collected data without having to find every possible answer to the question.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Exercise 6}
+Some students may think that the statistical variable is categorical since there are many different types of TV sets that people can own. Have students write out the definitions of quantitative and qualitative variables. Point out that a variable that is quantitative is numerical. Ask students if the question can be answered with a number.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Statistics and Statistical Variables}
+A statistical question is a question that can be answered by collecting many pieces of information, or data.
+``What is the average number of pets owned by students at your school?''
+``What is the most popular type of pet owned by students at your school?''
+\begin{tabular}{llll}
+Number of Pets & \multicolumn{3}{c}{Types of Pets} \\
+ & Dog & Cat & Other \\
+3 & X & X & X \\
+0 & X & X & \\
+1 & & & X \\
+\vdots & \vdots & \vdots & \vdots \\
+\end{tabular}
+\te{Printed 0 in the row with Dog and Cat marked; likely 2.}
+The value of a statistical variable will vary from one observation to another.
+A quantitative variable has numerical values that can be meaningfully compared, added, subtracted, or otherwise operated upon.
+A categorical variable has a limited number of possible responses that are not quantitative.
+A parameter is a piece of information about a variable that is based on the entire population, or group of people or things that is being studied.
+A statistic is a piece of information about a variable that is based on a sample or subgroup chosen from the population.
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION What kinds of questions about quantities and relationships among quantities can be answered with statistics?
+\answer{Statistics can be used to study variables among entire populations, or groups (samples) within the populations, that can pertain to qualities or quantities.}
+2. Error Analysis Dyani says she identified a quantitative variable and conducted a survey when she asked her fellow classmates in her homeroom about their favorite style of sweatshirt from the categories: hoodie, pullover, or zip-up. Explain her error.
+\answer{The survey was conducted on a qualitative, or categorical, variable, rather than a quantitative variable.}
+3. Vocabulary Explain the difference between a categorical variable and a quantitative variable.
+\answer{A categorical variable (also referred to as a qualitative variable) is used to study data that can be classified into groups, whereas a quantitative variable is a numeric data value that can be counted, added, subtracted, and so on.}
+4. Communicate Precisely Suppose Hana wants to find out the most commonly driven type of vehicle among the students at her high school. Since 1,560 students attend her high school, she asks every tenth student who enters the building one morning what kind of vehicle he or she drives. What is the population in this scenario?
+\answer{The population is the 1,560 students that attend Hana's high school.}
+\textbf{Do You KNOW HOW?}
+5. Is the following question a statistical question?
+``During which month did your family take a vacation?''
+\answer{The question is not a statistical question because it can be answered using one piece of information.}
+6. What is the statistical variable represented by the following question, and is it categorical or quantitative?
+``How many TV sets are owned by families?''
+\answer{The statistical variable is the number of TV sets owned by families. It is quantitative because it asks for an amount, rather than a brand or type of TV set.}
+7. Forty randomly-selected members of a high school music program were asked to report the number of hours they spend practicing each week. If you were to compute the mean number of hours, would your answer be a parameter or a statistic? Explain.
+\answer{Statistic; the data were collected from a sample, not the entire population.}
+\end{concept-summary}
+% Source page 19: 536 Step 3 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+8--22 & 8--22 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 8, 12, 16, 17 & 1 \\
+2 & 13, 18 & 1 \\
+2 & 11 & 2 \\
+3 & 14, 19, 21 & 1 \\
+3 & 10, 22 & 3 \\
+4 & 9, 20 & 1 \\
+4 & 15 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{8}{1}
+UNDERSTAND. Communicate Precisely Does the scatterplot below relate to a statistical question? Explain.
+% FIG 19 501 334 705 461
+\placeholder{graph}{Hours of Studying. Red filled scatter points approximately (1,0),(2,0),(4,0),(5,1),(7,1),(8,1),(8,6),(9,3.5),(10,2),(10,3),(11,3),(12,3),(14,2.5),(14,8),(15,4),(15,4.5),(16,4),(16,5),(17,8),(18,15),(19,10),(19,14),(20,12). Horizontal Student Age (years), labels 0,5,10,15,20, grid every 2.5; vertical Study Time (hours), labels 0,5,10,15, grid every 5 with top at 20. Positive-axis arrows.}
+\answer{Yes; this is a scatter plot that represents the answers given by students of different ages to a question about the number of hours spent studying.}
+\end{practice}
+\begin{practice}{9}{1}
+UNDERSTAND. Make Sense and Persevere At the end of the month, a restaurant manager used the total food sales for the month and the total number of customers for the month to calculate that the mean amount spent per customer during that month was \$12.59. Is this value a statistic or a parameter? Explain.
+\answer{This is a parameter because it involves the entire population of the restaurant's customers during that month and because the restaurant wanted to know only about that one month.}
+\end{practice}
+\begin{practice}{10}{3}
+UNDERSTAND. Error Analysis Describe and correct the error a student made in responding to the question regarding the following scenario.
+A Detroit, Michigan, radio station polled its listeners about whether they supported a citywide tax increase to renovate the city's professional football stadium to determine whether city residents support the increase. What are the sample and the population in this scenario?
+\te{Student work marked with a red X: The sample is the listeners of the radio station. The population is all the registered voters in the state of Michigan.}
+\answer{The population should be all the residents of the city of Detroit, since it is a city tax, rather than a state tax.}
+\end{practice}
+\begin{practice}{11}{2}
+UNDERSTAND. Higher Order Thinking Write a response to the following items regarding statistical variables.
+a. Write a statistical question that uses a categorical variable.
+b. Write a statistical question that uses a quantitative variable.
+\answer{a. Sample: What is your favorite primary color? b. Sample: What is your hourly wage?}
+\end{practice}
+\begin{practice}{12}{1}
+PRACTICE. Is the given question a statistical question? Explain. SEE EXAMPLE 1
+ a. ``What is the tallest building in Chicago, Illinois?''
+ b. ``What is the most popular store in the Turtlecreek Mall among teenagers?''
+\answer{a. No; it is a question to which there is only one answer. b. Yes; this is a question to which multiple responses are anticipated.}
+\end{practice}
+\begin{practice}{13}{1}
+PRACTICE. What type of statistical variable is represented by the graph shown? SEE EXAMPLE 2
+% FIG 19 811 435 1009 580
+\placeholder{graph}{Most Popular H.S. Sport to Watch pie chart. Clockwise from the top: blue Football 45\%, orange Basketball 21\%, green Baseball 10\%, purple Volleyball 10\%, gold Soccer 14\%. Percentages inside sectors; sport labels outside with leader lines. No axes.}
+\answer{The statistical variable is categorical, because the values belong to a limited set of possible qualitative responses.}
+\end{practice}
+\begin{practice}{14}{1}
+PRACTICE. A biology teacher wants to know which dissection his students liked best this semester, so he randomly selects eight students from each of his five classes to participate in a survey.
+a. What is the sample in this situation?
+b. What is the population? SEE EXAMPLE 3
+\answer{a. The sample is the 40 students the biology teacher randomly selected to participate in his survey. b. The population is all of the students in all 5 of this biology teacher's classes.}
+\end{practice}
+\begin{practice}{15}{2}
+PRACTICE. The data below were collected from all race participants to answer the question, ``What is the average age of runners in the Fall Harvest 5K?'' Does this histogram represent data related to a parameter or statistic? Explain your response. SEE EXAMPLE 4
+% FIG 19 817 806 1070 979
+\placeholder{graph}{Fall Harvest 5K green histogram over a crowd photograph. Horizontal Ages, categories 10--19,20--29,30--39,40--49,50--59,60--69,70--79, labels rotated vertically. Vertical Number of Participants, 0 through 60 every 10. Adjacent bar heights approximately 32,49,57,53,38,22,4. No arrows.}
+\answer{The data summary shown in the histogram represents a parameter because it shows all the numbers of participants within different age brackets in a 5K.}
+\end{practice}
+% Source page 20: 537 Practice & Problem Solving continued
+\begin{practice}{16}{1}
+APPLY. Is the given question a statistical question? Explain.
+a. ``Which is the most popular category of children's literature: biography, science fiction, fantasy, or mystery?''
+b. ``For which category of children's literature is J.K. Rowling best known?''
+\answer{a. Yes; it is a statistical question that can be answered by collecting the responses of many people. b. No; it is a question for which there is only one answer.}
+\end{practice}
+\begin{practice}{17}{1}
+APPLY. Make Sense and Persevere Can the graph below be helpful in answering a statistical question? Explain.
+% FIG 20 556 463 747 617
+\placeholder{graph}{Recommended Vitamin C. Horizontal Age (years) 0 to 70 every 10; vertical Vitamin C (mg), 0 to 80 every 20, grid extends to 100. Positive-axis arrows. Red filled points: approximately (2,15); ages 4--8 at 25 mg; ages 9--13 at 45 mg; ages 14--18 at 70 mg; separate points at ages 19,25,33--36,45,50--51,59--61,66--70 at 80 mg. Closely spaced points overlap into short horizontal groups.}
+\answer{No; this is a response to the question ``What is the recommended amount of Vitamin C people of varying ages should consume per day?'' This is a question that is answered with one predetermined piece of information.}
+\end{practice}
+\begin{practice}{18}{1}
+APPLY. Use Structure What type of statistical variable is represented by the following question and corresponding graph?
+``How many pets does your family own?''
+% FIG 20 555 698 763 854
+\placeholder{graph}{Pets Owned orange bar graph. Horizontal Number of Pets, 0,1,2,3,4; vertical Frequency of Families 0 through 12 every 2. Separate bars at 0:6,1:10,2:5,3:2,4:1. Horizontal dotted grid every 2; no arrows.}
+\answer{This is a quantitative statistical question because the responses are numerical in nature and can be used in calculations.}
+\end{practice}
+\begin{practice}{19}{1}
+APPLY. Look For Relationships Ms. Lee wants to know what kinds of things her students do to prepare for her tests. Ms. Lee placed the names of her students into a box. To determine who she would ask about their study habits she asked a student to draw names from the box.
+a. What is the sample in this situation?
+b. What is the population?
+\answer{a. The sample is the students whose names were randomly drawn. b. The population is all of Ms. Lee's students.}
+\end{practice}
+\begin{practice}{20}{1}
+ASSESSMENT PRACTICE. The average length of all the trout in a river is 60 cm. This data summary represents a blank. (parameter/statistic)
+\answer{parameter}
+\end{practice}
+\begin{practice}{21}{1}
+ASSESSMENT PRACTICE. SAT/ACT If the Hamilton High School freshmen class is the sample in a statistical study, then which is not a possible population for the study?
+A. the student body of Hamilton High School
+B. the students in Hamilton High School's district
+C. the students in Ms. Anderson's science class
+D. all freshmen students in the state
+\answer{C}
+\end{practice}
+\begin{practice}{22}{3}
+ASSESSMENT PRACTICE. Performance Task A state randomly questioned some of its high schools about the average percentages of their students who attend home football games. The results are summarized in the histogram below.
+% FIG 20 875 583 1127 757
+\placeholder{graph}{H.S. Football Game Attendance orange histogram over a football photograph. Horizontal Average Percent of Student Body, categories 10--19,20--29,30--39,40--49,50--59,60--69,70--79,80--89,90--99, vertically rotated labels; vertical Number of Schools 0 through 80 every 20, dotted grid every 10. Approximate bar heights 9,16,29,57,63,72,65,41,11. No arrows.}
+Part A Describe the population and the sample for these data. Are these data quantitative or categorical? Explain.
+\answer{The population is high schools in the state. The sample is the list of high schools that were surveyed. This data are quantitative, because the percentages reported can be compared.}
+Part B What is an example of a statistical question that could be answered with these data?
+\answer{Sample: What percentage of students in a high school attend home football games?}
+Part C Joaquin was surprised that the median of the data was not a much lower number. What is a possible reason that Joaquin could be surprised by these results?
+\answer{Joshua may have been surprised that the median values were so high because, in his experience, student attendance at home high school football games is considerably lower.}
+\te{Printed Joshua in the answer; likely Joaquin as in the prompt.}
+\end{practice}
+% Source page 21: 537A Step 4 Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & DP25 \\
+2 & 1 & DP25 \\
+3 & 2 & DP25 \\
+4 & 2 & DP25 \\
+5 & 1 & DP25 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerds videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{11-1 Lesson Quiz: Statistical Questions and Variables}
+Name blank. enVision Algebra 2. SavvasRealize.com.
+1. Select the type of variable of each quantity.
+\begin{tabular}{llll}
+ & Quantitative & Categorical & Neither \\
+The distance from your home to your school in miles & blank & blank & blank \\
+The types of cars owned by families in your neighborhood & blank & blank & blank \\
+The number of hours veterinarians work in a week & blank & blank & blank \\
+The number of ingredients in your family cheese cake recipe & blank & blank & blank \\
+\end{tabular}
+\answer{1. Neither; Categorical; Quantitative; Neither.}
+2. A veterinarian polled her clients who own dogs as to whether or not they used dry food only for their dogs. Which of the following describes the population of this survey?
+A. pet owners
+B. dog owners
+C. this veterinarian's clients
+D. this veterinarian's dog-owning clients
+\answer{2. D}
+3. A survey question is conducted on all high school students in Miami. Select the type of variable that will result from each survey question.
+\begin{tabular}{lll}
+ & Quantitative & Categorical \\
+Do you have any siblings? & blank & blank \\
+What is your eye color? & blank & blank \\
+How old are you? & blank & blank \\
+What was your grade in the last math exam? & blank & blank \\
+How many languages do you speak? & blank & blank \\
+\end{tabular}
+\answer{3. Categorical; Categorical; Quantitative; Quantitative; Quantitative.}
+4. Select all the statements that are parameters.
+A. 75\% of the students at North High School voted for Lucy.
+B. The total collected at a fund-raiser was \$5,281.
+C. The mean height of students at one table in the cafeteria is 1.3 m.
+D. Ten out of 25 people surveyed chose ``red.''
+E. 78\% of science students said they got a fair grade on an assessment.
+\answer{4. A, B, E}
+5. From a population of 1,600 cars, a dealer chooses a sample of 25 cars and calculates their mean weight. Is this mean weight a statistic or a parameter?
+This mean weight is an example of a blank. (statistic/parameter)
+\answer{5. statistic}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 22: 537B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Reteach to Build Understanding: I}
+Provides scaffolded reteaching for the key lesson concepts. MathXL for School.
+\textbf{11-1 Reteach to Build Understanding: Statistical Questions and Variables}
+Name blank. enVision Algebra 2. SavvasRealize.com.
+A statistical question is any question that can be answered by collecting pieces of information or data.
+\begin{tabular}{lll}
+Term & Definition & Example \\
+Categorical variable & A variable that has a limited number of possible responses, usually in groups, or categories & Hair color (e.g., red, blond, brunette) \\
+Quantitative variable & A variable that has numeric values & Number of people in a town (measurable attribute) \\
+Parameter & A measure that describes a population & 20\% of the Senate voted yes for a particular bill. (There are only 100 Senators, so you can count how \uncertain{every one}{many} of them voted.) \\
+Statistic & A piece of information about a variable that is based on a sample of a population & 55\% of surveyed voters plan to vote for candidate A. \\
+Sample & A subset of a population & 5 people out of a group of 100 \\
+\end{tabular}
+
+1. Match the term on the left with the example on the right.
+\begin{tabular}{ll}
+a. parameter & i. 10 people out of a group of 20 \\
+b. statistic & ii. height \\
+c. sample & iii. color of eyes (brown, blue) \\
+d. quantitative variable & iv. 15\% of all Senators voted ``No'' on a bill. \\
+e. categorical variable & v. 20\% of students surveyed are 18 years old. \\
+\end{tabular}
+\answer{1. a--iv; b--v; c--i; d--ii; e--iii.}
+2. Malcolm plays a game where he guesses the color of each bead he selects from a bag. He said that a list of the colors of the beads describes a quantitative variable. What is Malcolm's error and what should he have said?
+\answer{Colors are qualitative, not numerical values, so the variable is categorical.}
+3. Fill in the blank with the correct term from the table.
+a. A set of 16 people out of an entire restaurant is a blank.
+\answer{sample}
+b. The average age of all pets at the shelter is a blank.
+\answer{parameter}
+c. Temperature in degrees Celsius is a blank.
+\answer{quantitative variable}
+d. Type of car is a blank.
+\answer{categorical variable}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice: I, O}
+Provides extra practice for each lesson. MathXL for School.
+\textbf{11-1 Additional Practice: Statistical Questions and Variables}
+Name blank. enVision Algebra 2. SavvasRealize.com.
+1. Are the questions below statistical questions? Explain.
+a. What is the tallest mountain in the world?
+\answer{No; it can be answered using one piece of information.}
+b. What is the most popular television program among teenagers?
+\answer{Yes; multiple responses are anticipated.}
+c. What is the most popular men's sport: football, basketball, tennis, golf, hockey, or lacrosse?
+\answer{Yes; it is a categorical statistical question with a variety of choices for the response.}
+2. What type of statistical variable is represented by the graph shown? Explain.
+% FIG 22 564 542 674 604
+\placeholder{graph}{Grayscale pie chart with legend Fish, Apples, Avocados, Chicken, Carrots, Broccoli. Clockwise sectors from top are 15\%,20\%,15\%,25\%,10\%,15\%, in progressively varied gray fills. No title or axes.}
+\answer{Categorical; the data indicate qualitative attributes.}
+3. A professor teaches four different science classes. He wants to try out a new style of exam, so during finals, he gives the new exam to 15 randomly selected students in each class. The other students take the regular exam.
+a. What is the sample in this situation?
+\answer{the 15 students who received the new exam}
+b. What is the population?
+\answer{all the students in the professor's classes}
+\te{Printed 15 students in the answer; likely 60 in total because the prompt specifies 15 in each of four classes.}
+4. Is the given data summary a parameter or a statistic?
+a. At a local company, management surveys every tenth employee and finds that 24\% of the surveyed employees buy their lunch in the cafeteria.
+\answer{statistic}
+b. Of the 1,500 people on a cruise ship, 25\% are under 18.
+\answer{parameter}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment: O, A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+\textbf{11-1 Enrichment: Statistical Questions and Variables}
+Name blank. enVision Algebra 2. SavvasRealize.com.
+The table shows topics that can be described by either quantitative or categorical variables. For each variable listed, provide a different type of variable related to the same topic. The first has been done for you.
+\answer{Answers may vary. Sample:}
+\begin{tabular}{ll}
+Quantitative Variable & Categorical Variable \\
+Number of people who like oranges & Favorite type of fruit \\
+\answer{Your age} & Month of birth \\
+Number of shoes you own & \answer{Favorite shoes} \\
+\answer{Amount of money you make each week} & Job \\
+Number of hot beverages drunk in a day & \answer{Favorite brand of hot chocolate} \\
+Number of pets you own & \answer{Favorite type of pet} \\
+\answer{Number of hours you play a sport per week} & Sport you play \\
+\answer{Number of hours watching TV} & Favorite TV show \\
+Average driving speed & \answer{Type of car you own} \\
+\answer{Hours of homework each night} & Favorite school subject \\
+Hours spent listening to music & \answer{Favorite type of music} \\
+\end{tabular}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary: I, O}
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{11-1 Mathematical Literacy and Vocabulary: Statistical Questions and Variables}
+Name blank. enVision Algebra 2. SavvasRealize.com.
+Complete the vocabulary chart by filling in the missing information.
+\begin{tabular}{lll}
+Word or Word Phrase & Definition & Picture or Example \\
+Categorical variable & data that fall into categories, or that indicate a qualitative rather than quantitative attribute & 1. \answer{Sample: eye color} \\
+Parameter & a measure that describes a population & 2. \answer{Sample: average height of children aged 5--10} \\
+Population & 3. \answer{all the members of a group being studied} & all high school graduates \\
+Quantitative variable & numerical data that can be compared, added, subtracted or otherwise operated on & 4. \answer{Sample: height} \\
+Sample & 5. \answer{subset of the population that is being studied to answer a statistical question about the population} & 100 students were chosen out of a school of 1,000. \\
+Statistic & 6. \answer{measure that describes a sample of the population} & 7. \answer{Sample: the average income of a random sample of households} \\
+Statistical question & answered by collecting many pieces of information, or data, and summarizing the data & On average, how many minutes does a Grade 10 student spend on homework? \\
+Statistical variable & quantity or quality that can be measured or counted, and for which data are expected to differ from one observation to another & 8. \answer{Sample: the average number of pets owned by each student at school} \\
+\end{tabular}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 22 617 980 1065 1298
+\placeholder{illustration}{Tablet displaying a digital graphing exercise: Solve the system of equations by graphing, y=3x+4 and y=-2x+4. Use the graphing tool to graph the system. Empty square coordinate grid x,y from -10 to 10 with labels every 2 and unit grid; arrowheads at positive ends. Click to enlarge graph. Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Click the graph, choose a tool in the palette and follow the instructions to create your graph. Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next, 1 part remaining.}
+\end{te-addendum}
+
+\end{document}

@@ -1,0 +1,1018 @@
+\documentclass{article}
+% Source: Topic_06_Teacher_Edition.pdf, PDF pages 70-80 (printed pages 321A-327B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 70: 321A Lesson Overview
+\begin{lesson-meta}
+lesson: 6-6
+title: Exponential and Logarithmic Equations
+standards: none printed
+practices: none printed
+objective: I can solve exponential and logarithmic equations.
+
+essential question: How do properties of exponents and logarithms help you solve equations?
+
+\textbf{VOCABULARY}
+\item exponential equation
+\item logarithmic equation
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 6-6 \\
+Title & Exponential and Logarithmic Equations \\
+Standards & none printed \\
+I CAN Objective & I can solve exponential and logarithmic equations. \\
+Essential Question & How do properties of exponents and logarithms help you solve equations? \\
+Lesson Vocabulary & exponential equation; logarithmic equation \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Use logarithms to express the solutions to exponential models.
+\item Solve exponential and logarithmic equations.
+Essential Understanding. Some exponential equations can be solved by rewriting both sides with a common base. For others, rewriting the equation using logarithms and applying properties of logarithms, is a more efficient method.
+\textbf{COHERENCE}
+Previously in this topic, students: Simplified and expanded expressions and equations using Properties of Logarithms.
+In this lesson, students:
+\item Use the structure of exponential and logarithmic expressions to identify ways that they can be rewritten.
+\item Create and solve exponential and logarithmic equations and construct arguments to justify the solution methods.
+Later in Calculus, students will: Rewrite logarithmic functions to more easily differentiate or integrate.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students build on their understanding of the properties of logarithms to include the Property of Equality for Logarithmic Equations.
+\item Students use their understanding of properties of logarithms to solve exponential and logarithmic equations.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Program Resources. Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+NEW VOCABULARY English & Spanish \\
+exponential equation & ecuación exponencial \\
+logarithmic equation & ecuación logarítmica \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Help students review linear, quadratic. As needed, have students identify each of the equations shown.
+(y=x^3-4): \answer{cubic}
+(y=2\cdot5^x): \answer{exponential}
+(y=\frac{1}{2}x+5): \answer{linear}
+(y=5-3x+3x^2): \answer{quadratic}
+(\log x=\log(2x-1)): \answer{logarithmic}
+(7x-1=13): \answer{linear}
+(4^{(2x-1)}=7^{(x+2)}): \answer{exponential}
+(0.5x^2+2=-x^2+4x): \answer{quadratic}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 70 963 734 1116 914
+\placeholder{illustration}{Black Student Companion cover with glowing purple and blue circular pattern, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students apply their understanding of the Property of Equality for Exponential Equations to solve exponential equations using a common base. They use equations and graphs to find solutions of logarithmic and exponential equations.
+Students rewrite and solve exponential equations using logarithms. Students use an exponential model to represent a real-world situation.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively
+Students attend to the meaning of quantities when determining which values to substitute for each variable to find how long it takes to contain a fire encompassing a given number of acres.
+Look For and Make Use of Structure
+Students look for patterns to determine whether to use the natural log or the common log to solve exponential equations. They use structure to determine the annual interest rate that results in a projected amount of money.
+\end{te-addendum}
+% Source page 71: 321B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{MODEL \& DISCUSS}
+INSTRUCTIONAL FOCUS Students write exponential equations to model sales data and determine when one model will exceed the other. Students see the need for efficient ways to solve exponential equations.
+STUDENT COMPANION Students can complete the Model \& Discuss activity in their Student Companion.
+Activities are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{MODEL \& DISCUSS}
+A store introduces two new models of fitness trackers to its product line. A glance at the data is enough to see that sales of both types of fitness trackers are increasing. Unfortunately, the store has limited space for the merchandise. The manager decides that the store will sell both models until sales of TrackSmart exceed those of FitTracker.
+% FIG 71 838 697 1042 794
+\placeholder{diagram}{Two stair-step displays, FitTracker Number Sold in blue and TrackSmart Number Sold in green, each with a fitness tracker icon. Four steps labeled Week 4, Week 3, Week 2, Week 1 from top to bottom. FitTracker values 228,112,54,28; TrackSmart values 130,44,17,5.}
+A. Model With Mathematics Find an equation of an exponential function that models the sales for each fitness tracker. Describe your method.
+\answer{I used my calculator to find the exponential regression models for each set of data. The exponential model for FitTracker is (y=13.6266(2.0180)^x), and the exponential model for TrackSmart is (y=1.8081(2.9227)^x).}
+B. Based on the equations that you wrote, determine when the store will stop selling FitTracker.
+\answer{Graph both equations on a graphing calculator. The graphs intersect near (x=6), so the store will stop selling FitTracker after 6 weeks.}
+\te{Digital activity repeats the data and questions with Go back and answer boxes; Part A is labeled Use Appropriate Tools. Digital paragraph names Fit Track and Track Smart, while the student page names FitTracker and TrackSmart.}
+\end{model-discuss}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: Why do you think an exponential model is better than a linear or a quadratic model for this problem?
+\answer{Sales are not increasing at a constant rate, so a linear model would not make sense. It also appears that sales will continue to increase as the products become more popular. There is no indication given in the data that sales will take a downward turn, so a quadratic model would not make sense.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: How do you know that TrackSmart will outsell FitTracker at some point?
+\answer{The rate that TrackSmart is increasing is greater than the rate that FitTracker is increasing. So eventually, sales of TrackSmart will be greater than sales of FitTracker.}
+Q: How can you use the equations to determine when the store will stop selling FitTracker?
+\answer{Evaluate the equation that models each tracker for different numbers of weeks until the week is found when sales of FitTracker are less than sales of TrackSmart.}
+For Early Finishers
+Q: Graph the two equations you found. Does your graph verify your results? Explain.
+\answer{Yes; The intersection point in the graph indicates when the sales of Tracksmart will begin to exceed those of FitTracker. The x-coordinate matches the result.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Ask students to share their answers to Part A.
+Q: Why did different methods result in the same answer for Part B?
+\answer{Although the methods for finding the equations may be different, the equations themselves should be fairly alike.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with MODEL \& DISCUSS
+Look for Relationships How do you know that the sales data is modeled by an exponential function?
+\answer{When calculating linear, quadratic, and exponential regression, the exponential model had the highest r value, so that is the most accurate model for the data.}
+\end{te-addendum}
+% Source page 72: 321 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Remind students that exponential functions and logarithmic functions have an inverse relationship. They will discover why this is useful when solving equations as they work through the examples in the lesson.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Property of Equality for Exponential Equations}
+Two powers of the same base are equal if and only if their exponents are equal.
+Suppose (b>0) and (b\neq1), then (b^x=b^y) if and only if (x=y).
+\te{VOCABULARY An exponential equation is an equation that contains variables in the exponents.}
+\end{concept-box}
+\begin{example}{1}
+\textbf{Solve Exponential Equations Using a Common Base}
+What is the solution to ((\frac{1}{2})^{x+7}=4^{3x})?
+The key to solving this equation is that (\frac{1}{2}) and 4 can be written as powers of 2.
+((\frac{1}{2})^{x+7}=4^{3x})
+((2^{-1})^{x+7}=(2^2)^{3x})
+\te{Rewrite each side with a common base.}
+(2^{-x-7}=2^{6x})
+(-x-7=6x)
+\te{Property of Equality for Exponential Equations}
+(-7=7x)
+(-1=x)
+\answer{(x=-1)}
+\end{example}
+\begin{tryit}{1}
+Solve each equation using a common base.
+a. (25^{3x}=125^{x+2})
+\answer{a. 2}
+b. (0.001=10^{6x})
+\answer{b. (-\frac{1}{2})}
+\end{tryit}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Facilitate Meaningful Mathematical Discourse ETP}
+Q: Why was each side of the equation written with an equivalent expression using 2 as the base?
+\answer{In order to solve an exponential equation, the bases must be the same.}
+Q: Could the expressions have been rewritten by using a common base of (\frac{1}{2}), 4, or 10 rather than 2?
+\answer{The expressions could be rewritten with a common base of (\frac{1}{2}) or 4. They could also be rewritten with a common base of 10, however, this would make the equation more complex rather than drawing closer to a solution.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Which base did you use for Part a? For Part b?
+\answer{5 for Part a because it is a factor of both 25 and 125; 10 for Part b because it is a factor of both 0.001 and 10}
+\te{Printed explanation calls 10 a factor of 0.001; likely intended that both are powers of 10.}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Additional Example 5}
+Additional Examples are available at SavvasRealize.com. Go back; ESSENTIAL QUESTION; SOLUTION.
+What is the solution to (\log(x^2-x)=\log20)?
+(x^2-x=20)
+(x^2-x-20=0)
+((x-5)(x+4)=0)
+(x=5\quad x=-4)
+The value (x=-4) is not an extraneous solution because the value of (x^2-x) is positive.
+\answer{(x=5), (x=-4)}
+Students practice solving logarithmic equations with multiple logarithmic terms in this additional example.
+Q: What is the first step to solve this problem?
+\answer{Use the Product Property of Logarithms.}
+\te{Printed answer names Product Property; the displayed first step uses equality of logarithmic arguments.}
+\end{te-addendum}
+\begin{te-addendum}{6}{PurposefulQuestions}
+\textbf{Additional Example 6}
+Go back; ESSENTIAL QUESTION; SOLUTION; TRY ANOTHER ONE.
+Solve the equation (10^{6-x}+2=\log_3(5x)+3) by graphing.
+Let (y_1=10^{6-x}+2) and (y_2=\log_3(5x)+3).
+The point of intersection is approximately (5.398,6), so the solution of the equation is approximately (x=5.398).
+% FIG 72 854 957 1002 1108
+\placeholder{graph}{Unit grid x=-9 to11, y=-9 to11; black axes x,y,O with even labels x=-8,-6,-4,-2,2,4,6,8,10 and y=-8,-6,-4,-2,2,4,6,8,10. Orange decreasing y1=10^{6-x}+2, upward arrow near x=5, horizontal right arrow toward y=2. Blue increasing y2=log_3(5x)+3, vertical asymptote x=0 approached from the right downward, right arrow near (11,6.6). Black filled intersection approximately (5.398,6).}
+\answer{(x\approx5.398)}
+Students solve exponential and logarithmic equations by graphing with this additional example.
+Q: How can you graph each side of the equation as its own function?
+\answer{Set each side of the equation equal to (y), then graph the two equations.}
+\end{te-addendum}
+% Source page 73: 322 Understand & Apply
+\begin{example}{2}
+\textbf{Rewrite Exponential Equations Using Logarithms}
+CONCEPTUAL UNDERSTANDING
+How can you rewrite the equation (17=4^x) using logarithms?
+There is no common base for 17 and 4. Write each number as a power of 10.
+(17=4^x)
+(10^{\log17}=10^{\log4^x})
+(\log17=\log4^x)
+Rewriting expressions using logarithms can help you solve many types of problems.
+\answer{(\log17=\log4^x)}
+\end{example}
+\begin{tryit}{2}
+Rewrite the equation (5^x=12) using logarithms.
+\answer{(\log5^x=\log12)}
+\end{tryit}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{Implement Tasks that Promote Reasoning and Problem Solving ETP}
+Q: Why is (10^{(\log17)}) equivalent to 17?
+\answer{because exponentials and logarithms are inverse operations}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 2
+Communicate Precisely In order to set the exponents of two exponential expressions equal to each other, what must be true about the exponential expressions?
+\answer{The bases of the two expressions must be equivalent.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Property of Equality for Logarithmic Equations}
+Two logarithms (exponents) of the same base are equal if and only if the arguments are equal.
+If (x>0), then (\log_b x=\log_b y) if and only if (x=y).
+\te{Printed condition gives x>0; logarithms also require a valid base b>0, b not equal to 1, and positive arguments.}
+\end{concept-box}
+\begin{example}{3}
+\textbf{Solve Exponential Equations Using Logarithms}
+What is the solution to (3^{x+1}=5^x)?
+(3^{x+1}=5^x)
+(\log(3^{x+1})=\log(5^x))
+((x+1)\log3=x\log5)
+(x\log3+\log3=x\log5)
+(x(\log3-\log5)=-\log3)
+(x=\frac{-\log3}{\log3-\log5})
+(x\approx2.15)
+Check by graphing the two sides of the equation.
+The point of intersection of the graphs is about (2.15,31.8).
+% FIG 73 1005 536 1115 639
+\placeholder{graph}{Coordinate grid x=-1 to4 with half-unit grid and labels 1,2,3; y=-10 to40 with grid spacing 5 and labels 10,20,30. Axes x,y,O with arrowheads. Blue increasing exponential plotted as 3^{x+1}, printed label y=3^x+1; red increasing y=5^x. Both have left arrows near horizontal asymptote y=0 and upper arrows near x=2.3. Black filled intersection labeled (2.15,31.8).}
+\te{Printed blue label is y=3^x+1; likely y=3^{x+1}, matching the equation, plotted y-intercept 3, and intersection.}
+\te{COMMON ERROR The entire quantity of x+1 is the exponent, so it must be written as a quantity to be multiplied by the logarithmic expression.}
+\answer{(x=\frac{-\log3}{\log3-\log5}\approx2.15)}
+\end{example}
+\begin{tryit}{3}
+What is the solution to (2^{3x}=7^{x+1})?
+\answer{(\frac{\log7}{3\log2-\log7}), or approximately 14.57}
+\end{tryit}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: Why are (\log3) and (x\log5) subtracted from both sides of the equation?
+\answer{(x\log3) and (x\log5) have a common factor of (x) and (\log3) is a constant. By subtracting those terms from both sides, (x) can be factored out and the equation can be solved.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Explain how the Distributive Property is used to solve the equation.
+\answer{The Distributive Property is used to multiply (\log7) through (x+1). It's used again to factor (x) out of (3x\log2-x\log7).}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 2 Some students have difficulty rewriting equations using logarithms.
+\item Have students rewrite the equations using logarithms.
+1. (5^x=16) \answer{(x\log5=\log16)}
+2. (2^{2x-3}=19) \answer{((2x-3)\log2=\log19)}
+3. (4^{3x}=6^{x-2}) \answer{(3x\log4=(x-2)\log6)}
+Q: What property did you use to rewrite each equation?
+\answer{Power Property of Logarithms}
+\end{te-addendum}
+\begin{te-addendum}{3}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 3 Have students explore solving multi-step exponential equations.
+\item Have students solve these equations and round their answers to the nearest thousandth.
+1. (15=6^{2x}-9) \answer{0.887}
+2. (5^{x-5}+1=4) \answer{5.683}
+3. (2^{2x+1}-6=-3) \answer{0.293}
+Q: What would you do first to solve these problems?
+\answer{Rewrite the equation with the exponential term on one side and the constant term on the other side.}
+\end{te-addendum}
+% Source page 74: 323 Understand & Apply
+\begin{example}{4}
+\textbf{Use an Exponential Model}
+APPLICATION
+The diagram shows how a forest fire grows over time. The fire department can contain a 160-acre fire without needing additional resources. About how many minutes does it take for a fire to become too big for the fire department to contain without additional resources? Round to the nearest minute.
+% FIG 74 837 304 1144 508
+\placeholder{illustration}{Firefighters spray water at a forest fire. Four outlined successive regions extend through the trees, labeled 4 acres,t=0 min; 7.2 acres,t=1 min; 12.96 acres,t=2 min; 23.3 acres,t=3 min. Birds fly away above the fire.}
+Formulate Because the size of the fire grows by 1.8 times each minute, an exponential function can be used to model the situation. Use model (f(t)=4(1.8)^t).
+\te{Use the model y=ab^t where y represents the number of acres, a is the initial number of acres, b is the growth rate of the fire, and t is the number of minutes the fire has raged.}
+Compute Substitute 160 for (f(t)) and solve the equation for (t).
+(160=4(1.8)^t)
+(40=(1.8)^t)
+(\log40=\log(1.8)^t)
+(\log40=t\log1.8)
+(\frac{\log40}{\log1.8}=t)
+(6.276\approx t)
+Interpret Verify the answer by evaluating the expression (4(1.8)^{6.276}).
+(4(1.8)^{6.276}\approx160.01)
+The fire department has a little more than 6 minutes to contain the fire before they will require additional resources.
+\answer{a little more than 6 minutes}
+\end{example}
+\begin{tryit}{4}
+About how many minutes does it take the fire to spread to cover 100 acres?
+\answer{approximately 5.5 minutes}
+\end{tryit}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Pose Purposeful Questions ETP}
+Q: How do you know that the ratios of the number of acres are all 1.8?
+\answer{The number of minutes are increasing by 1, so divide consecutive numbers of acres to find the ratios.}
+Q: Why does knowing the ratios are all 1.8 translate to knowing that the growth rate (b) is also 1.8?
+\answer{When the ratios of y values are equal, it is best to use an exponential model. And the b value is the common ratio.}
+\end{te-addendum}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Do you expect the answer to be greater than or less than the answer in the example? Explain.
+\answer{Less than; It should take less time for the fire to spread to 100 acres than it does to spread to 160 acres. However, because the fire is spreading exponentially, there should not be much of a difference in the times.}
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 4
+Use Structure Why is it useful to use logarithms to solve an exponential equation?
+\answer{Logarithms allow you to bring the variable down from the exponent and into the expression, so you can solve for the variable.}
+\end{te-addendum}
+\begin{te-addendum}{4}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 4)
+READING BEGINNING Ask students to read the Interpret section of the example. Then ask them to read the definition of verify in a glossary or dictionary.
+Q: What does the word verify mean?
+\answer{check}
+SPEAKING DEVELOPING Discuss the pronunciation and the meaning of the term acre.
+Q: What other units could be used to measure area?
+\answer{Samples: square inches, square feet, square yards, square centimeters, square meters}
+Q: Find a partner. Take turns using each of the units we discussed, including acre in a complete sentence.
+\answer{Listen for students to use the units appropriately in complete sentences.}
+LISTENING EXPANDING Discuss the uses of the word grows.
+Q: How does the diagram, showing how a fire grows, suggest that this is exponential growth?
+\answer{The part of the diagram that shows how many acres have burned after a given number of minutes suggests that this is exponential growth.}
+Q: Does the term grows always mean exponential growth, or can linear and quadratic graphs also show growth? Explain.
+\answer{The term grows does not always mean exponential growth. Linear graphs can show a constant growth rate. Quadratic graphs can show a variable, but not exponential, growth rate.}
+\end{te-addendum}
+% Source page 75: 324, Examples 5 and 6
+\begin{example}{5}
+\textbf{Solve Logarithmic Equations}
+What is the solution to (\ln(x^2-16)=\ln(6x))?
+(\ln(x^2-16)=\ln(6x))
+(x^2-16=6x)
+(x^2-6x-16=0)
+((x-8)(x+2)=0)
+(x=8) or (x=-2)
+Check Substitute each value into the original equation.
+\begin{tabular}{ll}
+(x=8) & (x=-2) \\
+(\ln(8^2-16)=\ln(6\cdot8)) & (\ln((-2)^2-16)=\ln(6\cdot(-2))) \\
+(\ln48=\ln48) Check & (\ln(-12)=\ln(-12)) X \\
+\end{tabular}
+Because logarithms are not defined for negative values, only (x=8) is a solution. The value (x=-2) is an extraneous solution.
+\te{VOCABULARY A logarithmic equation contains one or more logarithms of variable expressions.}
+\answer{(x=8); (x=-2) is an extraneous solution.}
+\end{example}
+\begin{tryit}{5}
+Solve each equation.
+a. (\log_5(x^2-45)=\log_5(4x))
+b. (\ln(-4x-1)=\ln(4x^2))
+\answer{a. 9 (-5 is extraneous) b. (-\frac12)}
+\end{tryit}
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Build Procedural Fluency from Conceptual Understanding ETP}
+Q: What is an extraneous solution and how do they occur?
+\answer{An extraneous solution is a root of a transformed equation that is not a root of the original equation. They occur when you transform an equation in order to solve it, without regard to the domain of the original equation.}
+\end{te-addendum}
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: Why is (-5) an extraneous solution (part a), but (-\frac12) is not extraneous (part b)?
+\answer{In part b, a negative x-value results in a positive argument for the natural log. But in part a, a negative x-value results in a negative argument for the logarithm with base 5, resulting in an expression that is undefined.}
+\end{te-addendum}
+\begin{te-addendum}{5}{CommonError}
+\textbf{Common Error}
+Try It! 5 Students may think (x=-\frac12) is extraneous because it is negative, and therefore respond with no solution to part b. Remind them that the equation does not call for (\ln x), but for (\ln(-4x-1)) and (\ln(4x^2)). When x is evaluated at (-\frac12), the bases are positive.
+\te{Printed bases; likely arguments.}
+\end{te-addendum}
+\begin{example}{6}
+\textbf{Solve Logarithmic and Exponential Equations by Graphing}
+Powered by Desmos
+What is the solution to (\log(2x+1)^5=x-2)?
+Let (y_1=5\log(2x+1)) and (y_2=x-2).
+Graph both equations.
+Use the INTERSECT feature to find the point(s) of intersection.
+The points of intersection, to the nearest thousandth, are ((-0.329,-2.329)) and ((8.204,6.204)).
+The solutions are (x\approx-0.329) and (x\approx8.204).
+Check
+\begin{tabular}{ll}
+(\log(2(-0.329)+1)^5=-0.329-2) & (\log(2(8.204)+1)^5=8.204-2) \\
+(\log(0.342)^5=-2.329) & (\log(17.408)^5=6.204) \\
+(-2.329=-2.329) Check & (6.204=6.204) Check \\
+\end{tabular}
+\te{USE APPROPRIATE TOOLS When typing this equation into a calculator, it is helpful to write the equation using the Power Property of Logarithms rather than risking incorrect input of the exponent.}
+% FIG 75 1015 550 1119 652
+\placeholder{graph}{Calculator display of red (y_1=5\log(2x+1)) and blue (y_2=x-2). Window x=-4 to 10 and y=-3 to 7. Horizontal and vertical axes have unit ticks, no numeric tick labels; caption x scale: 1, y scale: 1. Intersections approximately (-0.329,-2.329) and (8.204,6.204); logarithm has vertical asymptote x=-0.5. Both curves extend to the display boundary.}
+\answer{(x\approx-0.329) and (x\approx8.204)}
+\end{example}
+\begin{tryit}{6}
+Solve each equation by graphing. Round to the nearest thousandth.
+a. (3(2)^{x+2}-1=3-x)
+b. (\ln(3x-1)=x-5)
+\answer{a. (x\approx-1.205) b. (x\approx8.156) or (x\approx0.336)}
+\end{tryit}
+\begin{te-addendum}{6}{GeneralizeETP}
+\textbf{Implement Tasks That Promote Reasoning and Problem Solving ETP}
+Q: Could you let (Y_1=x-2) and (Y_2=5\log(2x+1))? Explain.
+\answer{Yes; the order the equations are input into the calculator is not important. Both equations will still be graphed in the same window and the points of intersection will be visible.}
+\te{Availability Example 6 Powered by Desmos Examples at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{6}{HabitsOfMind}
+\textbf{Habits of Mind}
+Use with Examples 5 and 6.
+Generalize Summarize the procedure for solving a logarithmic equation.
+\answer{If the logarithms have the same base, set the arguments of the logarithms equal to each other and solve. If the logarithms do not have the same base, apply the Change of Base Formula so all the logarithmic expressions have the same base and then solve. If the coefficients of the variable are logarithmic terms, put all like terms together, factor, and solve.}
+\end{te-addendum}
+% Source page 76: 325, Concept Summary
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Exponential and Logarithmic Equations}
+\begin{tabular}{lll}
+ & Property of Equality for Exponential Equations & Property of Equality for Logarithmic Equations \\
+ALGEBRA & If b is a positive number other than 1, (b^x=b^y) if and only if (x=y). & If b is a positive number other than 1, (\log_b x=\log_b y) if and only if (x=y). \\
+WORDS & If two powers of the same base are equal, then their exponents are equal. & If two logarithms of the same base are equal, then the arguments are equal. \\
+WORDS & If two exponents are equal, then the powers with the same base are equal. & If two arguments are equal and the bases are the same, then the logarithms are equal. \\
+NUMBERS & If (2^x=2^4), then (x=4). & If (\log_3 x=\log_3 8), then (x=8). \\
+NUMBERS & If (x=-4), then ((\frac15)^x=(\frac15)^{-4}). & If (x=0.7), then (\log_{13}x=\log_{13}0.7). \\
+\end{tabular}
+\te{Printed logarithmic equality statement omits positivity of x and y; logarithm arguments must be positive.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How do properties of exponents and logarithms help you solve equations?
+\answer{Properties of logarithms and exponents help to solve equations in which the terms do not have matching bases.}
+2. Vocabulary Jordan claims that (x^2+3=12) is an exponential equation. Is Jordan correct? Explain your thinking.
+\answer{Jordan is incorrect. The equation contains a variable in the base but not in the exponent.}
+3. Communicate Precisely How can properties of logarithms help to solve an equation such as (\log_6(8x-2)^3=12).
+\answer{Use the power property to move the exponent outside the logarithm, divide both sides by the exponent, then rewrite the equation in exponential form and solve.}
+\textbf{Do You KNOW HOW?}
+Solve. Round to the nearest hundredth, if necessary. List any extraneous solutions.
+4. (16^{3x}=256^{x+1})
+\answer{2}
+5. (6^{x+2}=4^x)
+\answer{-8.84}
+6. (\log_5(x^2-44)=\log_5(7x))
+\answer{-4 (extraneous); 11}
+7. (\log_2(3x-2)=4)
+\answer{6}
+8. (4^{2x}=9^{x-1})
+\answer{-3.82}
+9. A rabbit farm had 200 rabbits in 2015. The number of rabbits increases by 30\% every year. In what year does the rabbit population reach 13,000?
+\answer{in the year 2030}
+\end{concept-summary}
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Exponential and Logarithmic Equations}
+Q: Give an example of how using the Property of Equality for Logarithmic Equations can help simplify the process of solving a logarithmic equation.
+\answer{It can allow you to transform the equation into a factorable quadratic equation.}
+Q: How can you solve an exponential equation by graphing?
+\answer{Set each side of the equation equal to y and graph the functions. Then look for any points of intersection on the graphs.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+\textbf{Common Error}
+Exercise 6 Students may not check for extraneous solutions. Have students check each solution in the original equation. For example, logarithms are not defined for negative values, so any solution that results in taking the logarithm of a negative number is extraneous.
+\end{te-addendum}
+% Source page 77: 326, Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+10--34, 39--46 & 10--19, 24--46 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 16--21, 45 & 1 \\
+3 & 22--27 & 1 \\
+3 & 10, 11, 14 & 2 \\
+4 & 13, 28, 41, 42 & 2 \\
+5 & 29--37, 44 & 1 \\
+5 & 12, 15 & 1 \\
+5 & 43, 46 & 3 \\
+6 & 38--40 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{10}{2}
+UNDERSTAND. Use Structure Would you use the natural log or the common log when solving the equation (10^{x+2}=78)? Is it possible to use either the natural log or common log? Explain.
+\answer{common log; You could use either, but it is easier to use the common log because of the 10 on the left side.}
+\end{practice}
+\begin{practice}{11}{2}
+Make Sense and Persevere Explain why logarithms are necessary to solve the equation (3^{x+2}=8), but are not necessary to solve the equation (3^{x+2}=27^{4x}).
+\answer{The terms in the first equation do not have equivalent bases. The terms in the second equation can be manipulated to have the same base.}
+\end{practice}
+\begin{practice}{12}{1}
+Reason Trevon solved the equation (\log_3(x+1)-\log_3(x-6)=\log_3(2x+2)). Justify each step of solving the equation in Trevon's work. Are both numbers solutions to the equation? Explain.
+(\log_3(x+1)-\log_3(x-6)=\log_3(2x+2))
+(\log_3(x+1)=\log_3(2x+2)+\log_3(x-6))
+(\log_3(x+1)=\log_3(2x+2)(x-6))
+((x+1)=(2x+2)(x-6))
+(x+1=2x^2-10x-12)
+(0=2x^2-11x-13)
+(x=6.5) or (x=-1)
+\answer{addition, product property of logarithms, property of equality for logarithmic equations, expansion, subtraction, factoring; Both solutions are correct, but -1 is extraneous.}
+\end{practice}
+\begin{practice}{13}{2}
+Error Analysis The number of milligrams of medicine in a person's system after t hours is given by the function (A=20e^{-0.40t}). Thomas sets (A=0) to find the number of hours it takes for all of the medicine to be removed from a person's system. What mistake did Thomas make? Explain.
+\answer{To solve the equation when (A=0), Thomas would need to find the natural log of 0, which is undefined.}
+\end{practice}
+\begin{practice}{14}{2}
+Mathematical Connections Explain the importance of the Power Property of Logarithms when solving exponential equations.
+\answer{This property allows you to rewrite the exponents as products, enabling you to solve the equation.}
+\end{practice}
+\begin{practice}{15}{1}
+Error Analysis Find the student error in the solution of the logarithmic equation.
+(\log(x+3)+\log(x)=1)
+(\log x(x+3)=1)
+(x(x+3)=10^1)
+(x^2+3x-10=0)
+((x-2)(x+5)=0)
+(x=2,-5)
+\te{Red X beside the work.}
+\answer{-5 is extraneous}
+\end{practice}
+\begin{practice}{16}{1}
+PRACTICE. Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLE 1
+(3^{2-3x}=3^{5x-6})
+\answer{1}
+\end{practice}
+\begin{practice}{17}{1}
+PRACTICE. Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLE 1
+(7^{3x}=54)
+\answer{0.6833}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLE 1
+(25^{x^2}=125^{x+3})
+\answer{-1.5; 3}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLE 1
+(4^{3x-1}=(\frac12)^{x+5})
+\answer{-0.4286}
+\end{practice}
+\begin{practice}{20}{1}
+PRACTICE. Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLE 1
+(4^{2x+1}=4^{3x-5})
+\answer{6}
+\end{practice}
+\begin{practice}{21}{1}
+PRACTICE. Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLE 1
+(6^{x-2}=216)
+\answer{5}
+\end{practice}
+\begin{practice}{22}{1}
+Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLES 2 AND 3
+(2^{3x-2}=5)
+\answer{1.4406}
+\end{practice}
+\begin{practice}{23}{1}
+Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLES 2 AND 3
+(4+5^{6-x}=15)
+\answer{4.5101}
+\end{practice}
+\begin{practice}{24}{1}
+Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLES 2 AND 3
+(6^{3x+1}=9^x)
+\answer{-0.5638}
+\end{practice}
+\begin{practice}{25}{1}
+Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLES 2 AND 3
+(-3=(\frac12)^x-12)
+\answer{-3.1699}
+\end{practice}
+\begin{practice}{26}{1}
+Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLES 2 AND 3
+(3^{2x-3}=4^x)
+\answer{4.0643}
+\end{practice}
+\begin{practice}{27}{1}
+Find all solutions of the equation. Round answers to the nearest ten-thousandth. SEE EXAMPLES 2 AND 3
+(4^{x+2}=8^{x-1})
+\answer{7}
+\end{practice}
+\begin{practice}{28}{2}
+Dale has \$1,000 to invest. He has a goal to have \$2,500 in this investment in 10 years. At what annual rate compounded continuously will allow Dale to reach his goal? Round to the nearest hundredth. SEE EXAMPLE 4
+\answer{9.16\%}
+\end{practice}
+\begin{practice}{29}{1}
+Find all solutions of the equation. Round answers to the nearest thousandth. SEE EXAMPLE 5
+(\log_2(4x+5)=\log_2 x^2)
+\answer{-1; 5}
+\end{practice}
+\begin{practice}{30}{1}
+Find all solutions of the equation. Round answers to the nearest thousandth. SEE EXAMPLE 5
+(2\ln(3x-2)=\ln(5x+6))
+\answer{-0.1111 (extraneous); 2}
+\end{practice}
+\begin{practice}{31}{1}
+Find all solutions of the equation. Round answers to the nearest thousandth. SEE EXAMPLE 5
+(\log_4(x^2-2x)=\log_4(3x+8))
+\answer{-1.2749; 6.2749}
+\end{practice}
+\begin{practice}{32}{1}
+Find all solutions of the equation. Round answers to the nearest thousandth. SEE EXAMPLE 5
+(\ln(5x-2)=\ln(x-1))
+\answer{0.25 (extraneous)}
+\end{practice}
+\begin{practice}{33}{1}
+Find all solutions of the equation. Round answers to the nearest thousandth. SEE EXAMPLE 5
+(\ln(2x^2+5x)=\ln(2x+7))
+\answer{1.266; -2.766}
+\end{practice}
+\begin{practice}{34}{1}
+Find all solutions of the equation. Round answers to the nearest thousandth. SEE EXAMPLE 5
+(2\log(x+1)=\log(x+1))
+\answer{0; -1 (extraneous)}
+\end{practice}
+\begin{practice}{35}{1}
+Find all solutions of the equation. Round answers to the nearest thousandth. SEE EXAMPLE 5
+(\log_2 x+\log_2(x-3)=2)
+\answer{4; -1 (extraneous)}
+\end{practice}
+\begin{practice}{36}{1}
+Find all solutions of the equation. Round answers to the nearest thousandth. SEE EXAMPLE 5
+(\log_2(3x-2)=\log_2(x-1)+4)
+\answer{1.077}
+\end{practice}
+\begin{practice}{37}{1}
+Find all solutions of the equation. Round answers to the nearest thousandth. SEE EXAMPLE 5
+(\log_6(x^2-2x)=\log_6(2x-3)+\log_6(x+1))
+\answer{1.303 (extraneous); -2.303 (extraneous)}
+\end{practice}
+\begin{practice}{38}{2}
+Solve by graphing. Round answers to the nearest thousandth. SEE EXAMPLE 6
+(\log(5x-3)^2=x-4)
+\answer{(x\approx6.063)}
+\end{practice}
+\begin{practice}{39}{2}
+Solve by graphing. Round answers to the nearest thousandth. SEE EXAMPLE 6
+(\ln(2x)=3x-5)
+\answer{(x\approx0.003) and (x\approx2.153)}
+\end{practice}
+\begin{practice}{40}{2}
+Solve by graphing. Round answers to the nearest thousandth. SEE EXAMPLE 6
+(\log(4x)=x+\log x)
+\answer{(x\approx0.602)}
+\end{practice}
+% Source page 78: 327, Practice & Problem Solving continued
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice \& Problem Solving is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{practice}{41}{2}
+APPLY. Model With Mathematics The population of a city has an annual growth rate of 1.3\%. In 2000, the population is 250,000. In what year, to the nearest year, will the population reach 450,000?
+\answer{The city will have a population of 450,000 in 2045}
+\end{practice}
+\begin{practice}{42}{2}
+Use Structure Felix invested \$10,000 into a retirement account in 2016. He then projected the amount of money that would be in the account for several years assuming that interest would compound continuously at an annual rate. Later, when he looked back at the data, he could not recall the annual rate that he used for the projections. Use the data below to determine the annual rate.
+% FIG 78 555 500 742 612
+\placeholder{diagram}{Four green banknote columns sharing a baseline, labeled by year and amount: 2016, \$10,000; 2022, \$15,038; 2025, \$18,441; 2041, \$54,739. Heights increase from left to right.}
+\answer{6.8\%}
+\end{practice}
+\begin{practice}{43}{3}
+Higher Order Thinking A biologist is using the logarithmic model (n=k\log(A)) to determine the number of a species n, that can live on a land mass of area A. The constant k varies according to the species.
+a. Use the graph to determine the constant k for the species that the scientist is studying.
+\answer{a. 500}
+b. Determine the land mass in acres that is needed to support 3,000 of the species.
+\answer{b. 1,000,000 acres}
+% FIG 78 555 788 770 1032
+\placeholder{graph}{Red increasing concave-down logarithmic curve in first quadrant, horizontal Acres axis A from 0 to 1300 in grid steps of 100 with labels 0,500,1000; vertical Species axis n from 0 to 1700 in grid steps of 100 with labels 0,500,1000,1500. Solid labeled points (100,1000) and (1000,1500). Curve approaches the vertical axis and has a right arrowhead near (1300,1557); positive axis arrowheads.}
+\end{practice}
+\begin{practice}{44}{1}
+ASSESSMENT PRACTICE. Which of the following have the same solution? Select all that apply.
+A. (\log_8(x^2-15)=\log_8(2x))
+B. (\ln(12x+2)=\ln(2x-3))
+C. (\log_2 x+\log_2(x+4)=5)
+D. (\log_3(15x+6)^2=8)
+E. (\log_4(3x-5)=2)
+\answer{A, D}
+\te{Printed A, D; D also permits x=-5.8 when the square is inside the logarithm. The common positive solution is 5.}
+\end{practice}
+\begin{practice}{45}{1}
+SAT/ACT The graph shows the function (y=4^x). Solve the inequality (4^x>2^{3x-1}).
+A. (x>1)
+B. (x<1)
+C. (x>-1)
+D. (x<-1)
+\answer{B}
+% FIG 78 1017 405 1127 678
+\placeholder{graph}{Red graph y=4^x on unit grid with x window -3 to 3 and y window -4 to 16. Axes x,y have arrowheads at both ends; origin O; x labels -2,2; y labels -2,2,4,6,8,10,12,14. Solid labeled points (-1,0.25),(1,4),(2,16). Curve has left and upward arrowheads, approaches y=0 toward the left and crosses y=1 at x=0.}
+\end{practice}
+\begin{practice}{46}{3}
+Performance Task A professor conducted an experiment to find the relationship between time and memory. The professor determined the model (f(t)=t_0-15\log(t+1.1)) gives the memory score after t months when a student had an initial memory score of (t_0).
+% FIG 78 862 780 1040 955
+\placeholder{graph}{Human Memory. Horizontal Time (months) axis t spans 0 to 40, grid step 4 and labeled 0,8,16,24,32,40. Vertical Memory Score axis f(t) spans 0 to 100, grid step 10 and labels 0,20,40,60,80,100. Red decreasing concave-up curve begins with solid labeled point (0,94) and ends in a right arrowhead near (40,70).}
+Part A Write a model for a student with the given initial memory score.
+\answer{Part A (f(t)=94-15\log(t+1.1))}
+Part B After about how many years will the student have a memory score of 65?
+\answer{Part B about 7 years}
+\te{Printed model identifies t_0 as initial score, but substituting t=0 subtracts 15\log(1.1); the labeled (0,94) is an approximation for the printed Part A model.}
+\end{practice}
+% Source page 79: 327A, Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Resources book.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 1 & F71, F72, F73 \\
+2 & 2 & F72, F73 \\
+3A & 3 & F72, F73 \\
+3B & 3 & F72, F73 \\
+4 & 2 & F72, F73 \\
+5 & 2 & F72, F73 \\
+\end{tabular}
+RtI Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{6-6 Lesson Quiz: Exponential and Logarithmic Equations}
+Name \rule{3cm}{0.4pt}
+enVision Algebra 2. SavvasRealize.com
+1. What is the solution to the equation (7^{x-1}=3)?
+A. (x=\frac{\log3}{\log7}+1)
+B. (x=\frac{\log7}{\log3}-1)
+C. (x=\log(1\frac37))
+D. (x=\log(\frac73)+1)
+\answer{1. A}
+2. The volume of one cloud, in cubic kilometers, grows according to the expression (4^{3x-1}), where x is time in hours. Another cloud grows according to the expression (8^x). After how many hours will the two clouds have the same volume? What is their volume, in cubic kilometers?
+A. 0 hours; 1
+B. (\frac12) hour; 2.83
+C. (\frac23) hour; 4
+D. 2 hours; 64
+\answer{2. C}
+3. Max solved the equation, (5^{x+3}=25^{x-2}), but made an error. His work is shown.
+Part A Select each step that Max completed.
+Property of Equality for Exponential Equations
+Power of a Power Property
+Rewrite with a common base
+(25^{x-2}=5^{x+3})
+((5^2)^{x-2}=5^{x+3})
+\answer{Rewrite with a common base}
+(5^{2x-2}=5^{x+3})
+\answer{Power of a Power Property}
+(2x-2=x+3)
+\answer{Property of Equality for Exponential Equations}
+(x=5)
+Part B Identify and fix Max's mistake.
+Max made an error in line \rule{1cm}{0.4pt}. The correct solution is (x=\rule{1cm}{0.4pt}).
+\answer{3. Part B 3; 7}
+4. Select all solutions of the equation (2\log x=\log(5x-4)).
+A. (x=1)
+B. (x=4)
+C. (x=5)
+D. (x=0)
+E. (x=-1)
+\answer{4. A, B}
+5. Solve the equation (\ln(3x)=2x-5). If there is more than one solution, solve for the larger x-value. Round to the nearest hundredth.
+(x=\rule{1cm}{0.4pt})
+\answer{5. 3.70}
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 80: 327B, Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School
+Name \rule{3cm}{0.4pt}. enVision Algebra 2. SavvasRealize.com
+\textbf{6-6 Reteach to Build Understanding: Exponential and Logarithmic Equations}
+Property of Equality for Exponential Equations:
+Suppose (b>0) and (b\neq1), then (b^x=b^y) if only if (x=y).
+Property of Equality for Logarithmic Equations:
+If (x>0), then (\log_b x=\log_b y) if only if (x=y).
+\te{Printed if only if; likely if and only if. The logarithmic statement also requires a valid base and positive arguments.}
+1. For parts (a)--(d), refer to the properties above. Find your answer in the answer box. Write the correct answer in the blanks to show the solution of each question that was started.
+\te{Printed (a)--(d); parts (e) and (f) also appear.}
+\begin{tabular}{lllllllll}
+(\frac32) & 2 & 9 & -9 & -7 & 18 & -2 & 137 & 1 \\
+\end{tabular}
+a. (28=8^x)
+(\log28=x(\log8))
+(x=\frac{\log28}{\log8}=1.6025)
+b. (\log(x^2-2)=\log(-x))
+(x^2+x-2=0)
+((x+2)(x-1)=0)
+(x=\rule{1cm}{0.4pt}); the value \rule{1cm}{0.4pt} is an extraneous solution.
+\answer{b. -2; 1}
+c. (6^{2x}=216)
+(6^{2x}=6^3)
+(x=\rule{1cm}{0.4pt})
+\answer{c. (\frac32)}
+d. (\log_7(\rule{1cm}{0.4pt})=\log_7 7x)
+(137=7x)
+(x=\frac{137}{7})
+\answer{d. 137}
+e. (8^{x+9}=64)
+(8^{x+9}=8^2)
+(x+9=\rule{1cm}{0.4pt})
+(x=\rule{1cm}{0.4pt})
+\answer{e. 2; -7}
+f. (\log_3(2x)=\log_3 18)
+(2x=\rule{1cm}{0.4pt})
+(x=\rule{1cm}{0.4pt})
+\answer{f. 18; 9}
+2. Find and correct the student error in the solution of the logarithmic equation.
+(\ln(2x+3)+\ln x=\ln(1+4x))
+((2x+3)+x=1+4x) X
+a. Identify the error and explain the error the student made.
+\answer{Student uses the Product Property of Logarithms incorrectly by adding instead of multiplying. (\ln x(2x+3)=\ln(1+4x)).}
+b. Find the correct solution of the logarithmic equation. Select all that apply.
+A. (-\frac12)
+B. -1
+C. (\frac12)
+D. 1
+\answer{A, D}
+\te{Printed A, D; A is extraneous because ln x is undefined at x=-1/2.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson.
+MathXL for School
+Name \rule{3cm}{0.4pt}. enVision Algebra 2. SavvasRealize.com
+\textbf{6-6 Additional Practice: Exponential and Logarithmic Equations}
+Find all solutions of the equation. Round answers to the nearest thousandth, if necessary.
+1. ((\frac13)^{x-6}=9^x)
+\answer{(x=2)}
+2. (5^{x+3}=5^{2x-1})
+\answer{(x=4)}
+3. (0.0001=10^{2x})
+\answer{(x=-2)}
+4. (14^{x+7}=196^{x+2})
+\answer{(x=3)}
+5. (36x^2=216^{x+3})
+\answer{(x=3)}
+\te{Printed left side has baseline x and superscript 2; likely an exponent-formatting error. The printed answer does not satisfy this equation.}
+6. (2^{3x-2}=4x^2)
+\answer{(x=2)}
+7. (15=4^x)
+\answer{(x\approx1.953)}
+8. (4+3^{x-5}=15)
+\answer{(x\approx7.183)}
+9. (e^{x+1}=5)
+\answer{(x\approx0.609)}
+10. (4^{x-3}-3=6)
+\answer{(x\approx4.585)}
+11. (3^{x-2}=4)
+\answer{(x\approx3.262)}
+12. (5^{x+3}=4)
+\answer{(x\approx-2.139)}
+Find all solutions of the equation.
+13. (\log_3(2x)=\log_3 18)
+\answer{(x=9)}
+14. (\log_5(x^2-x)=\log_5(2x-2))
+\answer{(x=2)}
+15. (\log_2(2x)=\log_2(x+3))
+\answer{(x=3)}
+16. (\ln(x^2-4x)=\ln(-4x+25))
+\answer{(x=5) or -5}
+17. (\ln(2x+3)=\ln(-2x+7))
+\answer{(x=1)}
+18. (\log_4(x+1)=\log_4(3x-5))
+\answer{(x=3)}
+Solve the equations below using a graphing calculator to find the point(s) of intersection. Round answers to the nearest thousandth.
+19. (\log(3x-4)^2=x+\log x)
+\answer{(1.353,1.485)}
+% FIG 80 562 640 670 701
+\placeholder{graph}{Additional Practice 19. Magenta curves on black unit grid with x and y from -3 to 5; labels -2,2,4 and origin O. One U-shaped curve approaches a vertical line left of x=0 and rises toward upper right; another increasing concave-down curve approaches x=0 and rises toward (5,1.7). Solid crossing labeled (0.757,0.636). Curve ends have arrowheads. Printed answer outside graph is (1.353,1.485).}
+\te{Printed graph label (0.757,0.636) disagrees with printed answer (1.353,1.485); graph shape also differs from the stated logarithmic square expression.}
+20. (\ln(5x)=x^2)
+\answer{(0.209,0.044) and (1.393,1.941)}
+% FIG 80 693 640 815 699
+\placeholder{graph}{Additional Practice 20. Magenta parabola y=x^2 and logarithmic curve y=ln(5x) on unit grid, x and y windows -3 to 5; labels -2,2,4 and origin O. Parabola vertex at origin and arrows on both upward branches. Log curve approaches vertical asymptote x=0 and has right arrow. Solid intersections labeled (0.209,0.044) and (1.393,1.941).}
+21. A bee farm has 700 bees on September 1. Winter is coming and the number of bees decreases by 35\% every 2 months from September 1 until March 1. How many bees are on the farm on March 1?
+\answer{There are 125 bees on March 1.}
+\te{Printed 125; three two-month periods give 700(0.65)^3 approximately 192 bees.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School
+Name \rule{3cm}{0.4pt}. enVision Algebra 2. SavvasRealize.com
+\textbf{6-6 Enrichment: Exponential and Logarithmic Equations}
+1. Determine the solution to ((\frac12)^{x-3}=4^x) using two different methods. Choose the solution and graph that is correct.
+A. ((\frac12)^{x-3}=4^x)
+((2^{-1})^{x-3}=(2^2)^x)
+(2^{-x+3}=2^{2x})
+(-x+3=2x)
+(-3x=-3)
+(x=1)
+B. ((\frac12)^{x-3}=4^x)
+((2^{-1})^{x-3}=(2^2)^x)
+(2^{-x+3}=2^{2x})
+(-x+3=2x)
+(x=-3)
+C.
+% FIG 80 1010 441 1075 503
+\placeholder{graph}{Enrichment option C. Two black curves on unit grid x=-4 to 6, y=-1 to 9; axis letters x,y, origin O, x labels -2,2,4, y labels 2,4,6,8. Descending exponential passes near (0,1),(-1,2),(-2,4),(-3,8) and approaches y=0 on right. Increasing exponential stays close to x-axis until about x=2, passes near (3,1),(4,4), and exits top near x=4.5. Curves meet near (2,0.25); upper and horizontal curve-end arrows.}
+D.
+% FIG 80 1010 510 1075 573
+\placeholder{graph}{Enrichment option D. Two black exponentials on unit grid x=-4 to 6, y=-1 to 9. Axes x,y; origin O; x labels -2,2,4, y labels 2,4,6,8. Decreasing curve passes (0,8),(1,4),(2,2),(3,1) and approaches y=0 to right. Increasing curve passes (0,1),(1,4) and approaches y=0 to left. Intersection (1,4); no dot labels. Arrowheads on both upper branches and near horizontal ends.}
+\answer{1. A, D}
+2. Compare the value of the powers of 2 and the powers of (\frac12). Complete the table for each missing value.
+\begin{tabular}{ll}
+(2^2=4) & ((\frac12)^2=\frac14) \\
+(2^1=2) & ((\frac12)^1=\frac12) \\
+(2^0=1) & ((\frac12)^0=1) \\
+(2^{-1}=\rule{1cm}{0.4pt}) & ((\frac12)^{-1}=\rule{1cm}{0.4pt}) \\
+(2^{-2}=\rule{1cm}{0.4pt}) & ((\frac12)^{-2}=\rule{1cm}{0.4pt}) \\
+\end{tabular}
+\answer{2. (\frac12), 2; (\frac14), 4}
+3. Why can a fraction be written as a negative exponent?
+\answer{Answers may vary. Sample answer: When a base is raised to a negative exponent, it is the reciprocal of the base raised to a positive exponent.}
+What can you prove about the expressions (b^{-n}) and (\frac1{b^n}) if (b>0)?
+\answer{(b^{-n}=\frac1{b^n})}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name \rule{3cm}{0.4pt}. enVision Algebra 2. SavvasRealize.com
+\textbf{6-6 Mathematical Literacy and Vocabulary: Exponential and Logarithmic Equations}
+What is the solution to (\ln(x^2+2x)=\ln(7x-6))? Explain your work and check your solution.
+\begin{tabular}{ll}
+(\ln(x^2+2x)=\ln(7x-6)) & Write the original equation. \\
+(x^2+2x=7x-6) & Property of Equality of Logarithmic Equations \\
+(x^2-5x+6=0) & Set quadratic equation equal to 0. \\
+((x-2)(x-3)=0) & Factor. \\
+(x=2) or (x=3) & Apply the Zero Product Property. \\
+\end{tabular}
+Check: Substitute each value into the original equation.
+\begin{tabular}{ll}
+(x=2) & (x=3) \\
+(\ln(2^2+2\times2)=\ln(7\times2-6)) & (\ln(3^2+2\times3)=\ln(7\times3-6)) \\
+(\ln8=\ln8) & (\ln15=\ln15) \\
+\end{tabular}
+What is the solution to (5^x=2^{x+1})? Explain your work and check your solution.
+\begin{tabular}{ll}
+(5^x=2^{x+1}) & Write the original equation. \\
+(\log(5^x)=\log(2^{x+1})) & \answer{Property of Equality of Logarithmic Equations} \\
+\answer{(x\log5=(x+1)\log2)} & Power Property of Logarithms \\
+(x\log(5)=x\log2+\log2) & \answer{Use the Distributive Property.} \\
+(x\log5-x\log2=\log2) & Subtract (x\log2) from both sides. \\
+\answer{(x(\log5-\log2)=\log2)} & Factor out x. \\
+(x=\frac{\log2}{\log5-\log2}) & \answer{Divide.} \\
+\answer{(x\approx0.756)} & Use a calculator. \\
+\end{tabular}
+Check: Substitute \rule{1cm}{0.4pt} into the equation:
+\answer{0.756}
+(5^x=5^{\rule{1cm}{0.4pt}}\approx\rule{1cm}{0.4pt})
+\answer{0.756; 3.379}
+(2^{x+1}=2^{\rule{1cm}{0.4pt}}\approx\rule{1cm}{0.4pt})
+\answer{0.756+1; 3.379}
+The solution is about \rule{2cm}{0.4pt}.
+\answer{(0.756,3.379)}
+\te{Printed ordered pair gives the graph intersection; the solution of the one-variable equation is its x-coordinate.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+% FIG 80 615 980 1068 1300
+\placeholder{illustration}{Black tablet with MathXL interface. Prompt: Solve the system of equations by graphing, y=3x+4 and y=-2x+4. Use the graphing tool to graph the system. Click to enlarge graph. Blank x,y grid from -10 to 10 with unit spacing and labels every 2. Question Help menu: Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Bottom: Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining; Clear All; Check Answer; Review progress; Question 5 of 14; Go; Back; Next. Exit control at top left.}
+\end{te-addendum}
+
+\end{document}

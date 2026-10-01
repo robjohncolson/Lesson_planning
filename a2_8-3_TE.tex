@@ -1,0 +1,886 @@
+\documentclass{article}
+% Source: Topic_08_Teacher_Edition.pdf, PDF pages 40-51 (printed pages 413A-420B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 40: 413A Lesson Overview
+\begin{lesson-meta}
+lesson: 8-3
+title: Trigonometric Identities
+standards: none printed
+practices: none printed
+objective: I can verify and use trigonometric identities.
+
+essential question: How can you verify and apply relationships between trigonometric functions?
+
+\textbf{VOCABULARY}
+\item trigonometric identity
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 8-3 \\
+Title & Trigonometric Identities \\
+Standards & none printed \\
+I CAN Objective & I can verify and use trigonometric identities. \\
+Essential Question & How can you verify and apply relationships between trigonometric functions? \\
+Lesson Vocabulary & trigonometric identity \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Verify trigonometric identities using the unit circle.
+\item Use trigonometric identities to rewrite expressions.
+\item Prove sum and difference formulas for sine, cosine, and tangent, and use them to solve real-world problems.
+Essential Understanding. A trigonometric identity is an equation that is true for all values of the variable for which both sides of the equation are defined. Trigonometric identities and sum and difference formulas can be used to verify relationships between trigonometric functions and solve problems.
+\textbf{COHERENCE}
+Previously in this topic students:
+\item Applied trigonometric functions to solve problems involving right and non-right triangles.
+In this lesson, students:
+\item Use trigonometric identities and sum and difference formulas to verify and apply relationships between trigonometric functions and solve problems.
+Increasing Coherence This lesson is not necessarily expected to be addressed on high stakes assessments.
+Later in this topic, students will:
+\item Use trigonometry to represent and multiply complex numbers and to solve problems.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that trigonometric identities can be used to simplify expressions because they are true for all values of the variable for which both sides of the equation are defined.
+\item Students use sum or difference formulas to find values of unfamiliar angles by using common reference angles.
+\textbf{Mathematics Overview}
+Students verify and prove trigonometric identities and then use these identities to write trigonometric expressions in different forms. Students then work with the Sum and Difference Formulas to model sound waves.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively
+Students make sense of relationships when they think about how transformations of the graph of (y=\sin x) can be used to show the equivalence of (\sin(-x)) and (-\sin x).
+Construct Viable Arguments
+Students construct an algebraic argument to prove the quotient identity (\cot\theta=\frac{\cos\theta}{\sin\theta}).
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{lll}
+ & English & Spanish \\
+REVIEW VOCABULARY & terminal side & lado terminal \\
+ & unit circle & círculo unitario \\
+NEW VOCABULARY & trigonometric identity & identidad trigonométrica \\
+\end{tabular}
+VOCABULARY ACTIVITY
+Ask students to recall the term identity and have them use their prior knowledge to predict the meaning of the term trigonometric identity. Review the terms terminal side and unit circle, which students will use when verifying trigonometric identities. Have students choose which term (unit circle or trigonometric identity) is described by each phrase.
+\item centered on the origin of the coordinate plane with a radius of 1 unit \answer{unit circle}
+\item a trigonometric equation that is true for all values of the variable for which both sides of the equation are defined \answer{trigonometric identity}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 40 963 731 1116 912
+\placeholder{illustration}{Student Companion cover with glowing colored loops on a dark background; enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+% Source page 41: 413B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE \& REASON}
+INSTRUCTIONAL FOCUS Students explore the relationships between angles and heights of two triangles with the same base. This introduces students to verifying and applying relationships between trigonometric functions.
+STUDENT COMPANION Students can complete the Explore \& Reason activity in their Student Companion.
+\te{Explore \& Reason is Powered by Desmos. Critique \& Explain is available at SavvasRealize.com. Printed Critique \& Explain; likely Explore \& Reason.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving ETP
+Q: What do you notice about the two triangles?
+\answer{The base of both triangles is 3. The measure of the labeled angle in the second triangle is twice the measure of the labeled angle in the first triangle.}
+\textbf{During: SMALL GROUP}
+Support Productive Struggle in Learning Mathematics ETP
+Q: How are the steps to evaluate (\sin(2(30°))) different from the steps to evaluate (2\sin30°)?
+\answer{When evaluating (\sin(2(30°))), you multiply 30° by 2, then find the sine of 60°. When evaluating (2\sin30°), you find the sine of 30°, then multiply that value by 2.}
+For Early Finishers
+Q: Change the lengths of the bases of the triangles to 10. Calculate the vertical heights. Is the relationship between the base angles and vertical heights the same as before with bases equal to 3?
+\answer{5.77 and 17.32; Yes; The second angle is double the first, but the vertical height of the second triangle is more than double the height of the first triangle.}
+\textbf{After: WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse ETP
+Q: How do the graphs of (y=\sin2x) and (y=2\sin x) compare to the graph of (y=\sin x)?
+\answer{The graph of (y=\sin2x) is compressed horizontally compared to (y=\sin x). The graph of (y=2\sin x) is stretched vertically compared to (y=\sin x).}
+Q: How does understanding how the graphs are affected by the placement of the 2 in the equation help you answer Part b?
+\answer{Multiplying the sine function by 2 stretches the graph vertically, while multiplying x by 2 compresses the graph horizontally. So when x measures an acute angle, x is between 0 and (\frac\pi2). In that interval, the graph of (y=2\sin x) is above the graph of (y=\sin2x).}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE \& REASON}
+Two right triangles share the same base leg length.
+% FIG 41 907 259 1097 389
+\placeholder{diagram}{Whiteboard with two right triangles, horizontal bases each 3, vertical right legs and orange right-angle squares at lower right. Left purple triangle has lower left angle 30°; right blue triangle lower left angle 60° and taller vertical leg. Colored filled dots mark all vertices. Markers and eraser on tray.}
+A. Is the ratio between the base angles the same as the ratio between the vertical heights? Explain.
+\answer{A. No the second angle is double the first, but the vertical height of the second triangle is more than double the height of the first.}
+B. How do the values of (\sin(2(30°))) and (2\sin30°) compare?
+\answer{B. The value of (2\sin30°) is greater than that of (\sin(2(30°))).}
+C. Look for Relationships Graph (y=\sin2x) and (y=2\sin x) on the same coordinate plane. How do the two graphs help explain your answer to part (b)?
+\answer{C. See sample graph.}
+% FIG 41 716 1040 952 1235
+\placeholder{graph}{Double-arrowed black x,y axes, O origin. Grid x spacing 1.5, y spacing .5; x labels -6,-3,3,6, y labels -2,-1,1,2. Window approximately [-9,9] by [-2.5,2.5]. Blue y=2 sin x, amplitude 2, period 2pi, through origin increasing, extrema at pi/2+2kpi and -pi/2+2kpi. Red y=sin2x amplitude 1, period pi, through origin increasing. Both curves arrowed at borders; labels above with leader to red curve.}
+\te{Digital version displays parts A and B; Go back; Enter your answer.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+Use with EXPLORE \& REASON
+Make Sense and Persevere Are there any functions for which (f(2x)=2f(x)) for all x? Investigate three different types functions. Show your work. What do you conclude?
+\answer{The relationship holds for (f(x)=x) and (f(x)=|x|), but not for (f(x)=x^2).}
+\end{te-addendum}
+% Source page 42: 413 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning ETP
+Students learn how to verify and use trigonometric identities and sum and difference formulas. Students use trigonometric identities and sum and difference formulas to rewrite expressions and model real-world situations.
+\te{Example 1 is Powered by Desmos. Activities are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Use the Unit Circle to Verify Trigonometric Identities}
+Build Procedural Fluency From Conceptual Understanding ETP
+PART A
+Q: Why does the relationship between (\sin(-\theta)) and (-\sin\theta) hold true for any value of (\theta)?
+\answer{The sine function is an odd function and for any odd function, (f(-x)=-f(x)).}
+Q: Why do you only consider the y-coordinate of terminal side of the angle when finding the sine of the angle?
+\answer{The circle is a unit circle, so the value of the sine of an angle is the value of y-coordinate because the radius of the circle is 1.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 4}
+\te{Additional Examples are available at SavvasRealize.com. Go back. ESSENTIAL QUESTION. SOLUTION.}
+What is the exact value of (\sin(-75°))?
+(\sin(-75°)=\sin(-30°-45°))
+(=\sin(-30°)\cos45°-\cos(-30°)\sin45°)
+(=-\frac12(\frac{\sqrt2}{2})-\frac{\sqrt3}{2}(\frac{\sqrt2}{2}))
+(=\frac{-\sqrt2-\sqrt6}{4})
+\answer{(-\frac{\sqrt2-\sqrt6}{4})}
+\te{Printed final numerator has a minus sign between the radicals; likely it should be a plus sign after factoring out the negative.}
+Example 4 Students find the exact values of angles with negative measures using sum and difference formulas and special angle measures.
+Q: How is finding the exact value of a negative angle different from finding the exact value of a positive angle?
+\answer{When evaluating the sine and cosine of special angles, you need to make sure to include negative signs in the proper locations.}
+\end{te-addendum}
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 5}
+\te{Go back. ESSENTIAL QUESTION. SOLUTION.}
+The diagram shows a wheel with radius 10 in. The labeled point ((10\cos(\theta+45°),10\sin(\theta+45°))) represents a rotation of the wheel (\theta+45°) counterclockwise. Express the x-coordinate of the point in terms of (\cos\theta) and (\sin\theta).
+(10\cos(\theta+45°)=10(\cos\theta\cos45°-\sin\theta\sin45°))
+(=10(\frac{\sqrt2}{2}\cos\theta-\frac{\sqrt2}{2}\sin\theta))
+\answer{(5\sqrt2(\cos\theta-\sin\theta))}
+% FIG 42 977 936 1128 1070
+\placeholder{diagram}{Black circle with center dot and horizontal radius to rightmost dot (10,0). Orange point upper right at 45 degrees and second orange point near top, reached by an additional counterclockwise angle theta. Radii to both orange points; orange angle arcs labeled 45° and theta. Top point labeled (10 cos(theta-45°),10 sin(theta-45°)).}
+\te{Printed diagram label uses theta minus 45 degrees; likely theta plus 45 degrees as in the prompt and solution.}
+Example 5 Students transition to using sum and difference formulas to find the coordinates of a rotated point on a circle.
+Q: Suppose after rotating 45° counterclockwise, the wheel was rotated (\theta) clockwise. How would the expression of the coordinates change?
+\answer{The expression for the measure of the angle would be (45°-\theta).}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Use the Unit Circle to Verify Trigonometric Identities}
+\te{CONCEPTUAL UNDERSTANDING. Powered by Desmos.}
+A. What does the relationship between (\sin(-\theta)) and (-\sin\theta) indicate about the function (f(x)=\sin x)?
+% FIG 42 854 283 975 384
+\placeholder{graph}{Black unit circle on double-arrowed x,y axes, grid .25, window [-1.5,1.5] by [-1.25,1.25]; x,y labels -1,-.5,.5,1. Blue radius to filled point (a,b) in quadrant I and red radius to (a,-b) quadrant IV; blue counterclockwise theta arc and red clockwise -theta arc from positive x axis.}
+\te{Callout: The coordinate (a,b) may represent any point on the unit circle. Therefore, this justification holds true for any angle, theta.}
+Graph terminal sides representing angles (\theta) and (-\theta) intersecting the unit circle.
+If the terminal side of (\theta) intersects the circle at some point (a,b), the terminal side of (-\theta) intersects the circle at (a,-b). Since this is the unit circle, (\sin\theta=b) and (\sin(-\theta)=-b). Therefore, (\sin(-\theta)=-\sin\theta).
+The equation (\sin(-x)=-\sin x) is a trigonometric identity, or a trigonometric equation that is true for all values of the variable for which both sides of the equation are defined.
+Since (f(-x)=-f(x)), (f(x)=\sin x) is an odd function.
+\te{REASON Think about how transformations of the graph of (y=\sin x) can be used to show the equivalence of (\sin(-x)) and (-\sin x). CONTINUED ON THE NEXT PAGE.}
+\answer{A. (\sin(-\theta)=-\sin\theta); (f(x)=\sin x) is an odd function.}
+% Source page 43: 414 Example 1 continued
+B. How are (\cos(\theta+\pi)) and (\cos(2\pi-\theta)) related to (\cos\theta)?
+Graph the terminal sides of (\theta), (\theta+\pi), and (2\pi-\theta) on the unit circle.
+% FIG 43 814 260 917 360
+\placeholder{graph}{Black unit circle, double-arrowed x,y axes with O origin and labels -1,1; grid .25, window [-1.25,1.25] each axis. Blue radius to quadrant I filled point (x,y), red radius opposite to quadrant III point (-x,-y), green radius to quadrant IV point (x,-y). Arcs from positive x axis labeled blue theta, red theta+pi counterclockwise, green 2pi-theta counterclockwise nearly full turn.}
+The x-coordinates of (\theta) and (\theta+\pi) are x and -x. Therefore, (\cos(\theta+\pi)=-\cos\theta).
+The x-coordinates of (\theta) and (2\pi-\theta) are the same. Therefore, (\cos(2\pi-\theta)=\cos\theta).
+\te{LEARN TOGETHER What are ways to stay positive and work toward goals?}
+\answer{B. (\cos(\theta+\pi)=-\cos\theta); (\cos(2\pi-\theta)=\cos\theta).}
+\end{example}
+\begin{te-addendum}{1}{GeneralizeETP}
+Build Procedural Fluency From Conceptual Understanding ETP
+PART B
+Q: What do angles (\theta), (\theta+\pi), and (2\pi-\theta) have in common?
+\answer{All three angles have the same reference angle, theta.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{tryit}{1}
+a. Verify the cosine function is an even function, which means that for (f(x)=\cos x), (f(-x)=f(x)).
+\answer{a. Graph the terminal sides representing angles x and -x intersecting the unit circle. If the terminal side of x intersects the circle at some point (a,b), the terminal side of -x intersects the circle at (a,-b). Since this is the unit circle, (\cos x=a) and (\cos(-x)=a). Therefore, (\cos x=\cos(-x)), which means the cosine function is even.}
+b. How are (\sin(x+\pi)) and (\sin(2\pi-x)) related to (\sin x)?
+\answer{b. (\sin(x+\pi)=-\sin x); (\sin(2\pi-x)=-\sin x).}
+\end{tryit}
+\begin{te-addendum}{1}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: What strategy would you use to verify that (\cos(-\theta)=\cos\theta)?
+\answer{Graph the terminal sides of angles theta and -theta on a unit circle, then compare the x-coordinates of the points where the terminal sides intersect the unit circle.}
+\end{te-addendum}
+\begin{te-addendum}{1}{HabitsOfMind}
+Use with EXAMPLE 1
+Communicate Precisely Since (\cos(-x)=\cos x), cosine is an even function. How can you see this by looking at the graph of cosine?
+\answer{The graph of the cosine function is symmetric over the y-axis.}
+\end{te-addendum}
+\begin{te-addendum}{1}{LearnTogether}
+\textbf{Learn Together: Work Toward Goals}
+Set goals with positivity and work to achieve them. Ask: Why is it important to set goals with positivity? How do you make progress toward achieving your goals?
+\end{te-addendum}
+\begin{te-addendum}{1}{ELLAddendum}
+\textbf{English Language Learners} (Use with EXAMPLE 1)
+LISTENING BEGINNING Have students listen as you read different definitions of the word odd: defining numbers that cannot be evenly divided by two, something strange, or mismatched. Then have students listen as you read the following sentences. Have them restate the sentences by replacing a word or phrase with the word odd.
+Q: Maria thought it was strange that the neighbors did not have any lights on in the house.
+\answer{replace strange with odd}
+Q: There was not an even number of students in the class.
+\answer{replace not an even with an odd}
+Q: Jim could not believe the number of unpaired socks in his drawer.
+\answer{replace unpaired with odd}
+WRITING DEVELOPING Have students write the meaning of the word verify in their journals: to prove things are true. Then ask students to write an answer to each of the questions in their journals, using the word verify in the answers.
+Q: Why would a person show their driver's license to a storeowner?
+\answer{to verify their age or identity}
+Q: Why would a delivery person ask the recipient to sign their name?
+\answer{to verify that they received a package}
+Q: How are unit circles used for trigonometric identities?
+\answer{Graphing trigonometric functions on the unit circle helps to verify both sides of the equation are equal.}
+READING EXPANDING Have students read the instructions for Part A and ask the first question. Then have students read the rest of Part A and ask the last two questions.
+Q: What other word or phrase could be substituted for the word indicate?
+\answer{show, point out, demonstrate}
+Q: Does the second paragraph indicate anything about the function (f(x)=\sin x)?
+\answer{No; it states the relationship between (\sin(-\theta)) and (-\sin\theta), but does not indicate anything about (f(x)=\sin x).}
+Q: Does the last sentence indicate something about (f(x)=\sin x)?
+\answer{Yes; the last sentence indicates that (f(x)=\sin x) is an odd function because (f(-x)=-f(x)).}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Trigonometric Identities}
+\begin{tabular}{ll}
+Quotient Identity & Pythagorean Identity \\
+(\tan x=\frac{\sin x}{\cos x}) & (\sin^2x+\cos^2x=1) \\
+Cofunction Identities & Odd-Even Identities \\
+(\sin(\frac\pi2-x)=\cos x) & (\sin(-x)=-\sin x) \\
+(\cos(\frac\pi2-x)=\sin x) & (\cos(-x)=\cos x) \\
+(\tan(\frac\pi2-x)=\cot x) & (\tan(-x)=-\tan x) \\
+\end{tabular}
+\end{concept-box}
+\begin{example}{2}
+\textbf{Use Identities to Rewrite Expressions}
+A. What is an equivalent form of ([\tan(-x)](\cos x))?
+([\tan(-x)](\cos x)=\frac{\sin(-x)}{\cos(-x)}\cdot\cos(x))
+(=\frac{-\sin(x)}{\cos x}\cdot\cos x)
+(=-\sin x)
+\answer{So ([\tan(-x)](\cos x)=-\sin x).}
+\te{COMMON ERROR Be careful not to replace (\tan(-x)) with (\frac{\sin x}{\cos x}). When replacing a trigonometric expression with an equivalent one, be sure to use the same angle expression in the substitution. CONTINUED ON THE NEXT PAGE.}
+% Source page 44: 415 Example 2 continued
+B. What is an equivalent form of (1-\sin x\cos(x-\frac\pi2))?
+\begin{tabular}{ll}
+(1-\sin x\cos(x-\frac\pi2)=1-\sin x\cos[-(\frac\pi2-x)]) & Factor out -1. \\
+(=1-\sin x\cos(\frac\pi2-x)) & Apply the Odd-Even Identity. \\
+(=1-\sin x\cdot\sin x) & Apply a Cofunction Identity. \\
+(=1-\sin^2x) & Simplify. \\
+(=\cos^2x) & Apply the Pythagorean Identity. \\
+\end{tabular}
+\answer{An equivalent form of (1-\sin x\cos(x-\frac\pi2)) is (\cos^2x).}
+\end{example}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Use Identities to Rewrite Expressions}
+Pose Purposeful Questions ETP
+PART A
+Q: Why does the denominator change from (\cos(-x)) to (\cos x)?
+\answer{The Odd-Even Identities state that (\cos(-x)=\cos x).}
+PART B
+Q: Is there only one simplified form of the expression?
+\answer{No, you can rewrite the expression in different ways. For example, you could just write the expression as (1-\sin^2x) and not apply the Pythagorean Identity.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{tryit}{2}
+What is an equivalent form of each expression?
+a. (\tan(x-\frac\pi2))
+b. (\sin(-x)\tan(-x)+\cos x)
+\answer{a. (-\cot x) b. (\sec x)}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: How would you start writing an expression in a simplified form?
+\answer{Look at the given expression and see if there are any parts of the expression that are equal to a trigonometric identity. Rewrite the expression using this identity and then continue the process.}
+\end{te-addendum}
+\begin{te-addendum}{2}{CommonError}
+Try It! 2a Some students may rewrite the expression as (\tan x-\tan(\frac\pi2)). Have students rewrite the tangent as the quotient of sine and cosine functions using the Quotient Identity. Then have students review the cofunction identities to determine which one makes sense to use.
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Sum and Difference Formulas}
+\begin{tabular}{ll}
+Sum Formulas & Difference Formulas \\
+(\sin(\alpha+\beta)=\sin\alpha\cos\beta+\cos\alpha\sin\beta) & (\sin(\alpha-\beta)=\sin\alpha\cos\beta-\cos\alpha\sin\beta) \\
+(\cos(\alpha+\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta) & (\cos(\alpha-\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta) \\
+(\tan(\alpha+\beta)=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}) & (\tan(\alpha-\beta)=\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}) \\
+\end{tabular}
+\end{concept-box}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Prove Sum and Difference Formulas}
+Pose Purposeful Questions ETP
+PART A
+Q: What do (\alpha) and (\beta) represent?
+\answer{Alpha and beta are commonly used to represent angles.}
+Q: When proving the cosine difference formula, why do you determine ((AB)^2) two different ways?
+\answer{Each way of determining ((AB)^2) has a different result. Because both results are equal to ((AB)^2), you can use the Transitive Property to set the result using the Law of Cosines equal to the result using the Distance Formula.}
+Q: Why do you have to continue simplifying once you use the Transitive Property to set the two expressions equal?
+\answer{The goal is to prove the cosine difference formula, so you need to have the cosine of the difference of two angles alone on one side of the equation.}
+Q: What do you notice about the expressions (\sin^2x+\cos^2x), (1-\sin^2x), and (1-\cos^2x) in the Study Tip?
+\answer{The terms in each expression are perfect squares, and the expressions (1-\sin^2x) and (1-\cos^2x) are both differences of perfect squares.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Prove Sum and Difference Formulas}
+A. Prove the cosine difference formula.
+Draw the terminal sides of an angle (\alpha) and an angle (\beta) on the unit circle. Connect the terminal points A and B to create (\triangle AOB).
+% FIG 44 1033 576 1153 695
+\placeholder{graph}{Black unit circle on double-arrowed x,y axes, O origin, labels -1,1, grid .25, window [-1.5,1.5] each axis. Blue radius OA to quadrant II point A; red radius OB to quadrant I point B; green chord AB and green angle arc AOB labeled alpha-beta.}
+Thus, (OA=1), (OB=1), and (m\angle AOB=\alpha-\beta).
+Determine ((AB)^2) using the Law of Cosines.
+((AB)^2=1^2+1^2-2(1)(1)\cos(\alpha-\beta))
+((AB)^2=2-2\cos(\alpha-\beta))
+Determine ((AB)^2) using the Distance Formula.
+If (A=(x_2,y_2)) and (B=(x_1,y_1)), then
+((AB)^2=(x_2-x_1)^2+(y_2-y_1)^2)
+(=(\cos\alpha-\cos\beta)^2+(\sin\alpha-\sin\beta)^2)
+(=[\cos^2\alpha-2\cos\alpha\cos\beta+\cos^2\beta]+[\sin^2\alpha-2\sin\alpha\sin\beta+\sin^2\beta])
+(=2-2\cos\alpha\cos\beta-2\sin\alpha\sin\beta)
+\te{Callout: Use the Pythagorean Identity to simplify. STUDY TIP Often the clue that the Pythagorean Identity might be useful is an expression like (\sin^2x+\cos^2x), or the expressions (1-\sin^2x) and (1-\cos^2x). CONTINUED ON THE NEXT PAGE.}
+% Source page 45: 416 Example 3 continued
+By the Transitive Property, (2-2\cos(\alpha-\beta)=2-2\cos\alpha\cos\beta-2\sin\alpha\sin\beta).
+Solve for (\cos(\alpha-\beta)).
+(2-2\cos(\alpha-\beta)=2-2\cos\alpha\cos\beta-2\sin\alpha\sin\beta)
+(-2\cos(\alpha-\beta)=-2\cos\alpha\cos\beta-2\sin\alpha\sin\beta)
+(\cos(\alpha-\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta)
+\answer{Thus, (\cos(\alpha-\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta).}
+B. Prove the cosine sum formula.
+(\cos(\alpha+\beta)=\cos(\alpha-(-\beta)))
+(=\cos\alpha\cos(-\beta)+\sin\alpha\sin(-\beta))
+(=\cos\alpha\cos\beta+\sin\alpha(-\sin\beta))
+(=\cos\alpha\cos\beta-\sin\alpha\sin\beta)
+\answer{Thus, (\cos(\alpha+\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta).}
+\end{example}
+\begin{te-addendum}{3}{PurposefulQuestions}
+Pose Purposeful Questions ETP
+PART B
+Q: Why is the first step rewriting the angle sum as a difference?
+\answer{The cosine difference formula has already been proven, so it can be used to prove the cosine sum formula.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{tryit}{3}
+a. Use the cosine difference formula and the fact that
+(\sin(\alpha+\beta)=\cos(\frac\pi2-(\alpha+\beta)))
+(=\cos((\frac\pi2-\alpha)-\beta))
+to prove the sine sum formula.
+\answer{a. (\sin(\alpha+\beta)=\cos(\frac\pi2-(\alpha+\beta))=\cos((\frac\pi2-\alpha)-\beta)=\cos(\frac\pi2-\alpha)\cos\beta+\sin(\frac\pi2-\alpha)\sin\beta=\sin\alpha\cos\beta+\cos\alpha\sin\beta).}
+b. Prove the sine difference formula.
+\answer{b. (\sin(\alpha-\beta)=\sin(\alpha+(-\beta))=\sin\alpha\cos(-\beta)+\cos\alpha\sin(-\beta)=\sin\alpha\cos\beta+\cos\alpha(-\sin\beta)=\sin\alpha\cos\beta-\cos\alpha\sin\beta).}
+\end{tryit}
+\begin{te-addendum}{3}{HabitsOfMind}
+Use with EXAMPLES 2 \& 3
+Reason Why might it be useful to know the identity for the sine of a sum?
+\answer{You can use the identity to find exact values of the sines of other, less familiar angles.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Use a Sum or Difference Formula to Find a Value}
+Pose Purposeful Questions ETP
+Q: How do you determine which angle measures to use with the sum and difference formulas?
+\answer{You can use all combinations of the sums and differences of special angles, such as 30°, 45°, and 60°.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use a Sum or Difference Formula to Find a Value}
+What is the exact value of (\sin75°)?
+Although 75° is not a familiar angle, it can be written as the sum of two special angle measures.
+(\sin75°=\sin(30°+45°))
+(=\sin30°\cos45°+\cos30°\sin45°)
+(=\frac12(\frac{\sqrt2}{2})+\frac{\sqrt3}{2}(\frac{\sqrt2}{2}))
+(=\frac{\sqrt2+\sqrt6}{4})
+% FIG 45 996 556 1116 676
+\placeholder{graph}{Black unit circle on double-arrowed x,y axes, O origin, grid .25, window [-1.5,1.5] each axis, labels -1,1. Blue radius to filled blue point at 75°, dashed red radius to filled red point at 30°. Red arcs label 30° from positive x axis to red radius and 45° from red radius to blue radius. Blue origin dot.}
+\te{STUDY TIP There is often more than one way to rewrite an angle measure as a sum or difference of common reference angles.}
+\answer{So (\sin75°=\frac{\sqrt2+\sqrt6}{4}).}
+Check: Evaluate sin 75° on your calculator, and compare the value to your calculator's approximation for (\frac{\sqrt2+\sqrt6}{4}). Both expressions are approximately equal to 0.9659. \te{Check mark.}
+\end{example}
+\begin{tryit}{4}
+What is the exact value of each expression?
+a. (\tan15°)
+b. (\sin(-\frac\pi{12}))
+\answer{a. (2-\sqrt3) b. (\frac{\sqrt2-\sqrt6}{4})}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking ETP
+Q: What method would you use to find the value of each expression?
+\answer{Determine two special angles that can be added or subtracted to find the given angle measure. Then use a sum or difference formula to find the exact value of the expression.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 4 Have students explore using the sum and difference formulas to find the exact values of secant and cosecant expressions.
+\item Find the exact value of each expression.
+1. (\sec15°) \answer{(\sqrt6-\sqrt2)}
+2. (\csc75°) \answer{(\sqrt6-\sqrt2)}
+3. (\csc15°) \answer{(\sqrt6+\sqrt2)}
+Q: What special angles can you use for each calculation?
+\answer{For 15°, use the difference of 45° and 30°. For 75°, use the sum of 45° and 30°.}
+\end{te-addendum}
+% Source page 46: 417 Model With Sum and Difference Formulas
+\begin{te-addendum}{5}{PurposefulQuestions}
+\textbf{Model With Sum and Difference Formulas}
+Pose Purposeful Questions ETP
+Q: Why do you add the equations that model waves to cancel out the sound?
+\answer{The headphones create another sound wave. The sum of the two sound waves is zero when they cancel each other out.}
+Q: What do you notice about the graphs in the image?
+\answer{The values on the red graph are opposites of the values on the blue graph.}
+\te{Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Model With Sum and Difference Formulas}
+\te{APPLICATION}
+Noise-reducing headphones create a sound wave that effectively cancels out other noises around you. Do the sound waves cancel each other?
+% FIG 46 839 275 1138 436
+\placeholder{illustration}{Headphone ear cup centered on pale yellow background, blue sinusoidal sound wave across picture and red opposite wave extending right. No axes or ticks. Blue labeled y=sin(1,100pi x); red labeled y=sin[1,100pi(x-1/220)]. Equal amplitudes and wavelengths, peaks of one opposite troughs of other.}
+Formulate. Add the sound waves together to combine the noises. If the two waves do, in fact, cancel each other out, their sum will be 0.
+Compute.
+(\sin(1,100\pi x)+\sin[1,100\pi(x-\frac1{220})])
+(=\sin(1,100\pi x)+\sin[1,100\pi x-5\pi])
+(=\sin(1,100\pi x)+\sin(1,100\pi x)[\cos(5\pi)]-\cos(1,100\pi x)[\sin(5\pi)])
+(=\sin(1,100\pi x)+\sin(1,100\pi x)(-1)-\cos(1,100\pi x)(0))
+(=0)
+Interpret. Since the sum of the sound waves is 0 for all values of x, the noises cancel each other out.
+\answer{The sum is 0 for all values of x; the noises cancel each other out.}
+\end{example}
+\begin{tryit}{5}
+The sound wave for a musical note of A is modeled by (y=\sin(880\pi x)). The sound wave for a different A note is modeled by (y=\sin[880\pi(x+\frac1{440})]). What is the simplified form of an equation that models the sound wave if the two notes are played at the same time?
+\answer{(y=2\sin(880\pi x))}
+\end{tryit}
+\begin{te-addendum}{5}{HabitsOfMind}
+Use with EXAMPLES 4 \& 5
+Reason How do you prove the sum formula for (\tan(\alpha+\beta))?
+\answer{(\tan(\alpha+\beta)=\frac{\sin(\alpha+\beta)}{\cos(\alpha+\beta)}=\frac{\sin\alpha\cos\beta+\cos\alpha\sin\beta}{\cos\alpha\cos\beta-\sin\alpha\sin\beta}=\frac{\frac{\sin\alpha\cos\beta+\cos\alpha\sin\beta}{\cos\alpha\cos\beta}}{\frac{\cos\alpha\cos\beta-\sin\alpha\sin\beta}{\cos\alpha\cos\beta}}=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}).}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 5 Some students may struggle with the large numbers in this example. Have students practice simplifying expressions with smaller numbers.
+\item Simplify the following expressions.
+1. (\sin(5\pi x)+\sin(5\pi(x-1))) \answer{0}
+2. (\sin(2\pi x)+\sin(2\pi(x+1))) \answer{(2\sin(2\pi x))}
+3. (\sin(8\pi x)+\sin(8\pi(x-1))) \answer{(2\sin(8\pi x))}
+Q: Why are the answers for the first problem and the last problem different?
+\answer{The first problem includes an odd multiple of pi and the last problem includes an even multiple of pi.}
+\end{te-addendum}
+% Source page 47: 418 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Trigonometric Identities}
+Q: Why is it helpful to know trigonometric identities?
+\answer{Knowing trigonometric identities helps you simplify trigonometric expressions when solving problems.}
+\te{Presentation. Practice. Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+Exercise 9 Some students may incorrectly state that the simplified form of the expression is sec theta. Have students create flashcards of the trigonometric identities. Ask them to locate the flashcard with the Pythagorean Identity to help them recall that (1-\cos^2\theta) is equal to (\sin^2\theta), not (\sin\theta).
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Trigonometric Identities}
+\begin{tabular}{ll}
+QUOTIENT IDENTITY & PYTHAGOREAN IDENTITY \\
+(\tan x=\frac{\sin x}{\cos x}) & (\sin^2x+\cos^2x=1) \\
+COFUNCTION IDENTITIES & ODD-EVEN IDENTITIES \\
+(\sin(\frac\pi2-x)=\cos x) & (\sin(-x)=-\sin x) \\
+(\cos(\frac\pi2-x)=\sin x) & (\cos(-x)=\cos x) \\
+(\tan(\frac\pi2-x)=\cot x) & (\tan(-x)=-\tan x) \\
+SUM FORMULAS & DIFFERENCE FORMULAS \\
+(\sin(\alpha+\beta)=\sin\alpha\cos\beta+\cos\alpha\sin\beta) & (\sin(\alpha-\beta)=\sin\alpha\cos\beta-\cos\alpha\sin\beta) \\
+(\cos(\alpha+\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta) & (\cos(\alpha-\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta) \\
+(\tan(\alpha+\beta)=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}) & (\tan(\alpha-\beta)=\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}) \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How can you verify and apply relationships between trigonometric functions?
+\answer{Relationships that exist between trigonometric functions can be verified and applied through the use of the unit circle and its definitions of sine, cosine, and tangent.}
+2. Error Analysis Somona said that because of the odd-even identities, both the sine and cosine functions are odd functions. Explain and correct Somona's error.
+\answer{Because (\sin(-x)=-\sin x), the sine function is odd; however since (\cos(-x)=\cos x), the cosine function is an even function.}
+3. Vocabulary Explain what it means to say that (\cos(-x)=\cos x) is a trigonometric identity.
+\answer{Because the equation (\cos(-x)=\cos x) is true for all values of the variable for which both sides of the equation are defined.}
+4. Reason Why do the cofunction identities apply to an angle theta of any size?
+\answer{The cofunction identities were derived using the unit circle, which defines the trigonometric ratios for every real-number angle measure.}
+5. Make Sense and Persevere How can the quotient identity help you to identify angles for which the tangent is undefined?
+\answer{The value of the tangent is undefined if the cosine is zero. The cosine is zero for (\theta=\frac\pi2+k\pi), where k is an integer.}
+\textbf{Do You KNOW HOW?}
+Verify each identity.
+6. (\sin\theta\sec\theta\cot\theta=1)
+\answer{(\sin\theta\cdot\sec\theta\cdot\cot\theta\stackrel?=1); (\sin\theta\cdot\frac1{\cos\theta}\cdot\frac{\cos\theta}{\sin\theta}\stackrel?=1); \te{Sine and cosine factors crossed out.} (1=1).}
+7. (\sec\theta\cot\theta=\csc\theta)
+\answer{(\sec\theta\cdot\cot\theta\stackrel?=\csc\theta); (\frac1{\cos\theta}\cdot\frac{\cos\theta}{\sin\theta}\stackrel?=\csc\theta); \te{Cosine factors crossed out.} (\frac1{\sin\theta}=\csc\theta).}
+Find a simplified form of each expression.
+8. (\frac{\tan\theta}{\sin\theta})
+\answer{(\sec\theta)}
+9. (\frac{\sec\theta}{\sin\theta}(1-\cos^2\theta))
+\answer{(\tan\theta)}
+Use a sum or difference formula to find the exact value of each of the following.
+10. (\sin15°)
+\answer{(\frac{\sqrt6-\sqrt2}{4})}
+11. (\cos105°)
+\answer{(\frac{\sqrt2-\sqrt6}{4})}
+\end{concept-summary}
+% Source page 48: 419 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+Practice \& Problem Solving and video tutorials are available at SavvasRealize.com.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+12--29,31--38 & 12--19,21--38 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{Scan the QR code to access a video tutorial. See answers for Exercises 17, 20--22, 25, 26, and 31 on next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 20--22 & 1 \\
+1 & 12 & 2 \\
+2 & 23,24,36 & 1 \\
+2 & 13,14,16--18,34,35,38 & 2 \\
+3 & 25,26 & 3 \\
+4 & 27--30,37 & 1 \\
+4 & 15,19 & 2 \\
+5 & 31--33 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{12}{2}
+UNDERSTAND. Generalize Explain the process that is used to verify that a trigonometric equation is an identity.
+\answer{Select one side of the equation and transform it until it is the same as the other side of the equation.}
+\end{practice}
+\begin{practice}{13}{2}
+Construct Arguments Benicio said that he had worked out a trigonometric identity: (\cos2\theta=\cos^2\theta-\sin^2\theta). Is Benicio correct? Explain.
+\answer{Yes; (\cos2\theta=\cos(\theta+\theta)=\cos\theta\cdot\cos\theta-\sin\theta\cdot\sin\theta=\cos^2\theta-\sin^2\theta).}
+\end{practice}
+\begin{practice}{14}{2}
+Mathematical Connections Show that (f(x)=\tan x) is an odd function by verifying that (\tan(-x)=-\tan x).
+\answer{(\tan(-x)=\frac{\sin(-x)}{\cos(-x)}=-\frac{\sin x}{\cos x}=-\tan x).}
+\end{practice}
+\begin{practice}{15}{2}
+Error Analysis Describe and correct the error a student made in applying the cosine difference formula to find the exact value of cos 15°.
+(\cos15°=\cos(45°-30°))
+(=\cos45°\cos30°-\sin45°\sin30°)
+(=\frac{\sqrt2}{2}\cdot\frac{\sqrt3}{2}-\frac{\sqrt2}{2}\cdot\frac12)
+(=\frac{\sqrt6}{4}-\frac{\sqrt2}{4})
+(=\frac{\sqrt6-\sqrt2}{4})
+% FIG 48 559 525 803 679
+\placeholder{illustration}{Pale gray student work note with curled lower right corner and red X, containing the five incorrect calculation lines transcribed above.}
+\answer{The student applied the cosine of sums formula rather than the cosine of differences. The correct answer is (\frac{\sqrt6+\sqrt2}{4}).}
+\end{practice}
+\begin{practice}{16}{2}
+Construct Arguments Show that the quotient identity (\cot\theta=\frac{\cos\theta}{\sin\theta}) is true algebraically.
+\answer{(\cot\theta=\frac{\cos\theta}{\sin\theta}=\frac{\frac xr}{\frac yr}=\frac xr\cdot\frac ry=\frac xy).}
+\end{practice}
+\begin{practice}{17}{2}
+Higher Order Thinking Use the Pythagorean Identity (\sin^2x+\cos^2x=1) to algebraically derive each of the following identities.
+a. (1+\tan^2x=\sec^2x)
+\answer{a. (\sin^2\theta+\cos^2\theta=1); (\frac{\sin^2\theta}{\cos^2\theta}+\frac{\cos^2\theta}{\cos^2\theta}=\frac1{\cos^2\theta}); (\tan^2\theta+1=\sec^2\theta).}
+b. (1+\cot^2x=\csc^2x)
+\answer{b. (\sin^2\theta+\cos^2\theta=1); (\frac{\sin^2\theta}{\sin^2\theta}+\frac{\cos^2\theta}{\sin^2\theta}=\frac1{\sin^2\theta}); (1+\cot^2\theta=\csc^2\theta).}
+\end{practice}
+\begin{practice}{18}{2}
+Look for Relationships Using the Pythagorean Identity, express (\sin\theta) in terms of (\cos\theta).
+\answer{(\sin\theta=\pm\sqrt{1-\cos^2\theta})}
+\end{practice}
+\begin{practice}{19}{2}
+Use Structure Restate the Cofunction Identities using degrees instead of radians. What can you conclude about sin 15°? cos 60°?
+\answer{(\sin(90°-x)=\cos x); (\cos(90°-x)=\sin x); (\sin15°=\cos75°); (\cos60°=\sin30°).}
+\te{Printed key omits the tangent cofunction identity requested by the plural heading; retained as printed.}
+\end{practice}
+\begin{practice}{20}{1}
+PRACTICE. Does the relationship between (\csc(-\theta)) and (-\csc\theta) indicate whether (\csc\theta) is odd or even? SEE EXAMPLE 1
+\answer{(\csc(-\theta)=\frac1{\sin(-\theta)}=\frac1{-\sin\theta}=-\csc\theta); therefore cosecant is an odd function.}
+\end{practice}
+\begin{practice}{21}{1}
+Does the relationship between (\sec(-\theta)) and (-\sec\theta) indicate whether (\sec\theta) is odd or even? SEE EXAMPLE 1
+\answer{(\sec(-\theta)=\frac1{\cos(-\theta)}=\frac1{\cos\theta}=\sec\theta); therefore secant is an even function.}
+\te{Printed prompt compares to negative secant; likely the intended comparison is sec(theta), as shown by the even-function key.}
+\end{practice}
+\begin{practice}{22}{1}
+Does the relationship between (\cot(-\theta)) and (-\cot\theta) indicate whether (\cot\theta) is odd or even? SEE EXAMPLE 1
+\answer{(\cot(-\theta)=\frac1{\tan(-\theta)}=\frac1{-\tan\theta}=-\cot\theta); therefore cotangent is an odd function.}
+\end{practice}
+\begin{practice}{23}{1}
+Find a simplified form of each expression. SEE EXAMPLE 2
+(\frac{\cos\theta}{\sin\theta\cot\theta})
+\answer{1}
+\end{practice}
+\begin{practice}{24}{1}
+Find a simplified form of each expression. SEE EXAMPLE 2
+([\cot(-x)](\sin x))
+\answer{(-\cos x)}
+\end{practice}
+\begin{practice}{25}{3}
+Prove each of the following sum and difference formulas. SEE EXAMPLE 3
+(\tan(\alpha+\beta)=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta})
+\answer{(\tan(\alpha+\beta)=\frac{\sin(\alpha+\beta)}{\cos(\alpha+\beta)})
+(=\frac{\sin\alpha\cos\beta+\sin\beta\cos\alpha}{\cos\alpha\cos\beta-\sin\alpha\sin\beta})
+(=\frac{\frac{\sin\alpha\cos\beta+\sin\beta\cos\alpha}{\cos\alpha\cos\beta}}{\frac{\cos\alpha\cos\beta-\sin\alpha\sin\beta}{\cos\alpha\cos\beta}})
+(=\frac{\frac{\sin\alpha\cos\beta}{\cos\alpha\cos\beta}+\frac{\sin\beta\cos\alpha}{\cos\alpha\cos\beta}}{\frac{\cos\alpha\cos\beta}{\cos\alpha\cos\beta}-\frac{\sin\alpha\sin\beta}{\cos\alpha\cos\beta}})
+(=\frac{\frac{\sin\alpha}{\cos\alpha}+\frac{\sin\beta}{\cos\beta}}{1-\frac{\sin\alpha\sin\beta}{\cos\alpha\cos\beta}})
+(=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}).}
+\end{practice}
+\begin{practice}{26}{3}
+Prove each of the following sum and difference formulas. SEE EXAMPLE 3
+(\tan(\alpha-\beta)=\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta})
+\answer{(\tan(\alpha-\beta)=\frac{\sin(\alpha-\beta)}{\cos(\alpha-\beta)})
+(=\frac{\sin\alpha\cos\beta-\sin\beta\cos\alpha}{\cos\alpha\cos\beta+\sin\alpha\sin\beta})
+(=\frac{\frac{\sin\alpha\cos\beta-\sin\beta\cos\alpha}{\cos\alpha\cos\beta}}{\frac{\cos\alpha\cos\beta+\sin\alpha\sin\beta}{\cos\alpha\cos\beta}})
+(=\frac{\frac{\sin\alpha\cos\beta}{\cos\alpha\cos\beta}-\frac{\sin\beta\cos\alpha}{\cos\alpha\cos\beta}}{\frac{\cos\alpha\cos\beta}{\cos\alpha\cos\beta}+\frac{\sin\alpha\sin\beta}{\cos\alpha\cos\beta}})
+(=\frac{\frac{\sin\alpha}{\cos\alpha}-\frac{\sin\beta}{\cos\beta}}{1+\frac{\sin\alpha\sin\beta}{\cos\alpha\cos\beta}})
+(=\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}).}
+\end{practice}
+\begin{practice}{27}{1}
+Find the exact value of each expression. Then evaluate the function on your calculator, comparing the calculator value to the approximation for your exact value. SEE EXAMPLE 4
+(\tan105°)
+\answer{(-2-\sqrt3); -3.73}
+\end{practice}
+\begin{practice}{28}{1}
+Find the exact value of each expression. Then evaluate the function on your calculator, comparing the calculator value to the approximation for your exact value. SEE EXAMPLE 4
+(\sin(\frac{3\pi}4+\frac{5\pi}6))
+\answer{(\frac{-\sqrt6-\sqrt2}{4}); -0.966}
+\end{practice}
+\begin{practice}{29}{1}
+Find the exact value of each expression. Then evaluate the function on your calculator, comparing the calculator value to the approximation for your exact value. SEE EXAMPLE 4
+(\cos225°)
+\answer{(\frac{-\sqrt2}{2}); -0.707}
+\end{practice}
+\begin{practice}{30}{1}
+Find the exact value of each expression. Then evaluate the function on your calculator, comparing the calculator value to the approximation for your exact value. SEE EXAMPLE 4
+(\sin75°)
+\answer{(\frac{\sqrt2+\sqrt6}{4}); 0.966}
+\end{practice}
+\begin{practice}{31}{2}
+Does a noise with a sound wave modeled by (y=\sin(660\pi x)) get cancelled out by another noise with a sound wave modeled by (y=\sin[660\pi(x-\frac1{220})])? Explain. SEE EXAMPLE 5
+\answer{Yes; since the sum of the sound waves is 0 for all values of x, the noises cancel one another.}
+\end{practice}
+\begin{practice}{32}{2}
+The sound wave for a musical note is modeled by (y=\sin(1,320\pi x)). The sound wave for a different note is modeled by (y=\sin[1,320\pi(x+\frac1{220})]). What is the simplified form of an equation that models the sound wave if the two notes are played simultaneously? SEE EXAMPLE 5
+\answer{(y=2\sin(1,320\pi x))}
+\end{practice}
+% Source page 49: 420 Apply and Assessment Practice
+\begin{practice}{33}{2}
+APPLY. Make Sense and Persevere The diagram shows a gear with a radius of 5 in. Point Q represents a 30° counterclockwise rotation of point P(5,0). Point R represents a further theta-degree rotation. The coordinates of R are (5\cos(\theta+30°),5\sin(\theta+30°)). Express these coordinates in terms of (\cos\theta) and (\sin\theta).
+% FIG 49 523 391 789 571
+\placeholder{graph}{Photo of gears overlaid with coordinate grid, unit spacing, window x[-7,7] and y[-6,6], black double-arrowed x,y axes, O origin. Labels x=-6,-4,-2,2,4,6, y=-4,-2,2,4. Black circle radius 5 centered O, filled P(5,0) on positive x axis, Q in quadrant I at 30°, R quadrant II approximately (-3.5,3.5). Red radii OQ,OR; red 30° arc from positive x axis to Q and theta arc from Q to R.}
+\answer{(\frac{5\sqrt3}{2}\cos\theta-\frac52\sin\theta,\frac{5\sqrt3}{2}\sin\theta+\frac52\cos\theta)}
+\end{practice}
+\begin{practice}{34}{2}
+Look for Relationships The force required to push an object at a certain angle from its resting position can be modeled by (F=Mg\tan\theta), where F is the force, M is the mass of the object, g is the acceleration due to gravity, and theta is the angle at which the object is being pushed. Write an equivalent equation for this formula in terms of (\sin\theta) and (\sec\theta).
+\answer{(F=Mg\sin\theta\sec\theta)}
+\end{practice}
+\begin{practice}{35}{2}
+Reason The length s of a shadow cast by a vertical gnomon (the column or shaft on a sundial that projects a shadow) of height h when the angle of the sun above the horizon is theta can be modeled by the equation (s=\frac{h\sin(90°-\theta)}{\sin\theta}). Show that this equation is equivalent to (s=h\cot\theta). (Hint: Convert degrees to radians and use a cofunction identity).
+% FIG 49 523 847 789 1016
+\placeholder{illustration}{Gold circular sundial in perspective on gray octagonal base, Roman numeral hour markings around rim and brown sunburst in center. Upright triangular gnomon outlined orange, vertical side h, horizontal shadow s, orange right-angle square between them.}
+\answer{(s=\frac{h\sin(90°-\theta)}{\sin\theta}=\frac{h\sin(\frac\pi2-\theta)}{\sin\theta}=\frac{h\cos\theta}{\sin\theta}=h\cot\theta).}
+\end{practice}
+\begin{practice}{36}{1}
+ASSESSMENT PRACTICE. Fill in each blank to complete an expression equivalent to (\frac{\csc x(\sin^2x+\cos^2x\tan x)}{\sin x+\cos x}).
+a. (\sin^2x+\text{blank})
+b. (\text{blank}-\cos^2x)
+\answer{a. (\cos^2x) b. (\sin^2x+2\cos^2x)}
+\end{practice}
+\begin{practice}{37}{1}
+SAT/ACT Find the exact value of tan 75°.
+A. (2+\sqrt3)
+B. (2-\sqrt3)
+C. (-2+\sqrt3)
+D. (-2-\sqrt3)
+\answer{A}
+\end{practice}
+\begin{practice}{38}{2}
+Performance Task In order for motor vehicles to negotiate a curve in the road without skidding or running off of it, the angle of incline of the road must be determined. The angle of incline, or angle of inclination, is the nonnegative acute angle that the vehicle makes with the horizontal, and it is represented by the equation (\tan\theta=\frac{v^2}{gR}), where R is the radius of the circular path, v is the speed that the vehicle is traveling in meters per second, and g is the acceleration due to gravity, 9.8 m/s².
+% FIG 49 837 650 1098 778
+\placeholder{illustration}{Red car on gray banked curved road with double yellow line, desert cacti and mountains. Red line slopes down right beneath car and meets red horizontal baseline; acute angle at right labeled theta.}
+Part A Find the angle of inclination of a curve with a 120-m radius, when a vehicle is traveling at 60 km/h (16.7 m/s) around the curve. Round to the nearest tenth of a degree.
+\answer{Part A (\theta=13.3°)}
+Part B Write an equivalent equation in terms of sin theta, rather than tan theta.
+\answer{Part B (\sin\theta=\frac{v^2\cos\theta}{gR})}
+\end{practice}
+% Source page 50: 420A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & F92 \\
+2 & 2 & F92 \\
+3 & 2 & F92 \\
+4 & 1 & G98 \\
+5 & 2 & F87 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\te{Assessment. Lesson Quiz is available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{8-3 Lesson Quiz: Trigonometric Identities}
+\te{ASSESSMENT RESOURCES. Name blank. enVision Algebra 2. SavvasRealize.com. Copyright© Savvas Learning Company LLC. All Rights Reserved. enVision Algebra 2 Assessment Sourcebook.}
+1. What does the relationship between (\cos(-\theta)) and (\cos\theta) tell you about the function (f(x)=\cos x)?
+(\cos(-\theta)=\text{blank}). Choices: (-\cos\theta); (\cos\theta).
+The function (f(x)=\cos x) is blank. Choices: odd; even.
+\answer{1. (\cos\theta); even.}
+2. A simplified form of the expression (1-(\cot^2x)(\sin^2x)) is blank.
+Choices: (\sin^2x); (\cos^2x); (\tan^2x); (\cot^2x).
+\answer{2. (\sin^2x)}
+3. Complete the proof of the sine sum formula, (\sin(x+y)=\sin x\cos y+\sin y\cos x).
+\begin{tabular}{ll}
+(\sin(x+y)=\cos[\frac\pi2-(x+y)]) & Cofunction Identity \\
+(=\cos[(\frac\pi2-x)-y]) & Distributive and Associative Properties \\
+(=\cos(\frac\pi2-x)\cos y+\sin(\frac\pi2-x)\sin y) & blank Difference Formula \\
+(=\sin x\cos y+\sin y\cos x) & blank Identities \\
+\end{tabular}
+\answer{3. Cosine; Cofunction.}
+4. What is the exact value of sin 15°?
+A. (\frac{\sqrt6+\sqrt2}{4})
+B. (\frac{\sqrt6-\sqrt2}{4})
+C. (\frac{\sqrt2-\sqrt6}{4})
+D. (\frac{\sqrt2}{2})
+\answer{4. B}
+5. The sound wave for a musical note is modeled by (y=\sin(440\pi x)). The sound wave for a different note is modeled by (y=\sin[440\pi(x+\frac1{220})]). What is the simplified form of an equation that models the resulting sound wave if the two notes are played at the same time?
+A. (2\cos(440\pi x))
+B. 0
+C. (\sin(440\pi x)+\cos(440\pi x))
+D. (2\sin(440\pi x))
+\answer{5. D}
+\end{te-addendum}
+% Source page 51: 420B Differentiated Resources
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{DIFFERENTIATED RESOURCES}
+I=Intervention; O=On-Level; A=Advanced.
+Reteach to Build Understanding I. Provides scaffolded reteaching for the lesson concepts. MathXL for School.
+Additional Practice I O. Provides extra practice for each lesson. MathXL for School.
+Enrichment O A. Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Mathematical Literacy and Vocabulary I O. Helps students develop and reinforce understanding of key terms and concepts.
+\te{Resource sheets each print Name blank, enVision Algebra 2, SavvasRealize.com, lesson title Trigonometric Identities, Copyright© Savvas Learning Company LLC. All Rights Reserved., and enVision Algebra 2 Teaching Resources.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{8-3 Reteach to Build Understanding}
+1. The odd-even identities state that (\sin(-\theta)=-\sin\theta) and (\cos(-\theta)=\cos\theta).
+Verify the odd-even identities by evaluating the expressions within the table.
+\textbf{Odd-Even Identity}
+\begin{tabular}{ll}
+Expression & Equivalent Answer \\
+(\sin(-60°)) & a. \answer{-0.866} \\
+(-\sin(60°)) & b. \answer{-0.866} \\
+(\cos(-45°)) & c. \answer{0.707} \\
+(\cos(45°)) & d. \answer{0.707} \\
+\end{tabular}
+2. Dwayne tried to prove the sum and difference formulas for tangent, but the equations did not work. What error did he make in setting up the equations? How should he have set it up?
+(\tan(a+b)=\frac{\tan a+\tan b}{1+\tan a\cdot\tan b})
+(\tan(a-b)=\frac{\tan a+\tan b}{1-\tan a\cdot\tan b})
+\answer{The denominator for each equation is incorrect. The first one should be (1-\tan a\tan b) and the second should be (1+\tan a\tan b).}
+\te{Printed second numerator also has a plus sign; likely a minus sign is needed for the tangent difference formula.}
+3. The cofunction identities state that (\sin(\frac\pi2-\theta)=\cos\theta) and (\cos(\frac\pi2-\theta)=\sin\theta).
+Verify the cofunction identities by using (\sin(\frac\pi3)) and (\cos(\frac\pi3)). Use the image to complete the table.
+\begin{tabular}{lll}
+ & Cosine (x-coordinate) & Sine (y-coordinate) \\
+(\frac\pi3) & \answer{(\frac12)} & (\frac{\sqrt3}{2}) \\
+(\frac\pi2-\frac\pi3=\frac\pi6) & (\frac{\sqrt3}{2}) & \answer{(\frac12)} \\
+\end{tabular}
+% FIG 51 295 606 353 665
+\placeholder{diagram}{Black first-quadrant quarter unit circle with positive horizontal x-axis and vertical y-axis, no ticks. Two radii to points (1/2,sqrt3/2) at pi/3 and (sqrt3/2,1/2) at pi/6; angle labels pi/3 and pi/6 inside the respective sectors from the positive x-axis.}
+4. Now, verify the identities by substituting (\frac\pi3) for (\theta). Your answers should match the values in the table.
+(\sin(\frac\pi2-\frac\pi3)=\cos\frac\pi3)
+(\sin(\frac\pi6)=\cos\answer{\frac\pi3})
+(\answer{\frac12}=\answer{\frac12})
+(\cos(\frac\pi2-\frac\pi3)=\sin\frac\pi3)
+(\cos(\answer{\frac\pi6})=\sin\answer{\frac\pi3})
+(\frac{\sqrt3}{2}=\answer{\frac{\sqrt3}{2}})
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{8-3 Additional Practice}
+1. How are (\cos(x+\pi)) and (\cos(2\pi-x)) related to (\cos x)?
+\answer{(\cos(x+\pi)=-\cos x) and (\cos(2\pi-x)=\cos x)}
+2. What is a simplified form of the expression (\cot(x-\frac\pi2))?
+\answer{(-\tan x)}
+3. What is a simplified form of the expression (\cos(-x)\cot(-x)\sin x)?
+\answer{(-\cos^2x)}
+4. What is the exact value of (\tan75°)?
+\answer{(\sqrt3+2)}
+5. What is the approximate value of (\sin(-\frac\pi{36}))?
+\answer{-0.09}
+6. During calculations, a student made an error. What error did he make? What is the correct answer?
+(\sin105°=\sin(60°+45°))
+(=\sin60°\cos45°-\sin45°\cos60°)
+(=(\frac{\sqrt3}{2})(\frac{\sqrt2}{2})-(\frac{\sqrt2}{2})(\frac12))
+(=\frac{\sqrt6}{4}-\frac{\sqrt2}{4})
+(=\frac{\sqrt6-\sqrt2}{4})
+\answer{Sample Answer: The student remembered the formula for the sine of a sum of angles incorrectly. There should be a plus sign instead of a minus sign between the two terms on the right. The correct answer is (\frac{\sqrt6+\sqrt2}{4}).}
+7. The length of a guy-wire supporting a vertical communication antenna is d feet. The length of its shadow depends on the measure of the angle (\theta) it makes with the horizon. The shadow of the guy-wire is defined by (L=\frac{d\sin(\theta-90°)}{-\sin\theta}). Show that the equation is equivalent to (L=d\cot\theta).
+\answer{(L=\frac{d\sin(\theta-90°)}{-\sin\theta}=\frac{d\sin[-(90°-\theta)]}{-\sin\theta})
+(=\frac{-d\sin(90°-\theta)}{-\sin\theta})
+(=\frac{d\cos(\theta)}{\sin\theta}=d\cot\theta).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{8-3 Enrichment}
+The following equations represent trigonometric identities.
+(\frac{1+\sin2x+\cos2x}{1+\sin2x-\cos2x}=A)
+(\frac18(\sin^8x-\cos^8x)-\frac13\sin^6x+\frac16\cos^6x+\frac14\sin^4x=B)
+1. What expression makes each equation an identity? Write your answer using no more than one trigonometric function.
+\answer{(A=\cot x); (B=\frac1{24}).}
+2. In which of the functions shown do the values of the functions NOT vary with the values of the variables?
+A. (f(x)=\tan x(\frac{1+\sin2x+\cos2x}{1+\sin2x-\cos2x}))
+B. (g(x)=\cot x(\frac{1+\sin2x+\cos2x}{1+\sin2x-\cos2x}))
+C. (h(x)=\frac{\sin x}{24}[\frac18(\sin^8x-\cos^8x)-\frac13\sin^6x+\frac16\cos^6x+\frac14\sin^4x])
+D. (k(x)=\frac1{24}[\frac18(\sin^8x-\cos^8x)-\frac13\sin^6x+\frac16\cos^6x+\frac14\sin^4x])
+\answer{A, D}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{8-3 Mathematical Literacy and Vocabulary}
+Fill in the missing identities for each word or word phrase.
+\begin{tabular}{lll}
+Word or Word Phrase & Definition or Hint & Identity \\
+Odd-Even Identities & The relationship between sine and cosine of a positive angle and its opposite & 1. \answer{(\sin(-a)=-\sin a)}; 2. \answer{(\cos(-a)=\cos a)} \\
+Pythagorean Identity & A relationship between the squares of sine and cosine of an angle & 3. \answer{(\sin^2x+\cos^2x=1)} \\
+Sum Formulas & One identity for sine and one identity for cosine & 4. \answer{(\sin(\pi+x)=-\sin x)}; 5. \answer{(\cos(\pi+x)=-\cos x)} \\
+Difference Formulas & One identity for sine and one identity for cosine & 6. \answer{(\sin(\pi-x)=\sin x)}; 7. \answer{(\cos(\pi-x)=-\cos x)} \\
+Cofunction Identities & One identity for sine, one identity for cosine, and one identity for tangent & 8. \answer{(\sin(\frac\pi2-x)=\cos x)}; 9. \answer{(\cos(\frac\pi2-x)=\sin x)}; 10. \answer{(\tan(\frac\pi2-x)=\cot x)} \\
+Quotient Identity & One identity for tangent & 11. \answer{(\tan x=\frac{\sin x}{\cos x}) (write in fraction)} \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+Solve the system of equations by graphing.
+(y=3x+4)
+(y=-2x+4)
+Use the graphing tool to graph the system.
+Click to enlarge graph.
+Click the graph, choose a tool in the palette and follow the instructions to create your graph.
+% FIG 51 584 978 1035 1300
+\placeholder{illustration}{Black landscape tablet with home button left, white MathXL screen. System equations left, empty coordinate grid upper right, arrowed x,y axes, unit grid and labels -10,-8,...,10. Question Help menu Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Footer Review progress, Question 5 of 14, Go, Back, Next, Check Answer, Clear All; 1 part remaining.}
+\end{te-addendum}
+
+\end{document}

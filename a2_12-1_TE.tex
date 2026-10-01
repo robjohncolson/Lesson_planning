@@ -1,0 +1,921 @@
+\documentclass{article}
+% Source: Topic_12_Teacher_Edition.pdf, PDF pages 12-23 (printed pages 585A-592B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 12: 585A Lesson Overview
+\begin{lesson-meta}
+lesson: 12-1
+title: Probability Events
+standards: none printed
+practices: none printed
+objective: I can use relationships among events to find probabilities.
+
+essential question: How does describing events as mutually exclusive or independent affect how you find probabilities?
+
+\textbf{VOCABULARY}
+\item complement
+\item independent events
+\item mutually exclusive
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 12-1 \\
+Title & Probability Events \\
+Standards & none printed \\
+I CAN Objective & I can use relationships among events to find probabilities. \\
+Essential Question & How does describing events as mutually exclusive or independent affect how you find probabilities? \\
+Lesson Vocabulary & complement; independent events; mutually exclusive \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Explain independence of events in everyday language and everyday situations.
+\item Determine the probability of the union of two events ((A) or (B)) and the intersection of two independent events ((A) and (B)).
+Essential Understanding. Two events that cannot both occur are mutually exclusive. Two events are independent if the occurrence of one does not affect the probability of the other. The probability that two independent events both occur is the product of their probabilities.
+\textbf{COHERENCE}
+In earlier courses, students:
+\item Learned to express probability as a number between 0 and 1 and to predict the probability of random events.
+\item Used organized lists, tables, tree diagrams, and simulation to find probabilities of compound events.
+In this lesson, students:
+\item Learn to identify events as mutually exclusive or independent.
+\item Use a sum of probabilities to find the probability of the union of mutually exclusive events.
+\item Use a product of probabilities to find the probability of the intersection of independent events.
+Later in this topic, students will:
+\item Find the conditional probability of an event.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand relationships between events to determine if they are mutually exclusive or independent.
+\item Students apply formulas to calculate the probability of combinations of events.
+SavvasRealize.com. Program Resources.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\textbf{REVIEW VOCABULARY — English | Spanish}
+\begin{tabular}{ll}
+event & suceso \\
+outcome & resultado \\
+probability & probabilidad \\
+sample space & espacio muestral \\
+\end{tabular}
+\textbf{NEW VOCABULARY}
+\begin{tabular}{ll}
+complement & complemento \\
+independent events & sucesos independientes \\
+mutually exclusive & mutuamente excluyente \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+To review basic vocabulary related to probability, have students match the terms on the left with their meanings on the right.
+A. probability
+B. outcome
+C. event
+D. sample space
+\item a possible result of an experiment
+\item a set of all possible outcomes of an experiment
+\item a set of outcomes of an experiment
+\item the chances of an event happening
+\answer{A. the chances of an event happening; B. a possible result of an experiment; C. a set of outcomes of an experiment; D. a set of all possible outcomes of an experiment.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their in-class work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 12 962 796 1116 977
+\placeholder{illustration}{Student Companion cover: enVision Algebra 2, SAVVAS, multicolored circular abstract design on black background.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students learn to identify and distinguish between mutually exclusive events and independent events.
+Students understand that they use the sum of probabilities to find the probability of the union of mutually exclusive events, (P(A\text{ or }B)=P(A)+P(B)). They understand that they use the product of probabilities to find the intersection of independent events, (P(A\text{ and }B)=P(A)\cdot P(B)).
+Students apply probability formulas to solve real-world and mathematical problems.
+\textbf{Applying Math Practices}
+Reason Abstractly and Quantitatively. Students relate the areas of geometric figures to the probabilities of events that may occur randomly within a region.
+Construct Viable Arguments and Critique Reasoning. Students use definitions and formulas to construct arguments about whether pairs of events are mutually exclusive or independent.
+\end{te-addendum}
+% Source page 13: 585B Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 1 Explore — EXPLORE & REASON}
+INSTRUCTIONAL FOCUS Students explore whether random events are related or unrelated to one another to prepare for learning the concept of independent events later in the lesson.
+STUDENT COMPANION Students can complete the Explore & Reason activity in their Student Companion.
+Explore & Reason is available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before — WHOLE CLASS}
+Implement Tasks That Promote Reasoning And Problem Solving.
+Q: What is another way to say that Allie draws a card without looking?
+\answer{Allie chooses a card at random.}
+Q: What are the possible outcomes when Allie spins the spinner the first time? Chooses the first card?
+\answer{1, 2, 3, and 4; 1, 2, 3, and 4.}
+\textbf{During — SMALL GROUP}
+Support Productive Struggle in Learning Mathematics.
+Q: What is the probability of getting a particular number on the spinner? In the card draw?
+\answer{one out of four, or (\frac14) chance; one out of four, or (\frac14) chance}
+Q: Is anything different about the second spin? The second draw?
+\answer{No; yes; in the second draw there are only 3 cards to pick from because one card was removed.}
+Q: If the first card is the 2 card, what is the probability that the second card is a 2?
+\answer{0; if the first card is a 2, it is removed and cannot be chosen again.}
+Q: If the first card is the 1 or the 4 card, what is the probability that the second card is the 2 card?
+\answer{(\frac13); after Allie chooses a 1 or a 4 card, there are 3 cards left and the 2 card is one of them.}
+For Early Finishers.
+Q: Suppose that there are 5 cards, numbered 1, 2, 3, 4, and 5. How does the number of the first card that Allie chooses affect the probability that the second card will be the 3 card? That the third card chosen will be the 3 card?
+\answer{Second card probability is 0 or (\frac14), depending on whether the first card is a 3 or not; third card probability is 0 or (\frac13) depending on whether the first card is a 3 or not.}
+\te{Printed third-card probability depends only on the first card; it also depends on whether the second card was 3.}
+\textbf{After — WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse.
+Ask students to share what they wrote in Part B.
+Q: How is spinning the spinner two times different from selecting a card and then selecting another card?
+\answer{When Allie spins the spinner, the number she gets on the first spin does not affect the probability of getting a particular number on the second spin. When she selects a card and does not put it back, it does affect the probability of getting a particular number on the second card.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE & REASON}
+Allie spins the spinner and draws one card without looking. She gets a 3 on the spinner and the 3 card. Then she sets the card aside, spins again, and draws another card.
+% FIG 13 957 637 1130 714
+\placeholder{diagram}{Circular spinner divided into four equal quadrants: upper left orange 1, upper right green 2, lower right purple 3, lower left blue 4. Black pointer from center toward upper right. Four light-blue square cards to right in two rows: 1,2 above 3,4.}
+A. Is it possible for Allie to get a 3 on her second spin? On her second card? Explain.
+\answer{SAMPLE STUDENT WORK: Yes; no; she can get any number on her second spin, but her second card cannot be the same as her first card, because she set it aside.}
+B. Construct Arguments How does getting the 3 card on her first draw affect the probability of getting the 2 card on her second draw? Explain.
+\answer{Getting the 3 card on her first draw increases the probability of getting the 2 card on her second draw, because there are fewer cards left to choose from. On the first draw Allie has a one out of four chance to draw a 2. On the second draw, the chances go up to one out of three.}
+% FIG 13 637 187 1153 533
+\placeholder{illustration}{Digital Explore & Reason preview: Go back; same spinner and cards, introductory text and questions A/B as the student activity, each with an Enter your answer box.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with EXPLORE & REASON}
+Look for Relationships How are the results from the spinner related to the results from the cards? Explain.
+\answer{The results are unrelated, or independent, meaning a spinner result has no effect on the result from the cards, and vice-versa.}
+\end{te-addendum}
+% Source page 14: 585 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{STEP 2 Understand & Apply — INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Establish Learning.
+Students learn that if events (A) and (B) are mutually exclusive, then the probability that (A) or (B) will occur is equal to the sum of their probabilities and that, whether the events are mutually exclusive or not, (P(A\text{ or }B)=P(A)+P(B)-P(A\text{ and }B)). Students also learn that the probability that two independent events will both occur is equal to the product of their probabilities.
+Examples are available at SavvasRealize.com. Activity.
+\end{te-addendum}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{EXAMPLE 1 Find Probabilities of Mutually Exclusive Events — Pose Purposeful Questions}
+Q: What is another example of a pair of mutually exclusive events for this experiment?
+\answer{The event “roll an even number” and the event “roll an odd number” because only one of these can happen in one roll.}
+Q: What does favorable outcomes mean in the first equation in part A?
+\answer{The outcomes that are in the set (E) or in the set (T). This includes every number except 1 on the number cube.}
+Q: Why is there a 6 in the denominator?
+\answer{There are 6 possible outcomes in the sample space: 1, 2, 3, 4, 5, 6.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Find Probabilities of Mutually Exclusive Events}
+You roll a standard number cube once. Let (E) represent the event “roll an even number.” Let (T) represent the event “roll a 3 or 5.”
+A. What is the probability that you roll an even number or roll a 3 or 5?
+Show the outcomes of events (E) and (T) as a subset of the sample space (S).
+% FIG 14 931 326 1040 391
+\placeholder{diagram}{Rectangular sample space containing separate peach circle E with outcomes 2,4,6, and blue circle T with outcomes 5,3. Outcome 1 outside both circles near lower left.}
+\te{Callout: Events (E) and (T) are mutually exclusive because there is no outcome in both sets.}
+\te{Callout: There are 5 outcomes that are even numbers or a 3 or 5. (\{2,3,4,5,6\}). There are a total of 6 possible outcomes in the sample space.}
+(P(E\text{ or }T)=\frac{\text{number of favorable outcomes}}{\text{number of total possible outcomes}})
+(=\frac{3+2}{6})
+\te{Callout: There are 3 outcomes in event (E) and 2 outcomes in event (T).}
+(=\frac36+\frac26)
+\te{Callout: This is equivalent to (P(E)+P(T)).}
+(=\frac56)
+The probability of rolling an even number or rolling a 3 or a 5 is (\frac56).
+\answer{A. (\frac56)}
+B. You roll a standard number cube once. What is the probability that you roll an even number and a 3 or 5?
+(P(E\text{ and }T)=\frac{\text{number of favorable outcomes}}{\text{number of total possible outcomes}})
+(=\frac06)
+\te{Callout: Because events (E) and (T) are mutually exclusive, there are no outcomes that are in both sets.}
+(=0)
+The probability of rolling an even number and rolling a 3 or a 5 is 0.
+\answer{B. 0}
+\te{VOCABULARY A favorable outcome is an outcome that is being tested or observed and not necessarily a desirable result. A “favorable” outcome may be a loss for the home team or testing positive for a disease.}
+% Source page 15: 586 Example 1 continued
+C. You roll a standard number cube once. What is the probability that you do not roll an even number?
+(P(\text{not }E)=\frac36\text{ or }\frac12)
+\te{Callout: There are 3 outcomes that are not even numbers.}
+The probability of not rolling an even number is (\frac12).
+\answer{C. (\frac12)}
+\te{GENERALIZE Notice that (E) and not (E) are mutually exclusive events. What would the sum of (P(E)) and (P(\text{not }E)) be equal to?}
+\end{example}
+\begin{te-addendum}{1}{PurposefulQuestions}
+\textbf{Additional Examples — Additional Examples are available at SavvasRealize.com.}
+Example 1 Help students explore probabilities of non-mutually exclusive events.
+Q: How do the answers to parts B and C compare? Explain why that is the case.
+\answer{They are the same, because for all events (A) and (B), (P(A\text{ or }B)=P(A)+P(B)-P(A\text{ and }B)).}
+\textbf{ADDITIONAL EXAMPLE 1 — ESSENTIAL QUESTION — SOLUTION}
+You roll a ten-sided number polyhedron that has the numbers 1 through 10 on its faces. Each face has a different number. You observe the number that ends up on top. Let (A) be the event “the number is less than 8” and (B) be the event “the number is even.”
+% FIG 14 463 931 552 1020
+\placeholder{illustration}{Red ten-sided numbered polyhedron with white numerals including 1 on the upper central face, 4 upper right, 3 lower left, and 7 lower right; adjacent face partly visible.}
+A. Find (P(A)), (P(B)), and (P(A\text{ and }B)).
+\answer{There are 10 numbers in all. There are 7 numbers that are less than 8, so (P(A)=\frac7{10}). There are 5 numbers that are even, so (P(B)=\frac5{10}). There are 3 numbers that are both less than 8 and even, so (P(A\text{ and }B)=\frac3{10}).}
+B. Find (P(A)+P(B)-P(A\text{ and }B)).
+\answer{(P(A)+P(B)-P(A\text{ and }B)=\frac7{10}+\frac5{10}-\frac3{10}=\frac9{10})}
+C. Find (P(A\text{ or }B)).
+\answer{There are 9 numbers that are either less than 8 or even, so (P(A\text{ or }B)=\frac9{10}).}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4 — ESSENTIAL QUESTION — SOLUTION}
+Example 4 Help students practice finding probabilities of combinations of independent events.
+Q: Are the events “the student is a boy” and “the card has an odd number on it” independent events?
+\answer{Yes; the probability that the card will have an odd number on it is not affected by whether the student chosen is a boy or a girl.}
+There are 13 girls and 11 boys in a class. The cards shown below are mixed up and placed face down on the table.
+% FIG 14 742 966 934 1006
+\placeholder{diagram}{Five light-blue rectangular cards in a horizontal row, numbered 1,2,3,4,5 in black.}
+A student in the class is chosen at random. That student then chooses a card at random. What is the probability that the student is a boy and the card chosen has an odd number on it?
+There are 11 boys out of 24 students, so (P(\text{boy})=\frac{11}{24}).
+There are 3 odd cards out of 5 cards, so (P(\text{odd})=\frac35).
+(P(\text{boy and odd})=P(\text{boy})\cdot P(\text{odd})=\frac{11}{24}\cdot\frac35=\frac{11}{40})
+\answer{(\frac{11}{40})}
+\end{te-addendum}
+\begin{tryit}{1}
+A box contains 100 balls. Thirty of the balls are purple and 10 are orange. If you select one of the balls at random, what is the probability of each of the following events?
+a. The ball is purple or orange.
+\answer{a. 0.4, 40\%, or (\frac25)}
+b. The ball is not purple and not orange.
+\answer{b. 0.6, 60\%, or (\frac35)}
+\end{tryit}
+\begin{concept-box}
+\textbf{Probabilities of Mutually Exclusive Events}
+If (A) and (B) are mutually exclusive events, then
+\item (P(A\text{ or }B)=P(A)+P(B))
+\item (P(A\text{ and }B)=0)
+The complement of an event is the set of all outcomes in a sample space that are not included in the event.
+If (C) is the event that (A) does not occur, then
+(P(C)=1-P(A)).
+% FIG 15 1010 424 1114 542
+\placeholder{diagram}{Two rectangular sample spaces stacked. Upper: separate peach circle A on left and blue circle B on right. Lower: peach circle A at left; label C in the surrounding region to the right, representing complement.}
+\end{concept-box}
+\begin{te-addendum}{2}{GeneralizeETP}
+\textbf{EXAMPLE 2 Find the Probabilities of Non-Mutually Exclusive Events — Use and Connect Mathematical Representations}
+Q: What is the area of the yellow square? The area of the yellow square not counting the area where the two squares overlap?
+\answer{100 cm²; 75 cm²}
+Q: What is the meaning of (P(A)), and what is it equal to? What is the meaning of (P(A\text{ and }B)), and what is it equal to?
+\answer{(P(A)) is the probability that the sticky ball will land in the yellow square; (P(A)=\frac{100}{1,200}=\frac1{12}). (P(A\text{ and }B)) is the probability that the sticky ball will land in the area where the yellow and blue squares overlap; (P(A\text{ and }B)=\frac{25}{1,200}=\frac1{48}).}
+Q: How does the method for calculating (P(A\text{ or }B)) differ for mutually exclusive and non-mutually exclusive events?
+\answer{To find (P(A\text{ or }B)) for mutually exclusive events, add the probabilities of the two events; for non-mutually exclusive events, find that sum, and then subtract the probability that both events occur.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Find the Probabilities of Non-Mutually Exclusive Events}
+\te{APPLICATION}
+A student-made target includes two overlapping squares. Assume that a sticky ball thrown at the target is equally likely to land anywhere on the target. What is the probability that the ball lands inside one or both of the squares?
+% FIG 15 798 649 1015 730
+\placeholder{diagram}{Rectangular gray target, width 60 cm and height 20 cm, with pale concentric circles in background. Yellow square A above left of blue square B; each side 10 cm. Their overlap is a 5 cm by 5 cm square, labeled by arrows 5 cm horizontally and vertically. Small multicolored ball upper right.}
+Step 1 Find the area of the squares, and their overlapping area.
+% FIG 15 798 750 1015 816
+\placeholder{diagram}{Same target and overlapping yellow and blue squares. Each full square labeled 100 cm²; arrow to overlap labels 25 cm². Lower right Total area = 1200 cm²; ball lower left.}
+% Source page 16: 587 Example 2 continued
+Step 2 Find the probabilities.
+One method: (75\text{ cm}^2+25\text{ cm}^2+75\text{ cm}^2=175\text{ cm}^2)
+(P(A\text{ or }B)=\frac{175}{1,200}=\frac7{12})
+\te{Printed first reduction 7/12; likely 7/48, as in the next method and final answer.}
+Another method: (P(A\text{ or }B)=\frac{100}{1,200}+\frac{100}{1,200}-\frac{25}{1,200})
+(=\frac{175}{1,200}=\frac7{48})
+\te{Callout: Subtract the probability of the overlapping area because it was included twice, once for each large square.}
+The probability that the ball will land inside one or both squares is (\frac7{48}), or about 15\%.
+\answer{(\frac7{48}), or about 15\%.}
+\te{USE STRUCTURE To avoid counting the overlapping region twice, you need to subtract (P(A\text{ and }B)) from the sum of (P(A)) and (P(B)).}
+\end{example}
+\begin{tryit}{2}
+A video game screen is a rectangle with dimensions 34 cm and 20 cm. A starship on the screen is made of two circles with radius 6 cm, and overlapping area of 20 cm². A black hole appears randomly on the screen. What is the probability that it appears within the starship?
+\answer{30\%}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: Suppose (A) and (B) are mutually exclusive events. Is it still true that (P(A\text{ or }B)=P(A)+P(B)-P(A\text{ and }B))?
+\answer{Yes; since (A) and (B) are mutually exclusive events, (P(A\text{ and }B)=0) and (P(A\text{ or }B)=P(A)+P(B)). So (P(A\text{ or }B)=P(A)+P(B)-P(A\text{ and }B)).}
+Q: For two events (A) and (B), which would you expect to be greater, (P(A\text{ or }B)) or (P(A\text{ and }B))? Is this true in all cases?
+\answer{(P(A\text{ or }B)) would be greater because it includes all outcomes in (A) and all outcomes in (B), while (P(A\text{ and }B)) only includes the outcomes that are in both (A) and (B). This is true in most cases, but (P(A\text{ or }B)) would be equal to (P(A\text{ and }B)) if (A) and (B) both consist of the same set of outcomes.}
+\end{te-addendum}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with EXAMPLES 1 & 2}
+Generalize Explain in your own words the meaning of mutually exclusive events. Include examples.
+\answer{Sample: Mutually exclusive events cannot occur at the same time. For example, you cannot get both heads and tails when flipping a coin.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Probabilities of Non-Mutually Exclusive Events}
+If (A) and (B) are not mutually exclusive events, then
+(P(A\text{ or }B)=P(A)+P(B)-P(A\text{ and }B)).
+% FIG 16 1075 473 1147 532
+\placeholder{diagram}{Rectangular sample space with overlapping peach circle A at left and blue circle B at right. Gray overlap labeled A and B by downward arrow.}
+\end{concept-box}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{EXAMPLE 3 Identify Independent Events — Elicit and Use Evidence of Student Thinking}
+Q: What does it mean that a marble is chosen at random from the jar?
+\answer{A marble is chosen in such a way that each of the marbles is equally likely to be chosen. For example, a person chooses a marble without looking.}
+Q: In Part A, does the color of the first marble chosen affect the probability that the second marble will be a particular color? For example, does the color of the first marble chosen affect the probability that the second marble will be green?
+\answer{No; whether the first marble chosen is violet or green, the probability that the second marble is green is still (\frac35).}
+Q: In Part A, are the events “the first marble is violet” and “the second marble is green” independent events?
+\answer{Yes; the event “the first marble is violet” does not affect the probability that the second marble is green.}
+Q: In Part B, does the color of the first marble chosen affect the probability that the second marble will be a particular color? For example, does the color of the first marble affect the probability that the second marble will be green?
+\answer{Yes; if the first marble is violet, the probability that the second marble is green is (\frac{12}{19}). If the first marble is green, the probability that the second marble is green is (\frac{11}{19}).}
+Q: In Part B, are the events “the first marble is violet” and “the second marble is green” independent events?
+\answer{No; the occurrence of the event “the first marble is violet” affects the probability that the second marble is green.}
+\end{te-addendum}
+\begin{te-addendum}{3}{LearnTogether}
+\textbf{Learn Together — Provide Constructive Feedback}
+“Feedback” can include things you do well or things you might want to keep working on. Ask: How can you provide feedback to others to help them learn? How can make sure that your feedback is kind and helpful?
+\te{Printed How can make sure; likely How can you make sure.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Identify Independent Events}
+\te{CONCEPTUAL UNDERSTANDING}
+A jar contains 12 green marbles and 8 violet marbles.
+A. A marble is chosen at random from the jar and replaced. Another marble is chosen at random from the jar. Does the color of the first marble chosen affect the possible outcomes for the second marble chosen?
+Determine the probabilities for each choice to decide whether the first marble chosen affects the possibilities for the second marble.
+\begin{tabular}{ll}
+First Choice-Sample Space & Second Choice-Sample Space \\
+12 Green & 12 Green \\
+8 Violet & 8 Violet \\
+(P(G)=\frac{12}{20}=\frac35) & (P(G)=\frac{12}{20}=\frac35) \\
+(P(V)=\frac8{20}=\frac25) & (P(V)=\frac8{20}=\frac25) \\
+\end{tabular}
+\te{Callout: The probabilities are the same.}
+The color of the first marble chosen does not affect the possible outcomes for the second marble chosen.
+Two events are independent events if and only if the occurrence of one event does not affect the probability of a second event.
+\answer{A. The color of the first marble chosen does not affect the possible outcomes for the second marble chosen.}
+\te{LEARN TOGETHER How can you provide constructive feedback while being aware of the feelings and reactions of others?}
+% Source page 17: 588 Example 3 continued
+B. A marble is chosen at random from the jar and not replaced. Another marble is chosen at random from the jar. Does the color of the first marble chosen affect the possible outcomes for the second marble chosen?
+Determine whether the events are independent.
+\begin{tabular}{l}
+First Choice-Sample Space \\
+12 Green \\
+8 Violet \\
+\end{tabular}
+(P(G)=\frac{12}{20}=\frac35) (P(V)=\frac8{20}=\frac25)
+Assume a green marble was chosen first.
+\begin{tabular}{l}
+Second Choice-Sample Space \\
+11 Green \\
+8 Violet \\
+\end{tabular}
+(P(G)=\frac{11}{19}) (P(V)=\frac8{19})
+Assume a violet marble is chosen first.
+\begin{tabular}{l}
+Second Choice-Sample Space \\
+12 Green \\
+7 Violet \\
+\end{tabular}
+(P(G)=\frac{12}{19}) (P(V)=\frac7{19})
+When the first marble is not replaced in the jar, the color of the first marble chosen does affect the possible outcomes for the second marble chosen. These events are not independent.
+\answer{B. These events are not independent.}
+\te{COMMON ERROR When two or more items are selected from the same set, you must determine whether the first item(s) is replaced before the next item is selected. Then find the probabilities.}
+\end{example}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners — Use with EXAMPLE 3}
+READING — BEGINNING. Write the phrases chosen at random, replaced, and not replaced on the board. Have students find these words in the problem statements for Parts A and B. Discuss their meanings.
+Q: How might you choose a marble at random from the jar?
+\answer{Close your eyes and reach into the jar.}
+Q: Think of the word replace as meaning placed again. What does it mean to replace a marble?
+\answer{Put it back into the jar.}
+Q: What does it mean to say that the marble is not replaced?
+\answer{It is not put back into the jar.}
+WRITING — DEVELOPING. Draw students' attention to Part B. Give students the following sentence starter to complete: If the first marble is \underline{\hspace{1cm}}, then the probability that the second marble will be \underline{\hspace{1cm}} is \underline{\hspace{1cm}}.
+Q: How many different sentences are needed to describe all the possible results? \answer{4}
+Q: Complete this statement to describe a result in Part B: After a green marble is chosen and not replaced, there are ... in the jar.
+\answer{Answers may vary. Sample: ... 11 green marbles and 8 violet marbles ...}
+SPEAKING — EXPANDING. Explain that is independent can mean does not depend on someone or something.
+Q: In Part A, does the probability that the second marble is green depend on the color of the first marble?
+\answer{No; the first marble was put back in the jar. The same marbles are in the jar, so the probability of choosing green is the same.}
+Q: In Part B, why does the probability that the second marble is green depend on the color of the first marble?
+\answer{The first marble is not put back. So if the first marble is green, the jar has fewer green marbles than before, and if it is violet, the jar has fewer violet marbles than before.}
+\end{te-addendum}
+\begin{tryit}{3}
+There are 10 cards in a box, 5 black and 5 red. Two cards are selected from the box, one at a time.
+a. A card is chosen at random and then replaced. Another card is chosen. Does the color of the first card chosen affect the possibilities of the second card chosen? Explain.
+\answer{a. No; since the first card is replaced before the second card is drawn, the same cards are in the box as before.}
+b. A card is chosen at random and not replaced. Another card is chosen. Does the color of the first card chosen affect the possibilities of the second card chosen? Explain.
+\answer{b. Yes; since the first card is removed and not replaced, there are fewer cards in the box than before.}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What strategy will you use to solve these problems?
+\answer{For each part, first assume that the first card is black and find the number of cards of each color remaining in the box. Then assume the first card is red and repeat.}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{Probability of Independent Events}
+If (A) and (B) are independent events, then (P(A\text{ and }B)=P(A)\cdot P(B)).
+If (P(A\text{ and }B)=P(A)\cdot P(B)), then (A) and (B) are independent events.
+Example: When rolling a die and tossing a coin, the result of the die roll and the result of the coin toss are independent events.
+% FIG 17 812 728 965 804
+\placeholder{illustration}{Brown number cube showing 4 on top, 1 on left, 2 on right, beside a silver quarter showing Washington's head.}
+(P(4)=\frac16) (P(H)=\frac12)
+(P(4\text{ and }H)=\frac16\cdot\frac12=\frac1{12})
+\end{concept-box}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{CONCEPT Probability of Independent Events}
+Q: Suppose (A) is the event “roll a 6” and (B) is the event “toss heads”. Are (A) and (B) independent events?
+\answer{Yes; since (P(A)=\frac16) and (P(B)=\frac12), (P(A)\cdot P(B)=\frac16\cdot\frac12=\frac1{12}=P(A\text{ and }B)).}
+Q: Suppose (E) is “roll an even number” and (L) is “roll a number less than 4.” Are (E) and (L) independent events?
+\answer{No; since (P(E)=\frac12) and (P(L)=\frac12), (P(E)\cdot P(L)=\frac12\cdot\frac12=\frac14). Since 2 is the only outcome in the event ((E) and (L)), (P(E\text{ and }L)=\frac16). So (P(E\text{ and }L)\neq P(E)\cdot P(L)).}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtIExtend}
+\textbf{Extend Student Thinking — USE WITH EXAMPLE 4}
+Have students find probabilities in another situation.
+\item Describe the following experiment involving five cards, three that are numbered 1 and two that are numbered 2. One card will be selected at random, then replaced, and then another card will be selected.
+Q: What is the probability that you will select a 1 card both times? Show your calculation.
+\answer{(\frac9{25}); (\frac35\cdot\frac35=\frac9{25})}
+Q: What is the probability that you will select a 2 card both times? Show your calculation.
+\answer{(\frac4{25}); (\frac25\cdot\frac25=\frac4{25})}
+Q: What is the probability that the numbers on the two cards will match? Show your calculation.
+\answer{(\frac{13}{25}); (\frac9{25}+\frac4{25}=\frac{13}{25})}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students — USE WITH EXAMPLE 4}
+Have students visualize the sample space.
+\item Draw this tree diagram and explain what each branch represents. The first set of branches represents shirt colors, and the second set represents “rain” or “no rain.”
+% FIG 17 952 1020 1137 1290
+\placeholder{diagram}{Probability tree, root left with three branches to Y upper, B middle, G lower, probabilities 1/2,1/4,1/4 respectively. Each node branches right to R above with probability 2/5 and N below with probability 3/5. Six terminal labels R,N,R,N,R,N.}
+\item Show students that they can multiply the probabilities along any path through the tree to find the probability of that path. Ask the following questions.
+Q: Which path do you follow to find (P(Y\text{ and }N))? What probabilities are on that path?
+\answer{The path that goes through (Y) and (N); the probabilities are (\frac12) and (\frac35).}
+Q: Which path do you follow to find (P(G\text{ and }R))? What are the probabilities on that path?
+\answer{The path that goes through (G) and (R); the probabilities are (\frac14) and (\frac25).}
+\end{te-addendum}
+% Source page 18: 589 Example 4
+\begin{te-addendum}{4}{GeneralizeETP}
+\textbf{EXAMPLE 4 Find Probabilities of Independent Events — Build Procedural Fluency from Conceptual Understanding}
+Q: In Part A, Step 1, why is (P(S)=\frac34)?
+\answer{Since Alex chooses from 4 shirts and 3 of them are solid, (P(S)=\frac34).}
+Q: In Part B Step 1, why is (P(T\text{ and }R)=P(T)\cdot P(R))?
+\answer{Since Alex's choice of shirt does not affect the weather and the weather does not affect Alex's choice of shirt, (T) and (R) are independent. So (P(T\text{ and }R)=P(T)\cdot P(R)).}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Find Probabilities of Independent Events}
+\te{APPLICATION}
+Alex cannot decide which shirt to wear today, so she chooses one at random.
+The probability of rain today is 40\%, or (\frac25).
+% FIG 18 980 241 1150 335
+\placeholder{illustration}{Four shirts hanging side by side on wooden hangers against green background: solid pale yellow button shirt, solid dark blue shirt, solid yellow shirt, green striped shirt.}
+A. What is the probability that Alex chooses a solid-colored shirt and it does not rain today?
+Let (S) represent the event “solid-colored shirt.” Let (N) represent “no rain.”
+(S) and (N) are independent because Alex's choice of shirt does not affect the weather, and the weather does not affect Alex's choice of shirt. Use the formula to find (P(S\text{ and }N)).
+Step 1 Find (P(N)) and (P(S)).
+(P(N)=1-\frac25=\frac35)
+\te{Callout: Subtract the probability that it will rain, (\frac25), from 1 to find the probability that it will not rain.}
+(P(S)=\frac{\text{number of favorable outcomes}}{\text{total number of outcomes}}=\frac34)
+Step 2 Apply the formula and multiply the probabilities of (S) and (N).
+(P(S\text{ and }N)=P(S)\cdot P(N)=\frac34\cdot\frac35=\frac9{20}=45\%)
+\te{Callout: Use the rule for the probability of independent events.}
+The probability that Alex chooses a solid-colored shirt and it does not rain is 45\%.
+\answer{A. 45\%}
+B. What is the probability that Alex chooses a solid-colored shirt and it does not rain today or that Alex chooses a striped shirt and it rains today?
+Let (T) represent “striped shirt.” Let (R) represent “rain.”
+The events “(S) and (N)” and “(T) and (R)” are mutually exclusive because no outcomes are in both events.
+Step 1 Find (P(T\text{ and }R)).
+(P(T\text{ and }R)=P(T)\cdot P(R)=\frac14\cdot\frac25=\frac2{20}=\frac1{10}=10\%)
+Step 2 Find (P((S\text{ and }N)\text{ or }(T\text{ and }R))).
+(P((S\text{ and }N)\text{ or }(T\text{ and }R))=P(S\text{ and }N)+P(T\text{ and }R))
+(=45\%+10\%=55\%)
+\te{Callout: Add to find the probability that either event will occur.}
+The probability that Alex chooses a solid-colored shirt and it does not rain or that Alex chooses a striped shirt and it rains is 55\%.
+\answer{B. 55\%}
+\te{STUDY TIP You can write probabilities as fractions, decimals, or percents. Choose the most convenient form for your purposes.}
+\end{example}
+\begin{tryit}{4}
+You spin the spinner two times. Assume that the probability of Blue ((B)) each spin is (\frac13) and the probability of Orange ((O)) each spin is (\frac23). What is the probability of getting the same color both times? Explain.
+% FIG 18 1079 748 1150 825
+\placeholder{diagram}{Circular spinner: blue upper-left sector B occupying one third, orange sector O occupying remaining two thirds. Boundary radii vertical up and down-left. Black pointer from center toward upper right.}
+\answer{(\frac59); since getting blue twice and getting orange twice are mutually exclusive events, add (P(BB)) and (P(OO)). (P(BB)=P(B)\cdot P(B)=\frac13\cdot\frac13=\frac19); (P(OO)=P(O)\cdot P(O)=\frac23\cdot\frac23=\frac49). (P(\text{match})=P(BB)+P(OO)=\frac19+\frac49=\frac59).}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking}
+Q: What are two ways of getting the same color twice? Are those ways mutually exclusive events or independent events?
+\answer{Getting blue both times or getting orange both times; they are mutually exclusive because blue and orange are the only two colors on the spinner.}
+\end{te-addendum}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Common Error — Try It! 4}
+Students may add probabilities when they should multiply them or multiply them when they should add them. Suggest that students keep two simple examples in mind to help remember the rules.
+As an example of mutually exclusive events, consider rolling a number cube and finding (P(\text{odd or even})). The correct answer is found by adding: (P(\text{odd})+P(\text{even})=\frac12+\frac12=1); this gives the common-sense answer that there is 100\% chance of getting either an odd or an even number.
+As an example of independent events, consider flipping two coins and finding (P(\text{heads and heads})). The correct answer is found by multiplying: (P(\text{heads})\cdot P(\text{heads})=\frac12\cdot\frac12=\frac14); adding would give the nonsensical answer that the probability of getting two heads is 100\%.
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{HABITS OF MIND — Use with EXAMPLES 3 & 4}
+Make Sense and Persevere Explain the difference between mutually exclusive events and independent events.
+\answer{Answers may vary. Sample: Mutually exclusive events cannot happen at the same time. Independent events each have no effect on the likelihood of the other event happening.}
+\end{te-addendum}
+% Source page 19: 590 Concept Summary
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Probability Events}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com. Presentation. Practice.
+Q: In the diagram in the first column, what are the outcomes in (A)? in (B)?
+\answer{The outcomes in (A) are 1 and 2. The only outcome in (B) is 6.}
+Q: If (A) and (B) are mutually exclusive events, is it also true that (P(A\text{ or }B)=P(A)+P(B)-P(A\text{ and }B))?
+\answer{Yes; since (P(A\text{ and }B)=0) and (P(A\text{ or }B)=P(A)+P(B)), (P(A\text{ or }B)=P(A)+P(B)-P(A\text{ and }B)).}
+Q: In the diagram in the second column, what are the outcomes in (D)? in (M)?
+\answer{The outcomes in (D) are 1, 3, and 5. The outcomes in (M) are 5 and 6.}
+Q: What assumption are you making when you say that there is a (\frac16) chance of getting a 1 on the spinner or a (\frac16) chance of getting a 1 on the number cube? How might the probabilities differ if this assumption were not true?
+\answer{You are assuming that all outcomes are equally likely. If this were not true, then each outcome could have a different probability.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? — Common Error}
+Exercise 3 Students may assume that events (B) and (T) are mutually exclusive. Ask students if it possible that Deshawn played basketball and talked to his friends after school. Ask students which formula they would need to use to find (P(B\text{ or }T)).
+\te{Printed if it possible; likely if it is possible.}
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Probability Events}
+\begin{tabular}{lll}
+ & Mutually Exclusive Events & Independent Events \\
+WORDS & (A) and (B) are mutually exclusive because no outcome is in both (A) and (B). & (D) and (M) are independent because the occurrence of one does not affect the probability of the other. \\
+ALGEBRA & If (A) and (B) are mutually exclusive events, then (P(A\text{ or }B)=P(A)+P(B)). & If (D) and (M) are independent events, then (P(D\text{ and }M)=P(D)\cdot P(M)). \\
+ & If (C) is the event that (A) does not occur, then (P(C)=1-P(A)). & If (P(D\text{ and }M)=P(D)\cdot P(M)), then (D) and (M) are independent events. \\
+EXAMPLES & Experiment: Spin the spinner. & Experiment: Spin the spinner and roll a number cube. \\
+ & Event (A): number less than 3 & Event (D): odd number on spinner \\
+ & Event (B): number greater than 5 & Event (M): number greater than 4 on number cube \\
+ & (P(A\text{ or }B)=P(A)+P(B)=\frac26+\frac16=\frac12) & (P(D\text{ and }M)=P(D)\cdot P(M)=\frac12\cdot\frac13=\frac16) \\
+\end{tabular}
+% FIG 19 730 393 803 469
+\placeholder{diagram}{Spinner with six equal sectors numbered clockwise from upper right: green 1, orange 2, blue 3, green 4, orange 5, blue 6. Black pointer from center toward lower right into 2.}
+% FIG 19 904 400 957 461
+\placeholder{illustration}{Green number cube showing white 3 on top, 5 on right, and a rotated 6 appearing like 9 on left.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How does describing events as independent or mutually exclusive affect how you find probabilities?
+\answer{Knowing whether events are mutually exclusive or independent can help you choose appropriate formulas for calculating probabilities. If events (A) and (B) are mutually exclusive, then (P(A\text{ or }B)=P(A)+P(B)). If (A) and (B) are independent events, then (P(A\text{ and }B)=P(A)\cdot P(B)).}
+2. Reason Two marbles are chosen, one at a time, from a bag containing 6 marbles, 4 red marbles and 2 green marbles. Suppose the first marble chosen is green. Is the probability that the second marble will be red greater if the first marble is returned to the bag or if it is not returned to the bag? Explain.
+\answer{The probability is greater if the first marble is not returned to the bag. If the first marble is returned, there will be 6 marbles in the bag, of which 4 are red. If it is not returned, there will only be 5 marbles in the bag, of which 4 are red. (\frac45>\frac46).}
+3. Error Analysis The probability that Deshawn plays basketball (event (B)) after school is 20\%. The probability that he talks to friends (event (T)) after school is 45\%. He says that (P(B\text{ or }T)) is 65\%. Explain Deshawn's error.
+\answer{Because Deshawn is likely to talk to his friends while playing basketball, the two events are not mutually exclusive. So, he cannot find the probability of one or the other happening by adding them.}
+4. Vocabulary What is the difference between mutually exclusive events and independent events?
+\answer{Events are mutually exclusive if they do not share outcomes. Independent events can share outcomes, but the occurrence of one cannot affect the probability of the other happening.}
+\textbf{Do You KNOW HOW?}
+5. A bag contains 40 marbles. Eight are green and 2 are blue. You select one marble at random. What is the probability of each event?
+a. The marble is green or blue. \answer{a. 0.25, 25\%, or (\frac14)}
+b. The marble is not green and not blue. \answer{b. 0.75, 75\%, or (\frac34)}
+6. A robot at a carnival booth tosses a dart at a square target with 8-inch sides and a circle with a 3-inch radius in the middle. To the nearest whole percent, what is the probability that the dart will land in the circle?
+\answer{44\%}
+For Exercises 7 and 8, assume that you roll a standard number cube twice.
+7. What is the probability of rolling an even number on the first roll and a number less than 3 on the second roll?
+\answer{(\frac16), (0.1\overline6), or (16.\overline6\%)}
+8. What is the probability of rolling an odd number on the first roll and a number greater than 3 on the second roll?
+\answer{(\frac14), 0.25, or 25\%}
+\end{concept-summary}
+% Source page 20: 591 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{STEP 3 Practice & Problem Solving}
+Practice & Problem Solving and video tutorials are available at SavvasRealize.com. Practice. Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-Level & Advanced \\
+10, 12, 14, 16--27 & 9--27 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+Understand, Apply — 2 points each.
+Practice — 1 point each.
+Assessment Practice — 1 point each.
+Performance Task — 3 points.
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 12--15, 17--19 & 1 \\
+1 & 16 & 2 \\
+1 & 9 & 3 \\
+2 & 20, 22, 25 & 2 \\
+2 & 10 & 3 \\
+3 \& 4 & 21, 26 & 1 \\
+3 \& 4 & 11, 23, 24 & 2 \\
+3 \& 4 & 27 & 3 \\
+\bottomrule
+\end{tabular}
+\te{Printed combined example cell 3 and 4. The checker does not parse this combined label; the six corresponding practice DOK values are copied from these rows.}
+\end{item-analysis}
+\begin{practice}{9}{3}
+\textbf{UNDERSTAND — Construct Arguments} Let (S) be a sample space for an experiment in which every outcome is both equally likely and mutually exclusive. What can you conclude about the sum of the probabilities for all of the outcomes? Give an example.
+\answer{Sample: One situation in which every outcome is equally likely and every outcome is mutually exclusive is rolling a standard number cube. If you add the probabilities for getting each side of a number cube, 1, 2, 3, 4, 5, or 6, the sum is (\frac16+\frac16+\frac16+\frac16+\frac16+\frac16=\frac66=1). So, if you add all of the probabilities in an experiment where every outcome is both equally likely and mutually exclusive, the sum of the probabilities should be 1.}
+\end{practice}
+\begin{practice}{10}{3}
+\textbf{Error Analysis} At Lincoln High School, 6 students are members of both the Chess Club and the Math Club. There are 20 students in the Math Club, 12 students in the Chess Club, and 400 students in the entire school.
+Daniela calculated the probability that a student chosen at random belongs to the Chess Club or the Math Club. Explain her error.
+Event (C): Student is in Chess Club.
+Event (M): Student is in Math Club.
+(P(C\text{ or }M)=P(C)+P(M))
+(=\frac{12}{400}+\frac{20}{400})
+(=\frac{32}{400}=0.08)
+\te{Red X marks the student's work.}
+\answer{The events (C) and (M) are not mutually exclusive, so it is not true that (P(C\text{ or }M)=P(C)+P(M)). So, subtract the probability that a student is in both clubs to find the probability that a random student is in the Chess Club or the Math Club. (P(C\text{ or }M)=P(C)+P(M)-P(C\text{ and }M)).}
+\end{practice}
+\begin{practice}{11}{2}
+\textbf{Higher Order Thinking} Murphy's math teacher sometimes wears a scarf to class. Murphy has been documenting the relationship between his teacher wearing a scarf and when the class has a math quiz. The probabilities are as follows:
+\item (P(\text{wearing a scarf})=10\%)
+\item (P(\text{math quiz})=15\%)
+\item (P(\text{wearing a scarf and math quiz})=5\%)
+Are the events “the teacher is wearing a scarf” and “there will be a quiz” independent events? Explain.
+\answer{No; two events (A) and (B) are independent if and only if (P(A)\cdot P(B)=P(A\text{ and }B)) and ((0.10)(0.15)\neq0.05).}
+\end{practice}
+\begin{practice}{12}{1}
+\textbf{Reason} A card is drawn from a box containing 5 cards, each showing a different number from 1 to 5. Consider the events “even number,” “odd number,” “less than 3,” and “greater than 3.” Determine whether each pair of events mutually exclusive.
+(<3), (>3)
+\answer{yes}
+\te{Printed prompt omits are before mutually exclusive. Shared directions apply to Exercises 12--15.}
+\end{practice}
+\begin{practice}{13}{1}
+odd, (>3)
+\answer{no}
+\end{practice}
+\begin{practice}{14}{1}
+even, (>3)
+\answer{no}
+\end{practice}
+\begin{practice}{15}{1}
+odd, even
+\answer{yes}
+\end{practice}
+\begin{practice}{16}{2}
+\textbf{PRACTICE} Isis is playing a virtual reality game in which she must toss a disc to land on the largest triangular section of the board. If the disc is equally likely to land anywhere on the board, what is the probability that she will succeed? Explain. SEE EXAMPLE 1
+% FIG 20 861 378 1106 495
+\placeholder{diagram}{Virtual reality illustration: gloved hand tossing disc at pale blue rectangular board 50 cm wide and 40 cm high. Largest red triangle spans the entire bottom edge with apex on top edge about two thirds of the way from left. Dimension arrows above and right.}
+\answer{0.5, 50\%, or (\frac12); The area of the triangle is half of the area of the rectangle because the rectangle and the triangle have the same base (50 cm) and the same height (40 cm).}
+\end{practice}
+\begin{practice}{17}{1}
+In a class of 25 students, 8 students have heights less than 65 inches and 10 students have heights of 69 inches or more. For Exercises 17--19, find the probabilities described. SEE EXAMPLE 1
+(P(\text{less than 65 inches or greater than 69 inches}))
+\answer{0.72 or 72\%}
+\te{Printed greater than 69 differs from the given 69 inches or more; the answer includes all ten students in the latter group.}
+\end{practice}
+\begin{practice}{18}{1}
+(P(\text{greater than or equal to 65 inches}))
+\answer{0.68 or 68\%}
+\end{practice}
+\begin{practice}{19}{1}
+(P(\text{greater than or equal to 65 inches and less than or equal to 69 inches}))
+\answer{0.28 or 28\%}
+\te{Printed upper bound includes 69 inches, while the answer excludes all ten students whose heights are 69 inches or more.}
+\end{practice}
+\begin{practice}{20}{2}
+A skydiver is equally likely to land at any point on a rectangular field. Two overlapping circular targets of radius 5 meters are marked on the field. To the nearest percent, what is the probability that the sky diver will land in one or both of the circles? SEE EXAMPLE 2
+% FIG 20 861 761 1106 892
+\placeholder{diagram}{Green rectangular field 30 m wide and 20 m high, dimension arrows top and left. Two horizontally overlapping circles near upper left, each radius 5 m labeled along horizontal radius. Callout arrow to lens-shaped overlap labels 30 m². Skydiver at upper right.}
+\answer{21\%}
+\end{practice}
+\begin{practice}{21}{1}
+Two marbles are chosen at random, one at a time from a box that contains 7 marbles, 5 red and 2 green. SEE EXAMPLES 3 AND 4
+a. Find the probability of drawing 2 red marbles when the first marble is replaced before the second marble is chosen.
+\answer{a. (\frac{25}{49})}
+b. Determine whether the situation described is independent.
+\answer{b. independent}
+\end{practice}
+% Source page 21: 592 Practice & Problem Solving continued
+\begin{practice}{22}{2}
+\textbf{APPLY — Mathematical Connections} For a science fair project, Elena wants to test whether ants prefer certain colors. She releases ants on the colored surface shown. If the ants are randomly distributed across the entire surface, what is the probability that any given ant will be within the blue circle, but not within the yellow circle? Round to the nearest whole percent.
+% FIG 21 518 410 684 573
+\placeholder{diagram}{Three concentric circles, common black center. Yellow disk Y radius 3 in.; blue surrounding disk B radius 9 in.; white outer disk W radius 15 in. Red radii: horizontal right to yellow boundary, diagonal upper right to blue boundary, vertical up to outer boundary, each labeled with its length.}
+\answer{32\%}
+\end{practice}
+\begin{practice}{23}{2}
+\textbf{Use Structure} A city issues 3-digit license plates for motorized scooters. The digits 0--9 are chosen at random by a computer program. What is the probability that a license plate issued meets each set of criteria?
+% FIG 21 655 584 774 730
+\placeholder{illustration}{Rear view of green motor scooter on street, orange license plate showing three question marks.}
+a. The three-digit number formed is even. \answer{a. (\frac12)}
+b. The first number is not 7. \answer{b. (\frac19)}
+c. The first two digits are the same. \answer{c. (\frac1{10})}
+d. All three digits are the same. \answer{d. (\frac1{100})}
+\te{Printed answer b is 1/9; likely 9/10 for a randomly chosen digit from 0 through 9.}
+\end{practice}
+\begin{practice}{24}{2}
+\textbf{Model With Mathematics} During a football game, a kicker is called in twice to kick a field goal from the 30 yard line. Suppose that for each attempt, the probability that he will make the field goal is 0.8.
+a. What is the probability that the kicker will make both field goals?
+\answer{a. 0.64, or 64\%}
+b. What is the probability that he will make neither field goal?
+\answer{b. 0.04, or 4\%}
+\end{practice}
+\begin{practice}{25}{2}
+\textbf{ASSESSMENT PRACTICE} The probability of events (A) and (B) both occurring is 15\%. The probability of event (A) or (B) occurring is 60\%. The probability of (B) occurring is 50\%. What is the probability of (A) occurring?
+\answer{25\%}
+\end{practice}
+\begin{practice}{26}{1}
+\textbf{SAT/ACT} A robot spins the spinner shown twice. Assume that the outcomes 1, 2, 3, and 4 are equally likely for each spin. What is the probability that the sum of the two outcomes will be 6?
+% FIG 21 827 448 921 543
+\placeholder{diagram}{Four equal quadrants of circular spinner: upper-left orange 1, upper-right green 2, lower-right purple 3, lower-left blue 4. Black pointer toward upper right.}
+A. (\frac1{16})
+B. (\frac18)
+C. (\frac3{16})
+D. (\frac14)
+E. (\frac34)
+\answer{C}
+\end{practice}
+\begin{practice}{27}{3}
+\textbf{Performance Task} Paula is packing to visit a friend in another city for a long weekend. She looks at the weather forecast shown below to find the chance of rain. Assume that whether it rains on each day is independent of whether it rains on any other day.
+\begin{tabular}{lrrr}
+Weather Forecast & SAT & SUN & MON \\
+High & 70° & 63° & 65° \\
+Low & 59° & 49° & 48° \\
+Chance of rain & 10\% & 50\% & 20\% \\
+\end{tabular}
+% FIG 21 828 727 1025 866
+\placeholder{illustration}{Desktop monitor displaying the three-column Weather Forecast table transcribed above. Sun and cloud icons for Saturday and Monday, sun/cloud/rain for Sunday; blue droplets beside rain percentages.}
+Part A What is the probability that it will not rain on any of the three days to the nearest percent?
+\answer{Part A 36\%}
+Part B What is the probability that it will rain at least one of the three days to the nearest percent
+\answer{Part B 64\%}
+Part C Do you think Paula should pack an umbrella? Explain.
+\answer{Part C Yes, because even though the chance of rain on any one day is 50\% or less, it is more likely than not to rain at some point during her visit.}
+\end{practice}
+% Source page 22: 592A Lesson Quiz
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & G07, G36 \\
+2 & 1 & DP02 \\
+3 & 2 & DP02 \\
+4 & 1 & DP02 \\
+5 & 2 & DP02 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+I Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+O On-Level & 4 points & Enrichment \\
+A Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{12-1 Lesson Quiz. Probability Events}
+Name. enVision Algebra 2. SavvasRealize.com.
+1. A rectangular piece of stained glass has the dimensions shown in the diagram. What is the probability that a random leaf that lands on the rectangle lands within either section shaped like a right triangle?
+% FIG 22 1017 303 1145 374
+\placeholder{diagram}{Rectangle height 5 cm; bottom split into 2 cm, 3 cm, 6 cm segments. Segment from top left to first bottom division; segment from top right to second bottom division.}
+Choices: 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 16.
+\answer{(\frac{4}{11})}
+2. There are 5 red tiles and 5 blue tiles with the letter A in a bag. There are also 6 red tiles and 4 blue tiles with the letter B in the bag. What is the probability that a randomly selected tile is blue or has the letter B?
+A. (\frac{9}{20})
+B. (\frac{1}{2})
+C. (\frac{3}{4})
+D. (\frac{19}{20})
+\answer{C}
+3. Select from the following pairs of events all the pairs that are independent.
+A. Draw a 2 of clubs from a standard deck of 52 cards, keep it, then draw a 2 of diamonds.
+B. Draw a 3 of spades from a standard deck of 52 cards, replace it, then draw a 5 of hearts.
+C. Roll a number cube. Then roll again if the first roll is a 6.
+D. Roll a 2 on a number cube and spin a 3 on a spinner.
+E. Events A and B, where (P(A)=0.4), (P(B)=0.2), and (P(A\text{ and }B)=0.8)
+F. Events A and B, where (P(A)=0.1), (P(B)=0.5), and (P(A\text{ and }B)=0.05)
+\answer{B, D, F}
+4. On a track and field team, 8\% of the members run only long-distance, 32\% compete only in field events, and 12\% are sprinters only. Find the probability that a randomly chosen team member runs only long-distance or competes only in field events. Write the probability as a decimal.
+\answer{0.4}
+5. The probability that Yuri will make a free throw is 0.3. The probability that he will make two consecutive free throws is \answer{0.09}. The probability that he will make the first and not the second in two free throws is \answer{0.21}. The probability that he will make neither of the two free throws is \answer{0.49}.
+enVision Algebra 2 • Assessment Sourcebook
+\end{te-addendum}
+% Source page 23: 592B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{STEP 4 Assess \& Differentiate. DIFFERENTIATED RESOURCES}
+SavvasRealize.com. Practice. I = Intervention. O = On-Level. A = Advanced.
+\textbf{Reteach to Build Understanding I}
+Provides scaffolded reteaching for the lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-1 Reteach to Build Understanding. Probability Events}
+1. A card is selected at random and the number cube is rolled.
+Event A: An odd-numbered card is selected.
+Event B: An odd number comes up on the number cube.
+% FIG 23 260 428 403 474
+\placeholder{diagram}{Five fanned cards numbered 1, 2, 3, 4, 5; gray cube with 2 top, 3 front, 6 right.}
+Use the terms to complete the statements. Terms may be used more than once.
+\begin{tabular}{lll}
+are & are not & no \\
+does & does not & at least one \\
+equals & does not equal & \\
+\end{tabular}
+a. A and B \answer{are not} mutually exclusive because \answer{at least one} outcome in A can occur at the same time as an outcome in B.
+b. A and B \answer{are} independent because the occurrence of A \answer{does not} affect the probability of B.
+c. (P(A\text{ or }B)) \answer{does not equal} (P(A)+P(B)) because A and B \answer{are not} mutually exclusive.
+d. (P(A\text{ and }B)) \answer{equals} (P(A)\cdot P(B)) because A and B \answer{are} independent.
+2. Dakota calculates the probabilities shown below.
+Event A: an even numbered card. Event B: a number cube roll greater than 4
+Identify and correct the error(s).
+(P(A)=\frac{2}{5})
+(P(B)=\frac{2}{6})
+(P(A\text{ and }B)=\frac{22}{30})
+\answer{Dakota added the probabilities instead of multiplying: (\frac{2}{5}\cdot\frac{2}{6}=\frac{2}{15}).}
+3. A classmate asks Juan to find the probability of tossing a number cube and getting an even number on the first roll and a 2 on the second roll. Complete the calculation.
+(P(\text{even})=\frac{3}{6})
+(P(2)=\frac{\answer{1}}{6})
+(P(\text{even and }2)=\frac{1}{\answer{2}}\cdot\frac{\answer{1}}{6}=\answer{\frac{1}{12}})
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice I O}
+Provides extra practice for each lesson. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-1 Additional Practice. Probability Events}
+1. Understand Only 93\% of the airplane parts being examined pass inspection. What is the probability that the next 5 parts examined will all pass inspection?
+\answer{about 69.6\%}
+2. Apply Exactly 62\% of the students in your school are under 17 years old. In addition, 4\% of the students are over 18. What is the probability that a student chosen at random is under 17 or over 18?
+\answer{66\%}
+You have a drawer with five pairs of white socks, three pairs of black socks, and one pair of red socks. You choose one pair of socks at random each morning, starting on Monday. You do not put the socks you choose back in the drawer.
+3. You select black socks on Monday. What is the probability you select white socks on Tuesday?
+\answer{(\frac{5}{8})}
+4. You select white socks on Monday. What is the probability you select white socks on Tuesday?
+\answer{(\frac{1}{2})}
+The rectangular yard shown below has a circular pool and a triangular garden. A ball from an adjacent golf course lands at a random point within the yard. Find each probability.
+% FIG 23 676 600 780 652
+\placeholder{diagram}{Drawing not to scale. Rectangular yard 100 ft wide, 50 ft high. Circular pool on left radius 12 ft. Shaded right triangle in upper right corner with legs 8 ft across top and 6 ft along right.}
+5. The ball lands in the garden. \answer{about 0.005}
+6. The ball lands in the garden or the pool. \answer{about 0.095}
+7. The ball does not land in the pool. \answer{about 0.91}
+8. Of the 195 students in the senior class, 104 study Spanish and 85 study French, with 12 studying both Spanish and French. What is the probability that a student chosen at random is studying Spanish, but not French?
+\answer{about 0.47 or 47\%}
+9. You donate 8 baseballs to a local baseball team. Your uncle donates 12 baseballs. If a total of 50 baseballs are donated, what is the probability that the first pitch of the season uses one of your baseballs or one of your uncle's baseballs?
+\answer{0.4, or 40\%}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment O A}
+Presents engaging problems and activities that extend the lesson concepts. MathXL for School.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-1 Enrichment. Probability Events}
+For a math project, Maxine's class surveyed students at their school about the mode of transportation they most often use to go to and from school.
+A frequency table is a record of the number of times that an event occurs.
+Relative frequency is the ratio of the number of times an event occurs to the total number of trials.
+\textbf{Frequency Table}
+\begin{tabular}{llllll}
+Grade & 9 & 10 & 11 & 12 & Total \\
+Walk & 52 & 44 & 40 & 32 & \answer{168} \\
+Car & \answer{24} & \answer{44} & \answer{54} & \answer{66} & \answer{188} \\
+Bus & 84 & 90 & \answer{66} & 42 & 282 \\
+Total & 160 & 178 & 160 & 140 & 638 \\
+\end{tabular}
+1. A student lost some of the data. Complete the frequency table.
+\textbf{Relative Frequency}
+\begin{tabular}{lllllll}
+Grade & 9 & 10 & 11 & 12 & Total & Probability (\%) \\
+Walk & 0.08 & 0.07 & 0.06 & 0.05 & \answer{0.26} & \answer{26\%} \\
+Car & \answer{0.04} & \answer{0.07} & \answer{0.08} & \answer{0.10} & \answer{0.29} & \answer{29\%} \\
+Bus & 0.13 & 0.14 & \answer{0.10} & 0.07 & \answer{0.44} & \answer{44\%} \\
+Total & 0.25 & 0.28 & 0.25 & 0.22 & \answer{1} & \answer{100\%} \\
+\end{tabular}
+2. Complete the relative frequency table.
+Use the data in the tables for Items 3--7. Write probabilities to the nearest whole percent.
+3. What is the sum of all the individual relative frequencies? How can you use this to check your work?
+\answer{0.99; it should be about 1}
+4. a. How can you use frequency to find the relative frequency of an outcome?
+\answer{Sample answer: Divide the frequency of the outcome by the total number of outcomes.}
+b. How can you use relative frequency to find the probability that a senior selected at random takes the bus? Find the probability and explain.
+\answer{Sample answer: Divide the relative frequency of 12th grade and bus by the relative frequency of 12th grade: (\frac{0.07}{0.22}=0.32), or 32\%.}
+5. If 8\% of students sometimes take a bike to school, how many spaces in the bike rack should the school make available for each student to have a space?
+\answer{51 spaces}
+6. What is the probability that a randomly chosen student is a 10th grader who walks to school or takes the bus?
+\answer{21\%}
+7. If 5\% of students in Grade 9 who usually take the bus sometimes ride a bicycle to school, what is the probability that a ninth-grade student selected at random usually takes the bus and sometimes rides a bicycle to school?
+\answer{2.6\%}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary I O}
+Helps students develop and reinforce understanding of key terms and concepts.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-1 Mathematical Literacy and Vocabulary. Probability Events}
+Complete the vocabulary chart by filling in the missing information. \answer{Sample answers are shown.}
+\begin{tabular}{lll}
+Word or Word Phrase & Definition & Picture or Example \\
+outcome & An outcome is a possible result of a probability experiment. & Toss a coin. There are two possible outcomes: heads or tails. \\
+event & An event is a set of one or more outcomes of a probability experiment. & \answer{1. Rolling an even number is an event when rolling a number cube.} \\
+mutually exclusive events & \answer{2. Two (or more) events are mutually exclusive if they have no outcomes in common.} & Diagram below. \\
+non-mutually exclusive events & \answer{Two (or more) events are non-mutually exclusive if they have outcomes in common.} & \answer{3. Diagram below.} \\
+complement & The complement of an event is the set of all outcomes in a sample space that are not included in the event. & \answer{4. If C is the event that A does not occur, then (P(C)=1-P(A)).} \\
+independent events & \answer{5. Events A and B are independent if the occurrence of A does not affect the probability of B and vice versa.} & Toss two 1--6 number cubes. Tossing 1 on one cube and 6 on the other are independent events. (P(1\text{ and }6)=P(1)\cdot P(6)) \\
+\end{tabular}
+% FIG 23 325 1120 395 1170
+\placeholder{diagram}{Venn diagram: rectangle S with separate circles A and B.}
+% FIG 23 328 1173 394 1215
+\placeholder{diagram}{Magenta answer Venn diagram: rectangle S with overlapping circles A and B; arrow labeled Event A and B points into intersection.}
+enVision Algebra 2 • Teaching Resources
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital preview: A surveyor took some measurements of a piece of land. The owner needs to know the area of the land to determine the value. What is the area of the piece of land? Blank ft. Printed ft; likely square feet for area.}
+% FIG 23 584 977 1035 1298
+\placeholder{illustration}{Tablet with digital land-area problem; green irregular parcel, trees, road, dashed internal segments. Visible measurements 12 ft upper left, 21 ft lower left, 22 ft lower right, right-angle marker at bottom altitude and 54-degree lower-right angle. Help menu covers some right-hand labels. No answer printed.}
+\te{Exit. Question Help. Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Enter your answer in the answer box and then click Check Answer. 1 part remaining. Clear All. Check Answer. Review progress. Question 24 of 40. Go. Back. Next.}
+\end{te-addendum}
+
+\end{document}

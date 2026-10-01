@@ -1,0 +1,811 @@
+\documentclass{article}
+% Source: Topic_12_Teacher_Edition.pdf, PDF pages 72-83 (printed pages 623A-630B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example Ã— DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 72: 623A Lesson Overview
+\begin{lesson-meta}
+lesson: 12-6
+title: Probability and Decision Making
+standards: none printed
+practices: none printed
+objective: I can use probability to make decisions.
+
+essential question: How can you use probability to make decisions?
+
+\textbf{VOCABULARY: REVIEW}
+\item binomial probability
+\item expected value
+\item probability distribution
+\textbf{TOPIC VOCABULARY}
+\te{No separate topic vocabulary list is printed on these pages.}
+\begin{tabular}{ll}
+Lesson Code & 12-6 \\
+Title & Probability and Decision Making \\
+Standards & none printed \\
+I CAN Objective & I can use probability to make decisions. \\
+Essential Question & How can you use probability to make decisions? \\
+Lesson Vocabulary & binomial probability; expected value; probability distribution \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to: Analyze decisions and evaluate fairness using probability concepts.
+Essential Understanding. To determine whether a procedure is fair, compare the probabilities of possible outcomes. To choose among options, compare expected values. In situations with two possible outcomes for each trial, use binomial probabilities.
+\textbf{COHERENCE}
+Previously in this topic, students: Found the probability of random events. Calculated binomial probability. Calculated expected value.
+In this lesson, students: Use the probability of random events to determine whether games and strategies are fair or unfair. Make decisions based on expected value. Use a binomial distribution to make decisions.
+Increasing Coherence. The content of this lesson is not necessarily expected to be addressed on high-stakes assessments.
+In later courses, students will: Apply knowledge of probability to understanding statistics.
+\textbf{RIGOR}
+This lesson emphasizes a blend of procedural skill and fluency and application.
+Students calculate probabilities and expected value to solve problems.
+Students apply knowledge of probability to evaluate options and make decisions in real-world situations.
+\textbf{Mathematics Overview}
+Students use their understanding of probability concepts to analyze options and make decisions. They determine whether games and strategies are fair or not. Students apply this understanding in real-world situations and mathematical contexts.
+Students also make decisions based on expected value and binomial distributions.
+\textbf{Applying Math Practices}
+Make Sense of Problems and Persevere in Solving Them. Students evaluate complex situations and determine how probability concepts can be applied to make sense of them.
+Reason Abstractly and Quantitatively. Students translate real-world situations into mathematical representations in order to evaluate them, and then interpret the results in terms of the real-world contexts.
+\te{Program Resources. SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+REVIEW VOCABULARY English & Spanish \\
+binomial probability & probabilidad binomial \\
+expected value & valor esperado \\
+probability distribution & distribución de probabilidades \\
+\end{tabular}
+VOCABULARY ACTIVITY. Have students review how to recognize a binomial experiment by completing the following statements:
+A binomial experiment consists of a blank number of trials. \answer{fixed}
+Each trial has blank possible outcomes, one of which is denoted as ``success.'' \answer{two}
+The results of the trials are blank events. \answer{independent}
+The probability of success is blank for every trial. \answer{the same}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+% FIG 72 963 678 1117 858
+\placeholder{illustration}{Student Companion cover: multicolored circular geometric design on black; Student Companion; enVision Algebra 2; SAVVAS.}
+\end{te-addendum}
+% Source page 73: 623B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{CRITIQUE \& EXPLAIN}
+INSTRUCTIONAL FOCUS. Students explore how to use probability and expected value to determine whether a game is fair, in preparation for using probability to make decisions.
+STUDENT COMPANION. Students can complete the Critique \& Explain activity in their Student Companion.
+\te{Activity. Critique \& Explain is available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before: WHOLE CLASS. Implement Tasks That Promote Reasoning And Problem Solving ETP}
+Q: How do you decide whether to play a game where you can win or lose something of value?
+\answer{You may choose to play if you have a better chance of winning than losing, or if what you lose goes to a good cause.}
+\textbf{During: SMALL GROUP. Support Productive Struggle in Learning Mathematics ETP}
+Q: How can you organize the outcomes of rolling two number cubes and finding their product?
+\answer{Make a table with the 6 possibilities for one cube as the rows and the 6 for the other as the columns and put the products in the 36 cells.}
+Q: Does the game need to be fair for you to take the offer?
+\answer{No; if the game is fair, then you have an equal chance of winning or losing, but you should also take the offer if you have a better chance of winning.}
+Q: If you change the rules so neither player wins when certain outcomes occur, how can that help make the game fair?
+\answer{There are more possibilities for making the number of ways to win and lose equal, such as having 16 or 17 ways for each in addition to 18 for each.}
+\textbf{For Early Finishers}
+Q: Suppose you win \$1 or lose \$1 when you play. Can you make it fair by changing one of the amounts?
+\answer{Yes; there are 17 ways to win and 19 ways to lose. If the winner gets \$1.12 (\$1\times\frac{19}{17}), the game becomes fair.}
+\te{Printed \$1.12; this rounds the exact fair payoff \$19/17.}
+\textbf{After: WHOLE CLASS. Facilitate Meaningful Mathematical Discourse ETP}
+Q: What did you examine to decide whether to play the game?
+\answer{The possible outcomes, the probability of each outcome, and whether playing the game would result in more, fewer, or an equal number of wins in the long run.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{CRITIQUE \& EXPLAIN}
+Your friend offers to play the following game with you: ``If the product of the roll of two number cubes is 10 or less, I win. If not, you win!''
+% FIG 73 937 646 1061 710
+\placeholder{illustration}{Two colored number cubes: green cube with 1 on top, 5 on left face, 4 on right; blue cube with 6 on top, 2 on left, 3 on right.}
+A. If you were to play the game many times, what percent of the games would you expect to win?
+\answer{47.2\% of the games}
+B. Is the game fair? Should you take the offer? Explain.
+\answer{No, the game is not fair. There are 19 ways to get products that are 10 or less, and only 17 ways to get products that are more than 10. So, your friend has a 52.8\% chance to win, and you only have a 47.2\% chance to win.}
+C. Make Sense and Persevere. Suggest a way to change the game from fair to unfair, or vice versa, while still using the product of the two number cubes. Explain.
+\answer{The same game except your friend wins when the product is less than 10 and you win when the product is greater than 10. If a product of 10 is rolled, simply consider it a draw and reroll.}
+\te{Digital version: Go back; Your friend offers you the following game. ``If the product of the roll of two number cubes is 10 or less, I win. If not, you win!'' Parts A--C repeat the student questions; Enter your answer. STUDENT EDITION. SAMPLE STUDENT WORK.}
+\end{model-discuss}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{Use Structure. Use with CRITIQUE \& EXPLAIN}
+Change the game from using products to using a different mathematical number operation. Can you make the game fair? Explain your reasoning.
+\answer{Answers may vary. Sample: You can use addition. There are 18 even sums and 18 odd sums. If one person wins when the sum is even and one person wins when the sum is odd, the game is fair.}
+\end{te-addendum}
+% Source page 74: 623 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Establish Learning ETP.
+Students show that finding and using probabilities and values of expected outcomes can help them make decisions, such as deciding whether a game is fair or evaluating costs and benefits.
+\te{Activity. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{1}{ElicitEvidence}
+\textbf{Use Probability to Make Fair Decisions. Elicit and Use Evidence of Student Thinking ETP}
+Q: How many times do you need to generate a random integer in order to pick the two students?
+\answer{You do not know. You have to generate numbers until you do not get a duplicate.}
+Q: How could you use a table of random numbers to pick the students?
+\answer{Look for the first two different numbers that are 1, 2, 3, 4, or 5 and choose the students associated with those numbers.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Use Probability to Make Fair Decisions}
+\te{APPLICATION. ESSENTIAL QUESTION: How can you use probability to make decisions?}
+Sadie, Tamira, River, Victor, and Jae are candidates to represent their school at an event. How can you use random integers to select 2 students from the 5 candidates, so that each one is equally likely to be selected?
+There are 5 students. Assign a number to each student.
+\begin{tabular}{lllll}
+1 & 2 & 3 & 4 & 5 \\
+Sadie & Tamira & River & Victor & Jae \\
+\end{tabular}
+To select a student, use a calculator or other random number generator to generate a random integer from 1 to 5. Repeat to select the second student.
+% FIG 74 839 379 1077 440
+\placeholder{diagram}{Calculator screen: randInt(1,5) gives 5; randInt(1,5) gives 5; randInt(1,5) gives 1. Callout: Ignore the duplicate 5. Some calculators may have a function that eliminates duplicates.}
+\answer{Jae (5) and Sadie (1) are selected.}
+\te{MAKE SENSE AND PERSEVERE. Consider how you would assign integers from 1 to 10 among the 5 students. How do you adjust this for a random number generator that gives a number (r) from the interval (0\leq r<1)?}
+\end{example}
+\begin{tryit}{1}
+Your trainer creates training programs for you. How can you use index cards to randomly choose the following: Strength training 1 day per week; Cardio training 2 days per week, with no consecutive days; Swimming 1 day per week.
+\answer{Write the days of the week on 7 index cards. Select cards at random as follows: For cardio select 1 card, and then another. If the second card results in 2 consecutive days, ignore it and select another. Repeat as needed. For strength, select 1 card. For swimming, select 1 card.}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Additional Examples. ADDITIONAL EXAMPLE 2}
+\te{Additional Examples are available at SavvasRealize.com. Go back; ESSENTIAL QUESTION; SOLUTION.}
+Roshaun offers you a game where you roll a number cube. If the roll is less than 5, you get the number of points rolled. If not, Roshaun gets the points rolled. Is the game fair or unfair? If it is unfair, which player has the advantage?
+Find the probability of each outcome, its point value for you, and the expected value.
+Each roll, 1 through 6, has the same probability, (\frac16).
+(E=1\cdot(\frac16)+2\cdot(\frac16)+3\cdot(\frac16)+4\cdot(\frac16)+(-5)\cdot(\frac16)+(-6)\cdot(\frac16))
+(=(1+2+3+4-5-6)\cdot(\frac16))
+(=-\frac16)
+\answer{The game is unfair and is skewed to Roshaun's advantage.}
+% FIG 74 462 925 547 1017
+\placeholder{illustration}{Orange number cube, 4 on top, 1 on left face, 2 on right face.}
+Example 2. Help students find expected value and determine fairness in a game with more than two possible outcomes.
+Q: In the Example, there were two outcomes, one for winning and one for losing. Why are there more outcomes here?
+\answer{because each roll has a different point value}
+\end{te-addendum}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 3}
+\te{Go back; ESSENTIAL QUESTION; SOLUTION.}
+Gabriela offers you a game where the Flipper flips a coin 4 times. If it lands with heads showing 3 times, the Flipper gets 4 points. Otherwise the Observer gets 1 point.
+Would you prefer to be the Flipper or the Observer?
+Find the probability of each outcome, its point value for the Flipper, and the expected value.
+There are (2^4=16) possible outcomes.
+The number of outcomes where the Flipper wins is ({}_4C_3=4).
+The probability of the Flipper winning is (\frac4{16}=0.25).
+The probability of the Flipper losing is (1-0.25=0.75).
+(E=4(0.25)+(-1)(0.75))
+\answer{(=0.25)}
+% FIG 74 1012 925 1083 997
+\placeholder{photo}{Obverse of United States quarter dollar with Washington portrait: UNITED STATES OF AMERICA, LIBERTY, IN GOD WE TRUST, QUARTER DOLLAR.}
+Example 3. Help students find expected value and determine fairness in a situation with two possible outcomes for each of several trials.
+Q: How can you find the number of possible outcomes in this game? How can you find the number of winning outcomes?
+\answer{Since there are 2 outcomes for each toss, there are (2^n) possible outcomes for (n) tosses. To find the number of winning outcomes, find ({}_nC_r), where (n) is the number of tosses and (r) is the number of heads you need to win.}
+\end{te-addendum}
+% Source page 75: 624 Step 2 Understand & Apply
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Determine Whether a Decision Is Fair or Unfair. Pose Purposeful Questions ETP}
+Q: In Part A, could you ignore the number of points when deciding if the game is fair? Why? How can you decide whether the game is fair without considering points?
+\answer{Yes, because the outcomes winning and losing have the same point value. You can just count the number of winning and losing outcomes and see if they are equal.}
+Q: In Part B, consider the number of outcomes that result in a win and the number that result in a loss. What relationship must there be between the number of points for a win and the number of points for a loss to make it a fair game?
+\answer{Since there are two outcomes that lose and one that wins, the point value for the winning outcome must be double the point value for a losing outcome.}
+\te{Activity. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Determine Whether a Decision Is Fair or Unfair}
+\te{CONCEPTUAL UNDERSTANDING.}
+Thato places three cards in a hat and challenges Helena to a game.
+% FIG 75 955 246 1080 310
+\placeholder{illustration}{Brown hat holding three colored cards labeled 1, 2, and 3.}
+A. Thato says, ``If you draw a number greater than 2, you earn 2 points. Otherwise, I earn 2 points.'' Is the game fair, or unfair? If it is unfair, which player has the advantage? Explain.
+In each round, Thato either wins 2 points or loses 2 points.
+\te{If Helena draws a ``3'' and gets 2 points, Thato considers this a loss of 2 points for himself.}
+Find the probability of each outcome. Then find the expected value.
+(P(-2)=\frac13\text{ and }P(+2)=\frac23)
+(E=-2\cdot(\frac13)+2\cdot(\frac23))
+(=\frac23)
+\te{A game is considered ``fair'' if and only if the expected value is 0.}
+\answer{The game is unfair and is skewed to Thato's advantage. The probability of his scoring 2 points is twice the probability of Helena scoring 2 points.}
+\te{COMMON ERROR. Recall that the expected value is the sum of the products of the outcomes' values by their respective probabilities. Be careful not to use the sum of the probabilities.}
+B. Helena proposes a change to the scoring of the game. She says, ``If I draw a number greater than 2, I get 2 points. Otherwise, you get 1 point.'' Is the game fair, or unfair? If it is unfair, which player has the advantage? Explain.
+In each round, Thato either scores 1 point or he loses 2 points.
+Find the probability of each outcome. Then find the expected value.
+(P(-2)=\frac13\text{ and }P(+1)=\frac23)
+(E=-2\cdot(\frac13)+1\cdot(\frac23))
+(=-\frac23+\frac23=0)
+\answer{This is a fair game because the expected value is 0. Neither player has an advantage over the other.}
+\end{example}
+\begin{tryit}{2}
+Justice and Tamika use the same 3 cards but change the game. In each round, a player draws a card and replaces it, and then the other player draws. The differences between the two cards are used to score each round. Order matters, so the difference can be negative. Is each game fair? Explain.
+a. If the difference between the first and second cards is 2, Justice gets a point. Otherwise Tamika gets a point.
+\answer{a. No; there are more ways for Tamika to score a point.}
+b. They take turns drawing first. Each round, the first player to draw subtracts the second player's number from her own and the result is added to her total score.
+\answer{b. Yes; the expected value is 0, the possible scores are (-2), (-1), 0, 1, and 2, and each player has the same probability of getting each score.}
+\end{tryit}
+\begin{te-addendum}{2}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: In Part B, how does taking turns affect each player's chance of getting a particular score? How does this simplify your method for determining fairness?
+\answer{Since players take turns, each one has the same probability of getting each score. Even though different scores are not equally likely, you don't have to calculate their probabilities to know whether the game is fair.}
+\end{te-addendum}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking. USE WITH EXAMPLE 2}
+Have students explore fairness in a game with more complicated scoring rules.
+Give students the following game description. Consider providing number cubes for students to play the game.
+Divit rolls one number cube and Anastasia rolls two. If Divit rolls a 2 he wins; if Anastasia rolls a sum of 7 she wins. If both or neither occur, both roll again.
+Q: Is the game fair?
+\answer{Yes; each player has a 1 in 6 probability of winning.}
+Q: Change Divit's winning number to 3 and Anastasia's to a sum of 8. Is the game fair?
+\answer{No; Divit's chance of winning stays 1 in 6, but Anastasia has only a 5 in 36 chance of winning.}
+Q: How could you change the scoring rules to make a fair game involving the product of Anastasia's two numbers?
+\answer{If Divit rolls a 6 he wins, and if Anastasia rolls a product that is a perfect square she wins.}
+\te{Printed perfect-square product rule is not fair; eight of 36 ordered pairs have square products, including (1,4) and (4,1), compared with Divit's probability 1/6.}
+\end{te-addendum}
+% Source page 76: 625 Step 2 Understand & Apply
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Make a Decision Based on Expected Value. Support Productive Struggle in Learning Mathematics ETP}
+Q: If there were no failures, what would change about the situation?
+\answer{The expected profit for the TAB5000 would be (150-100=\$50) and for the TAB5001 would be (150-105=\$45). So it would not make sense to replace the TAB5000 with the TAB5001.}
+Q: How much more profit will the company get by selling 1,000 TAB5001 tablets than by selling 1,000 TAB5000 tablets? Suppose it will cost \$7,500 to advertise the new model. How many sales would be needed to make up for this cost? Would this information change your recommendation?
+\answer{\$150; 50,000; Yes, because the company may not sell enough tablets to pay off the advertising costs}
+\te{Activity. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Make a Decision Based on Expected Value}
+\te{APPLICATION.}
+The Silicon Valley Company manufactures tablets and computers. Their tablets are covered by a warranty for one year, so that if the tablet fails, the company replaces it. Since the failure rate of their model TAB5000 tablet is high, the head of production has a plan for replacing certain components inside the TAB5000 and calling the new model TAB5001.
+% FIG 76 835 304 1159 412
+\placeholder{illustration}{Two tablet computers on a green background. Model TAB5000 callout: Cost to produce: \$100; Price: \$150; 5\% fail within first year; Replacement cost to company: \$130. Model TAB5001 callout: Cost to produce: \$105; Price: \$150; 1\% fail within first year (estimate); Replacement cost to company: \$135.}
+If you were the head of production, would you recommend switching to selling the TAB5001?
+Formulate. Find the expected profit for each model.
+(Expected profit=price-cost-(cost\ to\ replace)(failure\ rate))
+Compute.
+(Expected profit of TAB5000=\$150-\$100-(\$130)(0.05))
+(=\$50-\$6.50)
+(=\$43.50)
+(Expected profit of TAB5001=\$150-\$105-(\$135)(0.01))
+(=\$45-\$1.35)
+(=\$43.65)
+Interpret.
+\answer{The expected profit of the TAB5001 is more than the expected profit of the TAB5000. It makes sense to sell the TAB5001 instead of the TAB5000. Also, customers who bought a tablet would be more likely to be pleased with their purchase and buy from the same company in the future.}
+\end{example}
+\begin{tryit}{3}
+Additional data is collected for the TAB5000 and TAB5001. The production and replacement costs for the TAB5001 remain unchanged.
+a. The production and replacement costs for the TAB5000 increased by \$10. What would the expected profit be for the TAB5000?
+\answer{a. \$33.00}
+b. The failure rate for the TAB5001 increased by 1\%. What would the expected profit be for the TAB5001?
+\answer{b. \$42.30}
+c. As a consultant for the company, what would you recommend they do to maximize their profit?
+\answer{c. Discontinue TAB5000 and consider increasing the selling price of TAB5001.}
+\end{tryit}
+\begin{te-addendum}{3}{HabitsOfMind}
+\textbf{Construct Arguments. Use with EXAMPLES 1, 2, \& 3}
+When do you need to compute and compare expected values instead of just comparing probabilities? Explain.
+\answer{Answers may vary. Sample: Compare expected values whenever different outcomes have different weights or values associated with them. In such cases, the probability alone does not show the value or score of a set of outcomes.}
+\end{te-addendum}
+\begin{te-addendum}{3}{ELLAddendum}
+\textbf{English Language Learners. Use with EXAMPLE 3}
+READING: BEGINNING. Have students match each bullet point in the graphic with the corresponding term in the equation (Expected profit=price-cost-(cost\ to\ replace)(failure\ rate)). Discuss the meaning of each term.
+Q: What is the price?
+\answer{The amount a customer pays for a tablet.}
+Q: What is the cost in the equation?
+\answer{The amount it costs the company to produce a tablet.}
+Q: What is the cost to replace in the equation? Why is this amount greater than the cost to produce?
+\answer{The amount it costs the company to send a customer a new tablet if one breaks; The company may need to pay for shipping the tablet.}
+SPEAKING: DEVELOPING. Discuss the meaning of profit: the amount gained minus the amount spent in producing or selling something. Have students describe how to calculate profit in various situations.
+Q: You buy yarn and knitting needles, and then you make and sell a scarf. What is your profit?
+\answer{The profit is the price of the scarf minus the cost of the yarn and needles.}
+Q: You buy snacks in bulk and then sell individual packages of them to your friends. How can you calculate your profit per package?
+\answer{Multiply the number you sell by the price per package, and then subtract the amount you paid for the bulk snacks. Then divide by the number of packages.}
+WRITING: EXPANDING. Have students practice persuasive writing by pretending they are the head of production and are writing a memo explaining why the TAB5000 should be replaced.
+Q: How can you describe the advantages of the TAB5001?
+\answer{It is more reliable; it will make customers more satisfied; it will increase our profits.}
+Q: What words or phrases will you use to convince your boss?
+\answer{``I strongly recommend ...''; ``a wonderful opportunity for our company''; ``the calculations show ...''}
+Have students trade papers and check for complete sentences and correct grammar and spelling.
+\end{te-addendum}
+% Source page 77: 626 Step 2 Understand & Apply
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Use a Binomial Distribution to Make Decisions. Elicit and Use Evidence of Student Thinking ETP}
+Q: How do combinations relate to the number of passengers that show up for the shuttle?
+\answer{Each of the 8 passengers can either show up or not show up. The number of ways that (r) passengers can show up is the number of combinations of 8 things taken (r) at a time.}
+Q: How is the binomial probability formula used to find the probability that 7 of the passengers show up?
+\answer{If 7 show up, then 1 does not show up. So the probability that 7 people show up is equal to the number of combinations of 8 things taken 7 at a time times the probability that each person shows up to the 7th power times the probability that one person does not show up.}
+\te{Activity. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Use a Binomial Distribution to Make Decisions}
+An airport shuttle company takes 8 reservations for each trip because 25\% of their reservations do not show up. Is this a reasonable policy?
+% FIG 77 960 243 1126 344
+\placeholder{illustration}{Airport Shuttle van at International Departures terminal; Capacity: 6 passengers.}
+Find the probability that more passengers show up than the van can carry.
+For 8 reservations, the graph shows the number of possible combinations of passengers showing up.
+% FIG 77 798 366 1114 526
+\placeholder{graph}{Airport Shuttle bar graph. Horizontal axis Number of Passengers That Show Up, integers 0 through 8. Vertical axis Number of Combinations, 0 through 80 in increments of 10. Blue bars at 0,1,2,3,4,5,6,7,8 have heights 1,8,28,56,70,56,28,8,1. Dashed red vertical line between 6 and 7, callout Too many passengers! Another callout: 8 ways that 7 people show up ({}_8C_7=8); 1 way that 8 people show up ({}_8C_8=1).}
+\te{USE APPROPRIATE TOOLS. How does the graph of the number of combinations help you think about the situation? How might it be misleading?}
+To find the probability that too many reservations show up, compute the probability that either 7 or 8 passengers show up. Each reservation has a 75\% chance of showing up and a 25\% chance of not showing up.
+Use (P(r)={}_nC_r\,p^r(1-p)^{n-r}).
+Find the probability that 7 reservations show up.
+(P(7)={}_8C_7(0.75)^7(0.25)^1\approx8(0.1335)(0.25)\approx0.267)
+Find the probability that 8 reservations show up.
+(P(8)={}_8C_8(0.75)^8(0.25)^0\approx1(0.1001)(1)\approx0.100)
+The probability that more reservations will show up than the van can carry is (P(7)+P(8)), or about (0.267+0.100=0.367).
+\answer{Over one third of the trips will have passengers who cannot get a seat in the van. This will result in dissatisfied customers, so this is not a reasonable policy.}
+\end{example}
+\begin{tryit}{4}
+A play calls for a crowd of 12 extras with non-speaking parts. Because 10\% of the extras have not shown up in the past, the director selects 15 students as extras. Find the probabilities that 12 extras show up to the performance, 15 extras show up to the performance, and more than 12 extras show up to the performance.
+\answer{13\%; 21\%; 82\%}
+\end{tryit}
+\begin{te-addendum}{4}{ElicitEvidence}
+\textbf{Elicit and Use Evidence of Student Thinking ETP}
+Q: What probabilities do you need to add to calculate the probability that more than 12 extras show up?
+\answer{the probabilities that 13 extras show up, that 14 extras show up, and that all 15 show up}
+\end{te-addendum}
+\begin{te-addendum}{4}{CommonError}
+\textbf{Try It! 4}
+Students may have difficulty setting up the binomial probability formula for each situation. Encourage them to think through which exponent goes with which probability in each case. The probability of showing up (90\%) should be raised to the power of the number who show up, while the probability of not showing up (10\%) should be raised to the power of the number who do not show up.
+\end{te-addendum}
+\begin{te-addendum}{4}{HabitsOfMind}
+\textbf{Use Structure. Use with EXAMPLE 4}
+What three expressions are multiplied together in the binomial probability formula and what do they represent?
+\answer{({}_nC_r), (p^r), and ((1-p)^{n-r}); ({}_nC_r) is the number of combinations with (r) successes out of (n) trials, or the number of ways to choose which (r) trials are successes. (p^r) is the probability of success, multiplied by itself (r) times. ((1-p)^{n-r}) is the probability of failure, multiplied by itself (n-r) times.}
+\end{te-addendum}
+\begin{te-addendum}{4}{RtISupport}
+\textbf{Support Struggling Students. USE WITH EXAMPLE 4}
+Students may feel the situation is too complex. Have them consider a simpler situation with 3 reservations for 2 spots.
+Have students draw pictures for each of the (2^3) ways that riders can show up or not show up. (YYY, YYN, YNY, ..., NNN)
+Q: How many ways can 0 riders show up? 1 rider? 2 riders? 3 riders?
+\answer{1, 3, 3, 1}
+Q: How do you use the binomial probability formula to find the probability that all 3 riders show up? What is this probability?
+\answer{({}_3C_3(0.75)^3(0.25)^0); 0.42}
+\end{te-addendum}
+% Source page 78: 627 Step 2 Understand & Apply
+\begin{te-addendum}{5}{ElicitEvidence}
+\textbf{Understanding False Positive and False Negative Results. Elicit and Use Evidence of Student Thinking ETP}
+Q: Suppose you were given the information that of (\frac{39}{61}), or about (\frac23), of the terriers did not have diabetes and that (\frac35) had a negative test result. What might you infer? Explain.
+\answer{Sample: The numbers are close, but since there were fewer terriers that tested negative than did not have diabetes, some of the positive test results must have been false.}
+\te{Printed ``that of''; likely ``that''. Activity. Examples are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Understanding False Positive and False Negative Results}
+Over several months, a veterinary clinic tests terriers for diabetes. The table shows the results.
+\textbf{Diabetes Test Results}
+\begin{tabular}{llll}
+ & Positive Test & Negative Test & Totals \\
+Terrier without diabetes & 63 & 327 & 390 \\
+Terrier with diabetes & 181 & 39 & 220 \\
+Totals & 244 & 366 & 610 \\
+\end{tabular}
+\te{Callout to 63: A false positive result is a positive test result even though the condition is not present. Callout to 39: A false negative result is a negative test result even though the condition is present.}
+A. What is the probability that a positive test result indicates the presence of diabetes? How likely is a false positive?
+Out of 244 terriers who tested positive, 181 have diabetes.
+(P(has\ diabetes\mid positive\ test)=\frac{181}{244}\approx74\%)
+\te{(P(does\ not\ have\ diabetes\mid positive\ test)) is the complement and equals 26\%.}
+\answer{Therefore, a terrier that with a positive test for diabetes has a 74\% probability of actually having the condition. The chance of a false positive result is 26\%.}
+\te{Printed ``a terrier that with''; likely ``a terrier with''. COMMUNICATE PRECISELY. The probability of a terrier having diabetes is (\frac{220}{610}\approx36\%). This differs from the probability of a false positive or a false negative.}
+B. What is the risk that a terrier with a negative test result actually has diabetes? How can that risk be reduced?
+Out of 366 terriers who tested negative, 39 have diabetes.
+(P(does\ have\ diabetes\mid negative\ test)=\frac{39}{366}\approx11\%)
+\answer{Approximately 1 terrier in 10 has diabetes even when the test results are negative. If the dog is overweight or has other symptoms, repeating the test could reduce the risk of misdiagnosis.}
+\te{REASON. Analyzing risk, the exposure to danger, harm, or loss, can help determine whether false results are acceptable or not.}
+\end{example}
+\begin{tryit}{5}
+A Chemistry teacher gives a pop quiz to see if the students read last night's assignment. The teacher expects a student to pass the quiz if the reading has been completed.
+\textbf{Chemistry Quiz Results}
+\begin{tabular}{llll}
+ & Passed & Failed & Totals \\
+Completed Reading & 95 & 1 & 96 \\
+Incomplete Reading & 7 & 7 & 14 \\
+Totals & 102 & 8 & 110 \\
+\end{tabular}
+a. What represents false positives and false negatives for the data? What percents are false positives and negatives?
+\answer{a. A false positive would be a student passed the quiz without completing the reading; (\frac7{102}\approx7\%); a false negative would be a student failed the quiz despite completing the reading; (\frac18\approx13\%).}
+b. What risk does a false value present?
+\answer{b. Sample: Students with a false positive may not understand the material in later lessons; students with a false negative may become discouraged.}
+\end{tryit}
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Support Productive Struggle in Learning Mathematics ETP}
+Q: For the data in the table, what do the fractions (\frac{19}{20}) and (\frac7{110}) represent? Explain.
+\answer{The students who took the test and passed after completing the reading, (\frac{95}{110}), or (\frac{19}{20}), and the students who took the test and passed but did not complete the reading, (\frac7{110}).}
+\te{Printed 95/110 or 19/20; likely 19/22.}
+\end{te-addendum}
+\begin{te-addendum}{5}{CommonError}
+\textbf{Try It! 5 a}
+For the false positive, students who use 110 as the denominator have confused the number of students who took the test (110) with the number of students who passed the test (102).
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{Make Sense and Persevere. Use with EXAMPLE 5}
+Suppose a test detects whether or not a person has a particular medical condition. A positive result means the person has the medical condition. What factors could impact the likelihood of receiving a false positive?
+\answer{Answers may vary. A test that is inaccurate may increase the likelihood of receiving a false positive. The likelihood of a false positive could also be impacted by how rare the condition is. If the condition is very rare, then even an accurate test can produce a high number of false positives compared with true positives.}
+\end{te-addendum}
+% Source page 79: 628 Step 2 Understand & Apply
+\begin{te-addendum}{ConceptSummary}{PurposefulQuestions}
+\textbf{CONCEPT SUMMARY Using Probability to Make Decisions}
+Q: How do you find and use expected values to make a decision?
+\answer{Use simple or binomial probability to find expected values. Compare the expected values to choose the more favorable outcome.}
+Q: How can you design a fair game?
+\answer{Make it so the expected value to a single player is zero or the expected value to each player is equal.}
+Q: How can a visual display of a probability distribution help you?
+\answer{You can see how many ways each outcome can occur before finding binomial probabilities.}
+\te{Presentation; Practice. Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW? Exercise 4}
+Students may associate the fairness of a game with a 50\% probability of winning or losing. Remind students that expected value is used to determine fairness. Ask them to describe situations where a fair game has win/loss probabilities other than 50\% (such as when a less valuable outcome is more likely than a more valuable outcome) and where an unfair game has 50\% probabilities (such as when equally likely outcomes are worth different amounts).
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Using Probability to Make Decisions}
+\begin{tabular}{lll}
+METHOD & DESCRIPTION & APPLICATIONS \\
+Simple Probability & Find the probability of random events. & Select the most favorable among random events. \\
+Expected Value & Multiply the probability of each outcome by its value. Add to find the expected value. & Compare expected values to choose the best of several options. Compare expected values to decide if a game is fair. \\
+Probability Distribution & Find the probability distribution of all possible outcomes. & Compare probabilities of outcomes in a binomial experiment. Create a graph of a probability distribution to present the distribution visually. \\
+\end{tabular}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION. How can you use probability to make decisions?
+\answer{Evaluating probabilities can help you decide whether a game is fair, find the costs and benefits for a risky business venture, and make rational decisions based on expected values and returns rather than guesses.}
+2. Reason. How can you use random numbers to simulate rolling a standard number cube?
+\answer{Use a calculator to generate a random integer from 1 to 6, or draw at random from a set of 6 index cards labeled 1 to 6. Each number has the same probability of being drawn or generated as the same number turning up on the roll of a standard number cube.}
+3. Error Analysis. Explain the error in Diego's reasoning.
+``If a game uses random numbers, it is always fair.''
+\te{Printed on a note with red X.}
+\answer{Sample: How the numbers are assigned or what meaning is attributed to them is a separate factor that determines whether a game is fair.}
+4. Use Structure. Describe what conditions are needed for a fair game.
+\answer{A fair game requires that participants have an equal chance to win or an expected value of 0, meaning no participant has an advantage.}
+5. Use Appropriate Tools. Explain how you can visualize probability distributions to help you make decisions.
+\answer{Answers may vary. Sample: Inspecting the graph of a probability distribution or a tree diagram makes it easier to see how likely or unlikely certain outcomes are, and inform your decisions.}
+6. Reason. Why must the expected value of a fair game of chance equal zero?
+\answer{If the expected value for a game of chance is less than 0, then a player can expect to lose more often than they win. If the expected value is greater than 0, then a player can expect to win more often than they lose. In a fair game, a player will win as often as they lose in the long run.}
+\te{Printed answer equates expected value with win frequency; unequal payoff sizes can make a fair game have unequal win and loss probabilities, as the adjacent Common Error notes.}
+\textbf{Do You KNOW HOW?}
+7. A teacher assigns each of 30 students a unique number from 1 to 30. The teacher uses the random numbers shown to select students for presentations. Which student was selected first? second?
+% FIG 79 1005 510 1095 580
+\placeholder{diagram}{Calculator screen shows randInt(1,30), result 9; randInt(1,30), result 9; randInt(1,30), result 4.}
+\answer{student 9, then student 4}
+8. Three friends are at a restaurant and they all want the last slice of pizza. Identify three methods involving probability that they can use to determine who gets the last slice. Explain mathematically why each method will guarantee a fair decision.
+\answer{(1) Write each friend's name on a slip of paper, and draw one slip at random from a paper bag to determine who gets the last slice. Each slip has a 1 in 3 chance of being chosen. (2) Assign the numbers 1 and 2 to one friend, 3 and 4 to a second friend, and 5 and 6 to the third friend. Roll a number cube, and give the slice to the friend whose number lands on top. Each person has a 2 in 6 chance of being chosen. (3) Assign each friend a number from 0 to 2. Use a calculator to generate a random number from 1 to 9. Divide the number by 3, and give the slice to the friend whose number matches the remainder. Each person has a 3 in 9 chance of being chosen.}
+9. Edgar rolls one number cube and Novia rolls two. If Edgar rolls a 6, he wins a prize. If Novia rolls a sum of 7, she gets a prize. Is this game fair? Explain.
+\answer{Yes; they each have a (\frac16) chance of winning, and the expected value is 0.}
+10. The 10 parking spaces in the first row of the parking lot are reserved for the 12 members of the Student Council. Usually an average of ten percent of the Student Council does not drive to school dances. What is the probability that more members of the Student Council will drive to a dance than there are reserved parking spaces?
+\answer{0.659 or 65.9\%}
+\end{concept-summary}
+% Source page 80: 629 Step 3 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE \& PROBLEM SOLVING}
+\te{Practice. Practice \& Problem Solving and video tutorials are available at SavvasRealize.com. Scan the QR code to access a video tutorial.}
+Lesson Practice. You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice.
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+11--13, 15--26 & 11--26 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items.
+You may structure this choice in many ways. For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 15, 25 & 2 \\
+2 & 16 & 1 \\
+2 & 11, 12, 24 & 2 \\
+3 & 17 & 2 \\
+3 & 18, 21, 26 & 3 \\
+4 & 13, 19, 22 & 3 \\
+5 & 14 & 1 \\
+5 & 20 & 2 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{2}
+UNDERSTAND. Reason. Suppose Léon has a pair of 4-sided dice, each numbered from 1 to 4, and Carolina has a pair of 10-sided dice, each numbered from 1 to 10. They decide to play a series of games against each other, using their own dice.
+a. Describe a game that would be fair. Explain.
+\answer{Answers may vary. Sample: a. Roll your dice. If the product is even you get one point, if the product is odd you lose two points. This game is fair because the expected value for each player is 0.25.}
+b. Describe an unfair game. Explain.
+\answer{b. Roll your dice. If the sum is prime number you get two points, if the sum is composite you lose one point. This game is unfair because Léon's expected value is 0.6875, while Carolina's expected value is 0.11.}
+% FIG 80 552 402 795 502
+\placeholder{photo}{Assorted colored polyhedral numbered dice, including red tetrahedron and green and yellow cubes, with blue, purple, green, orange and black dice of other face counts.}
+\end{practice}
+\begin{practice}{12}{2}
+UNDERSTAND. Construct Arguments. Mr. and Ms. Mitchell have 3 children: Luke, Charlie, and Aubrey. All 3 children want to sit in the front seat. Charlie suggests that they flip a coin two times to decide who will sit in the front seat. The number of heads determines who sits in the front seat. Is this a fair method? Explain.
+\begin{tabular}{ll}
+Number of Heads & Front Seat Passenger \\
+0 & Luke \\
+1 & Charlie \\
+2 & Aubrey \\
+\end{tabular}
+\answer{No; there are 2 ways to get 1 head since the sample space is \{HH, HT, TH, TT\}.}
+\end{practice}
+\begin{practice}{13}{3}
+UNDERSTAND. Error Analysis. Mercedes is planning a party for 10 people. She knows from experience that about 20\% of those invited will not show up. If she invites 12 people, how can she calculate the probability that more than 10 people will show up. What error did she make? What is the correct probability?
+Use the binomial distribution for 12 trials, with a 20\% probability, and more than 10 show up.
+((12)(0.80)^1(0.20)^1+(1)(0.80)^0(0.20)^{12})
+\te{Student work note marked with red X.}
+\answer{The error is in the exponents for the probability terms. The correct formula is ((12)(0.80)^{11}(0.20)^1+(1)(0.80)^{12}(0.20)^0). The correct probability is 27\%.}
+\end{practice}
+\begin{practice}{14}{1}
+UNDERSTAND. Use Appropriate Tools. How does a two-way frequency table help you organize test results and determine false positive or false negative results?
+\answer{Possible answer: Using columns that are labeled with ``positive'' and ``negative'' results makes it easier to identify false positive and false negatives since they are complements of the true positive and true negative results.}
+\end{practice}
+\begin{practice}{15}{2}
+PRACTICE. How can you use random integers to select 3 students from a group of 8 to serve as student body representatives, so that each student is equally likely to be selected? SEE EXAMPLE 1
+\answer{Assign numbers 0 through 7 to each of the candidates, and then generate one of the eight integers at random three times in a row. If the same number (student) is selected during the second or third trials, ignore the number and generate another number.}
+\te{Answers for Exercises 15--20 are printed on the next page.}
+\end{practice}
+\begin{practice}{16}{1}
+PRACTICE. Is this game fair or unfair? Explain. SEE EXAMPLE 2
+When it is your turn, roll a standard number cube. If the number is even, you get a point. If it is odd, you lose a point.
+\answer{Fair; even numbers have the same number of chances, \{2, 4, 6\}, as odd numbers \{1, 3, 5\}.}
+\end{practice}
+\begin{practice}{17}{2}
+PRACTICE. Fatima is a contestant on a game show. So far, she has won \$34,000. She can keep the \$34,000 or spin the spinner shown below and add or subtract the amount shown from \$34,000. SEE EXAMPLE 3
+% FIG 80 840 498 1093 639
+\placeholder{diagram}{Game-show contestant beside wheel with eight equal sectors and fixed yellow pointer at top. Clockwise from top: pink -\$4,000; green +\$3,000; orange -\$6,000; pale yellow +\$6,000; turquoise -\$1,000; pink +\$4,000; yellow -\$5,000; salmon +\$2,000.}
+If Fatima spins the spinner, what are her expected total winnings?
+\answer{\$33,875}
+\end{practice}
+\begin{practice}{18}{3}
+PRACTICE. Would you advise Fatima to keep the \$34,000 or to spin the spinner? Explain your reasoning.
+\answer{She should keep what she has (and not spin) because the game is not fair and she is more likely to lose money than win.}
+\te{Printed ``more likely to lose money than win''; the eight equal sectors include four gains and four losses, but the expected change is negative.}
+\end{practice}
+\begin{practice}{19}{3}
+PRACTICE. Suppose 0.5\% of people who file federal tax returns with an adjusted gross income (AGI) between \$50,000 and \$75,000 are audited. If 5 people with an AGI between \$50,000 and \$75,000 are selected at random from all the people who filed federal tax returns, what is the probability that at least 2 people are audited? SEE EXAMPLE 4
+\answer{about 0.00025, or 0.025\%}
+\end{practice}
+\begin{practice}{20}{2}
+PRACTICE. The table below shows results for a cancer screening test with rats. SEE EXAMPLE 5
+\textbf{Cancer in Rats Results}
+\begin{tabular}{llll}
+ & Positive & Negative & Total \\
+Rats with cancer & 690 & 22 & 712 \\
+Rats without cancer & 20 & 130 & 150 \\
+Total & 710 & 152 & 862 \\
+\end{tabular}
+What is the likelihood of getting false positives and false negatives for the data in the table? What risk does a false value present? Explain.
+\answer{false positive is (\frac{20}{710}\approx2.8\%); false negative is (\frac{22}{152}\approx14\%); A false positive is a rat that tested positive for cancer but does not have it, while a false negative is a rat that tested negative for cancer but has it.}
+\end{practice}
+% Source page 81: 630 Step 3 Practice & Problem Solving
+\begin{practice}{21}{3}
+APPLY. Model With Mathematics. For \$5.49 per month, insurance covers the cost of repairing a leak in the natural gas lines inside Ms. Corchado's house. She estimates a 3\% chance that she will need such repairs next year.
+a. What is the expected cost of a gas leak, if Ms. Corchado does not buy insurance? Use the cost shown in the middle of the graph.
+\answer{a. \$19.71}
+b. With more recent information, Ms. Corchado learns that repair costs could be as much as \$1,200 dollars with an 8\% probability of a leak. What is the expected cost of a gas leak with these assumptions?
+\answer{b. \$96.00}
+c. Would you advise Ms. Corchado to buy the insurance? Explain.
+\answer{c. Since (12\text{ mo}\times\$5.49/\text{mo}=\$65.88), the cost of the insurance for a year is \$65.88. Since the repair costs could be as much as \$1,200 and that the probability of a leak could be 8\%, the expected cost of a gas leak without insurance could be as high as \$96.00. She should buy the insurance.}
+% FIG 81 528 526 745 621
+\placeholder{graph}{Shaded bell curve, no axes or ticks. Purple point at peak and dotted horizontal guide to Average Reported Costs \$657. Left pale tail labeled Low Cost \$150; middle darker band Most Spent Between \$387 to \$951; right dark tail High Cost \$1,200.}
+\end{practice}
+\begin{practice}{22}{3}
+APPLY. Higher Order Thinking. You are a consultant to a company that manufactures components for cell phones. One of the components the company manufactures has a 4\% failure rate. Design changes have improved the quality of the component. A test of 50 of the new components found that only one of the new components is defective.
+a. Before the design improvements what was the probability that among 50 of the items, at most one of the items was defective?
+\answer{a. 40\% (rounded to the nearest whole percent)}
+b. Is it reasonable to say the new components have a failure rate below 4\%?
+\answer{b. Based on the test of 50 new components, the experimental probability for failure is 2\%. However, 50 is a relatively small sample, so I think that it is not reasonable to conclude that the new components have a lower failure rate than 4\%.}
+c. Would you recommend further testing to determine whether the new parts have a lower failure rate than 4\%? Explain.
+\answer{c. Further testing of the new parts is recommended, since 50 is a relatively small sample.}
+\end{practice}
+\begin{practice}{23}{3}
+APPLY. Reasoning. A helmet manufacturer tests the force needed to make a helmet crack or break. The safety team finds that an acceptable risk for a false positive must be less than 1\% and for a false negative must be less than 5\%. Interpret the risk levels as related to the safety and development of the helmets. What might explain the difference in criteria?
+\te{DOK \uncertain{3}{2}: item 23 is absent from the printed Item Analysis and has no printed DOK beside the prompt.}
+\answer{Possible answer: In this scenario, a false positive would mean that a helmet passed inspection but then failed in an accident or when pressure is applied. This could mean serious injury for a skateboarder using the helmet, so it makes sense that the company wants to minimize this risk. A possible reason for the false negative to be higher is that the company will still make enough profit to cover setting aside a few helmets that tested defective but that are actually safe to use.}
+\end{practice}
+\begin{practice}{24}{2}
+ASSESSMENT PRACTICE. Paola, Sasha, and Yumiko live together. They want a system to determine who will wash the dinner dishes on any given night. Select all of the methods that are fair.
+A. Roll a standard number cube. If the result is 1 or 2, Paola does the dishes; if 3 or 4, Sasha; if 5 or 6, Yumiko.
+B. Roll a standard number cube. If the result is 1, Paola does the dishes; if 2, Sasha; if 4, Yumiko. If the result is 3, 5, or 6, roll again.
+C. Roll two standard number cubes. If the sum of the numbers that come up is less than 6, Paola washes the dishes; if the sum is 8, 9, or 12, Sasha; if the sum is 6 or 7, Yumiko. If the sum is 10 or 11, roll again.
+D. Write the name of each girl on a slip of paper, place the slips in a box, mix them up, and select one at random. The person whose name is selected does the dishes.
+\answer{A, B, D}
+\end{practice}
+\begin{practice}{25}{2}
+ASSESSMENT PRACTICE. SAT/ACT. A fair choice among a group of students may be made by flipping three coins in sequence, and noting the sequences of heads and tails. If each student is assigned one of these sequences, how many students can be selected fairly by this method?
+A. 4
+B. 5
+C. 6
+D. 7
+E. 8
+\answer{E}
+\end{practice}
+\begin{practice}{26}{3}
+ASSESSMENT PRACTICE. Performance Task. Acme Tire Company makes two models of steel belted radial tires, Model 1001 and Model 1002.
+\begin{tabular}{lll}
+Model & 1001 & 1002 \\
+Blowouts per 200,000 tires & 2 & 1 \\
+Profits before any lawsuits & \$60 & \$56 \\
+\end{tabular}
+% FIG 81 862 857 1019 931
+\placeholder{illustration}{Two black treaded tires, one flat and one leaning across it; model information in callouts above, transcribed in the table.}
+If one of these tires fails and the company is sued, the average settlement is \$1,200,000.
+Part A. Find the expected profit for both models of tires after any potential lawsuits. Explain.
+\answer{Part A Model 1001: \$48; Model 1002: \$50; Calculate the expected profit after potential lawsuits for each model like this: Model 1001: (\$60-(\$1,200,000)(\frac2{200,000})=\$48). Model 1002: (\$56-(\$1,200,000)(\frac1{200,000})=\$50).}
+Part B. Would you recommend that the company continue selling both models? Explain.
+\answer{Part B It is recommended that the company stop selling Model 1001 and only sell Model 1002. The company can expect to make more money on Model 1002 than on Model 1001. Also, Model 1002 is a safer tire; fewer people will be injured or die if they have Model 1002 tires than if they have Model 1001 tires.}
+\end{practice}
+% Source page 82: 630A Step 4 Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & DOK \\
+1 & 2 & DP01 \\
+2 & 2 & DP01 \\
+3 & 2 & DP01 \\
+4 & 2 & DP15 \\
+5 & 2 & DP15 \\
+\end{tabular}
+\te{Printed third heading DOK; this column contains Skills Review and Practice codes.}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+I Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+O On-Level & 4 points & Enrichment \\
+A Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{12-6 Lesson Quiz: Probability and Decision Making}
+\te{Assessment. Lesson Quiz is available at SavvasRealize.com. ASSESSMENT RESOURCES. Name. enVision Algebra 2. SavvasRealize.com.}
+1. Students from 4 towns attend a conference. Each town is assigned a number 1 to 4.
+A number is drawn and replaced 6 times. Is this a fair way to pick 6 members to give each town representation?
+\answer{1. no}
+What is the probability that Town 1 will have at least 1 representative after 6 number draws, to the nearest percent?
+\answer{82\%}
+2. In a two-player game, five cards, numbered 1 through 5, are placed in a bag. A card is drawn at random, and the players look at the number. Which of the following scoring rules makes a fair game?
+A. If it is greater than 2, Player 1 earns 2 points. If not, Player 2 earns 2 points.
+B. If it is less than 2, Player 1 earns 3 points. If not, Player 2 earns 2 points.
+C. If it is greater than 3, Player 1 earns 2 points. If not, Player 2 earns 2 points.
+D. If it is less than 3, Player 1 earns 3 points. If not, Player 2 earns 2 points.
+\answer{2. D}
+3. Do the rules described result in a fair situation? Select Yes or No for each rule.
+\begin{tabular}{lll}
+ & Yes & No \\
+Roll a 1 through 6 number cube. If the result is 1 or 2, Joel walks the dog. If the result is 3 or 4, Kyle walks the dog. If the result is 5 or 6, Mindy walks the dog. & \answer{Yes} & \\
+Write the names of 5 participants on identical index cards. Put the names in a hat and draw a name at random. & \answer{Yes} & \\
+Assign each of 10 players a number from 0 to 9. Use a random number generator to select the first 4 to play. & \answer{Yes} & \\
+One-half of a spinner is green. The other two quarters are yellow and purple. Spin green and pay \$1. Spin yellow or purple and win \$2. & & \answer{No} \\
+\end{tabular}
+4. A caterer needs 12 workers for an event, but each worker has a 5\% chance of not showing up. The caterer wants at least a 90\% probability that enough workers show up, so she hires 13 workers.
+The caterer's strategy [is; is not] effective because the probability that enough workers show up is [0.14; 0.65; 0.86; 0.95].
+\answer{4. is not; 0.86}
+5. At a concert hall, seats are reserved for 10 VIPs. For each VIP, the probability that they will attend is 0.8. The probability that 6 VIPs attend is blank. The probability that 10 VIPs attend is blank. The probability that more than 6 VIPs attend is blank.
+\answer{5. 0.088; 0.107; 0.879}
+\te{enVision Algebra 2 • Assessment Sourcebook. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+% Source page 83: 630B Step 4 Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention. O = On-Level. A = Advanced.
+\textbf{Reteach to Build Understanding}. I.
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School. Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-6 Reteach to Build Understanding: Probability and Decision Making}
+1. Match each situation in Column A with the method in Column B that you could use to make the decision. Choices in Column B may be used more than once.
+\begin{tabular}{ll}
+Column A & Column B \\
+You roll a number cube twice and flip a coin. If the coin shows heads, add the numbers on the number cube. If the coin shows tails, multiply the first number by 2 and the second number by (-1), then add. Is this a fair game? \answer{b} & a. Simple probability \\
+You choose a target number from 3 to 18. Then you roll three number cubes. If the sum of the numbers is your target number, you win. Otherwise, you lose. What is your chance of winning? \answer{a} & b. Expected value \\
+Every Monday for a month, you record the number of cars, SUVs, and trucks at a construction site. You notice that the number of vehicles changes each day. On the following Monday, how can you estimate the number of each kind of vehicle there will be in the lot? \answer{c} & c. Probability distribution \\
+\end{tabular}
+2. In a game, a spinner is divided into two sections. The larger area covers 70\% of the spinner. If the spinner stops on the larger area, you lose 1 point. If the spinner stops on the smaller area, you win 2 points. Is this a fair game? Identify and correct the student's error(s).
+% FIG 83 350 575 408 628
+\placeholder{diagram}{Circle spinner divided by radii to top and lower left. Smaller upper-left sector labeled 2 points; larger sector labeled -1 point. Arrow points right and slightly up from center.}
+Find the expected value.
+(P(large)\times(point\ value)=(0.7)\times(-1)=-0.7)
+(P(small)\times(point\ value)=(0.3)\times(2)=0.6)
+(Expected value=(-0.7)\cdot(0.6)=-0.42)
+Since the expected value is not 0, the game is fair.
+\answer{The expected values should be added, so (E=-0.1). A game is fair only if the expected value is 0, so this game is not fair.}
+3. A light fixture has 6 light bulbs. With normal use, each bulb has a 95\% chance of lasting for 2 years. What is the probability that all 6 bulbs will last for 2 years? Complete the solution.
+(P(6)={}_6C_6\cdot(0.95)^6\cdot(0.05)^{\text{blank}})
+(\approx\text{blank}\cdot(0.7351)\cdot\text{blank})
+(\approx\text{blank}), or about blank\%.
+\answer{0; 1; 1; 0.7351; 74}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice}. I, O.
+Provides extra practice for each lesson.
+MathXL for School. Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-6 Additional Practice: Probability and Decision Making}
+1. There are 3 red apples and 1 green apple in a bowl. Gemma and Raul both want the green apple. How can they use probability to fairly decide who will get the green apple?
+\answer{Answers may vary. Sample answer: Assign three different numbers to each person on a number cube. Then roll the number cube. Each person has a 50\% chance of success.}
+2. In each hand of a card game, there is a 54\% chance of winning 3 points and a 46\% chance of losing 4 points. Is the game a fair game? Explain.
+\answer{No, the expected value on each hand is (-0.22) and not equal to zero, so the game is not fair.}
+3. A theater coach can send only 3 of 20 applicants to a workshop. To be fair he assigns each student a number from 1 to 20. He uses the numbers below to select students. Which students were selected? Would you expect the same results if you used the same method? Explain.
+(randInt(1,20)\ 20)\quad(randInt(1,20)\ 5)\quad(randInt(1,20)\ 16)
+\answer{The 20th, 5th, and 16th students were selected. If I used this method, I would expect different results since the numbers are randomly generated.}
+4. In a game at a fundraiser, Choice A gives you a 12\% chance of winning 8 prize tickets and Choice B gives you a 46\% chance of winning 2 prize tickets. Would you play Choice A or Choice B? Explain.
+\answer{Sample answer: I would play Choice A because it has an expected value 0.96 which is greater than the expected value of Choice B.}
+5. The board members of a company think there is a 75\% chance of high demand and a 25\% chance of low demand for a new product. If the company sells online, research models suggest profits of \$20 per unit if there is high demand and \$15 per unit if there is low demand. If the company sells through stores, models suggest profits of \$50 per unit if there is high demand and (-\$10) per unit if there is low demand. Is it better to sell online or through stores? Explain.
+\answer{Through stores, because expected profit is higher. Expected profit online: \$18.75; Expected profit in stores: \$35}
+6. The director of a race needs 10 volunteers. Because 20\% of the volunteers in the past have not shown up, the director assigns 12 volunteers. Find the probability that 10 volunteers show up, 12 volunteers show up, and at least 10 volunteers show up. Do you think the director is assigning enough volunteers? Explain.
+\answer{0.283; 0.069; 0.558; Sample answer: No, the probability of at least 10 volunteers showing up is less than 56\%. So more than 44\% of the time, not enough volunteers will come.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment}. O, A.
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School. Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-6 Enrichment: Probability and Decision Making}
+The City Council of a city recommends that the fire department reach a fire scene within 5 minutes of the original call or alarm. Data for arrival times during the previous year are shown in the histogram. Of the fires with response times greater than 5 minutes, a majority were within a new development area.
+% FIG 83 863 450 1016 534
+\placeholder{graph}{Gray histogram. Horizontal axis Response Times (min), integer labels 1 to 7 centered below contiguous unit-width bars; vertical axis Number of Fires, ticks 0,20,40,60,80 with horizontal grid lines. Bar heights for 1 through 7 minutes: 20,40,80,60,50,60,50.}
+A motion to construct a new fire station in that area is brought before the City Council and a decision is made to place the measure on the ballot for the voters. Would you vote to approve the measure to build a new fire station? You decide!
+Complete Items 1--5 before you decide what you would recommend.
+1. Why do the bars touch each other?
+\answer{Sample answer: The time intervals are continuous.}
+2. Why are the times on the horizontal axis in the middle of each bar?
+\answer{Sample answer: The intervals are from 30 seconds before to 30 seconds after the number of minutes.}
+3. What is the probability that a fire has a response time in each interval?
+a. 1 minute \answer{(\frac{20}{360})}
+b. 2 minutes \answer{(\frac{40}{360})}
+c. 3 minutes \answer{(\frac{80}{360})}
+d. 4 minutes or less \answer{(\frac{200}{360})}
+e. 5 minutes \answer{(\frac{50}{360})}
+f. more than 5 minutes \answer{(\frac{110}{360})}
+\te{Printed interval descriptions use rounded minute categories: ``4 minutes or less'' includes the bin through 4.5 minutes, and ``more than 5 minutes'' starts at 5.5 minutes.}
+4. What is the expected response time to a fire in this city?
+\answer{about 4.3 minutes}
+5. Would you support the motion to build a fire station in the new area? Explain.
+\answer{Sample answer: No, because the expected response time is less than 5 minutes.}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{Mathematical Literacy and Vocabulary}. I, O.
+Helps students develop and reinforce understanding of key terms and concepts.
+Name. enVision Algebra 2. SavvasRealize.com.
+\textbf{12-6 Mathematical Literacy and Vocabulary: Probability and Decision Making}
+The column on the left shows steps using probability to make a decision. Use this column to answer each question in the column on the right.
+\begin{tabular}{ll}
+Problem. A whitewater raft has a capacity of 10 plus the crew. The raft company has found that 60\% of those with reservations show up, so they take up to 12 reservations. What is the probability that 10 people show up? What is the probability that more than 10 people show up? Does the policy make sense? & 1. Read the question. How are you going to use probability to solve the problem? \answer{Find (P(10)), (P(11)), and (P(12)). Use the probabilities to decide if the policy seems reasonable.} \\
+Use the formula for binomial probability to find each probability. Use (P(r)={}_nC_r\,p^r(1-p)^{n-r}) for (r) values of 10, 11, and 12. & 2. Why do you use binomial probability? \answer{Assume that each reservation is independent. Each reservation has one of two outcomes, shows up or does not show. The probability of ``shows up'' is the same for each reservation.} \\
+Calculate the probabilities. (P(10)={}_{12}C_{10}(0.6)^{10}(0.4)^2\approx0.064). (P(11)={}_{12}C_{11}(0.6)^{11}(0.4)^1\approx0.017). (P(12)={}_{12}C_{12}(0.6)^{12}(0.4)^0\approx0.002). & 3. How do you identify (n), (r), (p), and (1-p)? \answer{The company takes up to 12 reservations, so this is the total, (n). The question is whether 10 or more show up, so the values of (r) range from 10 to 12. Since 60\% show up, (p=0.6) and (1-p=0.4).} \\
+Solution. The probability that 10 people show up is about 6\%. The probability that more than 10 people show up is about 2\%. The policy makes sense. & 4. How do you arrive at the solution? \answer{The probability that too many people show up is (P(11)+P(12)\approx2\%). So it is unlikely that people will be turned away.} \\
+\end{tabular}
+\te{enVision Algebra 2 • Teaching Resources. Copyright © Savvas Learning Company LLC. All Rights Reserved.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\te{Digital preview: A surveyor took some measurements of a piece of land. The owner needs to know the area of the land to determine the value. What is the area of the piece of land? Blank ft. Printed ft; likely square feet for area.}
+% FIG 83 582 977 1036 1298
+\placeholder{illustration}{Tablet with digital land-area problem; green irregular parcel, trees, road, dashed internal segments. Visible measurements 12 ft upper left, 21 ft lower left, 22 ft lower right, right-angle marker at bottom altitude and 54-degree lower-right angle. Help menu covers some right-hand labels. No answer printed.}
+\te{Exit. Question Help. Help Me Solve This; View an Example; Video; Textbook; Glossary; Math Tools; Print. Enter your answer in the answer box and then click Check Answer. 1 part remaining. Clear All. Check Answer. Review progress. Question 24 of 40. Go. Back. Next.}
+\end{te-addendum}
+
+\end{document}

@@ -1,0 +1,877 @@
+\documentclass{article}
+% Source: Topic_02_Teacher_Edition.pdf, PDF pages 12-22 (printed pages 61A-67B)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newenvironment{lesson-meta}{}{}        % lesson code, title, objective, EQ, vocab
+\newenvironment{item-analysis}{}{}      % Savvas's Example × DOK table
+\newenvironment{model-discuss}{}{}      % Launch opener
+\newenvironment{concept-box}{}{}        % in-lesson concept reference
+\newenvironment{concept-summary}{}{}    % end-of-lesson summary
+\newenvironment{example}[1]{}{}         % #1 = example number
+\newenvironment{tryit}[1]{}{}           % #1 = tryit number
+\newenvironment{practice}[2]{}{}        % #1 = practice number, #2 = DOK
+\newenvironment{te-addendum}[2]{}{}     % #1 = anchor example, #2 = type
+\newcommand{\answer}[1]{}               % answer key, inside any env
+\newcommand{\placeholder}[2]{}          % #1 = type, #2 = description
+\newcommand{\uncertain}[2]{#1}          % #1 = best guess, #2 = alternatives
+\newcommand{\te}[1]{}                   % teacher-only inline annotation
+
+\begin{document}
+% Source page 12: 61A Lesson Overview
+\begin{lesson-meta}
+lesson: 2-1
+title: Vertex Form of a Quadratic Function
+standards: none printed
+practices: none printed
+objective: I can apply the vertex form of a quadratic function to its graph.
+
+essential question: How are transformations related to the vertex form of a quadratic function?
+
+\textbf{VOCABULARY}
+\item parabola
+\item quadratic function
+\item vertex form of a quadratic function
+\textbf{TOPIC VOCABULARY}
+\te{No topic vocabulary list is printed on these lesson pages.}
+\begin{tabular}{ll}
+Lesson Code & 2-1 \\
+Title & Vertex Form of a Quadratic Function \\
+Standards & none printed \\
+I CAN Objective & I can apply the vertex form of a quadratic function to its graph. \\
+Essential Question & How are transformations related to the vertex form of a quadratic function? \\
+Lesson Vocabulary & parabola; quadratic function; vertex form of a quadratic function \\
+Topic Vocabulary & none printed \\
+\end{tabular}
+\end{lesson-meta}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Lesson Overview: FOCUS}
+Objective. Students will be able to:
+\item Create quadratic functions in vertex form to represent relationships between variables as shown in their graphs.
+\item Graph functions on coordinate axes using their key features.
+\item Interpret key features of the graph of a quadratic function.
+Essential Understanding. All quadratic functions are transformations of the parent function (f(x)=x^2). The vertex form of a quadratic function shows how the graph of the parent function can be transformed.
+\textbf{COHERENCE}
+Previously in earlier courses, students:
+\item Created and graphed linear functions.
+In this lesson, students:
+\item Create and graph quadratic functions in vertex form by identifying and interpreting the key features.
+Later in this topic, students will:
+\item Rewrite quadratic functions in vertex form using the standard form.
+\textbf{RIGOR}
+This lesson emphasizes a blend of conceptual understanding and procedural skill and fluency.
+\item Students understand that all quadratic functions are transformations of the parent function.
+\item Students interpret key features of the graph of a quadratic function in terms of the quantities given in real-world problems, such as those describing projectile motion.
+\end{te-addendum}
+\begin{te-addendum}{0}{ELLAddendum}
+\textbf{Vocabulary Builder}
+Glossary is available at SavvasRealize.com.
+\begin{tabular}{ll}
+REVIEW VOCABULARY English & Spanish \\
+vertex & vértice \\
+NEW VOCABULARY & \\
+parabola & parábola \\
+quadratic function & función cuadrática \\
+vertex form of a quadratic function & forma del vértice de una función cuadrática \\
+\end{tabular}
+\textbf{VOCABULARY ACTIVITY}
+Review the terms parabola, quadratic function, and vertex form of a quadratic function, which students previously used in Algebra 1. If necessary, use the following question to help students understand how the vertex form of a quadratic function relates to the vertex of the parabola.
+Q: When written in vertex form, what does the point (h,k) represent?
+A. axis of symmetry
+B. vertex of the parabola
+C. (y)-intercept
+D. (x)-intercept
+\answer{See back of book.}
+\te{No answer letter is marked in this Vocabulary Activity.}
+\end{te-addendum}
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{Student Companion}
+Students can do their work for the lesson in their Student Companion or on Savvas Realize.
+\placeholder{illustration}{Student Companion cover: dark background with a blue and purple spherical design, labeled Student Companion, enVision Algebra 2, SAVVAS.}
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Mathematics Overview}
+Students create quadratic functions in vertex form that model graphed relationships between variables. They relate quadratic functions to the parent function (f(x)=x^2).
+Students express the vertex, axis of symmetry, domain, and range algebraically. They also identify whether a quadratic function opens upward or downward.
+Students use and interpret key features to graph quadratic functions and interpret these key features.
+\textbf{Applying Math Practices}
+Make Sense of Problems and Persevere in Solving Them
+Students make sense of problems involving quadratic functions and plan solution pathways based on the information provided.
+Look For and Make Use of Structure
+Students look for relationships between a quadratic function and its graph. They use the structure of the function in vertex form to rewrite it in its equivalent standard form (y=ax^2+bx+c).
+\end{te-addendum}
+% Source page 13: 61B Step 1 Explore
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{EXPLORE & REASON}
+INSTRUCTIONAL FOCUS Students use their knowledge of the parent function (f(x)=x^2) to explore how adding or multiplying the function by a constant changes the value of the function.
+STUDENT COMPANION Students can complete the Explore & Reason activity in their Student Companion.
+Explore & Reason is Powered by Desmos. Explore & Reason is available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{Before WHOLE CLASS}
+Implement Tasks that Promote Reasoning and Problem Solving
+Q: Do you see any patterns in the table?
+\answer{The value of (A(x)) in the third row is equal to the square of the value of (x) in the first row.}
+\textbf{During SMALL GROUP}
+Support Productive Struggle in Learning Mathematics
+Q: Why is it helpful to think of the new function described in Part A in terms of (A(x))?
+\answer{Answers may vary. Sample: You know that (A(x)=x^2). The value of the new function is (2x) times (x) or (2x^2), so (f(x)=2A(x)). Therefore, if you know (A(x)), you can find (f(x)) by multiplying (A(x)) by 2.}
+Q: What does (A(x)+2) mean in relation to (A(x))?
+\answer{Find the value of (A(x)), and then add 2 to that value.}
+\textbf{For Early Finishers}
+Q: Suppose you double both the length and the width of the square to make a larger square. How are the corresponding areas affected?
+\answer{The corresponding areas are 4 times as great.}
+\textbf{After WHOLE CLASS}
+Facilitate Meaningful Mathematical Discourse
+Facilitate a discussion with students about their answers to Parts B and C.
+Q: What strategy can you use to determine the relationship between the new function described in Part A and (A(x))?
+\answer{Add another row to the table for the values of (f(x)). Each value of (f(x)) is twice the value of (A(x)). So (f(x)=2A(x)).}
+Q: What strategy can you use to determine the value of (f(x)+1) if you know the value of (A(x))?
+\answer{Multiply the value of (A(x)) by 2 and then add 1.}
+\end{te-addendum}
+\begin{te-addendum}{0}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXPLORE & REASON
+Q: Communicate Precisely Suppose you started with a different function. Would altering (A(x)) in the two ways you did have the same effect?
+\answer{Yes; each time you multiply the value of any function by 2, the (y)-value of each coordinate will double, and each time you add 2 to the value of any function, the (y)-value of each coordinate will increase by 2.}
+\end{te-addendum}
+\begin{model-discuss}
+\textbf{EXPLORE & REASON}
+The table represents (A(x)), the area of a square as a function of side length (x) units, where (x) is a positive real number.
+\begin{tabular}{llllll}
+Side Length (units) & (x) & 1 & 2 & 3 & 4 \\
+Area (sq. units) & (A(x)) & 1 & 4 & 9 & 16 \\
+\end{tabular}
+\placeholder{diagram}{Model row between side-length and area rows: square with red x on top and left sides, then unit square, 2 by 2 unit grid, 3 by 3 unit grid, 4 by 4 unit grid.}
+A. Consider the function where the areas in the table are doubled. Write the equation of a function that represents this.
+\answer{(f(x)=2(x^2))}
+B. Look for Relationships Graph the ordered pairs for both (A(x)) and your new function. How would you describe the differences in the locations of these points?
+\answer{The points that represent the new function are closer to the (y)-axis. The value of each (y)-value in the new function is twice that of the (y)-value in (A(x)).}
+\placeholder{graph}{Sample student work B: gray x and y axes with arrowheads both ends; grid spacing 1, x labels -4,-2,O,2,4 and y labels 2,4,6,8; window approximately x=-5 to 5,y=-1 to 9. Red upward parabolas with common vertex at origin, wider A for A(x)=x^2, narrower f for f(x)=2x^2, upward arrows on all four branches. Small italic a appears beside the left branch near the origin.}
+C. Find the equation for a function whose (x)-values are the same as (A(x)) but whose (y)-values are 2 units greater than each (y)-value in (A(x)).
+\answer{(g(x)=x^2+2)}
+\te{The digital screenshot repeats Part A and the table but leaves the model and area cells under side length 4 blank.}
+\end{model-discuss}
+% Source page 14: 61 Step 2 Understand & Apply
+\begin{te-addendum}{0}{LearnTogether}
+\textbf{INTRODUCE THE ESSENTIAL QUESTION}
+Establish Mathematics Goals to Focus Learning
+Introduce students to the vertex form of a quadratic function. Remind them that they have identified transformations of linear functions. Explain that the vertex form of a quadratic function can help them identify transformations of a quadratic function.
+Examples are available at SavvasRealize.com.
+\end{te-addendum}
+\begin{te-addendum}{0}{GeneralizeETP}
+\textbf{CONCEPT Representations of Quadratic Functions}
+Use and Connect Mathematical Representations
+Q: What are the key features of the graph of the quadratic parent function (f(x)=x^2)?
+\answer{Vertex at the origin; axis of symmetry is the (y)-axis; minimum: (y=0); domain: (-\infty,\infty); range: [0,\infty)}
+Q: What are the values (a), (h), and (k) for the quadratic parent function?
+\answer{(a=1), (h=0), (k=0)}
+\end{te-addendum}
+\begin{concept-box}
+\textbf{ESSENTIAL QUESTION} How are transformations related to the vertex form of a quadratic function?
+\textbf{CONCEPT Representations of Quadratic Functions}
+A function is a quadratic function if it can be written in the form (f(x)=ax^2+bx+c) with (a\neq 0).
+All quadratic functions are transformations of the parent function defined by (f(x)=x^2).
+The graph of a quadratic function is called a parabola.
+The vertex form of a quadratic function is (f(x)=a(x-h)^2+k) where (h,k) is the vertex of the parabola. Vertex form is useful because it highlights the vertex of the graph of the quadratic function.
+\placeholder{graph}{Blue parabola f(x)=x^2 labeled f, upward arrows on both branches, vertex at origin labeled (h,k) in blue; gray x,y axes, arrowheads both ends; square grid spacing 1, window x=-5 to 5,y=-5 to 5; labels x=-4,-2,2,4 and y=-4,-2,2,4, origin O.}
+\end{concept-box}
+\begin{te-addendum}{3}{PurposefulQuestions}
+\textbf{Additional Examples} Additional Examples are available at SavvasRealize.com.
+\textbf{ADDITIONAL EXAMPLE 3}
+What is the equation of a parabola with vertex (-2,-6) that passes through (-4,-10)?
+Substitute -2 for (h), -6 for (k), -4 for (x), and -10 for (y) in the vertex form of a quadratic equation.
+(-10=a(-4-(-2))^2+(-6))
+(-10=a(-2)^2-6)
+(-1=a)
+An equation of the parabola with vertex (-2,-6) that passes through (-4,-10) is (y=-(x+2)^2-6).
+\answer{(y=-(x+2)^2-6)}
+Example 3 Give students extra practice writing the equation of a parabola given the vertex and another point besides the (y)-intercept with this additional example.
+Q: How can you tell if (a) is positive or negative before writing the entire equation?
+\answer{Compare the (y)-coordinate of the vertex to the (y)-coordinate of the other point. If the (y)-coordinate of the other point is greater, then the parabola opens upward, and (a) is positive. If not, the parabola opens downward, and (a) is negative.}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{ADDITIONAL EXAMPLE 4}
+The curvature of a satellite dish is in the shape of a parabola. The graph of the function is shown in the figure.
+Write the equation of the parabola in vertex form and in the form (y=ax^2+bx+c).
+\placeholder{graph}{Satellite dish graph: blue upward parabola with vertex (15,0), passing through (0,10) and (30,10), small arrowhead at right branch. Gray axes x and y, window x=0 to 30,y=0 to about 12. Horizontal labels 0,5,10,15,20,25; vertical labels 0,5,10. Grid spacing x=2.5,y=2.5.}
+(y-0=a(x-15)^2)
+(10=a(0-15)^2)
+(10=a(225))
+(\frac{2}{45}=a)
+vertex form: (y-0=\frac{2}{45}(x-15)^2)
+Isolate (y):
+(y=\frac{2}{45}(x^2-30x+225))
+(y=\frac{2}{45}x^2-\frac{4}{3}x+10)
+\answer{(y-0=\frac{2}{45}(x-15)^2); (y=\frac{2}{45}x^2-\frac{4}{3}x+10)}
+Example 4 Show students another context in which they might need to write the equation of a parabola given its graph with this additional example.
+Q: Suppose a new satellite dish was made that had the same width as the satellite dish above, but wasn't as deep. Would the value of (a) in the equation representing the shape of the satellite dish be less than or greater than the satellite dish above?
+\answer{less than}
+\end{te-addendum}
+% Source page 15: 62 Step 2 Understand & Apply
+\begin{te-addendum}{1}{GeneralizeETP}
+\textbf{Transform a Quadratic Function}
+Example 1 is Powered by Desmos. Examples are available at SavvasRealize.com.
+Use and Connect Mathematical Representations
+Q: How does the variable (a) affect the graph in relation to the parent function?
+\answer{The value of (a) determines if the parabola is vertically stretched or vertically compressed, and whether it opens upward or downward.}
+\end{te-addendum}
+\begin{example}{1}
+\textbf{Transform a Quadratic Function}
+\textbf{CONCEPTUAL UNDERSTANDING}
+How are transformations of the graph of (f(x)=x^2) related to its parent function?
+The vertex form of the quadratic function contains three values which transform the graph of the function (f(x)=x^2).
+(f(x)=a(x-h)^2+k)
+\te{Callouts: The value of (a) determines the direction the parabola opens and whether the graph is stretched or compressed. The value of (h) determines the horizontal translation. The value of (k) determines the vertical translation.}
+A. (g(x)=-\frac{1}{2}(x+2)^2)
+The equation shows that the graph is translated 2 units left, will open downward, and will be vertically compressed.
+\placeholder{graph}{Example 1A: blue f(x)=x^2 with vertex (0,0) and red g(x)=-0.5(x+2)^2 with vertex (-2,0), labeled f and g; arrows on all branches. Gray x,y axes with arrowheads; unit grid, window [-5,5] by [-5,5]; labels -4,-2,2,4 on each axis and O at origin.}
+\answer{Translated 2 units left, will open downward, and will be vertically compressed.}
+B. (j(x)=2(x-1)^2-3)
+The equation shows that the graph is translated 1 unit right, 3 units down, and vertically stretched. It will open upward.
+\placeholder{graph}{Example 1B: blue f(x)=x^2, vertex (0,0), red j(x)=2(x-1)^2-3, vertex (1,-3), labeled f and j, arrows on both ends of each parabola. Gray x,y axes; unit grid, window [-5,5] by [-5,5]; labels -4,-2,2,4 and O at origin.}
+\answer{Translated 1 unit right, 3 units down, and vertically stretched. It will open upward.}
+When (a>0), the parabola opens upward. When (a<0), the parabola opens downward. When (|a|>1), the graph is stretched, and when (0<|a|<1), the graph is compressed.
+\te{STUDY TIP Recall that a vertical stretch makes the graph narrower and that a vertical compression makes the graph wider. To see the effects easily, use the same axes or units for all graphs.}
+\end{example}
+\begin{tryit}{1}
+Describe the transformations of the parent function (f(x)=x^2). Then graph the function.
+a. (g(x)=0.4(x-3)^2)
+\answer{a. The equation shows that the graph is vertically compressed, translated 3 units to the right, and will open upward.}
+\placeholder{graph}{Try It 1a answer: blue upward parabola g(x)=0.4(x-3)^2, vertex (3,0), y-intercept (0,3.6), arrows at both ends; gray x,y axes with arrowheads, unit grid, window [-5,5] by [-5,5], tick labels -4,-2,2,4, origin O.}
+b. (g(x)=3(x-1)^2+2)
+\answer{b. The equation shows that the graph is vertically stretched, translated to the right 1 unit and up 2 units, and will open upward.}
+\placeholder{graph}{Try It 1b answer: blue upward parabola g(x)=3(x-1)^2+2, vertex (1,2), y-intercept (0,5), arrows both ends; gray x,y axes with arrowheads, unit grid, window [-5,5] by [-5,5], labels -4,-2,2,4, origin O.}
+\end{tryit}
+\begin{te-addendum}{2}{PurposefulQuestions}
+\textbf{Determine Key Features of a Quadratic Function}
+Pose Purposeful Questions
+Q: How do (a), (h), and (k) affect the domain and range of a quadratic function in vertex form?
+\answer{These values do not affect the domain of the function. The domain is all real numbers. These values affect the range. If (a) is positive, (k) is the minimum value of the range. If (a) is negative, (k) is the maximum value of the range.}
+\end{te-addendum}
+\begin{example}{2}
+\textbf{Determine Key Features of a Quadratic Function}
+What are the key features of the quadratic function (f(x)=2(x-3)^2+4)?
+The graph shows (f(x)=2(x-3)^2+4).
+The 2 indicates that the graph opens upward and is vertically stretched.
+The range is (\{y\mid y\geq 4\}), so 4 is the minimum. There are no restrictions on the value of (x), so the domain is all real numbers.
+\placeholder{graph}{Red upward parabola f(x)=2(x-3)^2+4, vertex closed dot (3,4), red dashed vertical axis x=3 with arrows at top and bottom; parabola arrows at y=10. Gray x,y axes; unit grid x=0 to 6, y=0 to 10, labels x=0,2,4,6 and y=0,2,4,6,8,10. Callouts: The axis of symmetry is the line x=h or x=3. The vertex is the ordered pair (h,k), or (3,4).}
+\answer{Vertex (3,4); axis of symmetry (x=3); minimum 4; range (\{y\mid y\geq 4\}); domain all real numbers.}
+\end{example}
+\begin{tryit}{2}
+Identify the vertex, axis of symmetry, minimum or maximum, domain, and range of the function (f(x)=-(x+4)^2-5).
+\answer{Vertex: (-4,-5); Axis of Symmetry: (x=-4); Maximum: (y=-5); Domain: (-\infty,\infty); Range: (-\infty,-5]}
+\end{tryit}
+\begin{te-addendum}{2}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 2
+Q: Make Sense and Persevere In what order should you apply the transformations shown in the Try It! for Example 2?
+\answer{reflection first, then vertical and horizontal translation}
+\end{te-addendum}
+\begin{te-addendum}{1}{ELLAddendum}
+\textbf{English Language Learners} Use with EXAMPLE 1
+SPEAKING BEGINNING Have students discuss the meanings of the terms stretch and compress. Ask half the students to do a morning stretch, stretching their limbs up as high as possible. Ask the other half to bend down and reach their arms out to the sides, compressing their bodies as close to the floor as possible.
+Q: How can you relate these movements to how the value of (a) affects the graph of a parabola?
+\answer{When (|a|>1), the parabola is stretched taller. When (0<|a|<1), the parabola is compressed, appearing wider and closer to the (x)-axis.}
+LISTENING DEVELOPING Have students listen as you read the callouts from the example that describe the affect of (h) and (k) on the graph of a quadratic equation.
+Q: What do you think of when you hear the word translate?
+\answer{change from one language to another}
+Q: Words translated from one language to another may look completely different. Do the translated graphs look completely different? Explain.
+\answer{No; they change position, but retain the same shape.}
+WRITING EXPANDING Point out the words translate and transform in the example. Have students write the answers to the following questions in their journals.
+Q: What does it mean to translate a function? To transform a function?
+\answer{translate: slide vertically or horizontally; transform: change the position and/or shape of}
+Q: Describe how the terms translate and transform are related.
+\answer{A translation only changes position; a transformation may also change the shape.}
+\end{te-addendum}
+% Source page 16: 63 Step 2 Understand & Apply
+\begin{te-addendum}{3}{GeneralizeETP}
+\textbf{Write an Equation of a Parabola}
+Examples are available at SavvasRealize.com.
+Use and Connect Mathematical Representations
+Q: Do you have to use both the vertex and the (y)-intercept to write the equation of a parabola?
+\answer{No, you do not have to use the (y)-intercept. You can use another point that lies on the parabola.}
+Q: Why is the (y)-intercept a good point to use in this example?
+\answer{The (y)-intercept is easy to find from the graph. The calculations are simpler because the (x)-coordinate is 0.}
+\end{te-addendum}
+\begin{example}{3}
+\textbf{Write an Equation of a Parabola}
+What is the equation of a quadratic function with vertex (-2,3) and (y)-intercept -1? Write the equation in vertex form.
+Step 1 Substitute the coordinates of the vertex for (h) and (k) in the vertex form of a quadratic function.
+((h,k)=(-2,3)), so (y=a(x-(-2))^2+3)
+Step 2 Substitute the values of (x) and (y) from the (y)-intercept, and then solve for (a).
+((x,y)=(0,-1)), so (-1=a(0+2)^2+3)
+(-4=a(2)^2)
+(-4=4a)
+(a=-1)
+Step 3 Substitute the value of (a) into the vertex form of a quadratic function.
+(a=-1) so (y=-(x+2)^2+3)
+The equation of the parabola is (y=-(x+2)^2+3).
+\placeholder{graph}{Example 3: red downward parabola y=-(x+2)^2+3 with labeled closed points (-2,3) and (0,-1), arrowheads at bottom of both branches. Gray x,y axes, unit grid window [-5,5] by [-5,5], labels -4,-2,2,4, origin O.}
+\te{COMMON ERROR Be careful to not switch the coordinate values when substituting them into the equation.}
+\answer{(y=-(x+2)^2+3)}
+\end{example}
+\begin{tryit}{3}
+What is the equation of a parabola with a vertex of (1,-4) which passes through (-2,-1)? Write the equation in vertex form.
+\answer{(y=\frac{1}{3}(x-1)^2-4)}
+\end{tryit}
+\begin{te-addendum}{3}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: Which ordered pair would you use first to find the equation of the parabola?
+\answer{You use the coordinates of the vertex first and substitute for (h) and (k).}
+\end{te-addendum}
+\begin{te-addendum}{4}{PurposefulQuestions}
+\textbf{Write an Equation of a Parabola Given the Graph}
+Pose Purposeful Questions
+Q: What can you learn about the values of (a), (b), and (c) by looking at the graph?
+\answer{If the parabola opens upward, then (a) is positive. If it opens downward, then (a) is negative. The value of (c) is the (y)-coordinate of the (y)-intercept. You cannot determine the value of (b) by looking at the graph.}
+Q: Why does the ball start with a height of 4?
+\answer{When the ball leaves the person's hand, it is 4 ft off the ground.}
+\end{te-addendum}
+\begin{example}{4}
+\textbf{Write an Equation of a Parabola Given the Graph}
+\textbf{APPLICATION}
+The height of a hit ball is a quadratic function of the time it has been in the air. The ball is hit with an initial height of 4 feet and after 1 second reaches its vertex at 20 feet. What is an equation that defines this function? Write the quadratic equation in vertex form and in the form (y=ax^2+bx+c).
+\placeholder{graph}{Height of hit ball: red downward parabola y=-16(x-1)^2+20, shown from (0,4) over vertex (1,20) to arrow near (2.1,0), red label y=ax^2+bx+c across graph. x horizontal labeled Time (sec) with labels 0,1,2 and grid spacing 0.25; y vertical labeled Height (ft), labels 0,4,8,12,16,20, grid spacing 2. Window x=0 to 2.25,y=0 to 22. Illustration of volleyball player and ball behind left of graph. Callout: The initial height is the y-intercept. The maximum height occurring at one second is the vertex.}
+(y=a(x-h)^2+k)
+(4=a(0-1)^2+20)
+(4=a(-1)^2+20)
+(4=a+20)
+(-16=a)
+\te{Callout: Find (a) by substituting the vertex and a given point.}
+(y=-16(x-1)^2+20)
+(y=-16(x^2-2x+1)+20)
+(y=-16x^2+32x+4)
+The equation of the parabola in vertex form is (y=-16(x-1)^2+20).
+In the form (y=ax^2+bx+c), the equation is (y=-16x^2+32x+4).
+\te{LOOK FOR RELATIONSHIPS For a ball hit in the air, a quadratic function could represent the path of the ball or represent the height with respect to time. Be sure to interpret the axis correctly.}
+\answer{(y=-16(x-1)^2+20); (y=-16x^2+32x+4)}
+\end{example}
+\begin{te-addendum}{2}{RtIExtend}
+\textbf{Extend Student Thinking}
+USE WITH EXAMPLE 2 Have students identify the key features of quadratic functions when the coordinates of the vertex are fractions.
+1. (f(x)=-\frac{1}{2}(x-\frac{3}{2})^2+\frac{3}{4})
+2. (g(x)=\frac{2}{3}(x+\frac{1}{3})^2-\frac{1}{6})
+Q: Identify the vertex, axis of symmetry, minimum or maximum, domain, and range of the function.
+\answer{1. vertex: (\frac{3}{2},\frac{3}{4}); axis of symmetry: (x=\frac{3}{2}); maximum at (y=\frac{3}{4}); domain: (-\infty,\infty); range: (-\infty,\frac{3}{4}]. 2. vertex: (-\frac{1}{3},-\frac{1}{6}); axis of symmetry: (x=-\frac{1}{3}); minimum at (y=-\frac{1}{6}); domain: (-\infty,\infty); range: [-\frac{1}{6},\infty).}
+\end{te-addendum}
+% Source page 17: 64 Step 2 Understand & Apply
+\begin{tryit}{4}
+The graph shows the height of a ball with respect to time. What is the equation of the function? Write the equation in vertex form. Then write the equation in the form (y=ax^2+bx+c).
+\placeholder{graph}{Try It 4: red downward parabola from closed labeled point (0,4) through closed vertex (2,10), then down to arrow near x=4.6,y=0. Gray axes x,y, horizontal title Time (s), vertical Height (ft), window x=0 to 5,y=0 to 11, grid spacing x=0.5,y=1, labeled x=0,1,2,3,4,5 and y=0,2,4,6,8,10.}
+\answer{(y=-\frac{3}{2}(x-2)^2+10); (y=-\frac{3}{2}x^2+6x+4)}
+\end{tryit}
+\begin{te-addendum}{5}{GeneralizeETP}
+\textbf{Write an Equation of a Transformed Function}
+Examples are available at SavvasRealize.com.
+Use and Connect Mathematical Representations
+Q: What do you notice about the two graphs?
+\answer{The graphs open in the same direction. The graphs appear to have the same shape. The graph of (g) is shifted up and to the left.}
+Q: What does this tell you about the value of (a) in the equations of (f) and (g)?
+\answer{Since (g) is a translation of (f), the value of (a) does not change.}
+\end{te-addendum}
+\begin{example}{5}
+\textbf{Write an Equation of a Transformed Function}
+The function (g) is a translation of the parent function (f) 1 unit left and 3 units up. What is the equation of (g)? Write the quadratic equation in vertex form and in the form (y=ax^2+bx+c).
+Translate the graph of (f(x)) left 1 unit to locate the graph of (f(x+1)), then translate the graph of (f(x+1)) up 3 units to locate the graph of (f(x+1)+3).
+(f(x)=x^2) and (g(x)=f(x+1)+3), so
+(g(x)=a(x+1)^2+3), (a) is vertical stretch.
+From the graph, the point (0,4) is on (g). Use the point (0,4) to find (a).
+(4=a(0+1)^2+3)
+(4=a+3)
+(1=a)
+Substituting (a=1), the equation is
+(g(x)=a(x+1)^2+3)
+(g(x)=(x+1)^2+3)
+(g(x)=x^2+2x+1+3)
+(g(x)=x^2+2x+4)
+In vertex form, (g(x)=(x+1)^2+3) and in the form (y=ax^2+bx+c), the equation is (g(x)=x^2+2x+4).
+\placeholder{graph}{Example 5: red f(x)=x^2 with vertex (0,0), blue g(x)=(x+1)^2+3 with vertex (-1,3), labels f and g; arrows on all branches. Gray x,y axes with arrowheads, unit grid window x=-5 to 5,y=-1 to 9; x labels -4,-2,2,4, O at origin; y labels 2,4,6,8.}
+\te{STUDY TIP You can confirm your equation by picking a point that is on the graph and checking to make sure it satisfies your equation.}
+\answer{(g(x)=(x+1)^2+3); (g(x)=x^2+2x+4)}
+\end{example}
+\begin{tryit}{5}
+What is the equation of (j)? Write the equation in vertex form and in the form (y=ax^2+bx+c).
+a. Let (j) be a quadratic function whose graph is a translation 2 units right and 5 units down of the graph of the parent function (f).
+\answer{a. (j(x)=(x-2)^2-5); (j(x)=x^2-4x-1)}
+b. Let (j) be a quadratic function whose graph is a reflection of the graph of the parent function (f) in the (x)-axis followed by a translation 1 unit down.
+\answer{b. (j(x)=-(x-0)^2-1); (j(x)=-x^2-1)}
+\end{tryit}
+\begin{te-addendum}{5}{ElicitEvidence}
+Elicit and Use Evidence of Student Thinking
+Q: How can you determine the value of (a) from the given information?
+\answer{In Part a, the graph of (j) is a translation of (f). This means that (a=1). In Part b, the graph of (j) is a reflection of (f) in the (x)-axis. This means that (a=-1).}
+\end{te-addendum}
+\begin{te-addendum}{5}{CommonError}
+\textbf{Common Error}
+Try It! 5a Some students may switch the coordinate values when writing the vertex form of the equation of the parabola. Emphasize that (h) is the (x)-coordinate of the vertex and (k) is the (y)-coordinate of the vertex.
+\end{te-addendum}
+\begin{te-addendum}{5}{HabitsOfMind}
+\textbf{HABITS OF MIND} Use with EXAMPLE 5
+Q: Generalize What information do you need to write the equation of a quadratic function in vertex form?
+\answer{the value of the vertex and at least one other point on the transformed function}
+\end{te-addendum}
+\begin{te-addendum}{5}{RtISupport}
+\textbf{Support Struggling Students}
+USE WITH EXAMPLE 5 Some students may struggle with reflecting points across the (x)-axis.
+Have students practice reflecting points across the (x)- and (y)-axes.
+Q: Reflect (-3,5) across the (x)-axis.
+\answer{(-3,-5)}
+Q: Reflect (-4,-7) across the (y)-axis.
+\answer{(4,-7)}
+Q: Reflect (4,1) across the (x)-axis.
+\answer{(4,-1)}
+Q: Reflect (2,-2) across the (y)-axis.
+\answer{(-2,-2)}
+\end{te-addendum}
+% Source page 18: 65 Concept Summary
+\begin{te-addendum}{ConceptSummary}{GeneralizeETP}
+\textbf{CONCEPT SUMMARY Vertex Form of a Quadratic Function}
+Concept Summary, Do You Understand, and Do You Know How are available at SavvasRealize.com.
+Q: What can you learn about the values of (a), (h), and (k) from the graph of (g)?
+\answer{The vertex is (-2,3), so (h=-2) and (k=3). Because the graph opens downward, the value of (a) is negative. And because (g) appears to be vertically compressed, (0<|a|<1).}
+\end{te-addendum}
+\begin{te-addendum}{ConceptSummary}{CommonError}
+\textbf{Do You UNDERSTAND? | Do You KNOW HOW?}
+Common Error
+Exercise 6 Some students may say that the function (h) is translated right 2 units instead of left 2 units. Emphasize that in the vertex form of a parabola, the value of (h) is subtracted from (x), so (h=-2), not 2.
+\end{te-addendum}
+\begin{concept-summary}
+\textbf{CONCEPT SUMMARY Vertex Form of a Quadratic Function}
+\textbf{WORDS} The graph of a quadratic function is called a parabola.
+A quadratic function can be represented by an equation in vertex form (y=a(x-h)^2+k). Vertex form shows the different ways in which the graph of the parent function (f(x)=x^2) can be transformed.
+\begin{tabular}{lll}
+ALGEBRA & (f(x)=x^2) & (y=a(x-h)^2+k), (a\neq 0) \\
+vertex & (0,0) & (h,k) \\
+axis of symmetry & (x=0) & (x=h) \\
+opens upward & minimum: (y=0) & If (a>0): opens upward; minimum value is (k); range: [k,\infty) \\
+ & & If (a<0): opens downward; maximum value is (k); range: (-\infty,k] \\
+ domain & (-\infty,\infty) & (-\infty,\infty) \\
+ range & [0,\infty) & \\
+NUMBERS & (g(x)=-\frac{1}{2}(x+2)^2+3) & \\
+vertex & (-2,3) & \\
+axis of symmetry & (x=-2) & \\
+opens downward & maximum: (y=3) & \\
+domain & (-\infty,\infty) & \\
+range & (-\infty,3] & \\
+\end{tabular}
+\placeholder{graph}{Concept Summary GRAPH: blue upward f(x)=x^2 with vertex (0,0), red downward g(x)=-0.5(x+2)^2+3 with vertex (-2,3), labels f and g, arrows on four branches. Gray x,y axes, unit grid window x=-7 to 3,y=-5 to 5, labels x=-6,-4,-2,2 and y=-4,-2,2,4, origin O.}
+\textbf{Do You UNDERSTAND?}
+1. ESSENTIAL QUESTION How are transformations related to the vertex form of a quadratic function?
+\answer{Transformations move the points of a graph. The vertex shifts from the origin to (h,k) in the transformed function, where (k) is the vertical shift and (h) is the horizontal shift. These values are reflected in the vertex form, (y=a(x-h)^2+k). The graph may also be vertically stretched (if (|a|>1)) or vertically compressed (if (|a|<1)), and it may be reflected in the (x)-axis (if (a<0)).}
+2. Error Analysis Given the function (g(x)=(x+3)^2), Martin says the graph of (g) is the graph of the parent function (f(x)=x^2) translated 3 units right. Explain his error.
+\answer{Martin should rewrite the function as (g(x)=(x-(-3))^2). (h=-3), and the parent function, (f(x)=x^2), is translated 3 units left.}
+3. Vocabulary What is the shape of the graph of a quadratic function called?
+\answer{The shape of the graph of a quadratic function is called a parabola.}
+4. Communicate Precisely How are the graphs of (f(x)=x^2) and (g(x)=-(x+2)^2-4) related?
+\answer{The graph of the function (g) is a reflection across the (x)-axis and a translation 2 units to the left and 4 units down of the graph of (f).}
+\textbf{Do You KNOW HOW?}
+Describe the transformation of the parent function (f(x)=x^2).
+5. (g(x)=-(x+5)^2+2)
+\answer{The graph of the function (g) is a reflection across the (x)-axis and a translation 5 units to the left and 2 units up.}
+6. (h(x)=(x+2)^2-7)
+\answer{The graph of the function (h) is a translation 2 units to the left and 7 units down.}
+Write the equation of each parabola in vertex form.
+7. Vertex: (-3,7); Point: (-2,-5)
+\answer{(y=-12(x+3)^2+7)}
+8. Vertex: (1,3); Point: (2,5)
+\answer{(y=2(x-1)^2+3)}
+9. Vertex: (-4,6); Point: (-2,-2)
+\answer{(y=-2(x+4)^2+6)}
+10. Vertex: (7,4); Point: (5,16)
+\answer{(y=3(x-7)^2+4)}
+\end{concept-summary}
+% Source page 19: 66 Practice & Problem Solving
+\begin{te-addendum}{Practice}{GeneralizeETP}
+\textbf{PRACTICE & PROBLEM SOLVING}
+Practice & Problem Solving and video tutorials are available at SavvasRealize.com.
+Scan the QR code to access a video tutorial.
+Lesson Practice You may opt to have students complete the automatically scored Practice and Problem Solving items online powered by MathXL for School.
+Choose from: Lesson Practice; Adaptive Practice
+You may also take advantage of the bank of exercises for assigning additional practice.
+\textbf{Assignment Guide}
+\begin{tabular}{ll}
+On-level & Advanced \\
+11, 12, 14, 16--38 & 11--15, 17, 19, 21--38 \\
+\end{tabular}
+\textbf{Engage Through Student Choice}
+Promote student agency by allowing students to choose practice items. You may structure this choice in many ways.
+For example:
+Assign each section a point value. Students choose at least one item from each section and items chosen should have a minimum of 20 total points.
+\begin{tabular}{ll}
+Understand, Apply & 2 points each \\
+Practice & 1 point each \\
+Assessment Practice & 1 point each \\
+Performance Task & 3 points \\
+\end{tabular}
+\te{12, 14--15. Answers on previous page. See answers for 18--25 on the next page.}
+\end{te-addendum}
+\begin{item-analysis}
+\begin{tabular}{lll}
+\toprule
+Example & Items & DOK \\
+\midrule
+1 & 16--21, 36 & 1 \\
+2 & 22--25 & 1 \\
+2 & 12, 14, 32, 34 & 2 \\
+2 & 15, 38 & 3 \\
+3 & 26--28, 37 & 1 \\
+3 & 33 & 2 \\
+3 & 35 & 3 \\
+4 & 29 & 1 \\
+4 & 13 & 2 \\
+5 & 11, 30, 31 & 1 \\
+\bottomrule
+\end{tabular}
+\end{item-analysis}
+\begin{practice}{11}{1}
+UNDERSTAND. Use Structure The graph of the function (f(x)=x^2) is translated 3 units up and 1 unit left. What is the resulting function (g(x))?
+\answer{(g(x)=(x+1)^2+3)}
+\end{practice}
+\begin{practice}{12}{2}
+UNDERSTAND. Error Analysis A classmate said that the vertex of (g(x)=-5(x+2)^2-4) is (2,4). Is your classmate correct? If not, what is the correct vertex?
+\answer{No, the correct vertex is (-2,-4). The classmate should rewrite the function as (g(x)=-5(x-(-2))^2-4) to see the signs for the values of the vertex (h,k).}
+\end{practice}
+\begin{practice}{13}{2}
+UNDERSTAND. Higher Order Thinking The graph below is a transformation of the graph of the parent function. Write the quadratic function to model the graph.
+\placeholder{graph}{Practice 13: red downward parabola, closed vertex labeled (-3,4), branches with arrows at bottom near (-5.2,-6) and (-0.8,-6). Gray x,y axes, unit grid window x=-9 to 3,y=-6 to 6; x labels -8,-6,-4,-2,2, O at origin; y labels -4,-2,2,4. Curve y=-2(x+3)^2+4.}
+\answer{(y=-2(x+3)^2+4)}
+\end{practice}
+\begin{practice}{14}{2}
+UNDERSTAND. Construct Arguments Explain why the graph of the equation (g(x)=-(x+1)^2-3) would be a parabola opening downward.
+\answer{Since (a=-1) and (-1<0), the parabola opens downward.}
+\end{practice}
+\begin{practice}{15}{3}
+UNDERSTAND. Use Structure Amaya is standing 30 ft from a volleyball net. The net is 8 ft high. Amaya serves the ball. The path of the ball is modeled by the equation (y=-0.02(x-18)^2+12), where (x) is the ball's horizontal distance in feet from Amaya's position and (y) is the distance in feet from the ground to the ball.
+a. How far away horizontally is the ball from Amaya when it is at its maximum height? Explain.
+\answer{a. The ball is 18 ft away from Amaya when it is at its maximum height. Use the (x)-coordinate of the vertex.}
+b. Describe how you would find the ball's height when it crosses the net at (x=30).
+\answer{Substitute 30 for the variable (x) in the equation. The ball's height is 9.12 ft.}
+\end{practice}
+\begin{practice}{16}{1}
+PRACTICE. Describe the transformation of the parent function (f(x)=x^2). Then graph the transformed function. SEE EXAMPLE 1
+(j(x)=(x-1)^2+3)
+\answer{The graph of the function is translated 1 unit right and 3 units up from the graph of (f(x)=x^2).}
+\placeholder{graph}{Practice 16 answer: blue curve for (j(x)=(x-1)^2+3), vertex (1,3), y-intercept (0,4), window x=-5 to 5,y=-1 to 10, x labels -4,-2,2,4 and y labels 2,4,6,8; gray x,y axes with arrowheads, origin O, unit grid, arrows on both ends of parabola.}
+\end{practice}
+\begin{practice}{17}{1}
+PRACTICE. Describe the transformation of the parent function (f(x)=x^2). Then graph the transformed function. SEE EXAMPLE 1
+(y=(x+1)^2-3)
+\answer{The graph of the function is translated 1 unit left and 3 units down from the graph of (f(x)=x^2).}
+\placeholder{graph}{Practice 17 answer: blue curve for (y=(x+1)^2-3), vertex (-1,-3), y-intercept (0,-2), window [-5,5] by [-5,5], labels -4,-2,2,4 on both axes; gray x,y axes with arrowheads, origin O, unit grid, arrows on both ends of parabola.}
+\end{practice}
+\begin{practice}{18}{1}
+PRACTICE. Describe the transformation of the parent function (f(x)=x^2). Then graph the transformed function. SEE EXAMPLE 1
+(g(x)=2x^2)
+\answer{The function (g) is a vertical stretch of the graph of (f(x)=x^2).}
+\placeholder{graph}{Practice 18 answer: blue curve for (g(x)=2x^2), vertex (0,0), window x=-5 to 5,y=-1 to 10, x labels -4,-2,2,4 and y labels 2,4,6,8; gray x,y axes with arrowheads, origin O, unit grid, arrows on both ends of parabola.}
+\end{practice}
+\begin{practice}{19}{1}
+PRACTICE. Describe the transformation of the parent function (f(x)=x^2). Then graph the transformed function. SEE EXAMPLE 1
+(h(x)=-(x-1)^2+7)
+\answer{The graph of the function is a reflection in the (x)-axis, translated 1 unit right and 7 units up from the graph of (f(x)=x^2).}
+\placeholder{graph}{Practice 19 answer: blue curve for (h(x)=-(x-1)^2+7), downward parabola, vertex (1,7), y-intercept (0,6), window x=-5 to 5,y=-2 to 8, x labels -4,-2,2,4 and y labels 2,4,6; gray x,y axes with arrowheads, origin O, unit grid, arrows on both ends of parabola.}
+\end{practice}
+\begin{practice}{20}{1}
+PRACTICE. Describe the transformation of the parent function (f(x)=x^2). Then graph the transformed function. SEE EXAMPLE 1
+(y=-2(x+1)^2+1)
+\answer{The graph of the function is a reflection in the (x)-axis, translated 1 unit left and 1 unit up with a vertical stretch of the graph of (f(x)=x^2).}
+\placeholder{graph}{Practice 20 answer: blue curve for (y=-2(x+1)^2+1), downward parabola, vertex (-1,1), y-intercept (0,-1), window x=-5 to 5,y=-8 to 2, x labels -4,-2,2,4 and y labels -2,-4,-6; gray x,y axes with arrowheads, origin O, unit grid, arrows on both ends of parabola.}
+\end{practice}
+\begin{practice}{21}{1}
+PRACTICE. Describe the transformation of the parent function (f(x)=x^2). Then graph the transformed function. SEE EXAMPLE 1
+(g(x)=\frac{1}{2}(x-2)^2+3)
+\answer{The graph of the function is a translation 2 units right and 3 units up with a vertical compression of the graph of (f(x)=x^2).}
+\placeholder{graph}{Practice 21 answer: blue curve for (g(x)=\frac{1}{2}(x-2)^2+3), vertex (2,3), y-intercept (0,5), window x=-3 to 7,y=-1 to 10, x labels -2,2,4,6 and y labels 2,4,6,8; gray x,y axes with arrowheads, origin O, unit grid, arrows on both ends of parabola.}
+\end{practice}
+\begin{practice}{22}{1}
+PRACTICE. Identify the vertex, axis of symmetry, maximum or minimum, domain, and range of each function. SEE EXAMPLE 2
+(y=2(x-2)^2+5)
+\answer{Vertex: (2,5); axis of symmetry: (x=2); minimum: (y=5); domain: (-\infty,\infty); range: [5,\infty)}
+\end{practice}
+\begin{practice}{23}{1}
+PRACTICE. Identify the vertex, axis of symmetry, maximum or minimum, domain, and range of each function. SEE EXAMPLE 2
+(f(x)=-(x-1)^2+2)
+\answer{Vertex: (1,2); axis of symmetry: (x=1); maximum: (y=2); domain: (-\infty,\infty); range: (-\infty,2]}
+\end{practice}
+\begin{practice}{24}{1}
+PRACTICE. Identify the vertex, axis of symmetry, maximum or minimum, domain, and range of each function. SEE EXAMPLE 2
+(g(x)=-(x+4)^2)
+\answer{Vertex: (-4,0); axis of symmetry: (x=-4); maximum: (y=0); domain: (-\infty,\infty); range: (-\infty,0]}
+\end{practice}
+\begin{practice}{25}{1}
+PRACTICE. Identify the vertex, axis of symmetry, maximum or minimum, domain, and range of each function. SEE EXAMPLE 2
+(y=\frac{1}{3}(x+2)^2-1)
+\answer{Vertex: (-2,-1); axis of symmetry: (x=-2); minimum: (y=-1); domain: (-\infty,\infty); range: [-1,\infty)}
+\end{practice}
+\begin{practice}{26}{1}
+PRACTICE. Write the equation of each parabola in vertex form. SEE EXAMPLE 3
+Vertex: (1,2); Point: (2,-5)
+\answer{(y=-7(x-1)^2+2)}
+\end{practice}
+\begin{practice}{27}{1}
+PRACTICE. Write the equation of each parabola in vertex form. SEE EXAMPLE 3
+Vertex: (3,6); (y)-intercept: 2
+\answer{(y=-\frac{4}{9}(x-3)^2+6)}
+\end{practice}
+\begin{practice}{28}{1}
+PRACTICE. Write the equation of each parabola in vertex form. SEE EXAMPLE 3
+Vertex: (0,5); Point: (1,-2)
+\answer{(y=-7x^2+5)}
+\end{practice}
+\begin{practice}{29}{1}
+PRACTICE. Write the equation of the function represented by the parabola in vertex form and in the form (y=ax^2+bx+c). SEE EXAMPLE 4
+\placeholder{graph}{Practice 29: red upward parabola y=2(x+1)^2-6, closed vertex labeled (-1,-6), y-intercept (0,-4); gray x,y axes, unit grid window x=-7 to 5,y=-7 to 5, x labels -6,-4,-2,2,4, y labels -6,-4,-2,2,4, origin O; arrowheads at top of both branches.}
+\answer{(y=2(x+1)^2-6); (y=2x^2+4x-4)}
+\end{practice}
+\begin{practice}{30}{1}
+PRACTICE. Write the equation (g(x)) in vertex form of a quadratic function given the transformations of the parent function (f(x)=x^2). SEE EXAMPLE 5
+Let (g(x)) be the function whose graph is a translation 4 units left and 1 unit up of the graph of (f(x)).
+\answer{(g(x)=(x+4)^2+1)}
+\end{practice}
+\begin{practice}{31}{1}
+PRACTICE. Write the equation (g(x)) in vertex form of a quadratic function given the transformations of the parent function (f(x)=x^2). SEE EXAMPLE 5
+Let (g(x)) be the function whose graph is a reflection in the (x)-axis and translated 3 units right of the graph of (f(x)).
+\answer{(g(x)=-(x-3)^2)}
+\end{practice}
+% Source page 20: 67 Practice & Problem Solving continued
+\begin{te-addendum}{Practice}{GeneralizeETP}
+Practice & Problem Solving is available at SavvasRealize.com.
+\te{The answers for practice 18--25 are printed in the left margin of this page and are placed with their items above.}
+\end{te-addendum}
+\begin{practice}{32}{2}
+APPLY. Look for Relationships The height, in inches, that a person can jump while wearing jumping shoes is based on the time, (x), in seconds. Kimani is testing two pairs to determine which ones he likes better. Compare the maximum heights on the two sets of shoes.
+\placeholder{illustration}{Two pairs of spring jumping shoes shown on blue-trousered legs against yellow circles; left yellow shoes labeled Max Jumps: f(x)=-192(x-0.289)^2+16; right green shoes labeled Jumpsters: g(x)=-192(x-0.445)^2+38.}
+\answer{The maximum height for the shoes on the left is 16 in. The maximum height for the shoes on the right is 38 in. There is a 22-inch difference in the maximum heights.}
+\end{practice}
+\begin{practice}{33}{2}
+APPLY. Make Sense and Persevere A diver jumps from a 2 m board and 0.35 s later reaches his vertex at 3.2 m. Find his height at 3 other times.
+\answer{Answers will vary. Sample: (0.7 s, 2 m), (0.9 s, 0.24 m), (0.2 s, 2.98 m).}
+\end{practice}
+\begin{practice}{34}{2}
+APPLY. Make Sense and Persevere The curvature of the Tacoma Narrows Bridge in Washington is in the shape of a parabola.
+\placeholder{photo}{Tacoma Narrows suspension bridge over blue water, green towers and white highlighted deck/arch. Callout pointing to arch: f(x)=-0.016(x-52.5)^2+45.}
+In the given function, (x) represents the horizontal distance (in meters) from the arch's left end and (f(x)) represents the vertical distance (in meters) from the base of the arch. What is the distance between the supports?
+\answer{about 106 m}
+\end{practice}
+\begin{practice}{35}{3}
+APPLY. Model With Mathematics An object is propelled from a height of 5 ft. After 2.5 s, the object reaches a maximum height of 200 ft, 150 horizontal feet away, and then it lands 5 s after it was propelled. Write the vertex form of the quadratic equation that models the object's vertical path. Explain why you used the values that you did and how you could make a better model.
+\answer{(y\approx -31.2(x-2.5)^2+200); Answers will vary. Sample: Because we are interested in the vertical path, we need to ignore the horizontal distance. We could make a better model by recording more data points.}
+\te{Printed initial height 5 ft and landing time 5 s are not both satisfied by the printed model; the model gives height 5 ft at 5 s.}
+\end{practice}
+\begin{practice}{36}{1}
+ASSESSMENT PRACTICE. The graph of (g(x)=3(x-2)^2) is a transformation of the graph of (f(x)=x^2). Are the following transformations of (f) that map to (g)? Select yes or no.
+\begin{tabular}{lll}
+ & Yes & No \\
+Translation left & & \\
+Translation right & & \\
+Translation up & & \\
+Translation down & & \\
+Vertical compression & & \\
+Vertical stretch & & \\
+\end{tabular}
+\answer{Translation left: No; Translation right: Yes; Translation up: No; Translation down: No; Vertical compression: No; Vertical stretch: Yes.}
+\end{practice}
+\begin{practice}{37}{1}
+ASSESSMENT PRACTICE. SAT/ACT Which of the following functions represents a parabola with a vertex at (-3,4) and that passes through the point (-1,-4)?
+A. (f(x)=x^2-5)
+B. (f(x)=-2(x+3)^2+4)
+C. (f(x)=2(x+1)^2-4)
+D. (f(x)=2(x-3)^2-32)
+\answer{B}
+\end{practice}
+\begin{practice}{38}{3}
+ASSESSMENT PRACTICE. Performance Task The Bluebird Bakery sells more alfajores when it lowers its prices, but this also changes profits.
+\placeholder{illustration}{Gray pedestal cake stand with golden sandwich cookies, price card showing 0.75 dollars each crossed out in red and 40 cents ea written below.}
+The profit function for the alfajores is (f(x)=-500(x-0.45)^2+400). This function represents the profit earned when the price of an alfajor is (x) dollars. The bakery wants to maximize their profits.
+a. Part A What is the domain of the function?
+\answer{Part A The domain is (\{x\mid x>0\}). The value of (x) cannot be negative or 0 since it represents the price of a cookie.}
+b. Part B Find the daily profits for selling alfajores for \$0.40 each and for \$0.75 each.
+\answer{(f(0.40)=\$398.75); (f(0.75)=\$355)}
+c. Part C What price should the bakery charge to maximize their profits from selling alfajores?
+\answer{Part C The bakery should charge \$0.45 per cookie to make the maximum profit.}
+\te{Printed inline Part C answer repeats Part B: (f(0.40)=\$398.75); (f(0.75)=\$355); likely a duplicated answer. The margin gives the price \$0.45.}
+d. Part D What is the maximum profit?
+\answer{The maximum profit the bakery can make is \$400.}
+\end{practice}
+% Source page 21: 67A Assess & Differentiate
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{LESSON QUIZ}
+Use the Lesson Quiz to assess students' understanding of the mathematics in the lesson.
+Students can take the Lesson Quiz online or you can download a printable copy from SavvasRealize.com. The Lesson Quiz is also available in the Assessment Sourcebook.
+Lesson Quiz is available at SavvasRealize.com.
+\textbf{Item Analysis}
+\begin{tabular}{lll}
+Item & DOK & Skills Review and Practice \\
+1 & 2 & F60, F68 \\
+2 & 2 & F60 \\
+3 & 2 & F60 \\
+4 & 2 & F16 \\
+5 & 2 & F16, F68 \\
+\end{tabular}
+Use the student scores on the Lesson Quiz to prescribe differentiated assignments.
+If students take the Lesson Quiz online, it will be automatically scored and appropriate differentiated practice will be assigned based on student performance.
+\begin{tabular}{lll}
+Intervention & 0--3 points & Reteach to Build Understanding; Mathematical Literacy and Vocabulary; Lesson Virtual Nerd videos \\
+On-Level & 4 points & Enrichment \\
+Advanced & 5 points & Enrichment \\
+\end{tabular}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{ASSESSMENT RESOURCES}
+\textbf{2-1 Lesson Quiz: Vertex Form of a Quadratic Function}
+1. The function (g(x)=(x+2)^2+4) is a transformation of the parent function (f(x)=x^2). Select all the statements that are true about the transformation.
+A. Function (g) is the result of (f) being translated right 2 units and down 4 units.
+B. Function (g) is the result of (f) being translated left 2 units and up 4 units.
+C. The graph of function (f) opens upward.
+D. The graph of function (g) opens downward.
+E. The graph of function (f) is compressed by a factor of 2.
+\answer{1. B, C}
+2. The function (h(x)=-\frac{1}{2}(x-4)^2+3) represents the height of a bird (y) over time (x), as it flies past the school. What point on the graph represents the greatest height of the bird above the ground?
+A. (4,3)
+B. (3,4)
+C. (\frac{1}{2},4)
+D. (3,\frac{1}{2})
+\answer{2. A}
+3. What is the equation written in vertex form of a parabola with a vertex of (9,-1) that passes through (7,7)?
+A. (y=2(x-9)^2-1)
+B. (y=2(x+1)^2-9)
+C. (y=2(x-7)^2+7)
+D. (y=7(x-9)^2-1)
+\answer{3. A}
+4. Which of the following is an equation in the form (y=ax^2+bx+c) of the parabola shown in the graph?
+\placeholder{graph}{Quiz 4: black downward parabola, vertex (2,45), y-intercept (0,25), x-intercepts -1 and 5; arrows at both lower ends. Gray grid x=-2 to 8 at spacing 1, y=-30 to 70 at spacing 10; axes labeled x and y with arrowheads; x labels 2,4,6,8 and y labels -20,20,40,60, origin O.}
+A. (y=-5x^2-20x-65)
+B. (y=-5x^2-20x-20)
+C. (y=-x^2-27x-90)
+D. (y=-5x^2+20x+25)
+\answer{4. D}
+5. Function (g) is a transformation of the parent function (f(x)=x^2). The graph of (g) is a translation right 3 units and down 5 units of the graph of (f). What is the equation of function (g) written in the form (y=ax^2+bx+c)?
+A. (y=x^2+6x+4)
+B. (y=x^2-6x+4)
+C. (y=x^2+10x+22)
+D. (y=x^2-6x+14)
+\answer{5. B}
+\end{te-addendum}
+% Source page 22: 67B Differentiated Resources
+\begin{te-addendum}{Assess}{RtISupport}
+\textbf{DIFFERENTIATED RESOURCES}
+I = Intervention; O = On-Level; A = Advanced
+\textbf{Reteach to Build Understanding} I
+Provides scaffolded reteaching for the key lesson concepts.
+MathXL for School
+\textbf{2-1 Reteach to Build Understanding: Vertex Form of a Quadratic Function}
+1. Identify the vertex, axis of symmetry, the maximum or minimum value, and the domain and the range of (y=(x+1)^2-2).
+\placeholder{graph}{Reteach 1 left: black upward parent parabola y=x^2, vertex at origin labeled Vertex (h,k), Minimum; vertical axis labeled Axis of symmetry; curve labeled Parent Function y=x^2. Formula for a quadratic graph [y=a(x-h)^2+k] above. Unit labels x=-2,-1,1,2; y=1,2,3,4; fine half-unit grid. Arrows on branches; black coordinate axes x,y.}
+\placeholder{graph}{Reteach 1 right: upward black parabola y=(x+1)^2-2, vertex (-1,-2), solid point, bold horizontal minimum line y=-2, axis of symmetry x=-1. Formula for a quadratic graph [y=a(x-h)^2+k] above; printed curve callout Parent Function y=x^2. Gray half-unit grid, x labels -2,-1,1,2, y labels 1,2; axes x,y. Vertex (h,k)=(-1,-2), Minimum y=-2 are completed in magenta.}
+\textbf{Properties of a Quadratic Function}
+\begin{tabular}{llll}
+ & Algebra & Parent Function (y=x^2) & Function (y=(x+1)^2-2) \\
+Vertex & (h,k) & (0,0) & (-1,-2) \\
+Axis of Symmetry & (x=h) & (x=0) & (x=-1) \\
+Minimum (If (a>0)); Maximum (If (a<0)) & (y=k) & (y=0) & (y=-2) \\
+Domain & (-\infty,\infty) & (-\infty,\infty) & (-\infty,\infty) \\
+Range & [k,\infty) (If (a>0)); (-\infty,k] (If (a<0)) & [0,\infty) & \uncertain{(-\infty,-2]}{[\infty,-2]; blurred interval delimiters in printed answer} \\
+\end{tabular}
+\answer{Vertex (-1,-2); axis (x=-1); minimum (y=-2); domain (-\infty,\infty); printed range \uncertain{(-\infty,-2]}{[\infty,-2]; blurred interval delimiters}.}
+\te{Printed range appears to run from infinity to -2; likely intended range [-2,\infty).}
+2. Renaldo described the translation of the graph of (f(x)=x^2) related to (g(x)=(x+2)^2-6) as 2 units right and 2 units downward. What mistakes did he make?
+\answer{Since 2 is being added to (x), that means that the graph is being translated 2 units left, not right. Also since -6 is the value of (k), the graph is being translated 6 units down.}
+3. Write the equation of each parabola in vertex form with a vertex (2,1) and point (4,-3).
+Vertex (h,k)=(2,1) (\rightarrow y=a(x-2)^2+1)
+(-3=a(4-2)^2+1)
+(-3=a(2)^2+1)
+(-4=4a\rightarrow a=-1)
+\answer{(y=-(x-2)^2+1)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Additional Practice} I O
+Provides extra practice for each lesson.
+MathXL for School
+\textbf{2-1 Additional Practice: Vertex Form of a Quadratic Function}
+Graph each function. Describe how it was translated from (f(x)=x^2).
+1. (f(x)=x^2+4)
+\answer{translated up 4 units}
+\placeholder{graph}{Additional Practice 1: magenta upward parabola y=x^2+4 with vertex (0,4); unit grid, x labels -4,-2,2,4 and y labels -1,2,4,6,8, arrows on both branches; x,y axes. Window approximately x=-5 to 5,y=-1 to 10.}
+2. (f(x)=(x-3)^2)
+\answer{translated right 3 units}
+\placeholder{graph}{Additional Practice 2: magenta upward parabola y=(x-3)^2, vertex (3,0); unit grid, x labels -4,-2,2,4,6 and y labels 2,4,6,8, window x=-4 to 7,y=-1 to 10; x,y axes; arrows at upper branches.}
+3. (f(x)=(x+2)^2-1)
+\answer{translated 1 unit down and 2 units left}
+\placeholder{graph}{Additional Practice 3: magenta upward parabola y=(x+2)^2-1, vertex (-2,-1), y-intercept (0,3); unit grid x=-7 to 4,y=-1 to 10, x labels -6,-4,-2,2,4, y labels 2,4,6,8; x,y axes; arrows at upper branches.}
+Identify the vertex, axis of symmetry, the maximum or minimum value, and the domain and the range of each function.
+4. (y=(x-2)^2+3)
+\answer{Vertex: (2,3); Axis of Symmetry: (x=2); Minimum: (y=3); Domain: (-\infty,\infty); Range: (3,\infty)}
+\te{Printed range (3,\infty); likely [3,\infty), including the vertex.}
+5. (f(x)=-0.2(x+3)^2+2)
+\answer{Vertex: (-3,2); Axis of Symmetry: (x=-3); Maximum: (y=2); Domain: (-\infty,\infty); Range: (-\infty,2]}
+6. (y=(x+4)^2-1)
+\answer{Vertex: (-4,-1); Axis of Symmetry: (x=-4); Minimum: (y=-1); Domain: (-\infty,\infty); Range: (-1,\infty)}
+\te{Printed range (-1,\infty); likely [-1,\infty).}
+Write the equation of each parabola in vertex form.
+7. vertex (3,-2), point (2,3)
+\answer{(y=5(x-3)^2-2)}
+8. vertex (-4,-24), point (-5,-25)
+\answer{(y=-(x+4)^2-24)}
+9. vertex (-12.5,35.5), point (1,400)
+\answer{(y=2(x+12.5)^2+35.5)}
+10. Given the function (f(x)=x^2). Write the equation function (g(x)) whose graph is a translation 5 units left and 3 units down.
+\answer{(g(x)=(x+5)^2-3)}
+11. The diagram shows the path of a model rocket launched from the ground. It reaches a maximum altitude of 384 ft when it is above a location 16 ft from the launch site. What quadratic function models the height of the rocket?
+\placeholder{diagram}{Model rocket trajectory: black downward parabolic arch above horizontal baseline, launch at left, midpoint labeled 16 ft, right endpoint 32 ft; vertical segment from midpoint to vertex labeled 384 ft; no coordinate axes.}
+\answer{(f(x)=-1.5(x-16)^2+384)}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{RtIExtend}
+\textbf{Enrichment} O A
+Presents engaging problems and activities that extend the lesson concepts.
+MathXL for School
+\textbf{2-1 Enrichment: Vertex Form of a Quadratic Function}
+Develop equations for three parabolas. Each parabola will go through the (x)-axis as indicated, and pass through point(s) that are on the grid.
+\item The first parabola goes through the (x)-axis at 3.528.
+\item The second parabola goes through the (x)-axis at 7.877.
+\item The third parabola goes through the (x)-axis at 11.101.
+The parabolas must also go through (5,11), (8,20), (12,8), (12,17), (14,13), (16,20). Each point only needs to have one parabola go through it, but some may have two. You may use a graphing calculator or online source(s) to test your equations.
+\placeholder{graph}{Enrichment graph: three black downward parabolas y=-(x-12)^2+17, y=-(x-16)^2+24, y=-(x-8)^2+20 drawn above first-quadrant x,y axes. Horizontal title Distance in Feet, vertical Height in Feet. Square grid spacing 2; labels 0,4,8,12,16,20,24 on both axes, window x=0 to 26,y=0 to 26. Closed plotted points at (5,11),(8,20),(12,8),(12,17),(14,13),(16,24).}
+Write your equations here:
+\answer{1. (y=-(x-12)^2+17). 2. (y=-(x-16)^2+24). 3. (y=-(x-8)^2+20).}
+\te{Printed text lists (16,20); plotted point and supplied second equation have (16,24). Also supplied equation 3 has left intercept approximately 3.528, equation 1 has 7.877, and equation 2 has 11.101, reversing the stated sequence.}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{ELLAddendum}
+\textbf{Mathematical Literacy and Vocabulary} I O
+Helps students develop and reinforce understanding of key terms and concepts.
+\textbf{2-1 Mathematical Literacy and Vocabulary: Vertex Form of a Quadratic Function}
+Andrew throws a rubber ball which hits the floor 2 feet away from him. It then bounces in the air and, when it is 4 feet away from Andrew, it reaches a maximum height of 8 ft.
+There are two sets of note cards below that show Andrew how to find the expression that defines this function. The set on the left explains the thinking. The set on the right shows the steps. Match the Think Card with its corresponding Write Card, then number the steps in the correct order from 1--6.
+\begin{tabular}{ll}
+Think Cards & Printed step \\
+Divide both sides by 4 to solve for (a). & Step 6 \\
+Simplify the items within the parentheses. & Step 3 \\
+Identify the equation for a parabola. & Step 1 \\
+Square the number within the parentheses. & Step 4 \\
+Input the values for (a), (h), and (k) into the equation. & Step 7 \\
+Subtract 8 from each side. & Step 5 \\
+Use the vertex and a given point to write the equation in vertex form to find the value for (a). & Step 2 \\
+Write Cards & Printed step \\
+(0=a(2)^2+8) & Step 3 \\
+(0=a(x-h)^2+k) & Step 1 \\
+(-8=4a) & Step 5 \\
+(a=-2) & Step 6 \\
+(0=a(4-2)^2+8) & Step 2 \\
+(0=4a+8) & Step 4 \\
+(y=-2(x-2)^2+8) & Step 7 \\
+\end{tabular}
+\answer{Think cards, top to bottom: 6, 3, 1, 4, 7, 5, 2. Write cards, top to bottom: 3, 1, 5, 6, 2, 4, 7.}
+\te{Printed instruction says 1--6 but seven steps are printed. The story gives vertex at horizontal distance 4 and floor contact at 2, whereas printed equations use vertex (2,8) and point (4,0).}
+\end{te-addendum}
+\begin{te-addendum}{Assess}{GeneralizeETP}
+\textbf{Digital Differentiated Resources}
+The Reteach to Build Understanding, Additional Practice, and Enrichment activities are available as digital assignments. These activities are automatically assigned when students complete the lesson quiz online and are automatically scored.
+\placeholder{illustration}{Black tablet displaying digital math assignment. Prompt: Solve the system of equations by graphing. System y=3x+4, y=-2x+4. Use the graphing tool to graph the system. Blank gray x,y coordinate grid, unit spacing, window [-10,10] by [-10,10], even-number labels. Button Click to enlarge graph. Open Question Help menu: Help Me Solve This, View an Example, Video, Textbook, Glossary, Math Tools, Print. Bottom: Click the graph, choose a tool in the palette and follow the instructions to create your graph. 1 part remaining, Clear All, Check Answer, Review progress, Question 5 of 14, Go, Back, Next. Exit at upper left.}
+\te{The digital screenshot uses a linear system unrelated to this lesson.}
+\end{te-addendum}
+
+\end{document}
