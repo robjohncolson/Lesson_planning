@@ -154,17 +154,92 @@ def resolve_uncertain(body: str) -> tuple[str, list[tuple[str, str]]]:
     return body, flags
 
 
-def strip_placeholders(body: str) -> tuple[str, list[tuple[str, str]]]:
-    """\\placeholder{type}{description} → description + record type."""
+# An answer figure is labelled as one at the START of its description ("Practice 21 answer:",
+# "Answer on page 108:", "Sample Student Work Store A:"); the word later in the text
+# ("source answer identifies ...", "Check Answer button", "no solution lines") does not count.
+ANSWER_FIGURE_RE = re.compile(r"\banswers?\b|\bsolution\b|\bsample (?:student )?(?:work|graph|sketch|answer)", re.IGNORECASE)
+
+
+def figure_label(desc: str) -> str:
+    """The label of a figure description: the text before an early colon, else its first four words."""
+    head, colon, _ = desc.partition(":")
+    return head if colon and len(head) <= 60 else " ".join(desc.split()[:4])
+# Per-lesson figure-role overrides: {"1-3": {"tryit{5}#1": "answer", ...}}; key = block + "#" + nth placeholder in it.
+FIGURE_ROLES_PATH = Path(__file__).resolve().parent / "te-transcription" / "figure_roles.json"
+FIGURE_ROLES = json.loads(FIGURE_ROLES_PATH.read_text(encoding="utf-8")) if FIGURE_ROLES_PATH.exists() else {}
+
+
+def student_safe_description(desc: str) -> str:
+    """Drop function formulas (rendering instructions such as "(y=-2(x+3)^2+4)") from a figure description
+    shown to students. Only equations whose right side uses x go; tick ranges like "y=10 on (0,3]" stay.
+    Square brackets become parentheses so the [IMAGE: ...] marker stays well-formed."""
+    paren = r"\((?:[^()]|\((?:[^()]|\([^()]*\))*\))*\)"
+    def formula(m: re.Match) -> str:
+        inner = m.group(0)[1:-1]
+        lhs, _, rhs = inner.partition("=")
+        return "" if "=" in inner and re.search(r"x", rhs) and re.fullmatch(r"\s*[a-zA-Z](?:\(x\))?\s*", lhs) else m.group(0)
+    desc = re.sub(paren, formula, desc)
+    desc = re.sub(r"\b(?:for|of)\s+(?=[,;.]|$)", "", desc)
+    desc = re.sub(r"(?<![\w(])[a-zA-Z](?:\(x\))?=\S*x\S*?(?=[,;]?(?:\s|$))", "", desc)
+    return brackets_to_parens(desc)
+
+
+# The question asks the student for the formula itself (not, e.g., "find the zeros of the function").
+ASKS_FOR_FORMULA_RE = re.compile(
+    r"\b(?:write|determine|give)\b[^.?\n]{0,60}?\b(?:equation|function|rule|formula)s?\b"
+    r"|\bfind (?:an?|the) (?:equation|function|rule|formula)\b"
+    r"|\bwhat (?:is the )?(?:equation|function|rule|formula)\b"
+    r"|\bmodel the graph\b", re.IGNORECASE)
+STUDENT_BLOCKS = ("practice{", "tryit{", "model-discuss")
+
+
+def brackets_to_parens(desc: str) -> str:
+    """Keep the [IMAGE: ...] marker well-formed; fullwidth brackets keep closed-interval meaning.
+
+    Clauses that annotate the answer ("source answer identifies f(x)=|x-8| ...") are dropped from
+    the prompt copy; the full description stays in notes."""
+    clauses = re.split(r"(?<=[;.])\s+", desc)
+    desc = " ".join(c for c in clauses if not re.search(r"\b(?:answers?|solutions?)\b", c, re.IGNORECASE)
+                    or re.search(r"\bcheck answer\b|\bno solution\b", c, re.IGNORECASE))
+    desc = desc.replace("[", "［").replace("]", "］")
+    return re.sub(r"\s{2,}", " ", re.sub(r"\s+([,.;:])", r"\1", desc)).strip()
+
+
+def strip_placeholders(body: str, *, lesson: str = "", block: str = "") -> tuple[str, list[tuple[str, str]]]:
+    """\\placeholder{type}{description} → [IMAGE: description] for question figures, removed for answer figures.
+
+    Both arguments are brace-balanced. A figure is an answer figure when its description says so
+    (ANSWER_FIGURE_RE) or te-transcription/figure_roles.json marks it; answer figures stay in the
+    returned list (and so in notes) with type "answer:<type>".
+    """
     phs: list[tuple[str, str]] = []
-
-    def collect(m: re.Match) -> str:
-        vtype, desc = m.group(1).strip(), m.group(2).strip()
-        phs.append((vtype, desc))
-        return f"[IMAGE: {desc}]"
-
-    body = re.sub(r"\\placeholder\{([^{}]*)\}\{([^{}]*)\}", collect, body, flags=re.DOTALL)
-    return body, phs
+    out, pos, nth = [], 0, 0
+    overrides = FIGURE_ROLES.get(lesson, {})
+    # Formulas in a figure description are a give-away only when the question asks for that formula.
+    asks_formula = block.startswith(STUDENT_BLOCKS) and bool(ASKS_FOR_FORMULA_RE.search(strip_answer_and_te(body)))
+    describe = student_safe_description if asks_formula else brackets_to_parens
+    for start, end, vtype in balanced_command_blocks(body, "placeholder"):
+        if not body.startswith("{", end):
+            continue
+        depth, k = 1, end + 1
+        while k < len(body) and depth:
+            depth += {"{": 1, "}": -1}.get(body[k], 0)
+            k += 1
+        if depth:
+            continue
+        desc = " ".join(body[end + 1:k - 1].split())
+        nth += 1
+        role = overrides.get(f"{block}#{nth}") or ("answer" if ANSWER_FIGURE_RE.search(figure_label(desc)) else "question")
+        out.append(body[pos:start])
+        note_desc = latex_body_to_text(desc)
+        if role == "answer":
+            phs.append((f"answer:{vtype.strip()}", note_desc))
+        else:
+            phs.append((vtype.strip(), note_desc))
+            out.append(f"[IMAGE: {describe(desc)}]")
+        pos = k
+    out.append(body[pos:])
+    return "".join(out), phs
 
 
 def latex_body_to_text(body: str, *, preserve_tables: bool = True) -> str:
@@ -184,21 +259,28 @@ def latex_body_to_text(body: str, *, preserve_tables: bool = True) -> str:
     body = re.sub(r"\$\$([^$]*)\$\$", r"\1", body)
     body = re.sub(r"\$([^$]*)\$", r"\1", body)
 
+    # Transcription comments (% FIG: ..., % Source page ...) never reach the text
+    body = re.sub(r"(?<!\\)%[^\n]*", "", body)
+
+    # Structures whose rows are delimited by \\ must be handled before \\ is dropped
+    # (escaped characters stay protected so a literal \& is not a cell separator)
+    body = convert_cases(body)
+    if preserve_tables:
+        body = simplify_tabular(body)
+    else:
+        body = re.sub(r"\\begin\{tabular\}.*?\\end\{tabular\}", "[TABLE]", body, flags=re.DOTALL)
+
     # Restore escaped chars
     for src, dst in PROTECT:
         body = body.replace(dst, src[1:])  # strip the backslash
 
-    # Math substitutions — iterate \frac up to 4 times for nested fractions
-    frac_pattern = r"\\frac\{([^{}]+)\}\{([^{}]+)\}"
-    for _ in range(4):
-        new_body = re.sub(frac_pattern, r"(\1)/(\2)", body)
-        if new_body == body:
-            break
-        body = new_body
+    # Fractions and radicals, brace-balanced and nested in any order
+    body = convert_frac_sqrt(body)
+    body = re.sub(r"\\[cl]dots(?![a-zA-Z])", "...", body)
     for pattern, replacement in MATH_SUBSTITUTIONS:
-        if pattern == r"\\frac\{([^{}]+)\}\{([^{}]+)\}":
-            continue  # already iterated above
-        body = re.sub(pattern, replacement, body)
+        if pattern.startswith((r"\\frac", r"\\sqrt")):
+            continue  # handled by convert_frac_sqrt
+        body = re.sub(pattern + r"(?![a-zA-Z])" if pattern[-1].isalpha() else pattern, replacement, body)
 
     # Strip formatting commands (keep inner content)
     for pattern in STRIP_COMMANDS:
@@ -207,12 +289,6 @@ def latex_body_to_text(body: str, *, preserve_tables: bool = True) -> str:
     # Drop empty / structural commands
     for pattern in DROP_COMMANDS:
         body = re.sub(pattern, " ", body)
-
-    # Tabular environments: leave inline but simplify
-    if preserve_tables:
-        body = simplify_tabular(body)
-    else:
-        body = re.sub(r"\\begin\{tabular\}.*?\\end\{tabular\}", "[TABLE]", body, flags=re.DOTALL)
 
     # tikzpicture: summarize
     body = re.sub(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}",
@@ -224,8 +300,66 @@ def latex_body_to_text(body: str, *, preserve_tables: bool = True) -> str:
     return body.strip()
 
 
+def _arg(s: str, i: int) -> tuple[str, int]:
+    """Read one TeX argument at s[i:] (braced group or single token); return (content, next index)."""
+    while i < len(s) and s[i].isspace():
+        i += 1
+    if i >= len(s):
+        return "", i
+    if s[i] == "{":
+        depth, k = 1, i + 1
+        while k < len(s) and depth:
+            depth += {"{": 1, "}": -1}.get(s[k], 0)
+            k += 1
+        return s[i + 1:k - 1], k
+    if s[i] == "\\":
+        m = re.match(r"\\[a-zA-Z]+", s[i:])
+        if m:
+            return m.group(0), i + len(m.group(0))
+    return s[i], i + 1
+
+
+def convert_frac_sqrt(s: str) -> str:
+    """\\frac{a}{b} → (a)/(b), \\frac12 → (1)/(2), \\sqrt{x} → √(x), \\sqrt[3]{x} → ∛(x), innermost first."""
+    out, i = [], 0
+    while i < len(s):
+        m = re.match(r"\\[dt]?frac(?![a-zA-Z])", s[i:])
+        if m:
+            a, j = _arg(s, i + len(m.group(0)))
+            b, j = _arg(s, j)
+            out.append(f"({convert_frac_sqrt(a)})/({convert_frac_sqrt(b)})")
+            i = j
+            continue
+        m = re.match(r"\\sqrt(?![a-zA-Z])", s[i:])
+        if m:
+            j, index = i + len(m.group(0)), ""
+            if j < len(s) and s[j] == "[":
+                close = s.find("]", j)
+                index, j = s[j + 1:close].strip(), close + 1
+            a, j = _arg(s, j)
+            root = {"": "√", "2": "√", "3": "∛", "4": "∜"}.get(index, f"{index}√")
+            out.append(f"{root}({convert_frac_sqrt(a)})")
+            i = j
+            continue
+        out.append(s[i])
+        i += 1
+    return "".join(out)
+
+
+def convert_cases(body: str) -> str:
+    """\\begin{cases} e1 & c1 \\\\ e2 & c2 \\end{cases} → { e1, c1; e2, c2 } (rows kept apart)."""
+    def replace(m: re.Match) -> str:
+        rows = [r.strip() for r in re.split(r"\\\\", m.group(1)) if r.strip()]
+        parts = []
+        for r in rows:
+            cells = [c.strip().rstrip(",").strip() for c in r.split("&")]
+            parts.append(", ".join(c for c in cells if c))
+        return "{ " + "; ".join(parts) + " }"
+    return re.sub(r"\\begin\{cases\}(.*?)\\end\{cases\}", replace, body, flags=re.DOTALL)
+
+
 def simplify_tabular(body: str) -> str:
-    """Turn \\begin{tabular}{...}...\\end{tabular} into a compact text table."""
+    """Turn \\begin{tabular}{...}...\\end{tabular} into a compact text table (empty cells kept)."""
     def replace(m: re.Match) -> str:
         inner = m.group(1)
         # Drop the column spec — it's the {|c|c|} bit after \begin{tabular}
@@ -234,10 +368,10 @@ def simplify_tabular(body: str) -> str:
         rows = re.split(r"\\\\\s*", inner)
         cleaned = []
         for row in rows:
-            row = re.sub(r"\\hline", "", row)
-            cells = [c.strip() for c in row.split("&") if c.strip()]
-            if cells:
-                cleaned.append(" | ".join(cells))
+            row = re.sub(r"\\(?:hline|toprule|midrule|bottomrule)\b", "", row)
+            cells = [c.strip() for c in row.split("&")]
+            if any(cells):
+                cleaned.append(" | ".join(c if c else "___" for c in cells))
         if not cleaned:
             return "[TABLE]"
         return "TABLE:\n  " + "\n  ".join(cleaned) + "\nEND_TABLE"
@@ -263,12 +397,26 @@ def detect_visual_type(body: str) -> tuple[str, bool]:
 
 
 def extract_answer(body: str) -> Optional[str]:
-    """Return the \\answer{...} content from a block, or None if absent."""
-    block = next(balanced_command_blocks(body, "answer"), None)
-    if block is None:
-        return None
-    inner = block[2].strip()
-    return latex_body_to_text(inner)
+    """Return every \\answer{...} in a block, in order, joined with " | " (None if there are none).
+
+    Repeated values ("Yes", "No") are kept: each answer belongs to its own part.
+    """
+    answers = [latex_body_to_text(inner.strip()) for _, _, inner in balanced_command_blocks(body, "answer")]
+    answers = [a for a in answers if a]
+    return " | ".join(answers) if answers else None
+
+
+VISUAL_TYPES = {"graph": "graph", "diagram": "diagram", "photo": "photo", "illustration": "photo",
+                "map": "map", "table-image": "table"}
+
+
+def visual_from_placeholders(phs: list[tuple[str, str]], body: str) -> tuple[str, bool]:
+    """(visual_type, needs_cleanup) from the question figures left in the prompt; falls back to the body scan."""
+    for vtype, _ in phs:
+        if not vtype.startswith("answer:"):
+            return VISUAL_TYPES.get(vtype, "graph"), True
+    vt, nc = detect_visual_type(re.sub(r"\\placeholder\{[^{}]*\}", "", body))
+    return vt, nc
 
 
 def selftest() -> bool:
@@ -313,6 +461,7 @@ def expand_item_list(items_str: str) -> list[int]:
     # Normalize en-dash / em-dash variants to --
     items_str = items_str.replace("–", "--").replace("—", "--")
     items_str = re.sub(r"\\textbf\{([^{}]*)\}", r"\1", items_str)
+    items_str = re.sub(r"\\te\{([^{}]*)\}", r"\1", items_str)  # annotated items still count
     out = []
     for chunk in items_str.split(","):
         chunk = chunk.strip()
@@ -582,8 +731,8 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
     # Model & Discuss
     for _, body in find_blocks(tex, "model-discuss", arg_count=0):
         body_clean, uncert = resolve_uncertain(body)
-        body_clean, phs = strip_placeholders(body_clean)
-        vt, nc = detect_visual_type(body)
+        body_clean, phs = strip_placeholders(body_clean, lesson=lesson, block="model-discuss")
+        vt, nc = visual_from_placeholders(phs, body)
         prompt = latex_body_to_text(body_clean)
         ans = extract_answer(body)
         stubs.append(build_stub(
@@ -602,8 +751,8 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
         # Richest body (typically TE has added teacher commentary) as prompt source.
         body = max(example_groups[n], key=len)
         body_clean, uncert = resolve_uncertain(body)
-        body_clean, phs = strip_placeholders(body_clean)
-        vt, nc = detect_visual_type(body)
+        body_clean, phs = strip_placeholders(body_clean, lesson=lesson, block=f"example{{{n}}}")
+        vt, nc = visual_from_placeholders(phs, body)
         prompt = latex_body_to_text(body_clean)
         ans = extract_answer(body)
         stubs.append(build_stub(
@@ -621,17 +770,21 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
     for n in sorted(tryit_groups.keys()):
         body = max(tryit_groups[n], key=len)
         body_clean, uncert = resolve_uncertain(body)
-        body_clean, phs = strip_placeholders(body_clean)
-        vt, nc = detect_visual_type(body)
+        body_clean, phs = strip_placeholders(body_clean, lesson=lesson, block=f"tryit{{{n}}}")
+        vt, nc = visual_from_placeholders(phs, body)
         prompt = latex_body_to_text(body_clean)
         ans = extract_answer(body)
-        stubs.append(build_stub(
+        stub = build_stub(
             lesson, prompt, dok=2,
             source=f"Savvas Try It {n} (lesson {lesson})",
-            tags=[f"lesson-{lesson}", "try-it", f"try-it-{n}", "savvas-practice"],
+            # Try It N continues Example N and may rely on its givens (a rate, a model, a graph).
+            tags=[f"lesson-{lesson}", "try-it", f"try-it-{n}", "savvas-practice", f"linked-example-{n}"],
             answer=ans, uncertainty=uncert, placeholders=phs,
             visual_type=vt, visual_needs_cleanup=nc,
-        ))
+        )
+        context = f"Context: continues Savvas Example {n} (lesson {lesson}); deliver with that example."
+        stub["notes"] = context + (" · " + stub["notes"] if stub["notes"] else "")
+        stubs.append(stub)
 
     # Practice items — dedupe by item number when SE+TE both contain the block.
     # SE typically declares DOK as '?' (unknown, defaults to 2); TE declares the
@@ -673,8 +826,8 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
         dok = ia_dok if ia_dok is not None else inline_dok
         anchor = anchor_example_for_practice(item_analysis, n)
         body_clean, uncert = resolve_uncertain(body)
-        body_clean, phs = strip_placeholders(body_clean)
-        vt, nc = detect_visual_type(body)
+        body_clean, phs = strip_placeholders(body_clean, lesson=lesson, block=f"practice{{{n}}}")
+        vt, nc = visual_from_placeholders(phs, body)
         prompt = latex_body_to_text(body_clean)
         ans = extract_answer(body)
         tags = [f"lesson-{lesson}", "savvas-practice"]
@@ -697,8 +850,8 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
     # Concept box
     for _, body in find_blocks(tex, "concept-box", arg_count=0):
         body_clean, uncert = resolve_uncertain(body)
-        body_clean, phs = strip_placeholders(body_clean)
-        vt, nc = detect_visual_type(body)
+        body_clean, phs = strip_placeholders(body_clean, lesson=lesson, block="concept-box")
+        vt, nc = visual_from_placeholders(phs, body)
         prompt = latex_body_to_text(body_clean)
         stubs.append(build_stub(
             lesson, prompt, dok=1,
@@ -711,8 +864,8 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
     # Concept summary
     for _, body in find_blocks(tex, "concept-summary", arg_count=0):
         body_clean, uncert = resolve_uncertain(body)
-        body_clean, phs = strip_placeholders(body_clean)
-        vt, nc = detect_visual_type(body)
+        body_clean, phs = strip_placeholders(body_clean, lesson=lesson, block="concept-summary")
+        vt, nc = visual_from_placeholders(phs, body)
         prompt = latex_body_to_text(body_clean)
         stubs.append(build_stub(
             lesson, prompt, dok=2,
@@ -733,8 +886,8 @@ def extract_all(tex: str, lesson: str) -> tuple[dict, list[dict]]:
             # Keep the descriptive string as anchor — we'll still tag appropriately.
             anchor = anchor_raw
         body_clean, uncert = resolve_uncertain(body)
-        body_clean, phs = strip_placeholders(body_clean)
-        vt, nc = detect_visual_type(body)
+        body_clean, phs = strip_placeholders(body_clean, lesson=lesson, block=f"te-addendum{{{anchor_raw}}}{{{te_type}}}")
+        vt, nc = visual_from_placeholders(phs, body)
         prompt = latex_body_to_text(body_clean)
         ans = extract_answer(body)
         type_slug = re.sub(r"([a-z])([A-Z])", r"\1-\2", te_type).lower()
