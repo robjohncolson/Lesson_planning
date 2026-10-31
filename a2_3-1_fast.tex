@@ -1,0 +1,312 @@
+% Algebra 2 Lesson 3-1 fast-track packet: Graphing Polynomial Functions (enVision A2, Example 2 and Example 3 only)
+% Draft 2026-10-30 for the PLC. Keep/cut and quiz scoring are proposals (content/a2/lesson-prep.json "3-1").
+\input{fast-packet-template}
+\begin{document}
+
+\packethead{Lesson 3-1}{Graphing Polynomial Functions}
+\goals{I can predict the end behavior of a polynomial function from its degree and leading coefficient, and use a table of values to find its turning points and sketch its graph.}{I can describe a polynomial graph using the words \emph{degree}, \emph{leading coefficient}, \emph{end behavior}, \emph{turning point}, and \emph{relative maximum / relative minimum}.}
+
+\quiztarget{Quiz 2: end behavior from the degree and the leading coefficient (Example 2). Quiz 3: all the turning points on a graph (Example 3). Quiz 4, bonus: where a graph is increasing, decreasing, positive, or negative (Example 3 and the Practice). Quiz 1, a true statement about a degree-5 polynomial, and Quiz 5, what a $y$-intercept means in context: full Savvas quiz only.}
+
+\wspart{Example 2}{Understand End Behavior of Polynomial Functions}
+How do the sign of the leading coefficient and the degree of a polynomial affect the end behavior of the graph of a polynomial function?
+
+Write the polynomial in \textbf{standard form} (terms from the greatest power of $x$ down). The \textbf{degree} is the greatest power; the \textbf{leading coefficient} is the coefficient of that term. The \textbf{end behavior} of a graph describes what happens to the function values as $x\to\pm\infty$.
+
+\vspace{2pt}
+\noindent
+% TE panels: square unit grid x,y=[-5,5], labeled ticks -4,-2,2,4, origin O, arrowed axes, curves labeled f, g, h.
+% The y tick labels sit at the left edge of each panel (the curves crowd the y-axis); an x tick label that would sit on a curve is drawn as a node beside its tick.
+\pgfplotsset{ebgrid/.style={unitgrid, x=0.33cm, y=0.33cm,
+  xtick={-4,-2,2,4}, ytick={-4,-2,2,4}, minor xtick={-5,...,5}, minor ytick={-5,...,5},
+  minor grid style={gray!45}, ticklabel style={font=\tiny, fill=white, inner sep=0.5pt},
+  yticklabels={}, clip=false, xlabel={\tiny$x$}, ylabel={\tiny$y$}}}
+\tikzset{tl/.style={font=\tiny, fill=white, inner sep=0.5pt},
+         cl/.style={font=\scriptsize, fill=white, inner sep=0.3pt}}
+\newcommand{\ebpanel}[7]{%
+\begin{minipage}[t]{0.24\textwidth}\centering
+{\footnotesize\textbf{#1}}\\[1pt]
+{\scriptsize #2}\\[1pt]
+\begin{tikzpicture}
+\begin{axis}[ebgrid, #3]
+#4
+\pgfplotsinvokeforeach{-4,-2,2,4}{\node[tl, anchor=east] at (axis cs:-5.5,##1) {$##1$};}
+\end{axis}
+\end{tikzpicture}\\[1pt]
+{\scriptsize #5}\\
+{\scriptsize\itshape #6}
+\end{minipage}#7}%
+\ebpanel{Odd degree\\ Positive leading coefficient}
+ {\textcolor{red}{$f(x)=x$}\\ \textcolor{blue}{$g(x)=0.5x^3-x^2+3$}\\ \textcolor{green!50!black}{$h(x)=2x^5-x^2-x-2$}}
+ {}
+ {\addplot[very thick, red, <->] coordinates {(-5.3,-5.3) (5.3,5.3)};
+  \addplot[very thick, blue, <->, domain=-2.03:2.65, samples=80] {0.5*x^3-x^2+3};
+  \addplot[very thick, green!50!black, <->, domain=-1.098:1.397, samples=120] {2*x^5-x^2-x-2};
+  \node[tl, anchor=south east] at (axis cs:0,0) {$O$};
+  \node[cl, text=red] at (axis cs:4.6,3.3) {$f$};
+  \node[cl, text=blue] at (axis cs:-1.15,3.5) {$g$};
+  \node[cl, text=green!50!black] at (axis cs:0.6,3.9) {$h$};}
+ {As $x\to\infty$, $y\to\infty$;\\ as $x\to-\infty$, $y\to-\infty$.}
+ {like the parent $f(x)=x$}{\hfill}%
+\ebpanel{Even degree\\ Positive leading coefficient}
+ {\textcolor{red}{$f(x)=x^2$}\\ \textcolor{blue}{$g(x)=0.9x^4-2x^3+x^2-2x$}\\ \textcolor{green!50!black}{$h(x)=2x^6+x^2-2$}}
+ {xtick={-4,-2,4}}
+ {\addplot[very thick, red, <->, domain=-2.3:2.3, samples=60] {x^2};
+  \addplot[very thick, blue, <->, domain=-0.954:2.507, samples=120] {0.9*x^4-2*x^3+x^2-2*x};
+  \addplot[very thick, green!50!black, <->, domain=-1.196:1.196, samples=120] {2*x^6+x^2-2};
+  \node[tl, anchor=north, yshift=-1pt] at (axis cs:1.75,0) {$2$};
+  \node[tl, anchor=north east] at (axis cs:0,0) {$O$};
+  \node[cl, text=red] at (axis cs:-2.7,3.4) {$f$};
+  \node[cl, text=blue] at (axis cs:1.8,-3.8) {$g$};
+  \node[cl, text=green!50!black] at (axis cs:0.6,-2.8) {$h$};}
+ {As $x\to\pm\infty$, $y\to\infty$.\\ \phantom{x}}
+ {like the parent $f(x)=x^2$}{\hfill}%
+\ebpanel{Odd degree\\ Negative leading coefficient}
+ {\textcolor{red}{$f(x)=-x$}\\ \textcolor{blue}{$g(x)=-0.5x^3+x^2-3$}\\ \textcolor{green!50!black}{$h(x)=-2x^5+x^2+x+2$}}
+ {}
+ {\addplot[very thick, red, <->] coordinates {(-5.3,5.3) (5.3,-5.3)};
+  \addplot[very thick, blue, <->, domain=-2.03:2.65, samples=80] {-0.5*x^3+x^2-3};
+  \addplot[very thick, green!50!black, <->, domain=-1.098:1.397, samples=120] {-2*x^5+x^2+x+2};
+  \node[tl, anchor=north east] at (axis cs:0,0) {$O$};
+  \node[cl, text=red] at (axis cs:4.6,-3.3) {$f$};
+  \node[cl, text=blue] at (axis cs:-1.15,-3.5) {$g$};
+  \node[cl, text=green!50!black] at (axis cs:0.7,-4.6) {$h$};}
+ {As $x\to\infty$, $y\to-\infty$;\\ as $x\to-\infty$, $y\to\infty$.}
+ {like $f(x)=-x$}{\hfill}%
+\ebpanel{Even degree\\ Negative leading coefficient}
+ {\textcolor{red}{$f(x)=-x^2$}\\ \textcolor{blue}{$g(x)=-0.9x^4+2x^3-x^2+2x$}\\ \textcolor{green!50!black}{$h(x)=-2x^6-x^2+2$}}
+ {xtick={-4,-2,4}}
+ {\addplot[very thick, red, <->, domain=-2.3:2.3, samples=60] {-x^2};
+  \addplot[very thick, blue, <->, domain=-0.954:2.507, samples=120] {-0.9*x^4+2*x^3-x^2+2*x};
+  \addplot[very thick, green!50!black, <->, domain=-1.196:1.196, samples=120] {-2*x^6-x^2+2};
+  \node[tl, anchor=north, yshift=-1pt] at (axis cs:1.75,0) {$2$};
+  \node[tl, anchor=south east] at (axis cs:0,0) {$O$};
+  \node[cl, text=red] at (axis cs:-2.7,-3.4) {$f$};
+  \node[cl, text=blue] at (axis cs:1.8,3.8) {$g$};
+  \node[cl, text=green!50!black] at (axis cs:0.6,2.8) {$h$};}
+ {As $x\to\pm\infty$, $y\to-\infty$.\\ \phantom{x}}
+ {like $f(x)=-x^2$}{}
+
+\vspace{4pt}
+\textbf{The rule.} The \textbf{degree} decides whether the two ends point the \emph{same} way (even) or \emph{opposite} ways (odd). The sign of the \textbf{leading coefficient} decides where the right end goes: $+$ up, $-$ down. The other terms do not change the ends: the leading term has the greatest exponent, so it has the greatest effect as $x\to\pm\infty$.
+
+\textbf{Say it:} $g(x)=-0.5x^3+x^2-3$ has \textbf{degree} \blank[1.2cm], which is \blank[1.6cm], and \textbf{leading coefficient} \blank[1.2cm], which is \blank[1.8cm]. So its \textbf{end behavior} is: as $x\to\infty$, $y\to$ \blank[1.2cm], and as $x\to-\infty$, $y\to$ \blank[1.2cm].
+\lines[1]
+
+\newpage
+\wspart{Try It 2}{Use the leading coefficient and degree}
+Use the leading coefficient and degree of the polynomial function to determine the end behavior of each graph.
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{a.} $f(x)=2x^6-5x^5+6x^4-x^3+4x^2-x+1$
+
+\vspace{4pt}
+degree \blank[1cm] \quad leading coefficient \blank[1cm]
+
+\vspace{6pt}
+As $x\to\infty$, $y\to$ \blank[1.4cm]
+
+\vspace{6pt}
+As $x\to-\infty$, $y\to$ \blank[1.4cm]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{b.} $g(x)=-5x^3+8x+4$
+
+\vspace{4pt}
+degree \blank[1cm] \quad leading coefficient \blank[1cm]
+
+\vspace{6pt}
+As $x\to\infty$, $y\to$ \blank[1.4cm]
+
+\vspace{6pt}
+As $x\to-\infty$, $y\to$ \blank[1.4cm]
+\end{minipage}
+
+\vspace{6pt}
+\wspart{Example 3}{Graph a Polynomial Function}
+Consider the polynomial function $f(x)=-0.5x^4+3x^2+2$.
+
+\textbf{A.} How can you use a table of values to identify key features and sketch a graph of the function?
+
+\begin{minipage}[t]{0.55\textwidth}
+\vspace{0pt}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+\item Make a table of values. For example,\newline $f(-2)=-0.5(16)+3(4)+2=6$.
+
+\vspace{2pt}
+{\small
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $-3$ & $-2$ & $-1$ & $0$ & $1$ & $2$ & $3$ \\ \hline
+$f(x)$ & $-11.5$ & $6$ & $4.5$ & $2$ & $4.5$ & $6$ & $-11.5$ \\ \hline
+\end{tabular}}
+% TE table braces ("increasing from -3 to -2; decreasing from -2 to 0; ...") describe the listed values; f itself turns at x = -sqrt(3), 0, sqrt(3), so the sentence is about the table.
+\item Read the table left to right. The values of $f$ \textbf{increase} from $x=-3$ to $x=-2$, \textbf{decrease} from $x=-2$ to $x=0$, increase from $x=0$ to $x=2$, and decrease from $x=2$ to $x=3$.
+\item A \textbf{turning point} is where the values change from increasing to decreasing, or vice versa. The table shows turning points near $x=-2$, $x=0$, and $x=2$; it only estimates where they are.
+\item End behavior: degree $4$ (even), leading coefficient $-0.5$ (negative), so both ends approach $-\infty$.
+\item Plot the points and sketch a smooth curve.
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.42\textwidth}
+\vspace{0pt}
+\centering
+\begin{tikzpicture}
+% TE window x=[-5,5], y=[-2,8], unit grid, x labels -4,-2,O,2,4, y labels 2,4,6; the "2" label is drawn left of the curve.
+\begin{axis}[unitgrid, xmin=-5.5, xmax=5.5, ymin=-2.5, ymax=8.5,
+  xtick={-4,-2,2,4}, ytick={4,6}, minor xtick={-5,...,5}, minor ytick={-2,...,8},
+  minor grid style={gray!45}, x=0.62cm, y=0.62cm]
+\addplot[very thick, red, <->, domain=-2.66:2.66, samples=120] {-0.5*x^4+3*x^2+2};
+\node[closed, red] at (axis cs:-2,6) {};
+\node[closed, red] at (axis cs:-1,4.5) {};
+\node[closed, red] at (axis cs:0,2) {};
+\node[closed, red] at (axis cs:1,4.5) {};
+\node[closed, red] at (axis cs:2,6) {};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south east] at (axis cs:-2.2,6.6) {rel.\ max};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south west] at (axis cs:2.2,6.6) {rel.\ max};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north west] at (axis cs:0.3,1.6) {rel.\ min $(0,2)$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=east] at (axis cs:-0.45,2) {$2$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\node[font=\small, text=red, fill=white, inner sep=1pt] at (axis cs:3.3,4) {$f$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+A point where the function has the least value over an interval is a \textbf{relative minimum}: near $(0,2)$. A point where it has the greatest value over an interval is a \textbf{relative maximum}: near $(-2,6)$ and $(2,6)$. (A table only estimates: the smooth curve's relative maximums are at $\left(\pm\sqrt3,\,6.5\right)$, about $(\pm1.73,\,6.5)$.)
+
+\textbf{B.} How can you use the graph to estimate the average rate of change over the interval $[-2,0]$?
+
+Average rate of change $=\dfrac{f(b)-f(a)}{b-a}=\dfrac{f(0)-f(-2)}{0-(-2)}=\dfrac{2-6}{0-(-2)}=\dfrac{-4}{2}=-2$. \quad Substitute $(-2,6)$ and $(0,2)$.
+
+\textbf{Say it:} $f$ has a \textbf{relative minimum} near \blank[1.6cm] and \textbf{relative maximums} near \blank[1.6cm] and \blank[1.6cm], so it has \blank[0.8cm] \textbf{turning points}. Its \textbf{degree} is \blank[0.8cm] and its \textbf{leading coefficient} is \blank[1cm], so both ends \blank[2.8cm].
+\lines[1]
+
+\newpage
+\wspart{Try It 3}{Graph a polynomial function}
+Consider the polynomial function $f(x)=x^5+18x^2+10x+1$.
+
+\textbf{a.} Make a table of values to identify key features and sketch a graph of the function.
+
+\begin{minipage}[t]{0.5\textwidth}
+\vspace{0pt}
+{\small
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $-3$ & $-2$ & $-1$ & $0$ & $1$ & $2$ & $3$ \\ \hline
+$f(x)$ & \rule{0pt}{18pt}\hspace{0.66cm} & \hspace{0.66cm} & \hspace{0.66cm} & \hspace{0.66cm} & \hspace{0.66cm} & \hspace{0.66cm} & \hspace{0.66cm} \\ \hline
+\end{tabular}}
+
+\vspace{8pt}
+Degree \blank[1cm] \quad leading coefficient \blank[1cm]
+
+\vspace{6pt}
+End behavior: as $x\to-\infty$, $y\to$ \blank[1.3cm];\\[4pt]
+as $x\to\infty$, $y\to$ \blank[1.3cm].
+
+\vspace{6pt}
+Turning points: between $x=$ \blank[1cm] and $x=$ \blank[1cm],\\[4pt]
+and between $x=$ \blank[1cm] and $x=$ \blank[1cm].
+
+\vspace{6pt}
+\textbf{b.} Find the average rate of change over the interval $[0,2]$.
+\lines[2]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\textwidth}
+\vspace{0pt}
+\centering
+\begin{tikzpicture}
+% TE window x=[-5,5], y=[-10,30]; x grid 1, labels -4,-2,O,2,4; y grid 5, labels 10,20.
+\begin{axis}[sheetgrid, xmin=-5.5, xmax=5.5, ymin=-10.5, ymax=30.5,
+  xtick={-4,-2,2,4}, ytick={10,20}, minor xtick={-5,...,5}, minor ytick={-10,-5,...,30},
+  minor grid style={gray!45}, x=0.68cm, y=0.19cm]
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\wspart{Practice}{Read a polynomial graph}
+% R5 structural parallel of Savvas 3-1 Lesson Quiz item 4 (the short form's bonus): a different cubic, same four sentences and word bank.
+% f'(x) = (3x-11)(x+1)/4, so the turning points are exactly (-1, 9) and (11/3, -100/27).
+The graph shows the polynomial function $f(x)=\tfrac14(x+3)(x-2)(x-5)$. Its turning points are at $(-1,9)$ and near $\left(\tfrac{11}{3},-3.7\right)$.
+
+\begin{minipage}[t]{0.42\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+% Unit grid; the "2" label is drawn below-left of the zero (2,0) so it covers neither the dot nor the curve; y labels skip 8, which the curve crosses at the y-axis.
+\begin{axis}[sheetgrid, xmin=-5.5, xmax=7.5, ymin=-8.5, ymax=10.5,
+  xtick={-4,-2,4,6}, ytick={-8,-4,4}, minor xtick={-5,...,7}, minor ytick={-8,...,10},
+  minor grid style={gray!45}, x=0.5cm, y=0.27cm]
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north east, xshift=-1.5pt, yshift=-1.5pt] at (axis cs:2,0) {$2$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\addplot[very thick, blue, <->, domain=-3.64:6.064, samples=120] {0.25*(x+3)*(x-2)*(x-5)};
+\node[closed, blue] at (axis cs:-3,0) {};
+\node[closed, blue] at (axis cs:2,0) {};
+\node[closed, blue] at (axis cs:5,0) {};
+\node[closed, blue] at (axis cs:-1,9) {};
+\node[closed, blue] at (axis cs:3.667,-3.704) {};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.56\textwidth}
+\vspace{0pt}\raggedright
+Word bank: \emph{decreasing}; \emph{increasing}; \emph{negative}; \emph{positive}.
+
+\vspace{6pt}
+$f$ is \blank[2.4cm] on the intervals $(-3,2)$ and $(5,\infty)$.
+
+\vspace{6pt}
+$f$ is \blank[2.4cm] on the interval $\left(-1,\tfrac{11}{3}\right)$.
+
+\vspace{6pt}
+$f$ is \blank[2.4cm] on the intervals $(-\infty,-3)$ and $(2,5)$.
+
+\vspace{6pt}
+$f$ is \blank[2.4cm] on the intervals $(-\infty,-1)$ and $\left(\tfrac{11}{3},\infty\right)$.
+
+\vspace{6pt}
+Which turning point is a \textbf{relative maximum}? How do you know?
+\lines[2]
+\end{minipage}
+
+\newpage
+\wspart{IXL}{Practice for the quiz}
+Do the starred skills first. \textbf{SmartScore 70 or above on each starred ($\bigstar$) skill replaces your quiz score.}
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y Y}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{XMK $\bigstar$}{Match polynomial functions and graphs using end behavior}{Quiz 2: end behavior from the degree and the leading coefficient (Example 2); also choice B of Quiz 1 (full Savvas quiz only)}
+\ixlrow{XJU $\bigstar$}{Match polynomial functions and graphs}{Quiz 3 and Quiz 4 (bonus): read a polynomial graph (Example 3)}
+\ixlrow{DYB}{Polynomial vocabulary}{Warm-up: standard form, degree, leading coefficient}
+\ixlrow{PHD}{Average rate of change}{Optional: Example 3B and Try It 3b (not on the quiz)}
+\bottomrule
+\end{tabularx}
+
+\wspart{Exit question}{Use end behavior to reason}
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+An analyst for a new company used the first three years of revenue data to project future revenue for the company. The analyst predicts the function $f(x)=-2x^5+6x^4-x^3+5x^2+6x+50$ will give the revenue after $x$ years. Should the CEO expect the company to be successful? Explain.
+
+\vspace{6pt}
+The \textbf{degree} of $f$ is \blank[1.2cm], which is \blank[1.6cm], and the \textbf{leading coefficient} is \blank[1.2cm], which is \blank[1.8cm].
+
+\vspace{6pt}
+So the \textbf{end behavior} is: as $x\to\infty$, $y\to$ \blank[1.4cm]. In this context that means \dots
+\lines[3]
+}}
+
+\vspace{6pt}
+\textbf{Before the quiz, finish these sentences.}
+
+The \textbf{degree} tells you whether the two ends of the graph point \blank[3.5cm].
+
+The sign of the \textbf{leading coefficient} tells you whether the right end goes \blank[3cm].
+
+A \textbf{turning point} is where the graph changes from \blank[3cm] to \blank[3cm], or the reverse.
+
+A \textbf{relative maximum} is a turning point where the graph changes from \blank[2.2cm] to \blank[2.2cm].
+
+\vspace{4pt}
+{\small\textit{Want more?} Practice \& Problem Solving 14 (DOK 3): write a polynomial in standard form with 6 terms, $y$-intercept at 1, and end behavior as $x\to-\infty$, $y\to+\infty$; as $x\to+\infty$, $y\to-\infty$. Explain how you chose it and graph it to check.}
+
+\end{document}

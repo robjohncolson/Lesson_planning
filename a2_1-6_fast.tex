@@ -1,0 +1,178 @@
+\input{fast-packet-template}
+\newcommand{\twolines}[1][1]{\par\vspace{2pt}\foreach \i in {1,...,#1}{\rule{0pt}{22pt}\rule{0.48\textwidth}{0.4pt}\hfill\rule{0.48\textwidth}{0.4pt}\par}}
+\begin{document}
+
+\packethead{Lesson 1-6}{Linear Systems}
+\goals{I can solve a system of two linear equations and graph a system of inequalities.}{I can say ``the solution is the ordered pair that makes both equations true'' and ``the solution region is where the shadings overlap.''}
+
+\quiztarget{You will solve two systems of two equations. Then, for two word problems, you will choose the inequalities that model the situation and pick a point that satisfies all of them.}
+
+\wspart{Example 1}{Solve a system of linear equations}
+A \textbf{system}: two equations, same variables. Its \textbf{solution}: the pair $(x,y)$ that makes \emph{both} true.
+
+\begin{minipage}[t]{0.5\textwidth}
+\vspace{0pt}
+Solve $\begin{cases} x+2y=3\\ x-2y=4\end{cases}$ \quad\textbf{Substitution}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=1pt]
+\item Solve each equation for $x$:\\ $x=3-2y$ \quad and \quad $x=4+2y$
+\item Both equal $x$, so set them equal:\\ $3-2y=4+2y$
+\item Solve: $-1=4y$, so $y=-\tfrac14$
+\item Substitute back: $x=3-2\!\left(-\tfrac14\right)=\tfrac72$
+\item Solution: $\left(\tfrac72,\,-\tfrac14\right)$
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+\vspace{0pt}
+\textbf{Elimination} (same system)
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=1pt]
+\item The $y$ terms are $+2y$ and $-2y$. Add the equations:\\
+$(x+2y)+(x-2y)=3+4$
+\item $2x=7$, so $x=\tfrac72$
+\item Substitute into $x+2y=3$:\\ $\tfrac72+2y=3$, so $2y=-\tfrac12$, $y=-\tfrac14$
+\item Same solution: $\left(\tfrac72,\,-\tfrac14\right)$
+\end{enumerate}
+\textbf{Check} in both equations:\\
+$\tfrac72+2\!\left(-\tfrac14\right)=\tfrac72-\tfrac12=3$ \checkmark\\
+$\tfrac72-2\!\left(-\tfrac14\right)=\tfrac72+\tfrac12=4$ \checkmark
+\end{minipage}
+
+\vspace{-6pt}\textbf{Say it:} $(x,y)=\blank[2cm]$ works in both equations because \lines[2]\vspace{-8pt}
+
+\wspart{Try It 1}{Solve each system and check both equations}\vspace{-6pt}
+\begin{minipage}[t]{0.48\textwidth}\vspace{0pt}
+\textbf{a.} $\begin{cases} 2x+y=-1\\ 5y-6x=7\end{cases}$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}\vspace{0pt}
+\textbf{b.} $\begin{cases} 3x+2y=5\\ 6x+4y=3\end{cases}$\end{minipage}\vspace{-8pt}
+\twolines[5]
+
+\newpage
+
+\wspart{Example 2}{Solve a system of linear inequalities}
+Malcolm mows lawns for \$20 per hour and walks dogs for \$10 per hour. He wants to earn \textbf{at least} \$200 each week, he can work \textbf{at most} 20 hours, and he must walk dogs \textbf{at least} 5 hours. How many hours of each job meet his goals?
+
+\begin{minipage}[t]{0.5\textwidth}
+\vspace{0pt}
+\textbf{Step 1} Define the variables.\\
+$x=$ hours mowing lawns, \ $y=$ hours walking dogs
+
+\textbf{Step 2} Write an inequality for each constraint.
+\begin{itemize}
+\item earn at least \$200: \ $20x+10y\ge 200$
+\item at most 20 hours: \ $x+y\le 20$
+\item at least 5 hours of dogs: \ $y\ge 5$
+\end{itemize}
+
+\textbf{Step 3} Graph each boundary line ($\ge$ and $\le$: \textbf{solid}). Test a point to pick the side to shade:
+\begin{itemize}
+\item $20(0)+10(0)\ge200$? False: shade \emph{away} from $(0,0)$.
+\item $0+0\le20$? True: shade toward $(0,0)$.
+\item $y\ge5$: $(8,8)$ is true, shade above $y=5$.
+\end{itemize}
+
+\textbf{Step 4} The \textbf{solution region} is where all the shadings overlap (the shaded triangle).
+
+\textbf{Check a point.} $(12,7)$ is in the region:\\
+$20(12)+10(7)=310\ge200$ \checkmark\\
+$12+7=19\le20$ \checkmark \qquad $7\ge5$ \checkmark\\
+So 12 h mowing and 7 h walking dogs meets every goal.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=0, xmax=21.5, ymin=0, ymax=21.5,
+  xtick={0,2,...,20}, ytick={0,2,...,20}, x=0.3cm, y=0.3cm,
+  xlabel={hours mowing}, ylabel={hours walking dogs},
+  xlabel style={at={(axis description cs:0.5,-0.08)}, anchor=north, font=\scriptsize},
+  ylabel style={at={(axis description cs:-0.1,0.5)}, rotate=90, anchor=south, font=\scriptsize}]
+\addplot[fill=gray!70, fill opacity=0.5, draw=none] coordinates {(0,20) (7.5,5) (15,5)} \closedcycle;
+\addplot[very thick, domain=0:10, samples=2] {20-2*x};
+\addplot[very thick, domain=0:20, samples=2] {20-x};
+\addplot[very thick, domain=0:21.5, samples=2] {5};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:10.3,2.2) {$20x+10y=200$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south west] at (axis cs:6.3,14.3) {$x+y=20$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south west] at (axis cs:16.5,5.3) {$y=5$};
+\node[closed] at (axis cs:12,7) {};
+\node[font=\scriptsize, anchor=south west] at (axis cs:12.2,7.2) {$(12,7)$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\wspart{Try It 2}{Graph the solution region}
+\begin{minipage}[t]{0.5\textwidth}
+\vspace{0pt}
+Sketch all points that solve \ $\begin{cases} 2x+y\le 14\\ x+2y\le 10\\ x\ge 0\\ y\ge 0\end{cases}$
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+\item Graph $2x+y=14$ (solid). Test $(0,0)$, shade.
+\item Graph $x+2y=10$ (solid). Test $(0,0)$, shade.
+\item $x\ge0$, $y\ge0$: stay in the first quadrant.
+\item Darken where every shading overlaps.
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=0, xmax=9.5, ymin=0, ymax=8.5,
+  xtick={0,...,9}, ytick={0,...,8}, x=0.55cm, y=0.55cm]
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+Name one ordered pair in your solution region and show it makes all four inequalities true:
+\lines[3]
+
+\newpage
+
+\wspart{Practice}{Model with inequalities}
+Dmitri is buying snacks for a club meeting. A bag of chips costs \$1.50 and a drink costs \$2.00. He needs \textbf{at least 10 items} altogether, and he can spend \textbf{at most \$25}. Let $x$ be the number of bags of chips and $y$ be the number of drinks.
+
+\begin{minipage}[t]{0.5\textwidth}
+\vspace{0pt}
+\textbf{a.} Write an inequality for each constraint. (Can $x$ or $y$ be negative? Write those too.)
+
+at least 10 items: \blank[4cm]
+
+at most \$25: \blank[4cm]
+
+\blank[1.8cm] \quad and \quad \blank[1.8cm]
+
+\vspace{6pt}
+\textbf{b.} Graph the boundary lines on the grid. For each line, test $(0,0)$ and shade the correct side. Darken the solution region.
+
+\vspace{6pt}
+\textbf{c.} Name one ordered pair in the solution region. Show that it satisfies every inequality, then say what it means (how many chips, how many drinks, total cost).
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=0, xmax=21, ymin=0, ymax=21,
+  xtick={0,2,...,20}, ytick={0,2,...,20}, x=0.3cm, y=0.3cm,
+  xlabel={bags of chips}, ylabel={drinks},
+  xlabel style={at={(axis description cs:0.5,-0.08)}, anchor=north, font=\scriptsize},
+  ylabel style={at={(axis description cs:-0.1,0.5)}, rotate=90, anchor=south, font=\scriptsize}]
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\lines[4]
+
+\wspart{IXL}{Practice for the quiz}
+Go to IXL, Algebra 2. Type the code in the search box. $\star$ = required.
+\textbf{SmartScore 70 or above on each starred skill replaces your quiz score.}
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y l}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{NJP}{Is $(x,y)$ a solution to the system? (warm-up)}{warm-up}
+\ixlrow{BW5 $\star$}{Solve a system of equations using substitution}{quiz 1, 3}
+\ixlrow{2CN $\star$}{Solve a system of equations using elimination}{quiz 1, 3}
+\ixlrow{U5D $\star$}{Solve systems of linear inequalities by graphing}{quiz 2, 4}
+\ixlrow{FT6}{Solve a system of equations using any method (optional)}{quiz 1, 3}
+\bottomrule
+\end{tabularx}
+
+\vspace{4pt}
+\textbf{Before the quiz:} ``at least'' means $\ge$, ``at most'' and ``up to'' mean $\le$; add $x\ge0$, $y\ge0$ when the variables count things; a point is a solution only if it makes \emph{every} inequality true.
+
+\end{document}

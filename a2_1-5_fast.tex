@@ -1,0 +1,241 @@
+\input{fast-packet-template}
+\begin{document}
+
+\packethead{Lesson 1-5}{Solving by Graphing}
+
+\goals{I can solve an equation or inequality by graphing both sides and reading where the graphs meet.}{I can say ``the solution is where the graphs intersect'' and ``the inequality is true where one graph is above (or below) the other.''}
+
+\quiztarget{You will (1) sketch two graphs to solve an equation and read the solution(s) off the intersection, (2) graph two cost equations and write the inequality for when one plan is cheaper, and (3) approximate where two functions are equal from a table of values.}
+
+\wspart{Example 1}{Use a Graph to Solve an Equation}
+\textbf{The idea:} graph $y=$ left side and $y=$ right side. The $x$-value of each \textbf{intersection} is a solution.
+
+\begin{minipage}[t]{0.47\textwidth}
+\textbf{A.} Solve $-3x+20=0.2x+4$ by graphing.
+\begin{enumerate}[label=\arabic*.]
+\item Graph $y=-3x+20$ and $y=0.2x+4$.
+\item Find the intersection: $(5,5)$.
+\item Solution: $x=5$. Check: $-15+20=5$ and $1+4=5$. \checkmark
+\end{enumerate}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-5.5, xmax=10.5, ymin=-5.5, ymax=25.5,
+  xtick={-4,-2,...,10}, ytick={-5,0,...,25}, x=0.38cm, y=0.2cm]
+\addplot[very thick, blue] coordinates {(-1.9,25.7) (8.6,-5.8)};
+\addplot[very thick, red] coordinates {(-5.5,2.9) (10.5,6.1)};
+\node[closed] at (axis cs:5,5) {};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:5.4,6.5) {$(5,5)$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt, anchor=west] at (axis cs:-4.8,18) {$y=-3x+20$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:3,12) {$y=0.2x+4$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\textbf{B.} Solve $|x-4|=\tfrac12x+1$ by graphing.
+\begin{enumerate}[label=\arabic*.]
+\item Graph $y=|x-4|$ (a V, vertex $(4,0)$) and $y=\tfrac12x+1$.
+\item Two intersections: $(2,2)$ and $(10,6)$.
+\item Solutions: $x=2$ and $x=10$. Check: $|2-4|=2$ and $\tfrac12(2)+1=2$. \checkmark
+\end{enumerate}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-4.5, xmax=16.5, ymin=-4.5, ymax=16.5,
+  xtick={-4,-2,...,16}, ytick={-4,-2,...,16}, x=0.3cm, y=0.3cm,
+  xticklabels={,,O,,4,,8,,12,,16}, yticklabels={,,,,4,,8,,12,,16}]
+\addplot[very thick, blue] coordinates {(-4.5,8.5) (4,0) (16.5,12.5)};
+\addplot[very thick, red] coordinates {(-4.5,-1.25) (16.5,9.25)};
+\node[closed] at (axis cs:2,2) {};
+\node[closed] at (axis cs:10,6) {};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south east] at (axis cs:1.8,2.4) {$(2,2)$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north west] at (axis cs:10.3,5.6) {$(10,6)$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt] at (axis cs:12,13.5) {$y=|x-4|$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:9,2.2) {$y=\frac12x+1$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\textbf{Say it:} In Part B the solutions are $x=\blank[1.2cm]$ and $x=\blank[1.2cm]$ because \dots\lines[2]
+
+\newpage
+
+\wspart{Try It 1}{Use a graph to solve each equation}
+Write the two $y=$ equations, graph both, mark each intersection with a dot, and write the solution(s).
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{a.} $5x-12=3$
+
+$y=\blank[2.8cm]$ \quad $y=\blank[2.8cm]$
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, x=0.22cm, y=0.22cm, ticklabel style={font=\tiny, fill=white, inner sep=0.5pt}]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Solution: $x=\blank[2cm]$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{b.} $-|x-2|=-\tfrac12x-2$
+
+$y=\blank[2.8cm]$ \quad $y=\blank[2.8cm]$
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, x=0.22cm, y=0.22cm, ticklabel style={font=\tiny, fill=white, inner sep=0.5pt}]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Solution(s): $x=\blank[3.5cm]$
+\end{minipage}
+
+How did you know where the solutions were? Use the word \emph{intersect}.\lines[3]
+
+\wspart{Example 2}{Solve a One-Variable Inequality by Graphing}
+\textbf{The idea:} graph both sides. ``Left $>$ right'' is true where the left graph is \textbf{above} the right one; intersections are the boundaries.
+
+\begin{minipage}[t]{0.42\textwidth}
+\textbf{A.} Solve $x^2-4>0$.
+\begin{enumerate}[label=\arabic*.]
+\item Graph $y=x^2-4$ and $y=0$ (the $x$-axis).
+\item Boundaries: the graph crosses the $x$-axis at $x=-2$ and $x=2$.
+\item The parabola is \textbf{above} the $x$-axis when $x<-2$ or $x>2$ (thick part of the axis). Open circles: $\pm2$ give $0$, not $>0$.
+\end{enumerate}
+\textbf{Solution:} $x<-2$ or $x>2$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.26\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+\begin{axis}[unitgrid, xmin=-4.5, xmax=4.5, ymin=-5.5, ymax=4.5,
+  xtick={-4,...,4}, ytick={-5,...,4}, x=0.4cm, y=0.4cm]
+\addplot[very thick, blue, domain=-3:3, samples=60] {x^2-4};
+\addplot[line width=3pt, red] coordinates {(-4.5,0) (-2,0)};
+\addplot[line width=3pt, red] coordinates {(2,0) (4.5,0)};
+\node[open] at (axis cs:-2,0) {};
+\node[open] at (axis cs:2,0) {};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt] at (axis cs:2.9,-3.6) {$y=x^2-4$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.29\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=0, xmax=6.3, ymin=0, ymax=260,
+  xtick={0,1,...,6}, ytick={0,50,...,250}, x=0.6cm, y=0.015cm,
+  xlabel={Time (h)}, ylabel={Distance (mi)},
+  xlabel style={at={(axis description cs:0.5,-0.08)}, anchor=north, font=\scriptsize},
+  ylabel style={at={(axis description cs:-0.12,0.5)}, anchor=south, rotate=90, font=\scriptsize},
+  xticklabel style={font=\scriptsize}, yticklabel style={font=\scriptsize}]
+\addplot[very thick, blue] coordinates {(0,0) (4.3,258)};
+\addplot[very thick, red] coordinates {(0,40) (5.4,256)};
+\addplot[line width=3pt, blue] coordinates {(2,0) (6.3,0)};
+\node[closed] at (axis cs:2,120) {};
+\node[open] at (axis cs:2,0) {};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:2.3,110) {$(2,120)$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt] at (axis cs:4.7,235) {$60x$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:5.4,205) {$40x+40$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\textbf{B.} A motorcycle is 40 mi ahead of a car. The car goes 60 mph, the motorcycle 40 mph. When is the car ahead?
+\begin{enumerate}[label=\arabic*.]
+\item Let $x$ = hours. Car: $60x$ mi. Motorcycle: $40x+40$ mi (it \emph{started} 40 mi ahead, so add 40).
+\item Car ahead means $60x>40x+40$. Graph $y=60x$ and $y=40x+40$. They intersect at $(2,120)$; after that the $60x$ line is \textbf{above}.
+\end{enumerate}
+\textbf{Solution:} $x>2$. The car is ahead any time after 2 hours.
+
+\newpage
+
+\wspart{Try It 2}{Use a graph to solve each inequality}
+Graph both sides, dot the intersection(s), then mark the solution on the $x$-axis and write it.
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{a.} $x^2+6x+5\geq0$
+
+$y=\blank[2.8cm]$ \quad $y=\blank[2.8cm]$
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, x=0.22cm, y=0.22cm, ticklabel style={font=\tiny, fill=white, inner sep=0.5pt}]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Solution: \blank[5cm]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{b.} $x+3>7-3x$
+
+$y=\blank[2.8cm]$ \quad $y=\blank[2.8cm]$
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[unitgrid, x=0.42cm, y=0.42cm]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Solution: \blank[5cm]
+\end{minipage}
+
+In part b, which graph has to be on top? Why?\lines[3]
+
+\wspart{Practice}{Two cost plans}
+A gym charges \$12 per visit with no membership. With a \$60 membership, each visit costs only \$4.
+
+\begin{minipage}[t]{0.47\textwidth}
+\textbf{a.} Let $x$ = number of visits. Total cost of each plan:
+
+No membership: $y=\blank[3cm]$
+
+Membership: $y=\blank[3cm]$
+
+\textbf{b.} Graph both on the grid. Dot the intersection.
+
+\textbf{c.} Inequality that says \emph{the membership is cheaper}:
+
+\blank[6cm]
+
+\textbf{d.} Fewest visits for which the membership is cheaper: $\blank[1.5cm]$ visits
+
+\textbf{e.} Where do the plans cost the same? Can you make that many visits?\lines[3]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\vspace{0pt}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=0, xmax=12.6, ymin=0, ymax=165,
+  xtick={0,1,...,12}, ytick={0,10,...,160}, x=0.5cm, y=0.037cm,
+  minor y tick num=0,
+  xlabel={Number of visits}, ylabel={Cost (dollars)},
+  xlabel style={at={(axis description cs:0.5,-0.06)}, anchor=north},
+  ylabel style={at={(axis description cs:-0.1,0.5)}, anchor=south, rotate=90},
+  ticklabel style={font=\scriptsize}]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\newpage
+
+\wspart{IXL}{Practice for the quiz}
+Do the starred skills first. \textbf{SmartScore 70 or above on each starred skill replaces your quiz score.}
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y Y}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{M69 $\bigstar$}{Solve a system of equations by graphing}{Quiz 1--3: graph both sides, read the intersection}
+\ixlrow{FM2 $\bigstar$}{Approximate solutions using a table}{Quiz 5: find where $f(x)$ and $g(x)$ are closest}
+\ixlrow{ZBH}{Find solutions using a table}{Quiz 5 warm-up}
+\ixlrow{39B}{Graph solutions to absolute value equations}{Try It with $|x|$ (optional)}
+\bottomrule
+\end{tabularx}
+
+\vspace{8pt}
+\textbf{Before the quiz, finish these sentences.}
+
+The solution to an equation is where the two graphs \blank[3cm].
+
+An inequality like $f(x)>g(x)$ is true where the graph of $f$ is \blank[3cm] the graph of $g$.
+
+A membership is cheaper than pay-per-visit when its line is \blank[3cm] the other line.
+
+\end{document}

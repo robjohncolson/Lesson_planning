@@ -1,0 +1,214 @@
+% Algebra 2 Lesson 2-7 fast-track packet: Linear-Quadratic Systems (enVision A2 2024 TE, Example 3 and Example 4 only).
+% Fast-lesson draft 2026-10-30 (docs/a2-fast-lesson-spec.md); PLC has not met on this lesson.
+% Quiz map (TE 2-7 Lesson Quiz): item 1 count solutions = Ex 1; item 2 substitution = Ex 2; item 3 ball up a hill = Ex 3;
+% item 4 shade a system of inequalities = Ex 4; item 5 calculator intersect = Ex 5.
+% Kept: Ex 3 (the lesson's only DOK 3, practice 29; quiz 3, and its set-equal step is all of quiz 2) and
+% Ex 4 (the only route to quiz 4). DOK 3: practice 29 is the Practice block (page 2); the Exit question is Additional Practice 5.
+% Quiz numbers below are the Savvas item numbers (the short form keeps them); items 1 and 5 are full Savvas quiz only.
+\input{fast-packet-template}
+\usepgfplotslibrary{fillbetween}
+\begin{document}
+
+\packethead{Lesson 2-7}{Linear-Quadratic Systems}
+\goals{I can solve a linear-quadratic system by substitution and shade the solution region of a linear-quadratic system of inequalities.}{I can explain why my answer solves the system using the words substitute, intersection, boundary, and region.}
+
+\quiztarget{(1) Count the solutions of a line and a parabola (full Savvas quiz only). (2) Substitute to solve a system whose two equations both start ``$y=$'' (bonus; Example 3's first step). (3) Find how far a ball travels before it lands on a hill: set the path equal to the hill and solve (Example 3). (4) Shade the solution region of one quadratic and one linear inequality (Example 4). (5) Solve with a calculator's intersection feature (full Savvas quiz only).}
+
+\wspart{Example 3}{Applying a Linear-Quadratic System}
+Andrew kicks a ball up a hill for his dog, Laika, to chase. The hill is modeled by a line through the origin, $y=0.5x$. The path of the ball is modeled by the quadratic function $y=-0.5x^2+6x$. How far does the ball travel horizontally? How far must Laika run up the hill to catch it?
+
+\begin{minipage}[t]{0.47\textwidth}
+\vspace{0pt}\raggedright
+\textbf{1.} The ball lands where the path meets the hill: an \textbf{intersection}. Both equations give $y$, so \textbf{substitute} $0.5x$ for $y$:
+\[
+\begin{aligned}
+0.5x&=-0.5x^2+6x\\
+0&=-0.5x^2+5.5x\\
+0&=-0.5x(x-11)\\
+x=0 \quad&\text{or}\quad x=11
+\end{aligned}
+\]
+\textbf{2.} $x=0$ is where Andrew kicks the ball. $x=11$ is where it lands on the hill, at \mbox{$y=0.5(11)=5.5$}. \textbf{The ball travels 11 ft horizontally.}
+
+\textbf{3.} Laika runs along the hill: the hypotenuse of a right triangle with legs 11 ft and 5.5 ft.
+\[\sqrt{11^2+5.5^2}=\sqrt{151.25}\approx 12.3\ \text{ft}\]
+\textbf{Laika runs about 12.3 ft.} (Answer \emph{every} part of the question.)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.51\textwidth}
+\vspace{0pt}
+% TE window: first quadrant to x=27.5, y=20, ticks and grid every 2.5 ft (the TE's grid unit: "scaled by 2.5 feet"),
+% x labels O,5,...,25 and y labels 5,10,15; curves arrowed. Half a unit of padding keeps the origin dot unclipped.
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-0.5, xmax=28, ymin=-0.5, ymax=20.5,
+  xtick={0,2.5,...,27.5}, ytick={0,2.5,...,20},
+  xticklabels={$O$,,5,,10,,15,,20,,25,}, yticklabels={,,5,,10,,15,,}, hide obscured x ticks=false,
+  x=0.26cm, y=0.3cm,
+  xlabel={Horizontal distance (ft)}, ylabel={Height (ft)},
+  xlabel style={at={(axis description cs:0.5,-0.1)}, anchor=north, font=\scriptsize},
+  ylabel style={at={(axis description cs:-0.08,0.5)}, rotate=90, anchor=south, font=\scriptsize}]
+\addplot[very thick, red, ->, domain=0:11, samples=80] {-0.5*x^2+6*x};
+\addplot[very thick, blue, ->, domain=0:27.5, samples=2] {0.5*x};
+\addplot[thick, dashed] coordinates {(11,0) (11,5.5)};
+\node[closed] at (axis cs:0,0) {};
+\node[closed] at (axis cs:11,5.5) {};
+\node[closed] at (axis cs:6,18) {};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south] at (axis cs:6,18.4) {$(6,18)$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north west] at (axis cs:11.4,5.0) {$(11,5.5)$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt, anchor=west] at (axis cs:9.8,16.5) {$y=-0.5x^2+6x$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt, anchor=south east] at (axis cs:25,13.6) {$y=0.5x$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south] at (axis cs:5.5,0.3) {11 ft};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=east] at (axis cs:10.7,2.6) {5.5 ft};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\textbf{Say it:} I \blank[2.6cm] $0.5x$ for $y$ because at the \blank[3cm] the path and the hill have the same $y$-value. The solution $x=11$ means \dots\lines[2]
+
+\newpage
+
+\wspart{Try It 3}{Revenue and cost}
+Revenue for the high school band concert is given by the function $y=-30x^2+250x$, where $x$ is the ticket price, in dollars. The cost of the concert is given by the function $y=490-30x$. At what ticket price will the band make enough revenue to cover their costs?
+
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+\textbf{a.} Hint: set revenue equal to cost, then solve.\lines[4]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+\textbf{b.} Hint: test a price between your two answers.\lines[4]
+\end{minipage}
+
+The band covers its costs for ticket prices from \blank[2cm] to \blank[2cm] dollars.
+
+% R3: the lesson's only DOK 3 (Practice & Problem Solving 29, SEE EXAMPLE 3), verbatim; R5: rehearses Savvas quiz item 3 (the ball on the hill); the TE prints the path in the illustration callout.
+\wspart{Practice}{Bounce or splash? (DOK 3, Practice 29)}
+A golfer accidentally hits a ball toward a water hazard that is downhill from current position on the fairway. The hill can be modeled by a line through the origin with slope $-\tfrac18$. The path of the ball can be modeled by the function $y=-\tfrac{1}{100}x^2+\tfrac32x$.
+
+\textbf{Part A} If the golfer stands at the origin, and the water hazard is 180 yd away, will the golfer's ball bounce or splash?
+
+Hill: $y=\blank[2cm]$ \qquad Substitute and solve:\lines[4]
+
+\textbf{Part B} How far did the ball land from the edge of the water hazard?\lines[2]
+
+\textbf{Part C} Does it matter whether you measure the 180 yd horizontally or along the hill? Explain.\lines[2]
+
+\newpage
+
+\wspart{Example 4}{Solve a Linear-Quadratic System of Inequalities}
+How can you solve this system of inequalities? \quad $y<-2x^2+12x-10$ \quad and \quad $4x+y>4$
+
+\begin{minipage}[t]{0.52\textwidth}
+\vspace{0pt}
+\textbf{Step 1} Graph each \textbf{boundary}. ``$<$'' and ``$>$'': \textbf{dashed}, the boundary is not part of the solution.
+\begin{itemize}
+\item Parabola $y=-2x^2+12x-10$: vertex $(3,8)$, $x$-intercepts $1$ and $5$, $y$-intercept $-10$. Test $(0,0)$: $0<-10$? False. Shade the side \emph{without} the origin: below the parabola.
+\item Line: $4x+y>4$ is $y>-4x+4$ (slope $-4$, $y$-intercept $4$). Test $(0,0)$: $0>4$? False. Shade above the line.
+\end{itemize}
+\textbf{Step 2} The solution \textbf{region} is where the shadings overlap (darkest). The boundaries meet where $-2x^2+12x-10=-4x+4$:
+$x^2-8x+7=0$, $(x-1)(x-7)=0$, at $(1,0)$ and $(7,-24)$.
+
+\textbf{Check a point in the region,} $(2,0)$:\\
+$0<-2(2)^2+12(2)-10$, \ $0<6$ \checkmark\\
+$4(2)+0>4$, \ $8>4$ \checkmark
+\end{minipage}\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+% TE window x=[-5,10], y=[-45,25], grid 1 by 5, x labels -4,...,8, y labels 20,10,-10,...,-40; curve ends arrowed.
+\begin{axis}[sheetgrid, xmin=-5.5, xmax=10.5, ymin=-45.5, ymax=25.5,
+  xtick={-4,-2,2,4,6,8}, ytick={-40,-30,-20,-10,10,20},
+  minor xtick={-5,...,10}, minor ytick={-45,-40,...,25}, minor grid style={gray!25},
+  x=0.5cm, y=0.1cm]
+\addplot[name path=par, very thick, red, dashed, <->, domain=-2.1:8.1, samples=120] {-2*x^2+12*x-10};
+\addplot[name path=lin, very thick, blue, dashed, <->, domain=-5.2:10.2, samples=2] {-4*x+4};
+\path[name path=bot] (axis cs:-2.1,-45.5) -- (axis cs:8.1,-45.5);
+\path[name path=top] (axis cs:-5.5,25.5) -- (axis cs:10.5,25.5);
+\addplot[yellow!45, opacity=0.6] fill between[of=par and bot];
+\addplot[blue!30, opacity=0.45] fill between[of=lin and top];
+\addplot[green!55!black, opacity=0.55] fill between[of=par and lin, soft clip={domain=1:7}];
+\node[closed, red] at (axis cs:2,0) {};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south west] at (axis cs:2.2,0.8) {$(2,0)$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:6.4,14) {$y=-2x^2+12x-10$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt, anchor=north west] at (axis cs:-5.2,9) {$y=-4x+4$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\textbf{Say it:} The point $(2,0)$ is in the solution \blank[2.2cm] because \dots\ Each \blank[2.4cm] is dashed because \dots\lines[1]
+
+\wspart{Try It 4}{Shade the solution region}
+\begin{minipage}[t]{0.47\textwidth}
+\vspace{0pt}
+Solve the system of inequalities $y>x^2+6x-12$, $3x-y\geq-8$ using shading.
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+\item Graph $y=x^2+6x-12$, dashed or solid?\\ Vertex: \blank[1.8cm] \ $y$-intercept: \blank[1.1cm]
+\item Solve $3x-y\geq-8$ for $y$ (dividing by $-1$ flips the sign), dashed or solid?\\ $y$ \blank[3cm]
+\item Test $(0,0)$ in each inequality and shade.
+\item Darken the region where the shadings overlap.
+\item Check a point in your region in \emph{both} original inequalities:\lines[2]
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\vspace{0pt}
+\begin{center}
+\begin{tikzpicture}
+% Blank student grid (spec section 5: the window the Try It needs). It holds the vertex (-3,-21) and both boundary
+% crossings (about (-6.2,-10.6) and (3.2,17.6)); the TE answer graph's window (y up to 2.5) cuts off the top of the region.
+% Grid every 1 in x and every 2 in y with no gaps.
+\begin{axis}[sheetgrid, xmin=-10, xmax=6, ymin=-24, ymax=20,
+  xtick={-10,-8,...,6}, ytick={-24,-20,...,20},
+  minor x tick num=1, minor y tick num=1, minor grid style={gray!30},
+  x=0.5cm, y=0.17cm]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\newpage
+
+\wspart{IXL}{Practice for the quiz}
+Go to IXL, Algebra 2. Type the code in the search box. Do the starred skills first.
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y Y}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{HVZ $\bigstar$}{Solve a linear-quadratic system of equations: lines and parabolas}{Quiz 2 (bonus) and 3: substitute, solve the quadratic, find both points (Example 3)}
+\ixlrow{VQU $\bigstar$}{Solve a linear-quadratic system of equations by graphing: lines and parabolas}{Quiz 4: graph the parabola and the line (the boundaries); Quiz 2 by graphing; Quiz 1 (full Savvas quiz only)}
+\ixlrow{U5D $\bigstar$}{Solve systems of linear inequalities by graphing}{Quiz 4: dashed or solid, test a point, shade the overlap (Example 4)}
+\ixlrow{BW5}{Solve a system of equations using substitution}{Warm-up: the same move with two lines (Lesson 1-6)}
+\ixlrow{M69}{Solve a system of equations by graphing}{Warm-up: read where two graphs meet (Lesson 1-5)}
+\bottomrule
+\end{tabularx}
+
+\vspace{4pt}
+\textbf{SmartScore 70 or above on each starred skill replaces your quiz score.}
+
+% Exit: Additional Practice 5 from the TE (2-7 Additional Practice), the move Savvas quiz item 2 (the bonus) asks for.
+\wspart{Exit question}{Substitute and solve}
+\begin{minipage}[t]{0.40\textwidth}
+\vspace{0pt}
+Use substitution to solve the system of equations.
+\[
+\begin{cases} y=-x^2+x+12\\ y=2x-8\end{cases}
+\]
+Solutions: \blank[1.8cm] and \blank[1.8cm]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.56\textwidth}
+\vspace{0pt}
+\lines[4]
+\end{minipage}
+
+\textbf{Say it:} The two solutions are the points of \blank[3cm] of the line and the parabola. I checked one by \dots\lines[1]
+
+\vspace{4pt}
+\textbf{Before the quiz, finish these sentences.}
+
+To solve a linear-quadratic system, I \blank[3cm] one expression for $y$ into the other equation and solve the quadratic.
+
+The solutions are the points of \blank[3.2cm] of the line and the parabola: there can be 0, 1, or 2 of them.
+
+A dashed \blank[2.6cm] is not part of the solution; the solution \blank[2.2cm] is where the shadings overlap.
+
+\end{document}

@@ -1,0 +1,254 @@
+% Algebra 2 Lesson 5-6 fast-track packet: Inverse Relations and Functions (enVision A2, Example 2 and Example 3 only)
+% Bridge lesson. Source: a2_5-6_TE.tex (2024 TE, printed pages 269A-277B).
+% Kept: Example 2 (quiz 2 and 5; the switch-x-and-y move also answers quiz 1) and Example 3 (quiz 3).
+% Cut: Examples 1, 4, 5, 6. DOK 3: Practice & Problem Solving 38 (Example 3), used as the exit block.
+% No Practice block (R5): the quiz has no context item; Try It 2 and Try It 3 rehearse quiz 2, 3 and 5.
+\input{fast-packet-template}
+\begin{document}
+
+\packethead{Lesson 5-6}{Inverse Relations and Functions}
+\goals{I can find the inverse of a function from a table, an equation, or a graph, and restrict the domain so that the inverse is a function.}{I can explain how a function and its inverse are related using the words \emph{inverse}, \emph{reflection}, \emph{domain}, \emph{range}, and \emph{restrict}.}
+{\small Spanish: inverse function = \emph{funci\'on inversa}; inverse relation = \emph{relaci\'on inversa}; relation = \emph{relaci\'on}.}
+
+\quiztarget{Example 2 gets you (2) sketching a line and its inverse and (5, bonus) which line is the inverse of $f(x)=2x+4$. Example 3 gets you (3) restricting the domain of a parabola. Full Savvas quiz only: (1) the table of an inverse (``The idea'') and (4) a cube-root inverse (same switch and solve).}
+
+\textbf{The idea:} the inverse exchanges the roles of the domain and range.\par
+\begin{minipage}[t]{0.42\textwidth}
+\vspace{0pt}\small
+\textbf{Tables.} Switch the rows (or columns).\par\vspace{2pt}
+\begin{tabular}{|c|c|c|c|c|c|}\hline $x$ & 0&1&2&3&4\\ \hline $f(x)$ & 2&4&6&8&10\\ \hline\end{tabular}\par\vspace{3pt}
+\begin{tabular}{|c|c|c|c|c|c|}\hline $x$ & 2&4&6&8&10\\ \hline $f^{-1}(x)$ & 0&1&2&3&4\\ \hline\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.26\textwidth}
+\vspace{0pt}\small
+\textbf{Algebra.} Switch $x$ and $y$, then solve for $y$.\par\vspace{2pt}
+$y=x+9$\\ $x=y+9$\\ $y=x-9$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.28\textwidth}
+\vspace{0pt}\small
+\textbf{Graphs.} Reflect the graph across the line $y=x$: a point $(x,y)$ on $f$ becomes $(y,x)$ on the inverse.
+\end{minipage}
+
+\wspart{Example 2}{Find an Equation of an Inverse Relation}
+Let $f(x)=x^2$.
+
+\begin{minipage}[t]{0.52\textwidth}
+\vspace{0pt}
+\textbf{A.} How can you represent the inverse relation of $f$ algebraically?
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=1pt]
+\item Write $y$ for $f(x)$: \ $y=x^2$
+\item Switch the roles of $x$ and $y$: \ $x=y^2$
+\item Solve for $y$: \ $y=\pm\sqrt{x}$
+\end{enumerate}
+The inverse of $f$ is $y=\pm\sqrt{x}$. Check: $(2,4)$ is on $f$; $(4,2)$ and $(4,-2)$ are on the inverse.
+
+\textbf{B.} How are the graphs of $y=x^2$ and $y=\pm\sqrt{x}$ related?
+
+The graph of the inverse is the \textbf{reflection} of the graph of $y=x^2$ across the line $y=x$.
+\begin{itemize}
+\item The \textbf{range} of $f$ is $y\geq0$, so the \textbf{domain} of the inverse is $x\geq0$.
+\item The inverse is \textbf{not} a function: $x=4$ gives two values, $y=2$ and $y=-2$.
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+% TE: grid -4 to 4, minor grid 0.5, labels every 1 from -3 to 3, origin O; window padded 0.5 for the arrowheads.
+\begin{axis}[unitgrid, xmin=-4.5, xmax=4.5, ymin=-4.5, ymax=4.5,
+  xtick={-4,...,4}, ytick={-4,...,4},
+  xticklabels={,$-3$,$-2$,$-1$,,1,2,3,}, yticklabels={,$-3$,$-2$,$-1$,,1,2,3,},
+  minor tick num=1, minor grid style={gray!20},
+  x=0.56cm, y=0.56cm]
+\addplot[very thick, green!55!black, <->, domain=-4.4:4.4, samples=2] {x};
+\addplot[very thick, blue, <->, domain=-2.05:2.05, samples=80] {x^2};
+\addplot[very thick, red, <->, domain=-2.05:2.05, samples=80] ({x^2},{x});
+\node[closed] at (axis cs:0,0) {};
+\node[font=\scriptsize, anchor=north east, inner sep=0.5pt] at (axis cs:-0.06,-0.3) {$O$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt] at (axis cs:-2.9,2.6) {$y=x^2$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:3.0,-2.75) {$y=\pm\sqrt{x}$};
+\node[font=\scriptsize, green!45!black, fill=white, inner sep=1pt] at (axis cs:-3.5,-1.7) {$y=x$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{4pt}
+\textbf{Say it:} The inverse of $f(x)=x^2$ is $y=\pm\sqrt{x}$. Its graph is the \blank[2.6cm] of the graph of $f$ across the line \blank[1.6cm]. The range of $f$ becomes the \blank[2.2cm] of the inverse. The inverse is not a function because \hrulefill
+
+\newpage
+\wspart{Try It 2}{Find the inverse of a line}
+Let $f(x)=2x+1$.
+
+\begin{minipage}[t]{0.50\textwidth}
+\vspace{0pt}
+\textbf{a.} Write an equation to represent the inverse of $f$.
+
+$y=2x+1$ \quad$\to$\quad $x=\blank[2.4cm]$
+\lines[2]
+Inverse: $y=\blank[3.4cm]$
+
+\vspace{4pt}
+\textbf{b.} How can you use the graph of $f$ to determine if the inverse of $f$ is a function? Explain your answer.
+
+{\small Hint: sketch $f$, the line $y=x$, and the reflection of $f$ on the grid.}
+\lines[3]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+\begin{axis}[unitgrid, x=0.6cm, y=0.6cm]
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\wspart{Example 3}{Restrict a Domain to Produce an Inverse Function}
+Consider again the function $f(x)=x^2$. Under what domain will the inverse relation be a function?
+
+\begin{minipage}[t]{0.26\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+% TE: unit grid x -5 to 5 (labels -4,-2,2,4), y -2 to 10 (labels 2,4,6,8); window padded 0.5.
+\begin{axis}[sheetgrid, xmin=-5.5, xmax=5.5, ymin=-2.5, ymax=10.5,
+  xtick={-5,...,5}, ytick={-2,...,10},
+  xticklabels={,$-4$,,$-2$,,,,2,,4,}, yticklabels={,,,,2,,4,,6,,8,,},
+  x=0.36cm, y=0.36cm]
+\addplot[very thick, blue, <->, domain=-3.2:3.2, samples=80] {x^2};
+\addplot[very thick, red] coordinates {(-2,4) (2,4)};
+\addplot[thick, red, ->] coordinates {(-2,4) (-2,0)};
+\addplot[thick, red, ->] coordinates {(2,4) (2,0)};
+\node[closed, red] at (axis cs:-2,4) {};
+\node[closed, red] at (axis cs:2,4) {};
+\end{axis}
+\end{tikzpicture}
+
+{\scriptsize Two $x$-values, one $y$-value.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.40\textwidth}
+\vspace{0pt}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+\item $(-2,4)$ and $(2,4)$ are both on $f$. The inverse would contain $(4,-2)$ and $(4,2)$: two outputs for $x=4$, so it is \textbf{not} a function.
+\item For the inverse to be a function, all the duplicate $y$-values must be eliminated. \textbf{Restrict} the domain of $f$ to $x\geq0$ (keep the right half).
+\item Switch and solve: $x=y^2$, $y=\sqrt{x}$ (the $+$ root: outputs of $f^{-1}$ are inputs of $f$, so $y\geq0$).
+\item $f^{-1}(x)=\sqrt{x}$, with domain $x\geq0$ (the range of $f$).
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\textwidth}
+\vspace{0pt}
+\begin{tikzpicture}
+% TE: unit grid x and y -3 to 5, labels -2,2,4; window padded 0.5.
+\begin{axis}[unitgrid, xmin=-3.5, xmax=5.5, ymin=-3.5, ymax=5.5,
+  xtick={-3,...,5}, ytick={-3,...,5},
+  xticklabels={,$-2$,,,,2,,4,}, yticklabels={,$-2$,,,,2,,4,}, x=0.52cm, y=0.52cm]
+\addplot[very thick, green!55!black, <->, domain=-3.4:5.4, samples=2] {x};
+\addplot[very thick, blue, ->, domain=0:2.3, samples=60] {x^2};
+\addplot[very thick, red, ->, domain=0:5.3, samples=80] {sqrt(x)};
+\node[closed] at (axis cs:0,0) {};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt] at (axis cs:1.5,4.4) {$f$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:4.4,1.1) {$f^{-1}$};
+\node[font=\scriptsize, green!45!black, fill=white, inner sep=1pt] at (axis cs:-2.6,-1.4) {$y=x$};
+\end{axis}
+\end{tikzpicture}
+
+{\scriptsize $f(x)=x^2$, $x\geq0$, and $f^{-1}(x)=\sqrt{x}$.}
+\end{minipage}
+
+{\small\textbf{Rule:} if any horizontal line crosses the graph of $f$ more than once, the inverse is not a function. Another restriction works too: $x\leq0$ gives $f^{-1}(x)=-\sqrt{x}$. For any parabola, restrict to one side of the vertex.}
+
+\textbf{Say it:} To make the inverse a function, I \blank[2cm] the domain of $f$ to \blank[2cm], so that no horizontal line crosses the graph twice. Then $f^{-1}(x)=\blank[2.2cm]$, and its domain is the \blank[2cm] of $f$.\lines[1]
+
+\newpage
+\wspart{Try It 3}{Restrict the domain, then find the inverse}
+Find the inverse of each function by identifying an appropriate restriction of its domain.
+
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+\textbf{a.} $f(x)=x^2+8x+16$
+
+\vspace{4pt}
+$f(x)=(\blank[1.8cm])^2$, \ vertex \blank[1.6cm]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-8.5, xmax=1.5, ymin=-1.5, ymax=9.5,
+  xtick={-8,...,1}, ytick={-1,...,9},
+  xticklabels={$-8$,,$-6$,,$-4$,,$-2$,,,}, yticklabels={,,,2,,4,,6,,8,},
+  x=0.3cm, y=0.3cm]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Restrict the domain of $f$ to \blank[2.2cm]
+
+Switch and solve:\lines[2]
+$f^{-1}(x)=\blank[2.6cm]$, \ domain \blank[1.8cm]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+\textbf{b.} $f(x)=x^2-9$
+
+\vspace{4pt}
+Vertex \blank[1.8cm]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-4.5, xmax=4.5, ymin=-9.5, ymax=1.5,
+  xtick={-4,...,4}, ytick={-9,...,1},
+  xticklabels={$-4$,,$-2$,,,,2,,4}, yticklabels={,$-8$,,$-6$,,$-4$,,$-2$,,,},
+  x=0.3cm, y=0.3cm]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Restrict the domain of $f$ to \blank[2.2cm]
+
+Switch and solve:\lines[2]
+$f^{-1}(x)=\blank[2.6cm]$, \ domain \blank[1.8cm]
+\end{minipage}
+
+\vspace{6pt}
+\textbf{Say it:} I \blank[2cm] the domain because, without the restriction, a horizontal line crosses the graph of $f$ \blank[1.6cm] times, so the inverse would not be a \blank[2.2cm].
+
+\wspart{IXL}{Practice for the quiz}
+Go to IXL, Algebra 2. Type the code in the search box. Do the starred skills first.
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y Y}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{ZRQ $\bigstar$}{Find inverse functions and relations}{Quiz 3 and Quiz 5 (bonus): switch and solve (Examples 2 and 3); also Quiz 4 (full Savvas quiz only)}
+\ixlrow{K2W $\bigstar$}{Graphs of inverse functions}{Quiz 2: reflect a line across $y=x$ (Example 2B)}
+\ixlrow{9KT $\bigstar$}{Identify inverse functions}{Quiz 5 (bonus): which function is the inverse}
+\ixlrow{YLX}{Find values of inverse functions from tables}{Optional: Quiz 1 (full Savvas quiz only), switch $x$ and $y$ in a table}
+\ixlrow{LSG}{Graph a linear function}{Warm-up for Quiz 2: graph a line}
+\ixlrow{UAJ}{Graph square root functions}{Warm-up for Quiz 3: the graph of $y=\sqrt{x}$ (Example 3)}
+\bottomrule
+\end{tabularx}
+
+\vspace{4pt}
+\textbf{SmartScore 70 or above on each starred ($\bigstar$) skill replaces your quiz score.}
+
+\newpage
+\wspart{Exit question}{Which powers have inverse functions? (DOK 3)}
+The table shows several functions and some of the inverses of those functions. The table also shows whether some of the inverses are functions.
+
+\noindent\hfil\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Function} & \textbf{Inverse} & \textbf{Is the inverse a function?} \\ \hline
+$f(x)=x$ & $f^{-1}(x)=x$ & yes \\
+$g(x)=x^2$ & $g^{-1}(x)=\pm\sqrt{x}$ & no \\
+$h(x)=x^3$ & $h^{-1}(x)=\sqrt[3]{x}$ & yes \\
+$k(x)=x^4$ & & \\[12pt]
+$m(x)=x^5$ & & \\[12pt]
+$n(x)=x^6$ & & \\[12pt] \hline
+\end{tabular}\hfil\par
+
+\textbf{Part A} Determine the inverses of the remaining functions in the table.\\
+\textbf{Part B} Determine if the inverses of the remaining functions in the table are functions.\\
+\textbf{Part C} Make a conjecture about the power of a function if the inverse of that function is a function.
+\lines[4]
+
+\textbf{Before the quiz, finish these sentences.}
+
+To find an inverse, I switch the \blank[2.4cm] and the \blank[2.4cm].
+
+The graph of the inverse is the \blank[2.6cm] of the graph of $f$ across the line \blank[1.6cm].
+
+If a horizontal line crosses the graph of $f$ twice, I \blank[2.4cm] the domain so that the inverse is a function.
+
+\end{document}

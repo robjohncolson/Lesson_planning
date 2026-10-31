@@ -1,0 +1,60 @@
+% Shared preamble for the "fast" (hacked-down) Algebra 2 lesson packets, Oct 2026.
+% Each packet: \input{fast-packet-template} then \begin{document} ... \end{document}.
+\documentclass[12pt]{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{xcolor}
+\setlist{nosep,leftmargin=1.4em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.35}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\pagestyle{empty}
+
+% blanks and workspace
+\newcommand{\blank}[1][2.6cm]{\rule[-2pt]{#1}{0.5pt}}
+\newcommand{\lines}[1][1]{\par\vspace{2pt}\foreach \i in {1,...,#1}{\rule{0pt}{22pt}\rule{\linewidth}{0.4pt}\par}}
+\newcommand{\wspart}[2]{\vspace{4pt}{\large\bfseries #1: #2}\par\vspace{-6pt}\rule{\textwidth}{0.4pt}\par}
+
+% header: \packethead{Lesson 1-3}{Piecewise-Defined Functions}
+\newcommand{\packethead}[2]{%
+{\LARGE\bfseries #2}\hfill Name \blank[5cm]\\[2pt]
+Algebra 2 \quad #1 (fast track) \hfill Date \blank[2.5cm] \quad Period \blank[1.2cm]\par\vspace{2pt}}
+
+% boxed goals: \goals{learning goal}{language goal}
+\newcommand{\goals}[2]{%
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+\textbf{Learning goal:} #1\\[2pt]
+\textbf{Language goal:} #2}}\par}
+
+% quiz target box: \quiztarget{text}
+\newcommand{\quiztarget}[1]{%
+\vspace{4pt}\colorbox{gray!12}{\parbox{\dimexpr\textwidth-2\fboxsep}{\textbf{On the quiz:} #1}}\par}
+
+% IXL table row helper: code & skill & which quiz question it feeds
+\newcommand{\ixlrow}[3]{\texttt{#1} & #2 & #3 \\}
+
+% one grid style for every graph; override xmin/xmax/... per plot
+\pgfplotsset{sheetgrid/.style={
+  axis lines=middle, grid=both, grid style={gray!45},
+  xmin=-10.5, xmax=10.5, ymin=-10.5, ymax=10.5,
+  xtick={-10,-8,...,10}, ytick={-10,-8,...,10},
+  x=0.28cm, y=0.28cm,
+  ticklabel style={font=\scriptsize, fill=white, inner sep=1pt},
+  xlabel={$x$}, ylabel={$y$},
+  axis line style={thick}, clip=true}}
+% unit grid for small windows
+\pgfplotsset{unitgrid/.style={sheetgrid,
+  xmin=-5.5, xmax=5.5, ymin=-5.5, ymax=5.5,
+  xtick={-5,...,5}, ytick={-5,...,5}, x=0.5cm, y=0.5cm}}
+% open and closed endpoints
+\tikzset{closed/.style={circle, fill, inner sep=1.6pt},
+         open/.style={circle, draw, fill=white, inner sep=1.4pt}}

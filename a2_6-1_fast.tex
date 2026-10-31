@@ -1,0 +1,263 @@
+% Algebra 2 Lesson 6-1 fast-track packet: Key Features of Exponential Functions
+% (enVision A2 2024 TE, a2_6-1_TE.tex; Example 1 and Example 3 only, chosen for Lesson Quiz items 2, 3, 4)
+\input{fast-packet-template}
+\begin{document}
+
+\packethead{Lesson 6-1}{Key Features of Exponential Functions}
+\goals{I can recognize the key features of an exponential function and write an exponential growth or decay model from a starting amount and a percent rate.}{I can describe an exponential function using the words \emph{growth factor}, \emph{decay factor}, \emph{y-intercept}, \emph{asymptote}, and \emph{end behavior}.}
+
+\quiztarget{(1) Stretch and reflect $3^x$ (full Savvas quiz only). (2, bonus) Growth or decay after 5 years, and by about how much? (3) Example 1: domain, range, $y$-intercept, asymptote. (4) Example 3: write and graph a decay model from a start amount and a percent decrease. (5) Compare growth factors from a graph (full Savvas quiz only).}
+
+{\footnotesize Words: exponential function (\emph{funci\'on exponencial}), growth factor (\emph{factor de incremento}), decay factor (\emph{factor de decremento}).\par}
+
+\wspart{Example 1}{Identify Key Features of Exponential Functions}
+What are the key features of each function? Include domain, range, intercepts, asymptotes, and end behavior. An \textbf{exponential function} is any function of the form $f(x)=a\cdot b^x$ where $a$ and $b$ are constants with $a\neq0$, and $b>0$, $b\neq1$.
+
+\begin{minipage}[t]{0.49\textwidth}
+\vspace{0pt}
+\textbf{A.} $f(x)=2^x$
+
+\begin{minipage}[t]{0.36\linewidth}
+\vspace{0pt}
+\small
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $f(x)=2^x$ \\ \hline
+$-2$ & $\tfrac14$ \\
+$-1$ & $\tfrac12$ \\
+$0$ & $1$ \\
+$1$ & $2$ \\
+$2$ & $4$ \\ \hline
+\end{tabular}
+
+\vspace{2pt}
+each row: $\times 2$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.62\linewidth}
+\vspace{0pt}
+\begin{tikzpicture}
+% TE window x -5 to 5, y -1 to 9 (labels -4,-2,2,4 and 2,4,6,8), plus half a unit so the arrowheads show
+\begin{axis}[unitgrid, xmin=-5.5, xmax=5.5, ymin=-1.5, ymax=9.5,
+  xtick={-5,...,5}, ytick={-1,...,9},
+  xticklabels={,-4,,-2,,,,2,,4,}, yticklabels={,,,2,,4,,6,,8,},
+  x=0.36cm, y=0.31cm]
+\addplot[very thick, red, domain=-5.5:3.2, samples=80, <->] {2^x};
+\node[closed, red] at (axis cs:0,1) {};
+\node[closed, red] at (axis cs:2,4) {};
+\node[font=\scriptsize, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=east] at (axis cs:-0.9,1.4) {$(0,1)$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:2.3,4) {$(2,4)$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:4.3,8) {$f$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{2pt}
+$b=2$. Since $b>1$, the $y$-values \textbf{increase}: $2$ is the \textbf{growth factor}.
+\begin{itemize}[topsep=0pt]\small
+\item Domain: all real numbers
+\item Range: $\{y\mid y>0\}$
+\item $y$-intercept: $1$ \quad ($a=1$, because $b^0=1$)
+\item Asymptote: the $x$-axis ($y=0$)
+\item End behavior: as $x\to-\infty$, $y\to0$;\\ as $x\to\infty$, $y\to\infty$
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}
+\vspace{0pt}
+\textbf{B.} $g(x)=5\left(\tfrac12\right)^x$
+
+\begin{minipage}[t]{0.36\linewidth}
+\vspace{0pt}
+\small
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $g(x)$ \\ \hline
+$-2$ & $20$ \\
+$-1$ & $10$ \\
+$0$ & $5$ \\
+$1$ & $\tfrac52$ \\
+$2$ & $\tfrac54$ \\ \hline
+\end{tabular}
+
+\vspace{2pt}
+each row: $\times \tfrac12$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.62\linewidth}
+\vspace{0pt}
+\begin{tikzpicture}
+% TE window x -5 to 5, y -1 to 9; the 6 and 8 labels sit right of the y-axis because the curve crosses their left-side spots
+\begin{axis}[unitgrid, xmin=-5.5, xmax=5.5, ymin=-1.5, ymax=9.5,
+  xtick={-5,...,5}, ytick={-1,...,9},
+  xticklabels={,-4,,-2,,,,2,,4,}, yticklabels={,,,2,,4,,,,,},
+  extra y ticks={6,8}, extra y tick labels={6,8},
+  extra y tick style={tick label style={anchor=west, xshift=2pt}},
+  ylabel style={xshift=8pt}, x=0.36cm, y=0.31cm]
+\addplot[very thick, blue, domain=-0.9:5.5, samples=80, <->] {5*0.5^x};
+\node[closed, blue] at (axis cs:0,5) {};
+\node[closed, blue] at (axis cs:1,2.5) {};
+\node[font=\scriptsize, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:0.8,4.9) {$(0,5)$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:1.5,3.1) {$(1,\tfrac52)$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt] at (axis cs:4.3,1.6) {$g$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{2pt}
+$b=\tfrac12$. Since $b<1$, the $y$-values \textbf{decrease}: $\tfrac12$ is the \textbf{decay factor}.
+\begin{itemize}[topsep=0pt]\small
+\item Domain: all real numbers
+\item Range: $\{y\mid y>0\}$
+\item $y$-intercept: $5$ \quad (the $y$-intercept is $a$)
+\item Asymptote: the $x$-axis ($y=0$)
+\item End behavior: as $x\to-\infty$, $y\to\infty$;\\ as $x\to\infty$, $y\to0$
+\end{itemize}
+\end{minipage}
+
+\textbf{Study tip:} the ratio between $y$-values for consecutive integer values of $x$ is $b$. \quad
+\textbf{Reason:} in Part B, as $x$ increases the fraction gets smaller and smaller. Will it ever reach zero? \blank[4.6cm]
+
+\textbf{Say it:} For $g(x)=5\left(\tfrac12\right)^x$, the \emph{decay factor} is \blank[1.4cm], so as $x\to\infty$ the $y$-values \blank[2.6cm]. The \emph{y-intercept} is \blank[1.2cm] and the \emph{asymptote} is \blank[2.4cm] because \dots\lines[1]
+
+\newpage
+
+\wspart{Try It 1}{Graph an exponential function}
+Graph $f(x)=4(0.5)^x$. What are the domain, range, intercepts, asymptote, and the end behavior for this function?
+
+\begin{minipage}[t]{0.40\textwidth}
+\vspace{0pt}
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $f(x)=4(0.5)^x$ \\ \hline
+$-2$ & \\
+$-1$ & \\
+$0$ & \\
+$1$ & \\
+$2$ & \\
+$3$ & \\ \hline
+\end{tabular}
+
+\vspace{6pt}
+Growth or decay? $b=\blank[1.4cm]$ \\[4pt]
+so the $y$-values \blank[2.6cm].
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\textwidth}
+\vspace{0pt}
+\begin{center}
+\begin{tikzpicture}
+% TE window x -8 to 8, y -8 to 10, labels x -4,4 and y -4,4,8; axes with arrows at both ends; grid every unit
+\begin{axis}[sheetgrid, xmin=-8.5, xmax=8.5, ymin=-8.5, ymax=10.5,
+  xtick={-8,-6,...,8}, ytick={-8,-6,...,10}, minor tick num=1, minor grid style={gray!25},
+  xticklabels={,,-4,,,,4,,}, yticklabels={,,-4,,,,4,,8,},
+  axis line style={thick, <->},
+  x=0.42cm, y=0.42cm]
+\node[font=\scriptsize, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\vspace{4pt}
+Domain: \blank[4.5cm] \qquad Range: \blank[4.5cm]
+
+\vspace{6pt}
+$y$-intercept: \blank[4.5cm] \qquad Asymptote: \blank[4.2cm]
+
+\vspace{6pt}
+End behavior: as $x\to-\infty$, $y\to\blank[1.8cm]$; \quad as $x\to\infty$, $y\to\blank[1.8cm]$.
+
+How did you know where to start the graph, and which way it goes? Use the words \emph{y-intercept} and \emph{decay factor}.\lines[3]
+
+\newpage
+
+\wspart{Example 3}{Model with Exponential Functions}
+The population of a large city was about 4.6 million in the year 2020 and grew at a rate of 1.3\% for the next four years.
+
+\textbf{A.} What exponential function models the population of the city over that 4-year period?
+
+Compute the population for the first few years to look for a pattern. Each year you keep all of last year's people and add 1.3\% more:
+
+\begin{center}
+\small
+\begin{tabular}{|c|l|}
+\hline
+$t$ (years since 2020) & $p$ (population in millions) \\ \hline
+$0$ & $4.6$ \\
+$1$ & $4.6+4.6(0.013)=4.6(1.013)$ \\
+$2$ & $4.6(1.013)(1.013)=4.6(1.013)^2$ \\
+$3$ & $4.6(1.013)^3$ \\
+$4$ & $4.6(1.013)^4$ \\ \hline
+\end{tabular}
+\end{center}
+
+The $1$ in $1.013$ is the current population and the $0.013$ is the yearly increase. The exponent is the number of years since 2020. The population can be modeled by the exponential function
+\[
+P=4.6(1.013)^t \qquad
+\begin{array}{l}
+\text{\small $P$: population (millions) after $t$ years} \quad \text{\small $4.6$: population in 2020}\\
+\text{\small $1.013$: growth factor} \quad \text{\small $t$: years since 2020}
+\end{array}
+\]
+
+\textbf{B.} If the population continues to grow at the same rate, what will the population be in 2050?
+
+2050 is $2050-2020=30$ years after 2020, so solve the equation for $t=30$:
+\[P=4.6(1.013)^{30}\approx4.6(1.4733)\approx6.78\]
+
+In 2050, the population will be about \textbf{6.78 million}.
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+\textbf{Exponential growth and decay models.} A quantity changes by a fixed percent each time period. Starting amount $a$, rate $r$ (as a decimal), amount $A(t)$ after $t$ periods:\\[3pt]
+\begin{tabular}{@{}ll@{}}
+\textbf{Growth:} $A(t)=a(1+r)^t$ & $a>0$, \ growth factor $b=1+r$, \ $b>1$ \\
+\textbf{Decay:} $A(t)=a(1-r)^t$ & $a>0$, \ decay factor $b=1-r$, \ $0<b<1$
+\end{tabular}}}
+
+\textbf{Say it:} The \emph{growth factor} is \blank[1.4cm] because the city keeps \blank[1.4cm]\% of its people and adds \blank[1.4cm]\%. If a value \emph{dropped} 22\% each year, the \emph{decay factor} would be \blank[1.4cm] because \dots\lines[2]
+
+\newpage
+
+\wspart{Try It 3}{Write and use a decay model}
+A factory purchased a 3D printer in 2022 for \$35,750. The value of the printer depreciates every year by 22\% meaning that it retains 78\% of its purchase price for each year that passes.
+
+\textbf{a.} Write the function that represents the value of the printer in terms of $x$, the number of years since 2022.
+
+$f(x)=\blank[1.8cm]\,\big(\blank[1.4cm]\big)^x$ \qquad initial value \blank[1.8cm] \quad decay factor \blank[1.4cm]
+
+\textbf{b.} What is the value of the printer after 3 years to the nearest dollar?\lines[2]
+
+\textbf{c.} Does the printer lose more of its value in the first 3 years or in the second 3 years after it was purchased?
+
+Hint: the second 3 years run from year 3 to year 6.\lines[2]
+
+\wspart{IXL}{Practice for the quiz}
+\textbf{SmartScore 70 or above on each starred ($\bigstar$) skill replaces your quiz score.}
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y l}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{LWE}{Evaluate exponential functions}{warm-up (tables)}
+\ixlrow{EFD $\bigstar$}{Domain and range of exponential functions}{Quiz 3}
+\ixlrow{U7P $\bigstar$}{Graph exponential functions}{Quiz 4 (graph)}
+\ixlrow{DBW $\bigstar$}{Write exponential functions: word problems}{Quiz 4}
+\ixlrow{TYQ $\bigstar$}{Exponential growth and decay: word problems}{Quiz 2 (bonus), 4}
+\bottomrule
+\end{tabularx}
+
+\wspart{Exit question}{Model with mathematics}
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+A colony of bacteria starts with 50 organisms and quadruples each day. Write a function, $P(t)$, that represents the population of the bacteria after $t$ days. Then find the number of bacteria that will be in the colony after 5 days.
+
+\vspace{4pt}
+Starting amount ($y$-intercept): \blank[1.5cm] \quad \emph{Growth factor}: \blank[1.2cm] because \blank[3.6cm]
+
+\vspace{4pt}
+$P(t)=\blank[3.5cm]$ \qquad After 5 days: \blank[4cm] bacteria.
+
+\vspace{4pt}
+Is this exponential growth or decay? What does the \emph{end behavior} as $t\to\infty$ mean for the colony?\lines[1]
+}}
+
+\end{document}

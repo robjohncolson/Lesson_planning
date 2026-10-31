@@ -1,0 +1,251 @@
+% Algebra 2 Lesson 3-4 fast-track packet: Dividing Polynomials (enVision A2, Example 2 and Example 5 only)
+% Source: a2_3-4_TE.tex (2024 TE, printed pages 142A-149B). Savvas quiz items 2 and 5 graded, item 3 bonus (proposal); items 1 and 4 are full Savvas quiz only.
+\input{fast-packet-template}
+% synthetic-division tables: a | coefficients, one centered math column per coefficient
+\newcolumntype{C}{>{\centering\arraybackslash$}p{0.95cm}<{$}}
+\newcolumntype{A}{>{$}r<{$}}
+\newcommand{\sdstrut}{\rule[-8pt]{0pt}{28pt}}
+\begin{document}
+
+\packethead{Lesson 3-4}{Dividing Polynomials}
+\goals{I can divide a polynomial by a linear binomial with synthetic division and use the remainder to tell whether the binomial is a factor.}{I can explain whether a binomial is a factor of a polynomial using the words divisor, quotient, remainder and factor.}
+
+\quiztarget{You will (1) divide by $x+3$ with long division (full Savvas quiz only), (2) finish a synthetic division by $x-2$ and read the quotient, (3) find the remainder for $x+2$ two ways and see they match (bonus), (4) find a remainder when a term is missing (full Savvas quiz only), and (5) use a remainder of $0$ to write $P(x)$ as a product of two factors.}
+
+\wspart{Example 2}{Use Synthetic Division to Divide by $x-a$}
+What is $(2x^3-7x^2-4)$ divided by $(x-3)$? Use synthetic division.
+
+\textbf{The idea:} \textbf{synthetic division} divides a polynomial by a linear expression $x-a$ (leading coefficient 1). You write only $a$, the \textbf{zero of the divisor}, and the coefficients of the dividend.
+
+\begin{minipage}[t]{0.52\textwidth}
+\vspace{0pt}
+\begin{enumerate}[label=\textbf{Step \arabic*.}, leftmargin=4.2em, itemsep=3pt]
+\item The divisor $x-3$ is $0$ when $x=3$, so $a=3$. Write the dividend as $2x^3-7x^2+0x-4$: the coefficients are $2,\,-7,\,0,\,-4$. (Use $0$ for the missing $x$ term.)
+\item Bring down the first coefficient, $2$. Multiply $a$ by it: $3\cdot2=6$. Add to the next coefficient: $-7+6=-1$.
+\item Repeat until every column is done:\\ $3\cdot(-1)=-3$, \ $0+(-3)=-3$;\\ $3\cdot(-3)=-9$, \ $-4+(-9)=-13$.
+\item Read the last row: $2,\,-1,\,-3$ are the coefficients of the \textbf{quotient}, one degree lower than the dividend (cubic $\div$ linear = quadratic). The last number, $-13$, is the \textbf{remainder}.
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.44\textwidth}
+\vspace{0pt}
+\small Step 2\par
+\begin{tabular}{A|CCCC}
+3 & 2 & -7 & 0 & -4 \\
+  &   & 6  &   &    \\ \cline{2-5}
+  & 2 & -1 &   &    \\
+\end{tabular}
+
+\vspace{6pt}
+Steps 3 and 4\par
+\begin{tabular}{A|CCCC}
+3 & 2 & -7 & 0  & -4 \\
+  &   & 6  & -3 & -9 \\ \cline{2-5}
+  & 2 & -1 & -3 & \multicolumn{1}{|c}{$\boldsymbol{-13}$} \\[-6pt]
+  & \multicolumn{3}{c}{\scriptsize$\underbrace{\hspace{3.1cm}}_{\text{quotient coefficients}}$} & \multicolumn{1}{c}{\scriptsize remainder} \\
+\end{tabular}
+\end{minipage}
+
+\vspace{4pt}
+\textbf{Answer:} $\dfrac{2x^3-7x^2-4}{x-3}=2x^2-x-3-\dfrac{13}{x-3}$, \ so \ $2x^3-7x^2-4=(2x^2-x-3)(x-3)-13$.
+
+\textbf{Check} (quotient $\times$ divisor $+$ remainder): $(2x^2-x-3)(x-3)=2x^3-7x^2+9$; \ $9-13=-4$. \checkmark
+
+{\small Synthetic division works only when the divisor is $x-a$; for $x^2+5$ or $2x+3$, use long division.}
+
+\textbf{Say it:} To divide by $x-3$ I use $a=\blank[1cm]$. The last row gives the \blank[2.2cm] $2x^2-x-3$ and the \blank[2.2cm] $-13$. The \blank[2cm] $x-3$ is not a factor, because \dots
+\lines[2]
+
+\newpage
+\wspart{Try It 2}{Use synthetic division}
+Use synthetic division to divide $(3x^3-5x+10)$ by $(x-1)$.
+
+\begin{minipage}[t]{0.50\textwidth}
+\vspace{0pt}
+$a=\blank[1.2cm]$ \qquad Is a term missing? \blank[1.6cm]
+
+Coefficients: \blank[4.6cm]
+
+\vspace{8pt}
+\begin{tabular}{A|CCCC}
+\sdstrut\phantom{-1} & & & & \\
+\sdstrut & & & & \\ \cline{2-5}
+\sdstrut & & & & \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\textwidth}
+\vspace{0pt}
+Quotient: \blank[4.2cm]
+
+\vspace{6pt}
+Remainder: \blank[3.8cm]
+
+\vspace{6pt}
+$\dfrac{3x^3-5x+10}{x-1}=$ \blank[3.4cm]
+
+\vspace{6pt}
+Check: quotient $\times$ divisor $+$ remainder:
+\lines[2]
+\end{minipage}
+
+\vspace{4pt}
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+\textbf{Remainder Theorem and Factor Theorem}\\[2pt]
+The \textbf{Remainder Theorem} states that if a polynomial $P(x)$ is divided by $x-a$, the remainder is $P(a)$.\\[2pt]
+The \textbf{Factor Theorem} states that the expression $x-a$ is a factor of a polynomial $P(x)$ if and only if $P(a)=0$.\\[2pt]
+{\small Why: dividing gives $P(x)=Q(x)(x-a)+r$. Put in $x=a$: $P(a)=Q(a)\cdot 0+r=r$. So the remainder is $0$ exactly when $P(a)=0$.}}}
+
+\wspart{Example 5}{Check Whether $x-a$ Is a Factor of $P(x)$}
+How can you use the Factor Theorem to determine whether the given binomial is a factor of $P(x)$? If it is a factor, write the polynomial in factored form.
+
+\textbf{A.} $P(x)=x^4-8x^3+16x^2-23x-6$; binomial: $x-6$. \quad The binomial $x-6$ is a factor of $P(x)$ if $6$ is a zero of $P(x)$.
+
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+\textbf{Method 1} Synthetic substitution ($a=6$).\par
+\begin{tabular}{A|CCCCC}
+6 & 1 & -8 & 16  & -23 & -6 \\
+  &   & 6  & -12 & 24  & 6  \\ \cline{2-6}
+  & 1 & -2 & 4   & 1   & \multicolumn{1}{|c}{$\boldsymbol{0}$} \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+\textbf{Method 2} Direct substitution.\par
+$P(6)=6^4-8(6^3)+16(6^2)-23(6)-6$\\
+$\phantom{P(6)}=1{,}296-1{,}728+576-138-6$\\
+$\phantom{P(6)}=0$
+\end{minipage}
+
+\vspace{4pt}
+Because $P(6)=0$, the Factor Theorem says $x-6$ \textbf{is} a factor. The last row gives the other factor:\\
+\hspace*{2em}$P(x)=(x^3-2x^2+4x+1)(x-6)$.
+
+\newpage
+\textbf{B.} $P(x)=x^5-5x^3+9x^2-x+3$; binomial: $x+3$. \quad Write $x+3=x-(-3)$, so $a=-3$. There is no $x^4$ term: use $0$.
+
+\begin{minipage}[t]{0.50\textwidth}
+\vspace{0pt}
+\textbf{Method 1} Synthetic substitution ($a=-3$).\par
+\setlength{\tabcolsep}{4pt}%
+\begin{tabular}{A|CCCCCC}
+-3 & 1 & 0  & -5 & 9   & -1 & 3   \\
+   &   & -3 & 9  & -12 & 9  & -24 \\ \cline{2-7}
+   & 1 & -3 & 4  & -3  & 8  & \multicolumn{1}{|c}{$\boldsymbol{-21}$} \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\textwidth}
+\vspace{0pt}
+\textbf{Method 2} Direct substitution.\par
+$P(-3)=(-3)^5-5(-3)^3+9(-3)^2-(-3)+3$\\
+$\phantom{P(-3)}=-243+135+81+3+3$\\
+$\phantom{P(-3)}=-21$
+\end{minipage}
+
+\vspace{4pt}
+Because $P(-3)=-21\neq0$, $-3$ is not a zero of $P(x)$, so $x+3$ is \textbf{not} a factor of $P(x)$. Both methods give the same number, $-21$: that is the Remainder Theorem.
+
+\textbf{Say it:} $x-6$ is a \blank[2cm] of $P(x)$ because the \blank[2.2cm] is $0$. $x+3$ is not a factor because $P(\blank[1cm])=\blank[1cm]$, and \dots
+\lines[2]
+
+\wspart{Try It 5}{Is the binomial a factor?}
+Use the Factor Theorem to determine whether the given binomial is a factor of $P(x)$.
+
+\begin{minipage}[t]{0.47\textwidth}
+\vspace{0pt}
+\textbf{a.} $P(x)=x^3-10x^2+28x-16$;\\ binomial: $x-4$
+
+$a=\blank[1.2cm]$
+
+\begin{tabular}{A|CCCC}
+\sdstrut\phantom{-1} & & & & \\
+\sdstrut & & & & \\ \cline{2-5}
+\sdstrut & & & & \\
+\end{tabular}
+
+\vspace{4pt}
+Remainder: \blank[1.4cm] \quad Factor? \blank[1.4cm]
+
+If it is a factor, $P(x)=$
+\lines[1]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\vspace{0pt}
+\textbf{b.} $P(x)=2x^4+9x^3-2x^2+6x-40$;\\ binomial: $x+5$
+
+$a=\blank[1.2cm]$
+
+\begin{tabular}{A|CCCCC}
+\sdstrut\phantom{-1} & & & & & \\
+\sdstrut & & & & & \\ \cline{2-6}
+\sdstrut & & & & & \\
+\end{tabular}
+
+\vspace{4pt}
+Remainder: \blank[1.4cm] \quad Factor? \blank[1.4cm]
+
+Check one answer with direct substitution, $P(a)$:
+\lines[1]
+\end{minipage}
+
+Explain your answer to part b. Use the words \emph{remainder} and \emph{factor}.\lines[2]
+
+\newpage
+\wspart{IXL}{Practice for the quiz}
+Go to IXL, Algebra 2. Type the code in the search box. Do the starred skills first.
+\textbf{SmartScore 70 or above on each starred ($\bigstar$) skill replaces your quiz score.}
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y Y}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{D6D $\bigstar$}{Divide polynomials using synthetic division}{Quiz 2: Example 2 (also Quiz 1, full Savvas quiz only, with $a=-3$)}
+\ixlrow{CHC $\bigstar$}{Evaluate polynomials using synthetic division}{Quiz 3 (bonus): remainder $=P(a)$, Example 5; Quiz 4 (full Savvas quiz only)}
+\ixlrow{VXE $\bigstar$}{Factor theorem}{Quiz 5: remainder $0$ means a factor, Example 5}
+\ixlrow{8GN}{Multiply polynomials}{Warm-up: check a division (quotient $\times$ divisor $+$ remainder)}
+\ixlrow{NCY}{Factor a polynomial given a root}{Optional: the Exit question; Lesson 3-5}
+\bottomrule
+\end{tabularx}
+
+% DOK 3 (spec R3): Practice & Problem Solving 34 (Reason, DOK 3, Example 2), verbatim from the TE.
+\wspart{Exit question}{The DVD stand (DOK 3)}
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+Dajuan wants to determine the length and height of his DVD stand. The function \mbox{$f(x)=x^3+14x^2+57x+72$} represents the volume of the DVD stand, where the width is $x+3$ units. What are possible dimensions for the length and height of the DVD stand? Explain.
+
+\vspace{4pt}
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+$a=\blank[1.2cm]$\par
+\begin{tabular}{A|CCCC}
+\sdstrut\phantom{-1} & & & & \\
+\sdstrut & & & & \\ \cline{2-5}
+\sdstrut & & & & \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+Quotient: \blank[4cm]
+
+\vspace{6pt}
+Factor the quotient: \blank[3.4cm]
+
+\vspace{6pt}
+Length and height: \blank[1.8cm] and \blank[1.8cm]
+\end{minipage}
+
+\vspace{4pt}
+Explain: $x+3$ is a \blank[1.8cm] of $f(x)$ because the \blank[2cm] is \blank[1cm], so \dots
+\lines[2]\vspace{4pt}}}
+
+\vspace{6pt}
+\textbf{Before the quiz, finish these sentences.}
+
+To divide by $x+2$ with synthetic division, I use $a=\blank[1.2cm]$, because $x+2=x-(\blank[1cm])$.
+
+If a term is missing from the dividend, I write \blank[1.2cm] as its coefficient.
+
+When $P(x)$ is divided by $x-a$, the \blank[2.4cm] equals $P(a)$.
+
+The binomial $x-a$ is a \blank[2cm] of $P(x)$ exactly when the remainder is \blank[1.2cm].
+
+\end{document}

@@ -1,0 +1,227 @@
+% Algebra 2 Lesson 7-3 fast-track packet: Graphing Sine and Cosine Functions (enVision A2, Example 3 and Example 6 only)
+% Ground truth: a2_7-3_TE.tex (2024 Teacher Edition transcription). Quiz items taught: 1 (Example 3), 3 (Example 6), 4 (Example 3B + the DOK 3 Practice 23).
+\input{fast-packet-template}
+% radian ticks: multiples of pi with labels, pi/4 or pi/2 minor grid
+\pgfplotsset{trigx/.style={
+  xtick={-12.566,-9.4248,-6.2832,-3.1416,3.1416,6.2832,9.4248,12.566},
+  xticklabels={$-4\pi$,$-3\pi$,$-2\pi$,$-\pi$,$\pi$,$2\pi$,$3\pi$,$4\pi$},
+  minor grid style={gray!30}}}
+\begin{document}
+\relpenalty=10000 \binoppenalty=10000 % keep each inline formula on one line
+
+\packethead{Lesson 7-3}{Graphing Sine and Cosine Functions}
+\goals{I can find the amplitude and period of a sine or cosine function from its equation or its graph, and use them to compare two periodic functions.}{I can explain how two periodic functions compare using the words \emph{amplitude}, \emph{period}, \emph{midline}, and \emph{frequency}.}
+
+\quiztarget{(1) True amplitude and period statements: Example 3. (2) Rate of change (full Savvas quiz only). (3) An equation against a graph: Example 6. (4) Reflect $f(x)=5\cos(2x)$ over the $x$-axis: Example 3B, Practice. (5) Tide amplitude (full Savvas quiz only).}
+
+\wspart{Example 3}{Identify Amplitude and Period}
+% Rule from the TE Reteach box (a != 0, b > 0: period 2pi/b); written with |b| so it stays true for sin(-2x) in Practice 23.
+For $y=a\sin bx$ or $y=a\cos bx$ ($a\neq0$, $b\neq0$): the \textbf{amplitude} is $|a|$ (the distance from the \textbf{midline} to a maximum or minimum) and the \textbf{period} is $\frac{2\pi}{|b|}$ (the length of one cycle).
+
+\begin{minipage}[t]{0.47\textwidth}\raggedright
+\textbf{A.} What are the amplitude and period of $f(x)=3\cos x$?
+\begin{enumerate}[label=\arabic*.]
+\item Graph $f(x)=3\cos x$ and the parent $y=\cos x$.
+\item Midline $y=0$. Maximum values 3, minimum values $-3$: 3 times those of $\cos x$.
+\item The amplitude of $f(x)=3\cos x$ is 3, and the period is $2\pi$.
+\end{enumerate}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, trigx, xmin=-11.2, xmax=11.2, ymin=-5.5, ymax=5.5,
+  xtick={-9.4248,-6.2832,-3.1416,3.1416,6.2832,9.4248},
+  xticklabels={{},$-2\pi$,{},{},$2\pi$,{}},
+  minor xtick={-10.9956,-9.4248,...,11}, ytick={-4,-2,2,4}, minor ytick={-5,...,5},
+  x=0.33cm, y=0.26cm, ticklabel style={font=\tiny, fill=white, inner sep=0.5pt}, set layers, axis on top, grid style={gray!45, /pgfplots/on layer=axis background}, minor grid style={gray!30, /pgfplots/on layer=axis background},
+  title={\scriptsize\textcolor{red}{$f(x)=3\cos x$} \quad \textcolor{blue}{$y=\cos x$}}, title style={yshift=-4pt}]
+\addplot[very thick, blue, domain=-10.9:10.9, samples=200, <->] {cos(deg(x))};
+\addplot[very thick, red, domain=-10.9:10.9, samples=200, <->] {3*cos(deg(x))};
+\addplot[thick, dashed, red] coordinates {(6.2832,0) (6.2832,3)};
+\addplot[thick, dashed, red] coordinates {(-6.2832,3) (0,3)};
+\addplot[thick, dashed, blue] coordinates {(-6.2832,1) (0,1)};
+\node[font=\tiny, red, fill=white, inner sep=0.5pt, anchor=west] at (axis cs:6.6,1.5) {3};
+\node[font=\tiny, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+% odd multiples of pi: labels above the axis so they do not sit on the minima of either curve
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=south, yshift=1pt] at (axis cs:-9.4248,0) {$-3\pi$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=south, yshift=1pt] at (axis cs:-3.1416,0) {$-\pi$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=south, yshift=1pt] at (axis cs:3.1416,0) {$\pi$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=south, yshift=1pt] at (axis cs:9.4248,0) {$3\pi$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\vspace{-6pt}\textbf{Amplitude 3, period $2\pi$.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.50\textwidth}\raggedright
+\textbf{B.} What are the amplitude and period of $y=-\sin 2x$?
+\begin{enumerate}[label=\arabic*.]
+\item $y=-f(x)$ is a \textbf{reflection} of the parent $y=\sin x$ over the $x$-axis.
+\item $y=f(2x)$ is a horizontal compression by a factor of $\frac12$.
+\item Neither one changes the amplitude: $|-1|=1$.
+\item Period compressed by $\frac12$: $\frac12(2\pi)=\pi$.
+\item Check with a graph:
+\end{enumerate}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, trigx, xmin=-8.2, xmax=8.2, ymin=-1.35, ymax=1.35,
+  xtick={-6.2832,-3.1416,3.1416,6.2832}, xticklabels={$-2\pi$,$-\pi$,$\pi$,$2\pi$},
+  minor xtick={-7.854,-6.2832,...,8}, ytick={-1,1}, yticklabels={$-1$,{}}, minor ytick={-1.25,-1,...,1.3},
+  x=0.45cm, y=0.72cm, ticklabel style={font=\tiny, fill=white, inner sep=0.5pt}, xticklabel style={anchor=north east}, set layers, axis on top, grid style={gray!45, /pgfplots/on layer=axis background}, minor grid style={gray!30, /pgfplots/on layer=axis background},
+  title={\scriptsize\textcolor{red}{$y=-\sin 2x$}}, title style={yshift=-4pt}]
+\addplot[very thick, red, domain=-7.7:7.7, samples=240, <->] {-sin(deg(2*x))};
+\addplot[very thick, green!60!black] coordinates {(-3.927,0) (-3.927,1)};
+\node[font=\tiny, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\vspace{-6pt}Repeats every $\pi$. \textbf{Amplitude 1, period $\pi$.}
+\end{minipage}
+
+\textbf{Say it:} The amplitude of $y=-\sin 2x$ is \blank[1.2cm] because the midline is \blank[1.5cm] and a maximum is \blank[1.2cm] above it. The period is \blank[1.2cm] because \lines[1]
+
+\wspart{Try It 3}{What are the amplitude and period of each function?}
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{a.} $y=\frac13\cos\frac12 x$\lines[1]
+amplitude: \blank[1.8cm] \quad period: \blank[1.8cm]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{b.} $y=2\sin\pi x$\lines[1]
+amplitude: \blank[1.8cm] \quad period: \blank[1.8cm]
+\end{minipage}
+
+\newpage
+
+\wspart{Example 6}{Compare Key Features of Two Periodic Functions}
+The equation for $f$ and the graph of $g$ are given below. How do the period and amplitude of the functions compare?
+
+\begin{minipage}[t]{0.42\textwidth}
+\vspace{0pt}
+\centerline{$f(x)=4\cos\!\left(\frac{\pi}{4}x\right)$}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-1.5, xmax=13.5, ymin=-5.5, ymax=6.5,
+  xtick={2,4,...,12}, ytick={-4,-2,2,4}, xticklabels={{},{},{},{},{},{}}, yticklabels={{},{},{},{}}, minor xtick={-1,...,13}, minor ytick={-5,...,6},
+  minor grid style={gray!30}, x=0.45cm, y=0.4cm,
+  ticklabel style={font=\tiny, fill=white, inner sep=0.5pt}, set layers, axis on top, grid style={gray!45, /pgfplots/on layer=axis background}, minor grid style={gray!30, /pgfplots/on layer=axis background}]
+\addplot[very thick, red, domain=-1.2:13.2, samples=200, <->] {-4*sin(deg(pi*x/2))};
+\node[closed, red] at (axis cs:3,4) {};
+\node[closed, red] at (axis cs:7,4) {};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=south] at (axis cs:3,4.35) {$(3,4)$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=south] at (axis cs:7,4.35) {$(7,4)$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:10.3,5.6) {$g$};
+\node[font=\tiny, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=north west] at (axis cs:2,0) {$2$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=north west] at (axis cs:6,0) {$6$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=north west] at (axis cs:10,0) {$10$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=north east] at (axis cs:4,0) {$4$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=north east] at (axis cs:8,0) {$8$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=north east] at (axis cs:12,0) {$12$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=west, xshift=1pt] at (axis cs:0,2) {$2$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=west, xshift=1pt] at (axis cs:0,4) {$4$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=east, xshift=-1pt] at (axis cs:0,-2) {$-2$};
+\node[font=\tiny, fill=white, inner sep=0.5pt, anchor=east, xshift=-1pt] at (axis cs:0,-4) {$-4$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.56\textwidth}
+\vspace{0pt}
+\small
+\begin{tabular}{|p{0.44\linewidth}|p{0.44\linewidth}|}
+\hline
+\textbf{$f$: from the equation} & \textbf{$g$: from the graph} \\ \hline
+Period: divide the parent period by the parameter $\frac{\pi}{4}$: & Period: measure from one maximum to the next: \\
+$\dfrac{2\pi}{\pi/4}=2\pi\cdot\dfrac{4}{\pi}=8$ & $7-3=4$ \\ \hline
+Amplitude: multiply the parent amplitude by the parameter 4: & Amplitude: the midline is $y=0$, so the distance to a maximum is \\
+$1(4)=4$ & $4-0=4$ \\ \hline
+\end{tabular}
+
+\normalsize
+\vspace{4pt}
+\textbf{Compare:} the two functions have the \textbf{same amplitude}, 4, but the \textbf{period of $f$} (8) is \textbf{twice as long} as the period of $g$ (4).
+
+\vspace{2pt}
+{\small Study tip: use the two maximum points (or two minimum points) closest to each other to find the period.}
+\end{minipage}
+
+\textbf{Say it:} The two functions have the same \blank[2.2cm], but the \blank[2.2cm] of $f$ is \blank[2.2cm] as long as the \blank[2.2cm] of $g$, because \lines[2]
+
+\wspart{Try It 6}{Use $f$ and $g$ from Example 6}
+\textbf{a.} How do the frequencies of $f$ and $g$ compare?
+
+{\small Hint: frequency is the reciprocal of the period.}
+
+frequency of $f$: \blank[2.5cm] \qquad frequency of $g$: \blank[2.5cm]\lines[2]
+
+\textbf{b.} What else is different about the two functions? Explain.\lines[3]
+
+\newpage
+
+% R3 DOK 3: Practice & Problem Solving 23 (Example 6, Performance Task), verbatim. It rehearses quiz item 4 (reflection over the x-axis).
+\wspart{Practice}{DOK 3, Performance Task (Practice 23)}
+Dominga is investigating how the signs of the parameters $a$ and $b$ create transformations of the sine function.
+
+\begin{minipage}[t]{0.49\textwidth}\raggedright
+\textbf{Part A} Graph $f(x)=\sin 2x$ and $g(x)=-\sin(2x)$ on the same coordinate plane.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, trigx, xmin=-6.6, xmax=6.6, ymin=-1.35, ymax=1.35,
+  xtick={-6.2832,-3.1416,3.1416,6.2832}, xticklabels={$-2\pi$,$-\pi$,$\pi$,$2\pi$},
+  minor xtick={-6.2832,-5.4978,...,6.3}, ytick={-1,-0.5,0.5,1}, minor ytick={-1.25,-1,...,1.3},
+  x=0.6cm, y=2.3cm, ticklabel style={font=\tiny, fill=white, inner sep=0.5pt}]
+\node[font=\tiny, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\textbf{Part B} How are the graphs of $f(x)=\sin(2x)$ and $g(x)=-\sin(2x)$ related?\lines[2]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\raggedright
+\textbf{Part C} Graph $f(x)=\sin(2x)$ and $h(x)=\sin(-2x)$ on the same coordinate plane.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, trigx, xmin=-6.6, xmax=6.6, ymin=-1.35, ymax=1.35,
+  xtick={-6.2832,-3.1416,3.1416,6.2832}, xticklabels={$-2\pi$,$-\pi$,$\pi$,$2\pi$},
+  minor xtick={-6.2832,-5.4978,...,6.3}, ytick={-1,-0.5,0.5,1}, minor ytick={-1.25,-1,...,1.3},
+  x=0.6cm, y=2.3cm, ticklabel style={font=\tiny, fill=white, inner sep=0.5pt}]
+\node[font=\tiny, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\textbf{Part D} How are the graphs of $f(x)=\sin 2x$ and $h(x)=\sin(-2x)$ related?\lines[2]
+\end{minipage}
+
+\vspace{2pt}
+{\small Hint: for Parts A and C, one period is $\frac{2\pi}{2}=\pi$. Divide it into fourths and plot a zero, a maximum or minimum, a zero, the other one, and a zero.}
+
+\textbf{Part E} How is the graph of $y=a\sin(bx)$ affected when $a$ or $b$ is replaced with its opposite? Explain.\lines[5]
+
+\newpage
+\wspart{IXL}{Practice for the quiz}
+Do the starred skills first. \textbf{SmartScore 70 or above on each starred ($\bigstar$) skill replaces your quiz score.}
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y Y}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{6H8}{Evaluate trigonometric ratios using reference angles: sin, cos, tan}{Warm-up: the sine and cosine values the graphs are built from (Lesson 7-2)}
+\ixlrow{EDC}{Convert between radians and degrees}{Warm-up: radian periods such as $2\pi$, $\pi$, $4\pi$ (Lesson 7-1)}
+\ixlrow{9S8 $\bigstar$}{Find properties of sine and cosine functions}{Quiz 1 and 3: amplitude $|a|$ and period $2\pi/|b|$ from the equation (Example 3)}
+\ixlrow{5XN $\bigstar$}{Write equations of sine and cosine functions from graphs}{Quiz 3: amplitude and period read off a graph (Example 6); Quiz 4 bonus: a negative $a$ reflects over the $x$-axis}
+\ixlrow{A7V}{Graph sine and cosine functions}{Optional: Practice Parts A and C; feeds no scored quiz item}
+\bottomrule
+\end{tabularx}
+
+\vspace{8pt}
+\textbf{Before the quiz, finish these sentences.} {\small (Spanish: amplitude = \emph{amplitud}, period = \emph{período}, midline = \emph{línea media}, frequency = \emph{frecuencia}, periodic function = \emph{función periódica}.)}
+
+The \blank[2.5cm] is the distance from the midline to a maximum or a minimum, so the amplitude of $y=a\cos bx$ is \blank[2cm].
+
+The \blank[2.5cm] is the length of one cycle, so the period of $y=a\sin bx$ is \blank[2cm].
+
+The \blank[2.2cm] is the reciprocal of the period, so a function with period 4 has frequency \blank[1.8cm].
+
+Changing $a$ to $-a$ does not change the amplitude; it \blank[6cm].
+
+\vspace{6pt}
+\textbf{Exit:} Compare $f(x)=3\cos x$ and $y=-\sin 2x$ from Example 3. The \blank[2.2cm] of $f$ is \blank[1.4cm] times as great, and the \blank[2.2cm] of $f$ is \blank[2.2cm] as long, because \lines[2]
+
+\end{document}

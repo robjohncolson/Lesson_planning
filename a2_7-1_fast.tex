@@ -1,0 +1,338 @@
+% Algebra 2 Lesson 7-1 fast-track packet: Angles and the Unit Circle (enVision A2, Example 1 and Example 3 only)
+% Ground truth: a2_7-1_TE.tex (2024 TE printed pages 345A-353B). Quiz items 1, 3, 4 come from Examples 1 and 3.
+\input{fast-packet-template}
+\usetikzlibrary{arrows.meta}
+% Angle sketches are pgfplots axes. The TE draws them with arrowed axes and no ticks, except Example 1C (unit ticks, -4 and 4 labeled).
+\pgfplotsset{angleaxes/.style={axis lines=middle, axis line style={thick, {Stealth}-{Stealth}},
+  xmin=-1.3, xmax=1.3, ymin=-1.3, ymax=1.3, xtick=\empty, ytick=\empty,
+  x=#1, y=#1, clip=false}, angleaxes/.default=1cm}
+% point at (angle, radius) inside an axis
+\newcommand{\polar}[2]{(axis cs:{(#2)*cos(#1)},{(#2)*sin(#1)})}
+% axis names at the positive ends: \axlabels{xmax}{ymax}
+\newcommand{\axlabels}[2]{\node[right, font=\scriptsize, inner sep=1pt] at (axis cs:#1,0) {$x$};\node[above, font=\scriptsize, inner sep=1pt] at (axis cs:0,#2) {$y$};}
+% ray from O: \ray[style]{angle}{length}
+\newcommand{\ray}[3][]{\draw[very thick, #1] (axis cs:0,0) -- \polar{#2}{#3};}
+% circular arc: \angarc[style]{radius}{from angle}{to angle}
+\newcommand{\angarc}[4][]{\addplot[#1, domain=0:1, samples=60, smooth, variable=\t] ({(#2)*cos(#3+(#4-(#3))*\t)},{(#2)*sin(#3+(#4-(#3))*\t)});}
+% rotation arc that widens with each turn: \spiral[style]{angle}{start radius}{growth per turn}
+\newcommand{\spiral}[4][]{\addplot[red, -{Stealth}, domain=0:1, samples=120, smooth, variable=\t, #1] ({(#3+(#4)*abs((#2)*\t)/360)*cos((#2)*\t)},{(#3+(#4)*abs((#2)*\t)/360)*sin((#2)*\t)});}
+% TE FIG 14/15 labels: O and the cardinal degrees 0, 90, 180, 270 (window +-1.3)
+\newcommand{\cardinals}{%
+\node[font=\tiny, anchor=south, inner sep=1pt, yshift=1pt] at (axis cs:1.05,0) {$0^\circ$};
+\node[font=\tiny, anchor=north east, inner sep=1pt] at (axis cs:0,1.3) {$90^\circ$};
+\node[font=\tiny, anchor=south, inner sep=1pt, yshift=1pt] at (axis cs:-1.02,0) {$180^\circ$};
+\node[font=\tiny, anchor=south west, inner sep=1pt] at (axis cs:0,-1.3) {$270^\circ$};}
+% angle in standard position: \stdang[unit]{angle}{arc label}{label angle}{label radius}{extra}
+% O goes below left of the vertex, or below right when the rotation arc ends in Quadrant III
+\newcommand{\stdang}[6][1cm]{%
+\ifnum#2>179 \ifnum#2<270 \def\oanchor{north west}\else\def\oanchor{north east}\fi\else\def\oanchor{north east}\fi
+\begin{tikzpicture}
+\begin{axis}[angleaxes=#1]
+\axlabels{1.3}{1.3}
+\ray[blue]{0}{1.15}
+\ray[red, -{Stealth}]{#2}{1.15}
+\spiral{#2}{0.33}{0.15}
+\cardinals
+\node[font=\tiny, anchor=\oanchor, inner sep=0.3pt] at (axis cs:0,0) {$O$};
+\node[font=\scriptsize, red, fill=white, inner sep=0.6pt] at \polar{#4}{#5} {#3};
+#6
+\end{axis}
+\end{tikzpicture}}
+% Example 1C (TE FIG 15 797 468): unit ticks, -4 and 4 labeled on both axes, origin O.
+% The TE notes its printed terminal ray looks like 135 degrees; it is drawn here at the labeled 120 degrees.
+% \cotermfig{angle}{arc label}{label angle}{label radius}
+\newcommand{\cotermfig}[4]{%
+\begin{tikzpicture}
+\begin{axis}[unitgrid, xlabel={}, ylabel={}, axis line style={thick, {Stealth}-{Stealth}},
+  xmin=-4.5, xmax=4.5, ymin=-4.5, ymax=4.5, x=0.5cm, y=0.5cm,
+  xtick={-4,...,4}, ytick={-4,...,4},
+  xticklabels={$-4$,,,,,,,,$4$}, yticklabels={$-4$,,,,,,,,$4$},
+  ticklabel style={font=\tiny, fill=white, inner sep=0.5pt}, clip=false]
+\axlabels{4.5}{4.5}
+\node[font=\tiny, anchor=north east, inner sep=1pt, fill=white] at (axis cs:0,0) {$O$};
+\ray[red]{0}{4.2}
+\ray[red, -{Stealth}]{120}{4.2}
+\spiral{#1}{0.8}{0.55}
+\node[font=\scriptsize, red, fill=white, inner sep=0.8pt] at \polar{#3}{#4} {#2};
+\end{axis}
+\end{tikzpicture}}
+\begin{document}
+
+\packethead{Lesson 7-1}{Angles and the Unit Circle}
+\goals{I can find a positive, a negative, and a greater-than-$360^\circ$ measure for an angle in standard position, and convert between degrees and radians.}{I can explain where an angle ends using the words \emph{initial side}, \emph{terminal side}, \emph{quadrant}, \emph{coterminal}, and \emph{radian}.}
+
+\quiztarget{(1) You will pick every measure, in degrees or radians, that names one drawn angle (Examples 1 and 3). (2) You will pick the positive and negative measures of an angle from its reference angle and quadrant (Example 1; full Savvas quiz only). (3) You will find the angle in standard position from how far its terminal side is from the $x$-axis and its quadrant (Example 1). (4) You will convert radians to degrees (Example 3). (5) Arc length on a circle (Example 4, not in this packet; full Savvas quiz only).}
+
+\wspart{Example 1}{Explore Angles in the Coordinate Plane}
+\begin{minipage}[t]{0.66\textwidth}
+\textbf{A.} How can you express angle measures in the coordinate plane?
+
+An angle is in \textbf{standard position} when its vertex is at the origin and its \textbf{initial side} is the positive $x$-axis. The \textbf{terminal side} is the other ray that forms the angle. An angle $\theta$ is measured \textbf{counterclockwise} from its initial side to its terminal side. The terminal side tells you the \textbf{quadrant}:
+
+\small
+\begin{tabular}{@{}ll@{\qquad}ll@{}}
+$0^\circ<\theta<90^\circ$ & Quadrant I & $180^\circ<\theta<270^\circ$ & Quadrant III\\
+$90^\circ<\theta<180^\circ$ & Quadrant II & $270^\circ<\theta<360^\circ$ & Quadrant IV
+\end{tabular}
+\normalsize
+\end{minipage}\hfill
+\begin{minipage}[t]{0.31\textwidth}
+\vspace{2pt}\centering
+\begin{tikzpicture}
+\begin{axis}[angleaxes=1.15cm, ymin=-0.55]
+\axlabels{1.3}{1.3}
+\ray[blue]{0}{1.15}
+\ray[red, -{Stealth}]{130}{1.15}
+\angarc[red, -{Stealth}]{0.3}{0}{130}
+\node[font=\scriptsize, red] at \polar{65}{0.48} {$\theta$};
+\node[font=\scriptsize, blue, below, inner sep=2pt] at (axis cs:0.7,0) {initial side};
+\node[font=\scriptsize, red, anchor=south east, inner sep=1pt] at \polar{130}{1.15} {terminal side};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{2pt}
+How far is each terminal side from the $x$-axis? The quiz calls the smallest angle between the terminal side and the $x$-axis the \textbf{reference angle}.
+
+\noindent
+\begin{minipage}[t]{0.24\textwidth}\centering
+\stdang{65}{$65^\circ$}{28}{0.85}{}\\[-2pt]
+{\small $65^\circ$: Quadrant I\\ $65^\circ$ above the $+x$-axis}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\textwidth}\centering
+\stdang{140}{$140^\circ$}{38}{0.82}{}\\[-2pt]
+{\small $140^\circ$: Quadrant II\\ $180^\circ-40^\circ$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\textwidth}\centering
+\stdang{200}{$200^\circ$}{42}{0.85}{}\\[-2pt]
+{\small $200^\circ$: Quadrant III\\ $180^\circ+20^\circ$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\textwidth}\centering
+\stdang{330}{$330^\circ$}{135}{0.75}{}\\[-2pt]
+{\small $330^\circ$: Quadrant IV\\ $360^\circ-30^\circ$}
+\end{minipage}
+
+\vspace{4pt}
+\begin{minipage}[t]{0.5\textwidth}
+\textbf{B.} Sketch a $210^\circ$ angle and a $315^\circ$ angle.
+\begin{itemize}
+\item $210^\circ=180^\circ+30^\circ$. The terminal side is $30^\circ$ beyond the negative $x$-axis, in Quadrant III.
+\item $315^\circ=360^\circ-45^\circ$. It is a full revolution minus $45^\circ$, in Quadrant IV.
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.23\textwidth}\centering\vspace{0pt}
+\stdang{210}{$210^\circ$}{45}{0.8}{\angarc[thick]{0.8}{180}{210}\node[font=\scriptsize, fill=white, inner sep=0.4pt] at \polar{196}{1.12} {$30^\circ$};}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.23\textwidth}\centering\vspace{0pt}
+\stdang{315}{$315^\circ$}{135}{0.75}{\angarc[thick]{0.8}{315}{360}\node[font=\scriptsize, fill=white, inner sep=0.4pt] at \polar{337}{1.12} {$45^\circ$};}
+\end{minipage}
+
+\newpage
+\textbf{C.} How can you represent negative angle measures and angles with measures greater than $360^\circ$?
+
+\begin{minipage}[t]{0.52\textwidth}
+\small
+\begin{tabular}[t]{@{}l@{}}
+\textbf{Positive:} $0^\circ\le\theta<360^\circ$\\
+\textbf{Greater than $360^\circ$:} $\theta+360^\circ k$, where $k$ is the\\ \quad number of full rotations\\
+\textbf{Negative:} $-360^\circ\le\theta<0^\circ$, measured \textbf{clockwise}
+\end{tabular}
+\normalsize
+\end{minipage}\hfill
+\begin{minipage}[t]{0.44\textwidth}
+$120^\circ+360^\circ=480^\circ$ (one more turn)\\
+$120^\circ-360^\circ=-240^\circ$ (clockwise)\\[2pt]
+All three share the same terminal side, so they are \textbf{coterminal angles}.
+\end{minipage}
+
+\vspace{2pt}
+\noindent
+\begin{minipage}[t]{0.32\textwidth}\centering
+\cotermfig{120}{$120^\circ$}{55}{1.6}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}\centering
+\cotermfig{480}{$480^\circ$}{-40}{2.1}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}\centering
+\cotermfig{-240}{$-240^\circ$}{-45}{2.1}
+\end{minipage}
+
+\vspace{4pt}
+\textbf{Say it:} The angle $210^\circ$ has its terminal side in Quadrant \blank[1cm], $\blank[1cm]^\circ$ beyond the negative $x$-axis. Two angles that are coterminal with it are $\blank[1.4cm]^\circ$ and $\blank[1.4cm]^\circ$, because \dots\lines[2]
+
+\wspart{Try It 1}{Positive, negative, and greater than $360^\circ$}
+Find a positive angle measure, a negative angle measure, and an angle measure greater than $360^\circ$ for each angle.
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{a.}\par\centering
+\begin{tikzpicture}
+\begin{axis}[angleaxes=1.5cm, xmin=-1.25, ymin=-1.1, ymax=1.2]
+\axlabels{1.3}{1.2}
+\ray[red]{0}{1.1}
+\ray[red, -{Stealth}]{180}{1.1}
+\angarc[red, -{Stealth}]{0.35}{0}{180}
+\end{axis}
+\end{tikzpicture}
+
+\raggedright
+\vspace{4pt}
+Positive: \blank[2.2cm] \quad Negative: \blank[2.2cm]
+
+\vspace{6pt}
+Greater than $360^\circ$: \blank[2.2cm]
+\lines[2]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{b.}\par\centering
+% TE line 205 describes the ray as "25 degrees counterclockwise from the negative y direction"; the TE answer 245 degrees
+% (Quadrant III) puts it 25 degrees clockwise of the negative y-axis, as drawn here.
+\begin{tikzpicture}
+\begin{axis}[angleaxes=1.5cm, xmin=-1.25, ymin=-1.1, ymax=1.2]
+\axlabels{1.3}{1.2}
+\ray[red]{0}{1.1}
+\ray[red, -{Stealth}]{245}{1.1}
+\angarc[red, -{Stealth}]{0.3}{0}{245}
+\angarc[thick]{0.62}{245}{270}
+\node[font=\scriptsize, fill=white, inner sep=0.5pt] at \polar{258}{0.86} {$25^\circ$};
+\end{axis}
+\end{tikzpicture}
+
+\raggedright
+\vspace{4pt}
+Positive: \blank[2.2cm] \quad Negative: \blank[2.2cm]
+
+\vspace{6pt}
+Greater than $360^\circ$: \blank[2.2cm]
+\lines[2]
+\end{minipage}
+
+Hint: Trace each angle with your finger first. A positive measure turns counterclockwise; a negative measure turns clockwise.
+
+\newpage
+
+\wspart{Example 3}{Convert Between Degrees and Radians}
+\begin{minipage}[t]{0.6\textwidth}
+One full rotation, or $360^\circ$, is the same as $2\pi$ \textbf{radians}. Half a rotation, or $180^\circ$, is the same as $\pi$ radians.
+
+\vspace{4pt}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Radians} & $0$ & $\tfrac{\pi}{2}$ & $\pi$ & $\tfrac{3\pi}{2}$ & $2\pi$ \\ \hline
+\textbf{Degrees} & $0$ & $90$ & $180$ & $270$ & $360$ \\ \hline
+\end{tabular}
+
+\vspace{4pt}
+{\small Radians are written without a unit; degrees always get the $^\circ$ sign.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.37\textwidth}
+\vspace{0pt}\centering
+\begin{tikzpicture}
+\begin{axis}[angleaxes=1.3cm, xmin=-1.45, xmax=1.5, ymin=-1.4, ymax=1.45]
+\axlabels{1.5}{1.45}
+\addplot[very thick, red, domain=0:360, samples=120, smooth] ({cos(x)},{sin(x)});
+\draw[red, thick] (axis cs:0,0) -- \polar{40}{1} node[pos=0.5, above left, font=\scriptsize, inner sep=1pt] {$1$};
+\node[closed, red, inner sep=1.3pt] at (axis cs:1,0) {};
+\node[closed, red, inner sep=1.3pt] at (axis cs:0,1) {};
+\node[closed, red, inner sep=1.3pt] at (axis cs:-1,0) {};
+\node[closed, red, inner sep=1.3pt] at (axis cs:0,-1) {};
+\node[closed, inner sep=1.2pt] at (axis cs:0,0) {};
+\node[font=\scriptsize, anchor=south west, inner sep=1pt] at (axis cs:1.05,0.03) {$0^\circ$};
+\node[font=\scriptsize, anchor=south west, inner sep=1pt] at (axis cs:0.07,1.05) {$90^\circ$};
+\node[font=\scriptsize, anchor=south east, inner sep=1pt] at (axis cs:-1.05,0.03) {$180^\circ$};
+\node[font=\scriptsize, anchor=north west, inner sep=1pt] at (axis cs:0.07,-1.05) {$270^\circ$};
+\node[font=\scriptsize, blue, anchor=south east, inner sep=1pt] at (axis cs:-0.07,1.05) {$\frac{\pi}{2}$};
+\node[font=\scriptsize, blue, anchor=north east, inner sep=1pt] at (axis cs:-1.05,-0.03) {$\pi$};
+\node[font=\scriptsize, blue, anchor=north east, inner sep=1pt] at (axis cs:-0.07,-1.05) {$\frac{3\pi}{2}$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{4pt}
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{A.} Convert $\dfrac{5\pi}{4}$ into degrees.
+\begin{enumerate}[label=\arabic*.]
+\item $2\pi$ radians $=360^\circ$, so $\pi$ radians $=180^\circ$.
+\item Divide both sides by $\pi$: $1$ radian $=\tfrac{180^\circ}{\pi}$.
+\item Multiply by $\tfrac{180^\circ}{\pi}$:\\[3pt]
+$\dfrac{5\pi}{4}\cdot\dfrac{180^\circ}{\pi}=\dfrac{5\cdot180^\circ}{4}=225^\circ$
+\end{enumerate}
+\textbf{Answer:} $\tfrac{5\pi}{4}$ radians $=225^\circ$.\\
+{\small Check: $225^\circ$ is between $180^\circ$ and $270^\circ$ (Quadrant III), just as $\tfrac{5\pi}{4}$ is between $\pi$ and $\tfrac{3\pi}{2}$.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{B.} Convert $75^\circ$ into radians.
+\begin{enumerate}[label=\arabic*.]
+\item $\pi$ radians $=180^\circ$.
+\item Divide both sides by $180$: $1^\circ=\tfrac{\pi}{180}$ radians.
+\item Multiply by $\tfrac{\pi}{180^\circ}$:\\[3pt]
+$75^\circ\cdot\dfrac{\pi}{180^\circ}=\dfrac{75\pi}{180}=\dfrac{5\pi}{12}$
+\end{enumerate}
+\textbf{Answer:} $75^\circ=\tfrac{5\pi}{12}$ radians.\\
+{\small Simplify $\tfrac{75}{180}$ by dividing both by 15.}
+\end{minipage}
+
+\vspace{4pt}
+\textbf{Say it:} To change radians to degrees, I multiply by \blank[1.6cm] because $\pi$ radians $=\blank[1.4cm]^\circ$. The angle $\frac{5\pi}{4}$ radians is $\blank[1.4cm]^\circ$, so its terminal side is in Quadrant \blank[1cm].\lines[1]
+
+\wspart{Try It 3}{Convert}
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{a.} Convert $\dfrac{\pi}{4}$ and $1.5$ to degrees. Round to the nearest tenth.
+
+\vspace{4pt}
+$\dfrac{\pi}{4}=\blank[2cm]^\circ$ \qquad $1.5=\blank[2cm]^\circ$
+\lines[4]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{b.} Convert $30^\circ$ and $115^\circ$ to radians.
+
+\vspace{4pt}
+$30^\circ=\blank[2cm]$ \qquad $115^\circ=\blank[2cm]$
+\lines[4]
+\end{minipage}
+
+Hint: $1.5$ has no $\pi$ in it, but it is still a radian measure. Multiply it by $\tfrac{180^\circ}{\pi}$ the same way.
+
+\newpage
+
+\wspart{IXL}{Practice for the quiz}
+Go to IXL, Algebra 2. Type the code in the search box. Do the starred skills first.
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y Y}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{ANN}{Quadrants}{Warm-up before Example 1}
+\ixlrow{7CV $\bigstar$}{Coterminal angles}{Quiz 1 (bonus): positive, negative and greater-than-$360^\circ$ names (Example 1); Quiz 2 (full Savvas quiz only)}
+\ixlrow{BRP $\bigstar$}{Reference angles}{Quiz 3: the angle from its reference angle and quadrant (Example 1); Quiz 2 (full Savvas quiz only)}
+\ixlrow{EDC $\bigstar$}{Convert between radians and degrees}{Quiz 4, and the radian choices in Quiz 1 (Example 3)}
+\ixlrow{UA5}{Radians and arc length}{Optional: Quiz 5, arc length (Example 4, not in this packet; full Savvas quiz only)}
+\bottomrule
+\end{tabularx}
+
+\vspace{4pt}
+\textbf{SmartScore 70 or above on each starred ($\bigstar$) skill replaces your quiz score.}
+
+\wspart{Exit question}{A positive and a negative angle}
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+\textbf{Generalize} What is the relationship between a positive angle and a negative angle that share a common terminal side? Write a formula that relates the two measures.
+
+\vspace{2pt}
+{\small Hint: Try it with Example 1C first: $120^\circ$ and $-240^\circ$.}
+\lines[4]
+}}
+
+\vspace{8pt}
+\textbf{Before the quiz, finish these sentences.}
+
+An angle is in standard position when its vertex is at the \blank[2.4cm] and its initial side is on the \blank[3.6cm].
+
+Coterminal angles share the same \blank[3cm] side. I find one by adding or subtracting \blank[1.4cm]$^\circ$.
+
+A terminal side in Quadrant II that is $40^\circ$ from the negative $x$-axis makes the angle \blank[1.6cm]$^\circ$.
+
+A terminal side in Quadrant IV that is $30^\circ$ from the positive $x$-axis makes the angle \blank[1.6cm]$^\circ$.
+
+To change degrees to radians, I multiply by \blank[2cm]. One full rotation is \blank[1.6cm] radians.
+
+\end{document}

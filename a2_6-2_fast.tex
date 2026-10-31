@@ -1,0 +1,176 @@
+% Algebra 2 Lesson 6-2 fast-track packet: Exponential Models (enVision A2, Example 2 and Example 4 only)
+% Kept for Savvas Lesson Quiz items 3, 4, 5 (compound interest, continuous compounding, comparing options).
+% Cut: Example 1 (monthly rate of a population; quiz item 1), Example 3 (the natural base e; its one fact is
+% stated before Example 4), Example 5 (model from two points; quiz item 2), Example 6 (regression; no quiz item).
+\input{fast-packet-template}
+\begin{document}
+
+\packethead{Lesson 6-2}{Exponential Models}
+\goals{I can write an exponential model for money that earns compound interest or continuously compounded interest, and use it to find the value of the account.}{I can explain why more compounding periods give a larger account value, using the words principal, interest rate, compounding periods, compounded continuously, and natural base e.}
+
+\quiztarget{(Savvas numbers) (1) A town's yearly decrease as a rate per quarter and (2) a point on $y=a\cdot b^x$ from two points: full Savvas quiz only. You will (3) build $A(t)=P\left(1+\frac rn\right)^{nt}$ for an account compounded monthly (Example 2); (4) find the value of an account compounded continuously (Example 4); (5) bonus: compare simple, continuous and yearly interest on \$8{,}000 and say which option is linear and which are exponential (Examples 2 and 4, Practice).}
+
+\wspart{Example 2}{Understand Compound Interest}
+\textbf{Compound interest} is interest earned on interest already deposited. \textbf{Compound interest formula:} $A=P\left(1+\frac rn\right)^{nt}$, where $P=$ the initial \textbf{principal} invested, $r=$ annual \textbf{interest rate} as a decimal, $n=$ number of \textbf{compounding periods} per year, and $A=$ the value of the account after $t$ years.
+
+Tamira invests \$5,000 in an account that pays 4\% annual interest. \textbf{A.} How much will there be in the account after 3 years if the interest is compounded annually, quarterly, or monthly? ($P=5000$, $r=0.04$, $t=3$.)
+
+{\centering\small\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{|l|c|l|r|}
+\hline
+ & $n$ & \textbf{Compound interest formula} & \textbf{After 3 years} \\ \hline
+Annually & 1 & $A=5000\left(1+\frac{0.04}{1}\right)^{3(1)}=5000(1.04)^{3}$ & \$5,624.32 \\
+Quarterly & 4 & $A=5000\left(1+\frac{0.04}{4}\right)^{3(4)}=5000(1.01)^{12}$ & \$5,634.13 \\
+Monthly & 12 & $A=5000\left(1+\frac{0.04}{12}\right)^{3(12)}\approx5000(1.003333)^{36}$ & \$5,636.36 \\ \hline
+\end{tabular}\par}
+As the number of compounding periods increases, the amount in the account also increases: the more often interest is added, the earlier it earns interest of its own.
+
+% TE transcription error corrected: a2_6-2_TE.tex line 256 prints the monthly base as (1+0.003)^{12}; the TE's own note
+% (line 258) says 0.003333..., which gives the printed 1.0407. The packet uses 1.003333 in the monthly rows of both tables.
+\textbf{B.} What is the annual growth rate for each possible account? Use the Power of a Power rule, $\left(b^{n}\right)^{t}=b^{nt}$, to rewrite each model with exponent $t$. Growth factor minus 1 is the rate.
+
+{\centering\small\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{|l|l|c|}
+\hline
+ & \textbf{Rewrite with exponent} $t$ & \textbf{Annual growth rate} \\ \hline
+Annually & $A=5000\left(1+\frac{0.04}{1}\right)^{1t}=5000(1.04)^{t}$ & 4\% \\
+Quarterly & $A=5000\left(1+\frac{0.04}{4}\right)^{4t}=5000\left((1.01)^{4}\right)^{t}\approx5000(1.0406)^{t}$ & 4.06\% \\
+Monthly & $A=5000\left(1+\frac{0.04}{12}\right)^{12t}\approx5000\left((1.003333)^{12}\right)^{t}\approx5000(1.0407)^{t}$ & 4.07\% \\ \hline
+\end{tabular}\par}
+Quarterly: $1.0406-1=0.0406=4.06\%$. This yearly rate is the \textbf{effective annual interest rate}.
+
+\textbf{Say it:} Compounded monthly, the account has \blank[1.2cm] compounding periods per year instead of 1, so its value after 3 years is \blank[2cm] than with annual compounding, because \dots\lines[1]
+
+\newpage
+
+\wspart{Try It 2}{Compound interest}
+\$3,000 is invested in an account that earns 3\% annual interest, compounded monthly.
+
+$P=\blank[1.6cm]$ \quad $r=\blank[1.6cm]$ \quad $n=\blank[1.2cm]$ \qquad $A=\blank[1.6cm]\left(1+\dfrac{\blank[1.4cm]}{\blank[1cm]}\right)^{\blank[1.2cm]\,t}$
+
+\textbf{a.} What is the value of the account after 10 years? 100 years?
+
+\begin{minipage}[t]{0.48\textwidth}
+After 10 years:\lines[3]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+After 100 years:\lines[3]
+\end{minipage}
+
+\textbf{b.} What is the effective annual interest rate of the account?
+
+Hint: rewrite the model with exponent $t$, as in Part B.\lines[2]
+
+\wspart{Example 4}{Find Continuously Compounded Interest}
+\textbf{The natural base $e$.} Put \$1 in at 100\% interest for one year, compounded $n$ times: the value is $\left(1+\frac1n\right)^n$. For $n=1$ it is 2; $n=100$, 2.704813829; $n=100{,}000$, 2.718268237. As $n$ keeps growing, the value approaches the irrational number $e=2.718281828459\ldots$, the \textbf{natural base}. Compounding that never stops is \textbf{compounded continuously}.
+
+\textbf{Continuously compounded interest formula:} $A=Pe^{rt}$, where $P=$ the principal, $e=$ the natural base, $r=$ annual interest rate as a decimal, and $A=$ the value after $t$ years.
+
+\begin{minipage}[t]{0.56\textwidth}
+\vspace{0pt}
+Regina invests \$12,600 in an account that is compounded continuously, at a 3.2\% interest rate for a 12-year term. What is the value of the account after 12 years? Round your answer to the nearest dollar.
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+\item $P=12{,}600$, \ $r=0.032$, \ $t=12$.
+\item $A=Pe^{rt}=12{,}600\,e^{0.032(12)}$
+\item Multiply the exponent first: $0.032(12)=0.384$, so $A=12{,}600\,e^{0.384}$.
+\item Use the $e^x$ key: $e^{0.384}\approx1.468145$, so $A\approx18{,}498.63$.
+\end{enumerate}
+\textbf{To the nearest dollar, the value is \$18,499.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.40\textwidth}
+\vspace{0pt}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\raggedright\textbf{Calculator trap.} When you evaluate $e^{0.032(12)}$, either simplify $0.032(12)$ as $0.384$ first, or type parentheses, \texttt{e\^{}(0.032*12)}, so that $e$ is raised to the entire product, not just the first factor.}}
+\end{minipage}
+
+\textbf{Say it:} The account is \blank[3.2cm], so I use $A=\blank[1.6cm]$. The base $e$ is the \blank[2.6cm], about \blank[1.6cm].
+
+\newpage
+
+\wspart{Try It 4}{Continuously compounded interest}
+You invest \$125,000 in an account that earns 4.75\% annual interest, compounded continuously.
+
+$P=\blank[2cm]$ \quad $r=\blank[1.6cm]$ \qquad $A=\blank[2cm]\,e^{\blank[1.6cm]\,t}$
+
+\textbf{a.} What is the value of the account after 15 years?\\
+\textbf{b.} What is the value of the account after 30 years?
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{a.} After 15 years:\lines[3]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{b.} After 30 years:\lines[3]
+\end{minipage}
+
+Why did you use $A=Pe^{rt}$ and not $A=P\left(1+\frac rn\right)^{nt}$? Use the words \emph{compounded continuously} and \emph{natural base}.\lines[2]
+
+% R5 Practice: structural parallel of Savvas Lesson Quiz item 5 (Paul, $8,000, 6 years, 5% simple /
+% 4.5% continuous / 4.75% yearly). Same structure, new numbers and setting. Key: A 6600, B 6615.65, C 6712.35;
+% B - A = $16, C - B = $97 (96.70 to the nearest dollar); year 1: A 5200, B 5178.10, C 5187.50 (linear gains most at first).
+\wspart{Practice}{Three ways to save}
+Lena has \$5,000 from a summer job to save for 8 years. She compares three accounts.
+
+\begin{minipage}[t]{0.58\textwidth}
+\vspace{0pt}
+\textbf{Option A:} 4\% simple interest\\
+\textbf{Option B:} 3.5\% interest compounded continuously\\
+\textbf{Option C:} 3.75\% interest compounded yearly
+\end{minipage}\hfill
+\begin{minipage}[t]{0.39\textwidth}
+\vspace{0pt}
+\small\textbf{Simple interest} is paid on the principal only: $A=P(1+rt)$. It adds the same amount, $Pr$, every year.
+\end{minipage}
+
+\textbf{a.} Write a model for each option and fill in the table. Round to the cent.
+
+\begin{center}
+\begin{tabular}{|l|l|c|c|}
+\hline
+ & \textbf{Model} & \textbf{After 1 year} & \textbf{After 8 years} \\ \hline
+A (simple) & $A=\rule{0pt}{18pt}\blank[3.6cm]$ & \blank[2.2cm] & \blank[2.2cm] \\
+B (continuous) & $A=\rule{0pt}{18pt}\blank[3.6cm]$ & \blank[2.2cm] & \blank[2.2cm] \\
+C (yearly) & $A=\rule{0pt}{18pt}\blank[3.6cm]$ & \blank[2.2cm] & \blank[2.2cm] \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{b.} After 8 years, to the nearest dollar, Option B will be worth \$\blank[1.4cm] more than Option A and \$\blank[1.4cm] less than Option C.
+
+\textbf{c.} Option A is a \blank[2.4cm] function, while Options B and C are \blank[2.4cm] functions. Which option gained the most in the first year? Which gains faster over time? Use your table.\lines[2]
+
+\newpage
+\wspart{IXL}{Practice for the quiz}
+Go to IXL, Algebra 2. Type the code in the search box. Do the starred skills first.
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{l Y Y}
+\toprule
+\textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
+\midrule
+\ixlrow{LWE}{Evaluate exponential functions (warm-up)}{Do Now: calculator powers and the e key}
+\ixlrow{YJW $\bigstar$}{Compound interest: word problems}{Quiz 3 and 5 (Example 2)}
+\ixlrow{5GU $\bigstar$}{Continuously compounded interest: word problems}{Quiz 4 and 5 (Example 4)}
+\ixlrow{KLF $\bigstar$}{Describe linear and exponential growth and decay}{Quiz 5 (bonus), last parts: linear or exponential}
+\bottomrule
+\end{tabularx}
+
+\vspace{2pt}
+\textbf{SmartScore 70 or above on each starred ($\bigstar$) skill replaces your quiz score.}
+
+\wspart{Exit question}{Who will have more?}
+Adam and Jacinta open an account on the same day. Each starts with \$8,000 for 20 years. Adam's interest is compounded quarterly at 1.25\%. Jacinta's interest is compounded continuously at 1.25\%. Who do you predict will have more money in their account after 20 years? Explain your reasoning.
+
+\vspace{4pt}
+Adam: $A=\blank[5.5cm]$ \qquad Jacinta: $A=\blank[5cm]$
+
+\vspace{6pt}
+\blank[2.2cm] will have more, because interest that is \blank[3.6cm] is added more often than interest with only \blank[1.2cm] compounding periods per year, so \dots\lines[3]
+
+\vspace{6pt}
+\textbf{Before the quiz, finish these sentences.}
+
+The \blank[2.6cm] is the money you put in at the start; $r$ is the annual \blank[3cm], written as a decimal.
+
+More \blank[4cm] per year means a \blank[2cm] account value.
+
+When interest is \blank[4cm], I use $A=Pe^{rt}$, where $e\approx\blank[1.6cm]$ is the \blank[3cm].
+
+\end{document}
