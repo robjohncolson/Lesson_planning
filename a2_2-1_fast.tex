@@ -1,69 +1,20 @@
 % Algebra 2 Lesson 2-1 fast-track packet: Vertex Form of a Quadratic Function
-% (enVision A2 2024 TE, Example 2 and Example 4 only; Examples 1, 3, 5 cut).
-% Proposal for the PLC (docs/a2-fast-lesson-spec.md): Example 2 teaches quiz item 2 (bird's greatest
-% height = vertex), Example 4 teaches quiz items 3 and 4 (vertex + one point -> a, then y = ax^2+bx+c).
-% Quiz numbers are the Savvas item numbers; the short form keeps them (items 2, 3, 4; 1 and 5 left off).
-% DOK 3 kept: Practice & Problem Solving 15 (Amaya's serve, Example 2), as the Exit block.
-% No Practice block (R5): Try It 2 rehearses item 2, Try It 4 rehearses items 3 and 4.
+% (enVision A2 2024 TE, Example 4 and Example 5 only; Examples 1, 2, 3 cut).
+% Re-cut 2026-10-31 toward the Topic 2 test (docs/a2-fast-lesson-spec.md R1, R2): Topic 2 item 1
+% (golf ball, vertex form from the vertex and one point) is Example 4; item 2 (reflect, translate,
+% expand to y = ax^2+bx+c) is Example 5. Proposal for the PLC; the PLC has not met on this lesson.
+% Quiz numbers are the Savvas item numbers; the short form keeps them (items 3, 4, 5; 1 and 2 left off).
+% DOK 3: neither Example 4 nor 5 has a DOK 3 practice item (TE item analysis); Practice & Problem
+% Solving 15 (Amaya's serve, Example 2, cut) is named as the self-paced extension (R3).
+% No Practice block (R5): Try It 4 rehearses quiz items 3 and 4, Try It 5 rehearses item 5.
 \input{fast-packet-template}
 \begin{document}
 
 \packethead{Lesson 2-1}{Vertex Form of a Quadratic Function}
-\goals{I can find the vertex, axis of symmetry, maximum or minimum, domain and range of a quadratic function in vertex form, and write its equation from the vertex and one other point.}{I can explain how vertex form describes a parabola using the words vertex, axis of symmetry, maximum, minimum and opens upward or downward.}
+\goals{I can write the equation of a parabola in vertex form from its vertex and one other point, or from a translation or reflection of $y=x^2$, and rewrite it in the form $y=ax^2+bx+c$.}{I can explain how I wrote an equation using the words \emph{vertex}, \emph{translation}, \emph{reflection}, \emph{opens upward / downward} and \emph{maximum / minimum}.}
 
-\quiztarget{You will (1) tell how $g(x)=(x+2)^2+4$ moves $y=x^2$ (full Savvas quiz only), (2) find a parabola's highest point from vertex form (Example 2), (3) write vertex form from the vertex and a point (Example 4), (4) read the vertex and $y$-intercept off a graph, find $a$, write $y=ax^2+bx+c$ (Example 4), (5) write a shifted parabola as $y=ax^2+bx+c$ (full Savvas quiz only).}
-
-\wspart{Example 2}{Determine Key Features of a Quadratic Function}
-\textbf{Vertex form:} $y=a(x-h)^2+k$, $a\neq0$. \ The \textbf{vertex} is $(h,k)$; the \textbf{axis of symmetry} is the line $x=h$. If $a>0$ the parabola \textbf{opens upward} and $k$ is the \textbf{minimum}; if $a<0$ it \textbf{opens downward} and $k$ is the \textbf{maximum}. The domain is always all real numbers.
-
-\begin{minipage}[t]{0.64\textwidth}
-\vspace{0pt}
-What are the key features of the quadratic function\\ $f(x)=2(x-3)^2+4$?
-\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
-\item Match it to $a(x-h)^2+k$:\quad $a=2$, \ $h=3$, \ $k=4$.
-\item \textbf{Vertex:} $(h,k)=(3,4)$. \quad \textbf{Axis of symmetry:} $x=3$.
-\item The 2 indicates that the graph \textbf{opens upward} ($2>0$) and is vertically stretched ($|2|>1$).
-\item Opens upward, so the vertex is the lowest point: \textbf{minimum} $4$.
-\item \textbf{Range:} $\{y\mid y\geq 4\}$. There are no restrictions on the value of $x$, so the \textbf{domain} is all real numbers.
-\end{enumerate}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.33\textwidth}
-\vspace{0pt}
-\begin{center}
-\begin{tikzpicture}
-\begin{axis}[sheetgrid, xmin=-0.5, xmax=6.5, ymin=-0.5, ymax=10.5,
-  xtick={0,2,4,6}, ytick={0,2,...,10}, minor tick num=1, minor grid style={gray!45},
-  x=0.62cm, y=0.36cm]
-\addplot[very thick, red, domain=1.27:4.73, samples=80, <->] {2*(x-3)^2+4};
-\addplot[thick, red, dashed, <->] coordinates {(3,-0.4) (3,10.4)};
-\node[closed, red] at (axis cs:3,4) {};
-\node[font=\scriptsize, inner sep=1pt, anchor=north east] at (axis cs:0,0) {0};
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:3.3,3.2) {$(3,4)$};
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:3.2,1.4) {$x=3$};
-\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:5.4,9.2) {$f$};
-\end{axis}
-\end{tikzpicture}
-\end{center}
-\end{minipage}
-
-\textbf{Say it:} The vertex of $f$ is \blank[1.6cm], so the axis of symmetry is \blank[1.6cm]. The parabola opens \blank[2cm] because $a=\blank[1cm]$ is \blank[2cm], so $4$ is the \blank[2.2cm] value of $f$.
-
-\wspart{Try It 2}{Key features from vertex form}
-Identify the vertex, axis of symmetry, minimum or maximum, domain, and range of the function $f(x)=-(x+4)^2-5$.
-
-Hint: $x+4=x-(\blank[0.8cm])$, so $h=\blank[0.8cm]$.
-
-\renewcommand{\arraystretch}{1.8}
-\begin{tabularx}{\textwidth}{|l|Y|l|Y|}
-\hline
-$a=$ & & opens upward or downward? & \\ \hline
-vertex $(h,k)$ & & axis of symmetry & \\ \hline
-minimum or maximum? & & value & \\ \hline
-domain & & range & \\ \hline
-\end{tabularx}
-\renewcommand{\arraystretch}{1.35}
-
-\newpage
+\quiztarget{You will (1) tell how $g(x)=(x+2)^2+4$ moves $y=x^2$ (full Savvas quiz only), (2) find a bird's greatest height from vertex form (full Savvas quiz only), (3) write vertex form from the vertex and a point (Example 4), (4) read the vertex and $y$-intercept off a graph, find $a$, write $y=ax^2+bx+c$ (Example 4), (5) move $y=x^2$ right 3 and down 5 and write it as $y=ax^2+bx+c$ (Example 5).}
+\topictarget{2}{Question 1 asks you to write the golf ball's distance from the hole over time in vertex form from its vertex and one point (Example 4). Question 2 asks you to reflect $y=x^2$ in the $x$-axis, move it left and down, and write it as $y=ax^2+bx+c$ (Example 5).}
 
 \wspart{Example 4}{Write an Equation of a Parabola Given the Graph}
 The height of a hit ball is a quadratic function of the time it has been in the air. The ball is hit with an initial height of 4 feet and after 1 second reaches its vertex at 20 feet. What is an equation that defines this function? Write the quadratic equation in vertex form and in the form $y=ax^2+bx+c$.
@@ -105,6 +56,8 @@ $\boxed{y=-16x^2+32x+4}$
 
 \textbf{Say it:} The vertex is \blank[1.6cm], so $h=\blank[0.9cm]$ and $k=\blank[0.9cm]$. I substituted the point \blank[1.6cm] for $x$ and $y$ and got $a=\blank[1cm]$. The parabola opens \blank[2cm] because $a$ is \blank[2cm], so the vertex is a \blank[2.2cm].
 
+\newpage
+
 \wspart{Try It 4}{Write the equation from the graph}
 The graph shows the height of a ball with respect to time. What is the equation of the function? Write the equation in vertex form. Then write the equation in the form $y=ax^2+bx+c$.
 
@@ -142,7 +95,75 @@ Expand to get the form $y=ax^2+bx+c$:
 \lines[2]
 $y=\blank[5cm]$ \qquad Which number in this form is the initial height? \blank[2.5cm]
 
-\newpage
+\wspart{Example 5}{Write an Equation of a Transformed Function}
+The function $g$ is a translation of the parent function $f$ 1 unit left and 3 units up. What is the equation of $g$? Write the quadratic equation in vertex form and in the form $y=ax^2+bx+c$.
+
+\begin{minipage}[t]{0.60\textwidth}
+\vspace{0pt}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+\item Translate the graph of $f(x)$ left 1 unit to locate the graph of $f(x+1)$, then translate the graph of $f(x+1)$ up 3 units to locate the graph of $f(x+1)+3$. The \textbf{vertex} moves from $(0,0)$ to $(-1,3)$.
+\item $f(x)=x^2$ and $g(x)=f(x+1)+3$, so $g(x)=a(x+1)^2+3$; $a$ is the vertical stretch.
+\item From the graph, the point $(0,4)$ is on $g$. Use it to find $a$:\\
+$4=a(0+1)^2+3$, \ so \ $4=a+3$, \ $a=1$
+\item Vertex form: $\boxed{g(x)=(x+1)^2+3}$
+\item Expand to get $y=ax^2+bx+c$:\\
+$g(x)=x^2+2x+1+3$ \quad $\boxed{g(x)=x^2+2x+4}$
+\end{enumerate}
+\textbf{Check:} pick a point on the graph and make sure it satisfies your equation.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.37\textwidth}
+\vspace{0pt}
+\begin{center}
+% TE window x = -5 to 5, y = -1 to 9, unit grid; the point (0,4) is the one the TE's step names.
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-5.5, xmax=5.5, ymin=-1.5, ymax=9.5,
+  xtick={-4,-2,2,4}, ytick={2,4,6,8}, minor xtick={-5,-3,-1,0,1,3,5}, minor ytick={-1,0,1,3,5,7,9}, minor grid style={gray!45},
+  x=0.52cm, y=0.40cm]
+\addplot[very thick, red, domain=-3.06:3.06, samples=80, <->] {x^2};
+\addplot[very thick, blue, domain=-3.55:1.55, samples=80, <->] {(x+1)^2+3};
+\node[closed, blue] at (axis cs:0,4) {};
+\node[font=\scriptsize, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:0.25,3.7) {$(0,4)$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:3.6,8.4) {$f$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt] at (axis cs:-4.1,8.4) {$g$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\textbf{Say it:} The \blank[2.4cm] left 1 and up 3 moves the vertex to \blank[1.6cm], so $h=\blank[0.9cm]$ and $k=\blank[0.9cm]$. The point \blank[1.6cm] gives $a=\blank[0.9cm]$, so $g$ opens \blank[2cm] and $k$ is the \blank[2.2cm] value.
+
+\wspart{Try It 5}{Write the equation of a transformed function}
+What is the equation of $j$? Write the equation in vertex form and in the form $y=ax^2+bx+c$.
+
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+\textbf{a.} Let $j$ be a quadratic function whose graph is a translation 2 units right and 5 units down of the graph of the parent function $f$.
+
+\vspace{4pt}
+Vertex $(h,k)=\blank[2cm]$ \quad $a=\blank[1cm]$
+
+Vertex form: $j(x)=\blank[3.4cm]$
+
+Expand:
+\lines[3]
+$j(x)=\blank[4cm]$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}
+\textbf{b.} Let $j$ be a quadratic function whose graph is a reflection of the graph of the parent function $f$ in the $x$-axis followed by a translation 1 unit down.
+
+Hint: a reflection in the $x$-axis makes $a=-1$.
+
+\vspace{4pt}
+Vertex $(h,k)=\blank[2cm]$ \quad $a=\blank[1cm]$
+
+Vertex form: $j(x)=\blank[3.4cm]$
+
+Expand:
+\lines[3]
+$j(x)=\blank[4cm]$
+\end{minipage}
 
 \wspart{IXL}{Practice for the quiz}
 Do the starred skills first. \textbf{SmartScore 70 or above on each starred ($\bigstar$) skill replaces your quiz score.}
@@ -152,14 +173,18 @@ Do the starred skills first. \textbf{SmartScore 70 or above on each starred ($\b
 \toprule
 \textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
 \midrule
-\ixlrow{L8C $\bigstar$}{Characteristics of quadratic functions: equations}{Quiz 2: vertex, maximum or minimum from $a(x-h)^2+k$ (Example 2)}
 \ixlrow{URV $\bigstar$}{Write a quadratic function in vertex form from its vertex and another point}{Quiz 3 and 4: vertex + one point gives $a$ (Example 4)}
-\ixlrow{KQL}{Transformations of quadratic functions}{Optional: Quiz 1 and 5 (full Savvas quiz only)}
-\ixlrow{WMS}{Characteristics of quadratic functions: graphs}{Optional warm-up: key features read off a drawn parabola}
+\ixlrow{KQL $\bigstar$}{Transformations of quadratic functions}{Quiz 5: the moves of $y=x^2$ give the vertex and $a$ (Example 5)}
+\ixlrow{WMS}{Characteristics of quadratic functions: graphs}{Optional warm-up: read the vertex off a drawn parabola (Quiz 4)}
+\ixlrow{L8C}{Characteristics of quadratic functions: equations}{Optional: Quiz 1 and 2 (full Savvas quiz only)}
 \bottomrule
 \end{tabularx}
 
-\wspart{Exit question}{Amaya's serve (Practice 15)}
+\newpage
+
+% R3: the TE item analysis files no DOK 3 item under Example 4 or 5; Practice 15 (DOK 3) belongs to
+% Example 2, cut, and is named here as the self-paced extension.
+\wspart{Extension}{Practice 15 (DOK 3), when you finish}
 \fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
 Amaya is standing 30 ft from a volleyball net. The net is 8 ft high. Amaya serves the ball. The path of the ball is modeled by the equation $y=-0.02(x-18)^2+12$, where $x$ is the ball's horizontal distance in feet from Amaya's position and $y$ is the distance in feet from the ground to the ball.
 
@@ -168,15 +193,15 @@ Amaya is standing 30 ft from a volleyball net. The net is 8 ft high. Amaya serve
 The vertex is \blank[2cm]. The parabola opens \blank[2cm] because $a=\blank[1.4cm]$, so the vertex is the \blank[2.2cm]. The ball is \blank[1.4cm] ft from Amaya because \lines[2]
 
 \textbf{b.} Describe how you would find the ball's height when it crosses the net at $x=30$.
-\lines[4]
+\lines[3]
 }}
 
 \vspace{6pt}
 \textbf{Before the quiz, finish these sentences.}
 
-In $y=a(x-h)^2+k$, the vertex is \blank[2cm] and the axis of symmetry is the line \blank[2cm].
+In $y=a(x-h)^2+k$, the vertex is \blank[2cm]. A translation left or right changes \blank[1cm]; a translation up or down changes \blank[1cm].
 
-When $a$ is negative, the parabola opens \blank[2.4cm] and $k$ is the \blank[2.4cm] value.
+A reflection in the $x$-axis makes $a$ \blank[2.4cm], so the parabola opens \blank[2.4cm] and $k$ is the \blank[2.4cm] value.
 
 To find $a$, I substitute the \blank[2.4cm] for $h$ and $k$ and one other \blank[2.4cm] for $x$ and $y$.
 

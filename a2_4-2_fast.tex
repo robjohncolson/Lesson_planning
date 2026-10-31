@@ -1,12 +1,81 @@
-% Algebra 2 Lesson 4-2 fast-track packet: Graphing Rational Functions (enVision A2, Example 3 and Example 4 only)
-% Keep/cut is a proposal (2026-10-30); the PLC has not met on this lesson.
+% Algebra 2 Lesson 4-2 fast-track packet: Graphing Rational Functions (enVision A2, Example 2 and Example 3 only)
+% Re-cut 2026-10-31 toward the Topic 4 test (a2_T4_assessment_TE.tex): keep Examples 2, 3 (was 3, 4).
+% Keep/cut is a proposal; the PLC has not met on this lesson.
 \input{fast-packet-template}
 \begin{document}
 
 \packethead{Lesson 4-2}{Graphing Rational Functions}
-\goals{I can find the vertical and horizontal asymptotes of a rational function and use them to graph it.}{I can explain how I found each asymptote using the words numerator, denominator, degree, asymptote, and leading coefficient.}
+\goals{I can find the domain and the vertical and horizontal asymptotes of a rational function from its equation.}{I can explain how I found each asymptote using the words numerator, denominator, degree, asymptote, and leading coefficient.}
 
-\quiztarget{(1) Bonus, +5: match a graph to its equation by its two asymptotes and one point (Example 4). (2) A factor that cancels is not an asymptote (full Savvas quiz only). (3) Graded, 10 points: find both asymptotes of a linear-over-linear function (Example 4). (4) Water added to a mixture (full Savvas quiz only); the Practice block is optional preparation for it. (5) Graded, 10 points: pick the function with a given horizontal asymptote by comparing degrees and leading coefficients (Example 3).}
+\quiztarget{(1) Match a graph to its equation (full Savvas quiz only). (2) Bonus, +5: find the vertical asymptotes when a factor of the denominator cancels with the numerator (Example 2). (3) Graded, 10 points: find both asymptotes of a linear-over-linear function (Examples 2 and 3). (4) Water added to a mixture (full Savvas quiz only); the Practice block is optional preparation for it. (5) Graded, 10 points: pick the function with a given horizontal asymptote by comparing degrees and leading coefficients (Example 3).}
+\topictarget{4}{Question 2 asks for a domain (Example 2). Questions 3 and 12 ask for both asymptotes when a factor cancels (Examples 2, 3). Question 18 asks which functions have horizontal asymptote $y=7$ (Example 3). Questions 8 (a remainder) and 16 (asymptotes of $\frac{ax+b}{cx+d}$) come from Examples 1 and 4, which this packet skips.}
+
+\wspart{Example 2}{Find Multiple Vertical Asymptotes of a Rational Function}
+What are the vertical asymptotes for the graph of $f(x)=\dfrac{3x-2}{x^2+7x+12}$?
+
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0pt}\raggedright
+Vertical \textbf{asymptotes} can occur at the $x$-values where the function is undefined. Determine where the \textbf{denominator} of the rational function is equal to 0.
+
+\textbf{Step 1} Set the denominator equal to zero and solve.\\[2pt]
+$x^2+7x+12=0$\\
+$(x+3)(x+4)=0$\\
+$x+3=0$ or $x+4=0$\\
+$x=-3$ or $x=-4$
+
+The possible vertical asymptotes are $x=-3$ and $x=-4$.
+
+\textbf{Step 2} Check the \textbf{numerator} there: $3(-3)-2=-11$ and $3(-4)-2=-14$. Neither is 0, so both are asymptotes. Graph the function to check: the graph is not defined at $x=-3$ or $x=-4$. \textbf{These lines are vertical asymptotes.}
+
+{\small Rule (Concept Summary): $x=a$ is a vertical asymptote of $\frac{P(x)}{Q(x)}$ if $Q(a)=0$ and $P(a)\neq0$.\\ Cancel all common factors first. If $x=a$ still makes the reduced denominator 0, it is a vertical asymptote; if not, the graph has a hole at $x=a$. Either way, $a$ is not in the domain.}
+
+\textbf{Domain} (the $x$-values where $Q(x)\neq0$): all real numbers except $-3$ and $-4$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.38\textwidth}
+\vspace{0pt}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-7.5, xmax=1.5, ymin=-30.5, ymax=80.5,
+  xtick={-7,...,1}, xticklabels={,$-6$,,$-4$,,$-2$,,,}, ytick={-30,-20,...,80}, yticklabels={,,,,,,,,$50$,,,},
+  x=0.6cm, y=0.055cm]
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north west] at (axis cs:0,0) {$O$};
+\addplot[thick, dashed, blue, <->] coordinates {(-4,-30) (-4,80)};
+\addplot[thick, dashed, blue, <->] coordinates {(-3,-30) (-3,80)};
+\addplot[very thick, red, <->, domain=-7.4:-4.37, samples=200] {(3*x-2)/(x^2+7*x+12)};
+\addplot[very thick, red, <->, domain=-3.787:-3.176, samples=200] {(3*x-2)/(x^2+7*x+12)};
+\addplot[very thick, red, <->, domain=-2.73:1.4, samples=300] {(3*x-2)/(x^2+7*x+12)};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt, anchor=east] at (axis cs:-4.1,72) {$x=-4$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt, anchor=west] at (axis cs:-2.9,72) {$x=-3$};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:-1.2,-20) {$f$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\textbf{Say it:} The vertical asymptotes are $x=\blank[1.2cm]$ and $x=\blank[1.2cm]$ because the \blank[2.5cm] is 0 there and the \blank[2.5cm] is not.
+
+\newpage
+
+\wspart{Try It 2}{Vertical asymptotes}
+Find the vertical asymptotes for each function. Graph the function to check your work.
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{a.} $g(x)=\dfrac{5x}{x^2-x-6}$
+
+\vspace{4pt}
+denominator factored: \blank[3cm]\\[6pt]
+denominator is 0 at: \blank[3cm]\\[6pt]
+numerator at those $x$-values: \blank[2.2cm]\\[6pt]
+vertical asymptotes: \blank[3.5cm]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{b.} $h(x)=\dfrac{7-x}{(x-5)(x+1)(x+3)}$
+
+\vspace{4pt}
+denominator is 0 at: \blank[3cm]\\[6pt]
+numerator at those $x$-values: \blank[2.2cm]\\[6pt]
+vertical asymptotes: \blank[3.5cm]
+\end{minipage}
 
 \wspart{Example 3}{Find Types of Horizontal Asymptotes}
 What are the horizontal asymptotes for the graph of $f(x)=\dfrac{3x-2}{x^2+7x+12}$?
@@ -114,108 +183,6 @@ horizontal asymptote:\\[4pt] \blank[3.5cm]
 
 \textbf{Say it:} In part b the asymptote is not $y=0$ because the degrees are \blank[2cm], so I use the ratio of the \blank[3.5cm].
 
-\wspart{Example 4}{Graph a Function of the Form $\frac{ax+b}{cx+d}$}
-What is the graph of the function $f(x)=\dfrac{2x+1}{3x-4}$?
-
-\begin{minipage}[t]{0.52\textwidth}
-\vspace{0pt}\raggedright
-\textbf{Step 1} Vertical asymptote: where the \textbf{denominator} is 0.\\
-$3x-4=0$, so $3x=4$, so $x=\frac43$.\\
-The numerator is not 0 there ($2\cdot\frac43+1=\frac{11}3$), so there is a vertical asymptote at $\boldsymbol{x=\frac43}$.
-
-{\small Rule (Concept Summary): $x=a$ is a vertical asymptote of $\frac{P(x)}{Q(x)}$ if $Q(a)=0$ and $P(a)\neq0$.}
-
-\textbf{Step 2} Horizontal asymptote: the degrees are equal (1 and 1), so use the ratio of the \textbf{leading coefficients}: $y=\frac23$. As $x\to\pm\infty$, $y\to\frac23$. Horizontal asymptote $\boldsymbol{y=\frac23}$.
-
-\textbf{Step 3} Graph. Draw both asymptotes dashed. Pick $x$-values on \emph{both sides} of $x=\frac43$ and evaluate:
-
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-$x$ & $-2$ & $-0.5$ & $0$ & $2$ & $4$ \\ \hline
-$f(x)$ & $0.3$ & $0$ & $-0.25$ & $2.5$ & $1.125$ \\ \hline
-\end{tabular}
-\end{center}
-For example $f(2)=\frac{2(2)+1}{3(2)-4}=\frac52=2.5$. Plot the points and sketch each branch so it bends toward the asymptotes.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.45\textwidth}
-\vspace{0pt}
-\begin{center}
-\begin{tikzpicture}
-\begin{axis}[unitgrid, x=0.68cm, y=0.68cm, xlabel={},
-  xticklabels={,$-4$,,$-2$,,,,$2$,,$4$,}, yticklabels={,$-4$,,$-2$,,,,$2$,,$4$,}]
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south east] at (axis cs:0,0) {$0$};
-\node[anchor=north east, inner sep=1pt] at (axis cs:5.5,0) {$x$};
-\addplot[thick, dashed, green!50!black, <->] coordinates {(4/3,-5.3) (4/3,5.3)};
-\addplot[thick, dashed, blue, <->] coordinates {(-5.3,2/3) (5.3,2/3)};
-\addplot[very thick, red, <->, domain=-5.3:1.128, samples=300] {(2*x+1)/(3*x-4)};
-\addplot[very thick, red, <->, domain=1.597:5.3, samples=300] {(2*x+1)/(3*x-4)};
-\node[closed, red] at (axis cs:-2,0.3) {};
-\node[closed, red] at (axis cs:-0.5,0) {};
-\node[closed, red] at (axis cs:0,-0.25) {};
-\node[closed, red] at (axis cs:2,2.5) {};
-\node[closed, red] at (axis cs:4,1.125) {};
-\node[font=\scriptsize, green!40!black, fill=white, inner sep=1pt] at (axis cs:2.5,-3.6) {$x=\frac43$};
-\node[font=\scriptsize, blue, fill=white, inner sep=1pt] at (axis cs:-3.5,1.4) {$y=\frac23$};
-\end{axis}
-\end{tikzpicture}
-\end{center}
-\end{minipage}
-
-\textbf{Say it:} The vertical asymptote is $x=\blank[1.2cm]$ because the denominator \blank[3cm]. The horizontal asymptote is $y=\blank[1.2cm]$ because the degrees are \blank[2cm] and the ratio of the leading coefficients is \blank[1.5cm].
-
-\newpage
-
-\wspart{Try It 4}{Graph each function.}
-Hint: find both asymptotes, draw them dashed, make a table with $x$-values on both sides of the vertical asymptote, then sketch.
-
-\begin{minipage}[t]{0.48\textwidth}
-\textbf{a.} $f(x)=\dfrac{4x-3}{x+8}$
-
-vertical asymptote: $x=\blank[1.5cm]$\\[4pt]
-horizontal asymptote: $y=\blank[1.5cm]$
-
-{\renewcommand{\arraystretch}{1.3}%
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-$x$ & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\ \hline
-$f(x)$ & & & & \\ \hline
-\end{tabular}}
-\begin{center}
-\begin{tikzpicture}
-\begin{axis}[sheetgrid, xmin=-20, xmax=20, ymin=-40, ymax=40,
-  xtick={-20,-10,...,20}, ytick={-40,-20,...,40}, minor xtick={-20,-15,...,20}, minor ytick={-40,-30,...,40},
-  xticklabels={,$-10$,,$10$,}, yticklabels={,$-20$,,$20$,},
-  minor grid style={gray!45}, x=0.17cm, y=0.085cm]
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
-\end{axis}
-\end{tikzpicture}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\textbf{b.} $g(x)=\dfrac{3x+2}{x-1}$
-
-vertical asymptote: $x=\blank[1.5cm]$\\[4pt]
-horizontal asymptote: $y=\blank[1.5cm]$
-
-{\renewcommand{\arraystretch}{1.3}%
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-$x$ & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} & \hspace{1cm} \\ \hline
-$g(x)$ & & & & \\ \hline
-\end{tabular}}
-\begin{center}
-\begin{tikzpicture}
-\begin{axis}[sheetgrid, xmin=-4, xmax=4, ymin=-6, ymax=10,
-  xtick={-4,...,4}, ytick={-6,-4,...,10}, minor ytick={-6,...,10},
-  xticklabels={,,$-2$,,,,$2$,,}, yticklabels={,$-4$,,,,$4$,,$8$,},
-  minor grid style={gray!45}, x=0.85cm, y=0.425cm]
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
-\end{axis}
-\end{tikzpicture}
-\end{center}
-\end{minipage}
-
 % R5: structural parallel of 4-2 Lesson Quiz item 4 (water added to a 12% salt mixture, f(x)=1.2/(x+10));
 % no Try It rehearses that context. Same structure, different numbers and setting.
 \wspart{Practice}{Adding water to a mixture}
@@ -242,10 +209,10 @@ Go to IXL, Algebra 2. Type the code in the search box. Do the starred skills fir
 \toprule
 \textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
 \midrule
-\ixlrow{7JJ $\bigstar$}{Rational functions: asymptotes and excluded values}{Quiz 3 and 5: both asymptotes from the equation (Examples 3 and 4)}
-\ixlrow{79Q $\bigstar$}{Domain of rational functions}{Quiz 1 and 3: the denominator is 0 at the vertical asymptote (Example 4, Step 1)}
-\ixlrow{ULD}{Domain and range of reciprocal functions}{Warm-up for Quiz 1 (from Lesson 4-1)}
-\ixlrow{UB5}{Factor quadratics}{Warm-up: factor a denominator to find where it is 0 (Exit question; Quiz 2, full Savvas quiz only)}
+\ixlrow{7JJ $\bigstar$}{Rational functions: asymptotes and excluded values}{Quiz 2, 3 and 5: both asymptotes from the equation (Examples 2 and 3)}
+\ixlrow{79Q $\bigstar$}{Domain of rational functions}{Quiz 2 and 3: the denominator is 0 at a vertical asymptote and the value is left out of the domain (Example 2)}
+\ixlrow{ULD}{Domain and range of reciprocal functions}{Warm-up from Lesson 4-1 (Quiz 1, full Savvas quiz only)}
+\ixlrow{UB5 $\bigstar$}{Factor quadratics}{Quiz 2 (bonus): factor a denominator to find where it is 0 (Example 2, Try It 2a, Exit question)}
 \bottomrule
 \end{tabularx}
 

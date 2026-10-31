@@ -17,10 +17,10 @@
 \newcommand{\choice}[1]{\tikz[baseline=-0.6ex]\node[draw, circle, inner sep=0.6pt, minimum size=3.3mm, font=\scriptsize\bfseries] {#1};\;}
 \newcommand{\checkbox}{$\square$\;}
 \newcommand{\tile}[1]{\tikz[baseline=-0.6ex]\node[draw, rounded corners=2pt, minimum width=1.2cm, minimum height=0.7cm] {#1};}
-\pgfplotsset{quizgrid/.style={
-  axis lines=middle, grid=both, grid style={gray!45},
-  ticklabel style={font=\scriptsize, fill=white, inner sep=1pt},
-  xlabel={$x$}, ylabel={$y$}, axis line style={thick}, clip=true}}
+
+% Short form of the 7-3 Lesson Quiz (a2_7-3_TE.tex, "7-3 Lesson Quiz" block), re-cut 2026-10-31
+% with the packet (kept Examples 3 and 4): items 1 (Example 3), 2 (Example 4) and 4 (Example 3B).
+% Items 3 (Example 6) and 5 (Example 5) are left off. No item on this form has a figure.
 
 \begin{document}
 \relpenalty=10000 \binoppenalty=10000 % keep each inline formula on one line
@@ -33,7 +33,7 @@
 
 \vspace{4pt}\noindent\rule{\textwidth}{0.6pt}
 
-{\small Question numbers match the Savvas Lesson Quiz; questions 2 and 5 are not on this form.}
+{\small Question numbers match the Savvas Lesson Quiz; questions 3 and 5 are not on this form.}
 
 \vspace{4pt}
 \textbf{1.} Select \textbf{all} the correct statements.
@@ -54,40 +54,21 @@ Show one period calculation: \rule{8cm}{0.4pt}
 \vspace{10pt}\noindent\rule{\textwidth}{0.4pt}
 
 \vspace{6pt}
-\begin{minipage}[t]{0.56\textwidth}
-\textbf{3.} The equation for $f$ and the graph of $g$ are given. How do the period and the amplitude of the functions compare?
-
-\vspace{4pt}
-\centerline{$f(x)=2\cos\!\left(\frac{\pi}{2}x\right)$}
+\textbf{2.} What is the average rate of change of the function $y=3\sin(2x)$ on the interval $\left[0,\frac{\pi}{4}\right]$?
 
 \vspace{4pt}
 \begin{itemize}[leftmargin=1.2em, itemsep=6pt]
-\item[] \choice{A} The amplitudes are the same, but the period of $f$ is half as long as the period of $g$.
-\item[] \choice{B} The amplitudes are the same, but the period of $f$ is twice as long as the period of $g$.
-\item[] \choice{C} The periods are the same, but the amplitude of $f$ is half as great as the amplitude of $g$.
-\item[] \choice{D} The periods are the same, but the amplitude of $f$ is twice as great as the amplitude of $g$.
+\item[] \choice{A} $-\dfrac{12}{\pi}$ \qquad\qquad \choice{B} $-\dfrac{6}{\pi}$ \qquad\qquad \choice{C} $\dfrac{6}{\pi}$ \qquad\qquad \choice{D} $\dfrac{12}{\pi}$
 \end{itemize}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.40\textwidth}
-\vspace{4pt}
-\begin{tikzpicture}
-\begin{axis}[quizgrid, xmin=-1.5, xmax=6.5, ymin=-3.3, ymax=3.3,
-  xtick={2,4}, ytick={2}, minor xtick={-1,...,6}, minor ytick={-3,...,3}, minor grid style={gray!45},
-  x=0.8cm, y=0.8cm, xticklabel style={anchor=north west}, xlabel={}, set layers, axis on top,
-  grid style={gray!45, /pgfplots/on layer=axis background}, minor grid style={gray!45, /pgfplots/on layer=axis background}]
-\addplot[very thick, domain=-1.2:6.2, samples=200, <->] {2*sin(deg(pi*x))};
-\node[font=\small, fill=white, inner sep=1pt] at (axis cs:5.6,2.7) {$g$};
-\node[font=\scriptsize, inner sep=1pt, anchor=north west] at (axis cs:0,0) {$O$};
-\node[anchor=north east, inner sep=2pt] at (axis cs:6.5,0) {$x$}; % below the axis: the curve rises through (6,0) to the right-hand arrow
-\end{axis}
-\end{tikzpicture}
-
-\vspace{6pt}
-period of $f$: \rule{2cm}{0.4pt}
 
 \vspace{4pt}
-period of $g$: \rule{2cm}{0.4pt}
-\end{minipage}
+Show your work: the values of $y$ at $x=0$ and at $x=\frac{\pi}{4}$, and the rate of change.
+
+\vspace{4pt}
+\rule{\textwidth}{0.4pt}
+
+\vspace{14pt}
+\rule{\textwidth}{0.4pt}
 
 \vspace{10pt}\noindent\rule{\textwidth}{0.4pt}
 
@@ -97,7 +78,7 @@ period of $g$: \rule{2cm}{0.4pt}
 Write one tile in each blank.\quad \tile{$-5$}\; \tile{$\cos$}\; \tile{$(2x)$}\; \tile{$\sin$}\; \tile{$(-2x)$}\; \tile{$5$}
 
 \vfill
-\noindent\textbf{Scoring:} Question 1 and Question 3 are 10 points each. Question 4 is a bonus of up to 5 points. Total out of 20.
+\noindent\textbf{Scoring:} Question 1 and Question 2 are 10 points each. Question 4 is a bonus of up to 5 points. Total out of 20.
 
 \newpage
 \noindent{\LARGE\textbf{7-3 Lesson Quiz, short form: answer key}}
@@ -107,12 +88,12 @@ Write one tile in each blank.\quad \tile{$-5$}\; \tile{$\cos$}\; \tile{$(2x)$}\;
 \raggedright
 \begin{enumerate}
 \item[\textbf{1.}] \textbf{C, D, E, F.} Amplitude $=|a|$, period $=\frac{2\pi}{|b|}$. A is false: the amplitude of $2\cos\left(\frac12x\right)$ is 2 ($\frac12$ is $b$, not $a$). B is false: its period is $\frac{2\pi}{1/2}=4\pi$ (B multiplies $2\pi$ by $\frac12$, the Try It 3 common error). C: $\left|\frac{\pi}{2}\right|=\frac{\pi}{2}$. D: $\frac{2\pi}{1/2}=4\pi$ (the $4\pi$ in front is the amplitude and does not change the period). E: $\frac{2\pi}{2\pi}=1$. F: $|2|=2$. Savvas quiz item 1, DOK 1, Skills Review and Practice F90. Taught by Example 3 (Try It 3 is the same two formulas). \textbf{10 points:} 2.5 for each of C, D, E, F checked; subtract 2.5 for each of A, B checked; minimum 0.
-\item[\textbf{3.}] \textbf{B.} $f$: amplitude $|2|=2$, period $\frac{2\pi}{\pi/2}=4$. $g$: midline $y=0$, maximum 2, so amplitude 2; maxima at $x=\frac12$ and $x=\frac52$, so period $\frac52-\frac12=2$. Same amplitude, and the period of $f$ (4) is twice the period of $g$ (2). Distractor A reverses the comparison; C and D say the periods are equal. Savvas quiz item 3, DOK 2, F90. Taught by Example 6 (same task with different numbers). \textbf{10 points:} 3 for the period of $f$ with work, 3 for the period of $g$ read off the graph, 4 for choice B.
-\item[\textbf{4.}] \textbf{$-5$; $\cos$; $(2x)$, so $g(x)=-5\cos(2x)$.} Reflecting over the $x$-axis replaces $y$ with $-y$: $-\bigl(5\cos(2x)\bigr)=-5\cos(2x)$, and reflecting $g$ back gives $f$. Also correct: $-5$; $\cos$; $(-2x)$, because cosine is even, so $-5\cos(-2x)=-5\cos(2x)$; give it full credit. The tiles $5$, $\cos$, $(-2x)$ are a trap: $5\cos(-2x)=5\cos(2x)$ is $f$ itself, not its reflection. Savvas quiz item 4, DOK 1, F90. Taught by Example 3B ($y=-f(x)$ is a reflection over the $x$-axis) and the packet's DOK 3 Practice 23, Part E. \textbf{Bonus 5:} 3 for $-5$, 1 for $\cos$, 1 for $(2x)$ or $(-2x)$.
+\item[\textbf{2.}] \textbf{D, $\frac{12}{\pi}$.} The period of $3\sin(2x)$ is $\frac{2\pi}{2}=\pi$, so the key points are $\frac{\pi}{4}$ apart: $(0,0)$ and the maximum $\left(\frac{\pi}{4},3\right)$. Average rate of change $=\dfrac{3\sin\left(\frac{\pi}{2}\right)-3\sin 0}{\frac{\pi}{4}-0}=\dfrac{3}{\pi/4}=\dfrac{12}{\pi}$. A has the wrong sign (the graph rises from 0 to the maximum); C ($\frac{6}{\pi}$, that is $\frac{3}{\pi/2}$) divides by the half period $\frac{\pi}{2}$ instead of $\frac{\pi}{4}$, and B has that error with the wrong sign. Savvas quiz item 2, DOK 1, F31. Taught by Example 4 (the five key points, a zero then a maximum a quarter period later) and the packet's Practice (the same rate of change on Example 4's graphs); the rate formula is the Topic 1 skill. \textbf{10 points:} 3 for $y(0)=0$ and $y\left(\frac{\pi}{4}\right)=3$, 3 for the quotient set up over $\frac{\pi}{4}-0$, 4 for choice D.
+\item[\textbf{4.}] \textbf{$-5$; $\cos$; $(2x)$, so $g(x)=-5\cos(2x)$.} Reflecting over the $x$-axis replaces $y$ with $-y$: $-\bigl(5\cos(2x)\bigr)=-5\cos(2x)$, and reflecting $g$ back gives $f$. Also correct: $-5$; $\cos$; $(-2x)$, because cosine is even, so $-5\cos(-2x)=-5\cos(2x)$; give it full credit. The tiles $5$, $\cos$, $(-2x)$ are a trap: $5\cos(-2x)=5\cos(2x)$ is $f$ itself, not its reflection. Savvas quiz item 4, DOK 1, F90. Taught by Example 3B ($y=-f(x)$ is a reflection over the $x$-axis), rehearsed by Try It 4b ($h(x)=-\sin 2\pi x$) and the packet's extension (Practice 23, Part E). \textbf{Bonus 5:} 3 for $-5$, 1 for $\cos$, 1 for $(2x)$ or $(-2x)$.
 \end{enumerate}
 
-\textbf{Items left off this form} (available for a retake or Form B): Savvas item 2, the average rate of change of $y=3\sin(2x)$ on $\left[0,\frac{\pi}{4}\right]$ (answer D, $\frac{12}{\pi}$, because $\frac{3\sin(\pi/2)-3\sin 0}{\pi/4-0}=\frac{3}{\pi/4}$; DOK 1, F31; it needs the quarter-period key point of the cut Example 4 and the Topic 1 rate-of-change skill); Savvas item 5, the amplitude of the tide model with high tide 5 ft and low tide 1 ft (answer 2 ft, $\frac{5-1}{2}$; DOK 2, F90; the cut Example 5, and Practice 20 is its DOK 3 cousin). Neither item has a figure; both are left off because no kept Example teaches them. Item 5 is a one-round whiteboard bridge if the teacher puts it back: amplitude $=\frac{\text{max}-\text{min}}{2}$, midline $=\frac{\text{max}+\text{min}}{2}$.
+\textbf{Items left off this form} (available for a retake or Form B): Savvas item 3, the equation $f(x)=2\cos\left(\frac{\pi}{2}x\right)$ against the graph of $g$ (a sine curve through the origin with maxima at $\left(\frac12,2\right)$ and $\left(\frac52,2\right)$): how do the period and the amplitude compare? (answer B: the amplitudes are both 2, and the period of $f$, $\frac{2\pi}{\pi/2}=4$, is twice the period of $g$, $\frac52-\frac12=2$; DOK 2, F90; the cut Example 6); Savvas item 5, the amplitude of the tide model with high tide 5 ft and low tide 1 ft (answer 2 ft, $\frac{5-1}{2}$; DOK 2, F90; the cut Example 5, and Practice 20 is its DOK 3 cousin). Both are left off because no kept Example teaches them. Item 5 is a one-round whiteboard bridge if the teacher puts it back: amplitude $=\frac{\text{max}-\text{min}}{2}$, midline $=\frac{\text{max}+\text{min}}{2}$.
 
-\textbf{IXL replacement:} SmartScore 70 or above on 9S8 and 5XN replaces this quiz with 20/20.
+\textbf{IXL replacement:} SmartScore 70 or above on 9S8 and A7V replaces this quiz with 20/20.
 
 \end{document}

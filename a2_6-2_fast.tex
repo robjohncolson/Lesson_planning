@@ -1,140 +1,122 @@
-% Algebra 2 Lesson 6-2 fast-track packet: Exponential Models (enVision A2, Example 2 and Example 4 only)
-% Kept for Savvas Lesson Quiz items 3, 4, 5 (compound interest, continuous compounding, comparing options).
-% Cut: Example 1 (monthly rate of a population; quiz item 1), Example 3 (the natural base e; its one fact is
-% stated before Example 4), Example 5 (model from two points; quiz item 2), Example 6 (regression; no quiz item).
+% Algebra 2 Lesson 6-2 fast-track packet: Exponential Models (enVision A2 2024 TE, a2_6-2_TE.tex; Example 1 and Example 5 only)
+% Re-cut 2026-10-31 toward the Topic 6 test (a2_T6_assessment_TE.tex): Example 1 teaches topic items 2 and 6,
+% Example 5 teaches topic item 5; together they teach Savvas Lesson Quiz items 1 and 2.
+% Cut: Example 2 (compound interest; quiz item 3, the bonus, through IXL YJW), Example 3 (the natural base e; its one
+% fact is a hint on the DOK 3 exit item), Example 4 (continuous interest; quiz item 4), Example 6 (regression; no quiz item).
+% Quiz item 5 (simple vs continuous vs yearly) needs Examples 2 and 4 and is on the full Savvas quiz only.
 \input{fast-packet-template}
 \begin{document}
 
 \packethead{Lesson 6-2}{Exponential Models}
-\goals{I can write an exponential model for money that earns compound interest or continuously compounded interest, and use it to find the value of the account.}{I can explain why more compounding periods give a larger account value, using the words principal, interest rate, compounding periods, compounded continuously, and natural base e.}
+\goals{I can rewrite an exponential model to find its growth rate for a different time period, and write an exponential model from two points.}{I can explain how I found a rate or a model, using the words \emph{growth factor}, \emph{growth rate}, \emph{initial value}, and \emph{Power of a Power rule}.}
 
-\quiztarget{(Savvas numbers) (1) A town's yearly decrease as a rate per quarter and (2) a point on $y=a\cdot b^x$ from two points: full Savvas quiz only. You will (3) build $A(t)=P\left(1+\frac rn\right)^{nt}$ for an account compounded monthly (Example 2); (4) find the value of an account compounded continuously (Example 4); (5) bonus: compare simple, continuous and yearly interest on \$8{,}000 and say which option is linear and which are exponential (Examples 2 and 4, Practice).}
+\quiztarget{(Savvas numbers) You will (1) write the model for a town that shrinks 2.4\% per year and find its rate per quarter (Example 1); (2) find another point on $y=a\cdot b^x$ from two points (Example 5); (3) bonus: the model for an account compounded monthly (IXL YJW). (4) and (5), interest: full Savvas quiz only.}
+\topictarget{6}{Question 2 asks which model shows butterflies growing from 2000 to 2800 in 7 years (Example 1). Question 5 asks for another point on $y=a\cdot b^x$ from the views after 1 and 2 days (Example 5). Question 6 asks which model of a 20\% yearly growth shows the monthly rate (Example 1).}
 
-\wspart{Example 2}{Understand Compound Interest}
-\textbf{Compound interest} is interest earned on interest already deposited. \textbf{Compound interest formula:} $A=P\left(1+\frac rn\right)^{nt}$, where $P=$ the initial \textbf{principal} invested, $r=$ annual \textbf{interest rate} as a decimal, $n=$ number of \textbf{compounding periods} per year, and $A=$ the value of the account after $t$ years.
-
-Tamira invests \$5,000 in an account that pays 4\% annual interest. \textbf{A.} How much will there be in the account after 3 years if the interest is compounded annually, quarterly, or monthly? ($P=5000$, $r=0.04$, $t=3$.)
-
-{\centering\small\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{|l|c|l|r|}
-\hline
- & $n$ & \textbf{Compound interest formula} & \textbf{After 3 years} \\ \hline
-Annually & 1 & $A=5000\left(1+\frac{0.04}{1}\right)^{3(1)}=5000(1.04)^{3}$ & \$5,624.32 \\
-Quarterly & 4 & $A=5000\left(1+\frac{0.04}{4}\right)^{3(4)}=5000(1.01)^{12}$ & \$5,634.13 \\
-Monthly & 12 & $A=5000\left(1+\frac{0.04}{12}\right)^{3(12)}\approx5000(1.003333)^{36}$ & \$5,636.36 \\ \hline
-\end{tabular}\par}
-As the number of compounding periods increases, the amount in the account also increases: the more often interest is added, the earlier it earns interest of its own.
-
-% TE transcription error corrected: a2_6-2_TE.tex line 256 prints the monthly base as (1+0.003)^{12}; the TE's own note
-% (line 258) says 0.003333..., which gives the printed 1.0407. The packet uses 1.003333 in the monthly rows of both tables.
-\textbf{B.} What is the annual growth rate for each possible account? Use the Power of a Power rule, $\left(b^{n}\right)^{t}=b^{nt}$, to rewrite each model with exponent $t$. Growth factor minus 1 is the rate.
-
-{\centering\small\renewcommand{\arraystretch}{1.12}
-\begin{tabular}{|l|l|c|}
-\hline
- & \textbf{Rewrite with exponent} $t$ & \textbf{Annual growth rate} \\ \hline
-Annually & $A=5000\left(1+\frac{0.04}{1}\right)^{1t}=5000(1.04)^{t}$ & 4\% \\
-Quarterly & $A=5000\left(1+\frac{0.04}{4}\right)^{4t}=5000\left((1.01)^{4}\right)^{t}\approx5000(1.0406)^{t}$ & 4.06\% \\
-Monthly & $A=5000\left(1+\frac{0.04}{12}\right)^{12t}\approx5000\left((1.003333)^{12}\right)^{t}\approx5000(1.0407)^{t}$ & 4.07\% \\ \hline
-\end{tabular}\par}
-Quarterly: $1.0406-1=0.0406=4.06\%$. This yearly rate is the \textbf{effective annual interest rate}.
-
-\textbf{Say it:} Compounded monthly, the account has \blank[1.2cm] compounding periods per year instead of 1, so its value after 3 years is \blank[2cm] than with annual compounding, because \dots\lines[1]
-
-\newpage
-
-\wspart{Try It 2}{Compound interest}
-\$3,000 is invested in an account that earns 3\% annual interest, compounded monthly.
-
-$P=\blank[1.6cm]$ \quad $r=\blank[1.6cm]$ \quad $n=\blank[1.2cm]$ \qquad $A=\blank[1.6cm]\left(1+\dfrac{\blank[1.4cm]}{\blank[1cm]}\right)^{\blank[1.2cm]\,t}$
-
-\textbf{a.} What is the value of the account after 10 years? 100 years?
-
-\begin{minipage}[t]{0.48\textwidth}
-After 10 years:\lines[3]
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-After 100 years:\lines[3]
-\end{minipage}
-
-\textbf{b.} What is the effective annual interest rate of the account?
-
-Hint: rewrite the model with exponent $t$, as in Part B.\lines[2]
-
-\wspart{Example 4}{Find Continuously Compounded Interest}
-\textbf{The natural base $e$.} Put \$1 in at 100\% interest for one year, compounded $n$ times: the value is $\left(1+\frac1n\right)^n$. For $n=1$ it is 2; $n=100$, 2.704813829; $n=100{,}000$, 2.718268237. As $n$ keeps growing, the value approaches the irrational number $e=2.718281828459\ldots$, the \textbf{natural base}. Compounding that never stops is \textbf{compounded continuously}.
-
-\textbf{Continuously compounded interest formula:} $A=Pe^{rt}$, where $P=$ the principal, $e=$ the natural base, $r=$ annual interest rate as a decimal, and $A=$ the value after $t$ years.
-
-\begin{minipage}[t]{0.56\textwidth}
-\vspace{0pt}
-Regina invests \$12,600 in an account that is compounded continuously, at a 3.2\% interest rate for a 12-year term. What is the value of the account after 12 years? Round your answer to the nearest dollar.
-\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
-\item $P=12{,}600$, \ $r=0.032$, \ $t=12$.
-\item $A=Pe^{rt}=12{,}600\,e^{0.032(12)}$
-\item Multiply the exponent first: $0.032(12)=0.384$, so $A=12{,}600\,e^{0.384}$.
-\item Use the $e^x$ key: $e^{0.384}\approx1.468145$, so $A\approx18{,}498.63$.
-\end{enumerate}
-\textbf{To the nearest dollar, the value is \$18,499.}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.40\textwidth}
-\vspace{0pt}
-\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\raggedright\textbf{Calculator trap.} When you evaluate $e^{0.032(12)}$, either simplify $0.032(12)$ as $0.384$ first, or type parentheses, \texttt{e\^{}(0.032*12)}, so that $e$ is raised to the entire product, not just the first factor.}}
-\end{minipage}
-
-\textbf{Say it:} The account is \blank[3.2cm], so I use $A=\blank[1.6cm]$. The base $e$ is the \blank[2.6cm], about \blank[1.6cm].
-
-\newpage
-
-\wspart{Try It 4}{Continuously compounded interest}
-You invest \$125,000 in an account that earns 4.75\% annual interest, compounded continuously.
-
-$P=\blank[2cm]$ \quad $r=\blank[1.6cm]$ \qquad $A=\blank[2cm]\,e^{\blank[1.6cm]\,t}$
-
-\textbf{a.} What is the value of the account after 15 years?\\
-\textbf{b.} What is the value of the account after 30 years?
-
-\begin{minipage}[t]{0.48\textwidth}
-\textbf{a.} After 15 years:\lines[3]
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\textbf{b.} After 30 years:\lines[3]
-\end{minipage}
-
-Why did you use $A=Pe^{rt}$ and not $A=P\left(1+\frac rn\right)^{nt}$? Use the words \emph{compounded continuously} and \emph{natural base}.\lines[2]
-
-% R5 Practice: structural parallel of Savvas Lesson Quiz item 5 (Paul, $8,000, 6 years, 5% simple /
-% 4.5% continuous / 4.75% yearly). Same structure, new numbers and setting. Key: A 6600, B 6615.65, C 6712.35;
-% B - A = $16, C - B = $97 (96.70 to the nearest dollar); year 1: A 5200, B 5178.10, C 5187.50 (linear gains most at first).
-\wspart{Practice}{Three ways to save}
-Lena has \$5,000 from a summer job to save for 8 years. She compares three accounts.
+% TE transcription note: a2_6-2_TE.tex line 163 prints "t years after 2015" in the solution; the prompt and the
+% callout say 2021, so the packet uses 2021.
+\wspart{Example 1}{Rewrite an Exponential Function to Identify a Rate}
+In 2021, the population of a small town was 8,000. The population is increasing at a rate of 2.5\% per year. Rewrite an exponential growth function to find the monthly growth rate.
 
 \begin{minipage}[t]{0.58\textwidth}
 \vspace{0pt}
-\textbf{Option A:} 4\% simple interest\\
-\textbf{Option B:} 3.5\% interest compounded continuously\\
-\textbf{Option C:} 3.75\% interest compounded yearly
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+\item Write a model with the annual rate for the population $y$, $t$ years after 2021. The \textbf{initial value} is 8,000; the \textbf{growth rate} is 0.025; the \textbf{growth factor} is $1+0.025$.
+\[y=8{,}000(1+0.025)^t=8{,}000(1.025)^t\]
+\item For a monthly rate, the exponent must be the number of months in $t$ years, $12t$. Multiply the exponent by $\frac{12}{12}$, then use the \textbf{Power of a Power rule}, $\left(b^m\right)^n=b^{mn}$:
+\begin{align*}
+y&=8{,}000(1.025)^{\frac{12t}{12}}\\
+&=8{,}000\left(1.025^{\frac{1}{12}}\right)^{12t}\\
+&\approx8{,}000(1.00206)^{12t}
+\end{align*}
+\item The monthly growth factor is about 1.00206, so the monthly growth rate is about $1.00206-1=0.00206$.
+\end{enumerate}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.39\textwidth}
+\begin{minipage}[t]{0.38\textwidth}
 \vspace{0pt}
-\small\textbf{Simple interest} is paid on the principal only: $A=P(1+rt)$. It adds the same amount, $Pr$, every year.
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\raggedright\textbf{Common error.} Dividing the annual growth rate by 12 ($0.025\div12\approx0.00208$) does not give the exact monthly growth rate. You must use the Power of a Power rule to find the exact monthly growth rate.}}
+
+\vspace{6pt}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\raggedright\textbf{Other periods.} For a rate per quarter, multiply the exponent by $\frac44$ instead: the quarterly growth factor is $(1+r)^{\frac14}$, not $1+\frac r4$.}}
 \end{minipage}
 
-\textbf{a.} Write a model for each option and fill in the table. Round to the cent.
+\textbf{The population is increasing about 0.206\% per month.}
 
-\begin{center}
-\begin{tabular}{|l|l|c|c|}
+\textbf{Say it:} The yearly \emph{growth factor} is \blank[1.6cm]. I used the \emph{Power of a Power rule} to make the exponent \blank[1.4cm], so the monthly \emph{growth factor} is about \blank[1.8cm] and the monthly \emph{growth rate} is about \blank[1.6cm]\%, because \dots\lines[1]
+
+\newpage
+
+\wspart{Try It 1}{Quarterly rate}
+The population in a small town is increasing annually by 1.8\%. What is the quarterly rate of population increase?
+
+Hint: multiply the exponent by $\frac44$, as Example 1 multiplied it by $\frac{12}{12}$.
+
+\vspace{2pt}
+$y=a\left(\blank[1.6cm]\right)^{t}=a\left(\blank[1.6cm]^{\,1/4}\right)^{4t}\approx a\left(\blank[2cm]\right)^{4t}$
+
+Quarterly growth rate $\approx$ \blank[2cm] $-\,1=$ \blank[2cm], or about \blank[1.6cm]\% per quarter.\lines[2]
+
+\wspart{Example 5}{Use Two Points to Find an Exponential Model}
+Tia knew that the number of instant messages (IM) she sent was growing exponentially. She generated a record of the number of IM she sent each year since 2018. What is an exponential model that describes the data?
+
+\begin{minipage}[t]{0.62\textwidth}
+\vspace{0pt}
+Write an exponential model in the form $y=a\cdot b^x$, with $y$ equal to the number of IM in hundreds and $x$ equal to the number of years since 2018. Use the data to find the values of the constants $a$ and $b$.
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+\item 2022 is $x=4$ with $y=60$ hundred; 2023 is $x=5$ with $y=66$ hundred.
+\item The $x$-values are consecutive integers, so the \textbf{growth factor} $b$ is the ratio of the $y$-values: $b=\frac{66}{60}=\frac{11}{10}=1.1$.
+\item Use $b$ and one data point to find the \textbf{initial value} $a$. Substitute 1.1 for $b$, 5 for $x$, and 66 for $y$:
+\[66=a(1.1)^5\qquad a=\frac{66}{(1.1)^5}\approx40.98\]
+\end{enumerate}
+\textbf{The function $y=40.98(1.1)^x$ models the number of IM (in hundreds) Tia sends $x$ years after 2018.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.34\textwidth}
+\vspace{0pt}
+{\centering\small
+\begin{tabular}{|c|c|}
 \hline
- & \textbf{Model} & \textbf{After 1 year} & \textbf{After 8 years} \\ \hline
-A (simple) & $A=\rule{0pt}{18pt}\blank[3.6cm]$ & \blank[2.2cm] & \blank[2.2cm] \\
-B (continuous) & $A=\rule{0pt}{18pt}\blank[3.6cm]$ & \blank[2.2cm] & \blank[2.2cm] \\
-C (yearly) & $A=\rule{0pt}{18pt}\blank[3.6cm]$ & \blank[2.2cm] & \blank[2.2cm] \\ \hline
-\end{tabular}
-\end{center}
+\textbf{Year} & \textbf{IM sent} \\ \hline
+2022 & 6,000 \\
+2023 & 6,600 \\ \hline
+\end{tabular}\par}
 
-\textbf{b.} After 8 years, to the nearest dollar, Option B will be worth \$\blank[1.4cm] more than Option A and \$\blank[1.4cm] less than Option C.
+\vspace{6pt}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\raggedright\textbf{Common error.} The growth factor $(1+r)$ is different from the growth rate $(r)$. Here the growth factor is 1.1 while the growth rate is 0.1, or 10\%.}}
 
-\textbf{c.} Option A is a \blank[2.4cm] function, while Options B and C are \blank[2.4cm] functions. Which option gained the most in the first year? Which gains faster over time? Use your table.\lines[2]
+\vspace{6pt}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\raggedright\textbf{Check:} $40.98(1.1)^4\approx60$. \ If the $x$-values are 2 apart, divide the $y$-values, then take the square root.}}
+\end{minipage}
+
+\textbf{Say it:} The $x$-values are consecutive, so the \emph{growth factor} is $b=$ \blank[1.6cm] $=$ \blank[1.2cm] and the \emph{growth rate} is \blank[1.2cm]\%. To find the \emph{initial value} $a$, I substitute \blank[2.4cm] and solve, because \dots\lines[1]
+
+\newpage
+
+\wspart{Try It 5}{A model from two points}
+A Kansas realtor reported the value of an acre of farm land over a period of several years since 2015. The land was worth \$2010 in 2017 and \$2060 in 2018. Use the data to determine an exponential model that describes the value of the land per acre.
+
+Hint: \$2010 is not the initial value. Use $x=$ years since 2015, find $b$, then use $b$ and one point to solve for $a$.
+
+\vspace{2pt}
+Points: $\left(\blank[0.9cm],\ 2010\right)$ and $\left(\blank[0.9cm],\ 2060\right)$ \qquad $b=\blank[1.4cm]\div\blank[1.4cm]\approx\blank[1.8cm]$
+
+\blank[1.4cm] $=a\left(\blank[1.6cm]\right)^{\boxed{\phantom{0}}}$ \qquad $a\approx\blank[1.8cm]$ \qquad Model: $y\approx\blank[4cm]$\lines[2]
+
+% R5 Practice: structural parallel of Savvas Lesson Quiz item 1 (town of 4,200 in 1970 decreasing 2.4% per year;
+% complete y = __(__)^t; rate per quarter to the nearest thousandth of a percent). Try It 1 rehearses a growth rate,
+% not a decrease. Same structure, new numbers and setting. Key: y = 18,500(0.88)^t; 0.88^(1/4) = 0.968547,
+% so the value decreases about 1 - 0.968547 = 0.031453, 3.145% per quarter (not 12/4 = 3%).
+\wspart{Practice}{A decrease per quarter}
+In 2022, a used car was worth \$18,500. Its value is decreasing at a rate of 12\% per year.
+
+Hint: a decrease of 12\% per year keeps $1-0.12$ of the value each year, so the yearly factor is \blank[1.4cm].
+
+\textbf{a.} Complete the function that models the value $y$ of the car, $t$ years after 2022.
+
+\qquad $y=\blank[2cm]\left(\blank[1.6cm]\right)^t$
+
+\textbf{b.} To the nearest thousandth of a percent, the value is decreasing about \blank[1.8cm]\% per quarter. Show the rewrite with exponent $4t$.\lines[2]
+
+\textbf{c.} Why is the answer to part b not $12\div4=3\%$? Use the words \emph{growth factor} and \emph{Power of a Power rule}.\lines[2]
 
 \newpage
 \wspart{IXL}{Practice for the quiz}
@@ -145,32 +127,38 @@ Go to IXL, Algebra 2. Type the code in the search box. Do the starred skills fir
 \toprule
 \textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
 \midrule
-\ixlrow{LWE}{Evaluate exponential functions (warm-up)}{Do Now: calculator powers and the e key}
-\ixlrow{YJW $\bigstar$}{Compound interest: word problems}{Quiz 3 and 5 (Example 2)}
-\ixlrow{5GU $\bigstar$}{Continuously compounded interest: word problems}{Quiz 4 and 5 (Example 4)}
-\ixlrow{KLF $\bigstar$}{Describe linear and exponential growth and decay}{Quiz 5 (bonus), last parts: linear or exponential}
+\ixlrow{LWE}{Evaluate exponential functions (warm-up)}{Do Now: fractional powers on the calculator}
+\ixlrow{E5S $\bigstar$}{Exponential growth and decay}{Quiz 1 (Example 1): factor and rate}
+\ixlrow{2YT $\bigstar$}{Exponential functions over unit intervals}{Quiz 2 (Example 5): the ratio of $y$-values}
+\ixlrow{YJW $\bigstar$}{Compound interest: word problems}{Quiz 3 (bonus; Example 2, skipped here)}
 \bottomrule
 \end{tabularx}
 
 \vspace{2pt}
 \textbf{SmartScore 70 or above on each starred ($\bigstar$) skill replaces your quiz score.}
 
-\wspart{Exit question}{Who will have more?}
-Adam and Jacinta open an account on the same day. Each starts with \$8,000 for 20 years. Adam's interest is compounded quarterly at 1.25\%. Jacinta's interest is compounded continuously at 1.25\%. Who do you predict will have more money in their account after 20 years? Explain your reasoning.
+% R3 DOK 3: Practice & Problem Solving 13 (DOK 3, filed under Example 5 in the TE item analysis), verbatim; the TE's
+% part b ends "x = 8?", printed here with a period. Key: a = 54.61/e^2 = 7.39 (403.48/e^4 = 7.39 checks), y = 7.39e^x;
+% y(8) = 7.39e^8 = 22,029. The hint carries the one fact of the cut Example 3 (e, the natural base).
+\wspart{Exit question}{Use Structure (DOK 3)}
+The points $(2,\ 54.61)$ and $(4,\ 403.48)$ are points on the graph of an exponential model in the form $y=a\cdot e^x$.
 
-\vspace{4pt}
-Adam: $A=\blank[5.5cm]$ \qquad Jacinta: $A=\blank[5cm]$
+Hint: $e\approx2.718$ is the natural base; use the $e^x$ key. Here the base is already known, so one point gives $a$ and the other point checks it.
 
-\vspace{6pt}
-\blank[2.2cm] will have more, because interest that is \blank[3.6cm] is added more often than interest with only \blank[1.2cm] compounding periods per year, so \dots\lines[3]
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{a.} Find the exponential model.\lines[3]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{b.} Use the exponential model to find the value of $y$ when $x=8$.\lines[3]
+\end{minipage}
 
 \vspace{6pt}
 \textbf{Before the quiz, finish these sentences.}
 
-The \blank[2.6cm] is the money you put in at the start; $r$ is the annual \blank[3cm], written as a decimal.
+The \emph{growth factor} is 1 plus the \blank[2.8cm]; for a decrease it is 1 minus the rate.
 
-More \blank[4cm] per year means a \blank[2cm] account value.
+To change a yearly rate into a rate per quarter, I use the \blank[4.2cm] to make the exponent \blank[1.4cm], because \dots\lines[1]
 
-When interest is \blank[4cm], I use $A=Pe^{rt}$, where $e\approx\blank[1.6cm]$ is the \blank[3cm].
+When two points have consecutive $x$-values, $b$ is the \blank[2.4cm] of their $y$-values; then I substitute one point to find the \blank[2.8cm] $a$.
 
 \end{document}

@@ -22,6 +22,7 @@
   ticklabel style={font=\scriptsize, fill=white, inner sep=1pt},
   xlabel={$x$}, ylabel={$y$}, axis line style={thick}, clip=true}}
 
+% Short form re-cut 2026-10-31 with the packet (kept Examples 2 and 5): Savvas items 1 and 5 graded, item 3 the bonus.
 \begin{document}
 
 \noindent\textbf{Name}\; \rule{6cm}{0.4pt} \hfill Period \rule{1.2cm}{0.4pt} \quad Date \rule{2.2cm}{0.4pt}
@@ -30,26 +31,29 @@
 
 \vspace{2pt}\noindent{\LARGE\textbf{6-1 \; Lesson Quiz: Key Features of Exponential Functions}}
 
-\noindent{\small short form \hfill questions keep their Savvas numbers (2, 3, 4); show your work}
+\noindent{\small short form \hfill questions keep their Savvas numbers (1, 3, 5); show your work}
 
 \vspace{2pt}\noindent\rule{\textwidth}{0.6pt}
 
 \vspace{4pt}
-\textbf{2.} 15,000 blue trout were released into the Meherrin River for a scientific study. The function $f(x)=15{,}000\left(\frac98\right)^x$ represents the number of blue trout after $x$ years. After 5 years, what happens to the population?
+\textbf{1.} Which function represents the exponential function $f(x)=3^x$ after a vertical stretch by a factor of 8 and a reflection across the $x$-axis?
 
-\begin{minipage}[t]{0.44\textwidth}
+\begin{minipage}[t]{0.40\textwidth}
 \begin{itemize}[leftmargin=1.2em, itemsep=5pt]
-\item[] \choice{A} It decreases by about 2,000.
-\item[] \choice{B} It decreases by about 12,000.
-\item[] \choice{C} It increases by about 2,000.
-\item[] \choice{D} It increases by about 12,000.
+\item[] \choice{A} $g(x)=3^{-8x}$
+\item[] \choice{B} $g(x)=-3^{8x}$
+\item[] \choice{C} $g(x)=8\cdot3^{-x}$
+\item[] \choice{D} $g(x)=-8\cdot3^x$
 \end{itemize}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.52\textwidth}
-Show your work: $f(5)=\ansline[3.5cm]$
+\begin{minipage}[t]{0.56\textwidth}
+Explain your choice: which part of $g(x)$ makes the reflection, and which part makes the stretch?
 
-\vspace{14pt}
-Change after 5 years: \ansline[3.6cm]
+\vspace{16pt}
+\ansline[\linewidth]
+
+\vspace{16pt}
+\ansline[\linewidth]
 \end{minipage}
 
 \vspace{8pt}\noindent\rule{\textwidth}{0.4pt}
@@ -71,35 +75,43 @@ Function type: & \ansline[4cm] & & \\
 \vspace{6pt}\noindent\rule{\textwidth}{0.4pt}
 
 \vspace{4pt}
-\begin{minipage}[t]{0.44\textwidth}
-\textbf{4.} The rabbit population of Springfield, Ohio, was 144,000 in 2016. It is expected to decrease by about 7.2\% per year. Write and graph the exponential decay function of the rabbit population, $P(t)$.
+\begin{minipage}[t]{0.46\textwidth}
+\textbf{5.} Which of the following functions has a greater growth factor than the function shown in the graph?
 
-\vspace{14pt}
-$P(t)=\ansline[2.6cm]\,\big(\ansline[1.8cm]\big)^t$
+\begin{itemize}[leftmargin=1.2em, itemsep=5pt]
+\item[] \choice{A} $f(x)=\left(\frac32\right)\cdot3^x$
+\item[] \choice{B} $f(x)=8\left(\frac32\right)^x$
+\item[] \choice{C} $f(x)=20(1.4)^x$
+\item[] \choice{D} $f(x)=12(0.8)^x$
+\end{itemize}
 
-\vspace{14pt}
-Decay factor: \ansline[2cm]
-
-\vspace{14pt}
-What does $t$ count? \ansline[3.4cm]
+\vspace{6pt}
+Show your work: the growth factor of the graphed function is $b=\ansline[2.6cm]$
 \end{minipage}\hfill
-\begin{minipage}[t]{0.54\textwidth}
+\begin{minipage}[t]{0.50\textwidth}
 \vspace{-4pt}
 \begin{tikzpicture}
-% TE window t -10 to 90 (grid 10, labels 20-80), P -20,000 to 180,000 (grid 20,000, labels 40,000-160,000); O at origin
-\begin{axis}[quizgrid, xmin=-10, xmax=94, ymin=-20000, ymax=186000,
-  xtick={-10,0,...,90}, ytick={-20000,0,...,180000},
-  xticklabels={,,,20,,40,,60,,80,},
-  yticklabels={,,,40{,}000,,80{,}000,,120{,}000,,160{,}000,},
-  scaled y ticks=false,
-  x=0.08cm, y=0.000033cm, xlabel={$t$}, ylabel={$P$}]
+% TE quiz 5 figure: x window -1 to 6 (grid 1, labels 2,4), y window -20 to 60 (grid 10, labels 20,40);
+% filled labeled points (0,16), (2,36), (3,54); curve y = 16(1.5)^x with arrows near (-1,10) and near (3,60); axes arrows both ends
+\begin{axis}[quizgrid, xmin=-1.5, xmax=6.5, ymin=-22, ymax=64,
+  xtick={-1,...,6}, ytick={-20,-10,...,60},
+  xticklabels={,,,2,,4,,}, yticklabels={,,,,20,,40,},
+  axis line style={thick, <->},
+  x=0.9cm, y=0.068cm]
+\addplot[very thick, black, domain=-1.1:3.26, samples=80, <->] {16*1.5^x};
+\node[circle, fill, inner sep=1.5pt] at (axis cs:0,16) {};
+\node[circle, fill, inner sep=1.5pt] at (axis cs:2,36) {};
+\node[circle, fill, inner sep=1.5pt] at (axis cs:3,54) {};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:0.15,13) {$(0,16)$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:2.2,34) {$(2,36)$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:3.2,52) {$(3,54)$};
 \node[font=\scriptsize, inner sep=1pt, anchor=north east] at (axis cs:0,0) {$O$};
 \end{axis}
 \end{tikzpicture}
 \end{minipage}
 
 \vfill
-\noindent\textbf{Scoring:} Question 3 and Question 4 are 10 points each. Question 2 is a bonus of up to 5 points. Total out of 20.
+\noindent\textbf{Scoring:} Question 1 and Question 5 are 10 points each. Question 3 is a bonus of up to 5 points. Total out of 20.
 
 \newpage
 \noindent{\LARGE\textbf{6-1 Lesson Quiz, short form: answer key}}
@@ -107,13 +119,13 @@ What does $t$ count? \ansline[3.4cm]
 \vspace{4pt}\noindent\rule{\textwidth}{0.6pt}
 
 \begin{enumerate}
-\item[\textbf{2.}] \textbf{D, it increases by about 12,000.} The base $\frac98=1.125>1$, so the population grows. $f(5)=15{,}000\left(\frac98\right)^5=15{,}000\cdot\frac{59{,}049}{32{,}768}\approx27{,}030$, and $27{,}030-15{,}000\approx12{,}030$. Choice C is a common slip: $15{,}000(0.125)\approx1{,}900$ is one year's increase, not five. Savvas quiz item 2, DOK 2, Skills Review and Practice F14. Taught by Example 3B (evaluate the model at a later time) and Try It 3b-c. \textbf{Bonus 5:} 3 for D, 2 for shown work ($f(5)\approx27{,}000$ or the difference).
-\item[\textbf{3.}] \textbf{Domain: all real numbers; Range: $\{y\mid y>0\}$; $y$-intercept: $0.5$; Asymptote: $y=0$; Function type: exponential.} $a=\frac12$ is the $y$-intercept because $6^0=1$; $b=6>1$, so the graph rises from the $x$-axis on the left. Savvas quiz item 3, DOK 2, F13. Taught by Example 1 (Try It 1 is the same five features). \textbf{10 points:} 2 per correct blank.
-\item[\textbf{4.}] \textbf{$P(t)=144{,}000(0.928)^t$.} Decay factor $1-0.072=0.928$; $t$ is years since 2016. Graph: starts at the filled point $(0,144{,}000)$ and decreases toward the $t$-axis (asymptote $P=0$), passing near $(10,68{,}000)$, $(20,32{,}000)$, $(40,7{,}000)$; the TE answer graph ends near $(90,0)$. Savvas quiz item 4, DOK 2, F13 and F14. Taught by Example 3 and the decay model box (Try It 3 is the same decay shape). \textbf{10 points:} 3 for 144,000, 4 for 0.928, 3 for a decreasing curve through $(0,144{,}000)$ that approaches but does not cross the $t$-axis. A student who writes $0.072$ as the base loses the 4 points (it is the rate, not the decay factor; concept summary Common Error).
+\item[\textbf{1.}] \textbf{D, $g(x)=-8\cdot3^x$.} The factor 8 multiplies every $y$-value (vertical stretch) and the minus sign makes each $y$-value its opposite (reflection across the $x$-axis): $g(x)=-8f(x)$. A and B put the 8 in the exponent (a horizontal change, not a stretch of the $y$-values); C has the stretch but its $-x$ reflects across the $y$-axis. Savvas quiz item 1, DOK 2, Skills Review and Practice F28. Taught by Example 2 ($g(x)=-3^x=-f(x)$ reflects across the $x$-axis). \textbf{10 points:} 6 for D, 4 for the explanation (the $-$ reflects, the 8 stretches).
+\item[\textbf{3.}] \textbf{Domain: all real numbers; Range: $\{y\mid y>0\}$; $y$-intercept: $0.5$; Asymptote: $y=0$; Function type: exponential.} $a=\frac12$ is the $y$-intercept because $6^0=1$; with no vertical shift the asymptote stays $y=0$ (Example 2's rule: the asymptote moves only with a shift $k$). Savvas quiz item 3, DOK 2, F13. Taught by Example 1 (cut); Example 2's intercept and asymptote rules and the packet's definition line carry it. \textbf{Bonus 5:} 1 per correct blank.
+\item[\textbf{5.}] \textbf{A, $f(x)=\left(\frac32\right)\cdot3^x$.} The graph's growth factor is $b=\frac{54}{36}=1.5$ (and $\frac{36}{16}=2.25=1.5^2$ over two steps), so the graphed function is $16(1.5)^x$. Choice A's growth factor is $3>1.5$. B has the same factor $1.5$, C has $1.4<1.5$, and D ($0.8$) is decay. Savvas quiz item 5, DOK 2, F14. Taught by Example 5 (growth factor as the ratio of $y$-values one unit apart). \textbf{10 points:} 6 for A, 4 for $b=1.5$ shown from the points. A student who divides $\frac{36}{16}$ and calls it $b$ forgets that $x$ went up by 2.
 \end{enumerate}
 
-\textbf{Items left off this form} (available for a retake or Form B): Savvas item 1, the function for $f(x)=3^x$ after a vertical stretch by a factor of 8 and a reflection across the $x$-axis (answer D, $g(x)=-8\cdot3^x$; DOK 2, F28; it is the cut Example 2 and Lesson 1-2 transformations); Savvas item 5, which function has a greater growth factor than the graphed one through $(0,16)$, $(2,36)$, $(3,54)$ (answer A, $f(x)=\left(\frac32\right)\cdot3^x$, because the graph's growth factor is $\frac{54}{36}=1.5$ and $3>1.5$; choice B has the same factor 1.5; DOK 2, F14; it is the cut Example 5). Item 5's graph could be redrawn from the TE description; it is left off because no kept Example teaches it, not because of the figure (Example 1's study tip, ratio of consecutive $y$-values $=b$, is the one-minute bridge if the teacher puts it back).
+\textbf{Items left off this form} (available for a retake or Form B): Savvas item 2, 15,000 blue trout with $f(x)=15{,}000\left(\frac98\right)^x$: after 5 years the population increases by about 12,000 (answer D; $f(5)\approx27{,}030$; DOK 2, F14; it is the cut Examples 3 and 4); Savvas item 4, the rabbit population of Springfield, Ohio, 144,000 in 2016 and decreasing by about 7.2\% per year: $P(t)=144{,}000(0.928)^t$, graphed as a decay curve from $(0,144{,}000)$ toward the $t$-axis (DOK 2, F13 and F14; it is the cut Example 3 and its decay-model box). Both are full Savvas quiz only because no kept Example teaches them.
 
-\textbf{IXL replacement:} SmartScore 70 or above on EFD, U7P, DBW and TYQ replaces this quiz with 20/20.
+\textbf{IXL replacement:} SmartScore 70 or above on RSN, EFD and 2YT replaces this quiz with 20/20.
 
 \end{document}

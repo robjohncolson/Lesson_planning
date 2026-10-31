@@ -1,170 +1,203 @@
-% Algebra 2 Lesson 2-7 fast-track packet: Linear-Quadratic Systems (enVision A2 2024 TE, Example 3 and Example 4 only).
-% Fast-lesson draft 2026-10-30 (docs/a2-fast-lesson-spec.md); PLC has not met on this lesson.
+% Algebra 2 Lesson 2-7 fast-track packet: Linear-Quadratic Systems (enVision A2 2024 TE, Example 1 and Example 5 only).
+% Fast-lesson draft 2026-10-31 (docs/a2-fast-lesson-spec.md), re-cut toward the Topic 2 test; PLC has not met on this lesson.
+% Topic 2 Assessment (a2_T2_assessment_TE.tex): item 16 count the real solutions of y = x^2 + 8, y = x + 15 = Ex 1;
+% item 17 solve -3x^2 + 2x + 4 = -x - 3 with a calculator's intersection feature = Ex 5. The kept pair teaches both.
 % Quiz map (TE 2-7 Lesson Quiz): item 1 count solutions = Ex 1; item 2 substitution = Ex 2; item 3 ball up a hill = Ex 3;
 % item 4 shade a system of inequalities = Ex 4; item 5 calculator intersect = Ex 5.
-% Kept: Ex 3 (the lesson's only DOK 3, practice 29; quiz 3, and its set-equal step is all of quiz 2) and
-% Ex 4 (the only route to quiz 4). DOK 3: practice 29 is the Practice block (page 2); the Exit question is Additional Practice 5.
-% Quiz numbers below are the Savvas item numbers (the short form keeps them); items 1 and 5 are full Savvas quiz only.
+% Kept: Ex 1 (topic 16, quiz 1) and Ex 5 (topic 17, quiz 5). Quiz 2 (bonus) is the Exit question (Additional Practice 5).
+% DOK 3: the lesson's only DOK 3 item (practice 29) sits under Example 3, which is cut, so it is the self-paced Extension.
+% Quiz numbers below are the Savvas item numbers (the short form keeps them); items 3 and 4 are full Savvas quiz only.
 \input{fast-packet-template}
-\usepgfplotslibrary{fillbetween}
 \begin{document}
 
 \packethead{Lesson 2-7}{Linear-Quadratic Systems}
-\goals{I can solve a linear-quadratic system by substitution and shade the solution region of a linear-quadratic system of inequalities.}{I can explain why my answer solves the system using the words substitute, intersection, boundary, and region.}
+\goals{I can determine how many real solutions a linear-quadratic system has and solve a quadratic equation by graphing a linear-quadratic system and finding the intersection points.}{I can explain how many solutions a system has using the words system, intersection, tangent, and approximate.}
 
-\quiztarget{(1) Count the solutions of a line and a parabola (full Savvas quiz only). (2) Substitute to solve a system whose two equations both start ``$y=$'' (bonus; Example 3's first step). (3) Find how far a ball travels before it lands on a hill: set the path equal to the hill and solve (Example 3). (4) Shade the solution region of one quadratic and one linear inequality (Example 4). (5) Solve with a calculator's intersection feature (full Savvas quiz only).}
+\quiztarget{(1) Count the real solutions of a line and a parabola (Example 1, Try It 1). (2) Bonus: solve a system whose two equations both start ``$y=$'' (the Example 1 check; Exit question). (3) A ball up a hill and (4) shading inequalities: full Savvas quiz only. (5) Solve with a calculator's intersection feature (Example 5, Try It 5).}
+\topictarget{2}{Question 16 asks how many real solutions a parabola and a line have (Example 1). Question 17 asks you to solve a quadratic equation with a calculator's intersection feature, to the nearest hundredth (Example 5).}
 
-\wspart{Example 3}{Applying a Linear-Quadratic System}
-Andrew kicks a ball up a hill for his dog, Laika, to chase. The hill is modeled by a line through the origin, $y=0.5x$. The path of the ball is modeled by the quadratic function $y=-0.5x^2+6x$. How far does the ball travel horizontally? How far must Laika run up the hill to catch it?
-
-\begin{minipage}[t]{0.47\textwidth}
+\wspart{Example 1}{Determine the Number of Solutions}
+\begin{minipage}[t]{0.63\textwidth}
 \vspace{0pt}\raggedright
-\textbf{1.} The ball lands where the path meets the hill: an \textbf{intersection}. Both equations give $y$, so \textbf{substitute} $0.5x$ for $y$:
-\[
-\begin{aligned}
-0.5x&=-0.5x^2+6x\\
-0&=-0.5x^2+5.5x\\
-0&=-0.5x(x-11)\\
-x=0 \quad&\text{or}\quad x=11
-\end{aligned}
-\]
-\textbf{2.} $x=0$ is where Andrew kicks the ball. $x=11$ is where it lands on the hill, at \mbox{$y=0.5(11)=5.5$}. \textbf{The ball travels 11 ft horizontally.}
+How many solutions can there be for a linear-quadratic system?
 
-\textbf{3.} Laika runs along the hill: the hypotenuse of a right triangle with legs 11 ft and 5.5 ft.
-\[\sqrt{11^2+5.5^2}=\sqrt{151.25}\approx 12.3\ \text{ft}\]
-\textbf{Laika runs about 12.3 ft.} (Answer \emph{every} part of the question.)
+\textbf{A.} How many real solutions does the \textbf{system} $y=x^2$, $y=2x$ have?
+
+The graph shows the parabola and the line meet at two points, $(0,0)$ and $(2,4)$. A solution is an ordered pair that makes \emph{every} equation in the system true, so the solutions are the points of \textbf{intersection}.
+
+\textbf{Check with algebra:} both equations give $y$, so set them equal:
+$x^2=2x$, \ $x^2-2x=0$, \ $x(x-2)=0$, \ $x=0$ or $x=2$.
+\textbf{This system has two real solutions.}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.51\textwidth}
-\vspace{0pt}
-% TE window: first quadrant to x=27.5, y=20, ticks and grid every 2.5 ft (the TE's grid unit: "scaled by 2.5 feet"),
-% x labels O,5,...,25 and y labels 5,10,15; curves arrowed. Half a unit of padding keeps the origin dot unclipped.
-\begin{tikzpicture}
-\begin{axis}[sheetgrid, xmin=-0.5, xmax=28, ymin=-0.5, ymax=20.5,
-  xtick={0,2.5,...,27.5}, ytick={0,2.5,...,20},
-  xticklabels={$O$,,5,,10,,15,,20,,25,}, yticklabels={,,5,,10,,15,,}, hide obscured x ticks=false,
-  x=0.26cm, y=0.3cm,
-  xlabel={Horizontal distance (ft)}, ylabel={Height (ft)},
-  xlabel style={at={(axis description cs:0.5,-0.1)}, anchor=north, font=\scriptsize},
-  ylabel style={at={(axis description cs:-0.08,0.5)}, rotate=90, anchor=south, font=\scriptsize}]
-\addplot[very thick, red, ->, domain=0:11, samples=80] {-0.5*x^2+6*x};
-\addplot[very thick, blue, ->, domain=0:27.5, samples=2] {0.5*x};
-\addplot[thick, dashed] coordinates {(11,0) (11,5.5)};
-\node[closed] at (axis cs:0,0) {};
-\node[closed] at (axis cs:11,5.5) {};
-\node[closed] at (axis cs:6,18) {};
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south] at (axis cs:6,18.4) {$(6,18)$};
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north west] at (axis cs:11.4,5.0) {$(11,5.5)$};
-\node[font=\scriptsize, red, fill=white, inner sep=1pt, anchor=west] at (axis cs:9.8,16.5) {$y=-0.5x^2+6x$};
-\node[font=\scriptsize, blue, fill=white, inner sep=1pt, anchor=south east] at (axis cs:25,13.6) {$y=0.5x$};
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south] at (axis cs:5.5,0.3) {11 ft};
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=east] at (axis cs:10.7,2.6) {5.5 ft};
-\end{axis}
-\end{tikzpicture}
-\end{minipage}
-
-\textbf{Say it:} I \blank[2.6cm] $0.5x$ for $y$ because at the \blank[3cm] the path and the hill have the same $y$-value. The solution $x=11$ means \dots\lines[2]
-
-\newpage
-
-\wspart{Try It 3}{Revenue and cost}
-Revenue for the high school band concert is given by the function $y=-30x^2+250x$, where $x$ is the ticket price, in dollars. The cost of the concert is given by the function $y=490-30x$. At what ticket price will the band make enough revenue to cover their costs?
-
-\begin{minipage}[t]{0.48\textwidth}
-\vspace{0pt}
-\textbf{a.} Hint: set revenue equal to cost, then solve.\lines[4]
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\vspace{0pt}
-\textbf{b.} Hint: test a price between your two answers.\lines[4]
-\end{minipage}
-
-The band covers its costs for ticket prices from \blank[2cm] to \blank[2cm] dollars.
-
-% R3: the lesson's only DOK 3 (Practice & Problem Solving 29, SEE EXAMPLE 3), verbatim; R5: rehearses Savvas quiz item 3 (the ball on the hill); the TE prints the path in the illustration callout.
-\wspart{Practice}{Bounce or splash? (DOK 3, Practice 29)}
-A golfer accidentally hits a ball toward a water hazard that is downhill from current position on the fairway. The hill can be modeled by a line through the origin with slope $-\tfrac18$. The path of the ball can be modeled by the function $y=-\tfrac{1}{100}x^2+\tfrac32x$.
-
-\textbf{Part A} If the golfer stands at the origin, and the water hazard is 180 yd away, will the golfer's ball bounce or splash?
-
-Hill: $y=\blank[2cm]$ \qquad Substitute and solve:\lines[4]
-
-\textbf{Part B} How far did the ball land from the edge of the water hazard?\lines[2]
-
-\textbf{Part C} Does it matter whether you measure the 180 yd horizontally or along the hill? Explain.\lines[2]
-
-\newpage
-
-\wspart{Example 4}{Solve a Linear-Quadratic System of Inequalities}
-How can you solve this system of inequalities? \quad $y<-2x^2+12x-10$ \quad and \quad $4x+y>4$
-
-\begin{minipage}[t]{0.52\textwidth}
-\vspace{0pt}
-\textbf{Step 1} Graph each \textbf{boundary}. ``$<$'' and ``$>$'': \textbf{dashed}, the boundary is not part of the solution.
-\begin{itemize}
-\item Parabola $y=-2x^2+12x-10$: vertex $(3,8)$, $x$-intercepts $1$ and $5$, $y$-intercept $-10$. Test $(0,0)$: $0<-10$? False. Shade the side \emph{without} the origin: below the parabola.
-\item Line: $4x+y>4$ is $y>-4x+4$ (slope $-4$, $y$-intercept $4$). Test $(0,0)$: $0>4$? False. Shade above the line.
-\end{itemize}
-\textbf{Step 2} The solution \textbf{region} is where the shadings overlap (darkest). The boundaries meet where $-2x^2+12x-10=-4x+4$:
-$x^2-8x+7=0$, $(x-1)(x-7)=0$, at $(1,0)$ and $(7,-24)$.
-
-\textbf{Check a point in the region,} $(2,0)$:\\
-$0<-2(2)^2+12(2)-10$, \ $0<6$ \checkmark\\
-$4(2)+0>4$, \ $8>4$ \checkmark
-\end{minipage}\hfill
-\begin{minipage}[t]{0.45\textwidth}
-\vspace{0pt}
-\begin{tikzpicture}
-% TE window x=[-5,10], y=[-45,25], grid 1 by 5, x labels -4,...,8, y labels 20,10,-10,...,-40; curve ends arrowed.
-\begin{axis}[sheetgrid, xmin=-5.5, xmax=10.5, ymin=-45.5, ymax=25.5,
-  xtick={-4,-2,2,4,6,8}, ytick={-40,-30,-20,-10,10,20},
-  minor xtick={-5,...,10}, minor ytick={-45,-40,...,25}, minor grid style={gray!25},
-  x=0.5cm, y=0.1cm]
-\addplot[name path=par, very thick, red, dashed, <->, domain=-2.1:8.1, samples=120] {-2*x^2+12*x-10};
-\addplot[name path=lin, very thick, blue, dashed, <->, domain=-5.2:10.2, samples=2] {-4*x+4};
-\path[name path=bot] (axis cs:-2.1,-45.5) -- (axis cs:8.1,-45.5);
-\path[name path=top] (axis cs:-5.5,25.5) -- (axis cs:10.5,25.5);
-\addplot[yellow!45, opacity=0.6] fill between[of=par and bot];
-\addplot[blue!30, opacity=0.45] fill between[of=lin and top];
-\addplot[green!55!black, opacity=0.55] fill between[of=par and lin, soft clip={domain=1:7}];
-\node[closed, red] at (axis cs:2,0) {};
-\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=south west] at (axis cs:2.2,0.8) {$(2,0)$};
-\node[font=\scriptsize, red, fill=white, inner sep=1pt] at (axis cs:6.4,14) {$y=-2x^2+12x-10$};
-\node[font=\scriptsize, blue, fill=white, inner sep=1pt, anchor=north west] at (axis cs:-5.2,9) {$y=-4x+4$};
-\end{axis}
-\end{tikzpicture}
-\end{minipage}
-
-\textbf{Say it:} The point $(2,0)$ is in the solution \blank[2.2cm] because \dots\ Each \blank[2.4cm] is dashed because \dots\lines[1]
-
-\wspart{Try It 4}{Shade the solution region}
-\begin{minipage}[t]{0.47\textwidth}
-\vspace{0pt}
-Solve the system of inequalities $y>x^2+6x-12$, $3x-y\geq-8$ using shading.
-\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
-\item Graph $y=x^2+6x-12$, dashed or solid?\\ Vertex: \blank[1.8cm] \ $y$-intercept: \blank[1.1cm]
-\item Solve $3x-y\geq-8$ for $y$ (dividing by $-1$ flips the sign), dashed or solid?\\ $y$ \blank[3cm]
-\item Test $(0,0)$ in each inequality and shade.
-\item Darken the region where the shadings overlap.
-\item Check a point in your region in \emph{both} original inequalities:\lines[2]
-\end{enumerate}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.50\textwidth}
+\begin{minipage}[t]{0.35\textwidth}
 \vspace{0pt}
 \begin{center}
+% TE window x=[-5,5], y=[-2,7], unit grid, labeled x ticks -4,-2,2,4 and y ticks 2,4,6; both ends arrowed.
 \begin{tikzpicture}
-% Blank student grid (spec section 5: the window the Try It needs). It holds the vertex (-3,-21) and both boundary
-% crossings (about (-6.2,-10.6) and (3.2,17.6)); the TE answer graph's window (y up to 2.5) cuts off the top of the region.
-% Grid every 1 in x and every 2 in y with no gaps.
-\begin{axis}[sheetgrid, xmin=-10, xmax=6, ymin=-24, ymax=20,
-  xtick={-10,-8,...,6}, ytick={-24,-20,...,20},
-  minor x tick num=1, minor y tick num=1, minor grid style={gray!30},
-  x=0.5cm, y=0.17cm]
+\begin{axis}[sheetgrid, xmin=-5.5, xmax=5.5, ymin=-2.5, ymax=7.5,
+  xtick={-4,-2,2,4}, ytick={2,4,6}, minor xtick={-5,...,5}, minor ytick={-2,...,7}, minor grid style={gray!45},
+  x=0.33cm, y=0.33cm]
+\addplot[very thick, red, <->, domain=-2.7:2.7, samples=80] {x^2};
+\addplot[very thick, blue, <->, domain=-1.25:3.6, samples=2] {2*x};
+\node[closed, red] at (axis cs:0,0) {};
+\node[closed, red] at (axis cs:2,4) {};
+\node[font=\scriptsize, red, fill=white, inner sep=1pt, anchor=east] at (axis cs:-2.6,4.6) {$y=x^2$};
+\node[font=\scriptsize, blue, fill=white, inner sep=1pt, anchor=east] at (axis cs:5.4,2.0) {$y=2x$};
+\node[font=\scriptsize, fill=white, inner sep=1pt, anchor=west] at (axis cs:2.2,3.4) {$(2,4)$};
 \end{axis}
 \end{tikzpicture}
 \end{center}
 \end{minipage}
 
+\begin{minipage}[t]{0.63\textwidth}
+\vspace{0pt}\raggedright
+\textbf{B.} How many solutions could this system have? \quad $y=x^2$, \ $y=2x+b$
+
+Test values for $b$ to determine when the system has different numbers of solutions.
+\begin{itemize}[itemsep=0pt]
+\item $b=2$: two solutions; the graphs intersect at two points.
+\item $b=-1$: one solution; $y=2x-1$ is \textbf{tangent} to $y=x^2$ at $(1,1)$.
+\item $b=-8$: no solutions; $y=2x-8$ does not intersect $y=x^2$.
+\end{itemize}
+There is no way for a line to cross a parabola more than twice. \textbf{A linear-quadratic system may have 0, 1, or 2 solutions.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.35\textwidth}
+\vspace{0pt}
+\begin{center}
+% TE window x=[-4,6], y=[-3,9], unit grid, x labels -2,2,4 and y labels 2,4,6,8; red y=2x+2 crosses near (-0.73,0.54)
+% and (2.73,7.46); purple y=2x-1 tangent at (1,1); green y=2x-8 misses. All ends arrowed.
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-4.5, xmax=6.5, ymin=-3.5, ymax=9.5,
+  xtick={-2,2,4}, ytick={2,4,6,8}, minor xtick={-4,...,6}, minor ytick={-3,...,9}, minor grid style={gray!45},
+  x=0.33cm, y=0.33cm]
+\addplot[very thick, blue, <->, domain=-3.05:3.05, samples=80] {x^2};
+\addplot[very thick, red, <->, domain=-2.6:3.6, samples=2] {2*x+2};
+\addplot[very thick, violet, <->, domain=-1.1:5.1, samples=2] {2*x-1};
+\addplot[very thick, green!50!black, <->, domain=2.3:6.4, samples=2] {2*x-8};
+\node[closed, red] at (axis cs:-0.732,0.536) {};
+\node[closed, red] at (axis cs:2.732,7.464) {};
+\node[closed, violet] at (axis cs:1,1) {};
+\end{axis}
+\end{tikzpicture}
+
+{\scriptsize \textcolor{blue}{$y=x^2$}; \textcolor{red}{$y=2x+2$}, \textcolor{violet}{$y=2x-1$}, \textcolor{green!40!black}{$y=2x-8$}}
+\end{center}
+\end{minipage}
+
+\textbf{Say it:} The line $y=2x-1$ is \blank[2.4cm] to the parabola, so the \blank[2.2cm] has \blank[1.6cm] solution(s). A line and a parabola can have 0, 1, or 2 points of \blank[2.6cm] because \dots\lines[1]
+
 \newpage
+
+\wspart{Try It 1}{Count the solutions}
+\begin{minipage}[t]{0.50\textwidth}
+\vspace{0pt}\raggedright
+Determine the number of real solutions of the system $y=3x^2$, $y=3x-2$.
+
+Hint: graph both on the grid, or set $3x^2=3x-2$ and check the discriminant (Lesson 2-6).
+\lines[4]
+
+Number of real solutions: \blank[2cm]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\textwidth}
+\vspace{0pt}
+\begin{center}
+% Blank student grid (spec section 5): holds the vertex (0,0) and the line's y-intercept -2; unit grid, labels every 2.
+\begin{tikzpicture}
+\begin{axis}[sheetgrid, xmin=-4, xmax=4, ymin=-8, ymax=10,
+  xtick={-4,-2,...,4}, ytick={-8,-6,...,10}, minor xtick={-4,...,4}, minor ytick={-8,...,10}, minor grid style={gray!45},
+  x=0.5cm, y=0.3cm]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\wspart{Example 5}{Using a System to Solve an Equation}
+Solve the equation $x^2+9x-5=4-3x$ by writing a linear-quadratic system and using the intersection feature of a graphing calculator to solve it.
+
+\begin{minipage}[t]{0.55\textwidth}
+\vspace{0pt}\raggedright
+\textbf{1.} Each side of the equation becomes one equation of the \textbf{system}:
+\[y=x^2+9x-5,\qquad y=4-3x\]
+\textbf{2.} Graph the system. The graphing calculator shows the curve and line \textbf{intersect} at $x\approx0.71$ and $x\approx-12.71$. These are \textbf{approximate} solutions.
+
+Hint: on a TI-84, CALC then 5:intersect, once for each crossing; in Desmos, click each point where the graphs cross.
+
+\end{minipage}\hfill
+\begin{minipage}[t]{0.42\textwidth}
+\vspace{0pt}
+\begin{center}
+% TE: calculator display, window about x=[-18,10], y=[-30,80], Xscl 2, Yscl 10, unnumbered axes, no marked points.
+% Parabola vertex (-4.5,-25.25); line y=4-3x; crossings near (-12.71,42.13) and (0.71,1.87).
+\begin{tikzpicture}
+\begin{axis}[axis lines=middle, xmin=-18, xmax=10, ymin=-30, ymax=80,
+  xtick={-18,-16,...,10}, ytick={-30,-20,...,80}, xticklabels={}, yticklabels={},
+  grid=both, grid style={gray!35}, axis line style={thick}, clip=true,
+  x=0.18cm, y=0.042cm, axis background/.style={fill=gray!6}]
+\addplot[very thick, orange, domain=-14.76:5.76, samples=120] {x^2+9*x-5};
+\addplot[very thick, blue, domain=-18:10, samples=2] {4-3*x};
+\end{axis}
+\end{tikzpicture}
+
+{\scriptsize Xscl: 2 \quad Yscl: 10}
+\end{center}
+\end{minipage}
+
+\textbf{3. Check:} substitute into the original equation; one side should be approximately equal to the other.
+
+\begin{minipage}[t]{0.48\textwidth}
+\[
+\begin{aligned}
+(0.71)^2+9(0.71)-5&\stackrel{?}{=}4-3(0.71)\\
+0.5041+6.39-5&\stackrel{?}{=}4-2.13\\
+1.8941&\approx1.87\ \checkmark
+\end{aligned}
+\]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\[
+\begin{aligned}
+(-12.71)^2+9(-12.71)-5&\stackrel{?}{=}4-3(-12.71)\\
+161.5441-114.39-5&\stackrel{?}{=}4+38.13\\
+42.1541&\approx42.13\ \checkmark
+\end{aligned}
+\]
+\end{minipage}
+
+\textbf{The solutions are $x\approx0.71$ and $x\approx-12.71$.}
+
+\textbf{Say it:} I wrote the \blank[2.2cm] $y=x^2+9x-5$, $y=4-3x$. The $x$-values of the \blank[2.6cm] points are the solutions. They are \blank[2.6cm], so the two sides of the check are close but not equal.\lines[1]
+
+\newpage
+
+\wspart{Try It 5}{Solve with the intersection feature}
+Solve the equation $3x^2-7x+4=9-2x$ by writing a linear-quadratic system and solving using the intersection feature of a graphing calculator.
+
+\begin{minipage}[t]{0.50\textwidth}
+\vspace{0pt}\raggedright
+System: \quad $y=$ \blank[3.4cm]
+
+\hspace{4.1em}$y=$ \blank[3.4cm]
+
+\vspace{4pt}
+The curve and line intersect at\\[4pt]
+$x\approx$ \blank[2cm] and $x\approx$ \blank[2cm]
+
+\vspace{4pt}
+Check one value in the original equation:\lines[3]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\textwidth}
+\vspace{0pt}
+Sketch what the screen shows. Mark each \textbf{intersection}.
+\begin{center}
+% Blank sketch grid: no window is given; students copy their calculator screen.
+\begin{tikzpicture}
+\begin{axis}[axis lines=middle, xmin=-5, xmax=5, ymin=-5, ymax=15,
+  xtick={-5,...,5}, ytick={-5,0,...,15}, xticklabels={}, yticklabels={},
+  grid=both, grid style={gray!35}, axis line style={thick}, x=0.55cm, y=0.22cm]
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{minipage}
 
 \wspart{IXL}{Practice for the quiz}
 Go to IXL, Algebra 2. Type the code in the search box. Do the starred skills first.
@@ -174,9 +207,8 @@ Go to IXL, Algebra 2. Type the code in the search box. Do the starred skills fir
 \toprule
 \textbf{Code} & \textbf{Skill} & \textbf{Feeds} \\
 \midrule
-\ixlrow{HVZ $\bigstar$}{Solve a linear-quadratic system of equations: lines and parabolas}{Quiz 2 (bonus) and 3: substitute, solve the quadratic, find both points (Example 3)}
-\ixlrow{VQU $\bigstar$}{Solve a linear-quadratic system of equations by graphing: lines and parabolas}{Quiz 4: graph the parabola and the line (the boundaries); Quiz 2 by graphing; Quiz 1 (full Savvas quiz only)}
-\ixlrow{U5D $\bigstar$}{Solve systems of linear inequalities by graphing}{Quiz 4: dashed or solid, test a point, shade the overlap (Example 4)}
+\ixlrow{VQU $\bigstar$}{Solve a linear-quadratic system of equations by graphing: lines and parabolas}{Quiz 1: count where the line meets the parabola (Example 1); Quiz 5: read the intersections (Example 5)}
+\ixlrow{HVZ $\bigstar$}{Solve a linear-quadratic system of equations: lines and parabolas}{Quiz 2 (bonus): set the two $y$-expressions equal and solve (the Example 1 check)}
 \ixlrow{BW5}{Solve a system of equations using substitution}{Warm-up: the same move with two lines (Lesson 1-6)}
 \ixlrow{M69}{Solve a system of equations by graphing}{Warm-up: read where two graphs meet (Lesson 1-5)}
 \bottomrule
@@ -200,15 +232,24 @@ Solutions: \blank[1.8cm] and \blank[1.8cm]
 \lines[4]
 \end{minipage}
 
-\textbf{Say it:} The two solutions are the points of \blank[3cm] of the line and the parabola. I checked one by \dots\lines[1]
+\newpage
+% R3: the lesson's only DOK 3 (Practice & Problem Solving 29, Performance Task, SEE EXAMPLE 3). The item analysis files it
+% under Example 3, which this packet cuts, so it is named as the self-paced extension (verbatim; the TE prints the path in the
+% illustration callout).
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\small%
+\textbf{Extension (self-paced, DOK 3, Practice 29):} A golfer accidentally hits a ball toward a water hazard that is downhill from current position on the fairway. The hill can be modeled by a line through the origin with slope $-\tfrac18$. The path of the ball can be modeled by the function $y=-\tfrac{1}{100}x^2+\tfrac32x$.
+\textbf{Part A} If the golfer stands at the origin, and the water hazard is 180 yd away, will the golfer's ball bounce or splash?
+\textbf{Part B} How far did the ball land from the edge of the water hazard?
+\textbf{Part C} Does it matter whether you measure the 180 yd horizontally or along the hill? Explain.
+\lines[9]}}
 
-\vspace{4pt}
+\vspace{8pt}
 \textbf{Before the quiz, finish these sentences.}
 
-To solve a linear-quadratic system, I \blank[3cm] one expression for $y$ into the other equation and solve the quadratic.
+The solutions of a \blank[2.4cm] are the points of \blank[3cm] of its graphs.
 
-The solutions are the points of \blank[3.2cm] of the line and the parabola: there can be 0, 1, or 2 of them.
+A line that is \blank[2.4cm] to a parabola touches it once, so that system has one solution; a line and a parabola can have 0, 1, or 2.
 
-A dashed \blank[2.6cm] is not part of the solution; the solution \blank[2.2cm] is where the shadings overlap.
+A calculator gives \blank[2.6cm] solutions, so I check them in the original equation and the two sides are close.
 
 \end{document}

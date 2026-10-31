@@ -7,7 +7,8 @@
 
 Spec: algebra2-live-worksheet/docs/a2-fast-lesson-spec.md (sections 4, 5, 6, 11).
 
-FAIL (exit 1) when the packet is not on the template, lacks the goals / quiz-target / IXL blocks,
+FAIL (exit 1) when the packet is not on the template, lacks the goals / quiz-target / topic-target /
+IXL blocks (the topic-target box must name the lesson's own topic),
 keeps an Example without its Try It, names an Example or Try It the Teacher Edition does not have,
 stars nothing, drops the SmartScore sentence, uses an IXL code outside the Algebra 2 map, has no PDF,
 or runs past the page budget. Softer things (title wording, missing "Say it", example count) are
@@ -127,6 +128,13 @@ def check_packet(args, report: dict) -> None:
         fails.append("missing \\goals{learning}{language}")
     if "\\quiztarget{" not in tex:
         fails.append("missing \\quiztarget{...}")
+    topic_box = re.search(r"\\topictarget\{(\d+)\}\{", tex)
+    if not topic_box:
+        fails.append("missing \\topictarget{<topic>}{...} (the Topic Assessment items the kept Examples answer; spec R1, R8)")
+    elif lesson and topic_box.group(1) != lesson.split("-")[0]:
+        fails.append(f"\\topictarget names Topic {topic_box.group(1)} but lesson {lesson} is in Topic {lesson.split('-')[0]}")
+    else:
+        info["topicTarget"] = topic_box.group(1)
 
     examples = [int(n) for n in re.findall(r"\\wspart\{Example\s+(\d+)\}", tex)]
     tryits = [int(n) for n in re.findall(r"\\wspart\{Try It\s+(\d+)\}", tex)]
